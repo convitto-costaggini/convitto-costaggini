@@ -77,7 +77,7 @@
           Didattica <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
         </button>
         <ul class="dd-menu" role="menu">
-          <li><a href="giochi-orientamento.html" data-page="giochi-orientamento">🎮 Giochi &amp; Orientamento</a></li>
+          <li><a href="scopri-talento.html" data-page="scopri-talento">🎮 Giochi &amp; Orientamento</a></li>
           <li><a href="ptof-guida.html" data-page="ptof-guida">Il PTOF spiegato</a></li>
           <li><a href="regolamento.html" data-page="regolamento">Regolamento di Convitto</a></li>
           <li><a href="trasparenza.html" data-page="trasparenza">Amministrazione Trasparente</a></li>
@@ -136,7 +136,7 @@
     <li class="drw-group">
       <button class="drw-acc" aria-expanded="false">Didattica <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
       <ul class="drw-sub">
-        <li><a href="giochi-orientamento.html">🎮 Giochi &amp; Orientamento</a></li>
+        <li><a href="scopri-talento.html">🎮 Giochi &amp; Orientamento</a></li>
         <li><a href="ptof-guida.html">Il PTOF spiegato</a></li>
         <li><a href="regolamento.html">Regolamento di Convitto</a></li>
         <li><a href="trasparenza.html">Amministrazione Trasparente</a></li>

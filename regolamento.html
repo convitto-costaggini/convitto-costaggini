@@ -242,31 +242,6 @@
     }
 
 
-    /* ── SIDEBAR — solo desktop ── */
-    .pg-layout { display:block; }
-    @media(min-width:1024px){
-      .pg-layout { display:grid; grid-template-columns:1fr 280px; gap:2.5rem; align-items:start; }
-    }
-    .pg-sidebar { display:none; }
-    @media(min-width:1024px){
-      .pg-sidebar { display:flex; flex-direction:column; gap:1rem; position:sticky; top:80px; }
-    }
-    .sb-box { background:var(--av2); border:1px solid var(--av3); border-radius:10px; padding:1.25rem; }
-    .sb-box-dark { background:var(--bosco); border-color:rgba(184,146,42,.15); }
-    .sb-tag { font-family:var(--fu); font-size:.55rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--oro); margin-bottom:.4rem; }
-    .sb-box-dark .sb-tag { color:var(--oro2); }
-    .sb-title { font-family:var(--fd); font-size:1rem; font-weight:400; color:var(--bosco); margin-bottom:.4rem; }
-    .sb-box-dark .sb-title { color:#fff; }
-    .sb-desc { font-family:var(--fu); font-size:.75rem; color:var(--txt2); line-height:1.65; margin-bottom:.85rem; }
-    .sb-box-dark .sb-desc { color:rgba(245,240,232,.55); }
-    .sb-btn { display:inline-flex; align-items:center; font-family:var(--fu); font-size:.62rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--bosco); background:var(--av3); padding:.45rem .9rem; border-radius:6px; text-decoration:none; transition:background .2s; }
-    .sb-btn:hover { background:var(--oro2); color:var(--bosco); }
-    .sb-links { list-style:none; display:flex; flex-direction:column; gap:.35rem; }
-    .sb-links li a { font-family:var(--fu); font-size:.75rem; color:var(--bosco2); text-decoration:none; display:flex; align-items:center; gap:.4rem; padding:.3rem 0; border-bottom:1px solid var(--av3); transition:color .15s; }
-    .sb-box-dark .sb-links li a { color:rgba(245,240,232,.6); border-bottom-color:rgba(255,255,255,.06); }
-    .sb-links li:last-child a { border-bottom:none; }
-    .sb-links li a:hover { color:var(--oro); }
-    .sb-box-dark .sb-links li a:hover { color:var(--oro2); }
   </style>
 </head>
 <body data-page="regolamento">
@@ -293,34 +268,6 @@
         <span>🏛️ IPSSEOA "R. A. Costaggini" — Rieti</span>
       </div>
     </div>
-      </div>
-      <aside class="pg-sidebar" id="reg-sidebar">
-        <div class="sb-box" id="sb-toc-box">
-          <p class="sb-tag">📑 Indice rapido</p>
-          <h3 class="sb-title">Vai direttamente a...</h3>
-          <ul class="sb-links" id="sb-toc-list">
-            <li><a href="#" onclick="document.querySelector('[data-art=\"1\"]')?.scrollIntoView({behavior:'smooth'});return false">Art. 1 — Finalità</a></li>
-            <li><a href="#" onclick="document.querySelector('[data-art=\"3\"]')?.scrollIntoView({behavior:'smooth'});return false">Art. 3 — Ammissione</a></li>
-            <li><a href="#" onclick="document.querySelector('[data-art=\"5\"]')?.scrollIntoView({behavior:'smooth'});return false">Art. 5 — Orari</a></li>
-            <li><a href="#" onclick="document.querySelector('[data-art=\"8\"]')?.scrollIntoView({behavior:'smooth'});return false">Art. 8 — Comportamento</a></li>
-            <li><a href="#" onclick="document.querySelector('[data-art=\"12\"]')?.scrollIntoView({behavior:'smooth'});return false">Art. 12 — Sanzioni</a></li>
-          </ul>
-        </div>
-        <div class="sb-box sb-box-dark">
-          <p class="sb-tag">⬇️ Scarica</p>
-          <p class="sb-desc">Il Regolamento completo in PDF.</p>
-          <a href="Regolamento-di-Convitto-versione-30-01-2025__1_.pdf" download class="sb-btn">Scarica PDF →</a>
-        </div>
-        <div class="sb-box">
-          <p class="sb-tag">🔗 Correlati</p>
-          <ul class="sb-links">
-            <li><a href="ptof-guida.html">📋 Il PTOF spiegato</a></li>
-            <li><a href="organizzazione.html">🏛️ Organizzazione</a></li>
-            <li><a href="ammissione.html">📝 Come iscriversi</a></li>
-          </ul>
-        </div>
-      </aside>
-      </div>
       </section>
 
   <!-- TOOLBAR -->
@@ -351,8 +298,6 @@
   <!-- INDICE DEGLI ARTICOLI -->
   <section class="reg-indice">
     <div class="w">
-      <div class="pg-layout">
-      <div>
       <p class="lbl">Orientarsi nel documento</p>
       <h2>Indice degli <em>articoli</em></h2>
       <p>Clicca su un articolo per aprire una scheda di lettura immediata — senza aprire il PDF, senza perdere il filo.</p>

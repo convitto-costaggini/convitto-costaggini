@@ -58,6 +58,7 @@
         </button>
         <ul class="dd-menu" role="menu">
           <li><a href="servizi.html" data-page="servizi">Servizi &amp; spazi</a></li>
+          <li><a href="tour-virtuale.html" data-page="tour-virtuale">🏛️ Tour Virtuale 360°</a></li>
           <li><a href="semiconvitto.html" data-page="semiconvitto">🌅 Semiconvitto</a></li>
           <li><a href="ammissione.html#tariffe">Tariffe &amp; rette</a></li>
           <li><a href="ammissione.html" data-page="ammissione">Come iscriversi</a></li>
@@ -142,6 +143,7 @@
       <button class="drw-acc" aria-expanded="false">Servizi <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
       <ul class="drw-sub">
         <li><a href="servizi.html">Servizi &amp; spazi</a></li>
+        <li><a href="tour-virtuale.html">🏛️ Tour Virtuale 360°</a></li>
         <li><a href="semiconvitto.html">🌅 Semiconvitto</a></li>
         <li><a href="ammissione.html#tariffe">Tariffe &amp; rette</a></li>
         <li><a href="ammissione.html">Come iscriversi</a></li>
@@ -219,6 +221,7 @@
           <li><a href="educatori.html">Gli Educatori</a></li>
           <li><a href="giornata-tipo.html">Giornata tipo</a></li>
           <li><a href="servizi.html">Servizi</a></li>
+          <li><a href="tour-virtuale.html">🏛️ Tour Virtuale</a></li>
           <li><a href="semiconvitto.html">🌅 Semiconvitto</a></li>
           <li><a href="alumni.html">Alumni</a></li>
           <li><a href="ricordi.html">🕯️ Muro dei Ricordi</a></li>

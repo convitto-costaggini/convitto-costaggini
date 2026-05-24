@@ -183,7 +183,7 @@
           <li><a href="servizi.html">Servizi</a></li>
           <li><a href="tour-virtuale.html">🏛️ Tour Virtuale</a></li>
           <li><a href="semiconvitto.html">🌅 Semiconvitto</a></li>
-          <li><a href="alumni.html">Alumni</a></li>
+          <li><a href="alumni.html"><em>Alumni</em></a></li>
           <li><a href="ricordi.html">🕯️ Muro dei Ricordi</a></li>
         </ul></div>
 

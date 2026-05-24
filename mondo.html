@@ -153,22 +153,22 @@
 <script src="nav.js"></script>
 <script>
 const DEMO=[
-  {name:'[Alumni - dato dimostrativo]',city:'Dubai, EAU',role:'Chef · Hotel 5★',type:'alumni',year:'2018',lat:25.2,lng:55.3},
-  {name:'[Alumni - dato dimostrativo]',city:'Roma, Italia',role:'Maître · Ristorante stellato',type:'alumni',year:'2020',lat:41.9,lng:12.5},
-  {name:'[Alumni - dato dimostrativo]',city:'Milano, Italia',role:'Pasticcere',type:'alumni',year:'2019',lat:45.5,lng:9.2},
-  {name:'[Alumni - dato dimostrativo]',city:'Londra, UK',role:'F&B Manager',type:'alumni',year:'2015',lat:51.5,lng:-0.1},
-  {name:'[Alumni - dato dimostrativo]',city:'Parigi, Francia',role:'Sous Chef',type:'alumni',year:'2017',lat:48.8,lng:2.3},
-  {name:'[Alumni - dato dimostrativo]',city:'New York, USA',role:'Restaurant Manager',type:'alumni',year:'2014',lat:40.7,lng:-74.0},
-  {name:'[Alumni - dato dimostrativo]',city:'Tokyo, Giappone',role:'Italian cuisine chef',type:'alumni',year:'2016',lat:35.7,lng:139.7},
-  {name:'[Alumni - dato dimostrativo]',city:'Sydney, Australia',role:'Hotel Operations',type:'alumni',year:'2013',lat:-33.9,lng:151.2},
-  {name:'[Alumni - dato dimostrativo]',city:'Madrid, Spagna',role:'Chef Executive',type:'alumni',year:'2021',lat:40.4,lng:-3.7},
-  {name:'[Alumni - dato dimostrativo]',city:'Berlino, Germania',role:'Sommelier',type:'alumni',year:'2019',lat:52.5,lng:13.4},
+  {name:'[<em>Alumni</em> - dato dimostrativo]',city:'Dubai, EAU',role:'Chef · Hotel 5★',type:'alumni',year:'2018',lat:25.2,lng:55.3},
+  {name:'[<em>Alumni</em> - dato dimostrativo]',city:'Roma, Italia',role:'Maître · Ristorante stellato',type:'alumni',year:'2020',lat:41.9,lng:12.5},
+  {name:'[<em>Alumni</em> - dato dimostrativo]',city:'Milano, Italia',role:'Pasticcere',type:'alumni',year:'2019',lat:45.5,lng:9.2},
+  {name:'[<em>Alumni</em> - dato dimostrativo]',city:'Londra, UK',role:'F&B Manager',type:'alumni',year:'2015',lat:51.5,lng:-0.1},
+  {name:'[<em>Alumni</em> - dato dimostrativo]',city:'Parigi, Francia',role:'Sous Chef',type:'alumni',year:'2017',lat:48.8,lng:2.3},
+  {name:'[<em>Alumni</em> - dato dimostrativo]',city:'New York, USA',role:'Restaurant Manager',type:'alumni',year:'2014',lat:40.7,lng:-74.0},
+  {name:'[<em>Alumni</em> - dato dimostrativo]',city:'Tokyo, Giappone',role:'Italian cuisine chef',type:'alumni',year:'2016',lat:35.7,lng:139.7},
+  {name:'[<em>Alumni</em> - dato dimostrativo]',city:'Sydney, Australia',role:'Hotel Operations',type:'alumni',year:'2013',lat:-33.9,lng:151.2},
+  {name:'[<em>Alumni</em> - dato dimostrativo]',city:'Madrid, Spagna',role:'Chef Executive',type:'alumni',year:'2021',lat:40.4,lng:-3.7},
+  {name:'[<em>Alumni</em> - dato dimostrativo]',city:'Berlino, Germania',role:'Sommelier',type:'alumni',year:'2019',lat:52.5,lng:13.4},
   {name:'[Visitatore - dato dimostrativo]',city:'Osaka, Giappone',role:'Ricercatore hospitality',type:'visitor',year:'2024',lat:34.7,lng:135.5},
   {name:'[Scuola partner - dimostrativo]',city:'Francoforte, Germania',role:'Partner Erasmus+',type:'school',year:'2023',lat:50.1,lng:8.7},
   {name:'[Scuola partner - dimostrativo]',city:'Lione, Francia',role:'Partner progetto europeo',type:'school',year:'2022',lat:45.7,lng:4.8},
 ];
 const COLORS={alumni:'#B8922A',visitor:'#4fc3f7',school:'#81c784'};
-const LABELS={alumni:'Alumni',visitor:'Visitatore',school:'Scuola partner'};
+const LABELS={alumni:'<em>Alumni</em>',visitor:'Visitatore',school:'Scuola partner'};
 
 const map=L.map('map',{center:[30,10],zoom:2,minZoom:2,maxZoom:10});
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
@@ -194,7 +194,7 @@ function renderPins(){
   markers.forEach(m=>map.removeLayer(m));markers=[];
   allPins.forEach((p,i)=>{
     const m=L.marker([p.lat,p.lng],{icon:mkIcon(p.type)}).addTo(map)
-      .bindPopup(`<div class="popup-inner"><span class="popup-type ${p.type}">${LABELS[p.type]||'Alumni'}</span><span class="popup-name">${p.name}</span><div class="popup-city">📍 ${p.city}</div>${p.role?`<div class="popup-role">${p.role}</div>`:''  }${p.year?`<span class="popup-year">Anno: ${p.year}</span>`:''}</div>`,{maxWidth:240});
+      .bindPopup(`<div class="popup-inner"><span class="popup-type ${p.type}">${LABELS[p.type]||'<em>Alumni</em>'}</span><span class="popup-name">${p.name}</span><div class="popup-city">📍 ${p.city}</div>${p.role?`<div class="popup-role">${p.role}</div>`:''  }${p.year?`<span class="popup-year">Anno: ${p.year}</span>`:''}</div>`,{maxWidth:240});
     m.on('click',()=>scrollCard(i));
     markers.push(m);
   });

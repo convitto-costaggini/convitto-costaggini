@@ -343,7 +343,7 @@
         '<span style="font-family:\'Source Sans 3\',sans-serif;font-size:.76rem;font-weight:700;' +
         'letter-spacing:.06em;text-transform:uppercase;color:#F5F0E8">Home</span>';
       a.style.cssText =
-        'position:fixed;bottom:1.5rem;right:1.25rem;z-index:8000;' +
+        'position:fixed;bottom:5.5rem;right:1.25rem;z-index:8000;' +
         'display:flex;align-items:center;gap:.42rem;' +
         'background:linear-gradient(135deg,#2C3E2D,#3D5C3E);' +
         'text-decoration:none;border-radius:50px;' +
@@ -384,7 +384,7 @@
         'border:1px solid rgba(184,146,42,.25);backdrop-filter:blur(4px)' +
       '">Torna su</span>';
     btn.style.cssText =
-      'position:fixed;bottom:6rem;right:1.25rem;z-index:8000;' +
+      'position:fixed;bottom:9.5rem;right:1.25rem;z-index:8000;' +
       'width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;' +
       'background:linear-gradient(135deg,#2C3E2D,#3D5C3E);' +
       'box-shadow:0 4px 14px rgba(0,0,0,.3),0 0 0 2px rgba(184,146,42,.25);' +

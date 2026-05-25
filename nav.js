@@ -328,39 +328,74 @@
     window.location.href = 'admin.html';
   });
 
-  /* ── Bottone fluttuante "Home" su tutte le pagine interne ── */
-  (function() {
+  /* ── FAB SYSTEM — 3 cerchi uguali, a scomparsa su mobile ── */
+  (function(){
     const pg = document.body.dataset.page;
-    if (pg && pg !== 'home') {
-      const a = document.createElement('a');
-      a.href = 'index.html';
-      a.id = 'fab-home';
-      a.setAttribute('aria-label', 'Torna alla Home');
-      a.title = 'Home';
-      a.innerHTML =
-        '<svg viewBox="0 0 24 24" aria-hidden="true" style="width:17px;height:17px;fill:#D4AA4A;flex-shrink:0">' +
-        '<path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>' +
-        '<span style="font-family:\'Source Sans 3\',sans-serif;font-size:.76rem;font-weight:700;' +
-        'letter-spacing:.06em;text-transform:uppercase;color:#F5F0E8">Home</span>';
-      a.style.cssText =
-        'position:fixed;bottom:5.5rem;right:1.25rem;z-index:8000;' +
-        'display:flex;align-items:center;gap:.42rem;' +
-        'background:linear-gradient(135deg,#2C3E2D,#3D5C3E);' +
-        'text-decoration:none;border-radius:50px;' +
-        'padding:.62rem 1.05rem .62rem .85rem;min-height:44px;' +
-        'box-shadow:0 4px 18px rgba(0,0,0,.32),0 0 0 2px rgba(184,146,42,.28);' +
-        'transition:transform .18s,box-shadow .18s;' +
-        '-webkit-tap-highlight-color:transparent;';
-      a.addEventListener('mouseenter', () => {
-        a.style.transform = 'translateY(-2px)';
-        a.style.boxShadow = '0 8px 24px rgba(0,0,0,.4),0 0 0 2px rgba(184,146,42,.42)';
-      });
-      a.addEventListener('mouseleave', () => {
-        a.style.transform = '';
-        a.style.boxShadow = '0 4px 18px rgba(0,0,0,.32),0 0 0 2px rgba(184,146,42,.28)';
-      });
-      document.body.appendChild(a);
+    const isHome = !pg || pg === 'home';
+
+    const CSS = `
+    #fab-group{position:fixed;bottom:1.5rem;right:1.25rem;z-index:8900;display:flex;flex-direction:column;align-items:center;gap:.5rem;}
+    .fab-btn{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#2C3E2D,#1a3a1b);border:2px solid rgba(184,146,42,.35);box-shadow:0 4px 16px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;position:relative;transition:transform .2s,box-shadow .2s,opacity .25s,visibility .25s;-webkit-tap-highlight-color:transparent;}
+    .fab-btn:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(0,0,0,.4),0 0 0 2px rgba(184,146,42,.5);}
+    .fab-btn svg{width:20px;height:20px;fill:#D4AA4A;}
+    .fab-btn::before{content:attr(data-tip);position:absolute;right:54px;top:50%;transform:translateY(-50%);background:rgba(12,20,13,.9);color:#D4AA4A;font-family:'Source Sans 3',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .65rem;border-radius:5px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;border:1px solid rgba(184,146,42,.25);}
+    .fab-btn:hover::before{opacity:1;}
+    #fab-top{opacity:0;pointer-events:none;}
+    #fab-top.vis{opacity:1;pointer-events:auto;}
+    @media(max-width:700px){
+      .fab-btn::before{display:none;}
+      #fab-top,#fab-home{opacity:0;pointer-events:none;transform:scale(.7) translateY(8px);}
+      #fab-group.exp #fab-top.vis,#fab-group.exp #fab-home{opacity:1;pointer-events:auto;transform:scale(1) translateY(0);}
     }
+    `;
+    const st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
+
+    const grp = document.createElement('div'); grp.id = 'fab-group'; document.body.appendChild(grp);
+
+    // TORNA SU
+    const fabTop = document.createElement('button');
+    fabTop.id = 'fab-top'; fabTop.className = 'fab-btn';
+    fabTop.setAttribute('aria-label','Torna in cima'); fabTop.setAttribute('data-tip','Torna su');
+    fabTop.innerHTML = '<svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>';
+    fabTop.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
+    grp.appendChild(fabTop);
+    window.addEventListener('scroll', () => fabTop.classList.toggle('vis', window.scrollY > 300), {passive:true});
+
+    // HOME (solo pagine interne)
+    if (!isHome) {
+      const fabHome = document.createElement('a');
+      fabHome.id = 'fab-home'; fabHome.className = 'fab-btn';
+      fabHome.href = 'index.html';
+      fabHome.setAttribute('aria-label','Torna alla Home'); fabHome.setAttribute('data-tip','Home');
+      fabHome.innerHTML = '<svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>';
+      grp.appendChild(fabHome);
+    }
+
+    // CHATBOT — assistente.js crea #cc-fab; lo adottiamo nel gruppo
+    let tries = 0;
+    const waitChat = setInterval(() => {
+      const existing = document.getElementById('cc-fab');
+      if (existing) {
+        clearInterval(waitChat);
+        existing.removeAttribute('style');
+        existing.className = 'fab-btn';
+        existing.setAttribute('data-tip','Assistente');
+        grp.appendChild(existing);
+      } else if (++tries > 30) clearInterval(waitChat);
+    }, 200);
+
+    // MOBILE: tap su chatbot espande/collassa il gruppo
+    let collapseTimer;
+    grp.addEventListener('click', e => {
+      if (window.innerWidth > 700) return;
+      const isChatBtn = e.target.closest('#cc-fab');
+      if (!grp.classList.contains('exp')) {
+        grp.classList.add('exp');
+        clearTimeout(collapseTimer);
+        collapseTimer = setTimeout(() => grp.classList.remove('exp'), 4000);
+        if (isChatBtn) e.stopImmediatePropagation(); // impedisce apertura chat se si espande
+      }
+    });
   })();
 
   const obs = new IntersectionObserver(es => es.forEach(e => {
@@ -368,54 +403,6 @@
   }), { threshold: 0.08 });
   document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
-  /* ── Bottone Torna in cima ── */
-  (function(){
-    const btn = document.createElement('button');
-    btn.id = 'fab-top';
-    btn.setAttribute('aria-label', 'Torna in cima');
-    btn.title = 'Torna su';
-    btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>' +
-      '<span id="fab-top-label" style="' +
-        'position:absolute;right:52px;top:50%;transform:translateY(-50%);' +
-        'background:rgba(12,20,13,.88);color:#D4AA4A;' +
-        'font-family:var(--fu,\'Source Sans 3\',sans-serif);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;' +
-        'padding:.3rem .7rem;border-radius:4px;white-space:nowrap;' +
-        'opacity:0;transition:opacity .2s;pointer-events:none;' +
-        'border:1px solid rgba(184,146,42,.25);backdrop-filter:blur(4px)' +
-      '">Torna su</span>';
-    btn.style.cssText =
-      'position:fixed;bottom:9.5rem;right:1.25rem;z-index:8000;' +
-      'width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;' +
-      'background:linear-gradient(135deg,#2C3E2D,#3D5C3E);' +
-      'box-shadow:0 4px 14px rgba(0,0,0,.3),0 0 0 2px rgba(184,146,42,.25);' +
-      'display:flex;align-items:center;justify-content:center;' +
-      'opacity:0;transform:translateY(12px);' +
-      'transition:opacity .3s,transform .3s,box-shadow .2s;' +
-      'pointer-events:none;';
-    btn.querySelector('svg').style.cssText = 'width:20px;height:20px;fill:#D4AA4A;flex-shrink:0;';
-    btn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
-    btn.addEventListener('mouseenter', () => {
-      btn.style.boxShadow = '0 8px 22px rgba(0,0,0,.4),0 0 0 2px rgba(184,146,42,.45)';
-      document.getElementById('fab-top-label').style.opacity = '1';
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.boxShadow = '0 4px 14px rgba(0,0,0,.3),0 0 0 2px rgba(184,146,42,.25)';
-      document.getElementById('fab-top-label').style.opacity = '0';
-    });
-    document.body.appendChild(btn);
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        btn.style.opacity = '1';
-        btn.style.transform = 'translateY(0)';
-        btn.style.pointerEvents = 'auto';
-      } else {
-        btn.style.opacity = '0';
-        btn.style.transform = 'translateY(12px)';
-        btn.style.pointerEvents = 'none';
-      }
-    }, {passive:true});
-  })();
 
   /* ── Progress bar di lettura ── */
   (function(){
@@ -567,30 +554,6 @@
       // Piccolo delay per attendere il render delle sezioni
       setTimeout(initSectionNav, 200);
     }
-  })();
-
-  /* ── METEO RIETI — Open-Meteo, gratuito, no API key ── */
-  (function(){
-    const CSS=`#meteo-widget{position:fixed;bottom:1.5rem;left:1.25rem;z-index:8000;background:linear-gradient(135deg,#2C3E2D,#1a3a1b);border:1.5px solid rgba(184,146,42,.3);border-radius:12px;padding:.5rem .85rem;display:flex;align-items:center;gap:.6rem;box-shadow:0 4px 18px rgba(0,0,0,.28);min-width:110px;transition:transform .2s;cursor:default;}
-#meteo-widget:hover{transform:translateY(-2px);}
-.mw-icon{font-size:1.3rem;flex-shrink:0;line-height:1;}
-.mw-info{display:flex;flex-direction:column;gap:1px;}
-.mw-temp{font-family:'Source Sans 3',sans-serif;font-size:.88rem;font-weight:800;color:#fff;line-height:1;}
-.mw-desc{font-family:'Source Sans 3',sans-serif;font-size:.6rem;color:rgba(245,240,232,.5);text-transform:capitalize;}
-.mw-city{font-family:'Source Sans 3',sans-serif;font-size:.54rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(184,146,42,.65);}`;
-    const st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);
-    const w=document.createElement('div');w.id='meteo-widget';w.setAttribute('aria-label','Meteo attuale a Rieti');
-    w.innerHTML='<div class="mw-icon">🌤️</div><div class="mw-info"><div class="mw-temp">—°C</div><div class="mw-desc">Rieti</div><div class="mw-city">meteo</div></div>';
-    document.body.appendChild(w);
-    const M={0:'☀️|Sereno',1:'🌤️|Poco nuvoloso',2:'⛅|Nuvoloso',3:'☁️|Coperto',45:'🌫️|Nebbia',48:'🌫️|Nebbia',51:'🌦️|Pioggerella',53:'🌦️|Pioggerella',55:'🌧️|Pioggia',61:'🌧️|Pioggia',63:'🌧️|Pioggia',65:'🌧️|Pioggia',71:'❄️|Neve',73:'❄️|Neve',75:'❄️|Neve',80:'🌦️|Rovesci',81:'🌧️|Rovesci',82:'⛈️|Rovesci',95:'⛈️|Temporale',96:'⛈️|Temporale',99:'⛈️|Temporale'};
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=42.404&longitude=12.857&current=temperature_2m,weathercode&timezone=Europe%2FRome')
-      .then(r=>r.json()).then(d=>{
-        const t=Math.round(d.current.temperature_2m);
-        const [ico,desc]=(M[d.current.weathercode]||'🌡️|—').split('|');
-        w.querySelector('.mw-icon').textContent=ico;
-        w.querySelector('.mw-temp').textContent=t+'°C';
-        w.querySelector('.mw-desc').textContent=desc;
-      }).catch(()=>{ w.querySelector('.mw-desc').textContent='non disp.'; });
   })();
 
   /* ── TRADUZIONE — Google Translate widget ── */

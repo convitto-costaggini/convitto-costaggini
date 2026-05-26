@@ -337,8 +337,8 @@
       #fab-top{opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;transform:translateY(6px);}
       #fab-top.vis{opacity:1;pointer-events:auto;transform:translateY(0);}
       @media(max-width:700px){
-        #fab-top,#fab-home{opacity:0;pointer-events:none;transform:scale(.6);transition:opacity .22s,transform .22s;}
-        #fab-wrap.exp #fab-top.vis,#fab-wrap.exp #fab-home{opacity:1;pointer-events:auto;transform:scale(1);}
+        #fab-top{opacity:0;pointer-events:none;transform:scale(.6);transition:opacity .22s,transform .22s;}
+        #fab-wrap.exp #fab-top.vis{opacity:1;pointer-events:auto;transform:scale(1);}
         .fab-c[data-tip]:hover::after{display:none;}
       }
     `;

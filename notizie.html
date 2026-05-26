@@ -18,85 +18,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ── CARD SAGGIO DI FINE ANNO ── */
-    .saggio-card { border: 2px solid var(--oro) !important; background: linear-gradient(160deg,#fffef8,var(--bco)) !important; }
-    .saggio-inner {
-      display: flex;
-      flex-direction: column; /* mobile: impilato */
-    }
-    /* COLONNA LOCANDINA */
-    .saggio-poster {
-      position: relative;
-      background: linear-gradient(135deg,#0a1a0b,#1c3a1d);
-      display: flex; align-items: center; justify-content: center;
-      padding: 1.25rem 1rem;
-      flex-shrink: 0;
-    }
-    .saggio-poster img {
-      display: block;
-      width: auto;
-      max-width: 100%;
-      /* mobile: limita altezza per non dominare lo schermo */
-      max-height: 72vw;
-      border-radius: 8px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.45);
-    }
-    .saggio-badge {
-      position: absolute; top: .85rem; left: .85rem;
-      background: var(--oro); color: var(--bosco);
-      font-family: var(--fu); font-size: .6rem; font-weight: 800;
-      letter-spacing: .12em; text-transform: uppercase;
-      padding: .28rem .75rem; border-radius: 20px;
-      z-index: 2;
-    }
-    /* COLONNA TESTO */
-    .saggio-body {
-      padding: 1.5rem 1.25rem 1.75rem;
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .saggio-title {
-      font-family: var(--fd);
-      font-size: clamp(1.25rem, 5vw, 1.75rem);
-      font-weight: 400; color: var(--bosco);
-      line-height: 1.25; margin: .5rem 0 .75rem;
-    }
-    .saggio-text {
-      font-size: .88rem; color: var(--txt); line-height: 1.8; margin-bottom: .9rem;
-    }
-    .saggio-quote {
-      font-family: var(--fd); font-size: 1.05rem; font-style: italic;
-      color: var(--bosco); line-height: 1.6;
-      border-left: 3px solid var(--oro); padding-left: .9rem;
-      margin-bottom: 1rem;
-    }
-    .saggio-info {
-      display: flex; flex-wrap: wrap; gap: .5rem .85rem;
-      font-family: var(--fu); font-size: .75rem; font-weight: 700;
-    }
-    .saggio-info span:first-child { color: var(--txt2); }
-    .saggio-info span:last-child  { color: var(--oro); }
-
-    /* DESKTOP: affianca locandina e testo */
-    @media(min-width: 760px) {
-      .saggio-inner {
-        flex-direction: row;
-        align-items: stretch;
-      }
-      .saggio-card .saggio-poster {
-        width: 36%;
-        max-width: 320px;
-        padding: 1.5rem 1.25rem;
-        box-sizing: border-box;
-        border-radius: 6px 0 0 6px;
-      }
-      .saggio-body {
-        flex: 1;
-        padding: 2rem 2rem 2rem 1.75rem;
-      }
-      .saggio-title { font-size: clamp(1.4rem, 2.5vw, 2rem); }
-      .saggio-text  { font-size: .92rem; }
-    }
-
     .filter-bar { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 2rem; }
     .fbtn { background: var(--av2); border: 1px solid var(--av3); color: var(--txt2); font-family: var(--fu); font-size: .75rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: .5rem 1rem; border-radius: 40px; cursor: pointer; transition: var(--ease); min-height: 40px; }
     .fbtn.active, .fbtn:hover { background: var(--bosco); color: var(--av); border-color: var(--bosco); }
@@ -117,15 +38,9 @@
     .article-card.featured img { aspect-ratio: 21/9; }
     .article-card.featured .ac-body { padding: 1.5rem 1.75rem 2rem; }
     .article-card.featured h3 { font-size: 1.6rem; }
-    /* annulla le regole globali sull'immagine per la card del saggio */
-    .saggio-card { overflow: visible !important; }
-    .saggio-card .saggio-poster { overflow: hidden; border-radius: 8px 8px 0 0; }
-    .saggio-card .saggio-poster img { aspect-ratio: unset !important; object-fit: contain !important; width: 100% !important; height: auto !important; display: block; }
 
     @media(min-width:640px){ .news-grid { grid-template-columns: 1fr 1fr; } }
     @media(min-width:1024px){ .news-grid { grid-template-columns: repeat(3, 1fr); } .article-card.featured img { aspect-ratio: 32/9; } }
-    /* annulla anche il 32/9 per il saggio */
-    @media(min-width:1024px){ .saggio-card .saggio-poster img { aspect-ratio: unset !important; } }
 
     .comunicati-list { display: flex; flex-direction: column; gap: .55rem; }
     .com-row { display: flex; align-items: center; gap: .85rem; background: var(--bco); border: 1px solid var(--av3); border-radius: 4px; padding: .85rem 1rem; text-decoration: none; color: var(--txt); min-height: 56px; transition: background var(--ease); }
@@ -171,43 +86,6 @@
         <button class="fbtn" data-filter="comunicati">Comunicati</button>
       </div>
       <div class="news-grid" id="news-grid-main">
-
-        <!-- SAGGIO DI FINE ANNO — in evidenza, primo per data -->
-        <article class="article-card featured saggio-card rv" data-cat="eventi">
-          <!-- Layout: locandina sinistra + testo destra su desktop; solo testo + locandina su mobile -->
-          <div class="saggio-inner">
-
-            <!-- COLONNA SINISTRA: locandina -->
-            <div class="saggio-poster">
-              <span class="saggio-badge">In evidenza</span>
-              <img src="img/locandina-fine-anno-2026.jpeg"
-                   alt="Locandina Concerto di Fine Anno Scolastico — Laboratorio Musicale del Convitto Costaggini, Mercoledì 27 Maggio 2026 ore 18:00"
-                   loading="eager"/>
-            </div>
-
-            <!-- COLONNA DESTRA: testo -->
-            <div class="saggio-body">
-              <div class="ac-meta">
-                <span class="ac-date">27 Maggio 2026</span>
-                <span class="ac-cat" style="background:var(--bosco);color:var(--oro2)">Lab Musicale</span>
-              </div>
-              <h3 class="saggio-title">Concerto di Fine Anno Scolastico — il Laboratorio Musicale sale sul palco</h3>
-              <p class="saggio-text">
-                Mercoledì 27 maggio 2026, alle ore 18:00, il Convitto Costaggini di Rieti si trasforma in una sala da concerto.
-                Il Laboratorio Musicale — nato da un'idea semplice e cresciuto anno dopo anno grazie alla passione dei ragazzi — chiude il suo anno scolastico con un saggio aperto a tutti.
-                Sul palco: chitarre, voci, percussioni. Fuori: famiglie, docenti, personale ATA e chiunque voglia essere parte di questa piccola grande festa della musica.
-              </p>
-              <p class="saggio-quote">
-                "La musica unisce, emoziona, fa crescere." — Ingresso libero. <strong style="font-style:normal">Siete tutti invitati.</strong>
-              </p>
-              <div class="saggio-info">
-                <span>📍 Convitto "Costaggini" — Via Salaria s.n.c., Rieti</span>
-                <span>🕕 Ore 18:00</span>
-              </div>
-            </div>
-
-          </div>
-        </article>
 
         <article class="article-card rv" data-cat="istituzionale">
           <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80" alt="Aula magna per presentazione libro LILT al Costaggini di Rieti" loading="eager"/>
@@ -315,7 +193,7 @@
         </div>
         <div class="ev-card rv d2">
           <div class="ev-date"><span class="day">27</span><span class="mon">Mag 2026</span></div>
-          <div class="ev-body"><h3>Concerto-Saggio di Fine Anno — Laboratorio Musicale</h3><p>Il tradizionale appuntamento di fine anno del Laboratorio Musicale del Convitto. Chitarre, voci, percussioni: i ragazzi salgono sul palco e mostrano quello che hanno costruito insieme. Ingresso libero.</p><p class="ev-where">📍 Convitto "Costaggini" · Ore 18:00</p></div>
+          <div class="ev-body"><h3>Concerto-Saggio di Fine Anno — Laboratorio Musicale</h3><p>Il tradizionale appuntamento di fine anno del Laboratorio Musicale del Convitto. Chitarre, voci, percussioni: i ragazzi salgono sul palco e mostrano quello che hanno costruito insieme. Ingresso libero.</p><p class="ev-where">📍 Convitto "Costaggini" · Ore 18:30</p></div>
         </div>
         <div class="ev-card rv">
           <div class="ev-date"><span class="day">Set</span><span class="mon">Ogni anno</span></div>

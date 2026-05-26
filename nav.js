@@ -235,6 +235,7 @@
     <div class="fbot">
       <p>© 2025 Convitto Annesso — IPSSEOA "R. A. Costaggini" — Via Salaria s.n.c. — 02100 Rieti (RI) — C.F. 80008130579 — Cod. mecc. RIRH010007</p>
       <p><a href="trasparenza.html#accessibilita">Dichiarazione di Accessibilità</a> · <a href="privacy.html">Privacy</a> · <a href="cookie-policy.html">Cookie Policy</a> · <a href="trasparenza.html">Amm. Trasparente</a></p>
+      <p style="font-size:.68rem;color:rgba(245,240,232,.3);margin-top:.35rem;font-style:italic">⏳ Sito in fase di staging — in attesa di attivazione del dominio istituzionale convitto.alberghierorieti.edu.it a seguito delle procedure amministrative di competenza. I contenuti sono autentici e prodotti dall'IPSSEOA "Costaggini" di Rieti.</p>
     </div>
   </div>
 </footer>`;

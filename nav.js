@@ -241,6 +241,18 @@
 
   /* ── Inserimento nel DOM ── */
   document.body.insertAdjacentHTML('afterbegin', headerHTML);
+
+  /* ── Skip link accessibilità ── */
+  const skipCSS = document.createElement('style');
+  skipCSS.textContent = '#skip-link{position:absolute;top:-40px;left:1rem;z-index:99999;background:var(--bosco,#2C3E2D);color:#fff;padding:.5rem 1rem;border-radius:0 0 6px 6px;font-family:sans-serif;font-size:.85rem;text-decoration:none;transition:top .15s;}#skip-link:focus{top:0;}';
+  document.head.appendChild(skipCSS);
+  const skipLink = document.createElement('a');
+  skipLink.id = 'skip-link';
+  skipLink.href = '#main';
+  skipLink.textContent = 'Salta al contenuto principale';
+  skipLink.setAttribute('tabindex','0');
+  document.body.insertBefore(skipLink, document.body.firstChild);
+
   document.body.insertAdjacentHTML('beforeend', footerHTML);
 
   /* ── Caricamento chatbot ── */
@@ -542,6 +554,10 @@
     document.addEventListener('click',()=>menu.classList.remove('open'));
 
     function selectLang(l){
+      if (l.code !== 'it' && !sessionStorage.getItem('tr_consent')) {
+        if (!confirm('La traduzione automatica utilizza il servizio Google Translate. Il testo delle pagine verrà elaborato da server Google. Continuare?')) return;
+        sessionStorage.setItem('tr_consent','1');
+      }
       btn.innerHTML='🌐 '+l.code.toUpperCase();
       menu.querySelectorAll('.tr-opt').forEach((o,i)=>o.classList.toggle('act',LANGS[i].code===l.code));
       if(l.code==='it'){

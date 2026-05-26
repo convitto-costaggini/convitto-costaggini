@@ -54,6 +54,7 @@
           <li><a href="semiconvitto.html" data-page="semiconvitto">🌅 Semiconvitto</a></li>
           <li><a href="ammissione.html" data-page="ammissione">Come iscriversi</a></li>
           <li><a href="orientamento.html" data-page="orientamento">🗓 Orientamento &amp; Open Day</a></li>
+          <li><a href="genitori.html" data-page="genitori">👨‍👩‍👧 Per i Genitori</a></li>
           <li><a href="contatti.html" data-page="contatti">Contattaci</a></li>
         </ul>
       </div>
@@ -65,6 +66,7 @@
         </button>
         <ul class="dd-menu" role="menu">
           <li><a href="notizie.html" data-page="notizie">Ultime notizie</a></li>
+          <li><a href="aggiornamenti.html" data-page="aggiornamenti">📢 Aggiornamenti</a></li>
           <li><a href="avvisi.html" data-page="avvisi">Avvisi &amp; circolari</a></li>
           <li><a href="calendario.html" data-page="calendario">Calendario eventi</a></li>
           <li><a href="natale2024.html" data-page="natale2024">🎄 Natale 2024</a></li>
@@ -119,6 +121,7 @@
         <li><a href="semiconvitto.html">🌅 Semiconvitto</a></li>
         <li><a href="ammissione.html">Come iscriversi</a></li>
         <li><a href="orientamento.html">🗓 Orientamento &amp; Open Day</a></li>
+        <li><a href="genitori.html">👨‍👩‍👧 Per i Genitori</a></li>
         <li><a href="contatti.html">Contattaci</a></li>
       </ul>
     </li>
@@ -127,6 +130,7 @@
       <button class="drw-acc" aria-expanded="false">Novità <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
       <ul class="drw-sub">
         <li><a href="notizie.html">Ultime notizie</a></li>
+        <li><a href="aggiornamenti.html">📢 Aggiornamenti</a></li>
         <li><a href="avvisi.html">Avvisi &amp; circolari</a></li>
         <li><a href="calendario.html">Calendario eventi</a></li>
         <li><a href="natale2024.html">🎄 Natale 2024</a></li>

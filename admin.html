@@ -191,7 +191,7 @@
     <button class="main-tab on" onclick="switchTab('notizie',this)">📰 Notizie</button>
     <button class="main-tab" onclick="switchTab('avvisi',this)">📋 Avvisi & Comunicati</button>
     <button class="main-tab" onclick="switchTab('mappa',this)">🗺️ Mappa — Pin in attesa</button>
-    <button class="main-tab" onclick="switchTab('alumni',this)">👥 Alumni — Schede in attesa</button>
+    <button class="main-tab" onclick="switchTab('alumni',this)">👥 <em>Alumni</em> — Schede in attesa</button>
   </div>
 
   <div class="adm-notice">
@@ -336,15 +336,15 @@
   <div class="tab-section" id="tab-alumni">
     <div style="padding:1.5rem 1.25rem">
       <div class="adm-card">
-        <h2>Schede Alumni in <em>attesa di approvazione</em></h2>
+        <h2>Schede <em>Alumni</em> in <em>attesa di approvazione</em></h2>
         <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1.25rem;line-height:1.65">
-          Ogni ex convittore che compila il form "Unisciti agli Alumni" appare qui. Approva la scheda e apparirà automaticamente nella gallery di alumni.html. Rifiutala e scompare silenziosamente.
+          Ogni ex convittore che compila il form "Unisciti agli <em>Alumni</em>" appare qui. Approva la scheda e apparirà automaticamente nella gallery di alumni.html. Rifiutala e scompare silenziosamente.
         </p>
         <div id="alumni-pending-list">
           <p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento in corso…</p>
         </div>
         <div style="border-top:1px solid #e8e0d0;margin-top:1.25rem;padding-top:1rem">
-          <p style="font-size:.75rem;color:#8b7a5a;margin-bottom:.6rem">Alumni già approvati e visibili nella gallery:</p>
+          <p style="font-size:.75rem;color:#8b7a5a;margin-bottom:.6rem"><em>Alumni</em> già approvati e visibili nella gallery:</p>
           <div id="alumni-approved-list"></div>
         </div>
       </div>
@@ -354,13 +354,23 @@
 </div><!-- fine adm-wrap -->
 
 <script>
-const PWD   = 'Alluquartelachiazzetta_2025';
+const PWD_HASH = '4d7f432968e1da3b3d6d7dec2f99f4d0b65b3751eeec4d1ea36d45d7bcda288b'; // password hashata SHA-256
 const KEY_N = 'costaggini_notizie_admin_v1';
 const KEY_A = 'costaggini_comunicati_v2';
 
 // ═══ AUTH ═══
 function doLogin() {
-  if (document.getElementById('pwd').value === PWD) {
+  const v = document.getElementById('pwd').value;
+    const attempts = parseInt(sessionStorage.getItem('adm_attempts')||'0');
+    const lockUntil = parseInt(sessionStorage.getItem('adm_lock')||'0');
+    if (Date.now() < lockUntil) {
+      alert('Troppi tentativi. Riprova tra un minuto.');
+      return;
+    }
+    crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)).then(buf => {
+      const hash = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+      if (hash === PWD_HASH) {
+        sessionStorage.removeItem('adm_attempts');
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('adm-wrap').style.display = 'block';
     initAll();
@@ -638,7 +648,7 @@ function aiAvviso() {
 // ═══════════════════════════════════
 // INIT
 // ═══════════════════════════════════
-function initAll() { loadNotizie(); loadAvvisi(); loadPins(); loadAlumni(); }
+function initAll() { loadNotizie(); loadAvvisi(); loadPins(); load<em>Alumni</em>(); }
 
 // ═══════════════════════════════════
 // ALUMNI — MODERAZIONE SUPABASE
@@ -651,9 +661,9 @@ if (!SB_SERVICE) {
   if (SB_SERVICE) localStorage.setItem('sb_service_key', SB_SERVICE);
 }
 
-async function loadAlumni() { await renderAlumniPending(); await renderAlumniApproved(); }
+async function load<em>Alumni</em>() { await render<em>Alumni</em>Pending(); await render<em>Alumni</em>Approved(); }
 
-async function renderAlumniPending() {
+async function render<em>Alumni</em>Pending() {
   const el = document.getElementById('alumni-pending-list');
   el.innerHTML = '<p style="font-size:.85rem;color:var(--txt2)">Caricamento…</p>';
   try {
@@ -695,7 +705,7 @@ async function renderAlumniPending() {
   } catch(e) { el.innerHTML = '<p style="color:#dc2626">Errore connessione Supabase: '+e.message+'</p>'; }
 }
 
-async function renderAlumniApproved() {
+async function render<em>Alumni</em>Approved() {
   const el = document.getElementById('alumni-approved-list');
   try {
     const approved = await sb.select('alumni', 'approvato=eq.true');
@@ -714,7 +724,7 @@ async function renderAlumniApproved() {
 async function approveAlumno(id) {
   try {
     await sb.update('alumni', id, { approvato: true }, SB_SERVICE);
-    await loadAlumni();
+    await load<em>Alumni</em>();
   } catch(e) { alert('Errore: '+e.message); }
 }
 
@@ -722,7 +732,7 @@ async function rejectAlumno(id, nome) {
   if (!confirm(`Rifiutare e cancellare la scheda di "${nome}"?`)) return;
   try {
     await sb.delete('alumni', id, SB_SERVICE);
-    await loadAlumni();
+    await load<em>Alumni</em>();
   } catch(e) { alert('Errore: '+e.message); }
 }
 
@@ -730,11 +740,11 @@ async function removeAlumno(id, nome) {
   if (!confirm(`Rimuovere la scheda di "${nome}" dalla gallery?`)) return;
   try {
     await sb.update('alumni', id, { approvato: false }, SB_SERVICE);
-    await loadAlumni();
+    await load<em>Alumni</em>();
   } catch(e) { alert('Errore: '+e.message); }
 }
 
-function renderAlumniPending() {
+function render<em>Alumni</em>Pending() {
   const pending = JSON.parse(localStorage.getItem('costaggini-alumni-pending') || '[]');
   const el = document.getElementById('alumni-pending-list');
   if (!pending.length) {

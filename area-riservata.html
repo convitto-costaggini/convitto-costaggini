@@ -375,19 +375,34 @@
 
   // ── AVVIO ──
   window.addEventListener('load', async () => {
-    const { data: { session } } = await sb.auth.getSession();
-    if (session) avviaDashboard(session.user.email);
+
+    // Controlla se l'URL contiene un token di recovery
+    // Supabase aggiunge #access_token=...&type=recovery all'URL
+    const hash = window.location.hash;
+    const isRecovery = hash.includes('type=recovery');
+
+    if (isRecovery) {
+      // Mostra subito la schermata nuova password
+      // Supabase gestirà il token in background tramite onAuthStateChange
+      document.getElementById('schermata-auth').style.display = 'flex';
+      document.getElementById('schermata-dashboard').style.display = 'none';
+      mostraSchermata('nuovapwd');
+      // Pulisce l'URL per sicurezza
+      history.replaceState(null, '', window.location.pathname);
+    } else {
+      // Flusso normale — controlla sessione esistente
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) avviaDashboard(session.user.email);
+    }
 
     sb.auth.onAuthStateChange((event, session) => {
       if (event === 'PASSWORD_RECOVERY') {
-        // Utente arriva dal link di reset — mostra la schermata nuova password
         document.getElementById('schermata-auth').style.display = 'flex';
         document.getElementById('schermata-dashboard').style.display = 'none';
         mostraSchermata('nuovapwd');
         return;
       }
       if (event === 'SIGNED_IN' && session) {
-        // Se viene da recovery non andiamo alla dashboard
         if (schermataCorrente !== 'nuovapwd') avviaDashboard(session.user.email);
       }
       if (event === 'SIGNED_OUT') mostraAuth();

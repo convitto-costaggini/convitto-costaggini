@@ -269,6 +269,31 @@
         <div class="link-secondario"><a onclick="mostraSchermata('login')">← Torna al login</a></div>
       </div>
 
+      <!-- ─ NUOVA PASSWORD (dopo reset) ─ -->
+      <div class="sezione" id="sez-nuovapwd">
+        <p style="font-size:.9rem;color:var(--txt2);margin-bottom:1.5rem;line-height:1.7;text-align:center;">
+          Scegli la tua nuova password di accesso.
+        </p>
+        <div class="campo-g">
+          <label>Nuova password</label>
+          <div class="inp-wrap">
+            <input type="password" id="nuovapwd-1" placeholder="Almeno 8 caratteri"
+                   autocomplete="new-password" oninput="verificaNuovaPwd()">
+            <button class="occhio" type="button" onclick="togglePwd('nuovapwd-1',this)">👁️</button>
+          </div>
+        </div>
+        <div class="campo-g">
+          <label>Conferma nuova password</label>
+          <div class="inp-wrap">
+            <input type="password" id="nuovapwd-2" placeholder="Ripeti la password"
+                   autocomplete="new-password" oninput="verificaNuovaPwd()">
+            <button class="occhio" type="button" onclick="togglePwd('nuovapwd-2',this)">👁️</button>
+          </div>
+          <div style="font-size:.78rem;margin-top:.35rem;min-height:1.2rem" id="msg-nuovapwd-match"></div>
+        </div>
+        <button class="btn-auth" id="btn-nuovapwd" onclick="salvaNuovaPassword()">Salva nuova password</button>
+      </div>
+
       <!-- ─ REGISTRATI (redirect) ─ -->
       <div class="sezione" id="sez-registrati">
         <p style="font-size:.9rem;color:var(--txt2);margin-bottom:1.5rem;line-height:1.7;">
@@ -354,7 +379,17 @@
     if (session) avviaDashboard(session.user.email);
 
     sb.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) avviaDashboard(session.user.email);
+      if (event === 'PASSWORD_RECOVERY') {
+        // Utente arriva dal link di reset — mostra la schermata nuova password
+        document.getElementById('schermata-auth').style.display = 'flex';
+        document.getElementById('schermata-dashboard').style.display = 'none';
+        mostraSchermata('nuovapwd');
+        return;
+      }
+      if (event === 'SIGNED_IN' && session) {
+        // Se viene da recovery non andiamo alla dashboard
+        if (schermataCorrente !== 'nuovapwd') avviaDashboard(session.user.email);
+      }
       if (event === 'SIGNED_OUT') mostraAuth();
     });
   });
@@ -448,7 +483,7 @@
     const email = document.getElementById('reset-email').value.trim().toLowerCase();
     if (!email) return mostraMsg('Inserire l\'email.', 'err');
     await sb.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.origin + '/area-riservata.html'
+      redirectTo: window.location.href.split('?')[0].split('#')[0]
     });
     mostraMsg('Link di reset inviato a ' + email + '. Controlla la casella email.', 'ok');
   }
@@ -483,6 +518,35 @@
     document.getElementById('schermata-dashboard').style.display = 'none';
     document.getElementById('btn-logout').style.display = 'none';
     mostraSchermata('login');
+  }
+
+  // ── NUOVA PASSWORD (recovery) ──
+  function verificaNuovaPwd() {
+    const p1 = document.getElementById('nuovapwd-1').value;
+    const p2 = document.getElementById('nuovapwd-2').value;
+    const msg = document.getElementById('msg-nuovapwd-match');
+    if (!p2) { msg.textContent = ''; return; }
+    if (p1 === p2) { msg.textContent = '✓ Le password coincidono'; msg.style.color = '#15803d'; }
+    else { msg.textContent = '✗ Le password non coincidono'; msg.style.color = '#b91c1c'; }
+  }
+
+  async function salvaNuovaPassword() {
+    const p1 = document.getElementById('nuovapwd-1').value;
+    const p2 = document.getElementById('nuovapwd-2').value;
+    const btn = document.getElementById('btn-nuovapwd');
+    if (!p1 || p1.length < 8) return mostraMsg('La password deve essere di almeno 8 caratteri.', 'err');
+    if (p1 !== p2) return mostraMsg('Le due password non coincidono.', 'err');
+    btn.disabled = true; btn.textContent = 'Salvataggio...';
+    const { error } = await sb.auth.updateUser({ password: p1 });
+    if (error) {
+      mostraMsg('Errore: ' + error.message, 'err');
+      btn.disabled = false; btn.textContent = 'Salva nuova password';
+      return;
+    }
+    mostraMsg('✅ Password aggiornata! Accedi con le nuove credenziali.', 'ok');
+    btn.disabled = false; btn.textContent = 'Salva nuova password';
+    // Torna al login dopo 2 secondi
+    setTimeout(() => { sb.auth.signOut(); mostraSchermata('login'); }, 2000);
   }
 
   async function eseguiLogout() { await sb.auth.signOut(); }

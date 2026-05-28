@@ -328,11 +328,11 @@
   </nav>
 
   <div class="tab-cont attivo" id="tab-presenze">
-    <div class="banner-info">Presenze ai pasti degli ultimi 30 giorni.</div>
+    <div class="banner-info">Presenze ai pasti dall'inizio dell'anno scolastico.</div>
     <div id="cont-presenze"><div class="loader"><div class="spinner"></div></div></div>
   </div>
   <div class="tab-cont" id="tab-semafori">
-    <div class="banner-info">🟢 Positivo · 🟡 Migliorabile · 🔴 Da migliorare</div>
+    <div class="banner-info">Valutazioni dall'inizio dell'anno scolastico. 🟢 Positivo · 🟡 Migliorabile · 🔴 Da migliorare</div>
     <div class="sem-grid">
       <div class="sem-box"><h3>🛏️ Camera</h3><div class="sem-pallini">
         <div class="sem-pallino">🟢<span id="c-cam-v">0</span></div>
@@ -348,7 +348,7 @@
     <div id="cont-semafori"><div class="loader"><div class="spinner"></div></div></div>
   </div>
   <div class="tab-cont" id="tab-note">
-    <div class="banner-info">Note degli educatori degli ultimi 30 giorni.</div>
+    <div class="banner-info">Note degli educatori dall'inizio dell'anno scolastico.</div>
     <div id="cont-note"><div class="loader"><div class="spinner"></div></div></div>
   </div>
   <div class="tab-cont" id="tab-colloqui">
@@ -579,6 +579,13 @@
     btn.textContent = i.type === 'password' ? '👁️' : '🙈';
   }
 
+  // ── ANNO SCOLASTICO ──
+  function inizioAnnoScolastico() {
+    const oggi = new Date();
+    const anno = oggi.getMonth() >= 8 ? oggi.getFullYear() : oggi.getFullYear() - 1;
+    return anno + '-09-01';
+  }
+
   // ── DATI ──
   function fmt(iso) {
     if (!iso) return '';
@@ -593,9 +600,9 @@
   function vuoto(ico, txt) { return `<div class="vuoto"><div class="icona">${ico}</div><p>${txt}</p></div>`; }
 
   async function caricaPresenze() {
-    const dal = new Date(); dal.setDate(dal.getDate()-30);
+    const dal = inizioAnnoScolastico();
     const { data } = await sb.from('famiglie_presenze').select('*')
-      .eq('nome_studente', nomeStudente).gte('data', dal.toISOString().split('T')[0])
+      .eq('nome_studente', nomeStudente).gte('data', dal)
       .order('data', { ascending: false });
     const el = document.getElementById('cont-presenze');
     if (!data?.length) { el.innerHTML = vuoto('🍽️','Nessuna presenza registrata.'); return; }
@@ -610,9 +617,9 @@
   }
 
   async function caricaSemafori() {
-    const dal = new Date(); dal.setDate(dal.getDate()-30);
+    const dal = inizioAnnoScolastico();
     const { data } = await sb.from('famiglie_semafori').select('*')
-      .eq('nome_studente', nomeStudente).gte('data', dal.toISOString().split('T')[0])
+      .eq('nome_studente', nomeStudente).gte('data', dal)
       .order('data', { ascending: false });
     const el = document.getElementById('cont-semafori');
     if (!data?.length) { el.innerHTML = vuoto('🚦','Nessuna valutazione registrata.'); return; }
@@ -634,9 +641,9 @@
   }
 
   async function caricaNote() {
-    const dal = new Date(); dal.setDate(dal.getDate()-30);
+    const dal = inizioAnnoScolastico();
     const { data } = await sb.from('famiglie_note').select('*')
-      .eq('nome_studente', nomeStudente).gte('data', dal.toISOString().split('T')[0])
+      .eq('nome_studente', nomeStudente).gte('data', dal)
       .order('data', { ascending: false });
     const el = document.getElementById('cont-note');
     const filtrate = (data||[]).filter(r => r.testo?.trim() && !r.testo.includes('TEST_CONNESSIONE'));
@@ -683,5 +690,6 @@
     ).join('');
   }
 </script>
+<script src="nav.js"></script>
 </body>
 </html>

@@ -399,13 +399,14 @@ function doLogin() {
       const hash = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
       if (hash === PWD_HASH) {
         sessionStorage.removeItem('adm_attempts');
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('adm-wrap').style.display = 'block';
-    initAll();
-  } else {
-    document.getElementById('login-err').style.display = 'block';
-    document.getElementById('pwd').select();
-  }
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('adm-wrap').style.display = 'block';
+        initAll();
+      } else {
+        document.getElementById('login-err').style.display = 'block';
+        document.getElementById('pwd').select();
+      }
+    });
 }
 document.getElementById('pwd').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
 function logout() {

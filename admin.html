@@ -134,60 +134,29 @@
     .badge-home { font-family:var(--fu); font-size:.48rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; background:#1d6f42; color:#fff; padding:.12rem .4rem; border-radius:8px; margin-left:.35rem; vertical-align:middle; }
     .badge-pin { font-family:var(--fu); font-size:.48rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; background:#1a4a7a; color:#fff; padding:.12rem .4rem; border-radius:8px; margin-left:.35rem; vertical-align:middle; }
 
+    /* ── FAMIGLIE ── */
+    .fam-card { border:1px solid #e8e0d0; border-radius:10px; padding:1.1rem; margin-bottom:.75rem; background:#fff; }
+    .fam-card.in_attesa { border-left:4px solid var(--oro); }
+    .fam-card.approvata { border-left:4px solid #1d6f42; }
+    .fam-card.rifiutata { border-left:4px solid #dc2626; opacity:.7; }
+    .fam-info { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:.5rem; margin-bottom:.85rem; }
+    .fam-campo { font-family:var(--fu); font-size:.75rem; color:#6b5a2a; }
+    .fam-campo strong { display:block; font-size:.55rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#8b7a5a; margin-bottom:.15rem; }
+    .fam-azioni { display:flex; gap:.5rem; flex-wrap:wrap; }
+    .btn-approva { padding:.5rem 1.1rem; background:linear-gradient(135deg,var(--bosco),#1a3a1b); color:#fff; border:none; border-radius:6px; font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; transition:opacity .2s; }
+    .btn-approva:hover { opacity:.85; }
+    .btn-rifiuta { padding:.5rem 1.1rem; border:1.5px solid #dc2626; color:#dc2626; background:none; border-radius:6px; font-family:var(--fu); font-size:.65rem; font-weight:700; cursor:pointer; }
+
     /* ── ESPORTA ── */
     .export-bar { border-top:1px solid #e8e0d0; margin-top:1.25rem; padding-top:1rem; }
     .export-bar p { font-size:.78rem; color:#6b5a2a; margin-bottom:.6rem; line-height:1.5; }
     .btn-export { font-family:var(--fu); font-size:.62rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; padding:.5rem 1rem; border:1.5px solid var(--bosco); color:var(--bosco); background:none; border-radius:6px; cursor:pointer; transition:all .2s; }
     .btn-export:hover { background:var(--bosco); color:#fff; }
-  /* ── DIALOGO CUSTOM ── */
-  #adm-dialog-overlay {
-    position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;
-    display:none;align-items:center;justify-content:center;padding:1.25rem;
-    backdrop-filter:blur(2px);
-  }
-  #adm-dialog-overlay.show { display:flex; }
-  .adm-dialog-box {
-    background:#fff;border-radius:12px;width:100%;max-width:380px;
-    box-shadow:0 20px 40px rgba(0,0,0,.2);overflow:hidden;
-    animation:admDialogIn .18s ease;
-  }
-  @keyframes admDialogIn { from{transform:scale(.92);opacity:0} to{transform:scale(1);opacity:1} }
-  .adm-dialog-head {
-    background:var(--bosco);padding:1.1rem 1.4rem;
-    font-family:var(--fd);font-size:1.15rem;font-weight:400;color:#fff;
-    display:flex;align-items:center;gap:.6rem;
-  }
-  .adm-dialog-body {
-    padding:1.4rem;font-size:.9rem;color:var(--txt);line-height:1.65;
-    white-space:pre-wrap;
-  }
-  .adm-dialog-btns {
-    display:flex;border-top:1px solid #e8e0d0;
-  }
-  .adm-dialog-btn {
-    flex:1;padding:.9rem;border:none;background:none;font-family:var(--fu);
-    font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-    cursor:pointer;transition:background .15s;
-  }
-  .adm-dialog-btn:hover { background:#f5f0e8; }
-  .adm-dialog-btn.primary { color:var(--bosco); border-left:1px solid #e8e0d0; }
-  .adm-dialog-btn.danger  { color:#dc2626; border-left:1px solid #e8e0d0; }
-  .adm-dialog-btn.cancel  { color:#8b7a5a; }
-
   </style>
 </head>
 <body>
 
 <!-- ════ LOGIN ════ -->
-
-<div id="adm-dialog-overlay">
-  <div class="adm-dialog-box">
-    <div class="adm-dialog-head" id="adm-dialog-head">🛡️ Conferma</div>
-    <div class="adm-dialog-body" id="adm-dialog-body"></div>
-    <div class="adm-dialog-btns" id="adm-dialog-btns"></div>
-  </div>
-</div>
-
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">🛡️</div>
@@ -236,7 +205,7 @@
     <button class="main-tab" onclick="switchTab('avvisi',this)">📋 Avvisi & Comunicati</button>
     <button class="main-tab" onclick="switchTab('mappa',this)">🗺️ Mappa — Pin in attesa</button>
     <button class="main-tab" onclick="switchTab('alumni',this)">👥 <em>Alumni</em> — Schede in attesa</button>
-    <button class="main-tab" onclick="switchTab('famiglie',this)">🔐 Famiglie <span id="badge-fam" style="display:none;background:#dc2626;color:#fff;font-size:.5rem;padding:.1rem .4rem;border-radius:20px;margin-left:.3rem">0</span></button>
+    <button class="main-tab" id="tab-btn-famiglie" onclick="switchTab('famiglie',this)">👨‍👩‍👧 Famiglie <span id="badge-famiglie" style="display:none;background:#dc2626;color:#fff;font-size:.5rem;padding:.1rem .4rem;border-radius:10px;margin-left:.3rem;vertical-align:middle"></span></button>
   </div>
 
   <div class="adm-notice">
@@ -396,6 +365,28 @@
     </div>
   </div>
 
+  <!-- ══════════════════════════════════
+       TAB 5 — FAMIGLIE
+  ══════════════════════════════════ -->
+  <div class="tab-section" id="tab-famiglie">
+    <div style="padding:1.5rem 1.25rem">
+      <div class="adm-card">
+        <h2>Richieste di accesso <em>Famiglie</em></h2>
+        <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1.25rem;line-height:1.65">
+          Quando un genitore compila il modulo di richiesta accesso, appare qui. Verificare nome studente, email e relazione prima di approvare. All&rsquo;approvazione viene creato automaticamente l&rsquo;account e inviata una email di benvenuto al genitore.
+        </p>
+        <div style="display:flex;gap:.5rem;margin-bottom:1.25rem;flex-wrap:wrap">
+          <button onclick="caricaRichiesteAdmin('in_attesa')" id="btn-fam-attesa" style="padding:.45rem 1rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid var(--bosco);background:var(--bosco);color:#fff;border-radius:6px;cursor:pointer">In attesa</button>
+          <button onclick="caricaRichiesteAdmin('approvata')" id="btn-fam-approvata" style="padding:.45rem 1rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid #d4c9a8;background:none;color:#6b5a2a;border-radius:6px;cursor:pointer">Approvate</button>
+          <button onclick="caricaRichiesteAdmin('rifiutata')" id="btn-fam-rifiutata" style="padding:.45rem 1rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid #d4c9a8;background:none;color:#6b5a2a;border-radius:6px;cursor:pointer">Rifiutate</button>
+        </div>
+        <div id="fam-lista">
+          <p style="color:var(--txt2);font-size:.85rem;font-style:italic">Clicca &ldquo;In attesa&rdquo; per caricare le richieste.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div><!-- fine adm-wrap -->
 
 <script>
@@ -403,57 +394,26 @@ const PWD_HASH = '4d7f432968e1da3b3d6d7dec2f99f4d0b65b3751eeec4d1ea36d45d7bcda28
 const KEY_N = 'costaggini_notizie_admin_v1';
 const KEY_A = 'costaggini_comunicati_v2';
 
-// ── DIALOGO CUSTOM (sostituisce alert/confirm del browser) ──
-function admAlert(msg, icon) {
-  icon = icon || '✅';
-  document.getElementById('adm-dialog-head').innerHTML = icon + ' Avviso';
-  document.getElementById('adm-dialog-body').textContent = msg;
-  document.getElementById('adm-dialog-btns').innerHTML =
-    '<button class="adm-dialog-btn primary" onclick="admCloseDialog()">OK</button>';
-  document.getElementById('adm-dialog-overlay').classList.add('show');
-}
-
-function admConfirm(msg, icon, onOk, onCancel) {
-  icon = icon || '❓';
-  document.getElementById('adm-dialog-head').innerHTML = icon + ' Conferma';
-  document.getElementById('adm-dialog-body').textContent = msg;
-  document.getElementById('adm-dialog-btns').innerHTML =
-    '<button class="adm-dialog-btn cancel" onclick="admCloseDialog(' + (onCancel ? 'true' : '') + ')">Annulla</button>' +
-    '<button class="adm-dialog-btn primary" onclick="admCloseDialog(false, true)">Conferma</button>';
-  window._admOk     = onOk;
-  window._admCancel = onCancel;
-  document.getElementById('adm-dialog-overlay').classList.add('show');
-}
-
-function admCloseDialog(isCancel, isOk) {
-  document.getElementById('adm-dialog-overlay').classList.remove('show');
-  if (isOk  && window._admOk)     { const fn = window._admOk;     window._admOk = null;     fn(); }
-  if (isCancel && window._admCancel) { const fn = window._admCancel; window._admCancel = null; fn(); }
-  window._admOk = null;
-  window._admCancel = null;
-}
-
-
 // ═══ AUTH ═══
 function doLogin() {
   const v = document.getElementById('pwd').value;
-  const attempts = parseInt(sessionStorage.getItem('adm_attempts')||'0');
-  const lockUntil = parseInt(sessionStorage.getItem('adm_lock')||'0');
-  if (Date.now() < lockUntil) { alert('Troppi tentativi. Riprova tra un minuto.'); return; }
-  crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)).then(buf => {
-    const hash = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-    if (hash === PWD_HASH) {
-      sessionStorage.removeItem('adm_attempts');
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('adm-wrap').style.display = 'block';
-      initAll();
-    } else {
-      sessionStorage.setItem('adm_attempts', attempts + 1);
-      if (attempts + 1 >= 3) sessionStorage.setItem('adm_lock', Date.now() + 60000);
-      document.getElementById('login-err').style.display = 'block';
-      document.getElementById('pwd').value = '';
+    const attempts = parseInt(sessionStorage.getItem('adm_attempts')||'0');
+    const lockUntil = parseInt(sessionStorage.getItem('adm_lock')||'0');
+    if (Date.now() < lockUntil) {
+      alert('Troppi tentativi. Riprova tra un minuto.');
+      return;
     }
-  });
+    crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)).then(buf => {
+      const hash = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+      if (hash === PWD_HASH) {
+        sessionStorage.removeItem('adm_attempts');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('adm-wrap').style.display = 'block';
+    initAll();
+  } else {
+    document.getElementById('login-err').style.display = 'block';
+    document.getElementById('pwd').select();
+  }
 }
 document.getElementById('pwd').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
 function logout() {
@@ -468,7 +428,6 @@ function switchTab(name, btn) {
   document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('on'));
   btn.classList.add('on');
   document.getElementById('tab-' + name).classList.add('on');
-  if (name === 'famiglie') caricaRichiesteF();
 }
 
 // ═══════════════════════════════════
@@ -554,7 +513,7 @@ function modificaNotizia(id) {
   document.getElementById('n-featured').checked= !!n.featured;
   document.getElementById('n-edit-id').value   = id;
   const btn=document.getElementById('n-btn-salva');
-  document.getElementById('n-form-title').innerHTML='✏️ Modifica notizia';
+  document.getElementById('n-form-title').innerHTML='✏️ Modifica <em>notizia</em>';
   btn.textContent='💾 Aggiorna'; btn.classList.add('modifica');
   document.querySelector('#tab-notizie .adm-card').scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -575,7 +534,7 @@ function resetNotizia() {
   document.getElementById('n-cat').value='Istituzionale';
   document.getElementById('n-evidenza').checked=false;
   document.getElementById('n-featured').checked=false;
-  document.getElementById('n-form-title').innerHTML='+ Nuova notizia';
+  document.getElementById('n-form-title').innerHTML='+ Nuova <em>notizia</em>';
   const btn=document.getElementById('n-btn-salva');
   btn.textContent='📌 Pubblica'; btn.classList.remove('modifica');
 }
@@ -660,7 +619,7 @@ function modificaAvviso(id) {
   document.getElementById('a-autore').value = a.autore||'';
   document.getElementById('a-pinned').checked=!!a.pinned;
   document.getElementById('a-edit-id').value=id;
-  document.getElementById('a-form-title').innerHTML='✏️ Modifica avviso';
+  document.getElementById('a-form-title').innerHTML='✏️ Modifica <em>avviso</em>';
   const btn=document.getElementById('a-btn-salva');
   btn.textContent='💾 Aggiorna'; btn.classList.add('modifica');
   document.querySelector('#tab-avvisi .adm-card').scrollIntoView({behavior:'smooth',block:'start'});
@@ -682,7 +641,7 @@ function resetAvviso() {
   document.getElementById('a-cat').value='famiglie';
   document.getElementById('a-data').value=new Date().toISOString().split('T')[0];
   document.getElementById('a-pinned').checked=false;
-  document.getElementById('a-form-title').innerHTML='+ Nuovo avviso';
+  document.getElementById('a-form-title').innerHTML='+ Nuovo <em>avviso</em>';
   const btn=document.getElementById('a-btn-salva');
   btn.textContent='📌 Pubblica'; btn.classList.remove('modifica');
 }
@@ -725,17 +684,22 @@ function aiAvviso() {
 // ═══════════════════════════════════
 // INIT
 // ═══════════════════════════════════
-function initAll() { loadNotizie(); loadAvvisi(); loadPins(); loadAlumni(); verificaNuoveRichieste(); }
+function initAll() { loadNotizie(); loadAvvisi(); loadPins(); load<em>Alumni</em>(); }
 
 // ═══════════════════════════════════
 // ALUMNI — MODERAZIONE SUPABASE
 // ═══════════════════════════════════
 
-const SB_SERVICE = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhd2Nsc3lzcW5qc3Zib2Jpb3FvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTIxMzc2OSwiZXhwIjoyMDk0Nzg5NzY5fQ.pvYOl7aNXvO32Zb_8zzq5OXk3Cc9OeVe_QV9Vh_WaWw';
+// Chiave service_role — salvata in localStorage dell'admin dopo il primo inserimento
+let SB_SERVICE = localStorage.getItem('sb_service_key') || '';
+if (!SB_SERVICE) {
+  SB_SERVICE = window.prompt('Prima configurazione — inserisci la chiave service_role di Supabase:') || '';
+  if (SB_SERVICE) localStorage.setItem('sb_service_key', SB_SERVICE);
+}
 
-async function loadAlumni() { await renderAlumniPending(); await renderAlumniApproved(); }
+async function load<em>Alumni</em>() { await render<em>Alumni</em>Pending(); await render<em>Alumni</em>Approved(); }
 
-async function renderAlumniPending() {
+async function render<em>Alumni</em>Pending() {
   const el = document.getElementById('alumni-pending-list');
   el.innerHTML = '<p style="font-size:.85rem;color:var(--txt2)">Caricamento…</p>';
   try {
@@ -777,7 +741,7 @@ async function renderAlumniPending() {
   } catch(e) { el.innerHTML = '<p style="color:#dc2626">Errore connessione Supabase: '+e.message+'</p>'; }
 }
 
-async function renderAlumniApproved() {
+async function render<em>Alumni</em>Approved() {
   const el = document.getElementById('alumni-approved-list');
   try {
     const approved = await sb.select('alumni', 'approvato=eq.true');
@@ -796,7 +760,7 @@ async function renderAlumniApproved() {
 async function approveAlumno(id) {
   try {
     await sb.update('alumni', id, { approvato: true }, SB_SERVICE);
-    await loadAlumni();
+    await load<em>Alumni</em>();
   } catch(e) { alert('Errore: '+e.message); }
 }
 
@@ -804,7 +768,7 @@ async function rejectAlumno(id, nome) {
   if (!confirm(`Rifiutare e cancellare la scheda di "${nome}"?`)) return;
   try {
     await sb.delete('alumni', id, SB_SERVICE);
-    await loadAlumni();
+    await load<em>Alumni</em>();
   } catch(e) { alert('Errore: '+e.message); }
 }
 
@@ -812,11 +776,11 @@ async function removeAlumno(id, nome) {
   if (!confirm(`Rimuovere la scheda di "${nome}" dalla gallery?`)) return;
   try {
     await sb.update('alumni', id, { approvato: false }, SB_SERVICE);
-    await loadAlumni();
+    await load<em>Alumni</em>();
   } catch(e) { alert('Errore: '+e.message); }
 }
 
-function renderAlumniPending() {
+function render<em>Alumni</em>Pending() {
   const pending = JSON.parse(localStorage.getItem('costaggini-alumni-pending') || '[]');
   const el = document.getElementById('alumni-pending-list');
   if (!pending.length) {
@@ -946,124 +910,192 @@ function removeApproved(i) {
   renderApproved();
 }
 </script>
+<script src="supabase.js">
+// ═══ FAMIGLIE ═══
+const SB_URL = 'https://sawclsysqnjsvbobioqo.supabase.co';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyuZZTry0o7OQhnx0-LxTolWHOtfR3FumqISF3aD2ML36OHK5P7V_ZfQNZLzz663m7rIg/exec';
 
+function getSbKey() {
+  let k = localStorage.getItem('sb_service_key') || '';
+  if (!k) {
+    k = window.prompt('Inserisci la chiave secret di Supabase (serve solo la prima volta):') || '';
+    if (k) localStorage.setItem('sb_service_key', k);
+  }
+  return k;
+}
 
-  <!-- TAB FAMIGLIE -->
-  <div class="tab-section" id="tab-famiglie">
-    <div style="padding:1.25rem;max-width:900px;margin:0 auto">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem">
-        <div class="adm-card" style="text-align:center;padding:1.2rem"><div style="font-family:var(--fd);font-size:2rem;color:#a16207" id="fam-cnt-attesa">&#8212;</div><div style="font-size:.62rem;font-weight:800;text-transform:uppercase;color:#888;margin-top:4px">In attesa</div></div>
-        <div class="adm-card" style="text-align:center;padding:1.2rem"><div style="font-family:var(--fd);font-size:2rem;color:#1d6f42" id="fam-cnt-approvate">&#8212;</div><div style="font-size:.62rem;font-weight:800;text-transform:uppercase;color:#888;margin-top:4px">Approvate</div></div>
-        <div class="adm-card" style="text-align:center;padding:1.2rem"><div style="font-family:var(--fd);font-size:2rem;color:#dc2626" id="fam-cnt-rifiutate">&#8212;</div><div style="font-size:.62rem;font-weight:800;text-transform:uppercase;color:#888;margin-top:4px">Rifiutate</div></div>
-      </div>
-      <div style="display:flex;gap:.6rem;margin-bottom:1.25rem;flex-wrap:wrap">
-        <button onclick="famFiltro('in_attesa')" id="fam-f-attesa" style="font-family:var(--fu);font-size:.65rem;font-weight:800;text-transform:uppercase;padding:.5rem 1.1rem;border-radius:6px;border:1.5px solid #d4c9a8;background:#fef9c3;color:#a16207;cursor:pointer">In attesa</button>
-        <button onclick="famFiltro('approvata')" id="fam-f-approvate" style="font-family:var(--fu);font-size:.65rem;font-weight:800;text-transform:uppercase;padding:.5rem 1.1rem;border-radius:6px;border:1.5px solid #d4c9a8;background:#f0f9f0;color:#1d6f42;cursor:pointer">Approvate</button>
-        <button onclick="famFiltro('rifiutata')" id="fam-f-rifiutate" style="font-family:var(--fu);font-size:.65rem;font-weight:800;text-transform:uppercase;padding:.5rem 1.1rem;border-radius:6px;border:1.5px solid #d4c9a8;background:#fff5f5;color:#dc2626;cursor:pointer">Rifiutate</button>
-        <button onclick="caricaRichiesteF()" style="margin-left:auto;font-family:var(--fu);font-size:.65rem;font-weight:700;padding:.5rem 1.1rem;border-radius:6px;border:1.5px solid var(--bosco);color:var(--bosco);background:none;cursor:pointer">Aggiorna</button>
-      </div>
-      <div id="fam-lista"><p style="font-size:.85rem;color:#666;font-style:italic">Seleziona una categoria.</p></div>
-    </div>
-  </div>
-<script>
-const SB_URL_F = 'https://sawclsysqnjsvbobioqo.supabase.co';
-const SB_KEY_F = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhd2Nsc3lzcW5qc3Zib2Jpb3FvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTIxMzc2OSwiZXhwIjoyMDk0Nzg5NzY5fQ.pvYOl7aNXvO32Zb_8zzq5OXk3Cc9OeVe_QV9Vh_WaWw';
-let famRichieste = [], famFiltroCorrente = 'in_attesa';
-function sbFam(path, opts) {
-  opts = opts || {};
-  return fetch(SB_URL_F + path, { method: opts.method || 'GET', headers: Object.assign({'Content-Type':'application/json','apikey':SB_KEY_F,'Authorization':'Bearer '+SB_KEY_F}, opts.headers || {}), body: opts.body });
-}
-async function caricaRichiesteF() {
+async function caricaRichiesteAdmin(stato) {
+  stato = stato || 'in_attesa';
   const el = document.getElementById('fam-lista');
-  el.innerHTML = '<p style="font-size:.85rem;color:#666">Caricamento...</p>';
-  try { const resp = await sbFam('/rest/v1/richieste_accesso?select=*&order=created_at.desc'); famRichieste = await resp.json(); aggiornaBadgeF(); famFiltro(famFiltroCorrente); }
-  catch(e) { el.innerHTML = '<p style="color:#dc2626;font-size:.85rem">Errore: ' + e.message + '</p>'; }
-}
-function aggiornaBadgeF() {
-  const a = famRichieste.filter(r => r.stato === 'in_attesa').length;
-  const p = famRichieste.filter(r => r.stato === 'approvata').length;
-  const ri = famRichieste.filter(r => r.stato === 'rifiutata').length;
-  document.getElementById('fam-cnt-attesa').textContent = a;
-  document.getElementById('fam-cnt-approvate').textContent = p;
-  document.getElementById('fam-cnt-rifiutate').textContent = ri;
-  const b = document.getElementById('badge-fam');
-  if (b) { b.textContent = a; b.style.display = a > 0 ? 'inline-block' : 'none'; }
-}
-function famFiltro(stato) {
-  famFiltroCorrente = stato;
-  const filtrate = famRichieste.filter(r => r.stato === stato);
-  const el = document.getElementById('fam-lista');
-  if (!filtrate.length) { el.innerHTML = '<div style="background:rgba(29,111,66,.06);border:1px solid rgba(29,111,66,.2);border-radius:8px;padding:1rem;font-size:.85rem;color:#1d6f42">Nessuna richiesta.</div>'; return; }
-  el.innerHTML = filtrate.map((r, idx) => {
-    const data = new Date(r.created_at).toLocaleString('it-IT');
-    const rel = ({padre:'Padre',madre:'Madre',tutore:'Tutore'})[r.relazione] || r.relazione;
-    let azioni = '';
-    if (r.stato === 'in_attesa') {
-      azioni = '<textarea id="nota-fam-' + idx + '" style="width:100%;padding:.5rem;border:1px solid #d4c9a8;border-radius:6px;font-size:.82rem;resize:vertical;min-height:50px;margin-bottom:.5rem" placeholder="Nota opzionale..."></textarea>'
-             + '<div style="display:flex;gap:.6rem"><button onclick="famApprova(' + idx + ')" class="btn-ed edit">Approva</button><button onclick="famRifiuta(' + idx + ')" class="btn-ed del">Rifiuta</button></div>';
-    } else {
-      const col = r.stato === 'approvata' ? 'background:#dcfce7;color:#15803d' : 'background:#fee2e2;color:#b91c1c';
-      azioni = '<span style="font-size:.72rem;font-weight:800;padding:.2rem .6rem;border-radius:20px;' + col + '">' + r.stato + '</span>';
-      if (r.note_admin) azioni += ' <span style="font-size:.8rem;color:#888">' + r.note_admin + '</span>';
+  el.innerHTML = '<p style="font-size:.85rem;font-style:italic;color:var(--txt2)">Caricamento...</p>';
+
+  // Evidenzia bottone attivo
+  ['attesa','approvata','rifiutata'].forEach(s => {
+    const b = document.getElementById('btn-fam-' + s);
+    if (b) {
+      b.style.background = (s === stato || (s === 'attesa' && stato === 'in_attesa')) ? 'var(--bosco)' : 'none';
+      b.style.color = (s === stato || (s === 'attesa' && stato === 'in_attesa')) ? '#fff' : '#6b5a2a';
     }
-    return '<div style="border:1.5px solid #e8e0d0;border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:.85rem;background:#fff">'
-         + '<div style="font-family:var(--fd);font-size:1.1rem;color:var(--bosco);margin-bottom:.2rem">' + r.nome_studente + '</div>'
-         + '<div style="font-size:.7rem;color:#8b7a5a;margin-bottom:.6rem">' + data + ' - ' + rel + ' - ' + r.email_genitore + '</div>'
-         + azioni + '</div>';
-  }).join('');
-}
-async function famApprova(idx) {
-  const filtrate = famRichieste.filter(r => r.stato === famFiltroCorrente);
-  const r = filtrate[idx];
-  if (!r) { alert('Errore: richiesta non trovata. Aggiorna la lista.'); return; }
-  const nota = (document.getElementById('nota-fam-' + idx) || {}).value || '';
-  await new Promise((res,rej) => admConfirm('Attivare accesso per:\n' + r.email_genitore + '?', '🔐', res, rej));
+  });
+
+  const key = getSbKey();
+  if (!key) { el.innerHTML = '<p style="color:#dc2626;font-size:.85rem">Chiave non inserita.</p>'; return; }
+
   try {
-    const authBody = {
-      email: r.email_genitore,
-      password: r.password_hash,
-      email_confirm: true,
-      user_metadata: {nome_studente: r.nome_studente, relazione: r.relazione}
-    };
-    const ra = await fetch(SB_URL_F + '/auth/v1/admin/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SB_KEY_F,
-        'Authorization': 'Bearer ' + SB_KEY_F
-      },
-      body: JSON.stringify(authBody)
+    const url = SB_URL + '/rest/v1/richieste_accesso?stato=eq.' + stato + '&order=created_at.desc';
+    const resp = await fetch(url, {
+      headers: { 'apikey': key, 'Authorization': 'Bearer ' + key }
     });
-    const ad = await ra.json();
-    console.log('Auth response:', ra.status, JSON.stringify(ad));
-    if (!ra.ok && !(ad.msg && ad.msg.includes('already')) && !(ad.message && ad.message.includes('already'))) {
-      throw new Error('Auth HTTP ' + ra.status + ': ' + (ad.message || ad.msg || JSON.stringify(ad)));
+    if (!resp.ok) {
+      const err = await resp.text();
+      el.innerHTML = '<p style="color:#dc2626;font-size:.82rem">Errore ' + resp.status + ': ' + err + '</p>';
+      return;
     }
-    await sbFam('/rest/v1/genitori_studenti?on_conflict=email_genitore,nome_studente', {method:'POST', headers:{'Prefer':'resolution=merge-duplicates'}, body:JSON.stringify({email_genitore:r.email_genitore, nome_studente:r.nome_studente, relazione:r.relazione})});
-    await sbFam('/rest/v1/richieste_accesso?id=eq.' + r.id, {method:'PATCH', headers:{'Prefer':'return=minimal'}, body:JSON.stringify({stato:'approvata', processed_at:new Date().toISOString(), note_admin:nota})});
-    admAlert('Accesso attivato correttamente per:\n' + r.email_genitore + '\n\nIl genitore può ora accedere all\'Area Riservata.', '✅');
-    caricaRichiesteF();
-  } catch(e) { admAlert('Errore durante l\'attivazione:\n' + e.message, '⚠️'); }
-}
-async function famRifiuta(idx) {
-  const filtrate = famRichieste.filter(r => r.stato === famFiltroCorrente);
-  const r = filtrate[idx];
-  if (!r) { alert('Errore: richiesta non trovata. Aggiorna la lista.'); return; }
-  const nota = (document.getElementById('nota-fam-' + idx) || {}).value || '';
-  await new Promise((res,rej) => admConfirm('Rifiutare la richiesta di:\n' + r.email_genitore + '?', '✗', res, rej));
-  await sbFam('/rest/v1/richieste_accesso?id=eq.' + r.id, {method:'PATCH', headers:{'Prefer':'return=minimal'}, body:JSON.stringify({stato:'rifiutata', processed_at:new Date().toISOString(), note_admin:nota})});
-  caricaRichiesteF();
-}
-async function verificaNuoveRichieste() {
-  try {
-    const resp = await sbFam('/rest/v1/richieste_accesso?stato=eq.in_attesa&select=id');
     const data = await resp.json();
-    const count = Array.isArray(data) ? data.length : 0;
-    const b = document.getElementById('badge-fam');
-    if (b) { b.textContent = count; b.style.display = count > 0 ? 'inline-block' : 'none'; }
+    if (!Array.isArray(data) || !data.length) {
+      el.innerHTML = '<p style="font-size:.85rem;font-style:italic;color:var(--txt2)">Nessuna richiesta ' + stato + '.</p>';
+      return;
+    }
+    el.innerHTML = data.map(r => renderRichiesta(r)).join('');
+
+    // Aggiorna badge
+    if (stato === 'in_attesa') {
+      const badge = document.getElementById('badge-famiglie');
+      if (badge) {
+        if (data.length > 0) { badge.textContent = data.length; badge.style.display = 'inline'; }
+        else badge.style.display = 'none';
+      }
+    }
+  } catch(e) {
+    el.innerHTML = '<p style="color:#dc2626;font-size:.82rem">Errore: ' + e.message + '</p>';
+  }
+}
+
+function renderRichiesta(r) {
+  const dataStr = new Date(r.created_at).toLocaleDateString('it-IT', {day:'2-digit',month:'long',year:'numeric'});
+  const processedStr = r.processed_at ? new Date(r.processed_at).toLocaleDateString('it-IT') : '—';
+  const id = r.id;
+  const email = r.email_genitore;
+  const studente = r.nome_studente;
+  const rel = r.relazione;
+
+  let azioni = '';
+  if (r.stato === 'in_attesa') {
+    azioni = '<div class="fam-azioni">'
+      + '<button class="btn-approva" data-id="' + id + '" data-email="' + email + '" data-studente="' + studente + '" data-rel="' + rel + '" onclick="approvaClick(this)">&#10003; Approva e attiva accesso</button>'
+      + '<button class="btn-rifiuta" data-id="' + id + '" onclick="rifiutaClick(this)">&#x2717; Rifiuta</button>'
+      + '</div>';
+  } else {
+    azioni = '<p style="font-family:var(--fu);font-size:.72rem;color:#6b5a2a;font-style:italic">Elaborata il ' + processedStr + '</p>';
+  }
+
+  return '<div class="fam-card ' + r.stato + '">'
+    + '<div class="fam-info">'
+    + '<div class="fam-campo"><strong>Studente</strong>' + studente + '</div>'
+    + '<div class="fam-campo"><strong>Email genitore</strong>' + email + '</div>'
+    + '<div class="fam-campo"><strong>Relazione</strong>' + rel + '</div>'
+    + '<div class="fam-campo"><strong>Data richiesta</strong>' + dataStr + '</div>'
+    + '</div>' + azioni + '</div>';
+}
+
+function approvaClick(btn) {
+  const id = btn.getAttribute('data-id');
+  const email = btn.getAttribute('data-email');
+  const studente = btn.getAttribute('data-studente');
+  const rel = btn.getAttribute('data-rel');
+  approvaRichiestaAdmin(id, email, studente, rel, btn);
+}
+
+function rifiutaClick(btn) {
+  const id = btn.getAttribute('data-id');
+  rifiutaRichiestaAdmin(id);
+}
+
+async function approvaRichiestaAdmin(id, email, nomeStudente, relazione, btn) {
+  btn = btn || event.target;
+  btn.disabled = true; btn.textContent = 'Attivazione...';
+  const key = getSbKey();
+
+  try {
+    // 1. Crea utente in Supabase Auth
+    const respAuth = await fetch(SB_URL + '/auth/v1/admin/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': key, 'Authorization': 'Bearer ' + key },
+      body: JSON.stringify({ email, email_confirm: true, user_metadata: { nome_studente: nomeStudente, relazione } })
+    });
+    if (!respAuth.ok) {
+      const err = await respAuth.json();
+      if (!err.message?.includes('already')) throw new Error(err.message);
+    }
+
+    // 2. Inserisce in genitori_studenti
+    await fetch(SB_URL + '/rest/v1/genitori_studenti?on_conflict=email_genitore,nome_studente', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': key, 'Authorization': 'Bearer ' + key, 'Prefer': 'resolution=merge-duplicates' },
+      body: JSON.stringify({ email_genitore: email, nome_studente: nomeStudente, relazione })
+    });
+
+    // 3. Aggiorna stato
+    await fetch(SB_URL + '/rest/v1/richieste_accesso?id=eq.' + id, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'apikey': key, 'Authorization': 'Bearer ' + key, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ stato: 'approvata', processed_at: new Date().toISOString() })
+    });
+
+    // 4. Invia email tramite GAS
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'inviaEmailAccesso', email, nome_studente: nomeStudente, relazione })
+      });
+    } catch(e) { console.warn('Email non inviata:', e); }
+
+    alert('✅ Accesso attivato per ' + email);
+    caricaRichiesteAdmin('in_attesa');
+
+  } catch(e) {
+    alert('Errore: ' + e.message);
+    btn.disabled = false; btn.textContent = '✅ Approva e attiva accesso';
+  }
+}
+
+async function rifiutaRichiestaAdmin(id) {
+  if (!confirm('Rifiutare questa richiesta?')) return;
+  const key = getSbKey();
+  await fetch(SB_URL + '/rest/v1/richieste_accesso?id=eq.' + id, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'apikey': key, 'Authorization': 'Bearer ' + key, 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ stato: 'rifiutata', processed_at: new Date().toISOString() })
+  });
+  caricaRichiesteAdmin('in_attesa');
+}
+
+// Carica badge al login
+const _origInitAll = typeof initAll === 'function' ? initAll : null;
+window.addEventListener('load', function() {
+  // Controlla se già loggato e aggiorna badge
+  if (document.getElementById('adm-wrap').style.display !== 'none') {
+    contaBadgeFamiglie();
+  }
+});
+
+async function contaBadgeFamiglie() {
+  try {
+    const key = localStorage.getItem('sb_service_key');
+    if (!key) return;
+    const resp = await fetch(SB_URL + '/rest/v1/richieste_accesso?stato=eq.in_attesa&select=id', {
+      headers: { 'apikey': key, 'Authorization': 'Bearer ' + key }
+    });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    const badge = document.getElementById('badge-famiglie');
+    if (badge && Array.isArray(data) && data.length > 0) {
+      badge.textContent = data.length; badge.style.display = 'inline';
+    }
   } catch(e) {}
 }
+
 </script>
-<script src="supabase.js"></script>
 </body>
 </html>

@@ -160,7 +160,7 @@
     <div class="login-logo">🛡️</div>
     <h1>Pannello <em>Admin</em></h1>
     <p>Convitto "Costaggini" — Rieti</p>
-    <input type="password" id="pwd" placeholder="Password" autocomplete="current-password"/>
+    <input type="password" id="pwd" placeholder="Password" autocomplete="new-password" value="" autofocus/>
     <button class="btn-accedi" onclick="doLogin()">Accedi →</button>
     <p id="login-err">Password errata. Riprova.</p>
     <a href="index.html"
@@ -380,6 +380,12 @@
 </div><!-- fine adm-wrap -->
 
 <script>
+// Pulisci il campo password all'avvio per evitare caratteri pre-compilati
+window.addEventListener('DOMContentLoaded', function() {
+  var pwd = document.getElementById('pwd');
+  if (pwd) { pwd.value = ''; pwd.focus(); }
+});
+
 const PWD_HASH = '4d7f432968e1da3b3d6d7dec2f99f4d0b65b3751eeec4d1ea36d45d7bcda288b'; // password hashata SHA-256
 const KEY_N = 'costaggini_notizie_admin_v1';
 const KEY_A = 'costaggini_comunicati_v2';

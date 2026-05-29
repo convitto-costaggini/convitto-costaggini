@@ -144,7 +144,7 @@ code{background:rgba(255,255,255,.06);padding:.1rem .38rem;border-radius:4px;fon
   <div class="ls-sub">IPSSEOA · Rieti</div>
   <div class="ls-line"></div>
   <p style="font-family:var(--fd);font-size:.95rem;color:var(--txt3);font-style:italic;text-align:center">Dossier riservato — Dirigente Prof. Barbonetti · 29 Maggio 2026</p>
-  <input type="password" id="pwd-in" placeholder="password di accesso" autocomplete="current-password"/>
+  <input type="password" id="pwd-in" placeholder="password di accesso" autocomplete="new-password" value=""/>
   <button onclick="tryLogin()">Accedi al dossier →</button>
   <p id="login-err">Password non corretta. Riprovare.</p>
 </div>
@@ -633,5 +633,9 @@ function download(key, type) {
 if (sessionStorage.getItem('da')==='1') {
   document.getElementById('login-screen').style.display='none';
   document.getElementById('dossier-wrap').style.display='block';
+} else {
+  window.addEventListener('load', () => {
+    document.getElementById('pwd-in').focus();
+  });
 }
 </script>

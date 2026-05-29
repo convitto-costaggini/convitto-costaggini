@@ -134,24 +134,22 @@
     .badge-home { font-family:var(--fu); font-size:.48rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; background:#1d6f42; color:#fff; padding:.12rem .4rem; border-radius:8px; margin-left:.35rem; vertical-align:middle; }
     .badge-pin { font-family:var(--fu); font-size:.48rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; background:#1a4a7a; color:#fff; padding:.12rem .4rem; border-radius:8px; margin-left:.35rem; vertical-align:middle; }
 
-    /* ── FAMIGLIE ── */
-    .fam-card { border:1px solid #e8e0d0; border-radius:10px; padding:1.1rem; margin-bottom:.75rem; background:#fff; }
-    .fam-card.in_attesa { border-left:4px solid var(--oro); }
-    .fam-card.approvata { border-left:4px solid #1d6f42; }
-    .fam-card.rifiutata { border-left:4px solid #dc2626; opacity:.7; }
-    .fam-info { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:.5rem; margin-bottom:.85rem; }
-    .fam-campo { font-family:var(--fu); font-size:.75rem; color:#6b5a2a; }
-    .fam-campo strong { display:block; font-size:.55rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#8b7a5a; margin-bottom:.15rem; }
-    .fam-azioni { display:flex; gap:.5rem; flex-wrap:wrap; }
-    .btn-approva { padding:.5rem 1.1rem; background:linear-gradient(135deg,var(--bosco),#1a3a1b); color:#fff; border:none; border-radius:6px; font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; transition:opacity .2s; }
-    .btn-approva:hover { opacity:.85; }
-    .btn-rifiuta { padding:.5rem 1.1rem; border:1.5px solid #dc2626; color:#dc2626; background:none; border-radius:6px; font-family:var(--fu); font-size:.65rem; font-weight:700; cursor:pointer; }
-
     /* ── ESPORTA ── */
     .export-bar { border-top:1px solid #e8e0d0; margin-top:1.25rem; padding-top:1rem; }
     .export-bar p { font-size:.78rem; color:#6b5a2a; margin-bottom:.6rem; line-height:1.5; }
     .btn-export { font-family:var(--fu); font-size:.62rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; padding:.5rem 1rem; border:1.5px solid var(--bosco); color:var(--bosco); background:none; border-radius:6px; cursor:pointer; transition:all .2s; }
     .btn-export:hover { background:var(--bosco); color:#fff; }
+
+    .fam-card{border:1px solid #e8e0d0;border-radius:10px;padding:1.1rem;margin-bottom:.75rem;background:#fff;}
+    .fam-card.in_attesa{border-left:4px solid var(--oro);}
+    .fam-card.approvata{border-left:4px solid #1d6f42;}
+    .fam-card.rifiutata{border-left:4px solid #dc2626;opacity:.7;}
+    .fam-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.5rem;margin-bottom:.85rem;}
+    .fam-campo{font-family:var(--fu);font-size:.75rem;color:#6b5a2a;}
+    .fam-campo strong{display:block;font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8b7a5a;margin-bottom:.15rem;}
+    .fam-azioni{display:flex;gap:.5rem;flex-wrap:wrap;}
+    .btn-approva{padding:.5rem 1.1rem;background:linear-gradient(135deg,var(--bosco),#1a3a1b);color:#fff;border:none;border-radius:6px;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;}
+    .btn-rifiuta{padding:.5rem 1.1rem;border:1.5px solid #dc2626;color:#dc2626;background:none;border-radius:6px;font-family:var(--fu);font-size:.65rem;font-weight:700;cursor:pointer;}
   </style>
 </head>
 <body>
@@ -365,24 +363,18 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════
-       TAB 5 — FAMIGLIE
-  ══════════════════════════════════ -->
+  <!-- TAB FAMIGLIE -->
   <div class="tab-section" id="tab-famiglie">
     <div style="padding:1.5rem 1.25rem">
       <div class="adm-card">
         <h2>Richieste di accesso <em>Famiglie</em></h2>
-        <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1.25rem;line-height:1.65">
-          Quando un genitore compila il modulo di richiesta accesso, appare qui. Verificare nome studente, email e relazione prima di approvare. All&rsquo;approvazione viene creato automaticamente l&rsquo;account e inviata una email di benvenuto al genitore.
-        </p>
+        <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1.25rem;line-height:1.65">Quando un genitore compila il modulo, appare qui. Verificare i dati prima di approvare. All&rsquo;approvazione viene creato l&rsquo;account e inviata l&rsquo;email di benvenuto.</p>
         <div style="display:flex;gap:.5rem;margin-bottom:1.25rem;flex-wrap:wrap">
-          <button onclick="caricaRichiesteAdmin('in_attesa')" id="btn-fam-attesa" style="padding:.45rem 1rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid var(--bosco);background:var(--bosco);color:#fff;border-radius:6px;cursor:pointer">In attesa</button>
-          <button onclick="caricaRichiesteAdmin('approvata')" id="btn-fam-approvata" style="padding:.45rem 1rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid #d4c9a8;background:none;color:#6b5a2a;border-radius:6px;cursor:pointer">Approvate</button>
-          <button onclick="caricaRichiesteAdmin('rifiutata')" id="btn-fam-rifiutata" style="padding:.45rem 1rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid #d4c9a8;background:none;color:#6b5a2a;border-radius:6px;cursor:pointer">Rifiutate</button>
+          <button onclick="famLoad('in_attesa')" style="padding:.45rem 1rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid var(--bosco);background:var(--bosco);color:#fff;border-radius:6px;cursor:pointer">In attesa</button>
+          <button onclick="famLoad('approvata')" style="padding:.45rem 1rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid #d4c9a8;background:none;color:#6b5a2a;border-radius:6px;cursor:pointer">Approvate</button>
+          <button onclick="famLoad('rifiutata')" style="padding:.45rem 1rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid #d4c9a8;background:none;color:#6b5a2a;border-radius:6px;cursor:pointer">Rifiutate</button>
         </div>
-        <div id="fam-lista">
-          <p style="color:var(--txt2);font-size:.85rem;font-style:italic">Clicca &ldquo;In attesa&rdquo; per caricare le richieste.</p>
-        </div>
+        <div id="fam-lista"><p style="color:var(--txt2);font-size:.85rem;font-style:italic">Clicca In attesa per caricare le richieste.</p></div>
       </div>
     </div>
   </div>
@@ -684,7 +676,7 @@ function aiAvviso() {
 // ═══════════════════════════════════
 // INIT
 // ═══════════════════════════════════
-function initAll() { loadNotizie(); loadAvvisi(); loadPins(); load<em>Alumni</em>(); }
+function initAll() { loadNotizie(); loadAvvisi(); loadPins(); loadAlumni(); }
 
 // ═══════════════════════════════════
 // ALUMNI — MODERAZIONE SUPABASE
@@ -697,9 +689,9 @@ if (!SB_SERVICE) {
   if (SB_SERVICE) localStorage.setItem('sb_service_key', SB_SERVICE);
 }
 
-async function load<em>Alumni</em>() { await render<em>Alumni</em>Pending(); await render<em>Alumni</em>Approved(); }
+async function loadAlumni() { await renderAlumniPending(); await renderAlumniApproved(); }
 
-async function render<em>Alumni</em>Pending() {
+async function renderAlumniPending() {
   const el = document.getElementById('alumni-pending-list');
   el.innerHTML = '<p style="font-size:.85rem;color:var(--txt2)">Caricamento…</p>';
   try {
@@ -741,7 +733,7 @@ async function render<em>Alumni</em>Pending() {
   } catch(e) { el.innerHTML = '<p style="color:#dc2626">Errore connessione Supabase: '+e.message+'</p>'; }
 }
 
-async function render<em>Alumni</em>Approved() {
+async function renderAlumniApproved() {
   const el = document.getElementById('alumni-approved-list');
   try {
     const approved = await sb.select('alumni', 'approvato=eq.true');
@@ -760,7 +752,7 @@ async function render<em>Alumni</em>Approved() {
 async function approveAlumno(id) {
   try {
     await sb.update('alumni', id, { approvato: true }, SB_SERVICE);
-    await load<em>Alumni</em>();
+    await loadAlumni();
   } catch(e) { alert('Errore: '+e.message); }
 }
 
@@ -768,7 +760,7 @@ async function rejectAlumno(id, nome) {
   if (!confirm(`Rifiutare e cancellare la scheda di "${nome}"?`)) return;
   try {
     await sb.delete('alumni', id, SB_SERVICE);
-    await load<em>Alumni</em>();
+    await loadAlumni();
   } catch(e) { alert('Errore: '+e.message); }
 }
 
@@ -776,11 +768,11 @@ async function removeAlumno(id, nome) {
   if (!confirm(`Rimuovere la scheda di "${nome}" dalla gallery?`)) return;
   try {
     await sb.update('alumni', id, { approvato: false }, SB_SERVICE);
-    await load<em>Alumni</em>();
+    await loadAlumni();
   } catch(e) { alert('Errore: '+e.message); }
 }
 
-function render<em>Alumni</em>Pending() {
+function renderAlumniPending() {
   const pending = JSON.parse(localStorage.getItem('costaggini-alumni-pending') || '[]');
   const el = document.getElementById('alumni-pending-list');
   if (!pending.length) {
@@ -911,12 +903,12 @@ function removeApproved(i) {
 }
 </script>
 <script src="supabase.js">
-// ═══ FAMIGLIE ═══
-const SB_URL = 'https://sawclsysqnjsvbobioqo.supabase.co';
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbyuZZTry0o7OQhnx0-LxTolWHOtfR3FumqISF3aD2ML36OHK5P7V_ZfQNZLzz663m7rIg/exec';
+// ===== FAMIGLIE =====
+var FAM_SB = 'https://sawclsysqnjsvbobioqo.supabase.co';
+var FAM_GAS = 'https://script.google.com/macros/s/AKfycbyuZZTry0o7OQhnx0-LxTolWHOtfR3FumqISF3aD2ML36OHK5P7V_ZfQNZLzz663m7rIg/exec';
 
-function getSbKey() {
-  let k = localStorage.getItem('sb_service_key') || '';
+function famGetKey() {
+  var k = localStorage.getItem('sb_service_key') || '';
   if (!k) {
     k = window.prompt('Inserisci la chiave secret di Supabase (serve solo la prima volta):') || '';
     if (k) localStorage.setItem('sb_service_key', k);
@@ -924,178 +916,103 @@ function getSbKey() {
   return k;
 }
 
-async function caricaRichiesteAdmin(stato) {
-  stato = stato || 'in_attesa';
-  const el = document.getElementById('fam-lista');
+async function famLoad(stato) {
+  var el = document.getElementById('fam-lista');
   el.innerHTML = '<p style="font-size:.85rem;font-style:italic;color:var(--txt2)">Caricamento...</p>';
-
-  // Evidenzia bottone attivo
-  ['attesa','approvata','rifiutata'].forEach(s => {
-    const b = document.getElementById('btn-fam-' + s);
-    if (b) {
-      b.style.background = (s === stato || (s === 'attesa' && stato === 'in_attesa')) ? 'var(--bosco)' : 'none';
-      b.style.color = (s === stato || (s === 'attesa' && stato === 'in_attesa')) ? '#fff' : '#6b5a2a';
-    }
-  });
-
-  const key = getSbKey();
+  var key = famGetKey();
   if (!key) { el.innerHTML = '<p style="color:#dc2626;font-size:.85rem">Chiave non inserita.</p>'; return; }
-
   try {
-    const url = SB_URL + '/rest/v1/richieste_accesso?stato=eq.' + stato + '&order=created_at.desc';
-    const resp = await fetch(url, {
+    var resp = await fetch(FAM_SB + '/rest/v1/richieste_accesso?stato=eq.' + stato + '&order=created_at.desc', {
       headers: { 'apikey': key, 'Authorization': 'Bearer ' + key }
     });
-    if (!resp.ok) {
-      const err = await resp.text();
-      el.innerHTML = '<p style="color:#dc2626;font-size:.82rem">Errore ' + resp.status + ': ' + err + '</p>';
-      return;
-    }
-    const data = await resp.json();
-    if (!Array.isArray(data) || !data.length) {
-      el.innerHTML = '<p style="font-size:.85rem;font-style:italic;color:var(--txt2)">Nessuna richiesta ' + stato + '.</p>';
-      return;
-    }
-    el.innerHTML = data.map(r => renderRichiesta(r)).join('');
-
-    // Aggiorna badge
-    if (stato === 'in_attesa') {
-      const badge = document.getElementById('badge-famiglie');
-      if (badge) {
-        if (data.length > 0) { badge.textContent = data.length; badge.style.display = 'inline'; }
-        else badge.style.display = 'none';
+    if (!resp.ok) { el.innerHTML = '<p style="color:#dc2626;font-size:.82rem">Errore ' + resp.status + '</p>'; return; }
+    var data = await resp.json();
+    if (!Array.isArray(data) || !data.length) { el.innerHTML = '<p style="font-size:.85rem;font-style:italic;color:var(--txt2)">Nessuna richiesta ' + stato + '.</p>'; return; }
+    el.innerHTML = data.map(function(r) {
+      var d = new Date(r.created_at).toLocaleDateString('it-IT');
+      var azioni = '';
+      if (r.stato === 'in_attesa') {
+        azioni = '<div class="fam-azioni">'
+          + '<button class="btn-approva" data-id="' + r.id + '" data-email="' + r.email_genitore + '" data-studente="' + r.nome_studente + '" data-rel="' + r.relazione + '" onclick="famApprova(this)">Approva</button>'
+          + '<button class="btn-rifiuta" data-id="' + r.id + '" onclick="famRifiuta(this)">Rifiuta</button>'
+          + '</div>';
+      } else {
+        azioni = '<p style="font-family:var(--fu);font-size:.72rem;color:#6b5a2a;font-style:italic">Stato: ' + r.stato + '</p>';
       }
+      return '<div class="fam-card ' + r.stato + '">'
+        + '<div class="fam-info">'
+        + '<div class="fam-campo"><strong>Studente</strong>' + r.nome_studente + '</div>'
+        + '<div class="fam-campo"><strong>Email</strong>' + r.email_genitore + '</div>'
+        + '<div class="fam-campo"><strong>Relazione</strong>' + r.relazione + '</div>'
+        + '<div class="fam-campo"><strong>Data</strong>' + d + '</div>'
+        + '</div>' + azioni + '</div>';
+    }).join('');
+    // Aggiorna badge
+    var badge = document.getElementById('badge-famiglie');
+    if (badge && stato === 'in_attesa') {
+      if (data.length > 0) { badge.textContent = data.length; badge.style.display = 'inline'; }
+      else badge.style.display = 'none';
     }
   } catch(e) {
     el.innerHTML = '<p style="color:#dc2626;font-size:.82rem">Errore: ' + e.message + '</p>';
   }
 }
 
-function renderRichiesta(r) {
-  const dataStr = new Date(r.created_at).toLocaleDateString('it-IT', {day:'2-digit',month:'long',year:'numeric'});
-  const processedStr = r.processed_at ? new Date(r.processed_at).toLocaleDateString('it-IT') : '—';
-  const id = r.id;
-  const email = r.email_genitore;
-  const studente = r.nome_studente;
-  const rel = r.relazione;
-
-  let azioni = '';
-  if (r.stato === 'in_attesa') {
-    azioni = '<div class="fam-azioni">'
-      + '<button class="btn-approva" data-id="' + id + '" data-email="' + email + '" data-studente="' + studente + '" data-rel="' + rel + '" onclick="approvaClick(this)">&#10003; Approva e attiva accesso</button>'
-      + '<button class="btn-rifiuta" data-id="' + id + '" onclick="rifiutaClick(this)">&#x2717; Rifiuta</button>'
-      + '</div>';
-  } else {
-    azioni = '<p style="font-family:var(--fu);font-size:.72rem;color:#6b5a2a;font-style:italic">Elaborata il ' + processedStr + '</p>';
-  }
-
-  return '<div class="fam-card ' + r.stato + '">'
-    + '<div class="fam-info">'
-    + '<div class="fam-campo"><strong>Studente</strong>' + studente + '</div>'
-    + '<div class="fam-campo"><strong>Email genitore</strong>' + email + '</div>'
-    + '<div class="fam-campo"><strong>Relazione</strong>' + rel + '</div>'
-    + '<div class="fam-campo"><strong>Data richiesta</strong>' + dataStr + '</div>'
-    + '</div>' + azioni + '</div>';
-}
-
-function approvaClick(btn) {
-  const id = btn.getAttribute('data-id');
-  const email = btn.getAttribute('data-email');
-  const studente = btn.getAttribute('data-studente');
-  const rel = btn.getAttribute('data-rel');
-  approvaRichiestaAdmin(id, email, studente, rel, btn);
-}
-
-function rifiutaClick(btn) {
-  const id = btn.getAttribute('data-id');
-  rifiutaRichiestaAdmin(id);
-}
-
-async function approvaRichiestaAdmin(id, email, nomeStudente, relazione, btn) {
-  btn = btn || event.target;
+async function famApprova(btn) {
+  var id = btn.getAttribute('data-id');
+  var email = btn.getAttribute('data-email');
+  var studente = btn.getAttribute('data-studente');
+  var rel = btn.getAttribute('data-rel');
   btn.disabled = true; btn.textContent = 'Attivazione...';
-  const key = getSbKey();
-
+  var key = famGetKey();
   try {
-    // 1. Crea utente in Supabase Auth
-    const respAuth = await fetch(SB_URL + '/auth/v1/admin/users', {
+    // Crea utente Auth
+    var r1 = await fetch(FAM_SB + '/auth/v1/admin/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'apikey': key, 'Authorization': 'Bearer ' + key },
-      body: JSON.stringify({ email, email_confirm: true, user_metadata: { nome_studente: nomeStudente, relazione } })
+      body: JSON.stringify({ email: email, email_confirm: true, user_metadata: { nome_studente: studente, relazione: rel } })
     });
-    if (!respAuth.ok) {
-      const err = await respAuth.json();
-      if (!err.message?.includes('already')) throw new Error(err.message);
-    }
-
-    // 2. Inserisce in genitori_studenti
-    await fetch(SB_URL + '/rest/v1/genitori_studenti?on_conflict=email_genitore,nome_studente', {
+    var j1 = await r1.json();
+    if (!r1.ok && !((j1.message||'').includes('already'))) throw new Error(j1.message || r1.status);
+    // Collega genitore-studente
+    await fetch(FAM_SB + '/rest/v1/genitori_studenti?on_conflict=email_genitore,nome_studente', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'apikey': key, 'Authorization': 'Bearer ' + key, 'Prefer': 'resolution=merge-duplicates' },
-      body: JSON.stringify({ email_genitore: email, nome_studente: nomeStudente, relazione })
+      body: JSON.stringify({ email_genitore: email, nome_studente: studente, relazione: rel })
     });
-
-    // 3. Aggiorna stato
-    await fetch(SB_URL + '/rest/v1/richieste_accesso?id=eq.' + id, {
+    // Aggiorna stato
+    await fetch(FAM_SB + '/rest/v1/richieste_accesso?id=eq.' + id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', 'apikey': key, 'Authorization': 'Bearer ' + key, 'Prefer': 'return=minimal' },
       body: JSON.stringify({ stato: 'approvata', processed_at: new Date().toISOString() })
     });
-
-    // 4. Invia email tramite GAS
+    // Email via GAS
     try {
-      await fetch(GAS_URL, {
+      await fetch(FAM_GAS, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'inviaEmailAccesso', email, nome_studente: nomeStudente, relazione })
+        body: JSON.stringify({ action: 'inviaEmailAccesso', email: email, nome_studente: studente, relazione: rel })
       });
-    } catch(e) { console.warn('Email non inviata:', e); }
-
-    alert('✅ Accesso attivato per ' + email);
-    caricaRichiesteAdmin('in_attesa');
-
+    } catch(e2) { console.warn('Email non inviata:', e2); }
+    alert('Accesso attivato per ' + email);
+    famLoad('in_attesa');
   } catch(e) {
     alert('Errore: ' + e.message);
-    btn.disabled = false; btn.textContent = '✅ Approva e attiva accesso';
+    btn.disabled = false; btn.textContent = 'Approva';
   }
 }
 
-async function rifiutaRichiestaAdmin(id) {
+async function famRifiuta(btn) {
   if (!confirm('Rifiutare questa richiesta?')) return;
-  const key = getSbKey();
-  await fetch(SB_URL + '/rest/v1/richieste_accesso?id=eq.' + id, {
+  var id = btn.getAttribute('data-id');
+  var key = famGetKey();
+  await fetch(FAM_SB + '/rest/v1/richieste_accesso?id=eq.' + id, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json', 'apikey': key, 'Authorization': 'Bearer ' + key, 'Prefer': 'return=minimal' },
     body: JSON.stringify({ stato: 'rifiutata', processed_at: new Date().toISOString() })
   });
-  caricaRichiesteAdmin('in_attesa');
+  famLoad('in_attesa');
 }
-
-// Carica badge al login
-const _origInitAll = typeof initAll === 'function' ? initAll : null;
-window.addEventListener('load', function() {
-  // Controlla se già loggato e aggiorna badge
-  if (document.getElementById('adm-wrap').style.display !== 'none') {
-    contaBadgeFamiglie();
-  }
-});
-
-async function contaBadgeFamiglie() {
-  try {
-    const key = localStorage.getItem('sb_service_key');
-    if (!key) return;
-    const resp = await fetch(SB_URL + '/rest/v1/richieste_accesso?stato=eq.in_attesa&select=id', {
-      headers: { 'apikey': key, 'Authorization': 'Bearer ' + key }
-    });
-    if (!resp.ok) return;
-    const data = await resp.json();
-    const badge = document.getElementById('badge-famiglie');
-    if (badge && Array.isArray(data) && data.length > 0) {
-      badge.textContent = data.length; badge.style.display = 'inline';
-    }
-  } catch(e) {}
-}
-
 </script>
 </body>
 </html>

@@ -606,7 +606,7 @@ async function famLoad(stato) {
   const lista = document.getElementById('fam-lista');
   lista.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>';
   try {
-    const resp = await fetch(SB_N + '/rest/v1/famiglie_accessi?stato=eq.' + stato + '&order=created_at.desc', {
+    const resp = await fetch(SB_N + '/rest/v1/richieste_accesso?stato=eq.' + stato + '&order=created_at.desc', {
       headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
     });
     const data = await resp.json();
@@ -618,9 +618,8 @@ async function famLoad(stato) {
       <div class="fam-card ${f.stato}">
         <div class="fam-info">
           <div class="fam-campo"><strong>Studente</strong>${f.nome_studente || '—'}</div>
-          <div class="fam-campo"><strong>Genitore</strong>${f.nome_genitore || '—'}</div>
-          <div class="fam-campo"><strong>Email</strong>${f.email || '—'}</div>
-          <div class="fam-campo"><strong>Telefono</strong>${f.telefono || '—'}</div>
+          <div class="fam-campo"><strong>Email</strong>${f.email_genitore || '—'}</div>
+          <div class="fam-campo"><strong>Relazione</strong>${f.relazione || '—'}</div>
           <div class="fam-campo"><strong>Richiesta</strong>${f.created_at ? f.created_at.slice(0,10) : '—'}</div>
           <div class="fam-campo"><strong>Stato</strong>${f.stato}</div>
         </div>
@@ -647,7 +646,7 @@ async function famLoad(stato) {
 async function famAzione(id, nuovoStato) {
   const label = nuovoStato === 'approvata' ? 'approvare' : 'rifiutare';
   if (!confirm('Sei sicuro di voler ' + label + ' questa richiesta?')) return;
-  const resp = await fetch(SB_N + '/rest/v1/famiglie_accessi?id=eq.' + id, {
+  const resp = await fetch(SB_N + '/rest/v1/richieste_accesso?id=eq.' + id, {
     method: 'PATCH',
     headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ stato: nuovoStato })

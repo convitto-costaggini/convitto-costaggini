@@ -482,6 +482,7 @@ async function deleteNotizia(id) {
   await loadNotizie();
 }
 
+function resetNotizia() { resetFormNotizia(); }
 function resetFormNotizia() {
   ['n-titolo','n-testo','n-data','n-img','n-link','n-link-testo'].forEach(id => {
     const el = document.getElementById(id);
@@ -494,3 +495,287 @@ function resetFormNotizia() {
 }
 
 
+
+// ═══ AVVISI — SUPABASE ═══
+let editAvvisoId = null;
+
+async function loadAvvisi() {
+  const list = document.getElementById('a-list');
+  list.innerHTML = '<p style="color:#8b7a5a;font-size:.85rem;padding:.75rem 0">Caricamento...</p>';
+  try {
+    const resp = await fetch(SB_N + '/rest/v1/avvisi?order=created_at.desc', {
+      headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON }
+    });
+    const data = await resp.json();
+    document.getElementById('a-count').textContent = data.length + ' avvisi pubblicati';
+    if (!data.length) { list.innerHTML = '<p style="color:#8b7a5a;font-size:.85rem;padding:.75rem 0">Nessun avviso.</p>'; return; }
+    list.innerHTML = data.map(a => `
+      <div class="el-item" data-id="${a.id}">
+        <div class="el-top">
+          <span class="el-cat ${a.categoria === 'urgente' ? 'urgente' : ''}">${a.categoria || ''}</span>
+          <div>
+            <div class="el-titolo">${a.titolo || ''}${a.pinned ? '<span class="badge-pin">📌 PIN</span>' : ''}</div>
+            <div class="el-meta">${a.autore || ''} · ${a.data || ''}</div>
+          </div>
+        </div>
+        <div class="el-actions">
+          <button class="btn-ed edit" onclick="editAvviso('${a.id}')">✏️ Modifica</button>
+          <button class="btn-ed del"  onclick="deleteAvviso('${a.id}')">🗑️ Elimina</button>
+        </div>
+      </div>`).join('');
+  } catch(e) {
+    list.innerHTML = '<p style="color:#dc2626;font-size:.85rem">Errore: ' + e.message + '</p>';
+  }
+}
+
+async function salvaAvviso() {
+  const titolo  = document.getElementById('a-titolo').value.trim();
+  const testo   = document.getElementById('a-testo').value.trim();
+  const cat     = document.getElementById('a-cat').value;
+  const data    = document.getElementById('a-data').value.trim();
+  const autore  = document.getElementById('a-autore').value.trim();
+  const pinned  = document.getElementById('a-pinned').checked;
+  if (!titolo) { alert('Inserire il titolo.'); return; }
+
+  const payload = { titolo, testo, categoria: cat, data, autore, pinned };
+
+  let url = SB_N + '/rest/v1/avvisi';
+  let method = 'POST';
+  if (editAvvisoId) { url += '?id=eq.' + editAvvisoId; method = 'PATCH'; }
+
+  const resp = await fetch(url, {
+    method,
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    body: JSON.stringify(payload)
+  });
+
+  if (resp.ok || resp.status === 201) {
+    resetAvviso();
+    await loadAvvisi();
+    document.getElementById('a-ok').style.display = 'inline';
+    setTimeout(() => { document.getElementById('a-ok').style.display = 'none'; }, 3000);
+  } else {
+    alert('Errore salvataggio: ' + resp.status);
+  }
+}
+
+async function editAvviso(id) {
+  const resp = await fetch(SB_N + '/rest/v1/avvisi?id=eq.' + id, {
+    headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON }
+  });
+  const data = await resp.json();
+  if (!data.length) return;
+  const a = data[0];
+  document.getElementById('a-titolo').value  = a.titolo  || '';
+  document.getElementById('a-testo').value   = a.testo   || '';
+  document.getElementById('a-cat').value     = a.categoria || 'famiglie';
+  document.getElementById('a-data').value    = a.data    || '';
+  document.getElementById('a-autore').value  = a.autore  || '';
+  document.getElementById('a-pinned').checked = !!a.pinned;
+  editAvvisoId = id;
+  document.getElementById('a-btn-salva').textContent = '💾 Aggiorna avviso';
+  document.getElementById('a-form-title').innerHTML = 'Modifica <em>avviso</em>';
+  document.querySelector('#tab-avvisi .adm-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function deleteAvviso(id) {
+  if (!confirm('Eliminare questo avviso?')) return;
+  await fetch(SB_N + '/rest/v1/avvisi?id=eq.' + id, {
+    method: 'DELETE',
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
+  });
+  await loadAvvisi();
+}
+
+function resetAvviso() {
+  ['a-titolo', 'a-testo', 'a-data', 'a-autore'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  const cat = document.getElementById('a-cat');
+  if (cat) cat.value = 'famiglie';
+  const pinned = document.getElementById('a-pinned');
+  if (pinned) pinned.checked = false;
+  editAvvisoId = null;
+  document.getElementById('a-btn-salva').textContent = '📌 Pubblica';
+  document.getElementById('a-form-title').innerHTML = '+ Nuovo <em>avviso</em>';
+}
+
+// ═══ FAMIGLIE ═══
+async function famLoad(stato) {
+  const lista = document.getElementById('fam-lista');
+  lista.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>';
+  try {
+    const resp = await fetch(SB_N + '/rest/v1/famiglie_accessi?stato=eq.' + stato + '&order=created_at.desc', {
+      headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
+    });
+    const data = await resp.json();
+    if (!data.length) {
+      lista.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessuna richiesta in questa categoria.</p>';
+      return;
+    }
+    lista.innerHTML = data.map(f => `
+      <div class="fam-card ${f.stato}">
+        <div class="fam-info">
+          <div class="fam-campo"><strong>Studente</strong>${f.nome_studente || '—'}</div>
+          <div class="fam-campo"><strong>Genitore</strong>${f.nome_genitore || '—'}</div>
+          <div class="fam-campo"><strong>Email</strong>${f.email || '—'}</div>
+          <div class="fam-campo"><strong>Telefono</strong>${f.telefono || '—'}</div>
+          <div class="fam-campo"><strong>Richiesta</strong>${f.created_at ? f.created_at.slice(0,10) : '—'}</div>
+          <div class="fam-campo"><strong>Stato</strong>${f.stato}</div>
+        </div>
+        ${f.stato === 'in_attesa' ? `
+        <div class="fam-azioni">
+          <button class="btn-approva" onclick="famAzione('${f.id}','approvata')">✅ Approva</button>
+          <button class="btn-rifiuta" onclick="famAzione('${f.id}','rifiutata')">✗ Rifiuta</button>
+        </div>` : ''}
+      </div>`).join('');
+
+    // Aggiorna badge tab famiglie
+    if (stato === 'in_attesa') {
+      const badge = document.getElementById('badge-famiglie');
+      if (badge) {
+        badge.textContent = data.length;
+        badge.style.display = data.length ? 'inline' : 'none';
+      }
+    }
+  } catch(e) {
+    lista.innerHTML = '<p style="color:#dc2626;font-size:.85rem">Errore: ' + e.message + '</p>';
+  }
+}
+
+async function famAzione(id, nuovoStato) {
+  const label = nuovoStato === 'approvata' ? 'approvare' : 'rifiutare';
+  if (!confirm('Sei sicuro di voler ' + label + ' questa richiesta?')) return;
+  const resp = await fetch(SB_N + '/rest/v1/famiglie_accessi?id=eq.' + id, {
+    method: 'PATCH',
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ stato: nuovoStato })
+  });
+  if (resp.ok) {
+    await famLoad('in_attesa');
+  } else {
+    alert('Errore: ' + resp.status);
+  }
+}
+
+// ═══ AI — genera testo notizie e avvisi ═══
+async function aiNotizia() {
+  const prompt = document.getElementById('n-ai-prompt').value.trim();
+  if (!prompt) { alert('Descrivi brevemente la notizia.'); return; }
+  const stato = document.getElementById('n-ai-stato');
+  stato.textContent = '⏳ Generazione in corso…';
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 500,
+        messages: [{
+          role: 'user',
+          content: 'Scrivi una breve notizia istituzionale in italiano per il sito del Convitto "Costaggini" di Rieti (scuola alberghiera con convitto). Tono professionale ma caldo. Titolo e testo separati. Argomento: ' + prompt
+        }]
+      })
+    });
+    const data = await resp.json();
+    const testo = data.content?.[0]?.text || '';
+    // Separa titolo e testo: prima riga come titolo
+    const righe = testo.split('\n').filter(r => r.trim());
+    document.getElementById('n-titolo').value = righe[0].replace(/^[#*\s]+/, '').trim();
+    document.getElementById('n-testo').value  = righe.slice(1).join('\n').trim();
+    stato.textContent = '✅ Testo generato — controlla e pubblica.';
+  } catch(e) {
+    stato.textContent = '❌ Errore: ' + e.message;
+  }
+}
+
+async function aiAvviso() {
+  const prompt = document.getElementById('a-ai-prompt').value.trim();
+  if (!prompt) { alert('Descrivi brevemente l\'avviso.'); return; }
+  const stato = document.getElementById('a-ai-stato');
+  stato.textContent = '⏳ Generazione in corso…';
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 400,
+        messages: [{
+          role: 'user',
+          content: 'Scrivi un avviso ufficiale breve in italiano per il Convitto "Costaggini" di Rieti. Tono istituzionale, diretto. Solo titolo e testo (separati da riga vuota). Argomento: ' + prompt
+        }]
+      })
+    });
+    const data = await resp.json();
+    const testo = data.content?.[0]?.text || '';
+    const righe = testo.split('\n').filter(r => r.trim());
+    document.getElementById('a-titolo').value = righe[0].replace(/^[#*\s]+/, '').trim();
+    document.getElementById('a-testo').value  = righe.slice(1).join('\n').trim();
+    stato.textContent = '✅ Testo generato — controlla e pubblica.';
+  } catch(e) {
+    stato.textContent = '❌ Errore: ' + e.message;
+  }
+}
+
+// ═══ LOGIN / LOGOUT / NAVIGAZIONE ═══
+async function doLogin() {
+  const pwd = document.getElementById('pwd').value;
+  const err = document.getElementById('login-err');
+  err.style.display = 'none';
+  try {
+    const buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+    const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+    if (hash === PWD_HASH) {
+      sessionStorage.setItem('adm_auth', '1');
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('adm-wrap').style.display     = 'block';
+      await initNotizie();
+      await loadAvvisi();
+      await famLoad('in_attesa');
+    } else {
+      err.style.display = 'block';
+      document.getElementById('pwd').value = '';
+      document.getElementById('pwd').focus();
+    }
+  } catch(e) {
+    err.textContent = 'Errore: ' + e.message;
+    err.style.display = 'block';
+  }
+}
+
+// Consente login anche con Invio
+document.addEventListener('DOMContentLoaded', () => {
+  const pwd = document.getElementById('pwd');
+  if (pwd) pwd.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+  // Se già autenticato in questa sessione, salta il login
+  if (sessionStorage.getItem('adm_auth') === '1') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('adm-wrap').style.display     = 'block';
+    initNotizie();
+    loadAvvisi();
+    famLoad('in_attesa');
+  }
+});
+
+function logout() {
+  sessionStorage.removeItem('adm_auth');
+  document.getElementById('adm-wrap').style.display     = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('pwd').value = '';
+  document.getElementById('pwd').focus();
+}
+
+function switchTab(nome, btn) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.main-tab').forEach(b => b.classList.remove('on'));
+  const section = document.getElementById('tab-' + nome);
+  if (section) section.classList.add('on');
+  if (btn) btn.classList.add('on');
+}
+
+</script>
+</body>
+</html>

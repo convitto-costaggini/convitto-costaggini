@@ -23,7 +23,7 @@
       <div class="logo-t">
         <span class="n">Convitto "Costaggini"</span>
         <span class="s">Istituto Alberghiero · Rieti</span>
-        <span style="font-family:var(--fu);font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--oro2);opacity:.75;margin-top:1px;display:block">← Home</span>
+        <span style="font-family:var(--fu);font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#D4AA4A;margin-top:1px;display:block">← Home</span>
       </div>
     </a>
 
@@ -91,7 +91,7 @@
         <svg viewBox="0 0 24 24" width="13" height="13" style="fill:#D4AA4A" aria-hidden="true"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
         Famiglie
       </a>
-      <a href="#" id="nav-admin-btn" style="margin-left:.3rem;background:rgba(184,146,42,.18);border:1px solid rgba(184,146,42,.4);border-radius:4px;color:#D4AA4A !important;font-size:.72rem !important;padding:.4rem .75rem !important;display:inline-flex;align-items:center;gap:.3rem;" title="Pannello amministratori">
+      <a href="#" id="nav-admin-btn" style="margin-left:.3rem;background:rgba(0,0,0,.35);border:1px solid rgba(184,146,42,.4);border-radius:4px;color:#D4AA4A !important;font-size:.72rem !important;padding:.4rem .75rem !important;display:inline-flex;align-items:center;gap:.3rem;" title="Pannello amministratori">
         <svg viewBox="0 0 24 24" width="13" height="13" style="fill:#D4AA4A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1z"/></svg>
         Admin
       </a>
@@ -178,7 +178,7 @@
         <p>Residenza educativa di eccellenza per la formazione professionale nell'ospitalità e nelle arti culinarie. Ente pubblico — vigilanza MIM.</p>
         <!-- Dati istituzionali -->
         <div style="margin-top:1rem;display:flex;flex-direction:column;gap:.3rem">
-          <p style="font-family:var(--fu);font-size:.62rem;color:rgba(245,240,232,.45);line-height:1.7">
+          <p style="font-family:var(--fu);font-size:.62rem;color:rgba(245,240,232,.50);line-height:1.7">
             <strong style="color:rgba(245,240,232,.6)">C.F.</strong> 80008130579 &nbsp;·&nbsp;
             <strong style="color:rgba(245,240,232,.6)">Cod. mecc.</strong> RIRH010007<br>
             <strong style="color:rgba(245,240,232,.6)">PEC</strong> <a href="mailto:rirh010007@pec.istruzione.it" style="color:var(--oro2)">rirh010007@pec.istruzione.it</a><br>
@@ -245,7 +245,7 @@
     <div class="fbot">
       <p>© 2025 Convitto Annesso — IPSSEOA "R. A. Costaggini" — Via Salaria s.n.c. — 02100 Rieti (RI) — C.F. 80008130579 — Cod. mecc. RIRH010007</p>
       <p><a href="trasparenza.html#accessibilita">Dichiarazione di Accessibilità</a> · <a href="privacy.html">Privacy</a> · <a href="cookie-policy.html">Cookie Policy</a> · <a href="trasparenza.html">Amm. Trasparente</a></p>
-      <p style="font-size:.68rem;color:rgba(245,240,232,.3);margin-top:.35rem;font-style:italic">⏳ Sito in fase di staging — in attesa di attivazione del dominio istituzionale convitto.alberghierorieti.edu.it a seguito delle procedure amministrative di competenza. I contenuti sono autentici e prodotti dall'IPSSEOA "Costaggini" di Rieti.</p>
+      <p style="font-size:.68rem;color:rgba(245,240,232,.50);margin-top:.35rem;font-style:italic">⏳ Sito in fase di staging — in attesa di attivazione del dominio istituzionale convitto.alberghierorieti.edu.it a seguito delle procedure amministrative di competenza. I contenuti sono autentici e prodotti dall'IPSSEOA "Costaggini" di Rieti.</p>
     </div>
   </div>
 </footer>`;
@@ -289,10 +289,10 @@
     <div style="pointer-events:auto;background:#1a2e1b;border:1px solid rgba(184,146,42,.35);border-radius:10px;padding:1.25rem 1.5rem;min-width:280px;box-shadow:0 12px 36px rgba(0,0,0,.45);animation:pecIn .2s ease both">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
         <span style="font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2)">📧 Indirizzo PEC</span>
-        <button onclick="document.getElementById('pec-modal').style.display='none'" style="background:none;border:none;color:rgba(245,240,232,.4);cursor:pointer;font-size:1rem;line-height:1">✕</button>
+        <button onclick="document.getElementById('pec-modal').style.display='none'" style="background:none;border:none;color:rgba(245,240,232,.55);cursor:pointer;font-size:1rem;line-height:1">✕</button>
       </div>
       <p style="font-family:var(--fu);font-size:.92rem;font-weight:600;color:#fff;margin-bottom:.35rem">rirh010007@pec.istruzione.it</p>
-      <p style="font-family:var(--fu);font-size:.65rem;color:rgba(245,240,232,.4);line-height:1.5">Posta Elettronica Certificata<br>IPSSEOA "R. A. Costaggini" — Rieti</p>
+      <p style="font-family:var(--fu);font-size:.65rem;color:rgba(245,240,232,.55);line-height:1.5">Posta Elettronica Certificata<br>IPSSEOA "R. A. Costaggini" — Rieti</p>
       <a href="mailto:rirh010007@pec.istruzione.it" style="display:inline-block;margin-top:.85rem;font-family:var(--fu);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--oro2);text-decoration:none;border-bottom:1px solid rgba(184,146,42,.3);padding-bottom:1px">Copia indirizzo →</a>
     </div>
   `;
@@ -604,7 +604,7 @@
     @keyframes wsLine { from{width:0;opacity:0} to{width:48px;opacity:1} }
     .ws-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.4rem,5vw,2.2rem); font-weight:300; color:#fff; text-align:center; animation:wsFadeUp .5s ease .4s both; }
     .ws-title em { font-style:italic; color:#D4AA4A; }
-    .ws-sub { font-family:'Source Sans 3',sans-serif; font-size:.72rem; font-weight:400; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,240,232,.4); animation:wsFadeUp .5s ease .7s both; }
+    .ws-sub { font-family:'Source Sans 3',sans-serif; font-size:.72rem; font-weight:400; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,240,232,.50); animation:wsFadeUp .5s ease .7s both; }
     @keyframes wsFadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
     `;
     const st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);

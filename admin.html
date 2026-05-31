@@ -327,19 +327,25 @@
   <div class="tab-section" id="tab-mappa">
     <div style="padding:1.5rem 1.25rem">
       <div class="adm-card">
-        <h2>Mappa <em>— gestione pin</em></h2>
-        <div style="background:#f5f2e8;border:1px solid #d4c9a8;border-radius:8px;padding:1.1rem 1.25rem;margin-bottom:1.5rem">
-          <p style="font-size:.82rem;color:#6b5a2a;line-height:1.7;margin-bottom:.5rem">
-            <strong>ℹ️ Nota tecnica:</strong> I pin della mappa sono attualmente salvati nel browser di ogni visitatore (<code>localStorage</code>). Non transitano da un server centrale, quindi non è possibile moderarli da qui.
-          </p>
-          <p style="font-size:.82rem;color:#6b5a2a;line-height:1.7">
-            Per attivare la moderazione server-side (pin → tabella Supabase → approvazione admin) è necessario aggiornare <code>mondo.html</code> per inviare i nuovi pin a Supabase invece che al localStorage.
-          </p>
+        <h2>Pin mappa <em>in attesa</em></h2>
+        <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1.25rem;line-height:1.65">
+          Quando un visitatore aggiunge il suo segnaposto dalla pagina "Il Costaggini nel Mondo", la richiesta arriva qui con <code>approvato=false</code>. Approva e apparirà sulla mappa pubblica. Rifiuta ed elimina.
+        </p>
+        <div id="pin-pending-list">
+          <p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>
         </div>
-        <a href="mondo.html" target="_blank"
-           style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.55rem 1.2rem;background:var(--bosco);color:#fff;border-radius:6px;text-decoration:none">
-          🗺️ Apri mappa del mondo →
-        </a>
+        <div style="border-top:1px solid #e8e0d0;margin-top:1.75rem;padding-top:1.25rem">
+          <p style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8b7a5a;margin-bottom:.85rem">Pin già approvati — visibili sulla mappa</p>
+          <div id="pin-approved-list">
+            <p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>
+          </div>
+        </div>
+        <div style="margin-top:1.25rem">
+          <a href="mondo.html" target="_blank"
+             style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1.1rem;border:1.5px solid var(--bosco);color:var(--bosco);border-radius:6px;text-decoration:none">
+            🗺️ Apri mappa pubblica →
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -668,6 +674,78 @@ async function famAzione(id, nuovoStato) {
 }
 
 
+
+// ═══ MAPPA PIN ═══
+async function loadPins() {
+  const pendingEl  = document.getElementById('pin-pending-list');
+  const approvedEl = document.getElementById('pin-approved-list');
+
+  pendingEl.innerHTML  = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>';
+  approvedEl.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>';
+
+  try {
+    const pending  = await sbFetch('pin_mappa?approvato=eq.false&order=created_at.desc');
+    const approved = await sbFetch('pin_mappa?approvato=eq.true&order=created_at.desc');
+
+    pendingEl.innerHTML = pending.length
+      ? pending.map(p => pinCard(p, false)).join('')
+      : '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessun pin in attesa.</p>';
+
+    approvedEl.innerHTML = approved.length
+      ? approved.map(p => pinCard(p, true)).join('')
+      : '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessun pin approvato.</p>';
+
+  } catch(e) {
+    pendingEl.innerHTML = '<p style="color:#dc2626;font-size:.85rem">Errore: ' + e.message + '</p>';
+  }
+}
+
+function pinCard(p, approvato) {
+  const LABELS = { alumni: 'Alumni', visitor: 'Visitatore', school: 'Scuola partner' };
+  return `
+    <div class="fam-card ${approvato ? 'approvata' : 'in_attesa'}" style="margin-bottom:.75rem">
+      <div class="fam-info">
+        <div class="fam-campo"><strong>Nome</strong>${p.name || '—'}</div>
+        <div class="fam-campo"><strong>Città</strong>${p.city || '—'}</div>
+        <div class="fam-campo"><strong>Tipo</strong>${LABELS[p.type] || p.type || '—'}</div>
+        <div class="fam-campo"><strong>Anno</strong>${p.year || '—'}</div>
+        <div class="fam-campo"><strong>Ruolo</strong>${p.role || '—'}</div>
+        <div class="fam-campo"><strong>Coordinate</strong>${p.lat ? p.lat.toFixed(2) + ', ' + p.lng.toFixed(2) : '—'}</div>
+      </div>
+      <div class="fam-azioni">
+        ${!approvato ? `
+          <button class="btn-approva" onclick="pinAzione('${p.id}', true)">✅ Approva</button>
+          <button class="btn-rifiuta" onclick="pinElimina('${p.id}')">🗑️ Elimina</button>
+        ` : `
+          <button class="btn-annulla-fam" onclick="pinAzione('${p.id}', false)">↩ Annulla approvazione</button>
+          <button class="btn-rifiuta" onclick="pinElimina('${p.id}')">🗑️ Elimina</button>
+        `}
+      </div>
+    </div>`;
+}
+
+async function pinAzione(id, approva) {
+  const label = approva ? 'approvare' : "annullare l'approvazione di";
+  if (!confirm('Sei sicuro di voler ' + label + ' questo pin?')) return;
+  const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
+    method: 'PATCH',
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ approvato: approva })
+  });
+  if (resp.ok) { await loadPins(); }
+  else { alert('Errore: ' + resp.status); }
+}
+
+async function pinElimina(id) {
+  if (!confirm("Eliminare definitivamente questo pin? L'operazione non è reversibile.")) return;
+  const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
+    method: 'DELETE',
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
+  });
+  if (resp.ok) { await loadPins(); }
+  else { alert('Errore: ' + resp.status); }
+}
+
 // ═══ ALUMNI ═══
 async function loadAlumni() {
   const pendingEl  = document.getElementById('alumni-pending-list');
@@ -874,6 +952,7 @@ function switchTab(nome, btn) {
   if (btn) btn.classList.add('on');
   // Carica dati al primo accesso al tab
   if (nome === 'alumni') loadAlumni();
+  if (nome === 'mappa')  loadPins();
 }
 
 </script>

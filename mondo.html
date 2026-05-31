@@ -181,9 +181,30 @@ L.marker([42.405,12.865],{icon:L.divIcon({className:'',html:'<div style="positio
   .addTo(map)
   .bindPopup('<div class="popup-inner"><span class="popup-type alumni">⭐ Sede</span><span class="popup-name">Convitto "Costaggini"</span><div class="popup-city">📍 Via Salaria s.n.c. — Rieti</div><div class="popup-role">IPSSEOA R. A. Costaggini · Dal 1971</div></div>',{maxWidth:240});
 
-let allPins=[...DEMO];
-let markers=[];
-try{const s=JSON.parse(localStorage.getItem('costaggini-pins-v2')||'[]');allPins=[...allPins,...s];}catch(e){}
+const SB_URL  = 'https://sawclsysqnjsvbobioqo.supabase.co';
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhd2Nsc3lzcW5qc3Zib2Jpb3FvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMTM3NjksImV4cCI6MjA5NDc4OTc2OX0.vS-hoxI2YUlxCWIdDzARqqpGzmXTDi8hq1AVU2jdhZ0';
+
+let allPins = [...DEMO];
+let markers = [];
+
+// Carica i pin approvati da Supabase e li aggiunge ai DEMO
+async function loadApprovedPins() {
+  try {
+    const resp = await fetch(
+      SB_URL + '/rest/v1/pin_mappa?approvato=eq.true&order=created_at.asc',
+      { headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON } }
+    );
+    if (!resp.ok) return;
+    const data = await resp.json();
+    if (data && data.length) {
+      // Rimuove i DEMO e usa solo dati reali una volta che ce ne sono
+      allPins = [...DEMO, ...data];
+    }
+  } catch(e) {
+    console.warn('Supabase non raggiungibile:', e);
+  }
+  renderPins();
+}
 
 function mkIcon(type){
   const c=COLORS[type]||'#B8922A';
@@ -250,46 +271,72 @@ function closeModal(){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
-async function submitPin(){
-  const name=document.getElementById('pf-name').value.trim();
-  const city=document.getElementById('pf-city').value.trim();
-  if(!name||!city){alert('Inserisci nome e città.');return;}
-  document.getElementById('pf-loading').style.display='block';
-  document.getElementById('pf-error').style.display='none';
-  document.getElementById('pf-success').style.display='none';
-  let lat=41.9,lng=12.5,found=false;
-  try{
-    const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`,{headers:{'Accept-Language':'it'}});
-    const d=await r.json();
-    if(d&&d[0]){lat=parseFloat(d[0].lat);lng=parseFloat(d[0].lon);found=true;}
-  }catch(e){}
-  document.getElementById('pf-loading').style.display='none';
-  if(!found){document.getElementById('pf-error').style.display='block';return;}
+async function submitPin() {
+  const name = document.getElementById('pf-name').value.trim();
+  const city = document.getElementById('pf-city').value.trim();
+  if (!name || !city) { alert('Inserisci nome e città.'); return; }
 
-  // Salva in coda "in attesa" — NON appare sulla mappa finché l'admin non approva
-  const np={
-    id:'p'+Date.now(),
-    name,city,
-    type:document.getElementById('pf-type').value,
-    year:document.getElementById('pf-year').value.trim(),
-    role:document.getElementById('pf-role').value.trim(),
-    lat,lng,
-    pending:true,
-    submittedAt:new Date().toISOString()
+  const loadEl = document.getElementById('pf-loading');
+  const errEl  = document.getElementById('pf-error');
+  const okEl   = document.getElementById('pf-success');
+  loadEl.style.display = 'block';
+  errEl.style.display  = 'none';
+  okEl.style.display   = 'none';
+
+  // 1. Geocodifica la città con OpenStreetMap
+  let lat = 41.9, lng = 12.5, found = false;
+  try {
+    const r = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`,
+      { headers: { 'Accept-Language': 'it' } }
+    );
+    const d = await r.json();
+    if (d && d[0]) { lat = parseFloat(d[0].lat); lng = parseFloat(d[0].lon); found = true; }
+  } catch(e) {}
+
+  loadEl.style.display = 'none';
+  if (!found) { errEl.style.display = 'block'; return; }
+
+  // 2. Invia a Supabase con approvato=false — in attesa di moderazione admin
+  const pin = {
+    name,
+    city,
+    type:  document.getElementById('pf-type').value,
+    year:  document.getElementById('pf-year').value.trim() || null,
+    role:  document.getElementById('pf-role').value.trim() || null,
+    lat,
+    lng,
+    approvato: false
   };
-  try{
-    const queue=JSON.parse(localStorage.getItem('costaggini-pins-pending')||'[]');
-    queue.push(np);
-    localStorage.setItem('costaggini-pins-pending',JSON.stringify(queue));
-  }catch(e){}
 
-  ['pf-name','pf-city','pf-year','pf-role'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('pf-success').style.display='block';
-  // Non aggiunge alla mappa — aspetta approvazione admin
-  setTimeout(()=>closeModal(), 3500);
+  try {
+    const resp = await fetch(SB_URL + '/rest/v1/pin_mappa', {
+      method: 'POST',
+      headers: {
+        'apikey':       SB_ANON,
+        'Authorization': 'Bearer ' + SB_ANON,
+        'Content-Type': 'application/json',
+        'Prefer':       'return=minimal'
+      },
+      body: JSON.stringify(pin)
+    });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  } catch(e) {
+    errEl.textContent = 'Errore di invio. Riprova più tardi.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  // 3. Svuota il form e mostra conferma
+  ['pf-name', 'pf-city', 'pf-year', 'pf-role'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  okEl.style.display = 'block';
+  setTimeout(() => closeModal(), 3500);
 }
 
-renderPins();
+// Carica pin approvati da Supabase, poi renderizza
+loadApprovedPins();
 </script>
 </body>
 </html>

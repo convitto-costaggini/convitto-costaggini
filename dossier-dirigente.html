@@ -165,7 +165,17 @@ code { background: rgba(255,255,255,.06); padding: .1rem .38rem; border-radius: 
   .sec { padding: 2rem 1.2rem; }
   #mob-tog { display: flex; }
 }
-</style>
+
+    .dl-btn.view { background: #2C3E2D; color: #F5F0E8; border: none; }
+    .dl-btn.view:hover { background: #3d5c3e; }
+    .doc-viewer { display: none; margin-top: 1rem; border-radius: 8px; overflow: hidden; border: 1px solid #d4c9a8; }
+    .doc-viewer.open { display: block; }
+    .doc-viewer iframe { width: 100%; height: 70vh; border: none; display: block; }
+    .doc-viewer-bar { background: #2C3E2D; padding: .5rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+    .doc-viewer-bar span { color: rgba(245,240,232,.7); font-family: var(--fu, sans-serif); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+    .doc-viewer-close { background: none; border: 1px solid rgba(245,240,232,.3); color: rgba(245,240,232,.8); cursor: pointer; font-size: .72rem; padding: .25rem .75rem; border-radius: 4px; font-family: var(--fu, sans-serif); }
+    .doc-viewer-close:hover { background: rgba(245,240,232,.1); }
+  </style>
 </head>
 <body>
 
@@ -357,7 +367,15 @@ code { background: rgba(255,255,255,.06); padding: .1rem .38rem; border-radius: 
           <div class="dl-btns">
             <a class="dl-btn word" href="dossier-docs/Guida-Operativa-Messa-In-Produzione-v2.docx" download><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>Word</a>
             <a class="dl-btn pdf" href="dossier-docs/Guida-Operativa-Messa-In-Produzione-v2.pdf" download><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>PDF</a>
+            <button class="dl-btn view" onclick="toggleViewer('viewer-prod', 'dossier-docs/Guida-Operativa-Messa-In-Produzione-v2.pdf')"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;margin-right:4px"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>Visualizza</button>
           </div>
+        </div>
+        <div class="doc-viewer" id="viewer-prod">
+          <div class="doc-viewer-bar">
+            <span>📄 Guida Operativa — Messa in Produzione v2</span>
+            <button class="doc-viewer-close" onclick="toggleViewer('viewer-prod', '')">✕ Chiudi</button>
+          </div>
+          <iframe id="iframe-prod" src="" title="Guida Operativa — Messa in Produzione v2"></iframe>
         </div>
         <h3>Stato attuale</h3>
         <p>Il sito &egrave; in staging: <a class="lnk" href="https://computeaching2-cell.github.io/convitto-costaggini/" target="_blank">computeaching2-cell.github.io/convitto-costaggini</a></p>
@@ -438,7 +456,15 @@ code { background: rgba(255,255,255,.06); padding: .1rem .38rem; border-radius: 
           <div class="dl-btns">
             <a class="dl-btn word" href="dossier-docs/Incarico-ResponsabileTecnico-Gaggiano-v4.docx" download><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>Word</a>
             <a class="dl-btn pdf" href="dossier-docs/Incarico-ResponsabileTecnico-Gaggiano-v4.pdf" download><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>PDF</a>
+            <button class="dl-btn view" onclick="toggleViewer('viewer-inc', 'dossier-docs/Incarico-ResponsabileTecnico-Gaggiano-v4.pdf')"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;margin-right:4px"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>Visualizza</button>
           </div>
+        </div>
+        <div class="doc-viewer" id="viewer-inc">
+          <div class="doc-viewer-bar">
+            <span>📄 Atto di Incarico — Responsabile Tecnico</span>
+            <button class="doc-viewer-close" onclick="toggleViewer('viewer-inc', '')">✕ Chiudi</button>
+          </div>
+          <iframe id="iframe-inc" src="" title="Atto di Incarico — Responsabile Tecnico"></iframe>
         </div>
         <div class="pq"><p>L&rsquo;atto formalizza l&rsquo;incarico di Responsabile Tecnico del sito web e dell&rsquo;applicativo gestionale del Convitto, conferito all&rsquo;Educatore Michele Gaggiano per gli A.S. 2024/2025 e 2025/2026, a titolo gratuito.</p></div>
         <h3>Base normativa</h3>
@@ -462,7 +488,15 @@ code { background: rgba(255,255,255,.06); padding: .1rem .38rem; border-radius: 
           <div class="dl-btns">
             <a class="dl-btn word" href="dossier-docs/Dichiarazione-Accessibilita-AGID-Istruzioni-v2.docx" download><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>Word</a>
             <a class="dl-btn pdf" href="dossier-docs/Dichiarazione-Accessibilita-AGID-Istruzioni-v2.pdf" download><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>PDF</a>
+            <button class="dl-btn view" onclick="toggleViewer('viewer-agid', 'dossier-docs/Dichiarazione-Accessibilita-AGID-Istruzioni-v2.pdf')"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;margin-right:4px"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>Visualizza</button>
           </div>
+        </div>
+        <div class="doc-viewer" id="viewer-agid">
+          <div class="doc-viewer-bar">
+            <span>📄 Dichiarazione Accessibilità AGID</span>
+            <button class="doc-viewer-close" onclick="toggleViewer('viewer-agid', '')">✕ Chiudi</button>
+          </div>
+          <iframe id="iframe-agid" src="" title="Dichiarazione Accessibilità AGID"></iframe>
         </div>
         <p>Aprire <a class="lnk" href="https://form.agid.gov.it" target="_blank">form.agid.gov.it</a> con SPID del Dirigente e copiare i testi dalle sezioni qui sotto.</p>
         <div class="acc"><button class="acc-btn" onclick="tog(this)"><span><span class="an">A</span>Dati dell&rsquo;ente</span><svg class="acc-arr" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
@@ -490,7 +524,15 @@ code { background: rgba(255,255,255,.06); padding: .1rem .38rem; border-radius: 
           <div class="dl-btns">
             <a class="dl-btn word" href="dossier-docs/Guida-Uso-Sito-Convitto.docx" download><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>Word</a>
             <a class="dl-btn pdf" href="dossier-docs/Guida-Uso-Sito-Convitto.pdf" download><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>PDF</a>
+            <button class="dl-btn view" onclick="toggleViewer('viewer-guida', 'dossier-docs/Guida-Uso-Sito-Convitto.pdf')"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;margin-right:4px"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>Visualizza</button>
           </div>
+        </div>
+        <div class="doc-viewer" id="viewer-guida">
+          <div class="doc-viewer-bar">
+            <span>📄 Guida all'uso del Sito</span>
+            <button class="doc-viewer-close" onclick="toggleViewer('viewer-guida', '')">✕ Chiudi</button>
+          </div>
+          <iframe id="iframe-guida" src="" title="Guida all'uso del Sito"></iframe>
         </div>
         <h3>Accesso al pannello admin</h3>
         <p>URL sito + <code>/admin.html</code>. Blocco automatico dopo 3 tentativi errati (60 secondi).</p>

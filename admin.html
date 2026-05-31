@@ -400,8 +400,7 @@ window.addEventListener('DOMContentLoaded', function() {
 const PWD_HASH = '4d7f432968e1da3b3d6d7dec2f99f4d0b65b3751eeec4d1ea36d45d7bcda288b'; // password hashata SHA-256
 // ═══ NOTIZIE — SUPABASE ═══
 const SB_N = 'https://sawclsysqnjsvbobioqo.supabase.co';
-const SB_NK = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhd2Nsc3lzcW5qc3Zib2Jpb3FvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTIxMzc2OSwiZXhwIjoyMDk0Nzg5NzY5fQ.pvYOl7aNXvO32Zb_8zzq5OXk3Cc9OeVe_QV9Vh_WaWw';
-const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhd2Nsc3lzcW5qc3Zib2Jpb3FvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMTM3NjksImV4cCI6MjA5NDc4OTc2OX0.vS-hoxI2YUlxCWIdDzARqqpGzmXTDi8hq1AVU2jdhZ0';
+const SB_PUB = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
 
 let editNotiziaId = null;
 
@@ -414,7 +413,7 @@ async function loadNotizie() {
   list.innerHTML = '<p style="color:#8b7a5a;font-size:.85rem;padding:.75rem 0">Caricamento...</p>';
   try {
     const resp = await fetch(SB_N + '/rest/v1/notizie?order=created_at.desc', {
-      headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON }
+      headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
     });
     const data = await resp.json();
     document.getElementById('n-count').textContent = data.length + ' notizie · le prime 3 appaiono in homepage';
@@ -454,7 +453,7 @@ async function salvaNotizia() {
 
   const resp = await fetch(url, {
     method,
-    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify(payload)
   });
 
@@ -468,7 +467,7 @@ async function salvaNotizia() {
 
 async function editNotizia(id) {
   const resp = await fetch(SB_N + '/rest/v1/notizie?id=eq.' + id, {
-    headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON }
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
   });
   const data = await resp.json();
   if (!data.length) return;
@@ -489,7 +488,7 @@ async function deleteNotizia(id) {
   if (!confirm('Eliminare questa notizia?')) return;
   await fetch(SB_N + '/rest/v1/notizie?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
   });
   await loadNotizie();
 }
@@ -516,7 +515,7 @@ async function loadAvvisi() {
   list.innerHTML = '<p style="color:#8b7a5a;font-size:.85rem;padding:.75rem 0">Caricamento...</p>';
   try {
     const resp = await fetch(SB_N + '/rest/v1/avvisi?order=created_at.desc', {
-      headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON }
+      headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
     });
     const data = await resp.json();
     document.getElementById('a-count').textContent = data.length + ' avvisi pubblicati';
@@ -557,7 +556,7 @@ async function salvaAvviso() {
 
   const resp = await fetch(url, {
     method,
-    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify(payload)
   });
 
@@ -573,7 +572,7 @@ async function salvaAvviso() {
 
 async function editAvviso(id) {
   const resp = await fetch(SB_N + '/rest/v1/avvisi?id=eq.' + id, {
-    headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON }
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
   });
   const data = await resp.json();
   if (!data.length) return;
@@ -594,7 +593,7 @@ async function deleteAvviso(id) {
   if (!confirm('Eliminare questo avviso?')) return;
   await fetch(SB_N + '/rest/v1/avvisi?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
   });
   await loadAvvisi();
 }
@@ -619,7 +618,7 @@ async function famLoad(stato) {
   lista.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>';
   try {
     const resp = await fetch(SB_N + '/rest/v1/richieste_accesso?stato=eq.' + stato + '&order=created_at.desc', {
-      headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
+      headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
     });
     const data = await resp.json();
     if (!data.length) {
@@ -663,7 +662,7 @@ async function famAzione(id, nuovoStato) {
   if (!confirm('Sei sicuro di voler ' + label + ' questa richiesta?')) return;
   const resp = await fetch(SB_N + '/rest/v1/richieste_accesso?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ stato: nuovoStato })
   });
   if (resp.ok) {
@@ -729,7 +728,7 @@ async function pinAzione(id, approva) {
   if (!confirm('Sei sicuro di voler ' + label + ' questo pin?')) return;
   const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ approvato: approva })
   });
   if (resp.ok) { await loadPins(); }
@@ -740,7 +739,7 @@ async function pinElimina(id) {
   if (!confirm("Eliminare definitivamente questo pin? L'operazione non è reversibile.")) return;
   const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
   });
   if (resp.ok) { await loadPins(); }
   else { alert('Errore: ' + resp.status); }
@@ -756,7 +755,7 @@ async function loadAlumni() {
 
   try {
     // In attesa
-    const pending = await sbFetch('alumni_pubblici?approvato=eq.false&order=created_at.desc');
+    const pending = await sbFetch('alumni?approvato=eq.false&order=created_at.desc');
     if (!pending.length) {
       pendingEl.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessuna scheda in attesa.</p>';
     } else {
@@ -764,7 +763,7 @@ async function loadAlumni() {
     }
 
     // Approvati
-    const approved = await sbFetch('alumni_pubblici?approvato=eq.true&order=created_at.desc');
+    const approved = await sbFetch('alumni?approvato=eq.true&order=created_at.desc');
     if (!approved.length) {
       approvedEl.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessun alumni approvato.</p>';
     } else {
@@ -781,6 +780,7 @@ function alumniCard(a, approvato) {
       <div class="fam-info">
         <div class="fam-campo"><strong>Nome</strong>${a.nome || '—'}</div>
         <div class="fam-campo"><strong>Lavoro</strong>${a.lavoro || '—'}</div>
+        <div class="fam-campo"><strong>Settore</strong>${a.settore || '—'}</div>
         <div class="fam-campo"><strong>Città</strong>${a.citta || '—'}</div>
         <div class="fam-campo"><strong>Anni convitto</strong>${a.anni || '—'}</div>
         <div class="fam-campo"><strong>Email</strong>${a.email || '—'}</div>
@@ -801,9 +801,9 @@ function alumniCard(a, approvato) {
 async function alumniAzione(id, approva) {
   const label = approva ? 'approvare' : "annullare l'approvazione di";
   if (!confirm('Sei sicuro di voler ' + label + ' questa scheda alumni?')) return;
-  const resp = await fetch(SB_N + '/rest/v1/alumni_pubblici?id=eq.' + id, {
+  const resp = await fetch(SB_N + '/rest/v1/alumni?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ approvato: approva })
   });
   if (resp.ok) {
@@ -815,9 +815,9 @@ async function alumniAzione(id, approva) {
 
 async function alumniElimina(id) {
   if (!confirm("Eliminare definitivamente questa scheda alumni? L'operazione non è reversibile.")) return;
-  const resp = await fetch(SB_N + '/rest/v1/alumni_pubblici?id=eq.' + id, {
+  const resp = await fetch(SB_N + '/rest/v1/alumni?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
   });
   if (resp.ok) {
     await loadAlumni();
@@ -829,7 +829,7 @@ async function alumniElimina(id) {
 // Helper fetch generico con service key
 async function sbFetch(endpoint) {
   const resp = await fetch(SB_N + '/rest/v1/' + endpoint, {
-    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
   });
   if (!resp.ok) throw new Error('HTTP ' + resp.status + ': ' + await resp.text());
   return resp.json();

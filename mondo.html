@@ -182,7 +182,7 @@ L.marker([42.405,12.865],{icon:L.divIcon({className:'',html:'<div style="positio
   .bindPopup('<div class="popup-inner"><span class="popup-type alumni">⭐ Sede</span><span class="popup-name">Convitto "Costaggini"</span><div class="popup-city">📍 Via Salaria s.n.c. — Rieti</div><div class="popup-role">IPSSEOA R. A. Costaggini · Dal 1971</div></div>',{maxWidth:240});
 
 const SB_URL  = 'https://sawclsysqnjsvbobioqo.supabase.co';
-const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhd2Nsc3lzcW5qc3Zib2Jpb3FvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMTM3NjksImV4cCI6MjA5NDc4OTc2OX0.vS-hoxI2YUlxCWIdDzARqqpGzmXTDi8hq1AVU2jdhZ0';
+const SB_PUB  = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
 
 let allPins = [...DEMO];
 let markers = [];
@@ -192,7 +192,7 @@ async function loadApprovedPins() {
   try {
     const resp = await fetch(
       SB_URL + '/rest/v1/pin_mappa?approvato=eq.true&order=created_at.asc',
-      { headers: { 'apikey': SB_ANON, 'Authorization': 'Bearer ' + SB_ANON } }
+      { headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB } }
     );
     if (!resp.ok) return;
     const data = await resp.json();
@@ -313,8 +313,8 @@ async function submitPin() {
     const resp = await fetch(SB_URL + '/rest/v1/pin_mappa', {
       method: 'POST',
       headers: {
-        'apikey':       SB_ANON,
-        'Authorization': 'Bearer ' + SB_ANON,
+        'apikey':       SB_PUB,
+        'Authorization': 'Bearer ' + SB_PUB,
         'Content-Type': 'application/json',
         'Prefer':       'return=minimal'
       },

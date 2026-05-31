@@ -329,7 +329,11 @@ async function submitPin() {
       },
       body: JSON.stringify(pin)
     });
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    if (!resp.ok) {
+      const errBody = await resp.text();
+      console.error('Supabase 400 detail:', errBody);
+      throw new Error('HTTP ' + resp.status + ' — ' + errBody);
+    }
   } catch(e) {
     errEl.textContent = 'Errore di invio. Riprova più tardi.';
     errEl.style.display = 'block';

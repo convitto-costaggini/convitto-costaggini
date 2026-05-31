@@ -340,12 +340,35 @@ async function submitPin() {
     return;
   }
 
-  // 3. Svuota il form e mostra conferma
+  // 3. Chiude il pannello e mostra overlay di conferma centrato
   ['pf-name', 'pf-city', 'pf-year', 'pf-role'].forEach(id => {
     document.getElementById(id).value = '';
   });
-  okEl.style.display = 'block';
-  setTimeout(() => closeModal(), 3500);
+  closeModal();
+
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(6,13,16,.88);display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(6px)';
+  overlay.innerHTML = `
+    <div style="background:#0d1f2d;border:1px solid rgba(184,146,42,.4);border-radius:16px;padding:2.5rem 2rem;max-width:400px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)">
+      <div style="font-size:3rem;margin-bottom:1rem">📍</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:#fff;margin-bottom:.75rem">Richiesta ricevuta!</h2>
+      <p style="font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.75;margin-bottom:1.75rem">
+        Grazie! Il tuo segnaposto apparirà sulla mappa non appena il nostro team lo avrà verificato.<br>Di solito bastano poche ore.
+      </p>
+      <button onclick="this.closest('div[style*=fixed]').remove();document.body.style.overflow=''"
+        style="background:linear-gradient(135deg,#B8922A,#D4AA4A);color:#1a2e1b;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 2rem;border-radius:40px">
+        Chiudi
+      </button>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+  // Chiude automaticamente dopo 6 secondi
+  setTimeout(() => {
+    if (overlay.parentNode) {
+      overlay.remove();
+      document.body.style.overflow = '';
+    }
+  }, 6000);
 }
 
 // Carica pin approvati da Supabase, poi renderizza

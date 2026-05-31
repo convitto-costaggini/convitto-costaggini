@@ -747,6 +747,29 @@ Tel. 0746 201113 — rirh010007@istruzione.it — PEC: rirh010007@pec.istruzione
 </div>
 
 <script>
+
+function toggleViewer(id, pdfPath) {
+  var viewer = document.getElementById(id);
+  var iframeId = 'iframe-' + id.replace('viewer-', '');
+  var iframe = document.getElementById(iframeId);
+  if (viewer.classList.contains('open')) {
+    viewer.classList.remove('open');
+    iframe.src = '';
+  } else {
+    document.querySelectorAll('.doc-viewer.open').forEach(function(v) {
+      v.classList.remove('open');
+      var iid = 'iframe-' + v.id.replace('viewer-', '');
+      var f = document.getElementById(iid);
+      if (f) f.src = '';
+    });
+    iframe.src = pdfPath;
+    viewer.classList.add('open');
+    setTimeout(function() {
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  }
+}
+
 const HASH = 'd0b791e41896be1dbacafd351425716ca6454a6b1cfd32b399445177d41f3390';
 
 async function tryLogin() {

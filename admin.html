@@ -152,6 +152,36 @@
     .btn-rifiuta{padding:.5rem 1.1rem;border:1.5px solid #dc2626;color:#dc2626;background:none;border-radius:6px;font-family:var(--fu);font-size:.65rem;font-weight:700;cursor:pointer;}
     .btn-annulla-fam{padding:.5rem 1.1rem;border:1.5px solid #8b7a5a;color:#8b7a5a;background:none;border-radius:6px;font-family:var(--fu);font-size:.65rem;font-weight:700;cursor:pointer;transition:all .2s;}
     .btn-annulla-fam:hover{border-color:var(--bosco);color:var(--bosco);}
+  
+    /* Modal conferma */
+    .adm-modal-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(6,13,6,.85); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .adm-modal {
+      background: #1a2e1b; border: 1px solid rgba(184,146,42,.35);
+      border-radius: 14px; padding: 2rem 1.75rem; max-width: 380px; width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5); text-align: center;
+    }
+    .adm-modal-icon { font-size: 2.5rem; margin-bottom: .75rem; }
+    .adm-modal h3 { font-family: var(--fd); font-size: 1.3rem; font-weight: 300;
+      color: var(--av); margin-bottom: .5rem; }
+    .adm-modal p { font-size: .85rem; color: var(--txt2); line-height: 1.6; margin-bottom: 1.5rem; }
+    .adm-modal-btns { display: flex; gap: .75rem; justify-content: center; }
+    .adm-modal-btn-cancel {
+      padding: .55rem 1.5rem; border: 1.5px solid rgba(245,240,232,.25);
+      background: none; color: var(--txt2); border-radius: 6px;
+      font-family: var(--fu); font-size: .7rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+    .adm-modal-btn-cancel:hover { border-color: rgba(245,240,232,.5); color: var(--txt); }
+    .adm-modal-btn-confirm {
+      padding: .55rem 1.5rem; border: none; border-radius: 6px;
+      font-family: var(--fu); font-size: .7rem; font-weight: 800;
+      letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+    .adm-modal-btn-confirm.danger { background: #dc2626; color: #fff; }
+    .adm-modal-btn-confirm.success { background: linear-gradient(135deg,var(--oro),var(--oro2)); color: var(--bosco); }
+    .adm-modal-btn-confirm.neutral { background: rgba(245,240,232,.15); color: var(--txt); }
   </style>
 </head>
 <body>
@@ -507,7 +537,7 @@ async function editNotizia(id) {
 }
 
 async function deleteNotizia(id) {
-  if (!confirm('Eliminare questa notizia?')) return;
+  if (!await admConfirm({icon:'🗑️',title:'Elimina notizia',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   await fetch(SB_N + '/rest/v1/notizie?id=eq.' + id, {
     method: 'DELETE',
     headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
@@ -612,7 +642,7 @@ async function editAvviso(id) {
 }
 
 async function deleteAvviso(id) {
-  if (!confirm('Eliminare questo avviso?')) return;
+  if (!await admConfirm({icon:'🗑️',title:'Elimina avviso',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   await fetch(SB_N + '/rest/v1/avvisi?id=eq.' + id, {
     method: 'DELETE',
     headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
@@ -681,7 +711,7 @@ async function famLoad(stato) {
 
 async function famAzione(id, nuovoStato) {
   const label = nuovoStato === 'approvata' ? 'approvare' : 'rifiutare';
-  if (!confirm('Sei sicuro di voler ' + label + ' questa richiesta?')) return;
+  if (!await admConfirm({icon: stato==='approvata'?'✅':'✗', title: stato==='approvata'?'Approva richiesta':'Rifiuta richiesta', message: stato==='approvata'?'L\'accesso verrà attivato per questa famiglia.':'La richiesta verrà rifiutata.', confirmText: stato==='approvata'?'Approva':'Rifiuta', type: stato==='approvata'?'success':'danger'})) return;
   const resp = await fetch(SB_N + '/rest/v1/richieste_accesso?id=eq.' + id, {
     method: 'PATCH',
     headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
@@ -747,7 +777,7 @@ function pinCard(p, approvato) {
 
 async function pinAzione(id, approva) {
   const label = approva ? 'approvare' : "annullare l'approvazione di";
-  if (!confirm('Sei sicuro di voler ' + label + ' questo pin?')) return;
+  if (!await admConfirm({icon: approva?'✅':'↩', title: approva?'Approva pin':'Annulla approvazione', message: approva?'Il pin apparirà sulla mappa pubblica.':'Il pin tornerà in stato di attesa.', confirmText: approva?'Approva':'Annulla', type: approva?'success':'neutral'})) return;
   const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
     method: 'PATCH',
     headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
@@ -758,7 +788,7 @@ async function pinAzione(id, approva) {
 }
 
 async function pinElimina(id) {
-  if (!confirm("Eliminare definitivamente questo pin? L'operazione non è reversibile.")) return;
+  if (!await admConfirm({icon:'🗑️',title:'Elimina pin',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
     method: 'DELETE',
     headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
@@ -817,7 +847,7 @@ async function odAzione(id, stato) {
 }
 
 async function odElimina(id) {
-  if (!confirm("Eliminare definitivamente questa prenotazione?")) return;
+  if (!await admConfirm({icon:'🗑️',title:'Elimina prenotazione',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   const resp = await fetch('https://sawclsysqnjsvbobioqo.supabase.co/rest/v1/prenotazioni_openday?id=eq.' + id, {
     method: 'DELETE',
     headers: { 'apikey': 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ', 'Authorization': 'Bearer sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ' }
@@ -881,7 +911,7 @@ function alumniCard(a, approvato) {
 
 async function alumniAzione(id, approva) {
   const label = approva ? 'approvare' : "annullare l'approvazione di";
-  if (!confirm('Sei sicuro di voler ' + label + ' questa scheda alumni?')) return;
+  if (!await admConfirm({icon: approva?'✅':'↩', title: approva?'Approva scheda alumni':'Annulla approvazione', message: approva?'La scheda apparirà nella gallery pubblica.':'La scheda tornerà in stato di attesa.', confirmText: approva?'Approva':'Annulla', type: approva?'success':'neutral'})) return;
   const resp = await fetch(SB_N + '/rest/v1/alumni?id=eq.' + id, {
     method: 'PATCH',
     headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
@@ -895,7 +925,7 @@ async function alumniAzione(id, approva) {
 }
 
 async function alumniElimina(id) {
-  if (!confirm("Eliminare definitivamente questa scheda alumni? L'operazione non è reversibile.")) return;
+  if (!await admConfirm({icon:'🗑️',title:'Elimina scheda alumni',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   const resp = await fetch(SB_N + '/rest/v1/alumni?id=eq.' + id, {
     method: 'DELETE',
     headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }

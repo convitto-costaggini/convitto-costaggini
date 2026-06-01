@@ -193,7 +193,7 @@
   const grid = document.getElementById('alumni-community-grid');
   if (!grid) return;
   try {
-    const approved = await sb.select('alumni_pubblici', 'approvato=eq.true');
+    const approved = await sb.select('alumni_pubblici', '');
     if (!approved || !approved.length) {
       const emptyMsg = document.getElementById('alumni-empty-msg');
       if (emptyMsg) emptyMsg.style.display = 'block';

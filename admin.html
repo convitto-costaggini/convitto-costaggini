@@ -183,6 +183,28 @@
     .adm-modal-btn-confirm.success { background: linear-gradient(135deg,var(--oro),var(--oro2)); color: var(--bosco); }
     .adm-modal-btn-confirm.neutral { background: rgba(245,240,232,.15); color: var(--txt); }
   </style>
+<script>
+function admConfirm(opts) {
+  return new Promise(resolve => {
+    const ov = document.createElement('div');
+    ov.className = 'adm-modal-overlay';
+    const btnType = opts.type || 'danger';
+    ov.innerHTML = `
+      <div class="adm-modal">
+        <div class="adm-modal-icon">${opts.icon || '⚠️'}</div>
+        <h3>${opts.title || 'Conferma'}</h3>
+        <p>${opts.message || 'Sei sicuro?'}</p>
+        <div class="adm-modal-btns">
+          <button class="adm-modal-btn-cancel">Annulla</button>
+          <button class="adm-modal-btn-confirm ${btnType}">${opts.confirmText || 'Conferma'}</button>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    ov.querySelector('.adm-modal-btn-cancel').onclick  = () => { ov.remove(); resolve(false); };
+    ov.querySelector('.adm-modal-btn-confirm').onclick = () => { ov.remove(); resolve(true);  };
+  });
+}
+</script>
 </head>
 <body>
 

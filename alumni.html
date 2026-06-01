@@ -37,7 +37,7 @@
     .badge-ex{display:inline-block;font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .55rem;border-radius:20px;background:rgba(184,146,42,.12);color:#8B6914;margin-top:.25rem}
     .alumni-card{background:var(--bosco);border-radius:10px;overflow:hidden;border:1px solid rgba(184,146,42,.15);transition:transform .2s,box-shadow .2s;min-width:0;word-break:break-word}
     .alumni-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.25)}
-    .alumni-avatar{width:100%;aspect-ratio:1;background:linear-gradient(135deg,rgba(245,240,232,.08),rgba(245,240,232,.03));display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:3.5rem;font-style:italic;color:rgba(184,146,42,.4);border-bottom:1px solid rgba(184,146,42,.1)}
+    .alumni-avatar{width:100%;aspect-ratio:2/1;background:linear-gradient(135deg,rgba(245,240,232,.08),rgba(245,240,232,.03));display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:3.5rem;font-style:italic;color:rgba(184,146,42,.4);border-bottom:1px solid rgba(184,146,42,.1)}
     .alumni-body{padding:1.25rem}
     .alumni-name{font-family:var(--fd);font-size:1.15rem;font-weight:400;color:var(--av);margin-bottom:.2rem}
     .alumni-role{font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2);margin-bottom:.7rem}
@@ -52,7 +52,7 @@
     .hub-card-desc{font-family:var(--fu);font-size:.72rem;color:rgba(245,240,232,.5);line-height:1.65}
     .hub-card-arrow{position:absolute;bottom:1.25rem;right:1.25rem;font-size:.8rem;color:rgba(184,146,42,.4);transition:color .2s,transform .2s}
     .hub-card:hover .hub-card-arrow{color:var(--oro2);transform:translateX(3px)}
-  @media(min-width:480px){#alumni-community-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:860px){#alumni-community-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}}
+  @media(min-width:480px){#alumni-community-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:860px){#alumni-community-grid{grid-template-columns:repeat(auto-fill,minmax(240px,320px))}}
 </style>
 </head>
 <body data-page="alumni">
@@ -131,7 +131,7 @@
 
       <!-- Schede alumni dalla community (Supabase) -->
       <div id="alumni-community-grid" style="display:grid;gap:1.25rem;grid-template-columns:1fr">
-        <style>@media(min-width:480px){#alumni-community-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:860px){#alumni-community-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}}</style>
+        <style>@media(min-width:480px){#alumni-community-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:860px){#alumni-community-grid{grid-template-columns:repeat(auto-fill,minmax(240px,320px))}}</style>
       </div>
 
       <!-- Messaggio se nessun alumni ancora -->

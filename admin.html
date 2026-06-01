@@ -506,7 +506,7 @@ async function salvaNotizia() {
 
   const resp = await fetch(url, {
     method,
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify(payload)
   });
 
@@ -541,7 +541,7 @@ async function deleteNotizia(id) {
   if (!await admConfirm({icon:'🗑️',title:'Elimina notizia',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   await fetch(SB_N + '/rest/v1/notizie?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   await loadNotizie();
 }
@@ -609,7 +609,7 @@ async function salvaAvviso() {
 
   const resp = await fetch(url, {
     method,
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify(payload)
   });
 
@@ -646,7 +646,7 @@ async function deleteAvviso(id) {
   if (!await admConfirm({icon:'🗑️',title:'Elimina avviso',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   await fetch(SB_N + '/rest/v1/avvisi?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   await loadAvvisi();
 }
@@ -715,7 +715,7 @@ async function famAzione(id, nuovoStato) {
   if (!await admConfirm({icon: stato==='approvata'?'✅':'✗', title: stato==='approvata'?'Approva richiesta':'Rifiuta richiesta', message: stato==='approvata'?'L\'accesso verrà attivato per questa famiglia.':'La richiesta verrà rifiutata.', confirmText: stato==='approvata'?'Approva':'Rifiuta', type: stato==='approvata'?'success':'danger'})) return;
   const resp = await fetch(SB_N + '/rest/v1/richieste_accesso?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ stato: nuovoStato })
   });
   if (resp.ok) {
@@ -781,7 +781,7 @@ async function pinAzione(id, approva) {
   if (!await admConfirm({icon: approva?'✅':'↩', title: approva?'Approva pin':'Annulla approvazione', message: approva?'Il pin apparirà sulla mappa pubblica.':'Il pin tornerà in stato di attesa.', confirmText: approva?'Approva':'Annulla', type: approva?'success':'neutral'})) return;
   const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ approvato: approva })
   });
   if (resp.ok) { await loadPins(); }
@@ -792,7 +792,7 @@ async function pinElimina(id) {
   if (!await admConfirm({icon:'🗑️',title:'Elimina pin',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   if (resp.ok) { await loadPins(); }
   else { alert('Errore: ' + resp.status); }
@@ -915,7 +915,7 @@ async function alumniAzione(id, approva) {
   if (!await admConfirm({icon: approva?'✅':'↩', title: approva?'Approva scheda alumni':'Annulla approvazione', message: approva?'La scheda apparirà nella gallery pubblica.':'La scheda tornerà in stato di attesa.', confirmText: approva?'Approva':'Annulla', type: approva?'success':'neutral'})) return;
   const resp = await fetch(SB_N + '/rest/v1/alumni?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ approvato: approva })
   });
   if (resp.ok) {
@@ -929,7 +929,7 @@ async function alumniElimina(id) {
   if (!await admConfirm({icon:'🗑️',title:'Elimina scheda alumni',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   const resp = await fetch(SB_N + '/rest/v1/alumni?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   if (resp.ok) {
     await loadAlumni();

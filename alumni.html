@@ -230,7 +230,7 @@ function alumniNoContact(e) {
       if (emptyMsg) emptyMsg.style.display = 'block';
       return;
     }
-    approved.forEach(a => {
+    approved.forEach((a, idx) => {
       const s = a || {};
       const socialIcons = [
         a.social_fb  ? `<a href="${a.social_fb.startsWith('http')?a.social_fb:'https://facebook.com/'+a.social_fb}" target="_blank" rel="noopener" title="Facebook" style="color:rgba(245,240,232,.4);text-decoration:none;font-size:1.1rem" onmouseover="this.style.color='#D4AA4A'" onmouseout="this.style.color='rgba(245,240,232,.4)'">📘</a>` : '',
@@ -249,7 +249,7 @@ function alumniNoContact(e) {
 
       const card = document.createElement('div');
       card.className = 'alumni-card';
-      let colore = a.colore !== undefined ? a.colore % 5 : 0;
+      let colore = (a.colore !== undefined ? (a.colore + idx) % 5 : idx % 5);
       let grads = [
         'linear-gradient(160deg,#1a2e1b,#2d4a2e)',
         'linear-gradient(160deg,#1e1e2e,#2a2a4a)',

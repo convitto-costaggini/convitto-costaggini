@@ -297,18 +297,32 @@ async function submitRicordo(e) {
     } catch(err) { /* geocoding fallito — non blocca l'invio del ricordo */ }
   }
 
-  document.getElementById('mr-success-box').style.display = 'block';
-  document.getElementById('mr-testo').value = '';
-  document.getElementById('mr-nome').value = '';
-  document.getElementById('mr-anni').value = '';
-  document.getElementById('mr-dove').value = '';
-  document.getElementById('mr-chars').textContent = '0';
-  setTimeout(() => {
-    closeModal();
-    document.getElementById('mr-success-box').style.display = 'none';
-  }, 3000);
-}
+  // Svuota il form
+  ['mr-testo','mr-nome','mr-anni','mr-dove'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.value='';
+  });
+  var cc = document.getElementById('mr-chars');
+  if(cc) cc.textContent = '0';
+  if(btn){ btn.disabled=false; btn.textContent='Invia'; }
+  closeModal();
 
+  // Overlay conferma
+  var ov = document.createElement('div');
+  ov.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(6,13,6,.9);display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(6px)';
+  var box=document.createElement('div');
+  box.style.cssText='background:#0d1f10;border:1px solid rgba(184,146,42,.35);border-radius:16px;padding:2.5rem 2rem;max-width:400px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)';
+  box.innerHTML='<div style="font-size:2.8rem;margin-bottom:.85rem">✦</div>'
+    +'<h2 style="font-family:var(--fd);font-size:1.6rem;font-weight:300;color:#F5F0E8;margin:0 0 .6rem">Ricordo ricevuto!</h2>'
+    +'<p style="font-size:.86rem;color:rgba(245,240,232,.6);line-height:1.75;margin:0 0 1.5rem">Grazie. Il tuo ricordo è in attesa di approvazione — apparirà sul Muro entro 24 ore.</p>'
+    +'<button id="ricordo-ok-btn" style="background:linear-gradient(135deg,#B8922A,#D4AA4A);color:#1a2e1b;border:none;cursor:pointer;font-family:var(--fu);font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 2rem;border-radius:40px">Chiudi</button>';
+  ov.appendChild(box);
+  document.body.appendChild(ov);
+  document.body.style.overflow='hidden';
+  function chiudiOv(){ ov.remove(); document.body.style.overflow=''; }
+  document.getElementById('ricordo-ok-btn').addEventListener('click', chiudiOv);
+  ov.addEventListener('click', function(ev){ if(ev.target===ov) chiudiOv(); });
+  setTimeout(chiudiOv, 6000);
+}
 // Escape per chiudere
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
 

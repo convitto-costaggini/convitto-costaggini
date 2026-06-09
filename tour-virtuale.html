@@ -12,7 +12,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Source+Sans+3:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
-  <!-- Pannellum — viewer 360° open source -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
   <link rel="stylesheet" href="style.css"/>
@@ -135,7 +134,6 @@
 <body data-page="tour-virtuale">
 <main id="main">
 
-  <!-- HERO -->
   <div class="tv-hero">
     <div class="w" style="position:relative;z-index:1">
       <nav class="breadcrumb" style="justify-content:center;margin-bottom:1.25rem">
@@ -149,12 +147,9 @@
     </div>
   </div>
 
-  <!-- SELETTORE AMBIENTI -->
   <div class="tv-rooms" id="tv-rooms" role="tablist" aria-label="Scegli l'ambiente">
-    <!-- generato da JS -->
-  </div>
+    </div>
 
-  <!-- VIEWER PRINCIPALE -->
   <div class="tv-viewer-wrap">
     <div id="panorama"></div>
     <div class="tv-placeholder" id="tv-placeholder">
@@ -164,7 +159,6 @@
     </div>
   </div>
 
-  <!-- INFO AMBIENTE CORRENTE -->
   <div class="tv-info" id="tv-info" style="display:none">
     <div class="tv-info-wrap">
       <div class="tv-info-icon" id="tv-icon"></div>
@@ -175,14 +169,11 @@
     </div>
   </div>
 
-  <!-- MINIATURE -->
   <section style="background:#0a0f0a;padding:1rem 0">
     <div class="tv-thumbs" id="tv-thumbs">
-      <!-- generato da JS -->
-    </div>
+      </div>
   </section>
 
-  <!-- GUIDA AGGIORNAMENTO -->
   <section class="tv-guide">
     <div class="tv-guide-inner">
       <p style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin-bottom:.75rem">— Per il Responsabile Tecnico</p>
@@ -198,7 +189,7 @@
       </div>
       <div class="tv-guide-step">
         <div class="tv-guide-num">3</div>
-        <p class="tv-guide-text">Crea la cartella <code>img/tour/</code> nel repository GitHub. Carica le foto rinominandole esattamente così: <code>ingresso.jpg</code> · <code>camera.jpg</code> · <code>mensa.jpg</code> · <code>studio.jpg</code> · <code>musica.jpg</code> · <code>giardino.jpg</code> · <code>corridoio.jpg</code></p>
+        <p class="tv-guide-text">Crea la cartella <code>img/tour/</code> nel repository GitHub. Carica le foto rinominandole esattamente così: <code>ingresso.jpg</code> · <code>corridoi.jpg</code> · <code>sala-ricreativa.jpg</code> · <code>ufficio-educatori.jpg</code> · <code>camera.jpg</code> · <code>mensa.jpg</code> · <code>studio.jpg</code> · <code>musica.jpg</code> · <code>giardino.jpg</code></p>
       </div>
       <div class="tv-guide-step">
         <div class="tv-guide-num">4</div>
@@ -224,6 +215,33 @@ const ROOMS = [
     desc: 'Il primo spazio che ogni convittore attraversa. Accogliente, luminoso, punto di incontro tra il dentro e il fuori.',
     img: 'img/tour/ingresso.jpg',
     thumb: 'img/tour/ingresso.jpg',
+  },
+  {
+    id: 'corridoi',
+    label: 'Corridoi',
+    icon: '🏛️',
+    title: 'I <em>corridoi</em>',
+    desc: 'La spina dorsale del Convitto. I luoghi opera dove si incrociano migliaia di storie — di mattina di corsa, di sera con calma.',
+    img: 'img/tour/corridoi.jpg',
+    thumb: 'img/tour/corridoi.jpg',
+  },
+  {
+    id: 'sala-ricreativa',
+    label: 'Sala ricreativa',
+    icon: '🎮',
+    title: 'La <em>sala ricreativa</em>',
+    desc: 'Calciobalilla, ping pong, divani e vetrate sul verde. Lo spazio del gioco, del relax e dello stare insieme dopo lo studio.',
+    img: 'img/tour/sala-ricreativa.jpg',
+    thumb: 'img/tour/sala-ricreativa.jpg',
+  },
+  {
+    id: 'ufficio-educatori',
+    label: 'Ufficio educatori',
+    icon: '🖥️',
+    title: 'L\'<em>ufficio educatori</em>',
+    desc: 'Il cuore operativo del Convitto. Da qui gli educatori coordinano le attività, tengono i registri e — nelle giornate limpide — ammirano il Terminillo dalla terrazza.',
+    img: 'img/tour/ufficio-educatori.jpg',
+    thumb: 'img/tour/ufficio-educatori.jpg',
   },
   {
     id: 'camera',
@@ -270,20 +288,12 @@ const ROOMS = [
     img: 'img/tour/giardino.jpg',
     thumb: 'img/tour/giardino.jpg',
   },
-  {
-    id: 'corridoio',
-    label: 'Corridoi',
-    icon: '🏛️',
-    title: 'I <em>corridoi</em>',
-    desc: 'La spina dorsale del Convitto. I luoghi dove si incrociano migliaia di storie — di mattina di corsa, di sera con calma.',
-    img: 'img/tour/corridoio.jpg',
-    thumb: 'img/tour/corridoio.jpg',
-  },
 ];
 
 // ══ STATO ══════════════════════════════════════════
 let viewer = null;
 let currentRoom = null;
+let zoomInterval = null; // Gestisce l'intervallo dell'effetto zoom-out
 
 // ══ INIT ══════════════════════════════════════════
 function init() {
@@ -360,6 +370,7 @@ function selectRoom(room, autoPlay) {
   img.onerror = () => {
     // Foto non ancora disponibile — mostra placeholder
     if (viewer) { try { viewer.destroy(); } catch(e){} viewer = null; }
+    if (zoomInterval) { clearInterval(zoomInterval); } // Pulisce eventuali zoom in corso
     document.getElementById('tv-placeholder').style.display = 'flex';
     document.getElementById('tv-placeholder').innerHTML = `
       <div class="tv-placeholder-icon">${room.icon}</div>
@@ -372,7 +383,11 @@ function selectRoom(room, autoPlay) {
 }
 
 function loadPanorama(src, autoRotate) {
+  // 1. Reset completo del viewer precedente e degli intervalli attivi
   if (viewer) { try { viewer.destroy(); } catch(e){} }
+  if (zoomInterval) { clearInterval(zoomInterval); }
+
+  // 2. Inizializzazione di Pannellum
   viewer = pannellum.viewer('panorama', {
     type: 'equirectangular',
     panorama: src,
@@ -382,9 +397,12 @@ function loadPanorama(src, autoRotate) {
     compass: false,
     showControls: true,
     mouseZoom: true,
-    hfov: 100,
+    
+    // Configurazione dell'effetto allontanamento
+    hfov: 75,       // Inizio ravvicinato per creare l'effetto sorpresa
     minHfov: 50,
-    maxHfov: 120,
+    maxHfov: 130,   // Limite allargato per permettere una visione ampia dell'ambiente
+    
     strings: {
       loadButtonLabel: 'Clicca per caricare il panorama',
       loadingLabel: 'Caricamento…',
@@ -393,6 +411,21 @@ function loadPanorama(src, autoRotate) {
       fileAccessError: 'Immagine non trovata: %s',
       withEvent: '',
     }
+  });
+
+  // 3. Gestione dell'effetto Zoom-Out dinamico al caricamento completato
+  viewer.on('load', function() {
+    const targetFov = 105; // Punto di arrivo ideale bilanciato (evita distorsioni eccessive)
+    let currentFov = viewer.getHfov();
+
+    zoomInterval = setInterval(function() {
+      if (currentFov < targetFov) {
+        currentFov += 0.4; // Grado di allontanamento per step (mantiene l'effetto fluido su mobile)
+        viewer.setHfov(currentFov);
+      } else {
+        clearInterval(zoomInterval);
+      }
+    }, 12); // Frequenza di aggiornamento fluida (~80fps teorici)
   });
 }
 

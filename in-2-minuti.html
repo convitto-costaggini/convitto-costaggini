@@ -225,7 +225,6 @@
       <div class="m2-kpi-c"><span class="m2-kpi-v">4</span><span class="m2-kpi-l">Pasti al giorno</span></div>
       <div class="m2-kpi-c"><span class="m2-kpi-v">dal '71</span><span class="m2-kpi-l">Anno di fondazione</span></div>
       <div class="m2-kpi-c"><span class="m2-kpi-v">5</span><span class="m2-kpi-l">Indirizzi scolastici</span></div>
-      <div class="m2-kpi-c"><span class="m2-kpi-v">€0</span><span class="m2-kpi-l">Costo sito</span></div>
     </div>
   </section>
 
@@ -426,10 +425,19 @@ function tog(n) {
   if (!wasOpen) {
     card.classList.add('open');
     btn.setAttribute('aria-expanded','true');
+    // Dopo che il contenuto si è espanso, verifica se è tutto visibile
     setTimeout(() => {
       const rect = card.getBoundingClientRect();
-      if (rect.top < 80) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 50);
+      const viewH = window.innerHeight;
+      const navH  = 70; // altezza navbar sticky
+      // Se la card non è completamente visibile, scrolla quanto basta
+      if (rect.bottom > viewH) {
+        const overflow = rect.bottom - viewH + 20;
+        window.scrollBy({ top: overflow, behavior: 'smooth' });
+      } else if (rect.top < navH) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 60);
   }
 }
 </script>

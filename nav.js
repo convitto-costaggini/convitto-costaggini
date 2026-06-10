@@ -81,9 +81,9 @@
         </button>
         <ul class="dd-menu" role="menu">
           <li><a href="scopri-talento.html" data-page="scopri-talento">🎮 Giochi &amp; Orientamento</a></li>
-          <li><a href="regolamento.html" data-page="regolamento">Regolamento di Convitto</a></li>
-          <li><a href="ptof-guida.html" data-page="ptof-guida">Il PTOF spiegato</a></li>
-          <li><a href="trasparenza.html" data-page="trasparenza">Amministrazione Trasparente</a></li>
+          <li><a href="regolamento.html" data-page="regolamento">📜 Regolamento</a></li>
+          <li><a href="ptof-guida.html" data-page="ptof-guida">PTOF</a></li>
+          <li><a href="trasparenza.html" data-page="trasparenza">Trasparenza</a></li>
           <li><a href="organizzazione.html" data-page="organizzazione">Organizzazione</a></li>
         </ul>
       </div>
@@ -343,7 +343,7 @@
     const isHome = !document.body.dataset.page || document.body.dataset.page === 'home';
 
     const CSS = `
-      #fab-wrap{position:fixed;bottom:1.5rem;right:1.25rem;z-index:8900;display:flex;flex-direction:column;align-items:center;gap:.45rem;}
+      .dd-menu{max-height:calc(100vh - 80px) !important;overflow-y:auto !important;}.dd-menu::-webkit-scrollbar{width:3px}.dd-menu::-webkit-scrollbar-thumb{background:rgba(184,146,42,.3);border-radius:2px}#fab-wrap{position:fixed;bottom:1.5rem;right:1.25rem;z-index:8900;display:flex;flex-direction:column;align-items:center;gap:.45rem;}
       .fab-c{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2C3E2D,#1a3a1b);border:1.5px solid rgba(184,146,42,.35);box-shadow:0 3px 12px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;color:#fff;font-size:1rem;position:relative;transition:transform .18s,box-shadow .18s;-webkit-tap-highlight-color:transparent;flex-shrink:0;}
       .fab-c:hover{transform:scale(1.12);box-shadow:0 5px 18px rgba(0,0,0,.38),0 0 0 2px rgba(184,146,42,.45);}
       .fab-c svg{width:17px;height:17px;fill:#D4AA4A;flex-shrink:0;}

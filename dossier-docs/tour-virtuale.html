@@ -10,9 +10,8 @@
   <meta name="theme-color" content="#2C3E2D"/>
   <title>Tour Virtuale | Convitto "Costaggini" — Rieti</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Source+Sans+3:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
-  <!-- Pannellum — viewer 360° open source -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
   <link rel="stylesheet" href="style.css"/>
@@ -57,6 +56,26 @@
       background: #111;
     }
     #panorama { width: 100%; height: 100%; }
+
+    /* ══ FIX E OTTIMIZZAZIONE PULSANTI PANNELLUM ════ */
+    /* Forza la visibilità dei controlli nativi spesso nascosti dalle CDN */
+    .pnlm-control-bar {
+      display: block !important;
+      background: rgba(10, 15, 10, 0.75) !important;
+      border: 1px solid rgba(184, 146, 42, 0.3) !important;
+      border-radius: 4px !important;
+    }
+    .pnlm-zoom-controls, .pnlm-fullscreen-toggle {
+      background: rgba(10, 15, 10, 0.75) !important;
+      border: 1px solid rgba(184, 146, 42, 0.3) !important;
+    }
+    .pnlm-zoom-in, .pnlm-zoom-out, .pnlm-fullscreen-toggle-button {
+      color: var(--oro2) !important;
+      font-weight: bold;
+    }
+    /* Genera i vettori di movimento se le icone di Pannellum falliscono il caricamento */
+    .pnlm-zoom-in::before { content: "+"; font-size: 1.2rem; line-height: 26px; }
+    .pnlm-zoom-out::before { content: "−"; font-size: 1.2rem; line-height: 26px; }
 
     /* Info ambiente */
     .tv-info {
@@ -111,31 +130,11 @@
     .tv-thumb-placeholder span { font-size: 1.5rem; opacity: .3; }
 
     /* Istruzioni aggiornamento */
-    .tv-guide {
-      background: var(--av); border-top: 1px solid var(--av3);
-      padding: 2.5rem 1.25rem;
-    }
-    .tv-guide-inner { max-width: 720px; margin: 0 auto; }
-    .tv-guide-step {
-      display: flex; gap: 1rem; align-items: flex-start;
-      padding: .85rem 0; border-bottom: 1px solid var(--av3);
-    }
-    .tv-guide-step:last-child { border-bottom: none; }
-    .tv-guide-num {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: var(--bosco); color: var(--oro2);
-      font-family: var(--fu); font-size: .65rem; font-weight: 800;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .tv-guide-text { font-family: var(--fu); font-size: .8rem; color: var(--txt2); line-height: 1.7; }
-    .tv-guide-text strong { color: var(--bosco); }
-    .tv-guide-text code { font-family: monospace; font-size: .75rem; background: rgba(44,62,45,.1); padding: .15rem .4rem; border-radius: 3px; color: var(--bosco2); }
   </style>
 </head>
 <body data-page="tour-virtuale">
 <main id="main">
 
-  <!-- HERO -->
   <div class="tv-hero">
     <div class="w" style="position:relative;z-index:1">
       <nav class="breadcrumb" style="justify-content:center;margin-bottom:1.25rem">
@@ -149,12 +148,9 @@
     </div>
   </div>
 
-  <!-- SELETTORE AMBIENTI -->
   <div class="tv-rooms" id="tv-rooms" role="tablist" aria-label="Scegli l'ambiente">
-    <!-- generato da JS -->
-  </div>
+    </div>
 
-  <!-- VIEWER PRINCIPALE -->
   <div class="tv-viewer-wrap">
     <div id="panorama"></div>
     <div class="tv-placeholder" id="tv-placeholder">
@@ -164,7 +160,6 @@
     </div>
   </div>
 
-  <!-- INFO AMBIENTE CORRENTE -->
   <div class="tv-info" id="tv-info" style="display:none">
     <div class="tv-info-wrap">
       <div class="tv-info-icon" id="tv-icon"></div>
@@ -175,40 +170,9 @@
     </div>
   </div>
 
-  <!-- MINIATURE -->
   <section style="background:#0a0f0a;padding:1rem 0">
     <div class="tv-thumbs" id="tv-thumbs">
-      <!-- generato da JS -->
-    </div>
-  </section>
-
-  <!-- GUIDA AGGIORNAMENTO -->
-  <section class="tv-guide">
-    <div class="tv-guide-inner">
-      <p style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin-bottom:.75rem">— Per il Responsabile Tecnico</p>
-      <h2 style="font-family:var(--fd);font-size:1.5rem;font-weight:300;color:var(--bosco);margin-bottom:1.25rem">Come aggiungere le foto reali</h2>
-
-      <div class="tv-guide-step">
-        <div class="tv-guide-num">1</div>
-        <p class="tv-guide-text">Scatta le foto a 360° con l'app <strong>Google Street View</strong> (gratuita su Android e iPhone). Per ogni ambiente seleziona <strong>Fotocamera a 360°</strong> e segui i cerchi arancioni finché diventano tutti verdi.</p>
       </div>
-      <div class="tv-guide-step">
-        <div class="tv-guide-num">2</div>
-        <p class="tv-guide-text">Trasferisci le foto sul computer. Ogni foto a 360° è un file <code>.jpg</code> nella cartella <strong>Street View</strong> della galleria del telefono.</p>
-      </div>
-      <div class="tv-guide-step">
-        <div class="tv-guide-num">3</div>
-        <p class="tv-guide-text">Crea la cartella <code>img/tour/</code> nel repository GitHub. Carica le foto rinominandole esattamente così: <code>ingresso.jpg</code> · <code>corridoi.jpg</code> · <code>sala-ricreativa.jpg</code> · <code>ufficio-educatori.jpg</code> · <code>camera.jpg</code> · <code>mensa.jpg</code> · <code>studio.jpg</code> · <code>musica.jpg</code> · <code>giardino.jpg</code></p>
-      </div>
-      <div class="tv-guide-step">
-        <div class="tv-guide-num">4</div>
-        <p class="tv-guide-text">Non serve modificare nessun codice — la pagina legge automaticamente le immagini dalla cartella <code>img/tour/</code> e attiva il viewer a 360°. Se l'immagine non esiste mostra il segnaposto grigio.</p>
-      </div>
-      <div class="tv-guide-step">
-        <div class="tv-guide-num">5</div>
-        <p class="tv-guide-text"><strong>Tip qualità:</strong> per un risultato migliore, prima di caricare passa le foto sull'app <strong>Lightroom Mobile</strong> (gratuita) e aumenta leggermente la nitidezza e la chiarezza — le foto a 360° tendono ad essere un po' morbide.</p>
-      </div>
-    </div>
   </section>
 
 </main>
@@ -230,7 +194,7 @@ const ROOMS = [
     label: 'Corridoi',
     icon: '🏛️',
     title: 'I <em>corridoi</em>',
-    desc: 'La spina dorsale del Convitto. I luoghi dove si incrociano migliaia di storie — di mattina di corsa, di sera con calma.',
+    desc: 'La spina dorsale del Convitto. I luoghi opera dove si incrociano migliaia di storie — di mattina di corsa, di sera con calma.',
     img: 'img/tour/corridoi.jpg',
     thumb: 'img/tour/corridoi.jpg',
   },
@@ -302,12 +266,13 @@ const ROOMS = [
 // ══ STATO ══════════════════════════════════════════
 let viewer = null;
 let currentRoom = null;
+let zoomInterval = null;
 
 // ══ INIT ══════════════════════════════════════════
 function init() {
   buildButtons();
   buildThumbs();
-  selectRoom(ROOMS[0], false);
+  selectRoom(ROOMS[0], true);  // true = autorotazione attiva al caricamento
 }
 
 function buildButtons() {
@@ -333,7 +298,6 @@ function buildThumbs() {
     div.setAttribute('aria-label', r.label);
     div.onclick = () => selectRoom(r, true);
 
-    // Prova a caricare l'immagine — se non esiste mostra placeholder
     const img = new Image();
     img.onload = () => {
       div.innerHTML = `<img src="${r.thumb}" alt="${r.label}" loading="lazy"/>
@@ -353,22 +317,18 @@ function buildThumbs() {
 function selectRoom(room, autoPlay) {
   currentRoom = room;
 
-  // Aggiorna bottoni
   document.querySelectorAll('.tv-room-btn').forEach(b => b.classList.remove('active'));
   const btn = document.getElementById(`btn-${room.id}`);
   if (btn) btn.classList.add('active');
 
-  // Aggiorna miniature
   document.querySelectorAll('.tv-thumb').forEach(t => t.classList.remove('active'));
   const thumb = document.getElementById(`thumb-${room.id}`);
   if (thumb) thumb.classList.add('active');
 
-  // Aggiorna info
   document.getElementById('tv-icon').textContent = room.icon;
   document.getElementById('tv-title').innerHTML = room.title;
   document.getElementById('tv-desc').textContent = room.desc;
 
-  // Prova a caricare il panorama
   const img = new Image();
   img.onload = () => {
     document.getElementById('tv-placeholder').style.display = 'none';
@@ -376,8 +336,8 @@ function selectRoom(room, autoPlay) {
     loadPanorama(room.img, autoPlay);
   };
   img.onerror = () => {
-    // Foto non ancora disponibile — mostra placeholder
     if (viewer) { try { viewer.destroy(); } catch(e){} viewer = null; }
+    if (zoomInterval) { clearInterval(zoomInterval); }
     document.getElementById('tv-placeholder').style.display = 'flex';
     document.getElementById('tv-placeholder').innerHTML = `
       <div class="tv-placeholder-icon">${room.icon}</div>
@@ -391,18 +351,19 @@ function selectRoom(room, autoPlay) {
 
 function loadPanorama(src, autoRotate) {
   if (viewer) { try { viewer.destroy(); } catch(e){} }
+  if (zoomInterval) { clearInterval(zoomInterval); }
+
   viewer = pannellum.viewer('panorama', {
     type: 'equirectangular',
     panorama: src,
     autoLoad: true,
-    autoRotate: autoRotate ? -2 : 0,
-    autoRotateInactivityDelay: 3000,
+    autoRotate: 0,        // Rotazione gestita manualmente sotto
     compass: false,
     showControls: true,
-    mouseZoom: true,
-    hfov: 100,
-    minHfov: 50,
-    maxHfov: 120,
+    mouseZoom: false,     // Disabilita zoom con rotella/pinch — elimina l'effetto improvviso
+    hfov: 150,            // Massimo allontanamento possibile — visuale grandangolare
+    minHfov: 70,          // Limite minimo zoom-in manuale
+    maxHfov: 150,         // Non può andare oltre il punto di partenza
     strings: {
       loadButtonLabel: 'Clicca per caricare il panorama',
       loadingLabel: 'Caricamento…',
@@ -411,6 +372,38 @@ function loadPanorama(src, autoRotate) {
       fileAccessError: 'Immagine non trovata: %s',
       withEvent: '',
     }
+  });
+
+  // Avvia la rotazione — doppio sistema: evento load + fallback timeout
+  function avviaRotazione() {
+    if (zoomInterval) return; // già attiva
+    zoomInterval = setInterval(function() {
+      if (!viewer) { clearInterval(zoomInterval); zoomInterval = null; return; }
+      try { viewer.setYaw(viewer.getYaw() - 0.06); } catch(e) {}
+    }, 16);
+  }
+
+  // Tenta subito via evento nativo di Pannellum
+  viewer.on('load', avviaRotazione);
+
+  // Fallback: parte comunque dopo 800ms anche se l'evento non scatta
+  setTimeout(avviaRotazione, 800);
+
+  // Ferma la rotazione al tocco, riprende dopo 1.5s di inattività
+  const el = document.getElementById('panorama');
+  let dragTimer;
+  ['mousedown','touchstart','pointerdown'].forEach(function(ev) {
+    el.addEventListener(ev, function() {
+      clearInterval(zoomInterval);
+      zoomInterval = null;
+      clearTimeout(dragTimer);
+    }, { passive: true });
+  });
+  ['mouseup','touchend','pointerup'].forEach(function(ev) {
+    el.addEventListener(ev, function() {
+      clearTimeout(dragTimer);
+      dragTimer = setTimeout(avviaRotazione, 1500);
+    }, { passive: true });
   });
 }
 

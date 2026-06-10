@@ -272,7 +272,7 @@ let zoomInterval = null;
 function init() {
   buildButtons();
   buildThumbs();
-  selectRoom(ROOMS[0], false);
+  selectRoom(ROOMS[0], true);  // true = autorotazione attiva al caricamento
 }
 
 function buildButtons() {
@@ -357,13 +357,13 @@ function loadPanorama(src, autoRotate) {
     type: 'equirectangular',
     panorama: src,
     autoLoad: true,
-    autoRotate: 0,           // Gestiamo la rotazione manualmente per controllo totale
+    autoRotate: 0,        // Rotazione gestita manualmente sotto
     compass: false,
     showControls: true,
-    mouseZoom: true,
-    hfov: 120,               // Parte già lontano — visuale ampia dall'inizio
-    minHfov: 60,
-    maxHfov: 130,
+    mouseZoom: false,     // Disabilita zoom con rotella/pinch — elimina l'effetto improvviso
+    hfov: 150,            // Massimo allontanamento possibile — visuale grandangolare
+    minHfov: 70,          // Limite minimo zoom-in manuale
+    maxHfov: 150,         // Non può andare oltre il punto di partenza
     strings: {
       loadButtonLabel: 'Clicca per caricare il panorama',
       loadingLabel: 'Caricamento…',
@@ -374,13 +374,35 @@ function loadPanorama(src, autoRotate) {
     }
   });
 
-  viewer.on('load', function() {
-    if (!autoRotate) return;
-    // Avvia subito la rotazione automatica fluida (nessun ritardo)
+  // Funzione di rotazione — richiamata da evento E da fallback timeout
+  function avviaRotazione() {
+    if (zoomInterval) return;
     zoomInterval = setInterval(function() {
-      if (!viewer) { clearInterval(zoomInterval); return; }
-      viewer.setYaw(viewer.getYaw() - 0.08); // velocità rotazione: regola qui (0.05 lento, 0.15 veloce)
-    }, 16); // ~60fps
+      if (!viewer) { clearInterval(zoomInterval); zoomInterval = null; return; }
+      try { viewer.setYaw(viewer.getYaw() - 0.06); } catch(e) {}
+    }, 16);
+  }
+
+  // Sistema primario: evento nativo Pannellum
+  viewer.on('load', avviaRotazione);
+
+  // Sistema di riserva: parte dopo 800ms anche se l'evento non scatta (mobile, CDN)
+  setTimeout(avviaRotazione, 800);
+
+  // Ferma al tocco, riprende dopo 1.5s di inattività
+  const el = document.getElementById('panorama');
+  let dragTimer;
+  ['mousedown','touchstart','pointerdown'].forEach(function(ev) {
+    el.addEventListener(ev, function() {
+      clearInterval(zoomInterval); zoomInterval = null;
+      clearTimeout(dragTimer);
+    }, { passive: true });
+  });
+  ['mouseup','touchend','pointerup'].forEach(function(ev) {
+    el.addEventListener(ev, function() {
+      clearTimeout(dragTimer);
+      dragTimer = setTimeout(avviaRotazione, 1500);
+    }, { passive: true });
   });
 }
 

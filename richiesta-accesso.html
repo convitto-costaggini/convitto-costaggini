@@ -69,45 +69,6 @@
       margin-top: .35rem;
       line-height: 1.5;
     }
-    .pwd-wrap { position: relative; }
-    .pwd-wrap input { padding-right: 44px; }
-    .pwd-occhio {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.1rem;
-      color: #888;
-      padding: 4px;
-    }
-    .requisiti {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: .9rem 1rem;
-      margin-top: .5rem;
-      font-size: .82rem;
-      color: #555;
-      line-height: 1.8;
-    }
-    .requisiti li {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-    .requisiti li::before {
-      content: '○';
-      color: #ccc;
-      font-size: .9rem;
-    }
-    .requisiti li.ok::before {
-      content: '✓';
-      color: #15803d;
-    }
     .divider {
       border: none;
       border-top: 1px solid #eee;
@@ -209,7 +170,7 @@
       <h1>Richiesta <em>Accesso Famiglie</em></h1>
       <p class="sub">Compila il modulo per richiedere l'accesso all'area riservata. La segreteria attiverà il suo account entro 48 ore.</p>
       <button onclick="document.querySelector('.form-wrap').scrollIntoView({behavior:'smooth',block:'start'})"
-        style="margin-top:1.25rem;display:inline-flex;align-items:center;gap:.5rem;font-family:var(--fu);font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.7rem 1.75rem;background:linear-gradient(135deg,var(--oro),var(--oro2));color:var(--bosco);border:none;border-radius:40px;cursor:pointer;box-shadow:0 4px 16px rgba(184,146,42,.35)">
+        style="margin:1.75rem auto 0;display:flex;width:fit-content;align-items:center;justify-content:center;gap:.6rem;font-family:var(--fu);font-size:.82rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:1rem 2.75rem;background:linear-gradient(135deg,var(--oro),var(--oro2));color:var(--bosco);border:none;border-radius:40px;cursor:pointer;box-shadow:0 8px 24px rgba(184,146,42,.45)">
         Compila il modulo
         <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
       </button>
@@ -296,57 +257,6 @@
 <script src="nav.js"></script>
 <script>
 
-// ── Requisiti password ──
-function verificaPassword() {
-  const pwd = document.getElementById('password').value;
-  setReq('req-len', pwd.length >= 8);
-  setReq('req-mai', /[A-Z]/.test(pwd));
-  setReq('req-num', /[0-9]/.test(pwd));
-  setReq('req-spe', /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pwd));
-  verificaConferma();
-}
-
-function setReq(id, ok) {
-  const el = document.getElementById(id);
-  if (ok) el.classList.add('ok'); else el.classList.remove('ok');
-}
-
-function verificaConferma() {
-  const pwd = document.getElementById('password').value;
-  const conf = document.getElementById('conferma').value;
-  const msg = document.getElementById('msg-conferma');
-  if (!conf) { msg.textContent = ''; return; }
-  if (pwd === conf) {
-    msg.textContent = '✓ Le password coincidono';
-    msg.style.color = '#15803d';
-  } else {
-    msg.textContent = '✗ Le password non coincidono';
-    msg.style.color = '#b91c1c';
-  }
-}
-
-function mostraPassword(idCampo, btn) {
-  const inp = document.getElementById(idCampo);
-  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
-  else { inp.type = 'password'; btn.textContent = '👁️'; }
-}
-
-function passwordValida() {
-  const pwd = document.getElementById('password').value;
-  return pwd.length >= 8 &&
-         /[A-Z]/.test(pwd) &&
-         /[0-9]/.test(pwd) &&
-         /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pwd);
-}
-
-// ── Hash SHA-256 ──
-async function sha256(testo) {
-  const enc = new TextEncoder();
-  const buf = await crypto.subtle.digest('SHA-256', enc.encode(testo));
-  return Array.from(new Uint8Array(buf))
-    .map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
 // ── Invio richiesta ──
 async function inviaRichiesta() {
   const nomeStudente = document.getElementById('nome-studente').value.trim();
@@ -389,8 +299,6 @@ async function inviaRichiesta() {
     );
 
     if (resp.ok || resp.status === 201) {
-      // Mostra messaggio di successo al posto del form
-      // Mostra overlay centrato a schermo
       const overlay = document.createElement('div');
       overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(10,20,10,.85);display:flex;align-items:center;justify-content:center;padding:1.5rem;';
       overlay.innerHTML = `
@@ -399,7 +307,7 @@ async function inviaRichiesta() {
           <h2 style="font-family:var(--fd);font-size:1.8rem;color:var(--bosco);margin-bottom:.75rem;font-weight:300">Richiesta inviata!</h2>
           <p style="font-size:.92rem;color:#555;line-height:1.75;margin-bottom:1.75rem">
             La segreteria del Convitto verificherà i dati e attiverà il suo accesso entro 48 ore lavorative.<br><br>
-            Riceverà una conferma all'indirizzo email indicato.
+            Riceverà le credenziali di accesso all'indirizzo email indicato.
           </p>
           <a href="index.html" style="display:inline-block;background:var(--bosco);color:#fff;padding:13px 32px;border-radius:8px;text-decoration:none;font-family:var(--fu);font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase">← Torna alla Home</a>
         </div>`;

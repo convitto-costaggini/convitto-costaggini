@@ -182,7 +182,41 @@
     .adm-modal-btn-confirm.danger { background: #dc2626; color: #fff; }
     .adm-modal-btn-confirm.success { background: linear-gradient(135deg,var(--oro),var(--oro2)); color: var(--bosco); }
     .adm-modal-btn-confirm.neutral { background: rgba(245,240,232,.15); color: var(--txt); }
-  </style>
+/* ════════════════════════════════
+   OTTIMIZZAZIONE MOBILE (aggiunta)
+   ════════════════════════════════ */
+@media (max-width: 640px) {
+
+  /* Niente scorrimento orizzontale della pagina */
+  html, body { max-width: 100%; overflow-x: hidden; }
+
+  /* Contenitori mai più larghi dello schermo */
+  .adm-body { padding: 1rem .9rem; gap: 1rem; }
+  .adm-card, .list-wrap { padding: 1.1rem; max-width: 100%; overflow-wrap: break-word; }
+
+  /* I form a due colonne diventano a una colonna */
+  .fg-row2 { grid-template-columns: 1fr; }
+
+  /* Campi e textarea: mai oltre il bordo */
+  .fg input, .fg select, .fg textarea,
+  .ai-input, .login-box input { max-width: 100%; }
+
+  /* Riga "AI genera testo": input e bottone vanno a capo */
+  .ai-row { flex-wrap: wrap; }
+  .ai-row .ai-input, .ai-row .btn-ai { flex: 1 1 100%; }
+
+  /* Schede info famiglie/openday/ecc. a una colonna */
+  .fam-info { grid-template-columns: 1fr; }
+
+  /* Testi lunghi (email, link) spezzati invece di sfondare */
+  .el-titolo, .el-meta, .fam-campo, .adm-item,
+  .list-count, .el-item, .fam-card { max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+
+  /* Header e schede un filo più compatti */
+  .adm-hdr { padding: .8rem 1rem; }
+  .main-tab { padding: .8rem 1rem; font-size: .68rem; }
+}  
+</style>
 <script>
 function admConfirm(opts) {
   return new Promise(resolve => {
@@ -215,7 +249,7 @@ function admConfirm(opts) {
     <h1>Pannello <em>Admin</em></h1>
     <p>Convitto "Costaggini" — Rieti</p>
     <input type="email" id="eml" placeholder="Email" autocomplete="username" autofocus/>
-    <input type="password" id="pwd" placeholder="Password" autocomplete="current-password" value=""/>
+<input type="password" id="pwd" placeholder="Password" autocomplete="current-password" value=""/>
     <button class="btn-accedi" onclick="doLogin()">Accedi →</button>
     <p id="login-err">Password errata. Riprova.</p>
     <a href="index.html"
@@ -517,6 +551,7 @@ const PWD_HASH = '4d7f432968e1da3b3d6d7dec2f99f4d0b65b3751eeec4d1ea36d45d7bcda28
 // ═══ NOTIZIE — SUPABASE ═══
 const SB_N = 'https://sawclsysqnjsvbobioqo.supabase.co';
 const SB_PUB = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhd2Nsc3lzcW5qc3Zib2Jpb3FvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMTM3NjksImV4cCI6MjA5NDc4OTc2OX0.vS-hoxI2YUlxCWIdDzARqqpGzmXTDi8hq1AVU2jdhZ0';
+const SB_NK  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhd2Nsc3lzcW5qc3Zib2Jpb3FvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTIxMzc2OSwiZXhwIjoyMDk0Nzg5NzY5fQ.pvYOl7aNXvO32Zb_8zzq5OXk3Cc9OeVe_QV9Vh_WaWw';
 
 let editNotiziaId = null;
 
@@ -569,7 +604,7 @@ async function salvaNotizia() {
 
   const resp = await fetch(url, {
     method,
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || ''), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify(payload)
   });
 
@@ -604,7 +639,7 @@ async function deleteNotizia(id) {
   if (!await admConfirm({icon:'🗑️',title:'Elimina notizia',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   await fetch(SB_N + '/rest/v1/notizie?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   await loadNotizie();
 }
@@ -672,7 +707,7 @@ async function salvaAvviso() {
 
   const resp = await fetch(url, {
     method,
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || ''), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify(payload)
   });
 
@@ -709,7 +744,7 @@ async function deleteAvviso(id) {
   if (!await admConfirm({icon:'🗑️',title:'Elimina avviso',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   await fetch(SB_N + '/rest/v1/avvisi?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   await loadAvvisi();
 }
@@ -734,7 +769,7 @@ async function famLoad(stato) {
   lista.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>';
   try {
     const resp = await fetch(SB_N + '/rest/v1/richieste_accesso?stato=eq.' + stato + '&order=created_at.desc', {
-      headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+      headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
     });
     const data = await resp.json();
     if (!data.length) {
@@ -779,7 +814,7 @@ async function famAzione(id, nuovoStato) {
   // 1. Aggiorna stato nella tabella richieste_accesso
   const patch = await fetch(SB_N + '/rest/v1/richieste_accesso?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || ''), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ stato: nuovoStato })
   });
   if (!patch.ok) { alert('Errore aggiornamento stato: ' + patch.status); return; }
@@ -788,7 +823,7 @@ async function famAzione(id, nuovoStato) {
   if (nuovoStato === 'approvata') {
     // Recupera email e nome studente dalla richiesta
     const richResp = await fetch(SB_N + '/rest/v1/richieste_accesso?id=eq.' + id, {
-      headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+      headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
     });
     const rich = await richResp.json();
     if (!rich.length) { alert('Errore: richiesta non trovata.'); return; }
@@ -906,7 +941,7 @@ async function pinAzione(id, approva) {
   if (!await admConfirm({icon: approva?'✅':'↩', title: approva?'Approva pin':'Annulla approvazione', message: approva?'Il pin apparirà sulla mappa pubblica.':'Il pin tornerà in stato di attesa.', confirmText: approva?'Approva':'Annulla', type: approva?'success':'neutral'})) return;
   const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || ''), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ approvato: approva })
   });
   if (resp.ok) { await loadPins(); }
@@ -917,7 +952,7 @@ async function pinElimina(id) {
   if (!await admConfirm({icon:'🗑️',title:'Elimina pin',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   if (resp.ok) { await loadPins(); }
   else { alert('Errore: ' + resp.status); }
@@ -1028,7 +1063,7 @@ async function ricordiAzione(id, approva) {
   })) return;
   const resp = await fetch('https://sawclsysqnjsvbobioqo.supabase.co/rest/v1/ricordi?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || ''), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ approvato: approva })
   });
   if (resp.ok) { await ricordiLoad(false); }
@@ -1039,7 +1074,7 @@ async function ricordiElimina(id) {
   if (!await admConfirm({icon:'🗑️',title:'Elimina ricordo',message:'Operazione irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   const resp = await fetch('https://sawclsysqnjsvbobioqo.supabase.co/rest/v1/ricordi?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   if (resp.ok) { await ricordiLoad(null); }
   else { alert('Errore: ' + resp.status); }
@@ -1103,7 +1138,7 @@ async function alumniAzione(id, approva) {
   if (!await admConfirm({icon: approva?'✅':'↩', title: approva?'Approva scheda alumni':'Annulla approvazione', message: approva?'La scheda apparirà nella gallery pubblica.':'La scheda tornerà in stato di attesa.', confirmText: approva?'Approva':'Annulla', type: approva?'success':'neutral'})) return;
   const resp = await fetch(SB_N + '/rest/v1/alumni?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || ''), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ approvato: approva })
   });
   if (resp.ok) {
@@ -1117,7 +1152,7 @@ async function alumniElimina(id) {
   if (!await admConfirm({icon:'🗑️',title:'Elimina scheda alumni',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
   const resp = await fetch(SB_N + '/rest/v1/alumni?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   if (resp.ok) {
     await loadAlumni();
@@ -1129,7 +1164,7 @@ async function alumniElimina(id) {
 // Helper fetch generico con service key
 async function sbFetch(endpoint) {
   const resp = await fetch(SB_N + '/rest/v1/' + endpoint, {
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   if (!resp.ok) throw new Error('HTTP ' + resp.status + ': ' + await resp.text());
   return resp.json();
@@ -1203,9 +1238,9 @@ async function doLogin() {
   err.style.display = 'none';
   try {
     // 1) login su Supabase Auth
-    const r = await fetch(`${SB_N}/auth/v1/token?grant_type=password`, {
+    const r = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
       method: 'POST',
-      headers: { 'apikey': SB_PUB, 'Content-Type': 'application/json' },
+      headers: { 'apikey': SUPABASE_PUB, 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password: pwd })
     });
     if (!r.ok) throw new Error('Credenziali non valide');
@@ -1213,9 +1248,9 @@ async function doLogin() {
     const token = data.access_token;
 
     // 2) verifica che l'utente sia un amministratore
-    const chk = await fetch(`${SB_N}/rest/v1/rpc/is_admin`, {
+    const chk = await fetch(`${SUPABASE_URL}/rest/v1/rpc/is_admin`, {
       method: 'POST',
-      headers: { 'apikey': SB_PUB, 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+      headers: { 'apikey': SUPABASE_PUB, 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: '{}'
     });
     if ((await chk.json()) !== true) throw new Error('Utente non autorizzato');
@@ -1277,7 +1312,7 @@ async function labLoad() {
   const lista = document.getElementById('lab-lista');
   lista.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>';
   const resp = await fetch(SB_N + '/rest/v1/lab_musicale_iscrizioni?order=created_at.desc', {
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   const rows = await resp.json();
   if (!rows.length) {
@@ -1320,14 +1355,14 @@ async function labElimina(id, nome) {
   if (!confirm('Eliminare la richiesta di ' + nome + '?')) return;
   await fetch(SB_N + '/rest/v1/lab_musicale_iscrizioni?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   });
   labLoad();
 }
 
 function labExport() {
   fetch(SB_N + '/rest/v1/lab_musicale_iscrizioni?order=created_at.desc', {
-    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + (sessionStorage.getItem('sb_token') || '') }
+    headers: { 'apikey': SB_NK, 'Authorization': 'Bearer ' + SB_NK }
   }).then(r => r.json()).then(rows => {
     if (!rows.length) { alert('Nessuna iscrizione da esportare.'); return; }
     const cols = ['created_at','cognome','nome','classe','email','esperienza','strumento','interessi','note'];

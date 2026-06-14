@@ -132,9 +132,6 @@
         <li><a href="area-riservata.html" style="color:var(--oro2);font-weight:700;"> Area Riservata Famiglie</a></li>
       </ul>
     </li>
-        <li><a href="regolamento.html">Regolamento di Convitto</a></li>
-      </ul>
-    </li>
 
     <li class="drw-group">
       <button class="drw-acc" aria-expanded="false">Novità <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>

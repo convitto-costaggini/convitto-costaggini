@@ -139,6 +139,9 @@ const KB=[
   // ── DSA / BES ──
   {k:['dsa','bes','bisogni educativi','disturbi apprendimento','dislessia','discalculia','disgrafia','handicap','inclus','sostegno','difficoltà apprendimento'],
    r:'Il Convitto dispone di educatori con specifiche competenze in <strong>DSA</strong> (Disturbi Specifici dell\'Apprendimento) e <strong>BES</strong> (Bisogni Educativi Speciali). Il personale educativo è formato su metodologie didattiche inclusive, apprendimento cooperativo e strategie compensative. Per informazioni sulle misure di supporto disponibili: <a href="contatti.html">Contattaci →</a>'},
+  // ── BULLISMO / CYBERBULLISMO ──
+  {k:['bullism','cyberbull','bullo','bulli','prepotenz','vessazion','molest','minacc','vittima','escluso','esclusa','deris','insult','offes','offend','picchia','prevaricazion','preso in giro'],
+   r:'Al Convitto la sicurezza di ogni ragazzo è una priorità. Se subisci o assisti a episodi di <strong>bullismo o cyberbullismo</strong>:<br>1️⃣ Parlane subito con un <strong>educatore</strong> (presenti H24)<br>2️⃣ Vengono informati il <strong>Dirigente</strong> e il <strong>Referente Antibullismo</strong><br>3️⃣ Puoi chiedere un colloquio formale con il Referente e la dirigenza<br>📞 Numeri utili: <strong>114</strong> (Emergenza Infanzia) · <strong>19696</strong> (Polizia Postale)<br><a href="bullismo.html">Guida completa: riconoscere e agire →</a>'},
   // ── ALUMNI ──
   {k:['alumni','ex convittor','ex student','diplomati','community'],
    r:'Community degli <em>Alumni</em>: <a href="comunita.html">La nostra Comunità →</a><br>Se sei ex convittore: <a href="iscriviti-alumni.html">Unisciti →</a>'},
@@ -147,7 +150,7 @@ const KB=[
    r:'Ciao! 👋 Sono l\'assistente del Convitto "Costaggini" di Rieti. Posso aiutarti su: iscrizioni, orari, contatti, rette, camere, servizi e vita convittuale. Cosa ti serve?'},
 ];
 
-const SUGS=['Numero di telefono','Come ci si iscrive?','Orari della giornata','Quanto costa?','Visita guidata'];
+const SUGS=['Numero di telefono','Come ci si iscrive?','Orari della giornata','Quanto costa?','Bullismo: cosa fare','Visita guidata'];
 
 function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
 function match(q){

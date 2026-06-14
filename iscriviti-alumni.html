@@ -160,19 +160,19 @@
           <div class="ia-section-body">
             <div class="ia-grid-2">
               <div class="ia-field">
-                <label class="ia-label">Nome e cognome <span class="req">*</span></label>
+                <label class="ia-label" for="ia-nome">Nome e cognome <span class="req">*</span></label>
                 <input class="ia-input" id="ia-nome" type="text" placeholder="es. Marco Rossi" required oninput="updatePreview()"/>
               </div>
               <div class="ia-field">
-                <label class="ia-label">Come vuoi firmare</label>
+                <label class="ia-label" for="ia-firma">Come vuoi firmare</label>
                 <input class="ia-input" id="ia-firma" type="text" placeholder="es. Marco R. oppure solo Marco"/>
               </div>
               <div class="ia-field">
-                <label class="ia-label">Anni al Convitto <span class="req">*</span></label>
+                <label class="ia-label" for="ia-anni">Anni al Convitto <span class="req">*</span></label>
                 <input class="ia-input" id="ia-anni" type="text" placeholder="es. 2008–2013" required oninput="updatePreview()"/>
               </div>
               <div class="ia-field">
-                <label class="ia-label">Città dove abiti adesso</label>
+                <label class="ia-label" for="ia-citta">Città dove abiti adesso</label>
                 <input class="ia-input" id="ia-citta" type="text" placeholder="es. Milano" oninput="updatePreview()"/>
               </div>
             </div>
@@ -188,11 +188,11 @@
           <div class="ia-section-body">
             <div class="ia-grid-2">
               <div class="ia-field">
-                <label class="ia-label">Professione / Ruolo <span class="req">*</span></label>
+                <label class="ia-label" for="ia-lavoro">Professione / Ruolo <span class="req">*</span></label>
                 <input class="ia-input" id="ia-lavoro" type="text" placeholder="es. Chef · Hotel Manager · Studentessa" required oninput="updatePreview()"/>
               </div>
               <div class="ia-field">
-                <label class="ia-label">Settore</label>
+                <label class="ia-label" for="ia-settore">Settore</label>
                 <select class="ia-select" id="ia-settore" onchange="updatePreview()">
                   <option value="">— opzionale —</option>
                   <option>Ristorazione</option>
@@ -217,7 +217,7 @@
           </div>
           <div class="ia-section-body">
             <div class="ia-field">
-              <label class="ia-label">Un momento, una frase, un'emozione <span class="req">*</span></label>
+              <label class="ia-label" for="ia-ricordo">Un momento, una frase, un'emozione <span class="req">*</span></label>
               <textarea class="ia-textarea" id="ia-ricordo" maxlength="200" placeholder="Anche solo una riga. Quella che ti viene in mente adesso." required oninput="updatePreview();updateCount()"></textarea>
               <p class="ia-charcount"><span id="ia-chars">0</span>/200</p>
             </div>
@@ -233,11 +233,11 @@
           <div class="ia-section-body">
             <div class="ia-grid-2">
               <div class="ia-field">
-                <label class="ia-label">Email <span class="req">*</span></label>
+                <label class="ia-label" for="ia-email">Email <span class="req">*</span></label>
                 <input class="ia-input" id="ia-email" type="email" placeholder="la tua email privata" required/>
               </div>
               <div class="ia-field">
-                <label class="ia-label">Telefono (opzionale)</label>
+                <label class="ia-label" for="ia-tel">Telefono (opzionale)</label>
                 <input class="ia-input" id="ia-tel" type="tel" placeholder="opzionale"/>
               </div>
             </div>
@@ -260,25 +260,25 @@
 
             <div class="ia-grid-2">
               <div class="ia-field">
-                <label class="ia-label">
+                <label class="ia-label" for="ia-fb">
                   <span style="margin-right:.4rem">📘</span>Facebook
                 </label>
                 <input class="ia-input" id="ia-fb" type="url" placeholder="https://facebook.com/tuonome"/>
               </div>
               <div class="ia-field">
-                <label class="ia-label">
+                <label class="ia-label" for="ia-ig">
                   <span style="margin-right:.4rem">📸</span>Instagram
                 </label>
                 <input class="ia-input" id="ia-ig" type="text" placeholder="@tuonome oppure link profilo"/>
               </div>
               <div class="ia-field">
-                <label class="ia-label">
+                <label class="ia-label" for="ia-li">
                   <span style="margin-right:.4rem">💼</span>LinkedIn
                 </label>
                 <input class="ia-input" id="ia-li" type="url" placeholder="https://linkedin.com/in/tuonome"/>
               </div>
               <div class="ia-field">
-                <label class="ia-label">
+                <label class="ia-label" for="ia-web">
                   <span style="margin-right:.4rem">🌐</span>Sito / altro
                 </label>
                 <input class="ia-input" id="ia-web" type="url" placeholder="il tuo sito, blog, portfolio…"/>

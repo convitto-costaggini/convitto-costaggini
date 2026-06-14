@@ -328,13 +328,13 @@
     background: rgba(255,255,255,.05); border: 1px solid rgba(184,146,42,.22);
     border-radius: 8px; padding: 1rem;
   }
-  .ai-box h4 {
+  .ai-box h3 {
     font-family: var(--fu); font-size: .67rem; font-weight: 700;
     letter-spacing: .1em; text-transform: uppercase;
     color: var(--oro2); margin-bottom: .7rem;
     display: flex; align-items: center; gap: .4rem;
   }
-  .ai-box h4 svg { width: 13px; height: 13px; fill: var(--oro2); }
+  .ai-box h3 svg { width: 13px; height: 13px; fill: var(--oro2); }
   .ai-row { display: flex; flex-direction: column; gap: .5rem; }
   .ai-input {
     font-size: 1rem !important; min-height: 46px !important;
@@ -543,7 +543,7 @@
 <div id="login-overlay" role="dialog" aria-modal="true" aria-labelledby="login-title">
   <div class="login-box">
     <div class="login-drag" aria-hidden="true"></div>
-    <h3 id="login-title">Accesso amministratori</h3>
+    <h2 id="login-title">Accesso amministratori</h2>
     <p>Inserisci la password per gestire i comunicati.</p>
     <label for="pwd-input">Password</label>
     <input style="font-size:16px" type="password" id="pwd-input" autocomplete="current-password" placeholder="••••••••"/>
@@ -605,10 +605,10 @@
 
         <!-- Assistente AI -->
         <div class="ai-box">
-          <h4>
+          <h3>
             <svg viewBox="0 0 24 24"><path d="M13 3L4 14h7l-2 7 9-11h-7l2-7z"/></svg>
             Assistente AI — genera il testo automaticamente
-          </h4>
+          </h3>
           <div class="ai-row">
             <input style="font-size:16px" type="text" class="ai-input" id="ai-prompt"
               placeholder="Descrivi brevemente… es: 'Chiusura mensa venerdì per pulizie'"/>

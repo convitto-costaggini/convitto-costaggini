@@ -311,7 +311,7 @@ p:last-child { margin-bottom: 0; }
 .dico { width: 32px; height: 32px; border-radius: 3px; background: var(--bosco); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .dico svg { width: 15px; height: 15px; fill: var(--oro2); }
 .dinf { flex: 1; min-width: 0; }
-.dinf h4 { font-size: .83rem; font-weight: 700; color: var(--bosco); }
+.dinf h3, .dinf h4 { font-size: .83rem; font-weight: 700; color: var(--bosco); }
 .dinf span { font-size: .7rem; color: #666; }
 .darr { font-size: 1rem; color: var(--bosco2); flex-shrink: 0; }
 

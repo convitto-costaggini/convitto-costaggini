@@ -227,6 +227,7 @@ function toggleViewer(id, pdfPath) {
     <div class="sb-nav">
       <div class="sb-cat">Introduzione</div>
       <div class="sb-lnk on" onclick="show('intro',this)"><span class="n">&middot;</span>Panoramica</div>
+      <div class="sb-lnk" onclick="show('cosa-resta',this)"><span class="n">&#9733;</span>Cosa resta da fare</div>
       <div class="sb-lnk" onclick="show('numeri',this)"><span class="n">&middot;</span>Il sito in numeri</div>
       <div class="sb-sep"></div>
       <div class="sb-cat">Documenti</div>
@@ -240,6 +241,9 @@ function toggleViewer(id, pdfPath) {
       <div class="sb-lnk" onclick="show('confronto',this)"><span class="n">&middot;</span>Confronto nazionale</div>
       <div class="sb-lnk" onclick="show('argo',this)"><span class="n">&middot;</span>Accesso Argo educatori</div>
       <div class="sb-sep"></div>
+      <div class="sb-cat">&#128274; Sicurezza della rete</div>
+      <div class="sb-lnk" onclick="show('firewall',this)"><span class="n">&#9888;</span>Firewall e tutela dei minori</div>
+      <div class="sb-sep"></div>
       <div class="sb-cat">⚡ Adempimenti pendenti</div>
       <div class="sb-lnk" onclick="show('adempimenti-sito',this)"><span class="n">A</span>Go-live sito + email Argo</div>
       <div class="sb-lnk" onclick="show('adempimenti-argo',this)"><span class="n">B</span>Accesso educatori Argo</div>
@@ -250,6 +254,30 @@ function toggleViewer(id, pdfPath) {
   </nav>
 
   <main id="main">
+
+    <!-- COSA RESTA DA FARE -->
+    <section id="s-cosa-resta" class="sec">
+      <h2>Cosa resta <em>da fare</em></h2>
+      <div class="sec-meta">Guida operativa passo per passo &middot; 14 Giugno 2026</div>
+      <div class="body">
+        <p style="font-family:var(--fu);font-size:.82rem;color:var(--txt2);line-height:1.75;max-width:660px;margin-bottom:1.5rem">Elenco, in ordine cronologico e in linguaggio semplice, di tutte le attivit&agrave; che restano da svolgere per portare il sito alla pubblicazione definitiva e alla piena regolarit&agrave;. La sicurezza dei dati e l&rsquo;accessibilit&agrave; sono gi&agrave; state completate e verificate. Il documento &egrave; disponibile in formato Word (modificabile), PDF (da stampare o inviare) e consultabile direttamente qui sotto.</p>
+        <div class="dl-box">
+          <div><div class="dl-title">Che cosa resta da fare &mdash; guida operativa passo per passo</div><div class="dl-sub">Documento aggiornato &middot; 14 giugno 2026</div></div>
+          <div class="dl-btns dl-keep-row">
+            <a class="dl-btn word dl-keep" href="dossier-docs/Cosa-resta-da-fare-sito-Convitto.docx" download><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>Word</a>
+            <a class="dl-btn pdf dl-keep" href="dossier-docs/Cosa-resta-da-fare-sito-Convitto.pdf" download><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>PDF</a>
+            <button class="dl-btn view dl-keep" onclick="toggleViewer('viewer-resta', 'dossier-docs/Cosa-resta-da-fare-sito-Convitto.pdf')"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;margin-right:4px"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>Visualizza</button>
+          </div>
+        </div>
+        <div class="doc-viewer dv-keep" id="viewer-resta">
+          <div class="doc-viewer-bar">
+            <span>&#128196; Cosa resta da fare</span>
+            <button class="doc-viewer-close" onclick="toggleViewer('viewer-resta', '')">&#10005; Chiudi</button>
+          </div>
+          <iframe id="iframe-resta" src="" title="Cosa resta da fare — guida operativa"></iframe>
+        </div>
+      </div>
+    </section>
 
     <!-- INTRO -->
     <section id="s-intro" class="sec on">
@@ -263,7 +291,7 @@ function toggleViewer(id, pdfPath) {
           <div class="kpi-c"><div class="kpi-v">55+</div><div class="kpi-l">pagine</div></div>
           <div class="kpi-c"><div class="kpi-v">&euro;&thinsp;0</div><div class="kpi-l">costo annuo</div></div>
           <div class="kpi-c"><div class="kpi-v">5</div><div class="kpi-l">lingue</div></div>
-          <div class="kpi-c"><div class="kpi-v">4</div><div class="kpi-l">adempimenti</div></div>
+          <div class="kpi-c"><div class="kpi-v">3</div><div class="kpi-l">adempimenti</div></div>
         </div>
       </div>
 
@@ -461,13 +489,14 @@ function toggleViewer(id, pdfPath) {
         </div>
         <h3>Stato attuale</h3>
         <p>Il sito &egrave; in staging: <a class="lnk" href="https://computeaching2-cell.github.io/convitto-costaggini/" target="_blank">computeaching2-cell.github.io/convitto-costaggini</a></p>
-        <p>Per diventare sito istituzionale servono quattro adempimenti. Nessuno richiede competenze tecniche.</p>
-        <h3>I quattro adempimenti</h3>
+        <p>Per portare il sito in produzione si seguono questi passaggi, in ordine. Nessuno richiede competenze tecniche.</p>
+        <h3>I passaggi, in ordine</h3>
 
-        <div class="acc"><button class="acc-btn" onclick="tog(this)"><span><span class="an">1</span>Dominio .edu.it &mdash; <strong style="color:#f87171">PRIORIT&Agrave; ASSOLUTA</strong></span><svg class="acc-arr" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+        <div class="acc"><button class="acc-btn" onclick="tog(this)"><span><span class="an">1</span>Trasferimento del sito e dominio .edu.it &mdash; <strong style="color:#f87171">PRIMO PASSO</strong></span><svg class="acc-arr" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
           <div class="acc-body">
-            <p><strong>Chi:</strong> DS Barbonetti &mdash; email ad Argo. <strong>Tempi:</strong> 10 min + 2&ndash;5 gg attesa risposta.</p>
-            <p style="color:var(--txt2)">Il testo completo dell&rsquo;email pronta per l&rsquo;invio &egrave; disponibile nella sezione <strong style="color:var(--oro2)">&#9889; Go-live sito + email Argo</strong> (voce A del menu Adempimenti pendenti).</p>
+            <p><strong>Prima di tutto</strong> il sito va trasferito sull&rsquo;account GitHub istituzionale <strong>convitto-costaggini</strong> (prerequisito tecnico, ~20 min: DS + Gaggiano). <strong>Solo dopo</strong> il Dirigente invia l&rsquo;email ad Argo per attivare il dominio.</p>
+            <p><strong>Chi:</strong> DS Barbonetti &mdash; email ad Argo (dopo il trasferimento). <strong>Tempi:</strong> 10 min + 2&ndash;5 gg attesa risposta.</p>
+            <p style="color:var(--txt2)">La procedura completa passo-passo e il testo dell&rsquo;email pronta per l&rsquo;invio sono nella sezione <strong style="color:var(--oro2)">&#9889; Go-live sito + email Argo</strong> (voce A del menu Adempimenti pendenti).</p>
           </div>
         </div>
 
@@ -476,7 +505,7 @@ function toggleViewer(id, pdfPath) {
             <p><strong>Chi:</strong> DS con SPID + Gaggiano. <strong>Quando:</strong> dopo attivazione dominio. <strong>Tempo:</strong> 15 min.</p>
             <div class="steps">
               <div class="step"><div class="step-n">1</div><div class="step-t">Aprire <a class="lnk" href="https://form.agid.gov.it" target="_blank">form.agid.gov.it</a> &mdash; autenticarsi con SPID del Dirigente</div></div>
-              <div class="step"><div class="step-n">2</div><div class="step-t">Inserire URL: convitto.alberghierorieti.edu.it &mdash; Stato: Parzialmente conforme (bonifica di accessibilit&agrave; in fase di implementazione)</div></div>
+              <div class="step"><div class="step-n">2</div><div class="step-t">Inserire URL: convitto.alberghierorieti.edu.it &mdash; Stato: <strong>Conforme</strong> (bonifica di accessibilit&agrave; WCAG 2.1 livello AA completata e verificata su tutte le pagine pubbliche, giugno 2026)</div></div>
               <div class="step"><div class="step-n">3</div><div class="step-t">Copiare i testi dalla sezione &ldquo;Dichiarazione AGID&rdquo; di questo dossier</div></div>
               <div class="step"><div class="step-n">4</div><div class="step-t">Inviare il link risultante a Gaggiano (viene inserito automaticamente nel footer)</div></div>
             </div>
@@ -570,7 +599,7 @@ function toggleViewer(id, pdfPath) {
         <div class="acc"><button class="acc-btn" onclick="tog(this)"><span><span class="an">A</span>Dati dell&rsquo;ente</span><svg class="acc-arr" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
           <div class="acc-body"><ul><li><strong>Nome:</strong> IPSSEOA &ldquo;R. A. Costaggini&rdquo; &mdash; Convitto annesso</li><li><strong>C.F.:</strong> 80008130579 &middot; <strong>Cod. mecc.:</strong> RIRH010007</li><li><strong>URL:</strong> convitto.alberghierorieti.edu.it</li><li><strong>Dirigente:</strong> Prof. Giovanni Luca Barbonetti (in reggenza)</li></ul></div></div>
         <div class="acc"><button class="acc-btn" onclick="tog(this)"><span><span class="an">B</span>Stato &rarr; CONFORME</span><svg class="acc-arr" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
-          <div class="acc-body"><p>Finch&eacute; la bonifica di accessibilit&agrave; &egrave; <strong>in fase di implementazione</strong>, selezionare <strong>PARZIALMENTE CONFORME</strong> ed elencare le non conformit&agrave; note &mdash; contrasto del colore oro su bianco, etichette di alcuni campi dei moduli, gerarchia dei titoli, skip-link &mdash; indicandole come in corso di risoluzione. Lo stato <strong>CONFORME</strong> potr&agrave; essere selezionato soltanto dopo aver completato e verificato la bonifica su tutte le pagine (WCAG 2.1 livello AA).</p></div></div>
+          <div class="acc-body"><p>La bonifica di accessibilit&agrave; <strong>WCAG 2.1 livello AA</strong> &egrave; stata <strong>completata e verificata</strong> su tutte le pagine pubbliche (giugno 2026): risolti il contrasto del colore, le etichette dei moduli, la gerarchia dei titoli, gli skip-link e i testi alternativi delle immagini. Si pu&ograve; pertanto selezionare lo stato <strong>CONFORME</strong>. La dichiarazione va comunque compilata <strong>solo dopo l&rsquo;attivazione del dominio</strong> .edu.it: il sistema AGID non accetta indirizzi provvisori. Qualora in futuro venissero pubblicati documenti PDF non ancora resi accessibili, indicarli come unica eccezione &ldquo;parzialmente conforme&rdquo;.</p></div></div>
         <div class="acc"><button class="acc-btn" onclick="tog(this)"><span><span class="an">C&ndash;G</span>Tecnologie, metodo, feedback, procedure</span><svg class="acc-arr" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
           <div class="acc-body">
             <p><strong>C &mdash; Tecnologie:</strong> HTML5 semantico, CSS3, JavaScript vanilla ES6+, Leaflet.js, Pannellum, Supabase SDK. Nessun CMS, nessun tracker, nessun cookie di profilazione.</p>
@@ -1001,6 +1030,77 @@ Tel. 0746 201113 — rirh010007@istruzione.it — PEC: rirh010007@pec.istruzione
       </div>
     </section>
 
+    <!-- FIREWALL / SICUREZZA RETE -->
+    <section id="s-firewall" class="sec">
+      <h2>Sicurezza della rete e tutela dei <em>minori</em></h2>
+      <div class="sec-meta">Disamina tecnica &middot; Argomento cruciale &middot; Giugno 2026</div>
+      <div class="body">
+
+        <div style="margin:0 0 1.75rem;padding:1rem 1.3rem;background:rgba(184,146,42,.06);border:1.5px solid rgba(184,146,42,.28);border-left-width:3px;border-radius:0 var(--r) var(--r) 0">
+          <div style="font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.4rem">Premessa &middot; Una criticit&agrave; gi&agrave; rappresentata</div>
+          <p style="margin:0;font-family:var(--fd);font-size:1.02rem;font-style:italic;color:rgba(245,240,232,.82);line-height:1.8">Si ritiene doveroso evidenziare che quanto qui formalizzato non costituisce una segnalazione nuova: la criticit&agrave; era gi&agrave; stata rappresentata <strong style="font-style:normal;color:var(--txt)">per le vie brevi, in pi&ugrave; occasioni e da tempo, alle precedenti dirigenze</strong>. La presente trattazione intende darne finalmente evidenza documentale e sistematica, affinch&eacute; la questione sia valutata nelle sedi proprie.</p>
+        </div>
+
+        <p>Il Convitto ospita un&rsquo;utenza di circa <strong>120 convittori, in larga maggioranza minori</strong>, e vede in servizio contemporaneo, ogni giorno, circa <strong>20 unit&agrave;</strong> tra personale educativo e di supporto. Tutti accedono alla rete dati attraverso un&rsquo;<strong>unica infrastruttura condivisa</strong>, senza separazione strutturale tra il traffico dei minori e quello del personale, n&eacute; un sistema di filtraggio dei contenuti certificato e adeguato all&rsquo;et&agrave; dell&rsquo;utenza prevalente.</p>
+
+        <div class="kgrid">
+          <div class="kcard hi"><div class="v">120</div><div class="l">Convittori</div><div class="s">in maggioranza minori</div></div>
+          <div class="kcard"><div class="v">20</div><div class="l">Personale / die</div><div class="s">in servizio contemporaneo</div></div>
+          <div class="kcard"><div class="v" style="color:#f87171">1</div><div class="l">Rete unica</div><div class="s">nessuna segmentazione</div></div>
+          <div class="kcard"><div class="v" style="color:#f87171">0</div><div class="l">Filtri certificati</div><div class="s">attivi sulla navigazione</div></div>
+        </div>
+
+        <h3>Quadro normativo e profili di responsabilit&agrave;</h3>
+        <p>La materia non &egrave; rimessa alla discrezionalit&agrave; organizzativa: &egrave; presidiata da obblighi precisi che gravano sull&rsquo;istituzione e, in concreto, sul Dirigente Scolastico quale legale rappresentante.</p>
+
+        <div class="acc"><button class="acc-btn" onclick="tog(this)"><span><span class="an">01</span>Il Dirigente quale titolare del trattamento</span><svg class="acc-arr" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+          <div class="acc-body"><p>L&rsquo;istituzione scolastica &egrave; titolare del trattamento dei dati personali e il Dirigente Scolastico, in qualit&agrave; di legale rappresentante, assume in concreto le decisioni sulle attivit&agrave; e modalit&agrave; del trattamento. Il Regolamento (UE) 2016/679 (artt. 24 e 32) impone al titolare misure tecniche e organizzative <em>adeguate</em> a un livello di sicurezza commisurato al rischio: una rete usata quotidianamente da circa 120 minori rappresenta, sotto questo profilo, un rischio elevato.</p></div></div>
+
+        <div class="acc"><button class="acc-btn" onclick="tog(this)"><span><span class="an">02</span>Tutela rafforzata dei minori</span><svg class="acc-arr" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+          <div class="acc-body"><p>Il GDPR (considerando 38 e art. 8) e il vademecum del Garante <em>&ldquo;La scuola a prova di privacy&rdquo;</em>, aggiornato nel 2025, riconoscono ai minori una protezione specifica nei contesti educativi e digitali, richiamando l&rsquo;istituzione a un dovere attivo di prevenzione dei rischi connessi alla navigazione.</p></div></div>
+
+        <div class="acc"><button class="acc-btn" onclick="tog(this)"><span><span class="an">03</span>Misure Minime di Sicurezza ICT obbligatorie</span><svg class="acc-arr" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+          <div class="acc-body"><p>Le scuole, in quanto pubbliche amministrazioni ai sensi dell&rsquo;art. 1, comma 2, del D.Lgs. 165/2001, sono soggette alle &ldquo;Misure Minime di Sicurezza ICT per le PA&rdquo; di cui alla <strong>Circolare AgID n. 2/2017</strong> (in attuazione della Direttiva PCM 1&deg; agosto 2015, nel quadro dell&rsquo;art. 17 del CAD). Tra i controlli rientra la protezione perimetrale della rete; l&rsquo;attuazione e la relativa attestazione, mediante il &ldquo;Modulo di implementazione&rdquo;, competono al dirigente responsabile.</p></div></div>
+
+        <div class="acc"><button class="acc-btn" onclick="tog(this)"><span><span class="an">04</span>Dovere di vigilanza &mdash; <em>culpa in vigilando</em></span><svg class="acc-arr" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+          <div class="acc-body"><p>Il dovere di vigilanza sui minori affidati (art. 2048 c.c.), tradizionalmente riferito alla dimensione fisica, si estende oggi all&rsquo;ambiente digitale: la mancata predisposizione di filtri adeguati pu&ograve; integrare profili di <em>culpa in vigilando</em> in caso di accesso dei minori a contenuti illeciti o nocivi.</p></div></div>
+
+        <h3>Criticit&agrave; della configurazione attuale</h3>
+        <ul>
+          <li>I minori possono accedere a contenuti non filtrati o inadeguati.</li>
+          <li>Il traffico amministrativo e i dati di servizio del personale transitano sullo stesso segmento dei dispositivi dei convittori, con rischi di interferenza ed esposizione.</li>
+          <li>Non esiste un tracciamento ordinato e conforme degli accessi.</li>
+          <li>Non &egrave; disponibile alcuna attestazione di conformit&agrave; opponibile in sede di controllo o di contenzioso.</li>
+        </ul>
+
+        <h3>Proposta &mdash; incarico a ditta esterna qualificata</h3>
+        <p>Trattandosi di interventi che impegnano la responsabilit&agrave; dell&rsquo;istituzione e richiedono competenze specialistiche non interne, si propone di affidare a una <strong>ditta esterna qualificata</strong> la progettazione, l&rsquo;implementazione e la <strong>certificazione (attestazione di conformit&agrave;)</strong> di un sistema cos&igrave; articolato:</p>
+        <ul>
+          <li><strong>Firewall perimetrale di nuova generazione (NGFW/UTM)</strong> con <em>content filtering</em>, <em>intrusion prevention</em>, anti-malware e registrazione degli eventi.</li>
+          <li><strong>Segmentazione della rete</strong> mediante VLAN e/o SSID distinti, con isolamento tra due ambiti: rete del personale educativo/amministrativo e rete dei convittori.</li>
+          <li><strong>Profili di filtraggio differenziati</strong>, pi&ugrave; restrittivi sulla rete dei minori (blocco di categorie a rischio: pornografia, gioco d&rsquo;azzardo, violenza, autolesionismo, sostanze).</li>
+          <li><strong>Autenticazione distinta</strong> all&rsquo;accesso (es. <em>captive portal</em> con credenziali) per discriminare l&rsquo;utenza &ldquo;educatore/personale&rdquo; da quella &ldquo;convittore&rdquo;.</li>
+          <li><strong>Gestione e conservazione dei log</strong> nel rispetto dei principi di minimizzazione e limitazione della conservazione.</li>
+        </ul>
+
+        <h3>Performance di rete e dimensionamento della banda</h3>
+        <p>Aspetto operativo da chiarire <strong>espressamente con la ditta in sede di capitolato</strong>: l&rsquo;introduzione di un firewall con ispezione del traffico e filtraggio dei contenuti pu&ograve; comportare un <strong>rallentamento della navigazione</strong>, tanto pi&ugrave; sensibile quanto maggiore &egrave; il numero di dispositivi connessi contemporaneamente (qui, potenzialmente, oltre un centinaio). &Egrave; pertanto opportuno chiedere alla ditta:</p>
+        <ul>
+          <li>Se l&rsquo;attuale ampiezza di banda sia sufficiente a sostenere il carico aggiuntivo dell&rsquo;ispezione, ovvero se sia necessario un <strong>potenziamento della connettivit&agrave;</strong> (maggiore larghezza di banda).</li>
+          <li>Quale sia il <strong>dimensionamento (throughput) dell&rsquo;apparato</strong> con tutte le funzioni di sicurezza attive, rapportato al numero di utenti previsto.</li>
+          <li>Quali garanzie di <strong>continuit&agrave; e qualit&agrave; del servizio</strong> siano assicurate negli orari di maggior utilizzo.</li>
+        </ul>
+        <div class="note">L&rsquo;adeguamento in sicurezza non deve tradursi in un peggioramento dell&rsquo;esperienza d&rsquo;uso: il punto va definito in fase di offerta, valutando insieme firewall e banda come elementi di un unico dimensionamento.</div>
+
+        <h3>Cautele giuridiche nella separazione del traffico del personale</h3>
+        <p>La separazione delle reti e l&rsquo;eventuale registrazione del traffico del personale vanno impostate con attenzione, per evitare che si configurino come <strong>controllo a distanza dei lavoratori</strong>: l&rsquo;art. 4 della L. 300/1970 (Statuto dei Lavoratori) subordina l&rsquo;uso di strumenti da cui derivi tale possibilit&agrave; ad accordo sindacale o autorizzazione dell&rsquo;Ispettorato del Lavoro, oltre alla preventiva informativa. La finalit&agrave; della separazione resta la sicurezza e la tutela dei minori, non la sorveglianza del personale.</p>
+        <p>Si raccomanda inoltre, stante il monitoraggio sistematico di un&rsquo;utenza minorile, di valutare con il Responsabile della Protezione dei Dati (RPD/DPO) una <strong>valutazione d&rsquo;impatto (DPIA, art. 35 GDPR)</strong> e di predisporre l&rsquo;<strong>informativa</strong> agli interessati e, per i convittori minori, agli esercenti la responsabilit&agrave; genitoriale.</p>
+
+        <div class="pq"><p>L&rsquo;intervento consentirebbe di adempiere agli obblighi di sicurezza, rafforzare la tutela dei minori affidati e ridurre i profili di responsabilit&agrave; connessi all&rsquo;attuale configurazione. La questione, gi&agrave; rappresentata informalmente nel tempo, merita oggi una valutazione formale.</p></div>
+
+      </div>
+    </section>
+
   </main>
 </div>
 
@@ -1075,11 +1175,11 @@ if (sessionStorage.getItem('da') === '1') {
    I documenti allegati (Word/PDF/Visualizza) sono in aggiornamento:
    pulsanti resi non funzionanti e visualizzatori azzerati. */
 (function () {
-  // 1) Azzera l'apertura dei visualizzatori inline
-  try { window.toggleViewer = function () { return false; }; } catch (e) {}
+  // toggleViewer resta attivo: il nuovo documento (.dl-keep) deve poter aprire il visualizzatore.
+  // I pulsanti dei documenti datati vengono comunque neutralizzati qui sotto (onclick rimosso).
 
   function disattiva() {
-    var btns = document.querySelectorAll('.dl-btn');
+    var btns = document.querySelectorAll('.dl-btn:not(.dl-keep)');
     btns.forEach(function (el) {
       el.classList.add('dl-disabled');
       el.setAttribute('aria-disabled', 'true');
@@ -1091,8 +1191,8 @@ if (sessionStorage.getItem('da') === '1') {
       el.addEventListener('click', function (ev) { ev.preventDefault(); ev.stopPropagation(); }, true);
     });
     // Assicura che eventuali visualizzatori restino chiusi e vuoti
-    document.querySelectorAll('.doc-viewer').forEach(function (v) { v.style.display = 'none'; });
-    document.querySelectorAll('.doc-viewer iframe').forEach(function (f) { f.src = ''; });
+    document.querySelectorAll('.doc-viewer:not(.dv-keep)').forEach(function (v) { v.style.display = 'none'; });
+    document.querySelectorAll('.doc-viewer:not(.dv-keep) iframe').forEach(function (f) { f.src = ''; });
   }
 
   if (document.readyState === 'loading') {
@@ -1110,7 +1210,7 @@ if (sessionStorage.getItem('da') === '1') {
   cursor: not-allowed !important;
   pointer-events: none;
 }
-.dl-btns::after {
+.dl-btns:not(.dl-keep-row)::after {
   content: "Documenti in aggiornamento \2014 temporaneamente non disponibili";
   display: block;
   width: 100%;

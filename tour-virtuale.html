@@ -207,7 +207,7 @@ const canvas   = document.getElementById('tv-canvas');
 const wrap     = canvas.closest('.tv-viewer-wrap');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 const scene    = new THREE.Scene();
-const camera   = new THREE.PerspectiveCamera(100, 1, 0.1, 1000); // FOV 100 = molto grandangolare
+const camera   = new THREE.PerspectiveCamera(70, 1, 0.1, 1000); // FOV verticale: ricalcolato in resize() da H_FOV orizzontale
 camera.position.set(0, 0, 0.01);
 
 // Sfera interna
@@ -225,10 +225,13 @@ let lastX = 0, lastY = 0;
 let lon = 0, lat = 0;   // angolo di visione corrente
 let autoTimer  = null;
 
+const H_FOV = 75; // campo visivo ORIZZONTALE in gradi (come Pannellum) — costante a prescindere dalla forma del riquadro
 function resize() {
   const w = wrap.clientWidth, h = wrap.clientHeight;
   renderer.setSize(w, h, false);
   camera.aspect = w / h;
+  const hfov = THREE.MathUtils.degToRad(H_FOV);
+  camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(hfov / 2) / camera.aspect));
   camera.updateProjectionMatrix();
 }
 

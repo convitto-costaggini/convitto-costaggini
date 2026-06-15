@@ -241,6 +241,7 @@ function applyFov() {
 }
 function resize() {
   const w = wrap.clientWidth, h = wrap.clientHeight;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); // nitidezza su schermi HiDPI/retina
   renderer.setSize(w, h, false);
   camera.aspect = w / h;
   applyFov();
@@ -271,6 +272,7 @@ function loadPanorama(src) {
   material.map = null; material.needsUpdate = true;
   loader.load(src, function(tex) {
     tex.minFilter = THREE.LinearFilter;
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy(); // texture nitida anche guardando le pareti di sbieco
     material.map  = tex;
     material.color.set(0xffffff);
     material.needsUpdate = true;

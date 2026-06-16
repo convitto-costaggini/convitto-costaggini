@@ -240,7 +240,6 @@
           <li><a href="privacy.html">Privacy &amp; GDPR</a></li>
           <li><a href="cookie-policy.html">Cookie Policy</a></li>
           <li><a href="trasparenza.html#accessibilita">Accessibilità</a></li>
-          <li><a href="gestionale.html" style="color:var(--oro2);font-weight:700">🔐 Gestionale</a></li>
         </ul></div>
 
       </div>

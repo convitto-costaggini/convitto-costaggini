@@ -48,6 +48,8 @@ const CSS=`
 #cc-inp:focus{border-color:#2C3E2D;}#cc-inp::placeholder{color:#aaa;}
 #cc-go{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#2C3E2D,#1a3a1b);border:none;cursor:pointer;color:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:opacity .2s;}
 #cc-go:disabled{opacity:.35;cursor:default;}
+a.cc-sug{text-decoration:none;display:inline-block;color:#374151;}
+a.cc-sug:hover{color:#2C3E2D;}
 `;
 
 const KB=[
@@ -152,16 +154,144 @@ const KB=[
 
 const SUGS=['Numero di telefono','Come ci si iscrive?','Orari della giornata','Quanto costa?','Bullismo: cosa fare','Visita guidata'];
 
-function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
-function match(q){
-  const n=norm(q);let best=null,top=0;
-  for(const e of KB){let s=0;for(const k of e.k){if(n.includes(norm(k)))s++;}if(s>top){top=s;best=e;}}
-  return best&&top>0?best.r:null;
+/* ── MOTORE DI RICERCA (Strada A) ─────────────────────────────────────────
+ * Due livelli:
+ *  1) KB curata (sopra) — risposte esatte e autorevoli (contatti, orari,
+ *     rette, bullismo…). Vince sempre quando intercetta un intento.
+ *  2) INDICE del sito (kb-index.json, generato da build-index.js) — copre
+ *     TUTTE le pagine: quando la KB non sa rispondere, indirizza alla pagina
+ *     giusta invece di arrendersi.
+ * Tutto in locale: l'indice è servito dallo stesso sito, nessun dato esce.
+ * ------------------------------------------------------------------------- */
+
+let INDEX=[];      // voci da kb-index.json
+let IDF={};        // peso "rarità" di ogni token (token raro = più informativo)
+
+function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+
+const STOPQ=new Set('di a da in con su per tra fra il lo la le un uno una del dello della dei degli delle al allo alla come dove quando quanto quale quali questo questa che chi cui non sono vorrei voglio posso cosa piu meno mio mia miei fare avere essere ci si mi ti ho hai abbiamo avete hanno'.split(/\s+/));
+function toks(s){const o=[];for(const w of norm(s).split(/[^a-z0-9]+/)){if(w.length>=3&&!STOPQ.has(w))o.push(w);}return o;}
+
+// Sinonimi: espandono la domanda dell'utente verso i termini usati nel sito.
+const SYN={costo:['prezzo','retta','tariffa','pagamento','quota'],prezzo:['costo','retta','tariffa'],pagare:['retta','costo','pagamento'],mensa:['cucina','cibo','pasti','ristorazione'],cibo:['mensa','cucina','pasti'],dormire:['camera','stanza','alloggio','letto'],stanza:['camera','alloggio'],telefono:['numero','contatto','recapito'],orari:['orario','giornata','programma'],iscrizione:['ammissione','iscriversi','domanda'],iscriversi:['ammissione','iscrizione'],ammissione:['iscrizione'],vacanze:['calendario','festivita','chiusura'],festa:['calendario','festivita'],uscire:['uscita','permesso','autonoma'],aiuto:['supporto','sostegno'],disabile:['dsa','bes','sostegno','inclusione'],internet:['wifi','rete','connessione'],musica:['laboratorio','strumento','chitarra'],storia:['fondazione','anniversario'],genitore:['famiglia','famiglie','genitori'],studente:['convittore','ragazzo','alunno']};
+function expand(tk){const out=new Set(tk);for(const t of tk){const s=SYN[t];if(s)for(const x of s)out.add(x);}return [...out];}
+
+// Distanza di Levenshtein "<=1" (tollera un refuso). True se a e b differiscono
+// per al più un carattere (sostituzione, inserimento o cancellazione).
+function near(a,b){
+  if(a===b)return true;
+  const la=a.length,lb=b.length;if(Math.abs(la-lb)>1)return false;
+  let i=0,j=0,diff=0;
+  while(i<la&&j<lb){
+    if(a[i]===b[j]){i++;j++;continue;}
+    if(++diff>1)return false;
+    if(la>lb)i++;else if(lb>la)j++;else{i++;j++;}
+  }
+  if(i<la||j<lb)diff++;
+  return diff<=1;
 }
-function fallback(){return'Non ho trovato una risposta precisa. Puoi scriverci dal <a href="contatti.html">modulo di contatto →</a> e ti risponderemo direttamente.';}
+
+// Quanto un token della domanda (q) "centra" un token bersaglio (t):
+// 1 esatto, 0.8 prefisso (uno inizia con l'altro), 0.6 refuso. 0 altrimenti.
+// NB: è un match per inizio-parola, quindi "vitto" NON combacia con "convitto"
+// (sta in mezzo), mentre lo stem "iscri" combacia con "iscrizione".
+function tokHit(q,t){
+  if(q===t)return 1;
+  if(q.length>=4&&t.length>=4){
+    if(q.startsWith(t)||t.startsWith(q))return .8;
+    if(near(q,t))return .6;
+  }
+  return 0;
+}
+
+// Punteggio di una voce KB. Keyword di una parola → match per inizio-parola
+// sui token della domanda; keyword-frase (con spazio) → sottostringa, e pesa
+// di più perché è molto specifica.
+function scoreKB(qNorm,qtok,entry){
+  let s=0;
+  for(const k of entry.k){
+    const nk=norm(k).trim();
+    if(nk.includes(' ')){if(qNorm.includes(nk))s+=2;continue;}
+    let best=0;
+    for(const q of qtok){
+      if(q===nk){best=1;break;}
+      if(nk.length>=4&&q.length>=4&&(q.startsWith(nk)||nk.startsWith(q))){best=Math.max(best,1);}
+      else if(nk.length>=4&&q.length>=4&&near(q,nk)){best=Math.max(best,.6);}
+    }
+    s+=best;
+  }
+  return s;
+}
+
+// Punteggio di una pagina: per ogni token della domanda prendo il miglior
+// match nel titolo/intestazioni (peso pieno) o nel corpo (peso ridotto),
+// moltiplicato per la rarità (IDF) del token. Titolo/heading contano doppio.
+function scorePage(qtok,p){
+  let s=0;
+  for(const q of qtok){
+    let ti=0,he=0,bo=0;
+    for(const t of p._title){const h=tokHit(q,t);if(h>ti)ti=h;}
+    for(const t of p._head){const h=tokHit(q,t);if(h>he)he=h;}
+    for(const t of p.tokens){const h=tokHit(q,t);if(h>bo)bo=h;}
+    const idf=IDF[q]||1.2;
+    const contrib=Math.max(ti*1,he*.7,bo*.45)*idf;
+    if(contrib>0)s+=contrib;
+  }
+  return s;
+}
+
+function pageCard(p){
+  return '\uD83D\uDCC4 <strong>'+p.title+'</strong><br>'+p.snippet+'<br><a href="'+p.url+'">Apri la pagina \u2192</a>';
+}
+
+function match(q){
+  const qNorm=norm(q);
+  const qtok=expand(toks(q));
+
+  // 1) KB curata: se intercetta un intento, risponde lei (autorevole).
+  let kbBest=null,kbTop=0;
+  for(const e of KB){const s=scoreKB(qNorm,qtok,e);if(s>kbTop){kbTop=s;kbBest=e;}}
+  if(kbBest&&kbTop>=1)return kbBest.r;
+
+  // 2) Indice del sito: classifico le pagine.
+  if(qtok.length&&INDEX.length){
+    const ranked=INDEX.map(p=>({p,s:scorePage(qtok,p)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s);
+    if(ranked.length){
+      const top=ranked[0];
+      // Risposta diretta se la pagina migliore è robusta e stacca le altre.
+      const strong=top.s>=2.4||(top.s>=1.5&&(!ranked[1]||top.s>=ranked[1].s*1.5));
+      if(strong){
+        let html=pageCard(top.p);
+        const more=ranked.slice(1,3).filter(x=>x.s>=top.s*.5);
+        if(more.length)html+='<br><br>Forse \u00E8 utile anche: '+more.map(x=>'<a href="'+x.p.url+'">'+x.p.title+'</a>').join(' \u00B7 ');
+        return html;
+      }
+      // Bassa confidenza: propongo le pagine più vicine come chip.
+      const sug=ranked.slice(0,3);
+      return 'Non sono sicuro della risposta esatta. Forse cercavi una di queste pagine?<br><div class="cc-sugs" style="padding:.5rem 0 0">'+
+        sug.map(x=>'<a class="cc-sug" href="'+x.p.url+'">'+x.p.title+'</a>').join('')+'</div>';
+    }
+  }
+  return null;
+}
+
+function fallback(){return'Non ho trovato una risposta precisa. Puoi scriverci dal <a href="contatti.html">modulo di contatto \u2192</a> e ti risponderemo direttamente.';}
+
+// Carica l'indice del sito (stessa origine: resta tutto locale).
+function loadIndex(){
+  fetch('kb-index.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(j=>{
+    if(!j||!j.voci)return;
+    INDEX=j.voci;
+    for(const p of INDEX){p._title=[...new Set(toks(p.title||''))];p._head=[...new Set(toks((p.headings||[]).join(' ')))];}
+    const df={},N=INDEX.length;
+    for(const p of INDEX){for(const t of new Set(p.tokens))df[t]=(df[t]||0)+1;}
+    for(const t in df)IDF[t]=Math.log(1+N/df[t]);
+  }).catch(()=>{});
+}
 
 function build(){
   const st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);
+  loadIndex(); // carica indice del sito (kb-index.json) - tutto in locale
   // #cc-fab è creato da nav.js — aspettiamo che esista
   function agganciafab(tentativi) {
     const fab = document.getElementById('cc-fab');

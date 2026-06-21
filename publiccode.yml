@@ -1,0 +1,73 @@
+# publiccode.yml — metadati per il catalogo del software a riuso (Developers Italia)
+# Documentazione: https://github.com/italia/publiccode.yml
+#
+# >>> DA AGGIORNARE DOPO IL TRASFERIMENTO DEL REPOSITORY <<<
+#   - "url": sostituire <ORG-ISTITUZIONALE> con il nome dell'organizzazione
+#            GitHub ufficiale della scuola (es. ipsseoa-costaggini).
+#   - "it.riuso.codiceIPA": inserire il Codice IPA dell'Istituto reperibile
+#            su IndicePA (https://indicepa.gov.it). Non coincide col codice
+#            meccanografico.
+
+publiccodeYmlVersion: "0.4"
+
+name: Sito del Convitto "Costaggini"
+url: "https://github.com/<ORG-ISTITUZIONALE>/convitto-costaggini"
+landingURL: "https://convitto.alberghierorieti.edu.it"
+releaseDate: "2026-06-21"
+
+softwareType: standalone/web
+platforms:
+  - web
+
+categories:
+  - content-management
+
+developmentStatus: stable
+
+description:
+  it:
+    localisedName: Sito del Convitto Annesso "Costaggini"
+    shortDescription: >-
+      Sito web del Convitto annesso all'IPSSEOA "R. A. Costaggini" di Rieti.
+    longDescription: >
+      Sito web istituzionale del Convitto annesso all'IPSSEOA "R. A. Costaggini"
+      di Rieti. Realizzato come sito statico in HTML, CSS e JavaScript, offre
+      alle famiglie, agli studenti e alla comunità scolastica informazioni su
+      organizzazione, servizi, regolamenti, notizie ed eventi del Convitto,
+      un'area riservata alle famiglie, moduli di contatto e iscrizione, un tour
+      virtuale a 360 gradi e un assistente virtuale interamente locale. Il
+      backend dei dati è gestito tramite Supabase con Row Level Security su tutte
+      le tabelle. Il sito è conforme ai criteri di accessibilità WCAG 2.1 AA.
+    features:
+      - Informazioni su organizzazione, servizi e regolamenti del Convitto
+      - Sezione notizie, comunicati ed eventi gestibile da pannello amministrativo
+      - Area riservata alle famiglie con autenticazione
+      - Moduli di contatto, iscrizione e prenotazione
+      - Assistente virtuale locale (senza servizi LLM esterni)
+      - Tour virtuale a 360 gradi
+
+legal:
+  license: AGPL-3.0-only
+  mainCopyrightOwner: IPSSEOA "R. A. Costaggini" — Rieti
+  repoOwner: IPSSEOA "R. A. Costaggini" — Rieti
+
+maintenance:
+  type: internal
+  contacts:
+    - name: Responsabile Tecnico del sito
+      email: "rirh010007@istruzione.it"
+
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - it
+
+it:
+  countryExtensionVersion: "0.2"
+  riuso:
+    codiceIPA: "<CODICE-IPA-DA-INDICEPA>"
+  piattaforme:
+    spid: false
+    cie: false
+    anpr: false
+    pagopa: false

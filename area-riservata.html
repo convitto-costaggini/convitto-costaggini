@@ -425,7 +425,7 @@
     btn.disabled = false; btn.textContent = 'Verifica codice';
   }
 
-  // ── RESET PASSWORD ──
+ // ── RESET PASSWORD ──
   async function inviaReset() {
     const email = document.getElementById('reset-email').value.trim().toLowerCase();
     if (!email) return mostraMsg('Inserire l\'email.', 'err');

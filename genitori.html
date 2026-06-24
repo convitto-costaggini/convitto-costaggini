@@ -38,6 +38,18 @@
     .gen-checklist li { display:flex; align-items:flex-start; gap:.65rem; font-size:.85rem; color:var(--txt2); line-height:1.6; }
     .gen-checklist li::before { content:'✓'; color:var(--bosco2); font-weight:800; flex-shrink:0; margin-top:.05rem; }
   </style>
+  <style>
+    /* Collegamenti rapidi nell'hero */
+    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
+    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:var(--ease); }
+    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
+    .hero-jump a .hj-ico { font-size:.9rem; line-height:1; }
+    @media(max-width:560px){
+      .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
+      .hero-jump a { padding:.55rem .5rem; }
+    }
+    #impegno, #checklist, #faq, #area-famiglie { scroll-margin-top: 90px; }
+  </style>
 </head>
 <body data-page="genitori">
 <main id="main">
@@ -48,11 +60,18 @@
       <div class="gold-bar"></div>
       <h1>Per i <em>Genitori</em></h1>
       <p class="sub">Lasciare un figlio al Convitto è un atto di fiducia. Questa pagina è pensata per voi — per rispondere alle domande che contano davvero, anche quelle che non si trovano nei depliant.</p>
+      <nav class="hero-jump" aria-label="Vai a una sezione della pagina">
+        <a href="#impegno"><span class="hj-ico" aria-hidden="true">🛡️</span> Impegno</a>
+        <a href="#checklist"><span class="hj-ico" aria-hidden="true">🧳</span> Checklist</a>
+        <a href="#faq"><span class="hj-ico" aria-hidden="true">💬</span> FAQ</a>
+        <a href="#area-famiglie"><span class="hj-ico" aria-hidden="true">🔐</span> Area Famiglie</a>
+      </nav>
+
     </div>
   </div>
 
   <!-- COSA GARANTIAMO -->
-  <section style="background:var(--av)">
+  <section id="impegno" style="background:var(--av)">
     <div class="w">
       <p class="lbl">Il nostro impegno</p>
       <h2>Cosa garantiamo <em>ogni giorno</em></h2>
@@ -121,7 +140,7 @@
   </section>
 
   <!-- PRIMA DELLA PARTENZA -->
-  <section style="background:var(--bco)">
+  <section id="checklist" style="background:var(--bco)">
     <div class="w">
       <p class="lbl">Checklist</p>
       <h2>Prima della <em>partenza</em></h2>
@@ -156,7 +175,7 @@
   </section>
 
   <!-- FAQ GENITORI -->
-  <section style="background:var(--av)">
+  <section id="faq" style="background:var(--av)">
     <div class="w">
       <p class="lbl">Domande frequenti</p>
       <h2>Le domande dei <em>genitori</em></h2>
@@ -203,7 +222,7 @@
 
 
   <!-- AREA RISERVATA FAMIGLIE -->
-  <section style="background:#fff;padding:3rem 1.25rem;">
+  <section id="area-famiglie" style="background:#fff;padding:3rem 1.25rem;">
     <div class="w" style="max-width:720px;margin:0 auto;text-align:center;">
       <p class="lbl">Servizio digitale</p>
       <h2 style="font-family:var(--fd);font-size:1.8rem;font-weight:300;color:var(--bosco);margin-bottom:.75rem">Area Riservata <em>Famiglie</em></h2>

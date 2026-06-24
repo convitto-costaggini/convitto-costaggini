@@ -544,20 +544,17 @@
     
     const el = document.getElementById('cont-note');
     
-    // Tolleranza per intercettare sia il campo "testo" che "note_disciplinari" (o "note_discilinari")
-    const filtrate = (data || []).filter(r => {
-      const testoValido = (r.testo?.trim() || r.note_disciplinari?.trim() || r.note_discilinari?.trim() || '');
-      return testoValido && !testoValido.includes('TEST_CONNESSIONE');
-    });
+    // Filtra le righe escludendo i test di connessione ed eliminando i testi vuoti
+    const filtrate = (data || []).filter(r => r.testo?.trim() && !r.testo.includes('TEST_CONNESSIONE'));
 
     if (!filtrate.length) { el.innerHTML = vuoto('📝','Nessuna nota registrata.'); return; }
     
     el.innerHTML = filtrate.map(r => {
-      // Determina il testo effettivo della nota estraendo da più chiavi possibili per sicurezza
-      const testoNota = r.testo?.trim() || r.note_disciplinari?.trim() || r.note_discilinari?.trim() || '';
+      // Il testo si trova sempre nel campo "testo" inviato dal tuo .gs
+      const testoNota = r.testo.trim();
       
-      // Viene considerata disciplinare se il tipo è 'DISC' o se proviene da colonne disciplinari specifiche
-      const disc = (r.tipo === 'DISC') || !!r.note_disciplinari || !!r.note_discilinari;
+      // Una nota è disciplinare se il campo 'tipo' contiene 'DISC' o se il testo contiene stringhe disciplinari
+      const disc = (r.tipo === 'DISC');
       
       return `<div class="card-dato ${disc?'rosso':''}">
         <div class="card-meta"><span class="card-data">${fmt(r.data)}</span>

@@ -269,6 +269,22 @@
         <div class="link-secondario"><a onclick="mostraSchermata('login')">← Torna al login</a></div>
       </div>
 
+      <!-- ─ NUOVA PASSWORD (recovery) ─ -->
+      <div class="sezione" id="sez-nuova-password">
+        <p style="font-size:.88rem;color:var(--txt2);margin-bottom:1rem;line-height:1.6;">
+          Imposta la tua nuova password (almeno 8 caratteri).
+        </p>
+        <div class="campo-g">
+          <label>Nuova password</label>
+          <input type="password" id="np-pwd" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <div class="campo-g">
+          <label>Conferma password</label>
+          <input type="password" id="np-pwd2" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <button class="btn-auth" id="btn-np" onclick="salvaNuovaPassword()">Salva nuova password</button>
+      </div>
+
       <!-- ─ REGISTRATI (redirect) ─ -->
       <div class="sezione" id="sez-registrati">
         <p style="font-size:.9rem;color:var(--txt2);margin-bottom:1.5rem;line-height:1.7;">
@@ -333,11 +349,20 @@
   let schermataCorrente = 'login';
 
   // ── AVVIO ──
+  const inRecovery = /[#&]type=recovery/.test(window.location.hash);
+
   window.addEventListener('load', async () => {
-    const { data: { session } } = await sb.auth.getSession();
-    if (session) avviaDashboard(session.user.email);
+    if (inRecovery) {
+      // Flusso recupero password: NON avviare la dashboard, mostra la schermata nuova password
+      mostraSchermata('nuova-password');
+    } else {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) avviaDashboard(session.user.email);
+    }
 
     sb.auth.onAuthStateChange((event, session) => {
+      if (event === 'PASSWORD_RECOVERY') { mostraSchermata('nuova-password'); return; }
+      if (inRecovery) return; // durante il recovery ignora SIGNED_IN, resta sul reset
       if (event === 'SIGNED_IN' && session) avviaDashboard(session.user.email);
       if (event === 'SIGNED_OUT') mostraAuth();
     });
@@ -430,9 +455,34 @@
     const email = document.getElementById('reset-email').value.trim().toLowerCase();
     if (!email) return mostraMsg('Inserire l\'email.', 'err');
     await sb.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.origin + '/area-riservata.html'
+      redirectTo: window.location.origin + window.location.pathname
     });
     mostraMsg('Link di reset inviato a ' + email + '. Controlla la casella email.', 'ok');
+  }
+
+  // ── NUOVA PASSWORD (dopo click sul link di recupero) ──
+  async function salvaNuovaPassword() {
+    const p1 = document.getElementById('np-pwd').value;
+    const p2 = document.getElementById('np-pwd2').value;
+    if (p1.length < 8) return mostraMsg('La password deve avere almeno 8 caratteri.', 'err');
+    if (p1 !== p2) return mostraMsg('Le due password non coincidono.', 'err');
+
+    const btn = document.getElementById('btn-np');
+    btn.disabled = true; btn.textContent = 'Salvataggio...';
+
+    const { error } = await sb.auth.updateUser({ password: p1 });
+    if (error) {
+      mostraMsg('Errore nel salvataggio. Il link potrebbe essere scaduto: richiedine uno nuovo.', 'err');
+      btn.disabled = false; btn.textContent = 'Salva nuova password';
+      return;
+    }
+
+    // Pulisce l'hash, chiude la sessione di recupero e torna al login
+    history.replaceState(null, '', window.location.pathname);
+    await sb.auth.signOut();
+    btn.disabled = false; btn.textContent = 'Salva nuova password';
+    mostraSchermata('login');
+    mostraMsg('Password aggiornata. Accedi con la nuova password.', 'ok');
   }
 
   // ── DASHBOARD ──

@@ -349,7 +349,7 @@
   let schermataCorrente = 'login';
 
   // ── AVVIO ──
-  const inRecovery = /[#&]type=recovery/.test(window.location.hash);
+  let inRecovery = /[#&]type=recovery/.test(window.location.hash);
 
   window.addEventListener('load', async () => {
     if (inRecovery) {
@@ -476,6 +476,7 @@
     // Pulisce l'hash, chiude la sessione di recupero e torna al login
     history.replaceState(null, '', window.location.pathname);
     await sb.auth.signOut();
+    inRecovery = false;   // il recupero è finito: ora il login normale deve funzionare
     btn.disabled = false; btn.textContent = 'Salva nuova password';
     mostraSchermata('login');
     mostraMsg('Password aggiornata. Accedi con la nuova password.', 'ok');

@@ -27,10 +27,8 @@
       </div>
     </a>
 
-    <!-- DESKTOP NAV CON DROPDOWN -->
     <nav id="dnav" aria-label="Principale">
 
-      <!-- 1. IL CONVITTO -->
       <div class="dd-wrap">
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
           Il Convitto <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
@@ -40,11 +38,12 @@
           <li><a href="educatori.html" data-page="educatori">Gli Educatori</a></li>
           <li><a href="giornata-tipo.html" data-page="giornata-tipo">Una giornata tipo</a></li>
           <li><a href="laboratorio-musicale.html" data-page="laboratorio-musicale">♪ Laboratorio Musicale</a></li>
+          <li style="padding-left: .5rem;"><a href="vinile.html" data-page="vinile">└ 📻 Il nostro Vinile</a></li>
+          <li style="padding-left: .5rem;"><a href="la-solidarieta.html" data-page="la-solidarieta">└ 🤝 La Solidarietà</a></li>
           <li><a href="comunita.html" data-page="comunita">🌟 La nostra Comunità</a></li>
         </ul>
       </div>
 
-      <!-- 2. SERVIZI -->
       <div class="dd-wrap">
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
           Servizi <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
@@ -60,7 +59,6 @@
         </ul>
       </div>
 
-      <!-- 3. NOVITÀ -->
       <div class="dd-wrap">
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
           Novità <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
@@ -73,7 +71,6 @@
         </ul>
       </div>
 
-      <!-- 4. DIDATTICA -->
       <div class="dd-wrap">
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
           Didattica <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
@@ -102,7 +99,6 @@
   </div>
 </header>
 
-<!-- MOBILE DRAWER CON ACCORDION -->
 <nav id="drw" aria-label="Menu" role="navigation">
   <ul>
 
@@ -113,6 +109,8 @@
         <li><a href="educatori.html">Gli Educatori</a></li>
         <li><a href="giornata-tipo.html">Una giornata tipo</a></li>
         <li><a href="laboratorio-musicale.html">♪ Laboratorio Musicale</a></li>
+        <li style="padding-left: .75rem;"><a href="vinile.html">📻 Il nostro Vinile</a></li>
+        <li style="padding-left: .75rem;"><a href="la-solidarieta.html">🤝 La Solidarietà</a></li>
         <li><a href="comunita.html">🌟 La nostra Comunità</a></li>
       </ul>
     </li>
@@ -175,7 +173,6 @@
       <div class="fbrand">
         <p class="fn">Convitto "Costaggini"<br><span style="font-size:.72rem;font-weight:400;opacity:.7">IPSSEOA "R. A. Costaggini" · Rieti</span></p>
         <p>Residenza educativa di eccellenza per la formazione professionale nell'ospitalità e nelle arti culinarie. Ente pubblico — vigilanza MIM.</p>
-        <!-- Dati istituzionali -->
         <div style="margin-top:1rem;display:flex;flex-direction:column;gap:.3rem">
           <p style="font-family:var(--fu);font-size:.62rem;color:rgba(245,240,232,.50);line-height:1.7">
             <strong style="color:rgba(245,240,232,.6)">C.F.</strong> 80008130579 &nbsp;·&nbsp;

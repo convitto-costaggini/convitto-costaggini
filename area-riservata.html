@@ -428,6 +428,7 @@
 
   let emailUtente = '';
   let nomeStudente = '';
+  let codiceStudente = '';
   let schermataCorrente = 'login';
 
   // ── AVVIO ──
@@ -566,7 +567,7 @@
   // ── DASHBOARD ──
   async function avviaDashboard(email) {
     const { data: assoc } = await sb
-      .from('genitori_studenti').select('nome_studente, relazione')
+      .from('genitori_studenti').select('nome_studente, relazione, codice_studente')
       .eq('email_genitore', email).single();
 
     if (!assoc) {
@@ -576,6 +577,7 @@
     }
 
     nomeStudente = assoc.nome_studente;
+    codiceStudente = (assoc.codice_studente || '').trim();
     document.getElementById('dash-nome').textContent = nomeStudente;
     document.getElementById('dash-sub').textContent = assoc.relazione + ' · ' + email;
     document.getElementById('btn-logout').style.display = 'block';
@@ -623,10 +625,19 @@
   }
   function vuoto(ico, txt) { return `<div class="vuoto"><div class="icona">${ico}</div><p>${txt}</p></div>`; }
 
+  // Filtra una query sullo studente: per CODICE quando disponibile (stessa chiave della RLS),
+  // con ripiego sul nome solo per eventuali righe storiche prive di codice.
+  function filtraStudente(q) {
+    return codiceStudente
+      ? q.eq('codice_studente', codiceStudente)
+      : q.ilike('nome_studente', nomeStudente);
+  }
+
   async function caricaPresenze() {
     const dal = new Date(); dal.setDate(dal.getDate()-30);
-    const { data } = await sb.from('famiglie_presenze').select('*')
-      .ilike('nome_studente', nomeStudente).gte('data', dal.toISOString().split('T')[0])
+    const { data } = await filtraStudente(
+      sb.from('famiglie_presenze').select('*')
+    ).gte('data', dal.toISOString().split('T')[0])
       .order('data', { ascending: false });
     const el = document.getElementById('cont-presenze');
     if (!data?.length) { el.innerHTML = vuoto('🍽️','Nessuna presenza registrata.'); return; }
@@ -650,8 +661,9 @@
     const d30 = new Date(); d30.setDate(d30.getDate() - 30);
     const soglia30 = d30.toISOString().split('T')[0];
 
-    const { data } = await sb.from('famiglie_semafori').select('*')
-      .ilike('nome_studente', nomeStudente)
+    const { data } = await filtraStudente(
+      sb.from('famiglie_semafori').select('*')
+    )
       .gte('data', inizioAnno)
       .order('data', { ascending: false });
 
@@ -749,8 +761,9 @@ async function caricaNote() {
   const soglia30 = d30.toISOString().split('T')[0];
 
   // Una sola query: tutte le note dell'anno scolastico (filtro fine lato client)
-  const { data } = await sb.from('famiglie_note').select('*')
-    .ilike('nome_studente', nomeStudente)
+  const { data } = await filtraStudente(
+    sb.from('famiglie_note').select('*')
+  )
     .gte('data', inizioAnno)
     .order('data', { ascending: false });
 
@@ -782,8 +795,9 @@ async function caricaNote() {
 }
 
   async function caricaColloqui() {
-    const { data } = await sb.from('famiglie_colloqui').select('*')
-      .ilike('nome_studente', nomeStudente).order('data', { ascending: false }).limit(50);
+    const { data } = await filtraStudente(
+      sb.from('famiglie_colloqui').select('*')
+    ).order('data', { ascending: false }).limit(50);
     const el = document.getElementById('cont-colloqui');
     if (!data?.length) { el.innerHTML = vuoto('🗣️','Nessun colloquio registrato.'); return; }
     el.innerHTML = data.map(r => {
@@ -796,8 +810,9 @@ async function caricaNote() {
   }
 
   async function caricaRelazioni() {
-    const { data } = await sb.from('famiglie_relazioni').select('*')
-      .ilike('nome_studente', nomeStudente).order('data_invio', { ascending: false }).limit(20);
+    const { data } = await filtraStudente(
+      sb.from('famiglie_relazioni').select('*')
+    ).order('data_invio', { ascending: false }).limit(20);
     const el = document.getElementById('cont-relazioni');
     if (!data?.length) { el.innerHTML = vuoto('📄','Nessuna comunicazione formale.'); return; }
     el.innerHTML = data.map((r,i) =>

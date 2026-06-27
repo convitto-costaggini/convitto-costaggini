@@ -16,6 +16,12 @@
   <style>
     body { background:#0a0f0a; }
 
+    /* Sticky robusto: impedisce che un eventuale "overflow-x:hidden" ereditato
+       da style.css trasformi html/body/main in contenitore di scroll, cosa che
+       disattiverebbe position:sticky. "clip" blocca lo scroll orizzontale SENZA
+       creare un contenitore di scroll, quindi lo sticky continua a funzionare. */
+    html, body, #main { overflow-x: clip; }
+
     /* ── HERO ── */
     .sl-hero {
       background:linear-gradient(160deg,#000 0%,#0d150d 60%,#0a0f0a 100%);
@@ -114,15 +120,17 @@
     /* ── LAYOUT DUE COLONNE ── */
     .sl-two-col {
       display:grid;
-      grid-template-columns:2fr 3fr;  /* video sx, storia dx */
-      gap:2.5rem;
+      grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);  /* video sx più grande, storia dx */
+      gap:2.25rem;
       align-items:start;
     }
     /* Colonna video sticky — segue lo scroll */
     .sl-col-video {
       position:sticky;
+      position:-webkit-sticky;
       top:88px;
       align-self:start;
+      z-index:5;
     }
     .sl-video-sticky { /* wrapper senza overflow che blocchi lo sticky */ }
     .sl-video-inner {

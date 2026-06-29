@@ -686,3 +686,79 @@
   })();
 
 })();
+
+/* ═══════════════════════════════════════════════════
+   LETTURA FACILITATA — toggle accessibilità (tutte le pagine)
+   Pulsante nella colonna fab in basso a destra: SEMPRE visibile,
+   anche su mobile (la barra #pa e il pulsante lingua sono desktop-only).
+   Attiva font ad alta leggibilità (Atkinson Hyperlegible), interlinea
+   e spaziatura maggiori, link sottolineati, focus evidente.
+   Scelta ricordata in localStorage. Pienamente reversibile.
+═══════════════════════════════════════════════════ */
+(function () {
+  var KEY = 'lf-convitto';
+  var root = document.documentElement;
+
+  /* font ad alta leggibilità */
+  var fl = document.createElement('link');
+  fl.rel = 'stylesheet';
+  fl.href = 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap';
+  document.head.appendChild(fl);
+
+  /* regole attive SOLO quando html.lettura-facilitata è presente */
+  var CSS = [
+    'html.lettura-facilitata{font-size:106.25%;}',
+    'html.lettura-facilitata, html.lettura-facilitata body,',
+    'html.lettura-facilitata h1, html.lettura-facilitata h2, html.lettura-facilitata h3,',
+    'html.lettura-facilitata h4, html.lettura-facilitata h5, html.lettura-facilitata p,',
+    'html.lettura-facilitata li, html.lettura-facilitata a, html.lettura-facilitata span,',
+    'html.lettura-facilitata label, html.lettura-facilitata button, html.lettura-facilitata input,',
+    'html.lettura-facilitata td, html.lettura-facilitata th, html.lettura-facilitata dd,',
+    'html.lettura-facilitata dt, html.lettura-facilitata blockquote',
+    '{font-family:"Atkinson Hyperlegible",system-ui,"Segoe UI",sans-serif !important;}',
+    'html.lettura-facilitata body{line-height:1.8 !important;letter-spacing:.012em !important;word-spacing:.04em !important;}',
+    'html.lettura-facilitata p, html.lettura-facilitata li{font-size:1.06em !important;}',
+    'html.lettura-facilitata a{text-decoration:underline !important;text-underline-offset:.18em;}',
+    'html.lettura-facilitata *:focus-visible{outline:3px solid #B8922A !important;outline-offset:2px !important;}',
+    /* il pulsante eredita .fab-c (tondo verde/oro); qui solo testo "Aa" e stato attivo */
+    '#lf-fab{font-family:"Source Sans 3",system-ui,sans-serif;font-weight:800;font-size:.95rem;letter-spacing:-.02em;color:#D4AA4A;}',
+    '#lf-fab[aria-pressed="true"]{background:linear-gradient(135deg,#B8922A,#9a7a1f);border-color:#EDD98A;color:#fff;}'
+  ].join('');
+  var st = document.createElement('style'); st.id = 'lf-style'; st.textContent = CSS;
+  document.head.appendChild(st);
+
+  var btn = document.createElement('button');
+  btn.id = 'lf-fab'; btn.type = 'button'; btn.className = 'fab-c';
+  btn.setAttribute('aria-pressed', 'false');
+  btn.setAttribute('aria-label', 'Attiva o disattiva la lettura facilitata');
+  btn.setAttribute('data-tip', 'Lettura facilitata');
+  btn.textContent = 'Aa';
+
+  function apply(on) {
+    root.classList.toggle('lettura-facilitata', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.title = on ? 'Disattiva lettura facilitata' : 'Attiva lettura facilitata';
+  }
+  btn.addEventListener('click', function () {
+    var now = !root.classList.contains('lettura-facilitata');
+    apply(now);
+    try { localStorage.setItem(KEY, now ? '1' : '0'); } catch (e) {}
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+
+  function place() {
+    var wrap = document.getElementById('fab-wrap');
+    if (wrap) {
+      wrap.appendChild(btn);
+    } else {
+      btn.style.cssText = 'position:fixed;bottom:1.5rem;left:1.25rem;z-index:8900;width:40px;height:40px;border-radius:50%;';
+      document.body.appendChild(btn);
+    }
+    apply(saved === '1');
+  }
+
+  if (document.getElementById('fab-wrap') || (document.body && document.readyState !== 'loading')) place();
+  else document.addEventListener('DOMContentLoaded', place);
+})();

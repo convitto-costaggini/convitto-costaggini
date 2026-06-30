@@ -224,92 +224,7 @@
       <h2>Chiedici <em>quello che vuoi</em></h2>
       <p style="color:var(--txt2);max-width:540px;margin:.5rem 0 2rem;font-size:.9rem">Scrivi qualsiasi domanda — il sito filtra le risposte in tempo reale. Non trovi quello che cerchi? Scrivici.</p>
 
-      <!-- Ricerca live -->
-      <div class="faq-search-wrap rv">
-        <span class="faq-search-icon">🔍</span>
-        <input class="faq-search" id="faqSearch" type="search" placeholder="Es: quanto costa, posso chiamare, cosa si mangia..." autocomplete="off" oninput="filterFAQ()"/>
-      </div>
-      <p class="faq-count" id="faqCount"></p>
-
-      <!-- Categorie -->
-      <div class="faq-cats">
-        <button class="faq-cat active" data-cat="tutti" onclick="filterCat(this)">Tutte</button>
-        <button class="faq-cat" data-cat="vita" onclick="filterCat(this)">Vita quotidiana</button>
-        <button class="faq-cat" data-cat="costi" onclick="filterCat(this)">Costi & iscrizione</button>
-        <button class="faq-cat" data-cat="famiglia" onclick="filterCat(this)">Famiglia & contatti</button>
-        <button class="faq-cat" data-cat="studio" onclick="filterCat(this)">Studio & scuola</button>
-        <button class="faq-cat" data-cat="salute" onclick="filterCat(this)">Salute & sicurezza</button>
-      </div>
-
-      <!-- FAQ items -->
-      <div id="faqList">
-
-        <details class="faq-item rv" data-cat="costi" data-q="quanto costa retta convitto iscrizione pagamento">
-          <summary class="faq-q">Quanto costa iscriversi al Convitto?</summary>
-          <p class="faq-a">La retta comprende vitto completo (4 pasti al giorno), alloggio, studio guidato e trasporto Convitto–scuola. L'importo esatto viene deliberato ogni anno dal Consiglio d'Istituto. Scrivi a <a href="mailto:rirh010007@istruzione.it" style="color:var(--bosco2)">rirh010007@istruzione.it</a> per il preventivo aggiornato.</p>
-        </details>
-
-        <details class="faq-item rv d1" data-cat="vita" data-q="orario giornata sveglia colazione studio cena dormire">
-          <summary class="faq-q">Come si svolge la giornata tipo?</summary>
-          <p class="faq-a">Sveglia 6:30 → colazione 7:00 → scuola → pranzo 14:00 → tempo libero 15:00 → studio guidato 15:30–17:15 → merenda → libera uscita 17:30–19:15 → cena 19:15 → attività serali → riposo 22:30. <a href="giornata-tipo.html" style="color:var(--bosco2)">Leggi il racconto completo →</a></p>
-        </details>
-
-        <details class="faq-item rv d2" data-cat="famiglia" data-q="chiamare telefono cellulare genitori famiglia contatto">
-          <summary class="faq-q">Mio figlio può chiamarmi quando vuole?</summary>
-          <p class="faq-a">Sì, in qualsiasi momento. I ragazzi tengono il cellulare con sé. L'unico vincolo è spegnerlo in mensa, durante lo studio e il riposo notturno. Non ci sono orari fissi per le chiamate ai genitori.</p>
-        </details>
-
-        <details class="faq-item rv" data-cat="famiglia" data-q="venire trovare visita genitori settimana infrasettimanale">
-          <summary class="faq-q">Posso andare a trovare mio figlio durante la settimana?</summary>
-          <p class="faq-a">Sì. I genitori o una persona delegata per iscritto possono venire al Convitto durante la settimana. L'uscita viene autorizzata dall'educatore. Il rientro deve avvenire entro le 22:00.</p>
-        </details>
-
-        <details class="faq-item rv d1" data-cat="vita" data-q="weekend casa venerdì sabato domenica rientro">
-          <summary class="faq-q">Può tornare a casa nel weekend?</summary>
-          <p class="faq-a">Sì. Il Convitto funziona da domenica sera al venerdì mattina. Il fine settimana i ragazzi tornano a casa. Chi vuole rientrare domenica sera può farlo: sono previste corse con i mezzi del Convitto.</p>
-        </details>
-
-        <details class="faq-item rv d2" data-cat="salute" data-q="ammala malattia infermeria medico assistenza farmaci">
-          <summary class="faq-q">Cosa succede se si ammala?</summary>
-          <p class="faq-a">L'infermiera è presente ogni giorno. Per malattie lievi il ragazzo resta in Convitto, assistito e con i genitori avvisati subito. Per problemi seri, si dispone il rientro a casa in giornata. In emergenza l'infermiera accompagna al pronto soccorso.</p>
-        </details>
-
-        <details class="faq-item rv" data-cat="studio" data-q="studio voti registro scolastico profitto compiti pomeriggio">
-          <summary class="faq-q">Come seguono il profitto scolastico?</summary>
-          <p class="faq-a">Gli educatori hanno accesso al Registro Elettronico (con consenso della famiglia) e partecipano ai Consigli di Classe. Lo studio pomeridiano guidato (15:30–17:15) è obbligatorio e assistito. Se le cose non vanno, la famiglia viene contattata direttamente.</p>
-        </details>
-
-        <details class="faq-item rv d1" data-cat="vita" data-q="mangia mensa menu cibo pranzo cena colazione dieta allergie">
-          <summary class="faq-q">Cosa si mangia? Come funziona la mensa?</summary>
-          <p class="faq-a">Il menù mensile è concordato con la ASL di Rieti, con rotazione settimanale. Chi ha allergie o intolleranze (certificate da medico) riceve un pasto personalizzato. Il vitto include colazione, pranzo, merenda e cena. Si mangia tutti insieme in sala mensa.</p>
-        </details>
-
-        <details class="faq-item rv d2" data-cat="vita" data-q="camera stanza compagni letto bagno armadietto dormitorio">
-          <summary class="faq-q">Come sono le camere?</summary>
-          <p class="faq-a">Le camere sono prevalentemente triple, separate per maschi e femmine su piani diversi. Il Convitto fornisce letto, materasso, cuscino, armadietto e poggia-oggetti. Ogni convittore porta le proprie coperte, lenzuola, asciugamani e articoli personali.</p>
-        </details>
-
-        <details class="faq-item rv" data-cat="salute" data-q="sicurezza notte sorveglianza custode protezione educatore notturno">
-          <summary class="faq-q">Chi sorveglia di notte?</summary>
-          <p class="faq-a">Il Convitto è sorvegliato 24h/24. Di notte sono presenti educatori sui piani e custodi agli accessi. Il cancello si chiude alle 22:30 e riapre alle 6:00. In 54 anni di attività la sicurezza degli studenti è sempre stata la priorità assoluta.</p>
-        </details>
-
-        <details class="faq-item rv d1" data-cat="costi" data-q="iscrizione domanda modulistica quando scadenza luglio">
-          <summary class="faq-q">Quando e come si fa la domanda?</summary>
-          <p class="faq-a">La domanda si presenta contestualmente all'iscrizione scolastica. Entro il 7 luglio vanno consegnati i documenti e versata la quota di iscrizione. <a href="ammissione.html" style="color:var(--bosco2)">Vai alla pagina Ammissione →</a></p>
-        </details>
-
-        <details class="faq-item rv d2" data-cat="vita" data-q="musica laboratorio chitarra band concerto sport attività pomeriggio">
-          <summary class="faq-q">Ci sono attività extra oltre allo studio?</summary>
-          <p class="faq-a">Sì: laboratorio musicale (chitarra, voce, batteria, sax — attivo da 20 anni), sport (calcetto, basket, pallavolo, nuoto), uscite culturali, cineforum, tornei interni. Le attività serali sono proposte dagli educatori ma non obbligatorie.</p>
-        </details>
-
-        <details class="faq-item rv" data-cat="vita" data-q="semiconvitto solo pranzo studio pomeridiano non dormire">
-          <summary class="faq-q">Cos'è il Semiconvitto?</summary>
-          <p class="faq-a">Il Semiconvitto è per chi non dorme in Convitto ma vuole usufruire di pranzo e studio pomeridiano guidato. Dal prossimo anno scolastico (2026/27) il servizio è attivo. <a href="https://www.alberghierorieti.edu.it/semiconvitto/" target="_blank" rel="noopener" style="color:var(--bosco2)">Scopri di più →</a></p>
-        </details>
-
-      </div>
+      <div id="faq" data-faq="*" data-faq-search data-faq-cats></div>
 
       <div style="text-align:center;margin-top:2rem">
         <p style="font-family:var(--fd);font-size:1.1rem;font-style:italic;color:var(--bosco);margin-bottom:1rem">Non hai trovato risposta alla tua domanda?</p>
@@ -516,40 +431,6 @@ tourRender();
 setInterval(()=>tourGo(1), 5000);
 
 // ═══════════════════════════════════════════════════
-// FAQ RICERCA LIVE
-// ═══════════════════════════════════════════════════
-let activeCat = 'tutti';
-
-function filterFAQ() {
-  const q = document.getElementById('faqSearch').value.toLowerCase().trim();
-  const items = document.querySelectorAll('#faqList .faq-item');
-  let visible = 0;
-  items.forEach(item => {
-    const keywords = (item.dataset.q || '') + ' ' + item.querySelector('.faq-q').textContent.toLowerCase() + ' ' + item.querySelector('.faq-a').textContent.toLowerCase();
-    const catOk = activeCat === 'tutti' || item.dataset.cat === activeCat;
-    const qOk = !q || keywords.includes(q);
-    item.classList.toggle('faq-hidden', !(catOk && qOk));
-    if (catOk && qOk) visible++;
-  });
-  document.getElementById('faqCount').textContent = visible === 0
-    ? 'Nessun risultato — prova con altre parole chiave'
-    : `${visible} risposta${visible!==1?'e':''} trovata${visible!==1?'e':''}`;
-}
-
-function filterCat(btn) {
-  activeCat = btn.dataset.cat;
-  document.querySelectorAll('.faq-cat').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  filterFAQ();
-}
-
-// Inizializza count
-window.addEventListener('load', () => {
-  const tot = document.querySelectorAll('#faqList .faq-item').length;
-  document.getElementById('faqCount').textContent = `${tot} risposte disponibili — filtra o cerca`;
-});
-
-// ═══════════════════════════════════════════════════
 // PRENOTAZIONE VISITA
 // ═══════════════════════════════════════════════════
 function prenotaVisita() {
@@ -615,5 +496,6 @@ ${g('vis-note') || '—'}`;
   });
 })();
 </script>
+<script src="faq.js"></script>
 </body>
 </html>

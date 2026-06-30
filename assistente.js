@@ -65,31 +65,31 @@ const KB=[
    r:'📍 <strong>Convitto:</strong> Via Salaria s.n.c., 02100 Rieti<br>📍 <strong>Istituto:</strong> Via dei Salici, 62 — Rieti<br><a href="contatti.html">Mappa →</a>'},
   // ── ORARI GIORNATA ──
   {k:['orario','sveglia','luci','pasto','pranzo','cena','colazione','studio','giornata','orari'],
-   r:'⏰ <strong>La giornata tipo:</strong><br>🌅 Sveglia 06:30<br>☕ Colazione 07:00–07:30<br>📚 Scuola 08:00–13:30<br>🍽️ Pranzo 13:30–14:30<br>📖 Studio guidato 15:30–17:15<br>🎵 Tempo libero 17:15–19:15<br>🌙 Cena 19:15–20:00<br>💤 Luci spente 22:30<br><a href="giornata-tipo.html">Dettagli →</a>'},
+   faq:'giornata'},
   // ── WEEKEND ──
   {k:['venerd','sabato','domenica','weekend','fine settimana','chiude','chiuso','rientr','tornare a casa'],
-   r:'Il Convitto chiude ogni <strong>venerdì alle 13:30</strong>. Sabato e domenica è chiuso. Il rientro è la <strong>domenica alle 20:00</strong>, previa richiesta della famiglia.'},
+   faq:'uscite'},
   // ── ISCRIZIONI ──
   {k:['iscri','ammission','entrar','come si fa','procedura','domanda di ammissione'],
    r:'La procedura:<br>1️⃣ <strong>Nov–Dic:</strong> Open Day<br>2️⃣ <strong>Gen–Feb:</strong> Iscrizione su <a href="https://unica.istruzione.gov.it" target="_blank">unica.istruzione.gov.it</a><br>3️⃣ <strong>Mar–Apr:</strong> Colloquio<br>4️⃣ <strong>Giu–Lug:</strong> Conferma e prima rata<br>5️⃣ <strong>Settembre:</strong> Benvenuto!<br><a href="ammissione.html">Guida completa →</a>'},
   // ── RETTE ──
   {k:['retta','costo','quanto costa','tariffa','prezzo','pagamento','euro','soldi'],
-   r:'Le rette sono deliberate annualmente dal Consiglio d\'Istituto. Per i valori aggiornati: <a href="ammissione.html#tariffe">Tariffe e rette →</a>'},
+   faq:'costo'},
   // ── CAMERE ──
   {k:['camera','stanza','letto','bagno','dormire','piani','singola','doppia','tripla'],
-   r:'Camere <strong>triple con bagno privato</strong>, su 5 piani: 3 maschili e 2 femminili. <a href="tour-virtuale.html">Tour Virtuale 360° →</a>'},
+   faq:'camere'},
   // ── CIBO ──
   {k:['mangi','cucina','menu','menù','cibo','mensa','ristor','vitto','pasti'],
-   r:'Tre pasti al giorno con prodotti locali a km zero, concordati con la ASL di Rieti.<br>☕ Colazione 07:00 · 🍽️ Pranzo 13:30 · 🌙 Cena 19:15'},
+   faq:'mensa'},
   // ── ALLERGIE ──
   {k:['allergi','intolleran','celiachia','lattosio','dieta','vegetarian','halal'],
-   r:'I menù sono personalizzabili per allergie, intolleranze o esigenze religiose. Modulo allergie su <a href="ammissione.html#moduli">Modulistica →</a>'},
+   faq:'mensa'},
   // ── WI-FI ──
   {k:['wifi','wi-fi','internet','connession','rete'],
    r:'Wi-Fi disponibile in tutte le aree comuni. Uso libero durante le ore di tempo libero.'},
   // ── SMARTPHONE ──
   {k:['smartphone','cellulare','iphone','android','uso telefono','telefono mio'],
-   r:'Il cellulare è libero durante il tempo libero (17:15–19:15) e la serata (20:00–22:30). Durante lo studio guidato e la notte è richiesto il rispetto della quiete.'},
+   faq:'telefono'},
   // ── EDUCATORI ──
   {k:['educatori','educator','personale','staff','chi segue','adulti','accompagn'],
    r:'Educatori di ruolo selezionati per concorso pubblico, presenti H24. Non solo sorveglianza: tutoraggio, mediazione, supporto. <a href="educatori.html">Chi sono →</a>'},
@@ -107,10 +107,10 @@ const KB=[
    r:'Nel pomeriggio libero (17:15–19:15) si può fare sport o attività fisica. È in costruzione la nuova palestra polifunzionale (fondi PNRR).'},
   // ── USCITE ──
   {k:['uscita','uscire','autonoma','permesso uscita','libera uscita'],
-   r:'Le uscite autonome (17:15–19:15) sono consentite con <strong>autorizzazione scritta dei genitori</strong>. Modulo su <a href="ammissione.html#moduli">Modulistica →</a>'},
+   faq:'uscite'},
   // ── SEMICONVITTO ──
   {k:['semiconvitto','semi convitto','non alloggio','solo pranzo','senza dormire','esterno'],
-   r:'Il <strong>Semiconvitto</strong> — pranzo + studio + attività, senza pernottamento — è attivo dall\'a.s. 2026/27. Giornata di prova gratuita disponibile. <a href="semiconvitto.html">Info →</a>'},
+   faq:'semiconvitto'},
   // ── OPEN DAY ──
   {k:['open day','visita guidata','venire a vedere','prenotar','vedere dal vivo'],
    r:'Prenota una visita guidata su <a href="orientamento.html">Orientamento →</a> o esplora virtualmente su <a href="tour-virtuale.html">Tour 360° →</a>'},
@@ -119,10 +119,10 @@ const KB=[
    r:'Sorveglianza H24 con educatori su ogni turno inclusa la notte. Protocolli D.Lgs. 81/2008. Collegamento con PS Ospedale de\' Lellis di Rieti.'},
   // ── SALUTE ──
   {k:['medico','infermier','malato','farmaci','ospedale','salute','dottore','asl'],
-   r:'Il Convitto coordina con la ASL di Rieti. Farmaci prescritti gestiti dal personale. Emergenze: collegamento con PS Ospedale de\' Lellis.'},
+   faq:'salute'},
   // ── CORREDO ──
   {k:['corredo','cosa portare','valigia','lenzuola','biancheria','pigiama'],
-   r:'Corredo obbligatorio: lenzuola, coperte, asciugamani, pigiama, ciabatte, abbigliamento, materiale scolastico e documenti. Lista completa: <a href="ammissione.html#moduli">Modulistica →</a>'},
+   faq:'corredo'},
   // ── REGOLAMENTO ──
   {k:['regolamento','regole','norm','disciplin','vietato','permesso','articolo'],
    r:'Regolamento di Convitto (35 articoli, agg. 30/01/2025): <a href="regolamento.html">Leggi →</a>'},
@@ -140,13 +140,39 @@ const KB=[
    r:'I convittori vengono da tutta Italia. Vedi la mappa su <a href="provenienza.html">Da dove vengono →</a>'},
   // ── DSA / BES ──
   {k:['dsa','bes','bisogni educativi','disturbi apprendimento','dislessia','discalculia','disgrafia','handicap','inclus','sostegno','difficoltà apprendimento'],
-   r:'Il Convitto dispone di educatori con specifiche competenze in <strong>DSA</strong> (Disturbi Specifici dell\'Apprendimento) e <strong>BES</strong> (Bisogni Educativi Speciali). Il personale educativo è formato su metodologie didattiche inclusive, apprendimento cooperativo e strategie compensative. Per informazioni sulle misure di supporto disponibili: <a href="contatti.html">Contattaci →</a>'},
+   faq:'dsa'},
   // ── BULLISMO / CYBERBULLISMO ──
   {k:['bullism','cyberbull','bullo','bulli','prepotenz','vessazion','molest','minacc','vittima','escluso','esclusa','deris','insult','offes','offend','picchia','prevaricazion','preso in giro'],
    r:'Al Convitto la sicurezza di ogni ragazzo è una priorità. Se subisci o assisti a episodi di <strong>bullismo o cyberbullismo</strong>:<br>1️⃣ Parlane subito con un <strong>educatore</strong> (presenti H24)<br>2️⃣ Vengono informati il <strong>Dirigente</strong> e il <strong>Referente Antibullismo</strong><br>3️⃣ Puoi chiedere un colloquio formale con il Referente e la dirigenza<br>📞 Numeri utili: <strong>114</strong> (Emergenza Infanzia) · <strong>19696</strong> (Polizia Postale)<br><a href="bullismo.html">Guida completa: riconoscere e agire →</a>'},
   // ── ALUMNI ──
   {k:['alumni','ex convittor','ex student','diplomati','community'],
    r:'Community degli <em>Alumni</em>: <a href="comunita.html">La nostra Comunità →</a><br>Se sei ex convittore: <a href="iscriviti-alumni.html">Unisciti →</a>'},
+  // ── ARRICCHIMENTO DA FAQ (temi che vivono solo in faq.js) ──
+  // Solo chiavi qui: la risposta è la voce FAQ corrispondente (sorgente unica).
+  {k:['studio guidato','compiti','doposcuola','aiuto compiti','seguito nello studio','riuscira a studiare'],
+   faq:'studio'},
+  {k:['ambient','ambientamento','ambientarsi','nostalgia','primi giorni','si abituera','sentira la mancanza','soffrira','soffrire','distacco','lontano da casa','prima volta','si trovera bene','paura che soffra'],
+   faq:'ambientamento'},
+  {k:['compagno','coinquilino','compagni di stanza','va d\'accordo','litiga','non si trova','con chi sta in camera'],
+   faq:'compagno'},
+  {k:['si sente solo','sentira solo','solitudine','triste la sera','la sera da solo'],
+   faq:'solo-sera'},
+  {k:['autonomia','autonomo','responsabile','cresce','indipendente','maturare','responsabilita'],
+   faq:'autonomia'},
+  {k:['cosa guadagna','perche conviene','perche il convitto','vantaggi','a cosa serve','cosa ci guadagna','che vantaggio'],
+   faq:'cosa-guadagna'},
+  {k:['come sta andando','aggiornamenti','sapere come va','andamento','report settimanale','informazioni sul figlio'],
+   faq:'settimana-report'},
+  {k:['venire a trovar','far visita','posso visitarlo','visita dei genitori','andare a trovar','venirlo a vedere'],
+   faq:'visite'},
+  {k:['quando apre','apertura','periodo apertura','calendario convitto','mesi aperto','quando inizia','quando chiude per le vacanze'],
+   faq:'apertura'},
+  {k:['di notte','dorme','sorveglianza notturna','controllo notturno','chi sorveglia la notte'],
+   faq:'notte'},
+  {k:['sanzioni','punizioni','provvedimenti','cosa rischia','espuls','se sbaglia','se non rispetta'],
+   faq:'sanzioni'},
+  {k:['laboratori','attivita pomeridiane','cosa fanno il pomeriggio','passatempi','attivita extra','cosa si fa'],
+   faq:'attivita'},
   // ── SALUTO ──
   {k:['ciao','salve','buongiorno','buonasera','hey','help','aiuto','grazie','prego','cosa sai','cosa puoi'],
    r:'Ciao! 👋 Sono l\'assistente del Convitto "Costaggini" di Rieti. Posso aiutarti su: iscrizioni, orari, contatti, rette, camere, servizi e vita convittuale. Cosa ti serve?'},
@@ -288,6 +314,36 @@ function pageCard(p){
   return '\uD83D\uDCC4 <strong>'+p.title+'</strong><br>'+p.snippet+'<br><a href="'+p.url+'">Apri la pagina \u2192</a>';
 }
 
+/* ── FAQ come SORGENTE UNICA delle risposte ───────────────────────────────
+ * Le voci FAQ vivono SOLO in faq.js (window.FAQ_DATA). Le voci KB qui sotto
+ * che riguardano gli stessi temi non ripetono più il testo: portano un campo
+ * `faq:'<id>'` e la risposta viene letta a runtime da FAQ_DATA. Così il testo
+ * di quelle risposte ha un unico posto in cui essere aggiornato (faq.js).
+ * faq.js, se caricato su una pagina senza contenitori [data-faq], non fa nulla
+ * tranne esporre window.FAQ_DATA: è quindi innocuo caricarlo ovunque.
+ * ------------------------------------------------------------------------- */
+let FAQ={};   // id -> testo risposta (campo .a di FAQ_DATA)
+
+function buildFaq(){
+  const d=window.FAQ_DATA;
+  if(!Array.isArray(d))return;
+  for(const it of d){if(it&&it.id&&it.a)FAQ[it.id]=it.a;}
+}
+function loadFaqData(){
+  if(window.FAQ_DATA){buildFaq();return;}
+  if(document.querySelector('script[data-faqsrc]'))return;
+  const s=document.createElement('script');
+  s.src='faq.js';s.async=true;s.setAttribute('data-faqsrc','1');
+  s.onload=buildFaq;s.onerror=function(){};
+  document.head.appendChild(s);
+}
+// Risposta di una voce KB: testo proprio (r) oppure, se delegata, la voce FAQ.
+function ansOf(e){
+  if(e.r)return e.r;
+  if(e.faq&&FAQ[e.faq])return FAQ[e.faq];
+  return null;
+}
+
 function match(q){
   const qNorm=norm(q);
   const qbase=toks(q);
@@ -308,8 +364,8 @@ function match(q){
   const named=ranked.filter(x=>(x.phr||x.tw>=2)&&x.s>=1.8).sort((a,b)=>b.s-a.s)[0];
   if(named)return cardWith(named,ranked);
 
-  // KB autorevole se ha intercettato un intento.
-  if(kbBest&&kbTop>=1)return kbBest.r;
+  // KB autorevole se ha intercettato un intento (risposta propria o delegata a FAQ).
+  if(kbBest&&kbTop>=1){const a=ansOf(kbBest);if(a)return a;}
 
   // Indice: risposta diretta se robusta, altrimenti chip.
   if(top){
@@ -350,6 +406,7 @@ function loadIndex(){
 function build(){
   const st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);
   loadIndex(); // carica indice del sito (kb-index.json) - tutto in locale
+  loadFaqData(); // carica le risposte FAQ (faq.js / window.FAQ_DATA) - sorgente unica
   // #cc-fab è creato da nav.js — aspettiamo che esista
   function agganciafab(tentativi) {
     const fab = document.getElementById('cc-fab');

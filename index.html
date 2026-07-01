@@ -517,34 +517,151 @@
   <!-- GALLERIA SPAZI -->
   <section id="gal" aria-labelledby="gh" style="background:var(--bosco);padding:4rem 0 0">
     <div class="w"><p class="lbl" style="color:var(--oro2)">I nostri spazi</p><h2 id="gh" style="color:var(--av)">La vita al <em style="color:var(--oro3)">Costaggini</em></h2>
-    <p style="color:rgba(245,240,232,.6);font-size:.88rem;margin:.4rem 0 1.5rem;max-width:500px">Scorri per vedere gli spazi del Convitto — esterno, camere, mensa, studio, educatori.</p>
+    <p style="color:rgba(245,240,232,.6);font-size:.88rem;margin:.4rem 0 1.5rem;max-width:500px">Uno sguardo alla vita al Convitto — la struttura, le camere, la mensa, lo studio, gli educatori, il Laboratorio Musicale.</p>
     </div>
-    <div class="gscroll" role="list" aria-label="Galleria spazi — scorri orizzontalmente">
-      <div class="gsl" role="listitem" style="position:relative">
-        <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/IMG_4375-scaled.jpg" alt="Esterno del Convitto Costaggini di Rieti" loading="lazy"/>
-        <span style="position:absolute;bottom:.6rem;left:.7rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.8);text-shadow:0 1px 4px rgba(0,0,0,.6);z-index:2">🏛️ Esterno</span>
+    <style>
+      .ss { max-width: 920px; margin: 0 auto; padding: 0 1.25rem; }
+      .ss-frame { position: relative; aspect-ratio: 3/2; border-radius: 14px; overflow: hidden;
+        background: #0a0f0a; box-shadow: 0 20px 55px rgba(0,0,0,.45); border: 1px solid rgba(184,146,42,.28); outline: none; }
+      .ss-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .9s ease; }
+      .ss-slide.on { opacity: 1; }
+      .ss-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .ss-slide::after { content:''; position:absolute; inset:0; pointer-events:none;
+        background: linear-gradient(180deg, rgba(10,15,10,.05) 0%, transparent 40%, rgba(10,15,10,.78) 100%); }
+      .ss-cap { position: absolute; left: 1.5rem; bottom: 1.3rem; z-index: 2; }
+      .ss-cap .ico { font-size: 1.55rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+      .ss-cap .lab { display:block; font-family: var(--fd); font-size: 1.6rem; font-weight: 300; color: #fff; margin-top:.15rem; text-shadow: 0 2px 14px rgba(0,0,0,.65); }
+      .ss-arr { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+        width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(245,240,232,.35);
+        background: rgba(10,15,10,.4); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+        color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+      .ss-arr:hover { background: var(--oro); border-color: var(--oro); color: #1a2e1b; }
+      .ss-arr svg { width: 24px; height: 24px; fill: currentColor; }
+      .ss-prev { left: .8rem; } .ss-next { right: .8rem; }
+      .ss-arr:focus-visible { outline: 3px solid var(--oro); outline-offset: 2px; }
+      .ss-bar { display:flex; align-items:center; justify-content:center; gap: 1.1rem; margin-top: 1.2rem; }
+      .ss-play { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(184,146,42,.4);
+        background: rgba(184,146,42,.12); color: var(--oro2); cursor: pointer; display:flex; align-items:center; justify-content:center; transition: all .2s; flex-shrink:0; }
+      .ss-play:hover { background: var(--oro); color: #1a2e1b; border-color: var(--oro); }
+      .ss-play svg { width: 17px; height: 17px; fill: currentColor; }
+      .ss-play:focus-visible { outline: 3px solid var(--oro); outline-offset: 2px; }
+      .ss-dots { display: flex; gap: .55rem; align-items:center; }
+      .ss-dot { width: 9px; height: 9px; border-radius: 50%; border: none; padding: 0; cursor: pointer;
+        background: rgba(245,240,232,.28); transition: all .25s; }
+      .ss-dot.on { background: var(--oro2); transform: scale(1.4); }
+      .ss-dot:focus-visible { outline: 2px solid var(--oro); outline-offset: 2px; }
+      @media (max-width: 560px) {
+        .ss-cap .lab { font-size: 1.2rem; } .ss-cap { left: 1.1rem; bottom: 1rem; }
+        .ss-arr { width: 40px; height: 40px; } .ss-arr svg { width: 20px; height: 20px; }
+      }
+    </style>
+
+    <div class="ss">
+      <div class="ss-frame" id="ssFrame" tabindex="0" aria-roledescription="carosello" aria-label="La vita al Convitto Costaggini">
+        <div class="ss-slide on" role="group" aria-roledescription="foto" aria-label="L'esterno">
+          <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/IMG_4375-scaled.jpg" alt="Esterno del Convitto Costaggini di Rieti" loading="eager"/>
+          <div class="ss-cap"><span class="ico" aria-hidden="true">🏛️</span><span class="lab">L'esterno</span></div>
+        </div>
+        <div class="ss-slide" role="group" aria-roledescription="foto" aria-label="La struttura">
+          <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/IMG_4269-scaled.jpg" alt="Veduta del Convitto Costaggini" loading="lazy"/>
+          <div class="ss-cap"><span class="ico" aria-hidden="true">🏛️</span><span class="lab">La struttura</span></div>
+        </div>
+        <div class="ss-slide" role="group" aria-roledescription="foto" aria-label="Le camere">
+          <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/CAMERE.jpg" alt="Le camere triple del Convitto Costaggini" loading="lazy"/>
+          <div class="ss-cap"><span class="ico" aria-hidden="true">🛏️</span><span class="lab">Le camere</span></div>
+        </div>
+        <div class="ss-slide" role="group" aria-roledescription="foto" aria-label="La mensa">
+          <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/IMG_4257.jpg" alt="Area ristoro e mensa del Convitto Costaggini" loading="lazy"/>
+          <div class="ss-cap"><span class="ico" aria-hidden="true">🍽️</span><span class="lab">La mensa</span></div>
+        </div>
+        <div class="ss-slide" role="group" aria-roledescription="foto" aria-label="Lo studio guidato">
+          <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/1702938319160.jpg" alt="Sala studio del Convitto Costaggini" loading="lazy"/>
+          <div class="ss-cap"><span class="ico" aria-hidden="true">📚</span><span class="lab">Lo studio guidato</span></div>
+        </div>
+        <div class="ss-slide" role="group" aria-roledescription="foto" aria-label="Gli educatori">
+          <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/1704014837735.jpg" alt="Educatori e convittori del Convitto Costaggini" loading="lazy"/>
+          <div class="ss-cap"><span class="ico" aria-hidden="true">🤝</span><span class="lab">Gli educatori</span></div>
+        </div>
+        <div class="ss-slide" role="group" aria-roledescription="foto" aria-label="Il Laboratorio Musicale">
+          <img src="img/gruppo-laboratorio.jpg" alt="Il gruppo di ragazzi del Laboratorio Musicale del Convitto durante un'esibizione" loading="lazy"/>
+          <div class="ss-cap"><span class="ico" aria-hidden="true">🎸</span><span class="lab">Il Laboratorio Musicale</span></div>
+        </div>
+        <div class="ss-slide" role="group" aria-roledescription="foto" aria-label="La nostra mobilità">
+          <img src="img/bus.jpg" alt="I pullman per gli spostamenti dei convittori del Convitto Costaggini" loading="lazy"/>
+          <div class="ss-cap"><span class="ico" aria-hidden="true">🚌</span><span class="lab">La nostra mobilità</span></div>
+        </div>
+        <button class="ss-arr ss-prev" id="ssPrev" type="button" aria-label="Foto precedente">
+          <svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg>
+        </button>
+        <button class="ss-arr ss-next" id="ssNext" type="button" aria-label="Foto successiva">
+          <svg viewBox="0 0 24 24"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4L13.2 12z"/></svg>
+        </button>
       </div>
-      <div class="gsl" role="listitem" style="position:relative">
-        <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/IMG_4269-scaled.jpg" alt="Veduta del Convitto Costaggini" loading="lazy"/>
-        <span style="position:absolute;bottom:.6rem;left:.7rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.8);text-shadow:0 1px 4px rgba(0,0,0,.6);z-index:2">🏛️ La struttura</span>
-      </div>
-      <div class="gsl" role="listitem" style="position:relative">
-        <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/CAMERE-300x225.jpg" alt="Le camere triple del Convitto Costaggini" loading="lazy"/>
-        <span style="position:absolute;bottom:.6rem;left:.7rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.8);text-shadow:0 1px 4px rgba(0,0,0,.6);z-index:2">🛏️ Le camere</span>
-      </div>
-      <div class="gsl" role="listitem" style="position:relative">
-        <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/IMG_4257-640x480.jpg" alt="Area ristoro — mensa del Convitto Costaggini" loading="lazy"/>
-        <span style="position:absolute;bottom:.6rem;left:.7rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.8);text-shadow:0 1px 4px rgba(0,0,0,.6);z-index:2">🍽️ La mensa</span>
-      </div>
-      <div class="gsl" role="listitem" style="position:relative">
-        <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/1702938319160-300x225.jpg" alt="Sala studio del Convitto Costaggini" loading="lazy"/>
-        <span style="position:absolute;bottom:.6rem;left:.7rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.8);text-shadow:0 1px 4px rgba(0,0,0,.6);z-index:2">📚 Studio guidato</span>
-      </div>
-      <div class="gsl" role="listitem" style="position:relative">
-        <img src="https://www.alberghierorieti.edu.it/wp-content/uploads/1704014837735-300x225.jpg" alt="Educatori e convittori del Convitto Costaggini" loading="lazy"/>
-        <span style="position:absolute;bottom:.6rem;left:.7rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.8);text-shadow:0 1px 4px rgba(0,0,0,.6);z-index:2">🤝 Gli educatori</span>
+      <div class="ss-bar">
+        <button class="ss-play" id="ssPlay" type="button" aria-label="Metti in pausa"></button>
+        <div class="ss-dots" id="ssDots" role="tablist" aria-label="Naviga tra le foto"></div>
       </div>
     </div>
+
+    <script>
+    (function(){
+      var frame = document.getElementById('ssFrame');
+      if(!frame) return;
+      var slides = Array.prototype.slice.call(frame.querySelectorAll('.ss-slide'));
+      var dotsWrap = document.getElementById('ssDots');
+      var playBtn = document.getElementById('ssPlay');
+      var idx = 0, timer = null, playing = true, DELAY = 5000;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var dots = slides.map(function(_, i){
+        var b = document.createElement('button');
+        b.className = 'ss-dot' + (i===0?' on':'');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Vai alla foto ' + (i+1));
+        b.addEventListener('click', function(){ go(i); rearm(); });
+        dotsWrap.appendChild(b); return b;
+      });
+
+      function go(n){
+        slides[idx].classList.remove('on'); dots[idx].classList.remove('on');
+        idx = (n + slides.length) % slides.length;
+        slides[idx].classList.add('on'); dots[idx].classList.add('on');
+      }
+      function next(){ go(idx+1); }
+      function prev(){ go(idx-1); }
+      function icon(){
+        playBtn.innerHTML = playing
+          ? '<svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>'
+          : '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+        playBtn.setAttribute('aria-label', playing ? 'Metti in pausa' : 'Riprendi');
+      }
+      function arm(){ clearInterval(timer); if(playing && !reduce) timer = setInterval(next, DELAY); }
+      function rearm(){ arm(); }
+      function play(){ playing = true; icon(); arm(); }
+      function pause(){ playing = false; icon(); clearInterval(timer); }
+
+      document.getElementById('ssNext').addEventListener('click', function(){ next(); rearm(); });
+      document.getElementById('ssPrev').addEventListener('click', function(){ prev(); rearm(); });
+      playBtn.addEventListener('click', function(){ playing ? pause() : play(); });
+      frame.addEventListener('mouseenter', function(){ if(playing) clearInterval(timer); });
+      frame.addEventListener('mouseleave', function(){ if(playing) arm(); });
+      frame.addEventListener('keydown', function(e){
+        if(e.key==='ArrowRight'){ next(); rearm(); }
+        else if(e.key==='ArrowLeft'){ prev(); rearm(); }
+      });
+      var x0 = null;
+      frame.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+      frame.addEventListener('touchend', function(e){
+        if(x0===null) return;
+        var dx = e.changedTouches[0].clientX - x0;
+        if(Math.abs(dx)>40){ (dx<0?next:prev)(); rearm(); }
+        x0 = null;
+      }, {passive:true});
+
+      if(reduce){ playing = false; }
+      icon(); arm();
+    })();
+    </script>
     <div style="text-align:center;padding:1.5rem 1.25rem 2rem">
       <a href="alumni.html" class="btn-outline" style="color:rgba(245,240,232,.7);border-color:rgba(245,240,232,.25)"><em>Alumni</em> &amp; Testimonianze →</a>
     </div>

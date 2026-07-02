@@ -778,3 +778,203 @@
   if (document.getElementById('fab-wrap') || (document.body && document.readyState !== 'loading')) place();
   else document.addEventListener('DOMContentLoaded', place);
 })();
+
+/* ═══════════════════════════════════════════════════
+   RICERCA SITEWIDE — icona 🔍 in header, su ogni pagina
+   Un solo indice condiviso: la barra grande in home
+   (#search-input) e il pannello a comparsa qui sotto
+   usano entrambi window.ConvittoSearch, così i contenuti
+   indicizzati restano un'unica fonte da aggiornare.
+═══════════════════════════════════════════════════ */
+(function () {
+  var INDICE = [
+    { titolo: 'Chi siamo — Storia del Convitto', pagina: 'il-convitto.html', ancora: '#storia', cat: 'Il Convitto', keywords: ['storia','convitto','costaggini','fondazione','rieti','tradizione','comunità','educante','origine','anni','decenni'] },
+    { titolo: 'Missione e valori', pagina: 'il-convitto.html', ancora: '#mission', cat: 'Il Convitto', keywords: ['missione','valori','sicurezza','eccellenza','responsabilità','cura','formazione','educare'] },
+    { titolo: 'Staff educativo e organigramma', pagina: 'il-convitto.html', ancora: '#staff', cat: 'Il Convitto', keywords: ['staff','rettore','coordinatore','educatore','personale','direzione','organigramma','docenti'] },
+    { titolo: 'Cronologia storica', pagina: 'il-convitto.html', ancora: '#cronologia', cat: 'Il Convitto', keywords: ['cronologia','storia','timeline','anni 70','pnrr','modernizzazione','espansione'] },
+    { titolo: 'Ristorazione e pasti', pagina: 'servizi.html', ancora: '#ristorazione', cat: 'Servizi', keywords: ['ristorazione','mensa','pasti','colazione','pranzo','cena','merenda','menu','menù','cucina','mangiare','vitto','allergie','intolleranze','dieta'] },
+    { titolo: 'Alloggi e camere', pagina: 'servizi.html', ancora: '#alloggi', cat: 'Servizi', keywords: ['camera','camere','alloggio','alloggi','singola','doppia','bagno','letto','dormitorio','wifi','wi-fi','armadietto','biancheria','climatizzazione'] },
+    { titolo: 'Studio guidato', pagina: 'servizi.html', ancora: '#studio', cat: 'Servizi', keywords: ['studio','studiare','tutoraggio','compiti','pomeriggio','15.30'] },
+    { titolo: 'Sport, palestra e benessere', pagina: 'servizi.html', ancora: '#sport', cat: 'Servizi', keywords: ['palestra','sport','calcio','basket','yoga','pilates','tornei','campo','ping pong','calciobalilla','attività','fisico','benessere','pnrr'] },
+    { titolo: 'Tecnologia e connettività', pagina: 'servizi.html', ancora: '#tecnologia', cat: 'Servizi', keywords: ['wifi','wi-fi','internet','tecnologia','laboratorio','computer','digitale','pnsd','multimediale','software','alberghiero','pms','lim'] },
+    { titolo: 'Salute e assistenza sanitaria', pagina: 'servizi.html', ancora: '#salute', cat: 'Servizi', keywords: ['infermeria','salute','medico','psicologico','emergenza','118','ospedale','farmaci','sanitaria','assistenza','asl'] },
+    { titolo: 'Orari dei servizi', pagina: 'servizi.html', ancora: '#orari', cat: 'Servizi', keywords: ['orari','orario','apertura','chiusura','quando','ore','mattina','pomeriggio','sera'] },
+    { titolo: 'Come iscriversi al Convitto', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['iscriversi','iscrizione','ammissione','domanda','come','procedura','miur','portale','modulo','candidatura','entrare'] },
+    { titolo: 'Tariffe e rette 2025/26', pagina: 'ammissione.html', ancora: '#tariffe', cat: 'Ammissione', keywords: ['tariffa','retta','costo','prezzo','quanto','pagare','isee','riduzione','agevolazione','contributo','pagopa','rata','mensile','euro'] },
+    { titolo: 'Moduli e documenti da scaricare', pagina: 'ammissione.html', ancora: '#moduli', cat: 'Ammissione', keywords: ['modulo','moduli','scaricare','download','pdf','documenti','stampare','compilare','domanda','allegati'] },
+    { titolo: 'Domande frequenti — FAQ', pagina: 'ammissione.html', ancora: '#faq', cat: 'Ammissione', keywords: ['faq','domande','frequenti','dubbi','risposta','chiarimenti','uscita','malattia','rimborso','ritiro','camera','compagno'] },
+    { titolo: 'Scadenze e calendario iscrizioni', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['scadenza','calendario','quando','data','settembre','ottobre','novembre','gennaio','marzo','maggio','giugno','termine'] },
+    { titolo: 'Regolamento del Convitto', pagina: 'trasparenza.html', ancora: '#disposizioni', cat: 'Trasparenza', keywords: ['regolamento','regole','norme','disciplina','comportamento','patto','convivenza'] },
+    { titolo: 'P.T.O.F. — Piano Triennale Offerta Formativa', pagina: 'trasparenza.html', ancora: '#disposizioni', cat: 'Trasparenza', keywords: ['ptof','piano','triennale','offerta','formativa','progetto','educativo','programma'] },
+    { titolo: 'Bilancio e tariffe deliberate', pagina: 'trasparenza.html', ancora: '#bilancio', cat: 'Trasparenza', keywords: ['bilancio','preventivo','consuntivo','patrimonio','spese','entrate','conto','finanze','delibera'] },
+    { titolo: 'Dichiarazione di accessibilità AGID', pagina: 'trasparenza.html', ancora: '#accessibilita', cat: 'Trasparenza', keywords: ['accessibilità','agid','wcag','disabilità','legge stanca','dichiarazione','conformità'] },
+    { titolo: 'Privacy e trattamento dati GDPR', pagina: 'trasparenza.html', ancora: '#privacy', cat: 'Trasparenza', keywords: ['privacy','gdpr','dati','personali','trattamento','titolare','cookie','consenso','reg ue'] },
+    { titolo: 'ANAC e anticorruzione', pagina: 'trasparenza.html', ancora: '#anac', cat: 'Trasparenza', keywords: ['anac','anticorruzione','corruzione','segnalazione','whistleblowing','illecito','rpc'] },
+    { titolo: 'Tutte le notizie e comunicati', pagina: 'notizie.html', ancora: '', cat: 'Notizie', keywords: ['notizie','news','comunicato','aggiornamento','avviso','circolare','delibera','comunicazioni'] },
+    { titolo: 'Trionfo al Concorso Nazionale di Cucina', pagina: 'notizie.html', ancora: '', cat: 'Notizie', keywords: ['concorso','cucina','regionale','nazionale','junior','fipe','primo posto','gara','competizione','cuoco','chef'] },
+    { titolo: 'Open Day — Porte aperte alle famiglie', pagina: 'notizie.html', ancora: '', cat: 'Notizie', keywords: ['open day','porte aperte','visita','famiglia','famiglie','presentazione','tour','scoprire'] },
+    { titolo: 'Inaugurazione nuova palestra PNRR', pagina: 'notizie.html', ancora: '', cat: 'Notizie', keywords: ['palestra','inaugurazione','pnrr','fondi','nuovo','inaugurata','sport','apertura'] },
+    { titolo: 'Prossimi eventi e agenda', pagina: 'notizie.html', ancora: '#eventi', cat: 'Notizie', keywords: ['eventi','agenda','calendario','prossimo','quando','programma','cerimonia','diplomi','cena','gala'] },
+    { titolo: 'Telefono, email e PEC', pagina: 'contatti.html', ancora: '', cat: 'Contatti', keywords: ['telefono','email','pec','contatto','contattare','chiamare','scrivere','recapito','numero'] },
+    { titolo: 'Orari dello sportello', pagina: 'contatti.html', ancora: '#orari', cat: 'Contatti', keywords: ['sportello','orario','apertura','segreteria','ricevimento','quando','ore','mattina','pomeriggio'] },
+    { titolo: 'Dove siamo — Indirizzo e mappa', pagina: 'contatti.html', ancora: '#mappa', cat: 'Contatti', keywords: ['indirizzo','dove','mappa','come arrivare','rieti','sede','posizione','via','strada','percorso','gps'] },
+    { titolo: 'Scrivi un messaggio al Convitto', pagina: 'contatti.html', ancora: '#form', cat: 'Contatti', keywords: ['messaggio','scrivere','modulo','form','contatto','richiedere','informazioni','domanda','quesito'] },
+    { titolo: 'Il Laboratorio Musicale', pagina: 'laboratorio-musicale.html', ancora: '', cat: 'Comunità', keywords: ['musica','laboratorio','chitarra','voce','canto','concerto','ensemble','strumenti'] },
+    { titolo: 'Il Vinile del Convitto', pagina: 'vinile.html', ancora: '', cat: 'Comunità', keywords: ['vinile','disco','musica','ascolta','esibizioni','registrazioni'] },
+    { titolo: 'La Solidarietà — il brano', pagina: 'solidarieta.html', ancora: '', cat: 'Comunità', keywords: ['solidarietà','brano','canzone','musica','2019'] },
+    { titolo: 'Il Costaggini nel Mondo', pagina: 'mondo.html', ancora: '', cat: 'Comunità', keywords: ['mondo','alumni','ex convittori','mappa','estero'] },
+    { titolo: 'Da dove vengono i convittori', pagina: 'provenienza.html', ancora: '', cat: 'Comunità', keywords: ['provenienza','province','regioni','da dove vengono','mappa','statistiche'] }
+  ];
+
+  function escReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function highlight(text, query) {
+    if (!query) return text;
+    return text.replace(new RegExp('(' + escReg(query) + ')', 'gi'), '<mark>$1</mark>');
+  }
+  function badgeColor(cat) {
+    if (cat === 'Servizi') return 'oro';
+    if (cat === 'Ammissione') return 'verde';
+    return '';
+  }
+  function pageLabel(p) {
+    return p.replace('.html', '').replace(/-/g, ' ').replace(/^\w/, function (c) { return c.toUpperCase(); }).replace('Index', 'Home');
+  }
+  function cerca(query) {
+    var tokens = query.split(/\s+/).filter(function (t) { return t.length > 1; });
+    return INDICE.filter(function (item) {
+      var hay = (item.titolo + ' ' + item.cat + ' ' + item.keywords.join(' ')).toLowerCase();
+      return tokens.every(function (t) { return hay.indexOf(t) !== -1; });
+    });
+  }
+  function renderHTML(query) {
+    var q = query.trim().toLowerCase();
+    if (q.length < 2) return '';
+    var trovati = cerca(q);
+    if (trovati.length === 0) {
+      return '<div class="sr-header">Risultati per "' + q + '"</div>' +
+        '<div class="sr-empty">Nessun risultato trovato. Prova con parole diverse.</div>' +
+        '<div class="sr-footer">Hai bisogno di aiuto? <a href="contatti.html">Contattaci →</a></div>';
+    }
+    var items = trovati.slice(0, 8).map(function (item, i) {
+      return '<a class="sr-item" href="' + item.pagina + item.ancora + '" role="option" id="sr-' + i + '" tabindex="-1">' +
+        '<span class="sr-badge ' + badgeColor(item.cat) + '">' + item.cat + '</span>' +
+        '<span><span class="sr-title">' + highlight(item.titolo, q) + '</span>' +
+        '<span class="sr-page">' + pageLabel(item.pagina) + '</span></span></a>';
+    }).join('');
+    var extra = trovati.length > 8 ? '<div class="sr-footer">Trovati ' + trovati.length + ' risultati — <a href="notizie.html">Vedi tutte le notizie →</a></div>' : '';
+    return '<div class="sr-header">' + trovati.length + ' risultat' + (trovati.length === 1 ? 'o' : 'i') + ' per "' + q + '"</div>' + items + extra;
+  }
+
+  window.ConvittoSearch = { cerca: cerca, renderHTML: renderHTML };
+
+  /* ── Pannello a comparsa, raggiungibile da ogni pagina ── */
+  var modal = document.createElement('div');
+  modal.id = 'gsearch-modal';
+  modal.innerHTML =
+    '<div class="gsearch-backdrop"></div>' +
+    '<div class="gsearch-box" role="dialog" aria-modal="true" aria-label="Cerca nel sito">' +
+      '<div class="gsearch-input-wrap">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>' +
+        '<input type="search" id="gsearch-input" placeholder="Cerca nel sito…" aria-label="Cerca nel sito del Convitto Costaggini" autocomplete="off" autocorrect="off" spellcheck="false"/>' +
+        '<button id="gsearch-close" type="button" aria-label="Chiudi ricerca">✕</button>' +
+      '</div>' +
+      '<div id="gsearch-results" role="listbox" aria-label="Risultati della ricerca"></div>' +
+      '<div id="gsearch-hint">Premi <kbd>Esc</kbd> per chiudere</div>' +
+    '</div>';
+  document.body.appendChild(modal);
+
+  var gInput = document.getElementById('gsearch-input');
+  var gResults = document.getElementById('gsearch-results');
+  var gClose = document.getElementById('gsearch-close');
+  var gBackdrop = modal.querySelector('.gsearch-backdrop');
+  var lastFocus = null;
+
+  function openSearch() {
+    lastFocus = document.activeElement;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    gInput.value = '';
+    gResults.innerHTML = '';
+    setTimeout(function () { gInput.focus(); }, 30);
+  }
+  function closeSearch() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+  }
+  gInput.addEventListener('input', function () { gResults.innerHTML = renderHTML(gInput.value); });
+  gClose.addEventListener('click', closeSearch);
+  gBackdrop.addEventListener('click', closeSearch);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeSearch();
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); modal.classList.contains('open') ? closeSearch() : openSearch(); }
+  });
+
+  /* ── Icona 🔍 in header, sempre visibile (mobile + desktop) ── */
+  var hdrIn = document.querySelector('.hdr-in');
+  var dnav = document.getElementById('dnav');
+  if (hdrIn && dnav) {
+    var trigger = document.createElement('button');
+    trigger.id = 'gsearch-trigger';
+    trigger.type = 'button';
+    trigger.setAttribute('aria-label', 'Cerca nel sito');
+    trigger.setAttribute('data-tip', 'Cerca');
+    trigger.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>';
+    trigger.addEventListener('click', openSearch);
+    hdrIn.insertBefore(trigger, dnav);
+  }
+
+  /* ── Se la pagina ha già una barra di ricerca propria (home),
+        la colleghiamo allo stesso indice invece di aprire il pannello ── */
+  var homeInput = document.getElementById('search-input');
+  var homeResults = document.getElementById('search-results');
+  var homeBtn = document.getElementById('search-btn');
+  if (homeInput && homeResults) {
+    var lastQuery = '';
+    var focusIdx = -1;
+    function cercaHome(query) {
+      var q = query.trim().toLowerCase();
+      if (q === lastQuery) return;
+      lastQuery = q;
+      focusIdx = -1;
+      if (q.length < 2) {
+        homeResults.innerHTML = '';
+        homeResults.classList.remove('open');
+        homeInput.setAttribute('aria-expanded', 'false');
+        return;
+      }
+      homeResults.innerHTML = renderHTML(q);
+      homeResults.classList.add('open');
+      homeInput.setAttribute('aria-expanded', 'true');
+    }
+    homeInput.addEventListener('keydown', function (e) {
+      var items = homeResults.querySelectorAll('.sr-item');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        focusIdx = Math.min(focusIdx + 1, items.length - 1);
+        items.forEach(function (el, i) { el.classList.toggle('focused', i === focusIdx); });
+        if (items[focusIdx]) items[focusIdx].focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        focusIdx = Math.max(focusIdx - 1, -1);
+        items.forEach(function (el, i) { el.classList.toggle('focused', i === focusIdx); });
+        if (focusIdx === -1) homeInput.focus(); else if (items[focusIdx]) items[focusIdx].focus();
+      } else if (e.key === 'Escape') {
+        homeResults.classList.remove('open');
+        homeInput.setAttribute('aria-expanded', 'false');
+        lastQuery = '';
+      } else if (e.key === 'Enter' && focusIdx === -1 && homeResults.classList.contains('open')) {
+        var first = homeResults.querySelector('.sr-item');
+        if (first) first.click();
+      }
+    });
+    homeInput.addEventListener('input', function () { cercaHome(homeInput.value); });
+    if (homeBtn) homeBtn.addEventListener('click', function () { cercaHome(homeInput.value); if (homeInput.value.trim()) homeInput.focus(); });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('#ricerca')) {
+        homeResults.classList.remove('open');
+        lastQuery = '';
+      }
+    });
+  }
+})();

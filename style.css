@@ -97,6 +97,17 @@ a { color: inherit; }
 #brg[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 #brg[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* Pulsante ricerca sitewide — visibile su ogni pagina, mobile e desktop */
+#gsearch-trigger {
+  background: none; border: none; cursor: pointer; color: var(--av);
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: background var(--ease);
+}
+#gsearch-trigger:hover, #gsearch-trigger:focus-visible { background: rgba(255,255,255,.08); }
+#gsearch-trigger svg { width: 19px; height: 19px; fill: currentColor; }
+
 /* Desktop nav */
 #dnav { display: none; }
 
@@ -605,6 +616,96 @@ a.nc:hover, a.article-card:hover, a.alumni-card:hover,
 
 /* Pill tag hover */
 .tag:hover { background: rgba(44,62,45,.12); transform: translateY(-1px); transition: all .2s; cursor: default; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RICERCA — elenco risultati (condiviso dalla barra in home e dal
+   pannello di ricerca sitewide iniettato da nav.js su ogni pagina)
+   ═══════════════════════════════════════════════════════════════ */
+.sr-header {
+  padding: .7rem 1.25rem;
+  background: var(--av2);
+  font-family: var(--fu); font-size: .7rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--txt2);
+  border-bottom: 1px solid var(--av3);
+}
+.sr-item {
+  display: flex; align-items: center; gap: .85rem;
+  padding: .8rem 1.25rem; text-decoration: none; color: var(--txt);
+  border-bottom: 1px solid var(--av3);
+  transition: background var(--ease);
+}
+.sr-item:last-child { border-bottom: none; }
+.sr-item:hover, .sr-item:focus { background: var(--av2); outline: none; }
+.sr-item.focused { background: var(--av2); }
+.sr-badge {
+  font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  background: var(--bosco); color: var(--av);
+  padding: .2rem .55rem; border-radius: 20px; flex-shrink: 0; white-space: nowrap;
+}
+.sr-badge.oro { background: var(--oro); }
+.sr-badge.verde { background: var(--bosco2); }
+.sr-title { font-size: .88rem; font-weight: 600; color: var(--bosco); line-height: 1.35; }
+.sr-title mark { background: rgba(212,170,74,.35); color: var(--bosco); border-radius: 2px; padding: 0 2px; font-style: normal; }
+.sr-page { font-size: .72rem; color: var(--txt2); margin-top: .1rem; }
+.sr-empty {
+  padding: 1.5rem 1.25rem; text-align: center;
+  font-size: .88rem; color: var(--txt2); font-style: italic;
+}
+.sr-footer {
+  padding: .6rem 1.25rem; background: var(--av);
+  font-size: .72rem; color: var(--txt2); text-align: center;
+  border-top: 1px solid var(--av3);
+}
+.sr-footer a { color: var(--bosco2); font-weight: 600; text-decoration: none; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RICERCA SITEWIDE — pannello a comparsa, raggiungibile da ogni
+   pagina tramite l'icona 🔍 in header (vedi nav.js)
+   ═══════════════════════════════════════════════════════════════ */
+#gsearch-modal {
+  position: fixed; inset: 0; z-index: 9500;
+  display: none; align-items: flex-start; justify-content: center;
+  padding: 4.5rem 1rem 1rem;
+}
+#gsearch-modal.open { display: flex; }
+.gsearch-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(10,15,10,.72); backdrop-filter: blur(3px);
+}
+.gsearch-box {
+  position: relative; width: 100%; max-width: 560px;
+  background: #fff; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+  max-height: min(560px, 80vh);
+  display: flex; flex-direction: column;
+}
+.gsearch-input-wrap {
+  display: flex; align-items: center; gap: .6rem;
+  padding: .9rem 1rem; border-bottom: 1px solid var(--av3); flex-shrink: 0;
+}
+.gsearch-input-wrap svg { width: 19px; height: 19px; fill: var(--oro); flex-shrink: 0; }
+#gsearch-input {
+  flex: 1; border: none; outline: none; background: transparent;
+  font-family: var(--fu); font-size: 1rem; color: var(--txt);
+  min-height: 44px; padding: 0; -webkit-appearance: none;
+}
+#gsearch-input::placeholder { color: #aaa; }
+#gsearch-input::-webkit-search-cancel-button { display: none; }
+#gsearch-close {
+  background: var(--av2); border: none; border-radius: 50%;
+  width: 32px; height: 32px; flex-shrink: 0; cursor: pointer;
+  color: var(--txt2); font-size: .9rem; display: flex; align-items: center; justify-content: center;
+}
+#gsearch-close:hover { background: var(--av3); }
+#gsearch-results { overflow-y: auto; }
+#gsearch-hint {
+  padding: .5rem 1.25rem; font-size: .7rem; color: var(--txt2);
+  text-align: center; border-top: 1px solid var(--av3); flex-shrink: 0;
+}
+#gsearch-hint kbd {
+  background: var(--av2); border: 1px solid var(--av3); border-radius: 4px;
+  padding: .05rem .35rem; font-family: var(--fu); font-size: .65rem;
+}
 
 /* ═══════════════════════════════════════════════════════════════
    ACCESSIBILITÀ — Riduci movimento

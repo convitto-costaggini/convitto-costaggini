@@ -37,6 +37,7 @@
           <li><a href="il-convitto.html" data-page="il-convitto">Chi siamo &amp; storia</a></li>
           <li><a href="educatori.html" data-page="educatori">Gli Educatori</a></li>
           <li><a href="giornata-tipo.html" data-page="giornata-tipo">Una giornata tipo</a></li>
+          <li><a href="premio-merito.html" data-page="premio-merito">🏅 Premio al Merito</a></li>
           
           <li style="padding: .4rem .9rem; font-family: var(--fu); font-size: .58rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .8;">♪ Laboratorio Musicale</li>
           <li style="padding-left: .6rem;"><a href="laboratorio-musicale.html" data-page="laboratorio-musicale">└ Accedi al Laboratorio</a></li>
@@ -111,6 +112,7 @@
         <li><a href="il-convitto.html">Chi siamo &amp; storia</a></li>
         <li><a href="educatori.html">Gli Educatori</a></li>
         <li><a href="giornata-tipo.html">Una giornata tipo</a></li>
+        <li><a href="premio-merito.html">🏅 Premio al Merito</a></li>
         
         <li style="padding: .5rem .5rem .2rem; font-family: var(--fu); font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .85;">♪ Laboratorio Musicale</li>
         <li style="padding-left: .75rem;"><a href="laboratorio-musicale.html">Accedi al Laboratorio</a></li>
@@ -830,7 +832,36 @@
     { titolo: 'Il Vinile del Convitto', pagina: 'vinile.html', ancora: '', cat: 'Comunità', keywords: ['vinile','disco','musica','ascolta','esibizioni','registrazioni'] },
     { titolo: 'La Solidarietà — il brano', pagina: 'solidarieta.html', ancora: '', cat: 'Comunità', keywords: ['solidarietà','brano','canzone','musica','2019'] },
     { titolo: 'Il Costaggini nel Mondo', pagina: 'mondo.html', ancora: '', cat: 'Comunità', keywords: ['mondo','alumni','ex convittori','mappa','estero'] },
-    { titolo: 'Da dove vengono i convittori', pagina: 'provenienza.html', ancora: '', cat: 'Comunità', keywords: ['provenienza','province','regioni','da dove vengono','mappa','statistiche'] }
+    { titolo: 'Da dove vengono i convittori', pagina: 'provenienza.html', ancora: '', cat: 'Comunità', keywords: ['provenienza','province','regioni','da dove vengono','mappa','statistiche'] },
+    { titolo: 'Bullismo e Cyberbullismo', pagina: 'bullismo.html', ancora: '', cat: 'Sicurezza', keywords: ['bullismo','cyberbullismo','molestie','prepotenze','sicurezza','segnalare','aiuto','protezione','genitori','studenti'] },
+    { titolo: 'Come arrivare al Convitto', pagina: 'come-arrivare.html', ancora: '', cat: 'Contatti', keywords: ['come arrivare','indicazioni','autobus','cotral','treno','auto','salaria','roma','biglietti','orari','trasporti','viaggio','raggiungere'] },
+    { titolo: 'Premio al Merito del Convitto', pagina: 'premio-merito.html', ancora: '', cat: 'Il Convitto', keywords: ['premio','merito','riconoscimento','premiare','progresso','valutazione','incentivo'] },
+    { titolo: 'Alumni — le storie', pagina: 'alumni.html', ancora: '', cat: 'Comunità', keywords: ['alumni','ex convittori','storie','testimonianze','ricordi','passato'] },
+    { titolo: "L'Anno al Convitto", pagina: 'anno.html', ancora: '', cat: 'Il Convitto', keywords: ['anno','scolastico','calendario','eventi','vissuto'] },
+    { titolo: 'Calendario Eventi', pagina: 'calendario.html', ancora: '', cat: 'Notizie', keywords: ['calendario','eventi','open day','feste','uscite','concerti','appuntamenti'] },
+    { titolo: 'Collegio Educatori', pagina: 'collegio-educatori.html', ancora: '', cat: 'Il Convitto', keywords: ['collegio','educatori','riunione','organo','collegiale'] },
+    { titolo: 'La Nostra Comunità', pagina: 'comunita.html', ancora: '', cat: 'Comunità', keywords: ['comunità','alumni','muro dei ricordi','lab musicale','vinile','solidarietà'] },
+    { titolo: 'Cookie Policy', pagina: 'cookie-policy.html', ancora: '', cat: 'Trasparenza', keywords: ['cookie','policy','privacy','profilazione'] },
+    { titolo: 'Domanda di Ammissione', pagina: 'domanda-ammissione.html', ancora: '', cat: 'Ammissione', keywords: ['domanda','ammissione','iscrizione','modulo','online','segreteria','compilare'] },
+    { titolo: 'Gli Educatori', pagina: 'educatori.html', ancora: '', cat: 'Il Convitto', keywords: ['educatori','staff','ccnl','competenze','schede','personale'] },
+    { titolo: 'Il Convitto fa per me?', pagina: 'fa-per-me.html', ancora: '', cat: 'Orientamento', keywords: ['fa per me','quiz','scelta','giusta','vita convittuale','decidere'] },
+    { titolo: 'Per i Genitori', pagina: 'genitori.html', ancora: '', cat: 'Famiglie', keywords: ['genitori','famiglie','famiglia','vicini','informazioni'] },
+    { titolo: 'Una giornata al Convitto', pagina: 'giornata-tipo.html', ancora: '', cat: 'Il Convitto', keywords: ['giornata','tipo','sveglia','studio','sport','cena','quotidiana','routine'] },
+    { titolo: 'In 2 Minuti', pagina: 'in-2-minuti.html', ancora: '', cat: 'Orientamento', keywords: ['2 minuti','veloce','faq','domande frequenti','riassunto'] },
+    { titolo: 'Lettera a un Futuro Convittore', pagina: 'lettera.html', ancora: '', cat: 'Comunità', keywords: ['lettera','futuro','convittore','testimonianza','consigli'] },
+    { titolo: 'Open Day Digitale', pagina: 'openday.html', ancora: '', cat: 'Orientamento', keywords: ['open day','digitale','tour','spazi','faq','prenotazione','visita'] },
+    { titolo: 'Organizzazione del Convitto', pagina: 'organizzazione.html', ancora: '', cat: 'Trasparenza', keywords: ['organizzazione','organigramma','personale','patto educativo','corresponsabilità'] },
+    { titolo: 'Orientamento al Convitto', pagina: 'orientamento.html', ancora: '', cat: 'Orientamento', keywords: ['orientamento','open day','tour virtuale','fa per me','faq','prenotazione'] },
+    { titolo: 'Elenco del Personale', pagina: 'personale.html', ancora: '', cat: 'Il Convitto', keywords: ['personale','elenco','educativo','amministrativo','staff'] },
+    { titolo: 'Informativa Privacy', pagina: 'privacy.html', ancora: '', cat: 'Trasparenza', keywords: ['privacy','informativa','dati personali','gdpr','reg ue 2016/679'] },
+    { titolo: 'Il PTOF spiegato', pagina: 'ptof-guida.html', ancora: '', cat: 'Trasparenza', keywords: ['ptof','piano triennale','offerta formativa','spiegato','sezioni tematiche'] },
+    { titolo: 'Leggi il Regolamento — guida', pagina: 'regolamento-guida.html', ancora: '', cat: 'Trasparenza', keywords: ['regolamento','guida','articoli','leggere','chiaro','diretto'] },
+    { titolo: 'Regolamento di Convitto — versione interattiva', pagina: 'regolamento.html', ancora: '', cat: 'Trasparenza', keywords: ['regolamento','convitto','norme','regole','versione','aggiornata'] },
+    { titolo: 'Il Muro dei Ricordi', pagina: 'ricordi.html', ancora: '', cat: 'Comunità', keywords: ['muro','ricordi','ex convittori','emozione','frase','momento'] },
+    { titolo: 'Scopri il tuo Talento', pagina: 'scopri-talento.html', ancora: '', cat: 'Orientamento', keywords: ['scopri','talento','giochi','quiz','simulatori','futuri studenti'] },
+    { titolo: 'Semiconvitto', pagina: 'semiconvitto.html', ancora: '', cat: 'Servizi', keywords: ['semiconvitto','richiesta','partecipazione','studio guidato','pranzo','pomeridiane'] },
+    { titolo: 'Una Settimana in Numeri', pagina: 'settimana-in-numeri.html', ancora: '', cat: 'Il Convitto', keywords: ['settimana','numeri','pasti','statistiche','dati'] },
+    { titolo: 'Tour Virtuale 360°', pagina: 'tour-virtuale.html', ancora: '', cat: 'Orientamento', keywords: ['tour','virtuale','360','esplora','ambienti','prima di arrivare'] }
   ];
 
   function escReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }

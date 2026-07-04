@@ -213,7 +213,7 @@ a { color: inherit; }
 }
 .page-hero .gold-bar {
   width: 48px; height: 2px;
-  background: linear-gradient(90deg, var(--oro), var(--oro2));
+  background: linear-gradient(90deg, var(--oro2), var(--oro3));
   margin-bottom: 1rem; border-radius: 2px;
 }
 @media(min-width:768px) { .page-hero { padding: 5rem 1.5rem 4rem; } }

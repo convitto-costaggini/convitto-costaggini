@@ -762,7 +762,7 @@ async function loadNotizie() {
 }
 
 async function spostaNotizia(id, direzione) {
-  const idx = notizieCache.findIndex(n => n.id === id);
+  const idx = notizieCache.findIndex(n => String(n.id) === String(id));
   if (idx === -1) return;
   const target = direzione === 'su' ? idx - 1 : idx + 1;
   if (target < 0 || target >= notizieCache.length) return;

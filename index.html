@@ -698,8 +698,7 @@ async function caricaNotizieHome(){
       const img = n.immagine ? `<img src="${n.immagine}" alt="${idxEsc(n.titolo||'')}" loading="${i===0?'eager':'lazy'}"/>` : '';
       const meta = [n.data_pub||'', n.categoria||''].filter(Boolean).join(' · ');
       const lnk = n.link ? `<a href="${n.link}" ${n.link.startsWith('http')?'target="_blank" rel="noopener"':''} class="nc-lnk">${idxEsc(n.link_testo||'Leggi →')}</a>` : '';
-      const delay = i===1?' d1':(i===2?' d2':'');
-      return `<article class="nc rv${delay}">${img}<div class="nc-body"><p class="nc-date">${idxEsc(meta)}</p><h3>${idxEsc(n.titolo||'')}</h3><p>${idxEsc(idxTronca(n.testo,160))}</p>${lnk}</div></article>`;
+      return `<article class="nc">${img}<div class="nc-body"><p class="nc-date">${idxEsc(meta)}</p><h3>${idxEsc(n.titolo||'')}</h3><p>${idxEsc(idxTronca(n.testo,160))}</p>${lnk}</div></article>`;
     }).join('');
   }catch(e){
     row.innerHTML = '<p style="font-family:var(--fu);font-size:.8rem;color:var(--txt2);padding:1rem 0">Impossibile caricare le notizie al momento.</p>';

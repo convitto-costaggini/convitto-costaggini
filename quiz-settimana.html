@@ -78,6 +78,8 @@
     <div class="sw-legend" id="sw-legend"></div>
     <div class="sw-grid"><table class="sw-table" id="sw-table"></table></div>
 
+    <div id="sw-status" class="sr-only" aria-live="polite" role="status"></div>
+
     <div class="sw-summary" id="sw-summary" style="display:none">
       <h2>La tua settimana include:</h2>
       <div class="sw-tags" id="sw-tags"></div>
@@ -177,14 +179,20 @@ function addAtt(key) {
     // Evidenzia il catalogo
     document.getElementById('sw-catalog').style.outline = '2px solid rgba(184,146,42,.4)';
     setTimeout(() => document.getElementById('sw-catalog').style.outline = '', 1200);
+    document.getElementById('sw-status').textContent = 'Scegli prima un\'attività dal catalogo qui sopra.';
     return;
   }
   settimana[key] = sel;
+  const a = ATTIVITA.find(a=>a.id===sel);
+  const [gi,fi] = key.split('-').map(Number);
+  document.getElementById('sw-status').textContent = `${a.nome} aggiunto: ${GIORNI[gi]} ${FASCE[fi].label}.`;
   renderTable();
 }
 
 function removeAtt(key) {
+  const a = ATTIVITA.find(a=>a.id===settimana[key]);
   delete settimana[key];
+  if (a) document.getElementById('sw-status').textContent = `${a.nome} rimosso.`;
   renderTable();
 }
 

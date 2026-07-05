@@ -25,13 +25,15 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: hidden; overscroll-behavior-x: none; }
 body {
   font-family: var(--fu);
   background: var(--av);
   color: var(--txt);
   line-height: 1.65;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
 }
 img { display: block; width: 100%; }
 a { color: inherit; }

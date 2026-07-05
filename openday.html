@@ -461,7 +461,10 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
 /* invio prenotazione visita via backend email */
 (function(){
+  (function(){
   const CONTACT_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
+  const SB_N   = 'https://sawclsysqnjsvbobioqo.supabase.co';
+  const SB_PUB = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
   const f = document.querySelector('form[name="richiesta-visita"]');
   if (!f) return;
   f.addEventListener('submit', function(e){
@@ -495,11 +498,34 @@ ${g('vis-note') || '—'}`;
     };
     const btn = f.querySelector('button[type=submit]');
     if (btn) { btn.disabled = true; btn.textContent = 'Invio…'; }
+
+    // 1. Salva la prenotazione su Supabase, così appare nel pannello admin (tab Open Day)
+    fetch(SB_N + '/rest/v1/prenotazioni_openday', {
+      method: 'POST',
+      headers: {
+        'apikey': SB_PUB,
+        'Authorization': 'Bearer ' + SB_PUB,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        nome: g('vis-nome'),
+        email: g('vis-email'),
+        telefono: g('vis-tel'),
+        data_pref: g('vis-data'),
+        persone: g('vis-persone'),
+        note: g('vis-note'),
+        stato: 'nuova'
+      })
+    }).catch(() => { /* se questo fallisce non blocchiamo comunque l'invio dell'email */ });
+
+    // 2. Invia l'email di notifica (comportamento esistente, invariato)
     fetch(CONTACT_GAS, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body: JSON.stringify(payload) })
       .finally(() => { window.location = 'grazie.html'; });
   });
 })();
-</script>
+  
+ </script>
 <script src="faq.js"></script>
 </body>
 </html>

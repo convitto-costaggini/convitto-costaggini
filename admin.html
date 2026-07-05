@@ -1378,9 +1378,9 @@ async function odLoad(stato) {
 }
 
 async function odAzione(id, stato) {
-  const resp = await fetch('https://sawclsysqnjsvbobioqo.supabase.co/rest/v1/prenotazioni_openday?id=eq.' + id, {
+  const resp = await fetch(SB_N + '/rest/v1/prenotazioni_openday?id=eq.' + id, {
     method: 'PATCH',
-    headers: { 'apikey': 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ', 'Authorization': 'Bearer sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ', 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN(), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
     body: JSON.stringify({ stato })
   });
   if (resp.ok) { await odLoad('nuova'); }
@@ -1389,9 +1389,9 @@ async function odAzione(id, stato) {
 
 async function odElimina(id) {
   if (!await admConfirm({icon:'🗑️',title:'Elimina prenotazione',message:'Questa operazione è irreversibile.',confirmText:'Elimina',type:'danger'})) return;
-  const resp = await fetch('https://sawclsysqnjsvbobioqo.supabase.co/rest/v1/prenotazioni_openday?id=eq.' + id, {
+  const resp = await fetch(SB_N + '/rest/v1/prenotazioni_openday?id=eq.' + id, {
     method: 'DELETE',
-    headers: { 'apikey': 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ', 'Authorization': 'Bearer sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ' }
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN() }
   });
   if (resp.ok) { await odLoad(''); }
   else { alert('Errore: ' + resp.status); }

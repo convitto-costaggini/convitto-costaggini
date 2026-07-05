@@ -517,7 +517,8 @@ ${g('vis-note') || '—'}`;
         note: g('vis-note'),
         stato: 'nuova'
       })
-    }).catch(() => { /* se questo fallisce non blocchiamo comunque l'invio dell'email */ });
+    }).then(r => { if (!r.ok) return r.text().then(t => console.error('Errore insert prenotazioni_openday:', r.status, t)); })
+  .catch(e => console.error('Errore rete insert prenotazioni_openday:', e));
 
     // 2. Invia l'email di notifica (comportamento esistente, invariato)
     fetch(CONTACT_GAS, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body: JSON.stringify(payload) })

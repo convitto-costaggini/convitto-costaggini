@@ -79,6 +79,40 @@
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Convitto \"Costaggini\"",
+  "url": "https://computeaching2-cell.github.io/convitto-costaggini/",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Salaria s.n.c.",
+    "postalCode": "02100",
+    "addressLocality": "Rieti",
+    "addressRegion": "Lazio",
+    "addressCountry": "IT"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "Convitto",
+      "telephone": "+39 0746 296862",
+      "email": "convitto@alberghierorieti.it",
+      "areaServed": "IT",
+      "availableLanguage": "Italian"
+    },
+    {
+      "@type": "ContactPoint",
+      "contactType": "Segreteria Istituto",
+      "telephone": "+39 0746 201113",
+      "email": "rirh010007@istruzione.it",
+      "areaServed": "IT",
+      "availableLanguage": "Italian"
+    }
+  ]
+}
+</script>
 </head>
 <body data-page="contatti">
 <script src="nav-header.js"></script>
@@ -435,16 +469,24 @@ if (form) {
     };
 
     try {
-      // GAS richiede no-cors — non possiamo leggere la risposta
-      // ma i dati arrivano correttamente
-      await fetch(CONTACT_GAS, {
+      const resp = await fetch(CONTACT_GAS, {
         method:  'POST',
-        mode:    'no-cors',
         headers: { 'Content-Type': 'text/plain' },
         body:    JSON.stringify(payload)
       });
-      // Con no-cors consideriamo sempre successo se non lancia eccezione
-      if (true) {
+
+      let esito;
+      try {
+        esito = await resp.json();
+      } catch (parseErr) {
+        throw new Error('Risposta del server non valida (HTTP ' + resp.status + ')');
+      }
+
+      if (!resp.ok || !esito || esito.success !== true) {
+        throw new Error((esito && esito.message) || ('Errore del server (HTTP ' + resp.status + ')'));
+      }
+
+      {
         // Overlay di conferma
         const ov = document.createElement('div');
         ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(44,62,45,.92);display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px)';

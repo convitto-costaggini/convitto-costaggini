@@ -65,8 +65,9 @@
       .about-grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 2.5rem; }
       .about-grid > div:last-child { text-align: left; }
     }
-    .about-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
-    @media(min-width:900px){ .about-img { aspect-ratio: 16/9; max-height: 320px; } }
+    .ar-box { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; }
+    .ar-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media(min-width:900px){ .ar-box { max-height: 320px; } }
 
     /* ── ESPERIENZE UNICHE — 2 colonne su desktop ── */
     @media(min-width:640px){
@@ -176,7 +177,7 @@
     "@type": "School",
     "name": "Convitto IPSSEOA R. A. Costaggini",
     "alternateName": "Convitto Costaggini Rieti",
-    "url": "https://www.alberghierorieti.edu.it",
+    "url": "https://computeaching2-cell.github.io/convitto-costaggini/",
     "logo": "https://www.alberghierorieti.edu.it/wp-content/uploads/IMG_4374-scaled.jpg",
     "address": {
       "@type": "PostalAddress",
@@ -305,9 +306,11 @@
     <div class="w about-grid">
       <div>
         <figure style="margin:0;overflow:hidden;border-radius:6px">
-          <picture><source type="image/webp" srcset="img/terminillo.webp"/><img src="img/terminillo.jpg"
-               alt="Monte Terminillo con neve visto dalla piana reatina — 2.217 m s.l.m."
-               class="about-img" loading="lazy" width="1600" height="1200"/></picture>
+          <div class="ar-box">
+            <picture><source type="image/webp" srcset="img/terminillo.webp"/><img src="img/terminillo.jpg"
+                 alt="Monte Terminillo con neve visto dalla piana reatina — 2.217 m s.l.m."
+                 loading="lazy" width="1600" height="1200"/></picture>
+          </div>
           <figcaption style="background:var(--bosco);padding:.45rem .85rem">
             <span style="font-family:var(--fu);font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(245,240,232,.7);display:block;margin-bottom:.2rem">🏔️ Monte Terminillo · Rieti, Lazio</span>
             <a href="https://commons.wikimedia.org/wiki/File:Terminillo.JPG" target="_blank" rel="noopener"
@@ -359,7 +362,8 @@
       <div class="news-row" id="news-home-row">
         <p style="font-family:var(--fu);font-size:.8rem;color:var(--txt2);padding:1rem 0">Caricamento notizie…</p>
       </div>
-      <div style="flex:1;min-width:200px">
+      <div style="background:rgba(245,240,232,.04);border:1px solid rgba(184,146,42,.15);border-radius:10px;padding:1.25rem 1.5rem;margin-top:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap" class="rv">
+        <div style="flex:1;min-width:200px">
           <p style="font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.3rem">Resta aggiornato</p>
           <h3 style="font-family:var(--fd);font-size:1.2rem;font-weight:400;color:var(--av);margin-bottom:.3rem">Segui il Costaggini su Facebook</h3>
           <p style="font-size:.82rem;color:rgba(245,240,232,.65)">Tutte le novità del Convitto e dell'Istituto in tempo reale: progetti, eventi, risultati e vita quotidiana.</p>
@@ -628,7 +632,7 @@
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;align-items:center">
-        <a href="ammissione.html#faq" class="btn-gold">Tutte le 12 domande →</a>
+        <a href="ammissione.html#domande-genitori" class="btn-gold">Tutte le 6 domande →</a>
         <a href="regolamento.html"
            style="display:inline-flex;align-items:center;gap:.5rem;color:rgba(245,240,232,.55);font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(245,240,232,.2);padding-bottom:2px">
           <svg viewBox="0 0 24 24" width="14" height="14" style="fill:var(--oro2);flex-shrink:0"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>

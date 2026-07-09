@@ -30,6 +30,17 @@
     .hub-card.dark .hub-card-tag { color:var(--oro2); }
     .hub-card.dark .hub-card-cta { color:var(--oro2); }
     .hub-sep { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--oro); margin:2.5rem 0 .5rem; padding-bottom:.5rem; border-bottom:1px solid var(--av3); }
+    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
+    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:.2s; }
+    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
+    .hero-jump a.featured { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
+    .hero-jump a.featured:hover { opacity:.88; }
+    .hero-jump a .hj-ico { font-size:.9rem; line-height:1; }
+    #momenti, #alumni, #musica { scroll-margin-top: 90px; }
+    @media(max-width:480px){
+      .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
+      .hero-jump a { padding:.55rem .5rem; }
+    }
   </style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
@@ -45,10 +56,15 @@
       <div class="gold-bar"></div>
       <h1>La nostra <em>Comunità</em></h1>
       <p class="sub"><em>Alumni</em> sparsi nel mondo, ricordi che restano, musica che unisce. Tutto quello che rende il Convitto Costaggini qualcosa di più di una scuola.</p>
+      <nav class="hero-jump" aria-label="Vai a una sezione della pagina">
+        <a href="#momenti" class="featured"><span class="hj-ico" aria-hidden="true">✨</span> Momenti da non dimenticare</a>
+        <a href="#alumni"><span class="hj-ico" aria-hidden="true">🎓</span> Alumni & Memoria</a>
+        <a href="#musica"><span class="hj-ico" aria-hidden="true">🎵</span> Musica & Vita Convittuale</a>
+      </nav>
     </div>
   </div>
 
-  <section style="background:var(--bosco);padding:3.5rem 1.25rem">
+  <section id="momenti" style="background:var(--bosco);padding:3.5rem 1.25rem">
     <div class="w" style="max-width:700px">
       <p class="hub-sep" style="color:var(--oro2);border-bottom-color:rgba(184,146,42,.2)">— Momenti da non dimenticare</p>
       <h2 style="font-family:var(--fd);font-size:1.7rem;font-weight:300;color:#fff;margin-bottom:1rem">Non tutto è <em style="font-style:italic;color:var(--oro3)">cronaca</em></h2>
@@ -82,7 +98,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="alumni">
     <div class="w">
       <p class="hub-sep">— <em>Alumni</em> & memoria</p>
       <div class="hub-grid">
@@ -123,7 +139,7 @@
         </a>
       </div>
 
-      <p class="hub-sep">— Musica & vita convittuale</p>
+      <p class="hub-sep" id="musica">— Musica & vita convittuale</p>
       <div class="hub-grid">
         <a href="laboratorio-musicale.html" class="hub-card dark rv">
           <div class="hub-card-icon">🎵</div>
@@ -152,13 +168,6 @@
           <h2 class="hub-card-title">L'Anno al <em>Convitto</em></h2>
           <p class="hub-card-desc">Settembre, Natale, Pasqua, fine anno — il ritmo delle stagioni visto dall'interno del Convitto.</p>
           <span class="hub-card-cta">Scopri l'anno →</span>
-        </a>
-        <a href="natale2024.html" class="hub-card dark rv d3">
-          <div class="hub-card-icon">🎄</div>
-          <p class="hub-card-tag">Galleria · 2024</p>
-          <h2 class="hub-card-title">Natale al <em>Convitto</em></h2>
-          <p class="hub-card-desc">Le foto del Natale 2024 in Convitto — addobbi, musica e la festa insieme prima delle vacanze.</p>
-          <span class="hub-card-cta">Sfoglia la galleria →</span>
         </a>
       </div>
     </div>

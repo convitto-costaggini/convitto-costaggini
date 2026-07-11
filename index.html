@@ -195,10 +195,6 @@
     .triptych-wrap { position:relative; height:160px; overflow:hidden; background:var(--bosco); }
     .triptych-img { position:absolute; top:0; height:100%; width:42%; display:block; }
     .triptych-img img { width:100%; height:100%; object-fit:cover; display:block; }
-    /* Foto laboratorio musicale: il riquadro è basso e largo, la fascia centrale
-       tagliava le teste dei ragazzi — sposto l'inquadratura leggermente più in
-       basso nella foto sorgente per farle rientrare intere */
-    .img-lab { object-position:center 28%; }
     .t-left  { left:0; z-index:1;
       -webkit-mask-image:linear-gradient(to right,#000 0%,#000 69%,transparent 100%);
               mask-image:linear-gradient(to right,#000 0%,#000 69%,transparent 100%); }
@@ -470,16 +466,16 @@
           <!-- Trittico statico: 3 foto sfumate ai bordi, sempre visibili insieme -->
           <div class="triptych-wrap" aria-hidden="true">
             <picture class="triptych-img t-left">
-              <source type="image/webp" srcset="img/Educatori.webp"/>
-              <img src="img/Educatori.jpg" alt="" loading="lazy"/>
+              <source type="image/webp" srcset="img/educatori-triptych.webp"/>
+              <img src="img/educatori-triptych.jpg" alt="" loading="lazy"/>
             </picture>
             <picture class="triptych-img t-mid">
               <source type="image/webp" srcset="img/mensa-convitto.webp"/>
               <img src="img/mensa-convitto.jpg" alt="" loading="lazy"/>
             </picture>
             <picture class="triptych-img t-right">
-              <source type="image/webp" srcset="img/lab-musicale.webp"/>
-              <img src="img/lab-musicale.jpg" alt="" loading="lazy" class="img-lab"/>
+              <source type="image/webp" srcset="img/lab-musicale-triptych.webp"/>
+              <img src="img/lab-musicale-triptych.jpg" alt="" loading="lazy"/>
             </picture>
           </div>
           <!-- Testo + pulsanti nella stessa riga -->

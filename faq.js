@@ -54,7 +54,7 @@
 
     { id:'uscite', tags:['vita','genitori'], pill:'⏱ 25 secondi',
       q:`Quando può uscire o tornare a casa?`,
-      a:`I convittori rientrano a casa <strong>ogni fine settimana</strong> (venerdì pomeriggio, ritorno domenica sera o lunedì mattina). Durante la settimana è prevista una libera uscita quotidiana (17:30–19:15) previa autorizzazione scritta dei genitori, con rientro entro le 22:00. Le uscite straordinarie infrasettimanali richiedono richiesta scritta o via email con copia del documento; si possono delegare persone di fiducia per il ritiro. <a href="regolamento-guida.html">Regolamento uscite &rarr;</a>` },
+      a:`I convittori rientrano a casa <strong>ogni fine settimana</strong> (venerdì pomeriggio, ritorno domenica sera o lunedì mattina). Durante la settimana è prevista una libera uscita quotidiana (17:30–19:15) previa autorizzazione scritta dei genitori, con rientro entro le 22:00. Le uscite straordinarie infrasettimanali richiedono richiesta scritta o via email con copia del documento; si possono delegare persone di fiducia per il ritiro. <a href="regolamento-guida.html#art-uscite">Regolamento uscite &rarr;</a>` },
 
     { id:'telefono', tags:['genitori'],
       q:`Mio figlio può chiamarmi quando vuole?`,
@@ -62,11 +62,11 @@
 
     { id:'studio', tags:['vita','genitori'], pill:'⏱ 20 secondi',
       q:`Riuscirà a studiare? Lo studio è seguito?`,
-      a:`Ogni pomeriggio, dalle 15:30 alle 17:15, c'è lo <strong>studio guidato e obbligatorio</strong> con gli educatori: non solo "fare i compiti", ma costruire metodo, autonomia e abitudine allo studio. Gli educatori sono presenti su tutti i piani, aiutano e verificano il lavoro. Per difficoltà persistenti si attivano supporti aggiuntivi con la famiglia e il Consiglio di Classe; DSA e BES sono seguiti con piani personalizzati. <a href="servizi.html">Lo studio guidato &rarr;</a>` },
+      a:`Ogni pomeriggio, dalle 15:30 alle 17:15, c'è lo <strong>studio guidato e obbligatorio</strong> con gli educatori: non solo "fare i compiti", ma costruire metodo, autonomia e abitudine allo studio. Gli educatori sono presenti su tutti i piani, aiutano e verificano il lavoro. Per difficoltà persistenti si attivano supporti aggiuntivi con la famiglia e il Consiglio di Classe; DSA e BES sono seguiti con piani personalizzati. <a href="servizi.html#studio">Lo studio guidato &rarr;</a>` },
 
     { id:'mensa', tags:['vita','mensa','genitori'], pill:'⏱ 15 secondi',
       q:`Cosa si mangia? Come sono gestite le allergie?`,
-      a:`Quattro pasti al giorno con prodotti locali del territorio reatino e menù concordati con la <strong>ASL di Rieti</strong>, a rotazione settimanale; si mangia tutti insieme in sala mensa. Per i ragazzi più selettivi gli educatori vigilano con discrezione che mangino a sufficienza, senza forzature. Allergie, intolleranze e diete speciali — anche religiose o etiche — sono gestite con menù dedicati: basta segnalarle all'iscrizione con il certificato del medico curante. <a href="ammissione.html">Modulo allergie e intolleranze &rarr;</a>` },
+      a:`Quattro pasti al giorno con prodotti locali del territorio reatino e menù concordati con la <strong>ASL di Rieti</strong>, a rotazione settimanale; si mangia tutti insieme in sala mensa. Per i ragazzi più selettivi gli educatori vigilano con discrezione che mangino a sufficienza, senza forzature. Allergie, intolleranze e diete speciali — anche religiose o etiche — sono gestite con menù dedicati: basta segnalarle all'iscrizione con il certificato del medico curante. <a href="ammissione.html#acc-allergie-wrap">Modulo allergie e intolleranze &rarr;</a>` },
 
     { id:'notte', tags:['vita','sicurezza','genitori'], pill:'⏱ 15 secondi',
       q:`Chi c'è di notte? È al sicuro?`,
@@ -114,15 +114,15 @@
 
     { id:'cosa-guadagna', tags:['vita','emotivo'], pill:'⏱ 30 secondi',
       q:`Cosa ci guadagna mio figlio, oltre alla scuola?`,
-      a:`È la domanda giusta. Oltre alla scuola, al Convitto un ragazzo impara a esprimersi (Laboratorio Musicale, teatro, concerto-saggio annuale), a stare con gli altri (sport, sala ricreativa, amicizie che durano una vita), a essere autonomo (gestione del tempo e degli spazi, regole condivise) e a guardare lontano (stage, orientamento, una rete di alumni in tutto il mondo). Molti ex convittori dicono che il Convitto è stata l'esperienza formativa più importante della loro vita. <a href="comunita.html">Alumni e community &rarr;</a>` },
+      a:`È la domanda giusta. Oltre alla scuola, al Convitto un ragazzo impara a esprimersi (Laboratorio Musicale, teatro, concerto-saggio annuale), a stare con gli altri (sport, sala ricreativa, amicizie che durano una vita), a essere autonomo (gestione del tempo e degli spazi, regole condivise) e a guardare lontano (stage, orientamento, una rete di alumni in tutto il mondo). Molti ex convittori dicono che il Convitto è stata l'esperienza formativa più importante della loro vita. <a href="comunita.html#alumni">Alumni e community &rarr;</a>` },
 
     { id:'sanzioni', tags:['iscrizione'],
       q:`Esistono sanzioni disciplinari? Quali?`,
-      a:`Il Regolamento prevede quattro livelli: <strong>avvertimento verbale</strong> per mancanze lievi (ritardo alla sveglia, disordine in camera); <strong>avvertimento scritto</strong> con avviso alla famiglia, fino alla limitazione della libera uscita, per mancanze lievi reiterate; <strong>sospensione</strong> dal Convitto (fino a 5 giorni, su proposta del Consiglio di Disciplina) per mancanze gravi; <strong>esclusione</strong>, deliberata dal Consiglio d'Istituto, per mancanze gravissime. I provvedimenti possono essere convertiti in attività utili alla comunità. <a href="regolamento-guida.html">Disciplina e sanzioni &rarr;</a>` },
+      a:`Il Regolamento prevede quattro livelli: <strong>avvertimento verbale</strong> per mancanze lievi (ritardo alla sveglia, disordine in camera); <strong>avvertimento scritto</strong> con avviso alla famiglia, fino alla limitazione della libera uscita, per mancanze lievi reiterate; <strong>sospensione</strong> dal Convitto (fino a 5 giorni, su proposta del Consiglio di Disciplina) per mancanze gravi; <strong>esclusione</strong>, deliberata dal Consiglio d'Istituto, per mancanze gravissime. I provvedimenti possono essere convertiti in attività utili alla comunità. <a href="regolamento-guida.html#sezione-6">Disciplina e sanzioni &rarr;</a>` },
 
     { id:'semiconvitto', tags:['iscrizione','semiconvitto'],
       q:`Cos'è il Semiconvitto? A chi è rivolto?`,
-      a:`È il servizio per gli studenti del Costaggini che <strong>non alloggiano</strong> in Convitto: il semiconvittore pranza in mensa e partecipa allo studio pomeridiano guidato. La retta, fissata annualmente dal Consiglio d'Istituto, dà diritto al pranzo e all'assistenza educativa per il tempo di permanenza; vale lo stesso regolamento dei convittori. <a href="semiconvitto.html">Richiesta di Semiconvitto &rarr;</a>` }
+      a:`È il servizio per gli studenti del Costaggini che <strong>non alloggiano</strong> in Convitto: il semiconvittore pranza in mensa e partecipa allo studio pomeridiano guidato. La retta, fissata annualmente dal Consiglio d'Istituto, dà diritto al pranzo e all'assistenza educativa per il tempo di permanenza; vale lo stesso regolamento dei convittori. <a href="semiconvitto.html#sc-form">Richiesta di Semiconvitto &rarr;</a>` }
   ];
 
   window.FAQ_DATA = FAQ; // esposto per usi futuri (es. base di conoscenza dell'assistente)

@@ -169,6 +169,24 @@
     @media(min-width:1024px) {
       .search-wrap { padding: 0 2rem; }
     }
+
+    /* ── IL TUO PERCORSO ── */
+    .who-section { padding:3.5rem 1.25rem; background:var(--bco); }
+    .who-section .w { max-width:1080px; margin:0 auto; }
+    .who-head { text-align:center; margin-bottom:2rem; }
+    .who-head .lbl { font-family:var(--fu); font-size:.62rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--oro); margin-bottom:.5rem; }
+    .who-head h2 { font-family:var(--fd); font-weight:300; font-size:clamp(1.6rem,4vw,2.3rem); color:var(--bosco); margin:0; }
+    .who-head h2 em { font-style:italic; color:var(--oro); }
+    .who-grid { display:grid; gap:1.25rem; grid-template-columns:1fr; }
+    @media(min-width:560px){ .who-grid { grid-template-columns:1fr 1fr; } }
+    @media(min-width:900px){ .who-grid { grid-template-columns:repeat(3,1fr); } }
+    .who-card { display:flex; flex-direction:column; align-items:center; text-align:center; background:var(--av); border:1px solid var(--av3); border-radius:14px; padding:2rem 1.5rem; text-decoration:none; transition:transform var(--ease), box-shadow var(--ease), border-color var(--ease); }
+    .who-card:hover { transform:translateY(-5px); box-shadow:var(--sh-md); border-color:var(--oro); }
+    .who-ico { width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--oro2),var(--oro3)); display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin-bottom:1.1rem; flex-shrink:0; }
+    .who-title { font-family:var(--fd); font-weight:400; font-size:1.25rem; color:var(--bosco); margin:0 0 .5rem; }
+    .who-desc { font-size:.82rem; color:var(--txt2); line-height:1.65; margin:0 0 1.1rem; }
+    .who-cta { margin-top:auto; font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--oro); }
+    .who-card:hover .who-cta { color:var(--bosco); }
   </style>
   <script type="application/ld+json">
   {
@@ -259,6 +277,40 @@
       <div id="search-status" class="sr-only" aria-live="polite" role="status"></div>
     </div>
   </div>
+
+  <!-- IL TUO PERCORSO -->
+  <section class="who-section">
+    <div class="w">
+      <div class="who-head">
+        <p class="lbl">Il tuo percorso</p>
+        <h2>Chi sei, <em>oggi</em>?</h2>
+      </div>
+      <div class="who-grid">
+
+        <a href="orientamento.html" class="who-card">
+          <div class="who-ico">🎒</div>
+          <h3 class="who-title">Futuro convittore</h3>
+          <p class="who-desc">Tour virtuale, quiz per scoprire il tuo talento, una giornata tipo, il regolamento spiegato bene: tutto per capire se il Convitto fa per te.</p>
+          <span class="who-cta">Inizia il percorso di orientamento →</span>
+        </a>
+
+        <a href="genitori.html" class="who-card">
+          <div class="who-ico">👨‍👩‍👧</div>
+          <h3 class="who-title">Genitore</h3>
+          <p class="who-desc">Tuo figlio o tua figlia è già qui? Trovi qui le risposte alle domande più frequenti, pensate per te.</p>
+          <span class="who-cta">Vai alla guida per i genitori →</span>
+        </a>
+
+        <a href="alumni.html" class="who-card">
+          <div class="who-ico">🎓</div>
+          <h3 class="who-title">Alumno / Alumna</h3>
+          <p class="who-desc">Sei passato di qui e vuoi restare in contatto? Entra nella community e ritrova chi ha condiviso i tuoi stessi anni.</p>
+          <span class="who-cta">Scopri la community Alumni →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
 
   <!-- INTRO STRIP -->
   <section id="intro">

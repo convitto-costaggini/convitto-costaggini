@@ -46,6 +46,13 @@
     .hub-featured h2 em { font-style:italic; color:var(--oro3); }
     .hub-featured p { font-family:var(--fu); font-size:.82rem; color:rgba(245,240,232,.6); line-height:1.7; margin-bottom:1rem; }
     .hub-sep { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--oro); margin:2.5rem 0 .5rem; padding-bottom:.5rem; border-bottom:1px solid var(--av3); }
+    .who-hurry-bar { display:flex; align-items:center; gap:.85rem; background:var(--av2); border:1px solid var(--av3); border-radius:10px; padding:.85rem 1.25rem; text-decoration:none; transition:var(--ease); }
+    .who-hurry-bar:hover { border-color:var(--oro); background:var(--av); }
+    .who-hurry-ico { font-size:1.3rem; flex-shrink:0; }
+    .who-hurry-txt { font-family:var(--fu); font-size:.8rem; color:var(--txt2); line-height:1.5; flex:1; }
+    .who-hurry-txt strong { color:var(--bosco); }
+    .who-hurry-cta { font-family:var(--fu); font-size:.62rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--oro); flex-shrink:0; white-space:nowrap; }
+    @media(max-width:560px){ .who-hurry-bar { flex-wrap:wrap; } .who-hurry-cta { width:100%; text-align:center; padding-top:.4rem; border-top:1px solid var(--av3); margin-top:.4rem; } }
   </style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
@@ -62,6 +69,14 @@
       <h1>Orientamento al <em>Convitto</em></h1>
       <p class="sub">Tutto quello che serve per capire se il Convitto Costaggini fa per te — prima di fare qualsiasi scelta.</p>
     </div>
+  </div>
+
+  <div class="w" style="margin-top:1.5rem">
+    <a href="in-2-minuti.html" class="who-hurry-bar">
+      <span class="who-hurry-ico" aria-hidden="true">⏱️</span>
+      <span class="who-hurry-txt"><strong>Hai fretta?</strong> Le 10 domande più frequenti, risposte immediate, in 2 minuti.</span>
+      <span class="who-hurry-cta">Vai alla lettura rapida →</span>
+    </a>
   </div>
 
   <section>
@@ -110,6 +125,38 @@
           <h2 class="hub-card-title">Hai <em>dubbi?</em></h2>
           <p class="hub-card-desc">Le domande che fanno tutti i genitori e tutti i ragazzi — con risposte dirette, senza giri di parole.</p>
           <span class="hub-card-cta">Leggi le FAQ →</span>
+        </a>
+      </div>
+
+      <p class="hub-sep">— Conosci il Convitto più da vicino —</p>
+      <div class="hub-grid">
+        <a href="laboratorio-musicale.html" class="hub-card light rv">
+          <div class="hub-card-icon">🎼</div>
+          <p class="hub-card-tag">Da oltre 20 anni</p>
+          <h2 class="hub-card-title">Il Laboratorio <em>Musicale</em></h2>
+          <p class="hub-card-desc">Chitarra, canto, percorsi individuali e d'insieme. Uno dei cuori pulsanti della vita convittuale.</p>
+          <span class="hub-card-cta">Scopri il Laboratorio →</span>
+        </a>
+        <a href="servizi.html" class="hub-card light rv d1">
+          <div class="hub-card-icon">🛎️</div>
+          <p class="hub-card-tag">Tutti i servizi</p>
+          <h2 class="hub-card-title">Ristorazione, alloggi <em>e assistenza</em></h2>
+          <p class="hub-card-desc">Mensa, camere, studio guidato, sport, salute: cosa trovi ogni giorno al Costaggini.</p>
+          <span class="hub-card-cta">Guarda i servizi →</span>
+        </a>
+        <a href="quiz-settimana.html" class="hub-card light rv d2">
+          <div class="hub-card-icon">🎮</div>
+          <p class="hub-card-tag">Gioco interattivo</p>
+          <h2 class="hub-card-title">Costruisci la tua <em>settimana tipo</em></h2>
+          <p class="hub-card-desc">Trascina lezioni, sport, musica e tempo libero nel tuo orario ideale. Scopri come sarebbe la tua settimana qui.</p>
+          <span class="hub-card-cta">Gioca ora →</span>
+        </a>
+        <a href="regolamento-guida.html" class="hub-card light rv d3">
+          <div class="hub-card-icon">📖</div>
+          <p class="hub-card-tag">Senza sorprese</p>
+          <h2 class="hub-card-title">Il Regolamento <em>spiegato bene</em></h2>
+          <p class="hub-card-desc">Le regole del Convitto raccontate in modo chiaro, non il testo normativo integrale. Per sapere cosa aspettarsi.</p>
+          <span class="hub-card-cta">Leggilo →</span>
         </a>
       </div>
 

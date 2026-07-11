@@ -187,6 +187,23 @@
     .who-desc { font-size:.82rem; color:var(--txt2); line-height:1.65; margin:0 0 1.1rem; }
     .who-cta { margin-top:auto; font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--oro); }
     .who-card:hover .who-cta { color:var(--bosco); }
+
+    /* ── TRITTICO FOTO "OPEN DAY & TOUR VIRTUALE" ── */
+    /* 3 foto affiancate con sovrapposizione del 13%, ciascuna sfumata
+       ai bordi (mask-image) così da fondersi dolcemente con la vicina.
+       Tutte e tre restano sempre visibili insieme, nessuna animazione. */
+    .triptych-wrap { position:relative; height:160px; overflow:hidden; background:var(--bosco); }
+    .triptych-img { position:absolute; top:0; height:100%; width:42%; display:block; }
+    .triptych-img img { width:100%; height:100%; object-fit:cover; display:block; }
+    .t-left  { left:0; z-index:1;
+      -webkit-mask-image:linear-gradient(to right,#000 0%,#000 69%,transparent 100%);
+              mask-image:linear-gradient(to right,#000 0%,#000 69%,transparent 100%); }
+    .t-mid   { left:29%; z-index:2;
+      -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 31%,#000 69%,transparent 100%);
+              mask-image:linear-gradient(to right,transparent 0%,#000 31%,#000 69%,transparent 100%); }
+    .t-right { left:58%; z-index:1;
+      -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 31%,#000 100%);
+              mask-image:linear-gradient(to right,transparent 0%,#000 31%,#000 100%); }
   </style>
   <script type="application/ld+json">
   {
@@ -446,8 +463,21 @@
 
         <!-- Open Day + Tour -->
         <div style="border-radius:10px;overflow:hidden;border:1px solid var(--av3);background:linear-gradient(135deg,var(--bosco),#1a3a1b)">
-          <!-- Foto in alto, più alta -->
-          <div style="background:url('https://www.alberghierorieti.edu.it/wp-content/uploads/IMG_4257-640x480.jpg') center/cover no-repeat;height:160px"></div>
+          <!-- Trittico statico: 3 foto sfumate ai bordi, sempre visibili insieme -->
+          <div class="triptych-wrap" aria-hidden="true">
+            <picture class="triptych-img t-left">
+              <source type="image/webp" srcset="img/mensa-convitto.webp"/>
+              <img src="img/mensa-convitto.jpg" alt="" loading="lazy"/>
+            </picture>
+            <picture class="triptych-img t-mid">
+              <source type="image/webp" srcset="img/lab-musicale.webp"/>
+              <img src="img/lab-musicale.jpg" alt="" loading="lazy"/>
+            </picture>
+            <picture class="triptych-img t-right">
+              <source type="image/webp" srcset="img/Educatori.webp"/>
+              <img src="img/Educatori.jpg" alt="" loading="lazy"/>
+            </picture>
+          </div>
           <!-- Testo + pulsanti nella stessa riga -->
           <div style="padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
             <div style="flex:1;min-width:160px">

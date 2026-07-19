@@ -284,22 +284,22 @@ function alumniCopyEmail(e, email) {
       document.body.removeChild(ta);
     }
   } catch(err) { /* clipboard non disponibile, procede solo col mailto */ }
-  alumniShowToast('✓ Email copiata: ' + email);
+  alumniShowToast('✓ Email copiata: ' + email, 'Se non si apre il tuo programma di posta, incollala nella tua casella abituale (Gmail, Outlook…) per scrivere.');
 }
 
-function alumniShowToast(msg) {
+function alumniShowToast(msg, submsg) {
   const old = document.getElementById('alumni-toast');
   if (old) old.remove();
   const t = document.createElement('div');
   t.id = 'alumni-toast';
-  t.textContent = msg;
-  t.style.cssText = 'position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%);background:#1a2e1b;color:#F5F0E8;border:1px solid rgba(184,146,42,.4);border-radius:30px;padding:.55rem 1.1rem;font-family:var(--fu),sans-serif;font-size:.75rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:10000;opacity:0;transition:opacity .25s;max-width:90vw;text-align:center';
+  t.innerHTML = '<div>' + msg + '</div>' + (submsg ? '<div style="font-weight:400;font-size:.68rem;opacity:.75;margin-top:.25rem">' + submsg + '</div>' : '');
+  t.style.cssText = 'position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%);background:#1a2e1b;color:#F5F0E8;border:1px solid rgba(184,146,42,.4);border-radius:14px;padding:.65rem 1.1rem;font-family:var(--fu),sans-serif;font-size:.75rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:10000;opacity:0;transition:opacity .25s;max-width:90vw;text-align:center;line-height:1.4';
   document.body.appendChild(t);
   requestAnimationFrame(() => { t.style.opacity = '1'; });
   setTimeout(() => {
     t.style.opacity = '0';
     setTimeout(() => t.remove(), 300);
-  }, 2500);
+  }, 4000);
 }
   
   // Converte un link di condivisione Google Drive nel suo URL incorporabile.

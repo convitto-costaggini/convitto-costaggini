@@ -177,17 +177,27 @@
       padding: .5rem 1.25rem 1.75rem;
       position: relative;
     }
-    #jumpnav::after {
-  content: '›';
+    #jumpnav { padding-bottom: 2.15rem; }
+#jumpnav::after {
+  content: '';
   position: absolute; top: .5rem; bottom: 1.75rem; right: 0;
-  width: 44px; pointer-events: none;
-  display: flex; align-items: center; justify-content: flex-end;
-  padding-right: .35rem;
-  font-family: var(--fu); font-size: 1.3rem; font-weight: 800;
-  color: rgba(212,170,74,.85);
-  background: linear-gradient(to right, rgba(44,62,45,0), var(--bosco) 65%);
-  transition: opacity .25s;
+  width: 32px; pointer-events: none;
+  background: linear-gradient(to right, rgba(44,62,45,0), var(--bosco));
 }
+@media(min-width:768px) { #jumpnav::after { display: none; } }
+
+/* Barra di scorrimento — indicatore di posizione, non cliccabile */
+.jn-track {
+  position: absolute; left: 1.25rem; right: 1.25rem; bottom: .55rem;
+  height: 3px; border-radius: 3px;
+  background: rgba(245,240,232,.15);
+  overflow: hidden; pointer-events: none;
+}
+.jn-thumb {
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: var(--oro2); border-radius: 3px;
+}
+@media(min-width:768px) { .jn-track { display: none; } }
 #jumpnav.jn-end::after { opacity: 0; }
     @media(min-width:768px) { #jumpnav::after { display: none; } }
     .jumpnav-wrap {

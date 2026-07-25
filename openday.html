@@ -658,24 +658,6 @@ tourRender();
 // Auto-advance ogni 5s
 setInterval(()=>tourGo(1), 5000);
 
-// ═══════════════════════════════════════════════════
-// PRENOTAZIONE VISITA
-// ═══════════════════════════════════════════════════
-function prenotaVisita() {
-  const nome  = document.getElementById('vis-nome').value.trim();
-  const email = document.getElementById('vis-email').value.trim();
-  if (!nome || !email) { alert('Inserisci nome ed email per procedere.'); return; }
-
-  // Apri il mailto precompilato
-  const note = document.getElementById('vis-note').value.trim();
-  const data = document.getElementById('vis-data').value.trim();
-  const tel  = document.getElementById('vis-tel').value.trim();
-  const body = encodeURIComponent(`Richiesta visita guidata al Convitto Costaggini\n\nNome: ${nome}\nEmail: ${email}\nTelefono: ${tel}\nPreferenza: ${data}\n\nNote: ${note}`);
-  window.location.href = `mailto:convitto@alberghierorieti.it?subject=Richiesta%20visita%20guidata&body=${body}`;
-
-  document.getElementById('vis-ok').style.display = 'block';
-}
-
 // IntersectionObserver .rv
 const obs = new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}

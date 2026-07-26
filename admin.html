@@ -1259,7 +1259,7 @@ async function famAzione(id, nuovoStato) {
         + '<button id="fam-ok-btn-err" style="background:linear-gradient(135deg,#B8922A,#D4AA4A);color:#1a2e1b;border:none;cursor:pointer;font-family:var(--fu);font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.65rem 1.75rem;border-radius:40px">OK</button>';
     }
 
-    ov.appendChild(box);
+ov.appendChild(box);
     document.body.appendChild(ov);
     const famOkBtn = document.getElementById('fam-ok-btn-succ') || document.getElementById('fam-ok-btn-err');
     famOkBtn.addEventListener('click', () => { ov.remove(); document.body.style.overflow=''; });

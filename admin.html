@@ -1682,37 +1682,41 @@ async function labLoad() {
     document.getElementById('badge-lab').style.display = 'none';
     return;
   }
-  // badge
   const badge = document.getElementById('badge-lab');
   badge.textContent = rows.length;
   badge.style.display = 'inline';
 
   lista.innerHTML = rows.map(r => {
     const data = new Date(r.created_at).toLocaleDateString('it-IT', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-    const interessi = Array.isArray(r.interessi) && r.interessi.length ? r.interessi.join(', ') : '—';
-    var noteHtml = r.note ? '<div style="font-size:.82rem;background:#faf7f0;border-left:3px solid var(--oro);padding:.5rem .75rem;border-radius:0 6px 6px 0;color:var(--txt2)"><em>' + r.note + '</em></div>' : '';
+    const interessi = Array.isArray(r.interessi) && r.interessi.length ? escapeHtml(r.interessi.join(', ')) : '—';
+    const nomeCompleto = escapeHtml((r.cognome || '') + ' ' + (r.nome || ''));
+    var noteHtml = r.note ? '<div style="font-size:.82rem;background:#faf7f0;border-left:3px solid var(--oro);padding:.5rem .75rem;border-radius:0 6px 6px 0;color:var(--txt2)"><em>' + escapeHtml(r.note) + '</em></div>' : '';
     return '<div class="fam-card approvata" style="margin-bottom:.85rem">'
       + '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem">'
         + '<div>'
-          + '<strong style="font-size:1rem;color:var(--bosco)">' + r.cognome + ' ' + r.nome + '</strong>'
-          + '<span style="font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#e8f5e9;color:#1d6f42;padding:.15rem .5rem;border-radius:4px;margin-left:.5rem">' + (r.classe || '—') + '</span>'
+          + '<strong style="font-size:1rem;color:var(--bosco)">' + nomeCompleto + '</strong>'
+          + '<span style="font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#e8f5e9;color:#1d6f42;padding:.15rem .5rem;border-radius:4px;margin-left:.5rem">' + escapeHtml(r.classe || '—') + '</span>'
         + '</div>'
         + '<span style="font-family:var(--fu);font-size:.6rem;color:var(--txt2)">' + data + '</span>'
       + '</div>'
       + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem .85rem;font-size:.82rem;margin-bottom:.6rem">'
-        + '<div><span style="font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6b5a2a">Email</span><br>' + (r.email || '—') + '</div>'
-        + '<div><span style="font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6b5a2a">Strumento</span><br>' + (r.strumento || '—') + '</div>'
-        + '<div><span style="font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6b5a2a">Esperienza</span><br>' + (r.esperienza || '—') + '</div>'
+        + '<div><span style="font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6b5a2a">Email</span><br>' + escapeHtml(r.email || '—') + '</div>'
+        + '<div><span style="font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6b5a2a">Strumento</span><br>' + escapeHtml(r.strumento || '—') + '</div>'
+        + '<div><span style="font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6b5a2a">Esperienza</span><br>' + escapeHtml(r.esperienza || '—') + '</div>'
         + '<div><span style="font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6b5a2a">Interessi</span><br>' + interessi + '</div>'
       + '</div>'
       + noteHtml
       + '<div style="margin-top:.75rem;text-align:right">'
-        + '<button onclick="labElimina(' + r.id + ',\"' + r.cognome + ' ' + r.nome + '\")" style="padding:.3rem .8rem;font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid #dc2626;background:none;color:#dc2626;border-radius:6px;cursor:pointer">🗑 Elimina</button>'
+        + '<button class="btn-lab-elimina" data-id="' + r.id + '" data-nome="' + nomeCompleto + '" style="padding:.3rem .8rem;font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid #dc2626;background:none;color:#dc2626;border-radius:6px;cursor:pointer">🗑 Elimina</button>'
       + '</div>'
     + '</div>';
   }).join('');
-}
 
+  // Un solo listener delegato invece di onclick inline con stringhe concatenate
+  lista.querySelectorAll('.btn-lab-elimina').forEach(btn => {
+    btn.addEventListener('click', () => labElimina(btn.dataset.id, btn.dataset.nome));
+  });
+}
 async function labElimina(id, nome) {
   if (!confirm('Eliminare la richiesta di ' + nome + '?')) return;
   await fetch(SB_N + '/rest/v1/lab_musicale_iscrizioni?id=eq.' + id, {

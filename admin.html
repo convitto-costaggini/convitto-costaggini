@@ -1272,7 +1272,31 @@ ov.appendChild(box);
   }
 }
 
+async function famSvuota() {
+  if (!famStatoCorrente) { alert('Carica prima una lista (In attesa, Approvate o Rifiutate).'); return; }
+  if (famStatoCorrente === 'in_attesa') {
+    alert('Le richieste "In attesa" non si possono svuotare in blocco: sono azioni ancora da completare. Approvale o rifiutale prima, una per una.');
+    return;
+  }
+  const etichetta = famStatoCorrente === 'approvata' ? 'approvate' : 'rifiutate';
+  if (!await admConfirm({
+    icon: '🗑️',
+    title: 'Svuota lista ' + etichetta,
+    message: 'Verranno eliminate TUTTE le richieste ' + etichetta + '. Questa operazione è irreversibile e non cancella gli account già creati, solo lo storico delle richieste.',
+    confirmText: 'Svuota',
+    type: 'danger'
+  })) return;
 
+  const resp = await fetch(SB_N + '/rest/v1/richieste_accesso?stato=eq.' + famStatoCorrente, {
+    method: 'DELETE',
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN() }
+  });
+  if (resp.ok) {
+    await famLoad(famStatoCorrente);
+  } else {
+    alert('Errore durante lo svuotamento: ' + resp.status);
+  }
+}
 
 // ═══ MAPPA PIN ═══
 async function loadPins() {

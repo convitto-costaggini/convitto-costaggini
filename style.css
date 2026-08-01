@@ -211,7 +211,7 @@ a { color: inherit; }
   pointer-events: none;
 }
 @media(max-width:640px) {
-  .page-hero .w::after { width: 110px; height: 110px; top: auto; bottom: -.5rem; left: auto; right: -.5rem; transform: none; }
+  .page-hero .w::after { width: 72px; height: 72px; top: 30px; bottom: auto; left: auto; right: 0; transform: none; }
 }
 .page-hero .breadcrumb, .breadcrumb {
   display: flex; align-items: center; gap: .4rem;

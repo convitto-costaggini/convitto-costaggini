@@ -18,6 +18,21 @@
 <meta name="theme-color" content="#2C3E2D">
 <link rel="stylesheet" href="style.css">
 <style>
+    .ca-hero { --hero-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='rgba(245,240,232,0.13)' stroke-width='0.7' stroke-linecap='round' stroke-linejoin='round'%3E %3Ccircle cx='50' cy='50' r='38'/%3E %3Cpath d='M50 6 L50 15 M50 85 L50 94 M6 50 L15 50 M85 50 L94 50'/%3E %3Cpath d='M50 28 L59 50 L50 72 L41 50 Z'/%3E %3C/svg%3E"); }
+    .ca-hero .ca-wrap::after {
+      content:'';
+      position:absolute;
+      top:50%; left:min(500px, calc(100% - 160px));
+      transform:translateY(-50%);
+      width:170px; height:170px;
+      background-image: var(--hero-icon);
+      background-repeat:no-repeat; background-position:center; background-size:contain;
+      z-index:-1; pointer-events:none;
+    }
+    @media(max-width:640px){
+      .ca-hero .ca-wrap::after{ width:72px;height:72px; top:30px; left:auto; right:0; bottom:auto; transform:none; }
+    }
+
   /* ===== Sezione "Come arrivare" — autosufficiente =====
      Per integrarla nel sito: mantieni questo <style> e tutto ciò che
      sta dentro <main class="ca">. Header e footer globali (shared.js /

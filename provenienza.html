@@ -20,6 +20,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <style>
+    .page-hero { --hero-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='rgba(245,240,232,0.13)' stroke-width='0.7' stroke-linecap='round' stroke-linejoin='round'%3E %3Cpath d='M12 22 L37 14 L63 22 L88 14 L88 78 L63 86 L37 78 L12 86 Z'/%3E %3Cpath d='M37 14 L37 78 M63 22 L63 86'/%3E %3Cpath d='M50 32 C 58 32 63 38 63 45 C 63 54 50 66 50 66 C 50 66 37 54 37 45 C 37 38 42 32 50 32 Z'/%3E %3Ccircle cx='50' cy='44' r='4'/%3E %3C/svg%3E"); }
+    @media(max-width:640px) { .page-hero .w::after { top: 44px; } }
+
     body { background: var(--av); }
     #pv-map { height: 480px; border-radius: 12px; overflow: hidden; border: 1px solid var(--av3); }
     @media(max-width:600px){ #pv-map { height: 320px; } }

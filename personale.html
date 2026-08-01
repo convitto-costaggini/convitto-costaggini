@@ -13,14 +13,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .per-table { width:100%; border-collapse:collapse; font-size:.88rem; margin-top:1.25rem; }
-    .per-table th { background:var(--bosco); color:var(--av); padding:.75rem 1rem; text-align:left; font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
-    .per-table td { padding:.75rem 1rem; border-bottom:1px solid var(--av3); color:var(--txt); vertical-align:top; }
-    .per-table tr:last-child td { border-bottom:none; }
-    .per-table tr:nth-child(even) td { background:var(--av2); }
-    .per-table td:first-child { font-family:var(--fd); font-size:1rem; color:var(--bosco); }
-    .per-placeholder { color:rgba(44,62,45,.55); font-style:italic; font-size:.82rem; }
     .per-section-title { font-family:var(--fd); font-size:1.5rem; font-weight:400; color:var(--bosco); margin:2.5rem 0 .4rem; padding-bottom:.5rem; border-bottom:2px solid var(--oro2); display:inline-block; }
+    .per-placeholder { color:rgba(44,62,45,.55); font-style:italic; font-size:.82rem; }
+
+    /* Elenco personale — card (stesso linguaggio visivo di organizzazione.html) */
+    .pers-grid { display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1.25rem; }
+    @media(min-width:560px){ .pers-grid { grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); } }
+    .pers-card { background:#fff; border:1px solid var(--av3); border-radius:10px; padding:1.1rem 1.25rem; display:flex; align-items:flex-start; gap:.85rem; transition:box-shadow .2s; }
+    .pers-card:hover { box-shadow:0 4px 16px rgba(0,0,0,.08); }
+    .pers-ico { font-size:1.6rem; flex-shrink:0; line-height:1; }
+    .pers-role { font-family:var(--fu); font-size:.58rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--oro); margin-bottom:.2rem; display:block; }
+    .pers-name { font-family:var(--fd); font-size:.95rem; color:var(--bosco); line-height:1.2; }
+    .pers-note { font-family:var(--fu); font-size:.68rem; color:var(--txt2); margin-top:.2rem; line-height:1.4; }
+    .pers-note.scheda { color:rgba(44,62,45,.5); font-style:italic; }
   </style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
@@ -53,92 +58,157 @@
 
       <!-- DIRIGENZA -->
       <h2 class="per-section-title">Dirigenza</h2>
-      <div style="overflow-x:auto">
-        <table class="per-table" aria-label="Dirigenza">
-          <thead><tr><th>Cognome e Nome</th><th>Ruolo</th><th>Email istituzionale</th><th>Note</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>Barbonetti Giovanni Luca</td>
-              <td>Dirigente Scolastico</td>
-              <td><a href="mailto:rirh010007@istruzione.it" style="color:var(--bosco2)">rirh010007@istruzione.it</a></td>
-              <td>In reggenza</td>
-            </tr>
-            <tr>
-              <td>Mazzeo Annalisa</td>
-              <td>Vicepreside</td>
-              <td>—</td>
-              <td>Collaboratrice del Dirigente Scolastico · Referente operativa Convitto</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="pers-grid">
+        <div class="pers-card">
+          <span class="pers-ico">🏛️</span>
+          <div>
+            <span class="pers-role">Dirigente Scolastico</span>
+            <div class="pers-name">Prof. Giovanni Luca Barbonetti</div>
+            <p class="pers-note">In reggenza · Responsabile legale del Convitto e dell'Istituto</p>
+            <p class="pers-note"><a href="mailto:rirh010007@istruzione.it" style="color:var(--bosco2)">rirh010007@istruzione.it</a></p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">🎓</span>
+          <div>
+            <span class="pers-role">Vicepreside</span>
+            <div class="pers-name">Prof.ssa Annalisa Mazzeo</div>
+            <p class="pers-note">Collaboratrice vicaria del Dirigente Scolastico · Referente operativa Convitto</p>
+          </div>
+        </div>
       </div>
 
       <!-- PERSONALE EDUCATIVO -->
       <h2 class="per-section-title">Personale educativo</h2>
-      <div style="overflow-x:auto">
-        <table class="per-table" aria-label="Personale educativo">
-          <thead><tr><th>Cognome e Nome</th><th>Ruolo</th><th>Incarichi aggiuntivi</th><th>Foto/Bio</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>Montorselli Gianfranco</td>
-              <td>Educatore</td>
-              <td>Coordinatore dei Convitti</td>
-              <td>Scheda</td>
-            </tr>
-            <tr>
-              <td>Gaggiano Michele</td>
-              <td>Educatore</td>
-              <td>Responsabile Laboratorio Musicale</td>
-              <td><a href="educatori.html#team" style="color:var(--bosco2)">Scheda →</a></td>
-            </tr>
-            <tr>
-              <td>Marchetti S.</td>
-              <td>Educatore</td>
-              <td>Referente Orientamento e Marketing · Laboratorio sportivo</td>
-              <td class="per-placeholder">Scheda in arrivo</td>
-            </tr>
-            <tr>
-              <td>Bigetti A.R.</td>
-              <td>Educatrice</td>
-              <td>Referente Accoglienza, Volontariato e Laboratorio teatrale e cinema · Cogestione</td>
-              <td class="per-placeholder">Scheda in arrivo</td>
-            </tr>
-            <tr>
-              <td>Desideri A.</td>
-              <td>Educatrice</td>
-              <td>Referente Accoglienza ed Educazione alla prevenzione delle dipendenze</td>
-              <td class="per-placeholder">Scheda in arrivo</td>
-            </tr>
-            <tr>
-              <td>Giansanti E.</td>
-              <td>Educatrice</td>
-              <td>Referente Progetto Lettura e Biblioteca · Cogestione</td>
-              <td class="per-placeholder">Scheda in arrivo</td>
-            </tr>
-            <tr>
-              <td>Desideri C.</td>
-              <td>Educatrice</td>
-              <td>Cogestione</td>
-              <td class="per-placeholder">Scheda in arrivo</td>
-            </tr>
-            <tr>
-              <td colspan="4" class="per-placeholder" style="font-size:.86rem;padding:1.1rem 1rem">Le schede complete (foto e testi di presentazione) saranno pubblicate non appena disponibili. Nel frattempo è possibile conoscere il lavoro dell'équipe nella pagina <a href="educatori.html" style="color:var(--bosco2);font-style:normal">Gli Educatori →</a></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="pers-grid">
+        <div class="pers-card">
+          <span class="pers-ico">👤</span>
+          <div>
+            <span class="pers-role">Educatore</span>
+            <div class="pers-name">Gianfranco Montorselli</div>
+            <p class="pers-note">Coordinatore dei Convitti</p>
+            <p class="pers-note scheda">Scheda</p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">🧭</span>
+          <div>
+            <span class="pers-role">Educatore · Referente</span>
+            <div class="pers-name">S. Marchetti</div>
+            <p class="pers-note">Orientamento e marketing · Laboratorio sportivo</p>
+            <p class="pers-note scheda">Scheda in arrivo</p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">🎭</span>
+          <div>
+            <span class="pers-role">Educatrice · Referente</span>
+            <div class="pers-name">A.R. Bigetti</div>
+            <p class="pers-note">Accoglienza · Volontariato · Laboratorio teatrale e cinema · Cogestione</p>
+            <p class="pers-note scheda">Scheda in arrivo</p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">🤝</span>
+          <div>
+            <span class="pers-role">Educatrice · Referente</span>
+            <div class="pers-name">A. Desideri</div>
+            <p class="pers-note">Accoglienza · Educazione alla prevenzione delle dipendenze</p>
+            <p class="pers-note scheda">Scheda in arrivo</p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">📚</span>
+          <div>
+            <span class="pers-role">Educatrice · Referente</span>
+            <div class="pers-name">E. Giansanti</div>
+            <p class="pers-note">Progetto Lettura e Biblioteca · Cogestione</p>
+            <p class="pers-note scheda">Scheda in arrivo</p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">🎸</span>
+          <div>
+            <span class="pers-role">Educatore · Referente</span>
+            <div class="pers-name">Michele Gaggiano</div>
+            <p class="pers-note">Responsabile del Laboratorio Musicale · Ideatore del sito web</p>
+            <p class="pers-note"><a href="educatori.html#team" style="color:var(--bosco2);font-weight:700">Scheda →</a></p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">🎨</span>
+          <div>
+            <span class="pers-role">Educatrice · Referente</span>
+            <div class="pers-name">C. Desideri</div>
+            <p class="pers-note">Cogestione</p>
+            <p class="pers-note scheda">Scheda in arrivo</p>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:.82rem;color:var(--txt2);margin-top:1.1rem;line-height:1.7">Le schede complete (foto e testi di presentazione) saranno pubblicate non appena disponibili. Nel frattempo è possibile conoscere il lavoro dell'équipe nella pagina <a href="educatori.html" style="color:var(--bosco2)">Gli Educatori →</a></p>
+
+      <!-- ASSISTENZA SANITARIA E SERVIZI GENERALI -->
+      <h2 class="per-section-title">Assistenza sanitaria e servizi generali</h2>
+      <div class="pers-grid">
+        <div class="pers-card">
+          <span class="pers-ico">🏥</span>
+          <div>
+            <span class="pers-role">Infermiere</span>
+            <div class="pers-name">Personale sanitario</div>
+            <p class="pers-note">Infermeria diurna · Medico convenzionato SSN di riferimento</p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">🍳</span>
+          <div>
+            <span class="pers-role">Cuochi</span>
+            <div class="pers-name">Responsabile cucina</div>
+            <p class="pers-note">4 pasti al giorno · Menù concordato con specialista dell'alimentazione</p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">🧺</span>
+          <div>
+            <span class="pers-role">Guardarobiere</span>
+            <div class="pers-name">Servizio lavanderia</div>
+            <p class="pers-note">Lavaggio e stiratura del corredo personale dei convittori</p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">🔑</span>
+          <div>
+            <span class="pers-role">Custodi</span>
+            <div class="pers-name">Sorveglianza H24</div>
+            <p class="pers-note">Presidio accessi · Cancello 22:30–6:00 · Sicurezza perimetrale</p>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">🧹</span>
+          <div>
+            <span class="pers-role">Collaboratori scolastici</span>
+            <div class="pers-name">Personale ATA</div>
+            <p class="pers-note">Pulizie · Sorveglianza piani · Supporto cucina e mensa presso il Convitto</p>
+          </div>
+        </div>
       </div>
 
       <!-- PERSONALE AMMINISTRATIVO -->
       <h2 class="per-section-title">Personale amministrativo</h2>
-      <div style="overflow-x:auto">
-        <table class="per-table" aria-label="Personale amministrativo">
-          <thead><tr><th>Ruolo</th><th>Ufficio / Sede</th></tr></thead>
-          <tbody>
-            <tr><td>DSGA</td><td>Segreteria</td></tr>
-            <tr><td>Assistenti amministrativi</td><td>Segreteria didattica</td></tr>
-            <tr><td>Collaboratori scolastici</td><td>Convitto</td></tr>
-          </tbody>
-        </table>
+      <div class="pers-grid">
+        <div class="pers-card">
+          <span class="pers-ico">🗂️</span>
+          <div>
+            <span class="pers-role">DSGA</span>
+            <div class="pers-name">Ufficio di segreteria</div>
+          </div>
+        </div>
+        <div class="pers-card">
+          <span class="pers-ico">📋</span>
+          <div>
+            <span class="pers-role">Assistenti amministrativi</span>
+            <div class="pers-name">Segreteria didattica</div>
+          </div>
+        </div>
       </div>
       <p class="per-placeholder" style="font-size:.84rem;margin-top:.75rem">I nominativi del personale amministrativo saranno pubblicati previo consenso degli interessati.</p>
 

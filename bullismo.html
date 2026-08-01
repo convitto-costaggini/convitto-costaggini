@@ -57,6 +57,9 @@
 }
 </script>
   <style>
+    .page-hero { --hero-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='rgba(245,240,232,0.13)' stroke-width='0.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M50 8 L83 21 L83 50 C83 73 66 88 50 94 C34 88 17 73 17 50 L17 21 Z'/%3E %3Cpath d='M36 51 L46 62 L65 38'/%3E%3C/svg%3E"); }
+    @media(max-width:640px) { .page-hero .w::after { top: 44px; } }
+
     /* ── CARD TIPOLOGIE ── */
     .tema-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem; }
     @media(min-width:600px){ .tema-grid { grid-template-columns: 1fr 1fr; } }

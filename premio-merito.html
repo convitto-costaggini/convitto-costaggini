@@ -18,6 +18,21 @@
 <meta name="theme-color" content="#2C3E2D">
 <link rel="stylesheet" href="style.css">
 <style>
+    .pm-hero { --hero-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='rgba(245,240,232,0.13)' stroke-width='0.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='50' cy='60' r='20'/%3E %3Ccircle cx='50' cy='60' r='12'/%3E %3Cpath d='M50 52 L52.5 58 L59 58 L53.5 62 L55.5 68 L50 64 L44.5 68 L46.5 62 L41 58 L47.5 58 Z'/%3E %3Cpath d='M42 42 L30 6 L38 6 L48 40'/%3E %3Cpath d='M58 42 L70 6 L62 6 L52 40'/%3E %3Cpath d='M30 6 L34 12 L38 6'/%3E %3Cpath d='M70 6 L66 12 L62 6'/%3E%3C/svg%3E"); }
+    .pm-hero .pm-wrap::after {
+      content:'';
+      position:absolute;
+      top:50%; left:min(520px, calc(100% - 170px));
+      transform:translateY(-50%);
+      width:190px; height:190px;
+      background-image: var(--hero-icon);
+      background-repeat:no-repeat; background-position:center; background-size:contain;
+      z-index:-1; pointer-events:none;
+    }
+    @media(max-width:640px){
+      .pm-hero .pm-wrap::after{ width:72px;height:72px; top:30px; left:auto; right:0; bottom:auto; transform:none; }
+    }
+
   /* ===== Sezione "Premio al Merito" — autosufficiente =====
      Per integrarla nel sito: tieni questo <style> e tutto ciò che
      sta dentro <main class="pm">. Header e footer globali

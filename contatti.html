@@ -19,7 +19,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .page-hero { --hero-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='rgba(245,240,232,0.13)' stroke-width='0.7' stroke-linecap='round' stroke-linejoin='round'%3E %3Ccircle cx='25' cy='23' r='9'/%3E %3Ccircle cx='75' cy='77' r='9'/%3E %3Cpath d='M31 29 C 45 43, 45 43, 40 51 C 35 59, 42 66, 50 61 C 58 69, 58 69, 65 64 C 70 69, 70 69, 69 71'/%3E %3C/svg%3E"); }
+    .page-hero { --hero-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='rgba(245,240,232,0.13)' stroke-width='0.7' stroke-linecap='round' stroke-linejoin='round'%3E %3Cpath d='M20 78 Q20 66 32 66 L68 66 Q80 66 80 78 L80 82 Q80 86 76 86 L24 86 Q20 86 20 82 Z'/%3E %3Ccircle cx='35' cy='76' r='5'/%3E %3Ccircle cx='50' cy='76' r='5'/%3E %3Ccircle cx='65' cy='76' r='5'/%3E %3Cpath d='M30 66 Q30 46 50 46 Q70 46 70 66'/%3E %3Cpath d='M38 46 Q50 30 62 46'/%3E %3Cpath d='M44 30 Q50 18 56 30'/%3E %3Ccircle cx='24' cy='60' r='5'/%3E %3Cpath d='M24 55 L24 46 Q24 40 30 40'/%3E %3C/svg%3E"); }
+    @media(max-width:640px) { .page-hero .w::after { top: -16px; } }
 
     .cinfo-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
     .ci-ico { width: 36px; height: 36px; border-radius: 50%; background: var(--bosco); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }

@@ -95,6 +95,11 @@
     .pers-cta-ico { font-size:2rem; flex-shrink:0; }
     .pers-cta-text { flex:1; min-width:220px; }
     .pers-cta-text p { font-size:.85rem; color:var(--txt2); line-height:1.65; margin:.15rem 0 0; }
+    @media(max-width:560px){
+      .pers-cta { flex-direction:column; align-items:stretch; text-align:center; }
+      .pers-cta-text { min-width:0; }
+      .pers-cta a.btn-outline-dark { white-space:normal; text-align:center; width:100%; }
+    }
     
     /* Patto */
     .patto-section { background:var(--bosco); padding:5rem 1.25rem; scroll-margin-top: 2rem; }    .patto-intro { font-family:var(--fd); font-size:clamp(1.1rem,3vw,1.5rem); font-style:italic; color:rgba(245,240,232,.75); max-width:640px; margin:1rem 0 2.5rem; line-height:1.65; }    .patto-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }    @media(max-width:640px){ .patto-grid { grid-template-columns:1fr; } }    .patto-col { background:rgba(245,240,232,.04); border:1px solid rgba(184,146,42,.2); border-radius:10px; padding:1.5rem; }    .patto-col-title { font-family:var(--fu); font-size:.62rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--oro2); margin-bottom:1rem; display:flex; align-items:center; gap:.5rem; }    .patto-item { display:flex; align-items:flex-start; gap:.65rem; padding:.6rem 0; border-bottom:1px solid rgba(245,240,232,.06); }    .patto-item:last-child { border-bottom:none; }    .patto-check { color:var(--oro2); font-size:.8rem; flex-shrink:0; margin-top:.1rem; }    .patto-item p { font-family:var(--fu); font-size:.8rem; color:rgba(245,240,232,.65); line-height:1.65; margin:0; }    .patto-firma { background:rgba(245,240,232,.03); border:1px solid rgba(184,146,42,.15); border-radius:10px; padding:2rem; margin-top:2rem; text-align:center; }    .patto-firma p { font-family:var(--fd); font-size:1.1rem; font-style:italic; color:rgba(245,240,232,.5); line-height:1.65; }    .firma-line { width:120px; height:1px; background:rgba(184,146,42,.25); margin:.85rem auto; }

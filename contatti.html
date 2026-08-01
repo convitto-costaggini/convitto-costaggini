@@ -58,11 +58,13 @@
     .orari-strip .lbl { color: #D4AA4A; }
     .orari-strip .lbl::before { background: #D4AA4A; }
     .orari-grid { display: grid; gap: .75rem; margin-top: 1.5rem; }
-    .og-item { background: rgba(255,255,255,.06); border: 1px solid rgba(184,146,42,.15); border-radius: 6px; padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    .og-label { font-size: .8rem; font-weight: 600; color: var(--av); }
-    .og-time { font-family: var(--fd); font-size: 1.1rem; font-weight: 300; color: var(--oro3); }
+    .og-item { background: rgba(255,255,255,.06); border: 1px solid rgba(184,146,42,.15); border-radius: 6px; padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; min-width: 0; }
+    .og-label { font-size: .8rem; font-weight: 600; color: var(--av); overflow-wrap: break-word; }
+    .og-time { font-family: var(--fd); font-size: 1.1rem; font-weight: 300; color: var(--oro3); overflow-wrap: break-word; word-break: break-word; max-width: 100%; }
+    .og-note { display: block; font-family: var(--fu); font-size: .68rem; font-weight: 400; letter-spacing: .01em; color: rgba(245,240,232,.6); line-height: 1.4; margin-top: .2rem; }
     @media(min-width:640px){ .orari-grid { grid-template-columns: 1fr 1fr; } }
     @media(min-width:900px){ .orari-strip { padding: 4rem 2rem; } .orari-grid { grid-template-columns: repeat(3,1fr); } }
+    @media(max-width:639px){ .og-item { flex-direction: column; align-items: flex-start; } .og-time { text-align: left; } }
 
     /* Success/error messages */
     .form-msg { display: none; padding: 1rem 1.25rem; border-radius: 4px; font-size: .88rem; font-weight: 600; margin-top: .75rem; }
@@ -242,8 +244,8 @@
       </div>
 
       <div class="orari-grid">
-        <div class="og-item"><span class="og-label">Lunedì – Giovedì (mattina)</span><span class="og-time">9:00 – 13:00</span></div>
-        <div class="og-item"><span class="og-label">Lunedì – Giovedì (sera)</span><span class="og-time">17:00 – 19:00</span></div>
+        <div class="og-item"><span class="og-label">Lunedì – Giovedì (mattina)</span><span class="og-time">9:00 – 13:00 <small class="og-note">(telefono presidiato dal personale ATA)</small></span></div>
+        <div class="og-item"><span class="og-label">Lunedì – Giovedì (sera)</span><span class="og-time">17:00 – 19:00 <small class="og-note">(orario da utilizzarsi preferenzialmente per parlare con gli Educatori e le Educatrici)</small></span></div>
         <div class="og-item"><span class="og-label">Sabato</span><span class="og-time">Chiuso</span></div>
         <div class="og-item"><span class="og-label">Domenica e festivi</span><span class="og-time">Chiuso</span></div>
         <div class="og-item"><span class="og-label">Coordinatore — per appuntamento</span><span class="og-time">Centralino 0746 296862 · <a href="mailto:gianfranco.montorselli@alberghierorieti.it" style="color:inherit">gianfranco.montorselli@alberghierorieti.it</a></span></div>
@@ -255,9 +257,9 @@
         <div style="position:absolute;top:-1rem;right:1rem;font-size:3rem;opacity:.06;font-family:var(--fd)">❤</div>
         <p style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro);margin-bottom:.6rem">👨‍🏫 Gli Educatori sono sempre disponibili</p>
         <p style="font-size:.88rem;color:rgba(245,240,232,.82);line-height:1.8;margin:0">
-          Preferiamo sempre un appuntamento concordato — per garantire la giusta attenzione e il tempo necessario. Ma un genitore che si presenta spontaneamente chiedendo notizie sull'andamento del figlio
-          <strong>troverà sempre ascolto e disponibilità</strong> da parte degli Educatori.
-          Nessun genitore viene mai rimandato indietro.
+          Preferiamo sempre un appuntamento concordato, al fine di garantire la giusta attenzione e il tempo necessario. Ma un genitore che si presenta spontaneamente chiedendo notizie sull'andamento del figlio, troverà, come già accennato, sempre,
+          <strong>ascolto e disponibilità</strong> da parte degli Educatori.
+          Nessun papà o mamma verrà mai rimandato indietro.
         </p>
         <a href="educatori.html" style="display:inline-block;margin-top:.85rem;font-family:var(--fu);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#D4AA4A;text-decoration:none;border-bottom:1px solid rgba(212,170,74,.4);padding-bottom:1px">→ Conosci gli Educatori</a>
       </div>

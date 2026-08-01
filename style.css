@@ -200,9 +200,9 @@ a { color: inherit; }
 .page-hero .w::after {
   content: '';
   position: absolute;
-  top: 50%; left: min(600px, calc(100% - 170px));
+  top: 50%; left: min(590px, calc(100% - 220px));
   transform: translateY(-50%);
-  width: 190px; height: 190px;
+  width: 260px; height: 260px;
   background-image: var(--hero-icon);
   background-repeat: no-repeat;
   background-position: center;
@@ -211,7 +211,7 @@ a { color: inherit; }
   pointer-events: none;
 }
 @media(max-width:640px) {
-  .page-hero .w::after { width: 72px; height: 72px; top: 30px; bottom: auto; left: auto; right: 0; transform: none; }
+  .page-hero .w::after { width: 100px; height: 100px; top: -40px; bottom: auto; left: auto; right: 14px; transform: none; }
 }
 .page-hero .breadcrumb, .breadcrumb {
   display: flex; align-items: center; gap: .4rem;

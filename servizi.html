@@ -136,12 +136,17 @@
     .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
     .hero-jump a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:var(--ease); }
     .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
-    .hero-jump a .hj-ico { font-size:.78rem; line-height:1; }
+    .hero-jump a .hj-ico { font-size:.78rem; line-height:1; display:inline-flex; align-items:center; justify-content:center; width:1em; height:1em; overflow:hidden; flex-shrink:0; }
     @media(max-width:560px){
       .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
       .hero-jump a { padding:.55rem .5rem; }
     }
     #ristorazione, #alloggi, #studio, #sport, #tecnologia, #musica, #salute, #orari { scroll-margin-top: 90px; }
+
+    /* Icona decorativa dell'hero: di default 260px (style.css); qui più piccola
+       perché in questa pagina condivide lo spazio con la riga di pulsanti hero-jump */
+    .page-hero .w::after { width: 170px; height: 170px; }
+    @media(max-width:640px){ .page-hero .w::after { width: 70px; height: 70px; } }
     
     /* Overlay immagine dinamico e correzioni per ritratti */
     .img-container { position: relative; width: 100%; border-radius: 8px; overflow: hidden; }

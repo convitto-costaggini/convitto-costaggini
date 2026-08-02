@@ -96,6 +96,12 @@
     .da-success h2 { font-family:var(--fd); font-size:1.8rem; font-weight:300; color:var(--bosco); margin-bottom:.5rem; }
     .da-success p { font-family:var(--fu); font-size:.85rem; color:#374151; line-height:1.75; max-width:460px; margin:0 auto .85rem; }
 
+    /* Errore */
+    .da-error { display:none; background:linear-gradient(135deg,#fef2f2,#fff5f5); border:1px solid #fecaca; border-radius:12px; padding:2.25rem; text-align:center; margin-top:1.5rem; }
+    .da-error h2 { font-family:var(--fd); font-size:1.5rem; font-weight:300; color:#b91c1c; margin-bottom:.5rem; }
+    .da-error p { font-family:var(--fu); font-size:.85rem; color:#374151; line-height:1.75; max-width:460px; margin:0 auto .75rem; }
+    .da-error .da-error-contatti { font-size:.78rem; color:#6b7280; }
+
     /* Note */
     .da-nota { font-family:var(--fu); font-size:.65rem; color:#6b7280; line-height:1.6; }
     .da-nota strong { color:#374151; }
@@ -105,7 +111,7 @@
     .da-progress-fill { height:100%; background:linear-gradient(90deg,var(--bosco),var(--oro)); border-radius:4px; transition:width .4s; }
 
     @media print {
-      .da-hero, .da-footer, nav, footer, .da-progress { display:none !important; }
+      .da-hero, .da-footer, nav, footer, .da-progress, .da-error { display:none !important; }
       .da-section { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; }
     }
   </style>
@@ -380,13 +386,25 @@
               <button type="button" class="btn-stampa" onclick="window.print()">🖨️ Stampa</button>
               <button type="submit" class="btn-invia" id="da-submit">
                 <svg viewBox="0 0 24 24" width="16" height="16" style="fill:#fff"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                Invia alla Segreteria
+                <span id="da-submit-label">Invia alla Segreteria</span>
               </button>
             </div>
           </div>
         </div>
 
       </form><!-- fine form -->
+
+      <!-- Messaggio errore -->
+      <div class="da-error" id="da-error">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">⚠️</div>
+        <h2>Invio non riuscito</h2>
+        <p>Non siamo riusciti a inviare la domanda alla segreteria. <strong>I dati che hai inserito non sono andati persi</strong>: restano compilati qui sopra, puoi correggere e riprovare.</p>
+        <p class="da-error-contatti">Se il problema persiste, scrivi direttamente a <strong>rirh010007@istruzione.it</strong> oppure telefona alla segreteria — o stampa la domanda e consegnala di persona.</p>
+        <div style="margin-top:1.25rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+          <button type="button" class="btn-invia" id="da-retry">Riprova l'invio</button>
+          <button type="button" class="btn-stampa" onclick="window.print()">🖨️ Stampa la domanda</button>
+        </div>
+      </div>
 
       <!-- Messaggio successo -->
      <div class="da-success" id="da-success">
@@ -425,7 +443,10 @@ function updateProgress() {
 document.getElementById('da-form').addEventListener('input', updateProgress);
 document.getElementById('da-form').addEventListener('change', updateProgress);
 
-// Submit — usa mailto per inviare un riepilogo
+// Ultimo payload costruito, riusato dal pulsante "Riprova l'invio"
+let daUltimoPayload = null;
+
+// Submit — invia i dati al backend (GAS) e verifica davvero l'esito
 document.getElementById('da-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -497,18 +518,56 @@ NB: la domanda richiede firma autografa per la validità legale; contattare il g
     privacy: true
   };
 
-  const btn = document.getElementById('da-submit');
-  if (btn) { btn.disabled = true; btn.textContent = 'Invio in corso…'; }
-
-  fetch(CONTACT_GAS, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body: JSON.stringify(payload) })
-    .finally(() => {
-      document.querySelectorAll('#da-form input, #da-form select, #da-form textarea')
-        .forEach(el => el.disabled = true);
-      document.getElementById('da-submit').style.display = 'none';
-      document.getElementById('da-success').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  daUltimoPayload = payload;
+  daInviaDomanda(payload);
 });
+
+document.getElementById('da-retry').addEventListener('click', function() {
+  if (daUltimoPayload) daInviaDomanda(daUltimoPayload);
+});
+
+function daInviaDomanda(payload) {
+  const btn = document.getElementById('da-submit');
+  const btnLabel = document.getElementById('da-submit-label');
+  const retryBtn = document.getElementById('da-retry');
+  const errBox = document.getElementById('da-error');
+
+  errBox.style.display = 'none';
+  if (btn) { btn.disabled = true; }
+  if (btnLabel) { btnLabel.textContent = 'Invio in corso…'; }
+  if (retryBtn) { retryBtn.disabled = true; retryBtn.textContent = 'Invio in corso…'; }
+
+  fetch(CONTACT_GAS, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  })
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(esito => {
+      if (esito && esito.success) {
+        document.querySelectorAll('#da-form input, #da-form select, #da-form textarea')
+          .forEach(el => el.disabled = true);
+        btn.style.display = 'none';
+        errBox.style.display = 'none';
+        document.getElementById('da-success').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        daMostraErrore();
+      }
+    })
+    .catch(() => daMostraErrore());
+
+  function daMostraErrore() {
+    if (btn) { btn.disabled = false; }
+    if (btnLabel) { btnLabel.textContent = 'Invia alla Segreteria'; }
+    if (retryBtn) { retryBtn.disabled = false; retryBtn.textContent = "Riprova l'invio"; }
+    errBox.style.display = 'block';
+    errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
 
 updateProgress();
 </script>

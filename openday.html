@@ -164,6 +164,12 @@
     .of-input { width:100%; padding:.7rem 1rem; background:rgba(255,255,255,.06); border:1.5px solid rgba(184,146,42,.25); border-radius:6px; color:#fff; font-family:var(--fu); font-size:16px; outline:none; box-sizing:border-box; transition:border-color .2s; }
     .of-input:focus { border-color:var(--oro2); }
 
+    /* Errore prenotazione visita */
+    .ov-error { display:none; background:rgba(153,27,27,.18); border:1px solid rgba(248,113,113,.4); border-radius:10px; padding:1.5rem; margin-top:1.25rem; text-align:center; }
+    .ov-error h3 { font-family:var(--fd); font-size:1.2rem; font-weight:300; color:#fca5a5; margin-bottom:.5rem; }
+    .ov-error p { font-family:var(--fu); font-size:.78rem; color:rgba(245,240,232,.75); line-height:1.7; margin:0 auto .5rem; max-width:440px; }
+    .ov-error .btn-gold { margin-top:.5rem; }
+
   </style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
@@ -565,7 +571,16 @@
             Oppure scrivi direttamente a <a href="mailto:rirh010007@istruzione.it" style="color:var(--oro2)">rirh010007@istruzione.it</a>
           </p>
           </form>
-          </p>
+
+          <!-- Errore prenotazione -->
+          <div class="ov-error" id="ov-error">
+            <h3>Non siamo riusciti a salvare la richiesta</h3>
+            <p>I dati inseriti nel modulo non sono andati persi: puoi correggere e riprovare l'invio.</p>
+            <p style="color:rgba(245,240,232,.55)">Se il problema persiste, scrivi direttamente a <strong>rirh010007@istruzione.it</strong> oppure telefona al Convitto (0746 296862).</p>
+            <div style="margin-top:.75rem">
+              <button type="button" class="btn-gold" id="ov-retry">Riprova l'invio</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -665,13 +680,69 @@ const obs = new IntersectionObserver(es=>es.forEach(e=>{
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
 
-/* invio prenotazione visita via backend email */
+/* invio prenotazione visita: 1) salvataggio reale su Supabase (dato primario,
+   condiziona davvero il redirect a grazie.html) 2) notifica email di cortesia
+   allo staff (best-effort: se fallisce viene solo loggata, la prenotazione
+   resta comunque salvata e visibile in admin.html → tab Open Day) */
   (function(){
   const CONTACT_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
   const SB_N   = 'https://sawclsysqnjsvbobioqo.supabase.co';
   const SB_PUB = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
   const f = document.querySelector('form[name="richiesta-visita"]');
   if (!f) return;
+
+  const btn = f.querySelector('button[type=submit]');
+  const errBox = document.getElementById('ov-error');
+  const retryBtn = document.getElementById('ov-retry');
+  let ovUltimoDati = null;
+
+  function ovMostraErrore() {
+    if (btn) { btn.disabled = false; btn.textContent = 'Invia richiesta visita →'; }
+    if (retryBtn) { retryBtn.disabled = false; retryBtn.textContent = "Riprova l'invio"; }
+    errBox.style.display = 'block';
+    errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function ovInvia(dati) {
+    errBox.style.display = 'none';
+    if (btn) { btn.disabled = true; btn.textContent = 'Invio…'; }
+    if (retryBtn) { retryBtn.disabled = true; retryBtn.textContent = 'Invio…'; }
+
+    // 1. Salva la prenotazione su Supabase — è il dato che conta davvero,
+    //    quindi il redirect a "grazie" avviene solo se questo va a buon fine.
+    fetch(SB_N + '/rest/v1/prenotazioni_openday', {
+      method: 'POST',
+      headers: {
+        'apikey': SB_PUB,
+        'Authorization': 'Bearer ' + SB_PUB,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(dati.supabase)
+    })
+      .then(r => { if (!r.ok) throw new Error('Supabase HTTP ' + r.status); })
+      .then(() => {
+        // 2. Notifica email di cortesia — best-effort, non blocca il redirect:
+        //    la prenotazione è già al sicuro su Supabase in ogni caso.
+        fetch(CONTACT_GAS, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(dati.email)
+        })
+          .then(r2 => { if (!r2.ok) throw new Error('GAS HTTP ' + r2.status); return r2.json(); })
+          .then(esito => {
+            if (!esito || !esito.success) console.warn('Notifica email Open Day non riuscita (prenotazione comunque salvata su Supabase):', esito);
+          })
+          .catch(err => console.warn('Notifica email Open Day non riuscita (prenotazione comunque salvata su Supabase):', err));
+
+        window.location = 'grazie.html';
+      })
+      .catch(err => {
+        console.error('Errore insert prenotazioni_openday:', err);
+        ovMostraErrore();
+      });
+  }
+
   f.addEventListener('submit', function(e){
     e.preventDefault();
     let ok = true;
@@ -689,31 +760,9 @@ Partecipanti: ${g('vis-persone') || '—'}
 
 Note / domande:
 ${g('vis-note') || '—'}`;
-    const payload = {
-      tipo: 'openday',
-      nome: g('vis-nome'),
-      email: g('vis-email'),
-      telefono: g('vis-tel'),
-      data_preferita: g('vis-data'),
-      persone: g('vis-persone'),
-      note: g('vis-note'),
-      oggetto: 'Prenotazione Open Day — ' + g('vis-nome'),
-      messaggio: corpo,
-      privacy: true
-    };
-    const btn = f.querySelector('button[type=submit]');
-    if (btn) { btn.disabled = true; btn.textContent = 'Invio…'; }
 
-    // 1. Salva la prenotazione su Supabase, così appare nel pannello admin (tab Open Day)
-    fetch(SB_N + '/rest/v1/prenotazioni_openday', {
-      method: 'POST',
-      headers: {
-        'apikey': SB_PUB,
-        'Authorization': 'Bearer ' + SB_PUB,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({
+    ovUltimoDati = {
+      supabase: {
         nome: g('vis-nome'),
         email: g('vis-email'),
         telefono: g('vis-tel'),
@@ -721,13 +770,25 @@ ${g('vis-note') || '—'}`;
         persone: g('vis-persone'),
         note: g('vis-note'),
         stato: 'nuova'
-      })
-    }).then(r => { if (!r.ok) return r.text().then(t => console.error('Errore insert prenotazioni_openday:', r.status, t)); })
-  .catch(e => console.error('Errore rete insert prenotazioni_openday:', e));
+      },
+      email: {
+        tipo: 'openday',
+        nome: g('vis-nome'),
+        email: g('vis-email'),
+        telefono: g('vis-tel'),
+        data_preferita: g('vis-data'),
+        persone: g('vis-persone'),
+        note: g('vis-note'),
+        oggetto: 'Prenotazione Open Day — ' + g('vis-nome'),
+        messaggio: corpo,
+        privacy: true
+      }
+    };
+    ovInvia(ovUltimoDati);
+  });
 
-    // 2. Invia l'email di notifica (comportamento esistente, invariato)
-    fetch(CONTACT_GAS, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body: JSON.stringify(payload) })
-      .finally(() => { window.location = 'grazie.html'; });
+  retryBtn.addEventListener('click', function(){
+    if (ovUltimoDati) ovInvia(ovUltimoDati);
   });
 })();
   

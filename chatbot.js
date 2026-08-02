@@ -62,7 +62,7 @@ const KB=[
   // ── RETTE E COSTI ──
   {k:['retta','costo','quanto costa','quanto si paga','tariffa','prezzo','euro','pagamento',
       'isee','agevolazion','riduzion','sconto','esonero','borsa di studio','rata'],
-   r:'Le rette sono deliberate ogni anno dal Consiglio d\'Istituto e calibrate sull\'<strong>ISEE familiare</strong>. Sono previste riduzioni per situazioni economiche certificate e borse di studio regionali.<br><br>💶 <a href="ammissione.html#tariffe">Tariffe e agevolazioni →</a><br>✉️ Per un preventivo: <a href="contatti.html">Contattaci →</a>'},
+   r:'Le rette sono deliberate ogni anno dal Consiglio d\'Istituto, con un importo fisso uguale per tutte le famiglie (non è prevista una riduzione legata all\'ISEE). L\'ultima retta intera deliberata (A.S. 2025/26) è di <strong>1.600€ annui</strong>.<br><br>💶 <a href="ammissione.html#tariffe">Tariffe complete →</a><br>✉️ Per un preventivo: <a href="contatti.html">Contattaci →</a>'},
 
   // ── ORARI E GIORNATA ──
   {k:['orario','sveglia','quando','orari','giornata','cosa si fa','routine','programma',
@@ -225,7 +225,7 @@ const KB=[
   // ── CONVITTO VS COLLEGIO PRIVATO ──
   {k:['differenza','cos\'è un convitto','collegio privato','privatista','pubblico',
       'statale','costo rispetto a','convitto o collegio'],
-   r:'Il Convitto "Costaggini" è una struttura <strong>pubblica statale</strong> (MIUR), non un collegio privato. Le rette sono calibrate sull\'ISEE. Offre lo stesso livello di cura educativa dei collegi privati — ma con una vocazione pubblica e inclusiva.'},
+   r:'Il Convitto "Costaggini" è una struttura <strong>pubblica statale</strong> (MIUR), non un collegio privato. Le rette hanno un importo fisso, deliberato ogni anno dal Consiglio d\'Istituto. Offre lo stesso livello di cura educativa dei collegi privati — ma con una vocazione pubblica e inclusiva.'},
 
   // ── TRASPORTO ──
   {k:['trasporto','pullman','bus','navetta','come vanno a scuola','accompagnati',
@@ -319,7 +319,7 @@ const KB=[
 const SUGS_DEFAULT=['Ho fretta — dammi l\'essenziale','Come ci si iscrive?','Quanto costa?','C\'è il bullismo?','Lettera di un ex convittore'];
 const SUGS_MAP={
   iscri:    ['Quanto costa la retta?','Cosa devo portare?','Come si fa la domanda?'],
-  retta:    ['Ci sono agevolazioni ISEE?','Come ci si iscrive?','Borsa di studio?'],
+  retta:    ['Come si paga la retta?','Come ci si iscrive?','Cosa include la retta?'],
   orario:   ['Cosa si fa nel pomeriggio?','C\'è studio guidato?','A che ora si cena?'],
   camera:   ['C\'è il Wi-Fi?','Posso vedere le camere?','Posso cambiare camera?'],
   musica:   ['Chi sono gli educatori?','Cosa si fa nel pomeriggio?','Gli alumni?'],

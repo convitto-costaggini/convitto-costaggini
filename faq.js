@@ -34,7 +34,7 @@
 
     { id:'costo', tags:['iscrizione','genitori'], pill:'⏱ 20 secondi',
       q:`Quanto costa stare in Convitto?`,
-      a:`La retta è deliberata ogni anno dal Consiglio d'Istituto ed è calibrata sull'ISEE familiare: chi ha un ISEE basso paga meno — in alcuni casi anche zero — e sono previste riduzioni certificate e borse di studio regionali. Comprende vitto completo (quattro pasti al giorno), alloggio, studio guidato, attività e trasporto Convitto–scuola. Essendo una struttura pubblica statale, e non un collegio privato, i costi sono accessibili. Per il preventivo aggiornato: <a href="mailto:rirh010007@istruzione.it">rirh010007@istruzione.it</a>.` },
+      a:`La retta è deliberata ogni anno dal Consiglio d'Istituto. L'ultima retta intera deliberata (A.S. 2025/26) è di <strong>1.600€ annui</strong>, comprensiva di vitto completo, alloggio, studio guidato, attività e trasporto Convitto–scuola — <a href="ammissione.html#tariffe">tabella completa con importi e scadenze delle rate &rarr;</a>. Essendo una struttura pubblica statale, e non un collegio privato, i costi sono accessibili. Per il preventivo aggiornato: <a href="mailto:rirh010007@istruzione.it">rirh010007@istruzione.it</a>.` },
 
     { id:'apertura', tags:['iscrizione','vita'],
       q:`Quando è aperto il Convitto durante l'anno?`,

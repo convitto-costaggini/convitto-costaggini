@@ -22,22 +22,22 @@
   <link rel="stylesheet" href="style.css" />
   <style>
   #jumpnav { background: var(--bosco); padding: .5rem 1.25rem 1.75rem; position: relative; }
-#jumpnav::after {
-  content: '›';
+#jn-arrow {
   position: absolute; top: .5rem; bottom: 1.75rem; right: 0;
-  width: 34px; pointer-events: none;
+  width: 34px; border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--fu); font-size: 1.15rem; font-weight: 800;
-  color: rgba(212,170,74,.8);
+  color: rgba(212,170,74,.9);
   background: linear-gradient(to right, rgba(44,62,45,0), var(--bosco) 55%);
   animation: jnSwipe 1.7s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
 }
 @keyframes jnSwipe {
-  0%, 100% { transform: translateX(0); opacity: .5; }
+  0%, 100% { transform: translateX(0); opacity: .6; }
   50%      { transform: translateX(5px); opacity: 1; }
 }
-#jumpnav.jn-end::after { opacity: 0; animation: none; }
-@media(min-width:768px) { #jumpnav::after { display: none; } }
+#jumpnav.jn-end #jn-arrow { opacity: 0; pointer-events: none; animation: none; }
+@media(min-width:768px) { #jn-arrow { display: none; } }
     /* ── HERO ── */
     #hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; background: var(--bosco); overflow: hidden; }
     .hbg { position: absolute; top: -8%; left: 0; right: 0; bottom: -8%; background: linear-gradient(180deg, rgba(12,20,13,.60) 0%, rgba(12,20,13,.88) 100%), url('img/IMG_4374-scaled.jpg') center/cover no-repeat; will-change: transform; }
@@ -352,6 +352,7 @@
       <a href="#gal" class="jump-btn">🖼️ Galleria</a>
       <a href="#faq-home" class="jump-btn">❓ FAQ</a>
     </div>
+    <button id="jn-arrow" type="button" aria-label="Scorri per vedere altre sezioni">›</button>
   </nav>
 
   <!-- IL TUO PERCORSO -->
@@ -851,6 +852,7 @@ caricaNotizieHome();
 (function(){
   var wrap = document.querySelector('.jumpnav-wrap');
   var nav = document.getElementById('jumpnav');
+  var arrow = document.getElementById('jn-arrow');
   if (!wrap || !nav) return;
 
   function aggiornaFine(){
@@ -859,6 +861,14 @@ caricaNotizieHome();
   }
   wrap.addEventListener('scroll', aggiornaFine, { passive: true });
   aggiornaFine();
+
+  // Il pulsante ora è funzionante: un click scorre davvero la barra in avanti,
+  // non solo decorativo — risolve la confusione di chi ci clicca aspettandosi un'azione.
+  if (arrow) {
+    arrow.addEventListener('click', function(){
+      wrap.scrollBy({ left: 140, behavior: 'smooth' });
+    });
+  }
 
   // Animazione di richiamo: solo su mobile, solo se c'è davvero altro
   // da vedere, una volta sola per sessione — e MAI se l'utente ha

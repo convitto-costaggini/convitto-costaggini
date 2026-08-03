@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" /><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Educatori, custodi, cuochi, infermiere, accudienti: le persone che ogni giorno si prendono cura del Convitto Costaggini raccontate con le loro parole." />
+  <meta property="og:title" content="Voci del Personale — IPSSEOA &quot;Costaggini&quot; Rieti"/>
+  <meta property="og:description" content="Educatori, custodi, cuochi, infermiere, accudienti: chi si prende cura del Convitto &quot;Costaggini&quot; di Rieti, raccontato con le proprie parole."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Convitto Costaggini — Rieti"/>
+  <meta property="og:image" content="https://convitto-costaggini.github.io/convitto-costaggini/img/Educatori.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="theme-color" content="#2C3E2D" />
+  <title>Voci del Personale | "Costaggini" — Rieti</title>
+  <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/voci-del-personale.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #indice, #ruoli, #cap-1, #cap-2, #cap-3, #cap-4, #cap-5, #cap-6, #cap-7, #cap-8, #cap-9, #cap-10, #partecipa { scroll-margin-top: 90px; }
+
+    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
+    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:var(--ease); }
+    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
+    .cantiere-badge + .hero-jump { margin-top: 1.75rem; }
+    @media(max-width:640px) { .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; } .hero-jump a { padding:.55rem .5rem; } }
+
+    .cantiere-badge {
+      display: inline-flex; align-items: center; gap: .55rem;
+      border: 1px solid rgba(184,146,42,.55); background: rgba(184,146,42,.09);
+      border-radius: 40px; padding: .55rem 1.1rem; margin-top: 1.35rem;
+      font-family: var(--fu); font-size: .78rem; color: var(--oro3); line-height: 1.5; max-width: 580px;
+    }
+    .cantiere-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--oro2); flex-shrink: 0; animation: cantiere-pulse 2.2s ease-in-out infinite; }
+    @keyframes cantiere-pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+    @media (prefers-reduced-motion: reduce) { .cantiere-dot { animation: none; } }
+
+    /* — Chi intervistiamo — */
+    .ruoli-riga { display:flex; flex-wrap:wrap; gap:.65rem; justify-content:center; max-width:760px; margin:0 auto; }
+    .ruolo-chip {
+      display:inline-flex; align-items:center; gap:.5rem; background:var(--bco);
+      border:1px solid var(--av3); border-radius:40px; padding:.6rem 1.25rem;
+      font-family:var(--fu); font-size:.8rem; font-weight:600; color:var(--bosco2);
+      box-shadow: var(--sh-sm); transition: var(--ease);
+    }
+    .ruolo-chip:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+    .ruolo-chip .pt { width:6px; height:6px; border-radius:50%; background:var(--oro); flex-shrink:0; }
+
+    /* — Indice — */
+    .indice-domande { display: grid; gap: 0; max-width: 760px; margin: 0 auto; }
+    .indice-domande a {
+      display: flex; align-items: baseline; gap: 1.15rem; padding: 1rem .5rem;
+      text-decoration: none; color: var(--txt2); border-radius: 10px;
+      font-family: var(--fu); font-size: .93rem; transition: var(--ease);
+      border-bottom: 1px solid var(--av3);
+    }
+    .indice-domande a:hover { color: var(--bosco); background: var(--bco); box-shadow: var(--sh-sm); padding-left: .9rem; }
+    .indice-domande .num { font-family: var(--fd); font-style: italic; font-size: 1.25rem; color: var(--oro); width: 32px; flex-shrink: 0; }
+
+    /* — Capitoli — */
+    .capitolo { background: var(--bco); padding: 3.5rem 1.25rem; }
+    .capitolo.alt { background: var(--av2); }
+    .capitolo .w { max-width: 760px; }
+    .cap-eyebrow { display:flex; align-items:baseline; gap:.85rem; margin-bottom: 1rem; }
+    .cap-eyebrow .num { font-family: var(--fd); font-style: italic; font-size: 1.9rem; color: var(--oro); line-height: 1; }
+    .cap-eyebrow .line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--av3), transparent); }
+    .capitolo h2 {
+      font-family: var(--fd); font-weight: 400; color: var(--bosco);
+      font-size: clamp(1.35rem, 3.2vw, 1.75rem); line-height: 1.4; margin-bottom: 1.75rem;
+    }
+    .capitolo h2 em { font-style: italic; color: var(--bosco2); }
+
+    .voci-grid { display: grid; gap: 1rem; }
+    .voce-card {
+      display: flex; align-items: center; gap: 1rem;
+      background: #fff; border: 1px solid var(--av3); border-radius: 16px;
+      padding: 1.1rem 1.35rem; box-shadow: var(--sh-sm); transition: var(--ease);
+    }
+    .voce-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+    .voce-play {
+      width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%;
+      border: none; background: linear-gradient(135deg, var(--oro2), var(--oro3));
+      color: var(--bosco); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: .9rem; box-shadow: 0 3px 10px rgba(184,146,42,.35); transition: var(--ease);
+    }
+    .voce-play:hover { transform: scale(1.07); box-shadow: 0 5px 16px rgba(184,146,42,.5); }
+    .voce-body { flex: 1; min-width: 0; }
+    .voce-quote { font-family: var(--fd); font-style: italic; color: var(--txt); font-size: 1.02rem; line-height: 1.55; margin: 0 0 .35rem; }
+    .voce-meta { display: flex; align-items: center; gap: .5rem; }
+    .voce-nome { font-family: var(--fu); font-size: .75rem; font-weight: 700; color: var(--bosco2); }
+    .voce-ruolo {
+      font-family: var(--fu); font-size: .6rem; font-weight: 800; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--oro); background: rgba(184,146,42,.1);
+      padding: .18rem .55rem; border-radius: 20px;
+    }
+    .voce-vuoto {
+      display: flex; align-items: center; gap: .85rem;
+      background: transparent; border: 1.5px dashed var(--av3); border-radius: 16px;
+      padding: 1.1rem 1.35rem; font-family: var(--fd); font-style: italic;
+      color: var(--txt2); font-size: .98rem; opacity: .75;
+    }
+    .voce-vuoto .pt2 { width: 7px; height: 7px; border-radius: 50%; background: var(--av3); flex-shrink: 0; }
+  </style>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
+  <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+</head>
+<body data-page="voci-del-personale">
+<script src="nav-header.js"></script>
+<main id="main">
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso di navigazione">
+        <a href="index.html">Home</a><span>›</span><a href="organizzazione.html">Organizzazione</a><span>›</span><span aria-current="page">Voci del Personale</span>
+      </nav>
+      <div class="gold-bar"></div>
+      <h1>Voci del <em>Personale</em></h1>
+      <p class="sub">Educatori, custodi, cuochi, infermiere, accudienti. Le persone che tengono in piedi il Convitto ogni giorno, viste da dentro — con le loro parole, non con le nostre.</p>
+      <div class="cantiere-badge"><span class="cantiere-dot" aria-hidden="true"></span>Sezione in costruzione — in attesa delle voci di chi lavora ogni giorno al Convitto</div>
+      <nav class="hero-jump" aria-label="Vai a una sezione della pagina">
+        <a href="#ruoli">Chi intervistiamo</a>
+        <a href="#indice">Le domande</a>
+        <a href="#partecipa">Partecipa anche tu</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- CHI INTERVISTIAMO -->
+  <section id="ruoli" style="background:var(--bco);text-align:center">
+    <div class="w">
+      <p class="lbl" style="justify-content:center">Chi racconteremo</p>
+      <h2>Volti diversi, <em>una sola cura</em></h2>
+      <p class="lead" style="max-width:600px;margin-left:auto;margin-right:auto">Ruoli diversi, un solo filo comune: prendersi cura di ragazzi che non sono i propri figli, come se lo fossero.</p>
+      <nav class="ruoli-riga" aria-label="Ruoli del personale coinvolti">
+        <span class="ruolo-chip"><span class="pt" aria-hidden="true"></span>Educatori</span>
+        <span class="ruolo-chip"><span class="pt" aria-hidden="true"></span>Custodi</span>
+        <span class="ruolo-chip"><span class="pt" aria-hidden="true"></span>Cuochi</span>
+        <span class="ruolo-chip"><span class="pt" aria-hidden="true"></span>Infermiere</span>
+        <span class="ruolo-chip"><span class="pt" aria-hidden="true"></span>Accudienti</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- INDICE -->
+  <section id="indice" style="background:var(--av2)">
+    <div class="w">
+      <p class="lbl">Sommario</p>
+      <h2>Dieci domande, <em>uno sguardo da dentro</em></h2>
+      <p class="lead">Le stesse dieci domande, a chiunque le racconti. Le risposte restano loro.</p>
+      <nav class="indice-domande" aria-label="Indice delle dieci domande">
+        <a href="#cap-1"><span class="num">I</span>Qual è stato il momento in cui hai capito che questo lavoro, per te, non era "solo un lavoro"?</a>
+        <a href="#cap-2"><span class="num">II</span>C'è un convittore o una convittrice che non dimenticherai mai: cosa ti ha insegnato?</a>
+        <a href="#cap-3"><span class="num">III</span>Cosa vede chi lavora qui dentro, che le famiglie da fuori non possono vedere?</a>
+        <a href="#cap-4"><span class="num">IV</span>Qual è la parte più difficile di questo mestiere — quella di cui si parla meno?</a>
+        <a href="#cap-5"><span class="num">V</span>Se potessi dire una sola cosa a un ragazzo spaventato il primo giorno, cosa gli diresti?</a>
+        <a href="#cap-6"><span class="num">VI</span>Cos'è cambiato, nel tempo, nel modo in cui svolgi questo lavoro qui dentro?</a>
+        <a href="#cap-7"><span class="num">VII</span>Qual è il momento della giornata in cui senti di fare davvero la differenza?</a>
+        <a href="#cap-8"><span class="num">VIII</span>Cosa ti ha sorpreso di questo lavoro, che non ti aspettavi prima di iniziare?</a>
+        <a href="#cap-9"><span class="num">IX</span>Se dovessi raccontare il Convitto con un solo gesto quotidiano che fai, quale sceglieresti?</a>
+        <a href="#cap-10"><span class="num">X</span>Cosa vorresti che i ragazzi capissero di voi, che spesso non dicono?</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- CAPITOLO I -->
+  <section id="cap-1" class="capitolo">
+    <div class="w">
+      <div class="cap-eyebrow"><span class="num">I</span><span class="line"></span></div>
+      <h2>Qual è stato il momento in cui hai capito che questo lavoro, per te, non era <em>"solo un lavoro"</em>?</h2>
+      <div class="voci-grid">
+        <div class="voce-vuoto"><span class="pt2" aria-hidden="true"></span>In attesa delle prime voci.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO II -->
+  <section id="cap-2" class="capitolo alt">
+    <div class="w">
+      <div class="cap-eyebrow"><span class="num">II</span><span class="line"></span></div>
+      <h2>C'è un convittore o una convittrice che non dimenticherai mai: <em>cosa ti ha insegnato?</em></h2>
+      <div class="voci-grid">
+        <div class="voce-vuoto"><span class="pt2" aria-hidden="true"></span>In attesa delle prime voci.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO III -->
+  <section id="cap-3" class="capitolo">
+    <div class="w">
+      <div class="cap-eyebrow"><span class="num">III</span><span class="line"></span></div>
+      <h2>Cosa vede chi lavora qui dentro, <em>che le famiglie da fuori non possono vedere?</em></h2>
+      <div class="voci-grid">
+        <div class="voce-vuoto"><span class="pt2" aria-hidden="true"></span>In attesa delle prime voci.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO IV -->
+  <section id="cap-4" class="capitolo alt">
+    <div class="w">
+      <div class="cap-eyebrow"><span class="num">IV</span><span class="line"></span></div>
+      <h2>Qual è la parte più difficile di questo mestiere — <em>quella di cui si parla meno?</em></h2>
+      <div class="voci-grid">
+        <div class="voce-vuoto"><span class="pt2" aria-hidden="true"></span>In attesa delle prime voci.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO V -->
+  <section id="cap-5" class="capitolo">
+    <div class="w">
+      <div class="cap-eyebrow"><span class="num">V</span><span class="line"></span></div>
+      <h2>Se potessi dire una sola cosa a un ragazzo spaventato il primo giorno, <em>cosa gli diresti?</em></h2>
+      <div class="voci-grid">
+        <div class="voce-vuoto"><span class="pt2" aria-hidden="true"></span>In attesa delle prime voci.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO VI -->
+  <section id="cap-6" class="capitolo alt">
+    <div class="w">
+      <div class="cap-eyebrow"><span class="num">VI</span><span class="line"></span></div>
+      <h2>Cos'è cambiato, nel tempo, <em>nel modo in cui svolgi questo lavoro qui dentro?</em></h2>
+      <div class="voci-grid">
+        <div class="voce-vuoto"><span class="pt2" aria-hidden="true"></span>In attesa delle prime voci.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO VII -->
+  <section id="cap-7" class="capitolo">
+    <div class="w">
+      <div class="cap-eyebrow"><span class="num">VII</span><span class="line"></span></div>
+      <h2>Qual è il momento della giornata in cui <em>senti di fare davvero la differenza?</em></h2>
+      <div class="voci-grid">
+        <div class="voce-vuoto"><span class="pt2" aria-hidden="true"></span>In attesa delle prime voci.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO VIII -->
+  <section id="cap-8" class="capitolo alt">
+    <div class="w">
+      <div class="cap-eyebrow"><span class="num">VIII</span><span class="line"></span></div>
+      <h2>Cosa ti ha sorpreso di questo lavoro, <em>che non ti aspettavi prima di iniziare?</em></h2>
+      <div class="voci-grid">
+        <div class="voce-vuoto"><span class="pt2" aria-hidden="true"></span>In attesa delle prime voci.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO IX -->
+  <section id="cap-9" class="capitolo">
+    <div class="w">
+      <div class="cap-eyebrow"><span class="num">IX</span><span class="line"></span></div>
+      <h2>Se dovessi raccontare il Convitto con un solo gesto quotidiano che fai, <em>quale sceglieresti?</em></h2>
+      <div class="voci-grid">
+        <div class="voce-vuoto"><span class="pt2" aria-hidden="true"></span>In attesa delle prime voci.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO X -->
+  <section id="cap-10" class="capitolo alt">
+    <div class="w">
+      <div class="cap-eyebrow"><span class="num">X</span><span class="line"></span></div>
+      <h2>Cosa vorresti che i ragazzi capissero di voi, <em>che spesso non dicono?</em></h2>
+      <div class="voci-grid">
+        <div class="voce-vuoto"><span class="pt2" aria-hidden="true"></span>In attesa delle prime voci.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTECIPA -->
+  <section id="partecipa" style="background:var(--bosco)">
+    <div class="w" style="max-width:640px;text-align:center">
+      <p class="lbl" style="justify-content:center;color:var(--oro2)">Vuoi raccontarti anche tu</p>
+      <h2 style="color:var(--av)">Ogni ruolo ha <em style="color:var(--oro3)">una voce</em></h2>
+      <p style="color:rgba(245,240,232,.78);max-width:520px;margin:0 auto 1.75rem;font-size:.92rem;line-height:1.8">Se lavori al Convitto e vuoi partecipare, parlane con l'Educatore Michele Gaggiano — bastano novanta secondi e una domanda tra le dieci.</p>
+      <a href="contatti.html" class="btn-gold">Scrivi al Convitto →</a>
+    </div>
+  </section>
+
+</main>
+<script src="nav.js"></script>
+<script>
+  document.querySelectorAll('.voce-play').forEach(function(btn){
+    var audio = btn.nextElementSibling;
+    if (!audio || audio.tagName !== 'AUDIO') return;
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('audio.voce-audio').forEach(function(a){
+        if (a !== audio) { a.pause(); a.currentTime = 0; }
+      });
+      document.querySelectorAll('.voce-play span').forEach(function(s){
+        if (s.parentElement !== btn) s.textContent = '▶';
+      });
+      var icon = btn.querySelector('span');
+      if (audio.paused) { audio.play(); icon.textContent = '⏸'; }
+      else { audio.pause(); icon.textContent = '▶'; }
+    });
+    audio.addEventListener('ended', function(){ btn.querySelector('span').textContent = '▶'; });
+  });
+</script>
+</body>
+</html>

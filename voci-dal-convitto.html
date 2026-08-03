@@ -22,6 +22,12 @@
     /* margine di scroll: l'ancora non finisce sotto l'header fisso */
     #indice, #cap-1, #cap-2, #cap-3, #cap-4, #cap-5, #cap-6, #cap-7, #cap-8, #cap-9, #cap-10, #partecipa { scroll-margin-top: 90px; }
 
+    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
+    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:var(--ease); }
+    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
+    .cantiere-badge + .hero-jump { margin-top: 1.75rem; }
+    @media(max-width:640px) { .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; } .hero-jump a { padding:.55rem .5rem; } }
+
     .cantiere-badge {
       display: inline-flex; align-items: center; gap: .55rem;
       border: 1px solid rgba(184,146,42,.55); background: rgba(184,146,42,.09);
@@ -255,7 +261,7 @@
     <div class="w" style="max-width:640px;text-align:center">
       <p class="lbl" style="justify-content:center">Vuoi raccontarti anche tu</p>
       <h2>Ogni voce <em>conta</em></h2>
-      <p class="lead">Basta poco: una domanda tra le dieci, novanta secondi, la tua voce. Se sei un convittore o una convittrice e vuoi partecipare, parlane con un educatore o con il Prof. Gaggiano — si organizza la registrazione insieme.</p>
+      <p class="lead">Basta poco: una domanda tra le dieci, novanta secondi, la tua voce. Se sei un convittore o una convittrice e vuoi partecipare, parlane con un educatore o con l'Educatore Michele Gaggiano — si organizza la registrazione insieme.</p>
       <a href="contatti.html" class="btn-gold">Scrivi al Convitto →</a>
     </div>
   </section>

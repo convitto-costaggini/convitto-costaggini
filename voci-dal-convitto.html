@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" /><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Dieci domande, tante voci diverse: i convittori e le convittrici del Costaggini raccontano cosa significa davvero vivere al Convitto." />
+  <meta property="og:title" content="Voci dal Convitto — IPSSEOA &quot;Costaggini&quot; Rieti"/>
+  <meta property="og:description" content="Dieci domande, tante voci diverse: i convittori raccontano cosa significa vivere al Convitto &quot;Costaggini&quot; di Rieti."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Convitto Costaggini — Rieti"/>
+  <meta property="og:image" content="https://convitto-costaggini.github.io/convitto-costaggini/img/1702938319160.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="theme-color" content="#2C3E2D" />
+  <title>Voci dal Convitto | "Costaggini" — Rieti</title>
+  <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/voci-dal-convitto.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* margine di scroll: l'ancora non finisce sotto l'header fisso */
+    #indice, #cap-1, #cap-2, #cap-3, #cap-4, #cap-5, #cap-6, #cap-7, #cap-8, #cap-9, #cap-10, #partecipa { scroll-margin-top: 90px; }
+
+    .cantiere-badge {
+      display: inline-flex; align-items: center; gap: .55rem;
+      border: 1px solid rgba(184,146,42,.55); background: rgba(184,146,42,.09);
+      border-radius: 40px; padding: .55rem 1.1rem; margin-top: 1.35rem;
+      font-family: var(--fu); font-size: .78rem; color: var(--oro3); line-height: 1.5; max-width: 560px;
+    }
+    .cantiere-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--oro2); flex-shrink: 0;
+      animation: cantiere-pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes cantiere-pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+    @media (prefers-reduced-motion: reduce) { .cantiere-dot { animation: none; } }
+
+    .indice-domande { display: grid; gap: 0; max-width: 720px; margin: 0 auto; }
+    .indice-domande a {
+      display: flex; align-items: baseline; gap: 1rem; padding: .85rem .25rem;
+      border-bottom: 1px solid var(--av3); text-decoration: none; color: var(--txt2);
+      font-family: var(--fu); font-size: .92rem; transition: var(--ease);
+    }
+    .indice-domande a:hover { color: var(--bosco); padding-left: .6rem; }
+    .indice-domande .num { font-family: var(--fd); font-size: 1.15rem; color: var(--oro); width: 28px; flex-shrink: 0; }
+
+    .capitolo { background: var(--bosco); padding: 3rem 1.25rem; }
+    .capitolo.alt { background: #344835; }
+    .capitolo .w { max-width: 720px; }
+    .capitolo .num {
+      font-family: var(--fd); font-size: 2.1rem; color: var(--oro2); line-height: 1;
+      display: block; margin-bottom: .5rem;
+    }
+    .capitolo h2 {
+      font-family: var(--fd); font-style: italic; font-weight: 400; color: var(--av);
+      font-size: clamp(1.3rem, 3.2vw, 1.65rem); line-height: 1.4; margin-bottom: 1.35rem;
+    }
+    .capitolo .divisore { height: 1px; background: rgba(184,146,42,.35); margin-bottom: 1.35rem; width: 60px; }
+
+    .voci-lista { display: flex; flex-direction: column; gap: .65rem; }
+    .voce-pill {
+      display: flex; align-items: center; gap: .85rem;
+      background: rgba(245,240,232,.06); border: 1px solid rgba(184,146,42,.32);
+      border-radius: 40px; padding: .6rem 1.1rem;
+    }
+    .voce-play {
+      width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%;
+      border: 1px solid var(--oro2); background: transparent; color: var(--oro2);
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      font-size: .8rem; transition: var(--ease);
+    }
+    .voce-play:hover { background: var(--oro2); color: var(--bosco); }
+    .voce-quote {
+      font-family: var(--fd); font-style: italic; color: var(--av);
+      font-size: .95rem; line-height: 1.5; flex: 1; margin: 0;
+    }
+    .voce-firma {
+      font-family: var(--fu); font-size: .7rem; font-weight: 600; letter-spacing: .05em;
+      color: var(--oro2); flex-shrink: 0; white-space: nowrap;
+    }
+    .voce-vuoto {
+      font-family: var(--fd); font-style: italic; color: rgba(245,240,232,.45);
+      font-size: .95rem; margin: 0; padding: .4rem 0;
+    }
+  </style>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
+  <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+</head>
+<body data-page="voci-dal-convitto">
+<script src="nav-header.js"></script>
+<main id="main">
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso di navigazione">
+        <a href="index.html">Home</a><span>›</span><a href="comunita.html">Comunità</a><span>›</span><span aria-current="page">Voci dal Convitto</span>
+      </nav>
+      <div class="gold-bar"></div>
+      <h1>Voci dal <em>Convitto</em></h1>
+      <p class="sub">Dieci domande. Nessuna risposta giusta. Per ogni domanda, due o tre convittori diversi raccontano — con la propria voce — cosa significa davvero vivere qui.</p>
+      <div class="cantiere-badge"><span class="cantiere-dot" aria-hidden="true"></span>Sezione in costruzione — in attesa delle voci di convittori e convittrici che scelgono di raccontarsi</div>
+      <nav class="hero-jump" aria-label="Vai a una sezione della pagina">
+        <a href="#indice">Le domande</a>
+        <a href="#partecipa">Partecipa anche tu</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- INDICE -->
+  <section id="indice" style="background:var(--bco)">
+    <div class="w">
+      <p class="lbl">Sommario</p>
+      <h2>Dieci domande, <em>una comunità</em></h2>
+      <p class="lead">Ogni capitolo nasce da una sola domanda. Le risposte, quando arrivano, sono affidate a chi le vive — non riassunte da altri.</p>
+      <nav class="indice-domande" aria-label="Indice delle dieci domande">
+        <a href="#cap-1"><span class="num">I</span>Cosa diresti al te stesso del primo giorno, se potessi tornare indietro di un'ora</a>
+        <a href="#cap-2"><span class="num">II</span>Un momento in cui hai capito che questo, ormai, era diventato casa</a>
+        <a href="#cap-3"><span class="num">III</span>Cosa hai imparato a fare da solo, che prima non sapevi fare</a>
+        <a href="#cap-4"><span class="num">IV</span>Cosa porti con te dei tuoi compagni di stanza, o di piano</a>
+        <a href="#cap-5"><span class="num">V</span>Cosa manca di casa — e cosa, invece, hai scoperto di non rimpiangere</a>
+        <a href="#cap-6"><span class="num">VI</span>Un consiglio pratico che nessun regolamento scrive, ma che serve davvero</a>
+        <a href="#cap-7"><span class="num">VII</span>Come è cambiato il tuo rapporto con il silenzio e con lo studio</a>
+        <a href="#cap-8"><span class="num">VIII</span>Il posto del Convitto che senti più tuo, e perché</a>
+        <a href="#cap-9"><span class="num">IX</span>Un suono, un odore o un rumore che per te è ormai "il Convitto"</a>
+        <a href="#cap-10"><span class="num">X</span>Cosa diresti a chi sta decidendo, in questo momento, se venire qui</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- CAPITOLO I -->
+  <section id="cap-1" class="capitolo">
+    <div class="w">
+      <span class="num">I</span>
+      <h2>Cosa diresti al te stesso del primo giorno, se potessi tornare indietro di un'ora</h2>
+      <div class="divisore"></div>
+      <div class="voci-lista">
+        <p class="voce-vuoto">In attesa delle prime voci.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO II -->
+  <section id="cap-2" class="capitolo alt">
+    <div class="w">
+      <span class="num">II</span>
+      <h2>Un momento in cui hai capito che questo, ormai, era diventato casa</h2>
+      <div class="divisore"></div>
+      <div class="voci-lista">
+        <p class="voce-vuoto">In attesa delle prime voci.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO III -->
+  <section id="cap-3" class="capitolo">
+    <div class="w">
+      <span class="num">III</span>
+      <h2>Cosa hai imparato a fare da solo, che prima non sapevi fare</h2>
+      <div class="divisore"></div>
+      <div class="voci-lista">
+        <p class="voce-vuoto">In attesa delle prime voci.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO IV -->
+  <section id="cap-4" class="capitolo alt">
+    <div class="w">
+      <span class="num">IV</span>
+      <h2>Cosa porti con te dei tuoi compagni di stanza, o di piano</h2>
+      <div class="divisore"></div>
+      <div class="voci-lista">
+        <p class="voce-vuoto">In attesa delle prime voci.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO V -->
+  <section id="cap-5" class="capitolo">
+    <div class="w">
+      <span class="num">V</span>
+      <h2>Cosa manca di casa — e cosa, invece, hai scoperto di non rimpiangere</h2>
+      <div class="divisore"></div>
+      <div class="voci-lista">
+        <p class="voce-vuoto">In attesa delle prime voci.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO VI -->
+  <section id="cap-6" class="capitolo alt">
+    <div class="w">
+      <span class="num">VI</span>
+      <h2>Un consiglio pratico che nessun regolamento scrive, ma che serve davvero</h2>
+      <div class="divisore"></div>
+      <div class="voci-lista">
+        <p class="voce-vuoto">In attesa delle prime voci.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO VII -->
+  <section id="cap-7" class="capitolo">
+    <div class="w">
+      <span class="num">VII</span>
+      <h2>Come è cambiato il tuo rapporto con il silenzio e con lo studio</h2>
+      <div class="divisore"></div>
+      <div class="voci-lista">
+        <p class="voce-vuoto">In attesa delle prime voci.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO VIII -->
+  <section id="cap-8" class="capitolo alt">
+    <div class="w">
+      <span class="num">VIII</span>
+      <h2>Il posto del Convitto che senti più tuo, e perché</h2>
+      <div class="divisore"></div>
+      <div class="voci-lista">
+        <p class="voce-vuoto">In attesa delle prime voci.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO IX -->
+  <section id="cap-9" class="capitolo">
+    <div class="w">
+      <span class="num">IX</span>
+      <h2>Un suono, un odore o un rumore che per te è ormai "il Convitto"</h2>
+      <div class="divisore"></div>
+      <div class="voci-lista">
+        <p class="voce-vuoto">In attesa delle prime voci.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITOLO X -->
+  <section id="cap-10" class="capitolo alt">
+    <div class="w">
+      <span class="num">X</span>
+      <h2>Cosa diresti a chi sta decidendo, in questo momento, se venire qui</h2>
+      <div class="divisore"></div>
+      <div class="voci-lista">
+        <p class="voce-vuoto">In attesa delle prime voci.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTECIPA -->
+  <section id="partecipa" style="background:var(--bco)">
+    <div class="w" style="max-width:640px;text-align:center">
+      <p class="lbl" style="justify-content:center">Vuoi raccontarti anche tu</p>
+      <h2>Ogni voce <em>conta</em></h2>
+      <p class="lead">Basta poco: una domanda tra le dieci, novanta secondi, la tua voce. Se sei un convittore o una convittrice e vuoi partecipare, parlane con un educatore o con il Prof. Gaggiano — si organizza la registrazione insieme.</p>
+      <a href="contatti.html" class="btn-gold">Scrivi al Convitto →</a>
+    </div>
+  </section>
+
+</main>
+<script src="nav.js"></script>
+<script>
+  document.querySelectorAll('.voce-play').forEach(function(btn){
+    var audio = btn.nextElementSibling;
+    if (!audio || audio.tagName !== 'AUDIO') return;
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('audio.voce-audio').forEach(function(a){
+        if (a !== audio) { a.pause(); a.currentTime = 0; }
+      });
+      document.querySelectorAll('.voce-play span').forEach(function(s, i){
+        if (s.parentElement !== btn) s.textContent = '▶';
+      });
+      var icon = btn.querySelector('span');
+      if (audio.paused) { audio.play(); icon.textContent = '⏸'; }
+      else { audio.pause(); icon.textContent = '▶'; }
+    });
+    audio.addEventListener('ended', function(){ btn.querySelector('span').textContent = '▶'; });
+  });
+</script>
+</body>
+</html>

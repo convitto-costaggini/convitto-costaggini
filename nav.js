@@ -731,7 +731,6 @@
     { titolo: 'Alumni — le storie', pagina: 'alumni.html', ancora: '', cat: 'Comunità', keywords: ['alumni','ex convittori','storie','testimonianze','ricordi','passato'] },
     { titolo: "L'Anno al Convitto", pagina: 'anno.html', ancora: '', cat: 'Il Convitto', keywords: ['anno','scolastico','calendario','eventi','vissuto'] },
     { titolo: 'Calendario Eventi', pagina: 'calendario.html', ancora: '', cat: 'Notizie', keywords: ['calendario','eventi','open day','feste','uscite','concerti','appuntamenti'] },
-    { titolo: 'Collegio Educatori', pagina: 'collegio-educatori.html', ancora: '', cat: 'Il Convitto', keywords: ['collegio','educatori','riunione','organo','collegiale'] },
     { titolo: 'La Nostra Comunità', pagina: 'comunita.html', ancora: '', cat: 'Comunità', keywords: ['comunità','alumni','muro dei ricordi','lab musicale','vinile','solidarietà'] },
     { titolo: 'Cookie Policy', pagina: 'cookie-policy.html', ancora: '', cat: 'Trasparenza', keywords: ['cookie','policy','privacy','profilazione'] },
     { titolo: 'Domanda di Ammissione', pagina: 'domanda-ammissione.html', ancora: '', cat: 'Ammissione', keywords: ['domanda','ammissione','iscrizione','modulo','online','segreteria','compilare'] },

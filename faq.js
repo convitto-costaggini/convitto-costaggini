@@ -54,7 +54,7 @@
 
     { id:'uscite', tags:['vita','genitori'], pill:'⏱ 25 secondi',
       q:`Quando può uscire o tornare a casa?`,
-      a:`I convittori rientrano a casa <strong>ogni fine settimana</strong> (venerdì pomeriggio, ritorno domenica sera o lunedì mattina). Durante la settimana è prevista una libera uscita quotidiana (17:30–19:15) previa autorizzazione scritta dei genitori, con rientro entro le 22:00. Le uscite straordinarie infrasettimanali richiedono richiesta scritta o via email con copia del documento; si possono delegare persone di fiducia per il ritiro. <a href="regolamento-guida.html#art-uscite">Regolamento uscite &rarr;</a>` },
+      a:`I convittori rientrano a casa <strong>ogni fine settimana</strong> (venerdì pomeriggio, ritorno domenica sera o lunedì mattina). Durante la settimana è prevista una libera uscita quotidiana (17:30–19:15) previa autorizzazione scritta dei genitori. Le uscite straordinarie infrasettimanali richiedono richiesta scritta o via email con copia del documento; si possono delegare persone di fiducia per il ritiro. <a href="regolamento-guida.html#art-uscite">Regolamento uscite &rarr;</a>` },
 
     { id:'telefono', tags:['genitori'],
       q:`Mio figlio può chiamarmi quando vuole?`,

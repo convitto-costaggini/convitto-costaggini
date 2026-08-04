@@ -60,13 +60,12 @@
     .orari-strip .lbl { color: #D4AA4A; }
     .orari-strip .lbl::before { background: #D4AA4A; }
     .orari-grid { display: grid; gap: .75rem; margin-top: 1.5rem; }
-    .og-item { background: rgba(255,255,255,.06); border: 1px solid rgba(184,146,42,.15); border-radius: 6px; padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; min-width: 0; }
+    .og-item { background: rgba(255,255,255,.06); border: 1px solid rgba(184,146,42,.15); border-radius: 6px; padding: 1rem 1.25rem; display: flex; flex-direction: column; align-items: flex-start; gap: .35rem; min-width: 0; }
     .og-label { font-size: .8rem; font-weight: 600; color: var(--av); overflow-wrap: break-word; }
-    .og-time { font-family: var(--fd); font-size: 1.1rem; font-weight: 300; color: var(--oro3); overflow-wrap: break-word; word-break: break-word; max-width: 100%; }
+    .og-time { font-family: var(--fd); font-size: 1.1rem; font-weight: 300; color: var(--oro3); overflow-wrap: break-word; word-break: break-word; max-width: 100%; text-align: left; }
     .og-note { display: block; font-family: var(--fu); font-size: .68rem; font-weight: 400; letter-spacing: .01em; color: rgba(245,240,232,.6); line-height: 1.4; margin-top: .2rem; }
     @media(min-width:640px){ .orari-grid { grid-template-columns: 1fr 1fr; } }
     @media(min-width:900px){ .orari-strip { padding: 4rem 2rem; } .orari-grid { grid-template-columns: repeat(3,1fr); } }
-    @media(max-width:639px){ .og-item { flex-direction: column; align-items: flex-start; } .og-time { text-align: left; } }
 
     /* Success/error messages */
     .form-msg { display: none; padding: 1rem 1.25rem; border-radius: 4px; font-size: .88rem; font-weight: 600; margin-top: .75rem; }

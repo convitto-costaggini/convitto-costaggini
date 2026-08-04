@@ -62,7 +62,7 @@
 
     { id:'studio', tags:['vita','genitori'], pill:'⏱ 20 secondi',
       q:`Riuscirà a studiare? Lo studio è seguito?`,
-      a:`Ogni pomeriggio, dalle 15:30 alle 17:15, c'è lo <strong>studio guidato e obbligatorio</strong> con gli educatori: non solo "fare i compiti", ma costruire metodo, autonomia e abitudine allo studio. Gli educatori sono presenti su tutti i piani, aiutano e verificano il lavoro. Per difficoltà persistenti si attivano supporti aggiuntivi con la famiglia e il Consiglio di Classe; DSA e BES sono seguiti con piani personalizzati. <a href="servizi.html#studio">Lo studio guidato &rarr;</a>` },
+      a:`Ogni pomeriggio, dalle 15:30 alle 17:15, c'è lo <strong>studio guidato e obbligatorio</strong> con gli educatori: non solo "fare i compiti", ma costruire metodo, autonomia e abitudine allo studio. Gli educatori sono presenti su tutti i piani, aiutano e verificano il lavoro. Per difficoltà persistenti si attivano supporti aggiuntivi con la famiglia e il Consiglio di Classe; DSA e BES sono seguiti a scuola con piani personalizzati. <a href="servizi.html#studio">Lo studio guidato &rarr;</a>` },
 
     { id:'mensa', tags:['vita','mensa','genitori'], pill:'⏱ 15 secondi',
       q:`Cosa si mangia? Come sono gestite le allergie?`,
@@ -70,7 +70,7 @@
 
     { id:'notte', tags:['vita','sicurezza','genitori'], pill:'⏱ 15 secondi',
       q:`Chi c'è di notte? È al sicuro?`,
-      a:`Gli educatori sono presenti <strong>24 ore su 24</strong>, notte compresa: non sorveglianti, ma educatori di ruolo selezionati per concorso pubblico, con formazione psicopedagogica. In ogni turno c'è almeno un educatore sveglio e operativo, più i custodi agli accessi; il cancello si chiude alle 22:30 e riapre alle 6:00. Per qualsiasi malessere notturno l'assistenza è immediata.` },
+      a:`Gli educatori sono presenti <strong>24 ore su 24</strong>, notte compresa: non sorveglianti, ma educatori di ruolo selezionati per concorso pubblico, con formazione psicopedagogica. In ogni turno di notte c'è un educatore/educatrice operativi per ogni piano, più i custodi agli accessi; il cancello si chiude alle 22:30 e riapre alle 6:00. Per qualsiasi malessere notturno l'assistenza è immediata.` },
 
     { id:'bullismo', tags:['sicurezza'], pill:'⏱ 20 secondi',
       q:`E se viene bullizzato? Come lo gestite?`,

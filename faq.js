@@ -26,7 +26,7 @@
 
     { id:'come', tags:['iscrizione'], pill:'⏱ 30 secondi',
       q:`Come si fa a iscrivere un figlio al Convitto?`,
-      a:`La procedura è in <strong>4 passi</strong>: ① iscrizione online all'IPSSEOA Costaggini sul portale del Ministero (entro fine gennaio) ② compilazione del <a href="domanda-ammissione.html">modulo di richiesta per il Convitto</a> ③ consegna della documentazione in segreteria e versamento della quota ④ colloquio con il Dirigente e gli educatori. Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si muove, meglio è. <a href="ammissione.html">Guida completa all'ammissione &rarr;</a>` },
+      a:`La procedura è in <strong>4 passi</strong>: ① iscrizione online all'IPSSEOA Costaggini sul portale del Ministero (entro fine gennaio), prestando attenzione ad opzionare correttamente la scelta del Convitto ② Al di fuori di queste tempistiche, è prevista lacompilazione del <a href="domanda-ammissione.html">modulo di richiesta per il Convitto</a> ③ consegna della documentazione in segreteria e versamento della quota ④ colloquio con il Dirigente e gli educatori. Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è. <a href="ammissione.html">Guida completa all'ammissione &rarr;</a>` },
 
     { id:'quando-domanda', tags:['iscrizione'],
       q:`Entro quando va presentata la domanda?`,

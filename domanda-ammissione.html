@@ -119,6 +119,7 @@
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO"></script>
 </head>
 <body data-page="domanda-ammissione">
 <script src="nav-header.js"></script>
@@ -426,6 +427,7 @@
 <script src="nav.js"></script>
 <script>
 const CONTACT_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
+const RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
 // Pre-imposta data odierna
 document.getElementById('da-data').value = new Date().toISOString().split('T')[0];
 
@@ -537,7 +539,17 @@ function daInviaDomanda(payload) {
   if (btnLabel) { btnLabel.textContent = 'Invio in corso…'; }
   if (retryBtn) { retryBtn.disabled = true; retryBtn.textContent = 'Invio in corso…'; }
 
-  fetch(CONTACT_GAS, {
+  new Promise((resolve) => {
+    grecaptcha.ready(() => {
+      grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'domanda_ammissione' })
+        .then(resolve)
+        .catch(() => resolve('')); // se reCAPTCHA non risponde, si procede comunque: honeypot lato server resta attivo
+    });
+  }).then(recaptchaToken => {
+    payload.recaptchaToken = recaptchaToken;
+    payload.recaptchaAction = 'domanda_ammissione';
+
+    fetch(CONTACT_GAS, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify(payload)
@@ -559,6 +571,7 @@ function daInviaDomanda(payload) {
       }
     })
     .catch(() => daMostraErrore());
+  });
 
   function daMostraErrore() {
     if (btn) { btn.disabled = false; }

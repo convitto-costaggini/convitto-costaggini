@@ -391,6 +391,7 @@
   ]
 }
 </script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO"></script>
 </head>
 <body data-page="openday">
 <script src="nav-header.js"></script>
@@ -686,6 +687,7 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
    resta comunque salvata e visibile in admin.html → tab Open Day) */
   (function(){
   const CONTACT_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
+  const RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
   const SB_N   = 'https://sawclsysqnjsvbobioqo.supabase.co';
   const SB_PUB = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
   const f = document.querySelector('form[name="richiesta-visita"]');
@@ -724,16 +726,25 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
       .then(() => {
         // 2. Notifica email di cortesia — best-effort, non blocca il redirect:
         //    la prenotazione è già al sicuro su Supabase in ogni caso.
-        fetch(CONTACT_GAS, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(dati.email)
-        })
-          .then(r2 => { if (!r2.ok) throw new Error('GAS HTTP ' + r2.status); return r2.json(); })
-          .then(esito => {
-            if (!esito || !esito.success) console.warn('Notifica email Open Day non riuscita (prenotazione comunque salvata su Supabase):', esito);
+        new Promise((resolve) => {
+          grecaptcha.ready(() => {
+            grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'openday' }).then(resolve).catch(() => resolve(''));
+          });
+        }).then(recaptchaToken => {
+          dati.email.recaptchaToken = recaptchaToken;
+          dati.email.recaptchaAction = 'openday';
+
+          fetch(CONTACT_GAS, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(dati.email)
           })
-          .catch(err => console.warn('Notifica email Open Day non riuscita (prenotazione comunque salvata su Supabase):', err));
+            .then(r2 => { if (!r2.ok) throw new Error('GAS HTTP ' + r2.status); return r2.json(); })
+            .then(esito => {
+              if (!esito || !esito.success) console.warn('Notifica email Open Day non riuscita (prenotazione comunque salvata su Supabase):', esito);
+            })
+            .catch(err => console.warn('Notifica email Open Day non riuscita (prenotazione comunque salvata su Supabase):', err));
+        });
 
         window.location = 'grazie.html';
       })

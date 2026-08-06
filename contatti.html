@@ -116,6 +116,7 @@
   ]
 }
 </script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO"></script>
 </head>
 <body data-page="contatti">
 <script src="nav-header.js"></script>
@@ -426,6 +427,7 @@ function calcolaItinerario() {
 <script src="nav.js"></script>
 <script>
 const CONTACT_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
+const RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
 
 const form = document.getElementById('contact-form');
 if (form) {
@@ -480,6 +482,18 @@ if (form) {
     btn.disabled = true;
     btn.textContent = 'Invio in corso…';
 
+    let recaptchaToken = '';
+    try {
+      recaptchaToken = await new Promise((resolve, reject) => {
+        grecaptcha.ready(() => {
+          grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'contatti' }).then(resolve).catch(reject);
+        });
+      });
+    } catch (err) {
+      // Se reCAPTCHA non risponde, si procede comunque: il controllo honeypot lato server resta attivo
+      recaptchaToken = '';
+    }
+
     const payload = {
       nome:      (document.getElementById('nome')?.value.trim()      || '') + ' ' +
                  (document.getElementById('cognome')?.value.trim()   || ''),
@@ -487,7 +501,9 @@ if (form) {
       telefono:  document.getElementById('telefono')?.value.trim()   || '',
       oggetto:   document.getElementById('oggetto')?.value.trim()    || '',
       messaggio: document.getElementById('messaggio')?.value.trim()  || '',
-      privacy:   document.getElementById('priv')?.checked            || false
+      privacy:   document.getElementById('priv')?.checked            || false,
+      recaptchaToken: recaptchaToken,
+      recaptchaAction: 'contatti'
     };
 
     try {

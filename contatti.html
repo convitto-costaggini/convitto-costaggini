@@ -545,7 +545,23 @@ if (form) {
         form.reset();
       }
     } catch(err) {
-      alert('Errore durante l\'invio. Riprova o scriva direttamente a convitto@alberghierorieti.it\n(' + err.message + ')');
+      const ov = document.createElement('div');
+      ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(44,62,45,.92);display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px)';
+      ov.innerHTML = `
+        <div style="background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+          <div style="font-size:3rem;margin-bottom:1rem">⚠️</div>
+          <h2 style="font-family:var(--fd);font-size:1.8rem;color:#a02020;margin-bottom:.75rem;font-weight:300">Invio non riuscito</h2>
+          <p style="font-size:.9rem;color:#555;line-height:1.75;margin-bottom:.5rem">
+            Riprova tra qualche istante, oppure scrivici direttamente a<br><a href="mailto:convitto@alberghierorieti.it" style="color:var(--bosco);font-weight:700">convitto@alberghierorieti.it</a>
+          </p>
+          <p style="font-size:.72rem;color:#999;line-height:1.6;margin-bottom:1.75rem">${(err && err.message ? String(err.message).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : '')}</p>
+          <button onclick="this.closest('div[style*=fixed]').remove();document.body.style.overflow=''"
+            style="background:#a02020;color:#fff;border:none;cursor:pointer;font-family:var(--fu);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 2rem;border-radius:8px">
+            Chiudi
+          </button>
+        </div>`;
+      document.body.appendChild(ov);
+      document.body.style.overflow = 'hidden';
     } finally {
       btn.disabled = false;
       btn.textContent = origText;

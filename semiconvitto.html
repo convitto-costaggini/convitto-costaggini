@@ -43,8 +43,9 @@
     /* Box servizi */
     .sc-services { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin-bottom:1rem; }
     @media(max-width:520px){ .sc-services { grid-template-columns:1fr; } }
-    .sc-service { border:1.5px solid #e5e7eb; border-radius:8px; padding:.9rem 1rem; cursor:pointer; transition:all .2s; }
-    .sc-service.sel { border-color:var(--bosco); background:rgba(44,62,45,.04); }
+    .sc-service { position:relative; border:1.5px solid #e5e7eb; border-radius:8px; padding:.9rem 1rem; cursor:pointer; transition:all .2s; }
+    .sc-service.sel { border-color:var(--bosco); border-width:2px; background:rgba(44,62,45,.08); box-shadow:0 2px 8px rgba(44,62,45,.12); }
+    .sc-service.sel::after { content:"✓"; position:absolute; top:.55rem; right:.65rem; width:20px; height:20px; border-radius:50%; background:var(--bosco); color:#fff; font-size:.7rem; font-weight:800; display:flex; align-items:center; justify-content:center; }
     .sc-service input { display:none; }
     .sc-service-icon { font-size:1.5rem; display:block; margin-bottom:.35rem; }
     .sc-service-name { font-family:var(--fu); font-size:.72rem; font-weight:800; color:var(--bosco); margin-bottom:.2rem; }
@@ -226,7 +227,6 @@
                   <label style="display:flex;align-items:center;gap:.3rem;font-family:var(--fu);font-size:.75rem;color:var(--txt)"><input type="checkbox" name="giorno_mar" style="accent-color:var(--bosco)"/> Mar</label>
                   <label style="display:flex;align-items:center;gap:.3rem;font-family:var(--fu);font-size:.75rem;color:var(--txt)"><input type="checkbox" name="giorno_mer" style="accent-color:var(--bosco)"/> Mer</label>
                   <label style="display:flex;align-items:center;gap:.3rem;font-family:var(--fu);font-size:.75rem;color:var(--txt)"><input type="checkbox" name="giorno_gio" style="accent-color:var(--bosco)"/> Gio</label>
-                  <label style="display:flex;align-items:center;gap:.3rem;font-family:var(--fu);font-size:.75rem;color:var(--txt)"><input type="checkbox" name="giorno_ven" style="accent-color:var(--bosco)"/> Ven</label>
                 </div>
               </div>
             </div>
@@ -382,7 +382,7 @@ document.getElementById('sc-form').addEventListener('submit', function(e) {
   const d = Object.fromEntries(new FormData(this));
   const servizi = ['srv_prova','srv_studio','srv_pranzo','srv_full']
     .filter(k=>d[k]).map(k=>({'srv_prova':'Giornata di prova','srv_studio':'Studio guidato','srv_pranzo':'Pranzo','srv_full':'Pacchetto completo'}[k])).join(', ') || '—';
-  const giorni = ['lun','mar','mer','gio','ven'].filter(g=>d[`giorno_${g}`]).map(g=>g[0].toUpperCase()+g.slice(1)).join(', ')||'—';
+  const giorni = ['lun','mar','mer','gio'].filter(g=>d[`giorno_${g}`]).map(g=>g[0].toUpperCase()+g.slice(1)).join(', ')||'—';
 
   const corpo =
 `RICHIESTA SEMICONVITTO — A.S. 2026/27

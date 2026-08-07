@@ -789,7 +789,8 @@ ${g('vis-note') || '—'}`;
         data_pref: g('vis-data'),
         persone: g('vis-persone'),
         note: g('vis-note'),
-        stato: 'nuova'
+        stato: 'nuova',
+        bot_field: (f.querySelector('[name="bot-field"]')?.value || '')
       },
       email: {
         tipo: 'openday',

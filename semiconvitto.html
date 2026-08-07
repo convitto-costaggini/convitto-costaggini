@@ -44,8 +44,8 @@
     .sc-services { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin-bottom:1rem; }
     @media(max-width:520px){ .sc-services { grid-template-columns:1fr; } }
     .sc-service { position:relative; border:1.5px solid #e5e7eb; border-radius:8px; padding:.9rem 1rem; cursor:pointer; transition:all .2s; }
-    .sc-service.sel { border-color:var(--bosco); border-width:2px; background:rgba(44,62,45,.08); box-shadow:0 2px 8px rgba(44,62,45,.12); }
-    .sc-service.sel::after { content:"✓"; position:absolute; top:.55rem; right:.65rem; width:20px; height:20px; border-radius:50%; background:var(--bosco); color:#fff; font-size:.7rem; font-weight:800; display:flex; align-items:center; justify-content:center; }
+    .sc-service:has(input:checked) { border-color:var(--bosco); border-width:2px; background:rgba(44,62,45,.08); box-shadow:0 2px 8px rgba(44,62,45,.12); }
+    .sc-service:has(input:checked)::after { content:"✓"; position:absolute; top:.55rem; right:.65rem; width:20px; height:20px; border-radius:50%; background:var(--bosco); color:#fff; font-size:.7rem; font-weight:800; display:flex; align-items:center; justify-content:center; }
     .sc-service input { display:none; }
     .sc-service-icon { font-size:1.5rem; display:block; margin-bottom:.35rem; }
     .sc-service-name { font-family:var(--fu); font-size:.72rem; font-weight:800; color:var(--bosco); margin-bottom:.2rem; }
@@ -195,25 +195,25 @@
             <div class="sc-body">
               <p style="font-family:var(--fu);font-size:.72rem;color:var(--txt2);margin-bottom:1rem">Seleziona uno o più servizi:</p>
               <div class="sc-services">
-                <label class="sc-service" onclick="this.classList.toggle('sel')">
+                <label class="sc-service">
                   <input type="checkbox" name="srv_prova" value="1"/>
                   <span class="sc-service-icon">🎁</span>
                   <p class="sc-service-name">Giornata di prova gratuita</p>
                   <p class="sc-service-desc">Un giorno al Semiconvitto per capire se fa per voi — senza impegno.</p>
                 </label>
-                <label class="sc-service" onclick="this.classList.toggle('sel')">
+                <label class="sc-service">
                   <input type="checkbox" name="srv_studio" value="1"/>
                   <span class="sc-service-icon">📚</span>
                   <p class="sc-service-name">Solo studio guidato</p>
                   <p class="sc-service-desc">15:30–17:15 con educatori professionisti.</p>
                 </label>
-                <label class="sc-service" onclick="this.classList.toggle('sel')">
+                <label class="sc-service">
                   <input type="checkbox" name="srv_pranzo" value="1"/>
                   <span class="sc-service-icon">🍽️</span>
                   <p class="sc-service-name">Pranzo in mensa</p>
                   <p class="sc-service-desc">Menu cucinato internamente, variato ogni giorno.</p>
                 </label>
-                <label class="sc-service" onclick="this.classList.toggle('sel')">
+                <label class="sc-service">
                   <input type="checkbox" name="srv_full" value="1"/>
                   <span class="sc-service-icon">⭐</span>
                   <p class="sc-service-name">Pacchetto completo</p>

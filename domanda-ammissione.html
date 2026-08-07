@@ -379,7 +379,7 @@
         <!-- Footer form -->
         <div style="background:#fff;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,.07)">
           <div class="da-footer">
-            <div>
+            <div id="da-destinatario">
               <p style="font-family:var(--fu);font-size:.65rem;font-weight:700;color:#374151;margin-bottom:.2rem">La domanda sarà inviata a:</p>
               <p style="font-family:var(--fu);font-size:.72rem;color:var(--bosco);font-weight:800">Segreteria IPSSEOA "Costaggini" — rirh010007@istruzione.it</p>
             </div>
@@ -580,6 +580,8 @@ function daInviaDomanda(payload) {
           .forEach(el => el.disabled = true);
         btn.style.display = 'none';
         errBox.style.display = 'none';
+        const dest = document.getElementById('da-destinatario');
+        if (dest) dest.innerHTML = '<p style="font-family:var(--fu);font-size:.72rem;color:var(--bosco);font-weight:800">✅ La mail è stata correttamente inviata.</p>';
         document.getElementById('da-success').style.display = 'block';
         document.getElementById('da-success').scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {

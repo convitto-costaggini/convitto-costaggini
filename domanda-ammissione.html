@@ -388,9 +388,10 @@
               <button type="submit" class="btn-invia" id="da-submit">
                 <svg viewBox="0 0 24 24" width="16" height="16" style="fill:#fff"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
                 <span id="da-submit-label">Invia alla Segreteria</span>
-              </button>
+             </button>
             </div>
           </div>
+          <div id="da-wait" style="display:none;width:100%;padding:0 1.5rem 1rem;font-family:var(--fu);font-size:.72rem;color:#6b7280;text-align:right"></div>
         </div>
 
       </form><!-- fine form -->
@@ -533,11 +534,24 @@ function daInviaDomanda(payload) {
   const btnLabel = document.getElementById('da-submit-label');
   const retryBtn = document.getElementById('da-retry');
   const errBox = document.getElementById('da-error');
+  const waitBox = document.getElementById('da-wait');
 
   errBox.style.display = 'none';
   if (btn) { btn.disabled = true; }
   if (btnLabel) { btnLabel.textContent = 'Invio in corso…'; }
   if (retryBtn) { retryBtn.disabled = true; retryBtn.textContent = 'Invio in corso…'; }
+
+  waitBox.style.display = 'block';
+  waitBox.textContent = '';
+  const waitTimers = [
+    setTimeout(() => { waitBox.textContent = 'Stiamo verificando i dati, un momento…'; }, 4000),
+    setTimeout(() => { waitBox.textContent = "L'invio può richiedere fino a mezzo minuto: non chiudere la pagina, ci siamo quasi."; }, 10000)
+  ];
+  function daPulisciAttesa() {
+    waitTimers.forEach(clearTimeout);
+    waitBox.style.display = 'none';
+    waitBox.textContent = '';
+  }
 
   new Promise((resolve) => {
     grecaptcha.ready(() => {
@@ -559,18 +573,19 @@ function daInviaDomanda(payload) {
       return r.json();
     })
     .then(esito => {
+      daPulisciAttesa();
       if (esito && esito.success) {
         document.querySelectorAll('#da-form input, #da-form select, #da-form textarea')
           .forEach(el => el.disabled = true);
         btn.style.display = 'none';
         errBox.style.display = 'none';
         document.getElementById('da-success').style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.getElementById('da-success').scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
         daMostraErrore();
       }
     })
-    .catch(() => daMostraErrore());
+    .catch(() => { daPulisciAttesa(); daMostraErrore(); });
   });
 
   function daMostraErrore() {
@@ -581,7 +596,6 @@ function daInviaDomanda(payload) {
     errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
-
 updateProgress();
 </script>
 </body>

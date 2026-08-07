@@ -193,28 +193,28 @@
           <div class="sc-section">
             <div class="sc-hdr"><h2>3 — Tipo di richiesta</h2><span>cosa vuoi fare</span></div>
             <div class="sc-body">
-              <p style="font-family:var(--fu);font-size:.72rem;color:var(--txt2);margin-bottom:1rem">Seleziona uno o più servizi:</p>
+              <p style="font-family:var(--fu);font-size:.72rem;color:var(--txt2);margin-bottom:1rem">Seleziona il servizio che ti interessa:</p>
               <div class="sc-services">
                 <label class="sc-service">
-                  <input type="checkbox" name="srv_prova" value="1"/>
+                  <input type="radio" name="servizio" value="prova"/>
                   <span class="sc-service-icon">🎁</span>
                   <p class="sc-service-name">Giornata di prova gratuita</p>
                   <p class="sc-service-desc">Un giorno al Semiconvitto per capire se fa per voi — senza impegno.</p>
                 </label>
                 <label class="sc-service">
-                  <input type="checkbox" name="srv_studio" value="1"/>
+                  <input type="radio" name="servizio" value="studio"/>
                   <span class="sc-service-icon">📚</span>
                   <p class="sc-service-name">Solo studio guidato</p>
                   <p class="sc-service-desc">15:30–17:15 con educatori professionisti.</p>
                 </label>
                 <label class="sc-service">
-                  <input type="checkbox" name="srv_pranzo" value="1"/>
+                  <input type="radio" name="servizio" value="pranzo"/>
                   <span class="sc-service-icon">🍽️</span>
                   <p class="sc-service-name">Pranzo in mensa</p>
                   <p class="sc-service-desc">Menu cucinato internamente, variato ogni giorno.</p>
                 </label>
                 <label class="sc-service">
-                  <input type="checkbox" name="srv_full" value="1"/>
+                  <input type="radio" name="servizio" value="full"/>
                   <span class="sc-service-icon">⭐</span>
                   <p class="sc-service-name">Pacchetto completo</p>
                   <p class="sc-service-desc">Pranzo + studio guidato + attività pomeridiane.</p>
@@ -380,8 +380,8 @@ document.getElementById('sc-form').addEventListener('submit', function(e) {
   if (!ok) { alert('Compila i campi obbligatori (*)'); return; }
 
   const d = Object.fromEntries(new FormData(this));
-  const servizi = ['srv_prova','srv_studio','srv_pranzo','srv_full']
-    .filter(k=>d[k]).map(k=>({'srv_prova':'Giornata di prova','srv_studio':'Studio guidato','srv_pranzo':'Pranzo','srv_full':'Pacchetto completo'}[k])).join(', ') || '—';
+  const ETICHETTE_SERVIZIO = {prova:'Giornata di prova', studio:'Studio guidato', pranzo:'Pranzo', full:'Pacchetto completo'};
+  const servizi = ETICHETTE_SERVIZIO[d.servizio] || '—';
   const giorni = ['lun','mar','mer','gio'].filter(g=>d[`giorno_${g}`]).map(g=>g[0].toUpperCase()+g.slice(1)).join(', ')||'—';
 
   const corpo =

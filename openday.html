@@ -681,52 +681,12 @@ const obs = new IntersectionObserver(es=>es.forEach(e=>{
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
 
-/* invio prenotazione visita: 1) salvataggio reale su Supabase (dato primario,
-   condiziona davvero il redirect a grazie.html) 2) notifica email di cortesia
-   allo staff (best-effort: se fallisce viene solo loggata, la prenotazione
-   resta comunque salvata e visibile in admin.html → tab Open Day) */
-  (function(){
-  const CONTACT_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
-  const RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
-  const SB_N   = 'https://sawclsysqnjsvbobioqo.supabase.co';
-  const SB_PUB = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
-  const f = document.querySelector('form[name="richiesta-visita"]');
-  if (!f) return;
-
-  const btn = f.querySelector('button[type=submit]');
-  const errBox = document.getElementById('ov-error');
-  const retryBtn = document.getElementById('ov-retry');
-  let ovUltimoDati = null;
-
-  function ovMostraErrore() {
-    if (btn) { btn.disabled = false; btn.textContent = 'Invia richiesta visita →'; }
-    if (retryBtn) { retryBtn.disabled = false; retryBtn.textContent = "Riprova l'invio"; }
-    errBox.style.display = 'block';
-    errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  function ovInvia(dati) {
-    errBox.style.display = 'none';
-    if (btn) { btn.disabled = true; btn.textContent = 'Invio…'; }
-    if (retryBtn) { retryBtn.disabled = true; retryBtn.textContent = 'Invio…'; }
-
-    // 1. Salva la prenotazione su Supabase — è il dato che conta davvero,
-    //    quindi il redirect a "grazie" avviene solo se questo va a buon fine.
-    fetch(SB_N + '/rest/v1/prenotazioni_openday', {
-      method: 'POST',
-      headers: {
-        'apikey': SB_PUB,
-        'Authorization': 'Bearer ' + SB_PUB,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify(dati.supabase)
-    })
-      .then(r => { if (!r.ok) throw new Error('Supabase HTTP ' + r.status); })
-      .then(() => {
-        // 2. Notifica email di cortesia — best-effort, non blocca il redirect:
-        //    la prenotazione è già al sicuro su Supabase in ogni caso.
-        new Promise((resolve) => {
+// 2. Notifica email di cortesia — best-effort: attendiamo al massimo
+        //    1,5s che la richiesta parta davvero prima di cambiare pagina
+        //    (altrimenti la navigazione la interrompe a metà); keepalive la
+        //    fa comunque sopravvivere se il cambio pagina arriva nel mezzo.
+        //    La prenotazione è già al sicuro su Supabase in ogni caso.
+        const notifica = new Promise((resolve) => {
           grecaptcha.ready(() => {
             grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'openday' }).then(resolve).catch(() => resolve(''));
           });
@@ -734,19 +694,22 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
           dati.email.recaptchaToken = recaptchaToken;
           dati.email.recaptchaAction = 'openday';
 
-          fetch(CONTACT_GAS, {
+          return fetch(CONTACT_GAS, {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(dati.email)
+            body: JSON.stringify(dati.email),
+            keepalive: true
+          });
+        }).then(r2 => { if (!r2.ok) throw new Error('GAS HTTP ' + r2.status); return r2.json(); })
+          .then(esito => {
+            if (!esito || !esito.success) console.warn('Notifica email Open Day non riuscita (prenotazione comunque salvata su Supabase):', esito);
           })
-            .then(r2 => { if (!r2.ok) throw new Error('GAS HTTP ' + r2.status); return r2.json(); })
-            .then(esito => {
-              if (!esito || !esito.success) console.warn('Notifica email Open Day non riuscita (prenotazione comunque salvata su Supabase):', esito);
-            })
-            .catch(err => console.warn('Notifica email Open Day non riuscita (prenotazione comunque salvata su Supabase):', err));
-        });
+          .catch(err => console.warn('Notifica email Open Day non riuscita (prenotazione comunque salvata su Supabase):', err));
 
-        window.location = 'grazie.html';
+        Promise.race([
+          notifica,
+          new Promise(resolve => setTimeout(resolve, 1500))
+        ]).then(() => { window.location = 'grazie.html'; });
       })
       .catch(err => {
         console.error('Errore insert prenotazioni_openday:', err);

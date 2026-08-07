@@ -518,7 +518,8 @@ NB: la domanda richiede firma autografa per la validità legale; contattare il g
     telefono: d.cell_padre || '',
     oggetto: 'Domanda di ammissione — ' + (d.alunno_nome || ''),
     messaggio: corpo,
-    privacy: true
+    privacy: true,
+    botField: d['bot-field'] || ''
   };
 
   daUltimoPayload = payload;

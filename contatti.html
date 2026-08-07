@@ -168,6 +168,10 @@
           novalidate
           aria-label="Modulo di contatto">
 
+          <p style="position:absolute;left:-9999px" aria-hidden="true">
+            <label>Non compilare questo campo: <input type="text" id="sito_web" name="sito_web" tabindex="-1" autocomplete="off"/></label>
+          </p>
+
           <div class="frow">
             <div class="fg">
               <label for="nome">Nome <span class="req">*</span></label>
@@ -504,7 +508,8 @@ if (form) {
       messaggio: document.getElementById('messaggio')?.value.trim()  || '',
       privacy:   document.getElementById('priv')?.checked            || false,
       recaptchaToken: recaptchaToken,
-      recaptchaAction: 'contatti'
+      recaptchaAction: 'contatti',
+      botField:  document.getElementById('sito_web')?.value || ''
     };
 
     try {

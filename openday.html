@@ -762,6 +762,9 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
   f.addEventListener('submit', function(e){
     e.preventDefault();
+    // Honeypot: se il campo trappola è compilato, è un bot — non scriviamo
+    // nulla su Supabase né chiamiamo il GAS, ma non diamo segnali di blocco.
+    if ((f.querySelector('[name="bot-field"]')?.value || '').trim()) return;
     let ok = true;
     f.querySelectorAll('[required]').forEach(el => { el.style.borderColor=''; if(!el.value.trim()){ ok=false; el.style.borderColor='#dc2626'; } });
     if(!ok) return;
@@ -798,7 +801,8 @@ ${g('vis-note') || '—'}`;
         note: g('vis-note'),
         oggetto: 'Prenotazione Open Day — ' + g('vis-nome'),
         messaggio: corpo,
-        privacy: true
+        privacy: true,
+        botField: (f.querySelector('[name="bot-field"]')?.value || '')
       }
     };
     ovInvia(ovUltimoDati);

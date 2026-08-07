@@ -63,11 +63,17 @@
     .sc-success { display:none; background:linear-gradient(135deg,#f0fdf4,#f7fef4); border:1px solid #bbf7d0; border-radius:12px; padding:2.5rem; text-align:center; }
     .sc-success h2 { font-family:var(--fd); font-size:1.8rem; font-weight:300; color:var(--bosco); }
     .sc-success p { font-family:var(--fu); font-size:.85rem; color:#374151; line-height:1.75; max-width:440px; margin:.5rem auto .85rem; }
+
+    /* Errore */
+    .sc-error { display:none; background:linear-gradient(135deg,#fef2f2,#fff5f5); border:1px solid #fecaca; border-radius:12px; padding:2.25rem; text-align:center; margin-top:1.5rem; }
+    .sc-error h2 { font-family:var(--fd); font-size:1.5rem; font-weight:300; color:#991b1b; }
+    .sc-error p { font-family:var(--fu); font-size:.83rem; color:#374151; line-height:1.7; max-width:440px; margin:.5rem auto .85rem; }
   </style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO"></script>
 </head>
 <body data-page="semiconvitto">
 <script src="nav-header.js"></script>
@@ -121,6 +127,10 @@
         <div class="sc-progress"><div class="sc-progress-fill" id="sc-prog" style="width:0%"></div></div>
 
         <form id="sc-form" novalidate>
+
+          <p style="position:absolute;left:-9999px" aria-hidden="true">
+            <label>Non compilare questo campo: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"/></label>
+          </p>
 
           <!-- 1. Studente -->
           <div class="sc-section">
@@ -240,15 +250,27 @@
           <!-- Footer -->
           <div class="sc-section">
             <div class="sc-form-foot">
-              <div>
+              <div id="sc-destinatario">
                 <p style="font-family:var(--fu);font-size:.65rem;font-weight:700;color:#374151;margin-bottom:.2rem">Inviato a:</p>
-                <p style="font-family:var(--fu);font-size:.72rem;color:var(--bosco);font-weight:800">Segreteria IPSSEOA "Costaggini" · rirh010007@istruzione.it</p>
+                <p style="font-family:var(--fu);font-size:.72rem;color:var(--bosco);font-weight:800">Segreteria e Convitto IPSSEOA "Costaggini"</p>
               </div>
-              <button type="submit" class="btn-invia">Invia richiesta →</button>
+              <button type="submit" class="btn-invia" id="sc-submit">Invia richiesta →</button>
             </div>
+            <div id="sc-wait" style="display:none;width:100%;padding:.5rem 0 0;font-family:var(--fu);font-size:.72rem;color:#6b7280;text-align:right"></div>
           </div>
 
         </form>
+
+        <!-- Errore -->
+        <div class="sc-error" id="sc-error">
+          <div style="font-size:2.5rem;margin-bottom:.75rem">⚠️</div>
+          <h2>Invio non riuscito</h2>
+          <p>Non siamo riusciti a inviare la richiesta. <strong>I dati che hai inserito non sono andati persi</strong>: restano compilati qui sopra, puoi correggere e riprovare.</p>
+          <p style="font-family:var(--fu);font-size:.78rem;color:#6b7280">Se il problema persiste, telefona alla segreteria oppure scrivi a <strong>convitto@alberghierorieti.it</strong>.</p>
+          <div style="margin-top:1.25rem">
+            <button type="button" class="btn-invia" id="sc-retry">Riprova l'invio</button>
+          </div>
+        </div>
 
         <!-- Successo -->
         <div class="sc-success" id="sc-success">
@@ -281,6 +303,72 @@ document.getElementById('sc-form').addEventListener('input', updateProgress);
 document.getElementById('sc-form').addEventListener('change', updateProgress);
 
 // Submit
+const SC_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
+const SC_RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
+let scUltimoPayload = null;
+
+function scMostraErrore() {
+  const btn = document.getElementById('sc-submit');
+  const retryBtn = document.getElementById('sc-retry');
+  if (btn) { btn.disabled = false; btn.textContent = 'Invia richiesta →'; }
+  if (retryBtn) { retryBtn.disabled = false; retryBtn.textContent = "Riprova l'invio"; }
+  document.getElementById('sc-error').style.display = 'block';
+  document.getElementById('sc-error').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function scInvia(payload) {
+  const btn = document.getElementById('sc-submit');
+  const retryBtn = document.getElementById('sc-retry');
+  const waitBox = document.getElementById('sc-wait');
+  document.getElementById('sc-error').style.display = 'none';
+  if (btn) { btn.disabled = true; btn.textContent = 'Invio…'; }
+  if (retryBtn) { retryBtn.disabled = true; retryBtn.textContent = 'Invio…'; }
+
+  waitBox.style.display = 'block';
+  waitBox.textContent = '';
+  const waitTimers = [
+    setTimeout(() => { waitBox.textContent = 'Stiamo verificando i dati, un momento…'; }, 4000),
+    setTimeout(() => { waitBox.textContent = "L'invio può richiedere fino a mezzo minuto: non chiudere la pagina, ci siamo quasi."; }, 10000)
+  ];
+  function scPulisciAttesa() {
+    waitTimers.forEach(clearTimeout);
+    waitBox.style.display = 'none';
+    waitBox.textContent = '';
+  }
+
+  new Promise((resolve) => {
+    grecaptcha.ready(() => {
+      grecaptcha.execute(SC_RECAPTCHA_SITE_KEY, { action: 'semiconvitto' }).then(resolve).catch(() => resolve(''));
+    });
+  }).then(recaptchaToken => {
+    payload.recaptchaToken = recaptchaToken;
+    payload.recaptchaAction = 'semiconvitto';
+
+    return fetch(SC_GAS, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+  })
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(esito => {
+      scPulisciAttesa();
+      if (esito && esito.success) {
+        document.querySelectorAll('#sc-form input, #sc-form select, #sc-form textarea')
+          .forEach(el => el.disabled = true);
+        document.getElementById('sc-form').style.display = 'none';
+        document.getElementById('sc-error').style.display = 'none';
+        const dest = document.getElementById('sc-destinatario');
+        if (dest) dest.innerHTML = '<p style="font-family:var(--fu);font-size:.72rem;color:var(--bosco);font-weight:800">✅ La richiesta è stata correttamente inviata.</p>';
+        document.getElementById('sc-success').style.display = 'block';
+        document.getElementById('sc-success').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        scMostraErrore();
+      }
+    })
+    .catch(() => { scPulisciAttesa(); scMostraErrore(); });
+}
+
 document.getElementById('sc-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const req = this.querySelectorAll('[required]');
@@ -296,7 +384,7 @@ document.getElementById('sc-form').addEventListener('submit', function(e) {
     .filter(k=>d[k]).map(k=>({'srv_prova':'Giornata di prova','srv_studio':'Studio guidato','srv_pranzo':'Pranzo','srv_full':'Pacchetto completo'}[k])).join(', ') || '—';
   const giorni = ['lun','mar','mer','gio','ven'].filter(g=>d[`giorno_${g}`]).map(g=>g[0].toUpperCase()+g.slice(1)).join(', ')||'—';
 
-  const body = encodeURIComponent(
+  const corpo =
 `RICHIESTA SEMICONVITTO — A.S. 2026/27
 ======================================
 
@@ -314,17 +402,23 @@ Servizi: ${servizi}
 Giorni: ${giorni}
 
 NOTE / ALLERGIE
-${d.note||'—'}`
-  );
+${d.note||'—'}`;
 
-  const sogg = encodeURIComponent(`Richiesta Semiconvitto A.S. 2026/27 — ${d.studente_nome||''}`);
-  window.location.href = `mailto:rirh010007@istruzione.it?cc=michele.gaggiano@alberghierorieti.it&subject=${sogg}&body=${body}`;
+  scUltimoPayload = {
+    tipo: 'semiconvitto',
+    nome: d.studente_nome || '',
+    email: d.genitore_email || '',
+    telefono: d.genitore_tel || '',
+    oggetto: 'Richiesta Semiconvitto A.S. 2026/27',
+    messaggio: corpo,
+    privacy: true,
+    botField: d['bot-field'] || ''
+  };
+  scInvia(scUltimoPayload);
+});
 
-  setTimeout(() => {
-    document.getElementById('sc-form').style.display = 'none';
-    document.getElementById('sc-success').style.display = 'block';
-    window.scrollTo({top:0,behavior:'smooth'});
-  }, 600);
+document.getElementById('sc-retry').addEventListener('click', function(){
+  if (scUltimoPayload) scInvia(scUltimoPayload);
 });
 </script>
 </body>

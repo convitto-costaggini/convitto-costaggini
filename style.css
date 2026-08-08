@@ -281,6 +281,13 @@ p:last-child { margin-bottom: 0; }
   padding: .85rem 1.75rem; border-radius: 40px; min-height: 48px; transition: var(--ease);
 }
 .btn-outline-dark:hover { background: var(--bosco); color: var(--av); }
+.btn-outline {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  border: 1.5px solid; text-decoration: none; font-family: var(--fu); font-size: .83rem; font-weight: 700;
+  letter-spacing: .07em; text-transform: uppercase;
+  padding: .85rem 1.75rem; border-radius: 40px; min-height: 48px; transition: var(--ease);
+}
+.btn-outline:hover { opacity: .8; }
 
 /* ── Cards ── */
 .card {

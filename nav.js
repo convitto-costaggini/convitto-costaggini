@@ -325,7 +325,7 @@
           bottom: 1rem;
           left: 50%;
           transform: translateX(-50%);
-          width: 36px; height: 36px;
+          width: 48px; height: 48px;
           border-radius: 50%;
           background: rgba(184,146,42,.15);
           border: 1.5px solid rgba(184,146,42,.35);

@@ -336,7 +336,7 @@
           <span class="btn-label">Cerca</span>
         </button>
       </div>
-      <div id="search-results" aria-label="Risultati della ricerca"></div>
+      <div id="search-results" role="listbox" aria-label="Risultati della ricerca"></div>
       <div id="search-status" class="sr-only" aria-live="polite" role="status"></div>
     </div>
   </div>
@@ -558,7 +558,7 @@
             <div style="flex:1;min-width:160px">
               <p style="font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.25rem">Orientamento</p>
               <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:300;color:#fff;line-height:1.25;margin-bottom:.3rem">Open Day &amp; <em style="font-style:italic;color:var(--oro3)">Tour Virtuale</em></h3>
-              <p style="font-size:.76rem;color:rgba(245,240,232,.65);line-height:1.6;margin:0">Visita gli spazi a 360°, incontra gli educatori e prenota la tua visita — tutto online.</p>
+              <p style="font-size:.76rem;color:rgba(245,240,232,.55);line-height:1.6;margin:0">Visita gli spazi a 360°, incontra gli educatori e prenota la tua visita — tutto online.</p>
             </div>
             <div style="display:flex;flex-direction:column;gap:.45rem;flex-shrink:0">
               <a href="tour-virtuale.html" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .9rem;background:linear-gradient(135deg,var(--oro2),var(--oro3));color:var(--bosco);border-radius:6px;text-decoration:none;white-space:nowrap">🏛️ Tour 360°</a>
@@ -614,12 +614,10 @@
       .ss-play:hover { background: var(--oro); color: #1a2e1b; border-color: var(--oro); }
       .ss-play svg { width: 17px; height: 17px; fill: currentColor; }
       .ss-play:focus-visible { outline: 3px solid var(--oro); outline-offset: 2px; }
-      .ss-dots { display: flex; gap: 4px; align-items:center; }
-      .ss-dot { width: 24px; height: 24px; border-radius: 50%; border: none; padding: 0; cursor: pointer;
-        background: transparent; display: flex; align-items: center; justify-content: center; }
-      .ss-dot::before { content: ''; display: block; width: 9px; height: 9px; border-radius: 50%;
+      .ss-dots { display: flex; gap: .55rem; align-items:center; }
+      .ss-dot { width: 9px; height: 9px; border-radius: 50%; border: none; padding: 0; cursor: pointer;
         background: rgba(245,240,232,.28); transition: all .25s; }
-      .ss-dot.on::before { background: var(--oro2); transform: scale(1.4); }
+      .ss-dot.on { background: var(--oro2); transform: scale(1.4); }
       .ss-dot:focus-visible { outline: 2px solid var(--oro); outline-offset: 2px; }
       @media (max-width: 560px) {
         .ss-cap .lab { font-size: 1.2rem; } .ss-cap { left: 1.1rem; bottom: 1rem; }
@@ -776,7 +774,7 @@
       <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;align-items:center">
         <a href="ammissione.html#domande-genitori" class="btn-gold">Tutte le 6 domande →</a>
         <a href="regolamento.html"
-           style="display:inline-flex;align-items:center;gap:.5rem;color:rgba(245,240,232,.65);font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(245,240,232,.2);padding-bottom:2px">
+           style="display:inline-flex;align-items:center;gap:.5rem;color:rgba(245,240,232,.55);font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(245,240,232,.2);padding-bottom:2px">
           <svg viewBox="0 0 24 24" width="14" height="14" style="fill:var(--oro2);flex-shrink:0"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
           Regolamento completo PDF
         </a>

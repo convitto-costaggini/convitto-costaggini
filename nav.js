@@ -17,7 +17,7 @@
         <p class="fn">Convitto "Costaggini"<br><span style="font-size:.72rem;font-weight:400;opacity:.7">IPSSEOA "R. A. Costaggini" · Rieti</span></p>
         <p>Residenza educativa di eccellenza per la formazione professionale nell'ospitalità e nelle arti culinarie. Ente pubblico — vigilanza MIM.</p>
         <div style="margin-top:1rem;display:flex;flex-direction:column;gap:.3rem">
-          <p style="font-family:var(--fu);font-size:.62rem;color:rgba(245,240,232,.50);line-height:1.7">
+          <p style="font-family:var(--fu);font-size:.62rem;color:rgba(245,240,232,.65);line-height:1.7">
             <strong style="color:rgba(245,240,232,.6)">C.F.</strong> 80008130579 &nbsp;·&nbsp;
             <strong style="color:rgba(245,240,232,.6)">Cod. mecc.</strong> RIRH010007<br>
             <strong style="color:rgba(245,240,232,.6)">PEC</strong> <a href="mailto:rirh010007@pec.istruzione.it" style="color:var(--oro2)">rirh010007@pec.istruzione.it</a><br>
@@ -52,19 +52,19 @@
         </ul></div>
 
         <div class="fc"><h4>Contatti Uffici</h4><ul>
-          <li style="font-size:.7rem;color:rgba(245,240,232,.5);line-height:1.6">
+          <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6">
             <strong style="color:rgba(245,240,232,.7);display:block">Centralino</strong>
             <a href="tel:+390746201113" style="color:var(--oro2)">0746 201113</a>
           </li>
-          <li style="font-size:.7rem;color:rgba(245,240,232,.5);line-height:1.6;margin-top:.4rem">
+          <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6;margin-top:.4rem">
             <strong style="color:rgba(245,240,232,.7);display:block">Convitto</strong>
             <a href="tel:+390746296862" style="color:var(--oro2)">0746 296862</a>
           </li>
-          <li style="font-size:.7rem;color:rgba(245,240,232,.5);line-height:1.6;margin-top:.4rem">
+          <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6;margin-top:.4rem">
             <strong style="color:rgba(245,240,232,.7);display:block">Segreteria Didattica</strong>
             Lun–Ven 8:00–13:30<br>solo su appuntamento
           </li>
-          <li style="font-size:.7rem;color:rgba(245,240,232,.5);line-height:1.6;margin-top:.4rem">
+          <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6;margin-top:.4rem">
             <strong style="color:rgba(245,240,232,.7);display:block">Sede centrale</strong>
             Via dei Salici, 62 — Rieti
           </li>
@@ -86,7 +86,7 @@
     <div class="fbot">
       <p>© 2025 Convitto Annesso — IPSSEOA "R. A. Costaggini" — Via Salaria s.n.c. — 02100 Rieti (RI) — C.F. 80008130579 — Cod. mecc. RIRH010007</p>
      <p><a href="trasparenza.html#accessibilita">Dichiarazione di Accessibilità</a> · <a href="privacy.html">Privacy</a> · <a href="cookie-policy.html">Cookie Policy</a> · <a href="trasparenza.html">Amm. Trasparente</a> · <a href="mappa-sito.html">Mappa del Sito</a></p>
-      <p style="font-size:.68rem;color:rgba(245,240,232,.50);margin-top:.35rem;font-style:italic">⏳ Sito in fase di staging — in attesa di attivazione del dominio istituzionale convitto.alberghierorieti.edu.it a seguito delle procedure amministrative di competenza. I contenuti sono autentici e prodotti dall'IPSSEOA "Costaggini" di Rieti.</p>
+      <p style="font-size:.68rem;color:rgba(245,240,232,.65);margin-top:.35rem;font-style:italic">⏳ Sito in fase di staging — in attesa di attivazione del dominio istituzionale convitto.alberghierorieti.edu.it a seguito delle procedure amministrative di competenza. I contenuti sono autentici e prodotti dall'IPSSEOA "Costaggini" di Rieti.</p>
     </div>
   </div>
 </footer>`;
@@ -136,10 +136,10 @@
     <div style="pointer-events:auto;background:#1a2e1b;border:1px solid rgba(184,146,42,.35);border-radius:10px;padding:1.25rem 1.5rem;min-width:280px;box-shadow:0 12px 36px rgba(0,0,0,.45);animation:pecIn .2s ease both">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
         <span style="font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2)">📧 Indirizzo PEC</span>
-        <button onclick="document.getElementById('pec-modal').style.display='none'" style="background:none;border:none;color:rgba(245,240,232,.55);cursor:pointer;font-size:1rem;line-height:1">✕</button>
+        <button onclick="document.getElementById('pec-modal').style.display='none'" style="background:none;border:none;color:rgba(245,240,232,.65);cursor:pointer;font-size:1rem;line-height:1">✕</button>
       </div>
       <p style="font-family:var(--fu);font-size:.92rem;font-weight:600;color:#fff;margin-bottom:.35rem">rirh010007@pec.istruzione.it</p>
-      <p style="font-family:var(--fu);font-size:.65rem;color:rgba(245,240,232,.55);line-height:1.5">Posta Elettronica Certificata<br>IPSSEOA "R. A. Costaggini" — Rieti</p>
+      <p style="font-family:var(--fu);font-size:.65rem;color:rgba(245,240,232,.65);line-height:1.5">Posta Elettronica Certificata<br>IPSSEOA "R. A. Costaggini" — Rieti</p>
       <a href="mailto:rirh010007@pec.istruzione.it" style="display:inline-block;margin-top:.85rem;font-family:var(--fu);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--oro2);text-decoration:none;border-bottom:1px solid rgba(184,146,42,.3);padding-bottom:1px">Copia indirizzo →</a>
     </div>
   `;
@@ -502,7 +502,7 @@
     @keyframes wsLine { from{width:0;opacity:0} to{width:48px;opacity:1} }
     .ws-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.4rem,5vw,2.2rem); font-weight:300; color:#fff; text-align:center; animation:wsFadeUp .5s ease .4s both; }
     .ws-title em { font-style:italic; color:#D4AA4A; }
-    .ws-sub { font-family:'Source Sans 3',sans-serif; font-size:.72rem; font-weight:400; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,240,232,.50); animation:wsFadeUp .5s ease .7s both; }
+    .ws-sub { font-family:'Source Sans 3',sans-serif; font-size:.72rem; font-weight:400; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,240,232,.65); animation:wsFadeUp .5s ease .7s both; }
     @keyframes wsFadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
     `;
     const st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
@@ -795,7 +795,15 @@
     return '<div class="sr-header">' + trovati.length + ' risultat' + (trovati.length === 1 ? 'o' : 'i') + ' per "' + q + '"</div>' + items + extra;
   }
 
-  window.ConvittoSearch = { cerca: cerca, renderHTML: renderHTML };
+  /* Imposta role="listbox" solo quando il contenitore ha davvero risultati
+     con role="option" — evita un listbox vuoto/senza figli validi, che
+     viola la regola ARIA "certain roles must contain particular children" */
+  function syncListboxRole(el) {
+    if (el.querySelector('.sr-item')) el.setAttribute('role', 'listbox');
+    else el.removeAttribute('role');
+  }
+
+  window.ConvittoSearch = { cerca: cerca, renderHTML: renderHTML, syncListboxRole: syncListboxRole };
 
   function announceCount(query, statusEl) {
     if (!statusEl) return;
@@ -818,7 +826,7 @@
         '<input type="search" id="gsearch-input" placeholder="Cerca nel sito…" aria-label="Cerca nel sito del Convitto Costaggini" autocomplete="off" autocorrect="off" spellcheck="false"/>' +
         '<button id="gsearch-close" type="button" aria-label="Chiudi ricerca">✕</button>' +
       '</div>' +
-      '<div id="gsearch-results" role="listbox" aria-label="Risultati della ricerca"></div>' +
+      '<div id="gsearch-results" aria-label="Risultati della ricerca"></div>' +
       '<div id="gsearch-status" class="sr-only" aria-live="polite" role="status"></div>' +
       '<div id="gsearch-hint">Premi <kbd>Esc</kbd> per chiudere</div>' +
     '</div>';
@@ -836,6 +844,7 @@
     document.body.style.overflow = 'hidden';
     gInput.value = '';
     gResults.innerHTML = '';
+    syncListboxRole(gResults);
     setTimeout(function () { gInput.focus(); }, 30);
   }
   function closeSearch() {
@@ -846,6 +855,7 @@
   var gStatus = document.getElementById('gsearch-status');
   gInput.addEventListener('input', function () {
     gResults.innerHTML = renderHTML(gInput.value);
+    syncListboxRole(gResults);
     announceCount(gInput.value, gStatus);
   });
   gClose.addEventListener('click', closeSearch);
@@ -887,12 +897,14 @@
         homeResults.innerHTML = '';
         homeResults.classList.remove('open');
         homeInput.setAttribute('aria-expanded', 'false');
+        syncListboxRole(homeResults);
         if (homeStatus) homeStatus.textContent = '';
         return;
       }
       homeResults.innerHTML = renderHTML(q);
       homeResults.classList.add('open');
       homeInput.setAttribute('aria-expanded', 'true');
+      syncListboxRole(homeResults);
       announceCount(q, homeStatus);
     }
     homeInput.addEventListener('keydown', function (e) {

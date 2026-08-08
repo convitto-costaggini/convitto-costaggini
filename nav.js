@@ -29,7 +29,7 @@
 
       <div class="fcols">
 
-        <div class="fc"><h4>Il Convitto</h4><ul>
+        <div class="fc"><h2>Il Convitto</h2><ul>
           <li><a href="il-convitto.html">Chi siamo</a></li>
           <li><a href="educatori.html">Gli Educatori</a></li>
           <li><a href="giornata-tipo.html">Giornata tipo</a></li>
@@ -40,7 +40,7 @@
           <li><a href="ricordi.html">🕯️ Muro dei Ricordi</a></li>
         </ul></div>
 
-        <div class="fc"><h4>Servizi &amp; Ammissione</h4><ul>
+        <div class="fc"><h2>Servizi &amp; Ammissione</h2><ul>
           <li><a href="openday.html">🗓 Open Day</a></li>
           <li><a href="ammissione.html">Come iscriversi</a></li>
           <li><a href="domanda-ammissione.html">📋 Domanda online</a></li>
@@ -51,7 +51,7 @@
         <li><a href="contatti.html?oggetto=segnalazione-tecnica">🛠️ Segnala un problema</a></li>
         </ul></div>
 
-        <div class="fc"><h4>Contatti Uffici</h4><ul>
+        <div class="fc"><h2>Contatti Uffici</h2><ul>
           <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6">
             <strong style="color:rgba(245,240,232,.7);display:block">Centralino</strong>
             <a href="tel:+390746201113" style="color:var(--oro2)">0746 201113</a>
@@ -70,7 +70,7 @@
           </li>
         </ul></div>
 
-        <div class="fc"><h4>Amministrazione</h4><ul>
+        <div class="fc"><h2>Amministrazione</h2><ul>
           <li><a href="trasparenza.html">Amm. Trasparente</a></li>
           <li><a href="organizzazione.html">Organizzazione</a></li>
           <li><a href="ptof-guida.html">PTOF</a></li>

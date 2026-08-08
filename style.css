@@ -358,7 +358,7 @@ footer {
 .fbrand .fn { font-family: var(--fd); font-size: 1.15rem; color: var(--av); margin-bottom: .35rem; }
 .fbrand p { font-size: .78rem; line-height: 1.7; max-width: 360px; color: rgba(245,240,232,.65); margin-bottom: 0; }
 .fcols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.75rem; }
-.fc h4 { font-size: .66rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--oro2); margin-bottom: .7rem; }
+.fc h2 { font-size: .66rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--oro2); margin-bottom: .7rem; }
 .fc ul { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
 .fc a { font-size: .78rem; color: rgba(245,240,232,.65); text-decoration: none; min-height: 30px; display: flex; align-items: center; transition: color var(--ease); }
 .fc a:hover { color: var(--oro2); }

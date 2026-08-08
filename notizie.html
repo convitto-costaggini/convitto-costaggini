@@ -194,7 +194,9 @@ function renderNotizie(filtro) {
   const cat_colors = { eventi:'#1a4a7a', successi:'#1d6f42', pnrr:'#ea580c', 'vita al convitto':'#6b21a8', 'piatto della settimana':'#a06a00' };
   grid.innerHTML = filtered.map((n, i) => {
     const featured = ''; // tutte le notizie alla stessa dimensione
-    const img = n.immagine ? `<img src="${n.immagine}" alt="${newsEsc(n.titolo)}" loading="${i===0?'eager':'lazy'}"/>` : '';
+    const imgWebp = newsEsc((n.immagine||'').replace(/\.(jpe?g|png)$/i, '.webp'));
+    const imgSrc = newsEsc(n.immagine||'');
+    const img = n.immagine ? `<img src="${imgWebp}" data-fallback="${imgSrc}" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="${newsEsc(n.titolo)}" loading="${i===0?'eager':'lazy'}"/>` : '';
     const cs = cat_colors[(n.categoria||'').toLowerCase()] ? `background:${cat_colors[(n.categoria||'').toLowerCase()]};color:#fff` : '';
     const lnk = n.link ? `<a href="${newsEsc(n.link)}" ${n.link.startsWith('http')?'data-ext':''} class="ac-link">${newsEsc(n.link_testo||'Leggi →')}</a>` : '';
     return `<article class="article-card${featured}" data-cat="${newsEsc(n.categoria||'')}">${img}<div class="ac-body"><div class="ac-meta"><span class="ac-date">${newsEsc(n.data_pub||'')}</span><span class="ac-cat" style="${cs}">${newsEsc(n.categoria||'')}</span></div><h3>${newsEsc(n.titolo)}</h3><p>${newsEsc(n.testo||'')}</p>${lnk}</div></article>`;

@@ -841,7 +841,9 @@ async function caricaNotizieHome(){
       return;
     }
     row.innerHTML = data.map((n,i)=>{
-      const img = n.immagine ? `<img src="${n.immagine}" alt="${idxEsc(n.titolo||'')}" loading="${i===0?'eager':'lazy'}"/>` : '';
+      const imgWebp = idxEsc((n.immagine||'').replace(/\.(jpe?g|png)$/i, '.webp'));
+      const imgSrc = idxEsc(n.immagine||'');
+      const img = n.immagine ? `<img src="${imgWebp}" data-fallback="${imgSrc}" onerror="this.onerror=null;this.src=this.dataset.fallback" alt="${idxEsc(n.titolo||'')}" loading="${i===0?'eager':'lazy'}"/>` : '';
       const meta = [n.data_pub||'', n.categoria||''].filter(Boolean).join(' · ');
       const lnk = n.link ? `<a href="${idxEsc(n.link)}" ${n.link.startsWith('http')?'target="_blank" rel="noopener"':''} class="nc-lnk">${idxEsc(n.link_testo||'Leggi →')}</a>` : '';
       return `<article class="nc">${img}<div class="nc-body"><p class="nc-date">${idxEsc(meta)}</p><h3>${idxEsc(n.titolo||'')}</h3><p>${idxEsc(idxTronca(n.testo,160))}</p>${lnk}</div></article>`;

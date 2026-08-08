@@ -816,7 +816,7 @@
   }
 })();
 
-function idxEsc(t){ return (t||'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+function idxEsc(t){ return (t||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function idxTronca(t, n){ t = t || ''; return t.length > n ? t.slice(0, n).trim() + '…' : t; }
 
 async function caricaNotizieHome(){
@@ -838,7 +838,7 @@ async function caricaNotizieHome(){
     row.innerHTML = data.map((n,i)=>{
       const img = n.immagine ? `<img src="${n.immagine}" alt="${idxEsc(n.titolo||'')}" loading="${i===0?'eager':'lazy'}"/>` : '';
       const meta = [n.data_pub||'', n.categoria||''].filter(Boolean).join(' · ');
-      const lnk = n.link ? `<a href="${n.link}" ${n.link.startsWith('http')?'target="_blank" rel="noopener"':''} class="nc-lnk">${idxEsc(n.link_testo||'Leggi →')}</a>` : '';
+      const lnk = n.link ? `<a href="${idxEsc(n.link)}" ${n.link.startsWith('http')?'target="_blank" rel="noopener"':''} class="nc-lnk">${idxEsc(n.link_testo||'Leggi →')}</a>` : '';
       return `<article class="nc">${img}<div class="nc-body"><p class="nc-date">${idxEsc(meta)}</p><h3>${idxEsc(n.titolo||'')}</h3><p>${idxEsc(idxTronca(n.testo,160))}</p>${lnk}</div></article>`;
     }).join('');
   }catch(e){

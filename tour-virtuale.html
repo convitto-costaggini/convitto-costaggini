@@ -553,6 +553,8 @@ function buildButtons() {
   });
 }
 
+function tvEsc(t){ return (t||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
 // ── Build miniature ──
 function buildThumbs() {
   const wrap = document.getElementById('tv-thumbs');
@@ -566,8 +568,8 @@ function buildThumbs() {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectRoom(r, true); }
     });
     const img = new Image();
-    img.onload  = () => { div.innerHTML = `<img src="${r.thumb}" alt="${r.label}" loading="lazy"/><div class="tv-thumb-label">${r.label}</div>`; };
-    img.onerror = () => { div.innerHTML = `<div class="tv-thumb-placeholder"><span>${r.icon}</span><span>${r.label}</span></div>`; };
+    img.onload  = () => { div.innerHTML = `<img src="${r.thumb}" alt="${tvEsc(r.label)}" loading="lazy"/><div class="tv-thumb-label">${tvEsc(r.label)}</div>`; };
+    img.onerror = () => { div.innerHTML = `<div class="tv-thumb-placeholder"><span>${tvEsc(r.icon)}</span><span>${tvEsc(r.label)}</span></div>`; };
     img.src = r.thumb;
     wrap.appendChild(div);
   });

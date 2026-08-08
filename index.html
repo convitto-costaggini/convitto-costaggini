@@ -69,7 +69,7 @@
     .ic-ico svg { width: 20px; height: 20px; fill: var(--oro2); }
     .ic-ttl { font-family: var(--fd); font-size: 1.2rem; font-weight: 400; color: var(--bosco); }
     .ic-txt { font-size: .83rem; color: var(--txt2); line-height: 1.65; }
-    .ic-lnk { font-size: .75rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--oro); margin-top: auto; }
+    .ic-lnk { font-size: .75rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--bosco2); margin-top: auto; }
     @media(min-width:560px){ .intro-grid { grid-template-columns: 1fr 1fr; } }
     @media(min-width:900px){ .intro-grid { grid-template-columns: repeat(4,1fr); } }
 
@@ -95,7 +95,7 @@
     .nc { background: var(--bco); border-radius: 8px; overflow: hidden; border: 1px solid var(--av3); box-shadow: var(--sh-sm); }
     .nc img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
     .nc-body { padding: .9rem 1rem 1.1rem; }
-    .nc-date { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--oro); margin-bottom: .35rem; }
+    .nc-date { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bosco2); margin-bottom: .35rem; }
     .nc-body h3 { font-family: var(--fd); font-size: 1.15rem; font-weight: 400; color: var(--bosco); margin-bottom: .35rem; line-height: 1.3; }
     .nc-body p { font-size: .82rem; color: var(--txt2); line-height: 1.65; margin-bottom: 0; }
     .nc-lnk { display: inline-flex; align-items: center; gap: .3rem; font-size: .73rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--bosco); text-decoration: none; margin-top: .7rem; border-bottom: 1px solid var(--bosco); padding-bottom: 1px; }
@@ -142,7 +142,7 @@
       border-color: var(--oro2);
       box-shadow: 0 8px 32px rgba(0,0,0,.22), 0 0 0 4px rgba(212,170,74,.18);
     }
-    .search-icon { flex-shrink: 0; color: var(--oro); display: flex; align-items: center; }
+    .search-icon { flex-shrink: 0; color: var(--bosco2); display: flex; align-items: center; }
     .search-icon svg { width: 20px; height: 20px; fill: var(--oro); }
     #search-input {
       flex: 1; border: none; outline: none; background: transparent;
@@ -200,7 +200,7 @@
       display: inline-flex; align-items: center; gap: .4rem;
       font-family: var(--fu); font-size: .68rem; font-weight: 700;
       letter-spacing: .06em; text-transform: uppercase;
-      color: var(--oro2);
+      color: var(--oro3);
       background: rgba(245,240,232,.06);
       border: 1px solid rgba(184,146,42,.28);
       border-radius: 40px;
@@ -220,9 +220,9 @@
     .who-section { padding:3.5rem 1.25rem; background:var(--bco); }
     .who-section .w { max-width:1080px; margin:0 auto; }
     .who-head { text-align:center; margin-bottom:2rem; }
-    .who-head .lbl { font-family:var(--fu); font-size:.62rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--oro); margin-bottom:.5rem; }
+    .who-head .lbl { font-family:var(--fu); font-size:.62rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color: var(--bosco2); margin-bottom:.5rem; }
     .who-head h2 { font-family:var(--fd); font-weight:300; font-size:clamp(1.6rem,4vw,2.3rem); color:var(--bosco); margin:0; }
-    .who-head h2 em { font-style:italic; color:var(--oro); }
+    .who-head h2 em { font-style:italic; color: var(--bosco2); }
     .who-grid { display:grid; gap:1.25rem; grid-template-columns:1fr; }
     @media(min-width:560px){ .who-grid { grid-template-columns:1fr 1fr; } }
     @media(min-width:900px){ .who-grid { grid-template-columns:repeat(3,1fr); } }
@@ -231,7 +231,7 @@
     .who-ico { width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--oro2),var(--oro3)); display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin-bottom:1.1rem; flex-shrink:0; }
     .who-title { font-family:var(--fd); font-weight:400; font-size:1.25rem; color:var(--bosco); margin:0 0 .5rem; }
     .who-desc { font-size:.82rem; color:var(--txt2); line-height:1.65; margin:0 0 1.1rem; }
-    .who-cta { margin-top:auto; font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--oro); }
+    .who-cta { margin-top:auto; font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color: var(--bosco2); }
     .who-card:hover .who-cta { color:var(--bosco); }
 
     /* ── TRITTICO FOTO "OPEN DAY & TOUR VIRTUALE" ── */
@@ -336,7 +336,7 @@
           <span class="btn-label">Cerca</span>
         </button>
       </div>
-      <div id="search-results" role="listbox" aria-label="Risultati della ricerca"></div>
+      <div id="search-results" aria-label="Risultati della ricerca"></div>
       <div id="search-status" class="sr-only" aria-live="polite" role="status"></div>
     </div>
   </div>
@@ -444,7 +444,7 @@
           <figcaption style="background:var(--bosco);padding:.45rem .85rem">
             <span style="font-family:var(--fu);font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(245,240,232,.7);display:block;margin-bottom:.2rem">🏔️ Monte Terminillo · Rieti, Lazio</span>
             <a href="https://commons.wikimedia.org/wiki/File:Terminillo.JPG" target="_blank" rel="noopener"
-               style="font-family:var(--fu);font-size:.52rem;color:rgba(184,146,42,.55);text-decoration:none;word-break:break-all">© Livioandronico2013 · Wikimedia Commons · CC BY-SA</a>
+               style="font-family:var(--fu);font-size:.52rem;color:var(--oro2);text-decoration:none;word-break:break-all">© Livioandronico2013 · Wikimedia Commons · CC BY-SA</a>
           </figcaption>
         </figure>
       </div>
@@ -505,18 +505,18 @@
       </div>
 
       <div style="margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--av3)">
-        <p style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro);margin-bottom:.65rem">Dicono di noi</p>
+        <p style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color: var(--bosco2);margin-bottom:.65rem">Dicono di noi</p>
         <div style="display:flex;flex-direction:column;gap:.55rem">
           <a href="https://www.rietinvetrina.it/la-festa-di-natale-in-convitto-momento-di-condivisione-e-gioia-al-costaggini-di-rieti-le-foto/" target="_blank" rel="noopener" style="display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;text-decoration:none;font-size:.82rem;color:var(--txt2);line-height:1.5">
-            <span style="font-family:var(--fu);font-size:.64rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--oro);flex-shrink:0">Rietinvetrina</span>
+            <span style="font-family:var(--fu);font-size:.64rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color: var(--bosco2);flex-shrink:0">Rietinvetrina</span>
             <span style="font-family:var(--fd);font-style:italic;color:var(--bosco)">"La festa di Natale in convitto: momento di condivisione e gioia"</span>
           </a>
           <a href="https://www.rietilife.com/2026/03/09/il-presidente-cuneo-al-cantiere-della-palestra-dellistituto-costaggini-di-rieti/" target="_blank" rel="noopener" style="display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;text-decoration:none;font-size:.82rem;color:var(--txt2);line-height:1.5">
-            <span style="font-family:var(--fu);font-size:.64rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--oro);flex-shrink:0">Rietilife</span>
+            <span style="font-family:var(--fu);font-size:.64rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color: var(--bosco2);flex-shrink:0">Rietilife</span>
             <span style="font-family:var(--fd);font-style:italic;color:var(--bosco)">"Il presidente Cuneo al cantiere della palestra: stiamo costruendo un campus"</span>
           </a>
           <a href="https://www.rietilife.com/2025/05/26/590mila-euro-per-la-riqualificazione-della-mensa-del-convitto-dellalberghiero-di-rieti-finanziamento-ottenuto-dalla-provincia-nellambito-del-pnrr/" target="_blank" rel="noopener" style="display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;text-decoration:none;font-size:.82rem;color:var(--txt2);line-height:1.5">
-            <span style="font-family:var(--fu);font-size:.64rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--oro);flex-shrink:0">Rietilife</span>
+            <span style="font-family:var(--fu);font-size:.64rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color: var(--bosco2);flex-shrink:0">Rietilife</span>
             <span style="font-family:var(--fd);font-style:italic;color:var(--bosco)">"590mila euro PNRR per la riqualificazione della mensa"</span>
           </a>
         </div>
@@ -558,7 +558,7 @@
             <div style="flex:1;min-width:160px">
               <p style="font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.25rem">Orientamento</p>
               <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:300;color:#fff;line-height:1.25;margin-bottom:.3rem">Open Day &amp; <em style="font-style:italic;color:var(--oro3)">Tour Virtuale</em></h3>
-              <p style="font-size:.76rem;color:rgba(245,240,232,.55);line-height:1.6;margin:0">Visita gli spazi a 360°, incontra gli educatori e prenota la tua visita — tutto online.</p>
+              <p style="font-size:.76rem;color:rgba(245,240,232,.65);line-height:1.6;margin:0">Visita gli spazi a 360°, incontra gli educatori e prenota la tua visita — tutto online.</p>
             </div>
             <div style="display:flex;flex-direction:column;gap:.45rem;flex-shrink:0">
               <a href="tour-virtuale.html" style="display:inline-flex;align-items:center;justify-content:center;gap:.4rem;font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .9rem;background:linear-gradient(135deg,var(--oro2),var(--oro3));color:var(--bosco);border-radius:6px;text-decoration:none;white-space:nowrap">🏛️ Tour 360°</a>
@@ -614,10 +614,12 @@
       .ss-play:hover { background: var(--oro); color: #1a2e1b; border-color: var(--oro); }
       .ss-play svg { width: 17px; height: 17px; fill: currentColor; }
       .ss-play:focus-visible { outline: 3px solid var(--oro); outline-offset: 2px; }
-      .ss-dots { display: flex; gap: .55rem; align-items:center; }
-      .ss-dot { width: 9px; height: 9px; border-radius: 50%; border: none; padding: 0; cursor: pointer;
+      .ss-dots { display: flex; gap: 4px; align-items:center; }
+      .ss-dot { width: 24px; height: 24px; border-radius: 50%; border: none; padding: 0; cursor: pointer;
+        background: transparent; display: flex; align-items: center; justify-content: center; }
+      .ss-dot::before { content: ''; display: block; width: 9px; height: 9px; border-radius: 50%;
         background: rgba(245,240,232,.28); transition: all .25s; }
-      .ss-dot.on { background: var(--oro2); transform: scale(1.4); }
+      .ss-dot.on::before { background: var(--oro2); transform: scale(1.4); }
       .ss-dot:focus-visible { outline: 2px solid var(--oro); outline-offset: 2px; }
       @media (max-width: 560px) {
         .ss-cap .lab { font-size: 1.2rem; } .ss-cap { left: 1.1rem; bottom: 1rem; }
@@ -774,7 +776,7 @@
       <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;align-items:center">
         <a href="ammissione.html#domande-genitori" class="btn-gold">Tutte le 6 domande →</a>
         <a href="regolamento.html"
-           style="display:inline-flex;align-items:center;gap:.5rem;color:rgba(245,240,232,.55);font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(245,240,232,.2);padding-bottom:2px">
+           style="display:inline-flex;align-items:center;gap:.5rem;color:rgba(245,240,232,.65);font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(245,240,232,.2);padding-bottom:2px">
           <svg viewBox="0 0 24 24" width="14" height="14" style="fill:var(--oro2);flex-shrink:0"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
           Regolamento completo PDF
         </a>

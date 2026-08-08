@@ -320,7 +320,7 @@ p:last-child { margin-bottom: 0; }
 .irow:last-child { border-bottom: none; }
 .iico { width: 34px; height: 34px; border-radius: 50%; background: var(--bosco); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .iico svg { width: 15px; height: 15px; fill: var(--oro2); }
-.itxt label { display: block; font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--oro); margin-bottom: .1rem; }
+.itxt label { display: block; font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bosco2); margin-bottom: .1rem; }
 .itxt p, .itxt a { font-size: .86rem; color: var(--txt); line-height: 1.5; text-decoration: none; margin-bottom: 0; }
 .itxt a { color: var(--bosco2); }
 
@@ -356,18 +356,18 @@ footer {
 .fw { max-width: 1320px; margin: 0 auto; }
 .fbrand { margin-bottom: 1.75rem; }
 .fbrand .fn { font-family: var(--fd); font-size: 1.15rem; color: var(--av); margin-bottom: .35rem; }
-.fbrand p { font-size: .78rem; line-height: 1.7; max-width: 360px; color: rgba(245,240,232,.55); margin-bottom: 0; }
+.fbrand p { font-size: .78rem; line-height: 1.7; max-width: 360px; color: rgba(245,240,232,.65); margin-bottom: 0; }
 .fcols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.75rem; }
 .fc h4 { font-size: .66rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--oro2); margin-bottom: .7rem; }
 .fc ul { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
-.fc a { font-size: .78rem; color: rgba(245,240,232,.5); text-decoration: none; min-height: 30px; display: flex; align-items: center; transition: color var(--ease); }
+.fc a { font-size: .78rem; color: rgba(245,240,232,.65); text-decoration: none; min-height: 30px; display: flex; align-items: center; transition: color var(--ease); }
 .fc a:hover { color: var(--oro2); }
 .fbot {
   border-top: 1px solid rgba(255,255,255,.07); padding-top: 1.1rem;
-  font-size: .7rem; color: rgba(245,240,232,.50);
+  font-size: .7rem; color: rgba(245,240,232,.65);
   display: flex; flex-direction: column; gap: .4rem;
 }
-.fbot a { color: rgba(245,240,232,.50); text-decoration: underline; }
+.fbot a { color: rgba(245,240,232,.65); text-decoration: underline; }
 @media(min-width:640px) { footer { padding: 3.5rem 1.5rem 1.5rem; } .fcols { grid-template-columns: repeat(3,1fr); } }
 @media(min-width:900px) {
   footer { padding: 4rem 2rem 2rem; }
@@ -550,7 +550,7 @@ main { animation: pageIn .45s ease both; }
   display: block;
   font-family: var(--fu); font-size: .75rem; font-weight: 600;
   letter-spacing: .06em; text-transform: uppercase;
-  color: rgba(245,240,232,.55); text-decoration: none;
+  color: rgba(245,240,232,.65); text-decoration: none;
   padding: .55rem 1.5rem .55rem 2rem;
   border-left: 2px solid transparent;
   transition: color .2s, border-color .2s, padding-left .2s;

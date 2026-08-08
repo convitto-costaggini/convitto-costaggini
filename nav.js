@@ -94,6 +94,66 @@
   /* ── Inserimento nel DOM ── */
   document.body.insertAdjacentHTML('beforeend', footerHTML);
 
+  /* ── Lightbox foto condiviso (gallery home + laboratorio musicale) ──
+     Click su una foto di galleria apre una visualizzazione a schermo
+     intero; lo zoom fine è quello nativo del dispositivo (pinch-to-zoom),
+     già permesso dal viewport del sito. */
+  (function(){
+    const GALLERY_SELECTOR = '.ss-slide img, .mus-slide img';
+    if (!document.querySelector(GALLERY_SELECTOR)) return; // pagina senza gallery, nessun overhead
+
+    const lbStyle = document.createElement('style');
+    lbStyle.textContent = `
+      .lightbox { display:none; position:fixed; inset:0; z-index:9999;
+        background:rgba(10,15,10,.94); align-items:center; justify-content:center;
+        padding:3rem 1.25rem; -webkit-tap-highlight-color:transparent; }
+      .lightbox.open { display:flex; }
+      .lightbox img { max-width:100%; max-height:100%; object-fit:contain;
+        border-radius:6px; box-shadow:0 20px 60px rgba(0,0,0,.6); touch-action:pinch-zoom; }
+      .lightbox-close { position:absolute; top:1rem; right:1.1rem;
+        width:44px; height:44px; border-radius:50%; border:1.5px solid rgba(245,240,232,.35);
+        background:rgba(10,15,10,.55); color:#F5F0E8; font-size:1.5rem; line-height:1;
+        display:flex; align-items:center; justify-content:center; cursor:pointer; }
+      .lightbox-close:hover { background:rgba(245,240,232,.15); }
+      [class$="-slide"] img[data-lb], .ss-slide img, .mus-slide img { cursor:zoom-in; }
+    `;
+    document.head.appendChild(lbStyle);
+
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Foto ingrandita');
+    lb.innerHTML = '<button type="button" class="lightbox-close" aria-label="Chiudi">&times;</button><img alt=""/>';
+    document.body.appendChild(lb);
+    const lbImg = lb.querySelector('img');
+    let lastFocus = null;
+
+    function openLightbox(src, alt){
+      lastFocus = document.activeElement;
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lb.querySelector('.lightbox-close').focus();
+    }
+    function closeLightbox(){
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+    lb.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) closeLightbox(); });
+
+    document.addEventListener('click', function(e){
+      const img = e.target.closest(GALLERY_SELECTOR);
+      if (!img) return;
+      openLightbox(img.currentSrc || img.src, img.alt);
+    });
+  })();
+
   /* ── Caricamento chatbot (differito) ──
      Il bottone #cc-fab è già visibile (creato più sotto), ma il file
      chatbot.js (36 KB) non viene più scaricato subito su ogni pagina:

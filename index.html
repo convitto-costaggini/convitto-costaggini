@@ -682,19 +682,23 @@
       var idx = 0, timer = null, playing = true, DELAY = 5000;
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      var dots = slides.map(function(_, i){
+      var dots = slides.map(function(slide, i){
+        slide.id = slide.id || ('ss-slide-' + i);
         var b = document.createElement('button');
         b.className = 'ss-dot' + (i===0?' on':'');
         b.type = 'button';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-selected', i===0 ? 'true' : 'false');
+        b.setAttribute('aria-controls', slide.id);
         b.setAttribute('aria-label', 'Vai alla foto ' + (i+1));
         b.addEventListener('click', function(){ go(i); rearm(); });
         dotsWrap.appendChild(b); return b;
       });
 
       function go(n){
-        slides[idx].classList.remove('on'); dots[idx].classList.remove('on');
+        slides[idx].classList.remove('on'); dots[idx].classList.remove('on'); dots[idx].setAttribute('aria-selected','false');
         idx = (n + slides.length) % slides.length;
-        slides[idx].classList.add('on'); dots[idx].classList.add('on');
+        slides[idx].classList.add('on'); dots[idx].classList.add('on'); dots[idx].setAttribute('aria-selected','true');
       }
       function next(){ go(idx+1); }
       function prev(){ go(idx-1); }

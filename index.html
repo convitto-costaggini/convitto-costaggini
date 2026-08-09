@@ -592,8 +592,8 @@
       .ss { max-width: 920px; margin: 0 auto; padding: 0 1.25rem; }
       .ss-frame { position: relative; aspect-ratio: 3/2; border-radius: 14px; overflow: hidden;
         background: #0a0f0a; box-shadow: 0 20px 55px rgba(0,0,0,.45); border: 1px solid rgba(184,146,42,.28); outline: none; }
-      .ss-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .9s ease; }
-      .ss-slide.on { opacity: 1; }
+      .ss-slide { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .9s ease; }
+      .ss-slide.on { opacity: 1; pointer-events: auto; }
       .ss-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
       .ss-slide::after { content:''; position:absolute; inset:0; pointer-events:none;
         background: linear-gradient(180deg, rgba(10,15,10,.05) 0%, transparent 40%, rgba(10,15,10,.78) 100%); }

@@ -326,7 +326,7 @@
   <!-- MAPPA GOOGLE -->
   <section style="padding:0" aria-label="Mappa di localizzazione">
     <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2961.5!2d12.8624!3d42.4056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132ef7b7b1c3e6b1%3A0x0!2sVia+Salaria%2C+Rieti+RI!5e0!3m2!1sit!2sit!4v1"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2961.5!2d12.8582699!3d42.3921448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sConvitto+Costaggini%2C+Via+Salaria%2C+Rieti+RI!5e0!3m2!1sit!2sit!4v1"
       title="Posizione del Convitto Costaggini — Rieti, Via Salaria"
       style="width:100%;height:380px;border:none;display:block"
       loading="lazy"
@@ -336,11 +336,11 @@
       <p style="margin:0 0 .85rem;font-size:.82rem">📍 Convitto "Costaggini" — Via Salaria s.n.c. — 02100 Rieti (RI)</p>
       <p style="margin:0 0 .7rem;font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2)">Avvia la navigazione con la tua app</p>
       <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem">
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Via+Salaria,+Rieti+RI,+Italia" target="_blank" rel="noopener"
+        <a href="https://www.google.com/maps/dir/?api=1&destination=42.3921448,12.8582699&destination_place_id=ChIJKzi7PLarLxMRs3IIpGV6lgg" target="_blank" rel="noopener"
            style="display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1rem;border-radius:8px;background:rgba(245,240,232,.08);border:1px solid rgba(184,146,42,.35);color:var(--av);font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-decoration:none">🗺️ Google Maps</a>
-        <a href="https://maps.apple.com/?daddr=Via+Salaria,+Rieti+RI,+Italia&dirflg=d" target="_blank" rel="noopener"
+        <a href="https://maps.apple.com/?daddr=42.3921448,12.8582699&dirflg=d" target="_blank" rel="noopener"
            style="display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1rem;border-radius:8px;background:rgba(245,240,232,.08);border:1px solid rgba(184,146,42,.35);color:var(--av);font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-decoration:none">🍎 Apple Maps</a>
-        <a href="https://waze.com/ul?q=Via%20Salaria%20Rieti&navigate=yes" target="_blank" rel="noopener"
+        <a href="https://waze.com/ul?ll=42.3921448,12.8582699&navigate=yes" target="_blank" rel="noopener"
            style="display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1rem;border-radius:8px;background:rgba(245,240,232,.08);border:1px solid rgba(184,146,42,.35);color:var(--av);font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-decoration:none">🚗 Waze</a>
       </div>
     </div>
@@ -402,7 +402,7 @@ function calcolaItinerario() {
     const lat1 = parseFloat(data[0].lat);
     const lon1 = parseFloat(data[0].lon);
     // Coordinate Rieti Via Salaria
-    const lat2 = 42.4056, lon2 = 12.8624;
+    const lat2 = 42.3921448, lon2 = 12.8582699;
 
     // Distanza Haversine (in linea d'aria)
     const R = 6371;

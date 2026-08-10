@@ -97,8 +97,13 @@
           <li><a href="mappa-sito.html" data-page="mappa-sito">🗺️ Mappa del Sito</a></li>
         </ul>
       </div>
-      <a href="area-riservata.html" style="margin-left:.3rem;background:rgba(44,62,45,.35);border:1px solid rgba(184,146,42,.5);border-radius:4px;color:#D4AA4A !important;font-size:.72rem !important;padding:.4rem .75rem !important;display:inline-flex;align-items:center;gap:.3rem;" title="Area riservata famiglie">
-        <svg viewBox="0 0 24 24" width="13" height="13" style="fill:#D4AA4A" aria-hidden="true"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+
+      <a href="contatti.html" aria-label="Contattaci" title="Contattaci" style="margin-left:.3rem;width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:rgba(245,240,232,.75) !important;transition:background .2s,color .2s;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" width="17" height="17" style="fill:currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+
+      <a href="area-riservata.html" style="margin-left:.3rem;background:rgba(0,51,102,.28);border:1px solid rgba(120,160,210,.55);border-radius:4px;color:#BFD4EE !important;font-size:.72rem !important;padding:.4rem .75rem !important;display:inline-flex;align-items:center;gap:.3rem;" title="Area riservata famiglie — accesso con credenziali">
+        <svg viewBox="0 0 24 24" width="13" height="13" style="fill:#BFD4EE" aria-hidden="true"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
         Famiglie
       </a>
     </nav>
@@ -148,7 +153,6 @@
         <li><a href="bullismo.html">🛡️ Bullismo e Cyberbullismo</a></li>
         <li><a href="come-arrivare.html">🚌 Come arrivare</a></li>
         <li><a href="contatti.html">Contattaci</a></li>
-        <li><a href="area-riservata.html" style="color:var(--oro2);font-weight:700;"> Area Riservata Famiglie</a></li>
       </ul>
     </li>
 
@@ -173,8 +177,8 @@
       </ul>
     </li>
 
-    <li><a href="area-riservata.html" style="color:var(--oro2);font-weight:700;display:flex;align-items:center;gap:.5rem;padding:.6rem 0;">
-      <svg viewBox="0 0 24 24" width="15" height="15" style="fill:var(--oro2);flex-shrink:0"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+    <li><a href="area-riservata.html" style="color:#BFD4EE;font-weight:700;display:flex;align-items:center;gap:.5rem;padding:.6rem 0;">
+      <svg viewBox="0 0 24 24" width="15" height="15" style="fill:#BFD4EE;flex-shrink:0"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
       Area Riservata Famiglie
     </a></li>
 

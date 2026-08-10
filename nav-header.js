@@ -35,6 +35,10 @@
         📋 Come iscriversi
       </a>
 
+      <a href="genitori.html" style="margin-right:.5rem;border:1.5px solid rgba(184,146,42,.5);border-radius:4px;color:var(--oro2) !important;font-size:.75rem !important;font-weight:700 !important;letter-spacing:.06em;text-transform:uppercase;padding:.5rem 1rem !important;display:inline-flex;align-items:center;gap:.35rem;" title="Per i Genitori">
+        👨‍👩‍👧 Per i Genitori
+      </a>
+
       <div class="dd-wrap">
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
           Il Convitto <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>

@@ -66,7 +66,7 @@
           <li><a href="servizi.html" data-page="servizi">Servizi &amp; spazi</a></li>
           <li><a href="semiconvitto.html" data-page="semiconvitto">🌅 Semiconvitto</a></li>
           <li><a href="orientamento.html" data-page="orientamento">🗓 Orientamento &amp; Open Day</a></li>
-          <li><a href="genitori.html" data-page="genitori">👨‍👩‍👧 Per i Genitori</a></li>
+          <li><a href="scopri-talento.html" data-page="scopri-talento">🎮 Giochi &amp; Orientamento</a></li>
           <li><a href="bullismo.html" data-page="bullismo">🛡️ Bullismo e Cyberbullismo</a></li>
           <li><a href="come-arrivare.html" data-page="come-arrivare">🚌 Come arrivare</a></li>
           <li><a href="contatti.html" data-page="contatti">Contattaci</a></li>
@@ -87,10 +87,9 @@
 
       <div class="dd-wrap">
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
-          Didattica <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
+          Regolamenti &amp; Documenti <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
         </button>
         <ul class="dd-menu" role="menu">
-          <li><a href="scopri-talento.html" data-page="scopri-talento">🎮 Giochi &amp; Orientamento</a></li>
           <li><a href="regolamento.html" data-page="regolamento">📜 Regolamento</a></li>
           <li><a href="ptof-guida.html" data-page="ptof-guida">PTOF</a></li>
           <li><a href="trasparenza.html" data-page="trasparenza">Trasparenza</a></li>
@@ -117,6 +116,10 @@
       📋 Come iscriversi
     </a></li>
 
+    <li><a href="genitori.html" style="border:1.5px solid rgba(184,146,42,.5);color:var(--oro2) !important;font-weight:700;border-radius:4px;padding:.7rem .9rem;display:flex;align-items:center;gap:.4rem;text-transform:uppercase;font-size:.78rem;letter-spacing:.05em;margin-bottom:.3rem;">
+      👨‍👩‍👧 Per i Genitori
+    </a></li>
+
     <li class="drw-group">
       <button class="drw-acc" aria-expanded="false">Il Convitto <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
       <ul class="drw-sub">
@@ -141,7 +144,7 @@
         <li><a href="servizi.html">Servizi &amp; spazi</a></li>
         <li><a href="semiconvitto.html">🌅 Semiconvitto</a></li>
         <li><a href="orientamento.html">🗓 Orientamento &amp; Open Day</a></li>
-        <li><a href="genitori.html">👨‍👩‍👧 Per i Genitori</a></li>
+        <li><a href="scopri-talento.html">🎮 Giochi &amp; Orientamento</a></li>
         <li><a href="bullismo.html">🛡️ Bullismo e Cyberbullismo</a></li>
         <li><a href="come-arrivare.html">🚌 Come arrivare</a></li>
         <li><a href="contatti.html">Contattaci</a></li>
@@ -160,9 +163,8 @@
     </li>
 
     <li class="drw-group">
-      <button class="drw-acc" aria-expanded="false">Didattica <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
+      <button class="drw-acc" aria-expanded="false">Regolamenti &amp; Documenti <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
       <ul class="drw-sub">
-        <li><a href="scopri-talento.html">🎮 Giochi &amp; Orientamento</a></li>
         <li><a href="regolamento.html">Regolamento di Convitto</a></li>
         <li><a href="ptof-guida.html">Il PTOF spiegato</a></li>
         <li><a href="trasparenza.html">Amministrazione Trasparente</a></li>

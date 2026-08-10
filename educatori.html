@@ -51,14 +51,14 @@
     .edu-hero-bg {
       position: absolute; inset: 0;
       background:
-        linear-gradient(180deg, rgba(10,15,10,.3) 0%, rgba(10,15,10,.95) 100%),
+        linear-gradient(180deg, rgba(10,15,10,.55) 0%, rgba(10,15,10,.95) 100%),
         url('img/Educatori.webp') 50% 25%/cover no-repeat;
       transform: scale(1.05);
       animation: heroZoom 12s ease-out forwards;
     }
     @keyframes heroZoom { from{transform:scale(1.05)} to{transform:scale(1)} }
     @media(max-width:640px){
-      .edu-hero-bg { background-position: 26% 35%; }
+      .edu-hero-bg { background-position: 50% 20%; }
     }
 
     .edu-hero-content {
@@ -371,12 +371,12 @@
   <section class="edu-hero" aria-labelledby="edu-h1">
     <div class="edu-hero-bg" aria-hidden="true"></div>
     <div class="edu-hero-content w">
-      <nav class="breadcrumb" aria-label="Percorso" style="margin-bottom:1.5rem">
-        <a href="index.html" style="color:rgba(245,240,232,.45)">Home</a>
-        <span style="color:rgba(245,240,232,.2)">›</span>
-        <a href="il-convitto.html" style="color:rgba(245,240,232,.45)">Il Convitto</a>
-        <span style="color:rgba(245,240,232,.2)">›</span>
-        <span aria-current="page" style="color:var(--oro2)">Gli Educatori</span>
+      <nav class="breadcrumb" aria-label="Percorso" style="margin-bottom:1.5rem;text-shadow:0 1px 4px rgba(0,0,0,.85)">
+        <a href="index.html" style="color:rgba(245,240,232,.7)">Home</a>
+        <span style="color:rgba(245,240,232,.4)">›</span>
+        <a href="il-convitto.html" style="color:rgba(245,240,232,.7)">Il Convitto</a>
+        <span style="color:rgba(245,240,232,.4)">›</span>
+        <span aria-current="page" style="color:var(--oro3)">Gli Educatori</span>
       </nav>
       <span class="hero-eyebrow">— Il cuore del Convitto "Costaggini"</span>
       <h1 id="edu-h1">Gli<br><em>Educatori</em></h1>

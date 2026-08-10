@@ -51,7 +51,7 @@
     .edu-hero-bg {
       position: absolute; inset: 0;
       background:
-        linear-gradient(180deg, rgba(10,15,10,.35) 0%, rgba(10,15,10,.9) 100%),
+        linear-gradient(180deg, rgba(10,15,10,.12) 0%, rgba(10,15,10,.72) 100%),
         url('img/Educatori.webp') 50% 25%/cover no-repeat;
       transform: scale(1.05);
       animation: heroZoom 12s ease-out forwards;
@@ -371,16 +371,16 @@
   <section class="edu-hero" aria-labelledby="edu-h1">
     <div class="edu-hero-bg" aria-hidden="true"></div>
     <div class="edu-hero-content w">
-      <nav class="breadcrumb" aria-label="Percorso" style="margin-bottom:1.5rem;text-shadow:0 1px 4px rgba(0,0,0,.85)">
-        <a href="index.html" style="color:rgba(245,240,232,.7)">Home</a>
-        <span style="color:rgba(245,240,232,.4)">›</span>
-        <a href="il-convitto.html" style="color:rgba(245,240,232,.7)">Il Convitto</a>
-        <span style="color:rgba(245,240,232,.4)">›</span>
+      <nav class="breadcrumb" aria-label="Percorso" style="display:inline-flex;align-items:center;margin-bottom:1.5rem;background:rgba(10,15,10,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:.45rem .9rem;border-radius:20px;text-shadow:0 1px 3px rgba(0,0,0,.6)">
+        <a href="index.html" style="color:rgba(245,240,232,.85)">Home</a>
+        <span style="color:rgba(245,240,232,.45);margin:0 .3rem">›</span>
+        <a href="il-convitto.html" style="color:rgba(245,240,232,.85)">Il Convitto</a>
+        <span style="color:rgba(245,240,232,.45);margin:0 .3rem">›</span>
         <span aria-current="page" style="color:var(--oro3)">Gli Educatori</span>
       </nav>
-      <span class="hero-eyebrow">— Il cuore del Convitto "Costaggini"</span>
-      <h1 id="edu-h1">Gli<br><em>Educatori</em></h1>
-      <p class="edu-hero-sub">Non sono sorveglianti. Non sono professori. Sono qualcosa di più raro: adulti che scelgono di stare accanto ai ragazzi nel tempo in cui non si è in classe.</p>
+      <span class="hero-eyebrow" style="display:inline-block;background:rgba(10,15,10,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:.35rem .8rem;border-radius:20px;text-shadow:0 1px 3px rgba(0,0,0,.6)">— Il cuore del Convitto "Costaggini"</span>
+      <h1 id="edu-h1" style="text-shadow:0 2px 12px rgba(0,0,0,.55)">Gli<br><em>Educatori</em></h1>
+      <p class="edu-hero-sub" style="text-shadow:0 1px 6px rgba(0,0,0,.6)">Non sono sorveglianti. Non sono professori. Sono qualcosa di più raro: adulti che scelgono di stare accanto ai ragazzi nel tempo in cui non si è in classe.</p>
       <button class="scroll-hint" onclick="document.querySelector('.edu-statement').scrollIntoView({behavior:'smooth'})"
               aria-label="Scorri alla sezione successiva"
               style="background:none;border:none;cursor:pointer;padding:.5rem 0">

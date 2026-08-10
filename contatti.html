@@ -533,11 +533,15 @@ if (form) {
       {
         // Overlay di conferma
         const ov = document.createElement('div');
+        ov.setAttribute('role', 'alertdialog');
+        ov.setAttribute('aria-modal', 'true');
+        ov.setAttribute('aria-live', 'assertive');
+        ov.setAttribute('aria-labelledby', 'contatti-ov-title');
         ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(44,62,45,.92);display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px)';
         ov.innerHTML = `
           <div style="background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)">
             <div style="font-size:3rem;margin-bottom:1rem">✅</div>
-            <h2 style="font-family:var(--fd);font-size:1.8rem;color:var(--bosco);margin-bottom:.75rem;font-weight:300">Messaggio inviato!</h2>
+            <h2 id="contatti-ov-title" tabindex="-1" style="font-family:var(--fd);font-size:1.8rem;color:var(--bosco);margin-bottom:.75rem;font-weight:300">Messaggio inviato!</h2>
             <p style="font-size:.9rem;color:#555;line-height:1.75;margin-bottom:1.75rem">
               Grazie per averci scritto. La segreteria del Convitto risponderà entro 2 giorni lavorativi all'indirizzo email indicato.
             </p>
@@ -548,15 +552,20 @@ if (form) {
           </div>`;
         document.body.appendChild(ov);
         document.body.style.overflow = 'hidden';
+        document.getElementById('contatti-ov-title')?.focus();
         form.reset();
       }
     } catch(err) {
       const ov = document.createElement('div');
+      ov.setAttribute('role', 'alertdialog');
+      ov.setAttribute('aria-modal', 'true');
+      ov.setAttribute('aria-live', 'assertive');
+      ov.setAttribute('aria-labelledby', 'contatti-ov-err-title');
       ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(44,62,45,.92);display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px)';
       ov.innerHTML = `
         <div style="background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)">
           <div style="font-size:3rem;margin-bottom:1rem">⚠️</div>
-          <h2 style="font-family:var(--fd);font-size:1.8rem;color:#a02020;margin-bottom:.75rem;font-weight:300">Invio non riuscito</h2>
+          <h2 id="contatti-ov-err-title" tabindex="-1" style="font-family:var(--fd);font-size:1.8rem;color:#a02020;margin-bottom:.75rem;font-weight:300">Invio non riuscito</h2>
           <p style="font-size:.9rem;color:#555;line-height:1.75;margin-bottom:.5rem">
             Riprova tra qualche istante, oppure scrivici direttamente a<br><a href="mailto:convitto@alberghierorieti.it" style="color:var(--bosco);font-weight:700">convitto@alberghierorieti.it</a>
           </p>
@@ -568,6 +577,7 @@ if (form) {
         </div>`;
       document.body.appendChild(ov);
       document.body.style.overflow = 'hidden';
+      document.getElementById('contatti-ov-err-title')?.focus();
     } finally {
       btn.disabled = false;
       btn.textContent = origText;

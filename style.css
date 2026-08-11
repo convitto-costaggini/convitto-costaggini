@@ -664,8 +664,9 @@ a.nc:hover, a.article-card:hover, a.alumni-card:hover,
   transition: background var(--ease);
 }
 .sr-item:last-child { border-bottom: none; }
-.sr-item:hover, .sr-item:focus { background: var(--av2); outline: none; }
-.sr-item.focused { background: var(--av2); }
+.sr-item:hover { background: var(--av2); }
+.sr-item:focus-visible { outline: 2px solid var(--oro2); outline-offset: -2px; background: var(--av2); }
+.sr-item.focused { background: var(--av2); outline: 2px solid var(--oro2); outline-offset: -2px; }
 .sr-badge {
   font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
   background: var(--bosco); color: var(--av);

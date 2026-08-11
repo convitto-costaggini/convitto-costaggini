@@ -98,8 +98,8 @@
         </ul>
       </div>
 
-      <a href="contatti.html" aria-label="Contattaci" title="Contattaci" style="margin-left:.3rem;width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:rgba(245,240,232,.75) !important;transition:background .2s,color .2s;flex-shrink:0;">
-        <svg viewBox="0 0 24 24" width="17" height="17" style="fill:currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      <a href="contatti.html" aria-label="Contattaci" title="Contattaci" style="margin-left:.3rem;width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:rgba(245,240,232,.92) !important;transition:background .2s,color .2s;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" width="20" height="20" style="fill:currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       </a>
 
       <a href="area-riservata.html" style="margin-left:.3rem;background:rgba(0,51,102,.28);border:1px solid rgba(120,160,210,.55);border-radius:4px;color:#BFD4EE !important;font-size:.72rem !important;padding:.4rem .75rem !important;display:inline-flex;align-items:center;gap:.3rem;" title="Area riservata famiglie — accesso con credenziali">

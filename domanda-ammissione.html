@@ -144,6 +144,10 @@
 
       <!-- Barra avanzamento -->
       <div class="da-progress"><div class="da-progress-fill" id="da-prog" style="width:0%"></div></div>
+      <div id="da-bozza-notice" style="display:none;align-items:center;justify-content:space-between;gap:.75rem;background:#eef6f0;border:1px solid #bcdfc7;border-radius:8px;padding:.7rem 1rem;margin-bottom:1.25rem;font-size:.82rem;color:#1f5130">
+        <span>📝 Bozza precedente ripristinata automaticamente.</span>
+        <button type="button" id="da-bozza-cancella" style="background:none;border:none;color:#1f5130;text-decoration:underline;font-size:.82rem;cursor:pointer;padding:0">Ricomincia da zero</button>
+      </div>
 
       <form id="da-form" name="domanda-ammissione" novalidate>
           <input type="hidden" name="form-name" value="domanda-ammissione"/>
@@ -440,6 +444,64 @@ function updateProgress() {
 document.getElementById('da-form').addEventListener('input', updateProgress);
 document.getElementById('da-form').addEventListener('change', updateProgress);
 
+// ── BOZZA AUTOMATICA (localStorage) ──────────────────────────────────
+// Un form di 6 sezioni perde tutto se il browser si chiude a metà
+// compilazione. Salviamo una bozza locale ad ogni modifica e la
+// ripristiniamo al ricarico della pagina; viene cancellata solo dopo
+// un invio riuscito o su richiesta esplicita dell'utente.
+const DA_BOZZA_KEY = 'da-bozza-domanda-ammissione';
+
+function daRaccogliBozza() {
+  const dati = {};
+  document.querySelectorAll('#da-form input, #da-form select, #da-form textarea').forEach(el => {
+    if (!el.name) return;
+    if (el.type === 'checkbox') dati[el.name] = el.checked;
+    else dati[el.name] = el.value;
+  });
+  return dati;
+}
+
+function daSalvaBozza() {
+  try { localStorage.setItem(DA_BOZZA_KEY, JSON.stringify({ dati: daRaccogliBozza(), quando: Date.now() })); }
+  catch(e) { /* storage pieno o non disponibile: la bozza semplicemente non si salva, nessun blocco */ }
+}
+
+function daCancellaBozza() {
+  try { localStorage.removeItem(DA_BOZZA_KEY); } catch(e) {}
+  const notice = document.getElementById('da-bozza-notice');
+  if (notice) notice.style.display = 'none';
+}
+
+function daCaricaBozza() {
+  let salvato;
+  try { salvato = JSON.parse(localStorage.getItem(DA_BOZZA_KEY) || 'null'); } catch(e) { salvato = null; }
+  if (!salvato || !salvato.dati) return;
+
+  const form = document.getElementById('da-form');
+  Object.keys(salvato.dati).forEach(nome => {
+    const campo = form.elements[nome];
+    if (!campo) return;
+    if (campo.type === 'checkbox') campo.checked = !!salvato.dati[nome];
+    else campo.value = salvato.dati[nome];
+  });
+
+  const notice = document.getElementById('da-bozza-notice');
+  if (notice) notice.style.display = 'flex';
+  updateProgress();
+}
+
+document.getElementById('da-form').addEventListener('input', daSalvaBozza);
+document.getElementById('da-form').addEventListener('change', daSalvaBozza);
+document.getElementById('da-bozza-cancella').addEventListener('click', function() {
+  if (confirm('Cancellare la bozza salvata e ricominciare da zero?')) {
+    document.getElementById('da-form').reset();
+    daCancellaBozza();
+    updateProgress();
+  }
+});
+daCaricaBozza();
+// ──────────────────────────────────────────────────────────────────
+
 // Ultimo payload costruito, riusato dal pulsante "Riprova l'invio"
 let daUltimoPayload = null;
 
@@ -511,6 +573,7 @@ NB: la domanda richiede firma autografa per la validità legale; contattare il g
     email: d.email_padre || d.email_madre || '',
     telefono: d.cell_padre || '',
     oggetto: 'Domanda di ammissione — ' + (d.alunno_nome || ''),
+    tipo: 'domanda_ammissione',
     messaggio: corpo,
     privacy: true,
     botField: d['bot-field'] || ''
@@ -570,6 +633,7 @@ function daInviaDomanda(payload) {
     .then(esito => {
       daPulisciAttesa();
       if (esito && esito.success) {
+        daCancellaBozza();
         document.querySelectorAll('#da-form input, #da-form select, #da-form textarea')
           .forEach(el => el.disabled = true);
         btn.style.display = 'none';

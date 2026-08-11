@@ -49,6 +49,9 @@
     #hero h1 { font-family: var(--fd); font-size: clamp(2.3rem, 9vw, 5rem); font-weight: 300; color: #fff; line-height: 1.05; margin-bottom: .9rem; }
     #hero h1 em { font-style: italic; color: var(--oro3); display: block; }
     .hdesc { font-size: .93rem; color: rgba(255,255,255,.73); line-height: 1.7; margin-bottom: 1.6rem; max-width: 520px; }
+    @media(min-width:768px){
+  .hdesc { background: rgba(12,20,13,.38); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); padding: .85rem 1.15rem; border-radius: 10px; }
+}
     .hbtns { display: flex; flex-direction: column; gap: .65rem; }
     .bgold { display: flex; align-items: center; justify-content: center; gap: .5rem; background: linear-gradient(135deg, var(--oro2), var(--oro3)); color: var(--bosco); text-decoration: none; font-family: var(--fu); font-size: .84rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: .9rem 1.5rem; border-radius: 40px; min-height: 48px; box-shadow: 0 4px 20px rgba(184,146,42,.4); transition: transform .2s, box-shadow .2s, background .2s; }
     .bgold:hover { background: linear-gradient(135deg,#d4aa50,#c9a030); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(184,146,42,.6); color: var(--bosco); }
@@ -772,12 +775,12 @@
         <div class="faq-pill rv d3" style="background:rgba(245,240,232,.06);border:1px solid rgba(184,146,42,.2);border-radius:8px;padding:1.1rem 1.4rem">
           <p style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.4rem">Iscrizione</p>
           <p style="font-family:var(--fd);font-size:1.05rem;font-style:italic;color:var(--av);margin-bottom:.4rem">Entro quando va presentata la domanda?</p>
-          <p style="font-size:.82rem;color:rgba(245,240,232,.6);line-height:1.7">La domanda si presenta contestualmente all'iscrizione scolastica. La documentazione e la quota di iscrizione devono pervenire entro il 7 luglio.</p>
+          <p style="font-size:.82rem;color:rgba(245,240,232,.6);line-height:1.7">La domanda si presenta contestualmente all'iscrizione scolastica. La documentazione e la quota di iscrizione devono pervenire entro il 30 luglio.</p>
         </div>
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;align-items:center">
-        <a href="ammissione.html#domande-genitori" class="btn-gold">Tutte le 6 domande →</a>
+        <a href="openday.html#faq" class="btn-gold">Tutte le domande →</a>
         <a href="regolamento.html"
            style="display:inline-flex;align-items:center;gap:.5rem;color:rgba(245,240,232,.65);font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(245,240,232,.2);padding-bottom:2px">
           <svg viewBox="0 0 24 24" width="14" height="14" style="fill:var(--oro2);flex-shrink:0"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>

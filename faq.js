@@ -26,15 +26,15 @@
 
     { id:'come', tags:['iscrizione'], pill:'⏱ 30 secondi',
       q:`Come si fa a iscrivere un figlio al Convitto?`,
-      a:`La procedura è in <strong>4 passi</strong>: ① iscrizione online all'IPSSEOA Costaggini sul portale del Ministero (entro fine gennaio), prestando attenzione ad opzionare correttamente la scelta del Convitto ② Al di fuori di queste tempistiche, è prevista lacompilazione del <a href="domanda-ammissione.html">modulo di richiesta per il Convitto</a> ③ consegna della documentazione in segreteria e versamento della quota ④ colloquio con il Dirigente e gli educatori. Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è. <a href="ammissione.html">Guida completa all'ammissione &rarr;</a>` },
+      a:`La procedura è in <strong>4 passi</strong>: ① Open Day e orientamento tra dicembre e gennaio ② a febbraio, iscrizione online all'IPSSEOA Costaggini sulla Piattaforma Unica del MIM, mettendo la spunta sulla voce "Convitto" (è qui che si esprime la scelta) ③ entro il 30 luglio, <a href="domanda-ammissione.html">modulo di domanda al Convitto</a> per formalizzare quanto già scelto a febbraio, con la documentazione richiesta e la quota di iscrizione (€450) ④ da settembre, versamento delle rate successive secondo il piano concordato. Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è. <a href="ammissione.html">Guida completa all'ammissione &rarr;</a>` },
 
     { id:'quando-domanda', tags:['iscrizione'],
       q:`Entro quando va presentata la domanda?`,
-      a:`La domanda si presenta insieme all'iscrizione scolastica, nei termini previsti per le scuole secondarie di secondo grado. Entro il <strong>7 luglio</strong> devono pervenire la documentazione richiesta e il pagamento della quota deliberata dal Consiglio d'Istituto. Le domande tardive vengono considerate solo se restano posti disponibili.` },
+      a:`La domanda si presenta insieme all'iscrizione scolastica, nei termini previsti per le scuole secondarie di secondo grado. Entro il <strong>30 luglio</strong> devono pervenire il modulo di domanda, la documentazione richiesta e la ricevuta della quota di iscrizione (€450) deliberata dal Consiglio d'Istituto. Le domande tardive vengono considerate solo se restano posti disponibili.` },
 
     { id:'costo', tags:['iscrizione','genitori'], pill:'⏱ 20 secondi',
       q:`Quanto costa stare in Convitto?`,
-      a:`La retta è deliberata ogni anno dal Consiglio d'Istituto. L'ultima retta intera deliberata (A.S. 2025/26) è di <strong>1.600€ annui</strong>, comprensiva di vitto completo, alloggio, studio guidato, attività e trasporto Convitto–scuola — <a href="ammissione.html#tariffe">tabella completa con importi e scadenze delle rate &rarr;</a>. Essendo una struttura pubblica statale, e non un collegio privato, i costi sono accessibili. Per il preventivo aggiornato: <a href="mailto:rirh010007@istruzione.it">rirh010007@istruzione.it</a>.` },
+      a:`La retta è deliberata ogni anno dal Consiglio d'Istituto. La retta intera confermata per l'A.S. 2026/27 è di <strong>1.600€ annui</strong>, comprensiva di vitto completo, alloggio, studio guidato, attività e trasporto Convitto–scuola — <a href="ammissione.html#tariffe">tabella completa con importi e scadenze delle rate &rarr;</a>. Essendo una struttura pubblica statale, e non un collegio privato, i costi sono accessibili. Per il preventivo aggiornato: <a href="mailto:rirh010007@istruzione.it">rirh010007@istruzione.it</a>.` },
 
     { id:'apertura', tags:['iscrizione','vita'],
       q:`Quando è aperto il Convitto durante l'anno?`,

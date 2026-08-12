@@ -998,3 +998,24 @@
     });
   }
 })();
+
+// ── CLOUDFLARE WEB ANALYTICS ──────────────────────────────────────
+// Statistiche di traffico generale del sito (visite, pagine più
+// viste, provenienza). Gratuito, senza cookie né identificativi
+// personali — non richiede alcun banner né modifica a cookie-policy.html
+// (nessun cookie di profilazione, coerente con quanto già dichiarato).
+// Iniettato qui, in nav.js, invece che in ogni singola pagina: essendo
+// caricato su tutte le pagine del sito tranne admin/totem/area-riservata
+// (correttamente escluse anche dal tracciamento traffico), un solo punto
+// da mantenere copre l'intero sito. Attivo dal 12 agosto 2026 (sito
+// registrato su Web Analytics con account michele.gaggiano@alberghierorieti.it,
+// nessuna modifica al DNS del dominio). Statistiche consultabili nella
+// dashboard Cloudflare → Analytics & Logs → Web Analytics.
+(function () {
+  var CF_TOKEN = '598e2b86583643aaaa7e801b7a6dea5d';
+  var s = document.createElement('script');
+  s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  s.type = 'module';
+  s.setAttribute('data-cf-beacon', JSON.stringify({ token: CF_TOKEN }));
+  document.head.appendChild(s);
+})();

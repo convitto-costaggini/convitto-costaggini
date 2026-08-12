@@ -430,6 +430,56 @@ const RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
 // Pre-imposta data odierna
 document.getElementById('da-data').value = new Date().toISOString().split('T')[0];
 
+// ── TRACCIAMENTO ANONIMO ABBANDONO MODULO ────────────────────────────
+// Nessun dato personale: solo eventi aggregati (pagina vista / sezione
+// raggiunta / invio riuscito) su una tabella Supabase dedicata
+// (ammissione_funnel), pensata solo per capire dove le famiglie
+// abbandonano il modulo e intervenire lì. L'identificativo di sessione
+// è un UUID casuale generato ad ogni caricamento pagina, tenuto solo in
+// memoria JS (mai in cookie/localStorage, sparisce chiudendo la scheda):
+// serve solo a raggruppare gli eventi della stessa visita, non identifica
+// nessuno. Fire-and-forget: se una richiesta fallisce non blocca né
+// rallenta in alcun modo la compilazione o l'invio del modulo.
+const DA_SB_N   = 'https://sawclsysqnjsvbobioqo.supabase.co';
+const DA_SB_PUB = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
+const daSessione = crypto.randomUUID();
+
+function daTraccia(evento, sezione) {
+  const corpo = { sessione: daSessione, evento };
+  if (sezione !== undefined) corpo.sezione = sezione;
+  fetch(DA_SB_N + '/rest/v1/ammissione_funnel', {
+    method: 'POST',
+    headers: {
+      'apikey': DA_SB_PUB,
+      'Authorization': 'Bearer ' + DA_SB_PUB,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify(corpo),
+    keepalive: true
+  }).catch(() => { /* best-effort: un fallimento qui non deve disturbare l'utente */ });
+}
+
+daTraccia('pagina_vista');
+
+// Una sezione è "raggiunta" quando entra per la prima volta nel campo
+// visivo (soglia bassa: basta iniziare a leggerla). Ogni sezione viene
+// contata una sola volta per sessione.
+const daSezioniViste = new Set();
+const daSectionObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const idx = Array.from(document.querySelectorAll('.da-section')).indexOf(entry.target) + 1;
+    if (idx > 0 && !daSezioniViste.has(idx)) {
+      daSezioniViste.add(idx);
+      daTraccia('sezione_raggiunta', idx);
+    }
+    daSectionObs.unobserve(entry.target);
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.da-section').forEach(el => daSectionObs.observe(el));
+// ──────────────────────────────────────────────────────────────────
+
 // Aggiorna barra di avanzamento
 function updateProgress() {
   const inputs = document.querySelectorAll('#da-form input[required], #da-form select[required]');
@@ -633,6 +683,7 @@ function daInviaDomanda(payload) {
     .then(esito => {
       daPulisciAttesa();
       if (esito && esito.success) {
+        daTraccia('invio_riuscito');
         daCancellaBozza();
         document.querySelectorAll('#da-form input, #da-form select, #da-form textarea')
           .forEach(el => el.disabled = true);

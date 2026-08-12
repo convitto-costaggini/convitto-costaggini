@@ -1,0 +1,43 @@
+name: Aggiorna lastmod sitemap.xml
+
+# Si attiva a ogni push su main, ESCLUSI i push che toccano solo sitemap.xml
+# (per non innescare un loop infinito quando il workflow stesso la modifica).
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'sitemap.xml'
+
+# Serve il permesso di scrittura per poter fare il commit automatico.
+permissions:
+  contents: write
+
+jobs:
+  update-sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo (storia completa)
+        uses: actions/checkout@v4
+        with:
+          # fetch-depth 0 = storia completa, necessaria per "git log" per file
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Aggiorna lastmod in sitemap.xml
+        run: node scripts/update-sitemap-lastmod.js
+
+      - name: Commit ed eventuale push, solo se qualcosa è cambiato
+        run: |
+          if git diff --quiet -- sitemap.xml; then
+            echo "Nessuna modifica a sitemap.xml, niente da committare."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          git commit -m "chore: aggiorna automaticamente lastmod sitemap.xml [skip ci]"
+          git push

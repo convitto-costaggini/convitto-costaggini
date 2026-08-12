@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /area-riservata.html
+Disallow: /richiesta-accesso.html
 
 Sitemap: https://convitto.alberghierorieti.edu.it/sitemap.xml

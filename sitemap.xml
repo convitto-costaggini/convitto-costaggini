@@ -300,19 +300,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/richiesta-accesso.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/area-riservata.html</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
+<url>
     <loc>https://convitto.alberghierorieti.edu.it/mappa-sito.html</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>

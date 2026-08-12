@@ -75,6 +75,30 @@
     .da-allegato-text { font-size:.83rem; color:#374151; line-height:1.5; }
     .da-allegato-text strong { color:#111; }
 
+    /* Card upload documenti */
+    .da-doc-intro { font-size:.83rem; color:#374151; margin-bottom:1.25rem; line-height:1.7; background:#f0f7f0; border:1px solid rgba(44,62,45,.15); border-radius:8px; padding:1rem 1.15rem; }
+    .da-doc-intro strong { color:var(--bosco); }
+    .da-docs { display:flex; flex-direction:column; gap:.85rem; }
+    .da-doc { background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; padding:.85rem 1rem; transition:border-color .2s; }
+    .da-doc:has(.da-doc-file:not(:placeholder-shown)) { border-color:var(--bosco); background:#f6faf6; }
+    .da-doc-hdr { font-size:.83rem; color:#111; line-height:1.5; margin-bottom:.55rem; }
+    .da-doc-hdr strong { color:var(--bosco); }
+    .da-doc-row { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; }
+    .da-doc-file { font-family:var(--fu); font-size:.76rem; color:#374151; flex:1; min-width:180px; }
+    .da-doc-file::file-selector-button {
+      font-family:var(--fu); font-size:.68rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+      padding:.5rem 1rem; border-radius:6px; border:1.5px solid var(--bosco); background:#fff; color:var(--bosco);
+      cursor:pointer; margin-right:.75rem; transition:background .2s;
+    }
+    .da-doc-file::file-selector-button:hover { background:var(--bosco); color:#fff; }
+    .da-doc-status { font-family:var(--fu); font-size:.72rem; font-weight:700; margin-top:.5rem; line-height:1.5; }
+    .da-doc-status.ok { color:#166534; }
+    .da-doc-status.warn { color:#b45309; }
+    .da-doc-status.err { color:#b91c1c; }
+    .da-doc-alt { display:flex; align-items:center; gap:.5rem; margin-top:.6rem; padding-top:.6rem; border-top:1px dashed #e5e7eb; }
+    .da-doc-alt input { width:15px; height:15px; accent-color:var(--bosco); flex-shrink:0; cursor:pointer; }
+    .da-doc-alt label { font-family:var(--fu); font-size:.72rem; color:#6b7280; cursor:pointer; }
+
     /* Dichiarazioni */
     .da-dichiarazione { background:#fefce8; border:1px solid #fde68a; border-radius:8px; padding:1.1rem 1.25rem; margin-bottom:.85rem; }
     .da-dichiarazione p { font-size:.83rem; color:#374151; line-height:1.7; margin:0 0 .75rem; }
@@ -282,36 +306,81 @@
         <div class="da-section">
           <div class="da-section-hdr">
             <h2>4 — Documenti richiesti</h2>
-            <span>da consegnare o inviare separatamente, non da questo modulo</span>
+            <span>puoi allegarli direttamente qui</span>
           </div>
           <div class="da-section-body">
-            <p style="font-size:.83rem;color:#6b7280;margin-bottom:1rem;line-height:1.6"><strong>Questo modulo online non permette di caricare file.</strong> Spunta qui sotto i documenti che stai preparando: poi consegnali di persona in segreteria, oppure invia una foto o una scansione via email a <strong>rirh010007@istruzione.it</strong> (per conoscenza anche a <strong>convitto@alberghierorieti.it</strong>), indicando nell'oggetto "domanda di ammissione al convitto a.s. 2026/2027 alunno…".</p>
-            <div class="da-allegati">
-              <label class="da-allegato">
-                <input type="checkbox" name="all_sanitaria"/>
-                <div class="da-allegato-text"><strong>1.</strong> Copia tessera assistenza sanitaria</div>
-              </label>
-              <label class="da-allegato">
-                <input type="checkbox" name="all_vaccini"/>
-                <div class="da-allegato-text"><strong>2.</strong> Certificato delle vaccinazioni completo</div>
-              </label>
-              <label class="da-allegato">
-                <input type="checkbox" name="all_ricevuta"/>
-                <div class="da-allegato-text"><strong>3.</strong> Ricevuta di versamento quota iscrizione € 450,00 — <em>condiziona la garanzia del posto</em></div>
-              </label>
-              <label class="da-allegato">
-                <input type="checkbox" name="all_famiglia"/>
-                <div class="da-allegato-text"><strong>4.</strong> Stato di famiglia (e ove applicabile: atto di separazione, affido, ecc.)</div>
-              </label>
-              <label class="da-allegato">
-                <input type="checkbox" name="all_medica"/>
-                <div class="da-allegato-text"><strong>5.</strong> Dichiarazione medica di sana e robusta costituzione per attività non agonistiche</div>
-              </label>
-              <label class="da-allegato">
-                <input type="checkbox" name="all_documento"/>
-                <div class="da-allegato-text"><strong>6.</strong> Fotocopia documento di identità dei genitori</div>
-              </label>
+            <div class="da-doc-intro">
+              <strong>Novità:</strong> ora puoi allegare i documenti direttamente da qui — una foto scattata al momento va benissimo, non serve una scansione. Per ogni documento premi "Scegli file" e carica una foto o un PDF leggibile: verrà inviato insieme alla domanda, senza bisogno di email separate né di passare in segreteria. Se preferisci comunque consegnarlo di persona o inviarlo con calma in un secondo momento, spunta la casella "lo consegno/invio a parte" sotto al documento invece di caricarlo — la domanda si invia comunque, in entrambi i casi. Ogni file può pesare al massimo <strong>5 MB</strong>: se la tua foto è più pesante te lo segnaliamo subito, prova a scattarla di nuovo con qualità leggermente inferiore.
             </div>
+            <div class="da-docs" id="da-docs">
+              <div class="da-doc">
+                <div class="da-doc-hdr"><strong>1.</strong> Copia tessera assistenza sanitaria</div>
+                <div class="da-doc-row">
+                  <input type="file" class="da-doc-file" id="doc_sanitaria" data-doc="sanitaria" accept="image/*,.pdf,.heic,.heif"/>
+                </div>
+                <div class="da-doc-status" id="doc_sanitaria_status"></div>
+                <div class="da-doc-alt">
+                  <input type="checkbox" id="alt_sanitaria" name="all_sanitaria"/>
+                  <label for="alt_sanitaria">Lo consegno/invio a parte, non ora</label>
+                </div>
+              </div>
+              <div class="da-doc">
+                <div class="da-doc-hdr"><strong>2.</strong> Certificato delle vaccinazioni completo</div>
+                <div class="da-doc-row">
+                  <input type="file" class="da-doc-file" id="doc_vaccini" data-doc="vaccini" accept="image/*,.pdf,.heic,.heif"/>
+                </div>
+                <div class="da-doc-status" id="doc_vaccini_status"></div>
+                <div class="da-doc-alt">
+                  <input type="checkbox" id="alt_vaccini" name="all_vaccini"/>
+                  <label for="alt_vaccini">Lo consegno/invio a parte, non ora</label>
+                </div>
+              </div>
+              <div class="da-doc">
+                <div class="da-doc-hdr"><strong>3.</strong> Ricevuta di versamento quota iscrizione € 450,00 — <em>condiziona la garanzia del posto</em></div>
+                <div class="da-doc-row">
+                  <input type="file" class="da-doc-file" id="doc_ricevuta" data-doc="ricevuta" accept="image/*,.pdf,.heic,.heif"/>
+                </div>
+                <div class="da-doc-status" id="doc_ricevuta_status"></div>
+                <div class="da-doc-alt">
+                  <input type="checkbox" id="alt_ricevuta" name="all_ricevuta"/>
+                  <label for="alt_ricevuta">Lo consegno/invio a parte, non ora</label>
+                </div>
+              </div>
+              <div class="da-doc">
+                <div class="da-doc-hdr"><strong>4.</strong> Stato di famiglia (e ove applicabile: atto di separazione, affido, ecc.)</div>
+                <div class="da-doc-row">
+                  <input type="file" class="da-doc-file" id="doc_famiglia" data-doc="famiglia" accept="image/*,.pdf,.heic,.heif"/>
+                </div>
+                <div class="da-doc-status" id="doc_famiglia_status"></div>
+                <div class="da-doc-alt">
+                  <input type="checkbox" id="alt_famiglia" name="all_famiglia"/>
+                  <label for="alt_famiglia">Lo consegno/invio a parte, non ora</label>
+                </div>
+              </div>
+              <div class="da-doc">
+                <div class="da-doc-hdr"><strong>5.</strong> Dichiarazione medica di sana e robusta costituzione per attività non agonistiche</div>
+                <div class="da-doc-row">
+                  <input type="file" class="da-doc-file" id="doc_medica" data-doc="medica" accept="image/*,.pdf,.heic,.heif"/>
+                </div>
+                <div class="da-doc-status" id="doc_medica_status"></div>
+                <div class="da-doc-alt">
+                  <input type="checkbox" id="alt_medica" name="all_medica"/>
+                  <label for="alt_medica">Lo consegno/invio a parte, non ora</label>
+                </div>
+              </div>
+              <div class="da-doc">
+                <div class="da-doc-hdr"><strong>6.</strong> Fotocopia documento di identità dei genitori</div>
+                <div class="da-doc-row">
+                  <input type="file" class="da-doc-file" id="doc_documento" data-doc="documento" accept="image/*,.pdf,.heic,.heif"/>
+                </div>
+                <div class="da-doc-status" id="doc_documento_status"></div>
+                <div class="da-doc-alt">
+                  <input type="checkbox" id="alt_documento" name="all_documento"/>
+                  <label for="alt_documento">Lo consegno/invio a parte, non ora</label>
+                </div>
+              </div>
+            </div>
+            <p id="da-doc-totale-avviso" style="display:none;font-size:.78rem;color:#b91c1c;font-weight:700;margin-top:1rem"></p>
           </div>
         </div>
 
@@ -429,6 +498,133 @@ const CONTACT_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AK
 const RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
 // Pre-imposta data odierna
 document.getElementById('da-data').value = new Date().toISOString().split('T')[0];
+
+// ── UPLOAD DOCUMENTI (sezione 4) ─────────────────────────────────────
+// Ogni documento è opzionale ai fini dell'invio del modulo: chi non
+// carica nulla e non spunta "lo consegno a parte" semplicemente non
+// allega quel documento, esattamente come prima. Un file caricato con
+// successo viene convertito in base64 nel browser e allegato al payload
+// inviato a Codice.gs, che lo aggiungerà come allegato reale alla mail.
+const DA_DOC_LABELS = {
+  sanitaria: 'Tessera assistenza sanitaria',
+  vaccini: 'Certificato vaccinazioni',
+  ricevuta: 'Ricevuta quota iscrizione €450',
+  famiglia: 'Stato di famiglia',
+  medica: 'Dichiarazione medica',
+  documento: 'Documento identità genitori'
+};
+const DA_MAX_FILE_MB = 5;
+const DA_MAX_TOTALE_MB = 18; // margine di sicurezza sotto il limite email (~25MB, con overhead base64)
+const daDocElaborati = {}; // { chiave: { nomeFile, mimeType, contenuto (base64 puro) } }
+
+function daFormattaMB(bytes) {
+  return (bytes / (1024 * 1024)).toFixed(1).replace('.', ',');
+}
+
+function daImpostaStato(chiave, tipo, messaggio) {
+  const el = document.getElementById('doc_' + chiave + '_status');
+  el.className = 'da-doc-status ' + tipo;
+  el.textContent = messaggio;
+}
+
+function daAggiornaAvvisoTotale() {
+  const totale = Object.values(daDocElaborati).reduce((s, d) => s + d.bytes, 0);
+  const avviso = document.getElementById('da-doc-totale-avviso');
+  if (totale > DA_MAX_TOTALE_MB * 1024 * 1024) {
+    avviso.style.display = 'block';
+    avviso.textContent = `⚠️ Il totale dei documenti caricati (${daFormattaMB(totale)} MB) supera il limite complessivo di ${DA_MAX_TOTALE_MB} MB per l'invio via email. Rimuovine qualcuno (scegli "lo consegno a parte" per quelli in eccesso) prima di inviare.`;
+    return false;
+  }
+  avviso.style.display = 'none';
+  return true;
+}
+
+// Converte un file in base64 puro (senza prefisso data:...)
+function daFileABase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// Tenta di convertire una foto HEIC/HEIF in JPEG usando canvas. Funziona
+// solo nei browser capaci di decodificare HEIC nativamente in un <img>
+// (in pratica Safari, che è anche il browser predefinito su iPhone — cioè
+// esattamente il dispositivo che produce questi file). Su Chrome/Firefox
+// la decodifica fallisce e avvisiamo l'utente con istruzioni chiare,
+// nessun fallimento silenzioso.
+function daConvertiHeicSePossibile(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        canvas.toBlob((blob) => {
+          URL.revokeObjectURL(url);
+          if (blob) resolve(new File([blob], file.name.replace(/\.(heic|heif)$/i, '.jpg'), { type: 'image/jpeg' }));
+          else reject(new Error('conversione fallita'));
+        }, 'image/jpeg', 0.88);
+      } catch (e) { URL.revokeObjectURL(url); reject(e); }
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('decodifica non supportata')); };
+    img.src = url;
+  });
+}
+
+async function daGestisciFile(chiave, input) {
+  delete daDocElaborati[chiave];
+  daAggiornaAvvisoTotale();
+  const file = input.files[0];
+  if (!file) { daImpostaStato(chiave, '', ''); return; }
+
+  let fileDaUsare = file;
+  const isHeic = /\.(heic|heif)$/i.test(file.name) || file.type === 'image/heic' || file.type === 'image/heif';
+
+  if (isHeic) {
+    daImpostaStato(chiave, 'warn', '⏳ Formato HEIC rilevato, provo a convertirlo…');
+    try {
+      fileDaUsare = await daConvertiHeicSePossibile(file);
+    } catch (e) {
+      daImpostaStato(chiave, 'err',
+        '⚠️ Il tuo browser non riesce ad aprire foto in formato HEIC. Su iPhone: Impostazioni → Fotocamera → Formati → scegli "Più compatibile", poi rifai la foto; oppure apri la foto, fai uno screenshot e carica quello.');
+      input.value = '';
+      return;
+    }
+  }
+
+  if (fileDaUsare.size > DA_MAX_FILE_MB * 1024 * 1024) {
+    daImpostaStato(chiave, 'err',
+      `⚠️ File troppo pesante (${daFormattaMB(fileDaUsare.size)} MB, limite ${DA_MAX_FILE_MB} MB). Prova a fotografarlo di nuovo con qualità/risoluzione inferiore, oppure spunta "lo consegno a parte" qui sotto.`);
+    input.value = '';
+    return;
+  }
+
+  try {
+    const base64 = await daFileABase64(fileDaUsare);
+    daDocElaborati[chiave] = {
+      nomeFile: fileDaUsare.name,
+      mimeType: fileDaUsare.type || 'application/octet-stream',
+      contenuto: base64,
+      bytes: fileDaUsare.size
+    };
+    const nota = isHeic ? ' (convertita automaticamente in JPEG)' : '';
+    daImpostaStato(chiave, 'ok', `✅ ${fileDaUsare.name} — ${daFormattaMB(fileDaUsare.size)} MB${nota}, pronto per l'invio`);
+    daAggiornaAvvisoTotale();
+  } catch (e) {
+    daImpostaStato(chiave, 'err', '⚠️ Non sono riuscito a leggere questo file. Prova a sceglierlo di nuovo o usa "lo consegno a parte".');
+    input.value = '';
+  }
+}
+
+document.querySelectorAll('.da-doc-file').forEach(input => {
+  input.addEventListener('change', () => daGestisciFile(input.dataset.doc, input));
+});
 
 // ── TRACCIAMENTO ANONIMO ABBANDONO MODULO ────────────────────────────
 // Nessun dato personale: solo eventi aggregati (pagina vista / sezione
@@ -577,14 +773,32 @@ document.getElementById('da-form').addEventListener('submit', function(e) {
     return;
   }
 
+  // Blocco se il totale degli allegati supera il limite email (avviso già
+  // visibile in sezione 4, qui impediamo comunque l'invio se non risolto)
+  if (!daAggiornaAvvisoTotale()) {
+    document.getElementById('da-docs').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
   // Costruisci corpo e invia al backend email
   const d = Object.fromEntries(new FormData(this));
-  const allegati = ['sanitaria','vaccini','ricevuta','famiglia','medica','documento']
-    .filter(k => d['all_'+k])
-    .map((k,i) => {
-      const labels = ['Tessera sanitaria','Vaccinazioni','Ricevuta €450','Stato di famiglia','Dichiarazione medica','Doc. identità genitori'];
-      return (i+1) + '. ' + labels[i];
-    }).join('\n  ');
+  const docKeys = ['sanitaria','vaccini','ricevuta','famiglia','medica','documento'];
+  const docLabels = { sanitaria:'Tessera sanitaria', vaccini:'Vaccinazioni', ricevuta:'Ricevuta €450', famiglia:'Stato di famiglia', medica:'Dichiarazione medica', documento:'Doc. identità genitori' };
+  const allegati = docKeys.map((k, i) => {
+    const n = i + 1;
+    if (daDocElaborati[k]) return `${n}. ${docLabels[k]} — ALLEGATO A QUESTA EMAIL`;
+    if (d['all_' + k]) return `${n}. ${docLabels[k]} — sarà consegnato/inviato a parte dalla famiglia`;
+    return `${n}. ${docLabels[k]} — non ancora indicato`;
+  }).join('\n  ');
+  const documentiDaAllegare = docKeys
+    .filter(k => daDocElaborati[k])
+    .map(k => ({
+      chiave: k,
+      etichetta: docLabels[k],
+      nomeFile: daDocElaborati[k].nomeFile,
+      mimeType: daDocElaborati[k].mimeType,
+      contenuto: daDocElaborati[k].contenuto
+    }));
 
   const corpo =
 `DOMANDA DI AMMISSIONE AL CONVITTO A.S. 2026/2027
@@ -626,7 +840,8 @@ NB: la domanda richiede firma autografa per la validità legale; contattare il g
     tipo: 'domanda_ammissione',
     messaggio: corpo,
     privacy: true,
-    botField: d['bot-field'] || ''
+    botField: d['bot-field'] || '',
+    documenti: documentiDaAllegare
   };
 
   daUltimoPayload = payload;

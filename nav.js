@@ -85,7 +85,7 @@
     </div>
     <div class="fbot">
       <p>© 2025 Convitto Annesso — IPSSEOA "R. A. Costaggini" — Via Salaria s.n.c. — 02100 Rieti (RI) — C.F. 80008130579 — Cod. mecc. RIRH010007</p>
-     <p><a href="trasparenza.html#accessibilita">Dichiarazione di Accessibilità</a> · <a href="privacy.html">Privacy</a> · <a href="cookie-policy.html">Cookie Policy</a> · <a href="trasparenza.html">Amm. Trasparente</a> · <a href="mappa-sito.html">Mappa del Sito</a></p>
+     <p><a href="https://form.agid.gov.it/istsc_rirh010007/sito_convitto_ipsseoa_costaggini/dichiarazione" target="_blank" rel="noopener">Dichiarazione di Accessibilità</a> · <a href="privacy.html">Privacy</a> · <a href="cookie-policy.html">Cookie Policy</a> · <a href="trasparenza.html">Amm. Trasparente</a> · <a href="mappa-sito.html">Mappa del Sito</a></p>
       <p style="font-size:.68rem;color:rgba(245,240,232,.65);margin-top:.35rem;font-style:italic">I contenuti sono autentici e prodotti dall'IPSSEOA "Costaggini" di Rieti.</p>
     </div>
   </div>

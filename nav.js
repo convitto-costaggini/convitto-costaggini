@@ -999,6 +999,102 @@
   }
 })();
 
+/* ═══════════════════════════════════════════════════
+   ICONA DI SEZIONE — medaglione decorativo nell'hero
+   Riempie lo spazio vuoto a destra dell'hero (solo desktop,
+   min-width:1024px), senza toccare breadcrumb/titolo/testo/
+   pulsanti a sinistra né l'altezza della fascia verde.
+   Icona scelta da document.body.dataset.page, riusando la
+   stessa convenzione già in uso per l'evidenziazione del menu
+   attivo. Pagine non ancora mappate ricadono sullo stemma
+   generico (nessuna pagina resta "nuda").
+   Copertura iniziale rapida per gruppi di pagine principali —
+   da affinare pagina per pagina in seguito.
+═══════════════════════════════════════════════════ */
+(function () {
+  var heroBox = document.querySelector('.page-hero');
+  if (!heroBox) return; // pagina senza hero, nessun overhead
+
+  var ICONS = {
+    envelope: '<path d="M56 74h88c3 0 5 2 5 5v42c0 3-2 5-5 5H56c-3 0-5-2-5-5V79c0-3 2-5 5-5z" fill="rgba(212,170,74,.14)"/><path d="M52 78l48 32 48-32" fill="none" stroke="#2C3E2D" stroke-width="4"/>',
+    newspaper: '<path d="M60 72h80c3 0 5 2 5 5v54c0 3-2 5-5 5H60c-3 0-5-2-5-5V77c0-3 2-5 5-5z" fill="rgba(212,170,74,.14)"/><path d="M55 78L100 106 145 78" fill="none" stroke="#2C3E2D" stroke-width="4"/><line x1="70" y1="118" x2="96" y2="118" stroke="rgba(212,170,74,.35)" stroke-width="3" stroke-linecap="round"/>',
+    columns: '<path d="M58 128 L58 88 L100 62 L142 88 L142 128 Z" fill="rgba(212,170,74,.14)"/><path d="M58 128 L58 88 L100 62 L142 88 L142 128" fill="none" stroke="rgba(212,170,74,.3)" stroke-width="1.4"/><line x1="50" y1="128" x2="150" y2="128" stroke="rgba(212,170,74,.3)" stroke-width="1.4"/><line x1="72" y1="128" x2="72" y2="96" stroke="#2C3E2D" stroke-width="4"/><line x1="88" y1="128" x2="88" y2="96" stroke="#2C3E2D" stroke-width="4"/><line x1="112" y1="128" x2="112" y2="96" stroke="#2C3E2D" stroke-width="4"/><line x1="128" y1="128" x2="128" y2="96" stroke="#2C3E2D" stroke-width="4"/>',
+    key: '<circle cx="82" cy="100" r="20" fill="rgba(212,170,74,.14)"/><circle cx="82" cy="100" r="20" fill="none" stroke="#2C3E2D" stroke-width="4"/><line x1="100" y1="100" x2="140" y2="100" stroke="#2C3E2D" stroke-width="4"/><line x1="122" y1="100" x2="122" y2="114" stroke="#2C3E2D" stroke-width="4"/><line x1="134" y1="100" x2="134" y2="112" stroke="#2C3E2D" stroke-width="4"/>',
+    compass: '<circle cx="100" cy="100" r="40" fill="rgba(212,170,74,.14)"/><circle cx="100" cy="100" r="40" fill="none" stroke="rgba(212,170,74,.3)" stroke-width="1.4"/><path d="M116 84 L108 108 L84 116 L92 92 Z" fill="#2C3E2D"/>',
+    scroll: '<rect x="64" y="66" width="72" height="68" rx="4" fill="rgba(212,170,74,.14)"/><path d="M64 66h72v10a8 8 0 0 1-8 8H72a8 8 0 0 0-8 8v34a8 8 0 0 0 8 8h64" fill="none" stroke="rgba(212,170,74,.3)" stroke-width="1.4"/><line x1="78" y1="86" x2="122" y2="86" stroke="#2C3E2D" stroke-width="3"/><line x1="78" y1="100" x2="122" y2="100" stroke="#2C3E2D" stroke-width="3"/><line x1="78" y1="114" x2="108" y2="114" stroke="#2C3E2D" stroke-width="3"/>',
+    heart: '<path d="M100 132 C70 110 55 92 55 74 C55 60 66 50 80 50 C90 50 97 56 100 62 C103 56 110 50 120 50 C134 50 145 60 145 74 C145 92 130 110 100 132Z" fill="rgba(212,170,74,.14)" stroke="#2C3E2D" stroke-width="3"/>',
+    note: '<circle cx="76" cy="126" r="12" fill="rgba(212,170,74,.14)" stroke="#2C3E2D" stroke-width="3"/><circle cx="126" cy="118" r="12" fill="rgba(212,170,74,.14)" stroke="#2C3E2D" stroke-width="3"/><line x1="88" y1="126" x2="88" y2="66" stroke="#2C3E2D" stroke-width="3"/><line x1="138" y1="118" x2="138" y2="58" stroke="#2C3E2D" stroke-width="3"/><line x1="88" y1="66" x2="138" y2="58" stroke="#2C3E2D" stroke-width="3"/>',
+    shield: '<path d="M100 55 L142 68 L142 100 C142 128 124 148 100 155 C76 148 58 128 58 100 L58 68 Z" fill="rgba(212,170,74,.11)" stroke="rgba(212,170,74,.3)" stroke-width="1.4"/>'
+  };
+
+  /* Copertura rapida per gruppi principali — da affinare in seguito.
+     Qualsiasi data-page non elencato qui riceve lo stemma di fallback. */
+  var MAP = {
+    contatti: 'envelope',
+    notizie: 'newspaper',
+    calendario: 'newspaper',
+    'menu-settimana': 'newspaper',
+    'il-convitto': 'columns',
+    educatori: 'columns',
+    'giornata-tipo': 'columns',
+    'premio-merito': 'columns',
+    servizi: 'key',
+    semiconvitto: 'key',
+    ammissione: 'compass',
+    'domanda-ammissione': 'compass',
+    openday: 'compass',
+    orientamento: 'compass',
+    'scopri-talento': 'compass',
+    'fa-per-me': 'compass',
+    'tour-virtuale': 'compass',
+    'come-arrivare': 'compass',
+    'in-2-minuti': 'compass',
+    regolamento: 'scroll',
+    'regolamento-guida': 'scroll',
+    trasparenza: 'scroll',
+    organizzazione: 'scroll',
+    'ptof-guida': 'scroll',
+    privacy: 'scroll',
+    'cookie-policy': 'scroll',
+    'mappa-sito': 'scroll',
+    genitori: 'heart',
+    comunita: 'note',
+    alumni: 'note',
+    ricordi: 'note',
+    vinile: 'note',
+    'laboratorio-musicale': 'note',
+    solidarieta: 'note',
+    bullismo: 'shield'
+  };
+
+  var page = document.body.dataset.page;
+  var iconKey = MAP[page] || 'shield'; // fallback: stemma generico, nessuna pagina resta senza
+  var inner = ICONS[iconKey];
+
+  var css = document.createElement('style');
+  css.textContent =
+    '.hero-medallion{display:none}' +
+    '@media(min-width:1024px){' +
+      '.page-hero{position:relative}' +
+      '.page-hero>.w{position:relative;z-index:1}' +
+      '.hero-medallion{display:block;position:absolute;right:28px;top:50%;transform:translateY(-50%);width:220px;height:220px;pointer-events:none;z-index:0}' +
+      '.hero-medallion svg{width:100%;height:100%;display:block}' +
+    '}';
+  document.head.appendChild(css);
+
+  var wrap = document.createElement('div');
+  wrap.className = 'hero-medallion';
+  wrap.setAttribute('aria-hidden', 'true');
+  wrap.innerHTML =
+    '<svg viewBox="0 0 200 200">' +
+      '<circle cx="100" cy="100" r="92" fill="none" stroke="rgba(212,170,74,.16)" stroke-width="1"/>' +
+      '<circle cx="100" cy="100" r="78" fill="none" stroke="rgba(212,170,74,.1)" stroke-width="1"/>' +
+      inner +
+    '</svg>';
+
+  heroBox.appendChild(wrap);
+})();
+
 // ── CLOUDFLARE WEB ANALYTICS ──────────────────────────────────────
 // Statistiche di traffico generale del sito (visite, pagine più
 // viste, provenienza). Gratuito, senza cookie né identificativi

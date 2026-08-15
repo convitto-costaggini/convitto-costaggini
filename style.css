@@ -200,9 +200,9 @@ a { color: inherit; }
 .page-hero .w::after {
   content: '';
   position: absolute;
-  top: 50%; left: min(590px, calc(100% - 220px));
+  top: 50%; right: 8px;
   transform: translateY(-50%);
-  width: 260px; height: 260px;
+  width: 200px; height: 200px;
   background-image: var(--hero-icon);
   background-repeat: no-repeat;
   background-position: center;

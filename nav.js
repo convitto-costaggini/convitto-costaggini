@@ -1000,14 +1000,19 @@
 })();
 
 /* ═══════════════════════════════════════════════════
-   ICONA DI SEZIONE — medaglione decorativo nell'hero
-   Riempie lo spazio vuoto a destra dell'hero (solo desktop,
-   min-width:1024px), senza toccare breadcrumb/titolo/testo/
-   pulsanti a sinistra né l'altezza della fascia verde.
-   Icona scelta da document.body.dataset.page, riusando la
-   stessa convenzione già in uso per l'evidenziazione del menu
-   attivo. Pagine non ancora mappate ricadono sullo stemma
+   ICONA DI SEZIONE — riempie lo spazio vuoto dell'hero
+   (solo desktop, min-width:1024px), senza toccare
+   breadcrumb/titolo/testo/pulsanti a sinistra né l'altezza
+   della fascia verde. Icona scelta da document.body.dataset.page,
+   riusando la stessa convenzione già in uso per l'evidenziazione
+   del menu attivo. Pagine non mappate ricadono sullo scudo
    generico (nessuna pagina resta "nuda").
+   Stile definitivo (confermato da Michele, agosto 2026):
+   riquadro arrotondato attenuato (avorio 6% di opacità) —
+   niente oro, niente medaglione a doppio cerchio — forma
+   dell'icona in avorio 50%. Posizionato al centro dello
+   spazio libero a destra del testo (left:72%), non a ridosso
+   del bordo destro dell'hero.
    Copertura iniziale rapida per gruppi di pagine principali —
    da affinare pagina per pagina in seguito.
 ═══════════════════════════════════════════════════ */
@@ -1016,21 +1021,21 @@
   if (!heroBox) return; // pagina senza hero, nessun overhead
 
   var ICONS = {
-    envelope: '<path d="M56 74h88c3 0 5 2 5 5v42c0 3-2 5-5 5H56c-3 0-5-2-5-5V79c0-3 2-5 5-5z" fill="rgba(212,170,74,.14)"/><path d="M52 78l48 32 48-32" fill="none" stroke="#2C3E2D" stroke-width="4"/>',
-    newspaper: '<path d="M60 72h80c3 0 5 2 5 5v54c0 3-2 5-5 5H60c-3 0-5-2-5-5V77c0-3 2-5 5-5z" fill="rgba(212,170,74,.14)"/><path d="M55 78L100 106 145 78" fill="none" stroke="#2C3E2D" stroke-width="4"/><line x1="70" y1="118" x2="96" y2="118" stroke="rgba(212,170,74,.35)" stroke-width="3" stroke-linecap="round"/>',
-    columns: '<path d="M58 128 L58 88 L100 62 L142 88 L142 128 Z" fill="rgba(212,170,74,.14)"/><path d="M58 128 L58 88 L100 62 L142 88 L142 128" fill="none" stroke="rgba(212,170,74,.3)" stroke-width="1.4"/><line x1="50" y1="128" x2="150" y2="128" stroke="rgba(212,170,74,.3)" stroke-width="1.4"/><line x1="72" y1="128" x2="72" y2="96" stroke="#2C3E2D" stroke-width="4"/><line x1="88" y1="128" x2="88" y2="96" stroke="#2C3E2D" stroke-width="4"/><line x1="112" y1="128" x2="112" y2="96" stroke="#2C3E2D" stroke-width="4"/><line x1="128" y1="128" x2="128" y2="96" stroke="#2C3E2D" stroke-width="4"/>',
-    key: '<circle cx="82" cy="100" r="20" fill="rgba(212,170,74,.14)"/><circle cx="82" cy="100" r="20" fill="none" stroke="#2C3E2D" stroke-width="4"/><line x1="100" y1="100" x2="140" y2="100" stroke="#2C3E2D" stroke-width="4"/><line x1="122" y1="100" x2="122" y2="114" stroke="#2C3E2D" stroke-width="4"/><line x1="134" y1="100" x2="134" y2="112" stroke="#2C3E2D" stroke-width="4"/>',
-    compass: '<circle cx="100" cy="100" r="40" fill="rgba(212,170,74,.14)"/><circle cx="100" cy="100" r="40" fill="none" stroke="rgba(212,170,74,.3)" stroke-width="1.4"/><path d="M116 84 L108 108 L84 116 L92 92 Z" fill="#2C3E2D"/>',
-    scroll: '<rect x="64" y="66" width="72" height="68" rx="4" fill="rgba(212,170,74,.14)"/><path d="M64 66h72v10a8 8 0 0 1-8 8H72a8 8 0 0 0-8 8v34a8 8 0 0 0 8 8h64" fill="none" stroke="rgba(212,170,74,.3)" stroke-width="1.4"/><line x1="78" y1="86" x2="122" y2="86" stroke="#2C3E2D" stroke-width="3"/><line x1="78" y1="100" x2="122" y2="100" stroke="#2C3E2D" stroke-width="3"/><line x1="78" y1="114" x2="108" y2="114" stroke="#2C3E2D" stroke-width="3"/>',
-    heart: '<path d="M100 132 C70 110 55 92 55 74 C55 60 66 50 80 50 C90 50 97 56 100 62 C103 56 110 50 120 50 C134 50 145 60 145 74 C145 92 130 110 100 132Z" fill="rgba(212,170,74,.14)" stroke="#2C3E2D" stroke-width="3"/>',
-    note: '<circle cx="76" cy="126" r="12" fill="rgba(212,170,74,.14)" stroke="#2C3E2D" stroke-width="3"/><circle cx="126" cy="118" r="12" fill="rgba(212,170,74,.14)" stroke="#2C3E2D" stroke-width="3"/><line x1="88" y1="126" x2="88" y2="66" stroke="#2C3E2D" stroke-width="3"/><line x1="138" y1="118" x2="138" y2="58" stroke="#2C3E2D" stroke-width="3"/><line x1="88" y1="66" x2="138" y2="58" stroke="#2C3E2D" stroke-width="3"/>',
-    shield: '<path d="M100 55 L142 68 L142 100 C142 128 124 148 100 155 C76 148 58 128 58 100 L58 68 Z" fill="rgba(212,170,74,.11)" stroke="rgba(212,170,74,.3)" stroke-width="1.4"/>'
+    phone: '<path d="M74 60 C68 56 62 58 60 65 C56 78 60 100 78 118 C96 136 118 140 131 136 C138 134 140 128 136 122 L122 106 C118 101 111 101 106 105 L100 110 C92 104 86 98 80 90 L85 84 C89 79 89 72 84 68 Z" fill="rgba(245,240,232,.5)"/>',
+    newspaper: '<rect x="46" y="52" width="108" height="96" rx="6" fill="rgba(245,240,232,.5)"/><path d="M40 60L100 96 160 60" fill="none" stroke="#2C3E2D" stroke-width="7"/><line x1="68" y1="122" x2="118" y2="122" stroke="#2C3E2D" stroke-width="6" stroke-linecap="round"/>',
+    columns: '<path d="M48 150 L48 92 L100 60 L152 92 L152 150 Z" fill="rgba(245,240,232,.5)"/><rect x="62" y="104" width="12" height="46" fill="#2C3E2D"/><rect x="86" y="104" width="12" height="46" fill="#2C3E2D"/><rect x="126" y="104" width="12" height="46" fill="#2C3E2D"/>',
+    key: '<circle cx="80" cy="100" r="26" fill="rgba(245,240,232,.5)"/><circle cx="80" cy="100" r="10" fill="#2C3E2D"/><rect x="104" y="93" width="58" height="14" fill="rgba(245,240,232,.5)"/><rect x="128" y="107" width="12" height="16" fill="rgba(245,240,232,.5)"/><rect x="146" y="107" width="12" height="20" fill="rgba(245,240,232,.5)"/>',
+    compass: '<circle cx="100" cy="100" r="46" fill="rgba(245,240,232,.5)"/><path d="M118 78 L108 108 L82 122 L92 92 Z" fill="#2C3E2D"/>',
+    scroll: '<rect x="54" y="44" width="92" height="112" rx="6" fill="rgba(245,240,232,.5)"/><line x1="70" y1="70" x2="130" y2="70" stroke="#2C3E2D" stroke-width="8"/><line x1="70" y1="90" x2="130" y2="90" stroke="#2C3E2D" stroke-width="8"/><line x1="70" y1="110" x2="112" y2="110" stroke="#2C3E2D" stroke-width="8"/>',
+    heart: '<path d="M100 148 C64 120 44 98 44 74 C44 56 58 44 76 44 C88 44 97 51 100 60 C103 51 112 44 124 44 C142 44 156 56 156 74 C156 98 136 120 100 148Z" fill="rgba(245,240,232,.5)"/>',
+    group: '<circle cx="70" cy="86" r="16" fill="rgba(245,240,232,.5)"/><circle cx="130" cy="86" r="16" fill="rgba(245,240,232,.5)"/><circle cx="100" cy="66" r="18" fill="rgba(245,240,232,.5)"/><path d="M45 150 C45 122 58 108 72 108 M155 150 C155 122 142 108 128 108" fill="none" stroke="rgba(245,240,232,.5)" stroke-width="9" stroke-linecap="round"/><path d="M64 150 C64 118 80 102 100 102 C120 102 136 118 136 150" fill="rgba(245,240,232,.5)"/>',
+    shield: '<path d="M100 42 L152 58 L152 96 C152 128 130 152 100 160 C70 152 48 128 48 96 L48 58 Z" fill="rgba(245,240,232,.5)"/><path d="M100 62 L134 73 L134 96 C134 116 120 132 100 138" fill="none" stroke="#2C3E2D" stroke-width="6" opacity=".6"/>'
   };
 
   /* Copertura rapida per gruppi principali — da affinare in seguito.
      Qualsiasi data-page non elencato qui riceve lo stemma di fallback. */
   var MAP = {
-    contatti: 'envelope',
+    contatti: 'phone',
     notizie: 'newspaper',
     calendario: 'newspaper',
     'menu-settimana': 'newspaper',
@@ -1058,12 +1063,12 @@
     'cookie-policy': 'scroll',
     'mappa-sito': 'scroll',
     genitori: 'heart',
-    comunita: 'note',
-    alumni: 'note',
-    ricordi: 'note',
-    vinile: 'note',
-    'laboratorio-musicale': 'note',
-    solidarieta: 'note',
+    comunita: 'group',
+    alumni: 'group',
+    ricordi: 'group',
+    vinile: 'group',
+    'laboratorio-musicale': 'group',
+    solidarieta: 'group',
     bullismo: 'shield'
   };
 
@@ -1077,7 +1082,7 @@
     '@media(min-width:1024px){' +
       '.page-hero{position:relative}' +
       '.page-hero>.w{position:relative;z-index:1}' +
-      '.hero-medallion{display:block;position:absolute;right:28px;top:50%;transform:translateY(-50%);width:220px;height:220px;pointer-events:none;z-index:0}' +
+      '.hero-medallion{display:flex;align-items:center;justify-content:center;position:absolute;left:72%;top:50%;transform:translate(-50%,-50%);width:150px;height:150px;pointer-events:none;z-index:0}' +
       '.hero-medallion svg{width:100%;height:100%;display:block}' +
     '}';
   document.head.appendChild(css);
@@ -1087,8 +1092,7 @@
   wrap.setAttribute('aria-hidden', 'true');
   wrap.innerHTML =
     '<svg viewBox="0 0 200 200">' +
-      '<circle cx="100" cy="100" r="92" fill="none" stroke="rgba(212,170,74,.16)" stroke-width="1"/>' +
-      '<circle cx="100" cy="100" r="78" fill="none" stroke="rgba(212,170,74,.1)" stroke-width="1"/>' +
+      '<rect x="0" y="0" width="200" height="200" rx="18" fill="rgba(245,240,232,.06)"/>' +
       inner +
     '</svg>';
 

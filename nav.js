@@ -1000,19 +1000,20 @@
 })();
 
 /* ═══════════════════════════════════════════════════
-   ICONA DI SEZIONE — riempie lo spazio vuoto dell'hero
-   (solo desktop, min-width:1024px), senza toccare
-   breadcrumb/titolo/testo/pulsanti a sinistra né l'altezza
-   della fascia verde. Icona scelta da document.body.dataset.page,
-   riusando la stessa convenzione già in uso per l'evidenziazione
-   del menu attivo. Pagine non mappate ricadono sullo scudo
-   generico (nessuna pagina resta "nuda").
-   Stile definitivo (confermato da Michele, agosto 2026):
-   riquadro arrotondato attenuato (avorio 6% di opacità) —
-   niente oro, niente medaglione a doppio cerchio — forma
-   dell'icona in avorio 50%. Posizionato al centro dello
-   spazio libero a destra del testo (left:72%), non a ridosso
-   del bordo destro dell'hero.
+   ICONA DI SEZIONE — usa il meccanismo nativo già presente
+   in style.css: la variabile CSS --hero-icon su .page-hero
+   (con posizionamento, dimensione e comportamento responsive
+   già gestiti da .page-hero .w::after in style.css). Qui ci
+   limitiamo a scegliere quale file SVG usare, in base a
+   document.body.dataset.page — la stessa convenzione già in
+   uso per l'evidenziazione del menu attivo.
+   Le icone vivono in img/icone/*.svg (stile confermato da
+   Michele, agosto 2026: riquadro arrotondato attenuato,
+   avorio 6% di opacità, forma dell'icona avorio 50%).
+   Pagine non mappate ricadono su img/icone/scudo.svg
+   (nessuna pagina resta "nuda"). Le pagine con hero su
+   misura (laboratorio-musicale, vinile, solidarieta) non
+   hanno .page-hero e restano automaticamente escluse.
    Copertura iniziale rapida per gruppi di pagine principali —
    da affinare pagina per pagina in seguito.
 ═══════════════════════════════════════════════════ */
@@ -1020,83 +1021,44 @@
   var heroBox = document.querySelector('.page-hero');
   if (!heroBox) return; // pagina senza hero, nessun overhead
 
-  var ICONS = {
-    phone: '<path d="M74 60 C68 56 62 58 60 65 C56 78 60 100 78 118 C96 136 118 140 131 136 C138 134 140 128 136 122 L122 106 C118 101 111 101 106 105 L100 110 C92 104 86 98 80 90 L85 84 C89 79 89 72 84 68 Z" fill="rgba(245,240,232,.5)"/>',
-    newspaper: '<rect x="46" y="52" width="108" height="96" rx="6" fill="rgba(245,240,232,.5)"/><path d="M40 60L100 96 160 60" fill="none" stroke="#2C3E2D" stroke-width="7"/><line x1="68" y1="122" x2="118" y2="122" stroke="#2C3E2D" stroke-width="6" stroke-linecap="round"/>',
-    columns: '<path d="M48 150 L48 92 L100 60 L152 92 L152 150 Z" fill="rgba(245,240,232,.5)"/><rect x="62" y="104" width="12" height="46" fill="#2C3E2D"/><rect x="86" y="104" width="12" height="46" fill="#2C3E2D"/><rect x="126" y="104" width="12" height="46" fill="#2C3E2D"/>',
-    key: '<circle cx="80" cy="100" r="26" fill="rgba(245,240,232,.5)"/><circle cx="80" cy="100" r="10" fill="#2C3E2D"/><rect x="104" y="93" width="58" height="14" fill="rgba(245,240,232,.5)"/><rect x="128" y="107" width="12" height="16" fill="rgba(245,240,232,.5)"/><rect x="146" y="107" width="12" height="20" fill="rgba(245,240,232,.5)"/>',
-    compass: '<circle cx="100" cy="100" r="46" fill="rgba(245,240,232,.5)"/><path d="M118 78 L108 108 L82 122 L92 92 Z" fill="#2C3E2D"/>',
-    scroll: '<rect x="54" y="44" width="92" height="112" rx="6" fill="rgba(245,240,232,.5)"/><line x1="70" y1="70" x2="130" y2="70" stroke="#2C3E2D" stroke-width="8"/><line x1="70" y1="90" x2="130" y2="90" stroke="#2C3E2D" stroke-width="8"/><line x1="70" y1="110" x2="112" y2="110" stroke="#2C3E2D" stroke-width="8"/>',
-    heart: '<path d="M100 148 C64 120 44 98 44 74 C44 56 58 44 76 44 C88 44 97 51 100 60 C103 51 112 44 124 44 C142 44 156 56 156 74 C156 98 136 120 100 148Z" fill="rgba(245,240,232,.5)"/>',
-    group: '<circle cx="70" cy="86" r="16" fill="rgba(245,240,232,.5)"/><circle cx="130" cy="86" r="16" fill="rgba(245,240,232,.5)"/><circle cx="100" cy="66" r="18" fill="rgba(245,240,232,.5)"/><path d="M45 150 C45 122 58 108 72 108 M155 150 C155 122 142 108 128 108" fill="none" stroke="rgba(245,240,232,.5)" stroke-width="9" stroke-linecap="round"/><path d="M64 150 C64 118 80 102 100 102 C120 102 136 118 136 150" fill="rgba(245,240,232,.5)"/>',
-    shield: '<path d="M100 42 L152 58 L152 96 C152 128 130 152 100 160 C70 152 48 128 48 96 L48 58 Z" fill="rgba(245,240,232,.5)"/><path d="M100 62 L134 73 L134 96 C134 116 120 132 100 138" fill="none" stroke="#2C3E2D" stroke-width="6" opacity=".6"/>'
-  };
-
-  /* Copertura rapida per gruppi principali — da affinare in seguito.
-     Qualsiasi data-page non elencato qui riceve lo stemma di fallback. */
   var MAP = {
-    contatti: 'phone',
-    notizie: 'newspaper',
-    calendario: 'newspaper',
-    'menu-settimana': 'newspaper',
-    'il-convitto': 'columns',
-    educatori: 'columns',
-    'giornata-tipo': 'columns',
-    'premio-merito': 'columns',
-    servizi: 'key',
-    semiconvitto: 'key',
-    ammissione: 'compass',
-    'domanda-ammissione': 'compass',
-    openday: 'compass',
-    orientamento: 'compass',
-    'scopri-talento': 'compass',
-    'fa-per-me': 'compass',
-    'tour-virtuale': 'compass',
-    'come-arrivare': 'compass',
-    'in-2-minuti': 'compass',
-    regolamento: 'scroll',
-    'regolamento-guida': 'scroll',
-    trasparenza: 'scroll',
-    organizzazione: 'scroll',
-    'ptof-guida': 'scroll',
-    privacy: 'scroll',
-    'cookie-policy': 'scroll',
-    'mappa-sito': 'scroll',
-    genitori: 'heart',
-    comunita: 'group',
-    alumni: 'group',
-    ricordi: 'group',
-    vinile: 'group',
-    'laboratorio-musicale': 'group',
-    solidarieta: 'group',
-    bullismo: 'shield'
+    contatti: 'contatti',
+    notizie: 'notizie',
+    calendario: 'notizie',
+    'menu-settimana': 'notizie',
+    'il-convitto': 'il-convitto',
+    educatori: 'il-convitto',
+    'giornata-tipo': 'il-convitto',
+    'premio-merito': 'il-convitto',
+    servizi: 'servizi',
+    semiconvitto: 'servizi',
+    ammissione: 'orientamento',
+    'domanda-ammissione': 'orientamento',
+    openday: 'orientamento',
+    orientamento: 'orientamento',
+    'scopri-talento': 'orientamento',
+    'fa-per-me': 'orientamento',
+    'tour-virtuale': 'orientamento',
+    'come-arrivare': 'orientamento',
+    'in-2-minuti': 'orientamento',
+    regolamento: 'regolamenti',
+    'regolamento-guida': 'regolamenti',
+    trasparenza: 'regolamenti',
+    organizzazione: 'regolamenti',
+    'ptof-guida': 'regolamenti',
+    privacy: 'regolamenti',
+    'cookie-policy': 'regolamenti',
+    'mappa-sito': 'regolamenti',
+    genitori: 'genitori',
+    comunita: 'comunita',
+    alumni: 'comunita',
+    ricordi: 'comunita',
+    bullismo: 'scudo'
   };
 
   var page = document.body.dataset.page;
-  var iconKey = MAP[page] || 'shield'; // fallback: stemma generico, nessuna pagina resta senza
-  var inner = ICONS[iconKey];
-
-  var css = document.createElement('style');
-  css.textContent =
-    '.hero-medallion{display:none}' +
-    '@media(min-width:1024px){' +
-      '.page-hero{position:relative}' +
-      '.page-hero>.w{position:relative;z-index:1}' +
-      '.hero-medallion{display:flex;align-items:center;justify-content:center;position:absolute;left:72%;top:50%;transform:translate(-50%,-50%);width:150px;height:150px;pointer-events:none;z-index:0}' +
-      '.hero-medallion svg{width:100%;height:100%;display:block}' +
-    '}';
-  document.head.appendChild(css);
-
-  var wrap = document.createElement('div');
-  wrap.className = 'hero-medallion';
-  wrap.setAttribute('aria-hidden', 'true');
-  wrap.innerHTML =
-    '<svg viewBox="0 0 200 200">' +
-      '<rect x="0" y="0" width="200" height="200" rx="18" fill="rgba(245,240,232,.06)"/>' +
-      inner +
-    '</svg>';
-
-  heroBox.appendChild(wrap);
+  var icon = MAP[page] || 'scudo'; // fallback: scudo generico
+  heroBox.style.setProperty('--hero-icon', "url('img/icone/" + icon + ".svg')");
 })();
 
 // ── CLOUDFLARE WEB ANALYTICS ──────────────────────────────────────

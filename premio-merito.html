@@ -18,24 +18,12 @@
 <meta name="theme-color" content="#2C3E2D">
 <link rel="stylesheet" href="style.css">
 <style>
-    .pm-hero .pm-wrap::after {
-      content:'';
-      position:absolute;
-      top:50%; left:min(520px, calc(100% - 170px));
-      transform:translateY(-50%);
-      width:190px; height:190px;
-      background-image: var(--hero-icon);
-      background-repeat:no-repeat; background-position:center; background-size:contain;
-      z-index:-1; pointer-events:none;
-    }
-    @media(max-width:640px){
-      .pm-hero .pm-wrap::after{ width:72px;height:72px; top:30px; left:auto; right:0; bottom:auto; transform:none; }
-    }
-
   /* ===== Sezione "Premio al Merito" — autosufficiente =====
      Per integrarla nel sito: tieni questo <style> e tutto ciò che
      sta dentro <main class="pm">. Header e footer globali
-     (nav.js) avvolgeranno la pagina come per le altre sezioni. */
+     (nav.js) avvolgeranno la pagina come per le altre sezioni.
+     L'hero usa ora la struttura standard .page-hero condivisa
+     con il resto del sito (font, icona, layout) — vedi style.css. */
 
   .pm {
     --bosco: #2C3E2D;
@@ -68,37 +56,6 @@
   }
   .pm h2 em { font-style: italic; color: var(--oro); }
   .pm .sect-intro { max-width: 60ch; color: var(--muschio); margin: 1rem 0 0; }
-
-  /* ---------- HERO ---------- */
-  .pm-hero {
-    position: relative; overflow: hidden; background: var(--bosco-deep); color: var(--avorio);
-    padding: clamp(3.5rem, 2rem + 9vw, 7rem) 0 clamp(3rem, 2rem + 6vw, 5rem);
-  }
-  .pm-hero::before {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background:
-      radial-gradient(120% 80% at 80% -10%, rgba(184,146,42,.22), transparent 55%),
-      radial-gradient(90% 70% at -10% 110%, rgba(184,146,42,.10), transparent 55%);
-  }
-  .pm-hero .pm-wrap { position: relative; z-index: 2; }
-  .pm-brand {
-    font-size: .6937rem; letter-spacing: .26em; text-transform: uppercase;
-    font-weight: 600; color: var(--oro-soft);
-  }
-  .pm-hero h1 {
-    font-family: "Cormorant Garamond", serif; font-weight: 600; line-height: 1.03;
-    font-size: clamp(2.4375rem, 1.2188rem + 6vw, 4.6875rem); margin: .8rem 0 0; letter-spacing: -.01em;
-  }
-  .pm-hero h1 em { font-style: italic; color: var(--oro-soft); }
-  .pm-hero p.lead {
-    max-width: 52ch; margin: 1.4rem 0 0;
-    font-size: clamp(.9563rem, .8906rem + .4vw, 1.125rem); color: rgba(246,242,232,.85);
-  }
-  .pm-pillars { margin: 2.2rem 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: .7rem; }
-  .pm-pillars li {
-    font-size: .7687rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600;
-    color: var(--avorio); border: 1px solid rgba(205,171,82,.5); border-radius: 999px; padding: .35rem .9rem;
-  }
 
   /* ---------- MISURA DEL MERITO ---------- */
   .pm-measure { padding: clamp(3rem, 2rem + 6vw, 5rem) 0; }
@@ -219,17 +176,10 @@
   }
   .pm-note strong { color: var(--oro-soft); font-weight: 600; }
 
-  /* ---------- vivacità minima nell'hero — motivo statico ---------- */
-  .pm-sparks { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
-  .pm-spark {
-    position: absolute; color: #EDD98A; line-height: 1;
-    opacity: .32; user-select: none;
-  }
-
   /* ---------- reveal ---------- */
   .pm-reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
   .pm-reveal.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { .pm-reveal { opacity: 1; transform: none; transition: none; } .pm-sparks { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .pm-reveal { opacity: 1; transform: none; transition: none; } }
 </style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
@@ -240,28 +190,20 @@
 <script src="nav-header.js"></script>
 <main id="main" class="pm">
 
-  <!-- HERO -->
-  <header class="pm-hero">
-    <div class="pm-sparks" aria-hidden="true">
-      <span class="pm-spark" style="left:7%;top:60%;font-size:.85rem">✦</span>
-      <span class="pm-spark" style="left:17%;top:20%;font-size:.6rem">✧</span>
-      <span class="pm-spark" style="left:29%;top:50%;font-size:1rem">✦</span>
-      <span class="pm-spark" style="left:43%;top:70%;font-size:.7rem">✧</span>
-      <span class="pm-spark" style="left:57%;top:15%;font-size:.9rem">✦</span>
-      <span class="pm-spark" style="left:70%;top:55%;font-size:.6rem">✧</span>
-      <span class="pm-spark" style="left:82%;top:30%;font-size:1rem">✦</span>
-      <span class="pm-spark" style="left:92%;top:65%;font-size:.7rem">✧</span>
+  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso"><a href="index.html">Home</a><span>›</span><span aria-current="page">Premio al Merito</span></nav>
+      <div class="gold-bar"></div>
+      <h1>Dal misurare il merito, al <em>premiarlo</em></h1>
+      <p class="sub">Ogni giorno, in Convitto, gli educatori osservano e valorizzano il comportamento dei ragazzi. Il Premio al Merito trasforma quella misura quotidiana in un riconoscimento concreto: un modo per dire, alla fine dell'anno, che l'impegno è stato visto.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem">
+        <span class="tag" style="color:var(--av);border-color:rgba(245,240,232,.3)">Equo</span>
+        <span class="tag" style="color:var(--av);border-color:rgba(245,240,232,.3)">Trasparente</span>
+        <span class="tag" style="color:var(--av);border-color:rgba(245,240,232,.3)">Motivante</span>
+      </div>
     </div>
-    <div class="pm-wrap">
-      <nav class="breadcrumb"><a href="index.html">Home</a><span>›</span><span aria-current="page">Premio al Merito</span></nav>
-      <p class="pm-brand">Convitto «Costaggini» · Rieti</p>
-      <h1>Dal misurare il merito,<br>al <em>premiarlo</em>.</h1>
-      <p class="lead">Ogni giorno, in Convitto, gli educatori osservano e valorizzano il comportamento dei ragazzi. Il <strong>Premio al Merito</strong> trasforma quella misura quotidiana in un riconoscimento concreto: un modo per dire, alla fine dell'anno, che l'impegno è stato visto.</p>
-      <ul class="pm-pillars">
-        <li>Equo</li><li>Trasparente</li><li>Motivante</li>
-      </ul>
-    </div>
-  </header>
+  </div>
 
   <!-- COME SI MISURA -->
   <section class="pm-measure">

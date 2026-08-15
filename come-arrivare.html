@@ -18,24 +18,12 @@
 <meta name="theme-color" content="#2C3E2D">
 <link rel="stylesheet" href="style.css">
 <style>
-    .ca-hero .ca-wrap::after {
-      content:'';
-      position:absolute;
-      top:50%; left:min(500px, calc(100% - 160px));
-      transform:translateY(-50%);
-      width:170px; height:170px;
-      background-image: var(--hero-icon);
-      background-repeat:no-repeat; background-position:center; background-size:contain;
-      z-index:-1; pointer-events:none;
-    }
-    @media(max-width:640px){
-      .ca-hero .ca-wrap::after{ width:72px;height:72px; top:30px; left:auto; right:0; bottom:auto; transform:none; }
-    }
-
   /* ===== Sezione "Come arrivare" — autosufficiente =====
      Per integrarla nel sito: mantieni questo <style> e tutto ciò che
      sta dentro <main class="ca">. Header e footer globali (shared.js /
-     nav.js) avvolgeranno la pagina come per le altre sezioni. */
+     nav.js) avvolgeranno la pagina come per le altre sezioni.
+     L'hero usa ora la struttura standard .page-hero condivisa
+     con il resto del sito (font, icona, layout) — vedi style.css. */
 
   .ca {
     --bosco: #2C3E2D;
@@ -71,53 +59,6 @@
     margin: .35rem 0 0; color: var(--bosco);
   }
   .ca h2 em { font-style: italic; color: var(--oro); }
-
-  /* ---------- HERO ---------- */
-  .ca-hero {
-    position: relative; overflow: hidden;
-    background: var(--bosco-deep);
-    color: var(--avorio);
-    padding: clamp(3.5rem, 2rem + 9vw, 7rem) 0 clamp(3rem, 2rem + 6vw, 5.5rem);
-  }
-  .ca-hero::before {
-    content: ""; position: absolute; inset: 0;
-    background:
-      radial-gradient(120% 80% at 85% -10%, rgba(184,146,42,.20), transparent 55%),
-      radial-gradient(90% 70% at -10% 110%, rgba(184,146,42,.10), transparent 55%);
-    pointer-events: none;
-  }
-  .ca-hero .ca-wrap { position: relative; z-index: 2; }
-  .ca-hero-brand {
-    font-size: .6937rem; letter-spacing: .26em; text-transform: uppercase;
-    font-weight: 600; color: var(--oro-soft);
-  }
-  .ca-hero h1 {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 600; line-height: 1.02;
-    font-size: clamp(2.5312rem, 1.3125rem + 6vw, 5.0625rem);
-    margin: .8rem 0 0; letter-spacing: -.01em;
-  }
-  .ca-hero h1 em { font-style: italic; color: var(--oro-soft); }
-  .ca-hero p.lead {
-    max-width: 46ch; margin: 1.4rem 0 0;
-    font-size: clamp(.9563rem, .8906rem + .4vw, 1.125rem);
-    color: rgba(246,242,232,.84);
-  }
-  .ca-rule { width: 64px; height: 2px; background: var(--oro); margin: 2rem 0 0; border: 0; }
-
-  .ca-facts {
-    margin: 2.2rem 0 0; padding: 0; list-style: none;
-    display: flex; flex-wrap: wrap; gap: 1.6rem 2.6rem;
-  }
-  .ca-facts li { min-width: 0; }
-  .ca-facts .n {
-    font-family: "Cormorant Garamond", serif; font-weight: 600;
-    font-size: 1.7344rem; color: var(--avorio); line-height: 1;
-  }
-  .ca-facts .l {
-    display: block; margin-top: .25rem;
-    font-size: .7687rem; letter-spacing: .04em; color: rgba(246,242,232,.7);
-  }
 
   /* ---------- SPINA DELLA SALARIA ---------- */
   .ca-salaria { padding: clamp(3.2rem, 2rem + 6vw, 5.5rem) 0 clamp(2.6rem, 2rem + 4vw, 4rem); }
@@ -220,21 +161,12 @@
     font-size: .7687rem; color: rgba(246,242,232,.62); max-width: 70ch;
   }
 
-  /* ---------- vivacità minima nell'hero — motivo statico ---------- */
-  .ca-sparks { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
-  .ca-spark {
-    position: absolute; width: 5px; height: 5px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(237,217,138,.95), rgba(184,146,42,.55) 60%, transparent 72%);
-    opacity: .4;
-  }
-
   /* ---------- reveal on scroll ---------- */
   .ca-reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
   .ca-reveal.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
     .ca-reveal { opacity: 1; transform: none; transition: none; }
     .ca-btn, .ca-btn .arr { transition: none; }
-    .ca-sparks { display: none; }
   }
 </style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
@@ -246,31 +178,20 @@
 <script src="nav-header.js"></script>
 <main id="main" class="ca">
 
-  <!-- HERO -->
-  <header class="ca-hero">
-    <div class="ca-sparks" aria-hidden="true">
-      <span class="ca-spark" style="left:6%;top:65%"></span>
-      <span class="ca-spark" style="left:18%;top:25%"></span>
-      <span class="ca-spark" style="left:31%;top:55%"></span>
-      <span class="ca-spark" style="left:46%;top:15%"></span>
-      <span class="ca-spark" style="left:59%;top:70%"></span>
-      <span class="ca-spark" style="left:72%;top:35%"></span>
-      <span class="ca-spark" style="left:84%;top:60%"></span>
-      <span class="ca-spark" style="left:93%;top:20%"></span>
+  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso"><a href="index.html">Home</a><span>›</span><span aria-current="page">Come arrivare</span></nav>
+      <div class="gold-bar"></div>
+      <h1>Dalla <em>Salaria</em>, fino a noi</h1>
+      <p class="sub">Rieti è il centro geografico d'Italia, e la strada che la lega a Roma è la stessa di sempre: la Via Salaria. Il Convitto affaccia proprio su questa via — e su questa via arriva anche il capolinea dell'autobus.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem">
+        <span class="tag" style="color:var(--av);border-color:rgba(245,240,232,.3)">≈ 1h 40 in autobus da Roma Tiburtina</span>
+        <span class="tag" style="color:var(--av);border-color:rgba(245,240,232,.3)">Capolinea su Via Salaria</span>
+        <span class="tag" style="color:var(--av);border-color:rgba(245,240,232,.3)">~80 km da Roma</span>
+      </div>
     </div>
-    <div class="ca-wrap">
-      <nav class="breadcrumb"><a href="index.html">Home</a><span>›</span><span aria-current="page">Come arrivare</span></nav>
-      <p class="ca-hero-brand">Convitto «Costaggini» · Rieti</p>
-      <h1>Dalla <em>Salaria</em>,<br>fino a noi.</h1>
-      <p class="lead">Rieti è il centro geografico d'Italia, e la strada che la lega a Roma è la stessa di sempre: la Via Salaria. Il Convitto affaccia proprio su questa via — e su questa via arriva anche il capolinea dell'autobus.</p>
-      <hr class="ca-rule">
-      <ul class="ca-facts">
-        <li><span class="n">≈ 1h&nbsp;40</span><span class="l">in autobus da Roma Tiburtina</span></li>
-        <li><span class="n">Via Salaria</span><span class="l">capolinea bus a pochi minuti dal Convitto</span></li>
-        <li><span class="n">~80 km</span><span class="l">da Roma lungo la Salaria</span></li>
-      </ul>
-    </div>
-  </header>
+  </div>
 
   <!-- SPINA DELLA SALARIA -->
   <section class="ca-salaria">

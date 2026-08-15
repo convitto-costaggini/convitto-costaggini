@@ -1010,12 +1010,18 @@
    Le icone vivono in img/icone/*.svg (stile confermato da
    Michele, agosto 2026: riquadro arrotondato attenuato,
    avorio 6% di opacità, forma dell'icona avorio 50%).
-   Pagine non mappate ricadono su img/icone/scudo.svg
-   (nessuna pagina resta "nuda"). Le pagine con hero su
-   misura (laboratorio-musicale, vinile, solidarieta) non
-   hanno .page-hero e restano automaticamente escluse.
-   Copertura iniziale rapida per gruppi di pagine principali —
-   da affinare pagina per pagina in seguito.
+   GRUPPI E SOTTO-PAGINE: ogni gruppo ha una pagina "principale"
+   (HUBS) — le altre pagine dello stesso gruppo mostrano la
+   STESSA icona ma nella variante dorata "-satellite.svg"
+   (stesso disegno, colore oro invece di avorio, leggermente
+   più piccola/attenuata), per segnalare a colpo d'occhio che
+   non sono il cuore della sezione, senza disegnare icone nuove.
+   Copertura completa (agosto 2026): tutte le pagine pubbliche
+   sono mappate. Pagine future non ancora aggiunte ricadono su
+   img/icone/scudo.svg (nessuna pagina resta "nuda").
+   Le pagine con hero su misura (laboratorio-musicale, vinile,
+   solidarieta) non hanno .page-hero e restano automaticamente
+   escluse.
 ═══════════════════════════════════════════════════ */
 (function () {
   var heroBox = document.querySelector('.page-hero');
@@ -1053,6 +1059,16 @@
     comunita: 'comunita',
     alumni: 'comunita',
     ricordi: 'comunita',
+    mondo: 'comunita',
+    provenienza: 'comunita',
+    'abbraccio-amatrice': 'comunita',
+    personale: 'il-convitto',
+    anno: 'notizie',
+    'riconoscimento-frassinetti': 'notizie',
+    'voci-dal-convitto': 'microfono',
+    'voci-del-personale': 'microfono',
+    lettera: 'busta',
+    'settimana-in-numeri': 'grafico',
     bullismo: 'scudo'
   };
 
@@ -1066,16 +1082,20 @@
     'il-convitto': 'il-convitto',
     orientamento: 'orientamento',
     regolamenti: 'regolamento',
-    comunita: 'comunita'
+    comunita: 'comunita',
+    microfono: 'voci-dal-convitto'
   };
 
   var page = document.body.dataset.page;
   var icon = MAP[page] || 'scudo'; // fallback: scudo generico
-  heroBox.style.setProperty('--hero-icon', "url('img/icone/" + icon + ".svg')");
-
   var hubPage = HUBS[icon];
   var isSatellite = hubPage && page !== hubPage;
-  heroBox.style.setProperty('--hero-icon-opacity', isSatellite ? '.55' : '1');
+  /* Le sotto-pagine di un gruppo usano la variante dorata dell'icona
+     (stesso disegno, colore diverso) invece della sola icona attenuata:
+     si distinguono a colpo d'occhio dalla pagina principale del gruppo. */
+  var iconFile = isSatellite ? (icon + '-satellite') : icon;
+  heroBox.style.setProperty('--hero-icon', "url('img/icone/" + iconFile + ".svg')");
+  heroBox.style.setProperty('--hero-icon-opacity', isSatellite ? '.7' : '1');
   heroBox.style.setProperty('--hero-icon-scale', isSatellite ? '.82' : '1');
 })();
 

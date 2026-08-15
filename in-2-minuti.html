@@ -12,58 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .m2-hero { position:relative; overflow:hidden; }
-    .m2-hero .w::after {
-      content:'';
-      position:absolute;
-      top:50%; left:min(540px, calc(100% - 160px));
-      transform:translateY(-50%);
-      width:160px; height:160px;
-      background-image: var(--hero-icon);
-      background-repeat:no-repeat; background-position:center; background-size:contain;
-      z-index:-1; pointer-events:none;
-    }
-    @media(max-width:640px){
-      .m2-hero .w::after{ width:66px;height:66px; top:26px; left:auto; right:0; bottom:auto; transform:none; }
-    }
-
-
-    /* ── HERO ── */
-    .m2-hero {
-      background: linear-gradient(150deg, #060e06 0%, #1a2e1b 60%, #0a1409 100%);
-      padding: 5rem 1.25rem 3rem; position: relative; overflow: hidden;
-    }
-    .m2-hero::before {
-      content: ''; position: absolute; top: 0; left: -60%;
-      width: 50%; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(184,146,42,.5), transparent);
-    }
-    .m2-timer {
-      display: inline-flex; align-items: center; gap: .5rem;
-      font-family: var(--fu); font-size: .6rem; font-weight: 800;
-      letter-spacing: .2em; text-transform: uppercase;
-      color: var(--oro2); margin-bottom: .85rem;
-    }
-    .m2-timer::before { content: '⏱'; font-size: .9rem; }
-    .m2-hero h1 {
-      font-family: var(--fd);
-      font-size: clamp(2.2rem, 7vw, 4rem);
-      font-weight: 300; color: #fff; line-height: 1.05; margin-bottom: .6rem;
-    }
-    .m2-hero h1 em { font-style: italic; color: var(--oro3); }
-    .m2-hero p {
-      font-size: .95rem; color: rgba(245,240,232,.6);
-      line-height: 1.75; max-width: 520px; margin-bottom: 1.75rem;
-    }
-    .m2-progress {
-      display: flex; gap: .35rem; flex-wrap: wrap; max-width: 520px;
-    }
-    .m2-prog-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(184,146,42,.25); cursor: pointer;
-      transition: background .2s; border: none; padding: 0;
-    }
-    .m2-prog-dot.done { background: var(--oro); }
+    /* L'hero usa ora la struttura standard .page-hero condivisa con il
+       resto del sito (font, allineamento a sinistra, icona) — vedi
+       style.css. Le regole .m2-hero specifiche sono state rimosse. */
 
     /* ── LAYOUT PRINCIPALE ── */
     .m2-body { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
@@ -221,18 +172,16 @@
 <script src="nav-header.js"></script>
 <main id="main">
 
-  <!-- HERO -->
-  <header class="m2-hero">
-    <div class="w" style="max-width:700px;position:relative;z-index:2">
-      <nav class="breadcrumb" style="margin-bottom:1.25rem">
-        <a href="index.html">Home</a><span>›</span>
-        <span aria-current="page">In 2 Minuti</span>
-      </nav>
-      <p class="m2-timer">Lettura rapida</p>
-      <h1>Tutto quello che vuoi sapere<br><em>in 2 minuti</em></h1>
-      <p>Hai fretta? Nessun problema. Qui trovi le risposte alle 10 domande che ogni genitore fa per prima. Niente fronzoli — solo fatti. Quando avrai tempo, esplora il resto del sito con calma.</p>
+  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso"><a href="index.html">Home</a><span>›</span><span aria-current="page">In 2 Minuti</span></nav>
+      <div class="gold-bar"></div>
+      <p class="lbl" style="color:var(--oro2)">Lettura rapida</p>
+      <h1>Tutto quello che vuoi sapere <em>in 2 minuti</em></h1>
+      <p class="sub">Hai fretta? Nessun problema. Qui trovi le risposte alle 10 domande che ogni genitore fa per prima. Niente fronzoli — solo fatti. Quando avrai tempo, esplora il resto del sito con calma.</p>
     </div>
-  </header>
+  </div>
 
   <!-- KPI STRIP -->
   <section style="background:var(--bg,#0d1a0e);padding:1.5rem 1.25rem">

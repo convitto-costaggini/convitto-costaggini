@@ -21,8 +21,20 @@
     .vn-hero p { color:rgba(245,240,232,.5); max-width:500px; margin:.75rem auto 0; font-size:.9rem; line-height:1.8; }
     .vn-hero .w { position:relative; z-index:1; }
 
-    /* Solchi di vinile — motivo statico, distinto dalle note del Laboratorio Musicale */
-    .vn-motifs { position:absolute; inset:0; pointer-events:none; z-index:0; }
+    /* Sfondo condiviso col Laboratorio Musicale — stesso collage,
+       stesso velo sfumato, così le tre pagine "speciali" (Laboratorio,
+       Vinile, Solidarietà) restano visivamente imparentate. */
+    .vn-hero-bg {
+      position:absolute; inset:0; z-index:0;
+      background:
+        linear-gradient(180deg, rgba(10,15,10,.75) 0%, rgba(10,15,10,.6) 50%, rgba(10,15,10,.94) 100%),
+        url('img/strumenti-collage.svg') center/cover no-repeat;
+    }
+
+    /* Solchi di vinile — motivo in primo piano, distintivo di questa pagina
+       (differenziazione rispetto alle note del Laboratorio e alle scintille
+       della Solidarietà) */
+    .vn-motifs { position:absolute; inset:0; pointer-events:none; z-index:1; }
     .vn-ring {
       position:absolute; border-radius:50%;
       border:1.5px solid rgba(184,146,42,.3);
@@ -153,6 +165,7 @@
 
   <!-- HERO -->
   <section class="vn-hero">
+    <div class="vn-hero-bg" aria-hidden="true"></div>
     <div class="vn-motifs" aria-hidden="true">
       <span class="vn-ring" style="left:5%;top:15%;width:34px;height:34px"></span>
       <span class="vn-ring" style="left:16%;top:60%;width:22px;height:22px"></span>
@@ -401,11 +414,3 @@ setTimeout(() => {
 </script>
 </body>
 </html>
-      <div style="margin-top:1.25rem">
-        <a href="comunita.html"
-           style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.65);text-decoration:none;padding:.45rem 1rem;border:1px solid rgba(245,240,232,.2);border-radius:6px;transition:all .2s"
-           onmouseover="this.style.color='#F5F0E8';this.style.borderColor='rgba(245,240,232,.45)'"
-           onmouseout="this.style.color='rgba(245,240,232,.65)';this.style.borderColor='rgba(245,240,232,.2)'">
-          ← Torna alla Comunità
-        </a>
-      </div>

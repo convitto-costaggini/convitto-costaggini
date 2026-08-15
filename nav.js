@@ -1031,7 +1031,7 @@
     'giornata-tipo': 'il-convitto',
     'premio-merito': 'il-convitto',
     servizi: 'servizi',
-    semiconvitto: 'servizi',
+    semiconvitto: 'semiconvitto',
     ammissione: 'orientamento',
     'domanda-ammissione': 'orientamento',
     openday: 'orientamento',

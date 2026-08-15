@@ -1056,9 +1056,27 @@
     bullismo: 'scudo'
   };
 
+  /* Pagina "principale" di ciascun gruppo di icone condivise — le altre
+     pagine dello stesso gruppo (le "sotto-pagine") mostrano la stessa
+     icona ma attenuata (più piccola, più trasparente), per segnalare
+     con discrezione che non sono il cuore della sezione. Nessuna nuova
+     icona da disegnare: solo due variabili CSS in più. */
+  var HUBS = {
+    notizie: 'notizie',
+    'il-convitto': 'il-convitto',
+    orientamento: 'orientamento',
+    regolamenti: 'regolamento',
+    comunita: 'comunita'
+  };
+
   var page = document.body.dataset.page;
   var icon = MAP[page] || 'scudo'; // fallback: scudo generico
   heroBox.style.setProperty('--hero-icon', "url('img/icone/" + icon + ".svg')");
+
+  var hubPage = HUBS[icon];
+  var isSatellite = hubPage && page !== hubPage;
+  heroBox.style.setProperty('--hero-icon-opacity', isSatellite ? '.55' : '1');
+  heroBox.style.setProperty('--hero-icon-scale', isSatellite ? '.82' : '1');
 })();
 
 // ── CLOUDFLARE WEB ANALYTICS ──────────────────────────────────────

@@ -92,7 +92,11 @@
   .ca-stop.is-mid .place { font-size: 1.0125rem; color: #6E7A60; }
 
   /* ---------- MODALITÀ ---------- */
-  .ca-modes { padding: clamp(2.4rem, 2rem + 3vw, 3.5rem) 0 clamp(3.2rem, 2rem + 6vw, 5rem); }
+  .ca-modes {
+    padding: clamp(2.4rem, 2rem + 3vw, 3.5rem) 0 clamp(3.2rem, 2rem + 6vw, 5rem);
+    background: var(--avorio-2);
+    border-top: 1px solid var(--linea);
+  }
   .ca-grid { margin: 2.4rem 0 0; display: grid; gap: 1.2rem; grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 860px) { .ca-grid { grid-template-columns: 1fr; } }
 

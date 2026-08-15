@@ -1,4 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
 <rect width="200" height="200" rx="18" fill="rgba(245,240,232,.06)"/>
+<g transform="translate(100,100) scale(.89) translate(-100,-100)">
 <path d="M100 148 C64 120 44 98 44 74 C44 56 58 44 76 44 C88 44 97 51 100 60 C103 51 112 44 124 44 C142 44 156 56 156 74 C156 98 136 120 100 148Z" fill="rgba(245,240,232,.5)"/>
+</g>
 </svg>

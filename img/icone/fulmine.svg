@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<rect width="200" height="200" rx="18" fill="rgba(245,240,232,.06)"/>
+<g transform="translate(100,100) scale(1) translate(-100,-100)">
+<path d="M112 42 L64 112 L94 112 L86 158 L140 88 L108 88 Z" fill="rgba(245,240,232,.5)"/>
+</g>
+</svg>

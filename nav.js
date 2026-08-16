@@ -1035,7 +1035,7 @@
     'il-convitto': 'il-convitto',
     educatori: 'il-convitto',
     'giornata-tipo': 'il-convitto',
-    'premio-merito': 'il-convitto',
+    'premio-merito': 'premio',
     servizi: 'servizi',
     semiconvitto: 'semiconvitto',
     ammissione: 'orientamento',

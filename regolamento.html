@@ -225,35 +225,6 @@
     }
     .page-hero .w::after { top: calc(50% - 20px); }
 
-    /* ── STAMPA ──────────────────────────────────────────────
-       Il testo degli articoli vive dentro i modali (.art-modal),
-       normalmente display:none finché non si clicca una card.
-       Qui li rendiamo tutti visibili e impilati in sequenza,
-       nascondendo card-grid, overlay e controlli interattivi. */
-    @media print {
-      .page-hero, .art-overlay, .art-grid, .reg-btn,
-      .art-modal-close, .art-modal-footer { display: none !important; }
-
-      .art-modal {
-        display: block !important;
-        position: static !important;
-        inset: auto !important;
-        z-index: auto !important;
-        background: none !important;
-        backdrop-filter: none !important;
-        page-break-after: always;
-      }
-      .art-modal-box {
-        max-height: none !important;
-        overflow: visible !important;
-        box-shadow: none !important;
-        margin: 0 !important;
-        max-width: none !important;
-      }
-      .art-modal-header { border-bottom: 1px solid #999; padding-bottom: .5rem; margin-bottom: .5rem; }
-      .art-modal-body { color: #000 !important; }
-      .art-modal-quote { border-left: 3px solid #999; }
-    }
   </style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
@@ -292,7 +263,6 @@
       <a href="regolamento-guida.html" class="reg-btn reg-btn-primary">📖 Lettura guidata</a>
       <a href="Regolamento-di-Convitto-versione-30-01-2025__1_.pdf" download class="reg-btn reg-btn-primary">⬇️ Scarica PDF</a>
       <a href="Regolamento-di-Convitto-versione-30-01-2025__1_.pdf" target="_blank" rel="noopener" class="reg-btn reg-btn-secondary">↗ Apri in nuova scheda</a>
-      <button onclick="window.print()" class="reg-btn reg-btn-secondary">🖨️ Stampa</button>
     </div>
   </div>
 

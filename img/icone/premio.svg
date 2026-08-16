@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<rect width="200" height="200" rx="18" fill="rgba(245,240,232,.06)"/>
+<g transform="translate(100,100) scale(.95) translate(-100,-100)">
+<path d="M100 152 Q60 140 52 95 Q50 70 68 50" fill="none" stroke="rgba(245,240,232,.35)" stroke-width="4" stroke-linecap="round"/>
+<path d="M100 152 Q140 140 148 95 Q150 70 132 50" fill="none" stroke="rgba(245,240,232,.35)" stroke-width="4" stroke-linecap="round"/>
+<ellipse cx="90" cy="148" rx="11" ry="5" fill="rgba(245,240,232,.5)" transform="rotate(-70 90 148)"/>
+<ellipse cx="72" cy="130" rx="11" ry="5" fill="rgba(245,240,232,.5)" transform="rotate(-50 72 130)"/>
+<ellipse cx="58" cy="105" rx="11" ry="5" fill="rgba(245,240,232,.5)" transform="rotate(-25 58 105)"/>
+<ellipse cx="52" cy="80" rx="11" ry="5" fill="rgba(245,240,232,.5)" transform="rotate(0 52 80)"/>
+<ellipse cx="58" cy="58" rx="11" ry="5" fill="rgba(245,240,232,.5)" transform="rotate(25 58 58)"/>
+<ellipse cx="110" cy="148" rx="11" ry="5" fill="rgba(245,240,232,.5)" transform="rotate(70 110 148)"/>
+<ellipse cx="128" cy="130" rx="11" ry="5" fill="rgba(245,240,232,.5)" transform="rotate(50 128 130)"/>
+<ellipse cx="142" cy="105" rx="11" ry="5" fill="rgba(245,240,232,.5)" transform="rotate(25 142 105)"/>
+<ellipse cx="148" cy="80" rx="11" ry="5" fill="rgba(245,240,232,.5)" transform="rotate(0 148 80)"/>
+<ellipse cx="142" cy="58" rx="11" ry="5" fill="rgba(245,240,232,.5)" transform="rotate(-25 142 58)"/>
+<path d="M100 44 L102 51 L110 51 L104 55 L106 62 L100 58 L94 62 L96 55 L90 51 L98 51 Z" fill="#2C3E2D" opacity=".6"/>
+</g>
+</svg>

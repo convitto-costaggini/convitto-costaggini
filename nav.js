@@ -1063,7 +1063,7 @@
     'riconoscimento-frassinetti': 'notizie',
     'voci-dal-convitto': 'microfono',
     'voci-del-personale': 'microfono',
-    lettera: 'busta',
+    lettera: 'lettera',
     'settimana-in-numeri': 'grafico',
     bullismo: 'scudo'
   };

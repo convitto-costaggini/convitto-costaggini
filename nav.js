@@ -1058,6 +1058,7 @@
     genitori: 'genitori',
     comunita: 'comunita',
     alumni: 'comunita',
+    'iscriviti-alumni': 'comunita',
     ricordi: 'comunita',
     mondo: 'comunita',
     provenienza: 'comunita',

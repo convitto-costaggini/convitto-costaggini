@@ -21,15 +21,7 @@
     body { background: #0a0f0a; }
 
     /* Hero */
-    .tv-hero {
-      background: linear-gradient(160deg, #0a0f0a, var(--bosco));
-      padding: 3.5rem 1.25rem 2.5rem; text-align: center; position: relative; overflow: hidden;
-    }
-    .tv-hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(184,146,42,.1), transparent);
-      pointer-events: none;
-    }
+    /* tv-hero rimosso — ora .page-hero */
 
     /* Selettore ambienti */
     .tv-rooms {
@@ -125,15 +117,7 @@
       text-align: center; padding: .5rem;
     }
     .tv-thumb-placeholder span { font-size: 1.5rem; opacity: .3; }
-    .tv-hero .breadcrumb {
-      display: flex; align-items: center; gap: .4rem;
-      font-family: var(--fu); font-size: .72rem; font-weight: 600;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: rgba(245,240,232,.70);
-    }
-    .tv-hero .breadcrumb a { color: #D4AA4A; text-decoration: none; }
-    .tv-hero .breadcrumb a:hover { color: var(--oro3); }
-    .tv-hero .breadcrumb span { color: rgba(245,240,232,.60); }
+    /* tv-hero .breadcrumb rimosso — usa lo stile globale .breadcrumb */
 
     /* Guida vocale */
     .tv-narration {
@@ -173,16 +157,17 @@
 <script src="nav-header.js"></script>
 <main id="main">
 
-  <div class="tv-hero">
-    <div class="w" style="position:relative;z-index:1">
-      <nav class="breadcrumb" style="justify-content:center;margin-bottom:1.25rem">
+  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso">
         <a href="index.html">Home</a><span>›</span>
         <a href="servizi.html">Servizi</a><span>›</span>
         <span aria-current="page">Tour Virtuale</span>
       </nav>
-      <p style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);margin-bottom:.5rem">Esplora a 360°</p>
-      <h1 style="font-family:var(--fd);font-size:clamp(1.8rem,6vw,3.2rem);font-weight:300;color:#fff;margin-bottom:.5rem">Il Convitto <em style="font-style:italic;color:var(--oro3)">da dentro</em></h1>
-      <p style="color:rgba(245,240,232,.5);font-size:.85rem;max-width:500px;margin:0 auto">Visita gli ambienti del Convitto prima ancora di arrivare. Trascina con il dito o il mouse per guardarti intorno a 360°.</p>
+      <div class="gold-bar"></div>
+      <h1>Il Convitto <em>da dentro</em></h1>
+      <p class="sub">Esplora a 360° — visita gli ambienti del Convitto prima ancora di arrivare. Trascina con il dito o il mouse per guardarti intorno.</p>
     </div>
   </div>
 

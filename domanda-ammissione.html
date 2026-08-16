@@ -13,10 +13,7 @@
   <link rel="stylesheet" href="style.css"/>
   <style>
     /* ── HERO ── */
-    .da-hero { background:linear-gradient(135deg,var(--bosco),#1a3a1b); padding:3.5rem 1.25rem 3rem; }
-    .da-hero h1 { font-family:var(--fd); font-size:clamp(1.8rem,5vw,3rem); font-weight:300; color:#fff; margin-bottom:.4rem; }
-    .da-hero h1 em { font-style:italic; color:var(--oro3); }
-    .da-hero p { color:rgba(245,240,232,.6); font-size:.9rem; max-width:560px; line-height:1.8; }
+
 
     /* ── CARTA ── */
     .da-paper { max-width:780px; margin:0 auto; }
@@ -132,7 +129,7 @@
     .da-progress-fill { height:100%; background:linear-gradient(90deg,var(--bosco),var(--oro)); border-radius:4px; transition:width .4s; }
 
     @media print {
-      .da-hero, .da-footer, nav, footer, .da-progress, .da-error { display:none !important; }
+      .page-hero, .da-footer, nav, footer, .da-progress, .da-error { display:none !important; }
       .da-section { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; }
     }
   </style>
@@ -146,21 +143,19 @@
 <script src="nav-header.js"></script>
 <main id="main" aria-label="Domanda di ammissione al Convitto">
 
-  <!-- HERO -->
-  <section class="da-hero">
+  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
+  <div class="page-hero">
     <div class="w">
-      <nav class="breadcrumb" style="margin-bottom:1.25rem">
-        <a href="index.html" style="color:rgba(245,240,232,.45)">Home</a>
-        <span style="color:rgba(245,240,232,.2)">›</span>
-        <a href="ammissione.html" style="color:rgba(245,240,232,.45)">Ammissione</a>
-        <span style="color:rgba(245,240,232,.2)">›</span>
-        <span style="color:var(--oro2)">Domanda di Ammissione</span>
+      <nav class="breadcrumb" aria-label="Percorso">
+        <a href="index.html">Home</a><span>›</span>
+        <a href="ammissione.html">Ammissione</a><span>›</span>
+        <span aria-current="page">Domanda di Ammissione</span>
       </nav>
-      <p style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);margin-bottom:.5rem">A.S. 2026/2027</p>
-      <h1>Domanda di <em>Ammissione</em><br>al Convitto</h1>
-      <p>Compila il modulo online e invialo direttamente alla segreteria. Riceverai una conferma via email. La firma autografa rimane obbligatoria — la segreteria ti contatterà per il completamento.</p>
+      <div class="gold-bar"></div>
+      <h1>Domanda di <em>Ammissione</em></h1>
+      <p class="sub">A.S. 2026/2027 — compila il modulo online e invialo direttamente alla segreteria. Riceverai una conferma via email. La firma autografa rimane obbligatoria — la segreteria ti contatterà per il completamento.</p>
     </div>
-  </section>
+  </div>
 
   <!-- FORM -->
   <section style="background:var(--av);padding:3rem 1.25rem 4rem">

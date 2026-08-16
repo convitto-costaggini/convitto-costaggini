@@ -18,14 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* HERO compatto */
-    .reg-hero {
-      background: linear-gradient(135deg, var(--bosco), #1a3a1b);
-      padding: 4rem 1.25rem 2.5rem;
-    }
-    .reg-hero h1 { font-family:var(--fd); font-size:clamp(1.8rem,5vw,3rem); font-weight:300; color:#fff; margin-bottom:.4rem; }
-    .reg-hero h1 em { font-style:italic; color:var(--oro3); }
-    .reg-hero p { color:rgba(245,240,232,.6); font-size:.88rem; max-width:560px; line-height:1.7; margin-top:.5rem; }
+    /* HERO — rimosso, ora .page-hero standard */
 
     /* Barra azioni */
     .reg-toolbar {
@@ -239,19 +232,17 @@
 <body data-page="regolamento">
 <script src="nav-header.js"></script>
 <main id="main">
-  <section class="reg-hero">
+  <div class="page-hero">
     <div class="w">
-      <nav class="breadcrumb" aria-label="Percorso" style="margin-bottom:1.25rem">
-        <a href="index.html" style="color:rgba(245,240,232,.45)">Home</a>
-        <span style="color:rgba(245,240,232,.2)">›</span>
-        <a href="ammissione.html" style="color:rgba(245,240,232,.45)">Ammissione</a>
-        <span style="color:rgba(245,240,232,.2)">›</span>
-        <span aria-current="page" style="color:var(--oro2)">Regolamento</span>
+      <nav class="breadcrumb" aria-label="Percorso">
+        <a href="index.html">Home</a><span>›</span>
+        <a href="ammissione.html">Ammissione</a><span>›</span>
+        <span aria-current="page">Regolamento</span>
       </nav>
-      <p style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);margin-bottom:.6rem">— Documento ufficiale</p>
+      <div class="gold-bar"></div>
       <h1>Regolamento <em>di Convitto</em></h1>
-      <p>Il documento che disciplina la vita comunitaria al Convitto "Costaggini" di Rieti. 35 articoli che definiscono diritti, doveri e valori della nostra comunità educante.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem;font-family:var(--fu);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.4)">
+      <p class="sub">Il documento che disciplina la vita comunitaria al Convitto "Costaggini" di Rieti. 35 articoli che definiscono diritti, doveri e valori della nostra comunità educante.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem;justify-content:center;font-family:var(--fu);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.4)">
         <span>📄 35 articoli</span>
         <span>·</span>
         <span>📅 Versione 30 gennaio 2025</span>
@@ -259,7 +250,7 @@
         <span>🏛️ IPSSEOA "R. A. Costaggini" — Rieti</span>
       </div>
     </div>
-  </section>
+  </div>
 
   <div class="reg-toolbar">
     <div class="reg-info">

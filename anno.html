@@ -18,13 +18,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* Hero */
-    .an-hero { background:linear-gradient(135deg,var(--bosco),#1a3a1b); padding:3rem 1.25rem 2.5rem; text-align:center; }
-
     /* Annulla completamente l'animazione rv su questa pagina */
     .rv { opacity:1 !important; transform:none !important; transition:none !important; }
-    .an-hero h1 { font-family:var(--fd); font-size:clamp(2rem,6vw,3.5rem); font-weight:300; color:#fff; }
-    .an-hero h1 em { font-style:italic; color:var(--oro3); }
 
     /* OGGI AL CONVITTO */
     .an-oggi { background:#fff; border-bottom:1px solid var(--av3); padding:2rem 1.25rem; }
@@ -77,15 +72,15 @@
 <script src="nav-header.js"></script>
 <main id="main">
 
-  <!-- HERO -->
-  <section class="an-hero">
+  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
+  <div class="page-hero">
     <div class="w">
-      <nav class="breadcrumb"><a href="index.html">Home</a><span>›</span><span aria-current="page">L'anno al Convitto</span></nav>
-      <p id="an-as" style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);margin-bottom:.75rem">— A.S. 2026/2027</p>
-      <h1>L'anno<br><em>al Convitto</em></h1>
-      <p style="color:rgba(245,240,232,.6);max-width:480px;margin:.75rem auto 0;font-size:.9rem;line-height:1.8">Dove siamo nell'anno scolastico. Cosa abbiamo già vissuto. Cosa ci aspetta ancora.</p>
+      <nav class="breadcrumb" aria-label="Percorso"><a href="index.html">Home</a><span>›</span><span aria-current="page">L'anno al Convitto</span></nav>
+      <div class="gold-bar"></div>
+      <h1>L'anno <em>al Convitto</em></h1>
+      <p class="sub" id="an-as-sub"><span id="an-as">A.S. 2026/2027</span> dove siamo nell'anno scolastico. Cosa abbiamo già vissuto. Cosa ci aspetta ancora.</p>
     </div>
-  </section>
+  </div>
 
   <!-- OGGI AL CONVITTO -->
   <div class="an-oggi">

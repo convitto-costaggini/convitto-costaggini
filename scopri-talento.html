@@ -11,11 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .st-hero { background:linear-gradient(160deg,#0a0f0a,var(--bosco)); padding:4rem 1.25rem 3rem; text-align:center; position:relative; overflow:hidden; }
-    .st-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,146,42,.12), transparent); pointer-events:none; }
-    .st-hero h1 { font-family:var(--fd); font-size:clamp(2rem,7vw,4rem); font-weight:300; color:#fff; margin-bottom:.5rem; position:relative; }
-    .st-hero h1 em { font-style:italic; color:var(--oro3); }
-    .st-hero p { color:rgba(245,240,232,.55); max-width:540px; margin:.6rem auto 0; font-size:.9rem; line-height:1.85; position:relative; }
+    /* st-hero rimosso — ora .page-hero */
 
     /* Card griglia */
     .st-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; padding:3rem 1.25rem 5rem; max-width:1100px; margin:0 auto; }
@@ -51,18 +47,18 @@
 <script src="nav-header.js"></script>
 <main id="main">
 
-  <section class="st-hero">
-    <div class="w" style="position:relative;z-index:1">
-      <nav class="breadcrumb" style="justify-content:center;margin-bottom:1.5rem">
-        <a href="index.html" style="color:rgba(245,240,232,.35)">Home</a>
-        <span style="color:rgba(245,240,232,.15)">›</span>
-        <span style="color:var(--oro2)">Scopri il tuo Talento</span>
+  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso">
+        <a href="index.html">Home</a><span>›</span>
+        <span aria-current="page">Scopri il tuo Talento</span>
       </nav>
-      <p style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);margin-bottom:.6rem">— Laboratorio interattivo</p>
+      <div class="gold-bar"></div>
       <h1>Scopri il tuo <em>Talento</em></h1>
-      <p>Quiz, giochi e simulatori creati appositamente per chi vuole capire se il mondo dell'enogastronomia, dell'accoglienza e della ristorazione fa per lui. Nessuna valutazione — solo scoperta.</p>
+      <p class="sub">Laboratorio interattivo — quiz, giochi e simulatori creati appositamente per chi vuole capire se il mondo dell'enogastronomia, dell'accoglienza e della ristorazione fa per lui. Nessuna valutazione, solo scoperta.</p>
     </div>
-  </section>
+  </div>
 
   <div class="st-intro">
     <p>Ogni esperienza qui dentro ti rivela qualcosa di diverso su di te. <strong>Non ci sono risposte giuste o sbagliate</strong> — ci sono risposte tue. Prenditi 5 minuti e scopri dove potrebbe portarti il Costaggini.</p>

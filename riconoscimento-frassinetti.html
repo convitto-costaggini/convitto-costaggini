@@ -41,14 +41,6 @@
 }
   </script>
   <style>
-    .fr-hero { background: linear-gradient(135deg, var(--bosco) 0%, #1a2e1b 100%); padding: 5rem 1.25rem 3.5rem; text-align: center; position: relative; overflow: hidden; }
-    .fr-hero::before { content: '✪'; position: absolute; font-size: 16rem; color: rgba(184,146,42,.045); top: -3rem; left: 50%; transform: translateX(-50%); pointer-events: none; }
-    .fr-hero .gold-bar { margin: 0 auto .9rem; }
-    .fr-hero h1 { font-family: var(--fd); font-size: clamp(2rem,6vw,3.5rem); font-weight: 300; color: var(--av); line-height: 1.15; margin-bottom: .7rem; }
-    .fr-hero h1 em { display: block; font-style: italic; color: var(--oro3); }
-    .fr-hero p.sub { color: rgba(245,240,232,.68); font-size: .95rem; max-width: 560px; margin: 0 auto; line-height: 1.7; }
-    .fr-chip { display: inline-flex; align-items: center; gap: .5rem; font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--oro2); margin-bottom: .9rem; }
-    .fr-chip::before { content: '—'; }
 
     .fr-lede { background: var(--av); padding: 3rem 1.25rem 2.5rem; }
     .fr-lede .w { max-width: 720px; }
@@ -132,16 +124,17 @@
 <script src="nav-header.js"></script>
 <main id="main">
 
-  <div class="fr-hero">
+  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
+  <div class="page-hero">
     <div class="w">
-      <nav class="breadcrumb" aria-label="Percorso" style="justify-content:center;margin-bottom:1.5rem">
-        <a href="index.html" style="color:rgba(245,240,232,.55)">Home</a><span style="color:rgba(245,240,232,.3)">›</span>
-        <a href="comunita.html" style="color:rgba(245,240,232,.55)">Comunità</a><span style="color:rgba(245,240,232,.3)">›</span>
-        <span aria-current="page" style="color:rgba(245,240,232,.75)">Un riconoscimento che ci onora</span>
+      <nav class="breadcrumb" aria-label="Percorso">
+        <a href="index.html">Home</a><span>›</span>
+        <a href="comunita.html">Comunità</a><span>›</span>
+        <span aria-current="page">Un riconoscimento che ci onora</span>
       </nav>
-      <div class="fr-chip">29 Maggio 2026</div>
+      <div class="gold-bar"></div>
       <h1>Un riconoscimento <em>che ci onora</em></h1>
-      <p class="sub">La visita dell'On. Paola Frassinetti, Sottosegretario di Stato all'Istruzione e al Merito, al Costaggini.</p>
+      <p class="sub">29 maggio 2026 — la visita dell'On. Paola Frassinetti, Sottosegretario di Stato all'Istruzione e al Merito, al Costaggini.</p>
     </div>
   </div>
 

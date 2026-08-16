@@ -12,8 +12,7 @@
   <link rel="stylesheet" href="style.css"/>
   <style>
     body { background: #0a0f0a; }
-    .sn-hero { background: linear-gradient(160deg,#0a0f0a,var(--bosco)); padding:3.5rem 1.25rem 2.5rem; text-align:center; position:relative; overflow:hidden; }
-    .sn-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(184,146,42,.1),transparent); pointer-events:none; }
+    /* sn-hero rimosso — ora .page-hero */
 
     /* Griglia numeri principali */
     .sn-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:1rem; padding:2.5rem 1.25rem; max-width:860px; margin:0 auto; }
@@ -48,16 +47,17 @@
 <script src="nav-header.js"></script>
 <main id="main">
 
-  <div class="sn-hero">
-    <div class="w" style="position:relative;z-index:1">
-      <nav class="breadcrumb" style="justify-content:center;margin-bottom:1.25rem">
-        <a href="index.html" style="color:rgba(245,240,232,.35)">Home</a><span style="color:rgba(245,240,232,.15)">›</span>
-        <a href="il-convitto.html" style="color:rgba(245,240,232,.35)">Il Convitto</a><span style="color:rgba(245,240,232,.15)">›</span>
-        <span style="color:var(--oro2)">Una Settimana in Numeri</span>
+  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso">
+        <a href="index.html">Home</a><span>›</span>
+        <a href="il-convitto.html">Il Convitto</a><span>›</span>
+        <span aria-current="page">Una Settimana in Numeri</span>
       </nav>
-      <p style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);margin-bottom:.5rem">Infografica</p>
-      <h1 style="font-family:var(--fd);font-size:clamp(1.8rem,6vw,3.2rem);font-weight:300;color:#fff;margin-bottom:.5rem">Una settimana <em style="font-style:italic;color:var(--oro3)">in numeri</em></h1>
-      <p style="color:rgba(245,240,232,.5);font-size:.85rem;max-width:480px;margin:0 auto">7 giorni al Convitto Costaggini — quello che succede ogni settimana, in cifre.</p>
+      <div class="gold-bar"></div>
+      <h1>Una settimana <em>in numeri</em></h1>
+      <p class="sub">7 giorni al Convitto Costaggini — quello che succede ogni settimana, in cifre.</p>
     </div>
   </div>
 

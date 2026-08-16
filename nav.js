@@ -1059,7 +1059,7 @@
     provenienza: 'comunita',
     'abbraccio-amatrice': 'comunita',
     personale: 'il-convitto',
-    anno: 'notizie',
+    anno: 'anno',
     'riconoscimento-frassinetti': 'notizie',
     'voci-dal-convitto': 'microfono',
     'voci-del-personale': 'microfono',

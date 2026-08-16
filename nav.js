@@ -1043,7 +1043,7 @@
     'fa-per-me': 'orientamento',
     'tour-virtuale': 'orientamento',
     'come-arrivare': 'orientamento',
-    'in-2-minuti': 'orientamento',
+    'in-2-minuti': 'fulmine',
     regolamento: 'regolamenti',
     'regolamento-guida': 'regolamenti',
     trasparenza: 'regolamenti',

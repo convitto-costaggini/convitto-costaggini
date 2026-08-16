@@ -1030,7 +1030,7 @@
   var MAP = {
     contatti: 'contatti',
     notizie: 'notizie',
-    calendario: 'notizie',
+    calendario: 'calendario',
     'menu-settimana': 'notizie',
     'il-convitto': 'il-convitto',
     'premio-merito': 'premio',

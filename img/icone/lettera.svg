@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<rect width="200" height="200" rx="18" fill="rgba(245,240,232,.06)"/>
+<g transform="translate(100,100) scale(.95) translate(-100,-100)">
+<rect x="54" y="48" width="92" height="112" rx="6" fill="rgba(245,240,232,.5)"/>
+<line x1="70" y1="72" x2="118" y2="72" stroke="#2C3E2D" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+<line x1="70" y1="90" x2="130" y2="90" stroke="#2C3E2D" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+<line x1="70" y1="108" x2="100" y2="108" stroke="#2C3E2D" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+<g transform="translate(100,108) rotate(-42)">
+<rect x="0" y="-6" width="66" height="12" rx="6" fill="rgba(245,240,232,.6)"/>
+<ellipse cx="58" cy="0" rx="15" ry="12" fill="#2C3E2D" opacity=".65"/>
+</g>
+<path d="M100,108 L109,101 L107,115 Z" fill="#2C3E2D" opacity=".8"/>
+</g>
+</svg>

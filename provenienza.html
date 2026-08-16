@@ -111,21 +111,16 @@
 const ANNO = '2025/2026';
 const DATI = [
   // Lazio
-  { nome: 'Rieti',       sigla: 'RI', lat: 42.404,  lng: 12.857,  n: 28 },
-  { nome: 'Roma',        sigla: 'RM', lat: 41.902,  lng: 12.496,  n: 18 },
-  { nome: 'Viterbo',     sigla: 'VT', lat: 42.417,  lng: 12.107,  n: 8  },
-  { nome: 'Frosinone',   sigla: 'FR', lat: 41.640,  lng: 13.341,  n: 5  },
-  { nome: 'Latina',      sigla: 'LT', lat: 41.468,  lng: 12.903,  n: 3  },
-  // Centro-Sud
-  { nome: 'L\'Aquila',   sigla: 'AQ', lat: 42.351,  lng: 13.399,  n: 12 },
-  { nome: 'Teramo',      sigla: 'TE', lat: 42.660,  lng: 13.704,  n: 6  },
-  { nome: 'Pescara',     sigla: 'PE', lat: 42.462,  lng: 14.216,  n: 4  },
-  { nome: 'Chieti',      sigla: 'CH', lat: 42.351,  lng: 14.168,  n: 3  },
-  { nome: 'Campobasso',  sigla: 'CB', lat: 41.563,  lng: 14.656,  n: 4  },
-  { nome: 'Napoli',      sigla: 'NA', lat: 40.852,  lng: 14.268,  n: 5  },
-  // Nord
-  { nome: 'Milano',      sigla: 'MI', lat: 45.465,  lng: 9.188,   n: 2  },
-  { nome: 'Torino',      sigla: 'TO', lat: 45.071,  lng: 7.686,   n: 1  },
+  { nome: 'Rieti',        sigla: 'RI', lat: 42.404,  lng: 12.857,  n: 6  },
+  { nome: 'Roma',         sigla: 'RM', lat: 41.902,  lng: 12.496,  n: 40 },
+  // Abruzzo
+  { nome: 'L\'Aquila',    sigla: 'AQ', lat: 42.351,  lng: 13.399,  n: 28 },
+  { nome: 'Teramo',       sigla: 'TE', lat: 42.660,  lng: 13.704,  n: 18 },
+  // Umbria
+  { nome: 'Perugia',      sigla: 'PG', lat: 43.112,  lng: 12.389,  n: 20 },
+  { nome: 'Terni',        sigla: 'TR', lat: 42.563,  lng: 12.646,  n: 12 },
+  // Marche
+  { nome: 'Ascoli Piceno',sigla: 'AP', lat: 42.854,  lng: 13.575,  n: 5  },
 ];
 
 // ── STATISTICHE ───────────────────────────────────────────────
@@ -133,9 +128,9 @@ const totale = DATI.reduce((s, d) => s + d.n, 0);
 const regioni = new Set(DATI.map(d => {
   if (['RI','RM','VT','FR','LT'].includes(d.sigla)) return 'Lazio';
   if (['AQ','TE','PE','CH'].includes(d.sigla)) return 'Abruzzo';
-  if (['CB','IS'].includes(d.sigla)) return 'Molise';
-  if (['NA','SA','CE','BN','AV'].includes(d.sigla)) return 'Campania';
-  return 'Nord';
+  if (['PG','TR'].includes(d.sigla)) return 'Umbria';
+  if (['AP','AN','MC','FM','PU'].includes(d.sigla)) return 'Marche';
+  return 'Altro';
 })).size;
 const fuoriRieti = DATI.filter(d => d.sigla !== 'RI').reduce((s, d) => s + d.n, 0);
 const province = DATI.length;

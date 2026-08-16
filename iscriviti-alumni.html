@@ -12,15 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    body { background:#0a0f0a; }
-
-    /* HERO */
-    .ia-hero { background:linear-gradient(160deg,#000,#0d150d); padding:4.5rem 1.25rem 3.5rem; text-align:center; position:relative; overflow:hidden; }
-    .ia-hero::before { content:''; position:absolute; top:0; left:-100%; width:60%; height:1px; background:linear-gradient(90deg,transparent,rgba(184,146,42,.4),transparent); }
-    .ia-hero h1 { font-family:var(--fd); font-size:clamp(2rem,7vw,4rem); font-weight:300; color:#fff; margin-bottom:.5rem; }
-    .ia-hero h1 em { font-style:italic; color:var(--oro3); }
-    .ia-hero p { color:rgba(245,240,232,.55); max-width:520px; margin:.6rem auto 0; font-size:.9rem; line-height:1.8; }
-
     /* ANTEPRIMA CARD */
     .ia-preview { background:#0d150d; border-top:1px solid rgba(184,146,42,.1); padding:2.5rem 1.25rem; }
     .ia-preview-label { font-family:var(--fu); font-size:.58rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--oro2); text-align:center; margin-bottom:1.25rem; }
@@ -114,21 +105,19 @@
 <script src="nav-header.js"></script>
 <main id="main">
 
-  <!-- HERO -->
-  <section class="ia-hero">
-    <div class="w" style="position:relative;z-index:1">
-      <nav class="breadcrumb" style="justify-content:center;margin-bottom:1.5rem">
-        <a href="index.html" style="color:rgba(245,240,232,.35)">Home</a>
-        <span style="color:rgba(245,240,232,.15)">›</span>
-        <a href="alumni.html" style="color:rgba(245,240,232,.35)"><em>Alumni</em></a>
-        <span style="color:rgba(245,240,232,.15)">›</span>
-        <span style="color:var(--oro2)">Unisciti</span>
+  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso">
+        <a href="index.html">Home</a><span>›</span>
+        <a href="alumni.html"><em>Alumni</em></a><span>›</span>
+        <span aria-current="page">Unisciti</span>
       </nav>
-      <p style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);margin-bottom:.6rem">— Community <em>Alumni</em></p>
-      <h1>Sei passato dal<br><em>Costaggini</em>?</h1>
-      <p>Aggiungi la tua scheda alla gallery degli alumni. Pochi minuti — poi la tua storia entra a far parte di questa comunità per sempre.</p>
+      <div class="gold-bar"></div>
+      <h1>Sei passato dal <em>Costaggini</em>?</h1>
+      <p class="sub">Aggiungi la tua scheda alla gallery degli alumni. Pochi minuti — poi la tua storia entra a far parte di questa comunità per sempre.</p>
     </div>
-  </section>
+  </div>
 
   <!-- ANTEPRIMA LIVE -->
   <section class="ia-preview">

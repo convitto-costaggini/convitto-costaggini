@@ -12,8 +12,6 @@
   <link rel="stylesheet" href="style.css"/>
   <style>
     body { background:#0a0f0a; }
-    .cx-hero { background:linear-gradient(160deg,#0a0f0a,#1a0d07); padding:3.5rem 1.25rem 2.5rem; text-align:center; position:relative; overflow:hidden; }
-    .cx-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(184,146,42,.1),transparent); pointer-events:none; }
     .cx-wrap { max-width:860px; margin:0 auto; padding:2rem 1rem 5rem; }
     .cx-layout { display:grid; grid-template-columns:auto 1fr; gap:2rem; align-items:start; }
     @media(max-width:680px){ .cx-layout { grid-template-columns:1fr; } }
@@ -74,8 +72,8 @@
 <script src="nav-header.js"></script>
 <main id="main">
 
-  <div class="cx-hero">
-    <div class="w" style="position:relative;z-index:1">
+  <div style="background:linear-gradient(160deg,#0a0f0a,#1a0d07);padding:3.5rem 1.25rem 2.5rem;text-align:center">
+    <div class="w">
       <nav class="breadcrumb" style="justify-content:center;margin-bottom:1.25rem">
         <a href="scopri-talento.html" style="color:rgba(245,240,232,.35)">← Scopri il tuo Talento</a>
       </nav>

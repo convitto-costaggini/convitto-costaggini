@@ -48,6 +48,7 @@
           <li><a href="educatori.html" data-page="educatori">Gli Educatori</a></li>
           <li><a href="giornata-tipo.html" data-page="giornata-tipo">Una giornata tipo</a></li>
           <li><a href="premio-merito.html" data-page="premio-merito">🏅 Premio al Merito</a></li>
+          <li><a href="trofei-e-classifiche.html" data-page="trofei-e-classifiche">🏆 Trofei e Classifiche</a></li>
           
           <li style="padding: .4rem .9rem; font-family: var(--fu); font-size: .58rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .8;">♪ Laboratorio Musicale</li>
           <li style="padding-left: .6rem;"><a href="laboratorio-musicale.html" data-page="laboratorio-musicale">└ Accedi al Laboratorio</a></li>

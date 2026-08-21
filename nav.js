@@ -1034,6 +1034,7 @@
     'menu-settimana': 'notizie',
     'il-convitto': 'il-convitto',
     'premio-merito': 'premio',
+    'trofei-e-classifiche': 'premio',
     servizi: 'servizi',
     semiconvitto: 'semiconvitto',
     ammissione: 'orientamento',
@@ -1076,6 +1077,7 @@
   var HUBS = {
     notizie: 'notizie',
     'il-convitto': 'il-convitto',
+     premio: 'premio-merito',
     orientamento: 'orientamento',
     regolamenti: 'regolamento',
     comunita: 'comunita',

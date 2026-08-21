@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<rect width="200" height="200" rx="18" fill="rgba(245,240,232,.06)"/>
+<g transform="translate(100,100) scale(.95) translate(-100,-100)">
+<path d="M52 140 L52 60 L118 60 L148 90 L148 140 Z" fill="rgba(212,170,74,.55)"/>
+<path d="M118 60 L118 90 L148 90 Z" fill="#2C3E2D" opacity=".5"/>
+<line x1="68" y1="82" x2="120" y2="82" stroke="#2C3E2D" stroke-width="5" stroke-linecap="round" opacity=".6"/>
+<line x1="68" y1="98" x2="132" y2="98" stroke="#2C3E2D" stroke-width="5" stroke-linecap="round" opacity=".6"/>
+<path d="M100 116 L106 130 L120 131 L109 140 L113 154 L100 146 L87 154 L91 140 L80 131 L94 130 Z" fill="#2C3E2D" opacity=".7"/>
+</g>
+</svg>

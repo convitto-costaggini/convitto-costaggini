@@ -18,45 +18,15 @@
   <link rel="preconnect" href="https://script.google.com"/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    /* Stili specifici della pagina Trofei — seguono lo stesso schema di genitori.html:
-       variabili prese da style.css (--bosco, --oro, --oro2, --oro3, --av, --av2, --bco, --txt2, --fu, --fd, --ease) */
-    .tro-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.25rem; margin-top:1.5rem; }
-    @media(max-width:480px){ .tro-grid { grid-template-columns:1fr; } }
-    .tro-card { background:#fff; border:1px solid var(--av3); border-radius:12px; overflow:hidden; }
-    .tro-card-head { background:var(--bosco); padding:1rem 1.25rem; display:flex; align-items:center; gap:.65rem; }
-    .tro-card-icon { font-size:1.4rem; }
-    .tro-card-title { font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--oro2); }
-    .tro-card-body { padding:1.25rem; }
-    .tro-card-body p { font-size:.85rem; color:var(--txt2); line-height:1.75; margin-bottom:0; }
-    .tro-card-body strong { color:var(--bosco); }
-
-    .tro-frame-wrap { background:#0b1220; border-radius:14px; padding:6px; box-shadow:0 8px 24px rgba(0,0,0,.28); margin-top:1.75rem; }
-    .tro-frame-wrap iframe { width:100%; height:1500px; border:none; border-radius:10px; display:block; background:#0f172a; }
-    .tro-frame-fallback { text-align:center; margin-top:.85rem; font-family:var(--fu); font-size:.7rem; letter-spacing:.06em; }
-    .tro-frame-fallback a { color:var(--oro2); font-weight:800; text-decoration:none; }
-
-    .tro-cta-btn { display:inline-flex; align-items:center; gap:.6rem; background:var(--bosco); color:#fff; font-family:var(--fu); font-size:.78rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; padding:1rem 2rem; border-radius:8px; text-decoration:none; box-shadow:0 4px 16px rgba(44,62,45,.25); transition:background .2s,transform .2s; }
-    .tro-cta-btn:hover { background:#3d5c3e; transform:translateY(-2px); }
-
-    #come-funziona, #classifica, #il-tuo-codice { scroll-margin-top: 90px; }
-
-    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
-    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:var(--ease); }
-    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
-    @media(max-width:560px){
-      .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
-      .hero-jump a { padding:.55rem .5rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.tro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:1.5rem}@media (max-width:480px){.tro-grid{grid-template-columns:1fr}}.tro-card{background:#fff;border:1px solid var(--av3);border-radius:12px;overflow:hidden}.tro-card-head{background:var(--bosco);padding:1rem 1.25rem;display:flex;align-items:center;gap:.65rem}.tro-card-icon{font-size:1.4rem}.tro-card-title{font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)}.tro-card-body{padding:1.25rem}.tro-card-body p{font-size:.85rem;color:var(--txt2);line-height:1.75;margin-bottom:0}.tro-card-body strong{color:var(--bosco)}.tro-frame-wrap{background:#0b1220;border-radius:14px;padding:6px;box-shadow:0 8px 24px rgba(0,0,0,.28);margin-top:1.75rem}.tro-frame-wrap iframe{width:100%;height:1500px;border:0;border-radius:10px;display:block;background:#0f172a}.tro-frame-fallback{text-align:center;margin-top:.85rem;font-family:var(--fu);font-size:.7rem;letter-spacing:.06em}.tro-frame-fallback a{color:var(--oro2);font-weight:800;text-decoration:none}.hero-jump a,.tro-cta-btn{display:inline-flex;align-items:center;font-family:var(--fu);text-transform:uppercase;text-decoration:none}.tro-cta-btn{gap:.6rem;background:var(--bosco);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.12em;padding:1rem 2rem;border-radius:8px;box-shadow:0 4px 16px rgba(44,62,45,.25);transition:background .2s,transform .2s}.tro-cta-btn:hover{background:#3d5c3e;transform:translateY(-2px)}#classifica,#come-funziona,#il-tuo-codice{scroll-margin-top:90px}.hero-jump{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.35rem}.hero-jump a{justify-content:center;gap:.45rem;font-size:.72rem;font-weight:700;letter-spacing:.07em;color:var(--av,#F5F0E8);border:1px solid rgba(184,146,42,.6);background:rgba(255,255,255,.06);padding:.55rem 1rem;border-radius:40px;min-height:40px;transition:var(--ease)}.hero-jump a:focus-visible,.hero-jump a:hover{background:var(--oro,#B8922A);border-color:var(--oro,#B8922A);color:var(--bosco,#2C3E2D)}@media (max-width:560px){.hero-jump{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.hero-jump a{padding:.55rem .5rem}}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="trofei-e-classifiche">
-<script src="nav-header.js" defer></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <div class="page-hero">
@@ -150,6 +120,6 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 </body>
 </html>

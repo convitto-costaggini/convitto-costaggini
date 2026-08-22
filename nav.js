@@ -640,12 +640,21 @@
     let ticking = false;
     function update(){
       const vh = window.innerHeight;
+      // Fase di LETTURA: prima si leggono tutte le posizioni (getBoundingClientRect),
+      // senza scrivere nulla nel mezzo. Alternare letture e scritture di layout in un
+      // ciclo forza il browser a ricalcolare il layout ad ogni iterazione ("adattamento
+      // dinamico forzato del contenuto" / forced reflow). Separando lettura e scrittura
+      // in due passaggi si fa un solo ricalcolo per frame invece di uno per elemento.
+      const updates = [];
       els.forEach(el => {
         const speed = parseFloat(el.dataset.parallax) || 0.15;
         const host = el.parentElement;
         const rect = host.getBoundingClientRect();
         if (rect.bottom < 0 || rect.top > vh) return; // fuori dallo schermo: non calcolare
-        const offset = rect.top * speed;
+        updates.push({ el, offset: rect.top * speed });
+      });
+      // Fase di SCRITTURA: applica tutte le trasformazioni raccolte sopra.
+      updates.forEach(({ el, offset }) => {
         el.style.transform = 'translate3d(0,' + offset.toFixed(1) + 'px,0)';
       });
       ticking = false;

@@ -7,202 +7,17 @@
   <meta name="robots" content="noindex, nofollow"/>
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/richiesta-accesso.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .form-wrap {
-      max-width: 540px;
-      margin: 0 auto;
-      padding: 2.5rem 1.25rem 4rem;
-    }
-    .form-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 4px 24px rgba(44,62,45,.10);
-    }
-    .form-titolo {
-      font-family: var(--fd);
-      font-size: 1.7rem;
-      font-weight: 300;
-      color: var(--bosco);
-      margin-bottom: .4rem;
-    }
-    .form-sub {
-      font-size: .88rem;
-      color: var(--txt2);
-      line-height: 1.7;
-      margin-bottom: 2rem;
-    }
-    .campo-gruppo {
-      margin-bottom: 1.2rem;
-    }
-    .campo-gruppo label {
-      display: block;
-      font-family: var(--fu);
-      font-size: .68rem;
-      font-weight: 800;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--bosco);
-      margin-bottom: .4rem;
-    }
-    .campo-gruppo input,
-    .campo-gruppo select {
-      width: 100%;
-      padding: 13px 14px;
-      border: 1.5px solid #ddd;
-      border-radius: 8px;
-      font-family: var(--fu);
-      font-size: .95rem;
-      color: #1a1a1a;
-      background: #fafafa;
-      transition: border-color .2s;
-    }
-    .campo-gruppo input:focus,
-    .campo-gruppo select:focus {
-      outline: none;
-      border-color: var(--bosco);
-      background: #fff;
-    }
-    .campo-gruppo .aiuto {
-      font-size: .78rem;
-      color: #888;
-      margin-top: .35rem;
-      line-height: 1.5;
-    }
-    .pwd-wrap { position: relative; }
-    .pwd-wrap input { padding-right: 44px; }
-    .pwd-occhio {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.1rem;
-      color: #888;
-      padding: 4px;
-    }
-    .requisiti {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: .9rem 1rem;
-      margin-top: .5rem;
-      font-size: .82rem;
-      color: #555;
-      line-height: 1.8;
-    }
-    .requisiti li {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-    .requisiti li::before {
-      content: '○';
-      color: #ccc;
-      font-size: .9rem;
-    }
-    .requisiti li.ok::before {
-      content: '✓';
-      color: #15803d;
-    }
-    .divider {
-      border: none;
-      border-top: 1px solid #eee;
-      margin: 1.5rem 0;
-    }
-    .privacy-box {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .privacy-box label {
-      display: flex;
-      align-items: flex-start;
-      gap: .6rem;
-      font-size: .85rem;
-      color: #166534;
-      line-height: 1.6;
-      cursor: pointer;
-    }
-    .privacy-box input[type=checkbox] {
-      width: 18px;
-      height: 18px;
-      margin-top: 2px;
-      flex-shrink: 0;
-      accent-color: var(--bosco);
-    }
-    .btn-invia {
-      width: 100%;
-      padding: 14px;
-      background: var(--bosco);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-family: var(--fu);
-      font-size: .78rem;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .btn-invia:hover { background: #3d5c3e; }
-    .btn-invia:disabled { background: #aaa; cursor: not-allowed; }
-    .msg {
-      padding: 14px 16px;
-      border-radius: 8px;
-      font-size: .9rem;
-      margin-bottom: 1.2rem;
-      display: none;
-      line-height: 1.5;
-    }
-    .msg.ok  { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; display: block; }
-    .msg.err { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; display: block; }
-    .gia-account {
-      text-align: center;
-      margin-top: 1.2rem;
-      font-size: .85rem;
-      color: #888;
-    }
-    .gia-account a {
-      color: var(--bosco);
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .privacy-acc { margin-bottom: 1.5rem; }
-    .privacy-acc-btn {
-      width: 100%; padding: .75rem 1rem;
-      background: #f0fdf4; border: 1px solid #bbf7d0;
-      border-radius: 8px; cursor: pointer;
-      display: flex; align-items: center; justify-content: space-between;
-      font-family: var(--fu); font-size: .82rem; font-weight: 700;
-      color: #166534; text-align: left; transition: background .15s;
-    }
-    .privacy-acc-btn:hover { background: #dcfce7; }
-    .privacy-arr { transition: transform .2s; font-size: .7rem; }
-    .privacy-acc-btn[aria-expanded="true"] .privacy-arr { transform: rotate(180deg); }
-    .privacy-acc-body {
-      background: #f8fafc; border: 1px solid #e2e8f0;
-      border-radius: 0 0 8px 8px; padding: 1.1rem 1.2rem;
-      margin-top: -4px; font-size: .82rem; color: #444; line-height: 1.75;
-    }
-    .privacy-acc-body p { margin-bottom: .75rem; }
-    .privacy-acc-body p:last-child { margin-bottom: 0; }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css">
+  <style>.form-wrap{max-width:540px;margin:0 auto;padding:2.5rem 1.25rem 4rem}.form-card{background:#fff;border-radius:14px;padding:2.5rem 2rem;box-shadow:0 4px 24px rgba(44,62,45,.1)}.campo-gruppo label,.form-titolo{font-family:var(--fd);font-size:1.7rem;font-weight:300;color:var(--bosco);margin-bottom:.4rem}.form-sub{font-size:.88rem;color:var(--txt2);line-height:1.7;margin-bottom:2rem}.campo-gruppo{margin-bottom:1.2rem}.campo-gruppo label{display:block;font-family:var(--fu);font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.campo-gruppo input,.campo-gruppo select{width:100%;padding:13px 14px;border:1.5px solid #ddd;border-radius:8px;font-family:var(--fu);font-size:.95rem;color:#1a1a1a;background:#fafafa;transition:border-color .2s}.campo-gruppo input:focus,.campo-gruppo select:focus{outline:0;border-color:var(--bosco);background:#fff}.campo-gruppo .aiuto{font-size:.78rem;color:#888;margin-top:.35rem;line-height:1.5}.pwd-wrap{position:relative}.pwd-wrap input{padding-right:44px}.pwd-occhio{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:0 0;border:0;cursor:pointer;font-size:1.1rem;color:#888;padding:4px}.requisiti{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:.9rem 1rem;margin-top:.5rem;font-size:.82rem;color:#555;line-height:1.8}.requisiti li{list-style:none;display:flex;align-items:center;gap:.5rem}.requisiti li::before{content:"○";color:#ccc;font-size:.9rem}.requisiti li.ok::before{content:"✓";color:#15803d}.divider{border:0;border-top:1px solid #eee;margin:1.5rem 0}.privacy-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:1rem;margin-bottom:1.5rem}.privacy-box label{display:flex;align-items:flex-start;gap:.6rem;font-size:.85rem;color:#166534;line-height:1.6;cursor:pointer}.privacy-box input[type=checkbox]{width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:var(--bosco)}.btn-invia{width:100%;padding:14px;background:var(--bosco);color:#fff;border:0;border-radius:8px;font-family:var(--fu);font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s}.btn-invia:hover{background:#3d5c3e}.btn-invia:disabled{background:#aaa;cursor:not-allowed}.msg{padding:14px 16px;border-radius:8px;font-size:.9rem;margin-bottom:1.2rem;display:none;line-height:1.5}.msg.ok{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;display:block}.msg.err{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;display:block}.gia-account{text-align:center;margin-top:1.2rem;font-size:.85rem;color:#888}.gia-account a{color:var(--bosco);font-weight:700;text-decoration:none}.privacy-acc{margin-bottom:1.5rem}.privacy-acc-btn{width:100%;padding:.75rem 1rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:var(--fu);font-size:.82rem;font-weight:700;color:#166534;text-align:left;transition:background .15s}.privacy-acc-btn:hover{background:#dcfce7}.privacy-arr{transition:transform .2s;font-size:.7rem}.privacy-acc-btn[aria-expanded=true] .privacy-arr{transform:rotate(180deg)}.privacy-acc-body{background:#f8fafc;border:1px solid #e2e8f0;border-radius:0 0 8px 8px;padding:1.1rem 1.2rem;margin-top:-4px;font-size:.82rem;color:#444;line-height:1.75}.privacy-acc-body p{margin-bottom:.75rem}.privacy-acc-body p:last-child{margin-bottom:0}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="richiesta-accesso">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <div class="page-hero">
@@ -295,7 +110,7 @@
   </div>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 
 // ── Invio richiesta ──

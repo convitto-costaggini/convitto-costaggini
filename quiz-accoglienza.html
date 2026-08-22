@@ -7,58 +7,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/quiz-accoglienza.html"/>
   <meta name="description" content="Gioco di ruolo interattivo: metti alla prova le tue capacità di accoglienza in scenari reali del settore alberghiero e scopri come reagiresti con un ospite esigente."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    body { background:#0a0f0a; }
-    .rp-wrap { max-width:640px; margin:0 auto; padding:2rem 1.25rem 5rem; }
-    .sc-card { background:#141e14; border:1px solid rgba(184,146,42,.15); border-radius:14px; padding:2rem; display:none; }
-    .sc-card.active { display:block; animation:fadeUp .35s ease; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
-
-    .sc-scene { background:rgba(255,255,255,.03); border-left:3px solid rgba(184,146,42,.3); border-radius:0 8px 8px 0; padding:1.1rem 1.25rem; margin-bottom:1.25rem; }
-    .sc-scene-label { font-family:var(--fu); font-size:.58rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--oro2); margin-bottom:.4rem; }
-    .sc-scene-text { font-family:var(--fd); font-size:1rem; font-style:italic; color:rgba(245,240,232,.75); line-height:1.65; }
-    .sc-ospite { background:rgba(44,62,45,.25); border-radius:8px; padding:1rem 1.25rem; margin-bottom:1.25rem; display:flex; gap:.75rem; align-items:flex-start; }
-    .sc-ospite-avatar { font-size:1.8rem; flex-shrink:0; }
-    .sc-ospite-text { font-family:var(--fd); font-size:.95rem; font-style:italic; color:#fff; line-height:1.65; }
-    .sc-q { font-family:var(--fu); font-size:.82rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:rgba(245,240,232,.5); margin-bottom:1rem; }
-    .sc-opts { display:flex; flex-direction:column; gap:.65rem; }
-    .sc-opt { background:rgba(255,255,255,.04); border:1.5px solid rgba(255,255,255,.08); border-radius:10px; padding:1rem 1.25rem; cursor:pointer; text-align:left; transition:all .2s; }
-    .sc-opt:hover { border-color:var(--oro2); background:rgba(184,146,42,.08); }
-    .sc-opt-text { font-family:var(--fu); font-size:.85rem; color:rgba(245,240,232,.8); line-height:1.6; }
-
-    /* Reazione ospite */
-    .sc-reaction { border-radius:8px; padding:1rem 1.25rem; margin-top:1rem; display:none; animation:fadeUp .3s ease; }
-    .sc-reaction.good { background:rgba(74,222,128,.08); border:1px solid rgba(74,222,128,.2); }
-    .sc-reaction.bad { background:rgba(248,113,113,.08); border:1px solid rgba(248,113,113,.2); }
-    .sc-reaction.neutral { background:rgba(184,146,42,.08); border:1px solid rgba(184,146,42,.2); }
-    .sc-reaction-text { font-family:var(--fd); font-size:.95rem; font-style:italic; line-height:1.65; }
-    .sc-reaction.good .sc-reaction-text { color:#4ade80; }
-    .sc-reaction.bad .sc-reaction-text { color:#f87171; }
-    .sc-reaction.neutral .sc-reaction-text { color:var(--oro2); }
-
-    /* Finale */
-    .sc-final { text-align:center; background:#141e14; border:1px solid rgba(184,146,42,.2); border-radius:14px; padding:2.5rem 1.75rem; display:none; }
-    .sc-final.show { display:block; animation:fadeUp .4s ease; }
-    .sc-final-stars { font-size:2rem; letter-spacing:.4rem; margin-bottom:.75rem; }
-    .sc-final-score { font-family:var(--fd); font-size:3.5rem; font-weight:300; color:var(--oro3); }
-    .sc-final-msg { font-family:var(--fd); font-size:1.2rem; font-weight:300; color:#fff; line-height:1.65; max-width:440px; margin:1rem auto 1.5rem; }
-    .sc-final-msg em { font-style:italic; color:var(--oro3); }
-
-    .sc-progress { display:flex; gap:.4rem; margin-bottom:1.5rem; }
-    .sc-dot { flex:1; height:4px; border-radius:2px; background:rgba(255,255,255,.1); transition:background .3s; }
-    .sc-dot.done { background:#4ade80; }
-    .sc-dot.bad { background:#f87171; }
-    .sc-dot.active { background:var(--bosco2); }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>@keyframes fadeUp{0%{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}body{background:#0a0f0a}.rp-wrap{max-width:640px;margin:0 auto;padding:2rem 1.25rem 5rem}.sc-card{background:#141e14;border:1px solid rgba(184,146,42,.15);border-radius:14px;padding:2rem;display:none}.sc-card.active{display:block;animation:fadeUp .35s ease}.sc-scene{background:rgba(255,255,255,.03);border-left:3px solid rgba(184,146,42,.3);border-radius:0 8px 8px 0;padding:1.1rem 1.25rem;margin-bottom:1.25rem}.sc-scene-label{font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.4rem}.sc-scene-text{font-family:var(--fd);font-size:1rem;font-style:italic;color:rgba(245,240,232,.75);line-height:1.65}.sc-ospite{background:rgba(44,62,45,.25);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;gap:.75rem;align-items:flex-start}.sc-ospite-avatar{font-size:1.8rem;flex-shrink:0}.sc-ospite-text{font-family:var(--fd);font-size:.95rem;font-style:italic;color:#fff;line-height:1.65}.sc-q{font-family:var(--fu);font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.5);margin-bottom:1rem}.sc-opts{display:flex;flex-direction:column;gap:.65rem}.sc-opt{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:10px;padding:1rem 1.25rem;cursor:pointer;text-align:left;transition:all .2s}.sc-opt:hover{border-color:var(--oro2);background:rgba(184,146,42,.08)}.sc-opt-text{font-family:var(--fu);font-size:.85rem;color:rgba(245,240,232,.8);line-height:1.6}.sc-reaction{border-radius:8px;padding:1rem 1.25rem;margin-top:1rem;display:none;animation:fadeUp .3s ease}.sc-reaction.good{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2)}.sc-reaction.bad{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2)}.sc-reaction.neutral{background:rgba(184,146,42,.08)}.sc-reaction-text{font-family:var(--fd);font-size:.95rem;font-style:italic;line-height:1.65}.sc-reaction.good .sc-reaction-text{color:#4ade80}.sc-reaction.bad .sc-reaction-text{color:#f87171}.sc-reaction.neutral .sc-reaction-text{color:var(--oro2)}.sc-final,.sc-reaction.neutral{border:1px solid rgba(184,146,42,.2)}.sc-final{text-align:center;background:#141e14;border-radius:14px;padding:2.5rem 1.75rem;display:none}.sc-final.show{display:block;animation:fadeUp .4s ease}.sc-final-stars{font-size:2rem;letter-spacing:.4rem;margin-bottom:.75rem}.sc-final-msg,.sc-final-score{font-family:var(--fd);font-weight:300}.sc-final-score{font-size:3.5rem;color:var(--oro3)}.sc-final-msg{font-size:1.2rem;color:#fff;line-height:1.65;max-width:440px;margin:1rem auto 1.5rem}.sc-final-msg em{font-style:italic;color:var(--oro3)}.sc-progress{display:flex;gap:.4rem;margin-bottom:1.5rem}.sc-dot{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.1);transition:background .3s}.sc-dot.done{background:#4ade80}.sc-dot.bad{background:#f87171}.sc-dot.active{background:var(--bosco2)}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="quiz-accoglienza">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
   <div style="background:linear-gradient(160deg,#0a0f0a,#2e2a0d);padding:3.5rem 1.25rem 2.5rem;text-align:center">
     <div class="w">
@@ -198,7 +157,7 @@
     </div>
   </div>
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 let results = []; // 'good','neutral','bad' per ogni scenario
 

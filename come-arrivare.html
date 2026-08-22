@@ -14,172 +14,18 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
 <meta name="theme-color" content="#2C3E2D">
-<link rel="stylesheet" href="style.css">
-<style>
-  /* ===== Sezione "Come arrivare" — autosufficiente =====
-     Per integrarla nel sito: mantieni questo <style> e tutto ciò che
-     sta dentro <main class="ca">. Header e footer globali (shared.js /
-     nav.js) avvolgeranno la pagina come per le altre sezioni.
-     L'hero usa ora la struttura standard .page-hero condivisa
-     con il resto del sito (font, icona, layout) — vedi style.css. */
-
-  .ca {
-    --bosco: #2C3E2D;
-    --bosco-deep: #1E2A1F;
-    --oro: #B8922A;
-    --oro-soft: #CDAB52;
-    --avorio: #F6F2E8;
-    --avorio-2: #EDE6D5;
-    --inchiostro: #23281D;
-    --muschio: #5E6B53;
-    --linea: rgba(184,146,42,.35);
-
-    font-family: "Source Sans 3", system-ui, sans-serif;
-    color: var(--inchiostro);
-    background: var(--avorio);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  .ca *, .ca *::before, .ca *::after { box-sizing: border-box; }
-  .ca img { max-width: 100%; display: block; }
-  .ca a { color: inherit; }
-
-  .ca-wrap { width: min(1080px, 92vw); margin-inline: auto; }
-
-  .ca-eyebrow {
-    font-size: .6937rem; letter-spacing: .26em; text-transform: uppercase;
-    font-weight: 600; color: var(--oro);
-  }
-  .ca h2 {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 600; line-height: 1.08;
-    font-size: clamp(1.7812rem, .9375rem + 3vw, 2.8125rem);
-    margin: .35rem 0 0; color: var(--bosco);
-  }
-  .ca h2 em { font-style: italic; color: var(--oro); }
-
-  /* ---------- SPINA DELLA SALARIA ---------- */
-  .ca-salaria { padding: clamp(3.2rem, 2rem + 6vw, 5.5rem) 0 clamp(2.6rem, 2rem + 4vw, 4rem); }
-  .ca-salaria .intro { max-width: 56ch; }
-  .ca-salaria .intro p { color: var(--muschio); margin: .9rem 0 0; }
-
-  .ca-route { margin: 2.8rem 0 0; position: relative; padding-left: 30px; }
-  .ca-route::before {
-    content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px;
-    width: 2px;
-    background: linear-gradient(var(--oro), var(--linea) 92%, transparent);
-  }
-  .ca-stop { position: relative; padding: 0 0 1.9rem; }
-  .ca-stop:last-child { padding-bottom: 0; }
-  .ca-stop::before {
-    content: ""; position: absolute; left: -26px; top: 4px;
-    width: 11px; height: 11px; border-radius: 50%;
-    background: var(--avorio); border: 2px solid var(--oro);
-  }
-  .ca-stop .place {
-    font-family: "Cormorant Garamond", serif; font-weight: 600;
-    font-size: 1.2188rem; color: var(--bosco); line-height: 1.1;
-  }
-  .ca-stop .meta { font-size: .8438rem; color: var(--muschio); margin-top: .1rem; }
-  .ca-stop.is-end::before {
-    background: var(--oro); box-shadow: 0 0 0 4px rgba(184,146,42,.18);
-    width: 13px; height: 13px; left: -27px;
-  }
-  .ca-stop.is-end .place { color: var(--oro); }
-  .ca-stop.is-mid::before { width: 9px; height: 9px; left: -25px; opacity: .85; }
-  .ca-stop.is-mid .place { font-size: 1.0125rem; color: #6E7A60; }
-
-  /* ---------- MODALITÀ ---------- */
-  .ca-modes {
-    padding: clamp(2.4rem, 2rem + 3vw, 3.5rem) 0 clamp(3.2rem, 2rem + 6vw, 5rem);
-    background: var(--avorio-2);
-    border-top: 1px solid var(--linea);
-  }
-  .ca-grid { margin: 2.4rem 0 0; display: grid; gap: 1.2rem; grid-template-columns: repeat(3, 1fr); }
-  @media (max-width: 860px) { .ca-grid { grid-template-columns: 1fr; } }
-
-  .ca-card {
-    background: #fff; border: 1px solid var(--avorio-2);
-    border-radius: 4px; padding: 1.7rem 1.6rem 1.6rem;
-    display: flex; flex-direction: column; min-width: 0;
-  }
-  .ca-card.featured { border-color: var(--oro); box-shadow: 0 14px 36px -22px rgba(44,62,45,.5); }
-  .ca-tag {
-    align-self: flex-start; font-size: .6375rem; letter-spacing: .14em;
-    text-transform: uppercase; font-weight: 700; color: var(--bosco);
-    background: rgba(184,146,42,.16); padding: .26rem .6rem; border-radius: 2px;
-  }
-  .ca-tag.muted { color: var(--muschio); background: var(--avorio-2); }
-  .ca-card h3 {
-    font-family: "Cormorant Garamond", serif; font-weight: 600;
-    font-size: 1.7344rem; color: var(--bosco); margin: .9rem 0 0; line-height: 1;
-  }
-  .ca-time {
-    margin-top: .35rem; font-size: .8906rem; font-weight: 600; color: var(--oro);
-    letter-spacing: .01em;
-  }
-  .ca-card p.body { margin: .85rem 0 1.2rem; color: var(--inchiostro); font-size: .9rem; }
-  .ca-actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: .55rem; }
-
-  .ca-btn {
-    display: inline-flex; align-items: center; gap: .45rem;
-    font-family: "Source Sans 3", sans-serif; font-weight: 600; font-size: .8438rem;
-    text-decoration: none; padding: .6rem .95rem; border-radius: 3px;
-    border: 1px solid var(--bosco); color: var(--bosco); background: transparent;
-    transition: background .18s ease, color .18s ease, transform .18s ease;
-  }
-  .ca-btn .arr { transition: transform .18s ease; }
-  .ca-btn:hover { background: var(--bosco); color: var(--avorio); }
-  .ca-btn:hover .arr { transform: translateX(2px); }
-  .ca-btn.primary { background: var(--oro2); border-color: var(--oro2); color: var(--bosco); }
-  .ca-btn.primary:hover { background: #A37F1E; border-color: #A37F1E; }
-  .ca a:focus-visible, .ca-btn:focus-visible {
-    outline: 2px solid var(--oro); outline-offset: 3px; border-radius: 3px;
-  }
-
-  /* ---------- PRATICA / CONTATTI ---------- */
-  .ca-foot { background: var(--bosco); color: var(--avorio); padding: clamp(2.6rem, 2rem + 4vw, 4rem) 0; }
-  .ca-foot .ca-eyebrow { color: var(--oro-soft); }
-  .ca-foot h2 { color: var(--avorio); }
-  .ca-foot-grid {
-    margin: 2rem 0 0; display: grid; gap: 1.6rem 2.4rem;
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @media (max-width: 720px) { .ca-foot-grid { grid-template-columns: 1fr; } }
-  .ca-foot dt {
-    font-size: .675rem; letter-spacing: .16em; text-transform: uppercase;
-    color: var(--oro-soft); font-weight: 600;
-  }
-  .ca-foot dd { margin: .4rem 0 0; font-size: .975rem; }
-  .ca-foot dd a { text-decoration: none; border-bottom: 1px solid rgba(205,171,82,.45); }
-  .ca-foot dd a:hover { border-color: var(--oro-soft); }
-  .ca-foot .map-btn { margin-top: 1.6rem; }
-  .ca-foot .ca-btn { border-color: var(--oro-soft); color: var(--avorio); }
-  .ca-foot .ca-btn:hover { background: var(--oro2); border-color: var(--oro2); color: var(--bosco); }
-
-  .ca-note {
-    border-top: 1px solid rgba(246,242,232,.16);
-    margin-top: 2.4rem; padding-top: 1.3rem;
-    font-size: .7687rem; color: rgba(246,242,232,.62); max-width: 70ch;
-  }
-
-  /* ---------- reveal on scroll ---------- */
-  .ca-reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
-  .ca-reveal.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .ca-reveal { opacity: 1; transform: none; transition: none; }
-    .ca-btn, .ca-btn .arr { transition: none; }
-  }
-</style>
+<link rel="stylesheet" href="style.min.css">
+<style>.ca{--bosco:#2C3E2D;--bosco-deep:#1E2A1F;--oro:#B8922A;--oro-soft:#CDAB52;--avorio:#F6F2E8;--avorio-2:#EDE6D5;--inchiostro:#23281D;--muschio:#5E6B53;--linea:rgba(184,146,42,.35);font-family:"Source Sans 3",system-ui,sans-serif;color:var(--inchiostro);background:var(--avorio);line-height:1.6;-webkit-font-smoothing:antialiased}.ca *,.ca ::after,.ca ::before{box-sizing:border-box}.ca img{max-width:100%;display:block}.ca a{color:inherit}.ca-wrap{width:min(1080px,92vw);margin-inline:auto}.ca-eyebrow{font-size:.6937rem;letter-spacing:.26em;text-transform:uppercase;font-weight:600;color:var(--oro)}.ca h2{font-family:"Cormorant Garamond",serif;font-weight:600;line-height:1.08;font-size:clamp(1.7812rem,.9375rem + 3vw,2.8125rem);margin:.35rem 0 0;color:var(--bosco)}.ca h2 em{font-style:italic;color:var(--oro)}.ca-salaria{padding:clamp(3.2rem,2rem + 6vw,5.5rem)0 clamp(2.6rem,2rem + 4vw,4rem)}.ca-salaria .intro{max-width:56ch}.ca-salaria .intro p{color:var(--muschio);margin:.9rem 0 0}.ca-route{margin:2.8rem 0 0;position:relative;padding-left:30px}.ca-route::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--oro),var(--linea) 92%,transparent)}.ca-stop{position:relative;padding:0 0 1.9rem}.ca-stop:last-child{padding-bottom:0}.ca-stop::before{content:"";position:absolute;left:-26px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--avorio);border:2px solid var(--oro)}.ca-card h3,.ca-stop .place{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.2188rem;color:var(--bosco);line-height:1.1}.ca-stop .meta{font-size:.8438rem;color:var(--muschio);margin-top:.1rem}.ca-stop.is-end::before{background:var(--oro);box-shadow:0 0 0 4px rgba(184,146,42,.18);width:13px;height:13px;left:-27px}.ca-stop.is-end .place{color:var(--oro)}.ca-stop.is-mid::before{width:9px;height:9px;left:-25px;opacity:.85}.ca-stop.is-mid .place{font-size:1.0125rem;color:#6e7a60}.ca-modes{padding:clamp(2.4rem,2rem + 3vw,3.5rem)0 clamp(3.2rem,2rem + 6vw,5rem);background:var(--avorio-2);border-top:1px solid var(--linea)}.ca-grid{margin:2.4rem 0 0;display:grid;gap:1.2rem;grid-template-columns:repeat(3,1fr)}@media (max-width:860px){.ca-grid{grid-template-columns:1fr}}.ca-card{background:#fff;border:1px solid var(--avorio-2);border-radius:4px;padding:1.7rem 1.6rem 1.6rem;display:flex;flex-direction:column;min-width:0}.ca-card.featured{border-color:var(--oro);box-shadow:0 14px 36px -22px rgba(44,62,45,.5)}.ca-tag{align-self:flex-start;font-size:.6375rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--bosco);background:rgba(184,146,42,.16);padding:.26rem .6rem;border-radius:2px}.ca-tag.muted{color:var(--muschio);background:var(--avorio-2)}.ca-card h3{font-size:1.7344rem;margin:.9rem 0 0;line-height:1}.ca-time{margin-top:.35rem;font-size:.8906rem;font-weight:600;color:var(--oro);letter-spacing:.01em}.ca-card p.body{margin:.85rem 0 1.2rem;color:var(--inchiostro);font-size:.9rem}.ca-actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:.55rem}.ca-btn{display:inline-flex;align-items:center;gap:.45rem;font-family:"Source Sans 3",sans-serif;font-weight:600;font-size:.8438rem;text-decoration:none;padding:.6rem .95rem;border-radius:3px;border:1px solid var(--bosco);color:var(--bosco);background:0 0;transition:background .18s ease,color .18s ease,transform .18s ease}.ca-btn .arr{transition:transform .18s ease}.ca-btn:hover{background:var(--bosco);color:var(--avorio)}.ca-btn:hover .arr{transform:translateX(2px)}.ca-btn.primary{background:var(--oro2);border-color:var(--oro2);color:var(--bosco)}.ca-btn.primary:hover{background:#a37f1e;border-color:#a37f1e}.ca a:focus-visible,.ca-btn:focus-visible{outline:2px solid var(--oro);outline-offset:3px;border-radius:3px}.ca-foot{background:var(--bosco);padding:clamp(2.6rem,2rem + 4vw,4rem)0}.ca-foot .ca-eyebrow,.ca-foot dt{color:var(--oro-soft)}.ca-foot,.ca-foot h2{color:var(--avorio)}.ca-foot-grid{margin:2rem 0 0;display:grid;gap:1.6rem 2.4rem;grid-template-columns:repeat(3,1fr)}@media (max-width:720px){.ca-foot-grid{grid-template-columns:1fr}}.ca-foot dt{font-size:.675rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}.ca-foot dd{margin:.4rem 0 0;font-size:.975rem}.ca-foot dd a{text-decoration:none;border-bottom:1px solid rgba(205,171,82,.45)}.ca-foot dd a:hover{border-color:var(--oro-soft)}.ca-foot .map-btn{margin-top:1.6rem}.ca-foot .ca-btn{border-color:var(--oro-soft);color:var(--avorio)}.ca-foot .ca-btn:hover{background:var(--oro2);border-color:var(--oro2);color:var(--bosco)}.ca-note{border-top:1px solid rgba(246,242,232,.16);margin-top:2.4rem;padding-top:1.3rem;font-size:.7687rem;color:rgba(246,242,232,.62);max-width:70ch}.ca-reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}.ca-reveal.in{opacity:1;transform:none}@media (prefers-reduced-motion:reduce){.ca-reveal{opacity:1;transform:none}.ca-btn,.ca-btn .arr,.ca-reveal{transition:none}}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="come-arrivare">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main" class="ca">
 
   <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
@@ -314,6 +160,6 @@
     els.forEach(function (el) { io.observe(el); });
   })();
 </script>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 </body>
 </html>

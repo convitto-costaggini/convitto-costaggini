@@ -9,71 +9,18 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/semiconvitto.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-
-    /* Sezioni card */
-    .sc-section { background:#fff; border-radius:10px; box-shadow:0 2px 16px rgba(0,0,0,.07); margin-bottom:1.25rem; overflow:hidden; }
-    .sc-hdr { background:var(--bosco); padding:.9rem 1.5rem; display:flex; align-items:center; gap:.65rem; }
-    .sc-hdr h2 { font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--oro2); margin:0; }
-    .sc-hdr span { font-family:var(--fd); font-size:.8rem; font-style:italic; color:rgba(245,240,232,.4); }
-    .sc-body { padding:1.5rem; }
-    .sc-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:.85rem; }
-    @media(max-width:520px){ .sc-grid-2 { grid-template-columns:1fr; } }
-    .sc-field { display:flex; flex-direction:column; gap:.3rem; margin-bottom:.75rem; }
-    .sc-field:last-child { margin-bottom:0; }
-    .sc-label { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--bosco2); }
-    .sc-label .req { color:#dc2626; margin-left:2px; }
-    .sc-field input, .sc-field select, .sc-field textarea {
-      padding:.65rem .9rem; border:1.5px solid #d1d5db; border-radius:6px;
-      font-family:var(--fu); font-size:.88rem; color:#1a1a1a;
-      outline:none; transition:border-color .2s; background:#fafafa; width:100%; box-sizing:border-box;
-    }
-    .sc-field input:focus, .sc-field select:focus, .sc-field textarea:focus { border-color:var(--bosco); box-shadow:0 0 0 3px rgba(44,62,45,.1); }
-    .sc-check { display:flex; align-items:flex-start; gap:.6rem; cursor:pointer; margin-bottom:.65rem; }
-    .sc-check input { width:18px; height:18px; accent-color:var(--bosco); flex-shrink:0; margin-top:2px; }
-    .sc-check-label { font-family:var(--fu); font-size:.82rem; color:#374151; line-height:1.55; }
-    .sc-check-label a { color:var(--bosco2); }
-
-    /* Box servizi */
-    .sc-services { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin-bottom:1rem; }
-    @media(max-width:520px){ .sc-services { grid-template-columns:1fr; } }
-    .sc-service { position:relative; border:1.5px solid #e5e7eb; border-radius:8px; padding:.9rem 1rem; cursor:pointer; transition:all .2s; }
-    .sc-service:has(input:checked) { border-color:var(--bosco); border-width:2px; background:rgba(44,62,45,.08); box-shadow:0 2px 8px rgba(44,62,45,.12); }
-    .sc-service:has(input:checked)::after { content:"✓"; position:absolute; top:.55rem; right:.65rem; width:20px; height:20px; border-radius:50%; background:var(--bosco); color:#fff; font-size:.7rem; font-weight:800; display:flex; align-items:center; justify-content:center; }
-    .sc-service input { display:none; }
-    .sc-service-icon { font-size:1.5rem; display:block; margin-bottom:.35rem; }
-    .sc-service-name { font-family:var(--fu); font-size:.72rem; font-weight:800; color:var(--bosco); margin-bottom:.2rem; }
-    .sc-service-desc { font-family:var(--fu); font-size:.68rem; color:#6b7280; line-height:1.5; }
-
-    /* Progress */
-    .sc-progress { background:#e5e7eb; border-radius:4px; height:3px; margin-bottom:2rem; }
-    .sc-progress-fill { height:100%; background:linear-gradient(90deg,var(--bosco),var(--oro)); border-radius:4px; transition:width .4s; }
-
-    /* Footer form */
-    .sc-form-foot { background:#f9fafb; border-top:1px solid #e5e7eb; padding:1.5rem; border-radius:0 0 10px 10px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
-    .btn-invia { font-family:var(--fu); font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; padding:.85rem 2rem; background:linear-gradient(135deg,var(--bosco),#1a3a1b); color:#fff; border:none; border-radius:8px; cursor:pointer; transition:opacity .2s; }
-    .btn-invia:hover { opacity:.88; }
-
-    /* Successo */
-    .sc-success { display:none; background:linear-gradient(135deg,#f0fdf4,#f7fef4); border:1px solid #bbf7d0; border-radius:12px; padding:2.5rem; text-align:center; }
-    .sc-success h2 { font-family:var(--fd); font-size:1.8rem; font-weight:300; color:var(--bosco); }
-    .sc-success p { font-family:var(--fu); font-size:.85rem; color:#374151; line-height:1.75; max-width:440px; margin:.5rem auto .85rem; }
-
-    /* Errore */
-    .sc-error { display:none; background:linear-gradient(135deg,#fef2f2,#fff5f5); border:1px solid #fecaca; border-radius:12px; padding:2.25rem; text-align:center; margin-top:1.5rem; }
-    .sc-error h2 { font-family:var(--fd); font-size:1.5rem; font-weight:300; color:#991b1b; }
-    .sc-error p { font-family:var(--fu); font-size:.83rem; color:#374151; line-height:1.7; max-width:440px; margin:.5rem auto .85rem; }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.sc-section{background:#fff;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,.07);margin-bottom:1.25rem;overflow:hidden}.sc-hdr{background:var(--bosco);padding:.9rem 1.5rem;display:flex;align-items:center;gap:.65rem}.sc-hdr h2{font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--oro2);margin:0}.sc-hdr span{font-family:var(--fd);font-size:.8rem;font-style:italic;color:rgba(245,240,232,.4)}.sc-body{padding:1.5rem}.sc-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}@media (max-width:520px){.sc-grid-2{grid-template-columns:1fr}}.sc-field{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.75rem}.sc-field:last-child{margin-bottom:0}.sc-label{font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2)}.sc-label .req{color:#dc2626;margin-left:2px}.sc-field input,.sc-field select,.sc-field textarea{padding:.65rem .9rem;border:1.5px solid #d1d5db;border-radius:6px;font-family:var(--fu);font-size:.88rem;color:#1a1a1a;outline:0;transition:border-color .2s;background:#fafafa;width:100%;box-sizing:border-box}.sc-field input:focus,.sc-field select:focus,.sc-field textarea:focus{border-color:var(--bosco);box-shadow:0 0 0 3px rgba(44,62,45,.1)}.sc-check{display:flex;align-items:flex-start;gap:.6rem;cursor:pointer;margin-bottom:.65rem}.sc-check input{width:18px;height:18px;accent-color:var(--bosco);flex-shrink:0;margin-top:2px}.sc-check-label{font-family:var(--fu);font-size:.82rem;color:#374151;line-height:1.55}.sc-check-label a{color:var(--bosco2)}.sc-services{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem}@media (max-width:520px){.sc-services{grid-template-columns:1fr}}.sc-service{position:relative;border:1.5px solid #e5e7eb;border-radius:8px;padding:.9rem 1rem;cursor:pointer;transition:all .2s}.sc-service:has(input:checked){border-color:var(--bosco);border-width:2px;background:rgba(44,62,45,.08);box-shadow:0 2px 8px rgba(44,62,45,.12)}.sc-service:has(input:checked)::after{content:"✓";position:absolute;top:.55rem;right:.65rem;width:20px;height:20px;border-radius:50%;background:var(--bosco);color:#fff;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center}.sc-service input{display:none}.sc-service-icon{font-size:1.5rem;display:block;margin-bottom:.35rem}.sc-service-name{font-family:var(--fu);font-size:.72rem;font-weight:800;color:var(--bosco);margin-bottom:.2rem}.sc-service-desc{font-family:var(--fu);font-size:.68rem;color:#6b7280;line-height:1.5}.sc-progress{background:#e5e7eb;border-radius:4px;height:3px;margin-bottom:2rem}.sc-progress-fill{height:100%;background:linear-gradient(90deg,var(--bosco),var(--oro));border-radius:4px;transition:width .4s}.sc-form-foot{background:#f9fafb;border-top:1px solid #e5e7eb;padding:1.5rem;border-radius:0 0 10px 10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}.btn-invia{font-family:var(--fu);font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.85rem 2rem;background:linear-gradient(135deg,var(--bosco),#1a3a1b);color:#fff;border:0;border-radius:8px;cursor:pointer;transition:opacity .2s}.btn-invia:hover{opacity:.88}.sc-error,.sc-success{display:none;border-radius:12px;text-align:center}.sc-success{background:linear-gradient(135deg,#f0fdf4,#f7fef4);border:1px solid #bbf7d0;padding:2.5rem}.sc-error h2,.sc-success h2{font-family:var(--fd);font-weight:300}.sc-success h2{font-size:1.8rem;color:var(--bosco)}.sc-error p,.sc-success p{font-family:var(--fu);font-size:.85rem;color:#374151;line-height:1.75;max-width:440px;margin:.5rem auto .85rem}.sc-error{background:linear-gradient(135deg,#fef2f2,#fff5f5);border:1px solid #fecaca;padding:2.25rem;margin-top:1.5rem}.sc-error h2{font-size:1.5rem;color:#991b1b}.sc-error p{font-size:.83rem;line-height:1.7}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
 </head>
 <body data-page="semiconvitto">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- HERO -->
@@ -283,7 +230,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 // Progress bar
 function updateProgress() {

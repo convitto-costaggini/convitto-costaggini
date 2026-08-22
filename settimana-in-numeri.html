@@ -8,43 +8,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/settimana-in-numeri.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    body { background: #0a0f0a; }
-    /* sn-hero rimosso — ora .page-hero */
-
-    /* Griglia numeri principali */
-    .sn-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:1rem; padding:2.5rem 1.25rem; max-width:860px; margin:0 auto; }
-    @media(max-width:400px){ .sn-grid { grid-template-columns:1fr 1fr; } }
-    .sn-card { background:#141e14; border:1px solid rgba(184,146,42,.15); border-radius:12px; padding:1.5rem 1rem; text-align:center; transition:transform .2s; }
-    .sn-card:hover { transform:translateY(-3px); }
-    .sn-icon { font-size:2rem; display:block; margin-bottom:.5rem; }
-    .sn-num { font-family:var(--fd); font-size:3rem; font-weight:300; color:var(--oro3); line-height:1; margin-bottom:.25rem; }
-    .sn-unit { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:rgba(245,240,232,.35); margin-bottom:.4rem; }
-    .sn-label { font-family:var(--fu); font-size:.72rem; color:rgba(245,240,232,.6); line-height:1.5; }
-
-    /* Timeline settimanale */
-    .sn-timeline { max-width:700px; margin:0 auto; padding:0 1.25rem 3rem; }
-    .sn-day { margin-bottom:1.5rem; }
-    .sn-day-name { font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--oro2); margin-bottom:.6rem; }
-    .sn-slots { display:flex; flex-direction:column; gap:.35rem; }
-    .sn-slot { display:flex; align-items:center; gap:.75rem; border-radius:6px; padding:.5rem .85rem; }
-    .sn-slot.fisso { background:rgba(44,62,45,.3); }
-    .sn-slot.studio { background:rgba(184,146,42,.1); }
-    .sn-slot.libero { background:rgba(255,255,255,.04); border:1px dashed rgba(255,255,255,.08); }
-    .sn-slot.notte { background:rgba(15,15,30,.5); }
-    .sn-time { font-family:var(--fu); font-size:.6rem; font-weight:800; color:rgba(245,240,232,.4); min-width:52px; flex-shrink:0; }
-    .sn-act { font-family:var(--fu); font-size:.78rem; color:rgba(245,240,232,.75); }
-    .sn-act em { color:var(--oro2); font-style:normal; }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>body{background:#0a0f0a}.sn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;padding:2.5rem 1.25rem;max-width:860px;margin:0 auto}@media (max-width:400px){.sn-grid{grid-template-columns:1fr 1fr}}.sn-card{background:#141e14;border:1px solid rgba(184,146,42,.15);border-radius:12px;padding:1.5rem 1rem;text-align:center;transition:transform .2s}.sn-card:hover{transform:translateY(-3px)}.sn-icon{font-size:2rem;display:block;margin-bottom:.5rem}.sn-num{font-family:var(--fd);font-size:3rem;font-weight:300;color:var(--oro3);line-height:1;margin-bottom:.25rem}.sn-label,.sn-unit{font-family:var(--fu)}.sn-unit{font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:.4rem}.sn-label{font-size:.72rem;color:rgba(245,240,232,.6);line-height:1.5}.sn-timeline{max-width:700px;margin:0 auto;padding:0 1.25rem 3rem}.sn-day{margin-bottom:1.5rem}.sn-day-name{font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--oro2);margin-bottom:.6rem}.sn-slots{display:flex;flex-direction:column;gap:.35rem}.sn-slot{display:flex;align-items:center;gap:.75rem;border-radius:6px;padding:.5rem .85rem}.sn-slot.fisso{background:rgba(44,62,45,.3)}.sn-slot.studio{background:rgba(184,146,42,.1)}.sn-slot.libero{background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.08)}.sn-slot.notte{background:rgba(15,15,30,.5)}.sn-act,.sn-time{font-family:var(--fu)}.sn-time{font-size:.6rem;font-weight:800;color:rgba(245,240,232,.4);min-width:52px;flex-shrink:0}.sn-act{font-size:.78rem;color:rgba(245,240,232,.75)}.sn-act em{color:var(--oro2);font-style:normal}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="settimana-in-numeri">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
@@ -146,6 +120,6 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 </body>
 </html>

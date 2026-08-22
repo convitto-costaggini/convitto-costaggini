@@ -15,8 +15,9 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/genitori.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -81,53 +82,15 @@
   ]
 }
 </script>
-  <style>
-    .gen-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.25rem; margin-top:1.5rem; }
-    @media(max-width:480px){ .gen-grid { grid-template-columns:1fr; } }
-    .gen-card { background:#fff; border:1px solid var(--av3); border-radius:12px; overflow:hidden; transition:transform .2s,box-shadow .2s; }
-    .gen-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
-    .gen-card-head { background:var(--bosco); padding:1rem 1.25rem; display:flex; align-items:center; gap:.65rem; }
-    .gen-card-icon { font-size:1.4rem; }
-    .gen-card-title { font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--oro2); }
-    .gen-card-body { padding:1.25rem; }
-    .gen-card-body p { font-size:.85rem; color:var(--txt2); line-height:1.75; margin-bottom:.75rem; }
-    .gen-card-body p:last-child { margin-bottom:0; }
-    .gen-card-body strong { color:var(--bosco); }
-    .gen-card-body a { color:var(--bosco2); font-weight:700; }
-    .gen-faq { max-width:720px; margin:0 auto; }
-    .gen-faq-item { border-bottom:1px solid var(--av3); }
-    .gen-faq-btn { width:100%; background:none; border:none; cursor:pointer; padding:1rem 0; display:flex; align-items:center; justify-content:space-between; gap:1rem; text-align:left; }
-    .gen-faq-q { font-family:var(--fu); font-size:.85rem; font-weight:700; color:var(--bosco); line-height:1.5; }
-    .gen-faq-ico { font-size:1.2rem; color:var(--oro); flex-shrink:0; transition:transform .2s; }
-    .gen-faq-btn[aria-expanded="true"] .gen-faq-ico { transform:rotate(45deg); }
-    .gen-faq-body { display:none; padding:0 0 1rem; font-size:.85rem; color:var(--txt2); line-height:1.8; }
-    .gen-faq-body a { color:var(--bosco2); font-weight:700; }
-    .gen-quote { background:linear-gradient(135deg,var(--bosco),#1a3a1b); border-radius:12px; padding:2rem 1.5rem; position:relative; overflow:hidden; }
-    .gen-quote::before { content:'"'; position:absolute; top:-1rem; left:.5rem; font-family:var(--fd); font-size:8rem; color:rgba(184,146,42,.12); line-height:1; pointer-events:none; }
-    .gen-quote-text { font-family:var(--fd); font-size:1.15rem; font-weight:300; font-style:italic; color:#fff; line-height:1.7; position:relative; z-index:1; }
-    .gen-quote-author { font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--oro2); margin-top:.75rem; position:relative; z-index:1; }
-    .gen-checklist { list-style:none; display:flex; flex-direction:column; gap:.5rem; }
-    .gen-checklist li { display:flex; align-items:flex-start; gap:.65rem; font-size:.85rem; color:var(--txt2); line-height:1.6; }
-    .gen-checklist li::before { content:'✓'; color:var(--bosco2); font-weight:800; flex-shrink:0; margin-top:.05rem; }
-  </style>
-  <style>
-    /* Collegamenti rapidi nell'hero */
-    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
-    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:var(--ease); }
-    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
-    @media(max-width:560px){
-      .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
-      .hero-jump a { padding:.55rem .5rem; }
-    }
-    #impegno, #checklist, #faq, #area-famiglie { scroll-margin-top: 90px; }
-  </style>
+  <style>.gen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-top:1.5rem}@media (max-width:480px){.gen-grid{grid-template-columns:1fr}}.gen-card{background:#fff;border:1px solid var(--av3);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s}.gen-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.08)}.gen-card-head{background:var(--bosco);padding:1rem 1.25rem;display:flex;align-items:center;gap:.65rem}.gen-card-icon{font-size:1.4rem}.gen-card-title{font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)}.gen-card-body{padding:1.25rem}.gen-card-body p{font-size:.85rem;color:var(--txt2);line-height:1.75;margin-bottom:.75rem}.gen-card-body p:last-child{margin-bottom:0}.gen-card-body strong{color:var(--bosco)}.gen-card-body a,.gen-faq-body a{color:var(--bosco2);font-weight:700}.gen-faq{max-width:720px;margin:0 auto}.gen-faq-item{border-bottom:1px solid var(--av3)}.gen-faq-btn{width:100%;background:0 0;border:0;cursor:pointer;padding:1rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;text-align:left}.gen-faq-q{font-family:var(--fu);font-size:.85rem;font-weight:700;color:var(--bosco);line-height:1.5}.gen-faq-ico{font-size:1.2rem;color:var(--oro);flex-shrink:0;transition:transform .2s}.gen-faq-btn[aria-expanded=true] .gen-faq-ico{transform:rotate(45deg)}.gen-checklist li,.gen-faq-body{font-size:.85rem;color:var(--txt2)}.gen-faq-body{display:none;padding:0 0 1rem;line-height:1.8}.gen-quote{background:linear-gradient(135deg,var(--bosco),#1a3a1b);border-radius:12px;padding:2rem 1.5rem;position:relative;overflow:hidden}.gen-quote::before{content:'"';position:absolute;top:-1rem;left:.5rem;font-family:var(--fd);font-size:8rem;color:rgba(184,146,42,.12);line-height:1;pointer-events:none}.gen-quote-text{font-family:var(--fd);font-size:1.15rem;font-weight:300;font-style:italic;color:#fff;line-height:1.7;position:relative;z-index:1}.gen-quote-author{font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--oro2);margin-top:.75rem;position:relative;z-index:1}.gen-checklist{list-style:none;display:flex;flex-direction:column;gap:.5rem}.gen-checklist li{display:flex;align-items:flex-start;gap:.65rem;line-height:1.6}.gen-checklist li::before{content:"✓";color:var(--bosco2);font-weight:800;flex-shrink:0;margin-top:.05rem}</style>
+  <style>.hero-jump{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.35rem}.hero-jump a{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--av,#F5F0E8);text-decoration:none;border:1px solid rgba(184,146,42,.6);background:rgba(255,255,255,.06);padding:.55rem 1rem;border-radius:40px;min-height:40px;transition:var(--ease)}.hero-jump a:focus-visible,.hero-jump a:hover{background:var(--oro,#B8922A);border-color:var(--oro,#B8922A);color:var(--bosco,#2C3E2D)}@media (max-width:560px){.hero-jump{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.hero-jump a{padding:.55rem .5rem}}#area-famiglie,#checklist,#faq,#impegno{scroll-margin-top:90px}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="genitori">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
   <div class="page-hero">
     <div class="w">
@@ -369,7 +332,7 @@
     </div>
   </section>
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 document.querySelectorAll('.gen-faq-btn').forEach(btn => {
   btn.addEventListener('click', () => {

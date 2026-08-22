@@ -9,54 +9,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/fa-per-me.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    /* quiz-hero rimosso — ora .page-hero */
-
-    /* Progress */
-    .quiz-progress { height:3px; background:rgba(245,240,232,.1); position:relative; overflow:hidden; }
-    .quiz-progress-bar { height:100%; background:linear-gradient(90deg,var(--oro2),var(--oro3)); transition:width .4s ease; }
-
-    /* Quiz body */
-    .quiz-body { background:var(--av); min-height:60vh; padding:4rem 1.25rem; display:flex; align-items:center; }
-    .quiz-inner { max-width:640px; margin:0 auto; width:100%; }
-    .quiz-step { display:none; animation:fadeIn .35s ease; }
-    .quiz-step.active { display:block; }
-    @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-
-    .quiz-num { font-family:var(--fu); font-size:.58rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--oro); margin-bottom:.75rem; display:block; }
-    .quiz-q { font-family:var(--fd); font-size:clamp(1.3rem,4vw,1.9rem); font-weight:300; color:var(--bosco); line-height:1.35; margin-bottom:2rem; }
-
-    .quiz-options { display:grid; gap:.75rem; }
-    .quiz-opt {
-      background:#fff; border:1.5px solid var(--av3); border-radius:10px;
-      padding:1.1rem 1.4rem; cursor:pointer; text-align:left;
-      font-family:var(--fu); font-size:.85rem; color:var(--bosco2); line-height:1.5;
-      transition:all .2s; display:flex; align-items:flex-start; gap:.75rem;
-    }
-    .quiz-opt:hover { border-color:rgba(184,146,42,.4); background:rgba(184,146,42,.04); color:var(--bosco); }
-    .quiz-opt.selected { border-color:var(--bosco); background:var(--bosco); color:#fff; }
-    .quiz-opt-letter { font-family:var(--fd); font-size:1rem; font-style:italic; color:var(--oro); flex-shrink:0; }
-    .quiz-opt.selected .quiz-opt-letter { color:var(--oro2); }
-
-    /* Risultato */
-    .result-card { background:#fff; border-radius:14px; padding:2.5rem; text-align:center; border:1px solid var(--av3); }
-    .result-icon { font-size:4rem; display:block; margin-bottom:1rem; }
-    .result-title { font-family:var(--fd); font-size:2rem; font-weight:300; color:var(--bosco); margin-bottom:.5rem; }
-    .result-title em { font-style:italic; color:var(--oro); }
-    .result-desc { font-size:.9rem; color:var(--txt2); line-height:1.85; max-width:500px; margin:0 auto 1.75rem; }
-    .result-cta { display:flex; flex-wrap:wrap; gap:.75rem; justify-content:center; }
-
-    @media(max-width:480px) { .quiz-body { padding:2.5rem 1rem; } }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>@keyframes fadeIn{0%{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.quiz-progress{height:3px;background:rgba(245,240,232,.1);position:relative;overflow:hidden}.quiz-progress-bar{height:100%;background:linear-gradient(90deg,var(--oro2),var(--oro3));transition:width .4s ease}.quiz-body{background:var(--av);min-height:60vh;padding:4rem 1.25rem;display:flex;align-items:center}.quiz-inner{max-width:640px;margin:0 auto;width:100%}.quiz-step{display:none;animation:fadeIn .35s ease}.quiz-num,.quiz-step.active{display:block}.quiz-num{font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--oro);margin-bottom:.75rem}.quiz-q{font-family:var(--fd);font-size:clamp(1.3rem,4vw,1.9rem);font-weight:300;color:var(--bosco);line-height:1.35;margin-bottom:2rem}.quiz-options{display:grid;gap:.75rem}.quiz-opt{background:#fff;border:1.5px solid var(--av3);border-radius:10px;padding:1.1rem 1.4rem;cursor:pointer;text-align:left;font-family:var(--fu);font-size:.85rem;color:var(--bosco2);line-height:1.5;transition:all .2s;display:flex;align-items:flex-start;gap:.75rem}.quiz-opt:hover{border-color:rgba(184,146,42,.4);background:rgba(184,146,42,.04);color:var(--bosco)}.quiz-opt.selected{border-color:var(--bosco);background:var(--bosco);color:#fff}.quiz-opt-letter{font-family:var(--fd);font-size:1rem;font-style:italic;color:var(--oro);flex-shrink:0}.quiz-opt.selected .quiz-opt-letter{color:var(--oro2)}.result-card{background:#fff;border-radius:14px;padding:2.5rem;text-align:center;border:1px solid var(--av3)}.result-icon{font-size:4rem;display:block;margin-bottom:1rem}.result-title{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--bosco);margin-bottom:.5rem}.result-title em{font-style:italic;color:var(--oro)}.result-desc{font-size:.9rem;color:var(--txt2);line-height:1.85;max-width:500px;margin:0 auto 1.75rem}.result-cta{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}@media (max-width:480px){.quiz-body{padding:2.5rem 1rem}}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="fa-per-me">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main" aria-label="Il Convitto fa per me?">
 
   <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
@@ -223,7 +186,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 const RISULTATI = [
   {

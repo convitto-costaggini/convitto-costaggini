@@ -8,68 +8,17 @@
   <meta name="description" content="Cruciverba online sul vocabolario enogastronomico: mettiti alla prova con i termini della cucina italiana in un gioco interattivo pensato per gli studenti del Costaggini."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    body { background:#0a0f0a; }
-    .cx-wrap { max-width:860px; margin:0 auto; padding:2rem 1rem 5rem; }
-    .cx-layout { display:grid; grid-template-columns:auto 1fr; gap:2rem; align-items:start; }
-    @media(max-width:680px){ .cx-layout { grid-template-columns:1fr; } }
-
-    /* Griglia */
-    .cx-grid { display:inline-grid; gap:3px; background:rgba(184,146,42,.08); border:1px solid rgba(184,146,42,.2); border-radius:10px; padding:8px; }
-    .cx-cell { width:42px; height:42px; position:relative; }
-    @media(max-width:400px){ .cx-cell { width:34px; height:34px; } }
-    .cx-cell.black { background:#0a0f0a; border-radius:3px; }
-    .cx-cell input {
-      width:100%; height:100%; background:rgba(245,240,232,.08);
-      border:1.5px solid rgba(184,146,42,.2); border-radius:4px;
-      color:#fff; font-family:var(--fu); font-size:1.15rem; font-weight:700;
-      text-align:center; text-transform:uppercase; outline:none;
-      transition:border-color .15s, background .15s; padding:0; cursor:pointer;
-    }
-    .cx-cell input:focus { border-color:var(--oro2); background:rgba(184,146,42,.14); }
-    .cx-cell input.hi { border-color:var(--oro); background:rgba(184,146,42,.2); }
-    .cx-cell input.ok { border-color:#4ade80; background:rgba(74,222,128,.12); color:#4ade80; pointer-events:none; }
-    .cx-cell input.err { border-color:#f87171; background:rgba(248,113,113,.1); color:#f87171; animation:shk .3s; }
-    @keyframes shk { 0%,100%{transform:translateX(0)} 30%{transform:translateX(-3px)} 70%{transform:translateX(3px)} }
-    .cx-num { position:absolute; top:2px; left:3px; font-family:var(--fu); font-size:.42rem; font-weight:800; color:var(--oro2); pointer-events:none; z-index:1; line-height:1; }
-
-    /* Definizioni */
-    .cx-clues h2 { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--oro2); margin-bottom:.6rem; }
-    .cx-clue { display:flex; gap:.5rem; padding:.45rem .6rem; border-radius:5px; cursor:pointer; transition:background .15s; margin-bottom:.2rem; }
-    .cx-clue:hover { background:rgba(184,146,42,.07); }
-    .cx-clue.act { background:rgba(184,146,42,.13); }
-    .cx-clue.done span:last-child { color:#4ade80; }
-    .cx-clue-n { font-family:var(--fu); font-size:.6rem; font-weight:800; color:var(--oro2); min-width:16px; flex-shrink:0; line-height:1.6; }
-    .cx-clue-t { font-family:var(--fu); font-size:.82rem; color:rgba(245,240,232,.85); line-height:1.6; }
-    .cx-section { margin-bottom:1.25rem; }
-
-    /* Bottoni */
-    .cx-btns { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1.25rem; }
-    .cb { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.5rem .9rem; border-radius:6px; cursor:pointer; border:1.5px solid rgba(184,146,42,.3); color:var(--oro2); background:transparent; transition:all .2s; }
-    .cb:hover { background:rgba(184,146,42,.1); }
-    .cb.pri { background:linear-gradient(135deg,var(--bosco),#1a3a1b); color:#fff; border-color:transparent; }
-
-    /* Progress */
-    .cx-prog-bar { height:4px; background:rgba(255,255,255,.06); border-radius:2px; margin-bottom:1rem; }
-    .cx-prog-fill { height:100%; background:linear-gradient(90deg,var(--bosco2),var(--oro)); border-radius:2px; transition:width .4s; }
-
-    /* Risultato */
-    .cx-res { display:none; text-align:center; background:#141e14; border:1px solid rgba(184,146,42,.2); border-radius:14px; padding:2.5rem 1.75rem; margin-top:1.5rem; }
-    .cx-res.show { display:block; animation:fadeUp .4s ease; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
-    .cx-res-score { font-family:var(--fd); font-size:4rem; font-weight:300; color:var(--oro3); }
-    .cx-res-msg { font-family:var(--fd); font-size:1.15rem; font-weight:300; color:#fff; line-height:1.7; max-width:440px; margin:.75rem auto 1.5rem; }
-    .cx-res-msg em { font-style:italic; color:var(--oro3); }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>@keyframes shk{0%,to{transform:translateX(0)}30%{transform:translateX(-3px)}70%{transform:translateX(3px)}}@keyframes fadeUp{0%{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}.cx-cell.black,body{background:#0a0f0a}.cx-wrap{max-width:860px;margin:0 auto;padding:2rem 1rem 5rem}.cx-layout{display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start}@media (max-width:680px){.cx-layout{grid-template-columns:1fr}}.cx-grid{display:inline-grid;gap:3px;background:rgba(184,146,42,.08);border:1px solid rgba(184,146,42,.2);border-radius:10px;padding:8px}.cx-cell{width:42px;height:42px;position:relative}@media (max-width:400px){.cx-cell{width:34px;height:34px}}.cx-cell.black{border-radius:3px}.cx-cell input{width:100%;height:100%;background:rgba(245,240,232,.08);border:1.5px solid rgba(184,146,42,.2);border-radius:4px;color:#fff;font-family:var(--fu);font-size:1.15rem;font-weight:700;text-align:center;text-transform:uppercase;outline:0;transition:border-color .15s,background .15s;padding:0;cursor:pointer}.cx-cell input:focus{border-color:var(--oro2);background:rgba(184,146,42,.14)}.cx-cell input.hi{border-color:var(--oro);background:rgba(184,146,42,.2)}.cx-cell input.ok{border-color:#4ade80;background:rgba(74,222,128,.12);color:#4ade80;pointer-events:none}.cx-cell input.err{border-color:#f87171;background:rgba(248,113,113,.1);color:#f87171;animation:shk .3s}.cx-clues h2,.cx-num{font-family:var(--fu);font-weight:800;color:var(--oro2)}.cx-num{position:absolute;top:2px;left:3px;font-size:.42rem;pointer-events:none;z-index:1;line-height:1}.cx-clues h2{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.6rem}.cx-clue{display:flex;gap:.5rem;padding:.45rem .6rem;border-radius:5px;cursor:pointer;transition:background .15s;margin-bottom:.2rem}.cx-clue:hover{background:rgba(184,146,42,.07)}.cx-clue.act{background:rgba(184,146,42,.13)}.cx-clue.done span:last-child{color:#4ade80}.cx-clue-n,.cx-clue-t{font-family:var(--fu);line-height:1.6}.cx-clue-n{font-size:.6rem;font-weight:800;color:var(--oro2);min-width:16px;flex-shrink:0}.cx-clue-t{font-size:.82rem;color:rgba(245,240,232,.85)}.cx-section{margin-bottom:1.25rem}.cx-btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.25rem}.cb{font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.5rem .9rem;border-radius:6px;cursor:pointer;border:1.5px solid rgba(184,146,42,.3);color:var(--oro2);background:0 0;transition:all .2s}.cb:hover{background:rgba(184,146,42,.1)}.cb.pri{background:linear-gradient(135deg,var(--bosco),#1a3a1b);color:#fff;border-color:transparent}.cx-prog-bar{height:4px;background:rgba(255,255,255,.06);border-radius:2px;margin-bottom:1rem}.cx-prog-fill{height:100%;background:linear-gradient(90deg,var(--bosco2),var(--oro));border-radius:2px;transition:width .4s}.cx-res{display:none;text-align:center;background:#141e14;border:1px solid rgba(184,146,42,.2);border-radius:14px;padding:2.5rem 1.75rem;margin-top:1.5rem}.cx-res.show{display:block;animation:fadeUp .4s ease}.cx-res-msg,.cx-res-score{font-family:var(--fd);font-weight:300}.cx-res-score{font-size:4rem;color:var(--oro3)}.cx-res-msg{font-size:1.15rem;color:#fff;line-height:1.7;max-width:440px;margin:.75rem auto 1.5rem}.cx-res-msg em{font-style:italic;color:var(--oro3)}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="quiz-cruciverba">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <div style="background:linear-gradient(160deg,#0a0f0a,#1a0d07);padding:3.5rem 1.25rem 2.5rem;text-align:center">
@@ -127,7 +76,7 @@
   </div>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 // ══════════════════════════════════════════════════════
 // SCHEMA VERIFICATO — ogni parola incrocia almeno un'altra

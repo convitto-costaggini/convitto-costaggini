@@ -15,8 +15,9 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/organizzazione.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -47,64 +48,14 @@
   }
 }
 </script>
-  <style>
-    /* org-hero rimosso — ora .page-hero */
-
-    /* Pulsanti di salto nell'hero (stile servizi.html) */
-    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.6rem; }
-    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; text-align:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:all .2s; }
-    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
-    @media(max-width:560px){
-      .hero-jump { display:grid; grid-template-columns:1fr; gap:.55rem; }
-      .hero-jump a { padding:.6rem .75rem; }
-    }
-    #organigramma-titolo { scroll-margin-top:90px; }
-
-    /* Organigramma */
-    .org-chart { display:flex; flex-direction:column; align-items:center; gap:0; margin:2rem 0; }
-    .org-level { display:flex; justify-content:center; flex-wrap:wrap; gap:1rem; width:100%; }
-    .org-connector { width:2px; height:2rem; background:rgba(184,146,42,.3); margin:0 auto; }
-    .org-connector-h { display:flex; justify-content:center; gap:0; margin:0 auto; }
-    .org-node {      background:#fff; border:1.5px solid var(--av3); border-radius:10px;      padding:1rem 1.25rem; text-align:center; min-width:180px; max-width:220px;      transition:box-shadow .2s, border-color .2s, transform .2s;      position:relative;    }    .org-node:hover { box-shadow:0 8px 24px rgba(0,0,0,.1); border-color:rgba(184,146,42,.4); transform:translateY(-2px); }    .org-node.top { border-color:var(--bosco); background:var(--bosco); }    .org-node.top .org-role, .org-node.top .org-name { color:#fff; }    .org-node.top .org-label { color:var(--oro2); }    .org-node.mid { border-color:rgba(184,146,42,.4); }    .org-icon { font-size:1.75rem; margin-bottom:.4rem; display:block; }    .org-label { font-family:var(--fu); font-size:.55rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--oro); display:block; margin-bottom:.2rem; }    .org-name { font-family:var(--fd); font-size:.95rem; font-weight:400; color:var(--bosco); line-height:1.2; }    .org-role { font-family:var(--fu); font-size:.62rem; color:var(--txt2); margin-top:.2rem; line-height:1.3; }
-    
-    /* Rimando all'elenco personale (personale.html è la fonte unica dei nominativi) */
-    .pers-cta { background:#fff; border:1px solid var(--av3); border-radius:10px; padding:1.75rem 1.5rem; margin-top:1.75rem; display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap; }
-    .pers-cta-ico { font-size:2rem; flex-shrink:0; }
-    .pers-cta-text { flex:1; min-width:220px; }
-    .pers-cta-text p { font-size:.85rem; color:var(--txt2); line-height:1.65; margin:.15rem 0 0; }
-    @media(max-width:560px){
-      .pers-cta { flex-direction:column; align-items:stretch; text-align:center; }
-      .pers-cta-text { min-width:0; }
-      .pers-cta a.btn-outline-dark { white-space:normal; text-align:center; width:100%; }
-    }
-    
-    /* Patto */
-    .patto-section { background:var(--bosco); padding:5rem 1.25rem; scroll-margin-top: 2rem; }    .patto-intro { font-family:var(--fd); font-size:clamp(1.1rem,3vw,1.5rem); font-style:italic; color:rgba(245,240,232,.75); max-width:640px; margin:1rem 0 2.5rem; line-height:1.65; }    .patto-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }    @media(max-width:640px){ .patto-grid { grid-template-columns:1fr; } }    .patto-col { background:rgba(245,240,232,.04); border:1px solid rgba(184,146,42,.2); border-radius:10px; padding:1.5rem; }    .patto-col-title { font-family:var(--fu); font-size:.62rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--oro2); margin-bottom:1rem; display:flex; align-items:center; gap:.5rem; }    .patto-item { display:flex; align-items:flex-start; gap:.65rem; padding:.6rem 0; border-bottom:1px solid rgba(245,240,232,.06); }    .patto-item:last-child { border-bottom:none; }    .patto-check { color:var(--oro2); font-size:.8rem; flex-shrink:0; margin-top:.1rem; }    .patto-item p { font-family:var(--fu); font-size:.8rem; color:rgba(245,240,232,.65); line-height:1.65; margin:0; }    .patto-firma { background:rgba(245,240,232,.03); border:1px solid rgba(184,146,42,.15); border-radius:10px; padding:2rem; margin-top:2rem; text-align:center; }    .patto-firma p { font-family:var(--fd); font-size:1.1rem; font-style:italic; color:rgba(245,240,232,.5); line-height:1.65; }    .firma-line { width:120px; height:1px; background:rgba(184,146,42,.25); margin:.85rem auto; }
-
-    @media(max-width:600px){
-      .org-node { min-width:140px; padding:.75rem 1rem; }
-      .org-level { gap:.6rem; }
-    }
-    @media(min-width:560px){.org-grid{grid-template-columns:1fr 1fr}}
-    
-    /* Organigramma più grande SOLO su schermi ampi (PC): la fila da 4 caselle resta in linea; telefono e tablet invariati */
-    @media(min-width:1100px){
-      .org-node { min-width:210px; max-width:240px; padding:1.35rem 1.55rem; }
-      .org-level { gap:1.25rem; }
-      .org-icon { font-size:2.1rem; margin-bottom:.5rem; }
-      .org-label { font-size:.6rem; }
-      .org-name { font-size:1.1rem; }
-      .org-role { font-size:.7rem; }
-    }
-    .page-hero .w::after { top: calc(50% - 20px); }
-  </style>
+  <style>.hero-jump{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem}.hero-jump a{display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:.45rem;font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--av,#F5F0E8);text-decoration:none;border:1px solid rgba(184,146,42,.6);background:rgba(255,255,255,.06);padding:.55rem 1rem;border-radius:40px;min-height:40px;transition:all .2s}.hero-jump a:focus-visible,.hero-jump a:hover{background:var(--oro,#B8922A);border-color:var(--oro,#B8922A);color:var(--bosco,#2C3E2D)}@media (max-width:560px){.hero-jump{display:grid;grid-template-columns:1fr;gap:.55rem}.hero-jump a{padding:.6rem .75rem}}#organigramma-titolo{scroll-margin-top:90px}.org-chart{display:flex;flex-direction:column;align-items:center;gap:0;margin:2rem 0}.org-level{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem;width:100%}.org-connector{width:2px;height:2rem;background:rgba(184,146,42,.3);margin:0 auto}.org-connector-h{display:flex;justify-content:center;gap:0;margin:0 auto}.org-node{background:#fff;border:1.5px solid var(--av3);border-radius:10px;padding:1rem 1.25rem;text-align:center;min-width:180px;max-width:220px;transition:box-shadow .2s,border-color .2s,transform .2s;position:relative}.org-node:hover{box-shadow:0 8px 24px rgba(0,0,0,.1);border-color:rgba(184,146,42,.4);transform:translateY(-2px)}.org-node.top{border-color:var(--bosco);background:var(--bosco)}.org-node.top .org-name,.org-node.top .org-role{color:#fff}.org-node.top .org-label{color:var(--oro2)}.org-node.mid{border-color:rgba(184,146,42,.4)}.org-icon,.org-label{font-size:1.75rem;margin-bottom:.4rem;display:block}.org-label{font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:.2rem}.org-name{font-family:var(--fd);font-size:.95rem;font-weight:400;color:var(--bosco);line-height:1.2}.org-role{font-family:var(--fu);font-size:.62rem;color:var(--txt2);margin-top:.2rem;line-height:1.3}.pers-cta{background:#fff;border:1px solid var(--av3);border-radius:10px;padding:1.75rem 1.5rem;margin-top:1.75rem;display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}.pers-cta-ico{font-size:2rem;flex-shrink:0}.pers-cta-text{flex:1;min-width:220px}.pers-cta-text p{font-size:.85rem;color:var(--txt2);line-height:1.65;margin:.15rem 0 0}@media (max-width:560px){.pers-cta{flex-direction:column;align-items:stretch;text-align:center}.pers-cta-text{min-width:0}.pers-cta a.btn-outline-dark{white-space:normal;text-align:center;width:100%}}.patto-section{background:var(--bosco);padding:5rem 1.25rem;scroll-margin-top:2rem}.patto-intro{font-family:var(--fd);font-size:clamp(1.1rem,3vw,1.5rem);font-style:italic;color:rgba(245,240,232,.75);max-width:640px;margin:1rem 0 2.5rem;line-height:1.65}.patto-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}@media (max-width:640px){.patto-grid{grid-template-columns:1fr}}.patto-col{background:rgba(245,240,232,.04);border:1px solid rgba(184,146,42,.2);border-radius:10px;padding:1.5rem}.patto-col-title{font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}.patto-item{display:flex;align-items:flex-start;gap:.65rem;padding:.6rem 0;border-bottom:1px solid rgba(245,240,232,.06)}.patto-item:last-child{border-bottom:none}.patto-check{color:var(--oro2);font-size:.8rem;flex-shrink:0;margin-top:.1rem}.patto-item p{font-family:var(--fu);font-size:.8rem;color:rgba(245,240,232,.65);line-height:1.65;margin:0}.patto-firma{background:rgba(245,240,232,.03);border:1px solid rgba(184,146,42,.15);border-radius:10px;padding:2rem;margin-top:2rem;text-align:center}.patto-firma p{font-family:var(--fd);font-size:1.1rem;font-style:italic;color:rgba(245,240,232,.5);line-height:1.65}.firma-line{width:120px;height:1px;background:rgba(184,146,42,.25);margin:.85rem auto}@media (max-width:600px){.org-node{min-width:140px;padding:.75rem 1rem}.org-level{gap:.6rem}}@media (min-width:560px){.org-grid{grid-template-columns:1fr 1fr}}@media (min-width:1100px){.org-node{min-width:210px;max-width:240px;padding:1.35rem 1.55rem}.org-level{gap:1.25rem}.org-icon{font-size:2.1rem;margin-bottom:.5rem}.org-label{font-size:.6rem}.org-name{font-size:1.1rem}.org-role{font-size:.7rem}}.page-hero .w::after{top:calc(50% - 20px)}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="organizzazione">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
@@ -308,6 +259,6 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 </body>
 </html>

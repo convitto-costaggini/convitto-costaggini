@@ -9,74 +9,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/calendario.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-
-    /* Filtri categoria */
-    .cal-filters { display:flex; flex-wrap:wrap; gap:.5rem; margin:1.5rem 0; }
-    .cal-filter { font-family:var(--fu); font-size:.62rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.35rem .9rem; border-radius:20px; border:1.5px solid var(--av3); background:none; cursor:pointer; color:var(--bosco2); transition:all .2s; }
-    .cal-filter:hover, .cal-filter.active { background:var(--bosco); color:var(--av); border-color:var(--bosco); }
-    .cal-filter[data-cat="openday"].active    { background:#2C6E49; border-color:#2C6E49; }
-    .cal-filter[data-cat="festa"].active      { background:#b8451a; border-color:#b8451a; }
-    .cal-filter[data-cat="musica"].active     { background:#1a4a7a; border-color:#1a4a7a; }
-    .cal-filter[data-cat="sport"].active      { background:#4a7a1a; border-color:#4a7a1a; }
-    .cal-filter[data-cat="uscita"].active     { background:#7a4a1a; border-color:#7a4a1a; }
-
-    /* Card evento */
-    .ev-list { display:grid; gap:1rem; }
-    .ev-item {
-      display:grid; grid-template-columns:72px 1fr;
-      gap:0 1.25rem; background:var(--av2); border:1px solid var(--av3);
-      border-radius:8px; overflow:hidden; transition:transform .2s, box-shadow .2s;
-      border-left:4px solid var(--bosco);
-    }
-    .ev-item:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.1); }
-    .ev-item[data-cat="openday"]  { border-left-color:#2C6E49; }
-    .ev-item[data-cat="festa"]    { border-left-color:#b8451a; }
-    .ev-item[data-cat="musica"]   { border-left-color:#1a4a7a; }
-    .ev-item[data-cat="sport"]    { border-left-color:#4a7a1a; }
-    .ev-item[data-cat="uscita"]   { border-left-color:#7a4a1a; }
-    .ev-item.past { opacity:.55; }
-
-    .ev-date-box {
-      background:var(--bosco); display:flex; flex-direction:column;
-      align-items:center; justify-content:center; padding:.75rem .5rem;
-      flex-shrink:0;
-    }
-    .ev-day  { font-family:var(--fd); font-size:1.8rem; font-weight:300; color:var(--oro3); line-height:1; }
-    .ev-mon  { font-family:var(--fu); font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(245,240,232,.5); margin-top:.1rem; }
-    .ev-body { padding:.85rem .9rem .85rem 0; }
-    .ev-cat-badge { font-family:var(--fu); font-size:.55rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; padding:.15rem .5rem; border-radius:10px; background:rgba(0,0,0,.08); color:var(--bosco2); display:inline-block; margin-bottom:.35rem; }
-    .ev-title { font-family:var(--fd); font-size:1rem; font-weight:400; color:var(--bosco); line-height:1.3; margin-bottom:.3rem; }
-    .ev-meta { font-size:.75rem; color:var(--txt2); }
-    .ev-meta span + span::before { content:' · '; }
-
-    /* Su smartphone la casella data diventa una fascia orizzontale in alto, non più una colonna stretta allungata per tutta l'altezza della card */
-    @media(max-width:600px){
-      .ev-item { grid-template-columns:1fr; }
-      .ev-date-box { flex-direction:row; justify-content:flex-start; gap:.45rem; padding:.5rem .9rem; }
-      .ev-day { font-size:1.15rem; }
-      .ev-mon { margin-top:0; }
-      .ev-body { padding:.75rem .9rem .9rem; }
-    }
-
-    /* Mese header */
-    .month-header { font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--oro); padding:.5rem 0 .75rem; margin-top:2rem; border-bottom:1px solid var(--av3); margin-bottom:.75rem; }
-    .month-header:first-child { margin-top:0; }
-
-    /* Legenda */
-    .legend { display:flex; flex-wrap:wrap; gap:.75rem; margin-bottom:1.5rem; }
-    .leg-item { display:flex; align-items:center; gap:.4rem; font-family:var(--fu); font-size:.6rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--txt2); }
-    .leg-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.cal-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0}.cal-filter{font-family:var(--fu);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;border:1.5px solid var(--av3);background:0 0;cursor:pointer;color:var(--bosco2);transition:all .2s}.cal-filter.active,.cal-filter:hover{background:var(--bosco);color:var(--av);border-color:var(--bosco)}.cal-filter[data-cat=openday].active{background:#2c6e49;border-color:#2c6e49}.cal-filter[data-cat=festa].active{background:#b8451a;border-color:#b8451a}.cal-filter[data-cat=musica].active{background:#1a4a7a;border-color:#1a4a7a}.cal-filter[data-cat=sport].active{background:#4a7a1a;border-color:#4a7a1a}.cal-filter[data-cat=uscita].active{background:#7a4a1a;border-color:#7a4a1a}.ev-item,.ev-list{display:grid;gap:1rem}.ev-item{grid-template-columns:72px 1fr;gap:0 1.25rem;background:var(--av2);border:1px solid var(--av3);border-radius:8px;overflow:hidden;transition:transform .2s,box-shadow .2s;border-left:4px solid var(--bosco)}.ev-item:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.1)}.ev-item[data-cat=openday]{border-left-color:#2c6e49}.ev-item[data-cat=festa]{border-left-color:#b8451a}.ev-item[data-cat=musica]{border-left-color:#1a4a7a}.ev-item[data-cat=sport]{border-left-color:#4a7a1a}.ev-item[data-cat=uscita]{border-left-color:#7a4a1a}.ev-item.past{opacity:.55}.ev-date-box{background:var(--bosco);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.75rem .5rem;flex-shrink:0}.ev-day{font-family:var(--fd);font-size:1.8rem;font-weight:300;color:var(--oro3);line-height:1}.ev-mon{font-family:var(--fu);font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.5);margin-top:.1rem}.ev-body{padding:.85rem .9rem .85rem 0}.ev-cat-badge{font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.15rem .5rem;border-radius:10px;background:rgba(0,0,0,.08);color:var(--bosco2);display:inline-block;margin-bottom:.35rem}.ev-title{font-family:var(--fd);font-size:1rem;font-weight:400;color:var(--bosco);line-height:1.3;margin-bottom:.3rem}.ev-meta{font-size:.75rem;color:var(--txt2)}.ev-meta span+span::before{content:" · "}@media (max-width:600px){.ev-item{grid-template-columns:1fr}.ev-date-box{flex-direction:row;justify-content:flex-start;gap:.45rem;padding:.5rem .9rem}.ev-day{font-size:1.15rem}.ev-mon{margin-top:0}.ev-body{padding:.75rem .9rem .9rem}}.month-header{font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);padding:.5rem 0 .75rem;margin-top:2rem;border-bottom:1px solid var(--av3);margin-bottom:.75rem}.month-header:first-child{margin-top:0}.legend{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem}.leg-item{display:flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--txt2)}.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="calendario">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <div class="page-hero rv">
@@ -135,7 +78,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 // ── Eventi dal database (tabella eventi) ──
 const SB_URL_C = 'https://sawclsysqnjsvbobioqo.supabase.co';

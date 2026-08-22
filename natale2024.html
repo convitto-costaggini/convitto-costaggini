@@ -16,258 +16,20 @@
   <meta name="twitter:card" content="summary_large_image"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-
-    .gal-hero {
-      background: linear-gradient(135deg, var(--bosco) 0%, #1a2e1b 100%);
-      padding: 5rem 1.25rem 3rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .gal-hero::before {
-      content: '✦';
-      position: absolute;
-      font-size: 18rem;
-      color: rgba(184,146,42,.04);
-      top: -4rem; left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
-    .gal-hero .gold-bar { margin: 0 auto .9rem; }
-    .gal-hero h1 { font-family: var(--fd); font-size: clamp(2rem,6vw,3.5rem); font-weight: 300; color: var(--av); line-height: 1.1; margin-bottom: .6rem; }
-    .gal-hero h1 em { display: block; font-style: italic; color: var(--oro3); }
-    .gal-hero p { color: rgba(245,240,232,.65); font-size: .92rem; max-width: 520px; margin: 0 auto; }
-    .gal-chip { display: inline-flex; align-items: center; gap: .5rem; font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--oro2); margin-bottom: .9rem; }
-    .gal-chip::before { content: '—'; }
-
-    #slideshow {
-      position: relative;
-      background: #0c140d;
-      overflow: hidden;
-      user-select: none;
-      width: 100%;
-      height: clamp(280px, 60vw, 600px);
-      contain: layout style;
-    }
-    @media(max-width: 600px){
-      #slideshow { height: clamp(240px, 70vw, 420px); }
-    }
-    .slides-track {
-      display: flex;
-      height: 100%;
-      transition: transform .65s cubic-bezier(.4,0,.2,1);
-      will-change: transform;
-    }
-    .slide {
-      min-width: 100%;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-    /* Sfondo sfumato: copia della foto scalata e sfocata */
-    .slide-bg {
-      position: absolute;
-      inset: -20px;
-      background-size: cover;
-      background-position: center;
-      filter: blur(18px) brightness(.45) saturate(.7);
-      transform: scale(1.08);
-      z-index: 0;
-    }
-    .slide img {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      display: block;
-      transform: translateZ(0);
-    }
-    .slide-caption {
-      z-index: 2;
-    }
-    .slide-caption {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(0deg, rgba(12,20,13,.88) 0%, transparent 100%);
-      padding: 2.5rem 1.5rem 1.25rem;
-      pointer-events: none;
-    }
-    @media(max-width:600px){
-      .slide-caption { padding: 1.6rem .9rem .7rem; background: linear-gradient(0deg, rgba(12,20,13,.94) 0%, rgba(12,20,13,.6) 55%, transparent 100%); }
-      .slide-caption span { font-size: .56rem; margin-bottom: .15rem; }
-      .slide-caption p { font-size: .82rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.35; }
-    }
-    .slide-caption p {
-      font-family: var(--fd);
-      font-size: clamp(.95rem,2.5vw,1.25rem);
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(245,240,232,.88);
-      margin: 0;
-    }
-    .slide-caption span {
-      display: block;
-      font-family: var(--fu);
-      font-size: .65rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--oro2);
-      margin-bottom: .3rem;
-    }
-
-    .sl-arrow {
-      position: absolute;
-      top: 50%; transform: translateY(-50%);
-      width: 48px; height: 48px;
-      background: rgba(12,20,13,.55);
-      border: 1.5px solid rgba(184,146,42,.35);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: background .2s, border-color .2s;
-      z-index: 10;
-      backdrop-filter: blur(4px);
-    }
-    .sl-arrow:hover { background: rgba(184,146,42,.25); border-color: var(--oro2); }
-    .sl-arrow svg { width: 18px; height: 18px; fill: var(--av); }
-    .sl-prev { left: .85rem; }
-    .sl-next { right: .85rem; }
-
-    .sl-dots {
-      position: absolute;
-      bottom: .9rem; left: 50%;
-      transform: translateX(-50%);
-      display: flex; gap: .45rem;
-      z-index: 10;
-    }
-    .sl-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: rgba(245,240,232,.3);
-      border: none; cursor: pointer;
-      padding: 0;
-      transition: background .25s, transform .25s;
-    }
-    .sl-dot.active { background: var(--oro2); transform: scale(1.35); }
-
-    .sl-counter {
-      position: absolute;
-      top: 1rem; right: 1.1rem;
-      font-family: var(--fu);
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      color: rgba(245,240,232,.5);
-      z-index: 10;
-    }
-
-    .sl-progress { height: 2px; background: rgba(184,146,42,.15); position: relative; overflow: hidden; }
-    .sl-progress-bar { height: 100%; background: linear-gradient(90deg, var(--oro2), var(--oro3)); width: 0%; transition: width linear; }
-
-    .thumb-section { background: #0e1a0f; padding: 1rem 1rem 1.5rem; border-top: 1px solid rgba(184,146,42,.15); }
-    .thumb-strip {
-      display: flex; gap: .5rem;
-      overflow-x: auto; scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin; scrollbar-color: rgba(184,146,42,.3) transparent;
-      padding-bottom: .3rem;
-    }
-    .thumb-strip::-webkit-scrollbar { height: 3px; }
-    .thumb-strip::-webkit-scrollbar-thumb { background: rgba(184,146,42,.3); border-radius: 2px; }
-    .thumb { flex-shrink: 0; width: 72px; height: 52px; border-radius: 3px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color .2s, opacity .2s; scroll-snap-align: start; opacity: .55; }
-    .thumb.active { border-color: var(--oro2); opacity: 1; }
-    .thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-    .gal-info { background: var(--av2); border-top: 1px solid var(--av3); padding: 2.5rem 1.25rem; }
-    .gal-info .w { display: grid; gap: 2rem; }
-    @media(min-width:700px){ .gal-info .w { grid-template-columns: 1fr 1fr; align-items: start; } }
-    .gal-menu { background: var(--bosco); border-radius: 8px; padding: 1.5rem 1.75rem; border: 1px solid rgba(184,146,42,.2); }
-    .gal-menu h2 { font-family: var(--fd); font-size: 1.4rem; font-weight: 400; color: var(--av); margin-bottom: 1rem; }
-    .gal-menu h2 em { font-style: italic; color: var(--oro3); }
-    .menu-item { padding: .55rem 0; border-bottom: 1px solid rgba(245,240,232,.1); }
-    .menu-item:last-child { border-bottom: none; }
-    .menu-portata { font-family: var(--fu); font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--oro2); display: block; margin-bottom: .15rem; }
-    .menu-piatto { font-family: var(--fd); font-size: 1.05rem; font-weight: 300; color: var(--av); font-style: italic; }
-    .gal-desc h2 { font-family: var(--fd); font-size: 1.4rem; font-weight: 400; color: var(--bosco); margin-bottom: .75rem; }
-    .gal-desc h2 em { font-style: italic; color: var(--oro); }
-    .gal-desc p { font-size: .88rem; color: var(--txt2); line-height: 1.8; margin-bottom: .75rem; }
-    .gal-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
-    .back-bar { background: var(--bosco); padding: 1.5rem 1.25rem; text-align: center; }
-    .share-bar { padding: 2.75rem 1.25rem; text-align: center; background: var(--av); }
-    .share-label { font-family: var(--fd); font-size: 1.05rem; font-style: italic; color: var(--bosco); margin-bottom: 1.1rem; }
-    .share-btns { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; }
-    .share-btn { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--fu); font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: .6rem 1.15rem; border-radius: 40px; border: 1px solid var(--av3); background: var(--av2); color: var(--bosco); text-decoration: none; cursor: pointer; transition: .2s; }
-    .share-btn:hover, .share-btn:focus-visible { background: var(--oro); border-color: var(--oro); color: #fff; }
-
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>#slideshow,.gal-hero{position:relative;overflow:hidden}.gal-hero{background:linear-gradient(135deg,var(--bosco) 0%,#1a2e1b 100%);padding:5rem 1.25rem 3rem;text-align:center}.gal-hero::before{content:"✦";position:absolute;font-size:18rem;color:rgba(184,146,42,.04);top:-4rem;left:50%;transform:translateX(-50%);pointer-events:none}.gal-hero .gold-bar{margin:0 auto .9rem}.gal-hero h1{font-family:var(--fd);font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:var(--av);line-height:1.1;margin-bottom:.6rem}.gal-hero h1 em{display:block;font-style:italic;color:var(--oro3)}.gal-hero p{color:rgba(245,240,232,.65);font-size:.92rem;max-width:520px;margin:0 auto}.gal-chip{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);margin-bottom:.9rem}.gal-chip::before{content:"—"}#slideshow{background:#0c140d;user-select:none;width:100%;height:clamp(280px,60vw,600px);contain:layout style}@media (max-width:600px){#slideshow{height:clamp(240px,70vw,420px)}}.slides-track{display:flex;height:100%;transition:transform .65s cubic-bezier(.4,0,.2,1);will-change:transform}.slide,.slide img{position:relative;width:100%;height:100%}.slide{min-width:100%;flex-shrink:0;overflow:hidden}.slide-bg{position:absolute;inset:-20px;background-size:cover;background-position:center;filter:blur(18px) brightness(.45) saturate(.7);transform:scale(1.08);z-index:0}.slide img{z-index:1;object-fit:contain;object-position:center;display:block;transform:translateZ(0)}.slide-caption{z-index:2;position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(12,20,13,.88)0,transparent 100%);padding:2.5rem 1.5rem 1.25rem;pointer-events:none}@media (max-width:600px){.slide-caption{padding:1.6rem .9rem .7rem;background:linear-gradient(0deg,rgba(12,20,13,.94)0,rgba(12,20,13,.6) 55%,transparent 100%)}.slide-caption span{font-size:.56rem;margin-bottom:.15rem}.slide-caption p{font-size:.82rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.35}}.slide-caption p{font-family:var(--fd);font-size:clamp(.95rem,2.5vw,1.25rem);font-weight:300;font-style:italic;color:rgba(245,240,232,.88);margin:0}.slide-caption span{display:block;font-family:var(--fu);font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.3rem}.sl-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;background:rgba(12,20,13,.55);border:1.5px solid rgba(184,146,42,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,border-color .2s;z-index:10;backdrop-filter:blur(4px)}.sl-arrow:hover{background:rgba(184,146,42,.25);border-color:var(--oro2)}.sl-arrow svg{width:18px;height:18px;fill:var(--av)}.sl-prev{left:.85rem}.sl-next{right:.85rem}.sl-dots{position:absolute;bottom:.9rem;left:50%;transform:translateX(-50%);display:flex;gap:.45rem;z-index:10}.sl-dot{width:7px;height:7px;border-radius:50%;background:rgba(245,240,232,.3);border:0;cursor:pointer;padding:0;transition:background .25s,transform .25s}.sl-dot.active{background:var(--oro2);transform:scale(1.35)}.sl-counter{position:absolute;top:1rem;right:1.1rem;font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.1em;color:rgba(245,240,232,.5);z-index:10}.sl-progress{height:2px;background:rgba(184,146,42,.15);position:relative;overflow:hidden}.sl-progress-bar{height:100%;background:linear-gradient(90deg,var(--oro2),var(--oro3));width:0%;transition:width linear}.thumb-section{background:#0e1a0f;padding:1rem 1rem 1.5rem;border-top:1px solid rgba(184,146,42,.15)}.thumb-strip{display:flex;gap:.5rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(184,146,42,.3) transparent;padding-bottom:.3rem}.thumb-strip::-webkit-scrollbar{height:3px}.thumb-strip::-webkit-scrollbar-thumb{background:rgba(184,146,42,.3);border-radius:2px}.thumb{flex-shrink:0;width:72px;height:52px;border-radius:3px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .2s,opacity .2s;scroll-snap-align:start;opacity:.55}.thumb.active{border-color:var(--oro2);opacity:1}.thumb img{width:100%;height:100%;object-fit:cover}.gal-info{background:var(--av2);border-top:1px solid var(--av3);padding:2.5rem 1.25rem}.gal-info .w{display:grid;gap:2rem}@media (min-width:700px){.gal-info .w{grid-template-columns:1fr 1fr;align-items:start}}.gal-menu{background:var(--bosco);border-radius:8px;padding:1.5rem 1.75rem;border:1px solid rgba(184,146,42,.2)}.gal-menu h2{font-family:var(--fd);font-size:1.4rem;font-weight:400;color:var(--av);margin-bottom:1rem}.gal-menu h2 em{font-style:italic;color:var(--oro3)}.menu-item{padding:.55rem 0;border-bottom:1px solid rgba(245,240,232,.1)}.menu-item:last-child{border-bottom:none}.menu-portata{font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);display:block;margin-bottom:.15rem}.menu-piatto{font-family:var(--fd);font-size:1.05rem;font-weight:300;color:var(--av);font-style:italic}.gal-desc h2{font-family:var(--fd);font-size:1.4rem;font-weight:400;color:var(--bosco);margin-bottom:.75rem}.gal-desc h2 em{font-style:italic;color:var(--oro)}.gal-desc p{font-size:.88rem;color:var(--txt2);line-height:1.8;margin-bottom:.75rem}.gal-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}.back-bar{background:var(--bosco);padding:1.5rem 1.25rem;text-align:center}.share-bar{padding:2.75rem 1.25rem;text-align:center;background:var(--av)}.share-label{font-family:var(--fd);font-size:1.05rem;font-style:italic;color:var(--bosco);margin-bottom:1.1rem}.share-btns{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}.share-btn{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.6rem 1.15rem;border-radius:40px;border:1px solid var(--av3);background:var(--av2);color:var(--bosco);text-decoration:none;cursor:pointer;transition:.2s}.share-btn:focus-visible,.share-btn:hover{background:var(--oro);border-color:var(--oro);color:#fff}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="natale2024">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
-  <style>
-    /* ── Decorazioni natalizie hero ── */
-    .xmas-deco {
-      position: absolute; inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    /* Fiocchi di neve — motivo statico */
-    .snowflake {
-      position: absolute;
-      color: rgba(245,240,232,.4);
-      font-size: 1.1rem;
-      user-select: none;
-    }
-    /* Rametti SVG angoli */
-    .xmas-branch { position: absolute; opacity: .45; }
-    /* Pallina — statica, nessuna oscillazione */
-    .xmas-ball { transform-origin: top center; }
-
-    /* Lucine — statiche, sempre accese */
-    .led-r, .led-g, .led-w, .led-y { opacity: 1; }
-    /* Alone luminoso dietro ogni lucina */
-    .led-glow { transition: opacity .3s; }
-
-    /* Freccia scroll */
-    .scroll-hint {
-      display: flex; flex-direction: column; align-items: center;
-      gap: .35rem; margin-top: 1.4rem; cursor: pointer;
-    }
-    .scroll-hint span {
-      font-family: var(--fu); font-size: .6rem; font-weight: 700;
-      letter-spacing: .18em; text-transform: uppercase;
-      color: rgba(184,146,42,.55);
-    }
-    .scroll-arrow { /* statico: nessuna animazione */ }
-    /* Stelle — statiche */
-    .xmas-star { position: absolute; opacity: .45; color: var(--oro2); font-size: 1rem; }
-    /* Riga ornamentale */
-    .xmas-divider {
-      display: flex; align-items: center; justify-content: center;
-      gap: .6rem; margin: .9rem auto .7rem;
-      color: rgba(184,146,42,.6);
-      font-size: .75rem;
-    }
-    .xmas-divider::before, .xmas-divider::after {
-      content: '';
-      flex: 1; max-width: 80px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(184,146,42,.5), transparent);
-    }
-  </style>
+  <style>.xmas-deco{position:absolute;inset:0;pointer-events:none;overflow:hidden}.snowflake{position:absolute;color:rgba(245,240,232,.4);font-size:1.1rem;user-select:none}.xmas-branch{position:absolute;opacity:.45}.xmas-ball{transform-origin:top center}.led-g,.led-r,.led-w,.led-y{opacity:1}.led-glow{transition:opacity .3s}.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:.35rem;margin-top:1.4rem;cursor:pointer}.scroll-hint span{font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(184,146,42,.55)}.xmas-star{position:absolute;opacity:.45;color:var(--oro2);font-size:1rem}.xmas-divider{display:flex;align-items:center;justify-content:center;gap:.6rem;margin:.9rem auto .7rem;color:rgba(184,146,42,.6);font-size:.75rem}.xmas-divider::after,.xmas-divider::before{content:"";flex:1;max-width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(184,146,42,.5),transparent)}</style>
 
   <div class="gal-hero" style="padding-bottom:3.5rem">
 
@@ -573,7 +335,7 @@
   </div>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 (function(){
   const url = location.href;

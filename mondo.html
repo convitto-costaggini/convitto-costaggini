@@ -15,64 +15,18 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/mondo.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    body { background:#060d10; }
-    #map { width:100%; height:clamp(400px,60vh,680px); z-index:1; background:#0d1f2d; }
-    .leaflet-popup-content-wrapper { background:#0d1f2d; border:1px solid rgba(184,146,42,.4); border-radius:10px; box-shadow:0 12px 32px rgba(0,0,0,.5); color:#fff; }
-    .leaflet-popup-tip { background:#0d1f2d; }
-    .leaflet-popup-close-button { color:rgba(255,255,255,.5)!important; font-size:18px!important; }
-    .popup-inner { padding:.25rem .1rem; min-width:180px; }
-    .popup-type { font-family:'Source Sans 3',sans-serif; font-size:.55rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.4rem; display:block; }
-    .popup-type.alumni  { color:#B8922A; }
-    .popup-type.visitor { color:#4fc3f7; }
-    .popup-type.school  { color:#81c784; }
-    .popup-name { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:#fff; display:block; margin-bottom:.2rem; }
-    .popup-city { font-size:.78rem; color:rgba(255,255,255,.6); margin-bottom:.35rem; }
-    .popup-role { font-size:.78rem; color:rgba(184,146,42,.8); font-style:italic; }
-    .popup-year { font-size:.6rem; color:rgba(255,255,255,.3); margin-top:.35rem; display:block; }
-    .rieti-ring { position:absolute; top:-7px; left:-7px; width:24px; height:24px; border-radius:50%; border:2px solid #B8922A; opacity:.8; }
-    .rieti-dot  { width:12px; height:12px; border-radius:50%; background:#B8922A; border:2px solid #fff; box-shadow:0 0 8px rgba(184,146,42,.7); }
-    .map-legend { position:absolute; bottom:2rem; left:1rem; z-index:1000; background:rgba(13,31,45,.9); border:1px solid rgba(184,146,42,.25); border-radius:8px; padding:.75rem 1rem; backdrop-filter:blur(8px); }
-    .map-legend p { font-family:'Source Sans 3',sans-serif; font-size:.6rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:.5rem; }
-    .leg-close { position:absolute; top:.5rem; right:.5rem; width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.4); color:rgba(255,255,255,.6); font-size:.7rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; }
-    .leg-close:hover { background:rgba(255,255,255,.16); color:#fff; }
-    .leg-row { display:flex; align-items:center; gap:.5rem; margin-bottom:.3rem; font-family:'Source Sans 3',sans-serif; font-size:.65rem; color:rgba(255,255,255,.6); }
-    .leg-dot  { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
-    .mondo-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(184,146,42,.15); }
-    .ms-cell { background:#0a1520; padding:1rem .5rem; text-align:center; }
-    .ms-n { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:#D4AA4A; display:block; line-height:1; }
-    .ms-l { font-family:'Source Sans 3',sans-serif; font-size:.55rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-top:.2rem; display:block; }
-    #pin-modal { display:none; position:fixed; inset:0; z-index:5000; background:rgba(6,13,16,.85); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:1.25rem; }
-    #pin-modal.open { display:flex; }
-    .pin-form { background:#0d1f2d; border:1px solid rgba(184,146,42,.3); border-radius:12px; padding:2rem 1.75rem; width:100%; max-width:420px; }
-    .pin-form h3 { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:300; color:#fff; margin-bottom:1.25rem; }
-    .pin-form h3 em { font-style:italic; color:#D4AA4A; }
-    .pf-label { font-family:'Source Sans 3',sans-serif; font-size:.6rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.4); display:block; margin-bottom:.3rem; margin-top:.9rem; }
-    .pf-input,.pf-select { width:100%; padding:.65rem .9rem; background:rgba(255,255,255,.06); border:1.5px solid rgba(184,146,42,.25); border-radius:6px; color:#fff; font-family:'Source Sans 3',sans-serif; font-size:16px; outline:none; box-sizing:border-box; transition:border-color .2s; }
-    .pf-input:focus,.pf-select:focus { border-color:#B8922A; }
-    .pf-select option { background:#0d1f2d; }
-    .pf-row { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
-    .pf-btns { display:flex; gap:.75rem; margin-top:1.25rem; }
-    .pf-submit { flex:1; padding:.75rem; background:linear-gradient(135deg,#B8922A,#D4AA4A); color:#1a2e1b; border:none; border-radius:6px; font-family:'Source Sans 3',sans-serif; font-size:.72rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; }
-    .pf-cancel { padding:.75rem 1.25rem; background:rgba(255,255,255,.06); color:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.1); border-radius:6px; font-family:'Source Sans 3',sans-serif; font-size:.72rem; font-weight:700; cursor:pointer; }
-    .pin-card { display:flex; align-items:center; gap:1rem; background:rgba(255,255,255,.03); border:1px solid rgba(184,146,42,.1); border-radius:8px; padding:.85rem 1.1rem; margin-bottom:.6rem; cursor:pointer; transition:background .2s; }
-    .pin-card:hover { background:rgba(255,255,255,.07); }
-    .pin-dot-l { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
-    .pin-dot-l.alumni  { background:#B8922A; box-shadow:0 0 6px rgba(184,146,42,.5); }
-    .pin-dot-l.visitor { background:#4fc3f7; box-shadow:0 0 6px rgba(79,195,247,.5); }
-    .pin-dot-l.school  { background:#81c784; box-shadow:0 0 6px rgba(129,199,132,.5); }
-    .data-notice { background:rgba(79,195,247,.08); border:1px solid rgba(79,195,247,.2); border-radius:8px; padding:1rem 1.25rem; margin-bottom:1.5rem; font-size:.82rem; color:rgba(79,195,247,.8); }
-  </style>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>body{background:#060d10}#map{width:100%;height:clamp(400px,60vh,680px);z-index:1}.leaflet-popup-content-wrapper{background:#0d1f2d;border:1px solid rgba(184,146,42,.4);border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.5);color:#fff}#map,.leaflet-popup-tip,.pf-select option{background:#0d1f2d}.leaflet-popup-close-button{color:rgba(255,255,255,.5)!important;font-size:18px!important}.popup-inner{padding:.25rem .1rem;min-width:180px}.map-legend p,.popup-type{font-family:"Source Sans 3",sans-serif;font-weight:800;text-transform:uppercase}.popup-type{font-size:.55rem;letter-spacing:.14em;margin-bottom:.4rem;display:block}.popup-type.alumni{color:#b8922a}.popup-type.visitor{color:#4fc3f7}.popup-type.school{color:#81c784}.popup-name{font-family:"Cormorant Garamond",serif;font-size:1.1rem;font-style:italic;color:#fff;display:block;margin-bottom:.2rem}.popup-city{font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:.35rem}.popup-role{font-size:.78rem;color:rgba(184,146,42,.8);font-style:italic}.popup-year{font-size:.6rem;color:rgba(255,255,255,.3);margin-top:.35rem;display:block}.rieti-ring{position:absolute;top:-7px;left:-7px;width:24px;height:24px;border-radius:50%;border:2px solid #b8922a;opacity:.8}.rieti-dot{width:12px;height:12px;border-radius:50%;background:#b8922a;border:2px solid #fff;box-shadow:0 0 8px rgba(184,146,42,.7)}.map-legend{position:absolute;bottom:2rem;left:1rem;z-index:1000;background:rgba(13,31,45,.9);border:1px solid rgba(184,146,42,.25);border-radius:8px;padding:.75rem 1rem;backdrop-filter:blur(8px)}.map-legend p{font-size:.6rem;letter-spacing:.12em;color:rgba(255,255,255,.4);margin-bottom:.5rem}#pin-modal,.leg-close{align-items:center;justify-content:center}.leg-close,.leg-row{display:flex;color:rgba(255,255,255,.6)}.leg-close{position:absolute;top:.5rem;right:.5rem;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.4);font-size:.7rem;line-height:1;cursor:pointer;padding:0}.leg-close:hover{background:rgba(255,255,255,.16);color:#fff}.leg-row{align-items:center;gap:.5rem;margin-bottom:.3rem;font-family:"Source Sans 3",sans-serif;font-size:.65rem}.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}.mondo-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(184,146,42,.15)}.ms-cell{background:#0a1520;padding:1rem .5rem;text-align:center}.ms-n,.pin-form h3{font-family:"Cormorant Garamond",serif;font-weight:300}.ms-l,.ms-n{display:block}.ms-n{font-size:2rem;color:#d4aa4a;line-height:1}.ms-l{font-family:"Source Sans 3",sans-serif;font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.2rem}#pin-modal{display:none;position:fixed;inset:0;z-index:5000;background:rgba(6,13,16,.85);backdrop-filter:blur(8px);padding:1.25rem}#pin-modal.open{display:flex}.pin-form{background:#0d1f2d;border:1px solid rgba(184,146,42,.3);border-radius:12px;padding:2rem 1.75rem;width:100%;max-width:420px}.pin-form h3{font-size:1.5rem;color:#fff;margin-bottom:1.25rem}.pin-form h3 em{font-style:italic;color:#d4aa4a}.pf-input,.pf-label,.pf-select{font-family:"Source Sans 3",sans-serif}.pf-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-bottom:.3rem;margin-top:.9rem}.pf-input,.pf-select{width:100%;padding:.65rem .9rem;background:rgba(255,255,255,.06);border:1.5px solid rgba(184,146,42,.25);border-radius:6px;color:#fff;font-size:16px;outline:0;box-sizing:border-box;transition:border-color .2s}.pf-input:focus,.pf-select:focus{border-color:#b8922a}.pf-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}.pf-btns{display:flex;gap:.75rem;margin-top:1.25rem}.pf-cancel,.pf-submit{border-radius:6px;font-family:"Source Sans 3",sans-serif;font-size:.72rem;cursor:pointer}.pf-submit{flex:1;padding:.75rem;background:linear-gradient(135deg,#b8922a,#d4aa4a);color:#1a2e1b;border:0;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.pf-cancel{padding:.75rem 1.25rem;background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.1);font-weight:700}.pin-card{display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,.03);border:1px solid rgba(184,146,42,.1);border-radius:8px;padding:.85rem 1.1rem;margin-bottom:.6rem;cursor:pointer;transition:background .2s}.pin-card:hover{background:rgba(255,255,255,.07)}.pin-dot-l{width:12px;height:12px;border-radius:50%;flex-shrink:0}.pin-dot-l.alumni{background:#b8922a;box-shadow:0 0 6px rgba(184,146,42,.5)}.pin-dot-l.visitor{background:#4fc3f7;box-shadow:0 0 6px rgba(79,195,247,.5)}.pin-dot-l.school{background:#81c784;box-shadow:0 0 6px rgba(129,199,132,.5)}.data-notice{background:rgba(79,195,247,.08);border:1px solid rgba(79,195,247,.2);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:.82rem;color:rgba(79,195,247,.8)}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="mondo">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <section style="background:linear-gradient(180deg,#060d10,#0a1520);padding:5rem 1.25rem 2rem">
@@ -189,7 +143,7 @@
 
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 const DEMO=[
   {name:'[<em>Alumni</em> - dato dimostrativo]',city:'Dubai, EAU',role:'Chef · Hotel 5★',type:'alumni',year:'2018',lat:25.2,lng:55.3},

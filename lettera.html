@@ -9,66 +9,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/lettera.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    /* Iconcina penna piumata accanto al titolo */
-    .lt-title-line { white-space:nowrap; }
-    .lt-quill {
-      width:.55em; height:.55em;
-      margin-left:.4em;
-      vertical-align:-.04em;
-      flex-shrink:0;
-      opacity:.85;
-    }
-
-    /* La lettera */
-    .lt-body { background:linear-gradient(160deg,#fdfaf4,#f7f0e4); padding:3rem 1.25rem 5rem; }
-    .lt-carta {
-      max-width:680px; margin:0 auto;
-      background:#fff; border-radius:2px;
-      box-shadow:0 4px 24px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05);
-      padding:3.5rem 3.5rem;
-      position:relative;
-      background-image:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(44,62,45,.04) 28px);
-    }
-    @media(max-width:560px){ .lt-carta { padding:2rem 1.5rem; } }
-
-    /* Effetto carta con margine sinistro */
-    .lt-carta::before {
-      content:''; position:absolute; top:0; bottom:0; left:80px;
-      width:1px; background:rgba(184,146,42,.15);
-    }
-
-    .lt-testo { font-family:var(--fd); font-size:1.05rem; line-height:2; color:#2a2010; margin-bottom:1.5rem; }
-    .lt-testo p { margin-bottom:1.5rem; }
-    .lt-testo p:last-child { margin-bottom:0; }
-    .lt-testo strong { font-weight:600; color:var(--bosco); }
-    .lt-testo em { font-style:italic; }
-
-    /* Firma */
-    .lt-firma { margin-top:3rem; text-align:right; }
-    .lt-firma-nome { font-family:var(--fd); font-size:1.3rem; font-style:italic; color:var(--bosco); }
-    .lt-firma-meta { font-family:var(--fu); font-size:.65rem; color:rgba(44,62,45,.4); letter-spacing:.1em; text-transform:uppercase; margin-top:.25rem; }
-
-    /* Navigatore lettere */
-    .lt-nav-bar { background:var(--bosco); padding:1.25rem; display:flex; align-items:center; justify-content:center; gap:.75rem; flex-wrap:wrap; }
-    .lt-nav-btn { font-family:var(--fu); font-size:.6rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.45rem .9rem; border-radius:20px; border:1.5px solid rgba(184,146,42,.3); background:none; color:rgba(245,240,232,.5); cursor:pointer; transition:all .2s; }
-    .lt-nav-btn:hover, .lt-nav-btn.on { background:rgba(184,146,42,.2); border-color:var(--oro2); color:var(--oro2); }
-
-    /* Scrivi tu */
-    .lt-scrivi { background:var(--av2); padding:4rem 1.25rem; text-align:center; }
-    .lt-scrivi h2 { font-family:var(--fd); font-size:clamp(1.4rem,4vw,2rem); font-weight:300; color:var(--bosco); margin-bottom:.5rem; }
-    .lt-scrivi h2 em { font-style:italic; color:var(--oro); }
-    .lt-scrivi p { color:var(--txt2); max-width:480px; margin:.5rem auto 1.5rem; font-size:.88rem; line-height:1.8; }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.lt-title-line{white-space:nowrap}.lt-quill{width:.55em;height:.55em;margin-left:.4em;vertical-align:-.04em;flex-shrink:0;opacity:.85}.lt-body{background:linear-gradient(160deg,#fdfaf4,#f7f0e4);padding:3rem 1.25rem 5rem}.lt-carta{max-width:680px;margin:0 auto;background:#fff;border-radius:2px;box-shadow:0 4px 24px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.05);padding:3.5rem;position:relative;background-image:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(44,62,45,.04) 28px)}@media (max-width:560px){.lt-carta{padding:2rem 1.5rem}}.lt-carta::before{content:"";position:absolute;top:0;bottom:0;left:80px;width:1px;background:rgba(184,146,42,.15)}.lt-testo{font-family:var(--fd);font-size:1.05rem;line-height:2;color:#2a2010}.lt-testo,.lt-testo p{margin-bottom:1.5rem}.lt-testo p:last-child{margin-bottom:0}.lt-testo strong{font-weight:600;color:var(--bosco)}.lt-scrivi h2 em,.lt-testo em{font-style:italic}.lt-firma{margin-top:3rem;text-align:right}.lt-firma-nome,.lt-scrivi h2{font-family:var(--fd);color:var(--bosco)}.lt-firma-nome{font-size:1.3rem;font-style:italic}.lt-firma-meta{font-family:var(--fu);font-size:.65rem;color:rgba(44,62,45,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:.25rem}.lt-nav-bar{background:var(--bosco);padding:1.25rem;display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap}.lt-nav-btn{font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.45rem .9rem;border-radius:20px;border:1.5px solid rgba(184,146,42,.3);background:0 0;color:rgba(245,240,232,.5);cursor:pointer;transition:all .2s}.lt-nav-btn.on,.lt-nav-btn:hover{background:rgba(184,146,42,.2);border-color:var(--oro2);color:var(--oro2)}.lt-scrivi{background:var(--av2);padding:4rem 1.25rem;text-align:center}.lt-scrivi h2{font-size:clamp(1.4rem,4vw,2rem);font-weight:300;margin-bottom:.5rem}.lt-scrivi h2 em{color:var(--oro)}.lt-scrivi p{color:var(--txt2);max-width:480px;margin:.5rem auto 1.5rem;font-size:.88rem;line-height:1.8}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="lettera">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
@@ -110,7 +61,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 const LETTERE = [
   {

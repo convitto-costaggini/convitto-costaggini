@@ -9,138 +9,18 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/domanda-ammissione.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    /* ── HERO ── */
-
-
-    /* ── CARTA ── */
-    .da-paper { max-width:780px; margin:0 auto; }
-
-    /* Sezione del form */
-    .da-section { background:#fff; border-radius:10px; box-shadow:0 2px 16px rgba(0,0,0,.07); margin-bottom:1.5rem; overflow:hidden; }
-    .da-section-hdr { background:var(--bosco); padding:1rem 1.5rem; display:flex; align-items:center; gap:.75rem; }
-    .da-section-hdr h2 { font-family:var(--fu); font-size:.68rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--oro2); margin:0; }
-    .da-section-hdr span { font-family:var(--fd); font-size:.85rem; font-style:italic; color:rgba(245,240,232,.45); }
-    .da-section-body { padding:1.5rem; }
-
-    /* Grid campi */
-    .da-grid { display:grid; gap:.85rem; }
-    .da-grid-2 { grid-template-columns:1fr 1fr; }
-    .da-grid-3 { grid-template-columns:1fr 1fr 1fr; }
-    @media(max-width:580px){ .da-grid-2,.da-grid-3 { grid-template-columns:1fr; } }
-
-    /* Campo */
-    .da-field { display:flex; flex-direction:column; gap:.3rem; }
-    .da-field label { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--bosco2); }
-    .da-field label .req { color:#dc2626; margin-left:2px; }
-    .da-field input, .da-field select, .da-field textarea {
-      padding:.65rem .9rem; border:1.5px solid #d1d5db; border-radius:6px;
-      font-family:var(--fu); font-size:.88rem; color:#1a1a1a;
-      outline:none; transition:border-color .2s, box-shadow .2s;
-      background:#fafafa;
-    }
-    .da-field input:focus, .da-field select:focus, .da-field textarea:focus {
-      border-color:var(--bosco); box-shadow:0 0 0 3px rgba(44,62,45,.1); background:#fff;
-    }
-    .da-field textarea { resize:vertical; min-height:80px; }
-    .da-field input::placeholder { color:#9ca3af; }
-
-    /* Checkbox / Radio */
-    .da-check-row { display:flex; align-items:center; gap:.6rem; }
-    .da-check-row input[type=checkbox], .da-check-row input[type=radio] {
-      width:18px; height:18px; accent-color:var(--bosco); cursor:pointer; flex-shrink:0;
-    }
-    .da-check-row label { font-family:var(--fu); font-size:.82rem; color:#374151; cursor:pointer; line-height:1.5; }
-
-    /* Box rette */
-    .da-rette { background:linear-gradient(135deg,#f0f7f0,#f7f4ec); border:1px solid rgba(44,62,45,.15); border-radius:8px; padding:1.25rem; margin-bottom:1rem; }
-    .da-rette h3 { font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--bosco); margin-bottom:.85rem; }
-    .da-rata { display:flex; justify-content:space-between; align-items:center; padding:.55rem 0; border-bottom:1px solid rgba(44,62,45,.08); }
-    .da-rata:last-child { border-bottom:none; font-weight:700; color:var(--bosco); }
-    .da-rata-label { font-size:.83rem; color:#374151; }
-    .da-rata-label small { display:block; font-size:.72rem; color:#6b7280; margin-top:.1rem; }
-    .da-rata-amount { font-family:var(--fd); font-size:1.1rem; font-weight:400; color:var(--bosco); }
-    .da-rata:last-child .da-rata-amount { font-size:1.25rem; color:var(--oro); }
-
-    /* Allegati checklist */
-    .da-allegati { display:flex; flex-direction:column; gap:.5rem; }
-    .da-allegato { display:flex; align-items:flex-start; gap:.65rem; padding:.65rem .85rem; background:#f9fafb; border-radius:6px; border:1px solid #e5e7eb; cursor:pointer; transition:border-color .2s; }
-    .da-allegato:hover { border-color:var(--bosco); }
-    .da-allegato input { margin-top:2px; width:16px; height:16px; accent-color:var(--bosco); flex-shrink:0; }
-    .da-allegato-text { font-size:.83rem; color:#374151; line-height:1.5; }
-    .da-allegato-text strong { color:#111; }
-
-    /* Card upload documenti */
-    .da-doc-intro { font-size:.83rem; color:#374151; margin-bottom:1.25rem; line-height:1.7; background:#f0f7f0; border:1px solid rgba(44,62,45,.15); border-radius:8px; padding:1rem 1.15rem; }
-    .da-doc-intro strong { color:var(--bosco); }
-    .da-docs { display:flex; flex-direction:column; gap:.85rem; }
-    .da-doc { background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; padding:.85rem 1rem; transition:border-color .2s; }
-    .da-doc:has(.da-doc-file:not(:placeholder-shown)) { border-color:var(--bosco); background:#f6faf6; }
-    .da-doc-hdr { font-size:.83rem; color:#111; line-height:1.5; margin-bottom:.55rem; }
-    .da-doc-hdr strong { color:var(--bosco); }
-    .da-doc-row { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; }
-    .da-doc-file { font-family:var(--fu); font-size:.76rem; color:#374151; flex:1; min-width:180px; }
-    .da-doc-file::file-selector-button {
-      font-family:var(--fu); font-size:.68rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
-      padding:.5rem 1rem; border-radius:6px; border:1.5px solid var(--bosco); background:#fff; color:var(--bosco);
-      cursor:pointer; margin-right:.75rem; transition:background .2s;
-    }
-    .da-doc-file::file-selector-button:hover { background:var(--bosco); color:#fff; }
-    .da-doc-status { font-family:var(--fu); font-size:.72rem; font-weight:700; margin-top:.5rem; line-height:1.5; }
-    .da-doc-status.ok { color:#166534; }
-    .da-doc-status.warn { color:#b45309; }
-    .da-doc-status.err { color:#b91c1c; }
-    .da-doc-alt { display:flex; align-items:center; gap:.5rem; margin-top:.6rem; padding-top:.6rem; border-top:1px dashed #e5e7eb; }
-    .da-doc-alt input { width:15px; height:15px; accent-color:var(--bosco); flex-shrink:0; cursor:pointer; }
-    .da-doc-alt label { font-family:var(--fu); font-size:.72rem; color:#6b7280; cursor:pointer; }
-
-    /* Dichiarazioni */
-    .da-dichiarazione { background:#fefce8; border:1px solid #fde68a; border-radius:8px; padding:1.1rem 1.25rem; margin-bottom:.85rem; }
-    .da-dichiarazione p { font-size:.83rem; color:#374151; line-height:1.7; margin:0 0 .75rem; }
-    .da-dichiarazione p:last-child { margin:0; }
-
-    /* Bottoni */
-    .da-footer { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; justify-content:space-between; padding:1.5rem; background:#f9fafb; border-radius:0 0 10px 10px; border-top:1px solid #e5e7eb; }
-    .btn-invia { font-family:var(--fu); font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; padding:.85rem 2rem; background:linear-gradient(135deg,var(--bosco),#1a3a1b); color:#fff; border:none; border-radius:8px; cursor:pointer; display:inline-flex; align-items:center; gap:.5rem; transition:opacity .2s; }
-    .btn-invia:hover { opacity:.88; }
-    .btn-invia:disabled { opacity:.5; cursor:not-allowed; }
-    .btn-stampa { font-family:var(--fu); font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.75rem 1.25rem; background:none; border:1.5px solid #d1d5db; border-radius:8px; cursor:pointer; color:#374151; transition:all .2s; }
-    .btn-stampa:hover { border-color:var(--bosco); color:var(--bosco); }
-
-    /* Successo */
-    .da-success { display:none; background:linear-gradient(135deg,#f0fdf4,#f7fef4); border:1px solid #bbf7d0; border-radius:12px; padding:2.5rem; text-align:center; }
-    .da-success h2 { font-family:var(--fd); font-size:1.8rem; font-weight:300; color:var(--bosco); margin-bottom:.5rem; }
-    .da-success p { font-family:var(--fu); font-size:.85rem; color:#374151; line-height:1.75; max-width:460px; margin:0 auto .85rem; }
-
-    /* Errore */
-    .da-error { display:none; background:linear-gradient(135deg,#fef2f2,#fff5f5); border:1px solid #fecaca; border-radius:12px; padding:2.25rem; text-align:center; margin-top:1.5rem; }
-    .da-error h2 { font-family:var(--fd); font-size:1.5rem; font-weight:300; color:#b91c1c; margin-bottom:.5rem; }
-    .da-error p { font-family:var(--fu); font-size:.85rem; color:#374151; line-height:1.75; max-width:460px; margin:0 auto .75rem; }
-    .da-error .da-error-contatti { font-size:.78rem; color:#6b7280; }
-
-    /* Note */
-    .da-nota { font-family:var(--fu); font-size:.65rem; color:#6b7280; line-height:1.6; }
-    .da-nota strong { color:#374151; }
-
-    /* Progress */
-    .da-progress { background:#e5e7eb; border-radius:4px; height:4px; margin-bottom:2rem; }
-    .da-progress-fill { height:100%; background:linear-gradient(90deg,var(--bosco),var(--oro)); border-radius:4px; transition:width .4s; }
-
-    @media print {
-      .page-hero, .da-footer, nav, footer, .da-progress, .da-error { display:none !important; }
-      .da-section { box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; }
-    }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.da-paper{max-width:780px;margin:0 auto}.da-section{background:#fff;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,.07);margin-bottom:1.5rem;overflow:hidden}.da-section-hdr{background:var(--bosco);padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem}.da-field label,.da-section-hdr h2{font-family:var(--fu);font-weight:800;text-transform:uppercase}.da-section-hdr h2{font-size:.68rem;letter-spacing:.16em;color:var(--oro2);margin:0}.da-section-hdr span{font-family:var(--fd);font-size:.85rem;font-style:italic;color:rgba(245,240,232,.45)}.da-section-body{padding:1.5rem}.da-grid{display:grid;gap:.85rem}.da-grid-2{grid-template-columns:1fr 1fr}.da-grid-3{grid-template-columns:1fr 1fr 1fr}@media (max-width:580px){.da-grid-2,.da-grid-3{grid-template-columns:1fr}}.da-field{display:flex;flex-direction:column;gap:.3rem}.da-field label{font-size:.6rem;letter-spacing:.1em;color:var(--bosco2)}.da-field label .req{color:#dc2626;margin-left:2px}.da-field input,.da-field select,.da-field textarea{padding:.65rem .9rem;border:1.5px solid #d1d5db;border-radius:6px;font-family:var(--fu);font-size:.88rem;color:#1a1a1a;outline:0;transition:border-color .2s,box-shadow .2s;background:#fafafa}.da-field input:focus,.da-field select:focus,.da-field textarea:focus{border-color:var(--bosco);box-shadow:0 0 0 3px rgba(44,62,45,.1);background:#fff}.da-field textarea{resize:vertical;min-height:80px}.da-field input::placeholder{color:#9ca3af}.da-check-row{display:flex;align-items:center;gap:.6rem}.da-check-row input[type=checkbox],.da-check-row input[type=radio]{width:18px;height:18px;accent-color:var(--bosco);cursor:pointer;flex-shrink:0}.da-check-row label{font-family:var(--fu);font-size:.82rem;color:#374151;cursor:pointer;line-height:1.5}.da-rette{background:linear-gradient(135deg,#f0f7f0,#f7f4ec);border:1px solid rgba(44,62,45,.15);border-radius:8px;padding:1.25rem;margin-bottom:1rem}.da-rette h3{font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--bosco);margin-bottom:.85rem}.da-rata{display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid rgba(44,62,45,.08)}.da-rata:last-child{border-bottom:none;font-weight:700;color:var(--bosco)}.da-rata-label{font-size:.83rem;color:#374151}.da-rata-label small{display:block;font-size:.72rem;color:#6b7280;margin-top:.1rem}.da-rata-amount{font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--bosco)}.da-rata:last-child .da-rata-amount{font-size:1.25rem;color:var(--oro)}.da-allegati{display:flex;flex-direction:column;gap:.5rem}.da-allegato{display:flex;align-items:flex-start;gap:.65rem;padding:.65rem .85rem;background:#f9fafb;border-radius:6px;border:1px solid #e5e7eb;cursor:pointer;transition:border-color .2s}.da-allegato:hover{border-color:var(--bosco)}.da-allegato input{margin-top:2px;width:16px;height:16px;accent-color:var(--bosco);flex-shrink:0}.da-allegato-text,.da-doc-intro{font-size:.83rem;color:#374151;line-height:1.5}.da-allegato-text strong{color:#111}.da-doc-intro{margin-bottom:1.25rem;line-height:1.7;background:#f0f7f0;border:1px solid rgba(44,62,45,.15);border-radius:8px;padding:1rem 1.15rem}.da-doc-hdr strong,.da-doc-intro strong{color:var(--bosco)}.da-docs{display:flex;flex-direction:column;gap:.85rem}.da-doc{background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:.85rem 1rem;transition:border-color .2s}.da-doc:has(.da-doc-file:not(:placeholder-shown)){border-color:var(--bosco);background:#f6faf6}.da-doc-hdr{font-size:.83rem;color:#111;line-height:1.5;margin-bottom:.55rem}.da-doc-row{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}.da-doc-file{font-family:var(--fu);font-size:.76rem;color:#374151;flex:1;min-width:180px}.da-doc-file::file-selector-button{font-family:var(--fu);font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:.5rem 1rem;border-radius:6px;border:1.5px solid var(--bosco);background:#fff;color:var(--bosco);cursor:pointer;margin-right:.75rem;transition:background .2s}.da-doc-file::file-selector-button:hover{background:var(--bosco);color:#fff}.da-doc-alt label,.da-doc-status{font-family:var(--fu);font-size:.72rem}.da-doc-status{font-weight:700;margin-top:.5rem;line-height:1.5}.da-doc-status.ok{color:#166534}.da-doc-status.warn{color:#b45309}.da-doc-status.err{color:#b91c1c}.da-doc-alt{display:flex;align-items:center;gap:.5rem;margin-top:.6rem;padding-top:.6rem;border-top:1px dashed #e5e7eb}.da-doc-alt input{width:15px;height:15px;accent-color:var(--bosco);flex-shrink:0;cursor:pointer}.da-doc-alt label{color:#6b7280;cursor:pointer}.da-dichiarazione{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:1.1rem 1.25rem;margin-bottom:.85rem}.da-dichiarazione p{font-size:.83rem;color:#374151;line-height:1.7;margin:0 0 .75rem}.da-dichiarazione p:last-child{margin:0}.da-footer{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:1.5rem;background:#f9fafb;border-radius:0 0 10px 10px;border-top:1px solid #e5e7eb}.btn-invia{font-family:var(--fu);font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.85rem 2rem;background:linear-gradient(135deg,var(--bosco),#1a3a1b);color:#fff;border:0;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:opacity .2s}.btn-invia:hover{opacity:.88}.btn-invia:disabled{opacity:.5;cursor:not-allowed}.btn-stampa{font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1.25rem;background:0 0;border:1.5px solid #d1d5db;border-radius:8px;cursor:pointer;color:#374151;transition:all .2s}.btn-stampa:hover{border-color:var(--bosco);color:var(--bosco)}.da-error,.da-success{display:none;border-radius:12px;text-align:center}.da-success{background:linear-gradient(135deg,#f0fdf4,#f7fef4);border:1px solid #bbf7d0;padding:2.5rem}.da-error h2,.da-success h2{font-family:var(--fd);font-weight:300;margin-bottom:.5rem}.da-success h2{font-size:1.8rem;color:var(--bosco)}.da-error p,.da-success p{font-family:var(--fu);font-size:.85rem;line-height:1.75;max-width:460px}.da-success p{color:#374151;margin:0 auto .85rem}.da-error{background:linear-gradient(135deg,#fef2f2,#fff5f5);border:1px solid #fecaca;padding:2.25rem;margin-top:1.5rem}.da-error h2{font-size:1.5rem;color:#b91c1c}.da-error p{margin:0 auto .75rem}.da-error .da-error-contatti,.da-nota{font-size:.78rem;color:#6b7280}.da-nota{font-family:var(--fu);font-size:.65rem;line-height:1.6}.da-error p,.da-nota strong{color:#374151}.da-progress{background:#e5e7eb;border-radius:4px;height:4px;margin-bottom:2rem}.da-progress-fill{height:100%;background:linear-gradient(90deg,var(--bosco),var(--oro));border-radius:4px;transition:width .4s}@media print{.da-error,.da-footer,.da-progress,.page-hero,footer,nav{display:none!important}.da-section{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
 </head>
 <body data-page="domanda-ammissione">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main" aria-label="Domanda di ammissione al Convitto">
 
   <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
@@ -487,7 +367,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 const CONTACT_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
 const RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';

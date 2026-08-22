@@ -14,8 +14,9 @@
   <title>Il Convitto | "Costaggini" — Rieti</title>
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/il-convitto.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,66 +45,15 @@
   }
 }
 </script>
-  <style>
-
-    .storia-grid { display: grid; gap: 2rem; }
-    .storia-img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-radius: 6px 6px 0 0; display: block; }
-    @media(min-width:900px){ .storia-grid { grid-template-columns:1fr; align-items: start; } .storia-img { max-height: 320px; } }
-
-    .mission-strip { background: var(--bosco); padding: 3rem 1rem; }
-    .mission-strip .lbl { color: var(--oro2); }
-    .mission-strip .lbl::before { background: var(--oro2); }
-    .mission-strip h2 { color: var(--av); }
-    .mission-strip h2 em { color: var(--oro3); }
-    .mission-strip p { color: rgba(245,240,232,.72); }
-    .mission-grid { display: grid; gap: 1rem; margin-top: 2rem; }
-    .mcard { background: rgba(255,255,255,.06); border: 1px solid rgba(184,146,42,.18); border-radius: 8px; padding: 1.5rem; }
-    .mcard-n { font-family: var(--fd); font-size: 2.8rem; font-weight: 300; color: var(--oro3); display: block; line-height: 1; margin-bottom: .4rem; }
-    .mcard h3 { font-family: var(--fu); font-size: .82rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--av); margin-bottom: .3rem; }
-    .mcard p { font-size: .82rem; color: rgba(245,240,232,.6); margin-bottom: 0; }
-    @media(min-width:560px){ .mission-grid { grid-template-columns:1fr; } }
-    @media(min-width:900px){ .mission-grid { grid-template-columns: repeat(4,1fr); } .mission-strip { padding: 5rem 1.5rem; } }
-
-    .staff-grid { display: grid; gap: 1.25rem; margin-top: 2rem; }
-    .scard { background: var(--bco); border: 1px solid var(--av3); border-radius: 8px; overflow: hidden; }
-    .scard-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: top; }
-    .scard-body { padding: 1rem 1.1rem; }
-    .scard-role { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--oro); margin-bottom: .2rem; }
-    .scard-body h3 { font-size: 1.05rem; margin-bottom: .2rem; }
-    .scard-body p { font-size: .8rem; margin-bottom: 0; }
-    @media(min-width:480px){ .staff-grid { grid-template-columns:1fr; } }
-    @media(min-width:768px){ .staff-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media(min-width:1024px){ .staff-grid { grid-template-columns: repeat(4, 1fr); } }
-
-    .timeline-h { position: relative; margin-top: 2rem; padding-left: 1.4rem; }
-    .timeline-h::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg,var(--oro2),rgba(212,170,74,.1)); }
-    .th-item { position: relative; padding: 0 0 2rem 1.5rem; }
-    .th-item:last-child { padding-bottom: 0; }
-    .th-dot { position: absolute; left: -.95rem; top: .1rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: linear-gradient(135deg, var(--oro2), var(--oro3)); display: flex; align-items: center; justify-content: center; font-size: .68rem; font-weight: 700; color: var(--bosco); }
-    .th-year { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--oro); margin-bottom: .18rem; }
-    .th-title { font-family: var(--fd); font-size: 1.2rem; font-weight: 400; color: var(--bosco); margin-bottom: .28rem; }
-    .th-desc { font-size: .82rem; color: var(--txt2); line-height: 1.65; margin-bottom: 0; }
-  @media(min-width:600px){.cv-grid-2{grid-template-columns:1fr 1fr}}</style>
-  <style>
-    /* Collegamenti rapidi nell'hero verde */
-    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
-    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:var(--ease); }
-    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
-    /* su smartphone i 4 pulsanti vanno a due a due */
-    @media(max-width:560px){
-      .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
-      .hero-jump a { padding:.55rem .5rem; }
-    }
-    /* margine di scroll: l'ancora non finisce sotto l'header fisso */
-    #storia, #mission, #valori, #staff { scroll-margin-top: 90px; }
-  </style>
+  <style>.storia-grid{display:grid;gap:2rem}.storia-img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:6px 6px 0 0;display:block}@media (min-width:900px){.storia-grid{grid-template-columns:1fr;align-items:start}.storia-img{max-height:320px}}.mission-strip{background:var(--bosco);padding:3rem 1rem}.mission-strip .lbl{color:var(--oro2)}.mission-strip .lbl::before{background:var(--oro2)}.mcard h3,.mission-strip h2{color:var(--av)}.mission-strip h2 em{color:var(--oro3)}.mission-strip p{color:rgba(245,240,232,.72)}.mission-grid{display:grid;gap:1rem;margin-top:2rem}.mcard{background:rgba(255,255,255,.06);border:1px solid rgba(184,146,42,.18);border-radius:8px;padding:1.5rem}.mcard-n{font-family:var(--fd);font-size:2.8rem;font-weight:300;color:var(--oro3);display:block;line-height:1;margin-bottom:.4rem}.mcard h3{font-family:var(--fu);font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem}.mcard p{font-size:.82rem;color:rgba(245,240,232,.6);margin-bottom:0}@media (min-width:560px){.mission-grid{grid-template-columns:1fr}}@media (min-width:900px){.mission-grid{grid-template-columns:repeat(4,1fr)}.mission-strip{padding:5rem 1.5rem}}.staff-grid{display:grid;gap:1.25rem;margin-top:2rem}.scard{background:var(--bco);border:1px solid var(--av3);border-radius:8px;overflow:hidden}.scard-img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top}.scard-body{padding:1rem 1.1rem}.scard-role{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--oro);margin-bottom:.2rem}.scard-body h3{font-size:1.05rem;margin-bottom:.2rem}.scard-body p{font-size:.8rem;margin-bottom:0}@media (min-width:480px){.staff-grid{grid-template-columns:1fr}}@media (min-width:768px){.staff-grid{grid-template-columns:repeat(3,1fr)}}@media (min-width:1024px){.staff-grid{grid-template-columns:repeat(4,1fr)}}.timeline-h{position:relative;margin-top:2rem;padding-left:1.4rem}.timeline-h::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--oro2),rgba(212,170,74,.1))}.th-item{position:relative;padding:0 0 2rem 1.5rem}.th-item:last-child{padding-bottom:0}.th-dot,.th-year{font-size:.68rem;font-weight:700}.th-dot{position:absolute;left:-.95rem;top:.1rem;width:1.9rem;height:1.9rem;border-radius:50%;background:linear-gradient(135deg,var(--oro2),var(--oro3));display:flex;align-items:center;justify-content:center;color:var(--bosco)}.th-year{letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:.18rem}.th-title{font-family:var(--fd);font-size:1.2rem;font-weight:400;color:var(--bosco);margin-bottom:.28rem}.th-desc{font-size:.82rem;color:var(--txt2);line-height:1.65;margin-bottom:0}@media (min-width:600px){.cv-grid-2{grid-template-columns:1fr 1fr}}</style>
+  <style>.hero-jump{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.35rem}.hero-jump a{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--av,#F5F0E8);text-decoration:none;border:1px solid rgba(184,146,42,.6);background:rgba(255,255,255,.06);padding:.55rem 1rem;border-radius:40px;min-height:40px;transition:var(--ease)}.hero-jump a:focus-visible,.hero-jump a:hover{background:var(--oro,#B8922A);border-color:var(--oro,#B8922A);color:var(--bosco,#2C3E2D)}@media (max-width:560px){.hero-jump{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.hero-jump a{padding:.55rem .5rem}}#mission,#staff,#storia,#valori{scroll-margin-top:90px}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="il-convitto">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- PAGE HERO -->
@@ -194,7 +144,7 @@
       </div>
     </div>
   </section>
-  <style>#val-grid { grid-template-columns: 1fr; } @media(min-width:640px){ #val-grid { grid-template-columns:1fr; } }</style>
+  <style>#val-grid{grid-template-columns:1fr}@media (min-width:640px){#val-grid{grid-template-columns:1fr}}</style>
 
   <!-- ORGANIGRAMMA / STAFF -->
   <section id="staff" style="background:var(--bco)">
@@ -253,6 +203,6 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 </body>
 </html>

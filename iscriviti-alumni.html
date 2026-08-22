@@ -9,100 +9,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/iscriviti-alumni.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    /* ANTEPRIMA CARD */
-    .ia-preview { background:#0d150d; border-top:1px solid rgba(184,146,42,.1); padding:2.5rem 1.25rem; }
-    .ia-preview-label { font-family:var(--fu); font-size:.58rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--oro2); text-align:center; margin-bottom:1.25rem; }
-    .ia-card-preview {
-      max-width:280px; margin:0 auto;
-      background:var(--bosco); border-radius:10px; overflow:hidden;
-      border:1px solid rgba(184,146,42,.2);
-      box-shadow:0 16px 48px rgba(0,0,0,.5);
-    }
-    .ia-card-avatar {
-      width:100%; aspect-ratio:1;
-      background:linear-gradient(135deg,rgba(245,240,232,.08),rgba(245,240,232,.03));
-      display:flex; align-items:center; justify-content:center;
-      border-bottom:1px solid rgba(184,146,42,.1);
-      font-family:var(--fd); font-size:4rem; font-style:italic; color:rgba(184,146,42,.5);
-      transition:all .3s;
-    }
-    .ia-card-body { padding:1.25rem; }
-    .ia-card-name { font-family:var(--fd); font-size:1.2rem; color:var(--av); margin-bottom:.2rem; min-height:1.4em; }
-    .ia-card-role { font-family:var(--fu); font-size:.6rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--oro2); margin-bottom:.7rem; min-height:1em; }
-    .ia-card-quote { font-size:.82rem; color:rgba(245,240,232,.65); line-height:1.75; font-style:italic; min-height:3em; }
-    .ia-card-years { font-family:var(--fu); font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(245,240,232,.3); margin-top:.75rem; }
-
-    /* FORM */
-    .ia-form-wrap { max-width:680px; margin:0 auto; padding:3rem 1.25rem 5rem; }
-
-    .ia-section { background:#141e14; border:1px solid rgba(184,146,42,.15); border-radius:10px; overflow:hidden; margin-bottom:1.25rem; }
-    .ia-section-hdr { background:rgba(44,62,45,.6); padding:.9rem 1.25rem; display:flex; align-items:center; gap:.65rem; border-bottom:1px solid rgba(184,146,42,.1); }
-    .ia-section-hdr h2 { font-family:var(--fu); font-size:.62rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--oro2); margin:0; }
-    .ia-section-hdr span { font-family:var(--fd); font-size:.8rem; font-style:italic; color:rgba(245,240,232,.35); }
-    .ia-section-body { padding:1.25rem; }
-
-    .ia-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:.85rem; }
-    @media(max-width:520px){ .ia-grid-2 { grid-template-columns:1fr; } }
-
-    .ia-field { display:flex; flex-direction:column; gap:.3rem; margin-bottom:.75rem; }
-    .ia-field:last-child { margin-bottom:0; }
-    .ia-label { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--oro2); }
-    .ia-label .req { color:#f87171; margin-left:2px; }
-    .ia-input, .ia-select, .ia-textarea {
-      padding:.7rem 1rem; background:rgba(255,255,255,.06);
-      border:1.5px solid rgba(184,146,42,.2); border-radius:7px;
-      color:#fff; font-family:var(--fu); font-size:.88rem;
-      outline:none; transition:border-color .2s;
-      width:100%; box-sizing:border-box;
-    }
-    .ia-input:focus, .ia-select:focus, .ia-textarea:focus { border-color:var(--oro2); background:rgba(255,255,255,.09); }
-    .ia-input::placeholder, .ia-textarea::placeholder { color:rgba(255,255,255,.2); }
-    .ia-select { background:#141e14; }
-    .ia-select option { background:#141e14; }
-    .ia-textarea { resize:vertical; min-height:90px; font-family:var(--fd); font-style:italic; font-size:.95rem; }
-    .ia-charcount { font-family:var(--fu); font-size:.58rem; color:rgba(255,255,255,.25); text-align:right; margin-top:.2rem; }
-
-    /* Checkbox */
-    .ia-check { display:flex; align-items:flex-start; gap:.65rem; cursor:pointer; }
-    .ia-check input { width:18px; height:18px; accent-color:var(--oro); flex-shrink:0; margin-top:2px; }
-    .ia-check-label { font-family:var(--fu); font-size:.78rem; color:rgba(245,240,232,.6); line-height:1.6; }
-    .ia-check-label a { color:var(--oro2); }
-
-    /* Progress */
-    .ia-progress { height:3px; background:rgba(255,255,255,.08); border-radius:2px; margin-bottom:2rem; }
-    .ia-progress-fill { height:100%; background:linear-gradient(90deg,var(--bosco),var(--oro)); border-radius:2px; transition:width .4s; width:0%; }
-
-    /* Submit */
-    .ia-submit {
-      width:100%; padding:1rem; margin-top:1.25rem;
-      background:linear-gradient(135deg,var(--bosco),#1a3a1b);
-      color:#fff; border:none; border-radius:8px;
-      font-family:var(--fu); font-size:.78rem; font-weight:800;
-      letter-spacing:.14em; text-transform:uppercase;
-      cursor:pointer; display:flex; align-items:center;
-      justify-content:center; gap:.5rem; transition:opacity .2s;
-      border:1px solid rgba(184,146,42,.25);
-    }
-    .ia-submit:hover { opacity:.88; }
-
-    .ia-note { font-family:var(--fu); font-size:.65rem; color:rgba(245,240,232,.3); line-height:1.7; margin-top:1rem; text-align:center; }
-
-    /* Successo */
-    .ia-success { display:none; text-align:center; background:#141e14; border:1px solid rgba(184,146,42,.2); border-radius:12px; padding:3rem 2rem; margin-top:1.25rem; }
-    .ia-success h2 { font-family:var(--fd); font-size:2rem; font-weight:300; color:#fff; margin-bottom:.5rem; }
-    .ia-success h2 em { font-style:italic; color:var(--oro3); }
-    .ia-success p { font-family:var(--fu); font-size:.82rem; color:rgba(245,240,232,.55); line-height:1.75; max-width:420px; margin:0 auto .85rem; }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.ia-preview{background:#0d150d;border-top:1px solid rgba(184,146,42,.1);padding:2.5rem 1.25rem}.ia-preview-label{font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--oro2);text-align:center;margin-bottom:1.25rem}.ia-card-preview{max-width:280px;margin:0 auto;background:var(--bosco);border-radius:10px;overflow:hidden;border:1px solid rgba(184,146,42,.2);box-shadow:0 16px 48px rgba(0,0,0,.5)}.ia-card-avatar,.ia-section-hdr span{font-family:var(--fd);font-style:italic}.ia-card-avatar{width:100%;aspect-ratio:1;background:linear-gradient(135deg,rgba(245,240,232,.08),rgba(245,240,232,.03));display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(184,146,42,.1);font-size:4rem;color:rgba(184,146,42,.5);transition:all .3s}.ia-card-body{padding:1.25rem}.ia-card-name{font-family:var(--fd);font-size:1.2rem;color:var(--av);margin-bottom:.2rem;min-height:1.4em}.ia-card-role{font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2);margin-bottom:.7rem;min-height:1em}.ia-card-quote{font-size:.82rem;color:rgba(245,240,232,.65);line-height:1.75;font-style:italic;min-height:3em}.ia-card-years,.ia-section-hdr h2{font-family:var(--fu);text-transform:uppercase}.ia-card-years{font-size:.58rem;font-weight:700;letter-spacing:.1em;color:rgba(245,240,232,.3);margin-top:.75rem}.ia-form-wrap{max-width:680px;margin:0 auto;padding:3rem 1.25rem 5rem}.ia-section{background:#141e14;border:1px solid rgba(184,146,42,.15);border-radius:10px;overflow:hidden;margin-bottom:1.25rem}.ia-section-hdr{background:rgba(44,62,45,.6);padding:.9rem 1.25rem;display:flex;align-items:center;gap:.65rem;border-bottom:1px solid rgba(184,146,42,.1)}.ia-section-hdr h2{font-size:.62rem;font-weight:800;letter-spacing:.16em;color:var(--oro2);margin:0}.ia-section-hdr span{font-size:.8rem;color:rgba(245,240,232,.35)}.ia-section-body{padding:1.25rem}.ia-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}@media (max-width:520px){.ia-grid-2{grid-template-columns:1fr}}.ia-field{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.75rem}.ia-field:last-child{margin-bottom:0}.ia-label{font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--oro2)}.ia-label .req{color:#f87171;margin-left:2px}.ia-input,.ia-select{font-family:var(--fu);font-size:.88rem}.ia-input,.ia-select,.ia-textarea{padding:.7rem 1rem;background:rgba(255,255,255,.06);border:1.5px solid rgba(184,146,42,.2);border-radius:7px;color:#fff;outline:0;transition:border-color .2s;width:100%;box-sizing:border-box}.ia-input:focus,.ia-select:focus,.ia-textarea:focus{border-color:var(--oro2);background:rgba(255,255,255,.09)}.ia-input::placeholder,.ia-textarea::placeholder{color:rgba(255,255,255,.2)}.ia-select,.ia-select option{background:#141e14}.ia-textarea{resize:vertical;min-height:90px;font-family:var(--fd);font-style:italic;font-size:.95rem}.ia-charcount{font-family:var(--fu);font-size:.58rem;color:rgba(255,255,255,.25);text-align:right;margin-top:.2rem}.ia-check{display:flex;align-items:flex-start;gap:.65rem;cursor:pointer}.ia-check input{width:18px;height:18px;accent-color:var(--oro);flex-shrink:0;margin-top:2px}.ia-check-label,.ia-success p{font-family:var(--fu);font-size:.78rem;color:rgba(245,240,232,.6);line-height:1.6}.ia-check-label a{color:var(--oro2)}.ia-progress{height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:2rem}.ia-progress-fill{height:100%;background:linear-gradient(90deg,var(--bosco),var(--oro));border-radius:2px;transition:width .4s;width:0%}.ia-note,.ia-submit{font-family:var(--fu)}.ia-submit{width:100%;padding:1rem;margin-top:1.25rem;background:linear-gradient(135deg,var(--bosco),#1a3a1b);color:#fff;border:0;border-radius:8px;font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:opacity .2s;border:1px solid rgba(184,146,42,.25)}.ia-submit:hover{opacity:.88}.ia-note{font-size:.65rem;color:rgba(245,240,232,.3);line-height:1.7;margin-top:1rem;text-align:center}.ia-success{display:none;text-align:center;background:#141e14;border:1px solid rgba(184,146,42,.2);border-radius:12px;padding:3rem 2rem;margin-top:1.25rem}.ia-success h2{font-family:var(--fd);font-size:2rem;font-weight:300;color:#fff;margin-bottom:.5rem}.ia-success h2 em{font-style:italic;color:var(--oro3)}.ia-success p{font-size:.82rem;color:rgba(245,240,232,.55);line-height:1.75;max-width:420px;margin:0 auto .85rem}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="iscriviti-alumni">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
@@ -346,7 +263,7 @@
 
 </main>
 <script src="supabase.js"></script>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 // ── ANTEPRIMA LIVE ─────────────────────────────────────
 function updatePreview() {

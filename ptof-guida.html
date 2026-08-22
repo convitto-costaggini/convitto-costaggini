@@ -9,72 +9,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/ptof-guida.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    /* ptof-hero rimosso — ora .page-hero */
-
-    /* Navigatore */
-    .ptof-nav { background:var(--bosco); padding:1rem 1.25rem; position:sticky; top:68px; z-index:40; border-bottom:1px solid rgba(184,146,42,.15); }
-    .ptof-nav-row { display:flex; flex-wrap:wrap; gap:.4rem; }
-    .ptof-nb { font-family:var(--fu); font-size:.58rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.4rem .85rem; border-radius:20px; border:1.5px solid rgba(184,146,42,.25); background:none; color:rgba(245,240,232,.55); cursor:pointer; transition:all .2s; white-space:nowrap; }
-    .ptof-nb:hover, .ptof-nb.on { background:rgba(184,146,42,.2); border-color:var(--oro2); color:var(--oro2); }
-
-    /* Sezioni */
-    .ptof-sec { padding:4rem 1.25rem; }
-    .ptof-sec:nth-child(odd) { background:var(--av); }
-    .ptof-sec:nth-child(even) { background:var(--av2); }
-    .ptof-sec-hdr { display:flex; align-items:flex-start; gap:1.1rem; margin-bottom:2rem; }
-    .ptof-icon { font-size:2.5rem; flex-shrink:0; line-height:1; }
-    .ptof-sec-hdr h2 { font-family:var(--fd); font-size:clamp(1.4rem,3.5vw,2rem); font-weight:300; color:var(--bosco); margin-bottom:.2rem; }
-    .ptof-sec-hdr h2 em { font-style:italic; color:var(--oro); }
-    .ptof-sec-hdr p { color:var(--txt2); font-size:.88rem; max-width:560px; line-height:1.7; }
-
-    /* Accordion */
-    .ptof-acc { border:1px solid var(--av3); border-radius:8px; overflow:hidden; margin-bottom:.6rem; }
-    .ptof-acc[open] { border-color:rgba(184,146,42,.3); }
-    .ptof-sum {
-      list-style:none; display:flex; align-items:center; gap:.85rem;
-      padding:.95rem 1.2rem; cursor:pointer; background:var(--av); transition:background .2s;
-    }
-    .ptof-sum::-webkit-details-marker { display:none; }
-    .ptof-sum::marker { display:none; }
-    .ptof-sum:hover { background:rgba(44,62,45,.04); }
-    details[open] .ptof-sum { background:rgba(44,62,45,.04); border-bottom:1px solid var(--av3); }
-    .ptof-sum-num { font-family:var(--fd); font-size:.85rem; font-style:italic; color:var(--oro); flex-shrink:0; min-width:28px; }
-    .ptof-sum-title { font-family:var(--fu); font-size:.75rem; font-weight:700; letter-spacing:.04em; color:var(--bosco); flex:1; line-height:1.3; }
-    .ptof-sum-arr { font-size:.7rem; color:var(--oro); flex-shrink:0; transition:transform .3s; }
-    details[open] .ptof-sum-arr { transform:rotate(180deg); }
-    .ptof-body { padding:1.1rem 1.4rem; background:var(--av); font-size:.87rem; color:var(--txt2); line-height:1.85; }
-    .ptof-body p { margin-bottom:.75rem; }
-    .ptof-body p:last-child { margin-bottom:0; }
-    .ptof-body strong { color:var(--bosco); font-weight:700; }
-    .ptof-pill { display:inline-block; font-family:var(--fu); font-size:.57rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.18rem .55rem; border-radius:20px; background:rgba(44,62,45,.08); color:var(--bosco2); margin-bottom:.6rem; }
-    .ptof-pill.oro { background:rgba(184,146,42,.1); color:#7a5a10; }
-    .ptof-box { background:rgba(184,146,42,.06); border:1px solid rgba(184,146,42,.2); border-radius:8px; padding:.85rem 1.1rem; margin:.75rem 0; }
-    .ptof-box-lbl { font-family:var(--fu); font-size:.57rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--oro); margin-bottom:.4rem; display:block; }
-    .ptof-box p { font-size:.83rem; color:var(--bosco2); line-height:1.7; margin:0; }
-    .ptof-list { margin:.5rem 0; padding-left:0; list-style:none; }
-    .ptof-list li { padding:.3rem 0 .3rem 1.3rem; position:relative; border-bottom:1px solid var(--av3); font-size:.86rem; }
-    .ptof-list li:last-child { border-bottom:none; }
-    .ptof-list li::before { content:"→"; position:absolute; left:0; color:var(--oro); font-size:.7rem; top:.4rem; }
-
-    /* CTA finale */
-    .ptof-cta { background:var(--bosco); padding:4rem 1.25rem; text-align:center; }
-    .ptof-cta h2 { font-family:var(--fd); font-size:clamp(1.6rem,4vw,2.5rem); font-weight:300; color:#fff; margin-bottom:.75rem; }
-    .ptof-cta h2 em { font-style:italic; color:var(--oro3); }
-    .ptof-cta p { color:rgba(245,240,232,.65); max-width:520px; margin:0 auto 1.75rem; font-size:.9rem; line-height:1.75; }
-    @media(max-width:480px){ .ptof-sec-hdr { flex-direction:column; gap:.75rem; } }
-
-    .page-hero .w::after { top: calc(50% - 20px); }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.ptof-nav{background:var(--bosco);padding:1rem 1.25rem;position:sticky;top:68px;z-index:40;border-bottom:1px solid rgba(184,146,42,.15)}.ptof-nav-row{display:flex;flex-wrap:wrap;gap:.4rem}.ptof-nb{font-family:var(--fu);font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.4rem .85rem;border-radius:20px;border:1.5px solid rgba(184,146,42,.25);background:0 0;color:rgba(245,240,232,.55);cursor:pointer;transition:all .2s;white-space:nowrap}.ptof-nb.on,.ptof-nb:hover{background:rgba(184,146,42,.2);border-color:var(--oro2);color:var(--oro2)}.ptof-sec{padding:4rem 1.25rem}.ptof-sec:nth-child(odd){background:var(--av)}.ptof-sec:nth-child(even){background:var(--av2)}.ptof-sec-hdr{display:flex;align-items:flex-start;gap:1.1rem;margin-bottom:2rem}.ptof-icon{font-size:2.5rem;flex-shrink:0;line-height:1}.ptof-sec-hdr h2{font-family:var(--fd);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:300;color:var(--bosco);margin-bottom:.2rem}.ptof-sec-hdr h2 em{font-style:italic;color:var(--oro)}.ptof-sec-hdr p{color:var(--txt2);font-size:.88rem;max-width:560px;line-height:1.7}.ptof-acc{border:1px solid var(--av3);border-radius:8px;overflow:hidden;margin-bottom:.6rem}.ptof-acc[open]{border-color:rgba(184,146,42,.3)}.ptof-sum{list-style:none;display:flex;align-items:center;gap:.85rem;padding:.95rem 1.2rem;cursor:pointer;background:var(--av);transition:background .2s}.ptof-sum::-webkit-details-marker{display:none}.ptof-sum::marker{display:none}.ptof-sum:hover,details[open] .ptof-sum{background:rgba(44,62,45,.04)}details[open] .ptof-sum{border-bottom:1px solid var(--av3)}.ptof-sum-num{font-family:var(--fd);font-size:.85rem;font-style:italic;color:var(--oro);flex-shrink:0;min-width:28px}.ptof-sum-title{font-family:var(--fu);font-size:.75rem;font-weight:700;letter-spacing:.04em;color:var(--bosco);flex:1;line-height:1.3}.ptof-sum-arr{font-size:.7rem;color:var(--oro);flex-shrink:0;transition:transform .3s}details[open] .ptof-sum-arr{transform:rotate(180deg)}.ptof-body{padding:1.1rem 1.4rem;background:var(--av);font-size:.87rem;color:var(--txt2);line-height:1.85}.ptof-body p{margin-bottom:.75rem}.ptof-body p:last-child{margin-bottom:0}.ptof-body strong{color:var(--bosco);font-weight:700}.ptof-pill{display:inline-block;font-family:var(--fu);font-size:.57rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .55rem;border-radius:20px;background:rgba(44,62,45,.08);color:var(--bosco2);margin-bottom:.6rem}.ptof-pill.oro{background:rgba(184,146,42,.1);color:#7a5a10}.ptof-box{background:rgba(184,146,42,.06);border:1px solid rgba(184,146,42,.2);border-radius:8px;padding:.85rem 1.1rem;margin:.75rem 0}.ptof-box-lbl{font-family:var(--fu);font-size:.57rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:.4rem;display:block}.ptof-box p{font-size:.83rem;color:var(--bosco2);line-height:1.7;margin:0}.ptof-list{margin:.5rem 0;padding-left:0;list-style:none}.ptof-list li{padding:.3rem 0 .3rem 1.3rem;position:relative;border-bottom:1px solid var(--av3);font-size:.86rem}.ptof-list li:last-child{border-bottom:none}.ptof-list li::before{content:"→";position:absolute;left:0;color:var(--oro);font-size:.7rem;top:.4rem}.ptof-cta{background:var(--bosco);padding:4rem 1.25rem;text-align:center}.ptof-cta h2{font-family:var(--fd);font-size:clamp(1.6rem,4vw,2.5rem);font-weight:300;color:#fff;margin-bottom:.75rem}.ptof-cta h2 em{font-style:italic;color:var(--oro3)}.ptof-cta p{color:rgba(245,240,232,.65);max-width:520px;margin:0 auto 1.75rem;font-size:.9rem;line-height:1.75}@media (max-width:480px){.ptof-sec-hdr{flex-direction:column;gap:.75rem}}.page-hero .w::after{top:calc(50% - 20px)}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="ptof-guida">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
@@ -406,7 +351,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 function jump(id) {
   const el = document.getElementById(id);

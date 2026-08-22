@@ -12,73 +12,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/mappa-sito.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* ── GRIGLIA GRUPPI TEMATICI ── */
-    .ms-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    @media(min-width:640px) { .ms-grid { grid-template-columns: 1fr 1fr; } }
-    @media(min-width:1024px) { .ms-grid { grid-template-columns: 1fr 1fr 1fr; } }
-
-    .ms-card {
-      background: var(--bco);
-      border: 1px solid var(--av3);
-      border-radius: 10px;
-      padding: 1.35rem 1.3rem 1.1rem;
-    }
-    .ms-card-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .85rem; }
-    .ms-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; }
-    .ms-card h2 {
-      font-family: var(--fd); font-weight: 600; font-size: 1.15rem;
-      color: var(--txt); margin: 0;
-    }
-    .ms-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .1rem; }
-    .ms-list li { border-top: 1px solid var(--av3); }
-    .ms-list li:first-child { border-top: none; }
-    .ms-list a {
-      display: block;
-      padding: .62rem .1rem;
-      min-height: 44px;
-      display: flex; align-items: center;
-      font-family: var(--fu); font-size: .84rem; color: var(--txt2);
-      text-decoration: none;
-      transition: color .15s;
-    }
-    .ms-list a:hover, .ms-list a:focus-visible { color: var(--oro); }
-    .ms-list a::before { content: '›'; color: var(--oro); margin-right: .55rem; font-weight: 700; }
-
-    /* ── RICERCA RAPIDA ── */
-    .ms-search-wrap { margin-top: 2rem; max-width: 420px; }
-    .ms-search-wrap label {
-      display: block; font-family: var(--fu); font-size: .62rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase; color: var(--txt2); margin-bottom: .4rem;
-    }
-    #ms-search {
-      width: 100%; box-sizing: border-box; padding: .72rem 1rem; border-radius: 8px;
-      border: 1.5px solid var(--av3); background: var(--bco); font-family: var(--fu);
-      font-size: .9rem; color: var(--txt); outline: none;
-    }
-    #ms-search:focus-visible { border-color: var(--oro); }
-    .ms-count { font-family: var(--fu); font-size: .72rem; color: var(--txt2); margin-top: .5rem; }
-
-    .ms-card[hidden], .ms-list li[hidden] { display: none; }
-
-    /* ── AREA RISERVATA — accento diverso ── */
-    .ms-card.riservata { border-color: rgba(184,146,42,.4); background: var(--av); }
-    .page-hero .w::after { top: calc(50% - 20px); }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css" />
+  <style>.ms-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2rem}@media (min-width:640px){.ms-grid{grid-template-columns:1fr 1fr}}@media (min-width:1024px){.ms-grid{grid-template-columns:1fr 1fr 1fr}}.ms-card{background:var(--bco);border:1px solid var(--av3);border-radius:10px;padding:1.35rem 1.3rem 1.1rem}.ms-card-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.85rem}.ms-icon{font-size:1.25rem;line-height:1;flex-shrink:0}.ms-card h2{font-family:var(--fd);font-weight:600;font-size:1.15rem;color:var(--txt);margin:0}.ms-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.1rem}.ms-list li{border-top:1px solid var(--av3)}.ms-list li:first-child{border-top:none}.ms-list a{display:block;padding:.62rem .1rem;min-height:44px;display:flex;align-items:center;font-family:var(--fu);font-size:.84rem;color:var(--txt2);text-decoration:none;transition:color .15s}.ms-list a:focus-visible,.ms-list a:hover{color:var(--oro)}.ms-list a::before{content:"›";color:var(--oro);margin-right:.55rem;font-weight:700}.ms-search-wrap{margin-top:2rem;max-width:420px}.ms-search-wrap label{display:block;font-family:var(--fu);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);margin-bottom:.4rem}#ms-search{width:100%;box-sizing:border-box;padding:.72rem 1rem;border-radius:8px;border:1.5px solid var(--av3);background:var(--bco);font-family:var(--fu);font-size:.9rem;color:var(--txt);outline:0}#ms-search:focus-visible{border-color:var(--oro)}.ms-count{font-family:var(--fu);font-size:.72rem;color:var(--txt2);margin-top:.5rem}.ms-card[hidden],.ms-list li[hidden]{display:none}.ms-card.riservata{border-color:rgba(184,146,42,.4);background:var(--av)}.page-hero .w::after{top:calc(50% - 20px)}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="mappa-sito">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- PAGE HERO -->
@@ -217,7 +161,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 (function () {
   var input = document.getElementById('ms-search');

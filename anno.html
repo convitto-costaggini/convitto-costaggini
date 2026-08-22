@@ -15,61 +15,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/anno.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    /* Annulla completamente l'animazione rv su questa pagina */
-    .rv { opacity:1 !important; transform:none !important; transition:none !important; }
-
-    /* OGGI AL CONVITTO */
-    .an-oggi { background:#fff; border-bottom:1px solid var(--av3); padding:2rem 1.25rem; }
-    .an-oggi-inner { max-width:700px; margin:0 auto; display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
-    .an-oggi-dot { width:14px; height:14px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 4px rgba(34,197,94,.2); flex-shrink:0; }
-    .an-oggi-label { font-family:var(--fu); font-size:.55rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:#22c55e; }
-    .an-oggi-text { font-family:var(--fd); font-size:1.05rem; color:var(--bosco); flex:1; line-height:1.5; }
-    .an-oggi-date { font-family:var(--fu); font-size:.62rem; color:var(--txt2); flex-shrink:0; }
-
-    /* TIMELINE ANNO */
-    .an-timeline { padding:1.5rem 1.25rem 2rem; background:var(--av); }
-    .an-tl-wrap { max-width:800px; margin:0 auto; }
-
-    /* Barra progresso anno */
-    .an-progress-bar { height:8px; background:var(--av3); border-radius:4px; margin:1rem 0 1rem; }
-    .an-progress-fill { height:100%; background:linear-gradient(90deg,var(--bosco),var(--oro)); border-radius:3px; transition:width 1s ease; }
-    .an-progress-pct { text-align:center; font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--oro); margin-top:.5rem; }
-
-    /* Tappe */
-    .an-steps { display:flex; flex-direction:column; gap:.6rem; }
-    .an-step {
-      display:flex; align-items:flex-start; gap:1rem;
-      padding:1rem 1.25rem; border-radius:8px;
-      border-left:3px solid transparent;
-      transition:all .2s;
-    }
-    .an-step.past   { background:rgba(44,62,45,.05); border-color:var(--bosco); }
-    .an-step.now    { background:linear-gradient(135deg,rgba(44,62,45,.08),rgba(184,146,42,.06)); border-color:var(--oro); box-shadow:0 4px 16px rgba(184,146,42,.1); }
-    .an-step.future { background:var(--av2); border-color:var(--av3); opacity:.6; }
-
-    .an-step-icon { font-size:1.6rem; flex-shrink:0; line-height:1; margin-top:.1rem; }
-    .an-step-date { font-family:var(--fu); font-size:.58rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.2rem; }
-    .an-step.past   .an-step-date { color:var(--bosco2); }
-    .an-step.now    .an-step-date { color:var(--oro); }
-    .an-step.future .an-step-date { color:var(--txt2); }
-    .an-step-title { font-family:var(--fu); font-size:.8rem; font-weight:700; color:var(--bosco); margin-bottom:.2rem; }
-    .an-step.future .an-step-title { color:var(--txt2); }
-    .an-step-desc { font-size:.82rem; color:var(--txt2); line-height:1.65; }
-    .an-step-badge { display:inline-flex; align-items:center; gap:.3rem; font-family:var(--fu); font-size:.55rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.2rem .55rem; border-radius:10px; margin-top:.35rem; }
-    .an-step.past   .an-step-badge { background:rgba(44,62,45,.1); color:var(--bosco2); }
-    .an-step.now    .an-step-badge { background:rgba(184,146,42,.15); color:var(--oro); }
-    .an-step.future .an-step-badge { background:var(--av3); color:var(--txt2); }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.rv{opacity:1!important;transform:none!important;transition:none!important}.an-oggi{background:#fff;border-bottom:1px solid var(--av3);padding:2rem 1.25rem}.an-oggi-inner{max-width:700px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}.an-oggi-dot{width:14px;height:14px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.2);flex-shrink:0}.an-oggi-label{font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#22c55e}.an-oggi-text{font-family:var(--fd);font-size:1.05rem;color:var(--bosco);flex:1;line-height:1.5}.an-oggi-date{font-family:var(--fu);font-size:.62rem;color:var(--txt2);flex-shrink:0}.an-timeline{padding:1.5rem 1.25rem 2rem;background:var(--av)}.an-tl-wrap{max-width:800px;margin:0 auto}.an-progress-bar{height:8px;background:var(--av3);border-radius:4px;margin:1rem 0}.an-progress-fill{height:100%;background:linear-gradient(90deg,var(--bosco),var(--oro));border-radius:3px;transition:width 1s ease}.an-progress-pct{text-align:center;font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-top:.5rem}.an-steps{display:flex;flex-direction:column;gap:.6rem}.an-step{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.25rem;border-radius:8px;border-left:3px solid transparent;transition:all .2s}.an-step.past{background:rgba(44,62,45,.05);border-color:var(--bosco)}.an-step.now{background:linear-gradient(135deg,rgba(44,62,45,.08),rgba(184,146,42,.06));border-color:var(--oro);box-shadow:0 4px 16px rgba(184,146,42,.1)}.an-step.future{background:var(--av2);border-color:var(--av3);opacity:.6}.an-step-icon{font-size:1.6rem;flex-shrink:0;line-height:1;margin-top:.1rem}.an-step-date,.an-step-title{font-family:var(--fu);margin-bottom:.2rem}.an-step-date{font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.an-step.past .an-step-date{color:var(--bosco2)}.an-step.now .an-step-date{color:var(--oro)}.an-step.future .an-step-date,.an-step.future .an-step-title{color:var(--txt2)}.an-step-title{font-size:.8rem;font-weight:700;color:var(--bosco)}.an-step-desc{font-size:.82rem;color:var(--txt2);line-height:1.65}.an-step-badge{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .55rem;border-radius:10px;margin-top:.35rem}.an-step.past .an-step-badge{background:rgba(44,62,45,.1);color:var(--bosco2)}.an-step.now .an-step-badge{background:rgba(184,146,42,.15);color:var(--oro)}.an-step.future .an-step-badge{background:var(--av3);color:var(--txt2)}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="anno">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
@@ -117,7 +73,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 // Tappe dell'anno scolastico
 const TAPPE = [

@@ -8,30 +8,17 @@
   <title>Elenco del Personale | Convitto "Costaggini" — Rieti</title>
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/personale.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    .per-section-title { font-family:var(--fd); font-size:1.5rem; font-weight:400; color:var(--bosco); margin:2.5rem 0 .4rem; padding-bottom:.5rem; border-bottom:2px solid var(--oro2); display:inline-block; }
-    .per-placeholder { color:rgba(44,62,45,.55); font-style:italic; font-size:.82rem; }
-
-    /* Elenco personale — card (stesso linguaggio visivo di organizzazione.html) */
-    .pers-grid { display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1.25rem; }
-    @media(min-width:560px){ .pers-grid { grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); } }
-    .pers-card { background:#fff; border:1px solid var(--av3); border-radius:10px; padding:1.1rem 1.25rem; display:flex; align-items:flex-start; gap:.85rem; transition:box-shadow .2s; }
-    .pers-card:hover { box-shadow:0 4px 16px rgba(0,0,0,.08); }
-    .pers-ico { font-size:1.6rem; flex-shrink:0; line-height:1; }
-    .pers-role { font-family:var(--fu); font-size:.58rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--oro); margin-bottom:.2rem; display:block; }
-    .pers-name { font-family:var(--fd); font-size:.95rem; color:var(--bosco); line-height:1.2; }
-    .pers-note { font-family:var(--fu); font-size:.68rem; color:var(--txt2); margin-top:.2rem; line-height:1.4; }
-    .pers-note.scheda { color:rgba(44,62,45,.5); font-style:italic; }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.per-section-title{font-family:var(--fd);font-size:1.5rem;font-weight:400;color:var(--bosco);margin:2.5rem 0 .4rem;padding-bottom:.5rem;border-bottom:2px solid var(--oro2);display:inline-block}.per-placeholder{color:rgba(44,62,45,.55);font-style:italic;font-size:.82rem}.pers-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.25rem}@media (min-width:560px){.pers-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}.pers-card{background:#fff;border:1px solid var(--av3);border-radius:10px;padding:1.1rem 1.25rem;display:flex;align-items:flex-start;gap:.85rem;transition:box-shadow .2s}.pers-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}.pers-ico{font-size:1.6rem;flex-shrink:0;line-height:1}.pers-role{font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--oro);margin-bottom:.2rem;display:block}.pers-name{font-family:var(--fd);font-size:.95rem;color:var(--bosco);line-height:1.2}.pers-note{font-family:var(--fu);font-size:.68rem;color:var(--txt2);margin-top:.2rem;line-height:1.4}.pers-note.scheda{color:rgba(44,62,45,.5);font-style:italic}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="personale">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <div class="page-hero">
@@ -239,6 +226,6 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 </body>
 </html>

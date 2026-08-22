@@ -14,60 +14,11 @@
   <title>Ammissione | Convitto "Costaggini" — Rieti</title>
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/ammissione.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
-
-    .tl { position: relative; margin-top: 1.5rem; padding-left: 1.4rem; }
-    .tl::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg,var(--oro2),rgba(212,170,74,.1)); }
-    .ti { position: relative; padding: 0 0 2rem 1.75rem; }
-    .ti:last-child { padding-bottom: 0; }
-    .td { position: absolute; left: -.95rem; top: .1rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: linear-gradient(135deg, var(--oro2), var(--oro3)); display: flex; align-items: center; justify-content: center; font-size: .7rem; font-weight: 700; color: var(--bosco); }
-    .tp { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--oro); margin-bottom: .18rem; }
-    .tt { font-family: var(--fd); font-size: 1.3rem; font-weight: 400; color: var(--bosco); margin-bottom: .3rem; }
-    .td-desc { font-size: .85rem; color: var(--txt2); line-height: 1.7; margin-bottom: .5rem; }
-    .ti ul { list-style: none; }
-    .ti li { font-size: .83rem; color: var(--txt2); padding: .3rem 0; border-bottom: 1px solid var(--av3); display: flex; gap: .5rem; }
-    .ti li:last-child { border-bottom: none; }
-    .ti li::before { content: '→'; color: var(--oro); flex-shrink: 0; }
-
-    .tariffe-grid { display: grid; gap: 1.25rem; margin-top: 1.75rem; }
-    .tcard { background: var(--bco); border: 1px solid var(--av3); border-radius: 8px; padding: 1.5rem; position: relative; overflow: hidden; }
-    .tcard.featured { border-color: var(--oro2); box-shadow: 0 0 0 2px rgba(212,170,74,.25); }
-    .tcard.featured::before { content: 'Più scelto'; position: absolute; top: 1rem; right: -2rem; background: var(--oro2); color: var(--bosco); font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .2rem 2.5rem; transform: rotate(45deg); transform-origin: center; }
-    .tcard-tipo { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--oro); margin-bottom: .4rem; }
-    .tcard h3 { font-size: 1.2rem; margin-bottom: .75rem; }
-    .tcard-price { font-family: var(--fd); font-size: 2.5rem; font-weight: 300; color: var(--bosco); line-height: 1; margin-bottom: .25rem; }
-    .tcard-price span { font-size: .85rem; font-family: var(--fu); color: var(--txt2); font-weight: 400; }
-    .tcard ul { list-style: none; margin-top: 1rem; }
-    .tcard li { font-size: .82rem; color: var(--txt2); padding: .35rem 0; border-bottom: 1px solid var(--av3); display: flex; gap: .5rem; align-items: flex-start; }
-    .tcard li:last-child { border-bottom: none; }
-    .tcard li::before { content: '✓'; color: var(--oro); font-weight: 700; flex-shrink: 0; }
-    @media(min-width:640px){ .tariffe-grid { grid-template-columns: 1fr 1fr; } }
-    @media(min-width:900px){ .tariffe-grid { grid-template-columns: repeat(3,1fr); } }
-
-    .faq-list { margin-top: 1.5rem; }
-    .faq-item { border-bottom: 1px solid var(--av3); }
-    .faq-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; background: none; border: none; cursor: pointer; font-family: var(--fu); font-size: .9rem; font-weight: 600; color: var(--bosco); text-align: left; gap: 1rem; }
-    .faq-btn svg { width: 18px; height: 18px; fill: var(--oro); flex-shrink: 0; transition: transform .3s; }
-    .faq-btn[aria-expanded="true"] svg { transform: rotate(45deg); }
-    .faq-body { display: none; padding: 0 0 1rem; font-size: .85rem; color: var(--txt2); line-height: 1.75; }
-    .faq-body.open { display: block; }
-
-    .moduli-grid { display: grid; gap: .6rem; margin-top: 1.5rem; }
-    @media(min-width:640px){ .moduli-grid { grid-template-columns: 1fr 1fr; } }
-  </style>
-  <style>
-    /* Collegamenti rapidi nell'hero */
-    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
-    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:var(--ease); }
-    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
-    @media(max-width:560px){
-      .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
-      .hero-jump a { padding:.55rem .5rem; }
-    }
-    #domande-genitori, #procedura, #tariffe, #moduli { scroll-margin-top: 90px; }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css" />
+  <style>.ti,.tl{position:relative}.tl{margin-top:1.5rem;padding-left:1.4rem}.tl::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--oro2),rgba(212,170,74,.1))}.ti{padding:0 0 2rem 1.75rem}.ti:last-child{padding-bottom:0}.td,.tp{font-weight:700}.td{position:absolute;left:-.95rem;top:.1rem;width:1.9rem;height:1.9rem;border-radius:50%;background:linear-gradient(135deg,var(--oro2),var(--oro3));display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--bosco)}.tp{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:.18rem}.tt{font-family:var(--fd);font-size:1.3rem;font-weight:400;color:var(--bosco);margin-bottom:.3rem}.td-desc,.ti li{color:var(--txt2)}.td-desc{font-size:.85rem;line-height:1.7;margin-bottom:.5rem}.ti ul{list-style:none}.ti li{font-size:.83rem;padding:.3rem 0;border-bottom:1px solid var(--av3);display:flex;gap:.5rem}.tcard li:last-child,.ti li:last-child{border-bottom:none}.ti li::before{content:"→";color:var(--oro);flex-shrink:0}.tariffe-grid{display:grid;gap:1.25rem;margin-top:1.75rem}.tcard{background:var(--bco);border:1px solid var(--av3);border-radius:8px;padding:1.5rem;position:relative;overflow:hidden}.tcard.featured{border-color:var(--oro2);box-shadow:0 0 0 2px rgba(212,170,74,.25)}.tcard.featured::before{content:"Più scelto";position:absolute;top:1rem;right:-2rem;background:var(--oro2);color:var(--bosco);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.2rem 2.5rem;transform:rotate(45deg);transform-origin:center}.tcard li::before,.tcard-tipo{color:var(--oro);font-weight:700}.tcard-tipo{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem}.tcard h3{font-size:1.2rem;margin-bottom:.75rem}.tcard-price{font-family:var(--fd);font-size:2.5rem;font-weight:300;color:var(--bosco);line-height:1;margin-bottom:.25rem}.tcard-price span{font-size:.85rem;font-family:var(--fu);color:var(--txt2);font-weight:400}.tcard ul{list-style:none;margin-top:1rem}.tcard li{font-size:.82rem;color:var(--txt2);padding:.35rem 0;border-bottom:1px solid var(--av3);display:flex;gap:.5rem;align-items:flex-start}.tcard li::before{content:"✓";flex-shrink:0}@media (min-width:640px){.tariffe-grid{grid-template-columns:1fr 1fr}}@media (min-width:900px){.tariffe-grid{grid-template-columns:repeat(3,1fr)}}.faq-list{margin-top:1.5rem}.faq-item{border-bottom:1px solid var(--av3)}.faq-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:1rem 0;background:0 0;border:0;cursor:pointer;font-family:var(--fu);font-size:.9rem;font-weight:600;color:var(--bosco);text-align:left;gap:1rem}.faq-btn svg{width:18px;height:18px;fill:var(--oro);flex-shrink:0;transition:transform .3s}.faq-btn[aria-expanded=true] svg{transform:rotate(45deg)}.faq-body{display:none;padding:0 0 1rem;font-size:.85rem;color:var(--txt2);line-height:1.75}.faq-body.open{display:block}.moduli-grid{display:grid;gap:.6rem;margin-top:1.5rem}@media (min-width:640px){.moduli-grid{grid-template-columns:1fr 1fr}}</style>
+  <style>.hero-jump{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.35rem}.hero-jump a{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--av,#F5F0E8);text-decoration:none;border:1px solid rgba(184,146,42,.6);background:rgba(255,255,255,.06);padding:.55rem 1rem;border-radius:40px;min-height:40px;transition:var(--ease)}.hero-jump a:focus-visible,.hero-jump a:hover{background:var(--oro,#B8922A);border-color:var(--oro,#B8922A);color:var(--bosco,#2C3E2D)}@media (max-width:560px){.hero-jump{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.hero-jump a{padding:.55rem .5rem}}#domande-genitori,#moduli,#procedura,#tariffe{scroll-margin-top:90px}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
@@ -104,7 +55,7 @@
 </script>
 </head>
 <body data-page="ammissione">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <div class="page-hero">
@@ -143,7 +94,7 @@
       <h2 style="color:var(--av)">3 passi per <em style="color:var(--oro3)">entrare al Convitto</em></h2>
       <p style="color:rgba(245,240,232,.6);max-width:500px;margin:.5rem auto 2.5rem;font-size:.9rem">Il processo è semplice. Ecco tutto quello che deve fare una famiglia.</p>
 
-      <div id="passi-grid" style="display:grid;grid-template-columns:1fr;gap:1rem;max-width:700px;margin:0 auto"><style>@media(min-width:480px){#passi-grid{grid-template-columns:repeat(3,1fr)}}</style>
+      <div id="passi-grid" style="display:grid;grid-template-columns:1fr;gap:1rem;max-width:700px;margin:0 auto"><style>@media (min-width:480px){#passi-grid{grid-template-columns:repeat(3,1fr)}}</style>
 
         <div class="rv" style="background:rgba(245,240,232,.06);border:1px solid rgba(184,146,42,.2);border-radius:10px;padding:1.75rem 1.25rem;position:relative">
           <div style="width:40px;height:40px;border-radius:50%;background:var(--oro2);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;font-family:var(--fu);font-size:.8rem;font-weight:800;color:var(--bosco)">1</div>
@@ -190,16 +141,7 @@
     </div>
   </section>
 
-  <style>
-    .dg-item { background:var(--av); border:1px solid var(--av3); border-radius:8px; overflow:hidden; transition:box-shadow .2s; }
-    .dg-item:hover { box-shadow:0 4px 16px rgba(0,0,0,.08); }
-    .dg-q { font-family:var(--fu); font-size:.85rem; font-weight:700; letter-spacing:.04em; color:var(--bosco); padding:1.1rem 1.4rem; cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
-    .dg-q::marker, .dg-q::-webkit-details-marker { display:none; }
-    .dg-q::after { content:'＋'; font-size:1.1rem; color:var(--oro); flex-shrink:0; transition:transform .3s; }
-    details[open] .dg-q::after { transform:rotate(45deg); }
-    details[open] .dg-q { color:var(--bosco); border-bottom:1px solid var(--av3); }
-    .dg-a { font-size:.86rem; color:var(--txt2); line-height:1.8; padding:1rem 1.4rem 1.2rem; margin:0; }
-  </style>
+  <style>.dg-item{background:var(--av);border:1px solid var(--av3);border-radius:8px;overflow:hidden;transition:box-shadow .2s}.dg-item:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}.dg-q{font-family:var(--fu);font-size:.85rem;font-weight:700;letter-spacing:.04em;color:var(--bosco);padding:1.1rem 1.4rem;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem}.dg-q::-webkit-details-marker,.dg-q::marker{display:none}.dg-q::after{content:"＋";font-size:1.1rem;color:var(--oro);flex-shrink:0;transition:transform .3s}details[open] .dg-q::after{transform:rotate(45deg)}details[open] .dg-q{color:var(--bosco);border-bottom:1px solid var(--av3)}.dg-a{font-size:.86rem;color:var(--txt2);line-height:1.8;padding:1rem 1.4rem 1.2rem;margin:0}</style>
 
   <!-- PROCEDURA -->
   <section id="procedura" style="background:var(--bco)">
@@ -224,7 +166,7 @@
       </nav>
     </div>
   </section>
-  <style>#proc-grid { grid-template-columns: 1fr; } @media(min-width:900px){ #proc-grid { grid-template-columns: 1fr 1.2fr; align-items: start; } #proc-intro { position: sticky; top: 90px; align-self: start; } }</style>
+  <style>#proc-grid{grid-template-columns:1fr}@media (min-width:900px){#proc-grid{grid-template-columns:1fr 1.2fr;align-items:start}#proc-intro{position:sticky;top:90px;align-self:start}}</style>
 
   <!-- TARIFFE -->
   <section id="tariffe" style="background:var(--av)">
@@ -236,7 +178,7 @@
       <div style="background:linear-gradient(135deg,var(--bosco),#1a3a1b);border-radius:12px;padding:2.5rem;border:1px solid rgba(184,146,42,.2);margin-top:1.5rem">
 
         <!-- Griglia include + rate -->
-        <div id="rette-grid" style="display:grid;grid-template-columns:1fr;gap:1.25rem;margin-bottom:1.75rem"><style>@media(min-width:560px){#rette-grid{grid-template-columns:1fr 1fr}}</style>
+        <div id="rette-grid" style="display:grid;grid-template-columns:1fr;gap:1.25rem;margin-bottom:1.75rem"><style>@media (min-width:560px){#rette-grid{grid-template-columns:1fr 1fr}}</style>
 
           <div style="background:rgba(255,255,255,.05);padding:1.4rem">
             <p style="font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.75rem">Cosa include la retta</p>
@@ -473,7 +415,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 // ── ACCORDION ──────────────────────────────────────
 function toggleAcc(id) {
@@ -491,16 +433,7 @@ function stampaCorredo() {
   const w = window.open('', '_blank');
   w.document.write(`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/>
   <title>Lista corredo obbligatorio — Convitto Costaggini</title>
-  <style>
-    body { font-family: Arial, sans-serif; font-size: 12pt; max-width: 680px; margin: 40px auto; color: #1a1a1a; line-height: 1.6; }
-    h1 { font-size: 16pt; margin-bottom: 4px; }
-    .ente { font-size: 10pt; color: #555; margin-bottom: 24px; }
-    .sezione { font-size: 10pt; font-weight: bold; text-transform: uppercase; letter-spacing: .08em; color: #2C3E2D; margin: 16px 0 6px; }
-    ul { padding-left: 20px; margin: 0 0 12px; }
-    li { margin-bottom: 4px; }
-    .nota { background: #fff8e1; border: 1px solid #ffc107; padding: 10px 14px; border-radius: 4px; font-size: 10pt; margin: 16px 0; }
-    @media print { body { margin: 20px; } }
-  </style></head><body>
+  <style>body{font-family:Arial,sans-serif;font-size:12pt;max-width:680px;margin:40px auto;color:#1a1a1a;line-height:1.6}h1{font-size:16pt}.ente{font-size:10pt;color:#555;margin-bottom:24px}.sezione{font-size:10pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2c3e2d;margin:16px 0 6px}ul{padding-left:20px;margin:0 0 12px}h1,li{margin-bottom:4px}.nota{background:#fff8e1;border:1px solid #ffc107;padding:10px 14px;border-radius:4px;font-size:10pt;margin:16px 0}@media print{body{margin:20px}}</style></head><body>
   <div class="ente">IPSSEOA "R. A. Costaggini" — Rieti · Convitto annesso · C.F. 80008130579</div>
   <h1>Lista corredo obbligatorio</h1>
   <p style="font-size:10pt;color:#555">Art. 20 del Regolamento di Convitto — versione 30/01/2025 — A.S. 2026/2027</p>
@@ -532,19 +465,7 @@ function stampaAllergie() {
   const w = window.open('', '_blank');
   w.document.write(`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/>
   <title>Dichiarazione allergie — ${nome}</title>
-  <style>
-    body { font-family: Arial, sans-serif; font-size: 12pt; max-width: 700px; margin: 40px auto; color: #1a1a1a; }
-    h1 { font-size: 16pt; margin-bottom: 4px; }
-    .ente { font-size: 10pt; color: #555; margin-bottom: 24px; }
-    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-    td { padding: 8px 12px; border: 1px solid #ccc; vertical-align: top; }
-    td:first-child { font-weight: bold; width: 35%; background: #f5f5f5; }
-    .nota { background: #fff8e1; border: 1px solid #ffc107; padding: 10px 14px; border-radius: 4px; font-size: 10pt; margin: 16px 0; }
-    .firma { margin-top: 40px; display: flex; justify-content: space-between; }
-    .firma div { text-align: center; }
-    .firma .line { border-bottom: 1px solid #333; width: 200px; margin: 32px auto 4px; }
-    @media print { body { margin: 20px; } }
-  </style></head><body>
+  <style>body{font-family:Arial,sans-serif;font-size:12pt;max-width:700px;margin:40px auto;color:#1a1a1a}h1{font-size:16pt;margin-bottom:4px}.ente{font-size:10pt;color:#555;margin-bottom:24px}table{width:100%;border-collapse:collapse;margin:16px 0}td{padding:8px 12px;border:1px solid #ccc;vertical-align:top}td:first-child{font-weight:700;width:35%;background:#f5f5f5}.nota{background:#fff8e1;border:1px solid #ffc107;padding:10px 14px;border-radius:4px;font-size:10pt;margin:16px 0}.firma{margin-top:40px;display:flex;justify-content:space-between}.firma div{text-align:center}.firma .line{border-bottom:1px solid #333;width:200px;margin:32px auto 4px}@media print{body{margin:20px}}</style></head><body>
   <div class="ente">IPSSEOA "R. A. Costaggini" — Rieti · Convitto annesso · C.F. 80008130579</div>
   <h1>Dichiarazione di allergie e intolleranze alimentari</h1>
   <p style="font-size:10pt;color:#555">A.S. 2026/2027 — Da allegare alla documentazione di ammissione al Convitto</p>
@@ -579,18 +500,7 @@ function stampaUscite() {
   const w = window.open('', '_blank');
   w.document.write(`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/>
   <title>Autorizzazione uscite — ${nome}</title>
-  <style>
-    body { font-family: Arial, sans-serif; font-size: 12pt; max-width: 700px; margin: 40px auto; color: #1a1a1a; line-height: 1.6; }
-    h1 { font-size: 16pt; margin-bottom: 4px; }
-    .ente { font-size: 10pt; color: #555; margin-bottom: 24px; }
-    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-    td { padding: 8px 12px; border: 1px solid #ccc; }
-    td:first-child { font-weight: bold; width: 40%; background: #f5f5f5; }
-    .firma { margin-top: 48px; display: flex; justify-content: space-between; }
-    .firma div { text-align: center; }
-    .firma .line { border-bottom: 1px solid #333; width: 200px; margin: 32px auto 4px; }
-    @media print { body { margin: 20px; } }
-  </style></head><body>
+  <style>body{font-family:Arial,sans-serif;font-size:12pt;max-width:700px;margin:40px auto;color:#1a1a1a;line-height:1.6}h1{font-size:16pt;margin-bottom:4px}.ente{font-size:10pt;color:#555;margin-bottom:24px}table{width:100%;border-collapse:collapse;margin:16px 0}td{padding:8px 12px;border:1px solid #ccc}td:first-child{font-weight:700;width:40%;background:#f5f5f5}.firma{margin-top:48px;display:flex;justify-content:space-between}.firma div{text-align:center}.firma .line{border-bottom:1px solid #333;width:200px;margin:32px auto 4px}@media print{body{margin:20px}}</style></head><body>
   <div class="ente">IPSSEOA "R. A. Costaggini" — Rieti · Convitto annesso · C.F. 80008130579</div>
   <h1>Autorizzazione uscite autonome</h1>
   <p style="font-size:10pt;color:#555">A.S. 2026/2027 — Fascia di libera uscita pomeridiana (17:30–19:15) — art. 25 del Regolamento di Convitto</p>
@@ -633,19 +543,7 @@ function stampaCert() {
   const w = window.open('', '_blank');
   w.document.write(`<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/>
   <title>Richiesta certificato — ${nome}</title>
-  <style>
-    body { font-family: Arial, sans-serif; font-size: 12pt; max-width: 700px; margin: 40px auto; color: #1a1a1a; line-height: 1.7; }
-    h1 { font-size: 16pt; margin-bottom: 4px; }
-    .ente { font-size: 10pt; color: #555; margin-bottom: 24px; }
-    .dest { margin: 24px 0; }
-    table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-    td { padding: 8px 12px; border: 1px solid #ccc; }
-    td:first-child { font-weight: bold; width: 40%; background: #f5f5f5; }
-    .firma { margin-top: 48px; display: flex; justify-content: space-between; }
-    .firma div { text-align: center; }
-    .firma .line { border-bottom: 1px solid #333; width: 200px; margin: 32px auto 4px; }
-    @media print { body { margin: 20px; } }
-  </style></head><body>
+  <style>body{font-family:Arial,sans-serif;font-size:12pt;max-width:700px;margin:40px auto;color:#1a1a1a;line-height:1.7}h1{font-size:16pt;margin-bottom:4px}.ente{font-size:10pt;color:#555;margin-bottom:24px}.dest{margin:24px 0}table{width:100%;border-collapse:collapse;margin:16px 0}td{padding:8px 12px;border:1px solid #ccc}td:first-child{font-weight:700;width:40%;background:#f5f5f5}.firma{margin-top:48px;display:flex;justify-content:space-between}.firma div{text-align:center}.firma .line{border-bottom:1px solid #333;width:200px;margin:32px auto 4px}@media print{body{margin:20px}}</style></head><body>
   <div class="ente">Rieti, ${oggi}</div>
   <div class="dest">
     <strong>Al Dirigente Scolastico</strong><br>

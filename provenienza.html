@@ -15,37 +15,19 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/provenienza.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <style>
-
-    body { background: var(--av); }
-    #pv-map { height: 480px; border-radius: 12px; overflow: hidden; border: 1px solid var(--av3); }
-    @media(max-width:600px){ #pv-map { height: 320px; } }
-    .pv-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .75rem; margin-top: 1.5rem; }
-    @media(max-width:480px){ .pv-stats { grid-template-columns: 1fr 1fr; } }
-    .pv-stat { background: #fff; border: 1px solid var(--av3); border-radius: 10px; padding: 1rem; text-align: center; }
-    .pv-stat-num { font-family: var(--fd); font-size: 2.2rem; font-weight: 300; color: var(--bosco); line-height: 1; }
-    .pv-stat-label { font-family: var(--fu); font-size: .62rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--txt2); margin-top: .3rem; }
-    .pv-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .65rem; margin-top: 1.25rem; }
-    @media(max-width:480px){ .pv-list { grid-template-columns: 1fr; } }
-    .pv-item { display: flex; align-items: center; gap: .75rem; background: #fff; border: 1px solid var(--av3); border-radius: 8px; padding: .6rem .85rem; }
-    .pv-bar-wrap { flex: 1; background: var(--av3); border-radius: 4px; height: 6px; }
-    .pv-bar { background: linear-gradient(90deg, var(--bosco), var(--bosco2)); border-radius: 4px; height: 6px; transition: width .6s ease; }
-    .pv-place { font-family: var(--fu); font-size: .78rem; font-weight: 700; color: var(--bosco); min-width: 80px; }
-    .pv-count { font-family: var(--fu); font-size: .72rem; color: var(--txt2); min-width: 28px; text-align: right; }
-    /* Leaflet custom marker */
-    .pv-marker { background: var(--bosco); border: 2px solid var(--oro); border-radius: 50%; color: #fff; font-family: var(--fu); font-size: .6rem; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
-  </style>
+  <style>body{background:var(--av)}#pv-map{height:480px;border-radius:12px;overflow:hidden;border:1px solid var(--av3)}@media (max-width:600px){#pv-map{height:320px}}.pv-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem;margin-top:1.5rem}@media (max-width:480px){.pv-stats{grid-template-columns:1fr 1fr}}.pv-stat{background:#fff;border:1px solid var(--av3);border-radius:10px;padding:1rem;text-align:center}.pv-stat-num{font-family:var(--fd);font-size:2.2rem;font-weight:300;color:var(--bosco);line-height:1}.pv-stat-label{font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);margin-top:.3rem}.pv-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-top:1.25rem}@media (max-width:480px){.pv-list{grid-template-columns:1fr}}.pv-item{display:flex;align-items:center;gap:.75rem;background:#fff;border:1px solid var(--av3);border-radius:8px;padding:.6rem .85rem}.pv-bar,.pv-bar-wrap{border-radius:4px;height:6px}.pv-bar-wrap{flex:1;background:var(--av3)}.pv-bar{background:linear-gradient(90deg,var(--bosco),var(--bosco2));transition:width .6s ease}.pv-count,.pv-place{font-family:var(--fu)}.pv-place{font-size:.78rem;font-weight:700;color:var(--bosco);min-width:80px}.pv-count{font-size:.72rem;color:var(--txt2);min-width:28px;text-align:right}.pv-marker{background:var(--bosco);border:2px solid var(--oro);border-radius:50%;color:#fff;font-family:var(--fu);font-size:.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.3)}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="provenienza">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <div class="page-hero">
@@ -102,7 +84,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 // ══════════════════════════════════════════════════════════════
 // DATI PROVENIENZA — aggiornare ogni anno

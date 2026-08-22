@@ -9,167 +9,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/in-2-minuti.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    /* L'hero usa ora la struttura standard .page-hero condivisa con il
-       resto del sito (font, allineamento a sinistra, icona) — vedi
-       style.css. Le regole .m2-hero specifiche sono state rimosse. */
-
-    /* ── LAYOUT PRINCIPALE ── */
-    .m2-body { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
-    @media(min-width:768px){ .m2-body { padding: 3rem 2rem 6rem; } }
-
-    /* ── SCHEDA DOMANDA ── */
-    .m2-card {
-      background: var(--av);
-      border: 1px solid var(--av3);
-      border-radius: 14px;
-      margin-bottom: 1rem;
-      overflow: hidden;
-      transition: border-color .2s;
-    }
-    .m2-card:hover { border-color: rgba(184,146,42,.3); }
-    .m2-card.open { border-color: rgba(184,146,42,.45); }
-
-    .m2-q {
-      width: 100%; padding: 1.1rem 1.25rem;
-      background: none; border: none; cursor: pointer;
-      display: flex; align-items: center; gap: 1rem;
-      text-align: left; transition: background .15s;
-    }
-    .m2-q:hover { background: rgba(184,146,42,.04); }
-
-    .m2-num {
-      font-family: var(--fd); font-size: 1.3rem;
-      color: rgba(184,146,42,.4); flex-shrink: 0;
-      width: 28px; line-height: 1;
-    }
-    .m2-card.open .m2-num { color: var(--oro2); }
-
-    .m2-q-text {
-      flex: 1;
-      font-family: var(--fd); font-size: 1.1rem;
-      font-weight: 400; color: var(--txt);
-      line-height: 1.3;
-    }
-    .m2-card.open .m2-q-text { color: var(--oro3); }
-
-    .m2-arr {
-      width: 18px; height: 18px; fill: rgba(184,146,42,.4);
-      transition: transform .22s; flex-shrink: 0;
-    }
-    .m2-card.open .m2-arr { transform: rotate(180deg); fill: var(--oro2); }
-
-    .m2-a {
-      display: none;
-      padding: .25rem 1.25rem 1.35rem 4rem;
-    }
-    .m2-card.open .m2-a { display: block; }
-
-    .m2-a p {
-      font-family: var(--fd); font-size: 1.02rem;
-      color: var(--txt2); line-height: 1.85; margin-bottom: .7rem;
-    }
-    .m2-a p:last-child { margin-bottom: 0; }
-    .m2-a strong { color: var(--txt); font-weight: 600; }
-
-    /* Tag risposta rapida */
-    .m2-pill {
-      display: inline-block;
-      background: rgba(184,146,42,.1);
-      border: 1px solid rgba(184,146,42,.25);
-      border-radius: 20px;
-      font-family: var(--fu); font-size: .72rem; font-weight: 700;
-      color: var(--oro2); padding: .3rem .85rem;
-      margin-bottom: .75rem;
-    }
-
-    /* Link approfondimento */
-    .m2-link {
-      display: inline-flex; align-items: center; gap: .4rem;
-      font-family: var(--fu); font-size: .68rem; font-weight: 800;
-      letter-spacing: .08em; text-transform: uppercase;
-      color: var(--bosco); text-decoration: none;
-      border-bottom: 1.5px solid rgba(44,62,45,.3);
-      padding-bottom: .1rem;
-      transition: border-color .15s, color .15s;
-      margin-top: .5rem; margin-right: .85rem;
-    }
-    .m2-link:hover { color: var(--bosco2); border-bottom-color: var(--bosco); }
-    .m2-link::after { content: '→'; font-size: .75rem; }
-
-    /* ── SEZIONE KPI ── */
-    .m2-kpi {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: .75rem; margin: 2rem 0;
-    }
-    .m2-kpi-c {
-      background: var(--bosco);
-      border: 1px solid rgba(184,146,42,.15);
-      border-radius: 10px; padding: 1rem .85rem; text-align: center;
-    }
-    .m2-kpi-v {
-      font-family: var(--fd); font-size: 2rem;
-      color: var(--oro2); line-height: 1; display: block;
-    }
-    .m2-kpi-l {
-      font-family: var(--fu); font-size: .55rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: rgba(245,240,232,.4); margin-top: .3rem; display: block;
-    }
-
-    /* ── SEZIONE FINALE ── */
-    .m2-cta {
-      background: var(--bosco);
-      border: 1px solid rgba(184,146,42,.2);
-      border-radius: 14px; padding: 2rem 1.5rem;
-      text-align: center; margin-top: 2.5rem;
-    }
-    .m2-cta h2 {
-      font-family: var(--fd); font-size: 1.6rem; font-weight: 300;
-      color: #fff; margin-bottom: .5rem;
-    }
-    .m2-cta h2 em { font-style: italic; color: var(--oro3); }
-    .m2-cta p {
-      font-family: var(--fd); font-size: .95rem;
-      color: rgba(245,240,232,.6); line-height: 1.75;
-      max-width: 480px; margin: 0 auto 1.5rem;
-    }
-    .m2-cta-links { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
-    .m2-cta-btn {
-      font-family: var(--fu); font-size: .65rem; font-weight: 800;
-      letter-spacing: .12em; text-transform: uppercase;
-      padding: .8rem 1.5rem; border-radius: 40px; text-decoration: none;
-      transition: opacity .2s;
-    }
-    .m2-cta-btn:hover { opacity: .85; }
-    .m2-cta-btn.primary { background: linear-gradient(135deg,#B8922A,#D4AA4A); color: #0d1a0e; }
-    .m2-cta-btn.secondary { background: rgba(255,255,255,.07); color: var(--oro2); border: 1px solid rgba(184,146,42,.3); }
-
-    /* ── DIVISORE TEMATICO ── */
-    .m2-section-label {
-      font-family: var(--fu); font-size: .58rem; font-weight: 800;
-      letter-spacing: .2em; text-transform: uppercase;
-      color: var(--oro); margin: 2rem 0 .85rem;
-      padding-bottom: .5rem;
-      border-bottom: 1px solid rgba(184,146,42,.12);
-      display: block;
-    }
-
-    @media(max-width:520px){
-      .m2-a { padding-left: 1.25rem; }
-      .m2-num { display: none; }
-    }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.m2-body{max-width:900px;margin:0 auto;padding:2.5rem 1.25rem 5rem}@media (min-width:768px){.m2-body{padding:3rem 2rem 6rem}}.m2-card{background:var(--av);border:1px solid var(--av3);border-radius:14px;margin-bottom:1rem;overflow:hidden;transition:border-color .2s}.m2-card:hover{border-color:rgba(184,146,42,.3)}.m2-card.open{border-color:rgba(184,146,42,.45)}.m2-q{width:100%;padding:1.1rem 1.25rem;background:0 0;border:0;cursor:pointer;display:flex;align-items:center;gap:1rem;text-align:left;transition:background .15s}.m2-q:hover{background:rgba(184,146,42,.04)}.m2-num{font-size:1.3rem;color:rgba(184,146,42,.4);flex-shrink:0;width:28px;line-height:1}.m2-card.open .m2-num{color:var(--oro2)}.m2-a p,.m2-num,.m2-q-text{font-family:var(--fd)}.m2-q-text{flex:1;font-size:1.1rem;font-weight:400;color:var(--txt);line-height:1.3}.m2-card.open .m2-q-text{color:var(--oro3)}.m2-arr{width:18px;height:18px;fill:rgba(184,146,42,.4);transition:transform .22s;flex-shrink:0}.m2-card.open .m2-arr{transform:rotate(180deg);fill:var(--oro2)}.m2-a{display:none;padding:.25rem 1.25rem 1.35rem 4rem}.m2-card.open .m2-a{display:block}.m2-a p{font-size:1.02rem;color:var(--txt2);line-height:1.85;margin-bottom:.7rem}.m2-a p:last-child{margin-bottom:0}.m2-a strong{color:var(--txt);font-weight:600}.m2-link,.m2-pill{font-family:var(--fu)}.m2-pill{display:inline-block;background:rgba(184,146,42,.1);border:1px solid rgba(184,146,42,.25);border-radius:20px;font-size:.72rem;font-weight:700;color:var(--oro2);padding:.3rem .85rem;margin-bottom:.75rem}.m2-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--bosco);text-decoration:none;border-bottom:1.5px solid rgba(44,62,45,.3);padding-bottom:.1rem;transition:border-color .15s,color .15s;margin-top:.5rem;margin-right:.85rem}.m2-link:hover{color:var(--bosco2);border-bottom-color:var(--bosco)}.m2-link::after{content:"→";font-size:.75rem}.m2-kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.75rem;margin:2rem 0}.m2-kpi-c{background:var(--bosco);border:1px solid rgba(184,146,42,.15);border-radius:10px;padding:1rem .85rem;text-align:center}.m2-cta h2,.m2-cta p,.m2-kpi-v{font-family:var(--fd)}.m2-kpi-v{font-size:2rem;color:var(--oro2);line-height:1;display:block}.m2-kpi-l{font-family:var(--fu);font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-top:.3rem;display:block}.m2-cta{background:var(--bosco);border:1px solid rgba(184,146,42,.2);border-radius:14px;padding:2rem 1.5rem;text-align:center;margin-top:2.5rem}.m2-cta h2{font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:.5rem}.m2-cta h2 em{font-style:italic;color:var(--oro3)}.m2-cta p{font-size:.95rem;color:rgba(245,240,232,.6);line-height:1.75;max-width:480px;margin:0 auto 1.5rem}.m2-cta-links{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}.m2-cta-btn,.m2-section-label{font-family:var(--fu);font-weight:800;text-transform:uppercase}.m2-cta-btn{font-size:.65rem;letter-spacing:.12em;padding:.8rem 1.5rem;border-radius:40px;text-decoration:none;transition:opacity .2s}.m2-cta-btn:hover{opacity:.85}.m2-cta-btn.primary{background:linear-gradient(135deg,#b8922a,#d4aa4a);color:#0d1a0e}.m2-cta-btn.secondary{background:rgba(255,255,255,.07);color:var(--oro2);border:1px solid rgba(184,146,42,.3)}.m2-section-label{font-size:.58rem;letter-spacing:.2em;color:var(--oro);margin:2rem 0 .85rem;padding-bottom:.5rem;border-bottom:1px solid rgba(184,146,42,.12);display:block}@media (max-width:520px){.m2-a{padding-left:1.25rem}.m2-num{display:none}}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="in-2-minuti">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
@@ -213,7 +63,7 @@
   </div>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script src="faq.js"></script>
 </body>
 </html>

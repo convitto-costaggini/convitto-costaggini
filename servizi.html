@@ -14,8 +14,9 @@
   <title>Servizi | Convitto "Costaggini" — Rieti</title>
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/servizi.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -109,68 +110,15 @@
   ]
 }
 </script>
-  <style>
-
-    .svc-detail { display: grid; gap: 3.5rem; }
-    .svc-block { display: grid; gap: 2rem; align-items: center; }
-    .svc-block img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px; display: block; }
-    .svc-block ul { list-style: none; margin-top: .75rem; }
-    .svc-block li { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; border-bottom: 1px solid var(--av3); font-size: .86rem; color: var(--txt2); }
-    .svc-block li:last-child { border-bottom: none; }
-    .svc-block li::before { content: '✓'; color: var(--oro); font-weight: 700; flex-shrink: 0; }
-    .svc-num { font-family: var(--fd); font-size: 4rem; font-weight: 300; color: var(--av3); line-height: 1; display: block; margin-bottom: .25rem; }
-    @media(min-width:768px){ .svc-block { grid-template-columns: 1fr 1fr; } .svc-block.rev > *:first-child { order: 2; } .svc-block.rev > *:last-child { order: 1; } }
-
-    .orari-table { width: 100%; border-collapse: collapse; margin-top: 1.25rem; font-size: .85rem; }
-    .orari-table th { background: var(--bosco); color: var(--av); padding: .6rem .85rem; text-align: left; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; font-family: var(--fu); }
-    .orari-table td { padding: .6rem .85rem; border-bottom: 1px solid var(--av3); color: var(--txt); }
-    .orari-table tr:last-child td { border-bottom: none; }
-    .orari-table tr:nth-child(even) td { background: var(--av2); }
-    @media(min-width:560px){.srv-grid{grid-template-columns:1fr 1fr}}
-  </style>
-  <style>
-    /* Collegamenti rapidi nell'hero */
-    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
-    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:var(--ease); }
-    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
-    @media(max-width:560px){
-      .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; }
-      .hero-jump a { padding:.55rem .5rem; }
-    }
-    #ristorazione, #alloggi, #studio, #sport, #tecnologia, #musica, #salute, #orari { scroll-margin-top: 90px; }
-
-    /* Icona decorativa dell'hero: di default 260px (style.css); qui più piccola
-       perché in questa pagina condivide lo spazio con la riga di pulsanti hero-jump */
-    .page-hero .w::after { width: 170px; height: 170px; }
-
-    /* Overlay immagine dinamico e correzioni per ritratti */
-    .img-container { position: relative; width: 100%; border-radius: 8px; overflow: hidden; }
-    .img-overlay { position: absolute; top: 1.2rem; right: 1.2rem; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(4px); padding: 0.6rem 1.2rem; border-radius: 6px; border: 1px solid rgba(184,146,42,.4); box-shadow: 0 4px 10px rgba(0,0,0,0.15); font-family: var(--fu, 'Source Sans 3', sans-serif); text-align: right; line-height: 1.2; z-index: 2; }
-    .img-overlay strong { display: block; font-size: 0.9rem; color: var(--bosco, #2C3E2D); font-weight: 700; margin-bottom: 0.15rem; }
-    .img-overlay span { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--txt2, #555); font-weight: 600; }
-    .img-overlay .ico { color: var(--oro, #B8922A); font-style: normal; margin-right: 0.3rem; font-size: 1.1em; }
-    
-    /* Gestione foto verticali su mobile */
-    .portrait-safe img { aspect-ratio: auto !important; max-height: 450px; object-position: center top; }
-    
-    @media(min-width:768px){ 
-      .portrait-safe img { aspect-ratio: 16/9 !important; object-position: center 30%; max-height: none; } 
-    }
-    
-    @media(max-width:560px) {
-      .img-overlay { top: 0.5rem; right: 0.5rem; padding: 0.35rem 0.6rem; border-radius: 4px; }
-      .img-overlay strong { font-size: 0.75rem; margin-bottom: 0; }
-      .img-overlay span { font-size: 0.5rem; }
-      .img-overlay .ico { font-size: 1em; }
-    }
-  </style>
+  <style>.svc-block,.svc-detail{display:grid;gap:3.5rem}.svc-block{gap:2rem;align-items:center}.svc-block img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:block}.svc-block ul{list-style:none;margin-top:.75rem}.svc-block li{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--av3);font-size:.86rem;color:var(--txt2)}.orari-table tr:last-child td,.svc-block li:last-child{border-bottom:none}.svc-block li::before{content:"✓";color:var(--oro);font-weight:700;flex-shrink:0}.svc-num{font-family:var(--fd);font-size:4rem;font-weight:300;color:var(--av3);line-height:1;display:block;margin-bottom:.25rem}@media (min-width:768px){.svc-block{grid-template-columns:1fr 1fr}.svc-block.rev>:first-child{order:2}.svc-block.rev>:last-child{order:1}}.orari-table{width:100%;border-collapse:collapse;margin-top:1.25rem;font-size:.85rem}.orari-table th{background:var(--bosco);color:var(--av);padding:.6rem .85rem;text-align:left;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-family:var(--fu)}.orari-table td{padding:.6rem .85rem;border-bottom:1px solid var(--av3);color:var(--txt)}.orari-table tr:nth-child(even) td{background:var(--av2)}@media (min-width:560px){.srv-grid{grid-template-columns:1fr 1fr}}</style>
+  <style>.hero-jump{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.35rem}.hero-jump a{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--av,#F5F0E8);text-decoration:none;border:1px solid rgba(184,146,42,.6);background:rgba(255,255,255,.06);padding:.55rem 1rem;border-radius:40px;min-height:40px;transition:var(--ease)}.hero-jump a:focus-visible,.hero-jump a:hover{background:var(--oro,#B8922A);border-color:var(--oro,#B8922A);color:var(--bosco,#2C3E2D)}@media (max-width:560px){.hero-jump{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.hero-jump a{padding:.55rem .5rem}}#alloggi,#musica,#orari,#ristorazione,#salute,#sport,#studio,#tecnologia{scroll-margin-top:90px}.page-hero .w::after{width:170px;height:170px}.img-container{position:relative;width:100%;border-radius:8px;overflow:hidden}.img-overlay{position:absolute;top:1.2rem;right:1.2rem;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);padding:.6rem 1.2rem;border-radius:6px;border:1px solid rgba(184,146,42,.4);box-shadow:0 4px 10px rgba(0,0,0,.15);font-family:var(--fu, 'Source Sans 3', sans-serif);text-align:right;line-height:1.2;z-index:2}.img-overlay strong{display:block;font-size:.9rem;color:var(--bosco, #2C3E2D);font-weight:700;margin-bottom:.15rem}.img-overlay span{display:block;font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;color:var(--txt2, #555);font-weight:600}.img-overlay .ico{color:var(--oro, #B8922A);font-style:normal;margin-right:.3rem;font-size:1.1em}.portrait-safe img{aspect-ratio:auto!important;max-height:450px;object-position:center top}@media (min-width:768px){.portrait-safe img{aspect-ratio:16/9!important;object-position:center 30%;max-height:none}}@media (max-width:560px){.img-overlay{top:.5rem;right:.5rem;padding:.35rem .6rem;border-radius:4px}.img-overlay strong{font-size:.75rem;margin-bottom:0}.img-overlay span{font-size:.5rem}.img-overlay .ico{font-size:1em}}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="servizi">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <div class="page-hero">
@@ -376,6 +324,6 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 </body>
 </html>

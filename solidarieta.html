@@ -15,169 +15,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/solidarieta.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    body { background:#0a0f0a; }
-
-    /* Sticky robusto: impedisce che un eventuale "overflow-x:hidden" ereditato
-       da style.css trasformi html/body/main in contenitore di scroll, cosa che
-       disattiverebbe position:sticky. "clip" blocca lo scroll orizzontale SENZA
-       creare un contenitore di scroll, quindi lo sticky continua a funzionare. */
-    html, body, #main { overflow-x: clip; }
-
-    /* ── HERO ── */
-    .sl-hero {
-      background:linear-gradient(160deg,#000 0%,#0d150d 60%,#0a0f0a 100%);
-      padding:5rem 1.25rem 4rem; text-align:center; position:relative; overflow:hidden;
-    }
-
-    /* Sfondo condiviso col Laboratorio Musicale — stesso collage,
-       stesso velo sfumato, così le tre pagine "speciali" (Laboratorio,
-       Vinile, Solidarietà) restano visivamente imparentate. */
-    .sl-hero-bg {
-      position:absolute; inset:0; z-index:0;
-      background:
-        linear-gradient(180deg, rgba(10,15,10,.78) 0%, rgba(10,15,10,.62) 50%, rgba(10,15,10,.95) 100%),
-        url('img/strumenti-collage.svg') center/cover no-repeat;
-    }
-
-    .sl-hero-eyebrow { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--oro2); margin-bottom:.75rem; }
-    .sl-hero h1 { font-family:var(--fd); font-size:clamp(2.5rem,9vw,5.5rem); font-weight:300; color:#fff; line-height:1; margin-bottom:.4rem; }
-    .sl-hero h1 em { font-style:italic; color:var(--oro3); }
-    .sl-hero-meta { font-family:var(--fu); font-size:.7rem; color:rgba(245,240,232,.35); letter-spacing:.12em; text-transform:uppercase; margin-top:1rem; }
-    .sl-hero-meta span { color:var(--oro2); margin:0 .4rem; }
-
-    /* Scintille di luce — motivo in primo piano, distintivo di questa pagina
-       (differenziazione rispetto alle note del Laboratorio e ai solchi del Vinile) */
-    .sl-motifs { position:absolute; inset:0; pointer-events:none; z-index:1; }
-    .sl-spark {
-      position:absolute; border-radius:50%;
-      background:var(--oro2); box-shadow:0 0 8px rgba(184,146,42,.65);
-      opacity:.55;
-    }
-
-    /* ── VIDEO ── */
-    .sl-video-section { background:#000; padding:0; }
-    .sl-video-wrap {
-      max-width:900px; margin:0 auto; position:relative;
-      background:#000;
-    }
-    .sl-video-inner {
-      position:relative; padding-bottom:56.25%;
-      overflow:hidden;
-    }
-    .sl-video-inner video {
-      position:absolute; top:0; left:0; width:100%; height:100%;
-      background:#000;
-    }
-    /* Placeholder prima del caricamento video */
-    .sl-video-placeholder {
-      position:absolute; inset:0;
-      background:linear-gradient(135deg,#0d150d,#1a2e1a);
-      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem;
-    }
-    .sl-play-ring {
-      width:90px; height:90px; border-radius:50%;
-      border:2px solid rgba(184,146,42,.4);
-      display:flex; align-items:center; justify-content:center;
-      background:rgba(184,146,42,.08);
-    }
-    .sl-play-ring svg { fill:var(--oro2); margin-left:6px; }
-
-    /* ── STORIA ── */
-    .sl-story { padding:5rem 1.25rem; background:#0d150d; }
-    .sl-story-inner { max-width:720px; margin:0 auto; }
-
-    .sl-chapter { margin-bottom:3.5rem; }
-    .sl-chapter:last-child { margin-bottom:0; }
-
-    .sl-chapter-label {
-      font-family:var(--fu); font-size:.58rem; font-weight:800; letter-spacing:.18em;
-      text-transform:uppercase; color:var(--oro2); margin-bottom:.75rem; display:flex;
-      align-items:center; gap:.75rem;
-    }
-    .sl-chapter-label::after { content:''; flex:1; height:1px; background:rgba(184,146,42,.2); }
-
-    .sl-chapter h2 { font-family:var(--fd); font-size:clamp(1.5rem,4vw,2.2rem); font-weight:300; color:#fff; margin-bottom:1.25rem; line-height:1.2; }
-    .sl-chapter h2 em { font-style:italic; color:var(--oro3); }
-
-    .sl-chapter p { font-family:var(--fd); font-size:1.05rem; color:rgba(245,240,232,.72); line-height:1.9; margin-bottom:1.1rem; }
-    .sl-chapter p:last-child { margin-bottom:0; }
-    .sl-chapter strong { color:rgba(245,240,232,.92); font-weight:600; }
-
-    /* Pull quote */
-    .sl-pullquote {
-      border-left:3px solid var(--oro);
-      padding:1rem 1.5rem;
-      margin:2rem 0;
-      background:rgba(184,146,42,.05);
-      border-radius:0 8px 8px 0;
-    }
-    .sl-pullquote p { font-family:var(--fd); font-size:1.15rem; font-style:italic; color:rgba(245,240,232,.85); line-height:1.75; margin:0; }
-
-    /* Badge info */
-    .sl-badges { display:flex; flex-wrap:wrap; gap:.5rem; margin:1.5rem 0; }
-    .sl-badge { font-family:var(--fu); font-size:.58rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.3rem .75rem; border-radius:20px; border:1px solid rgba(184,146,42,.25); color:var(--oro2); background:rgba(184,146,42,.06); }
-
-    /* ── CREDITI ── */
-    .sl-credits { padding:4rem 1.25rem; background:#000; border-top:1px solid rgba(184,146,42,.1); }
-    .sl-credits-inner { max-width:720px; margin:0 auto; }
-    .sl-credits h3 { font-family:var(--fu); font-size:.65rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:rgba(245,240,232,.35); margin-bottom:1.5rem; }
-    .sl-credits-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; }
-    .sl-credit-item { border:1px solid rgba(255,255,255,.06); border-radius:8px; padding:1rem; }
-    .sl-credit-role { font-family:var(--fu); font-size:.57rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--oro2); margin-bottom:.3rem; }
-    .sl-credit-name { font-family:var(--fd); font-size:.95rem; color:rgba(245,240,232,.75); }
-
-    /* ── CTA ── */
-    .sl-cta { padding:4rem 1.25rem; background:#0d150d; text-align:center; }
-    .sl-cta p { font-family:var(--fd); font-size:1.1rem; font-style:italic; color:rgba(245,240,232,.45); max-width:480px; margin:0 auto 1.75rem; line-height:1.7; }
-
-    /* ── LAYOUT DUE COLONNE ── */
-    .sl-two-col {
-      display:grid;
-      grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);  /* video sx più grande, storia dx */
-      gap:2.25rem;
-      align-items:start;
-    }
-    /* Colonna video sticky — segue lo scroll */
-    .sl-col-video {
-      position:sticky;
-      position:-webkit-sticky;
-      top:88px;
-      align-self:start;
-      z-index:5;
-    }
-    .sl-video-sticky { /* wrapper senza overflow che blocchi lo sticky */ }
-    .sl-video-inner {
-      position:relative;
-      padding-bottom:56.25%;
-      border-radius:8px;
-      background:#000;
-      /* NON mettere overflow:hidden qui — rompe lo sticky del genitore */
-    }
-    .sl-video-inner video {
-      position:absolute;top:0;left:0;width:100%;height:100%;
-      border-radius:8px;
-    }
-    .sl-col-story { padding-top:.5rem; }
-
-    @media(max-width:860px){
-      .sl-two-col {
-        grid-template-columns:1fr;
-        gap:2rem;
-      }
-      .sl-col-video { position:static; }
-    }
-    @media(max-width:600px){ .sl-hero h1 { font-size:2.8rem; } }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>body{background:#0a0f0a}#main,body,html{overflow-x:clip}.sl-hero{background:linear-gradient(160deg,#000 0,#0d150d 60%,#0a0f0a 100%);padding:5rem 1.25rem 4rem;text-align:center;position:relative;overflow:hidden}.sl-hero-bg{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(10,15,10,.78)0,rgba(10,15,10,.62) 50%,rgba(10,15,10,.95) 100%),url(img/strumenti-collage.svg)center/cover no-repeat}.sl-hero-eyebrow,.sl-hero-meta{font-family:var(--fu);text-transform:uppercase}.sl-hero-eyebrow{font-size:.6rem;font-weight:800;letter-spacing:.2em;color:var(--oro2);margin-bottom:.75rem}.sl-hero h1{font-family:var(--fd);font-size:clamp(2.5rem,9vw,5.5rem);font-weight:300;color:#fff;line-height:1;margin-bottom:.4rem}.sl-chapter h2 em,.sl-hero h1 em{font-style:italic;color:var(--oro3)}.sl-hero-meta{font-size:.7rem;color:rgba(245,240,232,.35);letter-spacing:.12em;margin-top:1rem}.sl-hero-meta span{color:var(--oro2);margin:0 .4rem}.sl-motifs{position:absolute;inset:0;pointer-events:none;z-index:1}.sl-spark{position:absolute;border-radius:50%;background:var(--oro2);box-shadow:0 0 8px rgba(184,146,42,.65);opacity:.55}.sl-video-section{background:#000;padding:0}.sl-video-wrap{max-width:900px;margin:0 auto;position:relative;background:#000}.sl-video-inner{overflow:hidden}.sl-video-inner video{background:#000;position:absolute;top:0;left:0;width:100%;height:100%;border-radius:8px}.sl-play-ring,.sl-video-placeholder{display:flex;align-items:center;justify-content:center}.sl-video-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,#0d150d,#1a2e1a);flex-direction:column;gap:1.5rem}.sl-play-ring{width:90px;height:90px;border-radius:50%;border:2px solid rgba(184,146,42,.4);background:rgba(184,146,42,.08)}.sl-play-ring svg{fill:var(--oro2);margin-left:6px}.sl-story{padding:5rem 1.25rem;background:#0d150d}.sl-story-inner{max-width:720px;margin:0 auto}.sl-chapter{margin-bottom:3.5rem}.sl-chapter p:last-child,.sl-chapter:last-child{margin-bottom:0}.sl-chapter-label{font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}.sl-chapter-label::after{content:"";flex:1;height:1px;background:rgba(184,146,42,.2)}.sl-chapter h2{font-family:var(--fd);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:300;color:#fff;margin-bottom:1.25rem;line-height:1.2}.sl-chapter p{font-family:var(--fd);font-size:1.05rem;color:rgba(245,240,232,.72);line-height:1.9;margin-bottom:1.1rem}.sl-chapter strong{color:rgba(245,240,232,.92);font-weight:600}.sl-pullquote{border-left:3px solid var(--oro);padding:1rem 1.5rem;margin:2rem 0;background:rgba(184,146,42,.05);border-radius:0 8px 8px 0}.sl-pullquote p{font-family:var(--fd);font-size:1.15rem;font-style:italic;color:rgba(245,240,232,.85);line-height:1.75;margin:0}.sl-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0}.sl-badge,.sl-credits h3{font-family:var(--fu);font-weight:800;text-transform:uppercase}.sl-badge{font-size:.58rem;letter-spacing:.1em;padding:.3rem .75rem;border-radius:20px;border:1px solid rgba(184,146,42,.25);color:var(--oro2);background:rgba(184,146,42,.06)}.sl-credits{padding:4rem 1.25rem;background:#000;border-top:1px solid rgba(184,146,42,.1)}.sl-credits-inner{max-width:720px;margin:0 auto}.sl-credits h3{font-size:.65rem;letter-spacing:.18em;color:rgba(245,240,232,.35);margin-bottom:1.5rem}.sl-credits-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}.sl-credit-item{border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:1rem}.sl-credit-role{font-family:var(--fu);font-size:.57rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2);margin-bottom:.3rem}.sl-credit-name,.sl-cta p{font-family:var(--fd);font-size:.95rem;color:rgba(245,240,232,.75)}.sl-cta{padding:4rem 1.25rem;background:#0d150d;text-align:center}.sl-cta p{font-size:1.1rem;font-style:italic;color:rgba(245,240,232,.45);max-width:480px;margin:0 auto 1.75rem;line-height:1.7}.sl-two-col{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:2.25rem;align-items:start}.sl-col-video{position:sticky;position:-webkit-sticky;top:88px;align-self:start;z-index:5}.sl-video-inner{position:relative;padding-bottom:56.25%;border-radius:8px;background:#000}.sl-col-story{padding-top:.5rem}@media (max-width:860px){.sl-two-col{grid-template-columns:1fr;gap:2rem}.sl-col-video{position:static}}@media (max-width:600px){.sl-hero h1{font-size:2.8rem}}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="solidarieta">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- HERO -->
@@ -314,7 +162,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 const vid = document.getElementById('sl-video');
 if (vid) {

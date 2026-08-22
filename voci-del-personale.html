@@ -14,100 +14,17 @@
   <title>Voci del Personale | "Costaggini" — Rieti</title>
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/voci-del-personale.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    #indice, #ruoli, #cap-1, #cap-2, #cap-3, #cap-4, #cap-5, #cap-6, #cap-7, #cap-8, #cap-9, #cap-10, #partecipa { scroll-margin-top: 90px; }
-
-    .hero-jump { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.35rem; }
-    .hero-jump a { display:inline-flex; align-items:center; justify-content:center; text-align:center; gap:.45rem; font-family:var(--fu); font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--av,#F5F0E8); text-decoration:none; border:1px solid rgba(184,146,42,.6); background:rgba(255,255,255,.06); padding:.55rem 1rem; border-radius:40px; min-height:40px; transition:var(--ease); }
-    .hero-jump a:hover, .hero-jump a:focus-visible { background:var(--oro,#B8922A); border-color:var(--oro,#B8922A); color:var(--bosco,#2C3E2D); }
-    .cantiere-badge + .hero-jump { margin-top: 1.75rem; }
-    @media(max-width:640px) { .hero-jump { display:grid; grid-template-columns:1fr 1fr; gap:.55rem; } .hero-jump a { padding:.55rem .5rem; } }
-
-    .cantiere-badge {
-      display: inline-flex; align-items: center; gap: .55rem;
-      border: 1px solid rgba(184,146,42,.55); background: rgba(184,146,42,.09);
-      border-radius: 40px; padding: .55rem 1.1rem; margin-top: 1.35rem;
-      font-family: var(--fu); font-size: .78rem; color: var(--oro3); line-height: 1.5; max-width: 580px;
-    }
-    .cantiere-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--oro2); flex-shrink: 0; animation: cantiere-pulse 2.2s ease-in-out infinite; }
-    @keyframes cantiere-pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
-    @media (prefers-reduced-motion: reduce) { .cantiere-dot { animation: none; } }
-
-    /* — Chi intervistiamo — */
-    .ruoli-riga { display:flex; flex-wrap:wrap; gap:.65rem; justify-content:center; max-width:760px; margin:0 auto; }
-    .ruolo-chip {
-      display:inline-flex; align-items:center; gap:.5rem; background:var(--bco);
-      border:1px solid var(--av3); border-radius:40px; padding:.6rem 1.25rem;
-      font-family:var(--fu); font-size:.8rem; font-weight:600; color:var(--bosco2);
-      box-shadow: var(--sh-sm); transition: var(--ease);
-    }
-    .ruolo-chip:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
-    .ruolo-chip .pt { width:6px; height:6px; border-radius:50%; background:var(--oro); flex-shrink:0; }
-
-    /* — Indice — */
-    .indice-domande { display: grid; gap: 0; max-width: 760px; margin: 0 auto; }
-    .indice-domande a {
-      display: flex; align-items: baseline; gap: 1.15rem; padding: 1rem .5rem;
-      text-decoration: none; color: var(--txt2); border-radius: 10px;
-      font-family: var(--fu); font-size: .93rem; transition: var(--ease);
-      border-bottom: 1px solid var(--av3);
-    }
-    .indice-domande a:hover { color: var(--bosco); background: var(--bco); box-shadow: var(--sh-sm); padding-left: .9rem; }
-    .indice-domande .num { font-family: var(--fd); font-style: italic; font-size: 1.25rem; color: var(--oro); width: 32px; flex-shrink: 0; }
-
-    /* — Capitoli — */
-    .capitolo { background: var(--bco); padding: 3.5rem 1.25rem; }
-    .capitolo.alt { background: var(--av2); }
-    .capitolo .w { max-width: 760px; }
-    .cap-eyebrow { display:flex; align-items:baseline; gap:.85rem; margin-bottom: 1rem; }
-    .cap-eyebrow .num { font-family: var(--fd); font-style: italic; font-size: 1.9rem; color: var(--oro); line-height: 1; }
-    .cap-eyebrow .line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--av3), transparent); }
-    .capitolo h2 {
-      font-family: var(--fd); font-weight: 400; color: var(--bosco);
-      font-size: clamp(1.35rem, 3.2vw, 1.75rem); line-height: 1.4; margin-bottom: 1.75rem;
-    }
-    .capitolo h2 em { font-style: italic; color: var(--bosco2); }
-
-    .voci-grid { display: grid; gap: 1rem; }
-    .voce-card {
-      display: flex; align-items: center; gap: 1rem;
-      background: #fff; border: 1px solid var(--av3); border-radius: 16px;
-      padding: 1.1rem 1.35rem; box-shadow: var(--sh-sm); transition: var(--ease);
-    }
-    .voce-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
-    .voce-play {
-      width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%;
-      border: none; background: linear-gradient(135deg, var(--oro2), var(--oro3));
-      color: var(--bosco); display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: .9rem; box-shadow: 0 3px 10px rgba(184,146,42,.35); transition: var(--ease);
-    }
-    .voce-play:hover { transform: scale(1.07); box-shadow: 0 5px 16px rgba(184,146,42,.5); }
-    .voce-body { flex: 1; min-width: 0; }
-    .voce-quote { font-family: var(--fd); font-style: italic; color: var(--txt); font-size: 1.02rem; line-height: 1.55; margin: 0 0 .35rem; }
-    .voce-meta { display: flex; align-items: center; gap: .5rem; }
-    .voce-nome { font-family: var(--fu); font-size: .75rem; font-weight: 700; color: var(--bosco2); }
-    .voce-ruolo {
-      font-family: var(--fu); font-size: .6rem; font-weight: 800; letter-spacing: .09em;
-      text-transform: uppercase; color: var(--oro); background: rgba(184,146,42,.1);
-      padding: .18rem .55rem; border-radius: 20px;
-    }
-    .voce-vuoto {
-      display: flex; align-items: center; gap: .85rem;
-      background: transparent; border: 1.5px dashed var(--av3); border-radius: 16px;
-      padding: 1.1rem 1.35rem; font-family: var(--fd); font-style: italic;
-      color: var(--txt2); font-size: .98rem; opacity: .75;
-    }
-    .voce-vuoto .pt2 { width: 7px; height: 7px; border-radius: 50%; background: var(--av3); flex-shrink: 0; }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css" />
+  <style>@keyframes cantiere-pulse{0%,to{opacity:1}50%{opacity:.35}}#cap-1,#cap-10,#cap-2,#cap-3,#cap-4,#cap-5,#cap-6,#cap-7,#cap-8,#cap-9,#indice,#partecipa,#ruoli{scroll-margin-top:90px}.hero-jump{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.35rem}.hero-jump a{display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:.45rem;font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--av,#F5F0E8);text-decoration:none;border:1px solid rgba(184,146,42,.6);background:rgba(255,255,255,.06);padding:.55rem 1rem;border-radius:40px;min-height:40px;transition:var(--ease)}.hero-jump a:focus-visible,.hero-jump a:hover{background:var(--oro,#B8922A);border-color:var(--oro,#B8922A);color:var(--bosco,#2C3E2D)}.cantiere-badge+.hero-jump{margin-top:1.75rem}@media (max-width:640px){.hero-jump{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}.hero-jump a{padding:.55rem .5rem}}.cantiere-badge{display:inline-flex;align-items:center;gap:.55rem;border:1px solid rgba(184,146,42,.55);background:rgba(184,146,42,.09);border-radius:40px;padding:.55rem 1.1rem;margin-top:1.35rem;font-family:var(--fu);font-size:.78rem;color:var(--oro3);line-height:1.5;max-width:580px}.cantiere-dot{width:7px;height:7px;border-radius:50%;background:var(--oro2);flex-shrink:0;animation:cantiere-pulse 2.2s ease-in-out infinite}@media (prefers-reduced-motion:reduce){.cantiere-dot{animation:none}}.ruoli-riga{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;max-width:760px;margin:0 auto}.indice-domande a:hover,.ruolo-chip{background:var(--bco);box-shadow:var(--sh-sm)}.indice-domande a,.ruolo-chip{font-family:var(--fu);transition:var(--ease)}.ruolo-chip{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--av3);border-radius:40px;padding:.6rem 1.25rem;font-size:.8rem;font-weight:600;color:var(--bosco2)}.ruolo-chip:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}.ruolo-chip .pt{width:6px;height:6px;border-radius:50%;background:var(--oro);flex-shrink:0}.indice-domande{display:grid;gap:0;max-width:760px;margin:0 auto}.indice-domande a{display:flex;align-items:baseline;gap:1.15rem;padding:1rem .5rem;text-decoration:none;color:var(--txt2);border-radius:10px;font-size:.93rem;border-bottom:1px solid var(--av3)}.indice-domande a:hover{color:var(--bosco);padding-left:.9rem}.indice-domande .num{font-family:var(--fd);font-style:italic;font-size:1.25rem;color:var(--oro);width:32px;flex-shrink:0}.capitolo{background:var(--bco);padding:3.5rem 1.25rem}.capitolo.alt{background:var(--av2)}.capitolo .w{max-width:760px}.cap-eyebrow{display:flex;align-items:baseline;gap:.85rem;margin-bottom:1rem}.cap-eyebrow .num{font-family:var(--fd);font-style:italic;font-size:1.9rem;color:var(--oro);line-height:1}.cap-eyebrow .line{flex:1;height:1px;background:linear-gradient(90deg,var(--av3),transparent)}.capitolo h2{font-family:var(--fd);font-weight:400;color:var(--bosco);font-size:clamp(1.35rem,3.2vw,1.75rem);line-height:1.4;margin-bottom:1.75rem}.capitolo h2 em{font-style:italic;color:var(--bosco2)}.voci-grid{display:grid;gap:1rem}.voce-card,.voce-play{display:flex;align-items:center;transition:var(--ease)}.voce-card{gap:1rem;background:#fff;border:1px solid var(--av3);border-radius:16px;padding:1.1rem 1.35rem;box-shadow:var(--sh-sm)}.voce-card:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}.voce-play{width:40px;height:40px;flex-shrink:0;border-radius:50%;border:0;background:linear-gradient(135deg,var(--oro2),var(--oro3));color:var(--bosco);justify-content:center;cursor:pointer;font-size:.9rem;box-shadow:0 3px 10px rgba(184,146,42,.35)}.voce-play:hover{transform:scale(1.07);box-shadow:0 5px 16px rgba(184,146,42,.5)}.voce-body{flex:1;min-width:0}.voce-quote{font-family:var(--fd);font-style:italic;color:var(--txt);font-size:1.02rem;line-height:1.55;margin:0 0 .35rem}.voce-meta{display:flex;align-items:center;gap:.5rem}.voce-nome,.voce-ruolo{font-family:var(--fu);font-size:.75rem;font-weight:700;color:var(--bosco2)}.voce-ruolo{font-size:.6rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--oro);background:rgba(184,146,42,.1);padding:.18rem .55rem;border-radius:20px}.voce-vuoto{display:flex;align-items:center;gap:.85rem;background:0 0;border:1.5px dashed var(--av3);border-radius:16px;padding:1.1rem 1.35rem;font-family:var(--fd);font-style:italic;color:var(--txt2);font-size:.98rem;opacity:.75}.voce-vuoto .pt2{width:7px;height:7px;border-radius:50%;background:var(--av3);flex-shrink:0}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="voci-del-personale">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- PAGE HERO -->
@@ -286,7 +203,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
   document.querySelectorAll('.voce-play').forEach(function(btn){
     var audio = btn.nextElementSibling;

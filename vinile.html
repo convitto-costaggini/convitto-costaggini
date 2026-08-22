@@ -9,158 +9,17 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/vinile.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-    body { background:#0a0f0a; }
-
-    /* HERO */
-    .vn-hero { background:linear-gradient(180deg,#000,#0a0f0a); padding:4rem 1.25rem 3rem; text-align:center; position:relative; overflow:hidden; }
-    .vn-hero h1 { font-family:var(--fd); font-size:clamp(2rem,7vw,4.5rem); font-weight:300; color:#fff; }
-    .vn-hero h1 em { font-style:italic; color:var(--oro3); }
-    .vn-hero p { color:rgba(245,240,232,.5); max-width:500px; margin:.75rem auto 0; font-size:.9rem; line-height:1.8; }
-    .vn-hero .w { position:relative; z-index:1; }
-
-    /* Sfondo condiviso col Laboratorio Musicale — stesso collage,
-       stesso velo sfumato, così le tre pagine "speciali" (Laboratorio,
-       Vinile, Solidarietà) restano visivamente imparentate. */
-    .vn-hero-bg {
-      position:absolute; inset:0; z-index:0;
-      background:
-        linear-gradient(180deg, rgba(10,15,10,.75) 0%, rgba(10,15,10,.6) 50%, rgba(10,15,10,.94) 100%),
-        url('img/strumenti-collage.svg') center/cover no-repeat;
-    }
-
-    /* Solchi di vinile — motivo in primo piano, distintivo di questa pagina
-       (differenziazione rispetto alle note del Laboratorio e alle scintille
-       della Solidarietà) */
-    .vn-motifs { position:absolute; inset:0; pointer-events:none; z-index:1; }
-    .vn-ring {
-      position:absolute; border-radius:50%;
-      border:1.5px solid rgba(184,146,42,.3);
-      opacity:.32;
-    }
-    .vn-ring::after {
-      content:''; position:absolute; inset:32%; border-radius:50%;
-      border:1px solid rgba(184,146,42,.22);
-    }
-
-    /* GIRADISCHI */
-    .vn-player-wrap { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:3rem; padding:3rem 1.25rem; max-width:900px; margin:0 auto; }
-
-    /* Disco SVG animato */
-    .vn-disc-container { position:relative; width:260px; height:260px; flex-shrink:0; }
-    .vn-disc {
-      width:260px; height:260px; border-radius:50%;
-      background:conic-gradient(
-        #1a1a1a 0deg, #222 10deg, #1a1a1a 20deg, #222 30deg,
-        #1a1a1a 40deg, #222 50deg, #1a1a1a 60deg, #222 70deg,
-        #1a1a1a 80deg, #222 90deg, #1a1a1a 100deg, #222 110deg,
-        #1a1a1a 120deg, #222 130deg, #1a1a1a 140deg, #222 150deg,
-        #1a1a1a 160deg, #222 170deg, #1a1a1a 180deg, #222 190deg,
-        #1a1a1a 200deg, #222 210deg, #1a1a1a 220deg, #222 230deg,
-        #1a1a1a 240deg, #222 250deg, #1a1a1a 260deg, #222 270deg,
-        #1a1a1a 280deg, #222 290deg, #1a1a1a 300deg, #222 310deg,
-        #1a1a1a 320deg, #222 330deg, #1a1a1a 340deg, #222 350deg
-      );
-      box-shadow:0 0 40px rgba(0,0,0,.8), inset 0 0 20px rgba(0,0,0,.5);
-      animation:spinDisc 4s linear infinite;
-      animation-play-state:paused;
-      position:relative;
-    }
-    .vn-disc.playing { animation-play-state:running; }
-    @keyframes spinDisc { to { transform:rotate(360deg); } }
-
-    /* Riflesso sul disco */
-    .vn-disc::after {
-      content:''; position:absolute; inset:0; border-radius:50%;
-      background:radial-gradient(ellipse 60% 30% at 35% 30%, rgba(255,255,255,.06), transparent 60%);
-      pointer-events:none;
-    }
-
-    /* Etichetta centrale */
-    .vn-label {
-      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      width:80px; height:80px; border-radius:50%;
-      background:radial-gradient(circle,var(--bosco) 0%,#1a3a1b 100%);
-      border:2px solid rgba(184,146,42,.4);
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      pointer-events:none; z-index:2;
-    }
-    .vn-label span { font-family:var(--fd); font-size:.6rem; color:var(--oro2); text-align:center; line-height:1.3; }
-    .vn-label strong { font-size:.7rem; font-style:italic; }
-
-    /* Foro centrale */
-    .vn-hole {
-      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      width:10px; height:10px; border-radius:50%; background:#0a0f0a; z-index:3;
-    }
-
-    /* Braccio pickup */
-    .vn-arm {
-      position:absolute; top:10px; right:10px; width:80px; height:130px;
-      transform-origin:top right;
-      transition:transform .8s cubic-bezier(.4,0,.2,1);
-      transform:rotate(-25deg);
-      z-index:4;
-    }
-    .vn-arm.on-disc { transform:rotate(-8deg); }
-    .vn-arm-line { width:3px; height:100%; background:linear-gradient(180deg,#888,#555); border-radius:2px; margin-left:auto; }
-    .vn-arm-head { width:14px; height:8px; background:#B8922A; border-radius:2px; margin-top:2px; margin-left:auto; }
-
-    /* Controlli */
-    .vn-controls { flex:1; min-width:260px; }
-    .vn-now-playing { margin-bottom:1.5rem; }
-    .vn-np-label { font-family:var(--fu); font-size:.55rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:rgba(245,240,232,.3); margin-bottom:.4rem; }
-    .vn-np-title { font-family:var(--fd); font-size:1.5rem; color:#fff; margin-bottom:.2rem; }
-    .vn-np-meta  { font-family:var(--fu); font-size:.68rem; color:var(--oro2); }
-
-    /* Progress bar */
-    .vn-progress { height:3px; background:rgba(255,255,255,.1); border-radius:2px; margin:1.25rem 0 .5rem; cursor:pointer; }
-    .vn-progress-fill { height:100%; background:linear-gradient(90deg,var(--bosco),var(--oro)); border-radius:2px; width:0%; transition:width .5s linear; }
-    .vn-time { display:flex; justify-content:space-between; font-family:var(--fu); font-size:.6rem; color:rgba(255,255,255,.3); margin-bottom:1.25rem; }
-
-    /* Bottoni play/prev/next */
-    .vn-btn-row { display:flex; align-items:center; gap:.85rem; margin-bottom:1.5rem; }
-    .vn-btn { background:none; border:1.5px solid rgba(255,255,255,.12); color:rgba(255,255,255,.5); width:44px; height:44px; border-radius:50%; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:all .2s; }
-    .vn-btn:hover { border-color:var(--oro2); color:var(--oro2); }
-    .vn-btn.play { width:56px; height:56px; background:linear-gradient(135deg,var(--bosco),#1a3a1b); border-color:var(--oro2); color:var(--oro2); font-size:1.3rem; }
-
-    /* Playlist */
-    .vn-playlist { border-top:1px solid rgba(255,255,255,.06); padding-top:1.25rem; }
-    .vn-pl-label { font-family:var(--fu); font-size:.55rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:rgba(245,240,232,.25); margin-bottom:.75rem; }
-    .vn-pl-item {
-      display:flex; align-items:center; gap:.85rem;
-      padding:.7rem .75rem; border-radius:6px; cursor:pointer;
-      transition:background .2s; margin-bottom:.2rem;
-    }
-    .vn-pl-item:hover { background:rgba(255,255,255,.04); }
-    .vn-pl-item.active { background:rgba(44,62,45,.4); }
-    .vn-pl-num { font-family:var(--fd); font-size:.85rem; font-style:italic; color:rgba(255,255,255,.2); width:20px; text-align:right; flex-shrink:0; }
-    .vn-pl-item.active .vn-pl-num { color:var(--oro2); }
-    .vn-pl-info { flex:1; }
-    .vn-pl-title { font-family:var(--fu); font-size:.75rem; font-weight:700; color:rgba(255,255,255,.7); }
-    .vn-pl-item.active .vn-pl-title { color:#fff; }
-    .vn-pl-sub { font-family:var(--fu); font-size:.6rem; color:rgba(255,255,255,.3); margin-top:.1rem; }
-    .vn-pl-dur { font-family:var(--fu); font-size:.6rem; color:rgba(255,255,255,.25); flex-shrink:0; }
-
-    /* Nota su file demo */
-    .vn-demo-note { background:rgba(184,146,42,.06); border:1px solid rgba(184,146,42,.15); border-radius:8px; padding:.85rem 1.1rem; margin-top:1.5rem; font-family:var(--fu); font-size:.65rem; color:rgba(245,240,232,.4); line-height:1.6; text-align:center; }
-
-    /* STORIA */
-    .vn-storia { padding:4rem 1.25rem; }
-    .vn-storia-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; margin-top:2rem; }
-    .vn-anno-card { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:8px; padding:1.1rem; }
-    .vn-anno { font-family:var(--fd); font-size:1.4rem; font-style:italic; color:var(--oro2); margin-bottom:.3rem; }
-    .vn-anno-desc { font-family:var(--fu); font-size:.7rem; color:rgba(245,240,232,.45); line-height:1.6; }
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>@keyframes spinDisc{to{transform:rotate(360deg)}}body{background:#0a0f0a}.vn-hero{background:linear-gradient(180deg,#000,#0a0f0a);padding:4rem 1.25rem 3rem;text-align:center;position:relative;overflow:hidden}.vn-hero h1{font-family:var(--fd);font-size:clamp(2rem,7vw,4.5rem);font-weight:300;color:#fff}.vn-hero h1 em{font-style:italic;color:var(--oro3)}.vn-hero p{color:rgba(245,240,232,.5);max-width:500px;margin:.75rem auto 0;font-size:.9rem;line-height:1.8}.vn-hero .w{position:relative;z-index:1}.vn-hero-bg,.vn-motifs{position:absolute;inset:0}.vn-hero-bg{z-index:0;background:linear-gradient(180deg,rgba(10,15,10,.75)0,rgba(10,15,10,.6) 50%,rgba(10,15,10,.94) 100%),url(img/strumenti-collage.svg)center/cover no-repeat}.vn-motifs{pointer-events:none;z-index:1}.vn-ring{position:absolute;border-radius:50%;border:1.5px solid rgba(184,146,42,.3);opacity:.32}.vn-disc::after,.vn-ring::after{content:"";position:absolute;border-radius:50%}.vn-ring::after{inset:32%;border:1px solid rgba(184,146,42,.22)}.vn-player-wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:3rem;padding:3rem 1.25rem;max-width:900px;margin:0 auto}.vn-disc,.vn-disc-container{width:260px;height:260px;position:relative}.vn-disc-container{flex-shrink:0}.vn-disc{border-radius:50%;background:conic-gradient(#1a1a1a 0deg,#222 10deg,#1a1a1a 20deg,#222 30deg,#1a1a1a 40deg,#222 50deg,#1a1a1a 60deg,#222 70deg,#1a1a1a 80deg,#222 90deg,#1a1a1a 100deg,#222 110deg,#1a1a1a 120deg,#222 130deg,#1a1a1a 140deg,#222 150deg,#1a1a1a 160deg,#222 170deg,#1a1a1a 180deg,#222 190deg,#1a1a1a 200deg,#222 210deg,#1a1a1a 220deg,#222 230deg,#1a1a1a 240deg,#222 250deg,#1a1a1a 260deg,#222 270deg,#1a1a1a 280deg,#222 290deg,#1a1a1a 300deg,#222 310deg,#1a1a1a 320deg,#222 330deg,#1a1a1a 340deg,#222 350deg);box-shadow:0 0 40px rgba(0,0,0,.8),inset 0 0 20px rgba(0,0,0,.5);animation:spinDisc 4s linear infinite;animation-play-state:paused}.vn-disc.playing{animation-play-state:running}.vn-disc::after{inset:0;background:radial-gradient(ellipse 60% 30%at 35% 30%,rgba(255,255,255,.06),transparent 60%);pointer-events:none}.vn-hole,.vn-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%}.vn-label{width:80px;height:80px;background:radial-gradient(circle,var(--bosco) 0%,#1a3a1b 100%);border:2px solid rgba(184,146,42,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;z-index:2}.vn-label span{font-family:var(--fd);font-size:.6rem;text-align:center;line-height:1.3}.vn-label strong{font-size:.7rem;font-style:italic}.vn-hole{width:10px;height:10px;background:#0a0f0a;z-index:3}.vn-arm{position:absolute;top:10px;right:10px;width:80px;height:130px;transform-origin:top right;transition:transform .8s cubic-bezier(.4,0,.2,1);transform:rotate(-25deg);z-index:4}.vn-arm.on-disc{transform:rotate(-8deg)}.vn-arm-head,.vn-arm-line{border-radius:2px;margin-left:auto}.vn-arm-line{width:3px;height:100%;background:linear-gradient(180deg,#888,#555)}.vn-arm-head{width:14px;height:8px;background:#b8922a;margin-top:2px}.vn-controls{flex:1;min-width:260px}.vn-now-playing{margin-bottom:1.5rem}.vn-np-label{font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:.4rem}.vn-np-title{font-family:var(--fd);font-size:1.5rem;color:#fff;margin-bottom:.2rem}.vn-np-meta{font-family:var(--fu);font-size:.68rem;color:var(--oro2)}.vn-progress{height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin:1.25rem 0 .5rem;cursor:pointer}.vn-progress-fill{height:100%;background:linear-gradient(90deg,var(--bosco),var(--oro));border-radius:2px;width:0%;transition:width .5s linear}.vn-time{display:flex;justify-content:space-between;font-family:var(--fu);font-size:.6rem;color:rgba(255,255,255,.3);margin-bottom:1.25rem}.vn-btn,.vn-btn-row{display:flex;align-items:center}.vn-btn-row{gap:.85rem;margin-bottom:1.5rem}.vn-btn{background:0 0;border:1.5px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1rem;justify-content:center;transition:all .2s}.vn-btn.play,.vn-btn:hover{border-color:var(--oro2);color:var(--oro2)}.vn-btn.play{width:56px;height:56px;background:linear-gradient(135deg,var(--bosco),#1a3a1b);font-size:1.3rem}.vn-playlist{border-top:1px solid rgba(255,255,255,.06);padding-top:1.25rem}.vn-pl-label{font-family:var(--fu);font-size:.55rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,240,232,.25);margin-bottom:.75rem}.vn-pl-item{display:flex;align-items:center;gap:.85rem;padding:.7rem .75rem;border-radius:6px;cursor:pointer;transition:background .2s;margin-bottom:.2rem}.vn-pl-item:hover{background:rgba(255,255,255,.04)}.vn-pl-item.active{background:rgba(44,62,45,.4)}.vn-pl-num{font-family:var(--fd);font-size:.85rem;font-style:italic;color:rgba(255,255,255,.2);width:20px;text-align:right;flex-shrink:0}.vn-label span,.vn-pl-item.active .vn-pl-num{color:var(--oro2)}.vn-pl-info{flex:1}.vn-pl-title{font-family:var(--fu);font-size:.75rem;font-weight:700;color:rgba(255,255,255,.7)}.vn-pl-item.active .vn-pl-title{color:#fff}.vn-pl-dur,.vn-pl-sub{font-family:var(--fu);font-size:.6rem}.vn-pl-sub{color:rgba(255,255,255,.3);margin-top:.1rem}.vn-pl-dur{color:rgba(255,255,255,.25);flex-shrink:0}.vn-demo-note{background:rgba(184,146,42,.06);border:1px solid rgba(184,146,42,.15);border-radius:8px;padding:.85rem 1.1rem;margin-top:1.5rem;font-family:var(--fu);font-size:.65rem;color:rgba(245,240,232,.4);line-height:1.6;text-align:center}.vn-storia{padding:4rem 1.25rem}.vn-storia-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:2rem}.vn-anno-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:1.1rem}.vn-anno{font-family:var(--fd);font-size:1.4rem;font-style:italic;color:var(--oro2);margin-bottom:.3rem}.vn-anno-desc{font-family:var(--fu);font-size:.7rem;color:rgba(245,240,232,.45);line-height:1.6}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body data-page="vinile">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- HERO -->
@@ -281,7 +140,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 // Playlist — i file audio vengono aggiunti dal Responsabile Tecnico
 // Formato: { title, artist, year, duration, src }

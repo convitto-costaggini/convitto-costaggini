@@ -15,159 +15,10 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/openday.html"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <style>
-
-    /* ── HERO CON COUNTDOWN ── */
-    .od-hero {
-      position: relative; min-height: 65vh;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      background: transparent; overflow: hidden;
-    }
-    .od-hero-bg {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg,rgba(12,20,13,.25) 0%,rgba(12,20,13,.6) 60%,rgba(12,20,13,.85) 100%),
-        url('img/IMG_4375-scaled.jpg') center/cover no-repeat;
-    }
-    /* Box testo con glassmorphism */
-    .od-hero-glass {
-      position: relative; z-index: 2;
-      background: rgba(12,20,13,.55);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(184,146,42,.2);
-      padding: 2rem 1.25rem 2.5rem;
-    }
-    @media(min-width:768px){
-      .od-hero-glass { padding: 2.5rem 2rem 3rem; }
-    }
-    .od-hero h1 { font-family:var(--fd); font-size:clamp(2rem,6vw,3.5rem); font-weight:300; color:#fff; line-height:1.1; margin-bottom:.5rem; }
-    .od-hero h1 em { font-style:italic; color:var(--oro3); display:block; }
-    .od-hero p { color:rgba(255,255,255,.7); font-size:.9rem; max-width:540px; line-height:1.75; margin-bottom:0; }
-    /* Link navigazione hero */
-    .hero-nav-links { font-size:.9rem; color:rgba(255,255,255,.7); max-width:540px; margin-bottom:0; line-height:2.4; }
-    .hero-nav-links a { color:var(--oro3); text-decoration:none; border-bottom:1px solid rgba(212,170,74,.35); padding-bottom:1px; transition:border-color .2s, color .2s; }
-    .hero-nav-links a:hover { border-color:var(--oro3); color:#fff; }
-    .hero-sep { color:rgba(212,170,74,.35); margin:0 .35rem; }
-    @media(max-width:480px){
-      .hero-sep { display:none; }
-      .hero-nav-links a { display:inline-block; margin:.15rem .5rem .15rem 0; }
-    }
-
-    /* Countdown */
-    .countdown { display:flex; gap:1rem; margin:1.75rem 0; flex-wrap:wrap; }
-    .cd-unit { background:rgba(12,20,13,.6); border:1px solid rgba(184,146,42,.3); border-radius:8px; padding:.75rem 1.1rem; text-align:center; min-width:72px; backdrop-filter:blur(8px); }
-    .cd-num { font-family:var(--fd); font-size:2.2rem; font-weight:300; color:var(--oro3); display:block; line-height:1; }
-    .cd-lbl { font-family:var(--fu); font-size:.55rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(245,240,232,.55); margin-top:.2rem; display:block; }
-
-    /* ── TOUR SPAZI ── */
-    .tour-slide {
-      position: relative; overflow: hidden;
-      height: clamp(300px,55vw,600px);
-      cursor: pointer;
-    }
-    .tour-slide img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
-    .tour-slide:hover img { transform:scale(1.03); }
-    .tour-overlay {
-      position:absolute; inset:0;
-      background:linear-gradient(180deg,transparent 30%,rgba(12,20,13,.9) 100%);
-      display:flex; flex-direction:column; justify-content:flex-end;
-      padding:2rem 1.75rem;
-    }
-    .tour-badge { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--oro2); margin-bottom:.5rem; }
-    .tour-title { font-family:var(--fd); font-size:clamp(1.4rem,4vw,2rem); font-weight:300; color:#fff; margin-bottom:.5rem; line-height:1.2; }
-    .tour-desc { font-size:.85rem; color:rgba(255,255,255,.7); line-height:1.7; max-width:500px; }
-    .tour-nav { display:flex; gap:.5rem; margin-top:1rem; }
-    .tour-dot { width:8px; height:8px; border-radius:50%; border:1.5px solid rgba(184,146,42,.5); background:none; cursor:pointer; padding:0; transition:background .2s; }
-    .tour-dot.active { background:var(--oro2); border-color:var(--oro2); }
-
-    /* Su mobile: caption fuori dall'immagine, sotto */
-    @media(max-width:640px){
-      .tour-overlay {
-        position:static;
-        background:linear-gradient(135deg,var(--bosco),#1a3a1b);
-        padding:1.25rem 1.25rem 1.5rem;
-        border-radius:0 0 8px 8px;
-      }
-      .tour-slide {
-        height:auto !important;
-        border-radius:8px 8px 0 0;
-        overflow:visible;
-      }
-      .tour-slide img {
-        border-radius:8px 8px 0 0;
-        height:220px;
-      }
-      .tour-title { font-size:1.2rem; }
-      .tour-desc { font-size:.82rem; }
-      .tour-arr { top:110px; }
-    }
-
-    /* Frecce tour -->
-    .tour-arr {
-      position:absolute; top:50%; transform:translateY(-50%);
-      width:48px; height:48px; border-radius:50%; border:1.5px solid rgba(184,146,42,.4);
-      background:rgba(12,20,13,.55); display:flex; align-items:center; justify-content:center;
-      cursor:pointer; z-index:10; backdrop-filter:blur(4px);
-      transition:background .2s, border-color .2s;
-    }
-    .tour-arr:hover { background:rgba(184,146,42,.2); border-color:var(--oro2); }
-    .tour-arr svg { width:20px; height:20px; fill:#fff; }
-    .tour-prev { left:.85rem; }
-    .tour-next { right:.85rem; }
-
-    /* ── FAQ CON RICERCA ── */
-    .faq-search-wrap { position:relative; margin-bottom:1.5rem; }
-    .faq-search {
-      width:100%; padding:.9rem 1.1rem .9rem 3rem;
-      background:var(--av2); border:1.5px solid var(--av3);
-      border-radius:8px; font-family:var(--fu); font-size:16px;
-      color:var(--bosco); outline:none; box-sizing:border-box;
-      transition:border-color .2s;
-    }
-    .faq-search:focus { border-color:var(--oro2); }
-    .faq-search-icon { position:absolute; left:1rem; top:50%; transform:translateY(-50%); color:var(--bosco2); font-size:.9rem; pointer-events:none; }
-    .faq-count { font-family:var(--fu); font-size:.65rem; color:var(--txt2); margin-bottom:1rem; }
-    .faq-item { border:1px solid var(--av3); border-radius:8px; overflow:hidden; margin-bottom:.5rem; background:var(--av); }
-    .faq-q { font-family:var(--fu); font-size:.82rem; font-weight:700; color:var(--bosco); padding:1rem 1.25rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:1rem; transition:background .2s; list-style:none; }
-    .faq-q::-webkit-details-marker { display:none; }
-    .faq-q::marker { display:none; }
-    .faq-q:hover { background:rgba(44,62,45,.05); }
-    .faq-item[open] .faq-q { color:var(--bosco); border-bottom:1px solid var(--av3); }
-    .faq-q::after { content:'＋'; font-size:1.1rem; color:var(--oro); flex-shrink:0; transition:transform .3s; }
-    .faq-item[open] .faq-q::after { transform:rotate(45deg); }
-    .faq-a { font-size:.86rem; color:var(--txt2); line-height:1.8; padding:1rem 1.25rem 1.1rem; margin:0; }
-    .faq-a mark { background:rgba(184,146,42,.2); border-radius:2px; padding:0 2px; color:var(--bosco); }
-    .faq-hidden { display:none; }
-    .faq-cats { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1rem; }
-    .faq-cat { font-family:var(--fu); font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.3rem .75rem; border-radius:20px; border:1.5px solid var(--av3); background:none; cursor:pointer; color:var(--bosco2); transition:all .2s; }
-    .faq-cat.active, .faq-cat:hover { background:var(--bosco); color:var(--av); border-color:var(--bosco); }
-
-    /* ── EDUCATORI ── */
-    .edu-card { background:var(--av); border:1px solid var(--av3); border-radius:10px; overflow:hidden; transition:transform .2s, box-shadow .2s; }
-    .edu-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,.12); }
-    .edu-photo { width:100%; aspect-ratio:3/4; object-fit:cover; object-position:center; display:block; background:var(--bosco); }
-    .edu-photo-placeholder { width:100%; aspect-ratio:3/4; background:linear-gradient(135deg,var(--bosco),#1a3a1b); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; }
-    .edu-body { padding:1.1rem 1.25rem; }
-    .edu-name { font-family:var(--fd); font-size:1.1rem; color:var(--bosco); margin-bottom:.2rem; }
-    .edu-role { font-family:var(--fu); font-size:.6rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--oro); margin-bottom:.6rem; }
-    .edu-bio { font-size:.8rem; color:var(--txt2); line-height:1.7; }
-    .edu-tags { display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.75rem; }
-
-    /* ── PRENOTAZIONE ── */
-    .od-form { background:var(--bosco); border-radius:12px; padding:2rem; border:1px solid rgba(184,146,42,.2); }
-    .of-label { font-family:var(--fu); font-size:.6rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:rgba(245,240,232,.65); display:block; margin-bottom:.35rem; margin-top:.9rem; }
-    .of-input { width:100%; padding:.7rem 1rem; background:rgba(255,255,255,.06); border:1.5px solid rgba(184,146,42,.25); border-radius:6px; color:#fff; font-family:var(--fu); font-size:16px; outline:none; box-sizing:border-box; transition:border-color .2s; }
-    .of-input:focus { border-color:var(--oro2); }
-
-    /* Errore prenotazione visita */
-    .ov-error { display:none; background:rgba(153,27,27,.18); border:1px solid rgba(248,113,113,.4); border-radius:10px; padding:1.5rem; margin-top:1.25rem; text-align:center; }
-    .ov-error h3 { font-family:var(--fd); font-size:1.2rem; font-weight:300; color:#fca5a5; margin-bottom:.5rem; }
-    .ov-error p { font-family:var(--fu); font-size:.78rem; color:rgba(245,240,232,.75); line-height:1.7; margin:0 auto .5rem; max-width:440px; }
-    .ov-error .btn-gold { margin-top:.5rem; }
-
-  </style>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"/></noscript>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>.od-hero{position:relative;min-height:65vh;display:flex;flex-direction:column;justify-content:flex-end;background:0 0;overflow:hidden}.od-hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,20,13,.25)0,rgba(12,20,13,.6) 60%,rgba(12,20,13,.85) 100%),url(img/IMG_4375-scaled.jpg)center/cover no-repeat}.od-hero-glass{position:relative;z-index:2;background:rgba(12,20,13,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(184,146,42,.2);padding:2rem 1.25rem 2.5rem}@media (min-width:768px){.od-hero-glass{padding:2.5rem 2rem 3rem}}.od-hero h1{font-family:var(--fd);font-size:clamp(2rem,6vw,3.5rem);font-weight:300;color:#fff;line-height:1.1;margin-bottom:.5rem}.od-hero h1 em{font-style:italic;color:var(--oro3);display:block}.hero-nav-links,.od-hero p{color:rgba(255,255,255,.7);font-size:.9rem;max-width:540px;line-height:1.75;margin-bottom:0}.hero-nav-links{line-height:2.4}.hero-nav-links a{color:var(--oro3);text-decoration:none;border-bottom:1px solid rgba(212,170,74,.35);padding-bottom:1px;transition:border-color .2s,color .2s}.hero-nav-links a:hover{border-color:var(--oro3);color:#fff}.hero-sep{color:rgba(212,170,74,.35);margin:0 .35rem}@media (max-width:480px){.hero-sep{display:none}.hero-nav-links a{display:inline-block;margin:.15rem .5rem .15rem 0}}.countdown{display:flex;gap:1rem;margin:1.75rem 0;flex-wrap:wrap}.cd-unit{background:rgba(12,20,13,.6);border:1px solid rgba(184,146,42,.3);border-radius:8px;padding:.75rem 1.1rem;text-align:center;min-width:72px;backdrop-filter:blur(8px)}.cd-num{font-family:var(--fd);font-size:2.2rem;font-weight:300;color:var(--oro3);display:block;line-height:1}.cd-lbl{font-family:var(--fu);font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.55);margin-top:.2rem;display:block}.tour-slide{position:relative;overflow:hidden;height:clamp(300px,55vw,600px);cursor:pointer}.tour-slide img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}.tour-slide:hover img{transform:scale(1.03)}.tour-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(12,20,13,.9) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:2rem 1.75rem}.tour-badge{font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.5rem}.tour-title{font-family:var(--fd);font-size:clamp(1.4rem,4vw,2rem);font-weight:300;color:#fff;margin-bottom:.5rem;line-height:1.2}.tour-desc{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.7;max-width:500px}.tour-nav{display:flex;gap:.5rem;margin-top:1rem}.tour-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(184,146,42,.5);background:0 0;cursor:pointer;padding:0;transition:background .2s}.tour-dot.active{background:var(--oro2);border-color:var(--oro2)}@media (max-width:640px){.tour-overlay{position:static;background:linear-gradient(135deg,var(--bosco),#1a3a1b);padding:1.25rem 1.25rem 1.5rem;border-radius:0 0 8px 8px}.tour-slide{height:auto!important;border-radius:8px 8px 0 0;overflow:visible}.tour-slide img{border-radius:8px 8px 0 0;height:220px}.tour-title{font-size:1.2rem}.tour-desc{font-size:.82rem}.tour-arr{top:110px}}.faq-search-wrap{position:relative;margin-bottom:1.5rem}.faq-search{width:100%;padding:.9rem 1.1rem .9rem 3rem;background:var(--av2);border:1.5px solid var(--av3);border-radius:8px;font-family:var(--fu);font-size:16px;color:var(--bosco);outline:0;box-sizing:border-box;transition:border-color .2s}.faq-search:focus{border-color:var(--oro2)}.faq-search-icon{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--bosco2);font-size:.9rem;pointer-events:none}.faq-count{font-family:var(--fu);font-size:.65rem;color:var(--txt2);margin-bottom:1rem}.faq-item{border:1px solid var(--av3);border-radius:8px;overflow:hidden;margin-bottom:.5rem;background:var(--av)}.faq-q{font-family:var(--fu);font-size:.82rem;font-weight:700;color:var(--bosco);padding:1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:background .2s;list-style:none}.faq-q::-webkit-details-marker{display:none}.faq-q::marker{display:none}.faq-q:hover{background:rgba(44,62,45,.05)}.faq-item[open] .faq-q{color:var(--bosco);border-bottom:1px solid var(--av3)}.faq-q::after{content:"＋";font-size:1.1rem;color:var(--oro);flex-shrink:0;transition:transform .3s}.faq-item[open] .faq-q::after{transform:rotate(45deg)}.faq-a{font-size:.86rem;color:var(--txt2);line-height:1.8;padding:1rem 1.25rem 1.1rem;margin:0}.faq-a mark{background:rgba(184,146,42,.2);border-radius:2px;padding:0 2px;color:var(--bosco)}.faq-hidden{display:none}.faq-cats{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}.faq-cat{font-family:var(--fu);font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border-radius:20px;border:1.5px solid var(--av3);background:0 0;cursor:pointer;color:var(--bosco2);transition:all .2s}.faq-cat.active,.faq-cat:hover{background:var(--bosco);color:var(--av);border-color:var(--bosco)}.edu-card{background:var(--av);border:1px solid var(--av3);border-radius:10px;overflow:hidden;transition:transform .2s,box-shadow .2s}.edu-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.12)}.edu-photo{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center;display:block;background:var(--bosco)}.edu-photo-placeholder{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,var(--bosco),#1a3a1b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}.edu-body{padding:1.1rem 1.25rem}.edu-name{font-family:var(--fd);font-size:1.1rem;color:var(--bosco);margin-bottom:.2rem}.edu-role{font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--oro);margin-bottom:.6rem}.edu-bio{font-size:.8rem;color:var(--txt2);line-height:1.7}.edu-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.75rem}.od-form{background:var(--bosco);border-radius:12px;padding:2rem;border:1px solid rgba(184,146,42,.2)}.of-input,.of-label{font-family:var(--fu)}.of-label{font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.65);display:block;margin-bottom:.35rem;margin-top:.9rem}.of-input{width:100%;padding:.7rem 1rem;background:rgba(255,255,255,.06);border:1.5px solid rgba(184,146,42,.25);border-radius:6px;color:#fff;font-size:16px;outline:0;box-sizing:border-box;transition:border-color .2s}.of-input:focus{border-color:var(--oro2)}.ov-error{display:none;background:rgba(153,27,27,.18);border:1px solid rgba(248,113,113,.4);border-radius:10px;padding:1.5rem;margin-top:1.25rem;text-align:center}.ov-error h3{font-family:var(--fd);font-size:1.2rem;font-weight:300;color:#fca5a5;margin-bottom:.5rem}.ov-error p{font-family:var(--fu);font-size:.78rem;color:rgba(245,240,232,.75);line-height:1.7;margin:0 auto .5rem;max-width:440px}.ov-error .btn-gold{margin-top:.5rem}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
@@ -388,10 +239,10 @@
   ]
 }
 </script>
-<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
 </head>
 <body data-page="openday">
-<script src="nav-header.js"></script>
+<script src="nav-header.min.js" defer></script>
 <main id="main">
 
   <!-- ═══ HERO + COUNTDOWN ═══ -->
@@ -512,7 +363,7 @@
 
           <!-- Layout 3+3 orizzontale -->
           <div style="display:grid;grid-template-columns:1fr;gap:.85rem" id="od-form-grid">
-            <style>@media(min-width:560px){#od-form-grid{grid-template-columns:1fr 1fr}}</style>
+            <style>@media (min-width:560px){#od-form-grid{grid-template-columns:1fr 1fr}}</style>
             <!-- Colonna sinistra -->
             <div style="display:flex;flex-direction:column;gap:.85rem">
               <div>
@@ -559,13 +410,7 @@
           </div>
 
           <!-- Mobile: collassa a colonna singola -->
-          <style>
-            @media(max-width:580px){
-              .od-form > div[style*="grid-template-columns:1fr 1fr"] {
-                grid-template-columns: 1fr !important;
-              }
-            }
-          </style>
+          <style>@media (max-width:580px){.od-form>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}}</style>
           <p style="font-family:var(--fu);font-size:.6rem;color:rgba(245,240,232,.60);margin-top:.75rem;text-align:center">
             Oppure scrivi direttamente a <a href="mailto:convitto@alberghierorieti.it" style="color:var(--oro2)">convitto@alberghierorieti.it</a>
           </p>
@@ -586,7 +431,7 @@
   </section>
 
 </main>
-<script src="nav.js"></script>
+<script src="nav.min.js"></script>
 <script>
 
 // ═══════════════════════════════════════════════════

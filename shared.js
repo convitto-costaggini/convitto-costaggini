@@ -59,7 +59,7 @@
           <li><a href="domanda-ammissione.html">📋 Domanda online</a></li>
           <li><a href="openday.html" data-page="openday">🗓 Open Day</a></li>
           <li><a href="fa-per-me.html" data-page="fa-per-me">🎯 Il Convitto fa per me?</a></li>
-          <li><a href="ammissione.html#faq">FAQ</a></li>
+          <li><a href="ammissione.html#domande-genitori">FAQ</a></li>
           <li><a href="contatti.html" data-page="contatti">Contattaci</a></li>
         </ul>
       </div>
@@ -135,7 +135,7 @@
         <li><a href="domanda-ammissione.html">📋 Domanda online</a></li>
         <li><a href="openday.html">🗓 Open Day</a></li>
         <li><a href="fa-per-me.html">🎯 Il Convitto fa per me?</a></li>
-        <li><a href="ammissione.html#faq">FAQ</a></li>
+        <li><a href="ammissione.html#domande-genitori">FAQ</a></li>
         <li><a href="contatti.html">Contattaci</a></li>
       </ul>
     </li>

@@ -12,7 +12,7 @@
 <div id="pa" role="banner" aria-label="Intestazione istituzionale">
   <div class="pa-b">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L20 8.09v7.82L12 19.82 4 15.91V8.09L12 4.18z"/></svg>
-    Repubblica Italiana — Istruzione Pubblica
+    <a href="https://www.mim.gov.it/" target="_blank" rel="noopener">Ministero dell'Istruzione e del Merito</a>
   </div>
   <div><a href="trasparenza.html">Trasparenza</a> · <a href="area-riservata.html">Area riservata</a> · <a href="#" onclick="document.getElementById('pec-modal').style.display='flex';return false" aria-label="Mostra indirizzo PEC">PEC</a></div>
 </div>

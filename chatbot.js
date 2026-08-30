@@ -95,6 +95,12 @@ const KB=[
       'sono qualificati','figure educative','h24'],
    r:'Gli educatori del Convitto sono <strong>personale educativo di ruolo</strong>, selezionati per concorso pubblico MIUR e tutelati dal CCNL Istruzione e Ricerca (artt. 127–129). Non sono sorveglianti — hanno competenze psicopedagogiche e lavorano in coordinamento con i docenti. Presenti <strong>H24</strong>, inclusa la notte.<br><br>👥 <a href="educatori.html">Conosci il team →</a>'},
 
+  // ── DIRIGENTE SCOLASTICO ──
+  {k:['dirigente','dirigente scolastico','preside','chi dirige','chi è il dirigente',
+      'chi è il preside','chi comanda','chi guida il convitto','maddalena cioci','cioci',
+      'avvocato','reggenza','in reggenza','responsabile legale'],
+   r:'La Dirigente Scolastica è l\'<strong>Avv. Maddalena Cioci</strong>, Dirigente titolare dell\'Istituto Comprensivo "IC Sora 2" di Sora, che guida l\'IPSSEOA "Costaggini" e il Convitto <strong>in reggenza</strong>.<br><br>🏛️ <a href="organizzazione.html">Organizzazione e organigramma →</a><br>📞 <a href="contatti.html">Contatti →</a>'},
+
   // ── SICUREZZA E NOTTE ──
   {k:['sicur','notte','sorveglianza','chi c\'è di notte','emergenza','pronto soccorso',
       'infermeria','malato','malata','si ammala','mi fa male'],
@@ -329,6 +335,7 @@ const SUGS_MAP={
   vinile:   ['Il Lab Musicale?','Chi è Michele Gaggiano?','La community degli alumni?'],
   educatori:['Chi vigila di notte?','Come ci si iscrive?','Il progetto educativo?'],
   alumni:   ['Il Lab Musicale?','Il vinile del Convitto?','La community degli ex?'],
+  dirigente:['Come si contatta la segreteria?','Chi sono gli educatori?','L\'organigramma?'],
 };
 
 // ── NORMALIZZAZIONE ───────────────────────────────────────────────────────

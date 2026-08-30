@@ -264,6 +264,24 @@
   }
 
   function boot() {
+    // Disattiva la "scroll anchoring" del browser (la correzione
+    // automatica della posizione di scroll quando qualcosa sopra il
+    // punto visibile cambia altezza). È la causa più probabile dello
+    // sfarfallio della barra su alcuni dispositivi reali: appena la
+    // barra si aggancia/sgancia e la sua altezza cambia di colpo, il
+    // browser sposta lo scroll per compensare, il che può far
+    // riattraversare alla sentinella la soglia nella direzione opposta
+    // e far ripartire subito il cambio di stato. Il fenomeno dipende
+    // dal tempo a disposizione del browser tra un fotogramma e l'altro
+    // per applicare la correzione: più coerente quindi con la
+    // segnalazione per cui a velocità di scroll "normale" il problema
+    // si presenta ma scorrendo velocemente no (poco tempo per
+    // innescarsi). Qui si toglie la causa alla radice, invece di
+    // limitarsi a contenerne gli effetti con l'isteresi e il tempo
+    // minimo già in atto più sotto, che restano comunque come
+    // ulteriore sicurezza indipendente.
+    try { document.documentElement.style.overflowAnchor = 'none'; } catch (err) { /* ignorato */ }
+
     setHeaderVar();
     document.querySelectorAll('.hero-jump-bar').forEach(init);
     window.addEventListener('resize', setHeaderVar);

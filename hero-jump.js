@@ -116,22 +116,37 @@
     // la barra si sgancia di nuovo, l'altezza torna quella di prima, lo
     // scroll viene ricorretto di nuovo, e così via — un ciclo di
     // aggancio/sgancio continuo percepito come uno sfarfallio che
-    // blocca lo scorrimento della pagina. Per evitarlo si usa una banda
-    // di isteresi: per agganciarsi la sentinella deve superare la soglia
-    // di un margine, e per sganciarsi deve tornare indietro di un
-    // margine analogo dalla parte opposta, così piccole oscillazioni
-    // intorno al punto di aggancio non fanno scattare continuamente il
-    // cambio di stato.
-    var COLLAPSE_MARGIN = 10;
+    // blocca lo scorrimento della pagina. Per evitarlo si usano due
+    // protezioni indipendenti, per non dipendere da un solo dispositivo/
+    // browser testato: (1) una banda di isteresi — per agganciarsi la
+    // sentinella deve superare la soglia di un margine, e per sganciarsi
+    // deve tornare indietro di un margine analogo dalla parte opposta,
+    // così piccole oscillazioni intorno al punto di aggancio non fanno
+    // scattare continuamente il cambio di stato; (2) un tempo minimo tra
+    // un cambio di stato e il successivo, così anche se su un dispositivo
+    // reale (inerzia dello scroll touch, fisiche di scroll diverse da
+    // browser a browser) l'oscillazione superasse comunque il margine,
+    // non può ripetersi più di una volta ogni pochi decimi di secondo —
+    // eliminando lo sfarfallio percepito anche in quel caso.
+    var COLLAPSE_MARGIN = 24;
+    var COLLAPSE_MIN_INTERVAL = 220;
+    var lastCollapseChange = 0;
 
     function updateCollapse() {
       if (!mq.matches) {
         setCollapsed(false);
         return;
       }
+      var now = Date.now();
+      if (now - lastCollapseChange < COLLAPSE_MIN_INTERVAL) return;
       var top = sentinel.getBoundingClientRect().top;
-      if (!collapsed && top < -COLLAPSE_MARGIN) setCollapsed(true);
-      else if (collapsed && top > COLLAPSE_MARGIN) setCollapsed(false);
+      if (!collapsed && top < -COLLAPSE_MARGIN) {
+        setCollapsed(true);
+        lastCollapseChange = now;
+      } else if (collapsed && top > COLLAPSE_MARGIN) {
+        setCollapsed(false);
+        lastCollapseChange = now;
+      }
     }
 
     var collapseTicking = false;

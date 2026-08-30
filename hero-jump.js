@@ -103,19 +103,52 @@
       }
     });
 
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!mq.matches) {
-          setCollapsed(false);
-          return;
-        }
-        setCollapsed(entry.boundingClientRect.top < 0);
+    // Rileva l'aggancio/sgancio della barra osservando direttamente la
+    // posizione della sentinella a ogni scroll, invece che con un singolo
+    // IntersectionObserver a soglia 0. Motivo: quando la barra si
+    // aggancia, il suo <nav> viene spostato fuori dal flusso (per non
+    // occupare spazio verticale), e l'altezza della barra si riduce di
+    // colpo; il cambio di altezza appena sopra il punto che l'utente sta
+    // guardando può far scattare la "scroll anchoring" del browser (la
+    // correzione automatica dello scroll per evitare che il contenuto
+    // "salti" a video), che sposta lo scroll quel tanto che basta a far
+    // riattraversare alla sentinella la soglia nella direzione opposta:
+    // la barra si sgancia di nuovo, l'altezza torna quella di prima, lo
+    // scroll viene ricorretto di nuovo, e così via — un ciclo di
+    // aggancio/sgancio continuo percepito come uno sfarfallio che
+    // blocca lo scorrimento della pagina. Per evitarlo si usa una banda
+    // di isteresi: per agganciarsi la sentinella deve superare la soglia
+    // di un margine, e per sganciarsi deve tornare indietro di un
+    // margine analogo dalla parte opposta, così piccole oscillazioni
+    // intorno al punto di aggancio non fanno scattare continuamente il
+    // cambio di stato.
+    var COLLAPSE_MARGIN = 10;
+
+    function updateCollapse() {
+      if (!mq.matches) {
+        setCollapsed(false);
+        return;
+      }
+      var top = sentinel.getBoundingClientRect().top;
+      if (!collapsed && top < -COLLAPSE_MARGIN) setCollapsed(true);
+      else if (collapsed && top > COLLAPSE_MARGIN) setCollapsed(false);
+    }
+
+    var collapseTicking = false;
+    function onCollapseScroll() {
+      if (collapseTicking) return;
+      collapseTicking = true;
+      requestAnimationFrame(function () {
+        collapseTicking = false;
+        updateCollapse();
       });
-    }, { threshold: 0 });
-    io.observe(sentinel);
+    }
+    window.addEventListener('scroll', onCollapseScroll, { passive: true });
+    window.addEventListener('resize', onCollapseScroll, { passive: true });
+    updateCollapse();
 
     function onMqChange() {
-      if (!mq.matches) setCollapsed(false);
+      updateCollapse();
     }
     if (mq.addEventListener) mq.addEventListener('change', onMqChange);
     else if (mq.addListener) mq.addListener(onMqChange);

@@ -84,24 +84,33 @@
 <script>
 const PIATTI = [
   { nome:'Cacio e pepe', img:'https://images.unsplash.com/photo-1612874742237-6526221588e3?w=600&q=80', finti:['Carbonara','Gricia','Amatriciana'] },
-  { nome:'Tiramisu', img:'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&q=80', finti:['Panna cotta','Zuppa inglese','Charlotte'] },
+  { nome:'Tiramisù', img:'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&q=80', finti:['Panna cotta','Zuppa inglese','Charlotte'] },
   { nome:'Pizza Margherita', img:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80', finti:['Pizza Napoli','Focaccia al pomodoro','Pizza bianca'] },
   { nome:'Risotto alla milanese', img:'https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&q=80', finti:['Risotto al parmigiano','Riso in bianco','Pilaf allo zafferano'] },
-  { nome:'Parmigiana di melanzane', img:'https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=600&q=80', finti:['Lasagne al ragù','Moussaka','Melanzane ripiene'] },
-  { nome:'Cannoli siciliani', img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&q=80', finti:['Sfingi','Bomboloni','Sfogliatelle'] },
+  { nome:'Parmigiana di melanzane', img:'https://images.pexels.com/photos/1707917/pexels-photo-1707917.jpeg?w=600', finti:['Lasagne al ragù','Moussaka','Melanzane ripiene'] },
+  { nome:'Cannoli siciliani', img:'https://images.pexels.com/photos/3116848/pexels-photo-3116848.jpeg?w=600', finti:['Sfingi','Bomboloni','Sfogliatelle'] },
   { nome:'Bistecca alla fiorentina', img:'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600&q=80', finti:['Tagliata al rosmarino','Entrecôte','Costata alla brace'] },
   { nome:'Ribollita', img:'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80', finti:['Minestrone','Acquacotta','Zuppa di farro'] },
-  { nome:'Carbonara', img:'https://images.unsplash.com/photo-1612874742237-6526221588e3?w=600&q=80', finti:['Cacio e pepe','Gricia','Pasta alla crema'] },
+  { nome:'Carbonara', img:'https://images.unsplash.com/photo-1755594461640-b800c6bafdfa?w=600&q=80', finti:['Cacio e pepe','Gricia','Pasta alla crema'] },
   { nome:'Gelato artigianale', img:'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=600&q=80', finti:['Sorbetto','Semifreddo','Granita'] },
 ];
 
 let questions, current, score, timer, timeLeft;
 
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 function startGame() {
   document.getElementById('rp-intro').style.display = 'none';
   document.getElementById('rp-result').style.display = 'none';
   document.getElementById('rp-game').style.display = 'block';
-  questions = [...PIATTI].sort(() => Math.random()-.5);
+  questions = shuffle(PIATTI);
   current = 0; score = 0;
   showPiatto();
 }
@@ -114,11 +123,11 @@ function showPiatto() {
   document.getElementById('rp-feedback').textContent = '';
 
   const img = document.getElementById('rp-img');
-  img.src = p.img; img.className = '';
-  document.getElementById('rp-hint').style.display = 'none';
+  img.src = p.img; img.className = 'rp-img-blur';
+  document.getElementById('rp-hint').style.display = 'flex';
 
   // Opzioni
-  const opts = [p.nome, ...p.finti].sort(() => Math.random()-.5);
+  const opts = shuffle([p.nome, ...p.finti]);
   const container = document.getElementById('rp-opts');
   container.innerHTML = '';
   opts.forEach(o => {

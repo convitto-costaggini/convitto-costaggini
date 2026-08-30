@@ -16,6 +16,11 @@
       scroll viene calcolato al volo in base all'altezza reale di header
       e barra al momento del click.
 
+   In più, su tutti i viewport, evidenzia la voce corrispondente alla
+   sezione attualmente a schermo mentre si scorre la pagina — lo stesso
+   effetto già presente in ptof-guida.html, esteso qui a tutti i menu
+   "salta alla sezione" del sito.
+
    Nota tecnica: la linguetta e il pannello vengono spostati come figli
    diretti di <body> (invece di restare dentro <main>) perché <main> ha
    una transform (usata per le animazioni di comparsa dei contenuti) e
@@ -161,6 +166,52 @@
           }
         }
       } catch (err) { /* CSS.escape non disponibile: si ignora, nessun problema */ }
+    }
+
+    initScrollSpy();
+
+    // Evidenzia, tra le voci del menu, quella della sezione attualmente
+    // "in lettura" mentre si scorre — stesso effetto già presente in
+    // ptof-guida.html. Lì le sezioni sono corte e di altezza simile, per
+    // cui basta una soglia di visibilità (IntersectionObserver al 30%).
+    // Qui invece le sezioni delle varie pagine hanno altezze molto
+    // diverse — alcune superano abbondantemente l'altezza del viewport
+    // (es. lo staff in il-convitto.html) e non raggiungerebbero mai il
+    // 30% di area visibile. Si usa quindi la tecnica più robusta e
+    // indipendente dall'altezza: la voce attiva è quella dell'ultima
+    // sezione il cui bordo superiore ha superato una riga di lettura
+    // poco sotto header/barra.
+    function initScrollSpy() {
+      var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+      var sections = links
+        .map(function (a) { return { a: a, el: document.getElementById(a.getAttribute('href').slice(1)) }; })
+        .filter(function (s) { return !!s.el; });
+      if (!sections.length) return;
+
+      function setActive(id) {
+        links.forEach(function (a) {
+          a.classList.toggle('hjb-active-link', a.getAttribute('href') === '#' + id);
+        });
+      }
+
+      var ticking = false;
+      function update() {
+        ticking = false;
+        var hdrH = parseInt(document.documentElement.style.getPropertyValue('--hdr-h'), 10) || setHeaderVar();
+        var barH = collapsed ? 0 : bar.getBoundingClientRect().height;
+        var refLine = hdrH + barH + 24;
+        var current = null;
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].el.getBoundingClientRect().top <= refLine) current = sections[i];
+        }
+        setActive(current ? current.el.id : null);
+      }
+      function onScroll() {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
     }
   }
 

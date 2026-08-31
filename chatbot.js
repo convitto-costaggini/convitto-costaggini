@@ -56,17 +56,29 @@ const KB=[
 
   // ── ISCRIZIONI ──
   {k:['iscri','ammission','come si fa','come faccio','domanda di ammissione','entrare al convitto',
-      'portale miur','unica','scadenza','7 luglio','modulo domanda','procedura'],
-   r:'La procedura di ammissione si svolge in <strong>4 passi</strong>:<br>1. Iscrizione online sul portale MIUR + modulo al Convitto entro il <strong>7 luglio</strong><br>2. Consegna documentazione in segreteria e versamento quota<br>3. Colloquio con il Dirigente e gli educatori<br>4. A settembre: arrivo, assegnazione camera, accoglienza<br><br>📋 <a href="ammissione.html">Guida completa all\'ammissione →</a>'},
+      'portale miur','piattaforma unica','piattaforma unica del mim','unica','scadenza','30 luglio',
+      'entro quando','quando scade','scadenza domanda','modulo domanda','procedura','diventare convittore'],
+   r:'La procedura di ammissione si svolge in <strong>4 passi</strong>:<br>1. Open Day e orientamento tra dicembre e gennaio<br>2. A febbraio, iscrizione online all\'IPSSEOA Costaggini sulla <strong>Piattaforma Unica del MIM</strong>, con la spunta sulla voce "Convitto"<br>3. Entro il <strong>30 luglio</strong>, modulo di domanda al Convitto con documentazione e quota di iscrizione (450€)<br>4. Da settembre: versamento delle rate successive, arrivo, assegnazione camera, accoglienza<br><br>Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è.<br><br>📋 <a href="ammissione.html">Guida completa all\'ammissione →</a>'},
+
+  // ── COLLOQUIO DI AMMISSIONE (non esiste) ──
+  {k:['colloquio','intervista di selezione','esame di ammissione','sostenere un colloquio',
+      'devo fare un colloquio','c\'è un colloquio','prova di ammissione','selezione'],
+   r:'No: la procedura di ammissione al Convitto non prevede alcun colloquio di selezione con il Dirigente né con gli educatori. Bastano l\'iscrizione sulla Piattaforma Unica del MIM e il modulo di domanda entro il 30 luglio. Gli educatori restano comunque disponibili tutto l\'anno per incontrare le famiglie su richiesta.<br><br>📋 <a href="ammissione.html">Guida completa all\'ammissione →</a>'},
 
   // ── RETTE E COSTI ──
   {k:['retta','costo','quanto costa','quanto si paga','tariffa','prezzo','euro','pagamento',
-      'isee','agevolazion','riduzion','sconto','esonero','borsa di studio','rata'],
-   r:'Le rette sono deliberate ogni anno dal Consiglio d\'Istituto, con un importo fisso uguale per tutte le famiglie (non è prevista una riduzione legata all\'ISEE). L\'ultima retta intera deliberata (A.S. 2025/26) è di <strong>1.600€ annui</strong>.<br><br>💶 <a href="ammissione.html#tariffe">Tariffe complete →</a><br>✉️ Per un preventivo: <a href="contatti.html">Contattaci →</a>'},
+      'isee','agevolazion','riduzion','sconto','esonero','borsa di studio','rata','rate','rate da pagare',
+      'quante rate','importi delle rate','quota iscrizione'],
+   r:'La retta è deliberata ogni anno dal Consiglio d\'Istituto, con un importo fisso uguale per tutte le famiglie (non è prevista una riduzione legata all\'ISEE). La retta intera confermata per l\'A.S. 2026/27 è di <strong>1.600€ annui</strong>, comprensiva di vitto completo, alloggio, studio guidato, attività e trasporto Convitto-scuola.<br><br>💶 <a href="ammissione.html#tariffe">Tariffe complete →</a><br>✉️ Per un preventivo: <a href="contatti.html">Contattaci →</a>'},
 
   // ── ORARI E GIORNATA ──
-  {k:['orario','sveglia','quando','orari','giornata','cosa si fa','routine','programma',
-      'sveglia','alzarsi','luci spente','luce','mattina','pomeriggio','sera','notte'],
+  // "orario"/"orari" volutamente NON tra le keyword: da soli sono troppo
+  // generici e "vincevano" per pareggio anche domande su tutt'altro (es.
+  // gli orari della segreteria), perché questa voce viene prima di
+  // Contatti nell'elenco. "giornata tipo" resta comunque riconoscibile
+  // tramite "giornata", "sveglia" e gli altri orari specifici sotto.
+  {k:['sveglia','giornata tipo','cosa si fa','routine','programma',
+      'alzarsi','luci spente','luce','mattina','pomeriggio','sera','notte'],
    r:'<strong>La giornata tipo al Convitto:</strong><br>🌅 06:30 Sveglia · 07:00 Colazione (prodotti km zero)<br>🚌 07:40 Trasporto alla scuola<br>📚 08:00–14:00 Lezioni IPSSEOA<br>🍝 14:00 Pranzo<br>🏃 15:00–15:30 Tempo libero<br>📖 15:30–17:15 Studio guidato<br>⚽ 17:15–19:15 Tempo libero / sport / Lab Musicale<br>🍽️ 19:15 Cena<br>🌙 22:30 Luci spente<br><br>📅 <a href="giornata-tipo.html">Leggi la giornata completa →</a>'},
 
   // ── PASTI E MENSA ──
@@ -80,8 +92,8 @@ const KB=[
    r:'Il Convitto gestisce allergie, intolleranze e diete particolari — anche per esigenze culturali o religiose — con <strong>menù dedicati</strong>, senza che il ragazzo debba chiedere due volte. Va segnalato al momento dell\'iscrizione.<br><br>📋 <a href="ammissione.html#moduli">Modulo allergie →</a>'},
 
   // ── CAMERE E STRUTTURA ──
-  {k:['camera','stanza','letto','bagno','dormitor','alloggio','posto letto','struttura',
-      'dove si dorme','tripla','doppia','piano','arredat'],
+  {k:['camera','camere','stanza','letto','bagno','dormitor','alloggio','posto letto','struttura',
+      'dove si dorme','tripla','doppia','doppie','singole','piano','arredat'],
    r:'Camere principalmente <strong>triple con bagno privato</strong>, su 5 piani (3 maschili, 2 femminili). Ogni stanza ha letti, armadi e scrivanie personali. I ragazzi riordinano la camera ogni mattina prima di andare a scuola.<br><br>🔭 <a href="tour-virtuale.html">Visita gli spazi a 360° →</a>'},
 
   // ── WIFI E SMARTPHONE ──
@@ -113,7 +125,7 @@ const KB=[
 
   // ── STUDIO GUIDATO ──
   {k:['studio guidato','compiti','aiuto studio','ore studio','15:30','studiare','pomeriggio studio',
-      'doposcuola','metodo di studio','riuscirà a studiare','insufficiente','recupero'],
+      'studio pomeridiano','doposcuola','metodo di studio','riuscirà a studiare','insufficiente','recupero'],
    r:'Ogni pomeriggio dalle <strong>15:30 alle 17:15</strong> c\'è lo studio guidato con gli educatori. Non solo "fare i compiti" — gli educatori lavorano sul metodo, sull\'autonomia e sull\'abitudine allo studio. Per difficoltà persistenti si attivano supporti aggiuntivi in accordo con la famiglia.'},
 
   // ── COMPAGNO DI CAMERA / CONFLITTI ──
@@ -133,11 +145,6 @@ const KB=[
       'tastiera','percussioni','gaggiano','barba','dino','band','suonare','giovedì'],
    r:'Il <strong>Laboratorio Musicale</strong> si svolge ogni <strong>giovedì pomeriggio</strong>. Fondato da Michele Gaggiano e Dino Barba, è aperto a tutti i convittori — anche senza esperienza. Nel 2019 i ragazzi hanno prodotto e registrato il brano <em>"La Solidarietà"</em> su vinile.<br><br>🎵 <a href="laboratorio-musicale.html">Scopri il Lab Musicale →</a>'},
 
-  // ── VINILE E LA SOLIDARIETÀ ──
-  {k:['vinile','disco','solidariet','brano','canzone','registrazione','studio di registrazione',
-      'album','cd','la solidarietà','produzione musicale'],
-   r:'Nel 2019 il Laboratorio Musicale ha registrato il brano <em>"La Solidarietà"</em> in uno studio professionale, pubblicandolo su <strong>vinile autoprodotto</strong> dai convittori. Una delle produzioni più belle della storia del Convitto.<br><br>🎶 <a href="solidarieta.html">Guarda il video →</a>'},
-
   // ── SPORT E ATTIVITÀ POMERIDIANE ──
   {k:['sport','palestra','calcio','basket','ping pong','calciobalilla','attività pomeridiane',
       'tempo libero','17:15','svago','hobby','cosa si fa nel pomeriggio'],
@@ -150,7 +157,7 @@ const KB=[
 
   // ── VISITE E OPEN DAY ──
   {k:['open day','visita guidata','venire a vedere','prenotare','vedere il convitto',
-      'posso venire','sopralluogo','porte aperte','tour dal vivo'],
+      'visitare il convitto','posso visitare','posso venire','sopralluogo','porte aperte','tour dal vivo'],
    r:'Puoi prenotare una <strong>visita guidata</strong> o partecipare all\'Open Day.<br><br>📅 <a href="orientamento.html">Orientamento e visite →</a><br>🔭 Oppure esplora virtualmente: <a href="tour-virtuale.html">Tour Virtuale 360° →</a>'},
 
   // ── TOUR VIRTUALE ──
@@ -160,13 +167,14 @@ const KB=[
 
   // ── DOVE SI TROVA ──
   {k:['dove','indirizzo','come arrivare','via','rieti','sede','posizione','mappa','gps',
-      'navigatore','autobus','treno','pullman','distanza','km da','percorso'],
-   r:'Il Convitto si trova in <strong>Via Salaria s.n.c., 02100 Rieti</strong>, nella sede dell\'IPSSEOA "R. A. Costaggini".<br><br>📍 <a href="contatti.html">Mappa e indicazioni →</a>'},
+      'navigatore','autobus','stazione','treno','pullman','cotral','distanza','km da','percorso'],
+   r:'Il Convitto si trova in <strong>Via Salaria s.n.c., 02100 Rieti</strong>, nella sede dell\'IPSSEOA "R. A. Costaggini".<br><br>📍 <a href="contatti.html">Mappa e indicazioni →</a><br>🚌 Da stazione, treno o autobus: <a href="come-arrivare.html">Come arrivare →</a>'},
 
   // ── CONTATTI ──
   {k:['telefono','email','contatto','scrivere','segreteria','informazioni','risponde',
-      'numero','chiamare','mail','pec','indirizzo email','come contatto'],
-   r:'Puoi contattarci tramite:<br>📧 <a href="mailto:convitto@alberghierorieti.it">convitto@alberghierorieti.it</a><br>📋 <a href="contatti.html">Modulo di contatto →</a><br><br>La segreteria risponde entro 24-48 ore nei giorni scolastici.'},
+      'numero','chiamare','mail','pec','indirizzo email','come contatto',
+      'orari segreteria','orario segreteria','apertura segreteria','quando apre la segreteria'],
+   r:'Puoi contattarci tramite:<br>📧 <a href="mailto:convitto@alberghierorieti.it">convitto@alberghierorieti.it</a><br>📋 <a href="contatti.html">Modulo di contatto →</a><br><br>La segreteria risponde entro 24-48 ore nei giorni scolastici. Per gli orari esatti dello sportello: <a href="contatti.html#orari">Orari dello sportello →</a>'},
 
   // ── CORREDO ──
   {k:['corredo','cosa portare','cosa devo portare','lista','valigia','biancheria',
@@ -174,7 +182,7 @@ const KB=[
    r:'La lista completa del corredo obbligatorio è disponibile con possibilità di stampa.<br><br>📋 <a href="ammissione.html#moduli">Lista corredo →</a>'},
 
   // ── REGOLAMENTO ──
-  {k:['regolamento','regole','norme','disciplina','vietato','permesso','cosa non si può',
+  {k:['regolamento','regole','norme','disciplina','vietato','cosa non si può',
       'articoli','sanzioni','punizioni','provvedimento','comportamento','35 articoli'],
    r:'Il <strong>Regolamento del Convitto</strong> conta 35 articoli (versione 30/01/2025). Disciplina diritti, doveri, orari, uscite, sanzioni e molto altro. È consultabile in formato interattivo con ricerca per parola chiave.<br><br>📜 <a href="regolamento.html">Leggi il Regolamento →</a>'},
 
@@ -190,7 +198,7 @@ const KB=[
 
   // ── STRANIERI E LINGUE ──
   {k:['straniero','altra nazionalità','non parlo italiano','traduzione','arabo','romeno',
-      'inglese','spagnolo','altra lingua','cinque lingue'],
+      'inglese','spagnolo','altra lingua','cinque lingue','lingue','lingue parlate','in che lingue'],
    r:'Il sito è disponibile in <strong>5 lingue</strong>: italiano, inglese, spagnolo, arabo, romeno. Usa il selettore in basso a sinistra.<br><br>✉️ Per assistenza nella tua lingua: <a href="contatti.html">Contattaci →</a>'},
 
   // ── FARMACI ──
@@ -216,12 +224,12 @@ const KB=[
   // ── AGGIORNAMENTI / NEWS ──
   {k:['novità','news','aggiornamenti','notizie','comunicazioni','avvisi','bacheca',
       'cosa c\'è di nuovo','ultime notizie'],
-   r:'Tutte le comunicazioni, gli avvisi e le novità del Convitto sono sulla bacheca aggiornamenti.<br><br>📢 <a href="aggiornamenti.html">Leggi gli aggiornamenti →</a>'},
+   r:'Tutte le comunicazioni, gli avvisi e le novità del Convitto sono sulla bacheca notizie.<br><br>📢 <a href="notizie.html">Leggi le notizie →</a>'},
 
   // ── PTOF E PROGETTO EDUCATIVO ──
   {k:['ptof','progetto educativo','piano offerta formativa','filosofia','metodo',
       'mission','obiettivi','valori','come educate','stile educativo'],
-   r:'Il progetto educativo del Convitto mira alla crescita umana, civile e culturale dei ragazzi — in coordinamento con i docenti dell\'Istituto.<br><br>📖 <a href="ptof.html">PTOF →</a> · <a href="progetto-educativo.html">Progetto Educativo →</a>'},
+   r:'Il progetto educativo del Convitto mira alla crescita umana, civile e culturale dei ragazzi — in coordinamento con i docenti dell\'Istituto.<br><br>📖 <a href="ptof-guida.html">Il PTOF spiegato →</a> · <a href="il-convitto.html#mission">Missione e valori →</a>'},
 
   // ── CERTIFICATI ──
   {k:['certificato','frequenza','documento','attestato','dichiarazione','modulo',
@@ -245,7 +253,7 @@ const KB=[
 
   // ── PATTO EDUCATIVO ──
   {k:['patto educativo','patto di corresponsabilità','firmare','accordo','impegno'],
-   r:'Prima dell\'inizio dell\'anno scolastico, le famiglie partecipano a un <strong>colloquio con il Dirigente e gli educatori</strong> durante il quale viene presentato il Regolamento e firmato il Patto Educativo di Corresponsabilità.'},
+   r:'Prima dell\'inizio dell\'anno scolastico, alle famiglie viene presentato il Regolamento e viene firmato il Patto Educativo di Corresponsabilità. Gli educatori restano comunque disponibili durante tutto l\'anno a incontrare le famiglie, sia dei convittori sia degli aspiranti, per supporto e chiarimenti.<br><br>📜 <a href="regolamento.html">Il Regolamento →</a>'},
 
 
   // ── IN 2 MINUTI ──
@@ -261,8 +269,8 @@ const KB=[
    r:'Sul sito ci sono lettere vere scritte da chi è già passato dal Convitto: un ex convittore, una ex convittrice, un genitore, un educatore e — a breve — la Dirigenza.<br><br>💌 <a href="lettera.html">Leggi le lettere →</a>'},
 
   // ── VINILE + SOLIDARIETÀ ──
-  {k:['vinile','disco','la solidarietà','solidarieta','brano','canzone',
-      'registrazione','studio di registrazione','album','produzione musicale',
+  {k:['vinile','disco','la solidarietà','solidarieta','solidariet','brano','canzone',
+      'registrazione','studio di registrazione','album','cd','produzione musicale',
       'musica prodotta','2019','hanno registrato'],
    r:'Nel 2019 il Laboratorio Musicale ha registrato il brano <em>"La Solidarietà"</em> in uno studio professionale — scritto collettivamente dai ragazzi e pubblicato su <strong>vinile autoprodotto</strong>. Una delle cose più belle mai fatte al Convitto.<br><br>🎶 <a href="solidarieta.html">Guarda il video →</a><br>💿 <a href="vinile.html">Il Vinile del Convitto →</a>'},
 
@@ -346,19 +354,25 @@ const NORM_MAP={
   "mangiare":"mangi","mangio":"mangi","mangiano":"mangi",
   "telefono":"telefono","numero di telefono":"telefono",
   "educatrice":"educatori","educatrici":"educatori",
-  "convittore":"iscri","convittori":"iscri",
-  "c'e'":"c'è","ce'":"c'è","wifi":"wifi","wi fi":"wifi","wi-fi":"wifi",
+  "wifi":"wifi","wi fi":"wifi","wi-fi":"wifi",
   "devo":"","dovrei":"","vorrei":"","voglio":"","puoi dirmi":"","puoi spiegarmi":"",
   "ho bisogno di sapere":"","mi puoi dire":"","vorrei sapere":"","dimmi":"",
   "qual è":"","quale":"","quando":"quando","dove":"dove","come":"come","chi":"chi",
-  "l'":"","dell'":"","all'":"","nell'":"","un'":"",
   "\\bun\\b\\s+":"","\\buna\\b\\s+":"","\\bil\\b\\s+":"","\\bla\\b\\s+":"","\\blo\\b\\s+":"","\\bi\\b\\s+":"","\\ble\\b\\s+":"","\\bgli\\b\\s+":"",
 };
 
 function normalize(q){
+  // Nota: l'apostrofo va sostituito con uno SPAZIO, non cancellato: cancellarlo
+  // saldava l'articolo alla parola successiva ("l'indirizzo" -> "lindirizzo"),
+  // rendendo poi impossibile un confronto per parola intera come "indirizzo".
+  // Sostituendolo con uno spazio si ottiene "l indirizzo": il frammento "l"
+  // resta isolato e innocuo, "indirizzo" torna riconoscibile come parola a
+  // se'. Questo allinea anche la normalizzazione della domanda a quella gia'
+  // usata per le keyword (vedi keywordMatches), che passano gia' da
+  // /[^a-z0-9\s]/g, cioe' trattano l'apostrofo come uno spazio.
   let s=q.toLowerCase()
     .normalize('NFD').replace(/[\u0300-\u036f]/g,'') // rimuove accenti
-    .replace(/['"''""]/g,'') // rimuove apostrofi e virgolette
+    .replace(/['"''""]/g,' ') // apostrofi/virgolette -> spazio (non cancellare)
     .replace(/[^a-z0-9\s]/g,' ') // rimuove punteggiatura
     .replace(/\s+/g,' ').trim();
   // Applica sostituzioni
@@ -369,7 +383,31 @@ function normalize(q){
 }
 
 // ── MOTORE DI MATCHING ────────────────────────────────────────────────────
-// Scoring: +2 per corrispondenza di frase intera, +1 per keyword singola
+// Scoring: +2 per corrispondenza di frase intera, +1 per keyword singola.
+// Due correzioni rispetto alla v2 originale:
+// 1) le keyword di 4 caratteri o meno contavano SEMPRE zero, anche quando
+//    erano parole importanti ("dove","wifi","dsa","bes","ciao"...): qui
+//    restano escluse per default (troppo generiche, es. "chi","non","via"),
+//    tranne quelle esplicitamente elencate in SHORT_OK perché inequivocabili.
+// 2) il confronto era per sottostringa libera, quindi "vitto" (voce mensa)
+//    scattava leggendo "con-VITTO" o "semicon-VITTO". Molte keyword della
+//    base di conoscenza sono però radici troncate di proposito, per un
+//    piccolo effetto di stemming ("allergi" deve intercettare sia
+//    "allergia" sia "allergie", "intolleran" sia "intolleranza" sia
+//    "intolleranze", ecc.): un confine di parola su ENTRAMBI i lati
+//    avrebbe rotto anche queste. La correzione richiede invece un confine
+//    di parola solo all'INIZIO della keyword (la keyword deve iniziare
+//    dove inizia una parola vera), lasciando libera la fine: questo fa
+//    sì che "allergi" continui a intercettare "allergie", ma "vitto" non
+//    scatti più leggendo "con-VITTO", perché lì non c'è alcun inizio di
+//    parola prima di "vitto".
+const SHORT_OK=new Set(['dove','wifi','dsa','bes','ciao','cena','sede','pdf','pec','menu','menù','tour','quiz','isee','h24','via','gps','rate']);
+function keywordMatches(norm,kn){
+  if(!kn) return false;
+  if(!(kn.length>4||SHORT_OK.has(kn))) return false;
+  const esc=kn.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return new RegExp('\\b'+esc).test(norm);
+}
 function match(q){
   const norm=normalize(q);
   let best=null,top=0;
@@ -377,7 +415,7 @@ function match(q){
     let score=0;
     for(const k of e.k){
       const kn=k.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').trim();
-      if(kn.length>4&&norm.includes(kn)){
+      if(keywordMatches(norm,kn)){
         // Le frasi più lunghe pesano di più
         score+=kn.includes(' ')?2:1;
       }

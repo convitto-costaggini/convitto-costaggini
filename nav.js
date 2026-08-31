@@ -760,17 +760,17 @@
     { titolo: 'Missione e valori', pagina: 'il-convitto.html', ancora: '#mission', cat: 'Il Convitto', keywords: ['missione','valori','sicurezza','eccellenza','responsabilità','cura','formazione','educare'] },
     { titolo: 'Staff educativo e organigramma', pagina: 'il-convitto.html', ancora: '#staff', cat: 'Il Convitto', keywords: ['staff','rettore','coordinatore','educatore','personale','direzione','organigramma','docenti'] },
     { titolo: 'Cronologia storica', pagina: 'il-convitto.html', ancora: '#cronologia', cat: 'Il Convitto', keywords: ['cronologia','storia','timeline','anni 70','pnrr','modernizzazione','espansione'] },
-    { titolo: 'Ristorazione e pasti', pagina: 'servizi.html', ancora: '#ristorazione', cat: 'Servizi', keywords: ['ristorazione','mensa','pasti','colazione','pranzo','cena','merenda','menu','menù','cucina','mangiare','vitto','allergie','intolleranze','dieta'] },
-    { titolo: 'Alloggi e camere', pagina: 'servizi.html', ancora: '#alloggi', cat: 'Servizi', keywords: ['camera','camere','alloggio','alloggi','singola','doppia','bagno','letto','dormitorio','wifi','wi-fi','armadietto','biancheria','climatizzazione'] },
+    { titolo: 'Ristorazione e pasti', pagina: 'servizi.html', ancora: '#ristorazione', cat: 'Servizi', keywords: ['ristorazione','mensa','pasti','colazione','pranzo','cena','merenda','menu','menù','cucina','mangiare','vitto','allergie','intolleranze','dieta','celiaco','celiachia'] },
+    { titolo: 'Alloggi e camere', pagina: 'servizi.html', ancora: '#alloggi', cat: 'Servizi', keywords: ['camera','camere','stanza','alloggio','alloggi','singola','doppia','triple','persone','bagno','letto','dormitorio','wifi','wi-fi','armadietto','biancheria','climatizzazione'] },
     { titolo: 'Studio guidato', pagina: 'servizi.html', ancora: '#studio', cat: 'Servizi', keywords: ['studio','studiare','tutoraggio','compiti','pomeriggio','15.30'] },
     { titolo: 'Sport, palestra e benessere', pagina: 'servizi.html', ancora: '#sport', cat: 'Servizi', keywords: ['palestra','sport','calcio','basket','yoga','pilates','tornei','campo','ping pong','calciobalilla','attività','fisico','benessere','pnrr'] },
     { titolo: 'Tecnologia e connettività', pagina: 'servizi.html', ancora: '#tecnologia', cat: 'Servizi', keywords: ['wifi','wi-fi','internet','tecnologia','laboratorio','computer','digitale','pnsd','multimediale','software','alberghiero','pms','lim'] },
     { titolo: 'Salute e assistenza sanitaria', pagina: 'servizi.html', ancora: '#salute', cat: 'Servizi', keywords: ['infermeria','salute','medico','psicologico','emergenza','118','ospedale','farmaci','sanitaria','assistenza','asl'] },
     { titolo: 'Orari dei servizi', pagina: 'servizi.html', ancora: '#orari', cat: 'Servizi', keywords: ['orari','orario','apertura','chiusura','quando','ore','mattina','pomeriggio','sera'] },
-    { titolo: 'Come iscriversi al Convitto', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['iscriversi','iscrizione','ammissione','domanda','come','procedura','miur','portale','modulo','candidatura','entrare'] },
+    { titolo: 'Come iscriversi al Convitto', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['iscriversi','iscrizione','iscrivo','ammissione','domanda','come','procedura','miur','portale','modulo','candidatura','entrare'] },
     { titolo: 'Tariffe e rette 2025/26', pagina: 'ammissione.html', ancora: '#tariffe', cat: 'Ammissione', keywords: ['tariffa','retta','costo','prezzo','quanto','pagare','isee','riduzione','agevolazione','contributo','pagopa','rata','mensile','euro'] },
     { titolo: 'Moduli e documenti da scaricare', pagina: 'ammissione.html', ancora: '#moduli', cat: 'Ammissione', keywords: ['modulo','moduli','scaricare','download','pdf','documenti','stampare','compilare','domanda','allegati'] },
-    { titolo: 'Domande frequenti — FAQ', pagina: 'ammissione.html', ancora: '#faq', cat: 'Ammissione', keywords: ['faq','domande','frequenti','dubbi','risposta','chiarimenti','uscita','malattia','rimborso','ritiro','camera','compagno'] },
+    { titolo: 'Domande frequenti — FAQ', pagina: 'ammissione.html', ancora: '#faq', cat: 'Ammissione', keywords: ['faq','domande','frequenti','dubbi','risposta','chiarimenti','uscita','malattia','rimborso','ritiro','camera','compagno','valigia','corredo','portare','bagaglio','colloquio'] },
     { titolo: 'Scadenze e calendario iscrizioni', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['scadenza','calendario','quando','data','settembre','ottobre','novembre','gennaio','marzo','maggio','giugno','termine'] },
     { titolo: 'Regolamento del Convitto', pagina: 'trasparenza.html', ancora: '#disposizioni', cat: 'Trasparenza', keywords: ['regolamento','regole','norme','disciplina','comportamento','patto','convivenza'] },
     { titolo: 'P.T.O.F. — Piano Triennale Offerta Formativa', pagina: 'trasparenza.html', ancora: '#disposizioni', cat: 'Trasparenza', keywords: ['ptof','piano','triennale','offerta','formativa','progetto','educativo','programma'] },
@@ -803,9 +803,9 @@
     { titolo: 'La Nostra Comunità', pagina: 'comunita.html', ancora: '', cat: 'Comunità', keywords: ['comunità','alumni','muro dei ricordi','lab musicale','vinile','solidarietà'] },
     { titolo: 'Cookie Policy', pagina: 'cookie-policy.html', ancora: '', cat: 'Trasparenza', keywords: ['cookie','policy','privacy','profilazione'] },
     { titolo: 'Domanda di Ammissione', pagina: 'domanda-ammissione.html', ancora: '', cat: 'Ammissione', keywords: ['domanda','ammissione','iscrizione','modulo','online','segreteria','compilare'] },
-    { titolo: 'Gli Educatori', pagina: 'educatori.html', ancora: '', cat: 'Il Convitto', keywords: ['educatori','staff','ccnl','competenze','schede','personale'] },
+    { titolo: 'Gli Educatori', pagina: 'educatori.html', ancora: '', cat: 'Il Convitto', keywords: ['educatori','staff','ccnl','competenze','schede','personale','notte','notturna','sorveglianza','24 ore su 24','turno di notte'] },
     { titolo: 'Il Convitto fa per me?', pagina: 'fa-per-me.html', ancora: '', cat: 'Orientamento', keywords: ['fa per me','quiz','scelta','giusta','vita convittuale','decidere'] },
-    { titolo: 'Per i Genitori', pagina: 'genitori.html', ancora: '', cat: 'Famiglie', keywords: ['genitori','famiglie','famiglia','vicini','informazioni'] },
+    { titolo: 'Per i Genitori', pagina: 'genitori.html', ancora: '', cat: 'Famiglie', keywords: ['genitori','famiglie','famiglia','vicini','informazioni','dsa','bes','dislessia','disturbi di apprendimento','bisogni educativi speciali'] },
     { titolo: 'Una giornata al Convitto', pagina: 'giornata-tipo.html', ancora: '', cat: 'Il Convitto', keywords: ['giornata','tipo','sveglia','studio','sport','cena','quotidiana','routine'] },
     { titolo: 'In 2 Minuti', pagina: 'in-2-minuti.html', ancora: '', cat: 'Orientamento', keywords: ['2 minuti','veloce','faq','domande frequenti','riassunto'] },
     { titolo: 'Menu della Settimana', pagina: 'menu-settimana.html', ancora: '', cat: 'Novità', keywords: ['menu','mensa','cibo','pasti','primo','secondo','contorno','settimana','cucina'] },
@@ -817,13 +817,23 @@
     { titolo: 'Elenco del Personale', pagina: 'personale.html', ancora: '', cat: 'Il Convitto', keywords: ['personale','elenco','educativo','amministrativo','staff'] },
     { titolo: 'Informativa Privacy', pagina: 'privacy.html', ancora: '', cat: 'Trasparenza', keywords: ['privacy','informativa','dati personali','gdpr','reg ue 2016/679'] },
     { titolo: 'Il PTOF spiegato', pagina: 'ptof-guida.html', ancora: '', cat: 'Trasparenza', keywords: ['ptof','piano triennale','offerta formativa','spiegato','sezioni tematiche'] },
-    { titolo: 'Leggi il Regolamento — guida', pagina: 'regolamento-guida.html', ancora: '', cat: 'Trasparenza', keywords: ['regolamento','guida','articoli','leggere','chiaro','diretto'] },
+    { titolo: 'Leggi il Regolamento — guida', pagina: 'regolamento-guida.html', ancora: '', cat: 'Trasparenza', keywords: ['regolamento','guida','articoli','leggere','chiaro','diretto','uscite','uscire','permesso','weekend','fine settimana'] },
     { titolo: 'Regolamento di Convitto — versione interattiva', pagina: 'regolamento.html', ancora: '', cat: 'Trasparenza', keywords: ['regolamento','convitto','norme','regole','versione','aggiornata'] },
     { titolo: 'Il Muro dei Ricordi', pagina: 'ricordi.html', ancora: '', cat: 'Comunità', keywords: ['muro','ricordi','ex convittori','emozione','frase','momento'] },
     { titolo: 'Scopri il tuo Talento', pagina: 'scopri-talento.html', ancora: '', cat: 'Orientamento', keywords: ['scopri','talento','giochi','quiz','simulatori','futuri studenti'] },
     { titolo: 'Semiconvitto', pagina: 'semiconvitto.html', ancora: '', cat: 'Servizi', keywords: ['semiconvitto','richiesta','partecipazione','studio guidato','pranzo','pomeridiane'] },
     { titolo: 'Una Settimana in Numeri', pagina: 'settimana-in-numeri.html', ancora: '', cat: 'Il Convitto', keywords: ['settimana','numeri','pasti','statistiche','dati'] },
-    { titolo: 'Tour Virtuale 360°', pagina: 'tour-virtuale.html', ancora: '', cat: 'Orientamento', keywords: ['tour','virtuale','360','esplora','ambienti','prima di arrivare'] }
+    { titolo: 'Tour Virtuale 360°', pagina: 'tour-virtuale.html', ancora: '', cat: 'Orientamento', keywords: ['tour','virtuale','360','esplora','ambienti','prima di arrivare'] },
+    { titolo: 'Mappa del Sito', pagina: 'mappa-sito.html', ancora: '', cat: 'Trasparenza', keywords: ['mappa del sito','mappa sito','tutte le pagine','indice delle pagine','trova quello che cerchi','elenco pagine','navigazione'] },
+    { titolo: 'Festa di Natale 2024', pagina: 'natale2024.html', ancora: '', cat: 'Comunità', keywords: ['natale','natale 2024','festa di natale','cena di gala','tombola','musica dal vivo','dicembre 2024','galleria fotografica'] },
+    { titolo: 'Iscriviti come Alumno', pagina: 'iscriviti-alumni.html', ancora: '', cat: 'Comunità', keywords: ['iscriviti alumni','registrati alumni','sei passato dal convitto','aggiungi la tua scheda','pin sulla mappa','registrazione ex convittori'] },
+    { titolo: 'Trofei e Classifiche', pagina: 'trofei-e-classifiche.html', ancora: '', cat: 'Il Convitto', keywords: ['trofei','classifiche','classifica del merito','impegno','comportamento','vita di camera','anonimato','convittori premiati'] },
+    { titolo: 'Quiz: Sei pronto per l\'Accoglienza?', pagina: 'quiz-accoglienza.html', ancora: '', cat: 'Orientamento', keywords: ['quiz accoglienza','gioco di ruolo','ospite esigente','scenari alberghiero','sala accoglienza'] },
+    { titolo: 'Quiz: Sai già cucinare?', pagina: 'quiz-competenze.html', ancora: '', cat: 'Orientamento', keywords: ['quiz competenze','sai gia cucinare','livello di partenza','percorso di studio cucina'] },
+    { titolo: 'Cruciverba del Costaggini', pagina: 'quiz-cruciverba.html', ancora: '', cat: 'Orientamento', keywords: ['cruciverba','parole crociate','vocabolario enogastronomico','gioco enigmistico'] },
+    { titolo: 'Quiz: Scegli il tuo percorso', pagina: 'quiz-percorso.html', ancora: '', cat: 'Orientamento', keywords: ['scegli il tuo percorso','simulatore percorso','indirizzi di studio','orientarsi indirizzo'] },
+    { titolo: 'Quiz: Riconosci il Piatto', pagina: 'quiz-piatti.html', ancora: '', cat: 'Orientamento', keywords: ['riconosci il piatto','gioco piatti','cucina italiana classica','indovina il piatto'] },
+    { titolo: 'Quiz: La tua Settimana Tipo', pagina: 'quiz-settimana.html', ancora: '', cat: 'Orientamento', keywords: ['la tua settimana tipo','costruisci la settimana','settimana ideale','simulatore vita convittuale'] }
   ];
 
   function escReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
@@ -839,12 +849,66 @@
   function pageLabel(p) {
     return p.replace('.html', '').replace(/-/g, ' ').replace(/^\w/, function (c) { return c.toUpperCase(); }).replace('Index', 'Home');
   }
+  /* Parole troppo comuni per contare in una ricerca: articoli, preposizioni,
+     verbi ausiliari e interrogativi tipici delle domande in linguaggio
+     naturale ("dove si trova...", "come si fa...", "c'è il..."). Toglierle
+     PRIMA del confronto evita sia rumore (parole come "il"/"di" comparirebbero
+     per sottostringa in moltissime voci a caso) sia, soprattutto, il fallire
+     dell'intera ricerca per una sola parola non prevista tra le keyword. */
+  var STOPWORDS = {
+    'il':1,'lo':1,'la':1,'i':1,'gli':1,'le':1,'un':1,'uno':1,'una':1,
+    'di':1,'da':1,'in':1,'con':1,'su':1,'per':1,'tra':1,'fra':1,'a':1,
+    'e':1,'ed':1,'o':1,'ma':1,'se':1,'che':1,'chi':1,'cosa':1,'cos':1,
+    'come':1,'dove':1,'quando':1,'quale':1,'quali':1,'quanto':1,'quanti':1,
+    'quanta':1,'quante':1,'sono':1,'sia':1,
+    'mi':1,'ti':1,'si':1,'ci':1,'vi':1,'non':1,'ha':1,'ho':1,'hai':1,'hanno':1,
+    'del':1,'dello':1,'della':1,'dei':1,'degli':1,'delle':1,
+    'al':1,'allo':1,'alla':1,'ai':1,'agli':1,'alle':1,
+    'nel':1,'nello':1,'nella':1,'negli':1,'nelle':1,
+    'dal':1,'dallo':1,'dalla':1,'dagli':1,'dalle':1,
+    'sul':1,'sullo':1,'sulla':1,'sugli':1,'sulle':1,'col':1,'coi':1,
+    'va':1,'fa':1,'fai':1,'faccio':1,'posso':1,'puoi':1,'puo':1,
+    'vorrei':1,'voglio':1,'devo':1,'deve':1
+  };
+  /* Confronto: prima si separano le parole della domanda (togliendo
+     punteggiatura e apostrofi, che nell'AND rigido originale restavano
+     incollati alla parola successiva, es. "c'è" mai riconosciuto), poi si
+     scartano le parole vuote. Una voce dell'indice è rilevante se contiene
+     ALMENO UNA di queste parole significative (non più tutte quante: era
+     proprio l'obbligo del "tutte" a azzerare quasi ogni domanda naturale),
+     e i risultati vengono ordinati mettendo prima chi ne contiene di più:
+     così restano precise le ricerche mirate ("retta" da sola) e diventano
+     finalmente utili anche le domande scritte per intero.
+  */
+  function tokenize(query) {
+    return query
+      .toLowerCase()
+      .replace(/[''"".,;:!?()]/g, ' ')
+      .split(/\s+/)
+      .filter(function (t) { return t.length > 1 && !STOPWORDS[t]; });
+  }
+  /* Ogni token viene cercato con un confine di parola SOLO all'inizio
+     (\b prima, non dopo): questo permette ancora di trovare "iscrizioni"
+     scrivendo solo "iscriz" (radice troncata), ma impedisce che un token
+     breve come "vitto" risulti incollato dentro "conVITTO", che compare
+     nel titolo/categoria di quasi ogni voce e altrimenti vincerebbe quasi
+     ogni ricerca con risultati inutili (bug segnalato nel report). */
   function cerca(query) {
-    var tokens = query.split(/\s+/).filter(function (t) { return t.length > 1; });
-    return INDICE.filter(function (item) {
+    var tokens = tokenize(query);
+    if (!tokens.length) return [];
+    var regexes = tokens.map(function (t) { return new RegExp('\\b' + escReg(t)); });
+    var scored = [];
+    for (var i = 0; i < INDICE.length; i++) {
+      var item = INDICE[i];
       var hay = (item.titolo + ' ' + item.cat + ' ' + item.keywords.join(' ')).toLowerCase();
-      return tokens.every(function (t) { return hay.indexOf(t) !== -1; });
-    });
+      var score = 0;
+      for (var j = 0; j < regexes.length; j++) {
+        if (regexes[j].test(hay)) score++;
+      }
+      if (score > 0) scored.push({ item: item, score: score });
+    }
+    scored.sort(function (a, b) { return b.score - a.score; });
+    return scored.map(function (s) { return s.item; });
   }
   function renderHTML(query) {
     var q = query.trim().toLowerCase();

@@ -783,7 +783,7 @@
     { titolo: 'Prossimi eventi e agenda', pagina: 'notizie.html', ancora: '#eventi', cat: 'Notizie', keywords: ['eventi','agenda','calendario','prossimo','quando','programma','cerimonia','diplomi','cena','gala'] },
     { titolo: 'Telefono, email e PEC', pagina: 'contatti.html', ancora: '', cat: 'Contatti', keywords: ['telefono','email','pec','contatto','contattare','chiamare','scrivere','recapito','numero'] },
     { titolo: 'Orari dello sportello', pagina: 'contatti.html', ancora: '#orari', cat: 'Contatti', keywords: ['sportello','orario','apertura','segreteria','ricevimento','quando','ore','mattina','pomeriggio'] },
-    { titolo: 'Dove siamo — Indirizzo e mappa', pagina: 'contatti.html', ancora: '#mappa', cat: 'Contatti', keywords: ['indirizzo','dove','mappa','come arrivare','rieti','sede','posizione','via','strada','percorso','gps'] },
+    { titolo: 'Dove siamo — Indirizzo e mappa', pagina: 'contatti.html', ancora: '#mappa', cat: 'Contatti', keywords: ['indirizzo','dove','mappa','come arrivare','rieti','sede','posizione','via','strada','percorso','gps','trova','trovare','trovarci','ubicazione','situato','convitto'] },
     { titolo: 'Scrivi un messaggio al Convitto', pagina: 'contatti.html', ancora: '#form', cat: 'Contatti', keywords: ['messaggio','scrivere','modulo','form','contatto','richiedere','informazioni','domanda','quesito'] },
     { titolo: 'Il Laboratorio Musicale', pagina: 'laboratorio-musicale.html', ancora: '', cat: 'Comunità', keywords: ['musica','laboratorio','chitarra','voce','canto','concerto','ensemble','strumenti'] },
     { titolo: 'Il Vinile del Convitto', pagina: 'vinile.html', ancora: '', cat: 'Comunità', keywords: ['vinile','disco','musica','ascolta','esibizioni','registrazioni'] },
@@ -904,22 +904,103 @@
      breve come "vitto" risulti incollato dentro "conVITTO", che compare
      nel titolo/categoria di quasi ogni voce e altrimenti vincerebbe quasi
      ogni ricerca con risultati inutili (bug segnalato nel report). */
+  /* ── Rete di sicurezza automatica (31/8/26): kb-index.json è generato
+        da un GitHub Action ad ogni commit, leggendo il testo VERO delle
+        pagine (vedi scripts/build-kb-index.js) — non va mai tenuto
+        aggiornato a mano. Qui serve solo come ripiego: se una pagina non
+        ha ancora una voce curata in INDICE (dimenticanza, pagina nuova),
+        resta comunque trovabile tramite il proprio contenuto reale,
+        invece di essere invisibile alla ricerca finché qualcuno non se
+        ne accorge — il problema di fondo segnalato nel report di agosto. */
+  var PAGINE_INDEX = null;      // null = non ancora caricato, [] = caricato ma vuoto/fallito
+  var caricamentoPagineIndex = null;
+  function caricaPagineIndex() {
+    if (caricamentoPagineIndex) return caricamentoPagineIndex;
+    caricamentoPagineIndex = fetch('kb-index.json')
+      .then(function (r) { return r.ok ? r.json() : { pagine: [] }; })
+      .then(function (d) {
+        PAGINE_INDEX = Array.isArray(d.pagine) ? d.pagine : [];
+        rirenderizzaSeAttivo();
+      })
+      .catch(function () { PAGINE_INDEX = []; });
+    return caricamentoPagineIndex;
+  }
+  // Se l'indice arriva DOPO che l'utente ha già scritto una query (caso
+  // comune: il fetch parte all'apertura della ricerca, la digitazione è
+  // quasi sempre più veloce di un round-trip di rete), ribattiamo la
+  // stessa ricerca una volta pronto, così i risultati aggiuntivi non
+  // richiedono all'utente di ridigitare qualcosa per comparire.
+  function rirenderizzaSeAttivo() {
+    if (typeof gInput !== 'undefined' && gInput && gInput.value.trim().length >= 2) {
+      gResults.innerHTML = renderHTML(gInput.value);
+      syncListboxRole(gResults);
+    }
+    if (typeof homeInput !== 'undefined' && homeInput && homeInput.value.trim().length >= 2) {
+      homeResults.innerHTML = renderHTML(homeInput.value);
+      syncListboxRole(homeResults);
+    }
+  }
+
+  /* Due livelli di corrispondenza per token: PAROLA INTERA (di gran lunga
+     più affidabile: "retta" trovata come parola vera) e PARZIALE, solo
+     l'inizio (serve a trovare "iscrizioni" scrivendo "iscriz"). Senza
+     questa distinzione i due livelli valevano uguale, e una coincidenza
+     di prefisso poteva battere una parola vera: "costa" (da "quanto
+     costa la retta") combacia per prefisso anche con "Costaggini", che
+     compare nelle keyword della voce "Storia del Convitto" — quella voce
+     finiva prima di "Tariffe e rette", che ha "retta" per intero, solo
+     perché dichiarata prima nell'elenco INDICE (bug riscontrato con la
+     batteria di domande naturali del 31/8/26). Pesare di più la parola
+     intera risolve il pareggio a favore del risultato davvero pertinente,
+     senza perdere la ricerca per radice troncata.  */
+  function punteggioToken(hay, tokenText, regexParziale) {
+    if (!regexParziale.test(hay)) return 0;
+    var regexIntera = new RegExp('\\b' + escReg(tokenText) + '\\b');
+    return regexIntera.test(hay) ? 2 : 1;
+  }
   function cerca(query) {
     var tokens = tokenize(query);
     if (!tokens.length) return [];
     var regexes = tokens.map(function (t) { return new RegExp('\\b' + escReg(t)); });
     var scored = [];
+    var pagineTrovate = {};
     for (var i = 0; i < INDICE.length; i++) {
       var item = INDICE[i];
       var hay = (item.titolo + ' ' + item.cat + ' ' + item.keywords.join(' ')).toLowerCase();
       var score = 0;
       for (var j = 0; j < regexes.length; j++) {
-        if (regexes[j].test(hay)) score++;
+        score += punteggioToken(hay, tokens[j], regexes[j]);
       }
-      if (score > 0) scored.push({ item: item, score: score });
+      if (score > 0) {
+        scored.push({ item: item, score: score });
+        pagineTrovate[item.pagina] = true;
+      }
     }
     scored.sort(function (a, b) { return b.score - a.score; });
-    return scored.map(function (s) { return s.item; });
+    var risultati = scored.map(function (s) { return s.item; });
+
+    // Ripiego automatico: solo pagine che l'indice curato non ha già
+    // trovato, e solo se l'indice automatico è arrivato (altrimenti la
+    // ricerca curata resta quella di sempre, nessuna differenza per chi
+    // digita prima che il fetch finisca).
+    if (PAGINE_INDEX && PAGINE_INDEX.length) {
+      var fallback = [];
+      for (var k = 0; k < PAGINE_INDEX.length; k++) {
+        var pag = PAGINE_INDEX[k];
+        if (pagineTrovate[pag.url]) continue;
+        var scoreP = 0;
+        for (var m = 0; m < regexes.length; m++) {
+          scoreP += punteggioToken(pag.testo, tokens[m], regexes[m]);
+        }
+        if (scoreP > 0) fallback.push({ pag: pag, score: scoreP });
+      }
+      fallback.sort(function (a, b) { return b.score - a.score; });
+      for (var n = 0; n < fallback.length; n++) {
+        var p = fallback[n].pag;
+        risultati.push({ titolo: p.titolo, pagina: p.url, ancora: '', cat: 'Sito', keywords: [] });
+      }
+    }
+    return risultati;
   }
   function renderHTML(query) {
     var q = query.trim().toLowerCase();
@@ -991,6 +1072,9 @@
     gResults.innerHTML = '';
     syncListboxRole(gResults);
     setTimeout(function () { gInput.focus(); }, 30);
+    // Solo qui, non ad ogni caricamento pagina: il ~100 KB di kb-index.json
+    // pesa solo su chi apre davvero la ricerca, non su ogni visita al sito.
+    caricaPagineIndex();
   }
   function closeSearch() {
     modal.classList.remove('open');
@@ -1074,6 +1158,7 @@
       }
     });
     homeInput.addEventListener('input', function () { cercaHome(homeInput.value); });
+    homeInput.addEventListener('focus', function () { caricaPagineIndex(); }, { once: true });
     if (homeBtn) homeBtn.addEventListener('click', function () { cercaHome(homeInput.value); if (homeInput.value.trim()) homeInput.focus(); });
     document.addEventListener('click', function (e) {
       if (!e.target.closest('#ricerca')) {

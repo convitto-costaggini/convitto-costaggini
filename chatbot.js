@@ -453,6 +453,57 @@ function smartFallback(q){
   return 'Non ho trovato una risposta precisa. Puoi scriverci direttamente: <a href="contatti.html">modulo di contatto →</a> — rispondiamo entro 24-48 ore nei giorni scolastici.';
 }
 
+// ── RIPIEGO SULL'INDICE AUTOMATICO (31/8/26) ────────────────────────────
+// Stesso principio già usato dalla ricerca sitewide (vedi nav.js): quando
+// nessuna risposta pre-scritta della base di conoscenza (KB, sopra) copre
+// la domanda, invece del solo messaggio generico "scrivi alla segreteria"
+// si cerca la pagina reale del sito più pertinente in kb-index.json — lo
+// stesso indice generato automaticamente ad ogni commit da
+// scripts/build-kb-index.js — e la si propone come link diretto. Così una
+// domanda su un argomento che esiste sul sito ma non ha ancora una
+// risposta scritta a mano nel chatbot non cade più a vuoto.
+// Caricato pigramente alla prima apertura della chat (chatbot.js stesso è
+// già caricato solo su richiesta, vedi nav.js): nessun peso aggiuntivo per
+// chi non apre mai l'assistente.
+let PAGINE_INDEX_CHAT = null;
+let caricamentoPagineIndexChat = null;
+function caricaPagineIndexChat(){
+  if(caricamentoPagineIndexChat) return caricamentoPagineIndexChat;
+  caricamentoPagineIndexChat = fetch('kb-index.json')
+    .then(r=>r.ok?r.json():{pagine:[]})
+    .then(d=>{ PAGINE_INDEX_CHAT = Array.isArray(d.pagine)?d.pagine:[]; })
+    .catch(()=>{ PAGINE_INDEX_CHAT = []; });
+  return caricamentoPagineIndexChat;
+}
+function escHtmlChat(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+// Trova la pagina più pertinente in kb-index.json per la domanda, o null
+// se l'indice non è ancora arrivato o nessuna pagina è abbastanza
+// rilevante. Riusa normalize() già definita sopra per restare coerenti
+// con la stessa logica di confronto della base di conoscenza principale.
+function cercaPaginaFallback(q){
+  if(!PAGINE_INDEX_CHAT||!PAGINE_INDEX_CHAT.length) return null;
+  const tokens=normalize(q).split(' ').filter(t=>t.length>2);
+  if(!tokens.length) return null;
+  let best=null,bestScore=0;
+  for(const pag of PAGINE_INDEX_CHAT){
+    let score=0;
+    for(const t of tokens){
+      const esc=t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+      // Parola intera pesa più del semplice prefisso (stesso principio già
+      // applicato alla ricerca sitewide in nav.js): senza questo, un token
+      // come "quali" può vincere per coincidenza dentro "qualificati" su
+      // una pagina non pertinente, battendo la pagina davvero in tema che
+      // ha invece parole intere come "regioni" o "convittori".
+      if(new RegExp('\\b'+esc+'\\b').test(pag.testo)) score+=2;
+      else if(new RegExp('\\b'+esc).test(pag.testo)) score+=1;
+    }
+    if(score>bestScore){bestScore=score;best=pag;}
+  }
+  return best;
+}
+
 // ── COSTRUZIONE UI ────────────────────────────────────────────────────────
 function build(){
   const s=document.createElement('style');s.textContent=CSS;document.head.appendChild(s);
@@ -552,11 +603,30 @@ window.ccSend=function(){
   setTimeout(()=>{
     t.remove();
     const res=match(q);
-    addMsg('bot', res?res.r:smartFallback(q));
+    if(res){
+      addMsg('bot', res.r);
+      document.getElementById('cc-go').disabled=false;
+      buildSugs(res.k);
+      return;
+    }
+    // Nessuna risposta pre-scritta: prova prima con la pagina reale del
+    // sito più pertinente (kb-index.json, vedi cercaPaginaFallback sopra)
+    // prima del messaggio generico "scrivi alla segreteria".
+    const pag=cercaPaginaFallback(q);
+    if(pag){
+      addMsg('bot', 'Non ho una risposta pronta su questo, ma questa pagina del sito potrebbe aiutarti:<br><br>🔎 <a href="'+pag.url+'">'+escHtmlChat(pag.titolo)+' →</a><br><br>Se non è quello che cercavi, scrivi alla segreteria: <a href="contatti.html">modulo di contatto →</a>');
+    } else {
+      addMsg('bot', smartFallback(q));
+    }
     document.getElementById('cc-go').disabled=false;
-    buildSugs(res?res.k:null);
+    buildSugs(null);
   },400+Math.random()*350);
 };
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);else build();
+// Caricato qui, non al primo invio: la chat è già aperta a questo punto
+// (chatbot.js parte solo su richiesta, vedi nav.js), quindi c'è tempo
+// perché il fetch finisca prima che l'utente scriva la prima domanda,
+// senza bloccare nulla se la domanda arriva comunque prima.
+caricaPagineIndexChat();
 })();

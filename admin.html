@@ -942,13 +942,13 @@ async function famLoad(stato) {
       return;
     }
     lista.innerHTML = data.map(f => `
-      <div class="fam-card ${f.stato}">
+      <div class="fam-card ${escapeHtml(f.stato)}">
         <div class="fam-info">
           <div class="fam-campo"><strong>Studente</strong>${escapeHtml(f.nome_studente) || '—'}</div>
           <div class="fam-campo"><strong>Email</strong>${escapeHtml(f.email_genitore) || '—'}</div>
           <div class="fam-campo"><strong>Relazione</strong>${escapeHtml(f.relazione) || '—'}</div>
           <div class="fam-campo"><strong>Richiesta</strong>${f.created_at ? f.created_at.slice(0,10) : '—'}</div>
-          <div class="fam-campo"><strong>Stato</strong>${f.stato}</div>
+          <div class="fam-campo"><strong>Stato</strong>${escapeHtml(f.stato)}</div>
         </div>
         <div class="fam-azioni">
           ${f.stato === 'in_attesa' ? `
@@ -1163,7 +1163,7 @@ async function odLoad(stato) {
       return;
     }
     list.innerHTML = data.map(p => `
-      <div class="fam-card ${p.stato}" style="margin-bottom:.75rem">
+      <div class="fam-card ${escapeHtml(p.stato)}" style="margin-bottom:.75rem">
         <div class="fam-info">
           <div class="fam-campo"><strong>Nome</strong>${escapeHtml(p.nome) || '—'}</div>
           <div class="fam-campo"><strong>Email</strong>${escapeHtml(p.email) || '—'}</div>
@@ -1171,7 +1171,7 @@ async function odLoad(stato) {
           <div class="fam-campo"><strong>Data preferita</strong>${escapeHtml(p.data_pref) || '—'}</div>
           <div class="fam-campo"><strong>Persone</strong>${escapeHtml(p.persone) || '—'}</div>
           <div class="fam-campo"><strong>Richiesta</strong>${p.created_at ? p.created_at.slice(0,10) : '—'}</div>
-          <div class="fam-campo"><strong>Stato</strong>${p.stato}</div>
+          <div class="fam-campo"><strong>Stato</strong>${escapeHtml(p.stato)}</div>
         </div>
         ${p.note ? `<div style="font-size:.8rem;color:#6b5a2a;font-style:italic;margin:.5rem 0 .75rem;padding:.5rem .75rem;background:#f9f6ef;border-radius:6px">"${escapeHtml(p.note)}"</div>` : ''}
         <div class="fam-azioni">

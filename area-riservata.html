@@ -470,7 +470,7 @@
       el.innerHTML = recenti.map(r =>
         `<div class="card-dato ${cls[r.colore]||''}">
            <div class="card-meta"><span class="card-data">${fmt(r.data)}</span>
-           <span style="font-size:.82rem;font-weight:700;color:var(--txt2);">${r.tipo}</span></div>
+           <span style="font-size:.82rem;font-weight:700;color:var(--txt2);">${san(r.tipo)}</span></div>
            <div style="font-size:1.4rem;">${r.colore}</div></div>`
       ).join('');
     } else {

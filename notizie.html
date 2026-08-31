@@ -155,7 +155,7 @@ function fmtBadge(iso){
   if(isNaN(d)) return {day:'TBD', mon:''};
   return {day:String(d.getDate()).padStart(2,'0'), mon: MESI3[d.getMonth()]+' '+d.getFullYear()};
 }
-function comEscape(t){ return (t||'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+function comEscape(t){ return (t||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function comLinkify(t){
   return comEscape(t)
     .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" data-ext style="color:var(--oro-testo,#886813);font-weight:600;word-break:break-word">$1</a>')
@@ -177,7 +177,7 @@ async function caricaComunicati(){
       const meta = [a.autore||'', a.categoria||''].filter(Boolean).join(' · ');
       const aperto = (a.pinned || i===0) ? ' open' : '';
       const corpo = a.testo ? comLinkify(a.testo) : '<em style="color:var(--txt2)">(nessun testo)</em>';
-      const lnk = a.link ? `<div class="com-link-wrap"><a href="${a.link}" ${a.link.startsWith('http')?'data-ext':''} class="com-link">${comEscape(a.link_testo||'Leggi →')}</a></div>` : '';
+      const lnk = a.link ? `<div class="com-link-wrap"><a href="${comEscape(a.link)}" ${a.link.startsWith('http')?'data-ext':''} class="com-link">${comEscape(a.link_testo||'Leggi →')}</a></div>` : '';
       return `<details class="com-acc"${aperto}>
         <summary><span class="com-date">${badge}</span><span class="com-title">${pin}${comEscape(a.titolo||'')}</span><span class="com-chev">›</span></summary>
         <div class="com-acc-body">${corpo}${lnk}${meta?`<div class="com-acc-meta">${comEscape(meta)}</div>`:''}</div>
@@ -197,10 +197,10 @@ async function caricaEventi(){
     if(!lista.length){ grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--txt2);font-family:var(--fu);font-size:.85rem;padding:1.5rem">Nessun evento in programma al momento.</p>'; return; }
     grid.innerHTML = lista.map((e,i)=>{
       const b = fmtBadge(e.data);
-      const where = [e.luogo?('📍 '+e.luogo):'', e.nota||''].filter(Boolean).join(' · ');
-      const titolo = e.link ? `<a href="${e.link}" ${e.link.startsWith('http')?'data-ext':''}>${e.titolo||''}</a>` : (e.titolo||'');
+      const where = [e.luogo?('📍 '+comEscape(e.luogo)):'', e.nota?comEscape(e.nota):''].filter(Boolean).join(' · ');
+      const titolo = e.link ? `<a href="${comEscape(e.link)}" ${e.link.startsWith('http')?'data-ext':''}>${comEscape(e.titolo||'')}</a>` : comEscape(e.titolo||'');
       const dcl = i%3===1?' d1':(i%3===2?' d2':'');
-      return `<div class="ev-card${dcl}"><div class="ev-date"><span class="day">${b.day}</span><span class="mon">${b.mon}</span></div><div class="ev-body"><h3>${titolo}</h3>${e.descrizione?`<p>${e.descrizione}</p>`:''}${where?`<p class="ev-where">${where}</p>`:''}</div></div>`;
+      return `<div class="ev-card${dcl}"><div class="ev-date"><span class="day">${b.day}</span><span class="mon">${b.mon}</span></div><div class="ev-body"><h3>${titolo}</h3>${e.descrizione?`<p>${comEscape(e.descrizione)}</p>`:''}${where?`<p class="ev-where">${where}</p>`:''}</div></div>`;
     }).join('');
   }catch(e){ grid.innerHTML=''; }
 }

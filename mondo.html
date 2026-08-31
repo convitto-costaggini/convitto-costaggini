@@ -213,11 +213,17 @@ function mkIcon(type){
   return L.divIcon({className:'',html:`<div style="width:14px;height:14px;border-radius:50%;background:${c};border:2.5px solid rgba(255,255,255,.9);box-shadow:0 0 0 2px rgba(0,0,0,.3),0 2px 8px rgba(0,0,0,.5)"></div>`,iconSize:[14,14],iconAnchor:[7,7],popupAnchor:[0,-10]});
 }
 
+// Escape HTML per i campi testo inseriti dai visitatori (nome, città, ruolo...)
+// prima di iniettarli in innerHTML / popup Leaflet: i pin sono inseribili da
+// chiunque (poi approvati da un admin) e senza questo chiunque poteva far
+// eseguire JavaScript a tutti i visitatori della mappa una volta approvato.
+function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
 function renderPins(){
   markers.forEach(m=>map.removeLayer(m));markers=[];
   allPins.forEach((p,i)=>{
     const m=L.marker([p.lat,p.lng],{icon:mkIcon(p.type)}).addTo(map)
-      .bindPopup(`<div class="popup-inner"><span class="popup-type ${p.type}">${LABELS[p.type]||'<em>Alumni</em>'}</span><span class="popup-name">${p.name}</span><div class="popup-city">📍 ${p.city}</div>${p.role?`<div class="popup-role">${p.role}</div>`:''  }${p.year?`<span class="popup-year">Anno: ${p.year}</span>`:''}</div>`,{maxWidth:240});
+      .bindPopup(`<div class="popup-inner"><span class="popup-type ${escHtml(p.type)}">${LABELS[p.type]||'<em>Alumni</em>'}</span><span class="popup-name">${escHtml(p.name)}</span><div class="popup-city">📍 ${escHtml(p.city)}</div>${p.role?`<div class="popup-role">${escHtml(p.role)}</div>`:''  }${p.year?`<span class="popup-year">Anno: ${escHtml(p.year)}</span>`:''}</div>`,{maxWidth:240});
     m.on('click',()=>scrollCard(i));
     markers.push(m);
   });
@@ -249,12 +255,12 @@ function anim(id,target){
 function renderList(){
   document.getElementById('pin-list').innerHTML=allPins.map((p,i)=>`
     <div class="pin-card" id="pc${i}" onclick="flyTo(${p.lat},${p.lng},${i})" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
-      <div class="pin-dot-l ${p.type}"></div>
+      <div class="pin-dot-l ${escHtml(p.type)}"></div>
       <div style="flex:1;min-width:0">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:#fff">${p.name}</div>
-        <div style="font-family:'Source Sans 3',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.1rem">📍 ${p.city}${p.role?' · '+p.role:''}</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:#fff">${escHtml(p.name)}</div>
+        <div style="font-family:'Source Sans 3',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.1rem">📍 ${escHtml(p.city)}${p.role?' · '+escHtml(p.role):''}</div>
       </div>
-      <span style="font-family:'Source Sans 3',sans-serif;font-size:.6rem;color:#B8922A;margin-left:auto;flex-shrink:0">${p.year||''}</span>
+      <span style="font-family:'Source Sans 3',sans-serif;font-size:.6rem;color:#B8922A;margin-left:auto;flex-shrink:0">${escHtml(p.year||'')}</span>
     </div>`).join('');
 }
 

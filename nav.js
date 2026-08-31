@@ -837,6 +837,17 @@
   ];
 
   function escReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  /* Sfugge i caratteri HTML pericolosi prima di inserire testo scritto
+     dall'utente (la query di ricerca) dentro una stringa HTML che poi
+     finisce in innerHTML. Senza questo, digitare qualcosa come
+     "><img src=x onerror=alert(1)> nella casella di ricerca eseguiva
+     codice arbitrario nel browser di chi cercava (XSS confermato con
+     test reale in headless Chrome il 31/8/26). */
+  function escHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
   function highlight(text, query) {
     if (!query) return text;
     return text.replace(new RegExp('(' + escReg(query) + ')', 'gi'), '<mark>$1</mark>');
@@ -915,7 +926,7 @@
     if (q.length < 2) return '';
     var trovati = cerca(q);
     if (trovati.length === 0) {
-      return '<div class="sr-header">Risultati per "' + q + '"</div>' +
+      return '<div class="sr-header">Risultati per "' + escHtml(q) + '"</div>' +
         '<div class="sr-empty">Nessun risultato trovato. Prova con parole diverse.</div>' +
         '<div class="sr-footer">Hai bisogno di aiuto? <a href="contatti.html">Contattaci →</a></div>';
     }
@@ -926,7 +937,7 @@
         '<span class="sr-page">' + pageLabel(item.pagina) + '</span></span></a>';
     }).join('');
     var extra = trovati.length > 8 ? '<div class="sr-footer">Trovati ' + trovati.length + ' risultati — <a href="notizie.html">Vedi tutte le notizie →</a></div>' : '';
-    return '<div class="sr-header">' + trovati.length + ' risultat' + (trovati.length === 1 ? 'o' : 'i') + ' per "' + q + '"</div>' + items + extra;
+    return '<div class="sr-header">' + trovati.length + ' risultat' + (trovati.length === 1 ? 'o' : 'i') + ' per "' + escHtml(q) + '"</div>' + items + extra;
   }
 
   /* Imposta role="listbox" solo quando il contenitore ha davvero risultati

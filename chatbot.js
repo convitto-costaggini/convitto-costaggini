@@ -506,11 +506,18 @@ function toggle(){
   if(p.classList.contains('open'))setTimeout(()=>document.getElementById('cc-inp').focus(),300);
 }
 
+// Il messaggio dell'utente e' testo puro digitato da lui: va inserito con
+// textContent, mai con innerHTML, altrimenti digitare qualcosa come
+// <img src=x onerror=alert(1)> nella casella eseguiva codice arbitrario
+// nel proprio stesso browser (XSS confermato con test reale in headless
+// Chrome il 31/8/26). Le risposte del bot restano invece HTML vero
+// (contengono link e formattazione) perche' provengono solo dalla Knowledge
+// Base scritta dagli sviluppatori, mai dall'input dell'utente.
 function addMsg(role,html){
   const m=document.getElementById('cc-msgs');
   const d=document.createElement('div');
   d.className='cc-msg '+role;
-  d.innerHTML=html;
+  if(role==='user'){d.textContent=html;}else{d.innerHTML=html;}
   m.appendChild(d);
   m.scrollTop=m.scrollHeight;
 }

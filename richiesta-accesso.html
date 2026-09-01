@@ -19,7 +19,6 @@
 <body data-page="richiesta-accesso">
 <script src="nav-header.min.js"></script>
 <main id="main">
-
   <div class="page-hero">
     <div class="w">
       <nav class="breadcrumb">
@@ -29,22 +28,18 @@
       </nav>
       <div class="gold-bar"></div>
       <h1>Richiesta <em>Accesso Famiglie</em></h1>
-      <p class="sub">Compila il modulo per richiedere l'accesso all'area riservata. La segreteria attiverà il suo account entro 48 ore.</p>
+      <p class="sub">Compila il modulo per richiedere l'accesso all'area riservata. L'amministratore attiverà il suo account entro 48 ore.</p>
     </div>
   </div>
-
   <div class="form-wrap">
     <div class="form-card">
-
       <div id="msg-esito"></div>
-
       <div id="form-contenuto">
         <h2 class="form-titolo">I suoi dati</h2>
         <p class="form-sub">
-          Inserisca i dati del proprio figlio/a e la sua email. Le credenziali di accesso Le verranno inviate via email dopo l’approvazione. 
-          La richiesta verrà verificata dalla segreteria prima dell'attivazione.
+          Inserisca i dati del proprio figlio/a e la sua email. Le credenziali di accesso Le verranno inviate via email dopo l’approvazione.
+          La richiesta verrà verificata dall'amministratore prima dell'attivazione.
         </p>
-
         <!-- STUDENTE -->
         <div class="campo-gruppo">
           <label for="nome-studente">Nome e Cognome dello studente</label>
@@ -52,7 +47,6 @@
                  autocomplete="off" oninput="this.value = this.value.toUpperCase()">
           <div class="aiuto">Scrivere in maiuscolo, esattamente come compare nel registro scolastico.</div>
         </div>
-
         <!-- RELAZIONE -->
         <div class="campo-gruppo">
           <label for="relazione">Lei è</label>
@@ -63,7 +57,6 @@
             <option value="tutore">Tutore / Tutrice legale</option>
           </select>
         </div>
-
         <!-- EMAIL -->
         <div class="campo-gruppo">
           <label for="email">Indirizzo email</label>
@@ -71,9 +64,7 @@
                  autocomplete="email" inputmode="email">
           <div class="aiuto">Usare sempre questa email per accedere. Verificare attentamente prima di procedere.</div>
         </div>
-
         <hr class="divider">
-
         <!-- PRIVACY -->
         <div class="privacy-acc">
           <button type="button" class="privacy-acc-btn" onclick="togglePrivacy(this)" aria-expanded="false">
@@ -87,7 +78,7 @@
             <p><strong>Conservazione:</strong> I dati sono conservati per la durata del rapporto di convitto e cancellati su richiesta o alla conclusione del rapporto scolastico.</p>
             <p><strong>Responsabile del trattamento (hosting):</strong> Supabase Inc. — server in Europa (Francoforte) — con garanzie GDPR (Clausole Contrattuali Standard).</p>
             <p><strong>Diritti dell'interessato:</strong> Accesso, rettifica, cancellazione, limitazione, portabilità e opposizione al trattamento — da esercitare scrivendo a rirh010007@istruzione.it.</p>
-            <p><strong>Reclami:</strong> È possibile presentare reclamo al Garante per la protezione dei dati personali (www.garanteprivacy.it).</p>
+            <p><strong>Reclami:</strong> È possibile presentare reclamo al Garante per la protezione dei dati personali ([www.garanteprivacy.it](https://www.garanteprivacy.it)).</p>
           </div>
           <div class="privacy-box" style="margin-top:.75rem">
             <label>
@@ -96,23 +87,18 @@
             </label>
           </div>
         </div>
-
         <button class="btn-invia" id="btn-invia" onclick="inviaRichiesta()">
           Invia richiesta di accesso
         </button>
-
         <p class="gia-account">
           Hai già un account? <a href="area-riservata.html">Accedi →</a>
         </p>
       </div>
-
     </div>
   </div>
-
 </main>
 <script src="nav.min.js"></script>
 <script>
-
 // ── Invio richiesta ──
 async function inviaRichiesta() {
   const nomeStudente = document.getElementById('nome-studente').value.trim();
@@ -121,19 +107,15 @@ async function inviaRichiesta() {
   const privacy      = document.getElementById('privacy').checked;
   const msgEl        = document.getElementById('msg-esito');
   const btn          = document.getElementById('btn-invia');
-
   msgEl.className = '';
   msgEl.style.display = 'none';
-
   // Validazioni
   if (!nomeStudente) return mostraMsg('Inserire il nome e cognome dello studente.', 'err');
   if (!relazione)    return mostraMsg('Selezionare la relazione con lo studente.', 'err');
   if (!email || !email.includes('@')) return mostraMsg('Inserire un indirizzo email valido.', 'err');
   if (!privacy) return mostraMsg('È necessario accettare l\'informativa sulla privacy per procedere.', 'err');
-
   btn.disabled = true;
   btn.textContent = 'Invio in corso...';
-
   try {
     const resp = await fetch(
       'https://sawclsysqnjsvbobioqo.supabase.co/rest/v1/richieste_accesso',
@@ -153,7 +135,6 @@ async function inviaRichiesta() {
         })
       }
     );
-
     if (resp.ok || resp.status === 201) {
       // Mostra messaggio di successo al posto del form
       // Mostra overlay centrato a schermo
@@ -163,7 +144,7 @@ async function inviaRichiesta() {
         '<div style="font-size:3.5rem;margin-bottom:1rem">✅</div>' +
         '<h2 style="font-family:var(--fd);font-size:1.8rem;color:var(--bosco);margin-bottom:.75rem;font-weight:300">Richiesta inviata!</h2>' +
         '<p style="font-size:.92rem;color:#555;line-height:1.75;margin-bottom:1.75rem">' +
-'La segreteria del Convitto verificherà i dati e, se tutto è corretto, attiverà il suo accesso entro 48 ore lavorative.<br><br>' +
+'L\'amministratore del Convitto verificherà i dati e, se tutto è corretto, attiverà il suo accesso entro 48 ore lavorative.<br><br>' +
 'Riceverà le credenziali di accesso via email <strong>solo al momento dell\'attivazione</strong> — non è previsto nessun messaggio di conferma immediato.' +
 '</p>' +
         '<a href="index.html" style="display:inline-block;background:var(--bosco);color:#fff;padding:13px 32px;border-radius:8px;text-decoration:none;font-family:var(--fu);font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase">← Torna alla Home</a>' +
@@ -174,20 +155,17 @@ async function inviaRichiesta() {
       const errTxt = await resp.text();
       throw new Error('HTTP ' + resp.status + ': ' + errTxt);
     }
-
   } catch(e) {
-    mostraMsg('Errore durante l\'invio. Riprovare o contattare la segreteria. (' + e.message + ')', 'err');
+    mostraMsg('Errore durante l\'invio. Riprovare o contattare l\'amministratore. (' + e.message + ')', 'err');
     btn.disabled = false;
     btn.textContent = 'Invia richiesta di accesso';
   }
 }
-
 function mostraMsg(testo, tipo) {
   const el = document.getElementById('msg-esito');
   el.textContent = testo;
   el.className = 'msg ' + tipo;
 }
-
 function togglePrivacy(btn) {
   const body = document.getElementById('privacy-body');
   const expanded = btn.getAttribute('aria-expanded') === 'true';
@@ -200,7 +178,6 @@ function togglePrivacy(btn) {
     setTimeout(() => body.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
   }
 }
-
 </script>
 </body>
 </html>

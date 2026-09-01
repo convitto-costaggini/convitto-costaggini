@@ -17,9 +17,7 @@
 </head>
 <body data-page="menu-settimana">
 <script src="nav-header.min.js"></script>
-
 <main id="main">
-
   <div class="page-hero rv">
     <div class="w">
       <nav class="breadcrumb" aria-label="Percorso">
@@ -32,29 +30,22 @@
       <p class="sub">Primo, secondo e contorno di ogni giorno — preparati dai nostri cuochi specializzati.</p>
     </div>
   </div>
-
   <section style="background:var(--av);padding:3rem 1.25rem">
     <div class="w" style="max-width:840px">
-
       <div class="menu-card" id="menu-box">
         <div style="padding:2rem;text-align:center;color:var(--txt2);font-size:.85rem">Caricamento del menu…</div>
       </div>
-
-      <p style="font-size:.78rem;color:var(--txt2);margin-top:1.25rem;text-align:center">Il menu può variare in base alla disponibilità delle materie prime. Per intolleranze o allergie, contattare la segreteria del Convitto.</p>
-
+      <p style="font-size:.78rem;color:var(--txt2);margin-top:1.25rem;text-align:center">Il menu può variare in base alla disponibilità delle materie prime. Per intolleranze o allergie, contattare gli <a href="contatti.html">Educatori</a>.</p>
       <br/><a href="notizie.html" class="btn-outline-dark">Torna alle notizie →</a>
     </div>
   </section>
-
 </main>
 <script src="nav.min.js"></script>
 <script>
 const SB_URL_M = 'https://sawclsysqnjsvbobioqo.supabase.co';
 const SB_ANON_M = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
 const GIORNI_ORDINE = ['lunedì','martedì','mercoledì','giovedì','venerdì'];
-
 function mEsc(t){ return (t||'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
-
 async function caricaMenu(){
   const box = document.getElementById('menu-box');
   try{
@@ -64,17 +55,14 @@ async function caricaMenu(){
     const data = await r.json();
     const byGiorno = {};
     (Array.isArray(data) ? data : []).forEach(row => { byGiorno[row.giorno] = row; });
-
     const righeConContenuto = GIORNI_ORDINE.filter(g => {
       const row = byGiorno[g];
       return row && (row.primo || row.secondo || row.contorno);
     });
-
     if(!righeConContenuto.length){
       box.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--txt2);font-size:.85rem">Il menu di questa settimana non è ancora stato pubblicato.</div>';
       return;
     }
-
     let html = '<div class="menu-row head"><div class="menu-cell">Giorno</div><div class="menu-cell">Primo</div><div class="menu-cell">Secondo</div><div class="menu-cell">Contorno</div></div>';
     righeConContenuto.forEach(g => {
       const row = byGiorno[g];

@@ -321,11 +321,6 @@ const KB=[
       'cosa e successo di importante','fatti importanti','eventi speciali','pagine di memoria'],
    r:'C\'è una sezione dedicata ai momenti che hanno lasciato davvero un segno nella storia del Convitto — non semplice cronaca, ma testimonianze da conservare.<br><br>✨ <a href="comunita.html">Scopri "Momenti da non dimenticare" →</a>'},
 
-  // ── PREMIO AL MERITO ──
-  {k:['premio al merito','premio merito','merito','come si misura il merito','premiazione',
-      'premio progresso','graduatoria merito','punteggio comportamento','chi viene premiato'],
-   r:'Il <strong>Premio al Merito</strong> misura un anno di comportamento e impegno in un punteggio, con due graduatorie di pari dignità e un Premio Progresso per chi migliora di più. Una premiazione pensata per essere di tutti, non solo dei primi della classe.<br><br>🏅 <a href="premio-merito.html">Scopri come funziona →</a>'},
-
 ];
 
 // ── SUGGERIMENTI CONTESTUALI ──────────────────────────────────────────────

@@ -18,7 +18,6 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 </head>
 <body>
-
 <!-- HEADER -->
 <header style="background:var(--bosco);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.2);">
   <div style="display:flex;align-items:center;gap:14px;">
@@ -33,22 +32,18 @@
   </div>
   <button class="btn-logout" id="btn-logout" style="display:none;" onclick="eseguiLogout()">Esci</button>
 </header>
-
 <!-- ══ SCHERMATA AUTH ══ -->
 <div id="schermata-auth">
   <div class="auth-wrap">
     <div class="auth-card">
       <div class="stemma">🏫</div>
       <h1 class="auth-titolo">Accesso Famiglie</h1>
-
       <!-- TABS LOGIN / REGISTRATI -->
       <div class="tabs-auth">
         <button class="tab-auth attivo" id="tab-login" onclick="mostraSchermata('login')">Accedi</button>
         <button class="tab-auth" id="tab-registrati" onclick="mostraSchermata('registrati')">Richiedi accesso</button>
       </div>
-
       <div id="msg-auth"></div>
-
       <!-- ─ LOGIN ─ -->
       <div class="sezione attiva" id="sez-login">
         <div class="campo-g">
@@ -71,7 +66,6 @@
           <a onclick="mostraSchermata('reset')">Password dimenticata?</a>
         </div>
       </div>
-
       <!-- ─ RESET PASSWORD ─ -->
       <div class="sezione" id="sez-reset">
         <p style="font-size:.88rem;color:var(--txt2);margin-bottom:1rem;line-height:1.6;">
@@ -85,7 +79,6 @@
         <button class="btn-auth" onclick="inviaReset()">Invia link di reset</button>
         <div class="link-secondario"><a onclick="mostraSchermata('login')">← Torna al login</a></div>
       </div>
-
       <!-- ─ NUOVA PASSWORD (recovery) ─ -->
       <div class="sezione" id="sez-nuova-password">
         <p style="font-size:.88rem;color:var(--txt2);margin-bottom:1rem;line-height:1.6;">
@@ -101,11 +94,10 @@
         </div>
         <button class="btn-auth" id="btn-np" onclick="salvaNuovaPassword()">Salva nuova password</button>
       </div>
-
       <!-- ─ REGISTRATI (redirect) ─ -->
       <div class="sezione" id="sez-registrati">
         <p style="font-size:.9rem;color:var(--txt2);margin-bottom:1.5rem;line-height:1.7;">
-          Per accedere all'area riservata è necessario che la segreteria attivi il suo account.
+          Per accedere all'area riservata è necessario che l'amministratore attivi il suo account.
         </p>
         <a href="richiesta-accesso.html" class="btn-auth" style="display:block;text-align:center;text-decoration:none;">
           Compila il modulo di richiesta →
@@ -114,19 +106,15 @@
           L'accesso viene attivato entro 48 ore dalla richiesta.
         </div>
       </div>
-
     </div>
   </div>
 </div>
-
 <!-- ══ SCHERMATA DASHBOARD ══ -->
 <div id="schermata-dashboard">
-
   <div class="dash-info">
     <h2 id="dash-nome">Caricamento...</h2>
     <p id="dash-sub"></p>
   </div>
-
   <nav class="tab-nav">
     <button class="tab-btn attivo" onclick="cambiaTab('presenze',this)">🍽️ Pasti</button>
     <button class="tab-btn" onclick="cambiaTab('semafori',this)">🚦 Comportamento</button>
@@ -134,14 +122,12 @@
     <button class="tab-btn" onclick="cambiaTab('colloqui',this)">🗣️ Colloqui</button>
     <button class="tab-btn" onclick="cambiaTab('relazioni',this)">📄 Comunicazioni</button>
   </nav>
-
   <div class="tab-cont attivo" id="tab-presenze">
     <div class="banner-info">Presenze ai pasti degli ultimi 30 giorni.</div>
     <div id="cont-presenze"><div class="loader"><div class="spinner"></div></div></div>
   </div>
   <div class="tab-cont" id="tab-semafori">
     <div class="banner-info">🟢 Positivo · 🟡 Migliorabile · 🔴 Da migliorare</div>
-
     <!-- Sintesi del mese: frase gentile + totali complessivi -->
     <div id="sem-sintesi" class="sem-sintesi" style="display:none;">
       <div class="titolo-sintesi" id="sem-sintesi-titolo"></div>
@@ -152,7 +138,6 @@
         <div class="sem-totale"><div class="num r" id="tot-mese-r">0</div><div class="lbl">Da migliorare</div></div>
       </div>
     </div>
-
     <div class="sem-periodo-label">Ultimi 30 giorni, per ambito</div>
     <div class="sem-grid">
       <div class="sem-box"><h3>🛏️ Camera</h3><div class="sem-pallini">
@@ -166,13 +151,11 @@
         <div class="sem-pallino">🔴<span id="c-stu-r">0</span></div>
       </div></div>
     </div>
-
     <!-- Riepilogo dell'intero anno scolastico -->
     <div class="sem-anno" id="sem-anno" style="display:none;">
       Nell'intero anno scolastico: <strong id="anno-v">0</strong> 🟢 ·
       <strong id="anno-g">0</strong> 🟡 · <strong id="anno-r">0</strong> 🔴
     </div>
-
     <div id="cont-semafori"><div class="loader"><div class="spinner"></div></div></div>
   </div>
   <div class="tab-cont" id="tab-note">
@@ -187,23 +170,18 @@
     <div class="banner-info">Comunicazioni formali degli educatori.</div>
     <div id="cont-relazioni"><div class="loader"><div class="spinner"></div></div></div>
   </div>
-
 </div>
-
 <script>
   const { createClient } = supabase;
   const sb = createClient(
     'https://sawclsysqnjsvbobioqo.supabase.co',
     'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ'
   );
-
   let nomeStudente = '';
   let codiceStudente = '';
   let schermataCorrente = 'login';
-
   // ── AVVIO ──
   let inRecovery = /[#&]type=recovery/.test(window.location.hash);
-
   window.addEventListener('load', async () => {
     if (inRecovery) {
       // Flusso recupero password: NON avviare la dashboard, mostra la schermata nuova password
@@ -212,13 +190,11 @@
       const { data: { session } } = await sb.auth.getSession();
       if (session) avviaDashboard(session.user.email);
     }
-
     sb.auth.onAuthStateChange((event, session) => {
       if (event === 'PASSWORD_RECOVERY') { mostraSchermata('nuova-password'); return; }
       if (event === 'SIGNED_OUT') mostraAuth();
     });
   });
-
   // ── NAVIGAZIONE SCHERMATE ──
   function mostraSchermata(nome) {
     schermataCorrente = nome;
@@ -229,33 +205,27 @@
     if (tab) tab.classList.add('attivo');
     document.getElementById('msg-auth').className = 'msg-auth';
   }
-
   function mostraMsg(testo, tipo) {
     const el = document.getElementById('msg-auth');
     el.textContent = testo;
     el.className = 'msg-auth ' + tipo;
   }
-
   // ── LOGIN ──
   async function eseguiLogin() {
     const email = document.getElementById('login-email').value.trim().toLowerCase();
     const pwd   = document.getElementById('login-pwd').value;
     const btn   = document.getElementById('btn-login');
     if (!email || !pwd) return mostraMsg('Inserire email e password.', 'err');
-
     btn.disabled = true; btn.textContent = 'Accesso in corso...';
-
     const { data, error } = await sb.auth.signInWithPassword({ email, password: pwd });
     if (error) {
       mostraMsg('Credenziali non valide. Verificare email e password.', 'err');
       btn.disabled = false; btn.textContent = 'Accedi';
       return;    }
-
     // Login ok → avvio la dashboard direttamente (non dipendo dall'evento)
     btn.disabled = false; btn.textContent = 'Accedi';
     await avviaDashboard(email);
   }
-
  // ── RESET PASSWORD ──
   async function inviaReset() {
     const email = document.getElementById('reset-email').value.trim().toLowerCase();
@@ -265,24 +235,20 @@
     });
     mostraMsg('Link di reset inviato a ' + email + '. Controlla la casella email.', 'ok');
   }
-
   // ── NUOVA PASSWORD (dopo click sul link di recupero) ──
   async function salvaNuovaPassword() {
     const p1 = document.getElementById('np-pwd').value;
     const p2 = document.getElementById('np-pwd2').value;
     if (p1.length < 8) return mostraMsg('La password deve avere almeno 8 caratteri.', 'err');
     if (p1 !== p2) return mostraMsg('Le due password non coincidono.', 'err');
-
     const btn = document.getElementById('btn-np');
     btn.disabled = true; btn.textContent = 'Salvataggio...';
-
     const { error } = await sb.auth.updateUser({ password: p1 });
     if (error) {
       mostraMsg('Errore nel salvataggio. Il link potrebbe essere scaduto: richiedine uno nuovo.', 'err');
       btn.disabled = false; btn.textContent = 'Salva nuova password';
       return;
     }
-
     // Pulisce l'hash, chiude la sessione di recupero e torna al login
     history.replaceState(null, '', window.location.pathname);
     await sb.auth.signOut();
@@ -291,19 +257,16 @@
     mostraSchermata('login');
     mostraMsg('Password aggiornata. Accedi con la nuova password.', 'ok');
   }
-
   // ── DASHBOARD ──
   async function avviaDashboard(email) {
     const { data: assoc } = await sb
       .from('genitori_studenti').select('nome_studente, relazione, codice_studente')
       .eq('email_genitore', email).single();
-
     if (!assoc) {
       mostraMsg('Account non ancora attivato dalla segreteria. Riprovare più tardi.', 'err');
       await sb.auth.signOut();
       return;
     }
-
     nomeStudente = assoc.nome_studente;
     codiceStudente = (assoc.codice_studente || '').trim();
     document.getElementById('dash-nome').textContent = nomeStudente;
@@ -311,35 +274,29 @@
     document.getElementById('btn-logout').style.display = 'block';
     document.getElementById('schermata-auth').style.display = 'none';
     document.getElementById('schermata-dashboard').style.display = 'block';
-
     await Promise.all([
       caricaPresenze(), caricaSemafori(), caricaNote(),
       caricaColloqui(), caricaRelazioni()
     ]);
   }
-
   function mostraAuth() {
     document.getElementById('schermata-auth').style.display = 'block';
     document.getElementById('schermata-dashboard').style.display = 'none';
     document.getElementById('btn-logout').style.display = 'none';
     mostraSchermata('login');
   }
-
   async function eseguiLogout() { await sb.auth.signOut(); }
-
   function cambiaTab(nome, btn) {
     document.querySelectorAll('.tab-cont').forEach(t => t.classList.remove('attivo'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('attivo'));
     document.getElementById('tab-' + nome).classList.add('attivo');
     btn.classList.add('attivo');
   }
-
   function togglePwd(id, btn) {
     const i = document.getElementById(id);
     i.type = i.type === 'password' ? 'text' : 'password';
     btn.textContent = i.type === 'password' ? '👁️' : '🙈';
   }
-
   // ── DATI ──
   function fmt(iso) {
     if (!iso) return '';
@@ -352,7 +309,6 @@
     return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
   }
   function vuoto(ico, txt) { return `<div class="vuoto"><div class="icona">${ico}</div><p>${txt}</p></div>`; }
-
   // Filtra una query sullo studente: per CODICE quando disponibile (stessa chiave della RLS),
   // con ripiego sul nome solo per eventuali righe storiche prive di codice.
   function filtraStudente(q) {
@@ -360,7 +316,6 @@
       ? q.eq('codice_studente', codiceStudente)
       : q.ilike('nome_studente', nomeStudente);
   }
-
   async function caricaPresenze() {
     const dal = new Date(); dal.setDate(dal.getDate()-30);
     const { data } = await filtraStudente(
@@ -378,31 +333,25 @@
        ).join('')}</div></div>`
     ).join('') + '</div>';
   }
-
   async function caricaSemafori() {
     // Inizio anno scolastico corrente (1° settembre): scarico TUTTO l'anno una volta sola
     const oggi = new Date();
     const annoScol = (oggi.getMonth() >= 8) ? oggi.getFullYear() : oggi.getFullYear() - 1;
     const inizioAnno = `${annoScol}-09-01`;
-
     // Soglia 30 giorni per la vista "mese"
     const d30 = new Date(); d30.setDate(d30.getDate() - 30);
     const soglia30 = d30.toISOString().split('T')[0];
-
     const { data } = await filtraStudente(
       sb.from('famiglie_semafori').select('*')
     )
       .gte('data', inizioAnno)
       .order('data', { ascending: false });
-
     const el = document.getElementById('cont-semafori');
     if (!data?.length) { el.innerHTML = vuoto('🚦','Nessuna valutazione registrata.'); return; }
-
     // Conteggi: per ambito (mese), totali mese, totali anno
     const cntMese = { Camera:{'🟢':0,'🟡':0,'🔴':0}, Studio:{'🟢':0,'🟡':0,'🔴':0} };
     const totMese = {'🟢':0,'🟡':0,'🔴':0};
     const totAnno = {'🟢':0,'🟡':0,'🔴':0};
-
     data.forEach(r => {
       const col = r.colore;
       if (totAnno[col] === undefined) return;     // ignora valori non riconosciuti
@@ -413,7 +362,6 @@
         if (cntMese[r.tipo]) cntMese[r.tipo][col]++;
       }
     });
-
     // Spaccato per ambito (ultimi 30 giorni)
     ['cam','stu'].forEach((k,i) => {
       const tipo = ['Camera','Studio'][i];
@@ -421,18 +369,15 @@
       document.getElementById(`c-${k}-g`).textContent = cntMese[tipo]['🟡'];
       document.getElementById(`c-${k}-r`).textContent = cntMese[tipo]['🔴'];
     });
-
     // Totali del mese
     document.getElementById('tot-mese-v').textContent = totMese['🟢'];
     document.getElementById('tot-mese-g').textContent = totMese['🟡'];
     document.getElementById('tot-mese-r').textContent = totMese['🔴'];
-
     // Riga di sintesi gentile
     const sintesi = document.getElementById('sem-sintesi');
     const tit = document.getElementById('sem-sintesi-titolo');
     const fra = document.getElementById('sem-sintesi-frase');
     const totMeseN = totMese['🟢'] + totMese['🟡'] + totMese['🔴'];
-
     if (totMeseN === 0) {
       // Nessuna valutazione nell'ultimo mese, ma ci sono dati nell'anno
       sintesi.style.display = 'block';
@@ -452,7 +397,6 @@
         fra.textContent = 'Di seguito le valutazioni di comportamento registrate, suddivise per ambito.';
       }
     }
-
     // Riepilogo dell'intero anno
     const annoBox = document.getElementById('sem-anno');
     const totAnnoN = totAnno['🟢'] + totAnno['🟡'] + totAnno['🔴'];
@@ -462,7 +406,6 @@
       document.getElementById('anno-g').textContent = totAnno['🟡'];
       document.getElementById('anno-r').textContent = totAnno['🔴'];
     }
-
     // Elenco cronologico: solo gli ultimi 30 giorni (coerente con lo spaccato per ambito)
     const cls = {'🟢':'verde','🟡':'giallo','🔴':'rosso'};
     const recenti = data.filter(r => String(r.data).substring(0,10) >= soglia30);
@@ -477,26 +420,21 @@
       el.innerHTML = vuoto('🗓️','Nessuna valutazione negli ultimi 30 giorni. Più in alto il riepilogo dell\'anno.');
     }
   }
-
 async function caricaNote() {
   // Inizio anno scolastico corrente (1° settembre)
   const oggi = new Date();
   const annoScol = (oggi.getMonth() >= 8) ? oggi.getFullYear() : oggi.getFullYear() - 1;
   const inizioAnno = `${annoScol}-09-01`;
-
   // Soglia 30 giorni, solo per le note GENERICHE
   const d30 = new Date(); d30.setDate(d30.getDate() - 30);
   const soglia30 = d30.toISOString().split('T')[0];
-
   // Una sola query: tutte le note dell'anno scolastico (filtro fine lato client)
   const { data } = await filtraStudente(
     sb.from('famiglie_note').select('*')
   )
     .gte('data', inizioAnno)
     .order('data', { ascending: false });
-
   const el = document.getElementById('cont-note');
-
   const filtrate = (data || []).filter(r => {
     if (!r.testo?.trim()) return false;
     if (r.testo.includes('TEST_CONNESSIONE')) return false;
@@ -505,9 +443,7 @@ async function caricaNote() {
     // Disciplinari: tutto l'anno · Generiche: solo ultimi 30 giorni
     return disc ? true : (dataNota >= soglia30);
   });
-
   if (!filtrate.length) { el.innerHTML = vuoto('📝', 'Nessuna nota registrata.'); return; }
-
   el.innerHTML = filtrate.map(r => {
     const testoNota = r.testo.trim();
     const disc = (r.tipo === 'DISC' || r.tipo === 'DISCIPLINARE');
@@ -521,7 +457,6 @@ async function caricaNote() {
     </div>`;
   }).join('');
 }
-
   async function caricaColloqui() {
     const { data } = await filtraStudente(
       sb.from('famiglie_colloqui').select('*')
@@ -536,7 +471,6 @@ async function caricaNote() {
         <div class="card-testo">${san(r.testo)}</div></div>`;
     }).join('');
   }
-
   async function caricaRelazioni() {
     const { data } = await filtraStudente(
       sb.from('famiglie_relazioni').select('*')
@@ -555,6 +489,5 @@ async function caricaNote() {
     ).join('');
   }
 </script>
-
 </body>
 </html>

@@ -263,7 +263,7 @@
       .from('genitori_studenti').select('nome_studente, relazione, codice_studente')
       .eq('email_genitore', email).single();
     if (!assoc) {
-      mostraMsg('Account non ancora attivato dall'amministratore. Riprovare più tardi.', 'err');
+      mostraMsg('Account non ancora attivato dall\'amministratore. Riprovare più tardi.', 'err');
       await sb.auth.signOut();
       return;
     }

@@ -1,34 +1,4 @@
 #!/usr/bin/env node
-/**
- * check-consistency.js
- *
- * Il sito ripete alcuni "fatti volatili" (scadenza della domanda di
- * ammissione, quota di iscrizione, importo della retta annua, anno
- * scolastico in corso) in più punti indipendenti: la pagina Ammissione
- * (fonte primaria), il testo strutturato FAQPage di più pagine, la
- * pagina Domanda online, la home, e le risposte pre-scritte del
- * chatbot. Non esiste un solo posto da aggiornare — ne esistono più
- * di uno, e in agosto 2026 sono già andati fuori sincrono due volte
- * senza che nessuno se ne accorgesse (la procedura di ammissione nel
- * chatbot, e — trovato in questo stesso controllo il 31/8/26 — l'anno
- * scolastico nella scheda FAQ di genitori.html, rimasto "A.S. 2025/26"
- * mentre la stessa risposta su openday.html era già stata aggiornata
- * a "A.S. 2026/27").
- *
- * Riscrivere tutte queste copie in un'unica fonte tecnica (es. lette a
- * runtime da un JSON) è stato scartato: il testo di ciascuna non è mai
- * identico parola per parola (varia il contesto, il tono, la lunghezza),
- * quindi imporre un'unica stringa comune peggiorerebbe la qualità dei
- * contenuti. La soluzione più razionale è invece rendere impossibile
- * che una copia sfasata resti INVISIBILE: questo script confronta ogni
- * copia con la pagina Ammissione (fonte primaria) e fallisce in modo
- * rumoroso se un valore non coincide più — così, chiunque aggiorni un
- * solo posto, riceve un avviso automatico (via GitHub Actions) invece
- * di scoprirlo mesi dopo da una famiglia confusa.
- *
- * Uso: node scripts/check-consistency.js
- * Uscita: 0 se tutto coincide, 1 se trova almeno una discrepanza.
- */
 
 const fs = require('fs');
 const path = require('path');
@@ -64,10 +34,7 @@ const QUOTA    = estrai('quota di iscrizione', /quota di iscrizione di € ([\d.
 const RETTA    = estrai('retta annua', /Totale annuo<\/span><strong[^>]*>€\s*([\d.,]+)/); // es. "1.600"
 const ANNO     = estrai('anno scolastico', /A\.S\.\s*(\d{4}\/\d{2,4})/);           // es. "2026/27"
 
-const QUOTA_NUM = QUOTA.replace(/[.,]00$/, '').replace(/[.,]/g, '');  // "450,00" -> "450"
-// La retta si scrive SEMPRE con il punto delle migliaia in tutto il sito
-// ("1.600€", "€ 1.600,00", mai "1600"): il confronto usa la stessa forma,
-// non una versione ripulita che non comparirebbe mai nel testo reale.
+const QUOTA_NUM = QUOTA.replace(/[.,]00$/, '').replace(/[.,]/g, '');
 const RETTA_NUM = RETTA; // "1.600"
 const ANNO_INIZIO = ANNO.split('/')[0];                                // "2026/27" -> "2026"
 
@@ -78,9 +45,6 @@ console.log(`  retta annua        = € ${RETTA}`);
 console.log(`  anno scolastico    = A.S. ${ANNO} (cercato anche come "${ANNO_INIZIO}")`);
 console.log('');
 
-// ── 2. Punti del sito che ripetono uno o più di questi fatti, e quali
-//       devono contenere. "contains" accetta una stringa o un array di
-//       stringhe alternative (basta che una sia presente). ──
 const TARGET = [
   { file: 'chatbot.js', fatti: [
       { nome: 'scadenza', contains: SCADENZA },
@@ -109,10 +73,6 @@ const TARGET = [
   { file: 'regolamento-guida.html', fatti: [
       { nome: 'scadenza', contains: SCADENZA },
   ]},
-  // regolamento.html NON è incluso: cita deliberatamente la scadenza
-  // storica del Regolamento cartaceo (7 luglio), con una nota a parte
-  // in regolamento-guida.html che spiega perché per l'anno in corso
-  // vale invece il 30 luglio. Discrepanza voluta, non un bug.
 ];
 
 let mismatches = 0;

@@ -1,27 +1,4 @@
 #!/usr/bin/env node
-/**
- * update-sitemap-lastmod.js
- *
- * Aggiorna automaticamente il tag <lastmod> di ogni <url> in sitemap.xml
- * usando la data dell'ultimo commit git che ha toccato il file corrispondente.
- *
- * Come funziona:
- *  1. Legge sitemap.xml dalla root del repo.
- *  2. Per ogni blocco <url>...<loc>...</loc>...</url>, ricava il percorso
- *     locale del file a partire dall'URL (es. https://dominio/pagina.html -> pagina.html).
- *  3. Esegue `git log -1 --format=%cd --date=short -- <file>` per trovare
- *     la data dell'ultimo commit che ha modificato quel file.
- *  4. Se la data trovata è diversa da quella già presente, aggiorna il lastmod.
- *  5. Riscrive sitemap.xml solo se è cambiato qualcosa.
- *
- * Pagine escluse dall'aggiornamento automatico (SKIP_FILES sotto):
- * mantengono il lastmod attuale anche se il file cambia — usare per pagine
- * con valore storico/documentale dove la data non deve seguire le modifiche
- * tecniche (es. correzioni di battitura, refactor di script condivisi).
- *
- * Uso: node scripts/update-sitemap-lastmod.js
- * Richiede: repo git con storia completa (fetch-depth: 0 in CI), Node.js.
- */
 
 const fs = require('fs');
 const path = require('path');
@@ -29,8 +6,6 @@ const { execSync } = require('child_process');
 
 const SITEMAP_PATH = path.join(process.cwd(), 'sitemap.xml');
 
-// Pagine da NON aggiornare automaticamente (valore storico/documentale).
-// Aggiungi qui il nome file (case sensitive) se in futuro serve escluderne altre.
 const SKIP_FILES = new Set([
   'natale2024.html',
 ]);
@@ -50,9 +25,6 @@ if (!fs.existsSync(SITEMAP_PATH)) {
 
 const xml = fs.readFileSync(SITEMAP_PATH, 'utf8');
 
-// Estrae il percorso file locale da un URL assoluto.
-// Es: https://convitto.alberghierorieti.edu.it/ammissione.html -> ammissione.html
-// Es: https://convitto.alberghierorieti.edu.it/ -> index.html
 function locToFile(loc) {
   try {
     const u = new URL(loc.trim());
@@ -64,9 +36,6 @@ function locToFile(loc) {
   }
 }
 
-// Data dell'ultimo commit che ha toccato il file, formato YYYY-MM-DD.
-// Ritorna null se il file non esiste o non ha storia git (es. mai committato,
-// o rinominato senza --follow: in quel caso va sistemato a mano una volta).
 function lastCommitDate(file) {
   if (!fs.existsSync(path.join(process.cwd(), file))) {
     log(`  attenzione: file "${file}" referenziato in sitemap.xml ma non trovato su disco — lastmod invariato`);

@@ -1,10 +1,3 @@
-/* ═══════════════════════════════════════════════════
-   CONVITTO "COSTAGGINI" — RIETI
-   nav-header.js — SOLO header/skip-link/drawer, caricato per primo
-   nel <body> per evitare il Cumulative Layout Shift (CLS):
-   viene iniettato PRIMA che il resto della pagina sia renderizzato.
-   Footer, dropdown, reveal-on-scroll, chatbot ecc. restano in nav.js.
-═══════════════════════════════════════════════════ */
 
 (function () {
   const headerHTML = `
@@ -52,7 +45,7 @@
           <li style="padding-left: .6rem;"><a href="laboratorio-musicale.html" data-page="laboratorio-musicale">└ Accedi al Laboratorio</a></li>
           <li style="padding-left: .6rem;"><a href="vinile.html" data-page="vinile">└ 📻 Vinile</a></li>
           <li style="padding-left: .6rem;"><a href="solidarieta.html" data-page="solidarieta">└ 🤝 La Solidarietà</a></li>
-          
+
           <li><a href="comunita.html" data-page="comunita">🌟 La nostra Comunità</a></li>
         </ul>
       </div>
@@ -136,7 +129,7 @@
         <li style="padding-left: .75rem;"><a href="vinile.html">📻 Vinile</a></li>
         <li style="padding-left: .75rem;"><a href="solidarieta.html">🤝 La Solidarietà</a></li>
 
-        
+
         <li><a href="comunita.html">🌟 La nostra Comunità</a></li>
       </ul>
     </li>

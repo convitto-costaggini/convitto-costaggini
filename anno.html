@@ -28,7 +28,6 @@
 <script src="nav-header.min.js"></script>
 <main id="main">
 
-  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
   <div class="page-hero">
     <div class="w">
       <nav class="breadcrumb" aria-label="Percorso"><a href="index.html">Home</a><span>›</span><span aria-current="page">L'anno al Convitto</span></nav>
@@ -89,7 +88,6 @@ const TAPPE = [
   { data:'2027-06-20', icon:'☀️', titolo:'Fine anno scolastico',          desc:'Saluti, cerimonia degli esami, chiusura del Convitto per l\'estate. Arrivederci a settembre.' },
 ];
 
-// Anno scolastico di riferimento: dopo la fine dell'anno (~20 giugno) si passa al nuovo a.s.
 function asStartYear(){ const n=new Date(), m=n.getMonth(), d=n.getDate(); const ancoraInCorso=(m<5)||(m===5&&d<=20); return ancoraInCorso ? n.getFullYear()-1 : n.getFullYear(); }
 function schoolYear(){ const s=asStartYear(); return s+'/'+(s+1); }
 const asEl = document.getElementById('an-as');
@@ -176,10 +174,6 @@ TAPPE.forEach(t => {
   stepsEl.appendChild(div);
 });
 
-// ── ADEMPIMENTI DEL PERIODO ──────────────────────────────
-// NB (Michele): le date qui sotto sono quelle della maturità 2026.
-// Quando esce l'O.M. maturità 2026/27, aggiorna i campi `data` e la `Fonte` in fondo.
-// Le scadenze ricorrenti (pagellini, scrutini) si possono lasciare come riferimento.
 const ADEMPIMENTI = [
   { mese:4, voci:[
     { data:'12 maggio',    icona:'📋', titolo:'Presidenti di commissione',      desc:'Pubblicati dagli USR gli elenchi dei Presidenti di commissione dell\'Esame di Stato.',                                                                                                         chi:'Maturandi' },

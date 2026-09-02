@@ -78,30 +78,6 @@
 </main>
 <script src="nav.min.js"></script>
 <script>
-// ══════════════════════════════════════════════════════
-// SCHEMA VERIFICATO — ogni parola incrocia almeno un'altra
-//
-//     c0 c1 c2 c3 c4
-// r0: R  O  U  X  .
-// r1: I  C  .  .  .
-// r2: S  A  U  T  E
-// r3: O  .  .  I  .
-// r4: T  R  A  M  A
-// r5: T  .  .  O  .
-// r6: O  S  T  I  A
-//
-// Incroci verificati:
-// ROUX[0]=R = RISOTTO[0] ✓
-// ROUX[1]=O = OCA[0]     ✓
-// OCA[1]=C  (r1c1)       (incrocia ROUX e SAUTE[1])
-// OCA[2]=A  = SAUTE[1]   ✓
-// SAUTE[0]=S = RISOTTO[2]✓
-// SAUTE[3]=T = TIMO[0]   ✓
-// TRAMA[0]=T = RISOTTO[4]✓
-// TRAMA[3]=M = TIMO[2]   ✓
-// OSTIA[0]=O = RISOTTO[6]✓
-// OSTIA[3]=I = TIMO[3]   ✓
-// ══════════════════════════════════════════════════════
 
 const WORDS = [
   { w:'ROUX',    r:0, c:0, d:'A', n:1, cl:'Base di burro e farina per salse e vellutate' },

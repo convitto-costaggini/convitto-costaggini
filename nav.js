@@ -4,8 +4,6 @@
 ═══════════════════════════════════════════════════ */
 
 (function () {
-  /* ── PA banner + Header + skip-link + drawer: ora iniettati da nav-header.js,
-     caricato PRIMA di questo script per evitare il Cumulative Layout Shift ── */
 
   /* ── Inietta Footer ── */
   const footerHTML = `
@@ -94,10 +92,6 @@
   /* ── Inserimento nel DOM ── */
   document.body.insertAdjacentHTML('beforeend', footerHTML);
 
-  /* ── Lightbox foto condiviso (gallery home + laboratorio musicale) ──
-     Click su una foto di galleria apre una visualizzazione a schermo
-     intero; lo zoom fine è quello nativo del dispositivo (pinch-to-zoom),
-     già permesso dal viewport del sito. */
   (function(){
     const GALLERY_SELECTOR = '.ss-slide img, .mus-slide img';
     if (!document.querySelector(GALLERY_SELECTOR)) return; // pagina senza gallery, nessun overhead
@@ -154,12 +148,6 @@
     });
   })();
 
-  /* ── Caricamento chatbot (differito) ──
-     Il bottone #cc-fab è già visibile (creato più sotto), ma il file
-     chatbot.js (36 KB) non viene più scaricato subito su ogni pagina:
-     parte solo al primo click sul bottone, oppure dopo 4s di inattività
-     come rete di sicurezza — così non pesa sulla finestra critica di
-     caricamento per chi non usa mai l'assistente. */
   let chatbotLoaded = false;
   function loadChatbot(reopenOnLoad) {
     if (chatbotLoaded) return;
@@ -285,8 +273,6 @@
     }), { threshold: 0.08 });
     document.querySelectorAll('.rv').forEach(el => obs.observe(el));
   } catch (err) {
-    // Fallback: se IntersectionObserver non è disponibile o fallisce,
-    // mostra comunque i contenuti invece di lasciarli invisibili per sempre.
     console.error('Reveal observer non disponibile, mostro i contenuti direttamente:', err);
     document.querySelectorAll('.rv').forEach(el => el.classList.add('in'));
   }
@@ -338,7 +324,6 @@
   });
 
 
-  /* ── Fix colore testo "Contattaci" al click — il CSS :active viene ignorato da alcuni browser ── */
   (function(){
     function fixNC() {
       document.querySelectorAll('#dnav a.nc, #dnav .nc').forEach(el => {
@@ -414,8 +399,7 @@
 
       // Aggiunge freccia a ogni sezione tranne l'ultima
       sections.forEach((sec, i) => {
-        if (i >= sections.length - 1) return; // non aggiunge all'ultima
-        // La sezione deve avere position relative per posizionare la freccia
+        if (i >= sections.length - 1) return;
         const pos = getComputedStyle(sec).position;
         if (pos === 'static') sec.style.position = 'relative';
 
@@ -473,7 +457,6 @@
     });
     document.body.appendChild(menu);
 
-    // Fab lingua (mobile/tablet): apre lo STESSO menu, impilato nella colonna #fab-wrap
     const fab=document.createElement('button');
     fab.id='tr-fab';fab.type='button';fab.className='fab-c';
     fab.setAttribute('aria-label','Cambia lingua');fab.setAttribute('aria-haspopup','true');fab.setAttribute('aria-expanded','false');
@@ -621,7 +604,6 @@
     // Osserva tutti gli elementi con data-count
     document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
 
-    // Riprova dopo il DOM (nel caso nav.js carichi prima del contenuto)
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
     });
@@ -630,9 +612,6 @@
   }
 
   /* ── 🌄 PARALLAX DISCRETO ── */
-  // Applica un leggero spostamento verticale agli elementi [data-parallax]
-  // in base allo scroll. Disattivato del tutto se l'utente ha impostato
-  // "riduci movimento" (vedi anche la regola globale in style.css).
   try { (function(){
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const els = document.querySelectorAll('[data-parallax]');
@@ -640,11 +619,6 @@
     let ticking = false;
     function update(){
       const vh = window.innerHeight;
-      // Fase di LETTURA: prima si leggono tutte le posizioni (getBoundingClientRect),
-      // senza scrivere nulla nel mezzo. Alternare letture e scritture di layout in un
-      // ciclo forza il browser a ricalcolare il layout ad ogni iterazione ("adattamento
-      // dinamico forzato del contenuto" / forced reflow). Separando lettura e scrittura
-      // in due passaggi si fa un solo ricalcolo per frame invece di uno per elemento.
       const updates = [];
       els.forEach(el => {
         const speed = parseFloat(el.dataset.parallax) || 0.15;
@@ -671,14 +645,6 @@
 
 })();
 
-/* ═══════════════════════════════════════════════════
-   LETTURA FACILITATA — toggle accessibilità (tutte le pagine)
-   Pulsante nella colonna fab in basso a destra: SEMPRE visibile,
-   anche su mobile (la barra #pa e il pulsante lingua sono desktop-only).
-   Attiva font ad alta leggibilità (Atkinson Hyperlegible), interlinea
-   e spaziatura maggiori, link sottolineati, focus evidente.
-   Scelta ricordata in localStorage. Pienamente reversibile.
-═══════════════════════════════════════════════════ */
 (function () {
   var KEY = 'lf-convitto';
   var root = document.documentElement;
@@ -704,7 +670,6 @@
     'html.lettura-facilitata p, html.lettura-facilitata li{font-size:1.06em !important;}',
     'html.lettura-facilitata a{text-decoration:underline !important;text-underline-offset:.18em;}',
     'html.lettura-facilitata *:focus-visible{outline:3px solid #B8922A !important;outline-offset:2px !important;}',
-    /* il pulsante eredita .fab-c (tondo verde/oro); qui solo testo "Aa" e stato attivo */
     '#lf-fab{font-family:"Source Sans 3",system-ui,sans-serif;font-weight:800;font-size:.95rem;letter-spacing:-.02em;color:#D4AA4A;}',
     '#lf-fab[aria-pressed="true"]{background:linear-gradient(135deg,#B8922A,#9a7a1f);border-color:#EDD98A;color:#fff;}'
   ].join('');
@@ -747,13 +712,6 @@
   else document.addEventListener('DOMContentLoaded', place);
 })();
 
-/* ═══════════════════════════════════════════════════
-   RICERCA SITEWIDE — icona 🔍 in header, su ogni pagina
-   Un solo indice condiviso: la barra grande in home
-   (#search-input) e il pannello a comparsa qui sotto
-   usano entrambi window.ConvittoSearch, così i contenuti
-   indicizzati restano un'unica fonte da aggiornare.
-═══════════════════════════════════════════════════ */
 (function () {
   var INDICE = [
     { titolo: 'Chi siamo — Storia del Convitto', pagina: 'il-convitto.html', ancora: '#storia', cat: 'Il Convitto', keywords: ['storia','convitto','costaggini','fondazione','rieti','tradizione','comunità','educante','origine','anni','decenni'] },
@@ -835,12 +793,6 @@
   ];
 
   function escReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-  /* Sfugge i caratteri HTML pericolosi prima di inserire testo scritto
-     dall'utente (la query di ricerca) dentro una stringa HTML che poi
-     finisce in innerHTML. Senza questo, digitare qualcosa come
-     "><img src=x onerror=alert(1)> nella casella di ricerca eseguiva
-     codice arbitrario nel browser di chi cercava (XSS confermato con
-     test reale in headless Chrome il 31/8/26). */
   function escHtml(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -858,12 +810,6 @@
   function pageLabel(p) {
     return p.replace('.html', '').replace(/-/g, ' ').replace(/^\w/, function (c) { return c.toUpperCase(); }).replace('Index', 'Home');
   }
-  /* Parole troppo comuni per contare in una ricerca: articoli, preposizioni,
-     verbi ausiliari e interrogativi tipici delle domande in linguaggio
-     naturale ("dove si trova...", "come si fa...", "c'è il..."). Toglierle
-     PRIMA del confronto evita sia rumore (parole come "il"/"di" comparirebbero
-     per sottostringa in moltissime voci a caso) sia, soprattutto, il fallire
-     dell'intera ricerca per una sola parola non prevista tra le keyword. */
   var STOPWORDS = {
     'il':1,'lo':1,'la':1,'i':1,'gli':1,'le':1,'un':1,'uno':1,'una':1,
     'di':1,'da':1,'in':1,'con':1,'su':1,'per':1,'tra':1,'fra':1,'a':1,
@@ -879,16 +825,6 @@
     'va':1,'fa':1,'fai':1,'faccio':1,'posso':1,'puoi':1,'puo':1,
     'vorrei':1,'voglio':1,'devo':1,'deve':1
   };
-  /* Confronto: prima si separano le parole della domanda (togliendo
-     punteggiatura e apostrofi, che nell'AND rigido originale restavano
-     incollati alla parola successiva, es. "c'è" mai riconosciuto), poi si
-     scartano le parole vuote. Una voce dell'indice è rilevante se contiene
-     ALMENO UNA di queste parole significative (non più tutte quante: era
-     proprio l'obbligo del "tutte" a azzerare quasi ogni domanda naturale),
-     e i risultati vengono ordinati mettendo prima chi ne contiene di più:
-     così restano precise le ricerche mirate ("retta" da sola) e diventano
-     finalmente utili anche le domande scritte per intero.
-  */
   function tokenize(query) {
     return query
       .toLowerCase()
@@ -896,20 +832,6 @@
       .split(/\s+/)
       .filter(function (t) { return t.length > 1 && !STOPWORDS[t]; });
   }
-  /* Ogni token viene cercato con un confine di parola SOLO all'inizio
-     (\b prima, non dopo): questo permette ancora di trovare "iscrizioni"
-     scrivendo solo "iscriz" (radice troncata), ma impedisce che un token
-     breve come "vitto" risulti incollato dentro "conVITTO", che compare
-     nel titolo/categoria di quasi ogni voce e altrimenti vincerebbe quasi
-     ogni ricerca con risultati inutili (bug segnalato nel report). */
-  /* ── Rete di sicurezza automatica (31/8/26): kb-index.json è generato
-        da un GitHub Action ad ogni commit, leggendo il testo VERO delle
-        pagine (vedi scripts/build-kb-index.js) — non va mai tenuto
-        aggiornato a mano. Qui serve solo come ripiego: se una pagina non
-        ha ancora una voce curata in INDICE (dimenticanza, pagina nuova),
-        resta comunque trovabile tramite il proprio contenuto reale,
-        invece di essere invisibile alla ricerca finché qualcuno non se
-        ne accorge — il problema di fondo segnalato nel report di agosto. */
   var PAGINE_INDEX = null;      // null = non ancora caricato, [] = caricato ma vuoto/fallito
   var caricamentoPagineIndex = null;
   function caricaPagineIndex() {
@@ -923,11 +845,6 @@
       .catch(function () { PAGINE_INDEX = []; });
     return caricamentoPagineIndex;
   }
-  // Se l'indice arriva DOPO che l'utente ha già scritto una query (caso
-  // comune: il fetch parte all'apertura della ricerca, la digitazione è
-  // quasi sempre più veloce di un round-trip di rete), ribattiamo la
-  // stessa ricerca una volta pronto, così i risultati aggiuntivi non
-  // richiedono all'utente di ridigitare qualcosa per comparire.
   function rirenderizzaSeAttivo() {
     if (typeof gInput !== 'undefined' && gInput && gInput.value.trim().length >= 2) {
       gResults.innerHTML = renderHTML(gInput.value);
@@ -939,18 +856,6 @@
     }
   }
 
-  /* Due livelli di corrispondenza per token: PAROLA INTERA (di gran lunga
-     più affidabile: "retta" trovata come parola vera) e PARZIALE, solo
-     l'inizio (serve a trovare "iscrizioni" scrivendo "iscriz"). Senza
-     questa distinzione i due livelli valevano uguale, e una coincidenza
-     di prefisso poteva battere una parola vera: "costa" (da "quanto
-     costa la retta") combacia per prefisso anche con "Costaggini", che
-     compare nelle keyword della voce "Storia del Convitto" — quella voce
-     finiva prima di "Tariffe e rette", che ha "retta" per intero, solo
-     perché dichiarata prima nell'elenco INDICE (bug riscontrato con la
-     batteria di domande naturali del 31/8/26). Pesare di più la parola
-     intera risolve il pareggio a favore del risultato davvero pertinente,
-     senza perdere la ricerca per radice troncata.  */
   function punteggioToken(hay, tokenText, regexParziale) {
     if (!regexParziale.test(hay)) return 0;
     var regexIntera = new RegExp('\\b' + escReg(tokenText) + '\\b');
@@ -977,10 +882,6 @@
     scored.sort(function (a, b) { return b.score - a.score; });
     var risultati = scored.map(function (s) { return s.item; });
 
-    // Ripiego automatico: solo pagine che l'indice curato non ha già
-    // trovato, e solo se l'indice automatico è arrivato (altrimenti la
-    // ricerca curata resta quella di sempre, nessuna differenza per chi
-    // digita prima che il fetch finisca).
     if (PAGINE_INDEX && PAGINE_INDEX.length) {
       var fallback = [];
       for (var k = 0; k < PAGINE_INDEX.length; k++) {
@@ -1019,9 +920,6 @@
     return '<div class="sr-header">' + trovati.length + ' risultat' + (trovati.length === 1 ? 'o' : 'i') + ' per "' + escHtml(q) + '"</div>' + items + extra;
   }
 
-  /* Imposta role="listbox" solo quando il contenitore ha davvero risultati
-     con role="option" — evita un listbox vuoto/senza figli validi, che
-     viola la regola ARIA "certain roles must contain particular children" */
   function syncListboxRole(el) {
     if (el.querySelector('.sr-item')) el.setAttribute('role', 'listbox');
     else el.removeAttribute('role');
@@ -1070,8 +968,6 @@
     gResults.innerHTML = '';
     syncListboxRole(gResults);
     setTimeout(function () { gInput.focus(); }, 30);
-    // Solo qui, non ad ogni caricamento pagina: il ~100 KB di kb-index.json
-    // pesa solo su chi apre davvero la ricerca, non su ogni visita al sito.
     caricaPagineIndex();
   }
   function closeSearch() {
@@ -1106,8 +1002,6 @@
     hdrIn.insertBefore(trigger, dnav);
   }
 
-  /* ── Se la pagina ha già una barra di ricerca propria (home),
-        la colleghiamo allo stesso indice invece di aprire il pannello ── */
   var homeInput = document.getElementById('search-input');
   var homeResults = document.getElementById('search-results');
   var homeBtn = document.getElementById('search-btn');
@@ -1167,30 +1061,6 @@
   }
 })();
 
-/* ═══════════════════════════════════════════════════
-   ICONA DI SEZIONE — usa il meccanismo nativo già presente
-   in style.css: la variabile CSS --hero-icon su .page-hero
-   (con posizionamento, dimensione e comportamento responsive
-   già gestiti da .page-hero .w::after in style.css). Qui ci
-   limitiamo a scegliere quale file SVG usare, in base a
-   document.body.dataset.page — la stessa convenzione già in
-   uso per l'evidenziazione del menu attivo.
-   Le icone vivono in img/icone/*.svg (stile confermato da
-   Michele, agosto 2026: riquadro arrotondato attenuato,
-   avorio 6% di opacità, forma dell'icona avorio 50%).
-   GRUPPI E SOTTO-PAGINE: ogni gruppo ha una pagina "principale"
-   (HUBS) — le altre pagine dello stesso gruppo mostrano la
-   STESSA icona ma nella variante dorata "-satellite.svg"
-   (stesso disegno, colore oro invece di avorio, leggermente
-   più piccola/attenuata), per segnalare a colpo d'occhio che
-   non sono il cuore della sezione, senza disegnare icone nuove.
-   Copertura completa (agosto 2026): tutte le pagine pubbliche
-   sono mappate. Pagine future non ancora aggiunte ricadono su
-   img/icone/scudo.svg (nessuna pagina resta "nuda").
-   Le pagine con hero su misura (laboratorio-musicale, vinile,
-   solidarieta) non hanno .page-hero e restano automaticamente
-   escluse.
-═══════════════════════════════════════════════════ */
 (function () {
   var heroBox = document.querySelector('.page-hero');
   if (!heroBox) return; // pagina senza hero, nessun overhead
@@ -1237,11 +1107,6 @@
     bullismo: 'scudo'
   };
 
-  /* Pagina "principale" di ciascun gruppo di icone condivise — le altre
-     pagine dello stesso gruppo (le "sotto-pagine") mostrano la stessa
-     icona ma attenuata (più piccola, più trasparente), per segnalare
-     con discrezione che non sono il cuore della sezione. Nessuna nuova
-     icona da disegnare: solo due variabili CSS in più. */
   var HUBS = {
     notizie: 'notizie',
     'il-convitto': 'il-convitto',
@@ -1256,27 +1121,12 @@
   var icon = MAP[page] || 'scudo'; // fallback: scudo generico
   var hubPage = HUBS[icon];
   var isSatellite = hubPage && page !== hubPage;
-  /* Le sotto-pagine di un gruppo usano la variante dorata dell'icona
-     (stesso disegno, colore diverso) invece della sola icona attenuata:
-     si distinguono a colpo d'occhio dalla pagina principale del gruppo. */
   var iconFile = isSatellite ? (icon + '-satellite') : icon;
   heroBox.style.setProperty('--hero-icon', "url('img/icone/" + iconFile + ".svg')");
   heroBox.style.setProperty('--hero-icon-opacity', isSatellite ? '.7' : '1');
   heroBox.style.setProperty('--hero-icon-scale', isSatellite ? '.82' : '1');
 })();
 
-// ── CLOUDFLARE WEB ANALYTICS ──────────────────────────────────────
-// Statistiche di traffico generale del sito (visite, pagine più
-// viste, provenienza). Gratuito, senza cookie né identificativi
-// personali — non richiede alcun banner né modifica a cookie-policy.html
-// (nessun cookie di profilazione, coerente con quanto già dichiarato).
-// Iniettato qui, in nav.js, invece che in ogni singola pagina: essendo
-// caricato su tutte le pagine del sito tranne admin/totem/area-riservata
-// (correttamente escluse anche dal tracciamento traffico), un solo punto
-// da mantenere copre l'intero sito. Attivo dal 12 agosto 2026 (sito
-// registrato su Web Analytics con account michele.gaggiano@alberghierorieti.it,
-// nessuna modifica al DNS del dominio). Statistiche consultabili nella
-// dashboard Cloudflare → Analytics & Logs → Web Analytics.
 (function () {
   var CF_TOKEN = '598e2b86583643aaaa7e801b7a6dea5d';
   var s = document.createElement('script');

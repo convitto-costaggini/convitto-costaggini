@@ -8,7 +8,7 @@
   <meta property="og:description" content="Il Convitto (collegio) annesso all'IPSSEOA &quot;Costaggini&quot; di Rieti: 129 convittori, dal 1971, in un ambiente educativo sicuro e stimolante."/>
   <meta property="og:type" content="website"/>
   <meta property="og:site_name" content="Convitto Costaggini — Rieti"/>
-  <meta property="og:image" content="https://convitto.alberghierorieti.edu.it/img/IMG_4374-scaled.jpg"/> 
+  <meta property="og:image" content="https://convitto.alberghierorieti.edu.it/img/IMG_4374-scaled.jpg"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="theme-color" content="#2C3E2D" />
   <title>Home | Convitto "Costaggini" — Rieti</title>
@@ -44,7 +44,7 @@
       "addressCountry": "IT"
     },
     "telephone": "0746296862",
-    
+
     "email": "convitto@alberghierorieti.it",
     "foundingDate": "1971",
     "description": "Convitto residenziale annesso all'IPSSEOA Costaggini di Rieti, attivo dal 1971. 129 convittori, studio guidato, laboratorio musicale, sport.",
@@ -603,17 +603,12 @@ caricaNotizieHome();
   wrap.addEventListener('scroll', aggiornaFine, { passive: true });
   aggiornaFine();
 
-  // Il pulsante ora è funzionante: un click scorre davvero la barra in avanti,
-  // non solo decorativo — risolve la confusione di chi ci clicca aspettandosi un'azione.
   if (arrow) {
     arrow.addEventListener('click', function(){
       wrap.scrollBy({ left: 140, behavior: 'smooth' });
     });
   }
 
-  // Animazione di richiamo: solo su mobile, solo se c'è davvero altro
-  // da vedere, una volta sola per sessione — e MAI se l'utente ha
-  // impostato "riduci movimento" nel sistema operativo
   var riduciMovimento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!riduciMovimento && window.innerWidth < 768 && wrap.scrollWidth > wrap.clientWidth && !sessionStorage.getItem('jumpnavHint')) {
     sessionStorage.setItem('jumpnavHint', '1');

@@ -43,7 +43,7 @@
         onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
         📍 Aggiungi il tuo segnaposto
       </button>
-    
+
       <div style="margin-top:1.25rem">
         <a href="comunita.html" style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.7);text-decoration:none;padding:.45rem 1rem;border:1px solid rgba(245,240,232,.25);border-radius:6px">← Torna alla Comunità</a>
       </div></div>
@@ -57,7 +57,7 @@
       <div class="leg-row"><div class="leg-dot" style="background:#B8922A"></div><em>Alumni</em></div>
       <div class="leg-row"><div class="leg-dot" style="background:#4fc3f7"></div>Visitatori</div>
       <div class="leg-row"><div class="leg-dot" style="background:#81c784"></div>Scuole partner</div>
-    
+
       <div style="margin-top:1.25rem">
         <a href="comunita.html"
            style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.65);text-decoration:none;padding:.45rem 1rem;border:1px solid rgba(245,240,232,.2);border-radius:6px;transition:all .2s"
@@ -180,7 +180,6 @@ const SB_PUB  = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
 let allPins = [...DEMO];
 let markers = [];
 
-// Carica i pin approvati da Supabase e li aggiunge ai DEMO
 async function loadApprovedPins() {
   try {
     const resp = await fetch(
@@ -213,10 +212,6 @@ function mkIcon(type){
   return L.divIcon({className:'',html:`<div style="width:14px;height:14px;border-radius:50%;background:${c};border:2.5px solid rgba(255,255,255,.9);box-shadow:0 0 0 2px rgba(0,0,0,.3),0 2px 8px rgba(0,0,0,.5)"></div>`,iconSize:[14,14],iconAnchor:[7,7],popupAnchor:[0,-10]});
 }
 
-// Escape HTML per i campi testo inseriti dai visitatori (nome, città, ruolo...)
-// prima di iniettarli in innerHTML / popup Leaflet: i pin sono inseribili da
-// chiunque (poi approvati da un admin) e senza questo chiunque poteva far
-// eseguire JavaScript a tutti i visitatori della mappa una volta approvato.
 function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
 function renderPins(){
@@ -305,7 +300,6 @@ async function submitPin() {
   loadEl.style.display = 'none';
   if (!found) { errEl.style.display = 'block'; return; }
 
-  // 2. Invia a Supabase con approvato=false — in attesa di moderazione admin
   const pin = {
     nome:  name,
     citta: city,

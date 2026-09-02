@@ -236,13 +236,10 @@ document.addEventListener('click', function(e){
   if(!a) return;
   const href = a.getAttribute('href') || '';
   if(/^https?:\/\//i.test(href)){
-    // SE IL LINK È UN VIDEO (YOUTUBE o VIMEO), USA LA FINESTRA INTERNA MODALE
     if (ytEmbed(href)) {
       e.preventDefault();
       openExt(href, (a.textContent || '').trim());
     } else {
-      // PER TUTTI GLI ALTRI COLLEGAMENTI ESTERNI (INCLUSO IL SITO DELLA SCUOLA)
-      // APRIRE DIRETTAMENTE IN NUOVA SCHEDA PER MASSIMA RESPONSIVITÀ SU SMARTPHONE
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener noreferrer');
     }

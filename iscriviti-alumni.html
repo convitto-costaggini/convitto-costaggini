@@ -22,7 +22,6 @@
 <script src="nav-header.min.js"></script>
 <main id="main">
 
-  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
   <div class="page-hero">
     <div class="w">
       <nav class="breadcrumb" aria-label="Percorso">
@@ -285,9 +284,6 @@ function updatePreview() {
 
   const q = document.getElementById('prev-quote');
   if (ricordo) {
-    // testContent, non innerHTML: e' testo che l'utente sta ancora scrivendo,
-    // digitare qui dentro codice HTML non deve eseguirlo nella sua stessa
-    // anteprima (stesso tipo di bug gia' corretto nel chatbot del sito).
     q.textContent = '"' + ricordo + '"';
     q.style.fontStyle = 'italic';
   } else {

@@ -30,7 +30,7 @@
       <p class="mr-hero-sub">— Voci nel tempo</p>
       <h1>Il Muro<br>dei <em>Ricordi</em></h1>
       <p>Un posto, una stagione, una frase che non si dimentica. Gli ex convittori del Costaggini lasciano qui un frammento del loro tempo qui. Piccolo. Vero.</p>
-    
+
       <div style="margin-top:1.25rem">
         <a href="comunita.html" style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.7);text-decoration:none;padding:.45rem 1rem;border:1px solid rgba(245,240,232,.25);border-radius:6px">← Torna alla Comunità</a>
       </div></div>
@@ -99,8 +99,6 @@
 <script src="supabase.js"></script>
 <script src="nav.min.js"></script>
 <script>
-// Escape HTML per i campi testo inseriti dagli utenti prima di iniettarli in innerHTML
-// (stessa funzione già usata in calendario.html — evita XSS da form pubblici)
 function escapeHtml(t){return String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 const RICORDI_DEFAULT = [];
 
@@ -160,8 +158,6 @@ async function submitRicordo(e) {
     approvato: false
   };
 
-  // La validazione HTML5 "required" accetta anche testo fatto di soli spazi:
-  // qui controlliamo il valore già "trimmato" per evitare ricordi vuoti in coda di approvazione
   if (!r.testo) {
     alert('Scrivi il tuo ricordo prima di inviare.');
     document.getElementById('mr-testo').focus();
@@ -184,8 +180,6 @@ async function submitRicordo(e) {
     return;
   }
 
-  // Se ha indicato dove abita, crea automaticamente anche un pin per la mappa
-  // (salvato su Supabase, in attesa di approvazione — coerente con iscriviti-alumni.html)
   if (r.dove.trim()) {
     try {
       const res = await fetch(

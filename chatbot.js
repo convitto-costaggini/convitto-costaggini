@@ -1,9 +1,3 @@
-// ══════════════════════════════════════════════════════════════
-// ASSISTENTE VIRTUALE CONVITTO COSTAGGINI — v2.0
-// FAQ intelligente locale — nessuna API esterna, GDPR compliant
-// Miglioramenti v2: KB espansa, sinonimi, scoring pesato,
-// normalizzazione avanzata, fallback intelligente
-// ══════════════════════════════════════════════════════════════
 (function(){
 'use strict';
 
@@ -41,9 +35,6 @@ const CSS=`
 #cc-go:disabled{opacity:.35;cursor:default;}
 `;
 
-// ── BASE DI CONOSCENZA ESPANSA ─────────────────────────────────────────────
-// Struttura: k = keyword/frasi chiave, r = risposta HTML, w = peso (opzionale, default 1)
-// Le keyword possono essere stringhe singole o frasi: più è specifica la frase, più peso ha
 const KB=[
 
   // ── SALUTI ──
@@ -71,12 +62,6 @@ const KB=[
       'quante rate','importi delle rate','quota iscrizione'],
    r:'La retta è deliberata ogni anno dal Consiglio d\'Istituto, con un importo fisso uguale per tutte le famiglie (non è prevista una riduzione legata all\'ISEE). La retta intera confermata per l\'A.S. 2026/27 è di <strong>1.600€ annui</strong>, comprensiva di vitto completo, alloggio, studio guidato, attività e trasporto Convitto-scuola.<br><br>💶 <a href="ammissione.html#tariffe">Tariffe complete →</a><br>✉️ Per un preventivo: <a href="contatti.html">Contattaci →</a>'},
 
-  // ── ORARI E GIORNATA ──
-  // "orario"/"orari" volutamente NON tra le keyword: da soli sono troppo
-  // generici e "vincevano" per pareggio anche domande su tutt'altro (es.
-  // gli orari della segreteria), perché questa voce viene prima di
-  // Contatti nell'elenco. "giornata tipo" resta comunque riconoscibile
-  // tramite "giornata", "sveglia" e gli altri orari specifici sotto.
   {k:['sveglia','giornata tipo','cosa si fa','routine','programma',
       'alzarsi','luci spente','luce','mattina','pomeriggio','sera','notte'],
    r:'<strong>La giornata tipo al Convitto:</strong><br>🌅 06:30 Sveglia · 07:00 Colazione (prodotti km zero)<br>🚌 07:40 Trasporto alla scuola<br>📚 08:00–14:00 Lezioni IPSSEOA<br>🍝 14:00 Pranzo<br>🏃 15:00–15:30 Tempo libero<br>📖 15:30–17:15 Studio guidato<br>⚽ 17:15–19:15 Tempo libero / sport / Lab Musicale<br>🍽️ 19:15 Cena<br>🌙 22:30 Luci spente<br><br>📅 <a href="giornata-tipo.html">Leggi la giornata completa →</a>'},
@@ -357,14 +342,6 @@ const NORM_MAP={
 };
 
 function normalize(q){
-  // Nota: l'apostrofo va sostituito con uno SPAZIO, non cancellato: cancellarlo
-  // saldava l'articolo alla parola successiva ("l'indirizzo" -> "lindirizzo"),
-  // rendendo poi impossibile un confronto per parola intera come "indirizzo".
-  // Sostituendolo con uno spazio si ottiene "l indirizzo": il frammento "l"
-  // resta isolato e innocuo, "indirizzo" torna riconoscibile come parola a
-  // se'. Questo allinea anche la normalizzazione della domanda a quella gia'
-  // usata per le keyword (vedi keywordMatches), che passano gia' da
-  // /[^a-z0-9\s]/g, cioe' trattano l'apostrofo come uno spazio.
   let s=q.toLowerCase()
     .normalize('NFD').replace(/[\u0300-\u036f]/g,'') // rimuove accenti
     .replace(/['"''""]/g,' ') // apostrofi/virgolette -> spazio (non cancellare)
@@ -377,25 +354,6 @@ function normalize(q){
   return s.replace(/\s+/g,' ').trim();
 }
 
-// ── MOTORE DI MATCHING ────────────────────────────────────────────────────
-// Scoring: +2 per corrispondenza di frase intera, +1 per keyword singola.
-// Due correzioni rispetto alla v2 originale:
-// 1) le keyword di 4 caratteri o meno contavano SEMPRE zero, anche quando
-//    erano parole importanti ("dove","wifi","dsa","bes","ciao"...): qui
-//    restano escluse per default (troppo generiche, es. "chi","non","via"),
-//    tranne quelle esplicitamente elencate in SHORT_OK perché inequivocabili.
-// 2) il confronto era per sottostringa libera, quindi "vitto" (voce mensa)
-//    scattava leggendo "con-VITTO" o "semicon-VITTO". Molte keyword della
-//    base di conoscenza sono però radici troncate di proposito, per un
-//    piccolo effetto di stemming ("allergi" deve intercettare sia
-//    "allergia" sia "allergie", "intolleran" sia "intolleranza" sia
-//    "intolleranze", ecc.): un confine di parola su ENTRAMBI i lati
-//    avrebbe rotto anche queste. La correzione richiede invece un confine
-//    di parola solo all'INIZIO della keyword (la keyword deve iniziare
-//    dove inizia una parola vera), lasciando libera la fine: questo fa
-//    sì che "allergi" continui a intercettare "allergie", ma "vitto" non
-//    scatti più leggendo "con-VITTO", perché lì non c'è alcun inizio di
-//    parola prima di "vitto".
 const SHORT_OK=new Set(['dove','wifi','dsa','bes','ciao','cena','sede','pdf','pec','menu','menù','tour','quiz','isee','h24','via','gps','rate']);
 function keywordMatches(norm,kn){
   if(!kn) return false;
@@ -430,8 +388,6 @@ function getSugs(firstKey){
   return SUGS_DEFAULT;
 }
 
-// ── FALLBACK INTELLIGENTE ─────────────────────────────────────────────────
-// Prova a identificare parole importanti nella domanda e suggerisce
 function smartFallback(q){
   const norm=normalize(q);
   const hints=[
@@ -448,18 +404,6 @@ function smartFallback(q){
   return 'Non ho trovato una risposta precisa. Puoi scriverci direttamente: <a href="contatti.html">modulo di contatto →</a> — rispondiamo entro 24-48 ore nei giorni scolastici.';
 }
 
-// ── RIPIEGO SULL'INDICE AUTOMATICO (31/8/26) ────────────────────────────
-// Stesso principio già usato dalla ricerca sitewide (vedi nav.js): quando
-// nessuna risposta pre-scritta della base di conoscenza (KB, sopra) copre
-// la domanda, invece del solo messaggio generico "scrivi alla segreteria"
-// si cerca la pagina reale del sito più pertinente in kb-index.json — lo
-// stesso indice generato automaticamente ad ogni commit da
-// scripts/build-kb-index.js — e la si propone come link diretto. Così una
-// domanda su un argomento che esiste sul sito ma non ha ancora una
-// risposta scritta a mano nel chatbot non cade più a vuoto.
-// Caricato pigramente alla prima apertura della chat (chatbot.js stesso è
-// già caricato solo su richiesta, vedi nav.js): nessun peso aggiuntivo per
-// chi non apre mai l'assistente.
 let PAGINE_INDEX_CHAT = null;
 let caricamentoPagineIndexChat = null;
 function caricaPagineIndexChat(){
@@ -473,10 +417,6 @@ function caricaPagineIndexChat(){
 function escHtmlChat(s){
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
-// Trova la pagina più pertinente in kb-index.json per la domanda, o null
-// se l'indice non è ancora arrivato o nessuna pagina è abbastanza
-// rilevante. Riusa normalize() già definita sopra per restare coerenti
-// con la stessa logica di confronto della base di conoscenza principale.
 function cercaPaginaFallback(q){
   if(!PAGINE_INDEX_CHAT||!PAGINE_INDEX_CHAT.length) return null;
   const tokens=normalize(q).split(' ').filter(t=>t.length>2);
@@ -486,11 +426,6 @@ function cercaPaginaFallback(q){
     let score=0;
     for(const t of tokens){
       const esc=t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-      // Parola intera pesa più del semplice prefisso (stesso principio già
-      // applicato alla ricerca sitewide in nav.js): senza questo, un token
-      // come "quali" può vincere per coincidenza dentro "qualificati" su
-      // una pagina non pertinente, battendo la pagina davvero in tema che
-      // ha invece parole intere come "regioni" o "convittori".
       if(new RegExp('\\b'+esc+'\\b').test(pag.testo)) score+=2;
       else if(new RegExp('\\b'+esc).test(pag.testo)) score+=1;
     }
@@ -504,7 +439,6 @@ function build(){
   const s=document.createElement('style');s.textContent=CSS;document.head.appendChild(s);
 
 
-  // Il fab è gestito da nav.js — aggancia solo il click
   const fab = document.getElementById('cc-fab');
   if (fab) fab.onclick = toggle;
 
@@ -552,13 +486,6 @@ function toggle(){
   if(p.classList.contains('open'))setTimeout(()=>document.getElementById('cc-inp').focus(),300);
 }
 
-// Il messaggio dell'utente e' testo puro digitato da lui: va inserito con
-// textContent, mai con innerHTML, altrimenti digitare qualcosa come
-// <img src=x onerror=alert(1)> nella casella eseguiva codice arbitrario
-// nel proprio stesso browser (XSS confermato con test reale in headless
-// Chrome il 31/8/26). Le risposte del bot restano invece HTML vero
-// (contengono link e formattazione) perche' provengono solo dalla Knowledge
-// Base scritta dagli sviluppatori, mai dall'input dell'utente.
 function addMsg(role,html){
   const m=document.getElementById('cc-msgs');
   const d=document.createElement('div');
@@ -604,9 +531,6 @@ window.ccSend=function(){
       buildSugs(res.k);
       return;
     }
-    // Nessuna risposta pre-scritta: prova prima con la pagina reale del
-    // sito più pertinente (kb-index.json, vedi cercaPaginaFallback sopra)
-    // prima del messaggio generico "scrivi alla segreteria".
     const pag=cercaPaginaFallback(q);
     if(pag){
       addMsg('bot', 'Non ho una risposta pronta su questo, ma questa pagina del sito potrebbe aiutarti:<br><br>🔎 <a href="'+pag.url+'">'+escHtmlChat(pag.titolo)+' →</a><br><br>Se non è quello che cercavi, scrivi alla segreteria: <a href="contatti.html">modulo di contatto →</a>');
@@ -619,9 +543,5 @@ window.ccSend=function(){
 };
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);else build();
-// Caricato qui, non al primo invio: la chat è già aperta a questo punto
-// (chatbot.js parte solo su richiesta, vedi nav.js), quindi c'è tempo
-// perché il fetch finisca prima che l'utente scriva la prima domanda,
-// senza bloccare nulla se la domanda arriva comunque prima.
 caricaPagineIndexChat();
 })();

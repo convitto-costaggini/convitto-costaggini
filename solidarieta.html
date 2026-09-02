@@ -166,11 +166,8 @@
 <script>
 const vid = document.getElementById('sl-video');
 if (vid) {
-  // I browser richiedono muted per l'autoplay — dopo 800ms togliamo il mute
   vid.volume = 1;
 
-  // Amplificatore: il volume nativo si ferma al 100%, quindi usiamo la
-  // Web Audio API per alzare il segnale oltre il tetto naturale.
   function boostVolume(el, gainValue) {
     try {
       const Ctx = window.AudioContext || window.webkitAudioContext;
@@ -184,7 +181,6 @@ if (vid) {
         document.addEventListener('click', resume, { once: true });
       }
     } catch (e) {
-      // Se il boost non è supportato/consentito, il video resta comunque al volume normale
     }
   }
 

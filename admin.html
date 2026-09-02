@@ -126,7 +126,7 @@ function admConfirm(opts) {
     <button class="main-tab" id="tab-btn-lab" onclick="switchTab('lab',this)">🎵 Laboratorio Musicale <span id="badge-lab" style="display:none;background:#dc2626;color:#fff;font-size:.5rem;padding:.1rem .4rem;border-radius:10px;margin-left:.3rem;vertical-align:middle"></span></button>
   </div>
 
-  
+
 
   <!-- ══════════════════════════════════
        TAB 1 — NOTIZIE
@@ -436,18 +436,10 @@ window.addEventListener('DOMContentLoaded', function() {
 
 // ═══ NOTIZIE — SUPABASE ═══
 const SB_N = 'https://sawclsysqnjsvbobioqo.supabase.co';
-// Escape HTML per tutti i campi testo inseriti dagli utenti prima di iniettarli in innerHTML
-// (stessa funzione già usata in calendario.html — evita XSS da form pubblici)
 function escapeHtml(t){return String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 const SB_PUB = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
-// Token di sessione dell'amministratore loggato (sostituisce il service_role, che NON deve stare nel client).
-// Le operazioni admin passano per le policy RLS is_admin() come utente authenticated.
 const SB_TOKEN = () => sessionStorage.getItem('sb_token');
 
-// ───────── RECUPERO PASSWORD ADMIN ─────────
-// Il link di reset riporta su QUESTA pagina (non sull'area famiglie):
-// usiamo l'URL di admin.html come redirect, che deve essere fra i
-// "Redirect URLs" autorizzati in Supabase (Authentication → URL Configuration).
 const ADMIN_URL = window.location.origin + window.location.pathname;
 
 function mostraRecuperoAdmin() {
@@ -509,7 +501,6 @@ async function adminSetNewPwd() {
   }
 }
 
-// All'apertura: se l'URL contiene un token di recovery, mostra i campi "nuova password"
 (function rilevaRecovery() {
   const h = window.location.hash || '';
   if (h.indexOf('type=recovery') > -1 && h.indexOf('access_token=') > -1) {
@@ -529,7 +520,6 @@ async function adminSetNewPwd() {
 })();
 // ───────── fine recupero password ─────────
 
-// Segreto condiviso per le chiamate POST al GAS (deve combaciare con la Script Property MAIL_TOKEN sul GAS)
 const GAS_TOKEN = 'WrkaSLLP1LMZmSYLX0B9hJEs2J2L6UAp';
 
 let editNotiziaId = null;
@@ -548,7 +538,6 @@ async function loadNotizie() {
       headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
     });
     if (!resp.ok) {
-      // La colonna "ordine" potrebbe non esistere ancora: ripiego sul vecchio ordinamento
       resp = await fetch(SB_N + '/rest/v1/notizie?order=created_at.desc', {
         headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_PUB }
       });
@@ -585,7 +574,6 @@ async function spostaNotizia(id, direzione) {
   const arr = notizieCache.slice();
   const tmp = arr[idx]; arr[idx] = arr[target]; arr[target] = tmp;
 
-  // Riassegna un ordine esplicito e sequenziale (10, 20, 30…) secondo la nuova disposizione
   await Promise.all(arr.map((n, i) =>
     fetch(SB_N + '/rest/v1/notizie?id=eq.' + n.id, {
       method: 'PATCH',
@@ -608,7 +596,7 @@ async function salvaNotizia() {
   if (!titolo) { alert('Inserire il titolo.'); return; }
 
   const payload = { titolo, testo, categoria: cat, data_pub: data, immagine: img, link, link_testo: linkT };
-  
+
   let url = SB_N + '/rest/v1/notizie';
   let method = 'POST';
   if (editNotiziaId) { url += '?id=eq.' + editNotiziaId; method = 'PATCH'; }
@@ -937,7 +925,7 @@ async function salvaMenu() {
 
 // ═══ FAMIGLIE ═══
 let famStatoCorrente = null;
-let famDatiCorrenti = [];       // ultima lista scaricata da Supabase per lo stato corrente (non filtrata/ordinata)
+let famDatiCorrenti = [];
 let famOrdinaCampo = 'created_at';
 let famOrdinaDir = 'desc';
 let famFiltroTesto = '';
@@ -970,10 +958,6 @@ async function famLoad(stato) {
   }
 }
 
-// Ordina la lista cliccando un'intestazione di colonna (Studente, Email,
-// Relazione, Richiesta, Stato): un secondo click sulla stessa colonna
-// inverte la direzione, invece di ricaricare i dati da Supabase — tutto
-// avviene lato client sull'elenco già scaricato in famDatiCorrenti.
 function famOrdina(campo) {
   if (famOrdinaCampo === campo) {
     famOrdinaDir = famOrdinaDir === 'asc' ? 'desc' : 'asc';
@@ -1070,7 +1054,6 @@ async function famAzione(id, nuovoStato) {
   });
   if (!patch.ok) { alert('Errore aggiornamento stato: ' + patch.status); return; }
 
-  // 2. Se approvata, crea account Auth e invia email di invito
   if (nuovoStato === 'approvata') {
     // Recupera email e nome studente dalla richiesta
     const richResp = await fetch(SB_N + '/rest/v1/richieste_accesso?id=eq.' + id, {
@@ -1082,7 +1065,6 @@ async function famAzione(id, nuovoStato) {
     const nomeStud   = rich[0].nome_studente || '';
 
 
-    // Delega al GAS: crea account Supabase Auth + invia email con credenziali
     const GAS_URL = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
 
     let gasOk = false;
@@ -1606,7 +1588,6 @@ async function labLoad() {
     + '</div>';
   }).join('');
 
-  // Un solo listener delegato invece di onclick inline con stringhe concatenate
   lista.querySelectorAll('.btn-lab-elimina').forEach(btn => {
     btn.addEventListener('click', () => labElimina(btn.dataset.id, btn.dataset.nome));
   });

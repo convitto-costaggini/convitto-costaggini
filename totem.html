@@ -40,7 +40,6 @@
 // =========================================================================
 var APP_URL = "https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec";
 var TOTEM_TOKEN = "da955fbbaa1590b838811571777f3505ec618dab98620248087d569d6a24f010";
-// =========================================================================
 
 var scanner = null;
 var modalitaCorrente = "";
@@ -93,9 +92,6 @@ function onScan(testoQR) {
   var diagEl = document.getElementById('diag');
   diagEl.innerText = "";
 
-  // ⚠️ DIAGNOSTICA VISIBILE: contatore dei secondi trascorsi mostrato a schermo,
-  // per vedere ad occhio se l'esecuzione avanza e cosa succede esattamente
-  // al momento del timeout — senza bisogno di cronometro o console sviluppatore.
   var secondiTrascorsi = 0;
   msgEl.innerHTML = "⏳ Verifica in corso... (" + secondiTrascorsi + "s)";
   var contatoreId = setInterval(function () {
@@ -157,9 +153,6 @@ function onScan(testoQR) {
         ripristina();
       });
   } catch (eSync) {
-    // Cattura qualunque errore SINCRONO che impedirebbe a fetch() di partire
-    // (es. eccezione nella costruzione della richiesta) — prima andava perso
-    // in silenzio e la pagina restava bloccata su "Verifica in corso" per sempre.
     fermaTutto();
     msgEl.innerHTML = "<span style='color:#b91c1c;'>⚠️ Errore imprevisto</span>";
     diagEl.innerText = String(eSync && eSync.message ? eSync.message : eSync);

@@ -1,18 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════════
-   FAQ — SORGENTE UNICA  ·  Convitto "Costaggini" — Rieti
-   ───────────────────────────────────────────────────────────────────
-   Un solo file con TUTTE le domande/risposte del sito.
-   Le pagine non scrivono più FAQ a mano: inseriscono un contenitore e
-   includono questo file. Esempi d'uso:
-     <div data-faq="*" data-faq-search></div>      → tutte le voci + ricerca (hub)
-     <div data-faq="iscrizione"></div>             → tutte le voci con quel tag
-     <div data-faq-ids="costo,giornata,uscite"></div> → voci scelte, in quest'ordine
-   Tag disponibili: iscrizione · vita · genitori · sicurezza · mensa ·
-                    salute · semiconvitto · attivita · emotivo
-   Rendering: <details>/<summary> nativi (accessibili, funzionano anche
-   senza JS di toggle). window.FAQ_DATA è esposto per usi futuri
-   (es. alimentare la base di conoscenza dell'assistente).
-   ═══════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
   /* ── DATI ────────────────────────────────────────────────────────── */

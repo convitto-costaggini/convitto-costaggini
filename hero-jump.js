@@ -1,31 +1,3 @@
-/* hero-jump.js — comportamento mobile per la barra di navigazione interna
-   "salta alla sezione" (.hero-jump-bar), usata da organizzazione.html,
-   contatti.html, il-convitto.html e le altre pagine con sommario interno.
-
-   Su desktop la barra resta semplicemente "sticky" sotto l'header, invariata.
-
-   Su mobile risolve due problemi:
-   1) Quando la barra è "agganciata" in alto, gli elenchi con più voci
-      diventano una colonna alta e occupano molto spazio verticale utile.
-      Qui, appena la barra si stacca dalla sezione soprastante, il menu
-      viene spostato in un pannello fisso sul bordo destro, richiamabile
-      con una piccola linguetta, così non occupa più spazio in verticale.
-   2) Cliccando una voce, il punto di atterraggio veniva calcolato con un
-      margine fisso troppo piccolo per l'altezza reale della barra su
-      mobile, "mozzando" la prima riga della sezione. Qui l'offset di
-      scroll viene calcolato al volo in base all'altezza reale di header
-      e barra al momento del click.
-
-   In più, su tutti i viewport, evidenzia la voce corrispondente alla
-   sezione attualmente a schermo mentre si scorre la pagina — lo stesso
-   effetto già presente in ptof-guida.html, esteso qui a tutti i menu
-   "salta alla sezione" del sito.
-
-   Nota tecnica: la linguetta e il pannello vengono spostati come figli
-   diretti di <body> (invece di restare dentro <main>) perché <main> ha
-   una transform (usata per le animazioni di comparsa dei contenuti) e
-   qualunque transform su un antenato ridefinisce il "containing block"
-   degli elementi position:fixed, spostandoli fuori posto. */
 (function () {
   function setHeaderVar() {
     var header = document.querySelector('header');
@@ -41,8 +13,6 @@
     var navParent = nav.parentElement;
     var navNextSibling = nav.nextSibling;
 
-    // Sentinella posizionata subito prima della barra: quando esce dalla
-    // parte alta del viewport, la barra sticky si è "agganciata".
     var sentinel = document.createElement('div');
     sentinel.className = 'hjb-sentinel';
     sentinel.setAttribute('aria-hidden', 'true');
@@ -103,31 +73,6 @@
       }
     });
 
-    // Rileva l'aggancio/sgancio della barra osservando direttamente la
-    // posizione della sentinella a ogni scroll, invece che con un singolo
-    // IntersectionObserver a soglia 0. Motivo: quando la barra si
-    // aggancia, il suo <nav> viene spostato fuori dal flusso (per non
-    // occupare spazio verticale), e l'altezza della barra si riduce di
-    // colpo; il cambio di altezza appena sopra il punto che l'utente sta
-    // guardando può far scattare la "scroll anchoring" del browser (la
-    // correzione automatica dello scroll per evitare che il contenuto
-    // "salti" a video), che sposta lo scroll quel tanto che basta a far
-    // riattraversare alla sentinella la soglia nella direzione opposta:
-    // la barra si sgancia di nuovo, l'altezza torna quella di prima, lo
-    // scroll viene ricorretto di nuovo, e così via — un ciclo di
-    // aggancio/sgancio continuo percepito come uno sfarfallio che
-    // blocca lo scorrimento della pagina. Per evitarlo si usano due
-    // protezioni indipendenti, per non dipendere da un solo dispositivo/
-    // browser testato: (1) una banda di isteresi — per agganciarsi la
-    // sentinella deve superare la soglia di un margine, e per sganciarsi
-    // deve tornare indietro di un margine analogo dalla parte opposta,
-    // così piccole oscillazioni intorno al punto di aggancio non fanno
-    // scattare continuamente il cambio di stato; (2) un tempo minimo tra
-    // un cambio di stato e il successivo, così anche se su un dispositivo
-    // reale (inerzia dello scroll touch, fisiche di scroll diverse da
-    // browser a browser) l'oscillazione superasse comunque il margine,
-    // non può ripetersi più di una volta ogni pochi decimi di secondo —
-    // eliminando lo sfarfallio percepito anche in quel caso.
     var COLLAPSE_MARGIN = 24;
     var COLLAPSE_MIN_INTERVAL = 220;
     var lastCollapseChange = 0;
@@ -185,17 +130,6 @@
       });
     });
 
-    // Se la pagina viene caricata già con un'ancora corrispondente a una
-    // delle voci di questa barra (es. arrivando da un risultato di
-    // ricerca), collassala subito su mobile. Lo scroll automatico nativo
-    // del browser, se già avvenuto (o in corso), ha usato il layout
-    // "disteso" (bar alta) di partenza: una volta collassata la barra il
-    // contenuto sopra il bersaglio si accorcia e lo scroll nativo resta
-    // disallineato, per cui va ricalcolato e riapplicato qui. behavior
-    // 'auto' erediterebbe lo scroll-behavior:smooth del sito, animando
-    // in competizione con lo scroll nativo del browser: si forza quindi
-    // 'instant', e si ripete la correzione anche dopo un breve ritardo
-    // per vincere anche su uno scroll nativo ancora in animazione.
     if (mq.matches && location.hash) {
       try {
         var preselected = nav.querySelector('a[href="' + CSS.escape(location.hash) + '"]');
@@ -218,17 +152,6 @@
 
     initScrollSpy();
 
-    // Evidenzia, tra le voci del menu, quella della sezione attualmente
-    // "in lettura" mentre si scorre — stesso effetto già presente in
-    // ptof-guida.html. Lì le sezioni sono corte e di altezza simile, per
-    // cui basta una soglia di visibilità (IntersectionObserver al 30%).
-    // Qui invece le sezioni delle varie pagine hanno altezze molto
-    // diverse — alcune superano abbondantemente l'altezza del viewport
-    // (es. lo staff in il-convitto.html) e non raggiungerebbero mai il
-    // 30% di area visibile. Si usa quindi la tecnica più robusta e
-    // indipendente dall'altezza: la voce attiva è quella dell'ultima
-    // sezione il cui bordo superiore ha superato una riga di lettura
-    // poco sotto header/barra.
     function initScrollSpy() {
       var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
       var sections = links
@@ -264,22 +187,6 @@
   }
 
   function boot() {
-    // Disattiva la "scroll anchoring" del browser (la correzione
-    // automatica della posizione di scroll quando qualcosa sopra il
-    // punto visibile cambia altezza). È la causa più probabile dello
-    // sfarfallio della barra su alcuni dispositivi reali: appena la
-    // barra si aggancia/sgancia e la sua altezza cambia di colpo, il
-    // browser sposta lo scroll per compensare, il che può far
-    // riattraversare alla sentinella la soglia nella direzione opposta
-    // e far ripartire subito il cambio di stato. Il fenomeno dipende
-    // dal tempo a disposizione del browser tra un fotogramma e l'altro
-    // per applicare la correzione: più coerente quindi con la
-    // segnalazione per cui a velocità di scroll "normale" il problema
-    // si presenta ma scorrendo velocemente no (poco tempo per
-    // innescarsi). Qui si toglie la causa alla radice, invece di
-    // limitarsi a contenerne gli effetti con l'isteresi e il tempo
-    // minimo già in atto più sotto, che restano comunque come
-    // ulteriore sicurezza indipendente.
     try { document.documentElement.style.overflowAnchor = 'none'; } catch (err) { /* ignorato */ }
 
     setHeaderVar();

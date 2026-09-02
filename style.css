@@ -416,7 +416,6 @@ main { animation: pageIn .45s ease both; }
   background-size: 100% 1px;
 }
 
-/* CONTATTACI: testo bianco al click (:active) — gestito nel blocco media query */
 
 /* Bottone Torna in cima — stile già iniettato via JS */
 
@@ -578,7 +577,6 @@ main { animation: pageIn .45s ease both; }
 /* Cursore personalizzato su elementi interattivi */
 a:hover, button:hover { cursor: pointer; }
 
-/* Smooth reveal per card al scroll — già gestito da .rv in shared.js */
 .rv { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
 .rv.in { opacity: 1; transform: translateY(0); }
 .rv.d1 { transition-delay: .1s; }
@@ -649,10 +647,6 @@ a.nc:hover, a.article-card:hover, a.alumni-card:hover,
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RICERCA — elenco risultati (condiviso dalla barra in home e dal
-   pannello di ricerca sitewide iniettato da nav.js su ogni pagina)
-   ═══════════════════════════════════════════════════════════════ */
 .sr-header {
   padding: .7rem 1.25rem;
   background: var(--av2);
@@ -691,10 +685,6 @@ a.nc:hover, a.article-card:hover, a.alumni-card:hover,
 }
 .sr-footer a { color: var(--bosco2); font-weight: 600; text-decoration: none; }
 
-/* ═══════════════════════════════════════════════════════════════
-   RICERCA SITEWIDE — pannello a comparsa, raggiungibile da ogni
-   pagina tramite l'icona 🔍 in header (vedi nav.js)
-   ═══════════════════════════════════════════════════════════════ */
 #gsearch-modal {
   position: fixed; inset: 0; z-index: 9500;
   display: none; align-items: flex-start; justify-content: center;
@@ -742,16 +732,6 @@ a.nc:hover, a.article-card:hover, a.alumni-card:hover,
   padding: .05rem .35rem; font-family: var(--fu); font-size: .65rem;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ACCESSIBILITÀ — Riduci movimento
-   Rete di sicurezza valida su tutto il sito: se il sistema operativo
-   dell'utente richiede "riduci movimento" (impostazione di
-   accessibilità per chi soffre di disturbi vestibolari, emicranie
-   da trigger visivi, ecc.), tutte le animazioni CSS — presenti e
-   future, su qualunque pagina — vengono azzerate o rese istantanee.
-   Non serve intervenire pagina per pagina: questa regola ha priorità
-   perché è l'ultima dichiarata e usa selettori universali.
-   ═══════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

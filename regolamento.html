@@ -64,7 +64,7 @@
       <p class="lbl">Orientarsi nel documento</p>
       <h2>Indice degli <em>articoli</em></h2>
       <p>Clicca su un articolo per aprire una scheda di lettura immediata — senza aprire il PDF, senza perdere il filo.</p>
-      
+
       <div class="art-card-grid">
         <button class="art-card rv" onclick="openArt(0)" aria-label="Apri articolo: Il Convitto e la Scuola">
           <span class="art-card-num">Premessa</span>
@@ -213,10 +213,6 @@
 
 <script src="nav.min.js"></script>
 <script>
-  // Dati dei 24 articoli — generati automaticamente dal markup originale,
-  // così la modale viene costruita una sola volta invece di tenere in pagina
-  // 24 blocchi HTML completi fin dal caricamento (peso inutile sul parsing
-  // iniziale della pagina).
   const ART = [
     { num: `Premessa`, title: `Il Convitto e la Scuola`, body: `
 <p>Il Convitto annesso all'IPSSEOA "R. A. Costaggini" di Rieti è organizzato sia come Scuola che come Convitto maschile e femminile. Scuola e Convitto cooperano entrambi alla crescita didattica ed educativa degli alunni, in costante collegamento con le famiglie.</p><p>Il Convitto è un servizio a disposizione degli studenti per rendere più agevole il conseguimento dello sviluppo intellettuale e fisico dei giovani accolti. Rappresenta un mezzo per favorire il pieno sviluppo della personalità dell'educando, attraverso l'interazione tra il momento scolastico e quello educativo.</p><p>Gli obiettivi del Progetto Educativo comprendono:• Realizzazione della convivenza e integrazione tra i convittori• Uguaglianza delle opportunità educative• Promozione della conoscenza delle regole civili e dei propri diritti e doveri• Sostegno nella progressiva conquista dell'autonomia• Valorizzazione dell'identità e dei talenti di ciascuno</p><blockquote class="art-modal-quote">"Il Convitto è un laboratorio di vita democratica, di autonomia, di crescita e di consapevolezza."</blockquote>

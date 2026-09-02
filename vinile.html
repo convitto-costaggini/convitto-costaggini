@@ -40,7 +40,7 @@
       <p style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);margin-bottom:.75rem">— Laboratorio Musicale · Dal 2006</p>
       <h1>Il Vinile<br>del <em>Convitto</em></h1>
       <p>Vent'anni di musica. Decine di ragazzi che non sapevano suonare e hanno imparato. Qualche concerto memorabile. Tutto qui — da ascoltare.</p>
-    
+
       <div style="margin-top:1.25rem">
         <a href="comunita.html" style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.7);text-decoration:none;padding:.45rem 1rem;border:1px solid rgba(245,240,232,.25);border-radius:6px">← Torna alla Comunità</a>
       </div></div>
@@ -142,9 +142,6 @@
 </main>
 <script src="nav.min.js"></script>
 <script>
-// Playlist — i file audio vengono aggiunti dal Responsabile Tecnico
-// Formato: { title, artist, year, duration, src }
-// src: percorso relativo al file audio (es. "audio/concerto-2023.mp3")
 const PLAYLIST = [
   { title:"Canone di Pachelbel", artist:"Laboratorio Chitarra · Chit.: convittore Vladimir", year:2012, duration:"2:56", src:"video/Canone-Pachelbel.mp3" },
   { title:"live: Jingle bell rock - Bobby Helms",       artist:"Coro del Convitto · Natale 2024", year:2024, duration:"1:56", src:"video/jingle-bell-rock.mp3" },
@@ -261,8 +258,6 @@ function seekTo(e) {
 
 buildPlaylist();
 selectTrack(0);
-// Autoplay — i browser richiedono un'interazione utente, quindi proviamo
-// silenziosamente e accettiamo se bloccato
 setTimeout(() => {
   if (audio) {
     audio.play().catch(() => {

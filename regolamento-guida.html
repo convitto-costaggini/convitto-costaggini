@@ -29,7 +29,6 @@
 <script src="nav-header.min.js"></script>
 <main id="main">
 
-  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
   <div class="page-hero">
     <div class="w">
       <nav class="breadcrumb" aria-label="Percorso">
@@ -612,9 +611,6 @@
 <script src="nav.min.js"></script>
 <script src="hero-jump.js"></script>
 <script>
-// Se si arriva da un link diretto a un articolo (es. #art-ritardo), apri
-// automaticamente quel riquadro e portalo in vista, così non resta nascosto
-// dietro la barra di navigazione né confuso con l'articolo successivo.
 (function openLinkedArticle() {
   const id = window.location.hash.slice(1);
   if (!id) return;
@@ -626,12 +622,6 @@
   });
 })();
 
-// Il pulsante "Inizia la lettura" punta alla sezione 1 ma non fa parte
-// della barra "salta alla sezione" (che gestisce da sé l'atterraggio
-// corretto): calcola quindi l'offset allo stesso modo, tenendo conto
-// dell'altezza reale di header e barra al momento del click, con una
-// correzione di ripescaggio se nel frattempo (su mobile) la barra si
-// aggancia e si comprime durante lo scroll.
 (function () {
   const startLink = document.getElementById('rg-start-reading');
   const target = document.getElementById('sezione-1');

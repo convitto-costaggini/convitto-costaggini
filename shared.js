@@ -471,7 +471,6 @@
   });
 
 
-  /* ── Fix colore testo "Contattaci" al click — il CSS :active viene ignorato da alcuni browser ── */
   (function(){
     function fixNC() {
       document.querySelectorAll('#dnav a.nc, #dnav .nc').forEach(el => {
@@ -547,8 +546,7 @@
 
       // Aggiunge freccia a ogni sezione tranne l'ultima
       sections.forEach((sec, i) => {
-        if (i >= sections.length - 1) return; // non aggiunge all'ultima
-        // La sezione deve avere position relative per posizionare la freccia
+        if (i >= sections.length - 1) return;
         const pos = getComputedStyle(sec).position;
         if (pos === 'static') sec.style.position = 'relative';
 

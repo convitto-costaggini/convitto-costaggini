@@ -23,7 +23,6 @@
 <script src="nav-header.min.js"></script>
 <main id="main" aria-label="Domanda di ammissione al Convitto">
 
-  <!-- HERO — struttura standard .page-hero, condivisa con il resto del sito -->
   <div class="page-hero">
     <div class="w">
       <nav class="breadcrumb" aria-label="Percorso">
@@ -374,12 +373,6 @@ const RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
 // Pre-imposta data odierna
 document.getElementById('da-data').value = new Date().toISOString().split('T')[0];
 
-// ── UPLOAD DOCUMENTI (sezione 4) ─────────────────────────────────────
-// Ogni documento è opzionale ai fini dell'invio del modulo: chi non
-// carica nulla e non spunta "lo consegno a parte" semplicemente non
-// allega quel documento, esattamente come prima. Un file caricato con
-// successo viene convertito in base64 nel browser e allegato al payload
-// inviato a Codice.gs, che lo aggiungerà come allegato reale alla mail.
 const DA_DOC_LABELS = {
   sanitaria: 'Tessera assistenza sanitaria',
   vaccini: 'Certificato vaccinazioni',
@@ -389,7 +382,7 @@ const DA_DOC_LABELS = {
   documento: 'Documento identità genitori'
 };
 const DA_MAX_FILE_MB = 5;
-const DA_MAX_TOTALE_MB = 18; // margine di sicurezza sotto il limite email (~25MB, con overhead base64)
+const DA_MAX_TOTALE_MB = 18;
 const daDocElaborati = {}; // { chiave: { nomeFile, mimeType, contenuto (base64 puro) } }
 
 function daFormattaMB(bytes) {
@@ -424,12 +417,6 @@ function daFileABase64(file) {
   });
 }
 
-// Tenta di convertire una foto HEIC/HEIF in JPEG usando canvas. Funziona
-// solo nei browser capaci di decodificare HEIC nativamente in un <img>
-// (in pratica Safari, che è anche il browser predefinito su iPhone — cioè
-// esattamente il dispositivo che produce questi file). Su Chrome/Firefox
-// la decodifica fallisce e avvisiamo l'utente con istruzioni chiare,
-// nessun fallimento silenzioso.
 function daConvertiHeicSePossibile(file) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -501,16 +488,6 @@ document.querySelectorAll('.da-doc-file').forEach(input => {
   input.addEventListener('change', () => daGestisciFile(input.dataset.doc, input));
 });
 
-// ── TRACCIAMENTO ANONIMO ABBANDONO MODULO ────────────────────────────
-// Nessun dato personale: solo eventi aggregati (pagina vista / sezione
-// raggiunta / invio riuscito) su una tabella Supabase dedicata
-// (ammissione_funnel), pensata solo per capire dove le famiglie
-// abbandonano il modulo e intervenire lì. L'identificativo di sessione
-// è un UUID casuale generato ad ogni caricamento pagina, tenuto solo in
-// memoria JS (mai in cookie/localStorage, sparisce chiudendo la scheda):
-// serve solo a raggruppare gli eventi della stessa visita, non identifica
-// nessuno. Fire-and-forget: se una richiesta fallisce non blocca né
-// rallenta in alcun modo la compilazione o l'invio del modulo.
 const DA_SB_N   = 'https://sawclsysqnjsvbobioqo.supabase.co';
 const DA_SB_PUB = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
 const daSessione = crypto.randomUUID();
@@ -533,9 +510,6 @@ function daTraccia(evento, sezione) {
 
 daTraccia('pagina_vista');
 
-// Una sezione è "raggiunta" quando entra per la prima volta nel campo
-// visivo (soglia bassa: basta iniziare a leggerla). Ogni sezione viene
-// contata una sola volta per sessione.
 const daSezioniViste = new Set();
 const daSectionObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -549,7 +523,6 @@ const daSectionObs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15 });
 document.querySelectorAll('.da-section').forEach(el => daSectionObs.observe(el));
-// ──────────────────────────────────────────────────────────────────
 
 // Aggiorna barra di avanzamento
 function updateProgress() {
@@ -565,11 +538,6 @@ function updateProgress() {
 document.getElementById('da-form').addEventListener('input', updateProgress);
 document.getElementById('da-form').addEventListener('change', updateProgress);
 
-// ── BOZZA AUTOMATICA (localStorage) ──────────────────────────────────
-// Un form di 6 sezioni perde tutto se il browser si chiude a metà
-// compilazione. Salviamo una bozza locale ad ogni modifica e la
-// ripristiniamo al ricarico della pagina; viene cancellata solo dopo
-// un invio riuscito o su richiesta esplicita dell'utente.
 const DA_BOZZA_KEY = 'da-bozza-domanda-ammissione';
 
 function daRaccogliBozza() {
@@ -584,7 +552,7 @@ function daRaccogliBozza() {
 
 function daSalvaBozza() {
   try { localStorage.setItem(DA_BOZZA_KEY, JSON.stringify({ dati: daRaccogliBozza(), quando: Date.now() })); }
-  catch(e) { /* storage pieno o non disponibile: la bozza semplicemente non si salva, nessun blocco */ }
+  catch(e) {}
 }
 
 function daCancellaBozza() {
@@ -621,12 +589,10 @@ document.getElementById('da-bozza-cancella').addEventListener('click', function(
   }
 });
 daCaricaBozza();
-// ──────────────────────────────────────────────────────────────────
 
 // Ultimo payload costruito, riusato dal pulsante "Riprova l'invio"
 let daUltimoPayload = null;
 
-// Submit — invia i dati al backend (GAS) e verifica davvero l'esito
 document.getElementById('da-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -648,8 +614,6 @@ document.getElementById('da-form').addEventListener('submit', function(e) {
     return;
   }
 
-  // Blocco se il totale degli allegati supera il limite email (avviso già
-  // visibile in sezione 4, qui impediamo comunque l'invio se non risolto)
   if (!daAggiornaAvvisoTotale()) {
     document.getElementById('da-docs').scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
@@ -755,7 +719,7 @@ function daInviaDomanda(payload) {
     grecaptcha.ready(() => {
       grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'domanda_ammissione' })
         .then(resolve)
-        .catch(() => resolve('')); // se reCAPTCHA non risponde, si procede comunque: honeypot lato server resta attivo
+        .catch(() => resolve(''));
     });
   }).then(recaptchaToken => {
     payload.recaptchaToken = recaptchaToken;

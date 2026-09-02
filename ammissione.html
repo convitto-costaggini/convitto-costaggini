@@ -178,7 +178,6 @@
       <p class="lbl">Tariffe A.S. 2026/27</p>
       <h2>Rette e <em>contributi</em></h2>
       <p class="lead">Le tariffe sono deliberate annualmente dal Consiglio d'Istituto. Le rette vengono aggiornate ad ogni anno scolastico. Per il preventivo aggiornato contattare la segreteria.</p>
-      <!-- Rette confermate A.S. 2026/27 (Avviso n. 418 del 1° luglio 2026) -->
       <div style="background:linear-gradient(135deg,var(--bosco),#1a3a1b);border-radius:12px;padding:2.5rem;border:1px solid rgba(184,146,42,.2);margin-top:1.5rem">
 
         <!-- Griglia include + rate -->
@@ -433,10 +432,6 @@ function toggleAcc(id) {
   if (btn) btn.setAttribute('aria-expanded', !open);
 }
 
-// Se si arriva da un link diretto a un modulo (es. #acc-allergie-wrap),
-// aprilo automaticamente e portalo in vista: altrimenti, essendo chiuso
-// di default, resta nascosto sotto l'header e sembra atterrare sul
-// modulo successivo dell'elenco.
 (function openLinkedModulo() {
   const hashId = window.location.hash.slice(1);
   const match = hashId.match(/^acc-(.+)-wrap$/);

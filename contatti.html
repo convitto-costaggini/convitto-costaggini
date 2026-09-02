@@ -296,7 +296,6 @@
 
 <script>
 (function(){
-  // Pre-seleziona l'oggetto del modulo se la pagina è raggiunta con ?oggetto=... (es. dal link "Segnala un problema" nel footer)
   const params = new URLSearchParams(location.search);
   const oggetto = params.get('oggetto');
   if (oggetto) {
@@ -329,7 +328,6 @@ function calcolaItinerario() {
   distEl.textContent = '…';
   timeEl.textContent = '';
 
-  // Usa Google Maps Distance Matrix API via URL publico (no key) — fallback su Maps link
   const fromEnc = encodeURIComponent(from + ', Italia');
   const destEnc = encodeURIComponent(dest);
 
@@ -337,8 +335,6 @@ function calcolaItinerario() {
   const mapsUrl = `https://www.google.com/maps/dir/${fromEnc}/${destEnc}`;
   linkEl.href = mapsUrl;
 
-  // Stima approssimativa distanza lineare tramite coordinate (no API key necessaria)
-  // Usiamo Nominatim (OpenStreetMap) per geocodifica gratuita
   fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(from + ', Italia')}&limit=1`, {
     headers: { 'Accept-Language': 'it' }
   })
@@ -357,7 +353,6 @@ function calcolaItinerario() {
     const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
     const distLinea = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
-    // Fattore correzione stradale (~1.3x) e velocità media (80 km/h)
     const distStrada = Math.round(distLinea * 1.32);
     const mins = Math.round((distStrada / 80) * 60);
     const ore = Math.floor(mins / 60);
@@ -442,7 +437,6 @@ if (form) {
         });
       });
     } catch (err) {
-      // Se reCAPTCHA non risponde, si procede comunque: il controllo honeypot lato server resta attivo
       recaptchaToken = '';
     }
 

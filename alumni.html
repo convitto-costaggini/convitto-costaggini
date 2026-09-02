@@ -34,7 +34,7 @@ function alumniNoContact(e) {
     + '<div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">'
     + '<a href="iscriviti-alumni.html" style="display:inline-block;background:linear-gradient(135deg,#B8922A,#D4AA4A);color:#1a2e1b;padding:.6rem 1.5rem;border-radius:40px;text-decoration:none;font-family:sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase">Aggiungi la tua scheda</a>'
     + '<button id="alumni-nc-close" style="background:none;border:1px solid rgba(245,240,232,.2);color:rgba(245,240,232,.6);padding:.6rem 1.5rem;border-radius:40px;cursor:pointer;font-size:.68rem">Chiudi</button>'
-    + '</div>'; 
+    + '</div>';
   ov.appendChild(box);
   document.body.appendChild(ov);
   document.body.style.overflow = 'hidden';
@@ -106,7 +106,6 @@ function alumniNoContact(e) {
       <h2 style="text-align:center">Le storie degli <em>Alumni</em></h2>
       <p style="color:var(--txt2);max-width:560px;margin:.5rem auto 1.25rem;font-size:.88rem;line-height:1.75;text-align:center">Dal Costaggini al mondo. Cuochi, maître, hotel manager, imprenditori, musicisti.</p>
 
-      <!-- Cifre reali — popolato via JS da alumni_pubblici, nessuna query aggiuntiva -->
       <div id="alumni-cifre-reali"></div>
 
       <!-- Nota pulsante Scrivimi -->
@@ -188,14 +187,10 @@ function alumniNoContact(e) {
 </main>
 <script src="nav.min.js"></script>
 <script>
-// Escape HTML per i campi testo inseriti dagli utenti prima di iniettarli in innerHTML
-// (stessa funzione già usata in calendario.html — evita XSS da form pubblici)
 function escapeHtml(t){return String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
 function escapeHtml(t){return String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-// Copia l'email negli appunti come riscontro visibile, in aggiunta al mailto:
-// (che parte in parallelo ma non dà alcun segnale se non c'è un client email predefinito)
 
 function alumniCopyEmail(e, email) {
   try {
@@ -211,7 +206,7 @@ function alumniCopyEmail(e, email) {
       try { document.execCommand('copy'); } catch(err) {}
       document.body.removeChild(ta);
     }
-  } catch(err) { /* clipboard non disponibile, l'overlay mostra comunque l'indirizzo da copiare a mano */ }
+  } catch(err) {}
   alumniShowEmailOverlay(email);
 }
 
@@ -235,10 +230,7 @@ function alumniShowEmailOverlay(email) {
   document.getElementById('alumni-email-ov-close').addEventListener('click', chiudi);
   ov.addEventListener('click', function(ev) { if (ev.target === ov) chiudi(); });
 }
-  
-  // Converte un link di condivisione Google Drive nel suo URL incorporabile.
-// Se il link non è nel formato atteso, viene restituito così com'è: l'iframe
-// semplicemente non caricherà nulla e l'utente vede comunque il link diretto.
+
 function driveEmbedUrl(url) {
   const m = String(url || '').match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
   return m ? 'https://drive.google.com/file/d/' + m[1] + '/preview' : url;
@@ -261,11 +253,6 @@ function chiudiVideoAlumni() {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') chiudiVideoAlumni(); });
 
-// Pannello "cifre reali" — costruito sugli stessi dati alumni_pubblici già
-// caricati per le schede, nessuna query aggiuntiva. Si mostra solo quando
-// c'è abbastanza materiale da dire qualcosa di vero: zero iscritti = pannello
-// nascosto, pochi iscritti = solo il numero totale, dati sufficienti (5+) =
-// anche i settori più citati come pillole ordinate per frequenza.
 function renderCifreReali(rows) {
   const box = document.getElementById('alumni-cifre-reali');
   if (!box) return;
@@ -296,9 +283,6 @@ function renderCifreReali(rows) {
     </div>`;
   }
 
-  // Le pillole dei settori compaiono solo con un campione minimo — sotto
-  // quella soglia mostrarle darebbe un'impressione di precisione che i
-  // numeri non hanno ancora.
   let sectorsHtml = '';
   if (conLavoro >= 5 && settoriOrdinati.length > 0) {
     const top = settoriOrdinati.slice(0, 6);
@@ -320,8 +304,6 @@ function renderCifreReali(rows) {
 (async function() {
   const grid = document.getElementById('alumni-community-grid');
   if (!grid) return;
-  // Se supabase.js non è caricato (es. pagina aperta da sola in anteprima),
-  // mostra lo stato vuoto in silenzio: niente errore in console.
   if (typeof sb === 'undefined') {
     const emptyMsg = document.getElementById('alumni-empty-msg');
     if (emptyMsg) emptyMsg.style.display = 'block';
@@ -337,7 +319,6 @@ function renderCifreReali(rows) {
     }
     approved.forEach((a, idx) => {
       const s = a || {};
-      // Solo URL http/https vengono resi cliccabili — evita schemi javascript: nei link social
       const isHttp = (u) => typeof u === 'string' && /^https?:\/\//i.test(u.trim());
       const fbUrl  = a.social_fb  ? (a.social_fb.startsWith('http')  ? a.social_fb  : 'https://facebook.com/'+a.social_fb)               : '';
       const igUrl  = a.social_ig  ? (a.social_ig.startsWith('http')  ? a.social_ig  : 'https://instagram.com/'+a.social_ig.replace('@','')) : '';

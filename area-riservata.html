@@ -184,7 +184,6 @@
   let inRecovery = /[#&]type=recovery/.test(window.location.hash);
   window.addEventListener('load', async () => {
     if (inRecovery) {
-      // Flusso recupero password: NON avviare la dashboard, mostra la schermata nuova password
       mostraSchermata('nuova-password');
     } else {
       const { data: { session } } = await sb.auth.getSession();
@@ -249,7 +248,6 @@
       btn.disabled = false; btn.textContent = 'Salva nuova password';
       return;
     }
-    // Pulisce l'hash, chiude la sessione di recupero e torna al login
     history.replaceState(null, '', window.location.pathname);
     await sb.auth.signOut();
     inRecovery = false;   // il recupero è finito: ora il login normale deve funzionare
@@ -309,8 +307,6 @@
     return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
   }
   function vuoto(ico, txt) { return `<div class="vuoto"><div class="icona">${ico}</div><p>${txt}</p></div>`; }
-  // Filtra una query sullo studente: per CODICE quando disponibile (stessa chiave della RLS),
-  // con ripiego sul nome solo per eventuali righe storiche prive di codice.
   function filtraStudente(q) {
     return codiceStudente
       ? q.eq('codice_studente', codiceStudente)
@@ -334,7 +330,6 @@
     ).join('') + '</div>';
   }
   async function caricaSemafori() {
-    // Inizio anno scolastico corrente (1° settembre): scarico TUTTO l'anno una volta sola
     const oggi = new Date();
     const annoScol = (oggi.getMonth() >= 8) ? oggi.getFullYear() : oggi.getFullYear() - 1;
     const inizioAnno = `${annoScol}-09-01`;
@@ -406,7 +401,6 @@
       document.getElementById('anno-g').textContent = totAnno['🟡'];
       document.getElementById('anno-r').textContent = totAnno['🔴'];
     }
-    // Elenco cronologico: solo gli ultimi 30 giorni (coerente con lo spaccato per ambito)
     const cls = {'🟢':'verde','🟡':'giallo','🔴':'rosso'};
     const recenti = data.filter(r => String(r.data).substring(0,10) >= soglia30);
     if (recenti.length) {
@@ -428,7 +422,6 @@ async function caricaNote() {
   // Soglia 30 giorni, solo per le note GENERICHE
   const d30 = new Date(); d30.setDate(d30.getDate() - 30);
   const soglia30 = d30.toISOString().split('T')[0];
-  // Una sola query: tutte le note dell'anno scolastico (filtro fine lato client)
   const { data } = await filtraStudente(
     sb.from('famiglie_note').select('*')
   )

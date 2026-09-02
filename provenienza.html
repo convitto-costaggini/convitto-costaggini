@@ -86,10 +86,6 @@
 </main>
 <script src="nav.min.js"></script>
 <script>
-// ══════════════════════════════════════════════════════════════
-// DATI PROVENIENZA — aggiornare ogni anno
-// Per ogni provincia: nome, sigla, lat, lng, numero convittori
-// ══════════════════════════════════════════════════════════════
 const ANNO = '2025/2026';
 const DATI = [
   // Lazio
@@ -128,7 +124,7 @@ document.getElementById('pv-stats').innerHTML = stats.map(s =>
 ).join('');
 document.getElementById('pv-stats').classList.add('in');
 document.querySelectorAll('#pv-stats .rv').forEach(el => el.classList.add('in'));
-  
+
 // ── LISTA ─────────────────────────────────────────────────────
 const sorted = [...DATI].sort((a, b) => b.n - a.n);
 const max = sorted[0].n;

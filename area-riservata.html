@@ -32,6 +32,15 @@
   </div>
   <button class="btn-logout" id="btn-logout" style="display:none;" onclick="eseguiLogout()">Esci</button>
 </header>
+<!-- ══ AVVISO SOSPENSIONE ACCESSO ══ -->
+<div id="avviso-sospensione" style="position:fixed;inset:0;z-index:9999;background:var(--panna);display:flex;align-items:center;justify-content:center;padding:40px 20px;text-align:center;">
+  <div style="max-width:480px;width:100%;background:#fff;border-radius:var(--radius);padding:2.5rem 2rem;box-shadow:0 4px 24px rgba(44,62,45,.12);">
+    <div style="width:56px;height:56px;background:var(--bosco);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🏫</div>
+    <h1 style="font-family:var(--fd);font-size:1.5rem;color:var(--bosco);margin-bottom:1rem;">Area Riservata Famiglie</h1>
+    <p style="font-size:.95rem;color:var(--txt2);line-height:1.6;">Area riservata temporaneamente non disponibile per adeguamento delle procedure di accesso.<br>Per informazioni rivolgersi ai canali comunicativi del Convitto.</p>
+    <a href="index.html" style="display:inline-block;margin-top:1.5rem;padding:12px 24px;background:var(--bosco);color:#fff;border-radius:8px;text-decoration:none;font-family:var(--fu);font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;">Torna al sito</a>
+  </div>
+</div>
 <!-- ══ SCHERMATA AUTH ══ -->
 <div id="schermata-auth">
   <div class="auth-wrap">

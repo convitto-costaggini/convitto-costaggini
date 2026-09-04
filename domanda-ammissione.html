@@ -171,7 +171,7 @@
               </div>
             </div>
             <p class="da-nota">
-              <strong>Nota:</strong> La quota di iscrizione (€ 450,00) è destinata alle spese generali per l'ingresso in convitto e <strong>non può essere restituita</strong> qualora si chieda il nulla osta prima dell'inizio delle lezioni. In caso di ritiro o allontanamento successivo, nulla sarà dovuto oltre quanto già versato. Il mancato versamento alle scadenze comporta l'allontanamento immediato del convittore, <strong>senza ulteriore avviso</strong>.
+              <strong>Nota:</strong> La quota di iscrizione (€ 450,00) è destinata alle spese generali per l'ingresso in convitto e <strong>non può essere restituita</strong> qualora si chieda il nulla osta prima dall'inizio delle lezioni. In caso di ritiro o allontanamento successivo, nulla sarà dovuto oltre quanto già versato. Il mancato versamento alle scadenze comporta l'allontanamento immediato del convittore, <strong>senza ulteriore avviso</strong>.
             </p>
           </div>
         </div>
@@ -251,6 +251,17 @@
                 <div class="da-doc-alt">
                   <input type="checkbox" id="alt_documento" name="all_documento"/>
                   <label for="alt_documento">Lo consegno/invio a parte, non ora</label>
+                </div>
+              </div>
+              <div class="da-doc">
+                <div class="da-doc-hdr"><strong>7.</strong> Fotocopia documento di identità del/la convittore/convittrice</div>
+                <div class="da-doc-row">
+                  <input type="file" class="da-doc-file" id="doc_convittore" data-doc="convittore" accept="image/*,.pdf,.heic,.heif"/>
+                </div>
+                <div class="da-doc-status" id="doc_convittore_status"></div>
+                <div class="da-doc-alt">
+                  <input type="checkbox" id="alt_convittore" name="all_convittore"/>
+                  <label for="alt_convittore">Lo consegno/invio a parte, non ora</label>
                 </div>
               </div>
             </div>
@@ -379,7 +390,8 @@ const DA_DOC_LABELS = {
   ricevuta: 'Ricevuta quota iscrizione €450',
   famiglia: 'Stato di famiglia',
   medica: 'Dichiarazione medica',
-  documento: 'Documento identità genitori'
+  documento: 'Documento identità genitori',
+  convittore: 'Documento identità convittore/convittrice'
 };
 const DA_MAX_FILE_MB = 5;
 const DA_MAX_TOTALE_MB = 18;
@@ -621,8 +633,8 @@ document.getElementById('da-form').addEventListener('submit', function(e) {
 
   // Costruisci corpo e invia al backend email
   const d = Object.fromEntries(new FormData(this));
-  const docKeys = ['sanitaria','vaccini','ricevuta','famiglia','medica','documento'];
-  const docLabels = { sanitaria:'Tessera sanitaria', vaccini:'Vaccinazioni', ricevuta:'Ricevuta €450', famiglia:'Stato di famiglia', medica:'Dichiarazione medica', documento:'Doc. identità genitori' };
+  const docKeys = ['sanitaria','vaccini','ricevuta','famiglia','medica','documento','convittore'];
+  const docLabels = { sanitaria:'Tessera sanitaria', vaccini:'Vaccinazioni', ricevuta:'Ricevuta €450', famiglia:'Stato di famiglia', medica:'Dichiarazione medica', documento:'Doc. identità genitori', convittore:'Doc. identità convittore/convittrice' };
   const allegati = docKeys.map((k, i) => {
     const n = i + 1;
     if (daDocElaborati[k]) return `${n}. ${docLabels[k]} — ALLEGATO A QUESTA EMAIL`;
@@ -671,16 +683,40 @@ DATA COMPILAZIONE: ${d.data_firma || ''}
 Dichiarazioni accettate dal genitore: Regolamento e piano di versamento; condizioni di ammissione e videosorveglianza; trattamento dati (GDPR).
 NB: la domanda richiede firma autografa per la validità legale; contattare il genitore per completare la procedura.`;
 
+  // Dati strutturati (in aggiunta al testo "corpo" sopra, pensato per essere leggibile via email):
+  // usati per poter, in futuro, scrivere una riga di dettaglio nel gestionale (GAS) senza
+  // dover ri-analizzare il testo libero del messaggio. Non toglie né sostituisce nulla
+  // del comportamento attuale (invio email), è solo un'aggiunta.
+  const datiStrutturati = {
+    genitore_nome: d.genitore_nome || '',
+    genitore_ruolo: d.genitore_ruolo || '',
+    cell_padre: d.cell_padre || '',
+    cell_madre: d.cell_madre || '',
+    email_padre: d.email_padre || '',
+    email_madre: d.email_madre || '',
+    cell_altro: d.cell_altro || '',
+    alunno_nome: d.alunno_nome || '',
+    alunno_tipo: d.tipo || '',
+    alunno_nascita: d.alunno_nascita || '',
+    cell_ragazzo: d.cell_ragazzo || '',
+    residenza_citta: d.residenza_citta || '',
+    residenza_via: d.residenza_via || '',
+    residenza_cap: d.residenza_cap || '',
+    note: d.note || '',
+    data_firma: d.data_firma || ''
+  };
+
   const payload = {
     nome: d.alunno_nome || d.genitore_nome || '',
     email: d.email_padre || d.email_madre || '',
     telefono: d.cell_padre || '',
-    oggetto: 'Domanda di ammissione — ' + (d.alunno_nome || ''),
+    oggetto: 'domanda di ammissione al convitto a.s. 2026/2027 alunno ' + (d.alunno_nome || ''),
     tipo: 'domanda_ammissione',
     messaggio: corpo,
     privacy: true,
     botField: d['bot-field'] || '',
-    documenti: documentiDaAllegare
+    documenti: documentiDaAllegare,
+    dati: datiStrutturati
   };
 
   daUltimoPayload = payload;

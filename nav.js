@@ -566,6 +566,12 @@
   try { (function(){
     const noMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Anima solo al primo contatto con la home in questa sessione di navigazione:
+    // se l'utente ripassa dalla home più tardi nella stessa sessione, i numeri restano statici.
+    let giaVisti = false;
+    try { giaVisti = sessionStorage.getItem('cifreHomeViste') === '1'; } catch (e) {}
+    try { sessionStorage.setItem('cifreHomeViste', '1'); } catch (e) {}
+
     function finalText(el) {
       const target = parseInt(el.dataset.count);
       const suffix = el.dataset.suffix || '';
@@ -575,7 +581,7 @@
     }
 
     function animateCounter(el) {
-      if (noMotion) { el.textContent = finalText(el); return; }
+      if (noMotion || giaVisti) { el.textContent = finalText(el); return; }
       const target = parseInt(el.dataset.count);
       const suffix = el.dataset.suffix || '';
       const prefix = el.dataset.prefix || '';

@@ -345,7 +345,7 @@
             <span class="darr" id="acc-uscite-arrow">›</span>
           </button>
           <div id="acc-uscite" style="display:none;padding:1.5rem;border-top:1px solid var(--av3);background:var(--av)">
-            <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1.25rem;line-height:1.7">Autorizzazione per la libera uscita autonoma durante la fascia pomeridiana (17:30–19:15). Obbligatoria per i convittori minorenni. I maggiorenni firmano autonomamente.</p>
+            <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1.25rem;line-height:1.7">Autorizzazione per la libera uscita autonoma durante la fascia pomeridiana (17:30–19:15), dal lunedì al giovedì (il venerdì i convittori rientrano a casa all'uscita di scuola). Obbligatoria per i convittori minorenni. I maggiorenni firmano autonomamente.</p>
             <div style="display:grid;gap:.85rem">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
                 <div><label style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);display:block;margin-bottom:.3rem">Cognome e nome del convittore *</label><input type="text" id="usc-nome" placeholder="es. Rossi Luca" style="width:100%;padding:.6rem .85rem;border:1.5px solid #d1d5db;border-radius:6px;font-size:.88rem;box-sizing:border-box"/></div>
@@ -356,7 +356,7 @@
                 <div><label style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);display:block;margin-bottom:.3rem">Nome e cognome genitore *</label><input type="text" id="usc-genitore" placeholder="es. Mario Rossi" style="width:100%;padding:.6rem .85rem;border:1.5px solid #d1d5db;border-radius:6px;font-size:.88rem;box-sizing:border-box"/></div>
               </div>
               <div style="background:var(--av2);border:1px solid var(--av3);border-radius:8px;padding:1rem">
-                <p style="font-family:var(--fu);font-size:.72rem;color:var(--bosco2);margin-bottom:.5rem;font-weight:700">Il/la sottoscritto/a, in qualità di genitore/tutore legale, autorizza il proprio figlio/a ad uscire autonomamente dal Convitto durante la fascia di libera uscita pomeridiana (17:30–19:15), impegnandosi a:</p>
+                <p style="font-family:var(--fu);font-size:.72rem;color:var(--bosco2);margin-bottom:.5rem;font-weight:700">Il/la sottoscritto/a, in qualità di genitore/tutore legale, autorizza il proprio figlio/a ad uscire autonomamente dal Convitto durante la fascia di libera uscita pomeridiana (17:30–19:15), dal lunedì al giovedì, impegnandosi a:</p>
                 <ul style="font-family:var(--fu);font-size:.72rem;color:var(--txt2);line-height:1.75;padding-left:1.25rem">
                   <li>garantire che il convittore rientri entro l'orario stabilito</li>
                   <li>assumersi la piena responsabilità civile per il periodo di assenza dalla struttura</li>
@@ -390,7 +390,7 @@
                 <div><label style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);display:block;margin-bottom:.3rem">Classe</label><select id="cert-classe" style="width:100%;padding:.6rem .85rem;border:1.5px solid #d1d5db;border-radius:6px;font-size:.88rem;box-sizing:border-box"><option value="">— seleziona —</option><option>1ª</option><option>2ª</option><option>3ª</option><option>4ª</option><option>5ª</option></select></div>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
-                <div><label style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);display:block;margin-bottom:.3rem">Anno scolastico *</label><input type="text" id="cert-as" placeholder="es. 2025/2026" value="2025/2026" style="width:100%;padding:.6rem .85rem;border:1.5px solid #d1d5db;border-radius:6px;font-size:.88rem;box-sizing:border-box"/></div>
+                <div><label style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);display:block;margin-bottom:.3rem">Anno scolastico *</label><input type="text" id="cert-as" placeholder="es. 2026/2027" value="2026/2027" style="width:100%;padding:.6rem .85rem;border:1.5px solid #d1d5db;border-radius:6px;font-size:.88rem;box-sizing:border-box"/></div>
                 <div><label style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);display:block;margin-bottom:.3rem">Numero di copie richieste</label><select id="cert-copie" style="width:100%;padding:.6rem .85rem;border:1.5px solid #d1d5db;border-radius:6px;font-size:.88rem;box-sizing:border-box"><option>1</option><option>2</option><option>3</option></select></div>
               </div>
               <div><label style="font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);display:block;margin-bottom:.3rem">Finalità del certificato</label><select id="cert-uso" style="width:100%;padding:.6rem .85rem;border:1.5px solid #d1d5db;border-radius:6px;font-size:.88rem;box-sizing:border-box"><option value="">— seleziona —</option><option>Uso scolastico</option><option>Uso INPS / sussidi</option><option>Uso assicurativo</option><option>Uso sportivo</option><option>Uso privato</option><option>Altro</option></select></div>
@@ -517,7 +517,7 @@ function stampaUscite() {
   <style>body{font-family:Arial,sans-serif;font-size:12pt;max-width:700px;margin:40px auto;color:#1a1a1a;line-height:1.6}h1{font-size:16pt;margin-bottom:4px}.ente{font-size:10pt;color:#555;margin-bottom:24px}table{width:100%;border-collapse:collapse;margin:16px 0}td{padding:8px 12px;border:1px solid #ccc}td:first-child{font-weight:700;width:40%;background:#f5f5f5}.firma{margin-top:48px;display:flex;justify-content:space-between}.firma div{text-align:center}.firma .line{border-bottom:1px solid #333;width:200px;margin:32px auto 4px}@media print{body{margin:20px}}</style></head><body>
   <div class="ente">IPSSEOA "R. A. Costaggini" — Rieti · Convitto annesso · C.F. 80008130579</div>
   <h1>Autorizzazione uscite autonome</h1>
-  <p style="font-size:10pt;color:#555">A.S. 2026/2027 — Fascia di libera uscita pomeridiana (17:30–19:15) — art. 25 del Regolamento di Convitto</p>
+  <p style="font-size:10pt;color:#555">A.S. 2026/2027 — Fascia di libera uscita pomeridiana (17:30–19:15), dal lunedì al giovedì — art. 25 del Regolamento di Convitto</p>
   <table>
     <tr><td>Cognome e nome del convittore</td><td>${nome}</td></tr>
     <tr><td>Data di nascita</td><td>${nascita}</td></tr>
@@ -527,14 +527,14 @@ function stampaUscite() {
     <tr><td>Recapito cellulare</td><td>${tel}</td></tr>
   </table>
   <p>Il/la sottoscritto/a <strong>${genitore}</strong>, in qualità di genitore/tutore legale del/la convittore/rice <strong>${nome}</strong>,</p>
-  <p><strong>AUTORIZZA</strong> il/la proprio/a figlio/a ad uscire autonomamente dal Convitto durante la fascia di libera uscita pomeridiana (17:30–19:15) nei giorni scolastici, impegnandosi a:</p>
+  <p><strong>AUTORIZZA</strong> il/la proprio/a figlio/a ad uscire autonomamente dal Convitto durante la fascia di libera uscita pomeridiana (17:30–19:15), dal lunedì al giovedì (il venerdì i convittori rientrano a casa all'uscita di scuola), impegnandosi a:</p>
   <ul>
     <li>garantire che il/la convittore/rice rientri entro l'orario stabilito delle ore 19:15;</li>
     <li>assumersi la piena responsabilità civile per il periodo di assenza dalla struttura;</li>
     <li>comunicare tempestivamente al personale educativo qualsiasi variazione del recapito di reperibilità;</li>
     <li>informare il Convitto in anticipo di eventuali impedimenti alla libera uscita.</li>
   </ul>
-  <p>La presente autorizzazione è valida per l'intero anno scolastico 2025/2026 e può essere revocata in qualsiasi momento con comunicazione scritta alla Direzione del Convitto.</p>
+  <p>La presente autorizzazione è valida per l'intero anno scolastico 2026/2027 e può essere revocata in qualsiasi momento con comunicazione scritta alla Direzione del Convitto.</p>
   <div class="firma">
     <div><div class="line"></div><p style="font-size:10pt">Luogo e data<br>${oggi}</p></div>
     <div><div class="line"></div><p style="font-size:10pt">Firma del genitore/tutore</p></div>
@@ -548,7 +548,7 @@ function stampaUscite() {
 function stampaCert() {
   const nome = document.getElementById('cert-nome').value || '________________________';
   const classe = document.getElementById('cert-classe').value || '______';
-  const as = document.getElementById('cert-as').value || '2025/2026';
+  const as = document.getElementById('cert-as').value || '2026/2027';
   const copie = document.getElementById('cert-copie').value || '1';
   const uso = document.getElementById('cert-uso').value || '________________________';
   const richiedente = document.getElementById('cert-richiedente').value || '________________________';

@@ -626,16 +626,16 @@ caricaNotizieHome();
      a partire da lunedì 14 settembre 2026. Il JS sotto smette comunque di mostrarlo da solo
      dopo il 13/9/2026 23:59, come doppia sicurezza. Mostrato ad ogni caricamento della
      pagina (nessun limite "una volta al giorno"): resta visibile finché non scade. -->
-<div id="acc-modale-overlay" role="dialog" aria-modal="true" aria-labelledby="acc-modale-titolo" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:1.25rem;background:rgba(12,20,13,.72);backdrop-filter:blur(2px)">
-  <div style="position:relative;width:100%;max-width:460px;background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden;animation:accModaleIn .25s ease both">
+<div id="acc-modale-overlay" role="dialog" aria-modal="true" aria-labelledby="acc-modale-titolo" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:1.25rem;background:rgba(12,20,13,.72);backdrop-filter:blur(2px);overflow-y:auto">
+  <div style="position:relative;width:100%;max-width:460px;max-height:calc(100vh - 2.5rem);background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow-y:auto;overflow-x:hidden;animation:accModaleIn .25s ease both">
     <div style="background:linear-gradient(135deg,var(--bosco),#1a3a1b);padding:1.5rem 1.75rem 1.25rem;position:relative">
-      <button id="acc-modale-chiudi" aria-label="Chiudi avviso" style="position:absolute;top:.75rem;right:.75rem;background:rgba(255,255,255,.12);border:none;width:32px;height:32px;border-radius:50%;color:#fff;font-size:1.1rem;line-height:1;cursor:pointer">✕</button>
+      <button id="acc-modale-chiudi" aria-label="Chiudi avviso" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,255,255,.22);border:1.5px solid rgba(255,255,255,.55);width:40px;height:40px;border-radius:50%;color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25)">✕</button>
       <span style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2)">📋 Avviso Accoglienza</span>
       <h2 id="acc-modale-titolo" style="font-family:var(--fd);font-weight:300;font-size:1.55rem;color:#fff;margin:.4rem 0 0">Accoglienza convittori<br/><em style="color:var(--oro3);font-style:italic">A.S. 2026/2027</em></h2>
     </div>
     <div style="padding:1.5rem 1.75rem">
       <p style="font-family:var(--fu);font-size:.88rem;color:#374151;line-height:1.7;margin:0 0 1rem">
-        L'accoglienza dei convittori e delle convittrice si terrà <strong>venerdì 11 settembre 2026</strong>, presso il Convitto (Via Salaria per Roma), nei seguenti orari:
+        L'accoglienza dei convittori e delle convittrici si terrà <strong>venerdì 11 settembre 2026</strong>, presso il Convitto (<a href="https://convitto.alberghierorieti.edu.it/contatti.html#dove-siamo" style="color:var(--bosco2)">Via Salaria per Roma</a>), nei seguenti orari:
       </p>
       <div style="background:var(--av);border:1px solid rgba(44,62,45,.15);border-radius:8px;padding:.9rem 1.1rem;margin-bottom:1.1rem;font-family:var(--fu);font-size:.85rem;color:var(--bosco);font-weight:700;line-height:1.9">
         🕘 9.00 – 12.30<br/>
@@ -655,15 +655,34 @@ caricaNotizieHome();
 <script>
 (function(){
   // Non mostrare più dopo il 13/9/2026 23:59 (scompare da lunedì 14) — doppia sicurezza
-  // oltre alla rimozione manuale del blocco. Nessun limite "una volta al giorno":
-  // il modale compare ad ogni caricamento della pagina finché non scade.
+  // oltre alla rimozione manuale del blocco.
   var SCADENZA = new Date(2026, 8, 13, 23, 59, 59); // mese 8 = settembre (0-indicizzato)
   if (new Date() > SCADENZA) return;
 
+  // Una sola volta per navigazione (sessionStorage: dura finché resta aperta la
+  // scheda/il browser). Se l'utente, nella stessa visita, va sulla modulistica e
+  // torna alla home non lo rivede; al collegamento successivo (nuova scheda o
+  // nuova sessione del browser) torna a comparire.
+  var CHIAVE_SESSIONE = 'acc-modale-mostrato-sessione-2026';
+  try {
+    if (sessionStorage.getItem(CHIAVE_SESSIONE) === '1') return;
+  } catch(e) {}
+
   var overlay = document.getElementById('acc-modale-overlay');
   if (!overlay) return;
+  // Sicurezza aggiuntiva: sposta sempre l'overlay come figlio diretto di <body>,
+  // qualunque sia la sua posizione nel markup, così "position:fixed" si aggancia
+  // sempre alla finestra del browser e non a un antenato (es. <main>, che ha
+  // un'animazione di ingresso pagina che altrimenti lo trasformerebbe in un
+  // contenitore di posizionamento).
+  if (overlay.parentElement !== document.body) {
+    document.body.appendChild(overlay);
+  }
 
-  function mostra(){ overlay.style.display = 'flex'; }
+  function mostra(){
+    overlay.style.display = 'flex';
+    try { sessionStorage.setItem(CHIAVE_SESSIONE, '1'); } catch(e) {}
+  }
   function chiudi(){
     overlay.style.display = 'none';
   }

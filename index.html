@@ -498,7 +498,7 @@
         <div class="faq-pill rv d2" style="background:rgba(245,240,232,.06);border:1px solid rgba(184,146,42,.2);border-radius:8px;padding:1.1rem 1.4rem">
           <p style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.4rem">Uscite</p>
           <p style="font-family:var(--fd);font-size:1.05rem;font-style:italic;color:var(--av);margin-bottom:.4rem">Gli studenti possono uscire durante la settimana?</p>
-          <p style="font-size:.82rem;color:rgba(245,240,232,.6);line-height:1.7">Sì, dal lunedì al giovedì (17:30–19:15) previa autorizzazione scritta dei genitori; il venerdì i ragazzi rientrano a casa all'uscita di scuola, quindi non è prevista. I maggiorenni hanno maggiore autonomia.</p>
+          <p style="font-size:.82rem;color:rgba(245,240,232,.6);line-height:1.7">Sì. È prevista una libera uscita quotidiana (17:30–19:15) previa autorizzazione scritta dei genitori. I maggiorenni hanno maggiore autonomia.</p>
         </div>
         <div class="faq-pill rv d3" style="background:rgba(245,240,232,.06);border:1px solid rgba(184,146,42,.2);border-radius:8px;padding:1.1rem 1.4rem">
           <p style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin-bottom:.4rem">Iscrizione</p>
@@ -619,4 +619,67 @@ caricaNotizieHome();
   }
 })();
 </script>
+
+<!-- ══════════ BLOCCO TEMPORANEO — AVVISO ACCOGLIENZA CONVITTORI A.S. 2026/2027 ══════════
+     Da rimuovere manualmente (tutto il blocco, fino a END-MODALE-ACCOGLIENZA incluso)
+     dopo venerdì 11 settembre 2026. Il JS sotto smette comunque di mostrarlo da solo
+     dopo l'11/9/2026 23:59, come doppia sicurezza. -->
+<div id="acc-modale-overlay" role="dialog" aria-modal="true" aria-labelledby="acc-modale-titolo" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:1.25rem;background:rgba(12,20,13,.72);backdrop-filter:blur(2px)">
+  <div style="position:relative;width:100%;max-width:460px;background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden;animation:accModaleIn .25s ease both">
+    <div style="background:linear-gradient(135deg,var(--bosco),#1a3a1b);padding:1.5rem 1.75rem 1.25rem;position:relative">
+      <button id="acc-modale-chiudi" aria-label="Chiudi avviso" style="position:absolute;top:.75rem;right:.75rem;background:rgba(255,255,255,.12);border:none;width:32px;height:32px;border-radius:50%;color:#fff;font-size:1.1rem;line-height:1;cursor:pointer">✕</button>
+      <span style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2)">📋 Avviso Accoglienza</span>
+      <h2 id="acc-modale-titolo" style="font-family:var(--fd);font-weight:300;font-size:1.55rem;color:#fff;margin:.4rem 0 0">Accoglienza convittori<br/><em style="color:var(--oro3);font-style:italic">A.S. 2026/2027</em></h2>
+    </div>
+    <div style="padding:1.5rem 1.75rem">
+      <p style="font-family:var(--fu);font-size:.88rem;color:#374151;line-height:1.7;margin:0 0 1rem">
+        L'accoglienza dei convittori e delle convittrice si terrà <strong>venerdì 11 settembre 2026</strong>, presso il Convitto (Via Salaria per Roma), nei seguenti orari:
+      </p>
+      <div style="background:var(--av);border:1px solid rgba(44,62,45,.15);border-radius:8px;padding:.9rem 1.1rem;margin-bottom:1.1rem;font-family:var(--fu);font-size:.85rem;color:var(--bosco);font-weight:700;line-height:1.9">
+        🕘 9.00 – 12.30<br/>
+        🕒 15.00 – 18.30
+      </div>
+      <p style="font-family:var(--fu);font-size:.8rem;color:#6b7280;line-height:1.65;margin:0 0 1.25rem">
+        Si ricorda di portare con sé la modulistica compilata, da consegnare al Personale Educativo. Per informazioni: referente Montorselli Gianfranco — <a href="mailto:convitto@alberghierorieti.it" style="color:var(--bosco2)">convitto@alberghierorieti.it</a>
+      </p>
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+        <a href="accoglienza.html" class="btn-gold" style="text-decoration:none">Vai alla modulistica →</a>
+        <button type="button" id="acc-modale-chiudi-2" style="font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;background:none;border:1.5px solid #d1d5db;border-radius:8px;padding:.75rem 1.25rem;cursor:pointer">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>@keyframes accModaleIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}</style>
+<script>
+(function(){
+  // Non mostrare più dopo l'11/9/2026 23:59 (fine giornata di accoglienza) — doppia sicurezza
+  // oltre alla rimozione manuale del blocco.
+  var SCADENZA = new Date(2026, 8, 11, 23, 59, 59); // mese 8 = settembre (0-indicizzato)
+  if (new Date() > SCADENZA) return;
+
+  var CHIAVE = 'acc-modale-accoglienza-2026-visto-il';
+  var oggi = new Date().toDateString();
+  try {
+    if (localStorage.getItem(CHIAVE) === oggi) return; // già mostrato oggi
+  } catch(e) {}
+
+  var overlay = document.getElementById('acc-modale-overlay');
+  if (!overlay) return;
+
+  function mostra(){ overlay.style.display = 'flex'; }
+  function chiudi(){
+    overlay.style.display = 'none';
+    try { localStorage.setItem(CHIAVE, oggi); } catch(e) {}
+  }
+
+  document.getElementById('acc-modale-chiudi').addEventListener('click', chiudi);
+  document.getElementById('acc-modale-chiudi-2').addEventListener('click', chiudi);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) chiudi(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && overlay.style.display === 'flex') chiudi(); });
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mostra);
+  else mostra();
+})();
+</script>
+<!-- ══════════ END-MODALE-ACCOGLIENZA ══════════ -->
 </html>

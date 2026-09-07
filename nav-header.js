@@ -84,6 +84,7 @@
           Regolamenti &amp; Documenti <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
         </button>
         <ul class="dd-menu" role="menu">
+          <li><a href="accoglienza.html" data-page="accoglienza">📋 Accoglienza &amp; Modulistica</a></li>
           <li><a href="regolamento.html" data-page="regolamento">📜 Regolamento</a></li>
           <li><a href="ptof-guida.html" data-page="ptof-guida">PTOF</a></li>
           <li><a href="trasparenza.html" data-page="trasparenza">Trasparenza</a></li>
@@ -164,6 +165,7 @@
     <li class="drw-group">
       <button class="drw-acc" aria-expanded="false">Regolamenti &amp; Documenti <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
       <ul class="drw-sub">
+        <li><a href="accoglienza.html">📋 Accoglienza &amp; Modulistica</a></li>
         <li><a href="regolamento.html">Regolamento di Convitto</a></li>
         <li><a href="ptof-guida.html">Il PTOF spiegato</a></li>
         <li><a href="trasparenza.html">Amministrazione Trasparente</a></li>

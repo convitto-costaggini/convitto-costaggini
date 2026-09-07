@@ -566,12 +566,6 @@
   try { (function(){
     const noMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Anima solo al primo contatto con la home in questa sessione di navigazione:
-    // se l'utente ripassa dalla home più tardi nella stessa sessione, i numeri restano statici.
-    let giaVisti = false;
-    try { giaVisti = sessionStorage.getItem('cifreHomeViste') === '1'; } catch (e) {}
-    try { sessionStorage.setItem('cifreHomeViste', '1'); } catch (e) {}
-
     function finalText(el) {
       const target = parseInt(el.dataset.count);
       const suffix = el.dataset.suffix || '';
@@ -581,7 +575,7 @@
     }
 
     function animateCounter(el) {
-      if (noMotion || giaVisti) { el.textContent = finalText(el); return; }
+      if (noMotion) { el.textContent = finalText(el); return; }
       const target = parseInt(el.dataset.count);
       const suffix = el.dataset.suffix || '';
       const prefix = el.dataset.prefix || '';
@@ -795,7 +789,13 @@
     { titolo: 'Cruciverba del Costaggini', pagina: 'quiz-cruciverba.html', ancora: '', cat: 'Orientamento', keywords: ['cruciverba','parole crociate','vocabolario enogastronomico','gioco enigmistico'] },
     { titolo: 'Quiz: Scegli il tuo percorso', pagina: 'quiz-percorso.html', ancora: '', cat: 'Orientamento', keywords: ['scegli il tuo percorso','simulatore percorso','indirizzi di studio','orientarsi indirizzo'] },
     { titolo: 'Quiz: Riconosci il Piatto', pagina: 'quiz-piatti.html', ancora: '', cat: 'Orientamento', keywords: ['riconosci il piatto','gioco piatti','cucina italiana classica','indovina il piatto'] },
-    { titolo: 'Quiz: La tua Settimana Tipo', pagina: 'quiz-settimana.html', ancora: '', cat: 'Orientamento', keywords: ['la tua settimana tipo','costruisci la settimana','settimana ideale','simulatore vita convittuale'] }
+    { titolo: 'Quiz: La tua Settimana Tipo', pagina: 'quiz-settimana.html', ancora: '', cat: 'Orientamento', keywords: ['la tua settimana tipo','costruisci la settimana','settimana ideale','simulatore vita convittuale'] },
+    { titolo: 'Accoglienza & Modulistica', pagina: 'accoglienza.html', ancora: '', cat: 'Ammissione', keywords: ['accoglienza','modulistica','convittori','convittrici','11 settembre','moduli','documenti da consegnare','arrivo'] },
+    { titolo: 'Autorizzazioni del genitore/tutore', pagina: 'autorizzazioni.html', ancora: '', cat: 'Ammissione', keywords: ['autorizzazioni','libera uscita','pista ciclopedonale','entrata autonoma','uscita autonoma','riprese immagini','attività sportive','attività culturali'] },
+    { titolo: 'Patto di Corresponsabilità', pagina: 'patto-di-corresponsabilita.html', ancora: '', cat: 'Ammissione', keywords: ['patto','corresponsabilità','impegni','famiglia','convitto','regole di convivenza'] },
+    { titolo: 'Scheda Informativa del Convittore/trice', pagina: 'scheda-informativa-convittore.html', ancora: '', cat: 'Ammissione', keywords: ['scheda informativa','convittore','convittrice','anagrafica','dati alunno','genitori','provenienza scolastica','sostegno','invio online'] },
+    { titolo: 'Scheda Informativa Sanitaria', pagina: 'scheda-informativa-sanitaria.html', ancora: '', cat: 'Ammissione', keywords: ['scheda sanitaria','medico curante','allergie','farmaci','intolleranze','patologie'] },
+    { titolo: 'Richiesta di Rientro Domenicale', pagina: 'richiesta-rientro-domenicale.html', ancora: '', cat: 'Ammissione', keywords: ['rientro domenicale','domenica sera','rientro','lunedì mattina'] }
   ];
 
   function escReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }

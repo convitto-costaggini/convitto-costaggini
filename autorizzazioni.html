@@ -39,7 +39,7 @@
     .mf-footer-page{display:flex;justify-content:flex-end;margin-top:1rem}
     .btn-stampa{font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1.25rem;background:0 0;border:1.5px solid #d1d5db;border-radius:8px;cursor:pointer;color:#374151;transition:all .2s}
     .btn-stampa:hover{border-color:var(--bosco);color:var(--bosco)}
-    .print-title{display:none}
+    .print-title{display:none}.mf-data-stampa{display:none}
     @media print{
       body,html{background:#fff!important}
       #main>section{background:#fff!important}
@@ -47,6 +47,7 @@
       #google_translate_element,.goog-te-gadget,.goog-te-banner-frame,.goog-te-menu-frame,.skiptranslate{display:none!important}
       .mf-anagrafica,.mf-footer-page,.page-hero,footer,nav,.mf-nota{display:none!important}
       .mf-modulo{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;margin-bottom:.75rem}
+      .mf-data-stampa{display:block!important;font-family:var(--fu);font-size:.76rem;color:#374151;text-align:right;margin:.4rem 0 0}
       .print-title{display:block!important;text-align:center;font-weight:800;font-size:1.7rem;font-family:var(--fu);color:#1a1a1a;margin:0 0 1.5rem;letter-spacing:.01em}
     }
   </style>
@@ -95,6 +96,7 @@
         <div class="mf-modulo-body">
           <p>I sottoscritti genitori o tutori con patria potestà del/della convittore/trice <span class="fill az-nome" contenteditable="true" spellcheck="false">_______________________</span>, classe <span class="fill az-classe" contenteditable="true" spellcheck="false">______</span>, dichiarano di essere a conoscenza, di accettare e autorizzare che la fascia oraria per usufruire della libera uscita per l'anno scolastico 2026/2027 è la seguente: <strong>dal lunedì al giovedì dalle ore 17:30 alle ore 19:15</strong> e che la libera uscita di nostra/o figlio/a non prevede accompagnamento del Personale Educativo, come anche indicato dal Regolamento di Convitto art. 25 commi 1 e 2.</p>
           <p>Sollevano il Dirigente Scolastico e il Personale Educativo in servizio da qualsiasi responsabilità civile e penale, fino al momento del rientro in Convitto. Siamo altresì consapevoli che nostra/o figlio/a, anche al di fuori dal Convitto, durante la libera uscita, è tenuta/o ad avere un comportamento educato e corretto come indicato dal Regolamento art. 25 comma 4. E siamo al corrente dei seguenti aspetti: che l'Educatore/trice può impartire, a prescindere da questa autorizzazione, la sospensione della passeggiata se ritenuto necessario e detta decisione non può essere revocata tramite e-mail o telefonata dei genitori o tutori; che i genitori/tutori possono sospendere l'uscita dei figli temporaneamente e per periodi stabiliti avvisando tramite e-mail e con conferma telefonica il Personale Educativo; che il/la convittore/trice è tenuto/a a rientrare entro e non oltre l'orario stabilito, che potrebbe subire variazioni anche a seconda delle esigenze organizzative; che il mancato rispetto degli orari indicati può essere soggetto a sanzione come da Regolamento art. 30 comma 1 lettera d.</p>
+          <p class="mf-data-stampa">Rieti, lì ________________</p>
           <div class="mf-firma-blocco"><small>Firma dei genitori o di chi ne fa legalmente le veci</small><div class="linea"></div><div class="linea"></div></div>
         </div>
       </div>
@@ -105,6 +107,7 @@
         <div class="mf-modulo-body">
           <p>I sottoscritti genitori o tutori con patria potestà del/della convittore/trice maggiorenne <span class="fill az-nome" contenteditable="true" spellcheck="false">_______________________</span>, classe <span class="fill az-classe" contenteditable="true" spellcheck="false">______</span>, dichiarano di essere a conoscenza e di autorizzare la libera uscita nella scansione temporale indicata, e di essere a conoscenza e di autorizzare che la gestione del tempo dedicato all'attività della libera uscita prevederà una certa autonomia qualora richiesto e debitamente concordato con il Personale Educativo in servizio (Regolamento art. 25 comma 2).</p>
           <p>Sollevano il Dirigente Scolastico e il Personale Educativo in servizio da qualsiasi responsabilità civile e penale, fino al momento del rientro in Convitto.</p>
+          <p class="mf-data-stampa">Rieti, lì ________________</p>
           <div class="mf-firma-blocco"><small>Firma dei genitori o di chi ne fa legalmente le veci</small><div class="linea"></div><div class="linea"></div></div>
           <div class="mf-firma-blocco"><small>Firma alunno/a convittore/trice maggiorenne</small><div class="linea"></div></div>
         </div>
@@ -116,6 +119,7 @@
         <div class="mf-modulo-body">
           <p>I sottoscritti genitori o tutori con patria potestà del/della convittore/trice maggiorenne <span class="fill az-nome" contenteditable="true" spellcheck="false">_______________________</span>, classe <span class="fill az-classe" contenteditable="true" spellcheck="false">______</span>, dichiarano di essere a conoscenza che per usufruire della libera uscita è organizzata specifica corsa che avrà come luogo di approdo e come punto di ritrovo per il rientro in Convitto <strong>Porta Romana</strong> (Regolamento art. 25 comma 3); di accettare e autorizzare che, per recarsi e per rientrare dalla libera uscita, potrà utilizzare la pista ciclopedonale presente a ridosso della struttura convittuale (Regolamento art. 25 comma 3).</p>
           <p>Sollevano il Dirigente Scolastico e il Personale Educativo in servizio da qualsiasi responsabilità civile e penale, fino al momento del rientro in Convitto.</p>
+          <p class="mf-data-stampa">Rieti, lì ________________</p>
           <div class="mf-firma-blocco"><small>Firma dei genitori o di chi ne fa legalmente le veci</small><div class="linea"></div><div class="linea"></div></div>
           <div class="mf-firma-blocco"><small>Firma alunno/a convittore/trice maggiorenne</small><div class="linea"></div></div>
         </div>
@@ -127,6 +131,7 @@
         <div class="mf-modulo-body">
           <p>I sottoscritti genitori o tutori con patria potestà del/della convittore/trice minorenne <span class="fill az-nome" contenteditable="true" spellcheck="false">_______________________</span>, classe <span class="fill az-classe" contenteditable="true" spellcheck="false">______</span>, dichiarano di essere a conoscenza che per usufruire della libera uscita è organizzata specifica corsa che avrà come luogo di approdo e come punto di ritrovo per il rientro in Convitto <strong>Porta Romana</strong> (Regolamento art. 25 comma 3); di accettare e autorizzare, valutando il grado di maturità del/la proprio/a figlio/a, di far utilizzare la pista ciclopedonale per recarsi e rientrare dall'attività della libera uscita (Regolamento art. 25 comma 3).</p>
           <p>Sollevano il Dirigente Scolastico e il Personale Educativo in servizio da qualsiasi responsabilità civile e penale, fino al momento del rientro in Convitto.</p>
+          <p class="mf-data-stampa">Rieti, lì ________________</p>
           <div class="mf-firma-blocco"><small>Firma dei genitori o di chi ne fa legalmente le veci</small><div class="linea"></div><div class="linea"></div></div>
         </div>
       </div>
@@ -136,6 +141,7 @@
         <div class="mf-modulo-hdr"><h3>5 — Autorizzazione all'entrata e uscita autonoma da scuola (convittore/trice maggiorenne)</h3></div>
         <div class="mf-modulo-body">
           <p>I sottoscritti genitori o tutori con patria potestà del/della convittore/trice maggiorenne <span class="fill az-nome" contenteditable="true" spellcheck="false">_______________________</span>, classe <span class="fill az-classe" contenteditable="true" spellcheck="false">______</span>, dichiarano di essere a conoscenza che, durante il funzionamento e la permanenza in Convitto, il/la ragazzo/a, qualora autorizzato/a dall'Istituzione Scolastica ad entrare in ritardo o ad uscire prima da scuola rispetto all'orario delle lezioni, potrà farlo in modo autonomo, esonerando il Dirigente Scolastico e il Personale Educativo in Servizio da ogni eventuale responsabilità civile e penale (Regolamento art. 27 comma 3).</p>
+          <p class="mf-data-stampa">Rieti, lì ________________</p>
           <div class="mf-firma-blocco"><small>Firma dei genitori o di chi ne fa legalmente le veci</small><div class="linea"></div><div class="linea"></div></div>
           <div class="mf-firma-blocco"><small>Firma alunno/a convittore/trice maggiorenne</small><div class="linea"></div></div>
         </div>
@@ -150,6 +156,7 @@
           <p>Chiedono che il proprio figlio/a per l'A.S. 2026/2027 sia autorizzato/a a praticare le attività sportive organizzate dal Convitto, sia al suo interno che all'esterno, anche a quelle alle quali il Convitto partecipa come "Gruppo Sportivo".</p>
           <p>Chiedono che il proprio figlio/a per l'A.S. 2026/2027 sia autorizzato/a a partecipare a tutte le attività culturali, ricreative e manifestazioni che il Personale Educativo, nell'ambito della progettazione del Convitto, organizzerà per integrare l'offerta formativa.</p>
           <p>Autorizzano il Personale incaricato, ai sensi della legislazione vigente, al trattamento dei dati personali per le finalità sopra elencate.</p>
+          <p class="mf-data-stampa">Rieti, lì ________________</p>
           <div class="mf-firma-blocco"><small>Firma dei Genitori o chi esercita la Patria Potestà</small><div class="linea"></div><div class="linea"></div></div>
         </div>
       </div>

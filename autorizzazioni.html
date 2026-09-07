@@ -41,9 +41,11 @@
     .btn-stampa:hover{border-color:var(--bosco);color:var(--bosco)}
     .print-title{display:none}
     @media print{
+      body,html{background:#fff!important}
+      #main>section{background:#fff!important}
       body>*:not(#main){display:none!important}
       #google_translate_element,.goog-te-gadget,.goog-te-banner-frame,.goog-te-menu-frame,.skiptranslate{display:none!important}
-      .mf-anagrafica,.mf-footer-page,.page-hero,footer,nav{display:none!important}
+      .mf-anagrafica,.mf-footer-page,.page-hero,footer,nav,.mf-nota{display:none!important}
       .mf-modulo{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;margin-bottom:.75rem}
       .print-title{display:block!important;text-align:center;font-weight:800;font-size:1.7rem;font-family:var(--fu);color:#1a1a1a;margin:0 0 1.5rem;letter-spacing:.01em}
     }

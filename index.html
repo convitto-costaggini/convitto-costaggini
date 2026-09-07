@@ -619,11 +619,13 @@ caricaNotizieHome();
   }
 })();
 </script>
+</main>
 
 <!-- ══════════ BLOCCO TEMPORANEO — AVVISO ACCOGLIENZA CONVITTORI A.S. 2026/2027 ══════════
      Da rimuovere manualmente (tutto il blocco, fino a END-MODALE-ACCOGLIENZA incluso)
-     dopo venerdì 11 settembre 2026. Il JS sotto smette comunque di mostrarlo da solo
-     dopo l'11/9/2026 23:59, come doppia sicurezza. -->
+     a partire da lunedì 14 settembre 2026. Il JS sotto smette comunque di mostrarlo da solo
+     dopo il 13/9/2026 23:59, come doppia sicurezza. Mostrato ad ogni caricamento della
+     pagina (nessun limite "una volta al giorno"): resta visibile finché non scade. -->
 <div id="acc-modale-overlay" role="dialog" aria-modal="true" aria-labelledby="acc-modale-titolo" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:1.25rem;background:rgba(12,20,13,.72);backdrop-filter:blur(2px)">
   <div style="position:relative;width:100%;max-width:460px;background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden;animation:accModaleIn .25s ease both">
     <div style="background:linear-gradient(135deg,var(--bosco),#1a3a1b);padding:1.5rem 1.75rem 1.25rem;position:relative">
@@ -652,16 +654,11 @@ caricaNotizieHome();
 <style>@keyframes accModaleIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}</style>
 <script>
 (function(){
-  // Non mostrare più dopo l'11/9/2026 23:59 (fine giornata di accoglienza) — doppia sicurezza
-  // oltre alla rimozione manuale del blocco.
-  var SCADENZA = new Date(2026, 8, 11, 23, 59, 59); // mese 8 = settembre (0-indicizzato)
+  // Non mostrare più dopo il 13/9/2026 23:59 (scompare da lunedì 14) — doppia sicurezza
+  // oltre alla rimozione manuale del blocco. Nessun limite "una volta al giorno":
+  // il modale compare ad ogni caricamento della pagina finché non scade.
+  var SCADENZA = new Date(2026, 8, 13, 23, 59, 59); // mese 8 = settembre (0-indicizzato)
   if (new Date() > SCADENZA) return;
-
-  var CHIAVE = 'acc-modale-accoglienza-2026-visto-il';
-  var oggi = new Date().toDateString();
-  try {
-    if (localStorage.getItem(CHIAVE) === oggi) return; // già mostrato oggi
-  } catch(e) {}
 
   var overlay = document.getElementById('acc-modale-overlay');
   if (!overlay) return;
@@ -669,7 +666,6 @@ caricaNotizieHome();
   function mostra(){ overlay.style.display = 'flex'; }
   function chiudi(){
     overlay.style.display = 'none';
-    try { localStorage.setItem(CHIAVE, oggi); } catch(e) {}
   }
 
   document.getElementById('acc-modale-chiudi').addEventListener('click', chiudi);
@@ -682,4 +678,5 @@ caricaNotizieHome();
 })();
 </script>
 <!-- ══════════ END-MODALE-ACCOGLIENZA ══════════ -->
+</body>
 </html>

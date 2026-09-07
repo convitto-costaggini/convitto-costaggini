@@ -36,7 +36,14 @@
     .mf-footer-page{display:flex;justify-content:flex-end;margin-top:1rem}
     .btn-stampa{font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1.25rem;background:0 0;border:1.5px solid #d1d5db;border-radius:8px;cursor:pointer;color:#374151;transition:all .2s}
     .btn-stampa:hover{border-color:var(--bosco);color:var(--bosco)}
-    @media print{.mf-anagrafica,.mf-footer-page,.page-hero,footer,nav{display:none!important}.mf-modulo{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;margin-bottom:.75rem}}
+    .print-title{display:none}
+    @media print{
+      body>*:not(#main){display:none!important}
+      #google_translate_element,.goog-te-gadget,.goog-te-banner-frame,.goog-te-menu-frame,.skiptranslate{display:none!important}
+      .mf-anagrafica,.mf-footer-page,.page-hero,footer,nav{display:none!important}
+      .mf-modulo{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;margin-bottom:.75rem}
+      .print-title{display:block!important;text-align:center;font-weight:800;font-size:1.7rem;font-family:var(--fu);color:#1a1a1a;margin:0 0 1.5rem;letter-spacing:.01em}
+    }
   </style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
@@ -62,6 +69,8 @@
 
   <section style="background:var(--av);padding:3rem 1.25rem 4rem">
     <div class="mf-paper">
+
+      <h1 class="print-title">Autorizzazioni | Convitto "Costaggini" — Rieti</h1>
 
       <div class="mf-anagrafica">
         <h2>Dati dell'alunno/a (si riportano automaticamente in ogni modulo)</h2>

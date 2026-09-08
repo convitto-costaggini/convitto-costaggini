@@ -51,9 +51,10 @@ const KB=[
       'devo fare un colloquio','c\'è un colloquio','prova di ammissione','selezione'],
    r:'No: la procedura di ammissione al Convitto non prevede alcun colloquio di selezione con il Dirigente né con gli educatori. Bastano l\'iscrizione sulla Piattaforma Unica del MIM e il modulo di domanda entro il 30 luglio. Gli educatori restano comunque disponibili tutto l\'anno per incontrare le famiglie su richiesta.<br><br>📋 <a href="ammissione.html">Guida completa all\'ammissione →</a>'},
   // ── ACCOGLIENZA & MODULISTICA ──
-  {k:['accoglienza convittori','modulistica','moduli accoglienza','documenti accoglienza',
+  {k:['accoglienza','accoglienza convittori','schede accoglienza','scheda accoglienza',
+      'modulistica','moduli accoglienza','documenti accoglienza',
       'moduli da compilare','documenti da firmare','stampare moduli','autorizzazioni',
-      'scheda informativa','scheda sanitaria','modulo autorizzazioni','rientro domenicale',
+      'scheda','schede','scheda informativa','scheda sanitaria','modulo autorizzazioni','rientro domenicale',
       'scheda del convittore','scheda convittore'],
    r:'Tutta la modulistica per l\'accoglienza convittori e convittrici è raccolta in un\'unica pagina: autorizzazioni del genitore/tutore, Patto di Corresponsabilità, scheda informativa del convittore/trice, scheda informativa sanitaria e richiesta di rientro domenicale. Alcuni moduli si compilano e inviano online, altri si compilano e stampano per la firma.<br><br>📋 <a href="accoglienza.html">Accoglienza & Modulistica →</a>'},
   // ── RETTE E COSTI ──
@@ -167,7 +168,7 @@ const KB=[
    r:'La somministrazione di farmaci richiede apposita autorizzazione medica e dei genitori. Contattare la segreteria per il modulo specifico.<br><br>✉️ <a href="contatti.html">Contattaci →</a>'},
   // ── QUIZ E ORIENTAMENTO ──
   {k:['quiz','gioco','talento','fa per me','percorso scolastico','orientamento',
-      'enogastronomia','ospitalità','pasticceria','sala','cucina','accoglienza','indirizzo'],
+      'enogastronomia','ospitalità','pasticceria','indirizzo accoglienza','sala','cucina','indirizzo'],
    r:'Prova i <strong>6 quiz interattivi</strong> per scoprire quale percorso fa per te: sai già cucinare? Cucina, Sala, Pasticceria o Accoglienza? C\'è anche un cruciverba del Costaggini!<br><br>🎮 <a href="scopri-talento.html">Scopri il tuo Talento →</a>'},
   // ── ALUMNI E COMMUNITY ──
   {k:['alumni','ex convittore','ex studente','diplomati','ex allievi','sono stato convittore',

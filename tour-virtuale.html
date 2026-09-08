@@ -115,12 +115,27 @@ const NARRATIONS = {
   'corridoi': 'Questi sono i corridoi che i ragazzi percorrono ogni giorno per raggiungere le loro stanze. Non è solo un passaggio: è dove ci si incrocia, ci si saluta, si organizza la giornata al volo tra un momento e l\'altro nel flusso della nostra giornata. Le scale e l\'ascensore collegano tutti i piani della struttura.',
   'sala-ricreativa': 'Questa è la sala ricreativa, uno dei posti preferiti dai nostri giovani. Calcio balilla, ping pong, un po\' di relax dopo lo studio: qui si respira un\'atmosfera diversa, più leggera. E quando il tempo lo permette, la porta si apre direttamente sul verde esterno.',
   'ufficio-educatori': 'Questo è l\'ufficio degli educatori, il punto di riferimento per qualsiasi cosa: un dubbio, un problema, o semplicemente due chiacchiere. Sono sempre presenti, giorno e notte, ed è rassicurante per tutti sapere che c\'è sempre qualcuno a cui rivolgersi.',
+  /* Bozze nuove — stesso tono delle 4 sopra, ricavate dalla "desc" già presente in ROOMS. Da rileggere e correggere prima di considerarle definitive. */
+  'camera': 'Questa è una camera tipo: uno spazio personale, sicuro e ordinato. Ogni convittore ha il suo posto, un angolo tutto suo dove sistemare le proprie cose.',
+  'mensa': 'Questa è la mensa. Ogni giorno viene preparato un menù cucinato internamente e concordato con lo specialista: più che un pasto, un momento di convivialità vera.',
+  'studio': 'Questa è la sala studio. Dalle 15:30 alle 17:15 c\'è lo studio guidato con gli educatori, in un ambiente silenzioso e strutturato, pensato per concentrarsi davvero.',
+  'musica': 'Questo è il Laboratorio Musicale, fondato da Michele Gaggiano e Dino Barba. Chitarre, tastiere, percussioni — e la libertà di scoprire un talento che magari non sapevi di avere.',
+  'giardino': 'Questo è il giardino, lo spazio aperto del Convitto con il Terminillo sullo sfondo: il luogo delle pause, delle chiacchiere e di un po\' di aria fresca.',
 };
+// Percorsi per eventuali registrazioni con voce umana, quando saranno disponibili
+// e autorizzate: se il file esiste viene usato quello, altrimenti si parla in automatico
+// con la voce sintetica (vedi speakRoom). Basta caricare l'mp3 con questo stesso nome,
+// nessuna modifica al codice necessaria.
 const AUDIO_SRC = {
   'ingresso':          'audio/tour/ingresso.mp3',
   'corridoi':          'audio/tour/corridoi.mp3',
   'sala-ricreativa':   'audio/tour/sala-ricreativa.mp3',
   'ufficio-educatori': 'audio/tour/ufficio-educatori.mp3',
+  'camera':            'audio/tour/camera.mp3',
+  'mensa':             'audio/tour/mensa.mp3',
+  'studio':            'audio/tour/studio.mp3',
+  'musica':            'audio/tour/musica.mp3',
+  'giardino':          'audio/tour/giardino.mp3',
 };
 // ══ THREE.JS VIEWER ═══════════════════════════════════
 const canvas   = document.getElementById('tv-canvas');
@@ -259,39 +274,113 @@ function updateNarrBtn(speaking) {
   narrBtn.setAttribute('aria-label', speaking ? 'Metti in pausa la guida vocale' : 'Ascolta la guida vocale');
   narrCap.classList.toggle('speaking', speaking);
 }
+// ══ VOCE SINTETICA (Web Speech API) ═══════════════════
+// Nessuna registrazione, nessuna autorizzazione da attendere: parla il browser
+// stesso. Qualche accorgimento per renderla meno "robotica":
+//  1) sceglie, tra le voci italiane disponibili, quella di qualità migliore
+//     (le voci "cloud" dei vari sistemi suonano quasi sempre meglio di quelle
+//     locali di scorta);
+//  2) legge una frase alla volta invece dell'intero paragrafo in un fiato solo,
+//     con una breve pausa tra una frase e l'altra — è il trucco che aiuta di più
+//     a farla sembrare meno artificiale;
+//  3) velocità leggermente ridotta e intonazione appena addolcita.
+let ttsVoice = null;
+function pickBestItalianVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  const it = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('it'));
+  const pool = it.length ? it : voices;
+  // Nomi che, sui vari sistemi operativi/browser, corrispondono di solito a voci
+  // "naturali"/cloud più gradevoli di quelle robotiche di default.
+  const preferite = ['google italiano', 'elsa', 'isabella', 'diego', 'cosimo', 'alice', 'federica', 'luca', 'paola'];
+  for (const nome of preferite) {
+    const m = pool.find(v => v.name.toLowerCase().includes(nome));
+    if (m) return m;
+  }
+  const cloud = pool.find(v => v.localService === false); // spesso di qualità migliore delle voci locali
+  return cloud || pool[0];
+}
+if ('speechSynthesis' in window) {
+  ttsVoice = pickBestItalianVoice();
+  speechSynthesis.addEventListener('voiceschanged', () => { ttsVoice = pickBestItalianVoice(); });
+}
+let narrSession = 0;   // invalida i callback asincroni di una lettura precedente quando si cambia stanza
+let usingSynthesis = false;
+function splitSentences(text) {
+  return (text.match(/[^.!?]+[.!?]*/g) || [text]).map(s => s.trim()).filter(Boolean);
+}
+function speakSynthetic(room, session) {
+  if (!('speechSynthesis' in window)) {
+    narrBtn.style.display = 'none';
+    if (!ccEnabled) narrCap.textContent = NARRATIONS[room.id] || '';
+    return;
+  }
+  usingSynthesis = true;
+  narrBtn.style.display = 'flex';
+  const queue = splitSentences(NARRATIONS[room.id] || '');
+  let i = 0;
+  function next() {
+    if (session !== narrSession) return; // si è cambiata stanza nel frattempo
+    if (i >= queue.length) { updateNarrBtn(false); return; }
+    const frase = queue[i];
+    const u = new SpeechSynthesisUtterance(frase);
+    u.lang = 'it-IT';
+    if (ttsVoice) u.voice = ttsVoice;
+    u.rate = 0.94;
+    u.pitch = 1.03;
+    u.onstart = () => { if (session === narrSession) { updateNarrBtn(true); if (ccEnabled) narrCap.textContent = frase; } };
+    u.onend   = () => { if (session === narrSession) { i++; setTimeout(next, 280); } };
+    u.onerror = () => { if (session === narrSession) updateNarrBtn(false); };
+    speechSynthesis.speak(u);
+  }
+  next();
+}
 function stopNarration() {
+  narrSession++;
   narrAudio.pause();
   narrAudio.currentTime = 0;
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
   updateNarrBtn(false);
 }
 narrAudio.addEventListener('play',  () => updateNarrBtn(true));
 narrAudio.addEventListener('pause', () => updateNarrBtn(false));
 narrAudio.addEventListener('ended', () => updateNarrBtn(false));
+// Se il file audio registrato non c'è ancora (o non si carica), passa in automatico alla voce sintetica
+narrAudio.addEventListener('error', () => {
+  const session = narrSession;
+  const room = ROOMS.find(r => document.getElementById('btn-' + r.id)?.classList.contains('active'));
+  if (room && NARRATIONS[room.id] && !usingSynthesis) speakSynthetic(room, session);
+});
 function speakRoom(room, auto) {
   const text = NARRATIONS[room.id];
   const src  = AUDIO_SRC[room.id];
-  if (!text && !src) { narrBar.style.display = 'none'; return; }
+  if (!text) { narrBar.style.display = 'none'; return; }
   narrBar.style.display = 'flex';
-  narrCap.textContent = ccEnabled ? (text || '') : '';
-  if (!src) {
-    narrBtn.style.display = 'none';
-    if (!ccEnabled) narrCap.textContent = text || '';
-    return;
-  }
-  narrBtn.style.display = 'flex';
+  narrCap.textContent = ccEnabled ? text : '';
   stopNarration();
-  narrAudio.src = src;
+  usingSynthesis = false;
+  narrBtn.style.display = 'flex';
   if (!auto) return; // rispetta le regole autoplay del browser
-  narrAudio.play().catch(() => {
-    updateNarrBtn(false);
-  });
+  const session = narrSession;
+  if (src) {
+    narrAudio.src = src;
+    narrAudio.play().catch(() => { speakSynthetic(room, session); });
+  } else {
+    speakSynthetic(room, session);
+  }
 }
 narrBtn.addEventListener('click', () => {
-  if (!narrAudio.src) return;
-  if (!narrAudio.paused) {
-    narrAudio.pause();
+  const room = ROOMS.find(r => document.getElementById('btn-' + r.id)?.classList.contains('active'));
+  if (usingSynthesis) {
+    if (!('speechSynthesis' in window)) return;
+    if (speechSynthesis.speaking && !speechSynthesis.paused) speechSynthesis.pause();
+    else if (speechSynthesis.paused) speechSynthesis.resume();
+    else if (room) speakSynthetic(room, narrSession);
   } else {
-    narrAudio.play().catch(() => {});
+    if (!narrAudio.src) return;
+    if (!narrAudio.paused) narrAudio.pause();
+    else narrAudio.play().catch(() => {});
   }
 });
 // Toggle sottotitoli

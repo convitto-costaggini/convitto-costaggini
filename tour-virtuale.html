@@ -346,11 +346,21 @@ function stopNarration() {
 narrAudio.addEventListener('play',  () => updateNarrBtn(true));
 narrAudio.addEventListener('pause', () => updateNarrBtn(false));
 narrAudio.addEventListener('ended', () => updateNarrBtn(false));
-// Se il file audio registrato non c'è ancora (o non si carica), passa in automatico alla voce sintetica
+// Se il file audio registrato non c'è ancora (o non si carica), passa in automatico alla voce sintetica.
+// Sia l'evento "error" sia il rifiuto della promise di play() possono scattare per lo stesso
+// fallimento di caricamento: questo guardiano (per "sessione", cioè per singola selezione di
+// stanza) garantisce che il passaggio alla voce sintetica avvenga una volta sola, altrimenti la
+// narrazione partiva due volte e si sentiva il messaggio ripetuto.
+let fallbackDone = false;
+function triggerFallback(room, session) {
+  if (session !== narrSession || fallbackDone) return;
+  fallbackDone = true;
+  speakSynthetic(room, session);
+}
 narrAudio.addEventListener('error', () => {
   const session = narrSession;
   const room = ROOMS.find(r => document.getElementById('btn-' + r.id)?.classList.contains('active'));
-  if (room && NARRATIONS[room.id] && !usingSynthesis) speakSynthetic(room, session);
+  if (room && NARRATIONS[room.id]) triggerFallback(room, session);
 });
 function speakRoom(room, auto) {
   const text = NARRATIONS[room.id];
@@ -360,14 +370,15 @@ function speakRoom(room, auto) {
   narrCap.textContent = ccEnabled ? text : '';
   stopNarration();
   usingSynthesis = false;
+  fallbackDone = false;
   narrBtn.style.display = 'flex';
   if (!auto) return; // rispetta le regole autoplay del browser
   const session = narrSession;
   if (src) {
     narrAudio.src = src;
-    narrAudio.play().catch(() => { speakSynthetic(room, session); });
+    narrAudio.play().catch(() => { triggerFallback(room, session); });
   } else {
-    speakSynthetic(room, session);
+    triggerFallback(room, session);
   }
 }
 narrBtn.addEventListener('click', () => {

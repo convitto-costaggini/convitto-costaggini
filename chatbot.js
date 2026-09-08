@@ -62,13 +62,14 @@ const KB=[
       'isee','agevolazion','riduzion','sconto','esonero','borsa di studio','rata','rate','rate da pagare',
       'quante rate','importi delle rate','quota iscrizione'],
    r:'La retta è deliberata ogni anno dal Consiglio d\'Istituto, con un importo fisso uguale per tutte le famiglie (non è prevista una riduzione legata all\'ISEE). La retta intera confermata per l\'A.S. 2026/27 è di <strong>1.600€ annui</strong>, comprensiva di vitto completo, alloggio, studio guidato, attività e trasporto Convitto-scuola.<br><br>💶 <a href="ammissione.html#tariffe">Tariffe complete →</a><br>✉️ Per un preventivo: <a href="contatti.html">Contattaci →</a>'},
-  {k:['sveglia','giornata tipo','cosa si fa','routine','programma',
+  {k:['sveglia','giornata tipo','cosa si fa','routine','programma della giornata',
       'alzarsi','luci spente','luce','mattina','pomeriggio','sera','notte'],
    r:'<strong>La giornata tipo al Convitto:</strong><br>🌅 06:30 Sveglia · 07:00 Colazione (prodotti km zero)<br>🚌 07:40 Trasporto alla scuola<br>📚 08:00–14:00 Lezioni IPSSEOA<br>🍝 14:00 Pranzo<br>🏃 15:00–15:30 Tempo libero<br>📖 15:30–17:15 Studio guidato<br>⚽ 17:15–19:15 Tempo libero / sport / Lab Musicale<br>🍽️ 19:15 Cena<br>🌙 22:30 Luci spente<br><br>📅 <a href="giornata-tipo.html">Leggi la giornata completa →</a>'},
   // ── PASTI E MENSA ──
-  {k:['pranzo','cena','colazione','pasti','mensa','si mangia','cosa si mangia','cucina',
+  {k:['pranzo','cena','colazione','pasti','mensa','si mangia','cosa si mangia','mangi oggi',
+      'menù della settimana','menu della settimana','cucina','cosa mangi',
       'menù','menu','km zero','prodotti locali','reatino','quattro pasti','vitto'],
-   r:'La cucina prepara <strong>quattro pasti al giorno</strong> con prodotti locali a <strong>km zero</strong> del territorio reatino. I menù sono concordati con la ASL di Rieti. La mensa è presidiata dagli educatori — un momento di convivialità vera.<br><br>🥗 Allergie e intolleranze gestite con menù dedicati.'},
+   r:'La cucina prepara <strong>quattro pasti al giorno</strong> con prodotti locali a <strong>km zero</strong> del territorio reatino. I menù sono concordati con la ASL di Rieti. La mensa è presidiata dagli educatori — un momento di convivialità vera.<br><br>🍽️ <a href="menu-settimana.html">Il menù di questa settimana →</a><br>🥗 Allergie e intolleranze gestite con menù dedicati.'},
   // ── ALLERGIE E DIETE ──
   {k:['allergi','intolleran','celiaco','celiachia','vegano','vegetarian','dieta speciale',
       'senza glutine','senza lattosio','arachidi','diabete','religiosa','etica','halal'],
@@ -134,9 +135,36 @@ const KB=[
       'video convitto','immagini','galleria','com\'è','panorama'],
    r:'Il Convitto è visitabile virtualmente a <strong>360°</strong> direttamente dallo smartphone, senza installare nulla. Puoi esplorare ingresso, corridoi, sala ricreativa, ufficio educatori e molto altro.<br><br>🔭 <a href="tour-virtuale.html">Apri il Tour Virtuale →</a>'},
   // ── DOVE SI TROVA ──
-  {k:['dove','indirizzo','come arrivare','via','rieti','sede','posizione','mappa','gps',
+  {k:['dove si trova','dove è il convitto','dove siamo','indirizzo','come arrivare','via salaria',
+      'rieti','sede del convitto','posizione','mappa e indicazioni','gps',
       'navigatore','autobus','stazione','treno','pullman','cotral','distanza','km da','percorso'],
    r:'Il Convitto si trova in <strong>Via Salaria s.n.c., 02100 Rieti</strong>, nella sede dell\'IPSSEOA "R. A. Costaggini".<br><br>📍 <a href="contatti.html">Mappa e indicazioni →</a><br>🚌 Da stazione, treno o autobus: <a href="come-arrivare.html">Come arrivare →</a>'},
+  // ── PROVENIENZA CONVITTORI ──
+  {k:['da dove vengono','provenienza','province','regioni','da quali regioni','ragazzi vengono da',
+      'zone d\'italia','fuori regione','convittori vengono da'],
+   r:'I convittori arrivano da <strong>tutta Italia</strong>, non solo da Rieti e provincia: c\'è una mappa che mostra da quali regioni e province vengono, anno per anno.<br><br>🗺️ <a href="provenienza.html">Da dove vengono i convittori →</a>'},
+  // ── CALENDARIO EVENTI ──
+  {k:['calendario eventi','prossimi eventi','date importanti','agenda del convitto',
+      'eventi in programma','quando sono gli eventi','che eventi ci sono'],
+   r:'Tutti gli appuntamenti dell\'anno (Open Day, feste, uscite, concerti) sono raccolti in un calendario unico.<br><br>📅 <a href="calendario.html">Calendario Eventi →</a>'},
+  // ── SERVIZI DEL CONVITTO (panoramica) ──
+  {k:['servizi offerti','quali servizi','elenco servizi','cosa offre il convitto',
+      'panoramica servizi','tutti i servizi'],
+   r:'Il Convitto offre: ristorazione, alloggio in camera, studio guidato, sport e attività, connettività Wi-Fi e assistenza sanitaria — il tutto coordinato dagli educatori H24.<br><br>🧾 <a href="servizi.html">Tutti i servizi →</a>'},
+  // ── MAPPA DEL SITO ──
+  {k:['mappa del sito','tutte le pagine del sito','indice del sito','elenco di tutte le pagine',
+      'non trovo quello che cerco'],
+   r:'Se non trovi subito quello che cerchi, la mappa del sito elenca tutte le pagine in un colpo d\'occhio.<br><br>🗂️ <a href="mappa-sito.html">Mappa del Sito →</a>'},
+  // ── SETTIMANA IN NUMERI ──
+  {k:['settimana in numeri','statistiche del convitto','dati sulla vita convittuale','numeri del convitto'],
+   r:'Pasti serviti, ore di studio, attività svolte: una settimana tipo del Convitto raccontata attraverso i numeri.<br><br>📊 <a href="settimana-in-numeri.html">Una Settimana in Numeri →</a>'},
+  // ── VOCI DAL CONVITTO / VOCI DEL PERSONALE ──
+  {k:['voci dal convitto','voci del personale','interviste ai convittori','interviste al personale',
+      'podcast dei ragazzi','testimonianze audio'],
+   r:'Racconti audio in prima persona: dai convittori e dalle convittrici, e dal personale del Convitto.<br><br>🎙️ <a href="voci-dal-convitto.html">Voci dal Convitto →</a> · <a href="voci-del-personale.html">Voci del Personale →</a>'},
+  // ── L'ANNO AL CONVITTO ──
+  {k:['l\'anno al convitto','anno scolastico raccontato','cosa è successo quest\'anno','riepilogo dell\'anno'],
+   r:'Un racconto per immagini di come è stato l\'anno appena trascorso al Convitto.<br><br>📖 <a href="anno.html">L\'Anno al Convitto →</a>'},
   // ── CONTATTI ──
   {k:['telefono','email','contatto','scrivere','segreteria','informazioni','risponde',
       'numero','chiamare','mail','pec','indirizzo email','come contatto',
@@ -167,7 +195,7 @@ const KB=[
       'chi somministra','prendere farmaci','pillole'],
    r:'La somministrazione di farmaci richiede apposita autorizzazione medica e dei genitori. Contattare la segreteria per il modulo specifico.<br><br>✉️ <a href="contatti.html">Contattaci →</a>'},
   // ── QUIZ E ORIENTAMENTO ──
-  {k:['quiz','gioco','talento','fa per me','percorso scolastico','orientamento',
+  {k:['quiz','quiz accoglienza','gioco','talento','fa per me','percorso scolastico','orientamento',
       'enogastronomia','ospitalità','pasticceria','indirizzo accoglienza','sala','cucina','indirizzo'],
    r:'Prova i <strong>6 quiz interattivi</strong> per scoprire quale percorso fa per te: sai già cucinare? Cucina, Sala, Pasticceria o Accoglienza? C\'è anche un cruciverba del Costaggini!<br><br>🎮 <a href="scopri-talento.html">Scopri il tuo Talento →</a>'},
   // ── ALUMNI E COMMUNITY ──

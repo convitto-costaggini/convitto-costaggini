@@ -1110,7 +1110,12 @@
     'voci-del-personale': 'microfono',
     lettera: 'lettera',
     'settimana-in-numeri': 'grafico',
-    bullismo: 'scudo'
+    bullismo: 'scudo',
+    autorizzazioni: 'autorizzazioni',
+    'patto-di-corresponsabilita': 'patto-di-corresponsabilita',
+    'richiesta-rientro-domenicale': 'richiesta-rientro-domenicale',
+    'scheda-informativa-convittore': 'scheda-informativa-convittore',
+    'scheda-informativa-sanitaria': 'scheda-informativa-sanitaria'
   };
 
   var HUBS = {

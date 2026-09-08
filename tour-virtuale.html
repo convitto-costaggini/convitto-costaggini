@@ -122,10 +122,7 @@ const NARRATIONS = {
   'musica': 'Questo è il Laboratorio Musicale, fondato da Michele Gaggiano e Dino Barba. Chitarre, tastiere, percussioni — e la libertà di scoprire un talento che magari non sapevi di avere.',
   'giardino': 'Questo è il giardino, lo spazio aperto del Convitto con il Terminillo sullo sfondo: il luogo delle pause, delle chiacchiere e di un po\' di aria fresca.',
 };
-// Percorsi per eventuali registrazioni con voce umana, quando saranno disponibili
-// e autorizzate: se il file esiste viene usato quello, altrimenti si parla in automatico
-// con la voce sintetica (vedi speakRoom). Basta caricare l'mp3 con questo stesso nome,
-// nessuna modifica al codice necessaria.
+// Percorsi per eventuali registrazioni con voce umana, quando saranno disponibili e autorizzate.
 const AUDIO_SRC = {
   'ingresso':          'audio/tour/ingresso.mp3',
   'corridoi':          'audio/tour/corridoi.mp3',
@@ -137,6 +134,11 @@ const AUDIO_SRC = {
   'musica':            'audio/tour/musica.mp3',
   'giardino':          'audio/tour/giardino.mp3',
 };
+// Stanze per cui la registrazione con voce umana in AUDIO_SRC è realmente presente e autorizzata.
+// Oggi è vuoto (nessuna registrazione esiste ancora): si parla sempre con la voce sintetica.
+// Quando un mp3 sarà pronto, basta aggiungere qui l'id della stanza corrispondente — verrà
+// preferito automaticamente alla sintesi, senza altre modifiche al codice.
+const AUDIO_PRONTO = new Set([]);
 // ══ THREE.JS VIEWER ═══════════════════════════════════
 const canvas   = document.getElementById('tv-canvas');
 const wrap     = canvas.closest('.tv-viewer-wrap');
@@ -346,15 +348,16 @@ function stopNarration() {
 narrAudio.addEventListener('play',  () => updateNarrBtn(true));
 narrAudio.addEventListener('pause', () => updateNarrBtn(false));
 narrAudio.addEventListener('ended', () => updateNarrBtn(false));
-// Se il file audio registrato non c'è ancora (o non si carica), passa in automatico alla voce sintetica.
-// Sia l'evento "error" sia il rifiuto della promise di play() possono scattare per lo stesso
-// fallimento di caricamento: questo guardiano (per "sessione", cioè per singola selezione di
-// stanza) garantisce che il passaggio alla voce sintetica avvenga una volta sola, altrimenti la
-// narrazione partiva due volte e si sentiva il messaggio ripetuto.
+// Se il file audio registrato non c'è ancora (o non si carica), passa alla voce sintetica.
+// Questo guardiano (per "sessione", cioè per singola selezione di stanza) garantisce che il
+// passaggio avvenga una volta sola anche se sia l'evento "error" sia il rifiuto della promise
+// di play() scattano per lo stesso fallimento di caricamento — altrimenti la narrazione
+// partiva due volte e si sentiva il messaggio ripetuto.
 let fallbackDone = false;
 function triggerFallback(room, session) {
   if (session !== narrSession || fallbackDone) return;
   fallbackDone = true;
+  usingSynthesis = true;
   speakSynthetic(room, session);
 }
 narrAudio.addEventListener('error', () => {
@@ -369,12 +372,17 @@ function speakRoom(room, auto) {
   narrBar.style.display = 'flex';
   narrCap.textContent = ccEnabled ? text : '';
   stopNarration();
-  usingSynthesis = false;
   fallbackDone = false;
   narrBtn.style.display = 'flex';
   if (!auto) return; // rispetta le regole autoplay del browser
   const session = narrSession;
-  if (src) {
+  // Se non c'è ancora una registrazione pronta, la voce sintetica parte SUBITO, nello stesso
+  // istante del click: tentare comunque di caricare un file che sappiamo non esserci non
+  // guadagna nulla, e anzi il ritardo dell'esito di rete può far scadere, su alcuni browser, il
+  // permesso concesso dal click prima ancora di arrivare a parlare (la voce restava muta, senza
+  // errori visibili).
+  if (src && AUDIO_PRONTO.has(room.id)) {
+    usingSynthesis = false;
     narrAudio.src = src;
     narrAudio.play().catch(() => { triggerFallback(room, session); });
   } else {

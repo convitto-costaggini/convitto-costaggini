@@ -375,6 +375,7 @@ function speakRoom(room, auto) {
   fallbackDone = false;
   narrBtn.style.display = 'flex';
   if (!auto) return; // rispetta le regole autoplay del browser
+  disarmFirstInteractionAutostart(); // la narrazione sta partendo comunque: non serve più il listener generico
   const session = narrSession;
   // Se non c'è ancora una registrazione pronta, la voce sintetica parte SUBITO, nello stesso
   // istante del click: tentare comunque di caricare un file che sappiamo non esserci non
@@ -390,6 +391,7 @@ function speakRoom(room, auto) {
   }
 }
 narrBtn.addEventListener('click', () => {
+  disarmFirstInteractionAutostart();
   const room = ROOMS.find(r => document.getElementById('btn-' + r.id)?.classList.contains('active'));
   if (usingSynthesis) {
     if (!('speechSynthesis' in window)) return;
@@ -483,13 +485,29 @@ function buildThumbs() {
     wrap.appendChild(div);
   });
 }
+let firstInteractionArmed = true;
+function disarmFirstInteractionAutostart() {
+  if (!firstInteractionArmed) return;
+  firstInteractionArmed = false;
+  document.removeEventListener('pointerdown', onFirstInteraction);
+  document.removeEventListener('keydown', onFirstInteraction);
+}
+function onFirstInteraction(e) {
+  if (!firstInteractionArmed) return;
+  if (e.target.closest && e.target.closest('.tv-room-btn, .tv-thumb, #tv-narr-btn, #tv-narr-cc-toggle')) return;
+  disarmFirstInteractionAutostart();
+  const room = ROOMS.find(r => document.getElementById('btn-' + r.id)?.classList.contains('active')) || ROOMS[0];
+  speakRoom(room, true);
+}
+document.addEventListener('pointerdown', onFirstInteraction);
+document.addEventListener('keydown', onFirstInteraction);
 // ── Avvio ──
 window.addEventListener('resize', resize);
 resize();
 render();
 buildButtons();
 buildThumbs();
-selectRoom(ROOMS[0], false); // niente autoplay al primo caricamento: l'utente avvia con il pulsante 🔊
+selectRoom(ROOMS[0], false); // niente autoplay al primo caricamento (i browser lo bloccherebbero comunque): ci pensa onFirstInteraction sopra
 </script>
 </body>
 </html>

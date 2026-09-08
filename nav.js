@@ -1072,6 +1072,7 @@
   if (!heroBox) return; // pagina senza hero, nessun overhead
 
   var MAP = {
+    accoglienza: 'accoglienza',
     contatti: 'contatti',
     notizie: 'notizie',
     calendario: 'calendario',

@@ -104,11 +104,11 @@ const ROOMS = [
   { id:'corridoi',         label:'Corridoi',          icon:'🏛️', title:'I <em>corridoi</em>',                  desc:'La spina dorsale del Convitto. I luoghi dove si incrociano migliaia di storie — di mattina di corsa, di sera con calma.', img:'img/tour/corridoi.webp', thumb:'img/tour/corridoi-thumb.webp' },
   { id:'sala-ricreativa',  label:'Sala ricreativa',   icon:'🎮', title:'La <em>sala ricreativa</em>',          desc:'Calciobalilla, ping pong, divani e vetrate sul verde. Lo spazio del gioco, del relax e dello stare insieme dopo lo studio.', img:'img/tour/sala-ricreativa.webp', thumb:'img/tour/sala-ricreativa-thumb.webp' },
   { id:'ufficio-educatori',label:'Ufficio educatori', icon:'🖥️', title:'L\'<em>ufficio educatori</em>',        desc:'Il cuore operativo del Convitto. Da qui gli educatori coordinano le attività e — nelle giornate limpide — ammirano la splendida natura che circonda la struttura: dai piani, si può fruire di una splendida vista sul Terminillo.', img:'img/tour/ufficio-educatori.webp', thumb:'img/tour/ufficio-educatori-thumb.webp' },
-  { id:'camera',           label:'Camera tipo',       icon:'🛏️', title:'Una <em>camera tipo</em>',             desc:'Spazio personale, sicuro e ordinato. Ogni convittore ha il suo posto — un angolo tutto suo.', img:'img/tour/camera.webp', thumb:'img/tour/camera-thumb.webp' },
+  { id:'camera',           label:'Camera tipo',       icon:'🛏️', title:'Una <em>camera tipo</em>',             desc:'Spazio personale, sicuro e ordinato. Ogni convittore ha il suo posto — un angolo tutto suo.', img:'img/tour/camera.webp', thumb:'img/tour/camera-thumb.webp', hfov:100 },
   { id:'mensa',            label:'Mensa',             icon:'🍽️', title:'La <em>mensa</em>',                    desc:'Ogni giorno, un menù cucinato internamente e concordato con lo specialista. Un luogo di convivialità vera.', img:'img/tour/mensa.jpg', thumb:'img/tour/mensa.jpg' },
-  { id:'studio',           label:'Sala studio',       icon:'📖', title:'La <em>sala studio</em>',              desc:'Dalle 15:30 alle 17:15, studio guidato con gli educatori. Un ambiente silenzioso e strutturato.', img:'img/tour/studio.webp', thumb:'img/tour/studio-thumb.webp' },
+  { id:'studio',           label:'Sala studio',       icon:'📖', title:'La <em>sala studio</em>',              desc:'Dalle 15:30 alle 17:15, studio guidato con gli educatori. Un ambiente silenzioso e strutturato.', img:'img/tour/studio.webp', thumb:'img/tour/studio-thumb.webp', hfov:100 },
   { id:'musica',           label:'Lab Musicale',      icon:'🎵', title:'Il <em>Laboratorio Musicale</em>',     desc:'Fondato da Michele Gaggiano e Dino Barba. Chitarre, tastiere, percussioni — e la libertà di scoprire un talento.', img:'img/tour/musica.jpg', thumb:'img/tour/musica.jpg' },
-  { id:'infermeria',       label:'Infermeria',        icon:'🩺', title:'L\'<em>infermeria</em>',               desc:'Presidiata ogni giorno da un\'infermiera professionale: un piccolo spazio di cura e di ascolto, dove si seguono le terapie quotidiane e il benessere di ciascun convittore, anche grazie al sostegno dello sportello psicologico d\'Istituto (C.I.C.), in stretto contatto con il medico convenzionato.', img:'img/tour/infermeria.webp', thumb:'img/tour/infermeria-thumb.webp' },
+  { id:'infermeria',       label:'Infermeria',        icon:'🩺', title:'L\'<em>infermeria</em>',               desc:'Presidiata ogni giorno da un\'infermiera professionale: un piccolo spazio di cura e di ascolto, dove si seguono le terapie quotidiane e il benessere di ciascun convittore, anche grazie al sostegno dello sportello psicologico d\'Istituto (C.I.C.), in stretto contatto con il medico convenzionato.', img:'img/tour/infermeria.webp', thumb:'img/tour/infermeria-thumb.webp', hfov:100 },
   { id:'esterni',          label:'Esterni',           icon:'🌳', title:'Gli <em>esterni</em> della struttura', desc:'Il lato ovest dell\'edificio, la nuova palestra in costruzione e il verde che circonda il Convitto: un contesto tranquillo, a pochi minuti dal centro di Rieti.', img:'img/tour/esterni.webp', thumb:'img/tour/esterni-thumb.webp' },
 ];
 const NARRATIONS = {
@@ -435,7 +435,7 @@ function selectRoom(room, auto = true) {
   document.getElementById('tv-desc').textContent  = room.desc;
   // Reset angolo visione e zoom
   lon = 0; lat = 0; autoRot = true;
-  H_FOV = DEFAULT_HFOV; applyFov();
+  H_FOV = room.hfov || DEFAULT_HFOV; applyFov();
   document.getElementById('tv-placeholder').style.display = 'flex';
   document.getElementById('tv-info').style.display = 'none';
   loadPanorama(room.img);

@@ -621,54 +621,50 @@ caricaNotizieHome();
 </script>
 </main>
 
-<!-- ══════════ BLOCCO TEMPORANEO — AVVISO ACCOGLIENZA CONVITTORI A.S. 2026/2027 ══════════
-     Da rimuovere manualmente (tutto il blocco, fino a END-MODALE-ACCOGLIENZA incluso)
-     a partire da lunedì 14 settembre 2026. Il JS sotto smette comunque di mostrarlo da solo
-     dopo il 13/9/2026 23:59, come doppia sicurezza. Mostrato ad ogni caricamento della
-     pagina (nessun limite "una volta al giorno"): resta visibile finché non scade. -->
-<div id="acc-modale-overlay" role="dialog" aria-modal="true" aria-labelledby="acc-modale-titolo" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:1.25rem;background:rgba(12,20,13,.72);backdrop-filter:blur(2px);overflow-y:auto">
-  <div style="position:relative;width:100%;max-width:460px;max-height:calc(100vh - 2.5rem);background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow-y:auto;overflow-x:hidden;animation:accModaleIn .25s ease both">
+<!-- ══════════ AVVISO ALLE FAMIGLIE — ACCESSO REGISTRO ELETTRONICO (credenziali / SPID) ══════════
+     Sostituisce il precedente blocco temporaneo "AVVISO ACCOGLIENZA CONVITTORI A.S. 2026/2027".
+     Avviso permanente: nessuna data di scadenza automatica in questo caso, a differenza del
+     modale precedente. Per rimuoverlo in futuro basta cancellare tutto il blocco, fino a
+     END-MODALE-FAMIGLIE incluso. Mostrato una sola volta per sessione di navigazione
+     (sessionStorage), stesso meccanismo del modale precedente. -->
+<div id="fam-modale-overlay" role="dialog" aria-modal="true" aria-labelledby="fam-modale-titolo" style="display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;padding:1.25rem;background:rgba(12,20,13,.72);backdrop-filter:blur(2px);overflow-y:auto">
+  <div style="position:relative;width:100%;max-width:460px;max-height:calc(100vh - 2.5rem);background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow-y:auto;overflow-x:hidden;animation:famModaleIn .25s ease both">
     <div style="background:linear-gradient(135deg,var(--bosco),#1a3a1b);padding:1.5rem 1.75rem 1.25rem;position:relative">
-      <button id="acc-modale-chiudi" aria-label="Chiudi avviso" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,255,255,.22);border:1.5px solid rgba(255,255,255,.55);width:40px;height:40px;border-radius:50%;color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25)">✕</button>
-      <span style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2)">📋 Avviso Accoglienza</span>
-      <h2 id="acc-modale-titolo" style="font-family:var(--fd);font-weight:300;font-size:1.55rem;color:#fff;margin:.4rem 0 0">Accoglienza convittori<br/><em style="color:var(--oro3);font-style:italic">A.S. 2026/2027</em></h2>
+      <button id="fam-modale-chiudi" aria-label="Chiudi avviso" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,255,255,.22);border:1.5px solid rgba(255,255,255,.55);width:40px;height:40px;border-radius:50%;color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25)">✕</button>
+      <span style="font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2)">📢 Comunicazione</span>
+      <h2 id="fam-modale-titolo" style="font-family:var(--fd);font-weight:300;font-size:1.55rem;color:#fff;margin:.4rem 0 0">Avviso alle famiglie</h2>
     </div>
     <div style="padding:1.5rem 1.75rem">
       <p style="font-family:var(--fu);font-size:.88rem;color:#374151;line-height:1.7;margin:0 0 1rem">
-        L'accoglienza dei convittori e delle convittrici si terrà <strong>venerdì 11 settembre 2026</strong>, presso il Convitto (<a href="https://convitto.alberghierorieti.edu.it/contatti.html#dove-siamo" style="color:var(--bosco2)">Via Salaria per Roma</a>), nei seguenti orari:
+        Si comunica che i genitori possono visualizzare classi, sezioni degli alunni e tutti gli avvisi dalla bacheca del registro elettronico, accedendo:
       </p>
-      <div style="background:var(--av);border:1px solid rgba(44,62,45,.15);border-radius:8px;padding:.9rem 1.1rem;margin-bottom:1.1rem;font-family:var(--fu);font-size:.85rem;color:var(--bosco);font-weight:700;line-height:1.9">
-        🕘 9.00 – 12.30<br/>
-        🕒 15.00 – 18.30
+      <div style="background:var(--av);border:1px solid rgba(44,62,45,.15);border-radius:8px;padding:.9rem 1.1rem;margin-bottom:1.25rem;font-family:var(--fu);font-size:.85rem;color:var(--bosco);font-weight:700;line-height:1.9">
+        📧 con le credenziali ricevute agli indirizzi di posta elettronica indicati nella domanda di iscrizione<br/>
+        oppure<br/>
+        🪪 con lo SPID
       </div>
-      <p style="font-family:var(--fu);font-size:.8rem;color:#6b7280;line-height:1.65;margin:0 0 1.25rem">
-        Si ricorda di portare con sé la modulistica compilata, da consegnare al Personale Educativo. Per informazioni: referente Montorselli Gianfranco — <a href="mailto:convitto@alberghierorieti.it" style="color:var(--bosco2)">convitto@alberghierorieti.it</a>
-      </p>
       <div style="display:flex;gap:.75rem;flex-wrap:wrap">
-        <a href="accoglienza.html" class="btn-gold" style="text-decoration:none">Vai alla modulistica →</a>
-        <button type="button" id="acc-modale-chiudi-2" style="font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;background:none;border:1.5px solid #d1d5db;border-radius:8px;padding:.75rem 1.25rem;cursor:pointer">Chiudi</button>
+        <button type="button" id="fam-modale-chiudi-2" style="font-family:var(--fu);font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--bosco);background:linear-gradient(135deg,var(--oro2),var(--oro3));border:none;border-radius:8px;padding:.8rem 1.5rem;cursor:pointer;box-shadow:0 4px 14px rgba(184,146,42,.35)">Ho capito</button>
       </div>
     </div>
   </div>
 </div>
-<style>@keyframes accModaleIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}</style>
+<style>@keyframes famModaleIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}</style>
 <script>
 (function(){
-  // Non mostrare più dopo il 13/9/2026 23:59 (scompare da lunedì 14) — doppia sicurezza
-  // oltre alla rimozione manuale del blocco.
-  var SCADENZA = new Date(2026, 8, 13, 23, 59, 59); // mese 8 = settembre (0-indicizzato)
-  if (new Date() > SCADENZA) return;
+  // Avviso permanente: a differenza del modale precedente (accoglienza convittori),
+  // qui non c'è una data di scadenza automatica: resta attivo finché Michele non
+  // rimuove manualmente il blocco.
 
   // Una sola volta per navigazione (sessionStorage: dura finché resta aperta la
-  // scheda/il browser). Se l'utente, nella stessa visita, va sulla modulistica e
-  // torna alla home non lo rivede; al collegamento successivo (nuova scheda o
-  // nuova sessione del browser) torna a comparire.
-  var CHIAVE_SESSIONE = 'acc-modale-mostrato-sessione-2026';
+  // scheda/il browser). Al collegamento successivo (nuova scheda o nuova sessione
+  // del browser) torna a comparire.
+  var CHIAVE_SESSIONE = 'fam-modale-mostrato-sessione';
   try {
     if (sessionStorage.getItem(CHIAVE_SESSIONE) === '1') return;
   } catch(e) {}
 
-  var overlay = document.getElementById('acc-modale-overlay');
+  var overlay = document.getElementById('fam-modale-overlay');
   if (!overlay) return;
   // Sicurezza aggiuntiva: sposta sempre l'overlay come figlio diretto di <body>,
   // qualunque sia la sua posizione nel markup, così "position:fixed" si aggancia
@@ -687,8 +683,8 @@ caricaNotizieHome();
     overlay.style.display = 'none';
   }
 
-  document.getElementById('acc-modale-chiudi').addEventListener('click', chiudi);
-  document.getElementById('acc-modale-chiudi-2').addEventListener('click', chiudi);
+  document.getElementById('fam-modale-chiudi').addEventListener('click', chiudi);
+  document.getElementById('fam-modale-chiudi-2').addEventListener('click', chiudi);
   overlay.addEventListener('click', function(e){ if (e.target === overlay) chiudi(); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && overlay.style.display === 'flex') chiudi(); });
 
@@ -696,6 +692,6 @@ caricaNotizieHome();
   else mostra();
 })();
 </script>
-<!-- ══════════ END-MODALE-ACCOGLIENZA ══════════ -->
+<!-- ══════════ END-MODALE-FAMIGLIE ══════════ -->
 </body>
 </html>

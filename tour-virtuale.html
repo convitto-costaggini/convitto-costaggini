@@ -441,6 +441,9 @@ function selectRoom(room, auto = true) {
   loadPanorama(room.img);
   stopNarration();
   speakRoom(room, auto);
+  // Selezione da click reale (scheda o miniatura): riporta il visualizzatore in vista,
+  // altrimenti scegliendo una miniatura più in basso la nuova immagine cambia "fuori schermo"
+  if (auto) wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 // ── Build pulsanti stanza ──
 function buildButtons() {

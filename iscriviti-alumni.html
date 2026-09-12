@@ -14,6 +14,7 @@
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
 </head>
 <body data-page="iscriviti-alumni">
 <script src="nav-header.min.js"></script>
@@ -227,6 +228,9 @@
         </div>
 
         <!-- SUBMIT -->
+        <p style="position:absolute;left:-9999px" aria-hidden="true">
+          <label>Non compilare questo campo: <input type="text" id="sito_web" name="sito_web" tabindex="-1" autocomplete="off"/></label>
+        </p>
         <div id="ia-error-msg" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:.75rem 1rem;font-size:.85rem;color:#b91c1c;margin-bottom:1rem;line-height:1.6">
           ❌ Errore durante l'invio. Controlla la connessione e riprova. Se il problema persiste, scrivi a <strong>convitto@alberghierorieti.it</strong>
         </div>
@@ -258,7 +262,6 @@
   </section>
 
 </main>
-<script src="supabase.js"></script>
 <script src="nav.min.js"></script>
 <script>
 // ── ANTEPRIMA LIVE ─────────────────────────────────────
@@ -355,51 +358,37 @@ document.getElementById('ia-form').addEventListener('submit', async function(e) 
   const mappa   = document.getElementById('ia-mappa').checked;
 
   try {
-    // 1. Salva scheda alumni su Supabase (approvato=false → in attesa)
-    try {
-      await sb.insert('alumni', {
-        nome, firma, anni, citta, lavoro, settore, ricordo, email,
-        social_fb: fb, social_ig: ig, social_li: li, social_web: web,
-        contattabile,
-        colore: Math.floor(Math.random()*5),
-        approvato: false
+    // Token anti-spam reCAPTCHA Enterprise
+    const recaptchaToken = await new Promise((resolve, reject) => {
+      if (typeof grecaptcha === 'undefined') return reject(new Error('reCAPTCHA non caricato'));
+      grecaptcha.ready(() => {
+        grecaptcha.execute('6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO', {action: 'iscrizione_alumni'})
+          .then(resolve).catch(reject);
       });
-    } catch(insertErr) {
-      // Ignora errore JSON su risposta vuota (201 senza body)
-      if (!insertErr.message.includes('JSON') && !insertErr.message.includes('end of JSON')) throw insertErr;
-    }
+    });
 
-    // 2. Salva ricordo su Supabase (approvato=false)
-    try {
-      await sb.insert('ricordi', {
-        testo: ricordo,
-        nome: firma,
-        anni,
-        dove: [citta, lavoro].filter(Boolean).join(' · '),
-        colore: Math.floor(Math.random()*5),
-        approvato: false
-      });
-    } catch(e) { if (!e.message.includes('JSON') && !e.message.includes('end of JSON')) console.warn('ricordi:', e); }
-
-    // 3. Se ha acconsentito alla mappa → geocodifica e salva pin
-    if (mappa && citta) {
-      try {
-        const geo = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(citta)}&limit=1`,
-          { headers: { 'Accept-Language':'it' } }
-        );
-        const gd = await geo.json();
-        if (gd && gd[0]) {
-          await sb.insert('pin_mappa', {
-            nome: firma, citta, tipo: 'alumni',
-            anni, ruolo: lavoro,
-            lat: parseFloat(gd[0].lat),
-            lng: parseFloat(gd[0].lon),
-            from_alumni: true,
-            approvato: false
-          });
-        }
-      } catch(e) { /* geocoding fallito — non blocca */ }
+    // Scheda alumni + ricordo + (eventuale) pin mappa: tutto gestito
+    // lato server dalla Edge Function, che verifica prima il reCAPTCHA.
+    const resp = await fetch(
+      'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/iscrizione-alumni',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ',
+          'Authorization': 'Bearer sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ'
+        },
+        body: JSON.stringify({
+          nome, firma, anni, citta, lavoro, settore, ricordo, email,
+          fb, ig, li, web, contattabile, mappa,
+          recaptchaToken,
+          botField: document.getElementById('sito_web')?.value || ''
+        })
+      }
+    );
+    const esito = await resp.json().catch(() => ({}));
+    if (!resp.ok || !esito.success) {
+      throw new Error(esito.message || ('HTTP ' + resp.status));
     }
 
     // Mostra successo — overlay centrato

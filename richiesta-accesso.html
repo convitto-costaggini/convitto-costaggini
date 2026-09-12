@@ -13,6 +13,7 @@
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
 </head>
 <body data-page="richiesta-accesso">
 <script src="nav-header.min.js"></script>
@@ -85,6 +86,9 @@
             </label>
           </div>
         </div>
+        <p style="position:absolute;left:-9999px" aria-hidden="true">
+          <label>Non compilare questo campo: <input type="text" id="sito_web" name="sito_web" tabindex="-1" autocomplete="off"/></label>
+        </p>
         <button class="btn-invia" id="btn-invia" onclick="inviaRichiesta()">
           Invia richiesta di accesso
         </button>
@@ -115,25 +119,34 @@ async function inviaRichiesta() {
   btn.disabled = true;
   btn.textContent = 'Invio in corso...';
   try {
+    const recaptchaToken = await new Promise((resolve, reject) => {
+      if (typeof grecaptcha === 'undefined') return reject(new Error('reCAPTCHA non caricato'));
+      grecaptcha.ready(() => {
+        grecaptcha.execute('6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO', {action: 'richiesta_accesso'})
+          .then(resolve).catch(reject);
+      });
+    });
     const resp = await fetch(
-      'https://sawclsysqnjsvbobioqo.supabase.co/rest/v1/richieste_accesso',
+      'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/richiesta-accesso',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'apikey': 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ',
-          'Authorization': 'Bearer sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ',
-          'Prefer': 'return=minimal'
+          'Authorization': 'Bearer sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ'
         },
         body: JSON.stringify({
-          nome_studente:  nomeStudente,
-          email_genitore: email,
-          relazione:      relazione,
-          stato:          'in_attesa'
+          nomeStudente,
+          relazione,
+          email,
+          privacy,
+          recaptchaToken,
+          botField: document.getElementById('sito_web')?.value || ''
         })
       }
     );
-    if (resp.ok || resp.status === 201) {
+    const esito = await resp.json().catch(() => ({}));
+    if (resp.ok && esito.success) {
       const overlay = document.createElement('div');
       overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(10,20,10,.85);display:flex;align-items:center;justify-content:center;padding:1.5rem;';
       overlay.innerHTML = '<div style="background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)">' +
@@ -148,8 +161,7 @@ async function inviaRichiesta() {
       document.body.appendChild(overlay);
       document.body.style.overflow = 'hidden';
     } else {
-      const errTxt = await resp.text();
-      throw new Error('HTTP ' + resp.status + ': ' + errTxt);
+      throw new Error(esito.message || ('HTTP ' + resp.status));
     }
   } catch(e) {
     mostraMsg('Errore durante l\'invio. Riprovare o contattare l\'amministratore. (' + e.message + ')', 'err');

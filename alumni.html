@@ -231,6 +231,28 @@ function alumniShowEmailOverlay(email) {
   ov.addEventListener('click', function(ev) { if (ev.target === ov) chiudi(); });
 }
 
+function apriRicordoAlumni(a) {
+  if (!a || !a.ricordo) return;
+  const old = document.getElementById('alumni-ricordo-ov');
+  if (old) old.remove();
+  var ov = document.createElement('div');
+  ov.id = 'alumni-ricordo-ov';
+  ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(6,13,6,.88);display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(6px)';
+  var box = document.createElement('div');
+  box.style.cssText = 'background:#1a2e1b;border:1px solid rgba(184,146,42,.3);border-radius:14px;padding:2rem 1.75rem;max-width:460px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)';
+  var sottotitolo = [a.lavoro, a.citta].filter(Boolean).join(' · ');
+  box.innerHTML = '<p style="font-family:var(--fd);font-size:1.15rem;font-style:italic;color:#F5F0E8;line-height:1.75;margin:0 0 1.25rem">"' + escapeHtml(a.ricordo) + '"</p>'
+    + '<h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--oro2);margin:0 0 .2rem">' + escapeHtml(a.nome||'') + '</h3>'
+    + (sottotitolo ? '<p style="font-size:.78rem;color:rgba(245,240,232,.55);margin:0 0 1.5rem">' + escapeHtml(sottotitolo) + '</p>' : '<div style="margin-bottom:1.5rem"></div>')
+    + '<button id="alumni-ricordo-ov-close" style="background:linear-gradient(135deg,#B8922A,#D4AA4A);color:#1a2e1b;border:none;padding:.6rem 1.5rem;border-radius:40px;cursor:pointer;font-family:var(--fu),sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase">Chiudi</button>';
+  ov.appendChild(box);
+  document.body.appendChild(ov);
+  document.body.style.overflow = 'hidden';
+  function chiudi() { ov.remove(); document.body.style.overflow = ''; }
+  document.getElementById('alumni-ricordo-ov-close').addEventListener('click', chiudi);
+  ov.addEventListener('click', function(ev) { if (ev.target === ov) chiudi(); });
+}
+
 function driveEmbedUrl(url) {
   const m = String(url || '').match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
   return m ? 'https://drive.google.com/file/d/' + m[1] + '/preview' : url;
@@ -251,7 +273,12 @@ function chiudiVideoAlumni() {
   if (frame) frame.src = ''; // ferma la riproduzione alla chiusura
   document.body.style.overflow = '';
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') chiudiVideoAlumni(); });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  chiudiVideoAlumni();
+  const ovRicordo = document.getElementById('alumni-ricordo-ov');
+  if (ovRicordo) { ovRicordo.remove(); document.body.style.overflow = ''; }
+});
 
 function renderCifreReali(rows) {
   const box = document.getElementById('alumni-cifre-reali');
@@ -363,6 +390,27 @@ function renderCifreReali(rows) {
         </div>
       `;
       grid.appendChild(card);
+
+      // L'intera scheda (esclusi i link/pulsanti interni: Scrivimi, social,
+      // "Guarda l'intervista") apre il ricordo completo, non troncato dal
+      // line-clamp CSS usato nell'anteprima.
+      if (a.ricordo) {
+        card.style.cursor = 'pointer';
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', 'Leggi il ricordo completo di ' + (a.nome || ''));
+        card.addEventListener('click', function(e){
+          if (e.target.closest('a,button')) return;
+          apriRicordoAlumni(a);
+        });
+        card.addEventListener('keydown', function(e){
+          if (e.target.closest('a,button')) return;
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            apriRicordoAlumni(a);
+          }
+        });
+      }
     });
   } catch(e) { console.warn('Supabase non raggiungibile:', e); }
 })();

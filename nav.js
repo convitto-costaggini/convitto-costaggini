@@ -649,11 +649,7 @@
   var KEY = 'lf-convitto';
   var root = document.documentElement;
 
-  /* font ad alta leggibilità */
-  var fl = document.createElement('link');
-  fl.rel = 'stylesheet';
-  fl.href = 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap';
-  document.head.appendChild(fl);
+  /* font ad alta leggibilità: già incluso in fonts.css (self-hosted), caricato in ogni pagina */
 
   /* regole attive SOLO quando html.lettura-facilitata è presente */
   var CSS = [

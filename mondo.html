@@ -216,8 +216,17 @@ function scrollCard(i){
 }
 
 function flyTo(lat,lng,i){
-  map.flyTo([lat,lng],5,{duration:1.2});
-  setTimeout(()=>{if(markers[i])markers[i].openPopup();},1300);
+  // Riporta prima la mappa in vista (da mobile, dopo aver scorso fino
+  // all'elenco "Chi ci ha raggiunto", la mappa è fuori schermo più in
+  // alto: senza questo passaggio il volo verso il punto geografico
+  // avviene fuori vista e sembra che non succeda nulla), poi la fa
+  // volare verso il punto e apre il popup del segnaposto.
+  const mapEl = document.getElementById('map');
+  if (mapEl) mapEl.scrollIntoView({behavior:'smooth', block:'start'});
+  setTimeout(()=>{
+    map.flyTo([lat,lng],5,{duration:1.2});
+    setTimeout(()=>{if(markers[i])markers[i].openPopup();},1300);
+  }, 450);
 }
 
 function updateStats(){

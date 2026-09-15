@@ -244,10 +244,10 @@
 @media (min-width:768px){
   #jumpnav{display:none!important}
 }
-#jumpnav{background:var(--bosco);padding:.5rem 1.25rem 1.75rem;position:sticky;top:var(--hdr-h,68px);z-index:40;border-bottom:1px solid rgba(184,146,42,.15)}
-#jumpnav::before{content:'';position:absolute;top:.5rem;bottom:1.75rem;left:0;width:26px;pointer-events:none;background:linear-gradient(to left,rgba(44,62,45,0),var(--bosco) 65%);z-index:2;transition:opacity .25s ease}
-#jumpnav::after{content:'';position:absolute;top:.5rem;bottom:1.75rem;right:0;width:26px;pointer-events:none;background:linear-gradient(to right,rgba(44,62,45,0),var(--bosco) 65%);z-index:2;transition:opacity .25s ease}
-.jumpnav-wrap{max-width:1320px;margin:0 auto;overflow:hidden;position:relative;scroll-snap-type:x proximity;scroll-padding-left:1.25rem}
+#jumpnav{background:var(--bosco);padding:.5rem 1.25rem 1.25rem;position:sticky;top:var(--hdr-h,68px);z-index:40;border-bottom:1px solid rgba(184,146,42,.15)}
+#jumpnav::before{content:'';position:absolute;top:.5rem;bottom:1.25rem;left:0;width:26px;pointer-events:none;background:linear-gradient(to left,rgba(44,62,45,0),var(--bosco) 65%);z-index:2;transition:opacity .25s ease}
+#jumpnav::after{content:'';position:absolute;top:.5rem;bottom:1.25rem;right:0;width:26px;pointer-events:none;background:linear-gradient(to right,rgba(44,62,45,0),var(--bosco) 65%);z-index:2;transition:opacity .25s ease}
+.jumpnav-wrap{max-width:1320px;margin:0 auto;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;position:relative;scroll-snap-type:x proximity;scroll-padding-left:1.25rem}
 .jumpnav-wrap::-webkit-scrollbar{display:none}
 .jumpnav-track{display:flex;gap:.55rem;flex-wrap:nowrap;width:max-content;will-change:transform}
 #jumpnav.jn-static .jumpnav-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -257,19 +257,26 @@
 .jump-btn{scroll-snap-align:start;flex-shrink:0;display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--oro3);background:rgba(245,240,232,.06);border:1px solid rgba(184,146,42,.28);border-radius:40px;padding:.5rem 1rem;text-decoration:none;transition:background var(--ease),border-color var(--ease),color var(--ease);white-space:nowrap}
 .jump-btn:hover{background:var(--oro2);border-color:var(--oro2);color:var(--bosco)}
 .jump-btn.active,.jump-btn.featured{background:var(--oro2);border-color:var(--oro2);color:var(--bosco)}
+@media (max-width:767px){
+  #storia,#mission,#valori,#staff{scroll-margin-top:calc(var(--hdr-h,68px) + var(--jn-h,65px) + 26px)}
+}
 </style>
 <script>
 (function(){
   var jn = document.getElementById('jumpnav');
   var track = document.getElementById('jnTrack');
-  if (!jn || !track) return;
+  var wrap = jn ? jn.querySelector('.jumpnav-wrap') : null;
+  if (!jn || !track || !wrap) return;
 
   var riduciMovimento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function isMobile(){ return window.innerWidth < 768; }
 
-  // Identico a index.html: nastro mosso via requestAnimationFrame, non con
-  // un'animazione CSS, così nulla può fermarlo per errore salvo "riduci movimento".
-  var VELOCITA = 34; // px al secondo
+  // Il nastro è mosso direttamente in JavaScript, fotogramma per fotogramma
+  // (requestAnimationFrame), invece che con un'animazione CSS: così nulla
+  // che accade altrove nella pagina (un click, la navigazione a un'ancora,
+  // il ridimensionamento della finestra) può fermarlo per errore. L'unica
+  // eccezione voluta è l'impostazione di sistema "riduci movimento".
+  var VELOCITA = 34; // px al secondo: velocità confortevole di lettura
   var larghezzaGruppo = 0;
   var posizione = 0;
   var ultimoT = null;
@@ -280,6 +287,13 @@
     larghezzaGruppo = track.scrollWidth / 2;
   }
 
+  // Altezza reale della barra, esposta come variabile CSS: serve a calcolare
+  // lo scroll-margin-top delle sezioni della pagina, così il tocco su una
+  // voce del menu non lascia la foto della sezione "mozzata" sotto la barra.
+  function misuraAltezza(){
+    document.documentElement.style.setProperty('--jn-h', jn.offsetHeight + 'px');
+  }
+
   function fotogramma(t){
     if (!inCorso) return;
     if (ultimoT === null) ultimoT = t;
@@ -287,7 +301,7 @@
     ultimoT = t;
     if (larghezzaGruppo > 0) {
       posizione = (posizione + VELOCITA * dt) % larghezzaGruppo;
-      track.style.transform = 'translateX(-' + posizione + 'px)';
+      wrap.scrollLeft = posizione;
     }
     rafId = requestAnimationFrame(fotogramma);
   }
@@ -298,18 +312,28 @@
     if (larghezzaGruppo <= 0) return;
     inCorso = true;
     ultimoT = null;
+    // Lo scroll-snap va disattivato mentre il nastro scorre da solo: con
+    // uno snap attivo il browser tende a "incollare" ogni micro-spostamento
+    // scritto via JS al pulsante più vicino, bloccando l'animazione. Torna
+    // attivo appena l'utente prende in mano lo scorrimento (vedi ferma()).
+    wrap.style.scrollSnapType = 'none';
     rafId = requestAnimationFrame(fotogramma);
   }
   function ferma(){
     inCorso = false;
     if (rafId) cancelAnimationFrame(rafId);
     rafId = null;
+    wrap.style.scrollSnapType = '';
   }
 
   function aggiorna(){
+    misuraAltezza();
+    // Il nastro è scorribile a mano solo quando è davvero questo il
+    // componente attivo (mobile): su desktop resta un normale tab stop
+    // in meno, così non si aggiunge una fermata inutile alla tastiera.
+    wrap.tabIndex = isMobile() ? 0 : -1;
     if (!isMobile() || riduciMovimento) {
       ferma();
-      track.style.transform = '';
       jn.classList.toggle('jn-static', riduciMovimento && isMobile());
       return;
     }
@@ -318,6 +342,9 @@
     if (!inCorso) avvia();
   }
   aggiorna();
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(misuraAltezza);
+  }
 
   var resizeT;
   window.addEventListener('resize', function(){
@@ -325,8 +352,42 @@
     resizeT = setTimeout(aggiorna, 200);
   }, { passive: true });
 
-  // Tap su una voce: la evidenzia in oro e spegne le altre, esattamente come
-  // in index.html (nessuna evidenziazione automatica durante lo scroll).
+  // Per chi ha fretta: il nastro resta scorribile anche a mano (dito, mouse,
+  // frecce da tastiera). Un tocco/trascinamento mette in pausa lo scorrimento
+  // automatico; dopo una breve pausa di inattività riprende da dove l'utente
+  // lo ha lasciato, senza scatti.
+  var riprendiTimer = null;
+  function pausaTemporanea(){
+    if (!isMobile() || riduciMovimento) return;
+    ferma();
+    clearTimeout(riprendiTimer);
+    riprendiTimer = setTimeout(function(){
+      if (!isMobile() || riduciMovimento) return;
+      if (larghezzaGruppo > 0) posizione = wrap.scrollLeft % larghezzaGruppo;
+      avvia();
+    }, 2500);
+  }
+  ['pointerdown', 'touchstart', 'wheel'].forEach(function(ev){
+    wrap.addEventListener(ev, pausaTemporanea, { passive: true });
+  });
+  wrap.addEventListener('keydown', function(e){
+    if (['ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'].indexOf(e.key) !== -1) {
+      pausaTemporanea();
+    }
+  });
+  // Il nastro è doppio (reale + copia) per dare l'illusione di un loop
+  // infinito: se lo scroll manuale supera la prima copia, lo si riporta
+  // indietro di una larghezza-gruppo in modo impercettibile (stesso
+  // contenuto, copia con aria-hidden).
+  wrap.addEventListener('scroll', function(){
+    if (larghezzaGruppo > 0 && wrap.scrollLeft >= larghezzaGruppo) {
+      wrap.scrollLeft -= larghezzaGruppo;
+    }
+  }, { passive: true });
+
+  // Tap su una voce: la evidenzia in oro e spegne le altre (su entrambe
+  // le copie, quella reale e quella duplicata per il loop), senza mai
+  // interrompere lo scorrimento del nastro.
   track.addEventListener('click', function(e){
     var link = e.target.closest('a.jump-btn');
     if (!link) return;

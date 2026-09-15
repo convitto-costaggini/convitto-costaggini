@@ -79,6 +79,27 @@
     </div>
   </div>
 
+  <!-- MINI-NAV MOBILE: su smartphone stesso identico mini-nav di index.html
+       (markup/CSS/JS ripresi pari pari da #jumpnav in home). Su desktop resta
+       nascosto e non cambia nulla: la barra sopra (.hero-jump-bar) è quella di
+       sempre. -->
+  <nav id="jumpnav" aria-label="Salta a una sezione della pagina">
+    <div class="jumpnav-wrap">
+      <div class="jumpnav-track" id="jnTrack">
+        <a href="#organigramma-titolo" class="jump-btn">Organigramma</a>
+        <a href="personale.html" class="jump-btn">Elenco del personale</a>
+        <a href="voci-del-personale.html" class="jump-btn">Voci del Personale</a>
+        <a href="#patto-corresponsabilita" class="jump-btn">Il Patto Educativo di Corresponsabilità</a>
+        <div data-dup="1" aria-hidden="true">
+          <a href="#organigramma-titolo" class="jump-btn" tabindex="-1">Organigramma</a>
+          <a href="personale.html" class="jump-btn" tabindex="-1">Elenco del personale</a>
+          <a href="voci-del-personale.html" class="jump-btn" tabindex="-1">Voci del Personale</a>
+          <a href="#patto-corresponsabilita" class="jump-btn" tabindex="-1">Il Patto Educativo di Corresponsabilità</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
   <section style="background:var(--av2);padding:4rem 1.25rem 2rem">
     <div class="w">
       <p class="lbl" id="organigramma-titolo">La struttura</p>
@@ -261,5 +282,114 @@
 </main>
 <script src="nav.min.js"></script>
 <script src="hero-jump.js"></script>
+<!-- ══════════ MINI-NAV MOBILE: bannerino rotante (stesso di index.html) ══════════
+     #jumpnav qui sopra è ripreso PARI PARI (markup, CSS, JS) da index.html: stesso
+     nastro che scorre da solo, stesso stile dei pulsanti, stesso comportamento al
+     tocco (evidenzia e basta, nessuna evidenziazione automatica durante lo scroll).
+     Su smartphone (<768px) sostituisce del tutto .hero-jump-bar, che viene solo
+     nascosta (resta intatta nel codice). Da desktop (≥768px) NULLA cambia: si vede
+     solo .hero-jump-bar, esattamente come oggi. -->
+<style>
+@media (max-width:767px){
+  .hero-jump-bar,.hjb-toggle.hjb-visible{display:none!important}
+}
+@media (min-width:768px){
+  #jumpnav{display:none!important}
+}
+#jumpnav{background:var(--bosco);padding:.5rem 1.25rem 1.75rem;position:sticky;top:var(--hdr-h,68px);z-index:40;border-bottom:1px solid rgba(184,146,42,.15)}
+#jumpnav::before{content:'';position:absolute;top:.5rem;bottom:1.75rem;left:0;width:26px;pointer-events:none;background:linear-gradient(to left,rgba(44,62,45,0),var(--bosco) 65%);z-index:2;transition:opacity .25s ease}
+#jumpnav::after{content:'';position:absolute;top:.5rem;bottom:1.75rem;right:0;width:26px;pointer-events:none;background:linear-gradient(to right,rgba(44,62,45,0),var(--bosco) 65%);z-index:2;transition:opacity .25s ease}
+.jumpnav-wrap{max-width:1320px;margin:0 auto;overflow:hidden;position:relative;scroll-snap-type:x proximity;scroll-padding-left:1.25rem}
+.jumpnav-wrap::-webkit-scrollbar{display:none}
+.jumpnav-track{display:flex;gap:.55rem;flex-wrap:nowrap;width:max-content;will-change:transform}
+#jumpnav.jn-static .jumpnav-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#jumpnav.jn-static .jumpnav-track{transform:none!important;width:auto}
+#jumpnav.jn-static .jumpnav-track [data-dup]{display:none}
+.jumpnav-track [data-dup]{display:contents}
+.jump-btn{scroll-snap-align:start;flex-shrink:0;display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--oro3);background:rgba(245,240,232,.06);border:1px solid rgba(184,146,42,.28);border-radius:40px;padding:.5rem 1rem;text-decoration:none;transition:background var(--ease),border-color var(--ease),color var(--ease);white-space:nowrap}
+.jump-btn:hover{background:var(--oro2);border-color:var(--oro2);color:var(--bosco)}
+.jump-btn.active,.jump-btn.featured{background:var(--oro2);border-color:var(--oro2);color:var(--bosco)}
+</style>
+<script>
+(function(){
+  var jn = document.getElementById('jumpnav');
+  var track = document.getElementById('jnTrack');
+  if (!jn || !track) return;
+
+  var riduciMovimento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function isMobile(){ return window.innerWidth < 768; }
+
+  // Identico a index.html: nastro mosso via requestAnimationFrame, non con
+  // un'animazione CSS, così nulla può fermarlo per errore salvo "riduci movimento".
+  var VELOCITA = 34; // px al secondo
+  var larghezzaGruppo = 0;
+  var posizione = 0;
+  var ultimoT = null;
+  var rafId = null;
+  var inCorso = false;
+
+  function misura(){
+    larghezzaGruppo = track.scrollWidth / 2;
+  }
+
+  function fotogramma(t){
+    if (!inCorso) return;
+    if (ultimoT === null) ultimoT = t;
+    var dt = (t - ultimoT) / 1000;
+    ultimoT = t;
+    if (larghezzaGruppo > 0) {
+      posizione = (posizione + VELOCITA * dt) % larghezzaGruppo;
+      track.style.transform = 'translateX(-' + posizione + 'px)';
+    }
+    rafId = requestAnimationFrame(fotogramma);
+  }
+
+  function avvia(){
+    if (inCorso) return;
+    misura();
+    if (larghezzaGruppo <= 0) return;
+    inCorso = true;
+    ultimoT = null;
+    rafId = requestAnimationFrame(fotogramma);
+  }
+  function ferma(){
+    inCorso = false;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  function aggiorna(){
+    if (!isMobile() || riduciMovimento) {
+      ferma();
+      track.style.transform = '';
+      jn.classList.toggle('jn-static', riduciMovimento && isMobile());
+      return;
+    }
+    jn.classList.remove('jn-static');
+    misura();
+    if (!inCorso) avvia();
+  }
+  aggiorna();
+
+  var resizeT;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeT);
+    resizeT = setTimeout(aggiorna, 200);
+  }, { passive: true });
+
+  // Tap su una voce: la evidenzia in oro e spegne le altre, esattamente come
+  // in index.html (nessuna evidenziazione automatica durante lo scroll).
+  track.addEventListener('click', function(e){
+    var link = e.target.closest('a.jump-btn');
+    if (!link) return;
+    var href = link.getAttribute('href');
+    var tutti = jn.querySelectorAll('a.jump-btn');
+    for (var i = 0; i < tutti.length; i++) {
+      tutti[i].classList.toggle('active', tutti[i].getAttribute('href') === href);
+    }
+  });
+})();
+</script>
+<!-- ══════════ FINE MINI-NAV MOBILE ══════════ -->
 </body>
 </html>

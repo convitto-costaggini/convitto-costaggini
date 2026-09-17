@@ -27,7 +27,7 @@
     .fill{font-weight:700;color:var(--bosco);border-bottom:1px dotted var(--bosco2);padding:0 2px;cursor:text}
     .fill:hover{background:#f5f8f5}
     .fill:focus{outline:2px solid var(--bosco);outline-offset:1px;background:#fff}
-    @media print{.fill{outline:none!important;background:0 0!important}}
+    @media print{.fill{outline:none!important;background:0 0!important;color:#000!important;border-bottom-color:#000!important}}
     .mf-firma-blocco{margin-top:1.25rem;padding-top:1rem;border-top:1px dashed #d1d5db}
     .mf-firma-blocco:first-of-type{border-top:none;margin-top:.5rem;padding-top:0}
     .mf-firma-blocco small{display:block;font-family:var(--fu);font-size:.66rem;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
@@ -43,7 +43,11 @@
       body>*:not(#main){display:none!important}
       #google_translate_element,.goog-te-gadget,.goog-te-banner-frame,.goog-te-menu-frame,.skiptranslate{display:none!important}
       .mf-anagrafica,.mf-footer-page,.page-hero,footer,nav,.mf-nota{display:none!important}
-      .mf-modulo{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;margin-bottom:.75rem}
+      .mf-modulo{box-shadow:none;border:1px solid #333;page-break-inside:avoid;margin-bottom:.75rem}
+      .mf-modulo-body p{color:#000!important}
+      .mf-firma-blocco{border-top-color:#666!important}
+      .mf-firma-blocco small{color:#000!important}
+      .mf-firma-blocco .linea{border-bottom-color:#000!important}
       .mf-data-stampa{display:block!important;font-family:var(--fu);font-size:.76rem;color:#374151;text-align:right;margin:.4rem 0 0}
       .print-title{display:block!important;text-align:center;font-weight:800;font-size:1.7rem;font-family:var(--fu);color:#1a1a1a;margin:0 0 1.5rem;letter-spacing:.01em}
     }

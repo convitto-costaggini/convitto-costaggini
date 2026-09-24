@@ -107,6 +107,10 @@
       <label class="pf-label">Cosa fai oggi? (facoltativo)</label>
       <input class="pf-input" id="pf-role" type="text" placeholder="Es. Chef in hotel 5★" maxlength="80"/>
       <p style="font-size:.72rem;color:rgba(255,255,255,.35);margin-top:.75rem">* La posizione viene rilevata automaticamente dalla città inserita tramite OpenStreetMap.</p>
+      <label for="pf-privacy" style="display:flex;gap:.6rem;align-items:flex-start;margin-top:.9rem;font-size:.76rem;line-height:1.5;color:rgba(255,255,255,.75);cursor:pointer">
+        <input type="checkbox" id="pf-privacy" style="margin-top:.2rem;flex-shrink:0;width:18px;height:18px;accent-color:#D4AA4A"/>
+        <span>Ho letto l'<a href="privacy.html" target="_blank" rel="noopener" style="color:#D4AA4A;text-decoration:underline">informativa sul trattamento dei dati personali</a> (Reg. UE 2016/679) e acconsento alla pubblicazione sulla mappa del nome (o delle iniziali), della città e delle informazioni facoltative indicate, dopo approvazione. Posso chiederne la rimozione in qualsiasi momento scrivendo a <a href="mailto:convitto@alberghierorieti.it" style="color:#D4AA4A;text-decoration:underline">convitto@alberghierorieti.it</a>. *</span>
+      </label>
       <div class="pf-btns" style="margin-top:1.25rem">
         <button class="pf-submit" onclick="submitPin()">Aggiungi 📍</button>
         <button class="pf-cancel" onclick="closeModal()">Annulla</button>
@@ -269,6 +273,7 @@ async function submitPin() {
   const name = document.getElementById('pf-name').value.trim();
   const city = document.getElementById('pf-city').value.trim();
   if (!name || !city) { alert('Inserisci nome e città.'); return; }
+  if (!document.getElementById('pf-privacy').checked) { alert('Per aggiungere il pin è necessario accettare l\'informativa sul trattamento dei dati.'); return; }
 
   const loadEl = document.getElementById('pf-loading');
   const errEl  = document.getElementById('pf-error');
@@ -328,6 +333,7 @@ async function submitPin() {
   ['pf-name', 'pf-city', 'pf-year', 'pf-role'].forEach(id => {
     document.getElementById(id).value = '';
   });
+  document.getElementById('pf-privacy').checked = false;
   closeModal();
 
   const overlay = document.createElement('div');

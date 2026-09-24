@@ -84,6 +84,12 @@
         <p>✦ Grazie. Il tuo ricordo è in attesa di approvazione — apparirà sul muro entro poche ore.</p>
       </div>
 
+      <label for="mr-privacy" style="display:flex;gap:.6rem;align-items:flex-start;margin:.9rem 0 .4rem;font-family:var(--fu);font-size:.8rem;line-height:1.5;color:rgba(255,255,255,.78);cursor:pointer">
+        <input type="checkbox" id="mr-privacy" required style="margin-top:.2rem;flex-shrink:0;width:18px;height:18px;accent-color:#B8922A"/>
+        <span>Ho letto l'<a href="privacy.html" target="_blank" rel="noopener" style="color:#D4AA4A;text-decoration:underline">informativa sul trattamento dei dati personali</a> (Reg. UE 2016/679) e acconsento alla pubblicazione del mio ricordo e del nome indicato, dopo approvazione. Posso chiederne la rimozione in qualsiasi momento scrivendo a <a href="mailto:convitto@alberghierorieti.it" style="color:#D4AA4A;text-decoration:underline">convitto@alberghierorieti.it</a>. *</span>
+      </label>
+      <p class="mr-note">Ti chiediamo di non citare per nome altre persone senza il loro consenso.</p>
+
       <p class="mr-note">Il tuo ricordo apparirà sul muro dopo una breve moderazione. Non vengono pubblicati contenuti offensivi o non pertinenti. Nessun dato viene condiviso con terze parti.</p>
 
       <button type="submit" style="width:100%;padding:.85rem;background:linear-gradient(135deg,var(--bosco),#1a3a1b);color:#fff;border:none;border-radius:8px;font-family:var(--fu);font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">
@@ -165,6 +171,11 @@ async function submitRicordo(e) {
     document.getElementById('mr-nome').focus();
     return;
   }
+  if (!document.getElementById('mr-privacy').checked) {
+    alert('Per inviare il ricordo è necessario accettare l\'informativa sul trattamento dei dati.');
+    document.getElementById('mr-privacy').focus();
+    return;
+  }
 
   const btn = e.target.querySelector('button[type=submit]');
   if (btn) { btn.disabled = true; btn.textContent = 'Invio…'; }
@@ -203,6 +214,7 @@ async function submitRicordo(e) {
   // Svuota il form
   ['mr-testo','mr-nome','mr-anni','mr-dove'].forEach(function(id){
     var el = document.getElementById(id); if(el) el.value='';
+    var pc = document.getElementById('mr-privacy'); if(pc) pc.checked=false;
   });
   var cc = document.getElementById('mr-chars');
   if(cc) cc.textContent = '0';

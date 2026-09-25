@@ -40,7 +40,7 @@
 .pm-rule{display:flex;align-items:center;gap:.8rem;justify-content:center;margin:1.4rem auto;max-width:320px;color:var(--oro)}
 .pm-rule::before,.pm-rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--oro))}
 .pm-rule::after{background:linear-gradient(90deg,var(--oro),transparent)}
-.pm-crest{position:relative;width:min(300px,74vw);margin:0 auto;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pm-crest{position:relative;width:min(300px,100%);margin:0 auto;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .pm-laurel{position:absolute;inset:0;width:100%;height:100%;color:var(--oro)}
 .pm-kind{display:block;font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#7a5a10;margin-bottom:.4rem}
 .pm-crest .pm-del{position:relative;font-family:var(--fd);font-style:italic;font-size:clamp(1.05rem,.95rem + .6vw,1.3rem);color:var(--oro)}
@@ -48,6 +48,7 @@
 .pm-crest .pm-name em{font-style:italic;color:var(--oro)}
 .pm-dedica{font-family:var(--fd);font-style:italic;font-size:clamp(1.15rem,1rem + 1vw,1.45rem);color:var(--bosco2);margin:1.1rem 0 .2rem}
 .pm-dedica strong{font-style:normal;font-weight:600;color:var(--bosco);letter-spacing:.02em}
+@media (max-width:560px){.pm-dedica strong{display:block;white-space:nowrap}.pm-as{white-space:nowrap;letter-spacing:.1em;padding:.45rem .5rem}}
 .pm-as{display:inline-block;margin-top:1rem;font-family:var(--fu);font-size:.66rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--bosco);padding:.45rem 1.1rem;border-top:1px solid rgba(184,146,42,.5);border-bottom:1px solid rgba(184,146,42,.5)}
 
 /* Premesse */

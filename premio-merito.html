@@ -22,9 +22,6 @@
 .pm-badge.ok{background:rgba(237,217,138,.18);color:#F5E6B0;border-color:rgba(237,217,138,.45)}
 @media (max-width:560px){.pm-meta{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}.pm-badge{display:flex;align-items:center;justify-content:center;text-align:center;padding:.55rem .5rem;min-height:2.6em;line-height:1.35}}
 
-/* Barra di avanzamento lettura */
-.pm-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:9500;pointer-events:none;background:transparent}
-.pm-progress span{display:block;height:100%;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--oro),var(--oro3),var(--oro));box-shadow:0 0 8px rgba(184,146,42,.55)}
 
 .pm-prem .w,.pm-toc .w,.pm-art .w{max-width:1060px}
 .pm-front,.pm-prem,.pm-close{padding-bottom:clamp(5rem,4rem + 4vw,7rem)!important}
@@ -73,7 +70,7 @@
 .pm-toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.75rem;margin-top:2rem}
 .pm-toc a{display:flex;align-items:center;gap:.9rem;padding:.95rem 1.05rem;background:var(--bco);border:1px solid var(--av3);border-radius:10px;text-decoration:none;color:var(--bosco);transition:var(--ease)}
 .pm-toc a:hover,.pm-toc a:focus-visible{border-color:var(--oro);box-shadow:0 8px 22px -12px rgba(184,146,42,.6);transform:translateY(-2px)}
-.pm-toc .pm-rn{font-family:var(--fd);font-style:italic;font-size:1.6rem;color:var(--oro);min-width:2.1ch;text-align:center;line-height:1}
+.pm-toc .pm-rn{font-family:var(--fd);font-style:italic;font-size:1.6rem;color:var(--oro);width:2.3em;flex-shrink:0;text-align:center;line-height:1}
 .pm-toc .pm-tt{display:flex;flex-direction:column;line-height:1.25}
 .pm-toc .pm-tt small{font-family:var(--fu);font-size:.56rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--txt2);opacity:.8}
 .pm-toc .pm-tt span{font-family:var(--fu);font-size:.86rem;font-weight:700}
@@ -293,6 +290,39 @@
 }
 @media (max-width:420px){.pm-comm{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.pm-toc a:hover{transform:none}}
+
+/* ── Navigazione articoli: colonna fissa (pc) e pulsante "Indice" (smartphone) ── */
+.pm-side{display:none}
+#indice{scroll-margin-top:calc(var(--hdr-h,68px) - 1px)}
+.pm-toc a.pm-last{border-color:var(--oro);box-shadow:0 0 0 3px rgba(184,146,42,.25);background:#fff}
+@media (min-width:1024px){
+  .pm-articles{display:grid;grid-template-columns:clamp(230px,19vw,270px) minmax(0,1fr);background:linear-gradient(160deg,var(--bosco),#1a3a1b)}
+  .pm-main{min-width:0}
+  .pm-side{display:block;border-right:1px solid rgba(184,146,42,.35)}
+  .pm-side-in{position:sticky;top:calc(var(--hdr-h,68px) + 1.25rem);display:flex;flex-direction:column;gap:.2rem;padding:1.6rem .9rem 1.4rem;max-height:calc(100vh - var(--hdr-h,68px) - 2.5rem);overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(184,146,42,.4) transparent}
+  .pm-side-head{margin:0 0 .9rem;padding:0 .6rem .8rem;border-bottom:1px solid rgba(184,146,42,.3);font-family:var(--fd);font-size:1.35rem;font-weight:300;color:#fff;line-height:1.15}
+  .pm-side-head span{display:block;font-family:var(--fu);font-size:.56rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro3);margin-bottom:.3rem}
+  .pm-side-in a{display:flex;align-items:center;gap:.7rem;padding:.5rem .6rem;border-radius:8px;text-decoration:none;color:rgba(245,240,232,.78);border:1px solid transparent;position:relative;transition:background var(--ease),color var(--ease),border-color var(--ease)}
+  .pm-side-rn{font-family:var(--fd);font-style:italic;font-size:1.2rem;color:var(--oro2);width:2.2em;flex-shrink:0;text-align:center;line-height:1}
+  .pm-side-tt{display:flex;flex-direction:column;font-family:var(--fu);font-size:.8rem;font-weight:700;line-height:1.25}
+  .pm-side-tt small{font-size:.52rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.45)}
+  .pm-side-in a:hover,.pm-side-in a:focus-visible{background:rgba(245,240,232,.07);color:#fff;border-color:rgba(184,146,42,.3)}
+  .pm-side-in a.is-on{background:linear-gradient(90deg,var(--oro2),var(--oro3));color:var(--bosco);border-color:var(--oro2);box-shadow:0 6px 16px -8px rgba(0,0,0,.5)}
+  .pm-side-in a.is-on .pm-side-rn{color:var(--bosco)}
+  .pm-side-in a.is-on .pm-side-tt small{color:rgba(44,62,45,.7)}
+  .pm-side-in a.pm-side-top{margin-top:.9rem;padding-top:.8rem;border-top:1px solid rgba(184,146,42,.3);border-radius:0;justify-content:center;font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro3)}
+  .pm-side-in a.pm-side-top:hover{border-color:transparent;border-top-color:rgba(184,146,42,.3)}
+  .pm-art .w{padding-left:clamp(1.5rem,1rem + 2vw,3rem);padding-right:clamp(1.5rem,1rem + 2vw,3rem)}
+  .pm-back{display:none!important}
+}
+.pm-back{position:fixed;left:1rem;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));z-index:8900;display:inline-flex;align-items:center;gap:.55rem;min-height:46px;padding:.45rem 1.05rem .45rem .5rem;border-radius:40px;background:linear-gradient(135deg,var(--bosco),#1a3a1b);border:1.5px solid rgba(184,146,42,.6);box-shadow:0 8px 22px -6px rgba(0,0,0,.45);text-decoration:none;color:#fff;opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+.pm-back[hidden]{display:none}
+.pm-back.is-on{opacity:1;transform:none;pointer-events:auto}
+.pm-back-ar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--oro2);color:var(--bosco);font-weight:800;font-size:1rem}
+.pm-back-tx{display:flex;flex-direction:column;font-family:var(--fu);font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:1.15}
+.pm-back-tx small{font-size:.56rem;font-weight:700;letter-spacing:.08em;color:var(--oro3)}
+.pm-back:focus-visible{outline:3px solid var(--oro3);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.pm-back{transition:none}}
 </style>
 <link rel="icon" href="favicon.ico" sizes="any"/>
 <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
@@ -301,7 +331,6 @@
 </head>
 <body data-page="premio-merito">
 <script src="nav-header.min.js"></script>
-<div class="pm-progress" aria-hidden="true"><span id="pmProgress"></span></div>
 <main id="main">
 
   <!-- ══════════ HERO ══════════ -->
@@ -377,7 +406,7 @@
   </section>
 
   <!-- ══════════ INDICE ══════════ -->
-  <nav class="pm-toc" aria-labelledby="pm-toc-title">
+  <nav class="pm-toc" id="indice" aria-labelledby="pm-toc-title">
     <div class="w">
       <p class="lbl">Il Regolamento</p>
       <h2 id="pm-toc-title">Dieci articoli, <em>un solo spirito</em></h2>
@@ -397,6 +426,23 @@
   </nav>
 
   <div class="pm-articles">
+    <aside class="pm-side" aria-label="Articoli del Regolamento">
+      <nav class="pm-side-in" aria-label="Vai a un articolo">
+        <p class="pm-side-head"><span>Premio al Merito</span>Il Regolamento</p>
+        <a href="#art-1" data-art="1"><span class="pm-side-rn">I</span><span class="pm-side-tt"><small>Art. 1</small>Finalità</span></a>
+        <a href="#art-2" data-art="2"><span class="pm-side-rn">II</span><span class="pm-side-tt"><small>Art. 2</small>Destinatari</span></a>
+        <a href="#art-3" data-art="3"><span class="pm-side-rn">III</span><span class="pm-side-tt"><small>Art. 3</small>Criteri e classifica</span></a>
+        <a href="#art-4" data-art="4"><span class="pm-side-rn">IV</span><span class="pm-side-tt"><small>Art. 4</small>Riconoscimenti</span></a>
+        <a href="#art-5" data-art="5"><span class="pm-side-rn">V</span><span class="pm-side-tt"><small>Art. 5</small>Ulteriori riconoscimenti</span></a>
+        <a href="#art-6" data-art="6"><span class="pm-side-rn">VI</span><span class="pm-side-tt"><small>Art. 6</small>La premiazione</span></a>
+        <a href="#art-7" data-art="7"><span class="pm-side-rn">VII</span><span class="pm-side-tt"><small>Art. 7</small>Commissione di verifica</span></a>
+        <a href="#art-8" data-art="8"><span class="pm-side-rn">VIII</span><span class="pm-side-tt"><small>Art. 8</small>Riservatezza e dati</span></a>
+        <a href="#art-9" data-art="9"><span class="pm-side-rn">IX</span><span class="pm-side-tt"><small>Art. 9</small>Reclami</span></a>
+        <a href="#art-10" data-art="10"><span class="pm-side-rn">X</span><span class="pm-side-tt"><small>Art. 10</small>Disposizioni finali</span></a>
+        <a href="#indice" class="pm-side-top">↑ Torna all'indice</a>
+      </nav>
+    </aside>
+    <div class="pm-main">
 
   <!-- ══════════ ART. 1 ══════════ -->
   <section class="pm-art" id="art-1" aria-labelledby="art-1-t">
@@ -733,6 +779,7 @@
     </div>
   </section>
 
+    </div>
   </div>
 
   <!-- ══════════ CHIUSURA ══════════ -->
@@ -755,23 +802,76 @@
   </section>
 
 </main>
+<a href="#indice" class="pm-back" id="pmBack" aria-label="Torna all'indice degli articoli" hidden><span class="pm-back-ar" aria-hidden="true">←</span><span class="pm-back-tx">Indice<small id="pmBackArt"></small></span></a>
 <script src="nav.min.js"></script>
 <script>
 (function(){
-  var bar = document.getElementById('pmProgress');
-  if (!bar) return;
-  var ticking = false;
-  function aggiorna(){
-    ticking = false;
-    var h = document.documentElement.scrollHeight - window.innerHeight;
-    var p = h > 0 ? Math.min(1, Math.max(0, window.pageYOffset / h)) : 0;
-    bar.style.transform = 'scaleX(' + p + ')';
+  var sezioni = Array.prototype.slice.call(document.querySelectorAll('.pm-art'));
+  var zona = document.querySelector('.pm-articles');
+  var indice = document.getElementById('indice');
+  var back = document.getElementById('pmBack');
+  var backArt = document.getElementById('pmBackArt');
+  var laterali = Array.prototype.slice.call(document.querySelectorAll('.pm-side-in a[data-art]'));
+  if (!sezioni.length || !zona || !indice) return;
+  var ROMANI = ['I','II','III','IV','V','VI','VII','VIII','IX','X'];
+  var corrente = 0;
+
+  // Articolo "in lettura": l'ultimo la cui intestazione ha superato
+  // il terzo superiore della finestra.
+  function articoloCorrente(){
+    var soglia = window.innerHeight * 0.33;
+    var n = 0;
+    for (var i = 0; i < sezioni.length; i++) {
+      if (sezioni[i].getBoundingClientRect().top <= soglia) n = i + 1;
+    }
+    return n;
   }
+
+  function aggiorna(){
+    var n = articoloCorrente();
+    if (n !== corrente) {
+      corrente = n;
+      laterali.forEach(function(a){
+        var on = Number(a.getAttribute('data-art')) === n;
+        a.classList.toggle('is-on', on);
+        if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+      if (backArt) backArt.textContent = n ? 'Art. ' + ROMANI[n - 1] : '';
+    }
+    if (back) {
+      var r = zona.getBoundingClientRect();
+      var dentro = n > 0 && r.bottom > window.innerHeight * 0.5;
+      back.classList.toggle('is-on', dentro);
+      back.tabIndex = dentro ? 0 : -1;
+      back.setAttribute('aria-hidden', dentro ? 'false' : 'true');
+    }
+  }
+
+  if (back) back.hidden = false;
+  var inAttesa = false;
   window.addEventListener('scroll', function(){
-    if (!ticking) { ticking = true; requestAnimationFrame(aggiorna); }
+    if (!inAttesa) { inAttesa = true; requestAnimationFrame(function(){ inAttesa = false; aggiorna(); }); }
   }, { passive: true });
   window.addEventListener('resize', aggiorna, { passive: true });
   aggiorna();
+
+  // Ritorno all'indice: evidenzia per qualche istante la scheda
+  // dell'articolo appena letto, così si riprende da dove si era.
+  function tornaAllIndice(e){
+    var n = corrente;
+    if (e) e.preventDefault();
+    indice.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (history.replaceState) history.replaceState(null, '', '#indice');
+    var carta = n ? indice.querySelector('a[href="#art-' + n + '"]') : null;
+    if (carta) {
+      carta.classList.add('pm-last');
+      setTimeout(function(){ carta.classList.remove('pm-last'); }, 2600);
+      setTimeout(function(){ try { carta.focus({ preventScroll: true }); } catch (err) { carta.focus(); } }, 450);
+    }
+  }
+  if (back) back.addEventListener('click', tornaAllIndice);
+  var top = document.querySelector('.pm-side-top');
+  if (top) top.addEventListener('click', tornaAllIndice);
 })();
 </script>
 </body>

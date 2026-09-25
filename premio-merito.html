@@ -135,14 +135,17 @@
 .pm-podium{display:grid;grid-template-columns:1fr 1.1fr 1fr;align-items:end;gap:.55rem;max-width:640px;margin:0 auto;position:relative}
 .pm-step{display:flex;flex-direction:column;align-items:center;text-align:center}
 .pm-step .pm-medal i{width:46px;height:46px;font-size:1.35rem}
-.pm-step .pm-who{font-family:var(--fu);font-size:.56rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.7);margin:.45rem 0 .55rem}
-.pm-block{width:100%;border-radius:10px 10px 0 0;padding:.9rem .4rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.25rem;background:linear-gradient(180deg,rgba(245,240,232,.13),rgba(245,240,232,.04));border:1px solid rgba(237,217,138,.28);border-bottom:none}
+.pm-step .pm-who{font-family:var(--fu);font-size:.56rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.7);margin:.45rem 0 .55rem;white-space:nowrap}
+.pm-block{width:100%;border-radius:10px 10px 0 0;padding:1rem .4rem 1.1rem;display:flex;flex-direction:column;align-items:center;gap:.25rem;background:linear-gradient(180deg,rgba(245,240,232,.13),rgba(245,240,232,.04));border:1px solid rgba(237,217,138,.28);border-bottom:none}
 .pm-block b{font-family:var(--fd);font-weight:600;font-size:clamp(1.6rem,1.2rem + 1.8vw,2.3rem);line-height:1;color:var(--oro3)}
-.pm-block span{font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(245,240,232,.75);line-height:1.35}
-.pm-block .pm-buono{margin-top:.45rem;padding-top:.45rem;border-top:1px dashed rgba(237,217,138,.3);font-family:var(--fd);font-size:1.15rem;color:#fff;letter-spacing:0;text-transform:none;font-weight:600}
-.pm-step.s1 .pm-block{min-height:190px;background:linear-gradient(180deg,rgba(237,217,138,.26),rgba(237,217,138,.06));border-color:rgba(237,217,138,.55)}
-.pm-step.s2 .pm-block{min-height:150px}
-.pm-step.s3 .pm-block{min-height:122px}
+.pm-block .pm-lab{font-family:var(--fu);font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(245,240,232,.75);line-height:1.35}
+.pm-block .pm-lab-s{display:none}
+.pm-step .pm-who-s{display:none}
+.pm-block .pm-buono{display:flex;flex-direction:column;align-items:center;gap:.1rem;margin-top:.5rem;padding-top:.5rem;border-top:1px dashed rgba(237,217,138,.3);width:78%;font-family:var(--fd);font-size:1.25rem;color:#fff;font-weight:600;line-height:1.1;white-space:nowrap}
+.pm-block .pm-buono small{font-family:var(--fu);font-size:.56rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.6)}
+.pm-step.s1 .pm-block{padding-top:2.6rem;background:linear-gradient(180deg,rgba(237,217,138,.26),rgba(237,217,138,.06));border-color:rgba(237,217,138,.55)}
+.pm-step.s2 .pm-block{padding-top:1.6rem}
+.pm-step.s3 .pm-block{padding-top:.9rem}
 .pm-podium-box .pm-podium-foot{text-align:center;font-size:.8rem;color:rgba(245,240,232,.7);padding:.9rem .5rem 1.1rem;position:relative;border-top:1px solid rgba(237,217,138,.25);margin:0 -1.2rem;background:rgba(0,0,0,.12)}
 .pm-podium-foot strong{color:var(--oro3)}
 
@@ -286,7 +289,16 @@
   .pm-podium-box{padding:1.4rem .6rem 0}
   .pm-podium{gap:.35rem}
   .pm-podium-foot{margin:0 -.6rem}
-  .pm-block span{font-size:.54rem}
+  .pm-block .pm-lab-l{display:none}
+  .pm-block .pm-lab-s{display:block;font-size:.56rem;letter-spacing:.1em}
+  .pm-step .pm-who{font-size:.5rem;letter-spacing:.08em}
+  .pm-step .pm-who .pm-who-l{display:none}
+  .pm-step .pm-who .pm-who-s{display:inline}
+  .pm-block b{font-size:1.75rem}
+  .pm-block .pm-buono{width:84%;font-size:1.1rem}
+  .pm-step.s1 .pm-block{padding-top:2.1rem}
+  .pm-step.s2 .pm-block{padding-top:1.3rem}
+  .pm-step.s3 .pm-block{padding-top:.75rem}
 }
 @media (max-width:420px){.pm-comm{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.pm-toc a:hover{transform:none}}
@@ -587,18 +599,18 @@
         <div class="pm-podium">
           <div class="pm-step s2">
             <span class="pm-medal g2"><i>2</i></span>
-            <span class="pm-who">2° classificato/a</span>
-            <div class="pm-block"><b>60%</b><span>di riduzione della retta</span><span class="pm-buono">Buono € 100</span></div>
+            <span class="pm-who">2° <span class="pm-who-l">classificato/a</span><span class="pm-who-s">posto</span></span>
+            <div class="pm-block"><b>60%</b><span class="pm-lab pm-lab-l">di riduzione della retta</span><span class="pm-lab pm-lab-s">sulla retta</span><span class="pm-buono"><small>Buono</small>€&nbsp;100</span></div>
           </div>
           <div class="pm-step s1">
             <span class="pm-medal g1"><i>1</i></span>
-            <span class="pm-who">1° classificato/a</span>
-            <div class="pm-block"><b>80%</b><span>di riduzione della retta</span><span class="pm-buono">Buono € 150</span></div>
+            <span class="pm-who">1° <span class="pm-who-l">classificato/a</span><span class="pm-who-s">posto</span></span>
+            <div class="pm-block"><b>80%</b><span class="pm-lab pm-lab-l">di riduzione della retta</span><span class="pm-lab pm-lab-s">sulla retta</span><span class="pm-buono"><small>Buono</small>€&nbsp;150</span></div>
           </div>
           <div class="pm-step s3">
             <span class="pm-medal g3"><i>3</i></span>
-            <span class="pm-who">3° classificato/a</span>
-            <div class="pm-block"><b>40%</b><span>di riduzione della retta</span><span class="pm-buono">Buono € 50</span></div>
+            <span class="pm-who">3° <span class="pm-who-l">classificato/a</span><span class="pm-who-s">posto</span></span>
+            <div class="pm-block"><b>40%</b><span class="pm-lab pm-lab-l">di riduzione della retta</span><span class="pm-lab pm-lab-s">sulla retta</span><span class="pm-buono"><small>Buono</small>€&nbsp;50</span></div>
           </div>
         </div>
         <p class="pm-podium-foot">A tutti e sei: <strong>targa</strong> alla festa di fine anno, <strong>attestato di merito</strong> e <strong>relazione</strong> al Consiglio di Classe</p>

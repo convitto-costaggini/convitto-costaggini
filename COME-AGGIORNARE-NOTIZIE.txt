@@ -36,3 +36,33 @@ PER L'IMMAGINE:
 - Oppure carica una foto nella cartella "img/" e scrivi: "img/nomefile.jpg"
 
 ════════════════════════════════════════════════════════
+
+════════════════════════════════════════════════════════
+  GALLERIA FOTOGRAFICA (SLIDESHOW) DI UNA NOTIZIA
+════════════════════════════════════════════════════════
+
+Cliccando sulla foto di una notizia può aprirsi uno slideshow
+con altre foto dell'evento. Per attivarlo:
+
+1. Carica le foto nella cartella "img/notizie/nome-evento/"
+   (es. img/notizie/tutti-a-scuola/01.jpg, 02.jpg, ...).
+   Se accanto a una foto .jpg c'è la versione .webp con lo
+   stesso nome, il sito userà quella, più leggera.
+
+2. Apri "gallerie.json" e aggiungi una voce. La chiave è la
+   foto di copertina, cioè esattamente quanto scritto nel campo
+   "URL immagine" della notizia:
+
+  "img/notizie/tutti-a-scuola/copertina.jpg": {
+    "titolo": "Titolo mostrato in alto nello slideshow",
+    "foto": [
+      { "src": "img/notizie/tutti-a-scuola/01.jpg", "alt": "Descrizione per accessibilità", "didascalia": "Testo facoltativo sotto la foto" },
+      { "src": "img/notizie/tutti-a-scuola/02.jpg", "alt": "..." }
+    ]
+  }
+
+   La copertina diventa da sola la prima foto dello slideshow.
+   Tra una voce e l'altra ci vuole la virgola.
+
+3. Salva: la foto della notizia diventa cliccabile (il cursore
+   diventa una lente). Nessun pulsante compare sulla pagina.

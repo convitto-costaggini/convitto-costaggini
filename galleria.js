@@ -232,12 +232,25 @@
       img.classList.add('ac-gal');
       img.tabIndex = 0;
       img.setAttribute('role', 'button');
-      img.setAttribute('aria-label', 'Apri la galleria fotografica (' + normalizza(g, key).length + ' foto)');
+      var n = normalizza(g, key).length;
+      img.setAttribute('aria-label', 'Apri la galleria fotografica (' + n + ' foto)');
+      /* Invito sempre visibile sopra la foto (anche su smartphone, dove non c'è il passaggio del mouse) */
+      var wrap = document.createElement('span');
+      wrap.className = 'ac-gal-wrap';
+      img.parentNode.insertBefore(wrap, img);
+      wrap.appendChild(img);
+      var cta = document.createElement('span');
+      cta.className = 'ac-gal-cta';
+      cta.setAttribute('aria-hidden', 'true');
+      cta.innerHTML = '<svg viewBox="0 0 24 24"><path d="M4 8h3l1.6-2.2h6.8L17 8h3v11H4z"/><circle cx="12" cy="13.2" r="3.4"/></svg>' +
+        '<span>Sfoglia la galleria</span><em>' + n + ' foto</em>';
+      wrap.appendChild(cta);
     });
   }
 
   document.addEventListener('click', function (e) {
-    var img = e.target.closest && e.target.closest('img[data-gal]');
+    var w = e.target.closest && e.target.closest('.ac-gal-wrap');
+    var img = w && w.querySelector('img[data-gal]');
     if (img) { e.preventDefault(); apri(img.dataset.gal); }
   });
   document.addEventListener('keydown', function (e) {

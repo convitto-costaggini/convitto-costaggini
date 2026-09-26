@@ -11,7 +11,8 @@
   var GALLERIE = null;
   var lb, fig, slideA, slideB, capt, counter, thumbs, btnPrev, btnNext, btnPlay, prog, titoloEl;
   var slides = [], idx = -1, titolo = '', lastFocus = null, attiva = null, token = 0;
-  var play = false, timer = null, touchX = null, touchY = null, kb = 0;
+  var play = false, timer = null, kb = 0;
+  var zs = 1, zx = 0, zy = 0, gesto = null, pizzicato = false, ultimoTap = null, suggerito = false; // ingrandimento
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function chiave(src) {
@@ -64,7 +65,8 @@
       '<div class="gal-stage">' +
         '<button type="button" class="gal-btn gal-nav gal-prev" aria-label="Foto precedente">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg></button>' +
-        '<div class="gal-fig"><figure class="gal-slide"><img alt=""/></figure><figure class="gal-slide"><img alt=""/></figure></div>' +
+        '<div class="gal-fig"><figure class="gal-slide"><div class="gal-zoom"><img alt=""/></div></figure><figure class="gal-slide"><div class="gal-zoom"><img alt=""/></div></figure></div>' +
+        '<p class="gal-hint" aria-hidden="true"></p>' +
         '<button type="button" class="gal-btn gal-nav gal-next" aria-label="Foto successiva">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>' +
       '</div>' +
@@ -95,19 +97,86 @@
       var b = e.target.closest('button[data-i]');
       if (b) vai(+b.dataset.i, +b.dataset.i < idx ? -1 : 1);
     });
+    /* ── Gesti touch: pizzico per ingrandire, trascinamento, doppio tocco, swipe ── */
     fig.addEventListener('touchstart', function (e) {
-      if (e.touches.length !== 1) { touchX = null; return; }
-      touchX = e.touches[0].clientX; touchY = e.touches[0].clientY;
-    }, { passive: true });
+      if (e.touches.length === 2) {
+        var a = punto(e.touches[0]), b = punto(e.touches[1]);
+        gesto = { tipo: 'pizzico', d0: dist(a, b), s0: zs, cx: (((a.x + b.x) / 2) - zx) / zs, cy: (((a.y + b.y) / 2) - zy) / zs };
+        pizzicato = true;
+        e.preventDefault();
+      } else if (e.touches.length === 1) {
+        var p = punto(e.touches[0]);
+        gesto = { tipo: zs > 1.01 ? 'sposta' : 'swipe', px: p.x, py: p.y, x0: zx, y0: zy, t: Date.now() };
+        if (!pizzicato) gesto.pulito = true;
+      }
+    }, { passive: false });
+    fig.addEventListener('touchmove', function (e) {
+      if (!gesto) return;
+      if (gesto.tipo === 'pizzico' && e.touches.length === 2) {
+        e.preventDefault();
+        var a = punto(e.touches[0]), b = punto(e.touches[1]);
+        var ns = Math.min(4, Math.max(0.85, gesto.s0 * dist(a, b) / gesto.d0));
+        zs = ns;
+        zx = (a.x + b.x) / 2 - gesto.cx * zs;
+        zy = (a.y + b.y) / 2 - gesto.cy * zs;
+        applica(false, true);
+      } else if (gesto.tipo === 'sposta' && e.touches.length === 1) {
+        e.preventDefault();
+        var p = punto(e.touches[0]);
+        zx = gesto.x0 + p.x - gesto.px; zy = gesto.y0 + p.y - gesto.py;
+        applica(false);
+      } else if (gesto.tipo === 'swipe') {
+        e.preventDefault();
+      }
+    }, { passive: false });
     fig.addEventListener('touchend', function (e) {
-      if (touchX === null) return;
-      var dx = e.changedTouches[0].clientX - touchX, dy = e.changedTouches[0].clientY - touchY;
-      touchX = null;
-      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) vai(idx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
-      else if (dy > 90 && Math.abs(dy) > Math.abs(dx) * 1.5) chiudi();
-    }, { passive: true });
-    lb.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { e.preventDefault(); chiudi(); }
+      if (!gesto) return;
+      if (e.touches.length === 1) { // resta un dito dopo il pizzico: si continua spostando
+        var p = punto(e.touches[0]);
+        gesto = { tipo: 'sposta', px: p.x, py: p.y, x0: zx, y0: zy, t: Date.now() };
+        return;
+      }
+      if (e.touches.length) return;
+      var g = gesto; gesto = null;
+      if (zs < 1.02) azzera(true); else applica(true);
+      if (g.tipo === 'swipe' && g.pulito) {
+        var q = punto(e.changedTouches[0]), dx = q.x - g.px, dy = q.y - g.py;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) vai(idx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+        else if (dy > 90 && Math.abs(dy) > Math.abs(dx) * 1.5) chiudi();
+      }
+      if ((g.tipo === 'swipe' || g.tipo === 'sposta') && !pizzicato) {
+        var r = punto(e.changedTouches[0]);
+        if (Date.now() - g.t < 280 && dist(r, { x: g.px, y: g.py }) < 12) { // tocco
+          if (ultimoTap && Date.now() - ultimoTap.t < 320 && dist(r, ultimoTap) < 30) { alterna(r); ultimoTap = null; }
+          else ultimoTap = { x: r.x, y: r.y, t: Date.now() };
+        }
+      }
+      pizzicato = false;
+    });
+    lb.addEventListener('gesturestart', function (e) { e.preventDefault(); }); // Safari: niente zoom della pagina
+
+    /* ── Mouse: doppio clic, rotellina, trascinamento ── */
+    fig.addEventListener('dblclick', function (e) { e.preventDefault(); alterna(punto(e)); });
+    fig.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      ingrandisciIn(punto(e), zs * Math.exp(-e.deltaY * (e.deltaMode === 1 ? 0.05 : 0.0022)));
+    }, { passive: false });
+    fig.addEventListener('mousedown', function (e) {
+      if (zs <= 1.01 || e.button !== 0) return;
+      e.preventDefault();
+      var p0 = punto(e), x0 = zx, y0 = zy;
+      fig.classList.add('trascina');
+      function muovi(ev) { var p = punto(ev); zx = x0 + p.x - p0.x; zy = y0 + p.y - p0.y; applica(false); }
+      function fine() { fig.classList.remove('trascina'); window.removeEventListener('mousemove', muovi); window.removeEventListener('mouseup', fine); }
+      window.addEventListener('mousemove', muovi);
+      window.addEventListener('mouseup', fine);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') { e.preventDefault(); if (zs > 1.01) azzera(true); else chiudi(); }
+      else if (e.key === '+' || e.key === '=') { e.preventDefault(); ingrandisciIn(centro(), zs * 1.5, true); }
+      else if (e.key === '-') { e.preventDefault(); ingrandisciIn(centro(), zs / 1.5, true); }
+      else if (e.key === '0') { e.preventDefault(); azzera(true); }
       else if (e.key === 'ArrowRight') { e.preventDefault(); vai(idx + 1, 1); }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); vai(idx - 1, -1); }
       else if (e.key === 'Home') { e.preventDefault(); vai(0, -1); }
@@ -122,12 +191,62 @@
     document.addEventListener('visibilitychange', function () { if (!lb.hidden) programma(); });
   }
 
+  /* ── Ingrandimento della foto ── */
+  function punto(t) { var r = fig.getBoundingClientRect(); return { x: t.clientX - r.left, y: t.clientY - r.top }; }
+  function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+  function centro() { return { x: fig.clientWidth / 2, y: fig.clientHeight / 2 }; }
+  function zoomEl() { return attiva && attiva.querySelector('.gal-zoom'); }
+  /* Limiti: la foto ingrandita non può staccarsi dai bordi del riquadro */
+  function limita() {
+    var img = attiva && attiva.querySelector('img');
+    var W = fig.clientWidth, H = fig.clientHeight;
+    var iw = img && img.offsetWidth || W, ih = img && img.offsetHeight || H;
+    var ox = (W - iw) / 2, oy = (H - ih) / 2; // bordi vuoti attorno alla foto (non ingrandita)
+    function fascia(t, pieno, bordo, dim) {
+      var vis = dim * zs; // lato della foto ingrandita
+      if (vis <= pieno) return (pieno - vis) / 2 - bordo * zs; // più piccola del riquadro: centrata
+      return Math.min(-bordo * zs, Math.max(pieno - bordo * zs - vis, t));
+    }
+    zx = fascia(zx, W, ox, iw);
+    zy = fascia(zy, H, oy, ih);
+  }
+  function applica(anim, libero) {
+    var el = zoomEl(); if (!el) return;
+    if (!libero) limita();
+    el.style.transition = anim && !reduce ? 'transform .32s cubic-bezier(.22,.61,.36,1)' : 'none';
+    el.style.transform = zs === 1 && !zx && !zy ? '' : 'translate3d(' + zx + 'px,' + zy + 'px,0) scale(' + zs + ')';
+    var z = zs > 1.01;
+    if (z !== lb.classList.contains('zoomed')) {
+      lb.classList.toggle('zoomed', z);
+      if (z) { clearTimeout(timer); prog.style.transition = 'none'; prog.style.transform = 'scaleX(0)'; nascondiSuggerimento(); }
+      else programma();
+    }
+  }
+  function azzera(anim) { zs = 1; zx = 0; zy = 0; applica(anim, true); }
+  function ingrandisciIn(p, ns, anim) {
+    ns = Math.min(4, Math.max(1, ns));
+    var cx = (p.x - zx) / zs, cy = (p.y - zy) / zs;
+    zs = ns; zx = p.x - cx * zs; zy = p.y - cy * zs;
+    if (zs <= 1.001) azzera(anim); else applica(anim);
+  }
+  function alterna(p) { if (zs > 1.01) azzera(true); else ingrandisciIn(p, 2.5, true); }
+  function suggerisci() {
+    if (suggerito || reduce) return;
+    suggerito = true;
+    var h = lb.querySelector('.gal-hint');
+    var touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    h.textContent = touch ? 'Pizzica o tocca due volte la foto per ingrandirla' : 'Doppio clic o rotellina per ingrandire la foto';
+    setTimeout(function () { if (!lb.hidden && !lb.classList.contains('zoomed')) h.classList.add('on'); }, 900);
+    setTimeout(nascondiSuggerimento, 4600);
+  }
+  function nascondiSuggerimento() { var h = lb && lb.querySelector('.gal-hint'); if (h) h.classList.remove('on'); }
+
   /* ── Scorrimento automatico ── */
   function programma() {
     clearTimeout(timer);
     prog.style.transition = 'none';
     prog.style.transform = 'scaleX(0)';
-    if (!play || slides.length < 2 || document.hidden || lb.hidden) return;
+    if (!play || slides.length < 2 || document.hidden || lb.hidden || zs > 1.01) return;
     void prog.offsetWidth;
     prog.style.transition = 'transform ' + DURATA + 'ms linear';
     prog.style.transform = 'scaleX(1)';
@@ -163,6 +282,9 @@
     precarica(s.src, function (url) {
       if (mio !== token) return;
       var entra = attiva === slideA ? slideB : slideA, esce = attiva;
+      zs = 1; zx = 0; zy = 0; lb.classList.remove('zoomed');
+      var ze = entra.querySelector('.gal-zoom'); ze.style.transition = 'none'; ze.style.transform = '';
+      if (esce) { var zo = esce.querySelector('.gal-zoom'); zo.style.transition = 'transform .6s cubic-bezier(.22,.61,.36,1)'; zo.style.transform = ''; }
       var img = entra.querySelector('img');
       img.src = url;
       img.alt = s.alt || titolo;
@@ -202,6 +324,7 @@
     lb.classList.add('in');
     imposta(multi);
     vai(0, 1);
+    suggerisci();
     (multi ? btnNext : lb.querySelector('.gal-x')).focus({ preventScroll: true });
   }
 
@@ -215,6 +338,8 @@
       if (lb.classList.contains('in')) return;
       lb.hidden = true;
       slideA.className = slideB.className = 'gal-slide';
+      [slideA, slideB].forEach(function (sl) { sl.querySelector('.gal-zoom').style.transform = ''; });
+      zs = 1; zx = 0; zy = 0; lb.classList.remove('zoomed'); nascondiSuggerimento();
       slideA.querySelector('img').removeAttribute('src');
       slideB.querySelector('img').removeAttribute('src');
     }, reduce ? 0 : 420);

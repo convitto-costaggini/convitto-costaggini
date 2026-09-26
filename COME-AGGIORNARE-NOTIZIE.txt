@@ -65,6 +65,8 @@ con altre foto dell'evento. Per attivarlo:
    fila in basso (es. "img/notizie/tutti-a-scuola/01-mini.webp").
    La copertina diventa da sola la prima foto dello slideshow,
    se non è già nell'elenco.
+   Se la copertina è solo un ritaglio di una foto dell'elenco,
+   aggiungi  "includi_copertina": false  per non ripeterla.
    Tra una voce e l'altra ci vuole la virgola.
 
 3. Salva: la foto della notizia diventa cliccabile (il cursore

@@ -26,7 +26,7 @@
   function esc(t) { return (t || '').replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function normalizza(g, key) {
     var foto = (g.foto || []).map(function (f) { return typeof f === 'string' ? { src: f } : f; });
-    if (!foto.some(function (f) { return chiave(f.src) === key; })) foto.unshift({ src: key, alt: g.alt_copertina || '' });
+    if (g.includi_copertina !== false && !foto.some(function (f) { return chiave(f.src) === key; })) foto.unshift({ src: key, alt: g.alt_copertina || '' });
     return foto;
   }
 

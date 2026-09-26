@@ -1,3 +1,18 @@
 {
-  "_come_si_usa": "Ogni voce collega la foto di copertina di una notizia (lo stesso testo scritto in 'URL immagine' nell'Admin) alle foto dello slideshow. La copertina viene aggiunta da sola come prima foto. Istruzioni complete in COME-AGGIORNARE-NOTIZIE.txt."
+  "_come_si_usa": "Ogni voce collega la foto di copertina di una notizia (lo stesso testo scritto in 'URL immagine' nell'Admin) alle foto dello slideshow. La copertina viene aggiunta da sola come prima foto, se non è già nell'elenco. Istruzioni complete in COME-AGGIORNARE-NOTIZIE.txt.",
+
+  "img/notizie/tutti-a-scuola/01.jpg": {
+    "titolo": "“Tutti a scuola” — Amatrice",
+    "foto": [
+      { "src": "img/notizie/tutti-a-scuola/01.jpg", "mini": "img/notizie/tutti-a-scuola/01-mini.webp", "alt": "La brigata del Costaggini in divisa da cucina e da sala, sul palco insieme agli ospiti", "didascalia": "La brigata del Costaggini sul palco di “Tutti a scuola”" },
+      { "src": "img/notizie/tutti-a-scuola/02.jpg", "mini": "img/notizie/tutti-a-scuola/02-mini.webp", "alt": "Foto di gruppo all'aperto di studenti, chef e docenti davanti alla scritta dell'evento", "didascalia": "Cucina e sala, un'unica squadra" },
+      { "src": "img/notizie/tutti-a-scuola/03.jpg", "mini": "img/notizie/tutti-a-scuola/03-mini.webp", "alt": "Studenti in divisa in posa sul palco con alcuni ospiti della cerimonia", "didascalia": "Un ricordo con gli ospiti della cerimonia" },
+      { "src": "img/notizie/tutti-a-scuola/04.jpg", "mini": "img/notizie/tutti-a-scuola/04-mini.webp", "alt": "Lo chef Sandro Serva segue uno studente mentre manteca la pasta in padella", "didascalia": "Ai fornelli con lo chef Sandro Serva" },
+      { "src": "img/notizie/tutti-a-scuola/05.jpg", "mini": "img/notizie/tutti-a-scuola/05-mini.webp", "alt": "Una mano spolvera il formaggio su un piatto di spaghetti al pomodoro", "didascalia": "Il tocco finale, prima del servizio" },
+      { "src": "img/notizie/tutti-a-scuola/06.jpg", "mini": "img/notizie/tutti-a-scuola/06-mini.webp", "alt": "Selfie di un gruppo di studenti in divisa da cucina con un ospite", "didascalia": "Un selfie per non dimenticare" },
+      { "src": "img/notizie/tutti-a-scuola/07.jpg", "mini": "img/notizie/tutti-a-scuola/07-mini.webp", "alt": "Il palco della cerimonia con il logo “Tutti a scuola” sullo schermo", "didascalia": "Il palco della cerimonia inaugurale" },
+      { "src": "img/notizie/tutti-a-scuola/08.jpg", "mini": "img/notizie/tutti-a-scuola/08-mini.webp", "alt": "Due relatori parlano a un gruppo di ragazzi seduti, con magliette colorate appese alle pareti", "didascalia": "Incontri e testimonianze" },
+      { "src": "img/notizie/tutti-a-scuola/09.jpg", "mini": "img/notizie/tutti-a-scuola/09-mini.webp", "alt": "Ragazzi seduti ai tavoli durante un'attività di gruppo in una sala con travi in legno", "didascalia": "Lavori di gruppo nella giornata di Amatrice" }
+    ]
+  }
 }

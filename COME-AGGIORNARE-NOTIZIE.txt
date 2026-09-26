@@ -61,8 +61,16 @@ con altre foto dell'evento. Per attivarlo:
     ]
   }
 
-   La copertina diventa da sola la prima foto dello slideshow.
+   Facoltativo: "mini" indica una miniatura leggera per la
+   fila in basso (es. "img/notizie/tutti-a-scuola/01-mini.webp").
+   La copertina diventa da sola la prima foto dello slideshow,
+   se non è già nell'elenco.
    Tra una voce e l'altra ci vuole la virgola.
 
 3. Salva: la foto della notizia diventa cliccabile (il cursore
    diventa una lente). Nessun pulsante compare sulla pagina.
+   Lo slideshow scorre da solo (6 secondi per foto), si può
+   mettere in pausa e si naviga con frecce, miniature e swipe.
+
+Esempio già attivo: la notizia "Tutti a scuola" di Amatrice,
+con copertina "img/notizie/tutti-a-scuola/01.jpg".

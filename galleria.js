@@ -7,9 +7,11 @@
 (function () {
   'use strict';
 
+  var DURATA = 6000; // ms per foto nello scorrimento automatico
   var GALLERIE = null;
-  var lb, stage, imgA, imgB, cur, capt, counter, thumbs, btnPrev, btnNext;
-  var slides = [], idx = 0, titolo = '', lastFocus = null, showing = 'a', touchX = null, touchY = null;
+  var lb, fig, slideA, slideB, capt, counter, thumbs, btnPrev, btnNext, btnPlay, prog, titoloEl;
+  var slides = [], idx = -1, titolo = '', lastFocus = null, attiva = null, token = 0;
+  var play = false, timer = null, touchX = null, touchY = null, kb = 0;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function chiave(src) {
@@ -22,10 +24,22 @@
   }
   function webp(src) { return src.replace(/\.(jpe?g|png)$/i, '.webp'); }
   function esc(t) { return (t || '').replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function normalizza(g, key) {
+    var foto = (g.foto || []).map(function (f) { return typeof f === 'string' ? { src: f } : f; });
+    if (!foto.some(function (f) { return chiave(f.src) === key; })) foto.unshift({ src: key, alt: g.alt_copertina || '' });
+    return foto;
+  }
 
-  function carica(img, src) {
-    img.onerror = function () { this.onerror = null; this.src = src; };
-    img.src = webp(src);
+  /* Carica una foto (prima la versione .webp, poi l'originale) e avvisa quando è pronta */
+  function precarica(src, cb) {
+    var im = new Image();
+    im.decoding = 'async';
+    im.onload = function () { cb && cb(im.src); };
+    im.onerror = function () {
+      im.onerror = function () { cb && cb(src); };
+      im.src = src;
+    };
+    im.src = webp(src);
   }
 
   function costruisci() {
@@ -40,54 +54,64 @@
       '<div class="gal-top">' +
         '<p class="gal-titolo"></p>' +
         '<span class="gal-count" aria-live="polite"></span>' +
-        '<button type="button" class="gal-x" aria-label="Chiudi la galleria">' +
+        '<button type="button" class="gal-btn gal-play" aria-label="Metti in pausa lo scorrimento">' +
+          '<svg class="i-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>' +
+          '<svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></button>' +
+        '<button type="button" class="gal-btn gal-x" aria-label="Chiudi la galleria">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>' +
       '</div>' +
+      '<div class="gal-prog" aria-hidden="true"><i></i></div>' +
       '<div class="gal-stage">' +
-        '<button type="button" class="gal-nav gal-prev" aria-label="Foto precedente">' +
+        '<button type="button" class="gal-btn gal-nav gal-prev" aria-label="Foto precedente">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg></button>' +
-        '<figure class="gal-fig"><img class="gal-img on" alt=""/><img class="gal-img" alt=""/></figure>' +
-        '<button type="button" class="gal-nav gal-next" aria-label="Foto successiva">' +
+        '<div class="gal-fig"><figure class="gal-slide"><img alt=""/></figure><figure class="gal-slide"><img alt=""/></figure></div>' +
+        '<button type="button" class="gal-btn gal-nav gal-next" aria-label="Foto successiva">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>' +
       '</div>' +
       '<p class="gal-capt"></p>' +
-      '<div class="gal-thumbs" role="tablist" aria-label="Miniature"></div>';
+      '<div class="gal-thumbs" aria-label="Miniature"></div>';
     document.body.appendChild(lb);
 
-    stage = lb.querySelector('.gal-stage');
-    var imgs = lb.querySelectorAll('.gal-img');
-    imgA = imgs[0]; imgB = imgs[1];
+    fig = lb.querySelector('.gal-fig');
+    var s = lb.querySelectorAll('.gal-slide');
+    slideA = s[0]; slideB = s[1];
+    titoloEl = lb.querySelector('.gal-titolo');
     capt = lb.querySelector('.gal-capt');
     counter = lb.querySelector('.gal-count');
     thumbs = lb.querySelector('.gal-thumbs');
     btnPrev = lb.querySelector('.gal-prev');
     btnNext = lb.querySelector('.gal-next');
+    btnPlay = lb.querySelector('.gal-play');
+    prog = lb.querySelector('.gal-prog i');
 
     lb.querySelector('.gal-x').addEventListener('click', chiudi);
-    btnPrev.addEventListener('click', function () { vai(idx - 1); });
-    btnNext.addEventListener('click', function () { vai(idx + 1); });
-    stage.addEventListener('click', function (e) { if (e.target === stage || e.target.classList.contains('gal-fig')) chiudi(); });
+    btnPrev.addEventListener('click', function () { vai(idx - 1, -1); });
+    btnNext.addEventListener('click', function () { vai(idx + 1, 1); });
+    btnPlay.addEventListener('click', function () { imposta(!play); });
+    lb.querySelector('.gal-stage').addEventListener('click', function (e) {
+      if (e.target.classList.contains('gal-stage') || e.target.classList.contains('gal-fig')) chiudi();
+    });
     thumbs.addEventListener('click', function (e) {
       var b = e.target.closest('button[data-i]');
-      if (b) vai(+b.dataset.i);
+      if (b) vai(+b.dataset.i, +b.dataset.i < idx ? -1 : 1);
     });
-    stage.addEventListener('touchstart', function (e) {
+    fig.addEventListener('touchstart', function (e) {
       if (e.touches.length !== 1) { touchX = null; return; }
       touchX = e.touches[0].clientX; touchY = e.touches[0].clientY;
     }, { passive: true });
-    stage.addEventListener('touchend', function (e) {
+    fig.addEventListener('touchend', function (e) {
       if (touchX === null) return;
       var dx = e.changedTouches[0].clientX - touchX, dy = e.changedTouches[0].clientY - touchY;
       touchX = null;
-      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.3) vai(idx + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) vai(idx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
       else if (dy > 90 && Math.abs(dy) > Math.abs(dx) * 1.5) chiudi();
     }, { passive: true });
     lb.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { e.preventDefault(); chiudi(); }
-      else if (e.key === 'ArrowRight') { e.preventDefault(); vai(idx + 1); }
-      else if (e.key === 'ArrowLeft') { e.preventDefault(); vai(idx - 1); }
-      else if (e.key === 'Home') { e.preventDefault(); vai(0); }
-      else if (e.key === 'End') { e.preventDefault(); vai(slides.length - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); vai(idx + 1, 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); vai(idx - 1, -1); }
+      else if (e.key === 'Home') { e.preventDefault(); vai(0, -1); }
+      else if (e.key === 'End') { e.preventDefault(); vai(slides.length - 1, 1); }
       else if (e.key === 'Tab') {
         var f = [].slice.call(lb.querySelectorAll('button')).filter(function (b) { return b.offsetParent !== null; });
         if (!f.length) return;
@@ -95,71 +119,105 @@
         else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
       }
     });
+    document.addEventListener('visibilitychange', function () { if (!lb.hidden) programma(); });
   }
 
-  function vai(n) {
+  /* ── Scorrimento automatico ── */
+  function programma() {
+    clearTimeout(timer);
+    prog.style.transition = 'none';
+    prog.style.transform = 'scaleX(0)';
+    if (!play || slides.length < 2 || document.hidden || lb.hidden) return;
+    void prog.offsetWidth;
+    prog.style.transition = 'transform ' + DURATA + 'ms linear';
+    prog.style.transform = 'scaleX(1)';
+    timer = setTimeout(function () { vai(idx + 1, 1); }, DURATA);
+  }
+  function imposta(on) {
+    play = on && !reduce;
+    lb.classList.toggle('in-pausa', !play);
+    btnPlay.setAttribute('aria-label', play ? 'Metti in pausa lo scorrimento' : 'Avvia lo scorrimento automatico');
+    programma();
+  }
+
+  /* ── Cambio foto con transizione ── */
+  function vai(n, dir) {
     if (!slides.length) return;
     n = (n + slides.length) % slides.length;
-    var primo = !imgA.src && !imgB.src;
+    if (n === idx) return;
+    dir = dir || 1;
+    var mio = ++token;
     var s = slides[n];
-    var next = showing === 'a' ? imgB : imgA, prev = showing === 'a' ? imgA : imgB;
-    if (primo) { next = imgA; prev = imgB; }
-    next.alt = s.alt || titolo;
-    next.onload = null; prev.onload = null;
-    var mostra = function () {
-      prev.classList.remove('on');
-      next.classList.add('on');
-      showing = next === imgA ? 'a' : 'b';
-    };
-    carica(next, s.src);
-    if (next.complete && next.naturalWidth) mostra(); else next.onload = mostra;
     idx = n;
-    capt.textContent = s.didascalia || '';
-    capt.hidden = !s.didascalia;
+
+    capt.classList.remove('on');
     counter.textContent = (n + 1) + ' / ' + slides.length;
     [].forEach.call(thumbs.children, function (b, i) {
       var on = i === n;
       b.classList.toggle('on', on);
-      b.setAttribute('aria-selected', on ? 'true' : 'false');
+      if (on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
       if (on && b.scrollIntoView) b.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
     });
-    [n + 1, n - 1].forEach(function (k) {
-      var p = slides[(k + slides.length) % slides.length];
-      if (p) { var im = new Image(); carica(im, p.src); }
+    clearTimeout(timer);
+
+    precarica(s.src, function (url) {
+      if (mio !== token) return;
+      var entra = attiva === slideA ? slideB : slideA, esce = attiva;
+      var img = entra.querySelector('img');
+      img.src = url;
+      img.alt = s.alt || titolo;
+      entra.className = 'gal-slide ' + (dir > 0 ? 'da-dx' : 'da-sx') + ((kb++ % 2) ? ' kb2' : '');
+      void entra.offsetWidth;
+      entra.classList.remove('da-dx', 'da-sx');
+      entra.classList.add('on');
+      if (esce) esce.className = 'gal-slide ' + (dir > 0 ? 'va-sx' : 'va-dx');
+      attiva = entra;
+      capt.textContent = s.didascalia || '';
+      if (s.didascalia) setTimeout(function () { if (mio === token) capt.classList.add('on'); }, reduce ? 0 : 260);
+      programma();
+      [n + 1, n - 1].forEach(function (k) { precarica(slides[(k + slides.length) % slides.length].src); });
     });
   }
 
-  function apri(key, start) {
+  function apri(key) {
     var g = GALLERIE && GALLERIE[key];
     if (!g) return;
     costruisci();
-    var foto = (g.foto || []).map(function (f) { return typeof f === 'string' ? { src: f } : f; });
-    if (!foto.some(function (f) { return chiave(f.src) === key; })) foto.unshift({ src: key, alt: g.alt_copertina || '' });
-    slides = foto;
+    slides = normalizza(g, key);
     titolo = g.titolo || '';
-    lb.querySelector('.gal-titolo').textContent = titolo;
+    titoloEl.textContent = titolo;
     lb.setAttribute('aria-label', 'Galleria fotografica' + (titolo ? ': ' + titolo : ''));
     var multi = slides.length > 1;
-    btnPrev.hidden = btnNext.hidden = !multi;
-    thumbs.hidden = !multi;
+    lb.classList.toggle('singola', !multi);
     thumbs.innerHTML = slides.map(function (s, i) {
-      return '<button type="button" role="tab" data-i="' + i + '" aria-label="Foto ' + (i + 1) + '"><img src="' + esc(webp(s.src)) + '" data-fb="' + esc(s.src) + '" alt="" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fb"/></button>';
+      var mini = s.mini || webp(s.src);
+      return '<button type="button" data-i="' + i + '" aria-label="Foto ' + (i + 1) + (s.alt ? ': ' + esc(s.alt) : '') + '"><img src="' + esc(mini) + '" data-fb="' + esc(s.src) + '" alt="" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fb"/></button>';
     }).join('');
-    imgA.removeAttribute('src'); imgB.removeAttribute('src');
-    imgA.classList.add('on'); imgB.classList.remove('on'); showing = 'a';
+    slideA.className = slideB.className = 'gal-slide';
+    attiva = null; idx = -1;
     lastFocus = document.activeElement;
     lb.hidden = false;
     document.documentElement.classList.add('gal-open');
-    requestAnimationFrame(function () { lb.classList.add('in'); });
-    vai(start || 0);
+    void lb.offsetWidth;
+    lb.classList.add('in');
+    imposta(multi);
+    vai(0, 1);
     (multi ? btnNext : lb.querySelector('.gal-x')).focus({ preventScroll: true });
   }
 
   function chiudi() {
     if (!lb || lb.hidden) return;
+    token++;
+    clearTimeout(timer);
     lb.classList.remove('in');
     document.documentElement.classList.remove('gal-open');
-    setTimeout(function () { lb.hidden = true; imgA.removeAttribute('src'); imgB.removeAttribute('src'); }, reduce ? 0 : 280);
+    setTimeout(function () {
+      if (lb.classList.contains('in')) return;
+      lb.hidden = true;
+      slideA.className = slideB.className = 'gal-slide';
+      slideA.querySelector('img').removeAttribute('src');
+      slideB.querySelector('img').removeAttribute('src');
+    }, reduce ? 0 : 420);
     if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
   }
 
@@ -170,22 +228,21 @@
       var key = chiave(img.dataset.fallback || img.getAttribute('src'));
       var g = GALLERIE[key];
       if (!g) return;
-      var n = (g.foto || []).length + ((g.foto || []).some(function (f) { return chiave(f.src || f) === key; }) ? 0 : 1);
       img.dataset.gal = key;
       img.classList.add('ac-gal');
       img.tabIndex = 0;
       img.setAttribute('role', 'button');
-      img.setAttribute('aria-label', 'Apri la galleria fotografica (' + n + ' foto)');
+      img.setAttribute('aria-label', 'Apri la galleria fotografica (' + normalizza(g, key).length + ' foto)');
     });
   }
 
   document.addEventListener('click', function (e) {
     var img = e.target.closest && e.target.closest('img[data-gal]');
-    if (img) { e.preventDefault(); apri(img.dataset.gal, 0); }
+    if (img) { e.preventDefault(); apri(img.dataset.gal); }
   });
   document.addEventListener('keydown', function (e) {
     var t = e.target;
-    if ((e.key === 'Enter' || e.key === ' ') && t && t.matches && t.matches('img[data-gal]')) { e.preventDefault(); apri(t.dataset.gal, 0); }
+    if ((e.key === 'Enter' || e.key === ' ') && t && t.matches && t.matches('img[data-gal]')) { e.preventDefault(); apri(t.dataset.gal); }
   });
 
   window.Galleria = { decora: decora };

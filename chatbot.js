@@ -126,6 +126,12 @@ const KB=[
   {k:['semiconvitto','semi convitto','solo pranzo','non alloggia','giornaliero','senza dormire',
       'non dormo','mezza pensione'],
    r:'Il <strong>Semiconvitto</strong> (pranzo + studio guidato + attività pomeridiane, senza pernottamento) è attivo dall\'a.s. 2026/27.<br><br>📋 <a href="semiconvitto.html">Info Semiconvitto →</a>'},
+  // ── PREMIO AL MERITO ──
+  {k:['premio al merito','premio merito','premio','premi','premiazione','merito','meritevol',
+      'bando','bando merito','bando del premio','mario serva','educatore mario serva','riconosciment',
+      'classifica','riduzione della retta per merito','sconto retta merito','albo d\'oro','encomio',
+      'buono libri','premio progresso','migliori convittori'],
+   r:'Il <strong>Premio al Merito "Educatore Mario Serva"</strong>, approvato dal Consiglio di Istituto il 22/9/2026, premia ogni anno le convittrici e i convittori che si sono distinti per impegno, comportamento e partecipazione alla vita del Convitto.<br><br>Ai primi tre classificati e alle prime tre classificate spetta una <strong>riduzione della retta</strong> dell\'anno successivo (80%, 60%, 40%) e un buono libri e cultura, oltre ad attestato di merito, Albo d\'Oro e altri riconoscimenti.<br><br>📋 <a href="premio-merito.html">Leggi il bando completo →</a>'},
   // ── VISITE E OPEN DAY ──
   {k:['open day','visita guidata','venire a vedere','prenotare','vedere il convitto',
       'visitare il convitto','posso visitare','posso venire','sopralluogo','porte aperte','tour dal vivo'],

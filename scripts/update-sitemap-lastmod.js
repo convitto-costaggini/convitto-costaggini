@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { pagineIndicizzabili } = require('./pagine-indicizzabili');
 
 const SITEMAP_PATH = path.join(process.cwd(), 'sitemap.xml');
 
@@ -23,7 +24,7 @@ if (!fs.existsSync(SITEMAP_PATH)) {
   fail(`sitemap.xml non trovato in ${SITEMAP_PATH}`);
 }
 
-const xml = fs.readFileSync(SITEMAP_PATH, 'utf8');
+let xml = fs.readFileSync(SITEMAP_PATH, 'utf8');
 
 function locToFile(loc) {
   try {
@@ -54,6 +55,23 @@ function lastCommitDate(file) {
 
 let changedCount = 0;
 let skippedCount = 0;
+
+// Aggiunge alla sitemap le pagine indicizzabili che ancora mancano (es. una
+// pagina appena creata): senza questo passaggio Google e la ricerca interna
+// del sito non le troverebbero finché qualcuno non le inserisce a mano.
+const BASE_URL = 'https://convitto.alberghierorieti.edu.it/';
+const presenti = new Set(
+  [...xml.matchAll(/<loc>([\s\S]*?)<\/loc>/g)].map(m => locToFile(m[1])).filter(Boolean)
+);
+const mancanti = pagineIndicizzabili(process.cwd()).filter(f => !presenti.has(f));
+if (mancanti.length) {
+  const blocchi = mancanti.map(f => {
+    log(`  ${f}: aggiunta a sitemap.xml`);
+    return `  <url>\n    <loc>${BASE_URL}${f}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n`;
+  }).join('');
+  xml = xml.replace(/<\/urlset>/, blocchi + '</urlset>');
+  changedCount += mancanti.length;
+}
 
 // Sostituisce, blocco per blocco <url>...</url>, il lastmod se necessario.
 const updatedXml = xml.replace(

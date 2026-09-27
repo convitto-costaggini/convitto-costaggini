@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { pagineIndicizzabili } = require('./pagine-indicizzabili');
 
 const ROOT = process.cwd();
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
@@ -87,7 +88,10 @@ function estraiCorpo(html) {
 // --- Elenco pagine pubbliche da sitemap.xml ---
 const sitemapXml = fs.readFileSync(SITEMAP_PATH, 'utf8');
 const locs = [...sitemapXml.matchAll(/<loc>([\s\S]*?)<\/loc>/g)].map(m => m[1]);
-const files = [...new Set(locs.map(locToFile).filter(Boolean))].sort();
+// Unione con le pagine indicizzabili su disco: una pagina nuova non ancora
+// in sitemap.xml (che viene aggiornata da un altro workflow) va comunque
+// indicizzata subito.
+const files = [...new Set([...locs.map(locToFile).filter(Boolean), ...pagineIndicizzabili(ROOT)])].sort();
 
 if (!files.length) fail('nessuna pagina trovata in sitemap.xml');
 

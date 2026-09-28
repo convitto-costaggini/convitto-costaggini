@@ -175,7 +175,7 @@ const KB=[
   {k:['telefono','email','contatto','scrivere','segreteria','informazioni','risponde',
       'numero','chiamare','mail','pec','indirizzo email','come contatto',
       'orari segreteria','orario segreteria','apertura segreteria','quando apre la segreteria'],
-   r:'Puoi contattarci tramite:<br>📧 <a href="mailto:convitto@alberghierorieti.it">convitto@alberghierorieti.it</a><br>📋 <a href="contatti.html">Modulo di contatto →</a><br><br>La segreteria risponde entro 24-48 ore nei giorni scolastici. Per gli orari esatti dello sportello: <a href="contatti.html#orari">Orari dello sportello →</a>'},
+   r:'Puoi contattarci tramite:<br>📧 <a href="mailto:convitto@alberghierorieti.it">convitto@alberghierorieti.it</a><br>📋 <a href="contatti.html">Modulo di contatto →</a><br><br>La segreteria risponde entro 24-48 ore nei giorni scolastici. Per gli orari esatti dello sportello: <a href="contatti.html#orari">Orari dello sportello →</a><br><br>Gli uffici amministrativi dell\'Istituto (Didattica, Personale, Protocollo, Contabilità) ricevono presso la Sede Centrale, Via dei Salici 62: <a href="contatti.html#segreteria">Orari della segreteria dell\'Istituto →</a>'},
   // ── CORREDO ──
   {k:['corredo','cosa portare','cosa devo portare','lista','valigia','biancheria',
       'lenzuola','asciugamani','vestiti','necessaire','bagagli','cosa serve'],

@@ -74,6 +74,7 @@
           <li><a href="ptof-guida.html">PTOF</a></li>
           <li><a href="regolamento.html">Regolamento</a></li>
           <li><a href="privacy.html">Privacy &amp; GDPR</a></li>
+          <li><a href="privacy-moduli.html">Informative e moduli privacy</a></li>
           <li><a href="cookie-policy.html">Cookie Policy</a></li>
           <li><a href="trasparenza.html#accessibilita">Accessibilità</a></li>
           <li><a href="mappa-sito.html">🗺️ Mappa del Sito</a></li>
@@ -83,7 +84,7 @@
     </div>
     <div class="fbot">
       <p>© 2026 Convitto Annesso — IPSSEOA "R. A. Costaggini" — Via Salaria s.n.c. — 02100 Rieti (RI) — C.F. 80008130579 — Cod. mecc. RIRH010007</p>
-     <p><a href="https://form.agid.gov.it/istsc_rirh010007/sito_convitto_ipsseoa_costaggini/dichiarazione" target="_blank" rel="noopener">Dichiarazione di Accessibilità</a> · <a href="privacy.html">Privacy</a> · <a href="cookie-policy.html">Cookie Policy</a> · <a href="trasparenza.html">Amm. Trasparente</a> · <a href="mappa-sito.html">Mappa del Sito</a></p>
+     <p><a href="https://form.agid.gov.it/istsc_rirh010007/sito_convitto_ipsseoa_costaggini/dichiarazione" target="_blank" rel="noopener">Dichiarazione di Accessibilità</a> · <a href="privacy.html">Privacy</a> · <a href="privacy-moduli.html">Informative e moduli privacy</a> · <a href="cookie-policy.html">Cookie Policy</a> · <a href="trasparenza.html">Amm. Trasparente</a> · <a href="mappa-sito.html">Mappa del Sito</a></p>
       <p style="font-size:.68rem;color:rgba(245,240,232,.65);margin-top:.35rem;font-style:italic">I contenuti sono autentici e prodotti dall'IPSSEOA "Costaggini" di Rieti.</p>
     </div>
   </div>
@@ -768,6 +769,7 @@
     { titolo: 'Chi è il Dirigente Scolastico', pagina: 'organizzazione.html', ancora: '#organigramma-titolo', cat: 'Organizzazione', keywords: ['dirigente','dirigente scolastico','preside','chi dirige il convitto','chi è il dirigente','chi è il preside','chi comanda','responsabile legale','cioci','maddalena cioci','avvocato','reggenza','in reggenza'] },
     { titolo: 'Orientamento al Convitto', pagina: 'orientamento.html', ancora: '', cat: 'Orientamento', keywords: ['orientamento','open day','tour virtuale','fa per me','faq','prenotazione'] },
     { titolo: 'Elenco del Personale', pagina: 'personale.html', ancora: '', cat: 'Il Convitto', keywords: ['personale','elenco','educativo','amministrativo','staff'] },
+    { titolo: 'Informative e moduli privacy', pagina: 'privacy-moduli.html', ancora: '', cat: 'Trasparenza', keywords: ['informative','moduli privacy','consenso','revoca','immagini','mappa','muro dei ricordi','semiconvitto','area famiglie','voci'] },
     { titolo: 'Informativa Privacy', pagina: 'privacy.html', ancora: '', cat: 'Trasparenza', keywords: ['privacy','informativa','dati personali','gdpr','reg ue 2016/679'] },
     { titolo: 'Il PTOF spiegato', pagina: 'ptof-guida.html', ancora: '', cat: 'Trasparenza', keywords: ['ptof','piano triennale','offerta formativa','spiegato','sezioni tematiche'] },
     { titolo: 'Leggi il Regolamento — guida', pagina: 'regolamento-guida.html', ancora: '', cat: 'Trasparenza', keywords: ['regolamento','guida','articoli','leggere','chiaro','diretto','uscite','uscire','permesso','weekend','fine settimana'] },

@@ -84,13 +84,19 @@
         <p>✦ Grazie. Il tuo ricordo è in attesa di approvazione — apparirà sul muro entro poche ore.</p>
       </div>
 
-      <label for="mr-privacy" style="display:flex;gap:.6rem;align-items:flex-start;margin:.9rem 0 .4rem;font-family:var(--fu);font-size:.8rem;line-height:1.5;color:rgba(255,255,255,.78);cursor:pointer">
-        <input type="checkbox" id="mr-privacy" required style="margin-top:.2rem;flex-shrink:0;width:18px;height:18px;accent-color:#B8922A"/>
-        <span>Ho letto l'<a href="privacy.html" target="_blank" rel="noopener" style="color:#D4AA4A;text-decoration:underline">informativa sul trattamento dei dati personali</a> (Reg. UE 2016/679) e acconsento alla pubblicazione del mio ricordo e del nome indicato, dopo approvazione. Posso chiederne la rimozione in qualsiasi momento scrivendo a <a href="mailto:convitto@alberghierorieti.it" style="color:#D4AA4A;text-decoration:underline">convitto@alberghierorieti.it</a>. *</span>
-      </label>
-      <p class="mr-note">Ti chiediamo di non citare per nome altre persone senza il loro consenso.</p>
+      <label class="mr-label" for="mr-email">La tua email * <span style="text-transform:none;letter-spacing:0;font-weight:400;opacity:.7">(non viene pubblicata)</span></label>
+      <input type="email" class="mr-input" id="mr-email" placeholder="nome@esempio.it" maxlength="200" autocomplete="email" required/>
 
-      <p class="mr-note">Il tuo ricordo apparirà sul muro dopo una breve moderazione. Non vengono pubblicati contenuti offensivi o non pertinenti. Nessun dato viene condiviso con terze parti.</p>
+      <p class="mr-note" style="color:rgba(255,255,255,.62);font-size:.72rem"><strong style="color:#D4AA4A">Prima di scrivere:</strong> racconta un tuo ricordo, senza nomi, cognomi, soprannomi o dettagli che rendano riconoscibili altre persone; niente dati sulla salute, recapiti o contenuti offensivi. Massimo 280 caratteri. Ogni ricordo viene letto dal Convitto prima della pubblicazione e può essere accorciato, corretto o non pubblicato. <a href="informativa-ricordi.html#regole" target="_blank" rel="noopener" style="color:#D4AA4A;text-decoration:underline">Tutte le regole del Muro</a></p>
+
+      <label for="mr-regole" style="display:flex;gap:.6rem;align-items:flex-start;margin:.9rem 0 .4rem;font-family:var(--fu);font-size:.8rem;line-height:1.5;color:rgba(255,255,255,.78);cursor:pointer">
+        <input type="checkbox" id="mr-regole" required style="margin-top:.2rem;flex-shrink:0;width:18px;height:18px;accent-color:#B8922A"/>
+        <span>Ho letto le <a href="informativa-ricordi.html#regole" target="_blank" rel="noopener" style="color:#D4AA4A;text-decoration:underline">regole d'uso del Muro dei Ricordi</a> e mi impegno a rispettarle. *</span>
+      </label>
+      <label for="mr-privacy" style="display:flex;gap:.6rem;align-items:flex-start;margin:.4rem 0 .4rem;font-family:var(--fu);font-size:.8rem;line-height:1.5;color:rgba(255,255,255,.78);cursor:pointer">
+        <input type="checkbox" id="mr-privacy" required style="margin-top:.2rem;flex-shrink:0;width:18px;height:18px;accent-color:#B8922A"/>
+        <span>Ho letto l'<a href="informativa-ricordi.html" target="_blank" rel="noopener" style="color:#D4AA4A;text-decoration:underline">informativa specifica sul Muro dei Ricordi</a> e <strong>acconsento</strong> alla pubblicazione del mio ricordo, del nome con cui firmo e delle informazioni facoltative indicate, dopo moderazione. Posso <a href="informativa-ricordi.html#revoca" target="_blank" rel="noopener" style="color:#D4AA4A;text-decoration:underline">revocare il consenso</a> in qualsiasi momento. *</span>
+      </label>
 
       <button type="submit" style="width:100%;padding:.85rem;background:linear-gradient(135deg,var(--bosco),#1a3a1b);color:#fff;border:none;border-radius:8px;font-family:var(--fu);font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">
         ✦ Lascia il ricordo
@@ -152,7 +158,9 @@ function updateCount() {
 
 async function submitRicordo(e) {
   e.preventDefault();
+  const email = (document.getElementById('mr-email').value || '').trim().toLowerCase();
   const r = {
+    id:     crypto.randomUUID(),
     testo:  document.getElementById('mr-testo').value.trim(),
     nome:   document.getElementById('mr-nome').value.trim(),
     anni:   document.getElementById('mr-anni').value.trim(),
@@ -171,8 +179,18 @@ async function submitRicordo(e) {
     document.getElementById('mr-nome').focus();
     return;
   }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Inserisci un indirizzo email valido: non verrà pubblicato.');
+    document.getElementById('mr-email').focus();
+    return;
+  }
+  if (!document.getElementById('mr-regole').checked) {
+    alert('Per inviare il ricordo è necessario accettare le regole d\'uso del Muro.');
+    document.getElementById('mr-regole').focus();
+    return;
+  }
   if (!document.getElementById('mr-privacy').checked) {
-    alert('Per inviare il ricordo è necessario accettare l\'informativa sul trattamento dei dati.');
+    alert('Per inviare il ricordo è necessario prestare il consenso descritto nell\'informativa.');
     document.getElementById('mr-privacy').focus();
     return;
   }
@@ -181,6 +199,13 @@ async function submitRicordo(e) {
   if (btn) { btn.disabled = true; btn.textContent = 'Invio…'; }
 
   try {
+    // Prima il consenso (email non pubblica, leggibile solo dagli amministratori),
+    // poi il ricordo: se l'autore è stato bloccato dalla moderazione il consenso
+    // viene rifiutato e il ricordo non parte.
+    await sb.insert('consensi_privacy', {
+      servizio: 'ricordi', riferimento_id: r.id, email: email,
+      versione_informativa: 'ricordi-2026-09-28'
+    });
     await sb.insert('ricordi', r);
   } catch(err) {
     if (btn) { btn.disabled = false; btn.textContent = 'Invia'; }
@@ -188,33 +213,14 @@ async function submitRicordo(e) {
     return;
   }
 
-  if (r.dove.trim()) {
-    try {
-      const res = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(r.dove)}&limit=1`,
-        { headers: { 'Accept-Language':'it' } }
-      );
-      const geo = await res.json();
-      if (geo && geo[0]) {
-        await sb.insert('pin_mappa', {
-          nome: r.nome,
-          citta: r.dove,
-          tipo: 'alumni',
-          anni: r.anni,
-          ruolo: 'Ex convittore/trice',
-          lat: parseFloat(geo[0].lat),
-          lng: parseFloat(geo[0].lon),
-          from_alumni: false,
-          approvato: false
-        });
-      }
-    } catch(err) { /* geocoding o inserimento falliti — non blocca l'invio del ricordo */ }
-  }
+  // Il pin sulla Mappa non viene più creato da qui: la pubblicazione della
+  // posizione è un trattamento distinto, con informativa e consenso propri
+  // (mondo.html → informativa-mappa.html).
 
   // Svuota il form
-  ['mr-testo','mr-nome','mr-anni','mr-dove'].forEach(function(id){
+  ['mr-testo','mr-nome','mr-anni','mr-dove','mr-email'].forEach(function(id){
     var el = document.getElementById(id); if(el) el.value='';
-    var pc = document.getElementById('mr-privacy'); if(pc) pc.checked=false;
+    ['mr-privacy','mr-regole'].forEach(function(c){ var pc = document.getElementById(c); if(pc) pc.checked=false; });
   });
   var cc = document.getElementById('mr-chars');
   if(cc) cc.textContent = '0';

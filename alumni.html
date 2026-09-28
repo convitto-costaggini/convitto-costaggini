@@ -109,7 +109,7 @@ function alumniNoContact(e) {
       <div style="display:flex;align-items:flex-start;gap:.6rem;background:rgba(184,146,42,.07);border:1px solid rgba(184,146,42,.2);border-radius:8px;padding:.65rem 1rem;margin:0 auto 1.75rem;max-width:560px">
         <span style="font-size:1rem;flex-shrink:0;margin-top:.05rem">💬</span>
         <p style="font-size:.78rem;color:var(--txt2);line-height:1.6;margin:0">
-          Alcune schede mostrano il pulsante <strong style="color:var(--oro2)">Scrivimi</strong> — significa che quell'ex convittore o convittrice ha acconsentito a essere contattato/a da altri ex convittori. Se non compare, ha preferito restare anonimo/a.
+          Alcune schede mostrano il pulsante <strong style="color:var(--oro2)">Scrivimi</strong> — significa che quell'ex convittore o convittrice ha acconsentito a essere contattato/a da altri ex convittori. Il messaggio arriva al Convitto, che lo inoltra: nessun indirizzo email personale è pubblicato sul sito. Se il pulsante non compare, ha preferito restare anonimo/a.
           <br>Vuoi essere contattabile? Spunta <em>"Acconsento ad essere contattato"</em> quando compili la tua scheda.
         </p>
       </div>
@@ -189,6 +189,8 @@ function escapeHtml(t){return String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&
 function escapeHtml(t){return String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
 
+const CONTATTO_ALUMNI = 'convitto@alberghierorieti.it';
+
 function alumniCopyEmail(e, email) {
   try {
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -218,7 +220,7 @@ function alumniShowEmailOverlay(email) {
   box.innerHTML = '<div style="font-size:2.2rem;margin-bottom:.75rem">✓</div>'
     + '<h3 style="font-family:var(--fd);font-size:1.3rem;font-weight:300;color:#F5F0E8;margin:0 0 .6rem">Email copiata</h3>'
     + '<p style="font-family:var(--fu);font-size:.85rem;font-weight:700;color:var(--oro2);background:rgba(184,146,42,.12);border-radius:8px;padding:.6rem 1rem;margin:0 0 1.1rem;word-break:break-all">' + escapeHtml(email) + '</p>'
-    + '<p style="font-size:.83rem;color:rgba(245,240,232,.6);line-height:1.7;margin:0 0 1.5rem">Se il tuo programma di posta non si è aperto da solo, incolla l\'indirizzo nella tua casella abituale (Gmail, Outlook…) per scrivere.</p>'
+    + '<p style="font-size:.83rem;color:rgba(245,240,232,.6);line-height:1.7;margin:0 0 1.5rem">Per tutelare la privacy degli ex convittori, i messaggi passano dal Convitto, che li inoltra alla persona che hai scelto. Indica nell\'oggetto a chi è rivolto. Se il tuo programma di posta non si è aperto da solo, incolla l\'indirizzo nella tua casella abituale.</p>'
     + '<button id="alumni-email-ov-close" style="background:linear-gradient(135deg,#B8922A,#D4AA4A);color:#1a2e1b;border:none;padding:.6rem 1.5rem;border-radius:40px;cursor:pointer;font-family:var(--fu),sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase">Ho capito</button>';
   ov.appendChild(box);
   document.body.appendChild(ov);
@@ -368,7 +370,10 @@ function renderCifreReali(rows) {
       card.style.cssText = 'background:' + grads[colore] + ';border:1px solid rgba(245,240,232,.1);border-radius:10px;overflow:hidden;transition:transform .2s,box-shadow .2s';
       card.onmouseenter = function(){ card.style.transform='translateY(-3px)';card.style.boxShadow='0 8px 24px rgba(0,0,0,.35)'; };
       card.onmouseleave = function(){ card.style.transform='';card.style.boxShadow=''; };
-      let hasContact = a.contattabile && a.email;
+      // L'email dell'ex convittore non arriva più al browser: "Scrivimi" scrive
+      // alla casella del Convitto, che inoltra il messaggio all'interessato.
+      let hasContact = a.contattabile;
+      const oggettoContatto = encodeURIComponent('Alumni - messaggio per ' + (a.firma || a.nome || ''));
       card.innerHTML = `
         <div style="padding:1rem .85rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:.35rem;height:100%;box-sizing:border-box">
           <div style="width:44px;height:44px;border-radius:50%;background:rgba(245,240,232,.1);border:1.5px solid rgba(245,240,232,.18);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:1.3rem;font-style:italic;color:rgba(245,240,232,.85);flex-shrink:0">
@@ -381,7 +386,7 @@ function renderCifreReali(rows) {
           ${socialRow}
           ${a.video_url ? '<button onclick="apriVideoAlumni(\'' + escapeHtml(a.video_url).replace(/'/g,"&#39;") + '\')" style="display:inline-flex;align-items:center;gap:.3rem;margin-top:.4rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;background:rgba(212,170,74,.15);border:1px solid rgba(212,170,74,.4);border-radius:20px;color:var(--oro2);cursor:pointer">▶ Guarda l\'intervista</button>' : ''}
           ${hasContact
-            ? '<a href="mailto:' + escapeHtml(a.email) + '?subject=Ciao%20dal%20Costaggini" onclick="alumniCopyEmail(event,\'' + escapeHtml(a.email).replace(/'/g,"&#39;") + '\')" style="display:inline-flex;align-items:center;gap:.25rem;margin-top:.4rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;background:rgba(184,146,42,.2);border:1px solid rgba(184,146,42,.4);border-radius:20px;color:var(--oro2);text-decoration:none">✉ Scrivimi</a>'
+            ? '<a href="mailto:' + CONTATTO_ALUMNI + '?subject=' + oggettoContatto + '" onclick="alumniCopyEmail(event,CONTATTO_ALUMNI)" style="display:inline-flex;align-items:center;gap:.25rem;margin-top:.4rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;background:rgba(184,146,42,.2);border:1px solid rgba(184,146,42,.4);border-radius:20px;color:var(--oro2);text-decoration:none">✉ Scrivimi</a>'
             : '<button onclick="alumniNoContact(event)" style="display:inline-flex;align-items:center;gap:.25rem;margin-top:.4rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;background:rgba(245,240,232,.05);border:1px solid rgba(245,240,232,.12);border-radius:20px;color:rgba(245,240,232,.3);cursor:pointer">✉ Scrivimi</button>'
           }
         </div>

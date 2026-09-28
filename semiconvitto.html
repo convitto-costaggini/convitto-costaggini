@@ -47,7 +47,7 @@
     .btn-stampa{font-family:var(--fu);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 2rem;background:0 0;border:1.5px solid var(--bosco);border-radius:8px;cursor:pointer;color:var(--bosco);transition:all .2s}
     .btn-stampa:hover{background:var(--bosco);color:#fff}
     @media print{
-      .sc-info,.sc-actions,.page-hero,footer,nav{display:none!important}
+      .sc-info,.sc-actions,.page-hero,footer,nav,#sc-esito{display:none!important}
       .sc-section{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
       body{background:#fff}
     }
@@ -89,7 +89,7 @@
         <p>L'orario delle attività di studio terminerà alle ore <strong>17:30</strong>.</p>
 
         <h3>Modalità di adesione</h3>
-        <p>I genitori interessati dovranno far pervenire la richiesta di adesione <strong>entro il 5 ottobre 2026</strong>, inviando all'indirizzo di posta elettronica <strong>rirh010007@istruzione.it</strong> il modulo di richiesta debitamente compilato (compilabile e stampabile qui sotto).</p>
+        <p>I genitori interessati dovranno far pervenire la richiesta di adesione <strong>entro il 5 ottobre 2026</strong>, inviando all'indirizzo di posta elettronica <strong>rirh010007@istruzione.it</strong> il modulo di richiesta debitamente compilato (compilabile e stampabile qui sotto), oppure <strong>inviandolo direttamente da questa pagina</strong> con il tasto "Invia la richiesta". La stessa richiesta vale anche per la giornata di prova.</p>
 
         <h3>Costi e utilizzo dei ticket</h3>
         <p>Il costo del servizio è di <strong>€ 70,00 mensili</strong>, da effettuare tramite il servizio PagoPA che sarà reso disponibile a seguito della ricezione della richiesta, e che darà diritto ad un carnet di <strong>16 ticket</strong> da consegnare al Personale Educativo preposto.</p>
@@ -176,12 +176,18 @@
           <div class="sc-section-body">
             <div class="sc-field">
               <label>Allergie, intolleranze o esigenze particolari</label>
-              <textarea name="note"></textarea>
+              <textarea name="note" maxlength="600"></textarea>
+              <p style="font-family:var(--fu);font-size:.72rem;color:#6b7280;margin:.35rem 0 0;line-height:1.5">Facoltativo. Sono dati relativi alla salute: li trattiamo solo con il consenso esplicito qui sotto e li comunichiamo soltanto al personale della cucina e della mensa.</p>
             </div>
             <div class="sc-check-row" style="margin-top:1rem">
               <input type="checkbox" id="sc-privacy" name="privacy"/>
-              <label for="sc-privacy">Ho letto l'informativa privacy (disponibile su <a href="privacy.html" style="text-decoration:underline">convitto.alberghierorieti.edu.it/privacy.html</a>) e acconsento al trattamento dei dati ai sensi del GDPR. <span class="req">*</span></label>
+              <label for="sc-privacy">Ho letto l'<a href="informativa-semiconvitto.html" target="_blank" rel="noopener" style="text-decoration:underline">informativa sul trattamento dei dati per il Semiconvitto</a>. <span class="req">*</span></label>
             </div>
+            <div class="sc-check-row" style="margin-top:.6rem">
+              <input type="checkbox" id="sc-salute" name="consenso_salute"/>
+              <label for="sc-salute"><strong>Presto il consenso esplicito</strong> al trattamento dei dati su allergie, intolleranze o esigenze particolari che ho indicato, al solo fine di adeguare la mensa e le attività (art. 9, par. 2, lett. a GDPR). Facoltativo; necessario solo se il campo qui sopra è compilato. Revocabile in qualsiasi momento.</label>
+            </div>
+            <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Non compilare questo campo: <input type="text" id="sito_web" name="sito_web" tabindex="-1" autocomplete="off"/></label></p>
           </div>
 
           <div class="sc-sig-row">
@@ -195,12 +201,14 @@
             </div>
           </div>
 
-          <div class="sc-footer-note">Modulo da restituire alla Segreteria e Convitto IPSSEOA "Costaggini" — Rieti, oppure via email a rirh010007@istruzione.it.</div>
+          <div class="sc-footer-note">Modulo da inviare con il tasto "Invia la richiesta", oppure da restituire firmato alla Segreteria e Convitto IPSSEOA "Costaggini" — Rieti, o via email a rirh010007@istruzione.it. <a href="informativa-semiconvitto.html" style="text-decoration:underline">Informativa privacy e moduli di consenso/revoca</a>.</div>
         </div>
 
       </form>
 
-      <div class="sc-actions">
+      <div id="sc-esito" role="status" aria-live="polite" style="display:none;max-width:780px;margin:1.25rem auto 0;border-radius:10px;padding:1rem 1.25rem;font-family:var(--fu);font-size:.88rem;line-height:1.6"></div>
+      <div class="sc-actions" style="gap:.75rem;flex-wrap:wrap">
+        <button type="button" id="sc-invia" class="btn-stampa" style="background:var(--bosco);color:#fff" onclick="inviaSemiconvitto()">✉️ Invia la richiesta</button>
         <button type="button" class="btn-stampa" onclick="window.print()">🖨️ Stampa il modulo</button>
       </div>
 
@@ -209,5 +217,92 @@
 
 </main>
 <script src="nav.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
+<script>
+// Invio online della richiesta di Semiconvitto: passa dallo stesso Apps Script
+// dei moduli Contatti/Open Day (verifica reCAPTCHA + email alle caselle istituzionali).
+const SC_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
+const SC_RECAPTCHA = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
+
+function scEsito(ok, testo) {
+  const el = document.getElementById('sc-esito');
+  el.style.display = 'block';
+  el.style.background = ok ? '#ecfdf5' : '#fef2f2';
+  el.style.border = '1px solid ' + (ok ? '#a7f3d0' : '#fecaca');
+  el.style.color = ok ? '#065f46' : '#b91c1c';
+  el.innerHTML = testo;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+async function inviaSemiconvitto() {
+  const f = document.getElementById('sc-form');
+  const v = n => ((f.elements[n] && f.elements[n].value) || '').trim();
+  const obbligatori = [['studente_nome','Cognome e nome dello studente'],['studente_classe','Classe'],['genitore_nome','Nome del genitore'],['genitore_cell','Cellulare'],['genitore_email','Email']];
+  for (const [n, et] of obbligatori) {
+    if (!v(n)) { scEsito(false, 'Compila il campo obbligatorio: <strong>' + et + '</strong>.'); f.elements[n].focus(); return; }
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('genitore_email'))) { scEsito(false, 'Inserisci un indirizzo email valido.'); f.elements['genitore_email'].focus(); return; }
+  if (!document.getElementById('sc-privacy').checked) { scEsito(false, 'Per inviare la richiesta conferma di aver letto l\'informativa.'); document.getElementById('sc-privacy').focus(); return; }
+  const note = v('note');
+  const consensoSalute = document.getElementById('sc-salute').checked;
+  if (note && !consensoSalute) {
+    scEsito(false, 'Hai indicato allergie o esigenze particolari: per trattarle serve il consenso esplicito. Spunta la casella dedicata oppure svuota il campo.');
+    document.getElementById('sc-salute').focus(); return;
+  }
+  const indirizzi = [...f.querySelectorAll('input[name=indirizzo]:checked')].map(x => x.value).join(', ');
+  const messaggio = [
+    'RICHIESTA DI ADESIONE AL SEMICONVITTO — A.S. 2026/2027',
+    '',
+    'Studente: ' + v('studente_nome'),
+    'Classe: ' + v('studente_classe'),
+    'Data di nascita: ' + (v('studente_nascita') || '—'),
+    'Indirizzo di studi: ' + (indirizzi || '—'),
+    '',
+    'Genitore/tutore: ' + v('genitore_nome'),
+    'Cellulare: ' + v('genitore_cell'),
+    'Email: ' + v('genitore_email'),
+    '',
+    'Allergie, intolleranze o esigenze particolari: ' + (note || '—'),
+    'Consenso esplicito dati salute (art. 9.2.a GDPR): ' + (note ? 'SÌ' : 'non necessario'),
+    'Presa visione informativa Semiconvitto: SÌ (versione 28/09/2026)',
+    'Inviata dal sito il: ' + new Date().toLocaleString('it-IT')
+  ].join('\n');
+
+  const btn = document.getElementById('sc-invia');
+  btn.disabled = true; btn.textContent = 'Invio in corso…';
+  let token = '';
+  try {
+    token = await new Promise((res, rej) => grecaptcha.ready(() => grecaptcha.execute(SC_RECAPTCHA, { action: 'semiconvitto' }).then(res).catch(rej)));
+  } catch (e) { token = ''; }
+  try {
+    const resp = await fetch(SC_GAS, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({
+        action: 'inviaContatto',
+        tipo: 'semiconvitto',
+        nome: v('genitore_nome'),
+        email: v('genitore_email'),
+        telefono: v('genitore_cell'),
+        oggetto: 'Richiesta adesione Semiconvitto — ' + v('studente_nome'),
+        messaggio: messaggio,
+        privacy: true,
+        recaptchaToken: token,
+        recaptchaAction: 'semiconvitto',
+        botField: (document.getElementById('sito_web') || {}).value || ''
+      })
+    });
+    let esito = null;
+    try { esito = await resp.json(); } catch (e) {}
+    if (!resp.ok || !esito || esito.success !== true) throw new Error((esito && esito.message) || ('HTTP ' + resp.status));
+    scEsito(true, '<strong>Richiesta inviata.</strong> La Segreteria e il Convitto l\'hanno ricevuta e la contatteranno all\'indirizzo indicato con le istruzioni per il pagamento PagoPA.');
+    f.reset();
+  } catch (e) {
+    scEsito(false, '<strong>Invio non riuscito.</strong> Riprovi tra qualche istante, oppure stampi il modulo e lo invii a <a href="mailto:rirh010007@istruzione.it">rirh010007@istruzione.it</a>.');
+  } finally {
+    btn.disabled = false; btn.textContent = '✉️ Invia la richiesta';
+  }
+}
+</script>
 </body>
 </html>

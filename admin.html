@@ -1155,6 +1155,7 @@ async function loadPins() {
   try {
     const pending  = await sbFetch('pin_mappa?approvato=eq.false&order=created_at.desc');
     const approved = await sbFetch('pin_mappa?approvato=eq.true&order=created_at.desc');
+    window._consensiMappa = await consensiPer('mappa');
 
     pendingEl.innerHTML = pending.length
       ? pending.map(p => pinCard(p, false)).join('')
@@ -1180,6 +1181,7 @@ function pinCard(p, approvato) {
         <div class="fam-campo"><strong>Anno</strong>${escapeHtml(p.anni) || '—'}</div>
         <div class="fam-campo"><strong>Ruolo</strong>${escapeHtml(p.ruolo) || '—'}</div>
         <div class="fam-campo"><strong>Coordinate</strong>${p.lat ? p.lat.toFixed(2) + ', ' + p.lng.toFixed(2) : '—'}</div>
+        ${pinConsensoInfo(p)}
       </div>
       <div class="fam-azioni">
         ${!approvato ? `
@@ -1187,10 +1189,52 @@ function pinCard(p, approvato) {
           <button class="btn-rifiuta" onclick="pinElimina('${p.id}')">🗑️ Elimina</button>
         ` : `
           <button class="btn-annulla-fam" onclick="pinAzione('${p.id}', false)">↩ Annulla approvazione</button>
+          <button class="btn-ed edit" onclick="pinRinnova('${p.id}')">🔁 Consenso rinnovato</button>
           <button class="btn-rifiuta" onclick="pinElimina('${p.id}')">🗑️ Elimina</button>
         `}
+        ${pinEmail(p) ? `<button class="btn-rifiuta" onclick="bloccaDaPin('${p.id}')">⛔ Blocca autore</button>` : ''}
       </div>
     </div>`;
+}
+
+function pinEmail(p) {
+  const c = (window._consensiMappa || {})[p.id];
+  return c ? c.email : '';
+}
+
+// Il consenso alla Mappa vale due anni (riscontro DPO): dopo la scadenza il pin
+// non è più visibile al pubblico finché non si registra il rinnovo.
+function pinConsensoInfo(p) {
+  const email = pinEmail(p);
+  let out = '<div class="fam-campo"><strong>Email (non pubblica)</strong>' + (escapeHtml(email) || '—') + '</div>';
+  if (p.consenso_at) {
+    const scad = new Date(p.consenso_at);
+    scad.setFullYear(scad.getFullYear() + 2);
+    const scaduto = scad < new Date();
+    out += '<div class="fam-campo"><strong>Consenso valido fino al</strong><span style="' + (scaduto ? 'color:#dc2626;font-weight:700' : '') + '">'
+        + scad.toLocaleDateString('it-IT') + (scaduto ? ' — SCADUTO, non visibile' : '') + '</span></div>';
+  }
+  return out;
+}
+
+async function pinRinnova(id) {
+  if (!await admConfirm({icon:'🔁',title:'Consenso rinnovato',message:"Registra che l'interessato ha rinnovato il consenso: il pin resterà visibile per altri due anni da oggi.",confirmText:'Registra',type:'success'})) return;
+  const resp = await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, {
+    method: 'PATCH',
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN(), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ consenso_at: new Date().toISOString() })
+  });
+  if (resp.ok) { await loadPins(); }
+  else { alert('Errore: ' + resp.status); }
+}
+
+async function bloccaDaPin(id) {
+  const email = pinEmail({ id: id });
+  if (!email) return;
+  if (!await admConfirm({icon:'⛔',title:'Blocca autore',message:'Il pin viene eliminato e i nuovi invii da ' + email + ' saranno rifiutati.',confirmText:'Blocca',type:'danger'})) return;
+  if (!await bloccaAutore(email, 'Mappa: contenuto non conforme')) { alert('Errore durante il blocco.'); return; }
+  await fetch(SB_N + '/rest/v1/pin_mappa?id=eq.' + id, { method: 'DELETE', headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN() } });
+  await loadPins();
 }
 
 async function pinAzione(id, approva) {
@@ -1281,6 +1325,7 @@ async function ricordiLoad(approvato) {
   try {
     const filter = approvato === null ? '' : '&approvato=eq.' + approvato;
     const data = await sbFetch('ricordi?order=created_at.desc' + filter);
+    window._consensiRicordi = await consensiPer('ricordi');
     if (!data.length) {
       list.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessun ricordo.</p>';
       return;
@@ -1292,6 +1337,7 @@ async function ricordiLoad(approvato) {
           <div class="fam-campo"><strong>Anni</strong>${escapeHtml(r.anni) || '—'}</div>
           <div class="fam-campo"><strong>Dove ora</strong>${escapeHtml(r.dove) || '—'}</div>
           <div class="fam-campo"><strong>Data</strong>${r.created_at ? r.created_at.slice(0,10) : '—'}</div>
+          <div class="fam-campo"><strong>Email (non pubblica)</strong>${escapeHtml(ricordoEmail(r)) || '—'}</div>
         </div>
         ${r.testo ? `<div style="font-size:.82rem;color:rgba(245,240,232,.7);font-style:italic;margin:.5rem 0 .75rem;padding:.6rem .85rem;background:rgba(245,240,232,.05);border-radius:6px;line-height:1.6">"${escapeHtml(r.testo)}"</div>` : ''}
         <div class="fam-azioni">
@@ -1302,11 +1348,45 @@ async function ricordiLoad(approvato) {
             <button class="btn-annulla-fam" onclick="ricordiAzione('${r.id}', false)">↩ Annulla</button>
             <button class="btn-rifiuta" onclick="ricordiElimina('${r.id}')">🗑️ Elimina</button>
           `}
+          <button class="btn-ed edit" onclick="ricordiModifica('${r.id}')">✏️ Modifica testo</button>
+          ${ricordoEmail(r) ? `<button class="btn-rifiuta" onclick="ricordiBlocca('${r.id}')">⛔ Blocca autore</button>` : ''}
         </div>
       </div>`).join('');
   } catch(e) {
     list.innerHTML = '<p style="color:#dc2626;font-size:.85rem">Errore: ' + e.message + '</p>';
   }
+}
+
+function ricordoEmail(r) {
+  const c = (window._consensiRicordi || {})[r.id];
+  return c ? c.email : '';
+}
+
+// Moderazione (regole d'uso del Muro): il Titolare può togliere dati superflui
+// o riferiti a terzi prima o dopo la pubblicazione.
+async function ricordiModifica(id) {
+  const rows = await sbFetch('ricordi?id=eq.' + id);
+  if (!rows.length) return;
+  const nuovo = prompt('Modifica il testo del ricordo (max 280 caratteri). Togli nomi di altre persone e dati superflui.', rows[0].testo || '');
+  if (nuovo === null) return;
+  const testo = nuovo.trim().slice(0, 280);
+  if (!testo) { alert('Il testo non può essere vuoto: per toglierlo usa Elimina.'); return; }
+  const resp = await fetch(SB_N + '/rest/v1/ricordi?id=eq.' + id, {
+    method: 'PATCH',
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN(), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ testo: testo })
+  });
+  if (resp.ok) { await ricordiLoad(null); }
+  else { alert('Errore: ' + resp.status); }
+}
+
+async function ricordiBlocca(id) {
+  const email = ricordoEmail({ id: id });
+  if (!email) return;
+  if (!await admConfirm({icon:'⛔',title:'Blocca autore',message:'Il ricordo viene eliminato e i nuovi invii da ' + email + ' saranno rifiutati.',confirmText:'Blocca',type:'danger'})) return;
+  if (!await bloccaAutore(email, 'Muro dei Ricordi: contenuto non conforme')) { alert('Errore durante il blocco.'); return; }
+  await fetch(SB_N + '/rest/v1/ricordi?id=eq.' + id, { method: 'DELETE', headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN() } });
+  await ricordiLoad(null);
 }
 
 async function ricordiAzione(id, approva) {
@@ -1337,6 +1417,21 @@ async function ricordiElimina(id) {
 }
 
 // ═══ ALUMNI ═══
+// Dal 28/09/2026 la colonna email di alumni non è leggibile via API (misure DPO):
+// gli admin la ottengono dalla funzione admin_email_alumni().
+const ALUMNI_COLS = 'id,nome,firma,anni,citta,lavoro,settore,ricordo,social_fb,social_ig,social_li,social_web,contattabile,colore,approvato,created_at,video_url';
+async function caricaEmailAlumni() {
+  window._emailAlumni = {};
+  try {
+    const resp = await fetch(SB_N + '/rest/v1/rpc/admin_email_alumni', {
+      method: 'POST',
+      headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN(), 'Content-Type': 'application/json' },
+      body: '{}'
+    });
+    if (resp.ok) (await resp.json()).forEach(r => { window._emailAlumni[r.id] = r.email; });
+  } catch(e) {}
+}
+
 async function loadAlumni() {
   const pendingEl  = document.getElementById('alumni-pending-list');
   const approvedEl = document.getElementById('alumni-approved-list');
@@ -1346,7 +1441,8 @@ async function loadAlumni() {
 
   try {
     // In attesa
-    const pending = await sbFetch('alumni?approvato=eq.false&order=created_at.desc');
+    const pending = await sbFetch('alumni?select=' + ALUMNI_COLS + '&approvato=eq.false&order=created_at.desc');
+    await caricaEmailAlumni();
     if (!pending.length) {
       pendingEl.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessuna scheda in attesa.</p>';
     } else {
@@ -1354,7 +1450,7 @@ async function loadAlumni() {
     }
 
     // Approvati
-    const approved = await sbFetch('alumni?approvato=eq.true&order=created_at.desc');
+    const approved = await sbFetch('alumni?select=' + ALUMNI_COLS + '&approvato=eq.true&order=created_at.desc');
     if (!approved.length) {
       approvedEl.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessun alumni approvato.</p>';
     } else {
@@ -1374,7 +1470,7 @@ function alumniCard(a, approvato) {
         <div class="fam-campo"><strong>Settore</strong>${escapeHtml(a.settore) || '—'}</div>
         <div class="fam-campo"><strong>Città</strong>${escapeHtml(a.citta) || '—'}</div>
         <div class="fam-campo"><strong>Anni convitto</strong>${escapeHtml(a.anni) || '—'}</div>
-        <div class="fam-campo"><strong>Email</strong>${escapeHtml(a.email) || '—'}</div>
+        <div class="fam-campo"><strong>Email</strong>${escapeHtml(a.email || (window._emailAlumni || {})[a.id]) || '—'}</div>
       </div>
       ${a.ricordo ? `<div style="font-size:.8rem;color:#6b5a2a;font-style:italic;margin:0 0 .75rem;padding:.5rem .75rem;background:#f9f6ef;border-radius:6px">"${escapeHtml(a.ricordo)}"</div>` : ''}
       <div class="fam-campo" style="margin-bottom:.75rem">
@@ -1453,6 +1549,27 @@ async function alumniElimina(id) {
 }
 
 // Helper fetch generico con service key
+// ═══ PRIVACY: registro consensi e blocchi (misure DPO 28/09/2026) ═══
+// Email di chi ha pubblicato su Mappa / Muro dei Ricordi, leggibili solo dagli admin.
+// Se la tabella non esiste ancora (migrazione non applicata) restituisce {}.
+async function consensiPer(servizio) {
+  try {
+    const rows = await sbFetch('consensi_privacy?select=riferimento_id,email,consenso_at&servizio=eq.' + servizio);
+    const m = {};
+    rows.forEach(r => { m[r.riferimento_id] = r; });
+    return m;
+  } catch(e) { return {}; }
+}
+
+async function bloccaAutore(email, motivo) {
+  const resp = await fetch(SB_N + '/rest/v1/moderazione_blocchi', {
+    method: 'POST',
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN(), 'Content-Type': 'application/json', 'Prefer': 'return=minimal,resolution=ignore-duplicates' },
+    body: JSON.stringify({ email: String(email).trim().toLowerCase(), motivo: motivo })
+  });
+  return resp.ok;
+}
+
 async function sbFetch(endpoint) {
   const resp = await fetch(SB_N + '/rest/v1/' + endpoint, {
     headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN() }

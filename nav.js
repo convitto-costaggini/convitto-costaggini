@@ -59,8 +59,8 @@
             <a href="tel:+390746296862" style="color:var(--oro2)">0746 296862</a>
           </li>
           <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6;margin-top:.4rem">
-            <strong style="color:rgba(245,240,232,.7);display:block">Segreteria Didattica</strong>
-            Lun–Ven 8:00–13:30<br>solo su appuntamento
+            <strong style="color:rgba(245,240,232,.7);display:block">Segreteria Istituto</strong>
+            <a href="contatti.html#segreteria" style="color:var(--oro2)">Orari di ricevimento →</a>
           </li>
           <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6;margin-top:.4rem">
             <strong style="color:rgba(245,240,232,.7);display:block">Sede centrale</strong>

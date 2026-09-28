@@ -107,9 +107,12 @@
       <label class="pf-label">Cosa fai oggi? (facoltativo)</label>
       <input class="pf-input" id="pf-role" type="text" placeholder="Es. Chef in hotel 5★" maxlength="80"/>
       <p style="font-size:.72rem;color:rgba(255,255,255,.35);margin-top:.75rem">* La posizione viene rilevata automaticamente dalla città inserita tramite OpenStreetMap.</p>
+      <label class="pf-label" for="pf-email">La tua email * <span style="text-transform:none;letter-spacing:0;font-weight:400;opacity:.7">(non viene pubblicata)</span></label>
+      <input class="pf-input" id="pf-email" type="email" placeholder="nome@esempio.it" maxlength="200" autocomplete="email"/>
+      <p style="font-size:.72rem;color:rgba(255,255,255,.45);margin-top:.35rem;line-height:1.5">Serve solo per confermare la tua scelta, per revocarla e per chiederti fra due anni se vuoi restare sulla mappa.</p>
       <label for="pf-privacy" style="display:flex;gap:.6rem;align-items:flex-start;margin-top:.9rem;font-size:.76rem;line-height:1.5;color:rgba(255,255,255,.75);cursor:pointer">
         <input type="checkbox" id="pf-privacy" style="margin-top:.2rem;flex-shrink:0;width:18px;height:18px;accent-color:#D4AA4A"/>
-        <span>Ho letto l'<a href="privacy.html" target="_blank" rel="noopener" style="color:#D4AA4A;text-decoration:underline">informativa sul trattamento dei dati personali</a> (Reg. UE 2016/679) e acconsento alla pubblicazione sulla mappa del nome (o delle iniziali), della città e delle informazioni facoltative indicate, dopo approvazione. Posso chiederne la rimozione in qualsiasi momento scrivendo a <a href="mailto:convitto@alberghierorieti.it" style="color:#D4AA4A;text-decoration:underline">convitto@alberghierorieti.it</a>. *</span>
+        <span>Ho letto l'<a href="informativa-mappa.html" target="_blank" rel="noopener" style="color:#D4AA4A;text-decoration:underline">informativa specifica sulla Mappa degli ex convittori</a> e <strong>acconsento</strong> alla pubblicazione sulla mappa del nome (o delle iniziali), della città e delle informazioni facoltative che ho indicato, dopo approvazione. So che il consenso vale <strong>due anni</strong>, che la posizione è mostrata solo a livello di città e che posso <a href="informativa-mappa.html#revoca" target="_blank" rel="noopener" style="color:#D4AA4A;text-decoration:underline">revocarlo</a> in qualsiasi momento. *</span>
       </label>
       <div class="pf-btns" style="margin-top:1.25rem">
         <button class="pf-submit" onclick="submitPin()">Aggiungi 📍</button>
@@ -162,6 +165,8 @@ L.marker([42.405,12.865],{icon:L.divIcon({className:'',html:'<div style="positio
 
 const SB_URL  = 'https://sawclsysqnjsvbobioqo.supabase.co';
 const SB_PUB  = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
+// Versione dell'informativa accettata, salvata insieme al consenso
+const INFORMATIVA_MAPPA = 'mappa-2026-09-28';
 
 let allPins = [...DEMO];
 let markers = [];
@@ -272,8 +277,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 async function submitPin() {
   const name = document.getElementById('pf-name').value.trim();
   const city = document.getElementById('pf-city').value.trim();
+  const email = document.getElementById('pf-email').value.trim().toLowerCase();
   if (!name || !city) { alert('Inserisci nome e città.'); return; }
-  if (!document.getElementById('pf-privacy').checked) { alert('Per aggiungere il pin è necessario accettare l\'informativa sul trattamento dei dati.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Inserisci un indirizzo email valido: non verrà pubblicato.'); return; }
+  if (!document.getElementById('pf-privacy').checked) { alert('Per aggiungere il pin è necessario prestare il consenso descritto nell\'informativa sulla Mappa.'); return; }
 
   const loadEl = document.getElementById('pf-loading');
   const errEl  = document.getElementById('pf-error');
@@ -296,7 +303,9 @@ async function submitPin() {
   loadEl.style.display = 'none';
   if (!found) { errEl.style.display = 'block'; return; }
 
+  const pinId = crypto.randomUUID();
   const pin = {
+    id:    pinId,
     nome:  name,
     citta: city,
     tipo:  document.getElementById('pf-type').value,
@@ -307,7 +316,22 @@ async function submitPin() {
     approvato: false
   };
 
+  const sbHeaders = {
+    'apikey':        SB_PUB,
+    'Authorization': 'Bearer ' + SB_PUB,
+    'Content-Type':  'application/json',
+    'Prefer':        'return=minimal'
+  };
   try {
+    // Prima il consenso (email non pubblica, leggibile solo dagli amministratori),
+    // poi il pin: se l'utente è stato bloccato dalla moderazione il consenso viene
+    // rifiutato e il pin non parte.
+    const rc = await fetch(SB_URL + '/rest/v1/consensi_privacy', {
+      method: 'POST',
+      headers: sbHeaders,
+      body: JSON.stringify({ servizio: 'mappa', riferimento_id: pinId, email, versione_informativa: INFORMATIVA_MAPPA })
+    });
+    if (!rc.ok) throw new Error('HTTP ' + rc.status + ' — ' + await rc.text());
     const resp = await fetch(SB_URL + '/rest/v1/pin_mappa', {
       method: 'POST',
       headers: {
@@ -330,7 +354,7 @@ async function submitPin() {
   }
 
   // 3. Chiude il pannello e mostra overlay di conferma centrato
-  ['pf-name', 'pf-city', 'pf-year', 'pf-role'].forEach(id => {
+  ['pf-name', 'pf-city', 'pf-year', 'pf-role', 'pf-email'].forEach(id => {
     document.getElementById(id).value = '';
   });
   document.getElementById('pf-privacy').checked = false;

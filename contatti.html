@@ -76,6 +76,7 @@
         <a href="#recapiti">Come contattarci</a>
         <a href="#contact-form">Scrivici un messaggio</a>
         <a href="#orari">Orari</a>
+        <a href="#segreteria">Segreteria Istituto</a>
         <a href="#dove-siamo">Dove siamo</a>
       </nav>
     </div>
@@ -91,11 +92,13 @@
         <a href="#recapiti" class="jump-btn">Come contattarci</a>
         <a href="#contact-form" class="jump-btn">Scrivici un messaggio</a>
         <a href="#orari" class="jump-btn">Orari</a>
+        <a href="#segreteria" class="jump-btn">Segreteria Istituto</a>
         <a href="#dove-siamo" class="jump-btn">Dove siamo</a>
         <div data-dup="1" aria-hidden="true">
           <a href="#recapiti" class="jump-btn" tabindex="-1">Come contattarci</a>
           <a href="#contact-form" class="jump-btn" tabindex="-1">Scrivici un messaggio</a>
           <a href="#orari" class="jump-btn" tabindex="-1">Orari</a>
+          <a href="#segreteria" class="jump-btn" tabindex="-1">Segreteria Istituto</a>
           <a href="#dove-siamo" class="jump-btn" tabindex="-1">Dove siamo</a>
         </div>
       </div>
@@ -237,6 +240,73 @@
       <p style="text-align:center;font-size:.8rem;color:rgba(245,240,232,.55);margin-top:1.5rem">Non hai trovato quello che cercavi? Consulta la <a href="mappa-sito.html" style="color:#D4AA4A;font-weight:700">Mappa del Sito</a>.</p>
     </div>
   </div>
+
+  <!-- ORARI SEGRETERIA ISTITUTO (a.s. 2026-2027, in vigore dal 28/06/2026) -->
+  <section id="segreteria" style="background:var(--bco)">
+    <div class="w">
+      <p class="lbl">Segreteria dell'Istituto</p>
+      <h2>Orario di ricevimento <em>al pubblico</em></h2>
+      <p style="font-size:.88rem;color:var(--txt2);max-width:680px;margin:.4rem 0 .35rem">
+        Gli uffici amministrativi (iscrizioni, certificati, personale, pagamenti) si trovano presso la <strong>Sede Centrale dell'IPSSEOA "R. A. Costaggini"</strong>, <strong>Via dei Salici, 62 – Rieti</strong>, e non presso il Convitto.
+      </p>
+      <p style="font-size:.78rem;color:var(--txt2);margin:0 0 1.5rem">a.s. 2026-2027 · in vigore dal 28/06/2026</p>
+
+      <div class="seg-grid">
+        <div class="seg-card">
+          <h3>Ufficio Didattico</h3>
+          <dl>
+            <div><dt>Lunedì</dt><dd>08:30 – 09:30</dd></div>
+            <div><dt>Mercoledì</dt><dd>14:00 – 15:00</dd></div>
+            <div><dt>Venerdì</dt><dd>12:30 – 13:30</dd></div>
+          </dl>
+        </div>
+        <div class="seg-card">
+          <h3>Ufficio Personale</h3>
+          <dl>
+            <div><dt>Martedì e Mercoledì</dt><dd>09:30 – 10:30</dd></div>
+            <div><dt>Lunedì e Giovedì</dt><dd>15:30 – 16:30</dd></div>
+          </dl>
+        </div>
+        <div class="seg-card">
+          <h3>Ufficio Protocollo</h3>
+          <dl>
+            <div><dt>Lunedì – Giovedì</dt><dd>10:30 – 11:30</dd></div>
+            <div><dt>Martedì (pomeriggio)</dt><dd>15:30 – 16:30</dd></div>
+          </dl>
+        </div>
+        <div class="seg-card">
+          <h3>Ufficio Contabilità</h3>
+          <dl>
+            <div><dt>Lunedì e Giovedì</dt><dd>09:30 – 10:30</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="seg-note">
+        <p>📞 Lo stesso orario vale anche per le <strong>richieste telefoniche</strong> al numero <a href="tel:+390746201113">0746 201113</a>.</p>
+        <p>✉️ Per <strong>richieste urgenti</strong> scrivere a <a href="mailto:rirh010007@istruzione.it">rirh010007@istruzione.it</a>.</p>
+        <p style="font-size:.75rem;color:var(--txt2)">Fonte: comunicazione della Dirigente Scolastica, Avv. Maddalena Cioci. Per questioni legate alla vita in Convitto rivolgersi invece al <a href="#orari">personale del Convitto</a>.</p>
+      </div>
+    </div>
+  </section>
+  <style>
+    .seg-grid{display:grid;gap:1rem}
+    .seg-card{background:var(--av);border:1px solid rgba(184,146,42,.25);border-left:4px solid var(--oro2);border-radius:8px;padding:1.1rem 1.25rem}
+    .seg-card h3{font-family:var(--fu);font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--bosco);margin:0 0 .7rem}
+    .seg-card dl{margin:0;display:flex;flex-direction:column;gap:.45rem}
+    .seg-card dl>div{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-bottom:1px dashed rgba(44,62,45,.12);padding-bottom:.4rem}
+    .seg-card dl>div:last-child{border-bottom:none;padding-bottom:0}
+    .seg-card dt{font-size:.85rem;color:var(--txt);font-weight:600}
+    .seg-card dd{margin:0;font-family:var(--fd);font-size:1.05rem;color:var(--bosco2);white-space:nowrap}
+    .seg-note{margin-top:1.5rem;background:var(--av);border:1px solid rgba(184,146,42,.25);border-radius:8px;padding:1rem 1.25rem}
+    .seg-note p{font-size:.86rem;color:var(--txt);line-height:1.6;margin:0 0 .4rem}
+    .seg-note p:last-child{margin-bottom:0}
+    .seg-note a{color:var(--bosco2);font-weight:700}
+    @media (min-width:640px){.seg-grid{grid-template-columns:1fr 1fr}}
+    @media (min-width:1100px){.seg-grid{grid-template-columns:repeat(4,1fr)}}
+    #segreteria{scroll-margin-top:90px}
+    @media (max-width:767px){#segreteria{scroll-margin-top:calc(var(--hdr-h,68px) + var(--jn-h,65px) + 26px)}}
+  </style>
 
 
   <!-- DOVE SIAMO -->

@@ -204,7 +204,7 @@ async function submitRicordo(e) {
     // viene rifiutato e il ricordo non parte.
     await sb.insert('consensi_privacy', {
       servizio: 'ricordi', riferimento_id: r.id, email: email,
-      versione_informativa: 'ricordi-2026-09-28'
+      versione_informativa: 'ricordi-2026-10-06'
     });
     await sb.insert('ricordi', r);
   } catch(err) {

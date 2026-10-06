@@ -194,7 +194,7 @@ const CONTATTO_ALUMNI = 'convitto@alberghierorieti.it';
 function alumniCopyEmail(e, email) {
   try {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(email);
+      navigator.clipboard.writeText(email).catch(function(){});
     } else {
       const ta = document.createElement('textarea');
       ta.value = email;
@@ -206,10 +206,14 @@ function alumniCopyEmail(e, email) {
       document.body.removeChild(ta);
     }
   } catch(err) {}
-  alumniShowEmailOverlay(email);
+  var ogg = (e && e.currentTarget && e.currentTarget.getAttribute('data-oggetto')) || 'Alumni - messaggio';
+  alumniShowEmailOverlay(email, ogg);
 }
 
-function alumniShowEmailOverlay(email) {
+function alumniShowEmailOverlay(email, oggetto) {
+  oggetto = oggetto || 'Alumni - messaggio';
+  var to = encodeURIComponent(email), su = encodeURIComponent(oggetto);
+  var bst = 'display:block;width:100%;box-sizing:border-box;margin:0 0 .55rem;padding:.6rem 1rem;border-radius:40px;font-family:var(--fu),sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;';
   const old = document.getElementById('alumni-email-ov');
   if (old) old.remove();
   var ov = document.createElement('div');
@@ -217,11 +221,17 @@ function alumniShowEmailOverlay(email) {
   ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(6,13,6,.88);display:flex;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(6px)';
   var box = document.createElement('div');
   box.style.cssText = 'background:#1a2e1b;border:1px solid rgba(184,146,42,.3);border-radius:14px;padding:2rem 1.75rem;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)';
-  box.innerHTML = '<div style="font-size:2.2rem;margin-bottom:.75rem">✓</div>'
-    + '<h3 style="font-family:var(--fd);font-size:1.3rem;font-weight:300;color:#F5F0E8;margin:0 0 .6rem">Email copiata</h3>'
-    + '<p style="font-family:var(--fu);font-size:.85rem;font-weight:700;color:var(--oro2);background:rgba(184,146,42,.12);border-radius:8px;padding:.6rem 1rem;margin:0 0 1.1rem;word-break:break-all">' + escapeHtml(email) + '</p>'
-    + '<p style="font-size:.83rem;color:rgba(245,240,232,.6);line-height:1.7;margin:0 0 1.5rem">Per tutelare la privacy degli ex convittori, i messaggi passano dal Convitto, che li inoltra alla persona che hai scelto. Indica nell\'oggetto a chi è rivolto. Se il tuo programma di posta non si è aperto da solo, incolla l\'indirizzo nella tua casella abituale.</p>'
-    + '<button id="alumni-email-ov-close" style="background:linear-gradient(135deg,#B8922A,#D4AA4A);color:#1a2e1b;border:none;padding:.6rem 1.5rem;border-radius:40px;cursor:pointer;font-family:var(--fu),sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase">Ho capito</button>';
+  box.innerHTML = '<div style="font-size:2.2rem;margin-bottom:.75rem;color:var(--oro2)">✉</div>'
+    + '<h3 style="font-family:var(--fd);font-size:1.3rem;font-weight:300;color:#F5F0E8;margin:0 0 .6rem">Scrivi tramite il Convitto</h3>'
+    + '<p style="font-size:.83rem;color:rgba(245,240,232,.6);line-height:1.7;margin:0 0 1rem">Per tutelare la privacy degli ex convittori, i messaggi passano dal Convitto, che li inoltra alla persona che hai scelto. Scegli come scrivere:</p>'
+    + '<a href="https://mail.google.com/mail/?view=cm&fs=1&to=' + to + '&su=' + su + '" target="_blank" rel="noopener" style="' + bst + 'background:linear-gradient(135deg,#B8922A,#D4AA4A);color:#1a2e1b;border:none">Scrivi con Gmail</a>'
+    + '<a href="https://outlook.live.com/mail/0/deeplink/compose?to=' + to + '&subject=' + su + '" target="_blank" rel="noopener" style="' + bst + 'background:rgba(184,146,42,.15);color:var(--oro2);border:1px solid rgba(184,146,42,.45)">Scrivi con Outlook</a>'
+    + '<a href="mailto:' + email + '?subject=' + su + '" style="' + bst + 'background:rgba(184,146,42,.15);color:var(--oro2);border:1px solid rgba(184,146,42,.45)">Apri il programma di posta</a>'
+    + '<p style="font-size:.78rem;color:rgba(245,240,232,.55);line-height:1.6;margin:.9rem 0 .4rem">Oppure scrivi dalla tua casella abituale a questo indirizzo (già copiato):</p>'
+    + '<p style="font-family:var(--fu);font-size:.85rem;font-weight:700;color:var(--oro2);background:rgba(184,146,42,.12);border-radius:8px;padding:.5rem 1rem;margin:0 0 .5rem;word-break:break-all">' + escapeHtml(email) + '</p>'
+    + '<p style="font-size:.78rem;color:rgba(245,240,232,.55);line-height:1.6;margin:0 0 .4rem">con questo oggetto, così sappiamo a chi inoltrarlo:</p>'
+    + '<p style="font-family:var(--fu);font-size:.8rem;font-weight:700;color:#F5F0E8;background:rgba(245,240,232,.08);border-radius:8px;padding:.5rem 1rem;margin:0 0 1.2rem;word-break:break-word">' + escapeHtml(oggetto) + '</p>'
+    + '<button id="alumni-email-ov-close" style="background:transparent;color:rgba(245,240,232,.75);border:1px solid rgba(245,240,232,.25);padding:.55rem 1.5rem;border-radius:40px;cursor:pointer;font-family:var(--fu),sans-serif;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase">Chiudi</button>';
   ov.appendChild(box);
   document.body.appendChild(ov);
   document.body.style.overflow = 'hidden';
@@ -386,7 +396,7 @@ function renderCifreReali(rows) {
           ${socialRow}
           ${a.video_url ? '<button onclick="apriVideoAlumni(\'' + escapeHtml(a.video_url).replace(/'/g,"&#39;") + '\')" style="display:inline-flex;align-items:center;gap:.3rem;margin-top:.4rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;background:rgba(212,170,74,.15);border:1px solid rgba(212,170,74,.4);border-radius:20px;color:var(--oro2);cursor:pointer">▶ Guarda l\'intervista</button>' : ''}
           ${hasContact
-            ? '<a href="mailto:' + CONTATTO_ALUMNI + '?subject=' + oggettoContatto + '" onclick="alumniCopyEmail(event,CONTATTO_ALUMNI)" style="display:inline-flex;align-items:center;gap:.25rem;margin-top:.4rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;background:rgba(184,146,42,.2);border:1px solid rgba(184,146,42,.4);border-radius:20px;color:var(--oro2);text-decoration:none">✉ Scrivimi</a>'
+            ? '<a href="mailto:' + CONTATTO_ALUMNI + '?subject=' + oggettoContatto + '" data-oggetto="' + escapeHtml(decodeURIComponent(oggettoContatto)) + '" onclick="alumniCopyEmail(event,CONTATTO_ALUMNI)" style="display:inline-flex;align-items:center;gap:.25rem;margin-top:.4rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;background:rgba(184,146,42,.2);border:1px solid rgba(184,146,42,.4);border-radius:20px;color:var(--oro2);text-decoration:none">✉ Scrivimi</a>'
             : '<button onclick="alumniNoContact(event)" style="display:inline-flex;align-items:center;gap:.25rem;margin-top:.4rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;background:rgba(245,240,232,.05);border:1px solid rgba(245,240,232,.12);border-radius:20px;color:rgba(245,240,232,.3);cursor:pointer">✉ Scrivimi</button>'
           }
         </div>

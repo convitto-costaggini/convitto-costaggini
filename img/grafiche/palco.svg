@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrazione: palco con riflettore, microfono, leggio e chitarra">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2=".7" y2="1"><stop offset="0" stop-color="#2C3E2D"/><stop offset=".6" stop-color="#1a281b"/><stop offset="1" stop-color="#0f1b12"/></linearGradient>
+<radialGradient id="spot" cx="0.5" cy="0.45" r=".55"><stop offset="0" stop-color="#e7c45f" stop-opacity=".22"/><stop offset=".55" stop-color="#caa23e" stop-opacity=".06"/><stop offset="1" stop-color="#caa23e" stop-opacity="0"/></radialGradient>
+<linearGradient id="g" gradientUnits="userSpaceOnUse" x1="250" y1="120" x2="950" y2="700"><stop offset="0" stop-color="#fbeec5"/><stop offset=".35" stop-color="#EDD98A"/><stop offset=".7" stop-color="#D4AA4A"/><stop offset="1" stop-color="#B8922A"/></linearGradient>
+<radialGradient id="b" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fbeec5" stop-opacity=".85"/><stop offset=".45" stop-color="#e6c45c" stop-opacity=".35"/><stop offset="1" stop-color="#e6c45c" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="800" fill="url(#bg)"/>
+<rect width="1200" height="800" fill="url(#spot)"/>
+<g fill="none" stroke="#D4AA4A" stroke-opacity=".13" stroke-width="1.5"><circle cx="0" cy="0" r="220"/><circle cx="0" cy="0" r="340"/><circle cx="1200" cy="800" r="200"/><circle cx="1200" cy="800" r="320"/><circle cx="1200" cy="800" r="440"/></g>
+<g fill="url(#b)"><circle cx="190" cy="610" r="26"/><circle cx="1010" cy="170" r="20"/><circle cx="930" cy="640" r="12"/><circle cx="260" cy="190" r="14"/><circle cx="1080" cy="470" r="9"/><circle cx="120" cy="380" r="8"/></g>
+<g fill="none" stroke="url(#g)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M600 110 L420 640 H780 Z" fill="#EDD98A" fill-opacity=".07" stroke="none"/>
+<path d="M560 70 H640 L625 120 H575 Z"/><line x1="600" y1="30" x2="600" y2="70"/>
+<path d="M240 640 H960"/><path d="M200 680 H1000" stroke-width="4" stroke-opacity=".6"/>
+<rect x="584" y="300" width="32" height="56" rx="16"/><line x1="600" y1="356" x2="600" y2="640"/><path d="M570 640 L600 600 L630 640"/>
+<path d="M380 400 H500 L490 470 H390 Z"/><line x1="440" y1="470" x2="440" y2="640"/><path d="M410 640 L440 610 L470 640"/>
+<line x1="400" y1="420" x2="480" y2="420" stroke-width="3"/><line x1="400" y1="438" x2="470" y2="438" stroke-width="3"/>
+<path d="M760 470 q-46 -10 -46 40 q0 40 30 56 q-20 40 20 64 q40 20 76 -10 q30 -30 4 -60 q30 -30 10 -64 q-24 -30 -60 -20 q-16 -10 -34 -6 Z"/>
+<line x1="790" y1="500" x2="860" y2="270"/><rect x="852" y="236" width="24" height="40" rx="5"/><circle cx="780" cy="560" r="14"/>
+<path d="M330 216 L334.2 225.8 L344 230 L334.2 234.2 L330 244 L325.8 234.2 L316 230 L325.8 225.8 Z" fill="url(#g)" stroke="none"/><path d="M880 149 L883.3 156.7 L891 160 L883.3 163.3 L880 171 L876.7 163.3 L869 160 L876.7 156.7 Z" fill="url(#g)" stroke="none"/><path d="M980 321 L982.7 327.3 L989 330 L982.7 332.7 L980 339 L977.3 332.7 L971 330 L977.3 327.3 Z" fill="url(#g)" stroke="none"/><path d="M260 372 L262.4 377.6 L268 380 L262.4 382.4 L260 388 L257.6 382.4 L252 380 L257.6 377.6 Z" fill="url(#g)" stroke="none"/>
+</g>
+</svg>

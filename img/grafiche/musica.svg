@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrazione: tastiera di pianoforte, microfono e note musicali">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2=".7" y2="1"><stop offset="0" stop-color="#2C3E2D"/><stop offset=".6" stop-color="#1a281b"/><stop offset="1" stop-color="#0f1b12"/></linearGradient>
+<radialGradient id="spot" cx="0.55" cy="0.5" r=".55"><stop offset="0" stop-color="#e7c45f" stop-opacity=".22"/><stop offset=".55" stop-color="#caa23e" stop-opacity=".06"/><stop offset="1" stop-color="#caa23e" stop-opacity="0"/></radialGradient>
+<linearGradient id="g" gradientUnits="userSpaceOnUse" x1="250" y1="120" x2="950" y2="700"><stop offset="0" stop-color="#fbeec5"/><stop offset=".35" stop-color="#EDD98A"/><stop offset=".7" stop-color="#D4AA4A"/><stop offset="1" stop-color="#B8922A"/></linearGradient>
+<radialGradient id="b" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fbeec5" stop-opacity=".85"/><stop offset=".45" stop-color="#e6c45c" stop-opacity=".35"/><stop offset="1" stop-color="#e6c45c" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="800" fill="url(#bg)"/>
+<rect width="1200" height="800" fill="url(#spot)"/>
+<g fill="none" stroke="#D4AA4A" stroke-opacity=".13" stroke-width="1.5"><circle cx="0" cy="0" r="220"/><circle cx="0" cy="0" r="340"/><circle cx="1200" cy="800" r="200"/><circle cx="1200" cy="800" r="320"/><circle cx="1200" cy="800" r="440"/></g>
+<g fill="url(#b)"><circle cx="190" cy="610" r="26"/><circle cx="1010" cy="170" r="20"/><circle cx="930" cy="640" r="12"/><circle cx="260" cy="190" r="14"/><circle cx="1080" cy="470" r="9"/><circle cx="120" cy="380" r="8"/></g>
+<g fill="none" stroke="url(#g)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M340 430 H760 V540 H340 Z"/><line x1="400" y1="430" x2="400" y2="540"/><line x1="440" y1="430" x2="440" y2="540"/><line x1="480" y1="430" x2="480" y2="540"/><line x1="520" y1="430" x2="520" y2="540"/><line x1="560" y1="430" x2="560" y2="540"/><line x1="600" y1="430" x2="600" y2="540"/><line x1="640" y1="430" x2="640" y2="540"/><line x1="680" y1="430" x2="680" y2="540"/><line x1="720" y1="430" x2="720" y2="540"/><rect x="386" y="430" width="20" height="62" rx="3" fill="url(#g)" stroke="none"/><rect x="426" y="430" width="20" height="62" rx="3" fill="url(#g)" stroke="none"/><rect x="506" y="430" width="20" height="62" rx="3" fill="url(#g)" stroke="none"/><rect x="546" y="430" width="20" height="62" rx="3" fill="url(#g)" stroke="none"/><rect x="586" y="430" width="20" height="62" rx="3" fill="url(#g)" stroke="none"/><rect x="666" y="430" width="20" height="62" rx="3" fill="url(#g)" stroke="none"/><rect x="706" y="430" width="20" height="62" rx="3" fill="url(#g)" stroke="none"/>
+<path d="M340 430 L360 360 H740 L760 430"/>
+<line x1="370" y1="540" x2="370" y2="640"/><line x1="730" y1="540" x2="730" y2="640"/>
+<rect x="836" y="250" width="56" height="96" rx="28"/><path d="M816 316 a48 48 0 0 0 96 0"/><line x1="864" y1="364" x2="864" y2="640"/><line x1="820" y1="640" x2="908" y2="640"/>
+<line x1="848" y1="280" x2="880" y2="280" stroke-width="4"/><line x1="848" y1="300" x2="880" y2="300" stroke-width="4"/>
+<g transform="translate(430,300) scale(1)"><ellipse cx="0" cy="0" rx="16" ry="12" transform="rotate(-20)" fill="url(#g)" stroke="none"/><path d="M14 -4 V-70 q18 8 26 26"/></g><g transform="translate(540,250) scale(1.15)"><ellipse cx="0" cy="0" rx="16" ry="12" transform="rotate(-20)" fill="url(#g)" stroke="none"/><path d="M14 -4 V-70 q18 8 26 26"/></g><g transform="translate(650,300) scale(0.9)"><ellipse cx="0" cy="0" rx="16" ry="12" transform="rotate(-20)" fill="url(#g)" stroke="none"/><path d="M14 -4 V-70 q18 8 26 26"/></g>
+<path d="M300 200 q60 -40 120 0 t120 0 t120 0" stroke-width="3" stroke-opacity=".6"/>
+</g>
+</svg>

@@ -38,7 +38,7 @@ token, che viene semplicemente ignorato).
 
 ### 3. Totem: nuova chiave (Michele, al dispositivo)
 
-1. Generare una chiave nuova (Claude la prepara: 64 caratteri casuali).
+1. Generare una chiave nuova (Claude la prepara: 6 gruppi di 4 caratteri, es. `ABCD-EFGH-…`, circa 118 bit; si digita facilmente sul totem, maiuscole o minuscole indifferenti).
 2. Gestionale → Proprietà script → `TOTEM_TOKEN` = la nuova chiave.
 3. Sul dispositivo del totem aprire la pagina: compare "Configurazione del
    totem"; incollare la nuova chiave e Salva. Se la pagina era già aperta,

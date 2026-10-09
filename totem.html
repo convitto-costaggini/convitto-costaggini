@@ -15,8 +15,8 @@
     🔑 <strong>Configurazione del totem</strong><br><br>
     Inserire la chiave del totem (proprietà TOTEM_TOKEN del gestionale).
     Si inserisce una sola volta: resta salvata solo su questo dispositivo.<br><br>
-    <input type="password" id="setup-chiave" autocomplete="off" required minlength="32"
-           style="width:100%;padding:12px;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#fff;font-size:1rem">
+    <input type="text" id="setup-chiave" autocomplete="off" autocapitalize="characters" spellcheck="false" required minlength="20" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
+           style="width:100%;padding:12px;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#fff;font-size:1.1rem;letter-spacing:.08em;text-align:center;font-family:monospace">
     <button type="submit" style="margin-top:14px;padding:12px 24px;border:0;border-radius:8px;background:#15803d;color:#fff;font-size:1rem;font-weight:700">Salva</button>
   </form>
 </div>
@@ -66,8 +66,8 @@ window.addEventListener('load', function () {
 
 function salvaChiaveTotem(ev) {
   ev.preventDefault();
-  var chiave = document.getElementById('setup-chiave').value.trim();
-  if (chiave.length < 32) return;
+  var chiave = document.getElementById('setup-chiave').value.trim().toUpperCase().replace(/\s+/g, '');
+  if (chiave.length < 20) return;
   try { localStorage.setItem(CHIAVE_LOCALE, chiave); } catch (e) {
     alert("Questo browser non consente di salvare la chiave: il totem funzionerà fino alla chiusura della pagina.");
   }

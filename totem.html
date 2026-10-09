@@ -11,8 +11,14 @@
 <body>
 
 <div id="setup-warning">
-  ⚠️ Questa pagina non è ancora configurata.<br><br>
-  Apri il file totem.html e imposta le costanti APP_URL e TOTEM_TOKEN in cima allo script.
+  <form id="setup-form" onsubmit="salvaChiaveTotem(event)" style="max-width:420px;width:100%;color:#e2e8f0">
+    🔑 <strong>Configurazione del totem</strong><br><br>
+    Inserire la chiave del totem (proprietà TOTEM_TOKEN del gestionale).
+    Si inserisce una sola volta: resta salvata solo su questo dispositivo.<br><br>
+    <input type="text" id="setup-chiave" autocomplete="off" autocapitalize="characters" spellcheck="false" required minlength="20" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
+           style="width:100%;padding:12px;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#fff;font-size:1.1rem;letter-spacing:.08em;text-align:center;font-family:monospace">
+    <button type="submit" style="margin-top:14px;padding:12px 24px;border:0;border-radius:8px;background:#15803d;color:#fff;font-size:1rem;font-weight:700">Salva</button>
+  </form>
 </div>
 
 <div id="menu-view">
@@ -36,20 +42,40 @@
 
 <script>
 // =========================================================================
-// CONFIGURAZIONE — già compilata con i tuoi valori reali
+// CONFIGURAZIONE
+// La chiave del totem NON è scritta qui (la pagina è pubblica): si inserisce
+// una volta sul dispositivo e resta nella sua memoria locale. Per cambiarla
+// aprire totem.html?nuova-chiave
 // =========================================================================
 var APP_URL = "https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec";
-var TOTEM_TOKEN = "da955fbbaa1590b838811571777f3505ec618dab98620248087d569d6a24f010";
+var CHIAVE_LOCALE = "totemToken";
+var TOTEM_TOKEN = "";
+try { TOTEM_TOKEN = localStorage.getItem(CHIAVE_LOCALE) || ""; } catch (e) {}
 
 var scanner = null;
 var modalitaCorrente = "";
 var inPausa = false;
 
 window.addEventListener('load', function () {
-  if (!APP_URL || APP_URL.indexOf("script.google.com") === -1 || !TOTEM_TOKEN) {
+  if (/[?&]nuova-chiave(=|&|$)/.test(location.search)) TOTEM_TOKEN = "";
+  if (!TOTEM_TOKEN) {
     document.getElementById('setup-warning').style.display = 'flex';
+    document.getElementById('setup-chiave').focus();
   }
 });
+
+function salvaChiaveTotem(ev) {
+  ev.preventDefault();
+  var chiave = document.getElementById('setup-chiave').value.trim().toUpperCase().replace(/\s+/g, '');
+  if (chiave.length < 20) return;
+  try { localStorage.setItem(CHIAVE_LOCALE, chiave); } catch (e) {
+    alert("Questo browser non consente di salvare la chiave: il totem funzionerà fino alla chiusura della pagina.");
+  }
+  TOTEM_TOKEN = chiave;
+  document.getElementById('setup-chiave').value = "";
+  document.getElementById('setup-warning').style.display = 'none';
+  if (/[?&]nuova-chiave/.test(location.search)) history.replaceState(null, "", location.pathname);
+}
 
 function avvia(modalita) {
   modalitaCorrente = modalita;
@@ -139,6 +165,9 @@ function onScan(testoQR) {
         } else if (json.notFound) {
           msgEl.innerHTML = "<span style='color:#b91c1c;'>❌ QR non riconosciuto</span>";
           diagEl.innerText = json.message || "";
+        } else if (json.message === "Non autorizzato") {
+          msgEl.innerHTML = "<span style='color:#b91c1c;'>🔑 Chiave del totem non valida</span>";
+          diagEl.innerText = "Chiamare l'amministratore: va reinserita la chiave (totem.html?nuova-chiave).";
         } else {
           msgEl.innerHTML = "<span style='color:#b91c1c;'>⚠️ Errore</span>";
           diagEl.innerText = json.message || "";

@@ -517,7 +517,9 @@ async function adminSetNewPwd() {
 })();
 // ───────── fine recupero password ─────────
 
-const GAS_TOKEN = 'WrkaSLLP1LMZmSYLX0B9hJEs2J2L6UAp';
+// Le azioni sensibili del gestionale (creazione account famiglie) sono autorizzate
+// dalla sessione admin Supabase (adminToken), verificata dal gestionale stesso:
+// nessuna chiave è scritta in questa pagina pubblica.
 
 let editNotiziaId = null;
 
@@ -1070,7 +1072,6 @@ async function famAzione(id, nuovoStato) {
       const gasResp = await fetch(GAS_URL, {
         method: 'POST',
         body: JSON.stringify({
-          token:         GAS_TOKEN,
           adminToken:    SB_TOKEN(),
           action:        'creaAccountEInvia',
           email:         email,

@@ -102,14 +102,13 @@ Prova del 9/10/2026 in transazione annullata: dopo la migrazione nessun codice
 corrisponde a più nomi e nessun nome a più codici; i trigger assegnano il codice
 sia ai collegamenti nuovi sia a quelli già esistenti.
 
-**Da confermare (Michele, nel gestionale):** le righe tolte riguardano tre
-codici. Se si tratta della stessa persona con il nome scritto diversamente,
-basta indicarlo e le righe vengono conservate (tabella `stessa_persona` nella
-migrazione):
-- STU-0005: un nome ad agosto (25-31/08), un altro da settembre;
-- STU-0070: idem;
-- STU-0128: due grafie dello stesso nome tra il 18 e il 23/09 (probabile
-  correzione).
+**Righe ambigue: decisione (9/10/2026).** Le 13 righe senza codice sono 4 + 4
+presenze di fine agosto (STU-0005, STU-0070) e 5 presenze dal 18 al 23/09
+(STU-0128, altra grafia del nome). I tre codici restano validi per i loro
+titolari attuali; non si creano codici nuovi e il gestionale non va toccato.
+Effetto per le famiglie: nullo in pratica (agosto è precedente all'anno
+scolastico; le presenze nell'Area si vedono solo per 30 giorni). La tabella
+`stessa_persona` resta vuota.
 
 **Perché non ricapiti:** nel gestionale `GENERA_CodiciStudenti` riparte dal
 numero più alto *presente nel foglio*: se si eliminano le righe con i numeri più

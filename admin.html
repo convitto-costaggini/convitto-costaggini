@@ -1686,7 +1686,7 @@ async function avviaMfa(token) {
       factor_type: 'totp', friendly_name: 'Pannello admin', issuer: 'Convitto Costaggini'
     });
     mfaFattore = nuovo.id;
-    document.getElementById('mfa-qr').src = nuovo.totp.qr_code;
+    document.getElementById('mfa-qr').src = immagineQr(nuovo.totp.qr_code);
     document.getElementById('mfa-segreto').textContent = nuovo.totp.secret;
     document.getElementById('mfa-attivazione').style.display = 'block';
     document.getElementById('mfa-istruzioni').textContent =
@@ -1694,6 +1694,18 @@ async function avviaMfa(token) {
   }
   document.getElementById('mfa-codice').value = '';
   document.getElementById('mfa-codice').focus();
+}
+
+// Supabase restituisce il QR come SVG dentro un indirizzo "data:" non
+// codificato: caratteri come # o % lo spezzano e l'immagine resta vuota.
+// Si riestrae l'SVG e lo si ricodifica.
+function immagineQr(qr) {
+  const s = String(qr || '');
+  const i = s.indexOf('<svg');
+  if (i === -1) return s;
+  let svg = s.slice(i);
+  try { if (/%3C|%3E|%22/i.test(svg)) svg = decodeURIComponent(svg); } catch (e) {}
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 
 // Restituisce la nuova sessione verificata in due passaggi (aal2)

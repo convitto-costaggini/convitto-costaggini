@@ -1048,6 +1048,7 @@ function famRenderLista() {
           <div class="fam-campo"><strong>Relazione</strong>${escapeHtml(f.relazione) || '—'}</div>
           <div class="fam-campo"><strong>Richiesta</strong>${f.created_at ? f.created_at.slice(0,10) : '—'}</div>
           <div class="fam-campo"><strong>Stato</strong>${escapeHtml(f.stato)}</div>
+          ${f.codice_studente ? `<div class="fam-campo"><strong>Codice</strong>${escapeHtml(f.codice_studente)}</div>` : ''}
           ${f.modulo_consenso_ricevuto ? `<div class="fam-campo"><strong>Modulo firmato</strong>${escapeHtml(f.modulo_consenso_ricevuto.split('-').reverse().join('/'))} · ${escapeHtml(f.modulo_consenso_rif || '')}</div>` : ''}
         </div>
         <div class="fam-azioni">
@@ -1092,6 +1093,10 @@ function famChiediModulo(richiesta) {
         <h3 style="text-align:center">Approva richiesta</h3>
         <p>Studente: <strong>${escapeHtml(richiesta.nome_studente || '—')}</strong><br>
            Email: <strong>${escapeHtml(richiesta.email_genitore || '—')}</strong></p>
+        <label style="display:block;font-size:.75rem;font-weight:700;margin:.8rem 0 .25rem;color:var(--av)">Codice studente (dal gestionale)</label>
+        <input type="text" id="fam-mod-codice" placeholder="STU-0000" maxlength="12" autocomplete="off"
+               style="width:100%;padding:.5rem;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;letter-spacing:.05em">
+        <div id="fam-mod-suggerimenti" style="font-size:.72rem;color:var(--txt2);margin-top:.3rem;line-height:1.5">Ricerca dei codici in corso…</div>
         <label style="display:block;font-size:.75rem;font-weight:700;margin:.8rem 0 .25rem;color:var(--av)">Modulo di consenso firmato ricevuto il</label>
         <input type="date" id="fam-mod-data" value="${oggi}" max="${oggi}" style="width:100%;padding:.5rem;border:1px solid #ccc;border-radius:6px">
         <label style="display:block;font-size:.75rem;font-weight:700;margin:.8rem 0 .25rem;color:var(--av)">Riferimento (es. email del 12/10, n. di protocollo, consegna a mano)</label>
@@ -1107,18 +1112,53 @@ function famChiediModulo(richiesta) {
         </div>
       </div>`;
     document.body.appendChild(ov);
+    famSuggerisciCodici(richiesta.nome_studente, ov);
     ov.querySelector('.adm-modal-btn-cancel').onclick = () => { ov.remove(); resolve(null); };
     ov.querySelector('.adm-modal-btn-confirm').onclick = () => {
+      const codice = ov.querySelector('#fam-mod-codice').value.trim().toUpperCase();
       const data = ov.querySelector('#fam-mod-data').value;
       const rif  = ov.querySelector('#fam-mod-rif').value.trim();
       const err  = ov.querySelector('#fam-mod-err');
+      if (!/^STU-\d{4,}$/.test(codice)) { err.textContent = 'Indicare il codice studente del gestionale (es. STU-0123).'; return; }
       if (!data || data > oggi) { err.textContent = 'Indicare la data di ricezione del modulo.'; return; }
       if (!rif) { err.textContent = 'Indicare un riferimento al modulo ricevuto.'; return; }
       if (!ov.querySelector('#fam-mod-ok').checked) { err.textContent = 'Confermare la verifica del modulo firmato.'; return; }
       ov.remove();
-      resolve({ data, rif });
+      resolve({ codice, data, rif });
     };
   });
+}
+
+// Il genitore scrive il nome a mano: si propongono i codici che i dati
+// recenti del gestionale associano a nomi simili. La scelta resta
+// dell'amministratore, che verifica nel gestionale in caso di dubbio.
+async function famSuggerisciCodici(nome, ov) {
+  const box = ov.querySelector('#fam-mod-suggerimenti');
+  const parole = String(nome || '').trim().split(/\s+/).filter(p => p.length >= 3);
+  if (!parole.length) { box.textContent = 'Nessun suggerimento: verificare il codice nel gestionale.'; return; }
+  try {
+    const filtro = parole.map(p => 'nome_studente.ilike.*' + encodeURIComponent(p.replace(/[*,()]/g, '')) + '*').join(',');
+    const resp = await fetch(SB_N + '/rest/v1/famiglie_presenze?select=nome_studente,codice_studente,data'
+      + '&codice_studente=not.is.null&or=(' + filtro + ')&order=data.desc&limit=300', {
+      headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN() }
+    });
+    const righe = resp.ok ? await resp.json() : [];
+    const visti = new Map();
+    righe.forEach(r => { const c = r.codice_studente.trim(); if (!visti.has(c)) visti.set(c, r); });
+    const cercato = String(nome).trim().toLowerCase();
+    const elenco = [...visti.values()].slice(0, 6);
+    if (!elenco.length) { box.textContent = 'Nessun nome simile nei dati recenti: verificare il codice nel gestionale.'; return; }
+    box.innerHTML = 'Codici trovati per nomi simili (dati più recenti):<br>' + elenco.map(r =>
+      `<a href="#" data-cod="${escapeHtml(r.codice_studente.trim())}" style="color:var(--oro2,#D4AA4A);font-weight:700">${escapeHtml(r.codice_studente.trim())}</a> ${escapeHtml(r.nome_studente)} (ultimo dato ${escapeHtml(String(r.data).split('-').reverse().join('/'))})`
+    ).join('<br>');
+    box.querySelectorAll('a[data-cod]').forEach(a => a.onclick = e => {
+      e.preventDefault(); ov.querySelector('#fam-mod-codice').value = a.dataset.cod;
+    });
+    const esatti = elenco.filter(r => r.nome_studente.trim().toLowerCase() === cercato);
+    if (esatti.length === 1) ov.querySelector('#fam-mod-codice').value = esatti[0].codice_studente.trim();
+  } catch (e) {
+    box.textContent = 'Suggerimenti non disponibili: verificare il codice nel gestionale.';
+  }
 }
 
 async function famAzione(id, nuovoStato) {
@@ -1131,7 +1171,11 @@ async function famAzione(id, nuovoStato) {
 
   // 1. Aggiorna stato nella tabella richieste_accesso
   const campi = { stato: nuovoStato, processed_at: nuovoStato === 'in_attesa' ? null : new Date().toISOString() };
-  if (modulo) { campi.modulo_consenso_ricevuto = modulo.data; campi.modulo_consenso_rif = modulo.rif; }
+  if (modulo) {
+    campi.codice_studente = modulo.codice;
+    campi.modulo_consenso_ricevuto = modulo.data;
+    campi.modulo_consenso_rif = modulo.rif;
+  }
   const patch = await fetch(SB_N + '/rest/v1/richieste_accesso?id=eq.' + id, {
     method: 'PATCH',
     headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN(), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },

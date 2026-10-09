@@ -19,8 +19,10 @@ resta sospesa** (avviso a tutta pagina in `area-riservata.html`).
 4. In `admin.html` → Famiglie → In attesa → **Approva**: la finestra chiede la
    data di ricezione del modulo firmato, un riferimento (email, protocollo…) e la
    conferma della verifica. I dati restano nella richiesta
-   (`modulo_consenso_ricevuto`, `modulo_consenso_rif`). Poi, come prima, il
-   gestionale crea l'account e invia le credenziali.
+   (`modulo_consenso_ricevuto`, `modulo_consenso_rif`). Chiede anche il
+   **codice studente** del gestionale (con suggerimenti dai dati recenti): è
+   l'unico elemento che collega il genitore ai dati del figlio. Poi, come
+   prima, il gestionale crea l'account e invia le credenziali.
 
 **Accesso (genitore)**
 5. Email e password → la Edge Function `otp-famiglie` invia un codice di 6 cifre
@@ -43,6 +45,7 @@ un'altra sessione dello stesso account e 0 a verifica più vecchia di 12 ore.
 | File | Cosa |
 |---|---|
 | `supabase/migrazioni/2026-10-09_area_famiglie_otp.sql` | tabella `famiglie_otp`, funzioni, regole RLS, colonne del modulo firmato |
+| `supabase/migrazioni/2026-10-09b_abbinamento_per_codice.sql` | abbinamento genitore-studente solo per codice, riallineamento dei codici riassegnati |
 | `supabase/functions/otp-famiglie/index.ts` | invio e verifica del codice |
 | `supabase/functions/richiesta-accesso/index.ts` | versione informativa aggiornata a `area-famiglie-2026-10-09` |
 | `supabase/gas-otp/Codice.gs` | progetto Apps Script che recapita l'email del codice |
@@ -57,7 +60,6 @@ un'altra sessione dello stesso account e 0 a verifica più vecchia di 12 ore.
 |---|---|
 | Parere RTD sull'OTP (8/10) | Favorevole; già inoltrato alla DPO |
 | Benestare DPO all'Area con OTP | **In attesa** |
-| Email dei sei ex convittori (violazione) | Chiusa dalla Dirigenza dopo la correzione, senza notifica al Garante (indicazione DPO: decisione in capo al Titolare) |
 | Indirizzo per i moduli firmati | `rirh010007@istruzione.it` (casella istituzionale) |
 | Codice | Ramo `area-famiglie-otp` su GitHub, non unito a `main` |
 | Database e funzioni Supabase | Non ancora modificati |
@@ -76,22 +78,47 @@ eseguibile da Claude Code su conferma.
 | 2 | **Secret Supabase** (Edge Functions → Secrets): `OTP_PEPPER` (stringa casuale di almeno 32 caratteri), `OTP_MAIL_URL`, `OTP_MAIL_TOKEN` | Michele (Claude prepara i valori casuali) |
 | 3 | **Edge Function** `otp-famiglie`: deploy con **Verify JWT attivo** | Claude |
 | 4 | **Edge Function** `richiesta-accesso`: ridistribuire (cambia solo la versione dell'informativa registrata) | Claude |
-| 5 | **Migrazione** `2026-10-09_area_famiglie_otp.sql` | Claude |
+| 5 | **Migrazioni**, in quest'ordine: `2026-10-09_area_famiglie_otp.sql`, poi `2026-10-09b_abbinamento_per_codice.sql` | Claude |
 | 6 | **Sito**: unire la richiesta di unione del ramo `area-famiglie-otp` su `main`. L'Area resta sospesa | Michele (o Claude su conferma) |
 | 7 | **Gestionale**: nell'email con le credenziali (`creaAccountEInvia`) aggiungere: "A ogni accesso, dopo la password, riceverà via email un codice di verifica di 6 cifre" | Michele |
 | 8 | **Prova completa** con un account di prova: richiesta → approvazione → email credenziali → accesso → codice → dati visibili; codice errato 5 volte; nuovo codice prima di un minuto (rifiutato) | Michele + Claude |
 | 9 | **Attivazione**: in `area-riservata.html` rimuovere il blocco `<!-- ══ AVVISO SOSPENSIONE ACCESSO ══ -->` e, nell'informativa, il riquadro "Servizio attualmente sospeso" | Claude, su via libera della Dirigenza |
 
+## Abbinamento per codice (migrazione 2026-10-09b)
+
+Finora le regole riconoscevano lo studente anche per nome: con due omonimi un
+genitore avrebbe visto i dati dell'altro. Analizzando i dati è emerso anche che
+a settembre alcuni codici sono stati **riassegnati** (es. un codice usato ad
+agosto per uno studente appartiene ora a un altro). La migrazione:
+
+- riallinea 17 righe al codice attuale dello stesso studente;
+- toglie il codice a 13 righe ambigue (nessun genitore le vede; restano nel
+  gestionale e nel registro `correzioni_codici`);
+- non completa i collegamenti dei genitori già esistenti: ogni famiglia rientra
+  con il modulo firmato e l'approvazione con codice;
+- da quel momento l'abbinamento avviene solo per codice.
+
+Prova del 9/10/2026 in transazione annullata: dopo la migrazione nessun codice
+corrisponde a più nomi e nessun nome a più codici; i trigger assegnano il codice
+sia ai collegamenti nuovi sia a quelli già esistenti.
+
+**Da confermare (Michele, nel gestionale):** le righe tolte riguardano tre
+codici. Se si tratta della stessa persona con il nome scritto diversamente,
+basta indicarlo e le righe vengono conservate (tabella `stessa_persona` nella
+migrazione):
+- STU-0005: un nome ad agosto (25-31/08), un altro da settembre;
+- STU-0070: idem;
+- STU-0128: due grafie dello stesso nome tra il 18 e il 23/09 (probabile
+  correzione).
+
+**Perché non ricapiti:** nel gestionale `GENERA_CodiciStudenti` riparte dal
+numero più alto *presente nel foglio*: se si eliminano le righe con i numeri più
+alti (diplomati) o si svuota la colonna Codice, i numeri vengono riassegnati.
+La versione corretta è in `gestionale/GENERA_CodiciStudenti.gs` (contatore che
+non torna mai indietro). Conviene anche proteggere la colonna Codice del foglio
+STUDENTI (Dati → Proteggi intervalli).
+
 ## Punti collegati, da chiudere
 
-- **Registro delle violazioni (art. 33, par. 5 GDPR).** Anche quando non si
-  notifica al Garante, il Titolare documenta la violazione, le conseguenze e i
-  provvedimenti adottati. Verificare con la DPO che l'episodio delle email degli
-  ex convittori sia annotato nel registro dell'Istituto.
-- **Token del gestionale in chiaro.** `admin.html` contiene `GAS_TOKEN` e il
-  repository è pubblico. Sostituire il token nel gestionale e non scriverlo più
-  nel codice della pagina.
-- **Riconoscimento per nome.** Le regole RLS, per le righe senza codice
-  studente, abbinano lo studente per nome e cognome: due omonimi si vedrebbero a
-  vicenda. Completare il codice studente su tutte le righe e poi togliere
-  l'abbinamento per nome.
+- **Token in chiaro nelle pagine pubbliche** (`admin.html`, `totem.html`): in
+  lavorazione sul ramo `token-fuori-dal-codice`.

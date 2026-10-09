@@ -101,16 +101,37 @@
         </div>
         <button class="btn-auth" id="btn-np" onclick="salvaNuovaPassword()">Salva nuova password</button>
       </div>
+      <!-- ─ CODICE DI VERIFICA (secondo fattore) ─ -->
+      <div class="sezione" id="sez-otp">
+        <p style="font-size:.88rem;color:var(--txt2);margin-bottom:1rem;line-height:1.6;" id="otp-istruzioni">
+          Per completare l'accesso inserisca il codice di 6 cifre inviato al Suo indirizzo email.
+        </p>
+        <div class="campo-g">
+          <label for="otp-codice">Codice di verifica</label>
+          <input type="text" id="otp-codice" placeholder="000000"
+                 inputmode="numeric" autocomplete="one-time-code" maxlength="6"
+                 pattern="[0-9]{6}" style="letter-spacing:.4em;font-size:1.3rem;text-align:center;"
+                 oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)"
+                 onkeydown="if(event.key==='Enter') verificaOtp()">
+        </div>
+        <button class="btn-auth" id="btn-otp" onclick="verificaOtp()">Verifica e accedi</button>
+        <div class="link-secondario">
+          <a onclick="richiediOtp(true)">Non ha ricevuto il codice? Ne invii uno nuovo</a>
+        </div>
+        <div class="link-secondario">
+          <a onclick="eseguiLogout()">← Annulla ed esci</a>
+        </div>
+      </div>
       <!-- ─ REGISTRATI (redirect) ─ -->
       <div class="sezione" id="sez-registrati">
-        <p style="font-size:.9rem;color:var(--txt2);margin-bottom:1.5rem;line-height:1.7;">
-          Per accedere all'area riservata è necessario che l'amministratore attivi il suo account.
+        <p style="font-size:.9rem;color:var(--txt2);margin-bottom:1rem;line-height:1.7;">
+          L'adesione è facoltativa e richiede tre passaggi: la lettura dell'informativa, l'invio del modulo di consenso firmato e la richiesta online.
         </p>
         <a href="richiesta-accesso.html" class="btn-auth" style="display:block;text-align:center;text-decoration:none;">
-          Compila il modulo di richiesta →
+          Inizia la richiesta →
         </a>
         <div class="link-secondario" style="margin-top:1rem;">
-          L'accesso viene attivato entro 48 ore dalla richiesta.
+          L'account viene attivato dopo la ricezione del modulo di consenso firmato.
         </div>
       </div>
     </div>
@@ -189,12 +210,13 @@
   let schermataCorrente = 'login';
   // ── AVVIO ──
   let inRecovery = /[#&]type=recovery/.test(window.location.hash);
+  const OTP_URL = 'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/otp-famiglie';
   window.addEventListener('load', async () => {
     if (inRecovery) {
       mostraSchermata('nuova-password');
     } else {
       const { data: { session } } = await sb.auth.getSession();
-      if (session) avviaDashboard(session.user.email);
+      if (session) await proseguiDopoPassword(session.user.email, false);
     }
     sb.auth.onAuthStateChange((event, session) => {
       if (event === 'PASSWORD_RECOVERY') { mostraSchermata('nuova-password'); return; }
@@ -209,6 +231,8 @@
     document.getElementById('sez-' + nome).classList.add('attiva');
     const tab = document.getElementById('tab-' + nome);
     if (tab) tab.classList.add('attivo');
+    // Durante la verifica del codice le schede Accedi/Richiedi non servono
+    document.querySelector('.tabs-auth').style.display = (nome === 'otp') ? 'none' : '';
     document.getElementById('msg-auth').className = 'msg-auth';
   }
   function mostraMsg(testo, tipo) {
@@ -228,10 +252,88 @@
       mostraMsg('Credenziali non valide. Verificare email e password.', 'err');
       btn.disabled = false; btn.textContent = 'Accedi';
       return;    }
-    // Login ok → avvio la dashboard direttamente (non dipendo dall'evento)
+    // Password corretta → secondo passaggio: codice inviato via email
     btn.disabled = false; btn.textContent = 'Accedi';
-    await avviaDashboard(email);
+    document.getElementById('login-pwd').value = '';
+    await proseguiDopoPassword(email, true);
   }
+  // ── SECONDO FATTORE: CODICE VIA EMAIL ──
+  // La verifica vera è nel database (famiglie_otp_ok): senza codice valido
+  // per questa sessione le tabelle non restituiscono alcun dato.
+  let emailCorrente = '';
+  async function proseguiDopoPassword(email, inviaCodice) {
+    emailCorrente = email;
+    const { data: ok } = await sb.rpc('famiglie_otp_ok');
+    if (ok === true) return avviaDashboard(email);
+    mostraSchermata('otp');
+    document.getElementById('otp-codice').value = '';
+    if (inviaCodice) {
+      await richiediOtp(false);
+    } else {
+      document.getElementById('otp-istruzioni').textContent =
+        'Per completare l\'accesso inserisca il codice di 6 cifre ricevuto via email, oppure ne richieda uno nuovo.';
+    }
+    document.getElementById('otp-codice').focus();
+  }
+  async function chiamaOtp(dati) {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { mostraAuth(); throw new Error('Sessione scaduta. Acceda di nuovo.'); }
+    const resp = await fetch(OTP_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ',
+        'Authorization': 'Bearer ' + session.access_token
+      },
+      body: JSON.stringify(dati)
+    });
+    const esito = await resp.json().catch(() => ({}));
+    if (!resp.ok || !esito.success) throw new Error(esito.message || 'Servizio non disponibile. Riprovi più tardi.');
+    return esito;
+  }
+  function mascheraEmail(e) {
+    const [u, d] = String(e).split('@');
+    return d ? u.slice(0, 2) + '•••@' + d : e;
+  }
+  async function richiediOtp(manuale) {
+    try {
+      const esito = await chiamaOtp({ azione: 'invia' });
+      document.getElementById('otp-istruzioni').textContent =
+        'Abbiamo inviato un codice di 6 cifre a ' + mascheraEmail(emailCorrente) +
+        '. Il codice vale ' + (esito.minuti || 10) + ' minuti. Controlli anche la cartella della posta indesiderata.';
+      if (manuale) mostraMsg('Nuovo codice inviato.', 'ok');
+    } catch (e) {
+      mostraMsg(e.message, 'err');
+    }
+  }
+  async function verificaOtp() {
+    const codice = document.getElementById('otp-codice').value.trim();
+    if (!/^\d{6}$/.test(codice)) return mostraMsg('Inserire il codice di 6 cifre ricevuto via email.', 'err');
+    const btn = document.getElementById('btn-otp');
+    btn.disabled = true; btn.textContent = 'Verifica in corso...';
+    try {
+      await chiamaOtp({ azione: 'verifica', codice });
+      document.getElementById('msg-auth').className = 'msg-auth';
+      await avviaDashboard(emailCorrente);
+    } catch (e) {
+      mostraMsg(e.message, 'err');
+      document.getElementById('otp-codice').select();
+    } finally {
+      btn.disabled = false; btn.textContent = 'Verifica e accedi';
+    }
+  }
+  // La verifica vale 12 ore: tornando sulla pagina dopo la scadenza si
+  // richiede di nuovo il codice invece di mostrare un'area vuota.
+  document.addEventListener('visibilitychange', async () => {
+    if (document.visibilityState !== 'visible') return;
+    if (document.getElementById('schermata-dashboard').style.display !== 'block') return;
+    const { data: ok } = await sb.rpc('famiglie_otp_ok');
+    if (ok !== true) {
+      document.getElementById('schermata-auth').style.display = 'block';
+      document.getElementById('schermata-dashboard').style.display = 'none';
+      await proseguiDopoPassword(emailCorrente, false);
+    }
+  });
  // ── RESET PASSWORD ──
   async function inviaReset() {
     const email = document.getElementById('reset-email').value.trim().toLowerCase();

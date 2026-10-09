@@ -36,9 +36,9 @@
 
   <section style="background:var(--bco)">
     <div class="prv-body">
-      <p class="prv-updated">Versione 1.1 · 6 ottobre 2026</p>
+      <p class="prv-updated">Versione 1.3 · 9 ottobre 2026</p>
 
-      <div class="inf-box"><strong>Servizio attualmente sospeso.</strong> L'Area riservata famiglie è sospesa in via cautelativa e sarà riattivata solo dopo la raccolta dei consensi con questo modulo. L'adesione è libera: chi non aderisce continua a ricevere tutte le comunicazioni del Convitto attraverso i canali ordinari.</div>
+      <div class="inf-box"><strong>Servizio attualmente sospeso.</strong> L'Area riservata famiglie è sospesa in via cautelativa e sarà riattivata solo dopo la raccolta dei consensi con il modulo di questa pagina e l'attivazione dell'accesso con codice di verifica. L'adesione è libera: chi non aderisce continua a ricevere tutte le comunicazioni del Convitto attraverso i canali ordinari.</div>
       <div class="inf-indice"><strong>In questa pagina:</strong> <a href="#informativa">informativa</a> · <a href="#consenso">modulo di consenso</a> · <a href="#revoca">modulo di revoca</a></div>
       <div id="informativa"></div>
 <div class="prv-art" id="titolare">
@@ -54,7 +54,7 @@
 </div>
 <div class="prv-art" id="dati">
   <h2>3. <em>Dati</em> trattati</h2>
-  <p>Del genitore: nome, cognome, relazione con lo studente, indirizzo email usato come credenziale di accesso, data e ora degli accessi. Dello studente: nome e cognome, presenze ai pasti e ai rientri, osservazioni del Personale Educativo. Non sono trattati dati relativi alla salute o altre categorie particolari di dati.</p>
+  <p>Del genitore: nome, cognome, relazione con lo studente, indirizzo email usato come credenziale di accesso e per l'invio dei codici di verifica, data e ora degli accessi e delle verifiche. I codici di verifica non sono conservati: il sistema ne registra soltanto un'impronta cifrata, utile a controllarli, con l'ora di richiesta e di utilizzo. Dello studente: nome e cognome, presenze ai pasti e ai rientri, osservazioni del Personale Educativo. Non sono trattati dati relativi alla salute o altre categorie particolari di dati.</p>
 </div>
 <div class="prv-art" id="base-giuridica">
   <h2>4. Base giuridica: il <em>consenso</em></h2>
@@ -63,7 +63,10 @@
 </div>
 <div class="prv-art" id="modalita">
   <h2>5. <em>Modalità</em> e sicurezza</h2>
-  <p>L'accesso avviene con credenziali personali; le regole di sicurezza del database (Row Level Security) fanno sì che ogni genitore veda soltanto i dati del proprio figlio o figlia. Le modalità di autenticazione (ad esempio SPID o CIE) sono definite con il Responsabile per la Transizione al Digitale dell'Istituto.</p>
+  <p>L'accesso avviene in due passaggi, come indicato dal Responsabile per la Transizione al Digitale dell'Istituto:</p>
+  <ul><li>email e password personali;</li><li>un <strong>codice di verifica di 6 cifre</strong> inviato, a ogni accesso, all'indirizzo email del genitore o tutore. Il codice vale 10 minuti, si usa una sola volta e dopo 5 tentativi errati viene annullato.</li></ul>
+  <p>Chi conoscesse la sola password non potrebbe quindi vedere alcun dato. Il controllo avviene nel database: le regole di sicurezza (Row Level Security) mostrano a ciascun genitore soltanto i dati del proprio figlio o figlia, e solo dopo la verifica del codice. La verifica vale per la sessione in corso e al massimo per 12 ore.</p>
+  <p>L'account è creato dall'amministratore soltanto dopo la ricezione del modulo di consenso firmato: non è possibile registrarsi da soli.</p>
 </div>
 <div class="prv-art" id="destinatari">
   <h2>6. <em>Destinatari</em></h2>
@@ -78,7 +81,7 @@
 </div>
 <div class="prv-art" id="conservazione">
   <h2>8. <em>Conservazione</em></h2>
-  <p>L'account resta attivo per la durata della permanenza dello studente in Convitto e viene disattivato alla sua conclusione o alla revoca del consenso. I dati visibili nell'Area vengono cancellati dall'Area stessa <strong>entro 30 giorni</strong> dalla disattivazione; dopo la revoca l'account viene disattivato entro 7 giorni.</p>
+  <p>L'account resta attivo per la durata della permanenza dello studente in Convitto e viene disattivato alla sua conclusione o alla revoca del consenso. I dati visibili nell'Area vengono cancellati dall'Area stessa <strong>entro 30 giorni</strong> dalla disattivazione; dopo la revoca l'account viene disattivato entro 7 giorni. Le registrazioni dei codici di verifica sono cancellate dopo 30 giorni.</p>
   <p>L'Area non è un archivio dell'Istituto. I documenti che la normativa scolastica impone di conservare (ad esempio le relazioni del Personale Educativo acquisite al fascicolo personale dello studente) sono custoditi fuori dall'Area, nei tempi stabiliti dal <strong>Massimario di conservazione e scarto per le Istituzioni scolastiche</strong>, adottato dal 1° gennaio 2022 (nota del Ministero dell'Istruzione e del Ministero della Cultura 10 dicembre 2021, n. 3868), che per i fascicoli personali degli alunni prevede la <strong>conservazione illimitata</strong> (voce V.4.2).</p>
 </div>
 <div class="prv-art" id="diritti">
@@ -86,6 +89,11 @@
   <p>In ogni momento l'interessato può chiedere l'accesso ai propri dati, la rettifica, la cancellazione, la limitazione del trattamento e la portabilità, e può opporsi al trattamento (artt. 15–22 GDPR).</p>
   <p><strong>Il consenso si revoca in qualsiasi momento</strong>, senza bisogno di motivazione e senza alcuna conseguenza, con il <a href="#revoca" style="color:var(--bosco2)">modulo di revoca</a> qui sotto oppure con una semplice email a <a href="mailto:rirh010007@istruzione.it" style="color:var(--bosco2)">rirh010007@istruzione.it</a> (oggetto: "Revoca consenso · Area riservata famiglie"). La revoca non pregiudica la liceità del trattamento svolto prima.</p>
   <p>È sempre possibile proporre reclamo al <strong>Garante per la protezione dei dati personali</strong> (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener" style="color:var(--bosco2)">www.garanteprivacy.it</a>).</p>
+</div>
+<div class="prv-art" id="come-aderire">
+  <h2>Come <em>aderire</em></h2>
+  <ol><li>Legga questa informativa.</li><li>Compili il modulo di consenso qui sotto (si scrive direttamente nella pagina), lo stampi e lo firmi. Ciascun genitore o tutore che desidera un proprio account indica la propria email e firma.</li><li>Invii il modulo firmato, come scansione o foto leggibile, a <span data-email-moduli>l'indirizzo indicato nella pagina di richiesta</span>, oppure lo consegni in Convitto.</li><li>Invii la <a href="richiesta-accesso.html?informativa=letta" style="color:var(--bosco2)">richiesta online</a> con la stessa email indicata nel modulo.</li></ol>
+  <p>Ricevuto il modulo, l'amministratore attiva l'account e invia le credenziali via email.</p>
 </div>
 <div class="mod" id="consenso">
   <div class="mod-hdr"><h2>Modulo di consenso — Area riservata famiglie</h2><button type="button" class="btn-stampa" onclick="stampaModulo('consenso')">🖨️ Stampa il modulo</button></div>
@@ -100,8 +108,10 @@
     <div class="scelta"><span class="box"></span><span><strong>NON PRESTANO IL CONSENSO</strong></span></div>
     <p style="margin-top:1rem">Luogo e data <span class="riga"></span></p>
     <div class="mod-firme"><div><span class="riga"></span><small>Firma genitore/tutore 1</small></div><div><span class="riga"></span><small>Firma genitore/tutore 2</small></div></div>
+    <p style="font-size:.78rem;color:#6b7280;margin-top:1rem">Inviare il modulo firmato, come scansione o foto leggibile, a <span data-email-moduli>l'indirizzo indicato nella pagina di richiesta</span>, oppure consegnarlo al Convitto. L'account viene attivato solo dopo la ricezione del modulo.</p>
   </div>
 </div>
+<div class="inf-box" id="percorso-prosegui" hidden style="margin-top:1.5rem"><strong>Ha letto l'informativa e preparato il modulo?</strong> Prosegua con la richiesta online: <a href="richiesta-accesso.html?informativa=letta" class="btn-gold" style="display:inline-block;margin-top:.6rem">Vai alla richiesta online →</a></div>
 <div class="mod" id="revoca">
   <div class="mod-hdr"><h2>Modulo di revoca del consenso — Area riservata famiglie</h2><button type="button" class="btn-stampa" onclick="stampaModulo('revoca')">🖨️ Stampa il modulo</button></div>
   <div class="mod-body">
@@ -133,6 +143,11 @@ function stampaModulo(id){
 window.addEventListener('afterprint', function(){ document.body.removeAttribute('data-stampa'); });
 </script>
 <script src="moduli-compilabili.js"></script>
+<script src="area-famiglie.js"></script>
+<script>
+// Arrivando dal percorso di richiesta, mostra il pulsante per proseguire.
+if (/[?&]percorso=richiesta(&|$)/.test(location.search)) document.getElementById('percorso-prosegui').hidden = false;
+</script>
 <script src="nav.min.js"></script>
 </body>
 </html>

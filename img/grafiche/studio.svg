@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrazione: libro aperto, matita, calcolatrice e lampada da tavolo">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2=".7" y2="1"><stop offset="0" stop-color="#2C3E2D"/><stop offset=".6" stop-color="#1a281b"/><stop offset="1" stop-color="#0f1b12"/></linearGradient>
+<radialGradient id="spot" cx="0.55" cy="0.45" r=".55"><stop offset="0" stop-color="#e7c45f" stop-opacity=".22"/><stop offset=".55" stop-color="#caa23e" stop-opacity=".06"/><stop offset="1" stop-color="#caa23e" stop-opacity="0"/></radialGradient>
+<linearGradient id="g" gradientUnits="userSpaceOnUse" x1="250" y1="120" x2="950" y2="700"><stop offset="0" stop-color="#fbeec5"/><stop offset=".35" stop-color="#EDD98A"/><stop offset=".7" stop-color="#D4AA4A"/><stop offset="1" stop-color="#B8922A"/></linearGradient>
+<radialGradient id="b" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fbeec5" stop-opacity=".85"/><stop offset=".45" stop-color="#e6c45c" stop-opacity=".35"/><stop offset="1" stop-color="#e6c45c" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="800" fill="url(#bg)"/>
+<rect width="1200" height="800" fill="url(#spot)"/>
+<g fill="none" stroke="#D4AA4A" stroke-opacity=".13" stroke-width="1.5"><circle cx="0" cy="0" r="220"/><circle cx="0" cy="0" r="340"/><circle cx="1200" cy="800" r="200"/><circle cx="1200" cy="800" r="320"/><circle cx="1200" cy="800" r="440"/></g>
+<g fill="url(#b)"><circle cx="190" cy="610" r="26"/><circle cx="1010" cy="170" r="20"/><circle cx="930" cy="640" r="12"/><circle cx="260" cy="190" r="14"/><circle cx="1080" cy="470" r="9"/><circle cx="120" cy="380" r="8"/></g>
+<g fill="none" stroke="url(#g)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M330 560 Q470 500 600 560 Q730 500 870 560 V360 Q730 300 600 360 Q470 300 330 360 Z"/><line x1="600" y1="360" x2="600" y2="560"/>
+<path d="M370 400 Q470 360 560 400 M370 440 Q470 400 560 440 M370 480 Q470 440 560 480" stroke-width="3" stroke-opacity=".7"/>
+<path d="M640 400 Q730 360 830 400 M640 440 Q730 400 830 440" stroke-width="3" stroke-opacity=".7"/>
+<path d="M180 600 H1020" stroke-width="4" stroke-opacity=".6"/>
+<path d="M900 590 L1000 330 L1022 340 L922 600 Z"/><path d="M900 590 L898 618 L922 600"/>
+<rect x="190" y="420" width="100" height="150" rx="10"/><rect x="206" y="436" width="68" height="32" rx="4"/><rect x="206" y="484" width="16" height="14" rx="3" fill="url(#g)" stroke="none"/><rect x="230" y="484" width="16" height="14" rx="3" fill="url(#g)" stroke="none"/><rect x="254" y="484" width="16" height="14" rx="3" fill="url(#g)" stroke="none"/><rect x="206" y="508" width="16" height="14" rx="3" fill="url(#g)" stroke="none"/><rect x="230" y="508" width="16" height="14" rx="3" fill="url(#g)" stroke="none"/><rect x="254" y="508" width="16" height="14" rx="3" fill="url(#g)" stroke="none"/><rect x="206" y="532" width="16" height="14" rx="3" fill="url(#g)" stroke="none"/><rect x="230" y="532" width="16" height="14" rx="3" fill="url(#g)" stroke="none"/><rect x="254" y="532" width="16" height="14" rx="3" fill="url(#g)" stroke="none"/>
+<path d="M690 180 L770 140 L800 200 Z"/><path d="M745 160 L700 250 L740 300"/><circle cx="740" cy="300" r="8" fill="url(#g)" stroke="none"/>
+</g>
+</svg>

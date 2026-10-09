@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrazione: albero di Natale stilizzato con luci e stelle">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2=".7" y2="1"><stop offset="0" stop-color="#2C3E2D"/><stop offset=".6" stop-color="#1a281b"/><stop offset="1" stop-color="#0f1b12"/></linearGradient>
+<radialGradient id="spot" cx="0.5" cy="0.45" r=".55"><stop offset="0" stop-color="#e7c45f" stop-opacity=".22"/><stop offset=".55" stop-color="#caa23e" stop-opacity=".06"/><stop offset="1" stop-color="#caa23e" stop-opacity="0"/></radialGradient>
+<linearGradient id="g" gradientUnits="userSpaceOnUse" x1="250" y1="120" x2="950" y2="700"><stop offset="0" stop-color="#fbeec5"/><stop offset=".35" stop-color="#EDD98A"/><stop offset=".7" stop-color="#D4AA4A"/><stop offset="1" stop-color="#B8922A"/></linearGradient>
+<radialGradient id="b" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fbeec5" stop-opacity=".85"/><stop offset=".45" stop-color="#e6c45c" stop-opacity=".35"/><stop offset="1" stop-color="#e6c45c" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="800" fill="url(#bg)"/>
+<rect width="1200" height="800" fill="url(#spot)"/>
+<g fill="none" stroke="#D4AA4A" stroke-opacity=".13" stroke-width="1.5"><circle cx="0" cy="0" r="220"/><circle cx="0" cy="0" r="340"/><circle cx="1200" cy="800" r="200"/><circle cx="1200" cy="800" r="320"/><circle cx="1200" cy="800" r="440"/></g>
+<g fill="url(#b)"><circle cx="190" cy="610" r="26"/><circle cx="1010" cy="170" r="20"/><circle cx="930" cy="640" r="12"/><circle cx="260" cy="190" r="14"/><circle cx="1080" cy="470" r="9"/><circle cx="120" cy="380" r="8"/></g>
+<g fill="none" stroke="url(#g)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M600 160 L470 330 H540 L420 480 H510 L380 640 H820 L690 480 H780 L660 330 H730 Z"/>
+<rect x="570" y="640" width="60" height="50"/>
+<path d="M600 103 L609.6 125.4 L632 135 L609.6 144.6 L600 167 L590.4 144.6 L568 135 L590.4 125.4 Z" fill="url(#g)" stroke="none"/>
+<path d="M500 330 Q600 380 700 330 M460 480 Q600 540 740 480" stroke-width="3" stroke-opacity=".7"/>
+<circle cx="530" cy="355" r="10" fill="url(#g)" stroke="none"/><circle cx="600" cy="370" r="10" fill="url(#g)" stroke="none"/><circle cx="670" cy="352" r="10" fill="url(#g)" stroke="none"/><circle cx="490" cy="505" r="10" fill="url(#g)" stroke="none"/><circle cx="560" cy="525" r="10" fill="url(#g)" stroke="none"/><circle cx="640" cy="525" r="10" fill="url(#g)" stroke="none"/><circle cx="710" cy="505" r="10" fill="url(#g)" stroke="none"/><circle cx="450" cy="610" r="10" fill="url(#g)" stroke="none"/><circle cx="600" cy="600" r="10" fill="url(#g)" stroke="none"/><circle cx="750" cy="610" r="10" fill="url(#g)" stroke="none"/>
+<path d="M300 234 L304.8 245.2 L316 250 L304.8 254.8 L300 266 L295.2 254.8 L284 250 L295.2 245.2 Z" fill="url(#g)" stroke="none"/><path d="M920 208 L923.6 216.4 L932 220 L923.6 223.6 L920 232 L916.4 223.6 L908 220 L916.4 216.4 Z" fill="url(#g)" stroke="none"/><path d="M980 411 L982.7 417.3 L989 420 L982.7 422.7 L980 429 L977.3 422.7 L971 420 L977.3 417.3 Z" fill="url(#g)" stroke="none"/><path d="M230 460 L233 467 L240 470 L233 473 L230 480 L227 473 L220 470 L227 467 Z" fill="url(#g)" stroke="none"/>
+</g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrazione: due mani che sorreggono un cuore">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2=".7" y2="1"><stop offset="0" stop-color="#2C3E2D"/><stop offset=".6" stop-color="#1a281b"/><stop offset="1" stop-color="#0f1b12"/></linearGradient>
+<radialGradient id="spot" cx="0.5" cy="0.45" r=".55"><stop offset="0" stop-color="#e7c45f" stop-opacity=".22"/><stop offset=".55" stop-color="#caa23e" stop-opacity=".06"/><stop offset="1" stop-color="#caa23e" stop-opacity="0"/></radialGradient>
+<linearGradient id="g" gradientUnits="userSpaceOnUse" x1="250" y1="120" x2="950" y2="700"><stop offset="0" stop-color="#fbeec5"/><stop offset=".35" stop-color="#EDD98A"/><stop offset=".7" stop-color="#D4AA4A"/><stop offset="1" stop-color="#B8922A"/></linearGradient>
+<radialGradient id="b" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fbeec5" stop-opacity=".85"/><stop offset=".45" stop-color="#e6c45c" stop-opacity=".35"/><stop offset="1" stop-color="#e6c45c" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1200" height="800" fill="url(#bg)"/>
+<rect width="1200" height="800" fill="url(#spot)"/>
+<g fill="none" stroke="#D4AA4A" stroke-opacity=".13" stroke-width="1.5"><circle cx="0" cy="0" r="220"/><circle cx="0" cy="0" r="340"/><circle cx="1200" cy="800" r="200"/><circle cx="1200" cy="800" r="320"/><circle cx="1200" cy="800" r="440"/></g>
+<g fill="url(#b)"><circle cx="190" cy="610" r="26"/><circle cx="1010" cy="170" r="20"/><circle cx="930" cy="640" r="12"/><circle cx="260" cy="190" r="14"/><circle cx="1080" cy="470" r="9"/><circle cx="120" cy="380" r="8"/></g>
+<g fill="none" stroke="url(#g)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M600 440 C520 370 470 310 520 260 C560 220 600 250 600 280 C600 250 640 220 680 260 C730 310 680 370 600 440 Z" fill="url(#g)" fill-opacity=".18"/>
+<path d="M300 520 Q380 470 460 500 L560 540 Q590 560 560 580 L470 570 M300 600 Q420 640 560 620 L620 600"/>
+<path d="M900 520 Q820 470 740 500 L640 540 Q610 560 640 580 L730 570 M900 600 Q780 640 640 620 L580 600"/>
+<path d="M360 248 L363.6 256.4 L372 260 L363.6 263.6 L360 272 L356.4 263.6 L348 260 L356.4 256.4 Z" fill="url(#g)" stroke="none"/><path d="M860 226 L864.2 235.8 L874 240 L864.2 244.2 L860 254 L855.8 244.2 L846 240 L855.8 235.8 Z" fill="url(#g)" stroke="none"/><path d="M940 372 L942.4 377.6 L948 380 L942.4 382.4 L940 388 L937.6 382.4 L932 380 L937.6 377.6 Z" fill="url(#g)" stroke="none"/>
+</g>
+</svg>

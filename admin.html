@@ -72,8 +72,34 @@ function admConfirm(opts) {
       </p>
       <input type="password" id="rec-p1" placeholder="Nuova password" autocomplete="new-password" style="margin-bottom:.5rem"/>
       <input type="password" id="rec-p2" placeholder="Conferma password" autocomplete="new-password" style="margin-bottom:.5rem"/>
+      <input type="text" id="rec-codice" placeholder="Codice dell'app di autenticazione" inputmode="numeric"
+             autocomplete="one-time-code" maxlength="6" style="margin-bottom:.5rem"/>
       <button class="btn-accedi" onclick="adminSetNewPwd()">Salva nuova password</button>
       <p id="rec-nuova-msg" style="display:none;font-size:.82rem;margin-top:.6rem;line-height:1.5"></p>
+    </div>
+
+    <!-- secondo fattore: codice dell'app di autenticazione (TOTP) -->
+    <div id="mfa-box" style="display:none;margin-top:1rem;text-align:left">
+      <div id="mfa-attivazione" style="display:none">
+        <p style="text-transform:none;letter-spacing:normal;font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:.6rem">
+          <strong style="color:#fff">Attivazione della verifica in due passaggi.</strong>
+          Apri sul telefono un'app di autenticazione (Google Authenticator, Microsoft Authenticator o simili),
+          scegli "Aggiungi account" e inquadra questo codice QR.
+        </p>
+        <div style="background:#fff;border-radius:8px;padding:10px;width:200px;margin:0 auto .6rem">
+          <img id="mfa-qr" alt="Codice QR da inquadrare con l'app di autenticazione" style="width:180px;height:180px;display:block"/>
+        </div>
+        <p style="text-transform:none;letter-spacing:normal;font-size:.72rem;color:rgba(255,255,255,.55);line-height:1.5;margin-bottom:.6rem;word-break:break-all">
+          Se non puoi inquadrarlo, inserisci a mano questa chiave nell'app: <code id="mfa-segreto" style="color:#d4aa4a"></code>
+        </p>
+      </div>
+      <p id="mfa-istruzioni" style="text-transform:none;letter-spacing:normal;font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:.6rem">
+        Inserisci il codice di 6 cifre mostrato dall'app di autenticazione.
+      </p>
+      <input type="text" id="mfa-codice" placeholder="000000" inputmode="numeric" autocomplete="one-time-code"
+             maxlength="6" style="letter-spacing:.4em;font-size:1.2rem"/>
+      <button class="btn-accedi" id="mfa-btn" onclick="verificaMfa()">Verifica →</button>
+      <a onclick="annullaMfa()" style="display:inline-block;margin-top:.6rem;font-size:.78rem;color:#888;cursor:pointer">← Annulla</a>
     </div>
     <a href="index.html"
        style="display:inline-flex;align-items:center;gap:.4rem;margin-top:1.25rem;
@@ -477,9 +503,18 @@ async function adminSetNewPwd() {
   const p2 = document.getElementById('rec-p2').value;
   if (!p1 || p1.length < 8) return recMsg('rec-nuova-msg', 'La password deve avere almeno 8 caratteri.', false);
   if (p1 !== p2)            return recMsg('rec-nuova-msg', 'Le due password non coincidono.', false);
-  const tok = sessionStorage.getItem('rec_access_token');
+  let tok = sessionStorage.getItem('rec_access_token');
   if (!tok) return recMsg('rec-nuova-msg', 'Link scaduto o non valido. Richiedi un nuovo link.', false);
   try {
+    // Con la verifica in due passaggi attiva, il cambio password richiede
+    // anche il codice dell'app di autenticazione.
+    const utente = await authApi('user', tok);
+    const fattore = fattoreTotpVerificato(utente);
+    if (fattore) {
+      const codice = document.getElementById('rec-codice').value.replace(/\D/g, '');
+      if (codice.length !== 6) return recMsg('rec-nuova-msg', 'Inserisci anche il codice di 6 cifre dell\'app di autenticazione.', false);
+      tok = (await verificaCodiceTotp(tok, fattore.id, codice)).access_token;
+    }
     const r = await fetch(`${SB_N}/auth/v1/user`, {
       method: 'PUT',
       headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + tok, 'Content-Type': 'application/json' },
@@ -1595,17 +1630,97 @@ async function doLogin() {
     });
     if (!r.ok) throw new Error('Credenziali non valide');
     const data  = await r.json();
-    const token = data.access_token;
+    document.getElementById('pwd').value = '';
 
-    // 2) verifica che l'utente sia un amministratore
+    // 2) secondo passaggio: codice dell'app di autenticazione.
+    //    Il database riconosce l'amministratore solo con una sessione
+    //    verificata in due passaggi (aal2): vedi is_admin().
+    await avviaMfa(data.access_token);
+  } catch (e) {
+    err.textContent = 'Accesso negato. ' + (e.message || '');
+    err.style.display = 'block';
+    document.getElementById('pwd').value = '';
+  }
+}
+
+// ───────── verifica in due passaggi (TOTP) ─────────
+let mfaToken = null;      // sessione dopo la sola password (aal1)
+let mfaFattore = null;    // id del fattore TOTP
+
+async function authApi(percorso, token, metodo, corpo) {
+  const r = await fetch(`${SB_N}/auth/v1/${percorso}`, {
+    method: metodo || 'GET',
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+    body: corpo ? JSON.stringify(corpo) : undefined
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.msg || j.message || j.error_description || ('HTTP ' + r.status));
+  return j;
+}
+
+function fattoreTotpVerificato(utente) {
+  return (utente.factors || []).find(f => f.factor_type === 'totp' && f.status === 'verified') || null;
+}
+
+async function avviaMfa(token) {
+  mfaToken = token;
+  const utente = await authApi('user', token);
+  const fattore = fattoreTotpVerificato(utente);
+  const box = document.getElementById('mfa-box');
+  document.querySelector('.login-box > .btn-accedi').style.display = 'none';
+  document.getElementById('eml').style.display = 'none';
+  document.getElementById('pwd').style.display = 'none';
+  document.getElementById('link-recovery').style.display = 'none';
+  box.style.display = 'block';
+  if (fattore) {
+    mfaFattore = fattore.id;
+    document.getElementById('mfa-attivazione').style.display = 'none';
+    document.getElementById('mfa-istruzioni').textContent =
+      'Inserisci il codice di 6 cifre mostrato dall\'app di autenticazione.';
+  } else {
+    // Prima attivazione: si eliminano eventuali tentativi non completati
+    for (const f of (utente.factors || []).filter(f => f.status !== 'verified')) {
+      await authApi('factors/' + f.id, token, 'DELETE').catch(() => {});
+    }
+    const nuovo = await authApi('factors', token, 'POST', {
+      factor_type: 'totp', friendly_name: 'Pannello admin', issuer: 'Convitto Costaggini'
+    });
+    mfaFattore = nuovo.id;
+    document.getElementById('mfa-qr').src = nuovo.totp.qr_code;
+    document.getElementById('mfa-segreto').textContent = nuovo.totp.secret;
+    document.getElementById('mfa-attivazione').style.display = 'block';
+    document.getElementById('mfa-istruzioni').textContent =
+      'Poi inserisci qui il codice di 6 cifre che compare nell\'app, per confermare l\'attivazione.';
+  }
+  document.getElementById('mfa-codice').value = '';
+  document.getElementById('mfa-codice').focus();
+}
+
+// Restituisce la nuova sessione verificata in due passaggi (aal2)
+async function verificaCodiceTotp(token, fattore, codice) {
+  const sfida = await authApi('factors/' + fattore + '/challenge', token, 'POST', {});
+  return authApi('factors/' + fattore + '/verify', token, 'POST', { challenge_id: sfida.id, code: codice });
+}
+
+async function verificaMfa() {
+  const err = document.getElementById('login-err');
+  const btn = document.getElementById('mfa-btn');
+  const codice = document.getElementById('mfa-codice').value.replace(/\D/g, '');
+  err.style.display = 'none';
+  if (codice.length !== 6) { err.textContent = 'Inserisci il codice di 6 cifre.'; err.style.display = 'block'; return; }
+  btn.disabled = true;
+  try {
+    const sessione = await verificaCodiceTotp(mfaToken, mfaFattore, codice);
+    const token = sessione.access_token;
     const chk = await fetch(`${SB_N}/rest/v1/rpc/is_admin`, {
       method: 'POST',
       headers: { 'apikey': SB_PUB, 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: '{}'
     });
     if ((await chk.json()) !== true) throw new Error('Utente non autorizzato');
-
-    // 3) sessione valida → apri il pannello (come prima)
+    mfaToken = null;
+    chiudiMfa();
+    // sessione valida → apri il pannello (come prima)
     sessionStorage.setItem('sb_token', token);
     sessionStorage.setItem('adm_auth', '1');
     document.getElementById('login-screen').style.display = 'none';
@@ -1614,11 +1729,31 @@ async function doLogin() {
     await loadAvvisi();
     await famLoad('in_attesa');
   } catch (e) {
-    err.textContent = 'Accesso negato. ' + (e.message || '');
+    err.textContent = /invalid|code/i.test(e.message) ? 'Codice non valido o scaduto. Riprova con il codice attuale.' : 'Accesso negato. ' + e.message;
     err.style.display = 'block';
-    document.getElementById('pwd').value = '';
+    document.getElementById('mfa-codice').select();
+  } finally {
+    btn.disabled = false;
   }
 }
+
+function chiudiMfa() {
+  document.getElementById('mfa-box').style.display = 'none';
+  document.querySelector('.login-box > .btn-accedi').style.display = '';
+  document.getElementById('eml').style.display = '';
+  document.getElementById('pwd').style.display = '';
+  document.getElementById('link-recovery').style.display = 'inline-block';
+}
+
+function annullaMfa() {
+  if (mfaToken) fetch(`${SB_N}/auth/v1/logout`, { method: 'POST', headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + mfaToken } }).catch(() => {});
+  mfaToken = null;
+  chiudiMfa();
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const c = document.getElementById('mfa-codice');
+  if (c) c.addEventListener('keydown', e => { if (e.key === 'Enter') verificaMfa(); });
+});
 // Consente login anche con Invio
 document.addEventListener('DOMContentLoaded', () => {
   const pwd = document.getElementById('pwd');
@@ -1635,6 +1770,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function logout() {
+  const tok = SB_TOKEN();
+  if (tok) fetch(`${SB_N}/auth/v1/logout`, { method: 'POST', headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + tok } }).catch(() => {});
+  sessionStorage.removeItem('sb_token');
   sessionStorage.removeItem('adm_auth');
   document.getElementById('adm-wrap').style.display     = 'none';
   document.getElementById('login-screen').style.display = 'flex';

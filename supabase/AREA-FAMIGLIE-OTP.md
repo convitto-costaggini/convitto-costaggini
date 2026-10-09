@@ -51,29 +51,47 @@ un'altra sessione dello stesso account e 0 a verifica più vecchia di 12 ore.
 | `informativa-area-famiglie.html`, `privacy.html` | informativa v1.3 |
 | `admin.html` | approvazione con registrazione del modulo firmato |
 
+## Stato al 9 ottobre 2026
+
+| Tema | Stato |
+|---|---|
+| Parere RTD sull'OTP (8/10) | Favorevole; già inoltrato alla DPO |
+| Benestare DPO all'Area con OTP | **In attesa** |
+| Email dei sei ex convittori (violazione) | Chiusa dalla Dirigenza dopo la correzione, senza notifica al Garante (indicazione DPO: decisione in capo al Titolare) |
+| Indirizzo per i moduli firmati | `rirh010007@istruzione.it` (casella istituzionale) |
+| Codice | Ramo `area-famiglie-otp` su GitHub, non unito a `main` |
+| Database e funzioni Supabase | Non ancora modificati |
+
 ## Ordine di attivazione
 
 Rispettare l'ordine: `admin.html` scrive le nuove colonne, quindi **la migrazione
-va applicata prima di pubblicare il sito**.
+va applicata prima di pubblicare il sito**. Nella colonna "Chi": **Michele** =
+operazione da fare di persona (account o pannelli personali); **Claude** =
+eseguibile da Claude Code su conferma.
 
-1. **Apps Script**: seguire le istruzioni in testa a `supabase/gas-otp/Codice.gs`
-   (nuovo progetto con l'account istituzionale, proprietà `OTP_MAIL_TOKEN`,
-   `provaInvio`, deployment come applicazione web). Annotare l'URL `/exec`.
-2. **Secret Supabase** (Edge Functions → Secrets): `OTP_PEPPER` (stringa casuale
-   di almeno 32 caratteri), `OTP_MAIL_URL`, `OTP_MAIL_TOKEN`.
-3. **Edge Function** `otp-famiglie`: deploy con **Verify JWT attivo**.
-4. **Edge Function** `richiesta-accesso`: ridistribuire (cambia solo la versione
-   dell'informativa registrata).
-5. **Migrazione**: eseguire `2026-10-09_area_famiglie_otp.sql`.
-6. **Sito**: unire il ramo `area-famiglie-otp` su `main`. L'Area resta sospesa.
-7. **Gestionale**: nell'email con le credenziali (`creaAccountEInvia`) aggiungere
-   una riga: "A ogni accesso, dopo la password, riceverà via email un codice di
-   verifica di 6 cifre".
-8. **Prova completa** con un account di prova: richiesta → approvazione → email
-   credenziali → accesso → codice → dati visibili; codice errato 5 volte;
-   nuovo codice prima di un minuto (rifiutato).
-9. **DPO**: sottoporre la funzionalità prima dell'attivazione, come da impegno ex
-   art. 38 GDPR (nota del 28/09/2026).
-10. **Attivazione**: in `area-riservata.html` rimuovere il blocco
-    `<!-- ══ AVVISO SOSPENSIONE ACCESSO ══ -->` e, nell'informativa, il riquadro
-    "Servizio attualmente sospeso".
+| # | Passaggio | Chi |
+|---|---|---|
+| 0 | Benestare della DPO sull'accesso con OTP (impegno ex art. 38 GDPR, nota del 28/09/2026) | Michele |
+| 1 | **Apps Script**: nuovo progetto con l'account istituzionale, seguendo le istruzioni in testa a `supabase/gas-otp/Codice.gs` (proprietà `OTP_MAIL_TOKEN`, `provaInvio`, deployment come applicazione web); annotare l'URL `/exec` | Michele |
+| 2 | **Secret Supabase** (Edge Functions → Secrets): `OTP_PEPPER` (stringa casuale di almeno 32 caratteri), `OTP_MAIL_URL`, `OTP_MAIL_TOKEN` | Michele (Claude prepara i valori casuali) |
+| 3 | **Edge Function** `otp-famiglie`: deploy con **Verify JWT attivo** | Claude |
+| 4 | **Edge Function** `richiesta-accesso`: ridistribuire (cambia solo la versione dell'informativa registrata) | Claude |
+| 5 | **Migrazione** `2026-10-09_area_famiglie_otp.sql` | Claude |
+| 6 | **Sito**: unire la richiesta di unione del ramo `area-famiglie-otp` su `main`. L'Area resta sospesa | Michele (o Claude su conferma) |
+| 7 | **Gestionale**: nell'email con le credenziali (`creaAccountEInvia`) aggiungere: "A ogni accesso, dopo la password, riceverà via email un codice di verifica di 6 cifre" | Michele |
+| 8 | **Prova completa** con un account di prova: richiesta → approvazione → email credenziali → accesso → codice → dati visibili; codice errato 5 volte; nuovo codice prima di un minuto (rifiutato) | Michele + Claude |
+| 9 | **Attivazione**: in `area-riservata.html` rimuovere il blocco `<!-- ══ AVVISO SOSPENSIONE ACCESSO ══ -->` e, nell'informativa, il riquadro "Servizio attualmente sospeso" | Claude, su via libera della Dirigenza |
+
+## Punti collegati, da chiudere
+
+- **Registro delle violazioni (art. 33, par. 5 GDPR).** Anche quando non si
+  notifica al Garante, il Titolare documenta la violazione, le conseguenze e i
+  provvedimenti adottati. Verificare con la DPO che l'episodio delle email degli
+  ex convittori sia annotato nel registro dell'Istituto.
+- **Token del gestionale in chiaro.** `admin.html` contiene `GAS_TOKEN` e il
+  repository è pubblico. Sostituire il token nel gestionale e non scriverlo più
+  nel codice della pagina.
+- **Riconoscimento per nome.** Le regole RLS, per le righe senza codice
+  studente, abbinano lo studente per nome e cognome: due omonimi si vedrebbero a
+  vicenda. Completare il codice studente su tutte le righe e poi togliere
+  l'abbinamento per nome.

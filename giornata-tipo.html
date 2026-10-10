@@ -110,7 +110,7 @@
       <h1 id="gj-h1">Una giornata<br><em>al Convitto</em></h1>
       <p>Dalla sveglia alle 6:30 al riposo notturno: ore strutturate, spazi di libertà, studio, sport e musica. Un ritmo che diventa casa.</p>
       <div id="gj-ora" class="gj-ora" role="status" hidden></div>
-      <p style="font-size:.7rem;color:rgba(255,255,255,.45);margin-top:.5rem">Ora di Rieti. Nei giorni di chiusura del <a href="calendario.html" style="color:inherit">calendario</a> il Convitto non è aperto.</p>
+      <p style="font-size:.7rem;color:rgba(255,255,255,.45);margin-top:.5rem">Ora di Rieti, secondo il calendario scolastico 2026/27.</p>
     </div>
   </section>
 
@@ -416,9 +416,10 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 @keyframes gjNodo{0%,100%{box-shadow:0 0 0 5px rgba(184,146,42,.15)}50%{box-shadow:0 0 0 11px rgba(184,146,42,.3)}}
 @media (prefers-reduced-motion:reduce){.gj-ora-dot,.tl-item.tl-adesso .tl-node{animation:none}}
 </style>
+<script src="calendario-scolastico.js"></script>
 <script>
 /* "Adesso al Convitto": evidenzia il momento della giornata in base all'ora di Rieti.
-   Lun–gio giornata completa; venerdì fino all'uscita per la scuola; rientro domenica 20:00–22:00. */
+   Tiene conto dei giorni di lezione e delle chiusure di calendario-scolastico.js. */
 (function () {
   var box = document.getElementById('gj-ora'); if (!box) return;
   var items = {};
@@ -438,20 +439,55 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   var GG = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
   function oraRieti() {
     var p = {};
-    new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Rome', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+    new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Rome', weekday: 'short', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
       .formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
-    return { g: GG[p.weekday], h: +p.hour, m: +p.minute };
+    return { g: GG[p.weekday], h: +p.hour, m: +p.minute, d: new Date(Date.UTC(+p.year, +p.month - 1, +p.day)) };
   }
-  function momento(g, min) {
-    var chiuso = [null, 'Il Convitto riposa: si riparte domenica sera, dalle 20:00', 'dom'];
-    if (g === 6 || (g === 5 && min >= 480) || (g === 0 && min < 1200)) return chiuso;
-    if (g === 0) return min < 1320 ? ['dom', 'Rientro settimanale (20:00–22:00)'] : ['22:30', min < 1350 ? 'Si va a dormire' : 'Riposo notturno'];
+  /* Giorni di lezione dal calendario scolastico (calendario-scolastico.js).
+     Regola, come nella settimana normale: si dorme in Convitto la sera prima di
+     ogni giorno di lezione (rientro 20:00–22:00) e si resta fino all'uscita per la
+     scuola dell'ultimo giorno di lezione prima di una chiusura. */
+  var CAL = window.CALENDARIO_SCOLASTICO;
+  function iso(d) { return d.getUTCFullYear() + '-' + ('0' + (d.getUTCMonth() + 1)).slice(-2) + '-' + ('0' + d.getUTCDate()).slice(-2); }
+  function chiusura(d) {
+    var k = iso(d), g = d.getUTCDay();
+    if (CAL && k >= CAL.inizio.slice(0, 4) + '-07-01' && k <= CAL.fine.slice(0, 4) + '-08-31') {
+      if (k < CAL.inizio || k > CAL.fine) return 'Vacanze estive';
+      for (var i = 0; i < CAL.chiusure.length; i++) if (k >= CAL.chiusure[i][0] && k <= CAL.chiusure[i][1]) return CAL.chiusure[i][2];
+    }
+    return (g === 0 || g === 6) ? 'fine settimana' : null;
+  }
+  function lezione(d) { return !chiusura(d); }
+  function piu(d, n) { return new Date(d.getTime() + n * 864e5); }
+  var GIORNI = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
+  var MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+  function testoChiuso(oggi) {
+    var motivo = chiusura(oggi) || chiusura(piu(oggi, 1)) || 'fine settimana', prossimo = null;
+    for (var i = 1; i < 120 && !prossimo; i++) if (lezione(piu(oggi, i))) prossimo = piu(oggi, i);
+    if (motivo === 'Vacanze estive' && CAL && iso(oggi) >= CAL.fine) return 'Buone vacanze! Le lezioni sono finite: ci rivediamo a settembre';
+    var apre = prossimo ? piu(prossimo, -1) : null, quando = '';
+    if (apre) {
+      var gg = Math.round((apre - oggi) / 864e5);
+      quando = gg === 0 ? 'stasera' : gg === 1 ? 'domani sera' : gg > 6 ? 'la sera di ' + GIORNI[apre.getUTCDay()] + ' ' + apre.getUTCDate() + ' ' + MESI[apre.getUTCMonth()] : GIORNI[apre.getUTCDay()] + ' sera';
+    }
+    var inizio = motivo === 'fine settimana' ? 'Il Convitto riposa' : motivo + ', Convitto chiuso';
+    return inizio + (apre ? ': si riparte ' + quando + ', dalle 20:00' : '');
+  }
+  function momento(g, min, oggi) {
+    var lezOggi = lezione(oggi), lezDomani = lezione(piu(oggi, 1));
+    var chiuso = [null, testoChiuso(oggi), 'dom'];
+    if (lezOggi) {
+      if (!lezDomani && min >= 480) return chiuso;
+    } else {
+      if (!lezDomani || min < 1200) return chiuso;
+      return min < 1320 ? ['dom', 'Rientro in Convitto (20:00–22:00)'] : ['22:30', min < 1350 ? 'Si va a dormire' : 'Riposo notturno'];
+    }
     var r = FERIALE[0];
     FERIALE.forEach(function (f) { if (min >= f[0]) r = f; });
     return [r[1], r[2]];
   }
   function aggiorna() {
-    var o = oraRieti(), min = o.h * 60 + o.m, m = momento(o.g, min);
+    var o = oraRieti(), min = o.h * 60 + o.m, m = momento(o.g, min, o.d);
     var hhmm = (o.h < 10 ? '0' : '') + o.h + ':' + (o.m < 10 ? '0' : '') + o.m;
     var chiave = m[0] || m[2], it = items[chiave];
     document.querySelectorAll('.tl-adesso').forEach(function (x) { x.classList.remove('tl-adesso'); var b = x.querySelector('.tl-adesso-badge'); if (b) b.remove(); });

@@ -9,7 +9,24 @@
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
   <style>
+    .vs-anni{font-family:var(--fd);font-size:1.05rem;letter-spacing:.32em;color:var(--oro3);margin:.9rem 0 0;display:flex;align-items:center;gap:.8rem}
+    .vs-anni::before,.vs-anni::after{content:"";height:1px;width:42px;background:linear-gradient(90deg,transparent,var(--oro2))}
+    .vs-anni::after{background:linear-gradient(90deg,var(--oro2),transparent)}
     .vs-intro{background:var(--av);padding:3rem 1.25rem 2rem}
+    .vs-intro p.vs-capo::first-letter{font-family:var(--fd);float:left;font-size:4.4rem;line-height:.82;padding:.35rem .55rem 0 0;color:var(--oro);font-weight:400}
+    .vs-orn{display:flex;align-items:center;justify-content:center;gap:1rem;color:var(--oro);margin:0 auto 2.25rem;max-width:420px}
+    .vs-orn::before,.vs-orn::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(184,146,42,.55))}
+    .vs-orn::after{background:linear-gradient(90deg,rgba(184,146,42,.55),transparent)}
+    .vs-orn svg{width:26px;height:26px;flex-shrink:0}
+    .vs-sant{position:relative;overflow:hidden}
+    .vs-sant .w{position:relative}
+    .vs-romano{position:absolute;right:-.5rem;top:-2.2rem;font-family:var(--fd);font-size:12rem;line-height:1;color:var(--oro);opacity:.07;pointer-events:none;user-select:none}
+    @media (max-width:899px){.vs-romano{font-size:8rem;top:-1.2rem}}
+    .vs-verso{font-family:var(--fd);font-style:italic;font-size:1.02rem;line-height:1.55;color:var(--bosco2);margin:0 0 1rem;padding-left:.9rem;border-left:2px solid rgba(184,146,42,.45)}
+    .vs-pace{background:var(--bosco);padding:3.25rem 1.25rem;text-align:center}
+    .vs-pace svg{width:44px;height:44px;color:var(--oro2)}
+    .vs-pace p{font-family:var(--fd);font-style:italic;font-size:1.9rem;color:var(--av);margin:.6rem 0 .25rem;letter-spacing:.02em}
+    .vs-pace small{font-family:var(--fu);font-size:.66rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--oro2)}
     .vs-intro .w{max-width:760px}
     .vs-intro p{font-size:1rem;line-height:1.8;color:var(--txt2);margin:0 0 1rem}
     .vs-cit{font-family:var(--fd);font-style:italic;font-size:1.25rem;line-height:1.5;color:var(--bosco);border-left:3px solid var(--oro2);padding:.25rem 0 .25rem 1.1rem;margin:1.75rem 0 0}
@@ -78,15 +95,16 @@
       </nav>
       <div class="gold-bar"></div>
       <h1>La Valle Santa <em>a tavola</em></h1>
-      <p class="sub">800 anni dalla morte di San Francesco (1226–2026): quattro santuari, quattro piatti, una valle.</p>
+      <p class="sub">800 anni dalla morte di San Francesco: quattro santuari, quattro piatti, una valle.</p>
+      <p class="vs-anni" aria-label="1226 – 2026">1226 · 2026</p>
     </div>
   </div>
 
   <section class="vs-intro">
     <div class="w">
-      <p>Intorno a Rieti si apre la <strong>Valle Santa</strong>: una conca verde chiusa dai monti, dove San Francesco tornò più volte e dove ancora oggi quattro santuari ne custodiscono la memoria. A Greccio nacque il primo presepe, a Fonte Colombo prese forma la Regola dei frati, a La Foresta la vigna di un povero sacerdote diede più vino che mai, a Poggio Bustone Francesco salutò gli abitanti con un “Buongiorno, buona gente”.</p>
+      <p class="vs-capo">Intorno a Rieti si apre la <strong>Valle Santa</strong>: una conca verde chiusa dai monti, dove San Francesco tornò più volte e dove ancora oggi quattro santuari ne custodiscono la memoria. A Greccio nacque il primo presepe, a Fonte Colombo prese forma la Regola dei frati, a La Foresta la vigna di un povero sacerdote diede più vino che mai, a Poggio Bustone Francesco salutò gli abitanti con un “Buongiorno, buona gente”.</p>
       <p>Per gli 800 anni dalla sua morte, gli allievi dell'Istituto Alberghiero “Costaggini” raccontano la valle a modo loro: per ogni santuario, un episodio delle fonti francescane e un piatto che a quell'episodio si ispira. Non sono le ricette di Francesco, che nessuno scrisse mai: sono un omaggio, con i prodotti di questa terra.</p>
-      <p class="vs-cit">«Laudato si', mi' Signore, per sora nostra matre Terra, la quale ne sustenta et governa, et produce diversi fructi con coloriti flori et herba.»<small>San Francesco d'Assisi, Cantico delle Creature</small></p>
+      <p class="vs-cit">«Altissimu, onnipotente, bon Signore, tue so' le laude, la gloria e l'honore et onne benedictione.»<small>San Francesco d'Assisi, Cantico delle Creature</small></p>
     </div>
   </section>
 
@@ -132,7 +150,9 @@
 
   <!-- 1. GRECCIO -->
   <section class="vs-sant" aria-labelledby="vs-greccio">
+    <div class="w"><div class="vs-orn"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 9 Q20 11.5 33 9 L31 16 Q25.5 15 22.6 15.2 L23.3 32 Q20 34 16.7 32 L17.4 15.2 Q14.5 15 9 16 Z" fill="currentColor"/></svg></div></div>
     <div class="w vs-grid">
+      <span class="vs-romano" aria-hidden="true">I</span>
       <div class="vs-foto">
         <figure>
           <picture><source type="image/webp" srcset="img/valle-santa/greccio.webp"/><img src="img/valle-santa/greccio.jpg" alt="Il santuario francescano di Greccio, incastonato nella roccia sul fianco del monte" loading="lazy"/></picture>
@@ -143,6 +163,7 @@
         <p class="vs-num">I · Greccio</p>
         <h2 id="vs-greccio">Il primo <em>presepe</em></h2>
         <p class="vs-dist">Santuario del Presepe · circa 15 km da Rieti</p>
+        <p class="vs-verso">«Laudato si', mi' Signore, per sora Luna e le stelle: in celu l'ài formate clarite et pretiose et belle.»</p>
         <p class="vs-ep">Nella notte di Natale del 1223, in una grotta sopra Greccio, Francesco volle “vedere con gli occhi del corpo” la povertà di Betlemme: una mangiatoia con il fieno, il bue e l'asinello, la gente del paese con fiaccole e candele. Nacque così il primo presepe della storia.</p>
         <p class="vs-fonte">Tommaso da Celano, Vita prima, cap. XXX (Fonti Francescane 466–470)</p>
         <div class="vs-piatto">
@@ -161,7 +182,9 @@
 
   <!-- 2. FONTE COLOMBO -->
   <section class="vs-sant rev" aria-labelledby="vs-fonte">
+    <div class="w"><div class="vs-orn"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 9 Q20 11.5 33 9 L31 16 Q25.5 15 22.6 15.2 L23.3 32 Q20 34 16.7 32 L17.4 15.2 Q14.5 15 9 16 Z" fill="currentColor"/></svg></div></div>
     <div class="w vs-grid">
+      <span class="vs-romano" aria-hidden="true">II</span>
       <div class="vs-foto">
         <figure>
           <picture><source type="image/webp" srcset="img/valle-santa/fonte-colombo.webp"/><img src="img/valle-santa/fonte-colombo.jpg" alt="La facciata del santuario di Fonte Colombo tra i lecci" loading="lazy"/></picture>
@@ -172,6 +195,7 @@
         <p class="vs-num">II · Fonte Colombo</p>
         <h2 id="vs-fonte">Il “Sinai <em>francescano</em>”</h2>
         <p class="vs-dist">Santuario di Fonte Colombo · circa 5 km da Rieti</p>
+        <p class="vs-verso">«Laudato si', mi' Signore, per sor'Aqua, la quale è multo utile et humile et pretiosa et casta.»</p>
         <p class="vs-ep">Tra i lecci di Monte Rainero, nel 1223, Francesco si ritirò in digiuno e preghiera e dettò la Regola definitiva dei frati, approvata da papa Onorio III il 29 novembre dello stesso anno. Una vita semplice, essenziale, come il cibo dei frati.</p>
         <p class="vs-fonte">Tradizione del santuario; Regola bollata, approvata con la bolla “Solet annuere” (29 novembre 1223)</p>
         <div class="vs-piatto">
@@ -190,7 +214,9 @@
 
   <!-- 3. LA FORESTA -->
   <section class="vs-sant" aria-labelledby="vs-foresta">
+    <div class="w"><div class="vs-orn"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 9 Q20 11.5 33 9 L31 16 Q25.5 15 22.6 15.2 L23.3 32 Q20 34 16.7 32 L17.4 15.2 Q14.5 15 9 16 Z" fill="currentColor"/></svg></div></div>
     <div class="w vs-grid">
+      <span class="vs-romano" aria-hidden="true">III</span>
       <div class="vs-foto">
         <figure>
           <picture><source type="image/webp" srcset="img/valle-santa/la-foresta.webp"/><img src="img/valle-santa/la-foresta.jpg" alt="Il santuario di Santa Maria della Foresta immerso nel verde" loading="lazy"/></picture>
@@ -201,6 +227,7 @@
         <p class="vs-num">III · La Foresta</p>
         <h2 id="vs-foresta">La vigna <em>del sacerdote</em></h2>
         <p class="vs-dist">Santuario di Santa Maria della Foresta · circa 5 km da Rieti</p>
+        <p class="vs-verso">«Laudato si', mi' Signore, per sora nostra matre Terra, la quale ne sustenta et governa, et produce diversi fructi con coloriti flori et herba.»</p>
         <p class="vs-ep">Francesco, malato agli occhi, si fermò presso la chiesa di San Fabiano, fuori Rieti. La gente accorse a vederlo e la vigna del povero sacerdote fu spogliata dei grappoli. Francesco lo rassicurò: quell'anno il vino fu più abbondante che mai.</p>
         <p class="vs-fonte">Fioretti di San Francesco, cap. XIX (Fonti Francescane 1849–1850)</p>
         <div class="vs-piatto">
@@ -219,7 +246,9 @@
 
   <!-- 4. POGGIO BUSTONE -->
   <section class="vs-sant rev" aria-labelledby="vs-poggio">
+    <div class="w"><div class="vs-orn"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 9 Q20 11.5 33 9 L31 16 Q25.5 15 22.6 15.2 L23.3 32 Q20 34 16.7 32 L17.4 15.2 Q14.5 15 9 16 Z" fill="currentColor"/></svg></div></div>
     <div class="w vs-grid">
+      <span class="vs-romano" aria-hidden="true">IV</span>
       <div class="vs-foto">
         <figure>
           <picture><source type="image/webp" srcset="img/valle-santa/poggio-bustone.webp"/><img src="img/valle-santa/poggio-bustone.jpg" alt="L'esterno del santuario di San Giacomo a Poggio Bustone" loading="lazy"/></picture>
@@ -230,6 +259,7 @@
         <p class="vs-num">IV · Poggio Bustone</p>
         <h2 id="vs-poggio">“Buongiorno, <em>buona gente</em>”</h2>
         <p class="vs-dist">Santuario di San Giacomo · circa 17 km da Rieti</p>
+        <p class="vs-verso">«Laudato sie, mi' Signore, cum tucte le tue creature, spetialmente messor lo frate Sole, lo qual è iorno, et allumini noi per lui.»</p>
         <p class="vs-ep">Arrivando a Poggio Bustone, Francesco salutò gli abitanti con un “Buongiorno, buona gente!”. La porta del paese si chiama ancora Porta del Buongiorno.</p>
         <p class="vs-fonte">Tradizione locale di Poggio Bustone</p>
         <div class="vs-piatto">
@@ -265,13 +295,19 @@
     </div>
   </section>
 
+  <section class="vs-pace" aria-label="Pace e bene">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 9 Q20 11.5 33 9 L31 16 Q25.5 15 22.6 15.2 L23.3 32 Q20 34 16.7 32 L17.4 15.2 Q14.5 15 9 16 Z" fill="currentColor"/></svg>
+    <p>Pace e bene</p>
+    <small>Il saluto di Francesco</small>
+  </section>
+
   <section class="vs-crediti" aria-labelledby="vs-crediti">
     <div class="w">
       <h2 id="vs-crediti">Fonti e crediti</h2>
       <ul>
         <li>Episodi tratti dalle Fonti Francescane (Tommaso da Celano, Vita prima; Fioretti di San Francesco; Specchio di perfezione; Leggenda dei tre compagni) e dalla tradizione dei santuari della Valle Santa. Le ricette sono ispirate agli episodi: non sono ricette di San Francesco.</li>
         <li>Foto dei santuari da Wikimedia Commons, con licenza CC BY-SA 4.0: Greccio di 66colpi; Fonte Colombo di MonDoMD; La Foresta di Marco Guadagnoli; Poggio Bustone di Monica Domeniconi.</li>
-        <li>Il Cantico delle Creature è citato nella forma del manoscritto di Assisi.</li>
+        <li>Il Cantico delle Creature è citato nella forma del manoscritto di Assisi; i versi abbinati ai santuari sono una scelta della redazione.</li>
       </ul>
     </div>
   </section>

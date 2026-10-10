@@ -1104,6 +1104,7 @@
     mondo: 'comunita',
     provenienza: 'comunita',
     'abbraccio-amatrice': 'comunita',
+    'valle-santa': 'tau',
     personale: 'il-convitto',
     anno: 'anno',
     'riconoscimento-frassinetti': 'notizie',

@@ -69,7 +69,7 @@ const KB=[
   {k:['pranzo','cena','colazione','pasti','mensa','si mangia','cosa si mangia','mangi oggi',
       'menù della settimana','menu della settimana','cucina','cosa mangi',
       'menù','menu','km zero','prodotti locali','reatino','quattro pasti','vitto'],
-   r:'La cucina prepara <strong>quattro pasti al giorno</strong> con prodotti locali a <strong>km zero</strong> del territorio reatino. I menù sono concordati con la ASL di Rieti. La mensa è presidiata dagli educatori — un momento di convivialità vera.<br><br>🍽️ <a href="menu-settimana.html">Il menù di questa settimana →</a><br>🥗 Allergie e intolleranze gestite con menù dedicati.'},
+   r:'La cucina prepara <strong>quattro pasti al giorno</strong> con prodotti locali a <strong>km zero</strong> del territorio reatino. I menù sono elaborati con la consulenza di specialisti. La mensa è presidiata dagli educatori — un momento di convivialità vera.<br><br>🍽️ <a href="menu-settimana.html">Il menù di questa settimana →</a><br>🥗 Allergie e intolleranze gestite con menù dedicati.'},
   // ── ALLERGIE E DIETE ──
   {k:['allergi','intolleran','celiaco','celiachia','vegano','vegetarian','dieta speciale',
       'senza glutine','senza lattosio','arachidi','diabete','religiosa','etica','halal'],

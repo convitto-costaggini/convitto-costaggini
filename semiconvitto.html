@@ -89,7 +89,7 @@
         <p>L'orario delle attività di studio terminerà alle ore <strong>17:30</strong>.</p>
 
         <h3>Modalità di adesione</h3>
-        <p>I genitori interessati dovranno far pervenire la richiesta di adesione <strong>entro il 5 ottobre 2026</strong>, inviando all'indirizzo di posta elettronica <strong>rirh010007@istruzione.it</strong> il modulo di richiesta debitamente compilato (compilabile e stampabile qui sotto), oppure <strong>inviandolo direttamente da questa pagina</strong> con il tasto "Invia la richiesta".</p>
+        <p>I genitori interessati dovranno far pervenire la richiesta di adesione <strong>entro il 5 ottobre 2026</strong>, inviando all'indirizzo di posta elettronica <strong>rirh010007@istruzione.it</strong> il modulo di richiesta debitamente compilato e firmato (compilabile e stampabile qui sotto).</p>
 
         <h3>Costi e utilizzo dei ticket</h3>
         <p>Il costo del servizio è di <strong>€ 70,00 mensili</strong>, da effettuare tramite il servizio PagoPA che sarà reso disponibile a seguito della ricezione della richiesta, e che darà diritto ad un carnet di <strong>16 ticket</strong> da consegnare al Personale Educativo preposto.</p>
@@ -98,71 +98,45 @@
         <div class="sc-firma">La Dirigente Scolastica — Avv. Maddalena Cioci<br>Firma autografa sostituita a mezzo stampa, ai sensi dell'art. 3 comma 2 del d.lgs. 39/93.</div>
       </div>
 
-      <!-- MODULO -->
-      <form id="sc-form" novalidate onsubmit="return false">
+      <!-- MODULO (contenuti del modello adottato dalla scuola, nell'aspetto dei moduli del sito) -->
+      <style>
+        .sc-testo{font-family:var(--fu);font-size:.88rem;line-height:1.7;color:#1a1a1a;margin:0 0 .9rem}
+        .sc-testo:last-child{margin-bottom:0}
+        .sc-dest{font-family:var(--fu);font-size:.85rem;line-height:1.6;color:#1a1a1a;margin-bottom:1rem}
+        .sc-chiede{font-family:var(--fu);font-weight:800;font-size:.8rem;letter-spacing:.16em;text-align:center;color:var(--bosco);margin:0 0 1rem}
+        @media print{.sc-schermo{display:none!important}.sc-field input{border:0;border-bottom:1px solid #999;border-radius:0;background:#fff;padding:.3rem 0}}
+      </style>
+      <form id="sc-form" novalidate onsubmit="return false" aria-label="Richiesta di autorizzazione per la partecipazione al semiconvitto">
 
         <div class="sc-section">
           <div class="sc-section-hdr">
-            <h2>1 — Lo studente</h2>
-            <span>dati anagrafici</span>
+            <h2>Richiesta di autorizzazione</h2>
+            <span>semiconvitto ed esonero da responsabilità</span>
           </div>
           <div class="sc-section-body">
-            <div class="sc-grid sc-grid-2">
-              <div class="sc-field">
-                <label>Cognome e nome <span class="req">*</span></label>
-                <input type="text" name="studente_nome"/>
-              </div>
-              <div class="sc-field">
-                <label>Classe frequentata <span class="req">*</span></label>
-                <input type="text" name="studente_classe"/>
-              </div>
-              <div class="sc-field">
-                <label>Data di nascita</label>
-                <input type="date" name="studente_nascita"/>
-              </div>
-            </div>
-            <div class="sc-field" style="margin-top:1.1rem">
-              <label>Indirizzo di studi (facoltativo)</label>
-              <div class="sc-indirizzi">
-                <div class="sc-check-row">
-                  <input type="checkbox" id="ind_cucina" name="indirizzo" value="Enogastronomia — Cucina"/>
-                  <label for="ind_cucina">Enogastronomia — Cucina</label>
-                </div>
-                <div class="sc-check-row">
-                  <input type="checkbox" id="ind_sala" name="indirizzo" value="Enogastronomia — Sala e Vendita"/>
-                  <label for="ind_sala">Enogastronomia — Sala e Vendita</label>
-                </div>
-                <div class="sc-check-row">
-                  <input type="checkbox" id="ind_pasticceria" name="indirizzo" value="Enogastronomia — Pasticceria"/>
-                  <label for="ind_pasticceria">Enogastronomia — Pasticceria</label>
-                </div>
-                <div class="sc-check-row">
-                  <input type="checkbox" id="ind_accoglienza" name="indirizzo" value="Accoglienza Turistica"/>
-                  <label for="ind_accoglienza">Accoglienza Turistica</label>
-                </div>
-              </div>
-            </div>
+            <div class="sc-dest"><strong>Al Dirigente Scolastico</strong><br>I.P.S.S.E.O.A. “Costaggini”<br>Via dei Salici, 62 – 02100 Rieti</div>
+            <p class="sc-testo"><strong>Oggetto:</strong> Richiesta di autorizzazione per partecipazione ad attività di semiconvitto e dichiarazione di esonero da responsabilità</p>
           </div>
         </div>
 
         <div class="sc-section">
           <div class="sc-section-hdr">
-            <h2>2 — Genitore / tutore</h2>
-            <span>referente</span>
+            <h2>1 — Il dichiarante</h2>
+            <span>genitore / tutore</span>
           </div>
           <div class="sc-section-body">
             <div class="sc-grid sc-grid-2">
-              <div class="sc-field">
-                <label>Nome e cognome <span class="req">*</span></label>
-                <input type="text" name="genitore_nome"/>
-              </div>
-              <div class="sc-field">
-                <label>Cellulare <span class="req">*</span></label>
-                <input type="tel" name="genitore_cell"/>
-              </div>
               <div class="sc-field" style="grid-column:1/-1">
-                <label>Email (per la conferma) <span class="req">*</span></label>
-                <input type="email" name="genitore_email"/>
+                <label for="sc-dich">Il/La sottoscritto/a (nome e cognome)</label>
+                <input type="text" id="sc-dich" name="dichiarante"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-luogo">Nato/a a</label>
+                <input type="text" id="sc-luogo" name="luogo_nascita"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-nascita">Il (data di nascita)</label>
+                <input type="text" id="sc-nascita" name="data_nascita" placeholder="gg/mm/aaaa"/>
               </div>
             </div>
           </div>
@@ -170,30 +144,50 @@
 
         <div class="sc-section">
           <div class="sc-section-hdr">
-            <h2>3 — Note e consenso</h2>
+            <h2>2 — L'alunno/a</h2>
+            <span>di cui è genitore / tutore</span>
+          </div>
+          <div class="sc-section-body">
+            <div class="sc-grid sc-grid-4">
+              <div class="sc-field" style="grid-column:1/-1">
+                <label for="sc-alunno">Genitore/tutore dell'alunno/a (nome e cognome)</label>
+                <input type="text" id="sc-alunno" name="alunno"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-classe">Frequentante la classe</label>
+                <input type="text" id="sc-classe" name="classe"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-sez">Sez.</label>
+                <input type="text" id="sc-sez" name="sezione"/>
+              </div>
+            </div>
+            <p class="sc-testo" style="margin-top:.9rem">dell'I.P.S.S.E.O.A. “Costaggini” di Rieti,</p>
+          </div>
+        </div>
+
+        <div class="sc-section">
+          <div class="sc-section-hdr">
+            <h2>3 — Richiesta e dichiarazione</h2>
             <span></span>
           </div>
           <div class="sc-section-body">
-            <div class="sc-field">
-              <label>Allergie, intolleranze o esigenze particolari</label>
-              <textarea name="note" maxlength="600"></textarea>
-              <p style="font-family:var(--fu);font-size:.72rem;color:#6b7280;margin:.35rem 0 0;line-height:1.5">Facoltativo. Sono dati relativi alla salute: li trattiamo solo con il consenso esplicito qui sotto e li comunichiamo soltanto al personale della cucina e della mensa.</p>
+            <p class="sc-chiede">CHIEDE</p>
+            <p class="sc-testo">l'autorizzazione affinché il/la proprio/a figlio/a possa partecipare all'attività di <strong>semiconvitto</strong> presso il Convitto per il giorno:</p>
+            <div class="sc-field" style="margin-bottom:1.1rem">
+              <label for="sc-giorni">Giorno o giorni di partecipazione</label>
+              <input type="text" id="sc-giorni" name="giorni"/>
             </div>
-            <div class="sc-check-row" style="margin-top:1rem">
-              <input type="checkbox" id="sc-privacy" name="privacy"/>
-              <label for="sc-privacy">Ho letto l'<a href="informativa-semiconvitto.html" target="_blank" rel="noopener" style="text-decoration:underline">informativa sul trattamento dei dati per il Semiconvitto</a>. <span class="req">*</span></label>
-            </div>
-            <div class="sc-check-row" style="margin-top:.6rem">
-              <input type="checkbox" id="sc-salute" name="consenso_salute"/>
-              <label for="sc-salute"><strong>Presto il consenso esplicito</strong> al trattamento dei dati su allergie, intolleranze o esigenze particolari che ho indicato, al solo fine di adeguare la mensa e le attività (art. 9, par. 2, lett. a GDPR). Facoltativo; necessario solo se il campo qui sopra è compilato. Revocabile in qualsiasi momento.</label>
-            </div>
-            <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Non compilare questo campo: <input type="text" id="sito_web" name="sito_web" tabindex="-1" autocomplete="off"/></label></p>
+            <p class="sc-testo">Il/La sottoscritto/a <strong>dichiara di sollevare</strong> il Dirigente Scolastico e l'Istituzione scolastica <strong>da ogni responsabilità civile e penale</strong> per eventuali danni a persone o cose che dovessero verificarsi durante lo svolgimento dell'attività, non imputabili a negligenza dell'Istituto o del personale scolastico.</p>
+            <p class="sc-testo">Si allega copia del documento di identità del dichiarante.</p>
           </div>
 
           <div class="sc-sig-row">
             <div class="sc-sig">
-              <div class="sc-sig-line"></div>
-              <div class="sc-sig-label">Data</div>
+              <div class="sc-field">
+                <label for="sc-data">Rieti, data</label>
+                <input type="text" id="sc-data" name="data" placeholder="gg/mm/aaaa"/>
+              </div>
             </div>
             <div class="sc-sig">
               <div class="sc-sig-line"></div>
@@ -201,14 +195,13 @@
             </div>
           </div>
 
-          <div class="sc-footer-note">Modulo da inviare con il tasto "Invia la richiesta", oppure da restituire firmato alla Segreteria e Convitto IPSSEOA "Costaggini" — Rieti, o via email a rirh010007@istruzione.it. <a href="informativa-semiconvitto.html" style="text-decoration:underline">Informativa privacy e moduli di consenso/revoca</a>.</div>
+          <div class="sc-footer-note">Da inviare a <strong>convitto@alberghierorieti.it</strong> allegando il documento d'identità.</div>
         </div>
 
       </form>
 
-      <div id="sc-esito" role="status" aria-live="polite" style="display:none;max-width:780px;margin:1.25rem auto 0;border-radius:10px;padding:1rem 1.25rem;font-family:var(--fu);font-size:.88rem;line-height:1.6"></div>
-      <div class="sc-actions" style="gap:.75rem;flex-wrap:wrap">
-        <button type="button" id="sc-invia" class="btn-stampa" style="background:var(--bosco);color:#fff" onclick="inviaSemiconvitto()">✉️ Invia la richiesta</button>
+      <p class="sc-schermo" style="max-width:780px;margin:1rem auto 0;font-family:var(--fu);font-size:.78rem;line-height:1.6;color:#4b5563;text-align:center">Compila i campi direttamente qui, poi stampa il modulo e firmalo. Il sito non invia e non salva nulla. <a href="informativa-semiconvitto.html" style="text-decoration:underline">Informativa sul trattamento dei dati</a>.</p>
+      <div class="sc-actions">
         <button type="button" class="btn-stampa" onclick="window.print()">🖨️ Stampa il modulo</button>
       </div>
 
@@ -217,92 +210,5 @@
 
 </main>
 <script src="nav.min.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
-<script>
-// Invio online della richiesta di Semiconvitto: passa dallo stesso Apps Script
-// dei moduli Contatti/Open Day (verifica reCAPTCHA + email alle caselle istituzionali).
-const SC_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
-const SC_RECAPTCHA = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
-
-function scEsito(ok, testo) {
-  const el = document.getElementById('sc-esito');
-  el.style.display = 'block';
-  el.style.background = ok ? '#ecfdf5' : '#fef2f2';
-  el.style.border = '1px solid ' + (ok ? '#a7f3d0' : '#fecaca');
-  el.style.color = ok ? '#065f46' : '#b91c1c';
-  el.innerHTML = testo;
-  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-async function inviaSemiconvitto() {
-  const f = document.getElementById('sc-form');
-  const v = n => ((f.elements[n] && f.elements[n].value) || '').trim();
-  const obbligatori = [['studente_nome','Cognome e nome dello studente'],['studente_classe','Classe'],['genitore_nome','Nome del genitore'],['genitore_cell','Cellulare'],['genitore_email','Email']];
-  for (const [n, et] of obbligatori) {
-    if (!v(n)) { scEsito(false, 'Compila il campo obbligatorio: <strong>' + et + '</strong>.'); f.elements[n].focus(); return; }
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('genitore_email'))) { scEsito(false, 'Inserisci un indirizzo email valido.'); f.elements['genitore_email'].focus(); return; }
-  if (!document.getElementById('sc-privacy').checked) { scEsito(false, 'Per inviare la richiesta conferma di aver letto l\'informativa.'); document.getElementById('sc-privacy').focus(); return; }
-  const note = v('note');
-  const consensoSalute = document.getElementById('sc-salute').checked;
-  if (note && !consensoSalute) {
-    scEsito(false, 'Hai indicato allergie o esigenze particolari: per trattarle serve il consenso esplicito. Spunta la casella dedicata oppure svuota il campo.');
-    document.getElementById('sc-salute').focus(); return;
-  }
-  const indirizzi = [...f.querySelectorAll('input[name=indirizzo]:checked')].map(x => x.value).join(', ');
-  const messaggio = [
-    'RICHIESTA DI ADESIONE AL SEMICONVITTO — A.S. 2026/2027',
-    '',
-    'Studente: ' + v('studente_nome'),
-    'Classe: ' + v('studente_classe'),
-    'Data di nascita: ' + (v('studente_nascita') || '—'),
-    'Indirizzo di studi: ' + (indirizzi || '—'),
-    '',
-    'Genitore/tutore: ' + v('genitore_nome'),
-    'Cellulare: ' + v('genitore_cell'),
-    'Email: ' + v('genitore_email'),
-    '',
-    'Allergie, intolleranze o esigenze particolari: ' + (note || '—'),
-    'Consenso esplicito dati salute (art. 9.2.a GDPR): ' + (note ? 'SÌ' : 'non necessario'),
-    'Presa visione informativa Semiconvitto: SÌ (versione 28/09/2026)',
-    'Inviata dal sito il: ' + new Date().toLocaleString('it-IT')
-  ].join('\n');
-
-  const btn = document.getElementById('sc-invia');
-  btn.disabled = true; btn.textContent = 'Invio in corso…';
-  let token = '';
-  try {
-    token = await new Promise((res, rej) => grecaptcha.ready(() => grecaptcha.execute(SC_RECAPTCHA, { action: 'semiconvitto' }).then(res).catch(rej)));
-  } catch (e) { token = ''; }
-  try {
-    const resp = await fetch(SC_GAS, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        action: 'inviaContatto',
-        tipo: 'semiconvitto',
-        nome: v('genitore_nome'),
-        email: v('genitore_email'),
-        telefono: v('genitore_cell'),
-        oggetto: 'Richiesta adesione Semiconvitto — ' + v('studente_nome'),
-        messaggio: messaggio,
-        privacy: true,
-        recaptchaToken: token,
-        recaptchaAction: 'semiconvitto',
-        botField: (document.getElementById('sito_web') || {}).value || ''
-      })
-    });
-    let esito = null;
-    try { esito = await resp.json(); } catch (e) {}
-    if (!resp.ok || !esito || esito.success !== true) throw new Error((esito && esito.message) || ('HTTP ' + resp.status));
-    scEsito(true, '<strong>Richiesta inviata.</strong> La Segreteria e il Convitto l\'hanno ricevuta e la contatteranno all\'indirizzo indicato con le istruzioni per il pagamento PagoPA.');
-    f.reset();
-  } catch (e) {
-    scEsito(false, '<strong>Invio non riuscito.</strong> Riprovi tra qualche istante, oppure stampi il modulo e lo invii a <a href="mailto:rirh010007@istruzione.it">rirh010007@istruzione.it</a>.');
-  } finally {
-    btn.disabled = false; btn.textContent = '✉️ Invia la richiesta';
-  }
-}
-</script>
 </body>
 </html>

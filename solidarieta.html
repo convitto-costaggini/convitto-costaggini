@@ -65,7 +65,12 @@
         <div class="sl-col-video">
           <div class="sl-video-sticky">
             <div class="sl-video-inner">
-              <div class="cover-grafica" role="img" aria-label="La solidarietà — Video momentaneamente non disponibile" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;text-align:center;padding:1.25rem;background:#0f1b12 url(img/la-solidarieta-2019-poster.jpg) center/cover no-repeat;background-size:contain;background-color:#000"><span aria-hidden="true" style="width:58px;height:58px;border-radius:50%;border:1.5px solid #D4AA4A;display:flex;align-items:center;justify-content:center;background:rgba(15,27,18,.55)"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#EDD98A" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9h4M3 15h4M17 9h4M17 15h4"/></svg></span><span style="font-family:var(--fd);font-style:italic;font-size:1.35rem;color:#F5F0E8;line-height:1.2;background:rgba(15,27,18,.55);padding:.15rem .6rem;border-radius:6px">La solidarietà</span><span style="font-family:var(--fu);font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D4AA4A;background:rgba(15,27,18,.55);padding:.2rem .6rem;border-radius:6px">Video momentaneamente non disponibile</span></div>
+              <video controls playsinline webkit-playsinline preload="auto" poster="img/la-solidarieta-2019-poster.jpg" id="sl-video"
+                     style="position:absolute;top:0;left:0;width:100%;height:100%;background:#000">
+                <source src="video/la-solidarieta-2019.mp4" type="video/mp4"/>
+                Il tuo browser non supporta la riproduzione video.
+              </video>
+              <button type="button" id="sl-stato" aria-live="polite" hidden style="position:absolute;left:12px;top:12px;z-index:3;border:1px solid rgba(212,170,74,.55);border-radius:20px;background:rgba(10,15,10,.78);color:#EDD98A;font:700 .72rem/1 var(--fu,sans-serif);letter-spacing:.08em;text-transform:uppercase;padding:.55rem .85rem;cursor:pointer;opacity:1;transition:opacity 1.2s ease"></button>
             </div>
             <p style="font-family:var(--fu);font-size:.58rem;color:rgba(245,240,232,.2);letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-top:.75rem">
               Laboratorio Musicale · Convitto "Costaggini" · Rieti · 2019
@@ -157,39 +162,77 @@
 </main>
 <script src="nav.min.js"></script>
 <script>
-const vid = document.getElementById('sl-video');
-if (vid) {
-  vid.volume = 1;
+// Avvio del video: prima con l'audio; se il browser lo blocca (regola dei browser:
+// niente audio senza un gesto del visitatore) parte in silenzio e l'audio si attiva
+// al primo tocco, clic o tasto in qualsiasi punto della pagina.
+(function () {
+  const vid = document.getElementById('sl-video');
+  const stato = document.getElementById('sl-stato');
+  if (!vid || !stato) return;
+  let timerFade = null, audioAttivo = false, potenziato = false;
 
-  function boostVolume(el, gainValue) {
-    try {
-      const Ctx = window.AudioContext || window.webkitAudioContext;
-      const ctx = new Ctx();
-      const source = ctx.createMediaElementSource(el);
-      const gainNode = ctx.createGain();
-      gainNode.gain.value = gainValue; // 1 = volume originale, 1.8 = +80%
-      source.connect(gainNode).connect(ctx.destination);
-      if (ctx.state === 'suspended') {
-        const resume = () => { ctx.resume(); document.removeEventListener('click', resume); };
-        document.addEventListener('click', resume, { once: true });
-      }
-    } catch (e) {
+  function etichetta(testo, sfuma) {
+    clearTimeout(timerFade);
+    stato.textContent = testo;
+    stato.hidden = false;
+    stato.style.opacity = '1';
+    if (sfuma) {
+      timerFade = setTimeout(function () {
+        stato.style.opacity = '0';
+        setTimeout(function () { stato.hidden = true; }, 1300);
+      }, 10000);
     }
   }
 
-  vid.addEventListener('canplay', function() {
-    vid.play().then(() => {
-      setTimeout(() => {
-        vid.muted = false;
-        boostVolume(vid, 1.8);
-      }, 800);
-    }).catch(() => {
-      // Browser ha bloccato l'autoplay — l'utente dovrà premere play
-      vid.muted = false;
-      boostVolume(vid, 1.8);
-    });
-  }, { once: true });
-}
+  // Volume più alto (+80%): solo dopo un gesto, altrimenti il browser terrebbe l'audio sospeso
+  function potenzia() {
+    if (potenziato) return;
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      const ctx = new Ctx();
+      const src = ctx.createMediaElementSource(vid);
+      const gain = ctx.createGain();
+      gain.gain.value = 1.8;
+      src.connect(gain).connect(ctx.destination);
+      if (ctx.state === 'suspended') ctx.resume();
+      potenziato = true;
+    } catch (e) {}
+  }
+
+  function inRiproduzione() {
+    audioAttivo = true;
+    etichetta('♪ In riproduzione…', true);
+  }
+
+  function attivaAudio() {
+    if (audioAttivo) return;
+    vid.muted = false;
+    vid.volume = 1;
+    potenzia();
+    vid.play().then(inRiproduzione).catch(function () {});
+  }
+
+  ['pointerdown', 'touchstart', 'keydown'].forEach(function (ev) {
+    document.addEventListener(ev, function sblocca() {
+      if (!audioAttivo) attivaAudio();
+      if (audioAttivo) ['pointerdown', 'touchstart', 'keydown'].forEach(function (e2) { document.removeEventListener(e2, sblocca); });
+    }, { passive: true });
+  });
+  stato.addEventListener('click', attivaAudio);
+
+  vid.muted = false;
+  vid.volume = 1;
+  vid.play().then(inRiproduzione).catch(function () {
+    vid.muted = true;
+    vid.play().then(function () {
+      etichetta('🔇 Tocca per attivare l’audio', false);
+    }).catch(function () { /* nemmeno il muto: resta il tasto play del lettore */ });
+  });
+
+  function controlla() { if (!vid.muted && !vid.paused && !audioAttivo) inRiproduzione(); }
+  vid.addEventListener('volumechange', controlla);
+  vid.addEventListener('play', controlla);
+})();
 </script>
 </body>
 </html>

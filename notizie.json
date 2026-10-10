@@ -12,16 +12,16 @@
     "in_evidenza": true
   },
   {
-    "id": "podcast-castaldo-2025",
+    "id": "podcast-mensa-2025",
     "data": "2025",
     "categoria": "Vita al Convitto",
     "categoria_css": "vita",
-    "titolo": "🎙️ Raffaele Castaldo intervista la responsabile della mensa di Santa Chiara — un convittore protagonista",
-    "testo": "Una bella storia che viene dal Convitto. Raffaele Castaldo, nostro convittore, ha condotto con sicurezza e professionalità un'intervista a Stefania Marinetti, responsabile della mensa di Santa Chiara di Rieti, nell'ambito di un podcast prodotto dall'Istituto. Una prestazione brillante, che rivela doti comunicative, curiosità e capacità di ascolto non comuni. Il Convitto Costaggini è anche questo: un luogo dove i talenti emergono, crescono e trovano spazio per esprimersi.",
+    "titolo": "🎙️ Un nostro convittore intervista la responsabile della mensa di Santa Chiara — un convittore protagonista",
+    "testo": "Una bella storia che viene dal Convitto. Un nostro convittore ha condotto con sicurezza e professionalità un'intervista a Stefania Marinetti, responsabile della mensa di Santa Chiara di Rieti, nell'ambito di un podcast prodotto dall'Istituto. Una prestazione brillante, che rivela doti comunicative, curiosità e capacità di ascolto non comuni. Il Convitto Costaggini è anche questo: un luogo dove i talenti emergono, crescono e trovano spazio per esprimersi.",
     "link": "https://www.youtube.com/watch?v=gQBUvoLzuDM",
     "link_testo": "▶ Ascolta il podcast su YouTube →",
     "immagine": "img/grafiche/podcast.svg",
-    "immagine_alt": "Podcast: Raffaele Castaldo intervista Stefania Marinetti — mensa Santa Chiara Rieti",
+    "immagine_alt": "Podcast: un convittore intervista Stefania Marinetti — mensa Santa Chiara Rieti",
     "in_evidenza": true
   },
   {

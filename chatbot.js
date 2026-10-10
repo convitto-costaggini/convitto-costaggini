@@ -282,8 +282,8 @@ const KB=[
       'politici in visita','politico in visita','visita ministeriale','visita istituzionale',
       'visita del sottosegretario','visita frassinetti','podcast del convitto','in visita al convitto',
       'venuto in visita','ospite illustre','personalita in visita','chi e venuto a trovarci',
-      'raffaele castaldo','onorevole frassinetti','paola frassinetti','riconoscimento che ci onora'],
-   r:'Il 29 maggio 2026 l\'On. Paola Frassinetti, Sottosegretario di Stato all\'Istruzione e al Merito, ha visitato il Costaggini: laboratori, cucina, un pranzo di lavoro e un podcast condotto da un nostro convittore, Raffaele Castaldo.<br><br>🎗️ <a href="riconoscimento-frassinetti.html">Scopri la visita →</a>'},
+      'onorevole frassinetti','paola frassinetti','riconoscimento che ci onora'],
+   r:'Il 29 maggio 2026 l\'On. Paola Frassinetti, Sottosegretario di Stato all\'Istruzione e al Merito, ha visitato il Costaggini: laboratori, cucina, un pranzo di lavoro e un podcast condotto da un nostro convittore.<br><br>🎗️ <a href="riconoscimento-frassinetti.html">Scopri la visita →</a>'},
   // ── FESTA DI NATALE 2024 ──
   {k:['natale 2024','festa di natale','cena di natale','tombola di natale','tombola',
       'dicembre 2024','cenone','festa natalizia','concerto di natale'],

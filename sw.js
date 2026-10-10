@@ -61,7 +61,10 @@ self.addEventListener('fetch', function (e) {
     e.respondWith(caches.match(req).then(function (c) { return c || rete; }));
     return;
   }
-  e.respondWith(fetch(req).then(function (r) { return salva(req, r); }).catch(function () {
+  /* "no-cache": il browser chiede sempre al sito se il file è cambiato (risposta
+     veloce se non lo è), così dopo ogni modifica la versione nuova arriva subito */
+  var fresca = new Request(url.href, { cache: 'no-cache', credentials: 'same-origin' });
+  e.respondWith(fetch(fresca).then(function (r) { return salva(req, r); }).catch(function () {
     /* "?app=1" e simili: la copia salvata non dipende dai parametri */
     var chiave = url.pathname === '/' ? 'index.html' : req;
     return caches.match(chiave, { ignoreSearch: true }).then(function (c) {

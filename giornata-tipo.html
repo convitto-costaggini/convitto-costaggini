@@ -109,6 +109,8 @@
       <span class="gj-chip">— La vita quotidiana al Convitto "Costaggini"</span>
       <h1 id="gj-h1">Una giornata<br><em>al Convitto</em></h1>
       <p>Dalla sveglia alle 6:30 al riposo notturno: ore strutturate, spazi di libertà, studio, sport e musica. Un ritmo che diventa casa.</p>
+      <div id="gj-ora" class="gj-ora" role="status" hidden></div>
+      <p style="font-size:.7rem;color:rgba(255,255,255,.45);margin-top:.5rem">Ora di Rieti. Nei giorni di chiusura del <a href="calendario.html" style="color:inherit">calendario</a> il Convitto non è aperto.</p>
     </div>
   </section>
 
@@ -395,6 +397,77 @@
 </style>
 <script>
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.ill-badge');document.querySelectorAll('.ill-badge.open').forEach(function(x){if(x!==b){x.classList.remove('open');x.setAttribute('aria-expanded','false');}});if(b){var o=b.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false');}});
+</script>
+<style>
+.gj-ora{display:inline-flex;flex-wrap:wrap;align-items:center;gap:.35rem .7rem;margin-top:1.4rem;padding:.6rem 1rem;border-radius:999px;background:rgba(15,27,18,.55);border:1px solid rgba(212,170,74,.35);font-family:var(--fu);color:rgba(245,240,232,.85);font-size:.8rem;line-height:1.4}
+.gj-ora[hidden]{display:none}
+.gj-ora-dot{width:9px;height:9px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:gjPulse 2s infinite;flex-shrink:0}
+.gj-ora.chiuso .gj-ora-dot{background:var(--oro2);animation:none}
+.gj-ora-lbl{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2)}
+.gj-ora strong{color:#fff;font-weight:700}
+.gj-ora a{color:var(--oro3);font-weight:700;text-decoration:none;white-space:nowrap}
+.gj-ora a:hover{text-decoration:underline}
+.timeline .tl-item{scroll-margin-top:96px}
+.tl-item.tl-adesso .tl-card{box-shadow:0 0 0 2px var(--oro),0 12px 30px rgba(184,146,42,.22)}
+.tl-item.tl-adesso .tl-node{animation:gjNodo 2.4s ease-in-out infinite}
+.tl-adesso-badge{display:inline-flex;align-items:center;gap:.4rem;margin-bottom:.5rem;padding:.2rem .65rem;border-radius:999px;background:var(--oro);color:#fff;font:800 .58rem/1.4 var(--fu);letter-spacing:.12em;text-transform:uppercase}
+.tl-adesso-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+@keyframes gjPulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.6)}70%{box-shadow:0 0 0 9px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+@keyframes gjNodo{0%,100%{box-shadow:0 0 0 5px rgba(184,146,42,.15)}50%{box-shadow:0 0 0 11px rgba(184,146,42,.3)}}
+@media (prefers-reduced-motion:reduce){.gj-ora-dot,.tl-item.tl-adesso .tl-node{animation:none}}
+</style>
+<script>
+/* "Adesso al Convitto": evidenzia il momento della giornata in base all'ora di Rieti.
+   Lun–gio giornata completa; venerdì fino all'uscita per la scuola; rientro domenica 20:00–22:00. */
+(function () {
+  var box = document.getElementById('gj-ora'); if (!box) return;
+  var items = {};
+  document.querySelectorAll('.timeline .tl-item').forEach(function (it, i) {
+    var t = (it.querySelector('.tl-time') || {}).textContent || '';
+    var k = t.indexOf('Domenica') === 0 ? 'dom' : t.slice(0, 5);
+    items[k] = it; it.id = it.id || 'momento-' + (i + 1);
+  });
+  /* [da (minuti), chiave del momento, testo breve] */
+  var FERIALE = [
+    [0, '22:30', 'Riposo notturno'], [390, '06:30', 'Sveglia'], [420, '07:00', 'Prima colazione'],
+    [460, '07:40', 'Trasferimento a scuola'], [480, '08:00', 'Lezioni all\'Istituto'], [840, '14:00', 'Pranzo'],
+    [900, '15:00', 'Tempo libero'], [930, '15:30', 'Studio guidato'], [1035, '17:15', 'Merenda'],
+    [1050, '17:30', 'Libera uscita'], [1155, '19:15', 'Cena'], [1230, '20:30', 'Tempo libero serale'],
+    [1320, '22:30', 'Si va a dormire'], [1350, '22:30', 'Riposo notturno']
+  ];
+  var GG = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+  function oraRieti() {
+    var p = {};
+    new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Rome', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+      .formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+    return { g: GG[p.weekday], h: +p.hour, m: +p.minute };
+  }
+  function momento(g, min) {
+    var chiuso = [null, 'Il Convitto riposa: si riparte domenica sera, dalle 20:00', 'dom'];
+    if (g === 6 || (g === 5 && min >= 480) || (g === 0 && min < 1200)) return chiuso;
+    if (g === 0) return min < 1320 ? ['dom', 'Rientro settimanale (20:00–22:00)'] : ['22:30', min < 1350 ? 'Si va a dormire' : 'Riposo notturno'];
+    var r = FERIALE[0];
+    FERIALE.forEach(function (f) { if (min >= f[0]) r = f; });
+    return [r[1], r[2]];
+  }
+  function aggiorna() {
+    var o = oraRieti(), min = o.h * 60 + o.m, m = momento(o.g, min);
+    var hhmm = (o.h < 10 ? '0' : '') + o.h + ':' + (o.m < 10 ? '0' : '') + o.m;
+    var chiave = m[0] || m[2], it = items[chiave];
+    document.querySelectorAll('.tl-adesso').forEach(function (x) { x.classList.remove('tl-adesso'); var b = x.querySelector('.tl-adesso-badge'); if (b) b.remove(); });
+    if (m[0] && it) {
+      it.classList.add('tl-adesso');
+      var b = document.createElement('span'); b.className = 'tl-adesso-badge'; b.textContent = 'Adesso';
+      var c = it.querySelector('.tl-card'); c.insertBefore(b, c.firstChild);
+    }
+    box.classList.toggle('chiuso', !m[0]);
+    box.innerHTML = '<span class="gj-ora-dot" aria-hidden="true"></span><span class="gj-ora-lbl">Adesso al Convitto · ' + hhmm + '</span><strong>' + m[1] + '</strong>' +
+      (it ? '<a href="#' + it.id + '">' + (m[0] ? 'Vai al momento ↓' : 'Come funziona ↓') + '</a>' : '');
+    box.hidden = false;
+  }
+  aggiorna();
+  setInterval(aggiorna, 60000);
+})();
 </script>
 </body>
 </html>

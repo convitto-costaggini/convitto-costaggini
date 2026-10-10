@@ -1,8 +1,10 @@
 /* ════════════════════════════════════════════════════════
    IL SITO COME APP — registrazione del service worker (sw.js)
    e invito discreto ad aggiungere il sito alla schermata Home.
-   - Android/Chrome: pulsante "Installa" (finestra del telefono).
-   - iPhone/iPad (Safari): istruzioni, perché Apple non ha il pulsante.
+   - Se il browser offre l'installazione diretta (Chrome, di solito dopo
+     ~30 secondi e un tocco): pulsante "Installa".
+   - Altrimenti, su qualsiasi telefono: istruzioni con i due tocchi giusti
+     per quel browser (iPhone, Samsung Internet, Firefox, Chrome).
    L'invito compare dalla seconda pagina visitata; "Non ora" lo
    nasconde per 60 giorni. Un qualsiasi elemento con l'attributo
    data-app-installa diventa un pulsante "installa" (es. Per i Genitori).
@@ -20,6 +22,8 @@
 
   var installata = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
   var ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var ua = navigator.userAgent;
+  var telefono = ios || /android|mobi/i.test(ua);
   var richiesta = null;
   var st = leggi();
   st.pagine = (st.pagine || 0) + 1; salva(st);
@@ -42,16 +46,19 @@
 
   function mostra(forzato) {
     if (document.querySelector('.app-toast')) return;
-    if (!richiesta && !ios) return;
+    if (!richiesta && !telefono) return;
     if (!forzato && (st.pagine < 2 || (st.noFinoA && Date.now() < st.noFinoA))) return;
     if (!document.getElementById('app-toast-css')) { var s = document.createElement('style'); s.id = 'app-toast-css'; s.textContent = CSS; document.head.appendChild(s); }
     var t = document.createElement('div');
     t.className = 'app-toast'; t.setAttribute('role', 'dialog'); t.setAttribute('aria-label', 'Aggiungi il sito alla schermata Home');
-    var testo = ios
-      ? 'Tocca ' + ICO_CONDIVIDI + ' <strong>Condividi</strong> in Safari, poi «<strong>Aggiungi alla schermata Home</strong>».'
-      : 'Si apre come un\'app: valigia, giornata tipo e numeri utili anche senza connessione.';
+    var diretta = !!richiesta;
+    var testo = diretta ? 'Si apre come un\'app: valigia, giornata tipo e numeri utili anche senza connessione.'
+      : ios ? 'Tocca ' + ICO_CONDIVIDI + ' <strong>Condividi</strong>, poi «<strong>Aggiungi alla schermata Home</strong>».'
+      : /samsungbrowser/i.test(ua) ? 'Tocca il menu <strong>≡</strong> in basso, poi «<strong>Aggiungi pagina a</strong>» → «<strong>Schermata Home</strong>».'
+      : /firefox|fxios/i.test(ua) ? 'Tocca il menu <strong>⋮</strong>, poi «<strong>Installa</strong>» (o «Aggiungi a schermata Home»).'
+      : 'Tocca il menu <strong>⋮</strong> in alto a destra, poi «<strong>Aggiungi a schermata Home</strong>» (o «Installa app»).';
     t.innerHTML = '<div class="app-toast-t"><img src="icon-192.png" alt=""/><div><b>Il Convitto sul telefono</b><p>' + testo + '</p></div></div>' +
-      '<div class="app-toast-b"><button type="button" data-a="no">' + (ios ? 'Ho capito' : 'Non ora') + '</button>' + (ios ? '' : '<button type="button" class="si" data-a="si">📲 Installa</button>') + '</div>';
+      '<div class="app-toast-b"><button type="button" data-a="no">' + (diretta ? 'Non ora' : 'Ho capito') + '</button>' + (diretta ? '<button type="button" class="si" data-a="si">📲 Installa</button>' : '') + '</div>';
     document.body.appendChild(t);
     requestAnimationFrame(function () { requestAnimationFrame(function () { t.classList.add('su'); }); });
     t.addEventListener('click', function (e) {
@@ -78,12 +85,12 @@
   });
 
   function avvia() {
-    /* pulsanti "installa" nelle pagine: visibili solo dove l'installazione è possibile */
+    /* pulsanti "installa" nelle pagine: su ogni telefono; sul computer solo se il browser lo permette */
     document.querySelectorAll('[data-app-installa]').forEach(function (b) {
-      b.hidden = !ios && !richiesta;
+      b.hidden = !telefono && !richiesta;
       b.addEventListener('click', function () { if (richiesta) { richiesta.prompt(); richiesta.userChoice.finally(function () { richiesta = null; }); } else mostra(true); });
     });
-    if (ios) setTimeout(function () { mostra(false); }, 4000);
+    if (telefono) setTimeout(function () { mostra(false); }, 4000);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', avvia); else avvia();
 })();

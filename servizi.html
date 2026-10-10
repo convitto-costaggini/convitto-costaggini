@@ -213,7 +213,7 @@
       </div>
 
       <div id="studio" class="svc-block rv">
-        <span class="img-ill" style="position:relative;display:block"><picture><source type="image/webp" srcset="img/sala-studio.webp"/><img src="img/sala-studio.jpg" alt="Studio guidato al Convitto Costaggini (immagine illustrativa, elaborata digitalmente)" loading="lazy" width="1920" height="1047"/></picture><span aria-hidden="true" title="Immagine illustrativa, elaborata digitalmente" style="position:absolute;right:8px;bottom:8px;width:22px;height:22px;border-radius:50%;background:rgba(15,27,18,.72);color:#EDD98A;font:700 15px/24px Georgia,serif;text-align:center">*</span></span>
+        <span class="img-ill" style="position:relative;display:block"><picture><source type="image/webp" srcset="img/sala-studio.webp"/><img src="img/sala-studio.jpg" alt="Studio guidato al Convitto Costaggini (immagine illustrativa, elaborata digitalmente)" loading="lazy" width="1920" height="1047"/></picture><button type="button" class="ill-badge" aria-expanded="false" aria-label="Immagine illustrativa, elaborata digitalmente"><span class="ill-star" aria-hidden="true">*</span><span class="ill-txt" aria-hidden="true">Immagine illustrativa, elaborata digitalmente</span></button></span>
         <div>
           <p class="lbl">Servizio 03</p>
           <h2>Studio <em>guidato</em></h2>
@@ -530,5 +530,17 @@
 })();
 </script>
 <!-- ══════════ FINE MINI-NAV MOBILE ══════════ -->
+<style>
+.ill-badge{position:absolute;right:8px;bottom:8px;display:flex;align-items:center;gap:6px;min-width:24px;min-height:24px;max-width:calc(100% - 16px);padding:3px 7px;box-sizing:border-box;border:0;border-radius:12px;background:rgba(15,27,18,.8);color:#EDD98A;font:600 11px/1.2 var(--fu,sans-serif);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ill-badge::before{content:"";position:absolute;inset:-10px}
+.ill-star{font:700 15px/1 Georgia,serif;margin-top:4px}
+.ill-txt{display:none;text-align:left}
+.ill-badge.open .ill-txt{display:inline}
+.ill-badge:focus-visible{outline:2px solid #EDD98A;outline-offset:2px}
+@media (hover:hover){.ill-badge:hover .ill-txt{display:inline}}
+</style>
+<script>
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.ill-badge');document.querySelectorAll('.ill-badge.open').forEach(function(x){if(x!==b){x.classList.remove('open');x.setAttribute('aria-expanded','false');}});if(b){var o=b.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false');}});
+</script>
 </body>
 </html>

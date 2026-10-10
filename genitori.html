@@ -269,34 +269,9 @@
   <section id="checklist" style="background:var(--bco)">
     <div class="w">
       <p class="lbl">Checklist</p>
-      <h2>Prima della <em>partenza</em></h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2rem;margin-top:1.5rem">
-        <div class="rv">
-          <h3 style="font-family:var(--fd);font-size:1.2rem;margin-bottom:1rem;color:var(--bosco)">Documenti da consegnare</h3>
-          <ul class="gen-checklist">
-            <li>Certificato medico di idoneità alla vita convittuale</li>
-            <li>Tessera sanitaria e documento d'identità</li>
-            <li>Dichiarazione allergie/intolleranze (se presenti) con certificato del curante</li>
-            <li>Prescrizione medica per farmaci da assumere durante la permanenza</li>
-            <li>Autorizzazione uscite autonome (modulo scaricabile dal sito)</li>
-            <li>Domanda di ammissione firmata</li>
-          </ul>
-          <a href="ammissione.html#moduli" style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);margin-top:1rem">Scarica i moduli →</a>
-        </div>
-        <div class="rv d1">
-          <h3 style="font-family:var(--fd);font-size:1.2rem;margin-bottom:1rem;color:var(--bosco)">Cosa portare</h3>
-          <ul class="gen-checklist">
-            <li>Coperte/piumino e lenzuola per letto singolo</li>
-            <li>N. 2 asciugamani</li>
-            <li>Pigiama e ciabatte</li>
-            <li>Abbigliamento personale adeguato</li>
-            <li>Sacchetto per biancheria sporca</li>
-            <li>Materiale scolastico</li>
-            <li>Appendiabiti (almeno 6)</li>
-          </ul>
-          <a href="ammissione.html#moduli" style="display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);margin-top:1rem">Lista completa e stampabile →</a>
-        </div>
-      </div>
+      <h2>Fai la <em>valigia</em></h2>
+      <p style="color:var(--txt2);font-size:.9rem;max-width:620px;margin:.4rem 0 1.5rem;line-height:1.7">Tutto quello che serve per l'ingresso in Convitto: spunta le voci man mano che le prepari. Il telefono le ricorda, così puoi riprendere quando vuoi; e la lista si può stampare.</p>
+      <div data-valigia id="valigia"></div>
     </div>
   </section>
   <!-- FAQ GENITORI -->
@@ -373,6 +348,7 @@
     </div>
   </section>
 </main>
+<script src="valigia.js"></script>
 <script src="nav.min.js"></script>
 <script src="hero-jump.js"></script>
 <!-- ══════════ MINI-NAV MOBILE: bannerino rotante (stesso di index.html) ══════════

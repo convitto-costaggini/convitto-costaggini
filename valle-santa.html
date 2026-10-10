@@ -36,6 +36,19 @@
     .vs-mappa h2{color:var(--av)}.vs-mappa h2 em{color:var(--oro3)}
     .vs-mappa p{color:rgba(245,240,232,.65);font-size:.85rem;margin:.4rem auto 1.5rem;max-width:560px}
     .vs-mappa svg{width:100%;max-width:760px;height:auto;display:block;margin:0 auto}
+    @media (max-width:640px){
+      .page-hero .w{text-align:center}
+      .page-hero .breadcrumb{justify-content:center;flex-wrap:wrap}
+      .page-hero .gold-bar{margin-left:auto;margin-right:auto}
+      .page-hero h1,.page-hero .sub{margin-left:auto;margin-right:auto}
+      .page-hero h1 em{display:block}
+      .vs-anni{justify-content:center}
+      .page-hero .w::after{display:block;left:50%;top:50%;width:240px;height:240px;transform:translate(-50%,-50%);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M7 9 Q20 11.5 33 9 L31 16 Q25.5 15 22.6 15.2 L23.3 32 Q20 34 16.7 32 L17.4 15.2 Q14.5 15 9 16 Z' fill='%23D4AA4A'/%3E%3C/svg%3E");opacity:.16}
+      .vs-mappa svg{width:calc(100% + 2.5rem);max-width:none;margin:0 -1.25rem}
+      .vs-mappa svg text[font-size="26"]{font-size:29px}
+      .vs-mappa svg text[font-size="17"]{font-size:19px}
+      .vs-mappa svg text[font-size="28"]{font-size:31px}
+    }
     .vs-btn-mappa{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.75rem;font-family:var(--fu);font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.6rem;border-radius:40px;border:1.5px solid var(--oro2);background:transparent;color:var(--oro3);cursor:pointer;transition:background .2s,color .2s}
     .vs-btn-mappa:hover,.vs-btn-mappa[aria-expanded="true"]{background:var(--oro2);color:var(--bosco)}
     #vs-mappa-reale{margin:1.5rem auto 0;max-width:900px;text-align:left}
@@ -112,7 +125,7 @@
     <div class="w">
       <h2 id="vs-mappa-t">I quattro santuari <em>della valle</em></h2>
       <p>Tutti a meno di mezz'ora d'auto da Rieti. Le distanze sono indicative.</p>
-      <svg viewBox="0 0 760 460" role="img" aria-label="Mappa illustrata della Valle Santa reatina con Rieti al centro e i quattro santuari: Greccio a nord-ovest, La Foresta a nord, Poggio Bustone a nord-est, Fonte Colombo a sud-ovest">
+      <svg viewBox="80 30 640 410" role="img" aria-label="Mappa illustrata della Valle Santa reatina con Rieti al centro e i quattro santuari: Greccio a nord-ovest, La Foresta a nord, Poggio Bustone a nord-est, Fonte Colombo a sud-ovest">
         <defs>
           <linearGradient id="vsg" gradientUnits="userSpaceOnUse" x1="100" y1="40" x2="660" y2="420"><stop offset="0" stop-color="#fbeec5"/><stop offset=".5" stop-color="#D4AA4A"/><stop offset="1" stop-color="#B8922A"/></linearGradient>
         </defs>

@@ -1,3 +1,44 @@
 {
-  "_come_si_usa": "Ogni voce collega la foto di copertina di una notizia (lo stesso testo scritto in 'URL immagine' nell'Admin) alle foto dello slideshow. La copertina viene aggiunta da sola come prima foto, se non è già nell'elenco. Istruzioni complete in COME-AGGIORNARE-NOTIZIE.txt. Con \"includi_copertina\": false la copertina non viene ripetuta nello slideshow (utile quando è un ritaglio di una delle foto)."
+  "_come_si_usa": "Ogni voce collega la foto di copertina di una notizia (lo stesso testo scritto in 'URL immagine' nell'Admin) alle foto dello slideshow. La copertina viene aggiunta da sola come prima foto, se non è già nell'elenco. Istruzioni complete in COME-AGGIORNARE-NOTIZIE.txt. Con \"includi_copertina\": false la copertina non viene ripetuta nello slideshow (utile quando è un ritaglio di una delle foto).",
+  "img/notizie/piatti-ottobre-2026/01.jpg": {
+    "titolo": "Piccoli cuochi che crescono, un piatto alla volta",
+    "foto": [
+      {
+        "src": "img/notizie/piatti-ottobre-2026/01.jpg",
+        "mini": "img/notizie/piatti-ottobre-2026/01-mini.webp",
+        "alt": "Tagliolini al ragù di punta di coltello serviti su ardesia, con noci e pecorino grattugiato",
+        "didascalia": "Tagliolino al ragù di punta di coltello, crema di zucca e pecorino"
+      },
+      {
+        "src": "img/notizie/piatti-ottobre-2026/02.jpg",
+        "mini": "img/notizie/piatti-ottobre-2026/02-mini.webp",
+        "alt": "Cappellotti di carne su crema di zucca, con gocce di caprino",
+        "didascalia": "Cappellotto di carne, crema di zucca e caprino"
+      },
+      {
+        "src": "img/notizie/piatti-ottobre-2026/03.jpg",
+        "mini": "img/notizie/piatti-ottobre-2026/03-mini.webp",
+        "alt": "Risotto dorato con chips di zucchina, erba cipollina e fiori di nepitella",
+        "didascalia": "Risotto agli scampi, chips di zucchina e tartare di scampo"
+      },
+      {
+        "src": "img/notizie/piatti-ottobre-2026/04.jpg",
+        "mini": "img/notizie/piatti-ottobre-2026/04-mini.webp",
+        "alt": "Rotolino di faraona avvolto nella pancetta, con rosa di patate su ardesia",
+        "didascalia": "Rotolino di faraona con pancetta, erbe aromatiche e rosa di patate"
+      },
+      {
+        "src": "img/notizie/piatti-ottobre-2026/05.jpg",
+        "mini": "img/notizie/piatti-ottobre-2026/05-mini.webp",
+        "alt": "Tortino di pasta brisée su ardesia, con decorazioni di salse",
+        "didascalia": "Brisée Lorraine con scamorza, guanciale e crème"
+      },
+      {
+        "src": "img/notizie/piatti-ottobre-2026/06.jpg",
+        "mini": "img/notizie/piatti-ottobre-2026/06-mini.webp",
+        "alt": "Cheesecake al cocco con gocce di coulis di frutti di bosco",
+        "didascalia": "Cheesecake cocco e cioccolato, coulis di frutti di bosco"
+      }
+    ]
+  }
 }

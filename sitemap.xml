@@ -128,7 +128,7 @@
   </url>
   <url>
     <loc>https://convitto.alberghierorieti.edu.it/comunita.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -417,6 +417,12 @@
   <url>
     <loc>https://convitto.alberghierorieti.edu.it/regole-ricordi.html</loc>
     <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://convitto.alberghierorieti.edu.it/valle-santa.html</loc>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="description" content="Rieti in libera uscita: la guida per i nuovi convittori del Convitto Costaggini. Le regole, Porta Romana come punto di arrivo e di ritrovo, i luoghi del centro a pochi minuti a piedi e un primo giro consigliato."/>
+  <title>Rieti in libera uscita | Convitto "Costaggini" — Rieti</title>
+  <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/rieti-libera-uscita.html"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>
+    .lu-intro{background:var(--av);padding:3rem 1.25rem 2.25rem}
+    .lu-intro .w{max-width:760px}
+    .lu-intro p{font-size:1rem;line-height:1.8;color:var(--txt2);margin:0 0 1rem}
+    .lu-intro p.lu-capo::first-letter{font-family:var(--fd);float:left;font-size:4.2rem;line-height:.82;padding:.35rem .55rem 0 0;color:var(--oro)}
+    .lu-regole{background:var(--bco);padding:2.5rem 1.25rem 3rem}
+    .lu-regole .w{max-width:1000px}
+    .lu-rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-top:1.4rem}
+    .lu-r{background:#fff;border:1px solid var(--av3);border-radius:12px;padding:1.1rem 1.15rem;box-shadow:var(--sh-sm)}
+    .lu-r span{font-size:1.5rem;display:block;margin-bottom:.4rem}
+    .lu-r h3{font-family:var(--fd);font-weight:400;font-size:1.12rem;color:var(--bosco);margin:0 0 .3rem}
+    .lu-r p{font-size:.83rem;line-height:1.6;color:var(--txt2);margin:0}
+    .lu-r a{color:var(--bosco2);font-weight:700}
+    .lu-fonte{font-family:var(--fu);font-size:.7rem;color:var(--txt2);margin-top:1rem}
+    .lu-mappa{background:var(--bosco);padding:2.75rem 1.25rem}
+    .lu-mappa .w{max-width:900px;text-align:center}
+    .lu-mappa h2{color:var(--av)}.lu-mappa h2 em{color:var(--oro3)}
+    .lu-mappa > .w > p{color:rgba(245,240,232,.65);font-size:.86rem;margin:.4rem auto 1.4rem;max-width:580px}
+    .lu-mappa svg{width:100%;max-width:760px;height:auto;display:block;margin:0 auto}
+    .lu-leg{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.2rem;margin-top:1rem;font-family:var(--fu);font-size:.72rem;color:rgba(245,240,232,.75)}
+    .lu-leg i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:.35rem;vertical-align:-1px}
+    .lu-btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.6rem;font-family:var(--fu);font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.6rem;border-radius:40px;border:1.5px solid var(--oro2);background:transparent;color:var(--oro3);cursor:pointer}
+    .lu-btn:hover,.lu-btn[aria-expanded="true"]{background:var(--oro2);color:var(--bosco)}
+    #lu-reale{margin:1.4rem auto 0;max-width:900px}
+    #lu-map{height:460px;border-radius:14px;overflow:hidden;border:1px solid rgba(184,146,42,.35)}
+    @media (max-width:600px){#lu-map{height:380px}}
+    #lu-map .leaflet-attribution-flag{width:1em!important;height:.6669em!important}
+    #lu-map .leaflet-marker-icon svg{width:28px;height:28px}
+    #lu-reale .lu-nota{font-family:var(--fu);font-size:.7rem;color:rgba(245,240,232,.55);margin-top:.6rem}
+    .lu-pop b{font-family:var(--fd);font-weight:400;font-size:1.05rem;color:#2C3E2D}.lu-pop span{display:block;font-size:.75rem;color:#4A4840;margin-top:.15rem}
+    .lu-luoghi{background:var(--av);padding:3rem 1.25rem}
+    .lu-luoghi .w{max-width:1040px}
+    .lu-cgrid{display:grid;gap:1.5rem;margin-top:1.4rem}
+    @media (min-width:860px){.lu-cgrid{grid-template-columns:1fr 1fr}}
+    .lu-cat{background:#fff;border:1px solid var(--av3);border-radius:14px;padding:1.25rem 1.35rem;box-shadow:var(--sh-sm)}
+    .lu-cat h3{font-family:var(--fd);font-weight:400;font-size:1.3rem;color:var(--bosco);margin:0}
+    .lu-sot{font-family:var(--fu);font-size:.75rem;color:var(--txt2);margin:.15rem 0 .8rem}
+    .lu-cat ul{list-style:none;margin:0;padding:0}
+    .lu-luogo{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;padding:.7rem 0;border-top:1px solid var(--av3)}
+    .lu-luogo h4{font-family:var(--fu);font-size:.86rem;font-weight:700;color:var(--bosco2);margin:0 0 .15rem}
+    .lu-luogo p{font-size:.8rem;line-height:1.55;color:var(--txt2);margin:0}
+    .lu-min{flex-shrink:0;font-family:var(--fu);font-size:.68rem;font-weight:800;letter-spacing:.06em;color:var(--bosco);background:var(--av2);border:1px solid var(--av3);border-radius:20px;padding:.25rem .6rem;white-space:nowrap}
+    .lu-giro{background:var(--bco);padding:3rem 1.25rem}
+    .lu-giro .w{max-width:760px}
+    .lu-tappe{list-style:none;counter-reset:t;margin:1.4rem 0 0;padding:0;border-left:2px solid var(--oro2)}
+    .lu-tappe li{counter-increment:t;position:relative;padding:0 0 1.15rem 1.6rem;font-size:.9rem;line-height:1.65;color:var(--txt2)}
+    .lu-tappe li::before{content:counter(t);position:absolute;left:-13px;top:0;width:24px;height:24px;border-radius:50%;background:var(--bosco);color:var(--oro3);font:700 .72rem/24px var(--fu);text-align:center}
+    .lu-tappe b{color:var(--bosco)}
+    .lu-consigli{background:var(--bosco);padding:3rem 1.25rem}
+    .lu-consigli .w{max-width:860px}
+    .lu-consigli h2{color:var(--av)}.lu-consigli h2 em{color:var(--oro3)}
+    .lu-consigli ul{list-style:none;margin:1.2rem 0 0;padding:0;display:grid;gap:.6rem}
+    .lu-consigli li{font-size:.9rem;line-height:1.65;color:rgba(245,240,232,.82);padding-left:1.6rem;position:relative}
+    .lu-consigli li::before{content:"✦";position:absolute;left:0;color:var(--oro2)}
+    .lu-num{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-top:1.75rem}
+    .lu-num div{border:1px solid rgba(184,146,42,.35);border-radius:12px;padding:1rem 1.1rem}
+    .lu-num small{display:block;font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2)}
+    .lu-num a{font-family:var(--fd);font-size:1.45rem;color:var(--av);text-decoration:none}
+    .lu-num span{display:block;font-family:var(--fu);font-size:.72rem;color:rgba(245,240,232,.6);margin-top:.15rem}
+    .lu-crediti{background:var(--av);padding:2rem 1.25rem 2.5rem}
+    .lu-crediti .w{max-width:860px}
+    .lu-crediti p{font-family:var(--fu);font-size:.72rem;line-height:1.7;color:var(--txt2);margin:0 0 .5rem}
+  </style>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
+  <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+</head>
+<body data-page="rieti-libera-uscita">
+<script src="nav-header.min.js"></script>
+<main id="main">
+
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso">
+        <a href="index.html">Home</a><span>›</span>
+        <a href="il-convitto.html">Il Convitto</a><span>›</span>
+        <span aria-current="page">Rieti in libera uscita</span>
+      </nav>
+      <div class="gold-bar"></div>
+      <h1>Rieti <em>in libera uscita</em></h1>
+      <p class="sub">Per chi è appena arrivato: le regole, il punto di ritrovo e i luoghi del centro a pochi minuti a piedi.</p>
+    </div>
+  </div>
+
+  <section class="lu-intro">
+    <div class="w">
+      <p class="lu-capo">Benvenuto a Rieti. I primi giorni in una città nuova possono disorientare: dove si arriva, dove si va, quanto ci vuole, come si torna. Questa pagina è pensata per te che sei appena arrivato al Convitto, e per la tua famiglia, che vuole sapere dove trascorrerai il tempo libero.</p>
+      <p>Il centro storico è piccolo, bello e raccolto: dalle sue porte alle piazze principali bastano pochi minuti a piedi. Qui trovi le regole della libera uscita, una mappa per orientarti e un primo giro da fare con i nuovi compagni.</p>
+    </div>
+  </section>
+
+  <section class="lu-regole" aria-labelledby="lu-regole-t">
+    <div class="w">
+      <p class="lbl">Prima di uscire</p>
+      <h2 id="lu-regole-t">Come funziona <em>la libera uscita</em></h2>
+      <div class="lu-rgrid">
+        <div class="lu-r"><span aria-hidden="true">🕠</span><h3>Quando</h3><p>Dalle 17:30 alle 19:15, dal lunedì al giovedì, dopo lo studio guidato. Il venerdì non c'è libera uscita: si torna a casa all'uscita di scuola.</p></div>
+        <div class="lu-r"><span aria-hidden="true">✍️</span><h3>Con l'autorizzazione</h3><p>Serve l'autorizzazione scritta dei genitori, firmata a inizio anno. <a href="autorizzazioni.html">Vai ai moduli →</a></p></div>
+        <div class="lu-r"><span aria-hidden="true">🚐</span><h3>Andata e ritorno</h3><p>I minorenni vengono accompagnati con i mezzi del Convitto a <strong>Porta Romana</strong>, che è anche il punto di ritrovo per il rientro.</p></div>
+        <div class="lu-r"><span aria-hidden="true">🚲</span><h3>Per i maggiorenni</h3><p>Con la relativa autorizzazione, i maggiorenni possono usare in autonomia la pista ciclopedonale.</p></div>
+        <div class="lu-r"><span aria-hidden="true">🤒</span><h3>Se non stai bene</h3><p>Chi è malato non può usufruire della libera uscita: si resta in Convitto, con gli educatori.</p></div>
+      </div>
+      <p class="lu-fonte">Dal Regolamento di Convitto, artt. 25–26. Per ogni dubbio, chiedi all'educatore di turno.</p>
+    </div>
+  </section>
+
+  <section class="lu-mappa" aria-labelledby="lu-mappa-t">
+    <div class="w">
+      <h2 id="lu-mappa-t">Da Porta Romana <em>al centro</em></h2>
+      <p>La corsa del Convitto arriva a Porta Romana. Da lì, superato il ponte sul Velino, Via Roma sale dritta fino alle piazze del centro.</p>
+      <svg viewBox="0 0 760 580" role="img" aria-label="Schema del percorso: dal Convitto la corsa porta a Porta Romana; da lì, a piedi, il Ponte Romano sul Velino e Via Roma fino al centro storico, con le piazze, la Cattedrale, la biblioteca, i musei e le poste"><defs><linearGradient id="lug" gradientUnits="userSpaceOnUse" x1="0" y1="560" x2="0" y2="80"><stop offset="0" stop-color="#B8922A"/><stop offset="1" stop-color="#fbeec5"/></linearGradient></defs><ellipse cx="380" cy="132" rx="330" ry="104" fill="#EDD98A" fill-opacity=".05" stroke="#D4AA4A" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="3 7"/><text x="380" y="20" text-anchor="middle" fill="#F5F0E8" font-size="22" font-style="italic" font-family="Georgia,serif">Centro storico</text><path d="M20 352 C 170 316, 270 372, 380 340 S 610 300, 740 330" fill="none" stroke="#5f8fa8" stroke-opacity=".6" stroke-width="12" stroke-linecap="round"/><text x="70" y="318" fill="#9cc1d4" font-size="15" font-style="italic" font-family="Georgia,serif">fiume Velino</text><path d="M380 545 L380 425" stroke="#D4AA4A" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/><text x="394" y="492" fill="#D4AA4A" font-size="14" font-family="sans-serif">corsa del Convitto</text><path d="M380 400 L380 92" stroke="url(#lug)" stroke-width="5" stroke-linecap="round"/><text transform="translate(366 290) rotate(-90)" fill="#EDD98A" font-size="13" font-family="sans-serif" letter-spacing="3" text-anchor="middle">VIA ROMA</text><circle cx="380" cy="556" r="10" fill="#2C3E2D" stroke="#EDD98A" stroke-width="3"/><text x="398" y="562" fill="#F5F0E8" font-size="18" font-family="Georgia,serif">Convitto</text><rect x="367" y="399" width="26" height="26" rx="5" fill="#B8922A"/><path d="M373 419 v-8 a7 7 0 0 1 14 0 v8" fill="none" stroke="#2C3E2D" stroke-width="3"/><text x="404" y="410" fill="#F5F0E8" font-size="20" font-family="Georgia,serif">Porta Romana</text><text x="404" y="429" fill="#D4AA4A" font-size="13" font-family="sans-serif">arrivo e ritrovo per il rientro</text><rect x="364" y="333" width="32" height="14" rx="3" fill="#2C3E2D" stroke="#EDD98A" stroke-width="2"/><text x="406" y="345" fill="#F5F0E8" font-size="15" font-family="sans-serif">Ponte Romano</text><circle cx="380" cy="92" r="7" fill="#EDD98A" stroke="#1a281b" stroke-width="2"/><text x="380" y="77" text-anchor="middle" fill="#F5F0E8" font-size="15" font-family="sans-serif">P.zza Vittorio Emanuele II</text><circle cx="500" cy="112" r="7" fill="#EDD98A" stroke="#1a281b" stroke-width="2"/><text x="513" y="117" text-anchor="start" fill="#F5F0E8" font-size="15" font-family="sans-serif">Centro d'Italia · P.zza San Rufo</text><circle cx="470" cy="172" r="7" fill="#f2b8a2" stroke="#1a281b" stroke-width="2"/><text x="483" y="177" text-anchor="start" fill="#F5F0E8" font-size="15" font-family="sans-serif">Poste</text><circle cx="258" cy="106" r="7" fill="#EDD98A" stroke="#1a281b" stroke-width="2"/><text x="245" y="111" text-anchor="end" fill="#F5F0E8" font-size="15" font-family="sans-serif">Cattedrale</text><circle cx="216" cy="150" r="7" fill="#9fd3a8" stroke="#1a281b" stroke-width="2"/><text x="203" y="155" text-anchor="end" fill="#F5F0E8" font-size="15" font-family="sans-serif">Giardini del Vignola</text><circle cx="300" cy="188" r="7" fill="#D4AA4A" stroke="#1a281b" stroke-width="2"/><text x="287" y="193" text-anchor="end" fill="#F5F0E8" font-size="15" font-family="sans-serif">Biblioteca Paroniana</text><circle cx="176" cy="194" r="7" fill="#D4AA4A" stroke="#1a281b" stroke-width="2"/><text x="163" y="199" text-anchor="end" fill="#F5F0E8" font-size="15" font-family="sans-serif">Museo Civico</text><circle cx="380" cy="262" r="7" fill="#f2b8a2" stroke="#1a281b" stroke-width="2"/><text x="364" y="267" text-anchor="end" fill="#F5F0E8" font-size="15" font-family="sans-serif">Farmacia</text><circle cx="330" cy="452" r="7" fill="#f2b8a2" stroke="#1a281b" stroke-width="2"/><text x="317" y="457" text-anchor="end" fill="#F5F0E8" font-size="15" font-family="sans-serif">Farmacia</text><circle cx="596" cy="400" r="7" fill="#9fd3a8" stroke="#1a281b" stroke-width="2"/><text x="609" y="405" text-anchor="start" fill="#F5F0E8" font-size="15" font-family="sans-serif">Parco 6 giugno 1944</text></svg>
+      <div class="lu-leg"><span><i style="background:#EDD98A"></i>Il cuore della città</span><span><i style="background:#9fd3a8"></i>All'aria aperta</span><span><i style="background:#D4AA4A"></i>Studiare e scoprire</span><span><i style="background:#f2b8a2"></i>Necessità</span></div>
+      <button type="button" class="lu-btn" id="lu-apri" aria-expanded="false" aria-controls="lu-reale">🗺️ Apri la mappa reale</button>
+      <div id="lu-reale" hidden>
+        <div id="lu-map" role="region" aria-label="Mappa geografica del centro di Rieti con i luoghi della libera uscita"></div>
+        <p class="lu-nota">Tocca un segnaposto per il nome e il tempo a piedi da Porta Romana. Mappa © OpenStreetMap e CARTO.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lu-luoghi" aria-labelledby="lu-luoghi-t">
+    <div class="w">
+      <p class="lbl">Dove andare</p>
+      <h2 id="lu-luoghi-t">I luoghi <em>a portata di passo</em></h2>
+      <p style="color:var(--txt2);font-size:.88rem;margin:.4rem 0 0;max-width:640px">I tempi sono indicativi, a piedi da Porta Romana e con passo tranquillo.</p>
+      <div class="lu-cgrid"><div class="lu-cat"><h3><span aria-hidden="true">🏛️</span> Il cuore della città</h3><p class="lu-sot">Per conoscere Rieti, dalle piazze ai monumenti.</p><ul><li class="lu-luogo"><div><h4>Ponte Romano</h4><p>Il ponte sul Velino, appena oltre Porta Romana: da qui inizia Via Roma, la strada principale del centro.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~4 min</span></li><li class="lu-luogo"><div><h4>Piazza Vittorio Emanuele II</h4><p>La piazza del Comune, con il Palazzo comunale: il punto d'incontro della città.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~8 min</span></li><li class="lu-luogo"><div><h4>Piazza San Rufo</h4><p>Qui un monumento segna il “Centro d'Italia”, l'Umbilicus Italiae: il centro geografico della penisola, secondo la tradizione.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~8 min</span></li><li class="lu-luogo"><div><h4>Cattedrale e Piazza Cesare Battisti</h4><p>La Cattedrale di Santa Maria Assunta e la sua piazza, con il Palazzo Papale accanto.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~8 min</span></li></ul></div><div class="lu-cat"><h3><span aria-hidden="true">🌳</span> All'aria aperta</h3><p class="lu-sot">Per staccare dopo lo studio.</p><ul><li class="lu-luogo"><div><h4>Giardini del Vignola</h4><p>Un giardino tranquillo con un balcone panoramico sulla valle: il posto giusto per una pausa.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~7 min</span></li><li class="lu-luogo"><div><h4>Parco 6 giugno 1944</h4><p>Un parco cittadino a pochi minuti da Porta Romana, per due passi all'aperto.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~7 min</span></li></ul></div><div class="lu-cat"><h3><span aria-hidden="true">📚</span> Per studiare e scoprire</h3><p class="lu-sot">Libri, sale di lettura e storia.</p><ul><li class="lu-luogo"><div><h4>Biblioteca comunale Paroniana</h4><p>La biblioteca della città: sale di lettura, libri e silenzio per studiare o leggere.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~7 min</span></li><li class="lu-luogo"><div><h4>Museo Civico, sezione archeologica</h4><p>La storia di Rieti dalle origini: un'ora diversa dal solito.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~6 min</span></li></ul></div><div class="lu-cat"><h3><span aria-hidden="true">🧭</span> Per le necessità</h3><p class="lu-sot">Farmacie e ufficio postale vicini al percorso.</p><ul><li class="lu-luogo"><div><h4>Farmacia Vaccarezza</h4><p>A due passi da Porta Romana.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~2 min</span></li><li class="lu-luogo"><div><h4>Farmacia Petrini</h4><p>In Via Roma, lungo la strada per il centro.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~5 min</span></li><li class="lu-luogo"><div><h4>Ufficio postale</h4><p>Nel Palazzo delle Poste, vicino a Piazza Vittorio Emanuele II.</p></div><span class="lu-min" title="tempo indicativo a piedi da Porta Romana">~9 min</span></li></ul></div></div>
+    </div>
+  </section>
+
+  <section class="lu-giro" aria-labelledby="lu-giro-t">
+    <div class="w">
+      <p class="lbl">La prima volta</p>
+      <h2 id="lu-giro-t">Il primo <em>giro</em></h2>
+      <p style="color:var(--txt2);font-size:.9rem;line-height:1.7;margin:.4rem 0 0">Un percorso facile, di circa 2 km e poco più di 20 minuti di cammino: lascia tutto il tempo per fermarsi. Meglio farlo insieme ai compagni.</p>
+      <ol class="lu-tappe">
+        <li><b>Porta Romana.</b> Scendi dalla corsa e guarda bene il punto: è qui che ci si ritrova per il rientro.</li>
+        <li><b>Ponte Romano.</b> Attraversa il Velino e imbocca Via Roma.</li>
+        <li><b>Via Roma.</b> La strada principale del centro, con negozi e caffè. A metà trovi una farmacia.</li>
+        <li><b>Piazza Vittorio Emanuele II.</b> La piazza del Comune: da qui ci si orienta per tutto il centro.</li>
+        <li><b>Piazza San Rufo.</b> Pochi passi e sei al “Centro d'Italia”: una foto è d'obbligo.</li>
+        <li><b>Cattedrale e Giardini del Vignola.</b> Torna verso la Cattedrale e affacciati dal balcone dei giardini.</li>
+        <li><b>Ritorno a Porta Romana.</b> Riscendi per Via Roma con calma: arriva al punto di ritrovo prima dell'orario della corsa.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="lu-consigli" aria-labelledby="lu-consigli-t">
+    <div class="w">
+      <h2 id="lu-consigli-t">Qualche <em>consiglio</em></h2>
+      <ul>
+        <li>Esci con il telefono carico e il numero del Convitto salvato in rubrica.</li>
+        <li>Muoviti con i compagni, soprattutto le prime volte.</li>
+        <li>Tieni d'occhio l'orologio: al punto di ritrovo si arriva qualche minuto prima, non dopo.</li>
+        <li>Se qualcosa non va, se ti perdi o hai un contrattempo, chiama subito il Convitto.</li>
+      </ul>
+      <div class="lu-num">
+        <div><small>Convitto “Costaggini”</small><a href="tel:+390746296862">0746 296862</a><span>Centralino del Convitto</span></div>
+        <div><small>Emergenze</small><a href="tel:112">112</a><span>Numero unico europeo</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lu-crediti">
+    <div class="w">
+      <p>Regole tratte dal Regolamento di Convitto (artt. 25–26) e dal modulo di autorizzazione alla libera uscita. Luoghi e posizioni da OpenStreetMap; i tempi a piedi sono stime indicative.</p>
+      <p>Vuoi segnalare un luogo utile ai nuovi arrivati? Parlane con gli educatori.</p>
+    </div>
+  </section>
+
+</main>
+<script>
+// Mappa reale: Leaflet e le tessere si caricano solo quando il visitatore la apre.
+(function () {
+  var btn = document.getElementById('lu-apri'), box = document.getElementById('lu-reale');
+  if (!btn || !box) return;
+  var LUOGHI = [{"n": "Convitto “Costaggini”", "d": "Partenza della corsa", "lat": 42.3921448, "lon": 12.8582699, "t": "conv"}, {"n": "Porta Romana", "d": "Arrivo della corsa e ritrovo per il rientro", "lat": 42.397867, "lon": 12.860366, "t": "porta"}, {"n": "Ponte Romano", "d": "~4 min a piedi da Porta Romana", "lat": 42.399828, "lon": 12.860964, "t": "cuore"}, {"n": "Piazza Vittorio Emanuele II", "d": "~8 min a piedi da Porta Romana", "lat": 42.402454, "lon": 12.860699, "t": "cuore"}, {"n": "Piazza San Rufo", "d": "~8 min a piedi da Porta Romana", "lat": 42.402294, "lon": 12.862106, "t": "cuore"}, {"n": "Cattedrale e Piazza Cesare Battisti", "d": "~8 min a piedi da Porta Romana", "lat": 42.40208, "lon": 12.858899, "t": "cuore"}, {"n": "Giardini del Vignola", "d": "~7 min a piedi da Porta Romana", "lat": 42.401848, "lon": 12.859919, "t": "aria"}, {"n": "Parco 6 giugno 1944", "d": "~7 min a piedi da Porta Romana", "lat": 42.397821, "lon": 12.865586, "t": "aria"}, {"n": "Biblioteca comunale Paroniana", "d": "~7 min a piedi da Porta Romana", "lat": 42.401453, "lon": 12.859687, "t": "studio"}, {"n": "Museo Civico, sezione archeologica", "d": "~6 min a piedi da Porta Romana", "lat": 42.401223, "lon": 12.859567, "t": "studio"}, {"n": "Farmacia Vaccarezza", "d": "~2 min a piedi da Porta Romana", "lat": 42.396591, "lon": 12.860716, "t": "utile"}, {"n": "Farmacia Petrini", "d": "~5 min a piedi da Porta Romana", "lat": 42.400388, "lon": 12.860985, "t": "utile"}, {"n": "Ufficio postale", "d": "~9 min a piedi da Porta Romana", "lat": 42.402881, "lon": 12.86141, "t": "utile"}];
+  var COL = { conv: '#EDD98A', porta: '#B8922A', cuore: '#EDD98A', aria: '#7cbf89', studio: '#D4AA4A', utile: '#e8957a' };
+  var mappa = null;
+  function carica(cb) {
+    if (window.L) return cb();
+    var css = document.createElement('link'); css.rel = 'stylesheet';
+    css.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(css);
+    var js = document.createElement('script'); js.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+    js.onload = cb; js.onerror = function () { box.querySelector('.lu-nota').textContent = 'Non è stato possibile caricare la mappa. Riprova più tardi.'; };
+    document.head.appendChild(js);
+  }
+  function icona(t) {
+    var c = COL[t] || '#D4AA4A';
+    var svg = (t === 'porta')
+      ? '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><rect x="2" y="2" width="24" height="24" rx="5" fill="' + c + '" stroke="#1a281b" stroke-width="2"/><path d="M8 21 v-7 a6 6 0 0 1 12 0 v7" fill="none" stroke="#1a281b" stroke-width="2.5"/></svg>'
+      : '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="' + (t === 'conv' ? 10 : 8) + '" fill="' + (t === 'conv' ? '#2C3E2D' : c) + '" stroke="' + (t === 'conv' ? c : '#1a281b') + '" stroke-width="' + (t === 'conv' ? 3 : 2) + '"/></svg>';
+    return L.divIcon({ html: svg, className: '', iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -12] });
+  }
+  function disegna() {
+    if (mappa) { mappa.invalidateSize(); return; }
+    mappa = L.map('lu-map', { scrollWheelZoom: false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2wbm_1_db8c9be60cf2d2d6ba49a9da', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 19 }).addTo(mappa);
+    var punti = [];
+    LUOGHI.forEach(function (l) {
+      var ll = [l.lat, l.lon]; punti.push(ll);
+      L.marker(ll, { icon: icona(l.t), title: l.n, alt: l.n }).addTo(mappa).bindPopup('<div class="lu-pop"><b>' + l.n + '</b><span>' + l.d + '</span></div>');
+    });
+    L.polyline([[LUOGHI[0].lat, LUOGHI[0].lon], [LUOGHI[1].lat, LUOGHI[1].lon]], { color: '#B8922A', weight: 3, opacity: .8, dashArray: '4 8' }).addTo(mappa);
+    mappa.fitBounds(punti, { padding: [30, 30] });
+  }
+  btn.addEventListener('click', function () {
+    var apri = box.hidden; box.hidden = !apri;
+    btn.setAttribute('aria-expanded', apri ? 'true' : 'false');
+    btn.textContent = apri ? '✕ Chiudi la mappa reale' : '🗺️ Apri la mappa reale';
+    if (apri) carica(disegna);
+  });
+})();
+</script>
+<script src="nav.min.js"></script>
+</body>
+</html>

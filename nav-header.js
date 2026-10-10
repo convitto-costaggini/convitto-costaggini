@@ -40,6 +40,7 @@
           <li><a href="il-convitto.html" data-page="il-convitto">Chi siamo &amp; storia</a></li>
           <li><a href="educatori.html" data-page="educatori">Gli Educatori</a></li>
           <li><a href="giornata-tipo.html" data-page="giornata-tipo">Una giornata tipo</a></li>
+          <li><a href="rieti-libera-uscita.html" data-page="rieti-libera-uscita">🧭 Rieti in libera uscita</a></li>
           <li><a href="premio-merito.html" data-page="premio-merito">🏅 Premio al Merito</a></li>
           <li><a href="trofei-e-classifiche.html" data-page="trofei-e-classifiche">🏆 Trofei e Classifiche</a></li>
 
@@ -126,6 +127,7 @@
         <li><a href="il-convitto.html">Chi siamo &amp; storia</a></li>
         <li><a href="educatori.html">Gli Educatori</a></li>
         <li><a href="giornata-tipo.html">Una giornata tipo</a></li>
+        <li><a href="rieti-libera-uscita.html">🧭 Rieti in libera uscita</a></li>
         <li><a href="premio-merito.html">🏅 Premio al Merito</a></li>
         <li><a href="trofei-e-classifiche.html">🏆 Trofei e Classifiche</a></li>
 

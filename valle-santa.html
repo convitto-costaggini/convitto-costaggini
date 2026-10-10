@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="description" content="La Valle Santa a tavola: per gli 800 anni dalla morte di San Francesco, i quattro santuari francescani della valle di Rieti raccontati con un episodio delle fonti e un piatto ispirato, preparato dagli allievi dell'Istituto Alberghiero Costaggini."/>
+  <title>La Valle Santa a tavola | Convitto "Costaggini" — Rieti</title>
+  <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/valle-santa.html"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <style>
+    .vs-intro{background:var(--av);padding:3rem 1.25rem 2rem}
+    .vs-intro .w{max-width:760px}
+    .vs-intro p{font-size:1rem;line-height:1.8;color:var(--txt2);margin:0 0 1rem}
+    .vs-cit{font-family:var(--fd);font-style:italic;font-size:1.25rem;line-height:1.5;color:var(--bosco);border-left:3px solid var(--oro2);padding:.25rem 0 .25rem 1.1rem;margin:1.75rem 0 0}
+    .vs-cit small{display:block;font-family:var(--fu);font-style:normal;font-size:.72rem;letter-spacing:.06em;color:var(--txt2);margin-top:.4rem}
+    .vs-mappa{background:var(--bosco);padding:2.5rem 1.25rem}
+    .vs-mappa .w{max-width:900px;text-align:center}
+    .vs-mappa h2{color:var(--av)}.vs-mappa h2 em{color:var(--oro3)}
+    .vs-mappa p{color:rgba(245,240,232,.65);font-size:.85rem;margin:.4rem auto 1.5rem;max-width:560px}
+    .vs-mappa svg{width:100%;max-width:760px;height:auto;display:block;margin:0 auto}
+    .vs-sant{padding:3rem 1.25rem;background:var(--bco)}
+    .vs-sant:nth-of-type(even){background:var(--av)}
+    .vs-sant .w{max-width:1040px}
+    .vs-grid{display:grid;gap:2rem;align-items:start}
+    @media (min-width:900px){.vs-grid{grid-template-columns:1fr 1fr}.vs-sant.rev .vs-foto{order:2}}
+    .vs-foto figure{margin:0}
+    .vs-foto img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:14px;display:block;box-shadow:var(--sh-lg);border:1px solid rgba(184,146,42,.2)}
+    .vs-foto figcaption{font-family:var(--fu);font-size:.68rem;color:var(--txt2);margin-top:.5rem;line-height:1.5}
+    .vs-foto figcaption a{color:var(--txt2)}
+    .vs-num{font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--oro)}
+    .vs-sant h2{margin:.25rem 0 .2rem}
+    .vs-dist{font-family:var(--fu);font-size:.75rem;color:var(--txt2);margin-bottom:1rem}
+    .vs-ep{font-size:.95rem;line-height:1.8;color:var(--txt2);margin:0 0 .6rem}
+    .vs-fonte{font-family:var(--fu);font-size:.7rem;color:var(--txt2);font-style:italic;margin:0 0 1.25rem}
+    .vs-piatto{background:#fff;border:1px solid var(--av3);border-radius:12px;overflow:hidden;box-shadow:var(--sh-sm)}
+    .vs-piatto-hdr{background:var(--bosco);padding:.85rem 1.25rem}
+    .vs-piatto-hdr span{font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--oro2)}
+    .vs-piatto-hdr h3{font-family:var(--fd);font-weight:400;font-size:1.3rem;color:var(--av);margin:.15rem 0 0}
+    .vs-piatto-body{padding:1.1rem 1.25rem 1.25rem}
+    .vs-piatto-body p{font-size:.86rem;line-height:1.7;color:var(--txt2);margin:0 0 .8rem}
+    .vs-piatto-body h4{font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--bosco2);margin:.9rem 0 .35rem}
+    .vs-piatto-body ul,.vs-piatto-body ol{margin:0 0 .5rem 1.1rem;padding:0;font-size:.84rem;line-height:1.7;color:var(--txt2)}
+    .vs-segnaposto{display:flex;align-items:center;gap:.75rem;background:var(--av);border:1.5px dashed var(--av3);border-radius:10px;padding:.85rem 1rem;font-family:var(--fu);font-size:.75rem;color:var(--txt2);margin-top:.9rem}
+    .vs-segnaposto span{font-size:1.4rem}
+    .vs-dolce{background:var(--bosco);padding:3rem 1.25rem}
+    .vs-dolce .w{max-width:760px}
+    .vs-dolce h2{color:var(--av)}.vs-dolce h2 em{color:var(--oro3)}
+    .vs-dolce .vs-ep{color:rgba(245,240,232,.75)}.vs-dolce .vs-fonte{color:rgba(245,240,232,.5)}
+    .vs-crediti{background:var(--av);padding:2.5rem 1.25rem 3rem}
+    .vs-crediti .w{max-width:860px}
+    .vs-crediti h2{font-size:1.2rem}
+    .vs-crediti li{font-family:var(--fu);font-size:.75rem;line-height:1.7;color:var(--txt2)}
+    .vs-crediti a{color:var(--bosco2)}
+  </style>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
+  <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+</head>
+<body data-page="valle-santa">
+<script src="nav-header.min.js"></script>
+<main id="main">
+
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso">
+        <a href="index.html">Home</a><span>›</span>
+        <a href="comunita.html">Comunità</a><span>›</span>
+        <span aria-current="page">La Valle Santa a tavola</span>
+      </nav>
+      <div class="gold-bar"></div>
+      <h1>La Valle Santa <em>a tavola</em></h1>
+      <p class="sub">800 anni dalla morte di San Francesco (1226–2026): quattro santuari, quattro piatti, una valle.</p>
+    </div>
+  </div>
+
+  <section class="vs-intro">
+    <div class="w">
+      <p>Intorno a Rieti si apre la <strong>Valle Santa</strong>: una conca verde chiusa dai monti, dove San Francesco tornò più volte e dove ancora oggi quattro santuari ne custodiscono la memoria. A Greccio nacque il primo presepe, a Fonte Colombo prese forma la Regola dei frati, a La Foresta la vigna di un povero sacerdote diede più vino che mai, a Poggio Bustone Francesco salutò gli abitanti con un “Buongiorno, buona gente”.</p>
+      <p>Per gli 800 anni dalla sua morte, gli allievi dell'Istituto Alberghiero “Costaggini” raccontano la valle a modo loro: per ogni santuario, un episodio delle fonti francescane e un piatto che a quell'episodio si ispira. Non sono le ricette di Francesco, che nessuno scrisse mai: sono un omaggio, con i prodotti di questa terra.</p>
+      <p class="vs-cit">«Laudato si', mi' Signore, per sora nostra matre Terra, la quale ne sustenta et governa, et produce diversi fructi con coloriti flori et herba.»<small>San Francesco d'Assisi, Cantico delle Creature</small></p>
+    </div>
+  </section>
+
+  <section class="vs-mappa" aria-labelledby="vs-mappa-t">
+    <div class="w">
+      <h2 id="vs-mappa-t">I quattro santuari <em>della valle</em></h2>
+      <p>Tutti a meno di mezz'ora d'auto da Rieti. Le distanze sono indicative.</p>
+      <svg viewBox="0 0 760 460" role="img" aria-label="Mappa illustrata della Valle Santa reatina con Rieti al centro e i quattro santuari: Greccio a nord-ovest, La Foresta a nord, Poggio Bustone a nord-est, Fonte Colombo a sud-ovest">
+        <defs>
+          <linearGradient id="vsg" gradientUnits="userSpaceOnUse" x1="100" y1="40" x2="660" y2="420"><stop offset="0" stop-color="#fbeec5"/><stop offset=".5" stop-color="#D4AA4A"/><stop offset="1" stop-color="#B8922A"/></linearGradient>
+        </defs>
+        <g fill="none" stroke="url(#vsg)" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 150 L90 80 L140 120 L210 50 L280 110 L340 60 L410 115 L470 55 L540 105 L610 45 L680 95 L740 70" stroke-width="3" stroke-opacity=".55"/>
+          <path d="M20 400 L80 350 L130 380 L190 330 L240 370" stroke-width="3" stroke-opacity=".4"/>
+          <path d="M560 380 L620 330 L680 370 L740 320" stroke-width="3" stroke-opacity=".4"/>
+          <ellipse cx="380" cy="270" rx="260" ry="120" stroke-width="1.5" stroke-opacity=".25" stroke-dasharray="3 9"/>
+          <path d="M150 300 Q260 250 380 290 T620 260" stroke-width="2" stroke-opacity=".45"/>
+          <g stroke-width="2.5" stroke-dasharray="3 9" stroke-opacity=".9">
+            <path d="M380 290 L175 185"/><path d="M380 290 L395 175"/><path d="M380 290 L600 160"/><path d="M380 290 L235 370"/>
+          </g>
+        </g>
+        <g font-family="Georgia,serif" text-anchor="middle">
+          <circle cx="380" cy="290" r="11" fill="#2C3E2D" stroke="#EDD98A" stroke-width="2.5"/>
+          <text x="380" y="328" fill="#F5F0E8" font-size="28">Rieti</text>
+          <text x="380" y="350" fill="#D4AA4A" font-size="15" font-family="sans-serif" letter-spacing="1.5">CONVITTO COSTAGGINI</text>
+          <g fill="#EDD98A">
+            <path d="M165 160 h20 v5 h-7 v18 h-6 v-18 h-7 z"/><path d="M385 150 h20 v5 h-7 v18 h-6 v-18 h-7 z"/>
+            <path d="M590 135 h20 v5 h-7 v18 h-6 v-18 h-7 z"/><path d="M225 345 h20 v5 h-7 v18 h-6 v-18 h-7 z"/>
+          </g>
+          <text x="175" y="215" fill="#F5F0E8" font-size="26">Greccio</text><text x="175" y="236" fill="#D4AA4A" font-size="17" font-family="sans-serif">circa 15 km</text>
+          <text x="395" y="205" fill="#F5F0E8" font-size="26">La Foresta</text><text x="395" y="226" fill="#D4AA4A" font-size="17" font-family="sans-serif">circa 5 km</text>
+          <text x="600" y="190" fill="#F5F0E8" font-size="26">Poggio Bustone</text><text x="600" y="211" fill="#D4AA4A" font-size="17" font-family="sans-serif">circa 17 km</text>
+          <text x="235" y="400" fill="#F5F0E8" font-size="26">Fonte Colombo</text><text x="235" y="421" fill="#D4AA4A" font-size="17" font-family="sans-serif">circa 5 km</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 1. GRECCIO -->
+  <section class="vs-sant" aria-labelledby="vs-greccio">
+    <div class="w vs-grid">
+      <div class="vs-foto">
+        <figure>
+          <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Greccio_-_Santuario_Francescano_di_Greccio_incastonato_tra_le_rocce.jpg/1920px-Greccio_-_Santuario_Francescano_di_Greccio_incastonato_tra_le_rocce.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Il santuario francescano di Greccio, incastonato nella roccia sul fianco del monte" loading="lazy"/>
+          <figcaption>Foto: 66colpi, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" rel="noopener">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Greccio_-_Santuario_Francescano_di_Greccio_incastonato_tra_le_rocce.jpg" rel="noopener">Wikimedia Commons</a></figcaption>
+        </figure>
+      </div>
+      <div>
+        <p class="vs-num">I · Greccio</p>
+        <h2 id="vs-greccio">Il primo <em>presepe</em></h2>
+        <p class="vs-dist">Santuario del Presepe · circa 15 km da Rieti</p>
+        <p class="vs-ep">Nella notte di Natale del 1223, in una grotta sopra Greccio, Francesco volle “vedere con gli occhi del corpo” la povertà di Betlemme: una mangiatoia con il fieno, il bue e l'asinello, la gente del paese con fiaccole e candele. Nacque così il primo presepe della storia.</p>
+        <p class="vs-fonte">Tommaso da Celano, Vita prima, cap. XXX (Fonti Francescane 466–470)</p>
+        <div class="vs-piatto">
+          <div class="vs-piatto-hdr"><span>Il piatto ispirato</span><h3>Patate cotte nel fieno</h3></div>
+          <div class="vs-piatto-body">
+            <p>Il fieno della mangiatoia diventa ingrediente: una cottura antica dei contadini di montagna, che profuma le patate di prato d'estate.</p>
+            <h4>Ingredienti (4 persone)</h4>
+            <ul><li>800 g di patate a pasta gialla, piccole e con la buccia</li><li>2 manciate di fieno alimentare (non trattato)</li><li>sale grosso, olio extravergine della Sabina DOP, timo</li></ul>
+            <h4>Preparazione</h4>
+            <ol><li>Lavare il fieno e lasciarlo in ammollo 10 minuti.</li><li>Disporre metà del fieno in una pentola, adagiare le patate, coprire con il resto del fieno e qualche grano di sale grosso.</li><li>Coprire d'acqua, chiudere con il coperchio e cuocere a fuoco dolce per circa 40 minuti.</li><li>Scolare, eliminare il fieno e servire con un filo d'olio e timo fresco.</li></ol>
+            <div class="vs-segnaposto"><span aria-hidden="true">📷</span>Foto del piatto: a cura dei docenti e degli allievi di cucina</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. FONTE COLOMBO -->
+  <section class="vs-sant rev" aria-labelledby="vs-fonte">
+    <div class="w vs-grid">
+      <div class="vs-foto">
+        <figure>
+          <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Fonte_Colombo%2C_facciata_01.jpg/1920px-Fonte_Colombo%2C_facciata_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="La facciata del santuario di Fonte Colombo tra i lecci" loading="lazy"/>
+          <figcaption>Foto: MonDoMD, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" rel="noopener">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Fonte_Colombo,_facciata_01.jpg" rel="noopener">Wikimedia Commons</a></figcaption>
+        </figure>
+      </div>
+      <div>
+        <p class="vs-num">II · Fonte Colombo</p>
+        <h2 id="vs-fonte">Il “Sinai <em>francescano</em>”</h2>
+        <p class="vs-dist">Santuario di Fonte Colombo · circa 5 km da Rieti</p>
+        <p class="vs-ep">Tra i lecci di Monte Rainero, nel 1223, Francesco si ritirò in digiuno e preghiera e dettò la Regola definitiva dei frati, approvata da papa Onorio III il 29 novembre dello stesso anno. Una vita semplice, essenziale, come il cibo dei frati.</p>
+        <p class="vs-fonte">Tradizione del santuario; Regola bollata, approvata con la bolla “Solet annuere” (29 novembre 1223)</p>
+        <div class="vs-piatto">
+          <div class="vs-piatto-hdr"><span>Il piatto ispirato</span><h3>Minestra di farro e lenticchie di Rascino</h3></div>
+          <div class="vs-piatto-body">
+            <p>La sobrietà dell'eremo in un piatto della montagna reatina: le piccole lenticchie dell'altopiano di Rascino e il farro, cibo antico e povero.</p>
+            <h4>Ingredienti (4 persone)</h4>
+            <ul><li>200 g di lenticchie di Rascino</li><li>150 g di farro perlato</li><li>1 cipolla, 1 carota, 1 costa di sedano, 1 spicchio d'aglio, 1 foglia d'alloro</li><li>olio extravergine della Sabina DOP, sale, pepe</li></ul>
+            <h4>Preparazione</h4>
+            <ol><li>Sciacquare lenticchie e farro.</li><li>Rosolare dolcemente il trito di cipolla, carota e sedano con l'aglio in tre cucchiai d'olio.</li><li>Unire lenticchie, farro e alloro, coprire con 1,5 litri d'acqua calda e cuocere per circa 40 minuti, salando a fine cottura.</li><li>Servire con olio a crudo e una macinata di pepe.</li></ol>
+            <div class="vs-segnaposto"><span aria-hidden="true">📷</span>Foto del piatto: a cura dei docenti e degli allievi di cucina</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LA FORESTA -->
+  <section class="vs-sant" aria-labelledby="vs-foresta">
+    <div class="w vs-grid">
+      <div class="vs-foto">
+        <figure>
+          <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Il_Santuario_della_Foresta.jpg/1920px-Il_Santuario_della_Foresta.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Il santuario di Santa Maria della Foresta immerso nel verde" loading="lazy"/>
+          <figcaption>Foto: Marco Guadagnoli, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" rel="noopener">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Il_Santuario_della_Foresta.jpg" rel="noopener">Wikimedia Commons</a></figcaption>
+        </figure>
+      </div>
+      <div>
+        <p class="vs-num">III · La Foresta</p>
+        <h2 id="vs-foresta">La vigna <em>del sacerdote</em></h2>
+        <p class="vs-dist">Santuario di Santa Maria della Foresta · circa 5 km da Rieti</p>
+        <p class="vs-ep">Francesco, malato agli occhi, si fermò presso la chiesa di San Fabiano, fuori Rieti. La gente accorse a vederlo e la vigna del povero sacerdote fu spogliata dei grappoli. Francesco lo rassicurò: quell'anno il vino fu più abbondante che mai.</p>
+        <p class="vs-fonte">Fioretti di San Francesco, cap. XIX (Fonti Francescane 1849–1850)</p>
+        <div class="vs-piatto">
+          <div class="vs-piatto-hdr"><span>Il piatto ispirato</span><h3>Ciambelline al vino</h3></div>
+          <div class="vs-piatto-body">
+            <p>Il vino della vigna di San Fabiano in un dolce semplice della tradizione laziale e sabina, da “inzuppare” nel vino stesso.</p>
+            <h4>Ingredienti (circa 30 ciambelline)</h4>
+            <ul><li>500 g di farina 00</li><li>150 g di zucchero, più quello per la copertura</li><li>125 ml di vino (rosso o bianco)</li><li>125 ml di olio extravergine d'oliva</li><li>un cucchiaino di semi di anice (facoltativo), un pizzico di sale, mezza bustina di lievito per dolci</li></ul>
+            <h4>Preparazione</h4>
+            <ol><li>Mescolare vino, olio e zucchero; aggiungere poco per volta la farina con il lievito, il sale e l'anice fino a ottenere un impasto morbido e liscio.</li><li>Formare dei cordoncini lunghi circa 12 cm, chiuderli ad anello e passarne un lato nello zucchero.</li><li>Cuocere in forno statico a 180 °C per 20–25 minuti, finché sono dorate.</li></ol>
+            <div class="vs-segnaposto"><span aria-hidden="true">📷</span>Foto del piatto: a cura dei docenti e degli allievi di cucina</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. POGGIO BUSTONE -->
+  <section class="vs-sant rev" aria-labelledby="vs-poggio">
+    <div class="w vs-grid">
+      <div class="vs-foto">
+        <figure>
+          <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Esterno_Santuario_02.jpg/1920px-Esterno_Santuario_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="L'esterno del santuario di San Giacomo a Poggio Bustone" loading="lazy"/>
+          <figcaption>Foto: Monica Domeniconi, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" rel="noopener">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Esterno_Santuario_02.jpg" rel="noopener">Wikimedia Commons</a></figcaption>
+        </figure>
+      </div>
+      <div>
+        <p class="vs-num">IV · Poggio Bustone</p>
+        <h2 id="vs-poggio">“Buongiorno, <em>buona gente</em>”</h2>
+        <p class="vs-dist">Santuario di San Giacomo · circa 17 km da Rieti</p>
+        <p class="vs-ep">Arrivando a Poggio Bustone, Francesco salutò gli abitanti con un “Buongiorno, buona gente!”. La porta del paese si chiama ancora Porta del Buongiorno.</p>
+        <p class="vs-fonte">Tradizione locale di Poggio Bustone</p>
+        <div class="vs-piatto">
+          <div class="vs-piatto-hdr"><span>Il piatto ispirato</span><h3>Bruschetta con l'olio nuovo della Sabina</h3></div>
+          <div class="vs-piatto-body">
+            <p>Il gesto più semplice dell'accoglienza: pane e olio, offerti a chi arriva. L'olio della Sabina è stato tra i primi extravergini italiani a ottenere la DOP.</p>
+            <h4>Ingredienti (4 persone)</h4>
+            <ul><li>4 fette spesse di pane casereccio</li><li>olio extravergine nuovo della Sabina DOP</li><li>1 spicchio d'aglio, sale in fiocchi</li></ul>
+            <h4>Preparazione</h4>
+            <ol><li>Tostare il pane sulla brace o su una piastra ben calda.</li><li>Strofinare appena l'aglio sul pane ancora caldo.</li><li>Condire con abbondante olio nuovo e un pizzico di sale.</li></ol>
+            <div class="vs-segnaposto"><span aria-hidden="true">📷</span>Foto del piatto: a cura dei docenti e degli allievi di cucina</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IL DOLCE DI FRATE JACOPA -->
+  <section class="vs-dolce" aria-labelledby="vs-dolce">
+    <div class="w">
+      <p class="vs-num" style="color:var(--oro2)">E per finire</p>
+      <h2 id="vs-dolce">Il dolce <em>di frate Jacopa</em></h2>
+      <p class="vs-ep">Negli ultimi giorni di vita, Francesco chiese di avere accanto i frati e la nobildonna romana Jacopa de' Settesoli, che lui chiamava “frate Jacopa”, e il dolce di mandorle e miele che lei gli preparava. Jacopa arrivò in tempo, con quel dolce: la tradizione lo identifica con i mostaccioli, che ancora oggi si preparano per la festa del 4 ottobre.</p>
+      <p class="vs-fonte">Specchio di perfezione; Leggenda dei tre compagni</p>
+      <div class="vs-piatto">
+        <div class="vs-piatto-hdr"><span>Il dolce</span><h3>Mostaccioli di San Francesco</h3></div>
+        <div class="vs-piatto-body">
+          <h4>Ingredienti (circa 25 mostaccioli)</h4>
+          <ul><li>250 g di farina</li><li>150 g di mandorle tostate e tritate grossolanamente</li><li>120 g di miele</li><li>80 ml di mosto cotto (o vino cotto)</li><li>un cucchiaino di cannella, la scorza grattugiata di un'arancia, mezzo cucchiaino di bicarbonato</li></ul>
+          <h4>Preparazione</h4>
+          <ol><li>Scaldare appena miele e mosto cotto, senza farli bollire.</li><li>In una ciotola unire farina, mandorle, cannella, scorza d'arancia e bicarbonato; versare il miele tiepido e impastare.</li><li>Stendere l'impasto a un centimetro di spessore e tagliare dei rombi.</li><li>Cuocere a 170 °C per 15–18 minuti: devono restare morbidi all'interno.</li></ol>
+          <div class="vs-segnaposto"><span aria-hidden="true">📷</span>Foto del dolce: a cura dei docenti e degli allievi di pasticceria</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vs-crediti" aria-labelledby="vs-crediti">
+    <div class="w">
+      <h2 id="vs-crediti">Fonti e crediti</h2>
+      <ul>
+        <li>Episodi tratti dalle Fonti Francescane (Tommaso da Celano, Vita prima; Fioretti di San Francesco; Specchio di perfezione; Leggenda dei tre compagni) e dalla tradizione dei santuari della Valle Santa. Le ricette sono ispirate agli episodi: non sono ricette di San Francesco.</li>
+        <li>Foto dei santuari da Wikimedia Commons, con licenza CC BY-SA 4.0: Greccio di 66colpi; Fonte Colombo di MonDoMD; La Foresta di Marco Guadagnoli; Poggio Bustone di Monica Domeniconi.</li>
+        <li>Il Cantico delle Creature è citato nella forma del manoscritto di Assisi.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+<script src="nav.min.js"></script>
+</body>
+</html>

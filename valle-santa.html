@@ -19,6 +19,15 @@
     .vs-mappa h2{color:var(--av)}.vs-mappa h2 em{color:var(--oro3)}
     .vs-mappa p{color:rgba(245,240,232,.65);font-size:.85rem;margin:.4rem auto 1.5rem;max-width:560px}
     .vs-mappa svg{width:100%;max-width:760px;height:auto;display:block;margin:0 auto}
+    .vs-btn-mappa{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.75rem;font-family:var(--fu);font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.85rem 1.6rem;border-radius:40px;border:1.5px solid var(--oro2);background:transparent;color:var(--oro3);cursor:pointer;transition:background .2s,color .2s}
+    .vs-btn-mappa:hover,.vs-btn-mappa[aria-expanded="true"]{background:var(--oro2);color:var(--bosco)}
+    #vs-mappa-reale{margin:1.5rem auto 0;max-width:900px;text-align:left}
+    #vs-mappa-reale .vs-leaflet{height:460px;border-radius:14px;overflow:hidden;border:1px solid rgba(184,146,42,.35)}
+    @media (max-width:600px){#vs-mappa-reale .vs-leaflet{height:380px}}
+    #vs-leaflet .leaflet-attribution-flag{width:1em!important;height:.6669em!important}
+    #vs-leaflet .leaflet-marker-icon svg{width:30px;height:30px}
+    #vs-mappa-reale .vs-nota-mappa{font-family:var(--fu);font-size:.7rem;color:rgba(245,240,232,.55);margin-top:.6rem;text-align:center}
+    .vs-pop b{font-family:var(--fd);font-weight:400;font-size:1.05rem;color:#2C3E2D}.vs-pop span{display:block;font-size:.75rem;color:#4A4840;margin:.15rem 0 .35rem}.vs-pop a{font-size:.75rem;font-weight:700;color:#3D5C3E}
     .vs-sant{padding:3rem 1.25rem;background:var(--bco)}
     .vs-sant:nth-of-type(even){background:var(--av)}
     .vs-sant .w{max-width:1040px}
@@ -41,8 +50,6 @@
     .vs-piatto-body p{font-size:.86rem;line-height:1.7;color:var(--txt2);margin:0 0 .8rem}
     .vs-piatto-body h4{font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--bosco2);margin:.9rem 0 .35rem}
     .vs-piatto-body ul,.vs-piatto-body ol{margin:0 0 .5rem 1.1rem;padding:0;font-size:.84rem;line-height:1.7;color:var(--txt2)}
-    .vs-segnaposto{display:flex;align-items:center;gap:.75rem;background:var(--av);border:1.5px dashed var(--av3);border-radius:10px;padding:.85rem 1rem;font-family:var(--fu);font-size:.75rem;color:var(--txt2);margin-top:.9rem}
-    .vs-segnaposto span{font-size:1.4rem}
     .vs-dolce{background:var(--bosco);padding:3rem 1.25rem}
     .vs-dolce .w{max-width:760px}
     .vs-dolce h2{color:var(--av)}.vs-dolce h2 em{color:var(--oro3)}
@@ -115,6 +122,11 @@
           <text x="235" y="400" fill="#F5F0E8" font-size="26">Fonte Colombo</text><text x="235" y="421" fill="#D4AA4A" font-size="17" font-family="sans-serif">circa 5 km</text>
         </g>
       </svg>
+      <button type="button" class="vs-btn-mappa" id="vs-apri-mappa" aria-expanded="false" aria-controls="vs-mappa-reale">🗺️ Apri la mappa reale dei luoghi</button>
+      <div id="vs-mappa-reale" hidden>
+        <div class="vs-leaflet" id="vs-leaflet" role="region" aria-label="Mappa geografica con il Convitto e i quattro santuari della Valle Santa"></div>
+        <p class="vs-nota-mappa">Tocca un segnaposto per il nome del luogo e le indicazioni stradali. Mappa © OpenStreetMap e CARTO.</p>
+      </div>
     </div>
   </section>
 
@@ -141,7 +153,6 @@
             <ul><li>800 g di patate a pasta gialla, piccole e con la buccia</li><li>2 manciate di fieno alimentare (non trattato)</li><li>sale grosso, olio extravergine della Sabina DOP, timo</li></ul>
             <h4>Preparazione</h4>
             <ol><li>Lavare il fieno e lasciarlo in ammollo 10 minuti.</li><li>Disporre metà del fieno in una pentola, adagiare le patate, coprire con il resto del fieno e qualche grano di sale grosso.</li><li>Coprire d'acqua, chiudere con il coperchio e cuocere a fuoco dolce per circa 40 minuti.</li><li>Scolare, eliminare il fieno e servire con un filo d'olio e timo fresco.</li></ol>
-            <div class="vs-segnaposto"><span aria-hidden="true">📷</span>Foto del piatto: a cura dei docenti e degli allievi di cucina</div>
           </div>
         </div>
       </div>
@@ -171,7 +182,6 @@
             <ul><li>200 g di lenticchie di Rascino</li><li>150 g di farro perlato</li><li>1 cipolla, 1 carota, 1 costa di sedano, 1 spicchio d'aglio, 1 foglia d'alloro</li><li>olio extravergine della Sabina DOP, sale, pepe</li></ul>
             <h4>Preparazione</h4>
             <ol><li>Sciacquare lenticchie e farro.</li><li>Rosolare dolcemente il trito di cipolla, carota e sedano con l'aglio in tre cucchiai d'olio.</li><li>Unire lenticchie, farro e alloro, coprire con 1,5 litri d'acqua calda e cuocere per circa 40 minuti, salando a fine cottura.</li><li>Servire con olio a crudo e una macinata di pepe.</li></ol>
-            <div class="vs-segnaposto"><span aria-hidden="true">📷</span>Foto del piatto: a cura dei docenti e degli allievi di cucina</div>
           </div>
         </div>
       </div>
@@ -201,7 +211,6 @@
             <ul><li>500 g di farina 00</li><li>150 g di zucchero, più quello per la copertura</li><li>125 ml di vino (rosso o bianco)</li><li>125 ml di olio extravergine d'oliva</li><li>un cucchiaino di semi di anice (facoltativo), un pizzico di sale, mezza bustina di lievito per dolci</li></ul>
             <h4>Preparazione</h4>
             <ol><li>Mescolare vino, olio e zucchero; aggiungere poco per volta la farina con il lievito, il sale e l'anice fino a ottenere un impasto morbido e liscio.</li><li>Formare dei cordoncini lunghi circa 12 cm, chiuderli ad anello e passarne un lato nello zucchero.</li><li>Cuocere in forno statico a 180 °C per 20–25 minuti, finché sono dorate.</li></ol>
-            <div class="vs-segnaposto"><span aria-hidden="true">📷</span>Foto del piatto: a cura dei docenti e degli allievi di cucina</div>
           </div>
         </div>
       </div>
@@ -231,7 +240,6 @@
             <ul><li>4 fette spesse di pane casereccio</li><li>olio extravergine nuovo della Sabina DOP</li><li>1 spicchio d'aglio, sale in fiocchi</li></ul>
             <h4>Preparazione</h4>
             <ol><li>Tostare il pane sulla brace o su una piastra ben calda.</li><li>Strofinare appena l'aglio sul pane ancora caldo.</li><li>Condire con abbondante olio nuovo e un pizzico di sale.</li></ol>
-            <div class="vs-segnaposto"><span aria-hidden="true">📷</span>Foto del piatto: a cura dei docenti e degli allievi di cucina</div>
           </div>
         </div>
       </div>
@@ -252,7 +260,6 @@
           <ul><li>250 g di farina</li><li>150 g di mandorle tostate e tritate grossolanamente</li><li>120 g di miele</li><li>80 ml di mosto cotto (o vino cotto)</li><li>un cucchiaino di cannella, la scorza grattugiata di un'arancia, mezzo cucchiaino di bicarbonato</li></ul>
           <h4>Preparazione</h4>
           <ol><li>Scaldare appena miele e mosto cotto, senza farli bollire.</li><li>In una ciotola unire farina, mandorle, cannella, scorza d'arancia e bicarbonato; versare il miele tiepido e impastare.</li><li>Stendere l'impasto a un centimetro di spessore e tagliare dei rombi.</li><li>Cuocere a 170 °C per 15–18 minuti: devono restare morbidi all'interno.</li></ol>
-          <div class="vs-segnaposto"><span aria-hidden="true">📷</span>Foto del dolce: a cura dei docenti e degli allievi di pasticceria</div>
         </div>
       </div>
     </div>
@@ -270,6 +277,59 @@
   </section>
 
 </main>
+<script>
+// Mappa reale della Valle Santa: Leaflet e le tessere della mappa si caricano solo
+// quando il visitatore apre la sezione (nessuna richiesta a server esterni prima).
+(function () {
+  var btn = document.getElementById('vs-apri-mappa');
+  var box = document.getElementById('vs-mappa-reale');
+  if (!btn || !box) return;
+  var LUOGHI = [{"n": "Convitto “Costaggini”", "d": "Rieti, Via Salaria", "lat": 42.3921448, "lon": 12.8582699, "c": true}, {"n": "Santuario di Greccio", "d": "Il primo presepe", "lat": 42.461942, "lon": 12.751024, "c": false}, {"n": "Santuario di Fonte Colombo", "d": "La Regola del 1223", "lat": 42.37929, "lon": 12.828389, "c": false}, {"n": "Santuario della Foresta", "d": "La vigna del sacerdote", "lat": 42.436572, "lon": 12.874557, "c": false}, {"n": "Santuario di Poggio Bustone", "d": "“Buongiorno, buona gente”", "lat": 42.50438, "lon": 12.892852, "c": false}];
+  var mappa = null;
+  function carica(cb) {
+    if (window.L) return cb();
+    var css = document.createElement('link');
+    css.rel = 'stylesheet'; css.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
+    document.head.appendChild(css);
+    var js = document.createElement('script');
+    js.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+    js.onload = cb;
+    js.onerror = function () { box.querySelector('.vs-nota-mappa').textContent = 'Non è stato possibile caricare la mappa. Riprova più tardi.'; };
+    document.head.appendChild(js);
+  }
+  function icona(convitto) {
+    var c = convitto ? '#EDD98A' : '#D4AA4A';
+    var svg = convitto
+      ? '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#2C3E2D" stroke="' + c + '" stroke-width="3"/><circle cx="15" cy="15" r="4" fill="' + c + '"/></svg>'
+      : '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="13" fill="#2C3E2D" stroke="' + c + '" stroke-width="2"/><path d="M8 9 h14 v4 h-5 v10 h-4 v-10 h-5 z" fill="' + c + '"/></svg>';
+    return L.divIcon({ html: svg, className: '', iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -14] });
+  }
+  function disegna() {
+    if (mappa) { mappa.invalidateSize(); return; }
+    mappa = L.map('vs-leaflet', { scrollWheelZoom: false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2wbm_1_db8c9be60cf2d2d6ba49a9da', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd', maxZoom: 19
+    }).addTo(mappa);
+    var punti = [];
+    LUOGHI.forEach(function (l) {
+      var ll = [l.lat, l.lon]; punti.push(ll);
+      var link = 'https://www.google.com/maps/dir/?api=1&destination=' + l.lat + ',' + l.lon;
+      L.marker(ll, { icon: icona(l.c), title: l.n, alt: l.n }).addTo(mappa)
+        .bindPopup('<div class="vs-pop"><b>' + l.n + '</b><span>' + l.d + '</span><a href="' + link + '" target="_blank" rel="noopener">Indicazioni stradali →</a></div>');
+      if (!l.c) L.polyline([[LUOGHI[0].lat, LUOGHI[0].lon], ll], { color: '#B8922A', weight: 2, opacity: .7, dashArray: '4 8' }).addTo(mappa);
+    });
+    mappa.fitBounds(punti, { padding: [36, 36] });
+  }
+  btn.addEventListener('click', function () {
+    var apri = box.hidden;
+    box.hidden = !apri;
+    btn.setAttribute('aria-expanded', apri ? 'true' : 'false');
+    btn.textContent = apri ? '✕ Chiudi la mappa reale' : '🗺️ Apri la mappa reale dei luoghi';
+    if (apri) carica(disegna);
+  });
+})();
+</script>
 <script src="nav.min.js"></script>
 </body>
 </html>

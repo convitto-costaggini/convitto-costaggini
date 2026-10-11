@@ -36,6 +36,7 @@ window.VOCABOLARIO = (function () {
     {"id":"ac-telefono","ambito":"accoglienza","nome":"📞 Al telefono","sot":"Prendere una prenotazione con garbo e precisione."},
     {"id":"ac-reclami","ambito":"accoglienza","nome":"🙏 Problemi e reclami","sot":"Ascoltare, scusarsi, risolvere."},
     {"id":"ac-territorio","ambito":"accoglienza","nome":"🗺️ Indicazioni e territorio","sot":"Spiegare la strada e far conoscere Rieti."},
+    {"id":"ac-oggetti","ambito":"accoglienza","nome":"🧳 Alla reception","sot":"Gli oggetti del ricevimento, da conoscere per nome."},
     {"id":"ba-caffetteria","ambito":"bar","nome":"☕ Caffetteria","sot":"Il caffè all'italiana spiegato al mondo."},
     {"id":"ba-cocktail","ambito":"bar","nome":"🍹 Aperitivi e cocktail","sot":"Attrezzi, richieste e una regola: niente alcol ai minorenni."},
     {"id":"ba-banco","ambito":"bar","nome":"🧾 Il servizio al banco","sot":"Ordinare, pagare, salutare."}
@@ -346,6 +347,20 @@ window.VOCABOLARIO = (function () {
     ["I santuari francescani della Valle Santa",{"en":["The Franciscan sanctuaries of the Holy Valley","də frensìscən sènciuəris əv də hòuli vèli"],"fr":["Les sanctuaires franciscains de la Vallée Sainte","le saNctüèr fraNsiscàN də la valé saNt"],"es":["Los santuarios franciscanos del Valle Santo","los santuàrios franthiscànos del bàglie sànto"],"de":["Die Franziskaner-Heiligtümer im Heiligen Tal","di frantsiscàner-hàilih-tümer im hàilighen tal"]}],
     ["Ecco una cartina",{"en":["Here's a map","hìərs a mep"],"fr":["Voici un plan","vuasì aN plaN"],"es":["Aquí tiene un mapa","achì tiéne un màpa"],"de":["Hier ist ein Stadtplan","hìr ist ain shtàt-plan"]}],
     ["Le chiamo un taxi?",{"en":["Shall I call you a taxi?","sciàl ai col iu a tèxi"],"fr":["Je vous appelle un taxi ?","jə vu zapèl aN taxì"],"es":["¿Le pido un taxi?","le pìdo un tàxi"],"de":["Soll ich Ihnen ein Taxi rufen?","zol ih ìnen ain tàxi rùfen"]}]
+  ],
+  "ac-oggetti": [
+    ["Il bancone della reception",{"en":["The reception desk","də risèpscion desk"],"fr":["Le comptoir de la réception","lə coNtuàr də la resepsiòN"],"es":["El mostrador de recepción","el mostradór de rethepthión"],"de":["Die Rezeption","di retsepsiòn"]}],
+    ["Il campanello",{"en":["The bell","də bel"],"fr":["La sonnette","la sonèt"],"es":["El timbre","el tìmbre"],"de":["Die Klingel","di clìnghel"]}],
+    ["La chiave",{"en":["The key","də chìi"],"fr":["La clé","la clé"],"es":["La llave","la gliàbe"],"de":["Der Schlüssel","der shlüssel"]}],
+    ["La valigia",{"en":["The suitcase","də sùtcheis"],"fr":["La valise","la valìz"],"es":["La maleta","la maléta"],"de":["Der Koffer","der còffer"]}],
+    ["Il passaporto",{"en":["The passport","də pàsport"],"fr":["Le passeport","lə paspòr"],"es":["El pasaporte","el pasapòrte"],"de":["Der Reisepass","der ràize-pas"]}],
+    ["Il telefono",{"en":["The telephone","də tèlifoun"],"fr":["Le téléphone","lə telefòn"],"es":["El teléfono","el telèfono"],"de":["Das Telefon","das telefòn"]}],
+    ["Il computer",{"en":["The computer","də compiùtər"],"fr":["L'ordinateur","lordinatör"],"es":["El ordenador","el ordenadór"],"de":["Der Computer","der compiùter"]}],
+    ["La cartina della città",{"en":["The town map","də tàun mep"],"fr":["Le plan de la ville","lə plaN də la vil"],"es":["El plano de la ciudad","el plàno de la thiudàd"],"de":["Der Stadtplan","der shtàt-plan"]}],
+    ["L'ascensore",{"en":["The lift","də lift"],"fr":["L'ascenseur","lasaNsör"],"es":["El ascensor","el asthensór"],"de":["Der Aufzug","der àuf-tsuk"]}],
+    ["Il dépliant",{"en":["The brochure","də bròuscer"],"fr":["Le dépliant","lə depliàN"],"es":["El folleto","el fogliéto"],"de":["Der Prospekt","der prospèkt"]}],
+    ["Il carrello portabagagli",{"en":["The luggage trolley","də làghig tròli"],"fr":["Le chariot à bagages","lə sciariò a bagàj"],"es":["El carro portaequipajes","el càrro portaechipàhes"],"de":["Der Gepäckwagen","der ghepèk-vaghen"]}],
+    ["La penna",{"en":["The pen","də pen"],"fr":["Le stylo","lə stilò"],"es":["El bolígrafo","el bolìgrafo"],"de":["Der Kugelschreiber","der kùghel-shraiber"]}]
   ],
   "ba-caffetteria": [
     ["Un caffè espresso",{"en":["An espresso","an esprèsso"],"fr":["Un expresso","aN nexpressò"],"es":["Un café solo","un cafè sòlo"],"de":["Ein Espresso","ain esprèsso"]}],

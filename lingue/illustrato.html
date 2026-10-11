@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Il ristorante illustrato | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Scene illustrate e interattive di sala, cucina, pasticceria, reception e bar: tocca un oggetto e ascolta il suo nome in inglese, francese, spagnolo e tedesco."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <script src="app.js" defer></script>
+  <style>
+  .il-ctrl{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.9rem 0 1rem}
+  .il-modo{display:flex;background:#fff;border:1.5px solid var(--av3);border-radius:12px;padding:3px;gap:3px}
+  .il-modo button{font:700 .74rem var(--fu);border:0;background:transparent;color:var(--bosco);padding:.55rem .75rem;border-radius:9px;cursor:pointer;white-space:nowrap}
+  .il-modo button[aria-pressed=true]{background:var(--bosco);color:#fff}
+  .il-scena{position:relative;max-width:980px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 14px 40px rgba(44,62,45,.18);border:1px solid var(--av3);background:#fff}
+  .il-scena svg{display:block;width:100%;height:auto;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+  .og{cursor:pointer;transition:filter .15s,opacity .2s}
+  .og:hover,.og:focus{filter:drop-shadow(0 0 6px rgba(212,170,74,.95)) brightness(1.04);outline:none}
+  .og.sel{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px #d4aa4a) drop-shadow(0 0 16px #d4aa4a)}
+  .og.giusto{filter:drop-shadow(0 0 10px #10b981) drop-shadow(0 0 18px #10b981)}
+  .og.sbagliato{filter:drop-shadow(0 0 10px #ef4444);animation:ilScuoti .35s}
+  .og.aiuto{animation:ilLampo 1s ease-in-out 3}
+  @keyframes ilScuoti{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+  @keyframes ilLampo{50%{filter:drop-shadow(0 0 14px #d4aa4a) drop-shadow(0 0 22px #d4aa4a)}}
+  @media (prefers-reduced-motion:reduce){.og.sbagliato,.og.aiuto{animation:none}}
+  .et rect{fill:rgba(44,62,45,.92)}
+  .et text{fill:#fff;font:700 13px var(--fu,sans-serif)}
+  .il-scheda{max-width:980px;margin:1rem auto 0;min-height:96px}
+  .il-card{background:#fff;border:1px solid var(--av3);border-radius:16px;padding:1rem 1.15rem;box-shadow:var(--sh-sm);display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;animation:ilEntra .25s ease}
+  @keyframes ilEntra{from{opacity:0;transform:translateY(6px)}}
+  .il-card .it{font-family:var(--fd);font-size:1.15rem;color:var(--txt2);width:100%;margin:0}
+  .il-card .tr{font-family:var(--fd);font-size:clamp(1.6rem,6vw,2.2rem);color:var(--bosco);line-height:1.1;margin:0}
+  .il-card .pr{font-size:.9rem;color:var(--txt2);font-style:italic}
+  .il-card .lg-play{width:48px;height:48px;font-size:1.2rem}
+  .il-altre{display:flex;flex-wrap:wrap;gap:.35rem .9rem;width:100%;border-top:1px dashed var(--av3);padding-top:.55rem;margin-top:.1rem}
+  .il-altre span{font-size:.82rem;color:var(--txt2)}
+  .il-altre b{font:800 .58rem var(--fu);color:var(--oro);margin-right:.3rem}
+  .il-suggerimento{text-align:center;color:var(--txt2);font-size:.88rem;padding:1.4rem .5rem}
+  .il-gioco{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;background:var(--bosco);color:#fff;border-radius:16px;padding:.9rem 1.1rem}
+  .il-gioco .dom{font:800 .62rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro3)}
+  .il-gioco .par{font-family:var(--fd);font-size:clamp(1.5rem,5.5vw,2rem);line-height:1.1;flex:1;min-width:160px}
+  .il-gioco .pun{font:800 .8rem var(--fu);color:var(--oro3);white-space:nowrap}
+  .il-gioco .lg-play{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);width:46px;height:46px}
+  .il-fine{text-align:center;background:#fff;border:1px solid var(--av3);border-radius:16px;padding:1.3rem;box-shadow:var(--sh-sm)}
+  .il-fine .tit{font-family:var(--fd);font-size:2rem;color:var(--bosco);margin:0 0 .3rem}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="illustrato">
+<div class="lg-anteprima">Anteprima per i docenti · contenuti in revisione, non ancora pubblicati</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Guarda, tocca, ascolta</p>
+      <h1>Il ristorante <em>illustrato</em></h1>
+      <p>Cinque scene, una per ambito: la tavola apparecchiata, la cucina, il laboratorio di pasticceria, la reception, il bancone del bar. Tocca un oggetto e lo senti nominare. Poi prova il gioco: il telefono dice una parola, tu trovi l'oggetto.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez">
+    <div class="w" style="max-width:1000px">
+      <div class="lg-chips scorre" id="il-scene" role="group" aria-label="Scena"></div>
+      <div class="lg-chips scorre" id="il-lingue" role="group" aria-label="Lingua" style="margin-top:.6rem"></div>
+      <div class="il-ctrl">
+        <div class="il-modo" role="group" aria-label="Modalità">
+          <button type="button" data-m="esplora" aria-pressed="true">👆 Esplora</button>
+          <button type="button" data-m="etichette" aria-pressed="false">🏷️ Etichette</button>
+          <button type="button" data-m="trova" aria-pressed="false">🎯 Trova l'oggetto</button>
+        </div>
+      </div>
+      <div class="il-scena" id="il-scena"></div>
+      <div class="il-scheda" id="il-scheda" aria-live="polite"></div>
+      <p class="lg-nota" style="max-width:980px;margin:1.5rem auto 0">📽️ <b>In classe:</b> proiettate una scena sulla LIM in modalità <b>Etichette</b> per presentare il lessico, poi passate a <b>Trova l'oggetto</b> e fate venire i ragazzi alla lavagna, oppure lasciate che giochino dal telefono.</p>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/parole.js"></script>
+<script src="lingue/illustrato-scene.js"></script>
+<script>
+(function () {
+  var L = window.LINGUE_SITO, V = window.VOCABOLARIO, S = window.SCENE_ILLUSTRATE, esc = L.esc;
+  var IDX = {}; V.SEZIONI.forEach(function (s) { (V.PAROLE[s.id] || []).forEach(function (p) { if (!IDX[p[0]]) IDX[p[0]] = p; }); });
+  var ICONE = {}; V.AMBITI.forEach(function (a) { ICONE[a.id] = a.icona; });
+  var dalLink = (location.search.match(/[?&]s=([a-z]+)/) || [])[1];
+  var scena = S.some(function (x) { return x.id === dalLink; }) ? dalLink : L.leggi('scena-il', 'sala');
+  if (!S.some(function (x) { return x.id === scena; })) scena = 'sala';
+  var lingua = L.leggi('lingua-il', 'en'), modo = 'esplora', gioco = null;
+  var box = document.getElementById('il-scena'), scheda = document.getElementById('il-scheda');
+  function sc() { return S.filter(function (x) { return x.id === scena; })[0]; }
+  function tr(k) { return IDX[k][1][lingua]; }
+
+  function disegnaControlli() {
+    document.getElementById('il-scene').innerHTML = S.map(function (x) { return '<button type="button" class="lg-chip" data-sc="' + x.id + '" aria-pressed="' + (x.id === scena) + '">' + ICONE[x.id] + ' ' + esc(x.titolo) + '</button>'; }).join('');
+    document.getElementById('il-lingue').innerHTML = L.LINGUE.map(function (l) { return '<button type="button" class="lg-chip" data-l="' + l.cod + '" aria-pressed="' + (l.cod === lingua) + '">' + l.nome + '</button>'; }).join('');
+  }
+  function disegnaScena() {
+    var s = sc();
+    box.innerHTML = '<svg viewBox="0 0 800 500" role="img" aria-label="' + esc(s.titolo + ': ' + s.sot) + '"><g aria-hidden="true">' + s.sfondo + '</g>' +
+      s.oggetti.map(function (o) { return '<g class="og" data-k="' + esc(o.k) + '" tabindex="0" role="button" aria-label="' + esc(o.k) + '">' + o.svg + '</g>'; }).join('') + '<g id="il-et"></g></svg>';
+    etichette();
+  }
+  /* etichette: una per oggetto, nel punto centrale, nella lingua scelta */
+  function etichette() {
+    var g = document.getElementById('il-et'); if (!g) return;
+    g.innerHTML = '';
+    if (modo !== 'etichette') return;
+    var NS = 'http://www.w3.org/2000/svg', occupate = [];
+    var pos = {}; sc().oggetti.forEach(function (o) { if (o.lx) pos[o.k] = [o.lx, o.ly]; });
+    box.querySelectorAll('.og').forEach(function (o) {
+      var b = o.getBBox(), t = tr(o.dataset.k)[0], x = b.x + b.width / 2, y = b.y + b.height / 2;
+      if (pos[o.dataset.k]) { x = pos[o.dataset.k][0]; y = pos[o.dataset.k][1]; }
+      var w = Math.min(220, t.length * 7.4 + 16), h = 22;
+      /* evita le sovrapposizioni più evidenti spostando l'etichetta in basso */
+      for (var tent = 0; tent < 6 && occupate.some(function (r) { return Math.abs(r.x - x) < (r.w + w) / 2 && Math.abs(r.y - y) < h; }); tent++) y += h + 2;
+      x = Math.max(w / 2 + 4, Math.min(800 - w / 2 - 4, x)); y = Math.max(h / 2 + 4, Math.min(500 - h / 2 - 4, y));
+      occupate.push({ x: x, y: y, w: w });
+      var e = document.createElementNS(NS, 'g'); e.setAttribute('class', 'et'); e.setAttribute('pointer-events', 'none');
+      e.innerHTML = '<rect x="' + (x - w / 2) + '" y="' + (y - h / 2) + '" width="' + w + '" height="' + h + '" rx="11"/><text x="' + x + '" y="' + (y + 4.5) + '" text-anchor="middle" lang="' + lingua + '">' + esc(t) + '</text>';
+      g.appendChild(e);
+    });
+  }
+  function mostraOggetto(k) {
+    var p = IDX[k], t = p[1][lingua], l = L.lingua(lingua);
+    scheda.innerHTML = '<div class="il-card"><p class="it">' + esc(k) + '</p><div style="flex:1;min-width:180px"><p class="tr" lang="' + lingua + '">' + esc(t[0]) + '</p><span class="pr">' + esc(t[1]) + '</span></div>' + L.play(t[0], lingua, 'Ascolta in ' + l.nome.toLowerCase()) +
+      '<div class="il-altre">' + L.LINGUE.filter(function (x) { return x.cod !== lingua; }).map(function (x) { return '<span><b>' + x.cod.toUpperCase() + '</b>' + esc(p[1][x.cod][0]) + '</span>'; }).join('') + '</div></div>';
+    if (L.parla) L.ascolta(t[0], lingua, { btn: scheda.querySelector('.lg-play') });
+  }
+  function suggerimento() {
+    scheda.innerHTML = modo === 'etichette' ? '<p class="il-suggerimento">Tutti i nomi sono sulla scena. Tocca un oggetto per ascoltarlo.</p>'
+      : '<p class="il-suggerimento">👆 Tocca un oggetto della scena per sentirne il nome in ' + L.lingua(lingua).nome.toLowerCase() + '.</p>';
+  }
+  /* gioco: trova l'oggetto */
+  function nuovoGioco() {
+    var tutti = sc().oggetti.map(function (o) { return o.k; });
+    gioco = { lista: L.mescola(tutti).slice(0, Math.min(10, tutti.length)), pos: 0, punti: 0, errori: 0 };
+    domandaGioco();
+  }
+  function domandaGioco() {
+    box.querySelectorAll('.og').forEach(function (o) { o.classList.remove('giusto', 'sbagliato', 'aiuto', 'sel'); });
+    if (gioco.pos >= gioco.lista.length) {
+      var n = gioco.lista.length, tit = gioco.punti === n ? '🏆 Perfetto!' : gioco.punti >= n * .7 ? '👏 Molto bene!' : '💪 Riprova!';
+      var rec = L.leggi('il-rec-' + scena + '-' + lingua, 0); if (gioco.punti > rec) L.salva('il-rec-' + scena + '-' + lingua, gioco.punti);
+      scheda.innerHTML = '<div class="il-fine"><p class="tit">' + tit + '</p><p>Al primo colpo: <b>' + gioco.punti + ' su ' + n + '</b>' + (rec ? ' · record: ' + Math.max(rec, gioco.punti) + ' su ' + n : '') + '</p><button type="button" class="lg-btn pieno" data-ancora>↺ Gioca ancora</button></div>';
+      return;
+    }
+    var k = gioco.lista[gioco.pos], t = tr(k);
+    gioco.tentativi = 0;
+    scheda.innerHTML = '<div class="il-gioco"><div style="flex:1;min-width:180px"><div class="dom">Trova · ' + (gioco.pos + 1) + ' di ' + gioco.lista.length + '</div><div class="par" lang="' + lingua + '">' + esc(t[0]) + '</div></div>' + L.play(t[0], lingua, 'Ascolta') + '<span class="pun">⭐ ' + gioco.punti + '</span></div>';
+    if (L.parla) L.ascolta(t[0], lingua, { btn: scheda.querySelector('.lg-play') });
+  }
+  function rispostaGioco(o) {
+    if (gioco.pausa) return;   /* durante il passaggio alla domanda successiva i tocchi non contano */
+    var k = gioco.lista[gioco.pos];
+    if (o.dataset.k === k) {
+      o.classList.add('giusto'); if (gioco.tentativi === 0) gioco.punti++;
+      if (navigator.vibrate) navigator.vibrate(30);
+      gioco.pos++; gioco.pausa = true; setTimeout(function () { gioco.pausa = false; domandaGioco(); }, 900);
+    } else {
+      gioco.tentativi++; o.classList.remove('sbagliato'); void o.getBBox(); o.classList.add('sbagliato');
+      if (gioco.tentativi >= 2) { var giusto = box.querySelector('.og[data-k="' + CSS.escape(k) + '"]'); if (giusto) giusto.classList.add('aiuto'); }
+    }
+  }
+  function tocca(o) {
+    if (modo === 'trova' && gioco) return rispostaGioco(o);
+    box.querySelectorAll('.og.sel').forEach(function (x) { x.classList.remove('sel'); }); o.classList.add('sel');
+    mostraOggetto(o.dataset.k);
+  }
+  box.addEventListener('click', function (e) { var o = e.target.closest('.og'); if (o) tocca(o); });
+  box.addEventListener('keydown', function (e) { var o = e.target.closest && e.target.closest('.og'); if (o && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); tocca(o); } });
+  scheda.addEventListener('click', function (e) { if (e.target.closest('[data-ancora]')) nuovoGioco(); });
+  document.addEventListener('click', function (e) {
+    var b;
+    if ((b = e.target.closest('[data-sc]'))) { scena = b.dataset.sc; L.salva('scena-il', scena); disegnaControlli(); disegnaScena(); if (modo === 'trova') nuovoGioco(); else suggerimento(); }
+    else if ((b = e.target.closest('[data-l]'))) { lingua = b.dataset.l; L.salva('lingua-il', lingua); disegnaControlli(); etichette(); if (modo === 'trova') nuovoGioco(); else { var s = box.querySelector('.og.sel'); if (s) mostraOggetto(s.dataset.k); else suggerimento(); } }
+    else if ((b = e.target.closest('[data-m]'))) {
+      modo = b.dataset.m; document.querySelectorAll('[data-m]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      box.querySelectorAll('.og').forEach(function (o) { o.classList.remove('sel', 'giusto', 'sbagliato', 'aiuto'); });
+      etichette(); if (modo === 'trova') nuovoGioco(); else { gioco = null; suggerimento(); }
+    }
+  });
+  disegnaControlli(); disegnaScena(); suggerimento();
+})();
+</script>
+</body>
+</html>

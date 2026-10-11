@@ -35,7 +35,7 @@
     <button type="button" class="pieno" id="dg-mostra">📲 Mostra l'invito adesso</button>
     <button type="button" id="dg-azzera">↻ Azzera le copie dell'app e ricarica</button>
   </div>
-  <small>"Azzera" cancella solo le pagine del sito salvate su questo telefono e la scelta "Non ora": le spunte della valigia e del primo giro restano.</small>
+  <small>"Azzera" cancella solo le pagine del sito salvate su questo telefono e l'eventuale rifiuto dell'invito: le spunte della valigia e del primo giro restano.</small>
 </main>
 <script>
 (function () {
@@ -44,7 +44,7 @@
     var A = window.CONVITTO_APP, righe = [];
     var ua = navigator.userAgent;
     righe.push(['Browser', ua]);
-    righe.push(['Versione app.js in uso', A ? '<span class="ok">' + A.versione + '</span>' : '<span class="no">vecchia (prima della 3)</span>']);
+    righe.push(['Versione app.js in uso', A ? '<span class="ok">' + A.versione + '</span>' : '<span class="no">vecchia (prima della 4)</span>']);
     try {
       var srv = await (await fetch('app.js?controllo=' + Date.now(), { cache: 'no-store' })).text();
       var m = srv.match(/versione: '(\d+)'/);
@@ -57,7 +57,7 @@
       righe.push(['Già aperto come app', sì(i.installata)]);
       righe.push(['Installazione diretta offerta', sì(i.installazioneDiretta)]);
       righe.push(['Pagine visitate', i.preferenze.pagine || 0]);
-      righe.push(['"Non ora" attivo fino al', i.preferenze.noFinoA ? new Date(i.preferenze.noFinoA).toLocaleDateString('it-IT') : '—']);
+      righe.push(['Invito già rifiutato', (i.preferenze.rifiutato || i.preferenze.noFinoA) ? 'sì' : 'no']);
     }
     righe.push(['Modalità di visualizzazione', ['standalone', 'minimal-ui', 'fullscreen', 'browser'].filter(function (d) { return matchMedia('(display-mode: ' + d + ')').matches; }).join(', ') || '?']);
     if ('serviceWorker' in navigator) {

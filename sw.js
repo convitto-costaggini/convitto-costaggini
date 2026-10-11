@@ -8,6 +8,11 @@
      riservate (admin, area riservata, totem, richieste di accesso)
      audio, video e PDF, e tutto ciò che non è una semplice lettura
      (moduli inviati).
+   - Una versione nuova di questo file subentra solo quando tutte le
+     finestre del sito sono chiuse (niente skipWaiting/claim): così un
+     aggiornamento non interrompe mai una pagina che si sta caricando.
+   - Rete lentissima: se una pagina non arriva entro 6 secondi e ne
+     esiste una copia salvata, si mostra la copia.
    Per forzare un aggiornamento completo delle copie: cambiare VERSIONE.
    ════════════════════════════════════════════════════════ */
 var VERSIONE = 'convitto-v1';
@@ -23,13 +28,13 @@ self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(VERSIONE).then(function (c) {
     /* una pagina che non si scarica non deve bloccare l'installazione */
     return Promise.all(ESSENZIALI.map(function (u) { return c.add(u).catch(function () {}); }));
-  }).then(function () { return self.skipWaiting(); }));
+  }));
 });
 
 self.addEventListener('activate', function (e) {
   e.waitUntil(caches.keys().then(function (k) {
     return Promise.all(k.filter(function (n) { return n !== VERSIONE; }).map(function (n) { return caches.delete(n); }));
-  }).then(function () { return self.clients.claim(); }));
+  }));
 });
 
 function salva(req, res) {
@@ -64,11 +69,23 @@ self.addEventListener('fetch', function (e) {
   /* "no-cache": il browser chiede sempre al sito se il file è cambiato (risposta
      veloce se non lo è), così dopo ogni modifica la versione nuova arriva subito */
   var fresca = new Request(url.href, { cache: 'no-cache', credentials: 'same-origin' });
-  e.respondWith(fetch(fresca).then(function (r) { return salva(req, r); }).catch(function () {
-    /* "?app=1" e simili: la copia salvata non dipende dai parametri */
-    var chiave = url.pathname === '/' ? 'index.html' : req;
-    return caches.match(chiave, { ignoreSearch: true }).then(function (c) {
-      return c || (pagina ? caches.match('offline.html') : Response.error());
+  /* "?app=1" e simili: la copia salvata non dipende dai parametri */
+  var chiave = url.pathname === '/' ? 'index.html' : req;
+  function copia() { return caches.match(chiave, { ignoreSearch: true }); }
+  e.respondWith(new Promise(function (ok, ko) {
+    var finito = false;
+    if (pagina) setTimeout(function () {
+      if (!finito) copia().then(function (c) { if (c && !finito) { finito = true; ok(c); } });
+    }, 6000);
+    fetch(fresca).then(function (r) {
+      salva(req, r);
+      if (!finito) { finito = true; ok(r); }
+    }).catch(function () {
+      copia().then(function (c) {
+        if (finito) return;
+        finito = true;
+        if (c) ok(c); else if (pagina) caches.match('offline.html').then(function (o) { ok(o || Response.error()); }); else ok(Response.error());
+      });
     });
   }));
 });

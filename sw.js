@@ -17,7 +17,7 @@ var ESSENZIALI = [
   'style.min.css', 'fonts.css', 'nav-header.min.js', 'nav.min.js', 'app.js',
   'valigia.js', 'calendario-scolastico.js', 'favicon.ico', 'icon-192.png'
 ];
-var RISERVATE = /\/(admin|area-riservata|totem|richiesta-accesso|google[0-9a-f]+)\.html$/;
+var RISERVATE = /\/(admin|area-riservata|totem|richiesta-accesso|diagnostica-app|google[0-9a-f]+)\.html$/;
 
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(VERSIONE).then(function (c) {

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Imprevisti | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Storie interattive in inglese, francese, spagnolo e tedesco: il vino che sa di tappo, una reazione allergica, la prenotazione sparita. Scegli la risposta giusta e scopri come reagisce il cliente."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <script src="app.js" defer></script>
+  <style>
+  .im-elenco{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem}
+  .im-card{text-align:left;cursor:pointer;font-family:var(--fu);display:flex;flex-direction:column;gap:.35rem;border:1.5px solid var(--av3);background:#fff;border-radius:16px;padding:1.1rem;box-shadow:var(--sh-sm);transition:transform .2s,border-color .2s}
+  .im-card:hover{transform:translateY(-3px);border-color:var(--oro)}
+  .im-card .ic{font-size:2rem;line-height:1}
+  .im-card .amb{font:800 .58rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro)}
+  .im-card h3{font-family:var(--fd);font-weight:400;font-size:1.3rem;color:var(--bosco);margin:0}
+  .im-card p{font-size:.84rem;color:var(--txt2);line-height:1.55;margin:0}
+  .im-card .rec{margin-top:auto;padding-top:.4rem;font:800 .62rem var(--fu);letter-spacing:.06em;color:#047857}
+  .im-gioco{max-width:680px;margin:0 auto}
+  .im-testa{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+  .im-testa h2{font-family:var(--fd);font-weight:400;font-size:clamp(1.3rem,4.5vw,1.7rem);color:var(--bosco);margin:0;flex:1;line-height:1.2}
+  .im-umore{display:flex;align-items:center;gap:.5rem;background:#fff;border:1px solid var(--av3);border-radius:999px;padding:.3rem .8rem .3rem .4rem;font:800 .66rem var(--fu);color:var(--bosco2)}
+  .im-umore span{font-size:1.6rem;line-height:1;transition:transform .3s}
+  .im-umore span.cambia{transform:scale(1.35)}
+  .im-passi{display:flex;gap:.35rem;margin-bottom:1rem}
+  .im-passi i{flex:1;height:6px;border-radius:6px;background:var(--av3)}
+  .im-passi i.ok{background:#10b981}.im-passi i.mh{background:#f59e0b}.im-passi i.ko{background:#ef4444}.im-passi i.ora{background:var(--oro)}
+  .im-intro{background:var(--bosco);color:rgba(245,240,232,.9);border-radius:14px;padding:.9rem 1.1rem;font-size:.9rem;line-height:1.6;margin-bottom:.9rem}
+  .im-sit{font-size:.92rem;color:var(--txt2);font-style:italic;margin:0 0 .7rem;line-height:1.6}
+  .im-cli{display:flex;gap:.6rem;align-items:flex-end;margin-bottom:1rem}
+  .im-cli .av{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:var(--av2);border:1px solid var(--av3);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+  .im-cli .bb{flex:1;background:#fff;border:1px solid var(--av3);border-radius:16px 16px 16px 4px;padding:.8rem 1rem;box-shadow:var(--sh-sm)}
+  .im-cli .tx{display:flex;gap:.6rem;align-items:flex-start}
+  .im-cli .tx span{flex:1;font-size:1.02rem;line-height:1.45;color:var(--txt)}
+  .im-trad{display:none;font-size:.8rem;color:var(--txt2);font-style:italic;margin-top:.35rem}
+  .mostra-trad .im-trad{display:block}
+  .im-dom{font:800 .62rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin:0 0 .5rem}
+  .im-opz{display:grid;gap:.55rem}
+  .im-opz button{font:600 .94rem var(--fu);text-align:left;padding:.85rem 1rem;border-radius:14px;border:1.5px solid var(--av3);background:var(--bco);color:var(--txt);cursor:pointer;line-height:1.4;min-height:52px}
+  .im-opz button:hover:not(:disabled){border-color:var(--oro)}
+  .im-opz button:disabled{cursor:default}
+  .im-opz button.v3{background:#ecfdf5;border-color:#10b981;color:#065f46}
+  .im-opz button.v1{background:#fffbeb;border-color:#f59e0b;color:#78350f}
+  .im-opz button.v0{background:#fef2f2;border-color:#f87171;color:#991b1b}
+  .im-opz button.spenta{opacity:.55}
+  .im-opz .tr{display:none;font-weight:500;font-size:.78rem;color:var(--txt2);font-style:italic;margin-top:.25rem}
+  .mostra-trad .im-opz .tr{display:block}
+  .im-esito{margin-top:1rem;border-radius:16px;padding:1rem 1.1rem;border:1px solid var(--av3);background:#fff;box-shadow:var(--sh-sm);animation:imEntra .3s ease}
+  @keyframes imEntra{from{opacity:0;transform:translateY(8px)}}
+  .im-badge{display:inline-block;font:800 .62rem var(--fu);letter-spacing:.1em;text-transform:uppercase;padding:.3rem .65rem;border-radius:999px;margin-bottom:.5rem}
+  .im-badge.v3{background:#10b981;color:#fff}.im-badge.v1{background:#f59e0b;color:#fff}.im-badge.v0{background:#ef4444;color:#fff}
+  .im-reaz{font-family:var(--fd);font-size:1.12rem;color:var(--bosco);line-height:1.4;margin:0 0 .5rem}
+  .im-perche{font-size:.88rem;color:var(--txt2);line-height:1.6;margin:0}
+  .im-meglio{margin-top:.7rem;padding-top:.7rem;border-top:1px dashed var(--av3);display:flex;gap:.6rem;align-items:flex-start;font-size:.88rem;color:#065f46}
+  .im-meglio div{flex:1}
+  .im-fine{text-align:center;background:#fff;border:1px solid var(--av3);border-radius:18px;padding:1.4rem 1.2rem;box-shadow:var(--sh-sm)}
+  .im-fine .faccia{font-size:3.4rem;line-height:1}
+  .im-fine .tit{font-family:var(--fd);font-size:1.8rem;color:var(--bosco);margin:.3rem 0}
+  .im-fine p{color:var(--txt2);font-size:.9rem;line-height:1.6}
+  .im-fine .bott{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1rem}
+  .im-riep{text-align:left;margin:1rem 0 0;padding:0;list-style:none}
+  .im-riep li{display:flex;gap:.5rem;font-size:.84rem;color:var(--txt2);padding:.35rem 0;border-top:1px dashed var(--av3)}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="imprevisti">
+<div class="lg-anteprima">Anteprima per i docenti · storie in revisione, non ancora pubblicate</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Saper gestire</p>
+      <h1>Gli <em>imprevisti</em></h1>
+      <p>Il vino sa di tappo, un ospite ha una reazione allergica, la prenotazione è sparita. A ogni passo scegli tra tre risposte nella lingua del cliente e scopri come reagisce. Alla fine vedi se è uscito contento.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez" id="im">
+    <div class="w" style="max-width:900px">
+      <label style="display:inline-flex;align-items:center;gap:.45rem;font:600 .82rem var(--fu);color:var(--txt2);margin:.8rem 0 0;cursor:pointer"><input type="checkbox" id="im-trad" style="width:18px;height:18px;accent-color:var(--bosco)"/> Mostra la traduzione italiana</label>
+      <div id="im-vista"></div>
+      <p class="lg-nota" style="margin-top:1.6rem">🎓 <b>In classe:</b> proiettate una storia e fate votare la classe per alzata di mano prima di scegliere. Poi discutete la spiegazione: perché quella risposta è la migliore? Come la direste voi?</p>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/parole.js"></script>
+<script src="lingue/imprevisti-dati.js"></script>
+<script>
+(function () {
+  var L = window.LINGUE_SITO, I = window.IMPREVISTI, esc = L.esc;
+  var AMB = {}; window.VOCABOLARIO.AMBITI.forEach(function (a) { AMB[a.id] = a; });
+  var lingua = L.linguaScelta(), storia = null, passo = 0, voti = [], ordine = [];
+  var vista = document.getElementById('im-vista'), sez = document.getElementById('im');
+  var ESITO = { 3: ['v3', '✓ Ottima risposta'], 1: ['v1', '≈ Si può fare meglio'], 0: ['v0', '✗ Da evitare'] };
+  function faccia(p) { var max = 3 * Math.max(voti.length, 1), r = voti.length ? p / max : .7; return r >= .85 ? '😀' : r >= .6 ? '🙂' : r >= .35 ? '😐' : '😠'; }
+  function punti() { return voti.reduce(function (a, b) { return a + b; }, 0); }
+
+  function elenco() {
+    storia = null;
+    vista.innerHTML = '<div class="im-elenco">' + I.map(function (s) {
+      var rec = L.leggi('im-rec-' + s.id, null);
+      return '<button type="button" class="im-card" data-st="' + s.id + '"><span class="ic">' + s.icona + '</span><span class="amb">' + AMB[s.ambito].icona + ' ' + esc(AMB[s.ambito].nome) + '</span><h3>' + esc(s.titolo) + '</h3><p>' + esc(s.intro) + '</p>' + (rec != null ? '<span class="rec">Il tuo record: ' + rec + ' su 9</span>' : '') + '</button>';
+    }).join('') + '</div>';
+  }
+  function avvia(id) { storia = I.filter(function (s) { return s.id === id; })[0]; passo = 0; voti = []; mostraPasso(); sez.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  function testa() {
+    return '<div class="im-testa"><button type="button" class="lg-btn" data-elenco style="min-height:38px;padding:.45rem .8rem">←</button><h2>' + storia.icona + ' ' + esc(storia.titolo) + '</h2><div class="im-umore" title="Umore del cliente"><span id="im-faccia">' + faccia(punti()) + '</span>umore</div></div>' +
+      '<div class="im-passi">' + storia.passi.map(function (p, i) { return '<i class="' + (i < voti.length ? (voti[i] === 3 ? 'ok' : voti[i] === 1 ? 'mh' : 'ko') : i === passo ? 'ora' : '') + '"></i>'; }).join('') + '</div>';
+  }
+  function mostraPasso() {
+    var p = storia.passi[passo], t = p.cliente[lingua];
+    ordine = L.mescola([0, 1, 2]);
+    vista.innerHTML = '<div class="im-gioco">' + testa() + (passo === 0 ? '<div class="im-intro">' + esc(storia.intro) + '</div>' : '') +
+      '<p class="im-sit">' + esc(p.situazione) + '</p>' +
+      '<div class="im-cli"><span class="av" aria-hidden="true">🧑</span><div class="bb"><div class="tx"><span lang="' + lingua + '">' + esc(t) + '</span>' + L.play(t, lingua, 'Ascolta il cliente') + '</div><div class="im-trad">' + esc(p.clienteIt) + '</div></div></div>' +
+      '<p class="im-dom">Che cosa rispondi?</p><div class="im-opz">' + ordine.map(function (k) { var o = p.opzioni[k]; return '<button type="button" data-o="' + k + '" lang="' + lingua + '">' + esc(o.testo[lingua]) + '<span class="tr">' + esc(o.it) + '</span></button>'; }).join('') + '</div><div id="im-esito"></div></div>';
+    if (L.parla) setTimeout(function () { L.ascolta(t, lingua, { btn: vista.querySelector('.im-cli .lg-play'), pitch: .9 }); }, 300);
+  }
+  function scegli(k) {
+    var p = storia.passi[passo], o = p.opzioni[k], migliore = p.opzioni.filter(function (x) { return x.voto === 3; })[0];
+    voti.push(o.voto);
+    vista.querySelectorAll('[data-o]').forEach(function (b) { b.disabled = true; var v = p.opzioni[+b.dataset.o].voto; if (+b.dataset.o === k) b.classList.add('v' + v); else if (v === 3 && o.voto !== 3) b.classList.add('v3'); else b.classList.add('spenta'); });
+    var e = ESITO[o.voto];
+    document.getElementById('im-esito').innerHTML = '<div class="im-esito"><span class="im-badge ' + e[0] + '">' + e[1] + '</span><p class="im-reaz">' + esc(o.reazione) + '</p><p class="im-perche">' + esc(o.perche) + '</p>' +
+      (o.voto !== 3 ? '<div class="im-meglio"><div><b>La risposta migliore:</b><br/><span lang="' + lingua + '">' + esc(migliore.testo[lingua]) + '</span></div>' + L.play(migliore.testo[lingua], lingua, 'Ascolta la risposta migliore') + '</div>' : '') +
+      '<button type="button" class="lg-btn pieno" data-avanti style="width:100%;margin-top:1rem">' + (passo + 1 < storia.passi.length ? 'Avanti →' : 'Com\'è andata?') + '</button></div>';
+    var f = document.getElementById('im-faccia'); f.textContent = faccia(punti()); f.classList.add('cambia'); setTimeout(function () { f.classList.remove('cambia'); }, 300);
+    vista.querySelectorAll('.im-passi i')[passo].className = o.voto === 3 ? 'ok' : o.voto === 1 ? 'mh' : 'ko';
+    if (L.parla) L.ascolta(o.testo[lingua], lingua);
+    document.getElementById('im-esito').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  function fine() {
+    var pt = punti(), max = 3 * storia.passi.length, r = pt / max;
+    var ES = storia.esiti || ['Cliente entusiasta!', 'Cliente soddisfatto', 'Cliente perplesso', 'Cliente scontento'];
+    var tit = ES[r >= .85 ? 0 : r >= .6 ? 1 : r >= .35 ? 2 : 3];
+    var rec = L.leggi('im-rec-' + storia.id, null); if (rec == null || pt > rec) L.salva('im-rec-' + storia.id, pt);
+    vista.innerHTML = '<div class="im-gioco">' + testa() + '<div class="im-fine"><div class="faccia">' + faccia(pt) + '</div><p class="tit">' + tit + '</p><p>Punteggio: <b>' + pt + ' su ' + max + '</b>' + (rec != null ? ' · record: ' + Math.max(rec, pt) + ' su ' + max : '') + '</p>' +
+      (storia.nota ? '<p class="lg-nota" style="text-align:left">⚠️ ' + esc(storia.nota) + '</p>' : '') +
+      '<ul class="im-riep">' + storia.passi.map(function (p, i) { return '<li><span>' + (voti[i] === 3 ? '✅' : voti[i] === 1 ? '🟡' : '❌') + '</span><span>' + esc(p.situazione) + '</span></li>'; }).join('') + '</ul>' +
+      '<div class="bott"><button type="button" class="lg-btn oro" data-rigioca>↺ Riprova</button><button type="button" class="lg-btn pieno" data-elenco>Altri imprevisti</button></div></div></div>';
+  }
+  document.addEventListener('click', function (e) {
+    var b;
+    if ((b = e.target.closest('[data-st]'))) avvia(b.dataset.st);
+    else if ((b = e.target.closest('[data-o]')) && !b.disabled) scegli(+b.dataset.o);
+    else if (e.target.closest('[data-avanti]')) { passo++; if (passo < storia.passi.length) mostraPasso(); else fine(); }
+    else if (e.target.closest('[data-rigioca]')) avvia(storia.id);
+    else if (e.target.closest('[data-elenco]')) { if (window.speechSynthesis) speechSynthesis.cancel(); elenco(); }
+  });
+  var tr = document.getElementById('im-trad'); tr.checked = !!L.leggi('trad-im', false); sez.classList.toggle('mostra-trad', tr.checked);
+  tr.addEventListener('change', function () { sez.classList.toggle('mostra-trad', tr.checked); L.salva('trad-im', tr.checked); });
+  var dalLink = (location.search.match(/[?&]s=([a-z]+)/) || [])[1];
+  /* la lingua si sceglie una volta sola, dal pulsante 🌍 della barra */
+  document.addEventListener('lingua', function (e) { lingua = e.detail; if (storia && voti.length === passo) mostraPasso(); });
+  if (I.some(function (s) { return s.id === dalLink; })) avvia(dalLink); else elenco();
+})();
+</script>
+</body>
+</html>

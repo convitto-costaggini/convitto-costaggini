@@ -65,7 +65,7 @@
   .ps-fc-b .no{border-color:#b45309;color:#b45309}
   .ps-prog{text-align:center;font:700 .72rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--bosco2);margin-bottom:.8rem}
   .ps-fine{text-align:center;padding:2rem 1rem}
-  @media (max-width:700px){#ps-ambiti,#ps-lingue,#ps-sezioni{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-1.25rem;margin-right:-1.25rem;padding:0 1.25rem}#ps-ambiti::-webkit-scrollbar,#ps-lingue::-webkit-scrollbar,#ps-sezioni::-webkit-scrollbar{display:none}.ps-chip{flex-shrink:0}}
+  @media (max-width:700px){#ps-ambiti,#ps-sezioni{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-1.25rem;margin-right:-1.25rem;padding:0 1.25rem}#ps-ambiti::-webkit-scrollbar,#ps-lingue::-webkit-scrollbar,#ps-sezioni::-webkit-scrollbar{display:none}.ps-chip{flex-shrink:0}}
   </style>
 </head>
 <body data-page="lingue" data-lingue="vocabolario">
@@ -89,10 +89,10 @@
           <input type="search" class="ps-cerca" id="ps-cerca" placeholder="Cerca una parola… (es. prenotato)" aria-label="Cerca una parola"/>
           <button type="button" class="ps-btn pieno" id="ps-allena">🎴 Allenati</button>
           <button type="button" class="ps-btn" id="ps-stampa">🖨️ Stampa</button>
+          <button type="button" class="ps-btn" id="ps-tutte" aria-pressed="true" title="Mostra tutte le lingue o solo quella scelta">🌍 Tutte</button>
         </div>
         <div class="ps-riga" id="ps-ambiti" role="group" aria-label="Ambito"></div>
         <div class="ps-riga" id="ps-sezioni" role="group" aria-label="Sezione"></div>
-        <div class="ps-riga" id="ps-lingue" role="group" aria-label="Lingua"></div>
       </div>
 
       <div class="ps-lista" id="ps-lista"></div>
@@ -135,7 +135,8 @@
   function salva() { try { localStorage.setItem(CH, JSON.stringify(st)); } catch (e) {} }
   var dalLink = (location.search.match(/[?&]a=([a-z]+)/) || [])[1];
   var ambito = ambitoDi(dalLink) ? dalLink : (ambitoDi(st.ambito) ? st.ambito : 'sala');
-  var lingua = st.lingua || 'tutte', sezione = sezioniDi(ambito)[0].id, cerca = '';
+  var SITO = window.LINGUE_SITO;
+  var lingua = st.soloMia ? SITO.linguaScelta() : 'tutte', sezione = sezioniDi(ambito)[0].id, cerca = '';
   function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function norm(t) { return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
 
@@ -155,11 +156,10 @@
     speechSynthesis.speak(u);
   }
 
-  var elLingue = document.getElementById('ps-lingue'), elSez = document.getElementById('ps-sezioni');
+  var elSez = document.getElementById('ps-sezioni'), elTutte = document.getElementById('ps-tutte');
   function chips() {
-    elLingue.innerHTML = [{ cod: 'tutte', nome: 'Tutte le lingue' }].concat(LINGUE).map(function (l) {
-      return '<button type="button" class="ps-chip" data-l="' + l.cod + '" aria-pressed="' + (lingua === l.cod) + '">' + l.nome + '</button>';
-    }).join('');
+    elTutte.setAttribute('aria-pressed', lingua === 'tutte');
+    elTutte.textContent = lingua === 'tutte' ? '🌍 Tutte' : '🌍 Solo ' + SITO.linguaScelta().toUpperCase();
     document.getElementById('ps-ambiti').innerHTML = AMBITI.map(function (a) {
       return '<button type="button" class="ps-chip ps-amb" data-amb="' + a.id + '" aria-pressed="' + (ambito === a.id) + '">' + a.icona + ' ' + a.nome + '</button>';
     }).join('');
@@ -197,7 +197,7 @@
   /* allenamento a flashcard */
   var mazzo = [], pos = 0, sapute = 0, tot = 0, primo = 0, visti = {}, linAll = 'en';
   function iniziaAllenamento(tieni) {
-    if (!tieni) linAll = lingua === 'tutte' ? (st.linAll || 'en') : lingua;
+    if (!tieni) linAll = lingua === 'tutte' ? SITO.linguaScelta() : lingua;
     mazzo = (PAROLE[sezione] || []).slice().sort(function () { return Math.random() - .5; });
     pos = 0; sapute = 0; tot = mazzo.length; primo = 0; visti = {}; carta();
   }
@@ -237,7 +237,7 @@
     var b;
     if ((b = e.target.closest('.ps-play'))) { e.stopPropagation(); ascolta(b.dataset.t, b.dataset.c, b); return; }
     if ((b = e.target.closest('[data-amb]'))) { ambito = b.dataset.amb; st.ambito = ambito; salva(); sezione = sezioniDi(ambito)[0].id; cerca = ''; document.getElementById('ps-cerca').value = ''; chips(); lista(); if (ps.classList.contains('allena')) iniziaAllenamento(); return; }
-    if ((b = e.target.closest('[data-l]'))) { lingua = b.dataset.l; st.lingua = lingua; salva(); chips(); lista(); return; }
+    if (e.target.closest('#ps-tutte')) { st.soloMia = lingua === 'tutte'; salva(); lingua = st.soloMia ? SITO.linguaScelta() : 'tutte'; chips(); lista(); return; }
     if ((b = e.target.closest('[data-s]')) && !b.disabled) { sezione = b.dataset.s; cerca = ''; document.getElementById('ps-cerca').value = ''; chips(); lista(); if (ps.classList.contains('allena')) iniziaAllenamento(); return; }
     if ((b = e.target.closest('[data-al]'))) { linAll = b.dataset.al; st.linAll = linAll; salva(); iniziaAllenamento(true); return; }
     if ((b = e.target.closest('[data-a]'))) {
@@ -259,6 +259,8 @@
   document.getElementById('ps-stampa').addEventListener('click', stampa);
   document.getElementById('ps-cerca').addEventListener('input', function () { cerca = this.value.trim(); if (ps.classList.contains('allena')) { ps.classList.remove('allena'); document.getElementById('ps-allena').textContent = '🎴 Allenati'; } lista(); });
   if (parla) speechSynthesis.getVoices();
+  /* la lingua si sceglie una volta sola, dal pulsante 🌍 della barra */
+  document.addEventListener('lingua', function () { if (lingua !== 'tutte') lingua = SITO.linguaScelta(); chips(); lista(); });
   chips(); lista();
 })();
 </script>

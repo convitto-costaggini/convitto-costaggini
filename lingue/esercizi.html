@@ -47,13 +47,12 @@
   <section class="lg-sez" id="es">
     <div class="w">
       <div class="es-scelta">
-        <p class="es-passo">1 · La lingua</p>
-        <div class="lg-chips scorre" id="es-lingue"></div>
-        <p class="es-passo">2 · L'ambito</p>
+        <p class="es-passo" id="es-lin-nota"></p>
+        <p class="es-passo">1 · L'ambito</p>
         <div class="lg-chips scorre" id="es-ambiti"></div>
-        <p class="es-passo">3 · L'argomento</p>
+        <p class="es-passo">2 · L'argomento</p>
         <div class="lg-chips scorre" id="es-sezioni"></div>
-        <p class="es-passo">4 · Il tipo di esercizio</p>
+        <p class="es-passo">3 · Il tipo di esercizio</p>
         <div class="es-tipi" id="es-tipi"></div>
         <p class="lg-nota" style="margin-top:1.5rem">💡 Gli esercizi con la voce funzionano meglio con l'audio acceso. Se una lingua non si sente, sul telefono si può scaricare la sua voce in <i>Impostazioni › Sintesi vocale</i>.</p>
       </div>
@@ -71,13 +70,13 @@
 <script>
 (function () {
   var L = window.LINGUE_SITO, E = window.ESERCIZI, P = window.VOCABOLARIO;
-  var lingua = L.leggi('lingua-es', 'en'), ambito = L.leggi('ambito-es', 'sala'), sezione = L.leggi('sezione-es', 'tutte');
+  var lingua = L.linguaScelta(), ambito = L.leggi('ambito-es', 'sala'), sezione = L.leggi('sezione-es', 'tutte');
   if (!P.AMBITI.some(function (a) { return a.id === ambito; })) ambito = 'sala';
   if (sezione !== 'tutte' && !P.SEZIONI.some(function (s) { return s.id === sezione && s.ambito === ambito; })) sezione = 'tutte';
   var sec = document.getElementById('es');
   function chiave(tipo) { return tipo + '-' + lingua + '-' + ambito + '-' + sezione; }
   function disegna() {
-    document.getElementById('es-lingue').innerHTML = L.LINGUE.map(function (l) { return '<button type="button" class="lg-chip" data-l="' + l.cod + '" aria-pressed="' + (l.cod === lingua) + '">' + l.nome + '</button>'; }).join('');
+    document.getElementById('es-lin-nota').innerHTML = 'Lingua: <b style="color:var(--bosco)">' + L.lingua(lingua).nome + '</b> · la cambi dal pulsante 🌍 in alto';
     document.getElementById('es-ambiti').innerHTML = P.AMBITI.map(function (a) { return '<button type="button" class="lg-chip" data-amb="' + a.id + '" aria-pressed="' + (a.id === ambito) + '">' + a.icona + ' ' + a.nome + '</button>'; }).join('');
     document.getElementById('es-sezioni').innerHTML = [{ id: 'tutte', nome: '🎲 Tutte' }].concat(P.SEZIONI.filter(function (s) { return s.ambito === ambito; })).map(function (s) { return '<button type="button" class="lg-chip" data-s="' + s.id + '" aria-pressed="' + (s.id === sezione) + '">' + s.nome + '</button>'; }).join('');
     document.getElementById('es-tipi').innerHTML = Object.keys(E.TIPI).map(function (k) {
@@ -87,8 +86,7 @@
   }
   document.addEventListener('click', function (e) {
     var b;
-    if ((b = e.target.closest('[data-l]'))) { lingua = b.dataset.l; L.salva('lingua-es', lingua); disegna(); }
-    else if ((b = e.target.closest('[data-amb]'))) { ambito = b.dataset.amb; sezione = 'tutte'; L.salva('ambito-es', ambito); L.salva('sezione-es', sezione); disegna(); }
+    if ((b = e.target.closest('[data-amb]'))) { ambito = b.dataset.amb; sezione = 'tutte'; L.salva('ambito-es', ambito); L.salva('sezione-es', sezione); disegna(); }
     else if ((b = e.target.closest('[data-s]'))) { sezione = b.dataset.s; L.salva('sezione-es', sezione); disegna(); }
     else if ((b = e.target.closest('.es-tipo'))) {
       var tipo = b.dataset.t, s = P.SEZIONI.filter(function (x) { return x.id === sezione; })[0], am = P.AMBITI.filter(function (x) { return x.id === ambito; })[0];
@@ -98,6 +96,8 @@
       sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
+  /* la lingua si sceglie una volta sola, dal pulsante 🌍 della barra */
+  document.addEventListener('lingua', function (e) { lingua = e.detail; if (sec.classList.contains('es-attivo')) document.getElementById('es-esci').click(); disegna(); });
   document.getElementById('es-esci').addEventListener('click', function () { if (window.speechSynthesis) speechSynthesis.cancel(); sec.classList.remove('es-attivo'); disegna(); });
   disegna();
 })();

@@ -16,7 +16,7 @@ window.LINGUE_SITO = (function () {
   ];
   var PAGINE = [
     ['index', '🏠', 'Lingue'],
-    ['parole-di-sala', '📖', 'Parole di sala'],
+    ['vocabolario', '📖', 'Vocabolario'],
     ['esercizi', '✏️', 'Esercizi'],
     ['dialoghi', '💬', 'Dialoghi'],
     ['risorse', '🌐', 'Risorse'],

@@ -84,7 +84,6 @@
 
   <section class="lg-sez" id="im">
     <div class="w" style="max-width:900px">
-      <div class="lg-chips scorre" id="im-lingue" role="group" aria-label="Lingua"></div>
       <label style="display:inline-flex;align-items:center;gap:.45rem;font:600 .82rem var(--fu);color:var(--txt2);margin:.8rem 0 0;cursor:pointer"><input type="checkbox" id="im-trad" style="width:18px;height:18px;accent-color:var(--bosco)"/> Mostra la traduzione italiana</label>
       <div id="im-vista"></div>
       <p class="lg-nota" style="margin-top:1.6rem">🎓 <b>In classe:</b> proiettate una storia e fate votare la classe per alzata di mano prima di scegliere. Poi discutete la spiegazione: perché quella risposta è la migliore? Come la direste voi?</p>
@@ -99,15 +98,12 @@
 (function () {
   var L = window.LINGUE_SITO, I = window.IMPREVISTI, esc = L.esc;
   var AMB = {}; window.VOCABOLARIO.AMBITI.forEach(function (a) { AMB[a.id] = a; });
-  var lingua = L.leggi('lingua-im', 'en'), storia = null, passo = 0, voti = [], ordine = [];
+  var lingua = L.linguaScelta(), storia = null, passo = 0, voti = [], ordine = [];
   var vista = document.getElementById('im-vista'), sez = document.getElementById('im');
   var ESITO = { 3: ['v3', '✓ Ottima risposta'], 1: ['v1', '≈ Si può fare meglio'], 0: ['v0', '✗ Da evitare'] };
   function faccia(p) { var max = 3 * Math.max(voti.length, 1), r = voti.length ? p / max : .7; return r >= .85 ? '😀' : r >= .6 ? '🙂' : r >= .35 ? '😐' : '😠'; }
   function punti() { return voti.reduce(function (a, b) { return a + b; }, 0); }
 
-  function lingue() {
-    document.getElementById('im-lingue').innerHTML = L.LINGUE.map(function (l) { return '<button type="button" class="lg-chip" data-l="' + l.cod + '" aria-pressed="' + (l.cod === lingua) + '">' + l.nome + '</button>'; }).join('');
-  }
   function elenco() {
     storia = null;
     vista.innerHTML = '<div class="im-elenco">' + I.map(function (s) {
@@ -154,8 +150,7 @@
   }
   document.addEventListener('click', function (e) {
     var b;
-    if ((b = e.target.closest('[data-l]'))) { lingua = b.dataset.l; L.salva('lingua-im', lingua); lingue(); if (storia && voti.length === passo) mostraPasso(); }
-    else if ((b = e.target.closest('[data-st]'))) avvia(b.dataset.st);
+    if ((b = e.target.closest('[data-st]'))) avvia(b.dataset.st);
     else if ((b = e.target.closest('[data-o]')) && !b.disabled) scegli(+b.dataset.o);
     else if (e.target.closest('[data-avanti]')) { passo++; if (passo < storia.passi.length) mostraPasso(); else fine(); }
     else if (e.target.closest('[data-rigioca]')) avvia(storia.id);
@@ -164,7 +159,9 @@
   var tr = document.getElementById('im-trad'); tr.checked = !!L.leggi('trad-im', false); sez.classList.toggle('mostra-trad', tr.checked);
   tr.addEventListener('change', function () { sez.classList.toggle('mostra-trad', tr.checked); L.salva('trad-im', tr.checked); });
   var dalLink = (location.search.match(/[?&]s=([a-z]+)/) || [])[1];
-  lingue(); if (I.some(function (s) { return s.id === dalLink; })) avvia(dalLink); else elenco();
+  /* la lingua si sceglie una volta sola, dal pulsante 🌍 della barra */
+  document.addEventListener('lingua', function (e) { lingua = e.detail; if (storia && voti.length === passo) mostraPasso(); });
+  if (I.some(function (s) { return s.id === dalLink; })) avvia(dalLink); else elenco();
 })();
 </script>
 </body>

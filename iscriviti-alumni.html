@@ -156,46 +156,15 @@
           </div>
         </div>
 
-        <!-- 5. SOCIAL (pubblici nella scheda) -->
+        <!-- 5. CONTATTI (nessun profilo social sul sito) -->
         <div class="ia-section">
           <div class="ia-section-hdr">
-            <h2>5 — Social &amp; Connessioni</h2>
-            <span>opzionali — appaiono sulla tua scheda pubblica</span>
+            <h2>5 — Ritrovarsi</h2>
+            <span>opzionale</span>
           </div>
           <div class="ia-section-body">
-            <p style="font-family:var(--fu);font-size:.68rem;color:rgba(245,240,232,.45);line-height:1.7;margin-bottom:1.1rem">
-              Inserisci i profili che vuoi rendere visibili agli altri alumni — un modo per ritrovarsi dopo anni. Lascia vuoti quelli che non vuoi condividere.
-            </p>
-
-            <div class="ia-grid-2">
-              <div class="ia-field">
-                <label class="ia-label" for="ia-fb">
-                  <span style="margin-right:.4rem">📘</span>Facebook
-                </label>
-                <input class="ia-input" id="ia-fb" type="url" placeholder="https://facebook.com/tuonome"/>
-              </div>
-              <div class="ia-field">
-                <label class="ia-label" for="ia-ig">
-                  <span style="margin-right:.4rem">📸</span>Instagram
-                </label>
-                <input class="ia-input" id="ia-ig" type="text" placeholder="@tuonome oppure link profilo"/>
-              </div>
-              <div class="ia-field">
-                <label class="ia-label" for="ia-li">
-                  <span style="margin-right:.4rem">💼</span>LinkedIn
-                </label>
-                <input class="ia-input" id="ia-li" type="url" placeholder="https://linkedin.com/in/tuonome"/>
-              </div>
-              <div class="ia-field">
-                <label class="ia-label" for="ia-web">
-                  <span style="margin-right:.4rem">🌐</span>Sito / altro
-                </label>
-                <input class="ia-input" id="ia-web" type="url" placeholder="il tuo sito, blog, portfolio…"/>
-              </div>
-            </div>
-
             <!-- Disponibilità a essere contattato -->
-            <div style="margin-top:1rem;background:rgba(184,146,42,.06);border:1px solid rgba(184,146,42,.15);border-radius:8px;padding:1rem 1.1rem">
+            <div style="background:rgba(184,146,42,.06);border:1px solid rgba(184,146,42,.15);border-radius:8px;padding:1rem 1.1rem">
               <label class="ia-check">
                 <input type="checkbox" id="ia-contattabile" checked/>
                 <span class="ia-check-label" style="color:rgba(245,240,232,.75)">
@@ -354,10 +323,6 @@ document.getElementById('ia-form').addEventListener('submit', async function(e) 
   const ricordo = document.getElementById('ia-ricordo').value.trim();
   const email   = document.getElementById('ia-email').value.trim();
   const tel     = document.getElementById('ia-tel').value.trim();
-  const fb      = document.getElementById('ia-fb').value.trim();
-  const ig      = document.getElementById('ia-ig').value.trim();
-  const li      = document.getElementById('ia-li').value.trim();
-  const web     = document.getElementById('ia-web').value.trim();
   const contattabile = document.getElementById('ia-contattabile').checked;
   const mappa   = document.getElementById('ia-mappa').checked;
 
@@ -384,7 +349,7 @@ document.getElementById('ia-form').addEventListener('submit', async function(e) 
         },
         body: JSON.stringify({
           nome, firma, anni, citta, lavoro, settore, ricordo, email,
-          fb, ig, li, web, contattabile, mappa,
+          contattabile, mappa,
           recaptchaToken,
           botField: document.getElementById('sito_web')?.value || ''
         })

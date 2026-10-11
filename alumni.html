@@ -359,18 +359,6 @@ function renderCifreReali(rows) {
     }
     approved.forEach((a, idx) => {
       const s = a || {};
-      const isHttp = (u) => typeof u === 'string' && /^https?:\/\//i.test(u.trim());
-      const fbUrl  = a.social_fb  ? (a.social_fb.startsWith('http')  ? a.social_fb  : 'https://facebook.com/'+a.social_fb)               : '';
-      const igUrl  = a.social_ig  ? (a.social_ig.startsWith('http')  ? a.social_ig  : 'https://instagram.com/'+a.social_ig.replace('@','')) : '';
-      const socialIcons = [
-        fbUrl && isHttp(fbUrl) ? `<a href="${escapeHtml(fbUrl)}" target="_blank" rel="noopener" title="Facebook" style="color:rgba(245,240,232,.4);text-decoration:none;font-size:1.1rem" onmouseover="this.style.color='#D4AA4A'" onmouseout="this.style.color='rgba(245,240,232,.4)'">📘</a>` : '',
-        igUrl && isHttp(igUrl) ? `<a href="${escapeHtml(igUrl)}" target="_blank" rel="noopener" title="Instagram" style="color:rgba(245,240,232,.4);text-decoration:none;font-size:1.1rem" onmouseover="this.style.color='#D4AA4A'" onmouseout="this.style.color='rgba(245,240,232,.4)'">📸</a>` : '',
-        a.social_li  && isHttp(a.social_li)  ? `<a href="${escapeHtml(a.social_li)}" target="_blank" rel="noopener" title="LinkedIn" style="color:rgba(245,240,232,.4);text-decoration:none;font-size:1.1rem" onmouseover="this.style.color='#D4AA4A'" onmouseout="this.style.color='rgba(245,240,232,.4)'">💼</a>` : '',
-        a.social_web && isHttp(a.social_web) ? `<a href="${escapeHtml(a.social_web)}" target="_blank" rel="noopener" title="Sito web" style="color:rgba(245,240,232,.4);text-decoration:none;font-size:1.1rem" onmouseover="this.style.color='#D4AA4A'" onmouseout="this.style.color='rgba(245,240,232,.4)'">🌐</a>` : '',
-      ].filter(Boolean).join('');
-
-      const socialRow = socialIcons ? `<div style="display:flex;gap:.5rem;margin-top:.6rem;justify-content:center">${socialIcons}</div>` : '';
-
       const card = document.createElement('div');
       card.className = 'alumni-card';
       let colore = (a.colore !== undefined ? (a.colore + idx) % 5 : idx % 5);
@@ -397,7 +385,6 @@ function renderCifreReali(rows) {
           <p style="font-size:.75rem;color:rgba(245,240,232,.65);margin:0;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml([a.lavoro,a.citta].filter(Boolean).join(' · '))}</p>
           ${a.anni ? '<p style="font-family:var(--fu);font-size:.58rem;color:rgba(184,146,42,.75);letter-spacing:.08em;text-transform:uppercase;margin:0">' + escapeHtml(a.anni) + '</p>' : ''}
           ${a.ricordo ? '<p style="font-size:.75rem;color:rgba(245,240,232,.45);font-style:italic;line-height:1.5;margin:.15rem 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">"' + escapeHtml(a.ricordo) + '"</p>' : ''}
-          ${socialRow}
           ${a.video_url ? '<button onclick="apriVideoAlumni(\'' + escapeHtml(a.video_url).replace(/'/g,"&#39;") + '\')" style="display:inline-flex;align-items:center;gap:.3rem;margin-top:.4rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;background:rgba(212,170,74,.15);border:1px solid rgba(212,170,74,.4);border-radius:20px;color:var(--oro2);cursor:pointer">▶ Guarda l\'intervista</button>' : ''}
           ${hasContact
             ? '<a href="mailto:' + CONTATTO_ALUMNI + '?subject=' + oggettoContatto + '" data-oggetto="' + escapeHtml(decodeURIComponent(oggettoContatto)) + '" onclick="alumniCopyEmail(event,CONTATTO_ALUMNI)" style="display:inline-flex;align-items:center;gap:.25rem;margin-top:.4rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;background:rgba(184,146,42,.2);border:1px solid rgba(184,146,42,.4);border-radius:20px;color:var(--oro2);text-decoration:none">✉ Scrivimi</a>'

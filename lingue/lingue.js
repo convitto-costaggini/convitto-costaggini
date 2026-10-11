@@ -84,5 +84,48 @@ window.LINGUE_SITO = (function () {
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', nav); else nav();
 
+  /* Righe orizzontali che escono dallo schermo (barra del minisito, ambiti,
+     sezioni, lingue): sul telefono scorrono da sole avanti e indietro, piano,
+     così si capisce che c'è altro. Un tocco le ferma; riprendono dopo una
+     pausa da dove le ha lasciate l'utente. Mai con "riduci movimento".
+     Avanti e indietro, e non a nastro infinito come in Per i Genitori,
+     perché qui sono pulsanti da selezionare. */
+  var RIGHE = '.lg-nav-in, .lg-chips.scorre, #ps-ambiti, #ps-sezioni, #ps-lingue';
+  var VEL = 34, SOSTA = 1600, RIPRESA = 3000;   /* px/s come in Per i Genitori; pause in ms */
+  var fermo = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stato = new WeakMap(), righe = [], ultimo = null;
+  function telefono() { return window.innerWidth < 768; }
+  function st(el) {
+    var s = stato.get(el);
+    if (!s) {
+      s = { pos: el.scrollLeft, dir: 1, attesa: performance.now() + 1200 };
+      stato.set(el, s);
+      ['pointerdown', 'touchstart', 'wheel', 'focusin'].forEach(function (ev) {
+        el.addEventListener(ev, function () { s.attesa = performance.now() + RIPRESA; s.mano = true; }, { passive: true });
+      });
+      el.addEventListener('scroll', function () { if (s.mano) s.pos = el.scrollLeft; }, { passive: true });
+    }
+    return s;
+  }
+  function trova() { righe = [].slice.call(document.querySelectorAll(RIGHE)); }
+  function passo(t) {
+    var dt = ultimo == null ? 0 : Math.min((t - ultimo) / 1000, .1); ultimo = t;
+    if (telefono() && !fermo && !document.hidden) {
+      righe.forEach(function (el) {
+        var max = el.scrollWidth - el.clientWidth; if (max < 8) return;
+        var r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > window.innerHeight) return;
+        var s = st(el); if (t < s.attesa) return;
+        if (s.mano) { s.mano = false; s.pos = el.scrollLeft; }
+        s.pos += s.dir * VEL * dt;
+        if (s.pos >= max) { s.pos = max; s.dir = -1; s.attesa = t + SOSTA; }
+        else if (s.pos <= 0) { s.pos = 0; s.dir = 1; s.attesa = t + SOSTA; }
+        el.scrollLeft = s.pos;
+      });
+    }
+    requestAnimationFrame(passo);
+  }
+  function avviaScorrimento() { trova(); setInterval(trova, 1500); requestAnimationFrame(passo); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', avviaScorrimento); else avviaScorrimento();
+
   return { LINGUE: LINGUE, esc: esc, leggi: leggi, salva: salva, lingua: lingua, mescola: mescola, parla: parla, ascolta: ascolta, play: play, voce: voce };
 })();

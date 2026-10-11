@@ -27,6 +27,12 @@
   var richiesta = null;
   var st = leggi();
   st.pagine = (st.pagine || 0) + 1; salva(st);
+  /* per la pagina di controllo diagnostica-app.html */
+  window.CONVITTO_APP = {
+    versione: '3',
+    info: function () { return { telefono: telefono, ios: ios, installata: installata, installazioneDiretta: !!richiesta, preferenze: leggi() }; },
+    mostra: function () { mostra(true); }
+  };
   if (installata) { document.documentElement.classList.add('app-installata'); return; }
 
   var CSS = '' +

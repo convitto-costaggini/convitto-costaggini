@@ -19,6 +19,7 @@ window.LINGUE_SITO = (function () {
     ['vocabolario', '📖', 'Vocabolario'],
     ['esercizi', '✏️', 'Esercizi'],
     ['dialoghi', '💬', 'Dialoghi'],
+    ['illustrato', '🖼️', 'Illustrato'],
     ['risorse', '🌐', 'Risorse'],
     ['verifiche', '📝', 'Verifiche'],
     ['docenti', '👩‍🏫', 'Area docenti']

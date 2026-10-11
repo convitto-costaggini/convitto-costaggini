@@ -20,6 +20,7 @@ window.LINGUE_SITO = (function () {
     ['esercizi', '✏️', 'Esercizi'],
     ['dialoghi', '💬', 'Dialoghi'],
     ['risorse', '🌐', 'Risorse'],
+    ['verifiche', '📝', 'Verifiche'],
     ['docenti', '👩‍🏫', 'Area docenti']
   ];
 

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Verifiche in un clic | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Strumento per i docenti: verifiche di lingua generate dal vocabolario dell'Alberghiero, modificabili, in più file e con le soluzioni."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <script src="app.js" defer></script>
+  <style>
+  .vf-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:1.5rem;align-items:start;max-width:1240px;margin:0 auto}
+  @media (max-width:980px){.vf-grid{grid-template-columns:1fr}}
+  .vf-pan{display:flex;flex-direction:column;gap:1.1rem}
+  .vf-box{background:#fff;border:1px solid var(--av3);border-radius:16px;padding:1.15rem 1.2rem;box-shadow:var(--sh-sm)}
+  .vf-box h2{font-family:var(--fd);font-weight:400;font-size:1.3rem;color:var(--bosco);margin:0 0 .2rem;display:flex;align-items:center;gap:.5rem}
+  .vf-box h2 .n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--bosco);color:#fff;font:800 .72rem var(--fu)}
+  .vf-box .sot{font-size:.8rem;color:var(--txt2);margin:0 0 .8rem;line-height:1.55}
+  .vf-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}
+  .vf-l{display:flex;flex-direction:column;gap:.3rem;font:700 .66rem var(--fu);letter-spacing:.05em;text-transform:uppercase;color:var(--bosco);margin:0 0 .7rem}
+  .vf-l small,.vf-l i{text-transform:none;letter-spacing:0;font-weight:500;color:var(--txt2)}
+  .vf-l input,.vf-l select,.vf-l textarea,.vf-q input[type=text],.vf-q input[type=number]{font:500 .9rem var(--fu);text-transform:none;letter-spacing:0;color:var(--txt);padding:.6rem .75rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--bco);width:100%;box-sizing:border-box}
+  .vf-l textarea{line-height:1.5;resize:vertical}
+  .vf-l input:focus,.vf-l select:focus,.vf-l textarea:focus,.vf-q input:focus{outline:none;border-color:var(--oro)}
+  .vf-c{display:flex;align-items:center;gap:.5rem;font:600 .82rem var(--fu);color:var(--txt2);margin:.2rem 0 .5rem;cursor:pointer}
+  .vf-c input{width:18px;height:18px;accent-color:var(--bosco)}
+  .vf-qt{width:100%;border-collapse:collapse;margin:.2rem 0 .8rem;font-family:var(--fu)}
+  .vf-qt th{font:800 .6rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--txt2);text-align:left;padding:.3rem .3rem}
+  .vf-qt td{padding:.25rem .3rem;font-size:.86rem;color:var(--txt)}
+  .vf-qt input{width:70px;font:600 .9rem var(--fu);padding:.45rem .5rem;border:1.5px solid var(--av3);border-radius:8px;background:var(--bco);text-align:center}
+  .vf-q{border:1.5px solid var(--av3);border-radius:14px;background:var(--bco);margin:0 0 .8rem;overflow:hidden}
+  .vf-qh{display:flex;align-items:center;gap:.4rem;padding:.55rem .7rem;background:#fff;border-bottom:1px solid var(--av3)}
+  .vf-n{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;border-radius:50%;background:var(--oro);color:#fff;font:800 .7rem var(--fu)}
+  .vf-tipo{flex:1;font:800 .66rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco)}
+  .vf-pt{display:flex;align-items:center;gap:.25rem;font:700 .7rem var(--fu);color:var(--txt2)}
+  .vf-pt input{width:58px!important;padding:.35rem .4rem!important;text-align:center}
+  .vf-ico{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--av3);background:#fff;color:var(--bosco);cursor:pointer;font-weight:800}
+  .vf-ico:disabled{opacity:.35;cursor:default}
+  .vf-ico.rosso{color:#b91c1c}
+  .vf-qb{padding:.8rem .8rem .2rem}
+  .vf-op{display:flex;align-items:center;gap:.45rem;margin:.15rem 0 .35rem}
+  .vf-op input[type=radio]{width:18px;height:18px;flex-shrink:0;accent-color:#047857}
+  .vf-x{border:0;background:none;color:#b91c1c;cursor:pointer;font-size:.9rem;padding:.3rem}
+  .vf-mini{align-self:flex-start;font:800 .6rem var(--fu);letter-spacing:.08em;text-transform:uppercase;border:1.5px dashed var(--bosco2);background:transparent;color:var(--bosco2);border-radius:8px;padding:.4rem .7rem;cursor:pointer;margin-bottom:.4rem}
+  .vf-vuoto{text-align:center;color:var(--txt2);font-size:.86rem;padding:1.2rem}
+  .vf-tot{font:800 .72rem var(--fu);letter-spacing:.06em;color:var(--bosco2);margin:0 0 .7rem}
+  .vf-dx{position:sticky;top:120px}
+  @media (max-width:980px){.vf-dx{position:static}}
+  .vf-ant-box{background:#e9e5dc;border:1px solid var(--av3);border-radius:16px;padding:.8rem;box-shadow:var(--sh-sm)}
+  .vf-ant-top{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem}
+  .vf-ant-top b{font:800 .62rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--bosco);margin-right:auto}
+  .vf-ant-top button{font:800 .64rem var(--fu);padding:.4rem .65rem;border-radius:8px;border:1.5px solid var(--av3);background:#fff;color:var(--bosco);cursor:pointer}
+  .vf-ant-top button[aria-pressed=true]{background:var(--bosco);border-color:var(--bosco);color:#fff}
+  #vf-ant{width:100%;height:70vh;min-height:480px;border:0;border-radius:6px;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.12)}
+  .vf-st{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin:.2rem 0 .9rem}
+  .vf-az{display:flex;flex-wrap:wrap;gap:.5rem}
+  .vf-salv{font:700 .72rem var(--fu);color:#047857;min-height:1.1em;margin:.5rem 0 0}
+  .vf-file input{display:none}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="verifiche">
+<div class="lg-anteprima">Anteprima per i docenti · strumento in prova</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Per i docenti</p>
+      <h1>Verifiche <em>in un clic</em></h1>
+      <p>Scegliete lingua e argomento: lo strumento prepara la verifica dal vocabolario dell'Alberghiero. Ogni domanda si può modificare, spostare o togliere, e se ne possono aggiungere di proprie. Si stampano le file A, B e C, con le domande in ordine diverso, e il foglio delle soluzioni.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez" style="padding-left:1rem;padding-right:1rem">
+    <div class="vf-grid">
+      <div class="vf-pan">
+
+        <div class="vf-box">
+          <h2><span class="n">1</span>Intestazione</h2>
+          <p class="sot">Compare in cima a ogni foglio, insieme al nome dell'Istituto e agli spazi per nome e classe.</p>
+          <label class="vf-l">Titolo<input id="vf-titolo" type="text" placeholder="Verifica di inglese — Sala e vendita"/></label>
+          <div class="vf-row">
+            <label class="vf-l">Classe<input id="vf-classe" type="text" placeholder="es. 3ª B"/></label>
+            <label class="vf-l">Data<input id="vf-data" type="text" placeholder="es. 15 ottobre 2026"/></label>
+            <label class="vf-l">Tempo<input id="vf-durata" type="text"/></label>
+          </div>
+          <label class="vf-l">Istruzioni per gli studenti<textarea id="vf-istruzioni" rows="2"></textarea></label>
+          <label class="vf-c"><input type="checkbox" id="vf-nomi"/> Spazi per cognome e nome, classe e data</label>
+          <label class="vf-c"><input type="checkbox" id="vf-griglia"/> Tabella di conversione punti → voto in fondo</label>
+        </div>
+
+        <div class="vf-box">
+          <h2><span class="n">2</span>Genera dal vocabolario</h2>
+          <p class="sot">Le domande vengono pescate a caso tra le frasi del vocabolario: ogni clic produce una verifica diversa.</p>
+          <div class="vf-row">
+            <label class="vf-l">Lingua<select id="vf-lingua"></select></label>
+            <label class="vf-l">Ambito<select id="vf-ambito"></select></label>
+            <label class="vf-l">Sezione<select id="vf-sezione"></select></label>
+          </div>
+          <label class="vf-l">Le traduzioni vanno<select id="vf-dir"><option value="it">dall'italiano alla lingua straniera</option><option value="ls">dalla lingua straniera all'italiano</option></select></label>
+          <table class="vf-qt">
+            <tr><th>Tipo</th><th>Quante</th><th>Punti ciascuna</th></tr>
+            <tr><td>🔤 Traduzione</td><td><input id="vf-n-traduci" type="number" min="0" max="30" value="4"/></td><td><input id="vf-p-traduci" type="number" min="0" step="0.5" value="2"/></td></tr>
+            <tr><td>🎯 Scelta multipla</td><td><input id="vf-n-scelta" type="number" min="0" max="30" value="4"/></td><td><input id="vf-p-scelta" type="number" min="0" step="0.5" value="1"/></td></tr>
+            <tr><td>🔗 Abbinamento <small>(coppie)</small></td><td><input id="vf-n-abbina" type="number" min="0" max="12" value="5"/></td><td><input id="vf-p-abbina" type="number" min="0" step="0.5" value="1"/></td></tr>
+            <tr><td>✏️ Completamento</td><td><input id="vf-n-completa" type="number" min="0" max="30" value="3"/></td><td><input id="vf-p-completa" type="number" min="0" step="0.5" value="1"/></td></tr>
+          </table>
+          <label class="vf-c"><input type="checkbox" id="vf-sostituisci" checked/> Sostituisci le domande attuali (togliete la spunta per aggiungerle in coda)</label>
+          <button type="button" class="lg-btn oro" id="vf-genera" style="width:100%;margin-top:.4rem">✨ Genera le domande</button>
+        </div>
+
+        <div class="vf-box" id="vf-domande">
+          <h2><span class="n">3</span>Le domande</h2>
+          <p class="sot">Modificate qualsiasi testo: l'anteprima si aggiorna mentre scrivete. Con ↑ ↓ si cambia l'ordine.</p>
+          <p class="vf-tot" id="vf-tot"></p>
+          <div id="vf-lista"></div>
+          <p class="sot" style="margin:.6rem 0 .5rem"><b>Aggiungi una domanda vostra:</b></p>
+          <div class="lg-chips" id="vf-aggiungi"></div>
+        </div>
+
+        <div class="vf-box">
+          <h2><span class="n">4</span>Stampa e salva</h2>
+          <p class="sot">Le file B e C hanno le stesse domande in ordine diverso, e anche le opzioni e gli abbinamenti mescolati: utile contro le copiature. Le soluzioni corrispondono a ciascuna fila.</p>
+          <div class="vf-st">
+            <label class="vf-c"><input type="checkbox" data-fila="A" checked/> Fila A</label>
+            <label class="vf-c"><input type="checkbox" data-fila="B" checked/> Fila B</label>
+            <label class="vf-c"><input type="checkbox" data-fila="C"/> Fila C</label>
+            <label class="vf-c"><input type="checkbox" id="vf-sol"/> Aggiungi le soluzioni in fondo</label>
+          </div>
+          <div class="vf-az">
+            <button type="button" class="lg-btn pieno" id="vf-stampa">🖨️ Stampa le file</button>
+            <button type="button" class="lg-btn" id="vf-stampa-sol">🔑 Solo le soluzioni</button>
+          </div>
+          <div class="vf-az" style="margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--av3)">
+            <button type="button" class="lg-btn" id="vf-esporta">💾 Esporta in un file</button>
+            <label class="lg-btn vf-file">📂 Apri da file<input type="file" id="vf-importa" accept=".json,application/json"/></label>
+            <button type="button" class="lg-btn" id="vf-nuova">＋ Nuova verifica</button>
+          </div>
+          <p class="vf-salv" id="vf-salvato" aria-live="polite"></p>
+          <p class="sot" style="margin:.4rem 0 0">La bozza resta salvata solo in questo browser. Per riprenderla su un altro computer o per passarla a un collega, usate «Esporta in un file». Con l'accesso dei docenti (fase 2) le verifiche si salveranno nel proprio account.</p>
+        </div>
+      </div>
+
+      <div class="vf-dx">
+        <div class="vf-ant-box">
+          <div class="vf-ant-top" id="vf-file-ant">
+            <b>Anteprima del foglio</b>
+            <button type="button" data-ant="A" aria-pressed="true">Fila A</button>
+            <button type="button" data-ant="B" aria-pressed="false">Fila B</button>
+            <button type="button" data-ant="C" aria-pressed="false">Fila C</button>
+            <button type="button" data-ant="S" aria-pressed="false">🔑 Soluzioni</button>
+          </div>
+          <iframe id="vf-ant" title="Anteprima della verifica"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/parole.js"></script>
+<script src="lingue/verifiche.js"></script>
+</body>
+</html>

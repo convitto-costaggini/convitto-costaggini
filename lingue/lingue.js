@@ -20,6 +20,7 @@ window.LINGUE_SITO = (function () {
     ['esercizi', '✏️', 'Esercizi'],
     ['dialoghi', '💬', 'Dialoghi'],
     ['illustrato', '🖼️', 'Illustrato'],
+    ['imprevisti', '🎭', 'Imprevisti'],
     ['risorse', '🌐', 'Risorse'],
     ['verifiche', '📝', 'Verifiche'],
     ['docenti', '👩‍🏫', 'Area docenti']
@@ -87,47 +88,56 @@ window.LINGUE_SITO = (function () {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', nav); else nav();
 
   /* Righe orizzontali che escono dallo schermo (barra del minisito, ambiti,
-     sezioni, lingue): sul telefono scorrono da sole avanti e indietro, piano,
-     così si capisce che c'è altro. Un tocco le ferma; riprendono dopo una
-     pausa da dove le ha lasciate l'utente. Mai con "riduci movimento".
-     Avanti e indietro, e non a nastro infinito come in Per i Genitori,
-     perché qui sono pulsanti da selezionare. */
+     sezioni, lingue): niente movimento continuo, che disorienta.
+     - Sfumatura e freccetta "›" sul bordo destro finché c'è altro da vedere.
+     - Un solo accenno, la prima volta che la riga entra nello schermo: scivola
+       un poco e torna, una riga alla volta (mai insieme). Poi resta ferma.
+     - Con "riduci movimento" resta solo la sfumatura. */
   var RIGHE = '.lg-nav-in, .lg-chips.scorre, #ps-ambiti, #ps-sezioni, #ps-lingue';
-  var VEL = 34, SOSTA = 1600, RIPRESA = 3000;   /* px/s come in Per i Genitori; pause in ms */
   var fermo = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var stato = new WeakMap(), righe = [], ultimo = null;
-  function telefono() { return window.innerWidth < 768; }
-  function st(el) {
-    var s = stato.get(el);
-    if (!s) {
-      s = { pos: el.scrollLeft, dir: 1, attesa: performance.now() + 1200 };
-      stato.set(el, s);
-      ['pointerdown', 'touchstart', 'wheel', 'focusin'].forEach(function (ev) {
-        el.addEventListener(ev, function () { s.attesa = performance.now() + RIPRESA; s.mano = true; }, { passive: true });
-      });
-      el.addEventListener('scroll', function () { if (s.mano) s.pos = el.scrollLeft; }, { passive: true });
-    }
-    return s;
+  var CSS_RIGHE = '.lg-altro{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent)}' +
+    '.lg-freccia{position:absolute;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--bosco,#2C3E2D);color:#fff;font:800 15px/26px sans-serif;text-align:center;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.18);opacity:0;transition:opacity .25s}' +
+    '.lg-freccia.on{opacity:.9}.lg-riga-box{position:relative}';
+  var visti = new WeakSet(), coda = [], inCorso = false;
+  function sistema(el) {
+    if (!el.parentNode) return;
+    var box = el.parentNode;
+    if (!box.classList.contains('lg-riga-box') && getComputedStyle(box).position === 'static') box.classList.add('lg-riga-box');
+    var fr = el._freccia;
+    if (!fr) { fr = document.createElement('span'); fr.className = 'lg-freccia'; fr.setAttribute('aria-hidden', 'true'); fr.textContent = '›'; el._freccia = fr; }
+    if (fr.parentNode !== box) box.appendChild(fr);
+    fr.style.top = (el.offsetTop + el.offsetHeight / 2) + 'px';
+    fr.style.left = (el.offsetLeft + el.clientWidth - 30) + 'px';
+    var altro = el.scrollWidth - el.clientWidth - el.scrollLeft > 6;
+    el.classList.toggle('lg-altro', altro); fr.classList.toggle('on', altro);
   }
-  function trova() { righe = [].slice.call(document.querySelectorAll(RIGHE)); }
-  function passo(t) {
-    var dt = ultimo == null ? 0 : Math.min((t - ultimo) / 1000, .1); ultimo = t;
-    if (telefono() && !fermo && !document.hidden) {
-      righe.forEach(function (el) {
-        var max = el.scrollWidth - el.clientWidth; if (max < 8) return;
-        var r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > window.innerHeight) return;
-        var s = st(el); if (t < s.attesa) return;
-        if (s.mano) { s.mano = false; s.pos = el.scrollLeft; }
-        s.pos += s.dir * VEL * dt;
-        if (s.pos >= max) { s.pos = max; s.dir = -1; s.attesa = t + SOSTA; }
-        else if (s.pos <= 0) { s.pos = 0; s.dir = 1; s.attesa = t + SOSTA; }
-        el.scrollLeft = s.pos;
+  function accenno() {
+    if (inCorso || !coda.length) return;
+    var el = coda.shift(); if (el.scrollWidth - el.clientWidth < 8) return accenno();
+    inCorso = true;
+    var da = el.scrollLeft, a = Math.min(da + 70, el.scrollWidth - el.clientWidth);
+    el.scrollTo({ left: a, behavior: 'smooth' });
+    setTimeout(function () { el.scrollTo({ left: da, behavior: 'smooth' }); }, 650);
+    setTimeout(function () { inCorso = false; accenno(); }, 1500);
+  }
+  function osserva() {
+    var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (voci) {
+      voci.forEach(function (v) {
+        if (!v.isIntersecting || visti.has(v.target)) return;
+        visti.add(v.target);
+        if (!fermo && v.target.scrollWidth - v.target.clientWidth > 8) { coda.push(v.target); setTimeout(accenno, 700); }
+      });
+    }, { threshold: .9 }) : null;
+    function aggiorna() {
+      document.querySelectorAll(RIGHE).forEach(function (el) {
+        if (!el._legato) { el._legato = true; el.addEventListener('scroll', function () { sistema(el); }, { passive: true }); if (io) io.observe(el); }
+        sistema(el);
       });
     }
-    requestAnimationFrame(passo);
+    var s = document.createElement('style'); s.textContent = CSS_RIGHE; document.head.appendChild(s);
+    aggiorna(); setInterval(aggiorna, 1200); window.addEventListener('resize', aggiorna);
   }
-  function avviaScorrimento() { trova(); setInterval(trova, 1500); requestAnimationFrame(passo); }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', avviaScorrimento); else avviaScorrimento();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', osserva); else osserva();
 
   return { LINGUE: LINGUE, esc: esc, leggi: leggi, salva: salva, lingua: lingua, mescola: mescola, parla: parla, ascolta: ascolta, play: play, voce: voce };
 })();

@@ -6,7 +6,7 @@
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Esercizi di lingua | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Esercizi sul vocabolario di sala in inglese, francese, spagnolo e tedesco: scelta multipla, abbinamento, riordina la frase, ascolta e scrivi."/>
+  <meta name="description" content="Esercizi sul vocabolario dell'Alberghiero (sala, cucina, pasticceria, accoglienza, bar) in inglese, francese, spagnolo e tedesco: scelta multipla, abbinamento, riordina la frase, ascolta e scrivi."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -38,8 +38,8 @@
   <section class="lg-hero">
     <div class="w">
       <p class="lbl">Allenamento</p>
-      <h1>Esercizi <em>di sala</em></h1>
-      <p>Scegli la lingua, l'argomento e il tipo di esercizio. Le frasi sono quelle di Parole di sala: ogni giro ne propone otto a caso, quindi è sempre diverso.</p>
+      <h1>Gli <em>esercizi</em></h1>
+      <p>Scegli la lingua, l'ambito, l'argomento e il tipo di esercizio. Le frasi sono quelle del Vocabolario: ogni giro ne propone otto a caso, quindi è sempre diverso.</p>
     </div>
   </section>
   <div data-lingue-nav></div>
@@ -49,9 +49,11 @@
       <div class="es-scelta">
         <p class="es-passo">1 · La lingua</p>
         <div class="lg-chips scorre" id="es-lingue"></div>
-        <p class="es-passo">2 · L'argomento</p>
+        <p class="es-passo">2 · L'ambito</p>
+        <div class="lg-chips scorre" id="es-ambiti"></div>
+        <p class="es-passo">3 · L'argomento</p>
         <div class="lg-chips scorre" id="es-sezioni"></div>
-        <p class="es-passo">3 · Il tipo di esercizio</p>
+        <p class="es-passo">4 · Il tipo di esercizio</p>
         <div class="es-tipi" id="es-tipi"></div>
         <p class="lg-nota" style="margin-top:1.5rem">💡 Gli esercizi con la voce funzionano meglio con l'audio acceso. Se una lingua non si sente, sul telefono si può scaricare la sua voce in <i>Impostazioni › Sintesi vocale</i>.</p>
       </div>
@@ -68,13 +70,16 @@
 <script src="lingue/esercizi.js"></script>
 <script>
 (function () {
-  var L = window.LINGUE_SITO, E = window.ESERCIZI, P = window.PAROLE_SALA;
-  var lingua = L.leggi('lingua-es', 'en'), sezione = L.leggi('sezione-es', 'tutte');
+  var L = window.LINGUE_SITO, E = window.ESERCIZI, P = window.VOCABOLARIO;
+  var lingua = L.leggi('lingua-es', 'en'), ambito = L.leggi('ambito-es', 'sala'), sezione = L.leggi('sezione-es', 'tutte');
+  if (!P.AMBITI.some(function (a) { return a.id === ambito; })) ambito = 'sala';
+  if (sezione !== 'tutte' && !P.SEZIONI.some(function (s) { return s.id === sezione && s.ambito === ambito; })) sezione = 'tutte';
   var sec = document.getElementById('es');
-  function chiave(tipo) { return tipo + '-' + lingua + '-' + sezione; }
+  function chiave(tipo) { return tipo + '-' + lingua + '-' + ambito + '-' + sezione; }
   function disegna() {
     document.getElementById('es-lingue').innerHTML = L.LINGUE.map(function (l) { return '<button type="button" class="lg-chip" data-l="' + l.cod + '" aria-pressed="' + (l.cod === lingua) + '">' + l.nome + '</button>'; }).join('');
-    document.getElementById('es-sezioni').innerHTML = [{ id: 'tutte', nome: '🎲 Tutte' }].concat(P.SEZIONI).map(function (s) { return '<button type="button" class="lg-chip" data-s="' + s.id + '" aria-pressed="' + (s.id === sezione) + '">' + s.nome + '</button>'; }).join('');
+    document.getElementById('es-ambiti').innerHTML = P.AMBITI.map(function (a) { return '<button type="button" class="lg-chip" data-amb="' + a.id + '" aria-pressed="' + (a.id === ambito) + '">' + a.icona + ' ' + a.nome + '</button>'; }).join('');
+    document.getElementById('es-sezioni').innerHTML = [{ id: 'tutte', nome: '🎲 Tutte' }].concat(P.SEZIONI.filter(function (s) { return s.ambito === ambito; })).map(function (s) { return '<button type="button" class="lg-chip" data-s="' + s.id + '" aria-pressed="' + (s.id === sezione) + '">' + s.nome + '</button>'; }).join('');
     document.getElementById('es-tipi').innerHTML = Object.keys(E.TIPI).map(function (k) {
       var t = E.TIPI[k], rec = L.leggi('ex-' + chiave(k), null);
       return '<button type="button" class="es-tipo" data-t="' + k + '"><span class="ic">' + t.icona + '</span><b>' + t.nome + '</b><span>' + t.desc + '</span>' + (rec != null ? '<span class="rec">Record: ' + rec + '%</span>' : '') + '</button>';
@@ -83,12 +88,13 @@
   document.addEventListener('click', function (e) {
     var b;
     if ((b = e.target.closest('[data-l]'))) { lingua = b.dataset.l; L.salva('lingua-es', lingua); disegna(); }
+    else if ((b = e.target.closest('[data-amb]'))) { ambito = b.dataset.amb; sezione = 'tutte'; L.salva('ambito-es', ambito); L.salva('sezione-es', sezione); disegna(); }
     else if ((b = e.target.closest('[data-s]'))) { sezione = b.dataset.s; L.salva('sezione-es', sezione); disegna(); }
     else if ((b = e.target.closest('.es-tipo'))) {
-      var tipo = b.dataset.t, s = P.SEZIONI.filter(function (x) { return x.id === sezione; })[0];
-      document.getElementById('es-tit').textContent = E.TIPI[tipo].icona + ' ' + E.TIPI[tipo].nome + ' · ' + L.lingua(lingua).nome + ' · ' + (s ? s.nome.replace(/^\S+\s/, '') : 'tutte le sezioni');
+      var tipo = b.dataset.t, s = P.SEZIONI.filter(function (x) { return x.id === sezione; })[0], am = P.AMBITI.filter(function (x) { return x.id === ambito; })[0];
+      document.getElementById('es-tit').textContent = E.TIPI[tipo].icona + ' ' + E.TIPI[tipo].nome + ' · ' + L.lingua(lingua).nome + ' · ' + am.nome + ' · ' + (s ? s.nome.replace(/^\S+\s/, '') : 'tutto');
       sec.classList.add('es-attivo');
-      E.avvia(document.getElementById('es-box'), { tipo: tipo, lingua: lingua, voci: E.daParole(lingua, sezione), chiave: chiave(tipo) });
+      E.avvia(document.getElementById('es-box'), { tipo: tipo, lingua: lingua, voci: E.daParole(lingua, sezione, ambito), chiave: chiave(tipo) });
       sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });

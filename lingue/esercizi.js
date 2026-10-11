@@ -4,6 +4,7 @@
    tipi: 'scelta' (scelta multipla), 'abbina' (abbinamento),
          'riordina' (riordina la frase), 'ascolta' (ascolta e scrivi)
    Nessun dato esce dal telefono: il miglior risultato resta in locale.
+   daParole(lingua, sezione, ambito): voci dal Vocabolario (sezione 'tutte' = tutto l'ambito).
    ════════════════════════════════════════════════════════ */
 window.ESERCIZI = (function () {
   'use strict';
@@ -154,10 +155,11 @@ window.ESERCIZI = (function () {
     nuovoGiro();
   }
 
-  /* frasi di Parole di sala → voci per il motore */
-  function daParole(cod, sezione) {
-    var P = window.PAROLE_SALA, out = [];
+  /* frasi del Vocabolario → voci per il motore */
+  function daParole(cod, sezione, ambito) {
+    var P = window.VOCABOLARIO, out = [];
     P.SEZIONI.forEach(function (s) {
+      if (ambito && s.ambito !== ambito) return;
       if (sezione && sezione !== 'tutte' && s.id !== sezione) return;
       (P.PAROLE[s.id] || []).forEach(function (p) { var t = p[1][cod]; out.push({ it: p[0], tr: t[0], pr: t[1], s: s.id }); });
     });

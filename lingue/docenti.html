@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Area docenti – Lingue | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="L'area in cui i docenti di lingue potranno creare esercizi e proporre contenuti per i ragazzi del Convitto Costaggini."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <script src="app.js" defer></script>
+  <style>
+  .dc-feat{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.9rem}
+  .dc-feat .lg-card{display:flex;gap:.75rem;align-items:flex-start}
+  .dc-feat .ic{font-size:1.5rem;line-height:1}
+  .dc-feat h3{font:800 .74rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco);margin:.15rem 0 .3rem}
+  .dc-feat p{font-size:.82rem;color:var(--txt2);line-height:1.55;margin:0}
+  .dc-login{max-width:420px;margin:0 auto;position:relative}
+  .dc-login .lg-card{padding:1.4rem}
+  .dc-login label{display:block;font:700 .7rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco);margin:.8rem 0 .35rem}
+  .dc-login input{width:100%;box-sizing:border-box;font:500 .95rem var(--fu);padding:.75rem .9rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--av)}
+  .dc-fase{position:absolute;top:-10px;right:-6px;background:var(--oro);color:#fff;font:800 .58rem var(--fu);letter-spacing:.1em;text-transform:uppercase;padding:.3rem .6rem;border-radius:999px;transform:rotate(4deg)}
+  .dc-ed{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;align-items:start}
+  @media (max-width:860px){.dc-ed{grid-template-columns:1fr}}
+  .dc-form label{display:block;font:700 .7rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco);margin:1rem 0 .4rem}
+  .dc-form label:first-child{margin-top:0}
+  .dc-form select,.dc-form input,.dc-form textarea{width:100%;box-sizing:border-box;font:500 .92rem var(--fu);padding:.7rem .85rem;border:1.5px solid var(--av3);border-radius:10px;background:#fff;color:var(--txt)}
+  .dc-form textarea{min-height:190px;line-height:1.55;font-family:ui-monospace,Consolas,monospace;font-size:.84rem}
+  .dc-form select:focus,.dc-form input:focus,.dc-form textarea:focus{outline:none;border-color:var(--oro)}
+  .dc-aiuto{font-size:.76rem;color:var(--txt2);margin:.35rem 0 0;line-height:1.5}
+  .dc-anteprima{background:var(--av);border:1px solid var(--av3);border-radius:16px;padding:1rem}
+  .dc-anteprima .ttl{font:800 .62rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro);margin:0 0 .75rem;text-align:center}
+  .dc-err{color:#b91c1c;font-size:.8rem;margin:.4rem 0 0}
+  .dc-azioni{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="docenti">
+<div class="lg-anteprima">Anteprima per i docenti · l'accesso e il salvataggio arriveranno nella fase 2</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Per i docenti di lingue</p>
+      <h1>Area <em>docenti</em></h1>
+      <p>Lo spazio in cui i docenti potranno creare esercizi per i ragazzi, correggere le frasi e proporre risorse. Qui sotto potete già provare l'editor degli esercizi: funziona davvero, solo che per ora non salva.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez">
+    <div class="w">
+      <p class="lbl">Fase 2</p>
+      <h2 class="lg-h2">Cosa potrete <em>fare</em></h2>
+      <p class="lg-sot">Ogni docente avrà un proprio accesso personale, protetto da password e codice. I ragazzi continueranno a usare tutto senza registrarsi.</p>
+      <div class="dc-feat">
+        <div class="lg-card"><span class="ic">✏️</span><div><h3>Creare esercizi</h3><p>Quattro tipi pronti: scelta multipla, abbinamento, riordina la frase, ascolta e scrivi. Basta scrivere le frasi.</p></div></div>
+        <div class="lg-card"><span class="ic">📲</span><div><h3>Condividerli in classe</h3><p>Ogni esercizio avrà un link e un codice QR da proiettare: i ragazzi lo aprono dal telefono in un attimo.</p></div></div>
+        <div class="lg-card"><span class="ic">👁️</span><div><h3>Bozza o pubblicato</h3><p>Si lavora in bozza e si pubblica quando è pronto; un esercizio si può nascondere o modificare in qualsiasi momento.</p></div></div>
+        <div class="lg-card"><span class="ic">📖</span><div><h3>Migliorare Parole di sala</h3><p>Correggere traduzioni e pronunce, aggiungere frasi e sezioni nuove per la propria lingua.</p></div></div>
+        <div class="lg-card"><span class="ic">🌐</span><div><h3>Proporre risorse</h3><p>Segnalare siti, video e podcast utili: compaiono nella pagina Risorse dopo l'approvazione.</p></div></div>
+        <div class="lg-card"><span class="ic">🔒</span><div><h3>Sicuro e semplice</h3><p>Accessi creati dall'amministratore del sito, con verifica in due passaggi come per il pannello del Convitto.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-sez chiara">
+    <div class="w">
+      <p class="lbl">Come sarà l'accesso</p>
+      <h2 class="lg-h2">Entrare <em>nell'area</em></h2>
+      <div class="dc-login" style="margin-top:1.25rem">
+        <span class="dc-fase">Fase 2</span>
+        <div class="lg-card" aria-disabled="true">
+          <label for="dc-mail">Email istituzionale</label><input id="dc-mail" type="email" placeholder="nome.cognome@alberghierorieti.it" disabled/>
+          <label for="dc-pw">Password</label><input id="dc-pw" type="password" placeholder="••••••••" disabled/>
+          <button type="button" class="lg-btn pieno" style="width:100%;margin-top:1.1rem" disabled>Accedi</button>
+          <p class="dc-aiuto" style="text-align:center;margin-top:.8rem">Al primo accesso si attiva il codice sul telefono (verifica in due passaggi).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lg-sez">
+    <div class="w">
+      <p class="lbl">Provatelo adesso</p>
+      <h2 class="lg-h2">L'editor <em>degli esercizi</em></h2>
+      <p class="lg-sot">Scegliete tipo e lingua, scrivete una frase per riga nel formato <b>italiano = traduzione</b> e guardate subito l'esercizio come lo vedranno i ragazzi.</p>
+      <div class="dc-ed">
+        <div class="dc-form lg-card">
+          <label for="dc-tit">Titolo</label>
+          <input id="dc-tit" type="text" value="Al bar: le bevande calde"/>
+          <label for="dc-tipo">Tipo di esercizio</label>
+          <select id="dc-tipo"></select>
+          <label for="dc-lin">Lingua</label>
+          <select id="dc-lin"></select>
+          <label for="dc-frasi">Frasi (una per riga)</label>
+          <textarea id="dc-frasi" spellcheck="false"></textarea>
+          <p class="dc-aiuto">Dopo la traduzione si può aggiungere la pronuncia: <i>Un caffè = A coffee = a còfi</i></p>
+          <p class="dc-err" id="dc-err"></p>
+          <div class="dc-azioni">
+            <button type="button" class="lg-btn pieno" id="dc-prova">▶ Aggiorna l'anteprima</button>
+            <button type="button" class="lg-btn" id="dc-esempio">Esempio</button>
+            <button type="button" class="lg-btn" disabled title="Disponibile nella fase 2">💾 Salva e pubblica</button>
+          </div>
+        </div>
+        <div class="dc-anteprima"><p class="ttl" id="dc-ttl">Anteprima</p><div id="dc-box"></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/esercizi.js"></script>
+<script>
+(function () {
+  var L = window.LINGUE_SITO, E = window.ESERCIZI;
+  var ESEMPI = {
+    en: 'Un caffè = A coffee = a còfi\nUn cappuccino = A cappuccino = a cappuccìno\nUn tè caldo = A hot tea = a hot tìi\nUna cioccolata calda = A hot chocolate = a hot ciòclat\nCon latte o limone? = With milk or lemon? = uìd milk or lèmon\nZucchero? = Sugar? = sciùgar',
+    fr: 'Un caffè = Un café = aN cafè\nUn cappuccino = Un cappuccino = aN capucinò\nUn tè caldo = Un thé chaud = aN tè sciò\nUna cioccolata calda = Un chocolat chaud = aN sciocolà sciò\nCon latte o limone? = Avec du lait ou du citron ? = avèc dü lè u dü sitròN\nZucchero? = Du sucre ? = dü sücr',
+    es: 'Un caffè = Un café = un cafè\nUn cappuccino = Un capuchino = un capucìno\nUn tè caldo = Un té caliente = un tè caliénte\nUna cioccolata calda = Un chocolate caliente = un ciocolàte caliénte\nCon latte o limone? = ¿Con leche o limón? = con léce o limòn\nZucchero? = ¿Azúcar? = athùcar',
+    de: 'Un caffè = Einen Kaffee = àinen kàffe\nUn cappuccino = Einen Cappuccino = àinen kapuccìno\nUn tè caldo = Einen heißen Tee = àinen hàisen tée\nUna cioccolata calda = Eine heiße Schokolade = àine hàise shokolàde\nCon latte o limone? = Mit Milch oder Zitrone? = mit milh òder tsitròne\nZucchero? = Zucker? = tsùker'
+  };
+  var tipo = document.getElementById('dc-tipo'), lin = document.getElementById('dc-lin'), txt = document.getElementById('dc-frasi');
+  tipo.innerHTML = Object.keys(E.TIPI).map(function (k) { return '<option value="' + k + '">' + E.TIPI[k].icona + ' ' + E.TIPI[k].nome + '</option>'; }).join('');
+  lin.innerHTML = L.LINGUE.map(function (l) { return '<option value="' + l.cod + '">' + l.nome + '</option>'; }).join('');
+  function esempio() { txt.value = ESEMPI[lin.value]; }
+  function prova() {
+    var err = [], voci = txt.value.split('\n').map(function (r, i) {
+      if (!r.trim()) return null;
+      var c = r.split('=').map(function (x) { return x.trim(); });
+      if (c.length < 2 || !c[0] || !c[1]) { err.push('riga ' + (i + 1)); return null; }
+      return { it: c[0], tr: c[1], pr: c[2] || '' };
+    }).filter(Boolean);
+    document.getElementById('dc-err').textContent = err.length ? 'Controllate il formato «italiano = traduzione» in: ' + err.join(', ') : '';
+    document.getElementById('dc-ttl').textContent = 'Anteprima · ' + (document.getElementById('dc-tit').value || 'Senza titolo');
+    E.avvia(document.getElementById('dc-box'), { tipo: tipo.value, lingua: lin.value, voci: voci });
+  }
+  lin.addEventListener('change', function () { if (Object.keys(ESEMPI).some(function (k) { return txt.value === ESEMPI[k]; })) esempio(); prova(); });
+  tipo.addEventListener('change', prova);
+  document.getElementById('dc-prova').addEventListener('click', prova);
+  document.getElementById('dc-esempio').addEventListener('click', function () { esempio(); prova(); });
+  esempio(); prova();
+})();
+</script>
+</body>
+</html>

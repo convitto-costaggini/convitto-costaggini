@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="robots" content="noindex"/>
+  <title>Parole di sala | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Il vocabolario del servizio di sala in italiano, inglese, francese, spagnolo e tedesco, con la pronuncia e l'ascolto."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <script src="app.js" defer></script>
+  <style>
+  .anteprima{background:#7f1d1d;color:#fff;text-align:center;font:800 .68rem var(--fu);letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1rem}
+  .ps-hero{background:linear-gradient(160deg,#1a2e1b,var(--bosco));padding:3.5rem 1.25rem 2.5rem;color:#fff}
+  .ps-hero .lbl{color:var(--oro2)}
+  .ps-hero h1{font-family:var(--fd);font-weight:300;font-size:clamp(2rem,7vw,3.4rem);line-height:1.1;margin:.3rem 0 .6rem;color:#fff}
+  .ps-hero h1 em{color:var(--oro3)}
+  .ps-hero p{color:rgba(245,240,232,.75);max-width:600px;font-size:.95rem;line-height:1.7;margin:0}
+  .ps-lingue-hero{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.1rem}
+  .ps-lingue-hero span{font:800 .62rem var(--fu);letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(212,170,74,.45);color:var(--oro3);border-radius:999px;padding:.25rem .65rem}
+  .ps{background:var(--av);padding:2rem 1.25rem 3rem}
+  .ps .w{max-width:900px}
+  .ps-barra{position:sticky;top:64px;z-index:5;background:var(--av);padding:.75rem 0 .9rem;border-bottom:1px solid var(--av3);margin-bottom:1.25rem}
+  .ps-riga{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+  .ps-riga+.ps-riga{margin-top:.6rem}
+  .ps-cerca{flex:1 1 220px;font:500 .9rem var(--fu);padding:.6rem .9rem;border:1.5px solid var(--av3);border-radius:10px;background:#fff;color:var(--txt)}
+  .ps-cerca:focus{outline:none;border-color:var(--oro)}
+  .ps-chip{font:700 .7rem var(--fu);letter-spacing:.06em;padding:.45rem .8rem;border-radius:999px;border:1.5px solid var(--av3);background:#fff;color:var(--bosco);cursor:pointer}
+  .ps-chip[aria-pressed=true]{background:var(--bosco);border-color:var(--bosco);color:#fff}
+  .ps-chip[disabled]{opacity:.45;cursor:default}
+  .ps-btn{font:800 .64rem var(--fu);letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1rem;border-radius:9px;cursor:pointer;border:1.5px solid var(--bosco);background:transparent;color:var(--bosco)}
+  .ps-btn.pieno{background:var(--bosco);color:#fff}
+  .ps-sez{font-family:var(--fd);font-weight:400;font-size:1.5rem;color:var(--bosco);margin:0 0 .25rem}
+  .ps-sez-sot{font-size:.84rem;color:var(--txt2);margin:0 0 1.1rem}
+  .ps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem}
+  .ps-card{background:#fff;border:1px solid var(--av3);border-radius:12px;padding:1rem 1.1rem;box-shadow:var(--sh-sm)}
+  .ps-it{font-family:var(--fd);font-size:1.2rem;color:var(--bosco);margin:0 0 .65rem;line-height:1.3}
+  .ps-l{display:grid;grid-template-columns:30px 1fr 34px;gap:.15rem .5rem;align-items:center;padding:.4rem 0;border-top:1px dashed var(--av3)}
+  .ps-cod{font:800 .58rem var(--fu);letter-spacing:.06em;color:var(--oro);text-align:center;border:1px solid var(--av3);border-radius:5px;padding:.15rem 0}
+  .ps-fr{font-size:.92rem;color:var(--txt);line-height:1.35}
+  .ps-pr{grid-column:2;font-size:.76rem;color:var(--txt2);font-style:italic}
+  .ps-nota{grid-column:2;font-size:.72rem;color:#8a6d1a}
+  .ps-play{grid-row:1/span 2;grid-column:3;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--av3);background:var(--av);cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+  .ps-play:hover{border-color:var(--oro)}
+  .ps-play.va{background:var(--oro);border-color:var(--oro)}
+  .ps-vuoto{text-align:center;color:var(--txt2);font-size:.88rem;padding:2rem}
+  .ps-leg{margin-top:2rem;background:#fff;border:1px solid var(--av3);border-radius:12px;padding:1rem 1.2rem;font-size:.82rem;color:var(--txt2);line-height:1.7}
+  .ps-leg h3{font-family:var(--fd);font-weight:400;color:var(--bosco);font-size:1.1rem;margin:0 0 .4rem}
+  .ps-leg b{color:var(--bosco)}
+  /* allenamento */
+  .ps-all{display:none;max-width:520px;margin:0 auto}
+  .ps.allena .ps-all{display:block}
+  .ps.allena .ps-lista{display:none}
+  .ps-fc{background:#fff;border:1px solid var(--av3);border-radius:16px;box-shadow:var(--sh-sm);padding:2rem 1.5rem;text-align:center;min-height:250px;display:flex;flex-direction:column;justify-content:center;cursor:pointer}
+  .ps-fc-cod{font:800 .62rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro)}
+  .ps-fc-it{font-family:var(--fd);font-size:1.7rem;color:var(--bosco);margin:.5rem 0}
+  .ps-fc-hint{font-size:.78rem;color:var(--txt2)}
+  .ps-fc-ris{display:none;margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--av3)}
+  .ps-fc.girata .ps-fc-ris{display:block}
+  .ps-fc.girata .ps-fc-hint{display:none}
+  .ps-fc-fr{font-size:1.25rem;color:var(--txt);font-weight:600}
+  .ps-fc-pr{font-size:.9rem;color:var(--txt2);font-style:italic;margin:.25rem 0 .6rem}
+  .ps-fc-b{display:flex;gap:.6rem;justify-content:center;margin-top:1rem}
+  .ps-fc-b .si{background:#047857;border-color:#047857;color:#fff}
+  .ps-fc-b .no{border-color:#b45309;color:#b45309}
+  .ps-prog{text-align:center;font:700 .72rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--bosco2);margin-bottom:.8rem}
+  .ps-fine{text-align:center;padding:2rem 1rem}
+  @media (max-width:700px){.ps-barra{position:static}#ps-lingue,#ps-sezioni{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-1.25rem;margin-right:-1.25rem;padding:0 1.25rem}#ps-lingue::-webkit-scrollbar,#ps-sezioni::-webkit-scrollbar{display:none}.ps-chip{flex-shrink:0}}
+  </style>
+</head>
+<body data-page="parole-di-sala">
+<div class="anteprima">Anteprima · traduzioni e pronunce da far verificare ai docenti di lingue</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="ps-hero">
+    <div class="w">
+      <p class="lbl">Il vocabolario del servizio</p>
+      <h1>Parole <em>di sala</em></h1>
+      <p>Le frasi che si usano davvero in sala, dall'accoglienza al conto: in quattro lingue, con la pronuncia scritta all'italiana e la voce del telefono per ascoltarle.</p>
+      <div class="ps-lingue-hero"><span>Italiano</span><span>English</span><span>Français</span><span>Español</span><span>Deutsch</span></div>
+    </div>
+  </section>
+
+  <section class="ps" id="ps">
+    <div class="w">
+      <div class="ps-barra">
+        <div class="ps-riga">
+          <input type="search" class="ps-cerca" id="ps-cerca" placeholder="Cerca una parola… (es. prenotato)" aria-label="Cerca una parola"/>
+          <button type="button" class="ps-btn pieno" id="ps-allena">🎴 Allenati</button>
+          <button type="button" class="ps-btn" id="ps-stampa">🖨️ Stampa</button>
+        </div>
+        <div class="ps-riga" id="ps-lingue" role="group" aria-label="Lingua"></div>
+        <div class="ps-riga" id="ps-sezioni" role="group" aria-label="Sezione"></div>
+      </div>
+
+      <div class="ps-lista" id="ps-lista"></div>
+      <div class="ps-all" id="ps-all"></div>
+
+      <div class="ps-leg">
+        <h3>Come leggere la pronuncia</h3>
+        La pronuncia è scritta come la leggerebbe un italiano; l'accento indica la sillaba da marcare. Pochi segni speciali:<br/>
+        <b>ü</b> — di' «i» con le labbra a forma di «u» (francese <i>tu</i>, tedesco <i>zurück</i>) ·
+        <b>ö</b> — di' «e» con le labbra a forma di «o» (tedesco <i>möchten</i>) ·
+        <b>N</b> — la vocale prima si dice «nel naso», senza pronunciare la n (francese <i>bon</i>) ·
+        <b>ə</b> — vocale breve e debole, quasi muta (francese <i>je</i>) ·
+        <b>j</b> — come la «g» di <i>garage</i> (francese <i>bonjour</i>) ·
+        <b>h</b> — aspirata, come un soffio (inglese <i>here</i>, tedesco <i>ich</i>, spagnolo <i>tarjeta</i>, dove è più forte) ·
+        <b>sh</b> — come «sci» di <i>scena</i> (tedesco <i>Tisch</i>) ·
+        <b>th</b> — la lingua tra i denti, come l'inglese <i>think</i> (spagnolo <i>cerveza</i>) ·
+        <b>ə</b> anche in inglese indica una vocale debole (<i>water</i> → «uòtər»).
+        <br/>Il pulsante 🔊 usa la voce del tuo telefono o computer: se una lingua non è installata, la voce può mancare o avere un accento diverso.
+      </div>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var LINGUE = [
+    { cod: 'en', nome: 'Inglese', voce: 'en-GB' },
+    { cod: 'fr', nome: 'Francese', voce: 'fr-FR' },
+    { cod: 'es', nome: 'Spagnolo', voce: 'es-ES' },
+    { cod: 'de', nome: 'Tedesco', voce: 'de-DE' }
+  ];
+  var SEZIONI = [
+    { id: 'accoglienza', nome: '🤝 Accoglienza', sot: 'Dal saluto all\'accompagnamento al tavolo.' },
+    { id: 'mise', nome: '🍽️ La mise en place', sot: 'Gli oggetti della tavola, uno per uno.' },
+    { id: 'ordine', nome: '📝 L\'ordinazione', sot: 'Prendere l\'ordine, consigliare, chiedere la cottura.' },
+    { id: 'bevande', nome: '🍷 Bevande e vini', sot: 'Acqua, vino e tutto ciò che si serve da bere.' },
+    { id: 'allergie', nome: '⚠️ Allergie', sot: 'Le frasi più importanti per la sicurezza del cliente: in caso di dubbio si chiede sempre in cucina.' },
+    { id: 'conto', nome: '💶 Il conto e il congedo', sot: 'Chiudere il servizio con garbo.' }
+  ];
+  /* [italiano, {lingua: [frase, pronuncia, nota?]}] — BOZZA da far verificare ai docenti di lingue */
+  var PAROLE = {
+  accoglienza: [
+    ['Buongiorno', { en: ['Good morning', 'gud mòrning'], fr: ['Bonjour', 'boNjùr'], es: ['Buenos días', 'buénos días'], de: ['Guten Morgen', 'gùten mòrghen'] }],
+    ['Buonasera', { en: ['Good evening', 'gud ìvning'], fr: ['Bonsoir', 'boNsuàr'], es: ['Buenas tardes', 'buénas tàrdes', 'a tarda sera: «Buenas noches»'], de: ['Guten Abend', 'gùten àbent'] }],
+    ['Benvenuti', { en: ['Welcome', 'uèlcam'], fr: ['Bienvenue', 'biaNvənü'], es: ['Bienvenidos', 'bienvenìdos'], de: ['Willkommen', 'vilkòmmen'] }],
+    ['Avete prenotato?', { en: ['Do you have a reservation?', 'du iu hev a resərvéiscion'], fr: ['Vous avez réservé ?', 'vu zavé reservé'], es: ['¿Tienen reserva?', 'tiénen resèrva'], de: ['Haben Sie reserviert?', 'hàben si reservìrt'] }],
+    ['A che nome?', { en: ['Under what name?', 'àndər uòt néim'], fr: ['À quel nom ?', 'a chèl noN'], es: ['¿A nombre de quién?', 'a nómbre de chièn'], de: ['Auf welchen Namen?', 'auf vèlhen nàmen'] }],
+    ['Per quante persone?', { en: ['For how many people?', 'for hàu mèni pìpol'], fr: ['Pour combien de personnes ?', 'pur coNbiaN də persònn'], es: ['¿Para cuántas personas?', 'para cuàntas persònas'], de: ['Für wie viele Personen?', 'für vi fìle persònen'] }],
+    ['Prego, da questa parte', { en: ['This way, please', 'dis uèi, plìis'], fr: ['Par ici, s\'il vous plaît', 'par isì, sil vu plè'], es: ['Por aquí, por favor', 'por achì, por favór'], de: ['Hier entlang, bitte', 'hìr entlàng, bìtte'] }],
+    ['Prego, si accomodi', { en: ['Please, have a seat', 'plìis, hev a sìit'], fr: ['Je vous en prie, asseyez-vous', 'jə vu zaN prì, asseié vu'], es: ['Siéntese, por favor', 'siéntese, por favór'], de: ['Bitte, nehmen Sie Platz', 'bìtte, némen si plats'] }],
+    ['Posso prendere il suo cappotto?', { en: ['May I take your coat?', 'méi ai téic iòr còut'], fr: ['Puis-je prendre votre manteau ?', 'püìj prandr vòtr mantò'], es: ['¿Me permite su abrigo?', 'me permìte su abrìgo'], de: ['Darf ich Ihren Mantel nehmen?', 'darf ih ìren màntel némen'] }],
+    ['Ecco il menù', { en: ['Here is the menu', 'hìar is də mèniu'], fr: ['Voici la carte', 'vuasì la cart'], es: ['Aquí tiene la carta', 'achì tiéne la càrta'], de: ['Hier ist die Speisekarte', 'hìr ist di shpàizekarte'] }],
+    ['Desidera un aperitivo?', { en: ['Would you like an aperitif?', 'ud iu làic an apèritif'], fr: ['Désirez-vous un apéritif ?', 'desiré vu aN aperitìf'], es: ['¿Desea un aperitivo?', 'deséa un aperitìvo'], de: ['Möchten Sie einen Aperitif?', 'möhten si àinen aperitìf'] }],
+    ['Torno subito', { en: ['I\'ll be right back', 'àil bi ràit bec'], fr: ['Je reviens tout de suite', 'jə rəviaN tud süìt'], es: ['Enseguida vuelvo', 'enseghìda buélvo'], de: ['Ich bin gleich zurück', 'ih bin glàih tsurük'] }],
+    ['Mi dispiace, siamo al completo', { en: ['I\'m sorry, we\'re fully booked', 'àim sòri, uìar fùli bukt'], fr: ['Désolé, nous sommes complets', 'dezolé, nu som coNplè'], es: ['Lo siento, estamos completos', 'lo siénto, estàmos complétos'], de: ['Es tut mir leid, wir sind ausgebucht', 'es tut mir làit, vir sint àusghebuht'] }],
+    ['Buon appetito', { en: ['Enjoy your meal', 'engiòi iòr mìil'], fr: ['Bon appétit', 'bon apetì'], es: ['¡Buen provecho!', 'buén provécio'], de: ['Guten Appetit', 'gùten apetìt'] }]
+  ],
+  mise: [
+    ['Il tavolo', { en: ['The table', 'də téibol'], fr: ['La table', 'la tàbl'], es: ['La mesa', 'la mésa'], de: ['Der Tisch', 'der tish'] }],
+    ['La tovaglia', { en: ['The tablecloth', 'də téibolclos'], fr: ['La nappe', 'la nap'], es: ['El mantel', 'el mantél'], de: ['Die Tischdecke', 'di tìshdeche'] }],
+    ['Il tovagliolo', { en: ['The napkin', 'də nèpchin'], fr: ['La serviette', 'la servièt'], es: ['La servilleta', 'la servigliéta'], de: ['Die Serviette', 'di servièt-te'] }],
+    ['Il piatto piano', { en: ['The dinner plate', 'də dìnər pléit'], fr: ['L\'assiette plate', 'lassièt plat'], es: ['El plato llano', 'el plàto gliàno'], de: ['Der flache Teller', 'der flàhe tèller'] }],
+    ['Il piatto fondo', { en: ['The soup plate', 'də sup pléit'], fr: ['L\'assiette creuse', 'lassièt cröz'], es: ['El plato hondo', 'el plàto òndo'], de: ['Der tiefe Teller', 'der tìfe tèller'] }],
+    ['Il piattino del pane', { en: ['The bread plate', 'də bred pléit'], fr: ['L\'assiette à pain', 'lassièt a paN'], es: ['El platillo del pan', 'el platìglio del pan'], de: ['Der Brotteller', 'der bròt-teller'] }],
+    ['Il sottopiatto', { en: ['The charger plate', 'də ciàrgiər pléit'], fr: ['L\'assiette de présentation', 'lassièt də presantasiòN'], es: ['El bajoplato', 'el bahoplàto'], de: ['Der Platzteller', 'der plàts-teller'] }],
+    ['La forchetta', { en: ['The fork', 'də fòrk'], fr: ['La fourchette', 'la furscèt'], es: ['El tenedor', 'el tenedór'], de: ['Die Gabel', 'di gàbel'] }],
+    ['Il coltello', { en: ['The knife', 'də nàif'], fr: ['Le couteau', 'lə cutò'], es: ['El cuchillo', 'el cucìglio'], de: ['Das Messer', 'das mèsser'] }],
+    ['Il cucchiaio', { en: ['The spoon', 'də spùun'], fr: ['La cuillère', 'la cüièr'], es: ['La cuchara', 'la cuciàra'], de: ['Der Löffel', 'der löffel'] }],
+    ['Il cucchiaino', { en: ['The teaspoon', 'də tìispuun'], fr: ['La petite cuillère', 'la pətìt cüièr'], es: ['La cucharilla', 'la cuciarìglia'], de: ['Der Teelöffel', 'der tée-löffel'] }],
+    ['Il bicchiere da acqua', { en: ['The water glass', 'də uòtər glas'], fr: ['Le verre à eau', 'lə vèr a ò'], es: ['El vaso de agua', 'el bàso de àgua'], de: ['Das Wasserglas', 'das vàsserglas'] }],
+    ['Il calice da vino', { en: ['The wine glass', 'də uàin glas'], fr: ['Le verre à vin', 'lə vèr a vaN'], es: ['La copa de vino', 'la còpa de bìno'], de: ['Das Weinglas', 'das vàinglas'] }],
+    ['La caraffa', { en: ['The carafe', 'də caràf'], fr: ['La carafe', 'la caràf'], es: ['La jarra', 'la hàrra', 'la «j» spagnola è una h forte'], de: ['Die Karaffe', 'di karàffe'] }],
+    ['La saliera', { en: ['The salt shaker', 'də sòlt scéiker'], fr: ['La salière', 'la saliér'], es: ['El salero', 'el saléro'], de: ['Der Salzstreuer', 'der zàlts-shtròier'] }],
+    ['Il segnaposto', { en: ['The place card', 'də pléis card'], fr: ['Le marque-place', 'lə marc plas'], es: ['La tarjeta de mesa', 'la tarhéta de mésa'], de: ['Die Tischkarte', 'di tìsh-karte'] }]
+  ],
+  ordine: [
+    ['Siete pronti per ordinare?', { en: ['Are you ready to order?', 'ar iu rèdi tu òrdər'], fr: ['Vous avez choisi ?', 'vu zavé sciuasì'], es: ['¿Están listos para pedir?', 'estàn lìstos para pedìr'], de: ['Möchten Sie bestellen?', 'möhten si bəshtèllen'] }],
+    ['Cosa desidera?', { en: ['What would you like?', 'uòt ud iu làic'], fr: ['Que désirez-vous ?', 'kə desiré vu'], es: ['¿Qué desea?', 'che deséa'], de: ['Was möchten Sie?', 'vas möhten si'] }],
+    ['Le consiglio…', { en: ['I recommend…', 'ai recomènd'], fr: ['Je vous conseille…', 'jə vu coNsèi'], es: ['Le recomiendo…', 'le recomiéndo'], de: ['Ich empfehle Ihnen…', 'ih empféle ìnen'] }],
+    ['Il piatto del giorno è…', { en: ['Today\'s special is…', 'tudéis spèscial is'], fr: ['Le plat du jour est…', 'lə pla dü jur è'], es: ['El plato del día es…', 'el plàto del dìa es'], de: ['Das Tagesgericht ist…', 'das tàghes-gheriht ist'] }],
+    ['Il piatto è preparato con…', { en: ['This dish is made with…', 'dis disc is méid uìd'], fr: ['Ce plat est préparé avec…', 'sə pla è preparé avèc'], es: ['Este plato lleva…', 'éste plàto gliéva'], de: ['Dieses Gericht wird mit … zubereitet', 'dìzes gheriht virt mit … tsùbəraitet'] }],
+    ['L\'antipasto', { en: ['The starter', 'də stàrtər'], fr: ['L\'entrée', 'laNtré'], es: ['El entrante', 'el entrànte'], de: ['Die Vorspeise', 'di fòrshpaize'] }],
+    ['Il primo piatto', { en: ['The first course', 'də fërst còrs'], fr: ['Le premier plat', 'lə prəmié pla'], es: ['El primer plato', 'el primér plàto'], de: ['Der erste Gang', 'der èrste gang'] }],
+    ['Il secondo piatto', { en: ['The main course', 'də méin còrs'], fr: ['Le plat principal', 'lə pla praNsipàl'], es: ['El segundo plato', 'el segùndo plàto'], de: ['Das Hauptgericht', 'das hàupt-gheriht'] }],
+    ['Il contorno', { en: ['The side dish', 'də sàid disc'], fr: ['L\'accompagnement', 'lacoNpagnəmàN'], es: ['La guarnición', 'la guarnithión'], de: ['Die Beilage', 'di bàilaghe'] }],
+    ['Il dolce', { en: ['The dessert', 'də disèrt'], fr: ['Le dessert', 'lə desèr'], es: ['El postre', 'el pòstre'], de: ['Die Nachspeise', 'di nàh-shpaize'] }],
+    ['Che cottura desidera?', { en: ['How would you like it cooked?', 'hàu ud iu làic it cukt'], fr: ['Quelle cuisson ?', 'chèl cüissòN'], es: ['¿Qué punto de cocción?', 'che pùnto de cocthión'], de: ['Wie möchten Sie es gebraten?', 'vi möhten si es ghebràten'] }],
+    ['Al sangue', { en: ['Rare', 'rèər'], fr: ['Saignant', 'segnàN'], es: ['Poco hecho', 'pòco écio'], de: ['Blutig', 'blùtih'] }],
+    ['Cottura media', { en: ['Medium', 'mìdiəm'], fr: ['À point', 'a puàN'], es: ['Al punto', 'al pùnto'], de: ['Medium', 'mìdium'] }],
+    ['Ben cotta', { en: ['Well done', 'uèl dan'], fr: ['Bien cuit', 'biaN cüì'], es: ['Muy hecho', 'mui écio'], de: ['Durchgebraten', 'dùrh-ghebraten'] }],
+    ['Desidera altro?', { en: ['Anything else?', 'ènithing èls'], fr: ['Autre chose ?', 'ótr sciòz'], es: ['¿Algo más?', 'àlgo màs'], de: ['Sonst noch etwas?', 'zonst noh ètvas'] }],
+    ['Ottima scelta', { en: ['Excellent choice', 'èxələnt ciòis'], fr: ['Excellent choix', 'exelàN sciuà'], es: ['Muy buena elección', 'mui buéna electhión'], de: ['Gute Wahl', 'gùte vaal'] }]
+  ],
+  bevande: [
+    ['Cosa desiderate da bere?', { en: ['What would you like to drink?', 'uòt ud iu làic tu drink'], fr: ['Que désirez-vous boire ?', 'kə desiré vu buàr'], es: ['¿Qué desean beber?', 'che deséan bebér'], de: ['Was möchten Sie trinken?', 'vas möhten si trìnken'] }],
+    ['Acqua naturale', { en: ['Still water', 'stil uòtər'], fr: ['Eau plate', 'o plat'], es: ['Agua sin gas', 'àgua sin gas'], de: ['Stilles Wasser', 'shtìlles vàsser'] }],
+    ['Acqua frizzante', { en: ['Sparkling water', 'spàrcling uòtər'], fr: ['Eau gazeuse', 'o gazöz'], es: ['Agua con gas', 'àgua con gas'], de: ['Sprudelwasser', 'shprùdel-vasser'] }],
+    ['La carta dei vini', { en: ['The wine list', 'də uàin list'], fr: ['La carte des vins', 'la cart de vaN'], es: ['La carta de vinos', 'la càrta de bìnos'], de: ['Die Weinkarte', 'di vàin-karte'] }],
+    ['Vino rosso', { en: ['Red wine', 'red uàin'], fr: ['Vin rouge', 'vaN ruj'], es: ['Vino tinto', 'bìno tìnto'], de: ['Rotwein', 'ròt-vain'] }],
+    ['Vino bianco', { en: ['White wine', 'uàit uàin'], fr: ['Vin blanc', 'vaN blaN'], es: ['Vino blanco', 'bìno blànco'], de: ['Weißwein', 'vàis-vain'] }],
+    ['Vino rosato', { en: ['Rosé wine', 'rosé uàin'], fr: ['Vin rosé', 'vaN rosé'], es: ['Vino rosado', 'bìno rosàdo'], de: ['Roséwein', 'rosé-vain'] }],
+    ['Un calice o una bottiglia?', { en: ['A glass or a bottle?', 'a glas or a bòtol'], fr: ['Un verre ou une bouteille ?', 'aN vèr u ün butèi'], es: ['¿Una copa o una botella?', 'ùna còpa o ùna botéglia'], de: ['Ein Glas oder eine Flasche?', 'ain glas òder àine flàshe'] }],
+    ['Le consiglio questo vino del territorio', { en: ['I recommend this local wine', 'ai recomènd dis lòcal uàin'], fr: ['Je vous conseille ce vin local', 'jə vu coNsèi sə vaN locàl'], es: ['Le recomiendo este vino de la zona', 'le recomiéndo éste bìno de la thòna'], de: ['Ich empfehle Ihnen diesen Wein aus der Region', 'ih empféle ìnen dìzen vain aus der reghiòn'] }],
+    ['Desidera assaggiarlo?', { en: ['Would you like to taste it?', 'ud iu làic tu téist it'], fr: ['Voulez-vous le goûter ?', 'vulé vu lə gutè'], es: ['¿Desea probarlo?', 'deséa probàrlo'], de: ['Möchten Sie ihn probieren?', 'möhten si in probìren'] }],
+    ['Con ghiaccio?', { en: ['With ice?', 'uìd àis'], fr: ['Avec des glaçons ?', 'avèc de glassòN'], es: ['¿Con hielo?', 'con iélo'], de: ['Mit Eis?', 'mit ais'] }],
+    ['Una birra', { en: ['A beer', 'a bìər'], fr: ['Une bière', 'ün bièr'], es: ['Una cerveza', 'ùna therbétha'], de: ['Ein Bier', 'ain bìir'] }],
+    ['Un succo di frutta', { en: ['A fruit juice', 'a frut giùs'], fr: ['Un jus de fruits', 'aN jü də früì'], es: ['Un zumo de fruta', 'un thùmo de frùta'], de: ['Ein Fruchtsaft', 'ain frùht-saft'] }],
+    ['Un caffè', { en: ['A coffee', 'a còfi'], fr: ['Un café', 'aN cafè'], es: ['Un café', 'un cafè'], de: ['Einen Kaffee', 'àinen kàffe'] }],
+    ['Un digestivo', { en: ['A digestif', 'a digestìf'], fr: ['Un digestif', 'aN digestìf'], es: ['Un digestivo', 'un dihestìvo'], de: ['Einen Digestif', 'àinen dighestìf'] }]
+  ],
+  allergie: [
+    ['Ha allergie o intolleranze?', { en: ['Do you have any allergies or intolerances?', 'du iu hev èni èlərgis or intòlərənsis'], fr: ['Avez-vous des allergies ou des intolérances ?', 'avé vu de zalergì u de zaNtoleràns'], es: ['¿Tiene alguna alergia o intolerancia?', 'tiéne algùna alèrhia o intoleránthia'], de: ['Haben Sie Allergien oder Unverträglichkeiten?', 'hàben si alerghìen òder ùnfertrèglihkaiten'] }],
+    ['Contiene glutine', { en: ['It contains gluten', 'it contéins glùtən'], fr: ['Il contient du gluten', 'il coNtiaN dü glütèn'], es: ['Contiene gluten', 'contiéne glùten'], de: ['Es enthält Gluten', 'es enthèlt glutén'] }],
+    ['Senza glutine', { en: ['Gluten-free', 'glùtən frìi'], fr: ['Sans gluten', 'saN glütèn'], es: ['Sin gluten', 'sin glùten'], de: ['Glutenfrei', 'glutén-frai'] }],
+    ['Contiene latte', { en: ['It contains milk', 'it contéins milk'], fr: ['Il contient du lait', 'il coNtiaN dü lè'], es: ['Contiene leche', 'contiéne léce'], de: ['Es enthält Milch', 'es enthèlt milh'] }],
+    ['Contiene uova', { en: ['It contains eggs', 'it contéins egs'], fr: ['Il contient des œufs', 'il coNtiaN de zö'], es: ['Contiene huevo', 'contiéne uébo'], de: ['Es enthält Eier', 'es enthèlt àier'] }],
+    ['Contiene frutta a guscio', { en: ['It contains nuts', 'it contéins nats'], fr: ['Il contient des fruits à coque', 'il coNtiaN de früì a còc'], es: ['Contiene frutos secos', 'contiéne frùtos sécos'], de: ['Es enthält Nüsse', 'es enthèlt nüsse'] }],
+    ['Contiene arachidi', { en: ['It contains peanuts', 'it contéins pìinats'], fr: ['Il contient des arachides', 'il coNtiaN de zarascìd'], es: ['Contiene cacahuetes', 'contiéne cacauétes'], de: ['Es enthält Erdnüsse', 'es enthèlt èrt-nüsse'] }],
+    ['Contiene pesce', { en: ['It contains fish', 'it contéins fisc'], fr: ['Il contient du poisson', 'il coNtiaN dü puassòN'], es: ['Contiene pescado', 'contiéne pescàdo'], de: ['Es enthält Fisch', 'es enthèlt fish'] }],
+    ['Contiene crostacei', { en: ['It contains shellfish', 'it contéins scèlfisc'], fr: ['Il contient des crustacés', 'il coNtiaN de crüstasé'], es: ['Contiene marisco', 'contiéne marìsco'], de: ['Es enthält Krebstiere', 'es enthèlt crèps-tire'] }],
+    ['Contiene sedano', { en: ['It contains celery', 'it contéins sèləri'], fr: ['Il contient du céleri', 'il coNtiaN dü selrì'], es: ['Contiene apio', 'contiéne àpio'], de: ['Es enthält Sellerie', 'es enthèlt sèlleri'] }],
+    ['Verifico subito con la cucina', { en: ['I\'ll check with the kitchen right away', 'àil cec uìd də chìcen ràit əuéi'], fr: ['Je vérifie tout de suite avec la cuisine', 'jə verifì tud süìt avèc la cüisìn'], es: ['Lo consulto ahora mismo con la cocina', 'lo consùlto aóra mìsmo con la cothìna'], de: ['Ich frage sofort in der Küche nach', 'ih fràghe sofòrt in der kühe nah'] }],
+    ['Possiamo prepararle un piatto senza…', { en: ['We can prepare a dish without…', 'uì can pripèər a disc uidàut'], fr: ['Nous pouvons vous préparer un plat sans…', 'nu puvòN vu preparé aN pla saN'], es: ['Podemos prepararle un plato sin…', 'podémos prepararle un plàto sin'], de: ['Wir können Ihnen ein Gericht ohne … zubereiten', 'vir können ìnen ain gheriht òne … tsùbəraiten'] }],
+    ['Questo piatto è vegetariano', { en: ['This dish is vegetarian', 'dis disc is vegetèriən'], fr: ['Ce plat est végétarien', 'sə pla è vejetariaN'], es: ['Este plato es vegetariano', 'éste plàto es behetariàno'], de: ['Dieses Gericht ist vegetarisch', 'dìzes gheriht ist veghetàrish'] }],
+    ['Questo piatto è vegano', { en: ['This dish is vegan', 'dis disc is vìigən'], fr: ['Ce plat est végan', 'sə pla è vegàn'], es: ['Este plato es vegano', 'éste plàto es begàno'], de: ['Dieses Gericht ist vegan', 'dìzes gheriht ist veghàn'] }]
+  ],
+  conto: [
+    ['Va tutto bene?', { en: ['Is everything all right?', 'is èvrithing ol ràit'], fr: ['Tout se passe bien ?', 'tu sə pas biaN'], es: ['¿Todo bien?', 'tòdo bièn'], de: ['Ist alles in Ordnung?', 'ist àlles in òrdnung'] }],
+    ['Gradisce altro?', { en: ['Would you like anything else?', 'ud iu làic ènithing èls'], fr: ['Désirez-vous autre chose ?', 'desiré vu ótr sciòz'], es: ['¿Desea algo más?', 'deséa àlgo màs'], de: ['Darf es noch etwas sein?', 'darf es noh ètvas zain'] }],
+    ['È stato tutto di suo gradimento?', { en: ['Did you enjoy your meal?', 'did iu engiòi iòr mìil'], fr: ['Le repas vous a plu ?', 'lə rəpà vu za plü'], es: ['¿Le ha gustado la comida?', 'le a gustàdo la comìda'], de: ['Hat es Ihnen geschmeckt?', 'hat es ìnen ghəshmèct'] }],
+    ['Il conto, per favore', { en: ['The bill, please', 'də bil, plìis'], fr: ['L\'addition, s\'il vous plaît', 'ladisiòN, sil vu plè'], es: ['La cuenta, por favor', 'la cuénta, por favór'], de: ['Die Rechnung, bitte', 'di rèhnung, bìtte'] }],
+    ['Ecco il conto', { en: ['Here is your bill', 'hìər is iòr bil'], fr: ['Voici l\'addition', 'vuasì ladisiòN'], es: ['Aquí tiene la cuenta', 'achì tiéne la cuénta'], de: ['Hier ist Ihre Rechnung', 'hìr ist ìre rèhnung'] }],
+    ['In contanti o con carta?', { en: ['Cash or card?', 'chesc or card'], fr: ['En espèces ou par carte ?', 'aN nespès u par cart'], es: ['¿En efectivo o con tarjeta?', 'en efectìvo o con tarhéta'], de: ['Bar oder mit Karte?', 'bar òder mit kàrte'] }],
+    ['Il servizio è incluso', { en: ['Service is included', 'sërvis is inclùdid'], fr: ['Le service est compris', 'lə servìs è coNprì'], es: ['El servicio está incluido', 'el servìthio està incluìdo'], de: ['Die Bedienung ist inbegriffen', 'di bədìnung ist ìnbegriffen'] }],
+    ['Ecco la ricevuta', { en: ['Here is your receipt', 'hìər is iòr risìit'], fr: ['Voici votre reçu', 'vuasì vòtr rəsü'], es: ['Aquí tiene el recibo', 'achì tiéne el rethìbo'], de: ['Hier ist Ihre Quittung', 'hìr ist ìre cvìttung'] }],
+    ['Grazie mille', { en: ['Thank you very much', 'thenk iu vèri mac'], fr: ['Merci beaucoup', 'mersì bocù'], es: ['Muchas gracias', 'mùcias gràthias'], de: ['Vielen Dank', 'fìlen danc'] }],
+    ['Prego, di niente', { en: ['You\'re welcome', 'iòr uèlcam'], fr: ['Je vous en prie', 'jə vu zaN prì'], es: ['De nada', 'de nàda'], de: ['Bitte schön', 'bìtte shön'] }],
+    ['Buona serata', { en: ['Have a nice evening', 'hev a nàis ìvning'], fr: ['Bonne soirée', 'bon suaré'], es: ['Que pase una buena noche', 'che pàse ùna buéna nóce'], de: ['Schönen Abend noch', 'shönen àbent noh'] }],
+    ['Arrivederci', { en: ['Goodbye', 'gudbài'], fr: ['Au revoir', 'o rəvuàr'], es: ['Adiós', 'adiòs'], de: ['Auf Wiedersehen', 'auf vìder-zéen'] }],
+    ['Torni a trovarci!', { en: ['Come back soon!', 'cam bec sùun'], fr: ['Revenez nous voir !', 'rəvəné nu vuàr'], es: ['¡Vuelva pronto!', 'buélva prònto'], de: ['Kommen Sie bald wieder!', 'kòmmen si balt vìder'] }]
+  ]
+  };
+
+  var CH = 'convitto-parole-sala-v1', st = {};
+  try { st = JSON.parse(localStorage.getItem(CH) || '{}') || {}; } catch (e) {}
+  function salva() { try { localStorage.setItem(CH, JSON.stringify(st)); } catch (e) {} }
+  var lingua = st.lingua || 'tutte', sezione = 'accoglienza', cerca = '';
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function norm(t) { return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+
+  /* voce del telefono */
+  var parla = 'speechSynthesis' in window;
+  function ascolta(testo, cod, btn) {
+    if (!parla) return;
+    var l = LINGUE.filter(function (x) { return x.cod === cod; })[0];
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(testo.replace(/[¿¡]/g, ''));
+    u.lang = l.voce; u.rate = .9;
+    var v = speechSynthesis.getVoices().filter(function (x) { return x.lang && x.lang.replace('_', '-').indexOf(cod) === 0; });
+    var pref = v.filter(function (x) { return x.lang.replace('_', '-') === l.voce; })[0] || v[0];
+    if (pref) u.voice = pref;
+    document.querySelectorAll('.ps-play.va').forEach(function (b) { b.classList.remove('va'); });
+    if (btn) { btn.classList.add('va'); u.onend = u.onerror = function () { btn.classList.remove('va'); }; }
+    speechSynthesis.speak(u);
+  }
+
+  var elLingue = document.getElementById('ps-lingue'), elSez = document.getElementById('ps-sezioni');
+  function chips() {
+    elLingue.innerHTML = [{ cod: 'tutte', nome: 'Tutte le lingue' }].concat(LINGUE).map(function (l) {
+      return '<button type="button" class="ps-chip" data-l="' + l.cod + '" aria-pressed="' + (lingua === l.cod) + '">' + l.nome + '</button>';
+    }).join('');
+    elSez.innerHTML = SEZIONI.map(function (s) {
+      var c = PAROLE[s.id];
+      return '<button type="button" class="ps-chip" data-s="' + s.id + '" aria-pressed="' + (sezione === s.id) + '"' + (c ? '' : ' disabled title="In preparazione"') + '>' + s.nome + (c ? '' : ' · presto') + '</button>';
+    }).join('');
+  }
+  function lingueAttive() { return lingua === 'tutte' ? LINGUE : LINGUE.filter(function (l) { return l.cod === lingua; }); }
+  function voci() {
+    var q = norm(cerca), out = [];
+    SEZIONI.forEach(function (s) {
+      (PAROLE[s.id] || []).forEach(function (p) {
+        if (!q && s.id !== sezione) return;
+        var testo = norm(p[0] + ' ' + LINGUE.map(function (l) { return p[1][l.cod][0]; }).join(' '));
+        if (!q || testo.indexOf(q) >= 0) out.push({ sez: s, p: p });
+      });
+    });
+    return out;
+  }
+  function lista() {
+    var v = voci(), s = SEZIONI.filter(function (x) { return x.id === sezione; })[0];
+    var testa = cerca ? '<h2 class="ps-sez">Risultati per «' + esc(cerca) + '»</h2><p class="ps-sez-sot">' + v.length + ' frasi trovate</p>' : '<h2 class="ps-sez">' + esc(s.nome) + '</h2><p class="ps-sez-sot">' + esc(s.sot) + '</p>';
+    if (!v.length) { document.getElementById('ps-lista').innerHTML = testa + '<p class="ps-vuoto">Nessuna frase trovata.</p>'; return; }
+    document.getElementById('ps-lista').innerHTML = testa + '<div class="ps-grid">' + v.map(function (x) {
+      return '<article class="ps-card"><h3 class="ps-it">' + esc(x.p[0]) + '</h3>' + lingueAttive().map(function (l) {
+        var t = x.p[1][l.cod];
+        return '<div class="ps-l"><span class="ps-cod" title="' + l.nome + '">' + l.cod.toUpperCase() + '</span><span class="ps-fr" lang="' + l.cod + '">' + esc(t[0]) + '</span>' +
+          (parla ? '<button type="button" class="ps-play" data-t="' + esc(t[0]) + '" data-c="' + l.cod + '" aria-label="Ascolta in ' + l.nome.toLowerCase() + '">🔊</button>' : '') +
+          '<span class="ps-pr">' + esc(t[1]) + '</span>' + (t[2] ? '<span class="ps-nota">ℹ️ ' + esc(t[2]) + '</span>' : '') + '</div>';
+      }).join('') + '</article>';
+    }).join('') + '</div>';
+  }
+
+  /* allenamento a flashcard */
+  var mazzo = [], pos = 0, sapute = 0, tot = 0, primo = 0, visti = {}, linAll = 'en';
+  function iniziaAllenamento(tieni) {
+    if (!tieni) linAll = lingua === 'tutte' ? (st.linAll || 'en') : lingua;
+    mazzo = (PAROLE[sezione] || []).slice().sort(function () { return Math.random() - .5; });
+    pos = 0; sapute = 0; tot = mazzo.length; primo = 0; visti = {}; carta();
+  }
+  function carta() {
+    var box = document.getElementById('ps-all'), l = LINGUE.filter(function (x) { return x.cod === linAll; })[0];
+    var scelta = '<div class="ps-riga" style="justify-content:center;margin-bottom:1rem">' + LINGUE.map(function (x) {
+      return '<button type="button" class="ps-chip" data-al="' + x.cod + '" aria-pressed="' + (x.cod === linAll) + '">' + x.nome + '</button>';
+    }).join('') + '</div>';
+    if (pos >= mazzo.length) {
+      box.innerHTML = scelta + '<div class="ps-fc ps-fine" style="cursor:default"><div class="ps-fc-it">' + (primo === tot ? '🏆 Perfetto!' : '👏 Mazzo completato!') + '</div><p class="ps-fc-hint" style="display:block">Al primo colpo ne sapevi ' + primo + ' su ' + tot + ' in ' + l.nome.toLowerCase() + (primo < tot ? '; le altre le hai ripassate fino a saperle.' : '.') + '</p>' +
+        '<div class="ps-fc-b"><button type="button" class="ps-btn pieno" data-a="ricomincia">↺ Ricomincia</button><button type="button" class="ps-btn" data-a="esci">← Torna alla lista</button></div></div>';
+      var r = st.risultati || (st.risultati = {}); r[sezione + '-' + linAll] = primo + '/' + tot; salva();
+      return;
+    }
+    var p = mazzo[pos], t = p[1][linAll];
+    box.innerHTML = scelta + '<div class="ps-prog">Sapute ' + sapute + ' di ' + tot + (mazzo.length - pos > 1 ? ' · ancora ' + (mazzo.length - pos) + ' carte' : ' · ultima carta') + '</div>' +
+      '<div class="ps-fc" id="ps-fc" role="button" tabindex="0" aria-label="Gira la carta"><div class="ps-fc-cod">Come si dice in ' + l.nome.toLowerCase() + '?</div><div class="ps-fc-it">' + esc(p[0]) + '</div><div class="ps-fc-hint">Pensa alla risposta, poi tocca la carta per girarla</div>' +
+      '<div class="ps-fc-ris"><div class="ps-fc-fr" lang="' + linAll + '">' + esc(t[0]) + '</div><div class="ps-fc-pr">' + esc(t[1]) + '</div>' + (parla ? '<button type="button" class="ps-play" style="margin:0 auto" data-t="' + esc(t[0]) + '" data-c="' + linAll + '" aria-label="Ascolta">🔊</button>' : '') +
+      '<div class="ps-fc-b"><button type="button" class="ps-btn no" data-a="ripasso">Da ripassare</button><button type="button" class="ps-btn si" data-a="sapevo">✓ Lo sapevo</button></div></div></div>' +
+      '<p style="text-align:center;margin-top:1rem"><button type="button" class="ps-btn" data-a="esci">← Torna alla lista</button></p>';
+  }
+
+  function stampa() {
+    var s = SEZIONI.filter(function (x) { return x.id === sezione; })[0];
+    var righe = (PAROLE[sezione] || []).map(function (p) {
+      return '<tr><td class="it">' + esc(p[0]) + '</td>' + LINGUE.map(function (l) { var t = p[1][l.cod]; return '<td>' + esc(t[0]) + '<small>' + esc(t[1]) + '</small></td>'; }).join('') + '</tr>';
+    }).join('');
+    var w = window.open('', '_blank'); if (!w) { window.print(); return; }
+    w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>Parole di sala — ' + esc(s.nome) + '</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#1a1a1a}h1{font-size:16pt;margin:0 0 2px}p{font-size:9pt;color:#555;margin:0 0 12px}table{width:100%;border-collapse:collapse;font-size:9.5pt}th{background:#2C3E2D;color:#fff;text-align:left;padding:5px;font-size:8.5pt;text-transform:uppercase}td{border-bottom:1px solid #ccc;padding:5px;vertical-align:top}td.it{font-weight:bold}small{display:block;color:#666;font-style:italic;font-size:8pt}@page{size:A4 landscape;margin:12mm}</style></head><body>' +
+      '<h1>Parole di sala — ' + esc(s.nome.replace(/^\S+\s/, '')) + '</h1><p>Convitto "Costaggini" · IPSSEOA Rieti — pronuncia scritta all\'italiana</p><table><thead><tr><th>Italiano</th><th>Inglese</th><th>Francese</th><th>Spagnolo</th><th>Tedesco</th></tr></thead><tbody>' + righe + '</tbody></table>' +
+      '<script>window.onload=function(){window.print()}<\/script></body></html>');
+    w.document.close();
+  }
+
+  var ps = document.getElementById('ps');
+  document.addEventListener('click', function (e) {
+    var b;
+    if ((b = e.target.closest('.ps-play'))) { e.stopPropagation(); ascolta(b.dataset.t, b.dataset.c, b); return; }
+    if ((b = e.target.closest('[data-l]'))) { lingua = b.dataset.l; st.lingua = lingua; salva(); chips(); lista(); return; }
+    if ((b = e.target.closest('[data-s]')) && !b.disabled) { sezione = b.dataset.s; cerca = ''; document.getElementById('ps-cerca').value = ''; chips(); lista(); if (ps.classList.contains('allena')) iniziaAllenamento(); return; }
+    if ((b = e.target.closest('[data-al]'))) { linAll = b.dataset.al; st.linAll = linAll; salva(); iniziaAllenamento(true); return; }
+    if ((b = e.target.closest('[data-a]'))) {
+      var a = b.dataset.a;
+      if (a === 'sapevo') { if (!visti[mazzo[pos][0]]) primo++; visti[mazzo[pos][0]] = 1; sapute++; pos++; carta(); }
+      else if (a === 'ripasso') { visti[mazzo[pos][0]] = 1; mazzo.push(mazzo[pos]); pos++; carta(); }
+      else if (a === 'ricomincia') iniziaAllenamento();
+      else if (a === 'esci') { ps.classList.remove('allena'); document.getElementById('ps-allena').textContent = '🎴 Allenati'; }
+      return;
+    }
+    if ((b = e.target.closest('#ps-fc'))) { b.classList.add('girata'); return; }
+  });
+  document.addEventListener('keydown', function (e) { var f = document.getElementById('ps-fc'); if (f && document.activeElement === f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); f.classList.add('girata'); } });
+  document.getElementById('ps-allena').addEventListener('click', function () {
+    var on = ps.classList.toggle('allena');
+    this.textContent = on ? '📋 Torna alla lista' : '🎴 Allenati';
+    if (on) { cerca = ''; document.getElementById('ps-cerca').value = ''; iniziaAllenamento(); }
+  });
+  document.getElementById('ps-stampa').addEventListener('click', stampa);
+  document.getElementById('ps-cerca').addEventListener('input', function () { cerca = this.value.trim(); if (ps.classList.contains('allena')) { ps.classList.remove('allena'); document.getElementById('ps-allena').textContent = '🎴 Allenati'; } lista(); });
+  if (parla) speechSynthesis.getVoices();
+  chips(); lista();
+})();
+</script>
+</body>
+</html>

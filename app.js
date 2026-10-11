@@ -5,8 +5,9 @@
      ~30 secondi e un tocco): pulsante "Installa".
    - Altrimenti, su qualsiasi telefono: istruzioni con i due tocchi giusti
      per quel browser (iPhone, Samsung Internet, Firefox, Chrome).
-   L'invito compare dalla seconda pagina visitata; "Non ora" lo
-   nasconde per 60 giorni. Un qualsiasi elemento con l'attributo
+   L'invito compare dalla seconda pagina visitata. Chi lo chiude ("Non ora",
+   "Ho capito") o rifiuta la finestra di installazione del browser non lo
+   rivede più: resta solo il pulsante nelle pagine (es. Per i Genitori). Un qualsiasi elemento con l'attributo
    data-app-installa diventa un pulsante "installa" (es. Per i Genitori).
    Le preferenze restano solo nel browser (localStorage).
    ════════════════════════════════════════════════════════ */
@@ -29,7 +30,7 @@
   st.pagine = (st.pagine || 0) + 1; salva(st);
   /* per la pagina di controllo diagnostica-app.html */
   window.CONVITTO_APP = {
-    versione: '3',
+    versione: '4',
     info: function () { return { telefono: telefono, ios: ios, installata: installata, installazioneDiretta: !!richiesta, preferenze: leggi() }; },
     mostra: function () { mostra(true); }
   };
@@ -53,7 +54,7 @@
   function mostra(forzato) {
     if (document.querySelector('.app-toast')) return;
     if (!richiesta && !telefono) return;
-    if (!forzato && (st.pagine < 2 || (st.noFinoA && Date.now() < st.noFinoA))) return;
+    if (!forzato && (st.pagine < 2 || st.rifiutato || st.noFinoA)) return;
     if (!document.getElementById('app-toast-css')) { var s = document.createElement('style'); s.id = 'app-toast-css'; s.textContent = CSS; document.head.appendChild(s); }
     var t = document.createElement('div');
     t.className = 'app-toast'; t.setAttribute('role', 'dialog'); t.setAttribute('aria-label', 'Aggiungi il sito alla schermata Home');
@@ -70,13 +71,20 @@
     t.addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       if (b.dataset.a === 'si' && richiesta) {
-        richiesta.prompt();
-        richiesta.userChoice.finally(function () { richiesta = null; });
+        installa();
       } else {
-        st.noFinoA = Date.now() + 60 * 864e5; salva(st);
+        rifiuta();
       }
       t.classList.remove('su'); setTimeout(function () { t.remove(); }, 400);
     });
+  }
+
+  /* chi rifiuta non rivede più l'invito automatico */
+  function rifiuta() { st.rifiutato = 1; salva(st); }
+  function installa() {
+    var r = richiesta; if (!r) return;
+    r.prompt();
+    r.userChoice.then(function (c) { if (c && c.outcome === 'dismissed') rifiuta(); }).catch(function () {}).then(function () { richiesta = null; });
   }
 
   window.addEventListener('beforeinstallprompt', function (e) {
@@ -94,7 +102,7 @@
     /* pulsanti "installa" nelle pagine: su ogni telefono; sul computer solo se il browser lo permette */
     document.querySelectorAll('[data-app-installa]').forEach(function (b) {
       b.hidden = !telefono && !richiesta;
-      b.addEventListener('click', function () { if (richiesta) { richiesta.prompt(); richiesta.userChoice.finally(function () { richiesta = null; }); } else mostra(true); });
+      b.addEventListener('click', function () { if (richiesta) installa(); else mostra(true); });
     });
     if (telefono) setTimeout(function () { mostra(false); }, 4000);
   }

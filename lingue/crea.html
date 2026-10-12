@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Crea i tuoi esercizi – Lingue | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Per i docenti: scrivete o incollate le frasi della lezione, provate l'esercizio e condividetelo con la classe con un link e un codice QR, alla LIM o su carta."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .cr-passo{display:flex;align-items:center;gap:.6rem;margin:2rem 0 .8rem}
+  .cr-passo:first-child{margin-top:0}
+  .cr-passo b{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--bosco);color:#fff;display:flex;align-items:center;justify-content:center;font:800 .85rem var(--fu)}
+  .cr-passo h2{margin:0}
+  .cr-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem}
+  @media (max-width:760px){.cr-grid{grid-template-columns:minmax(0,1fr)}}
+  .cr label,.cr .et{display:block;font:700 .7rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco);margin:1rem 0 .4rem}
+  .cr label:first-child{margin-top:0}
+  .cr input[type=text],.cr select,.cr textarea{width:100%;box-sizing:border-box;font:500 .92rem var(--fu);padding:.7rem .85rem;border:1.5px solid var(--av3);border-radius:10px;background:#fff;color:var(--txt)}
+  .cr textarea{min-height:230px;line-height:1.6;resize:vertical}
+  .cr input:focus,.cr select:focus,.cr textarea:focus{outline:none;border-color:var(--oro)}
+  .cr-aiuto{font-size:.78rem;color:var(--txt2);margin:.4rem 0 0;line-height:1.55}
+  .cr-stato{font-size:.8rem;margin:.4rem 0 0;min-height:1.2em;color:#15803d;font-weight:600}
+  .cr-stato.no{color:#b91c1c}
+  .cr details{margin-top:1rem;border:1.5px dashed var(--av3);border-radius:12px;padding:.7rem .9rem;background:#fff}
+  .cr summary{cursor:pointer;font:700 .82rem var(--fu);color:var(--bosco)}
+  .cr-voc{max-height:300px;overflow:auto;margin:.6rem 0;border:1px solid var(--av3);border-radius:10px;background:var(--av)}
+  .cr-voc label{display:flex;gap:.55rem;align-items:flex-start;text-transform:none;letter-spacing:0;font:500 .84rem/1.45 var(--fu);color:var(--txt);margin:0;padding:.45rem .65rem;border-bottom:1px solid var(--av3);cursor:pointer}
+  .cr-voc label:last-child{border-bottom:0}
+  .cr-voc input{width:18px;height:18px;flex-shrink:0;accent-color:var(--bosco);margin-top:.1rem}
+  .cr-voc small{display:block;color:var(--txt2)}
+  .cr-riga{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-top:.6rem}
+  .cr-anteprima{background:var(--av);border:1px solid var(--av3);border-radius:16px;padding:1rem}
+  .cr-usa{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));gap:.7rem}
+  .cr-usa button{display:flex;gap:.7rem;align-items:flex-start;text-align:left;font:inherit;background:#fff;border:2px solid var(--av3);border-radius:14px;padding:.9rem 1rem;cursor:pointer;color:var(--txt)}
+  .cr-usa button:hover{border-color:var(--oro)}
+  .cr-usa .ic{font-size:1.7rem;line-height:1}
+  .cr-usa b{display:block;font:800 .76rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco)}
+  .cr-usa small{display:block;font-size:.8rem;color:var(--txt2);line-height:1.45;margin-top:.15rem}
+  .cr-qr{margin-top:1rem;display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.2rem;align-items:start}
+  @media (max-width:640px){.cr-qr{grid-template-columns:minmax(0,1fr)}}
+  .cr-qr canvas{width:220px;max-width:100%;height:auto;image-rendering:pixelated;background:#fff;border-radius:12px;border:1px solid var(--av3)}
+  .cr-qr input{font-size:.8rem!important}
+  .cr-qr-grande{position:fixed;inset:0;z-index:200;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:1rem;text-align:center}
+  .cr-qr-grande canvas{width:min(80vh,90vw);height:auto;image-rendering:pixelated}
+  .cr-qr-grande p{font-family:var(--fd);font-size:clamp(1.3rem,3vw,2.2rem);color:var(--bosco);margin:0}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="crea">
+<div class="lg-anteprima">Anteprima per i docenti · gli esercizi viaggiano nel link: il sito non salva nulla</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Per i docenti</p>
+      <h1>Crea i tuoi <em>esercizi</em></h1>
+      <p>Scrivete o incollate le frasi della vostra lezione, provate l'esercizio e date ai ragazzi un link o un codice QR da aprire sul telefono. Le stesse frasi diventano anche giochi alla LIM e una verifica da stampare.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez">
+    <div class="w cr">
+      <div class="cr-passo"><b>1</b><h2 class="lg-h2">Le <em>frasi</em></h2></div>
+      <div class="cr-grid">
+        <div class="lg-card">
+          <label for="cr-tit">Titolo dell'esercizio</label>
+          <input type="text" id="cr-tit" maxlength="80" placeholder="Es. Al bar: le bevande calde"/>
+          <label for="cr-lin">Lingua</label>
+          <select id="cr-lin"></select>
+          <label for="cr-txt">Frasi, una per riga</label>
+          <textarea id="cr-txt" spellcheck="false" placeholder="Un caffè = A coffee&#10;Con latte o limone? = With milk or lemon?&#10;Lo zucchero = The sugar"></textarea>
+          <p class="cr-aiuto">Tre modi: scrivete <b>italiano = traduzione</b>; oppure copiate due colonne da Excel o da una tabella di Word e incollatele qui; oppure pescate dal vocabolario del sito, qui sotto. Una terza colonna, se c'è, è la pronuncia.</p>
+          <p class="cr-stato" id="cr-stato" aria-live="polite"></p>
+          <details id="cr-pesca">
+            <summary>📖 Pesca dal vocabolario del sito</summary>
+            <div class="cr-riga"><select id="cr-amb" aria-label="Indirizzo" style="flex:1;min-width:140px"></select><select id="cr-sez" aria-label="Sezione" style="flex:1;min-width:140px"></select></div>
+            <div class="cr-voc" id="cr-voc"></div>
+            <div class="cr-riga"><button type="button" class="lg-btn" id="cr-tutte">Seleziona tutte</button><button type="button" class="lg-btn pieno" id="cr-aggiungi">+ Aggiungi alla lista</button></div>
+          </details>
+          <div class="cr-riga" style="margin-top:1rem"><button type="button" class="lg-btn" id="cr-esempio">Esempio</button><button type="button" class="lg-btn" id="cr-svuota">Svuota</button></div>
+        </div>
+        <div>
+          <span class="et" style="margin-top:0">Anteprima · come la vedranno i ragazzi</span>
+          <div class="lg-chips scorre" id="cr-tipi" role="group" aria-label="Tipo di esercizio"></div>
+          <div class="cr-anteprima" style="margin-top:.7rem"><div id="cr-box"></div></div>
+        </div>
+      </div>
+
+      <div class="cr-passo"><b>2</b><h2 class="lg-h2">Usatelo <em>in classe</em></h2></div>
+      <div class="cr-usa">
+        <button type="button" id="cr-link"><span class="ic">📲</span><span><b>Link e codice QR</b><small>I ragazzi aprono l'esercizio sul telefono, senza registrarsi. Possono scegliere anche gli altri tipi.</small></span></button>
+        <button type="button" id="cr-lim"><span class="ic">🎲</span><span><b>Gioca alla LIM</b><small>Le stesse frasi nei quattro giochi a squadre.</small></span></button>
+        <button type="button" id="cr-carta"><span class="ic">🖨️</span><span><b>Verifica su carta</b><small>Una verifica pronta, modificabile, con file A e B e soluzioni.</small></span></button>
+      </div>
+      <div id="cr-condividi"></div>
+      <p class="lg-nota" style="margin-top:1.5rem">🔒 <b>Niente account, niente server.</b> Le frasi stanno dentro il link: chi lo apre vede l'esercizio, ma il sito non lo riceve e non lo conserva. La bozza resta solo in questo browser. Se cambiate le frasi, create un link nuovo.</p>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/parole.js"></script>
+<script src="lingue/esercizi.js"></script>
+<script src="lingue/pacchetto.js"></script>
+<script src="lingue/qrcode.js"></script>
+<script>
+(function () {
+  var L = window.LINGUE_SITO, V = window.VOCABOLARIO, E = window.ESERCIZI, PK = window.PACCHETTO, esc = L.esc;
+  var $ = function (id) { return document.getElementById(id); };
+  var tit = $('cr-tit'), lin = $('cr-lin'), txt = $('cr-txt');
+  var bozza = L.leggi('crea-bozza', null) || { titolo: '', lingua: L.linguaScelta(), testo: '', tipo: 'scelta' };
+  var ESEMPI = {
+    en: 'Un caffè = A coffee\nUn cappuccino = A cappuccino\nUn tè caldo = A hot tea\nUna cioccolata calda = A hot chocolate\nCon latte o limone? = With milk or lemon?\nVuole lo zucchero? = Would you like some sugar?',
+    fr: 'Un caffè = Un café\nUn cappuccino = Un cappuccino\nUn tè caldo = Un thé chaud\nUna cioccolata calda = Un chocolat chaud\nCon latte o limone? = Avec du lait ou du citron ?\nVuole lo zucchero? = Vous voulez du sucre ?',
+    es: 'Un caffè = Un café\nUn cappuccino = Un capuchino\nUn tè caldo = Un té caliente\nUna cioccolata calda = Un chocolate caliente\nCon latte o limone? = ¿Con leche o limón?\nVuole lo zucchero? = ¿Quiere azúcar?',
+    de: 'Un caffè = Einen Kaffee\nUn cappuccino = Einen Cappuccino\nUn tè caldo = Einen heißen Tee\nUna cioccolata calda = Eine heiße Schokolade\nCon latte o limone? = Mit Milch oder Zitrone?\nVuole lo zucchero? = Möchten Sie Zucker?'
+  };
+
+  lin.innerHTML = L.LINGUE.map(function (l) { return '<option value="' + l.cod + '">' + l.nome + '</option>'; }).join('');
+  tit.value = bozza.titolo; lin.value = bozza.lingua; txt.value = bozza.testo;
+  function salvaBozza() { bozza.titolo = tit.value; bozza.lingua = lin.value; bozza.testo = txt.value; L.salva('crea-bozza', bozza); }
+  function lista() { return PK.voci(txt.value); }
+
+  /* ── anteprima ── */
+  function tipi() {
+    $('cr-tipi').innerHTML = Object.keys(E.TIPI).map(function (k) { return '<button type="button" class="lg-chip" data-tipo="' + k + '" aria-pressed="' + (k === bozza.tipo) + '">' + E.TIPI[k].icona + ' ' + E.TIPI[k].nome + '</button>'; }).join('');
+  }
+  function aggiorna() {
+    var r = lista(), st = $('cr-stato');
+    st.className = 'cr-stato' + (r.err.length ? ' no' : '');
+    st.textContent = !r.voci.length && !r.err.length ? '' : r.voci.length + (r.voci.length === 1 ? ' frase' : ' frasi') + (r.err.length ? ' · righe da sistemare (manca «=» o una delle due parti): ' + r.err.join(', ') : ' pronte');
+    if (!r.voci.length) $('cr-box').innerHTML = '<p class="lg-sot" style="margin:0;text-align:center">Scrivete almeno due frasi per vedere l\'anteprima.</p>';
+    else E.avvia($('cr-box'), { tipo: bozza.tipo, lingua: lin.value, voci: r.voci });
+    $('cr-condividi').innerHTML = '';
+    salvaBozza();
+  }
+  var tAgg; function aggiornaPoi() { clearTimeout(tAgg); tAgg = setTimeout(aggiorna, 450); }
+  txt.addEventListener('input', aggiornaPoi);
+  tit.addEventListener('input', function () { salvaBozza(); $('cr-condividi').innerHTML = ''; });
+  lin.addEventListener('change', function () { aggiorna(); disegnaVoc(); });
+  document.addEventListener('click', function (e) { var b = e.target.closest('[data-tipo]'); if (b) { bozza.tipo = b.dataset.tipo; tipi(); aggiorna(); } });
+  $('cr-esempio').addEventListener('click', function () { if (txt.value.trim() && !confirm('Sostituire le frasi con l\'esempio?')) return; txt.value = ESEMPI[lin.value]; if (!tit.value) tit.value = 'Al bar: le bevande calde'; aggiorna(); });
+  $('cr-svuota').addEventListener('click', function () { if (txt.value.trim() && !confirm('Cancellare tutte le frasi?')) return; txt.value = ''; aggiorna(); });
+
+  /* ── pesca dal vocabolario ── */
+  var amb = $('cr-amb'), sez = $('cr-sez');
+  amb.innerHTML = V.AMBITI.map(function (a) { return '<option value="' + a.id + '">' + a.icona + ' ' + esc(a.nome) + '</option>'; }).join('');
+  function opzSez() { sez.innerHTML = V.SEZIONI.filter(function (s) { return s.ambito === amb.value; }).map(function (s) { return '<option value="' + s.id + '">' + esc(s.nome) + '</option>'; }).join(''); }
+  function disegnaVoc() {
+    $('cr-voc').innerHTML = (V.PAROLE[sez.value] || []).map(function (p, i) {
+      var t = p[1][lin.value]; return '<label><input type="checkbox" data-v="' + i + '"/><span>' + esc(p[0]) + '<small>' + esc(t[0]) + '</small></span></label>';
+    }).join('');
+  }
+  amb.addEventListener('change', function () { opzSez(); disegnaVoc(); });
+  sez.addEventListener('change', disegnaVoc);
+  $('cr-tutte').addEventListener('click', function () { var c = $('cr-voc').querySelectorAll('input'), tutte = [].every.call(c, function (x) { return x.checked; }); c.forEach(function (x) { x.checked = !tutte; }); });
+  $('cr-aggiungi').addEventListener('click', function () {
+    var gia = {}; lista().voci.forEach(function (v) { gia[v.it] = 1; });
+    var nuove = [].filter.call($('cr-voc').querySelectorAll('input:checked'), function () { return true; }).map(function (x) {
+      var p = V.PAROLE[sez.value][+x.dataset.v], t = p[1][lin.value]; x.checked = false;
+      return gia[p[0]] ? null : p[0] + ' = ' + t[0] + (t[1] ? ' = ' + t[1] : '');
+    }).filter(Boolean);
+    if (!nuove.length) return;
+    txt.value = (txt.value.trim() ? txt.value.replace(/\s+$/, '') + '\n' : '') + nuove.join('\n');
+    aggiorna();
+  });
+
+  /* ── usarlo ── */
+  function pacchetto() {
+    var r = lista();
+    if (r.voci.length < 2) { alert('Servono almeno due frasi.'); return null; }
+    return { v: 1, t: tit.value.trim() || 'Esercizio di ' + L.lingua(lin.value).nome.toLowerCase(), l: lin.value, k: bozza.tipo, f: r.voci.map(function (v) { return v.pr ? [v.it, v.tr, v.pr] : [v.it, v.tr]; }) };
+  }
+  function qr(testo, canvas, cella) {
+    var q = qrcode(0, 'L'); q.addData(testo); q.make();
+    var n = q.getModuleCount(), m = 4, s = (n + m * 2) * cella, c = canvas.getContext('2d');
+    canvas.width = canvas.height = s; c.fillStyle = '#fff'; c.fillRect(0, 0, s, s); c.fillStyle = '#000';
+    for (var r = 0; r < n; r++) for (var k = 0; k < n; k++) if (q.isDark(r, k)) c.fillRect((k + m) * cella, (r + m) * cella, cella, cella);
+  }
+  $('cr-link').addEventListener('click', function () {
+    var p = pacchetto(); if (!p) return;
+    PK.codifica(p).then(function (cod) {
+      var url = location.origin + '/lingue/esercizio.html#e=' + cod, box = $('cr-condividi');
+      if (url.length > 2800) { box.innerHTML = '<p class="lg-nota" style="margin-top:1rem">Le frasi sono troppe per un codice QR: dividetele in due esercizi (fino a una cinquantina di frasi brevi per esercizio).</p>'; return; }
+      box.innerHTML = '<div class="lg-card cr-qr"><canvas id="cr-qrc" aria-label="Codice QR dell\'esercizio"></canvas><div>' +
+        '<span class="et" style="margin-top:0">' + esc(p.t) + ' · ' + p.f.length + ' frasi</span><input type="text" readonly id="cr-url" value="' + esc(url) + '"/>' +
+        '<div class="cr-riga"><button type="button" class="lg-btn pieno" id="cr-copia">📋 Copia il link</button><button type="button" class="lg-btn" id="cr-grande">⛶ QR a tutto schermo</button><a class="lg-btn" href="' + esc(url) + '" target="_blank" rel="noopener">Apri ↗</a></div>' +
+        '<p class="cr-aiuto">Il link si può incollare nel registro elettronico, in Classroom o in una chat di classe. ' + (url.length > 1200 ? 'Con tante frasi il codice QR è fitto: alla LIM usate «QR a tutto schermo».' : '') + '</p></div></div>';
+      qr(url, $('cr-qrc'), 4);
+      $('cr-copia').addEventListener('click', function () {
+        var b = this; (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).catch(function () { $('cr-url').select(); document.execCommand('copy'); }).then(function () { b.textContent = '✓ Copiato'; setTimeout(function () { b.textContent = '📋 Copia il link'; }, 2000); });
+      });
+      $('cr-grande').addEventListener('click', function () {
+        var g = document.createElement('div'); g.className = 'cr-qr-grande'; g.innerHTML = '<p>' + esc(p.t) + '</p><canvas></canvas><button type="button" class="lg-btn pieno">✕ Chiudi</button>';
+        document.body.appendChild(g); qr(url, g.querySelector('canvas'), 10);
+        g.addEventListener('click', function () { g.remove(); });
+      });
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+  $('cr-lim').addEventListener('click', function () {
+    var p = pacchetto(); if (!p) return;
+    L.salva('mie-frasi-' + p.l, p.f.map(function (f) { return f[0] + ' = ' + f[1]; }).join('\n'));
+    L.salva('livello-lim', 'mie'); L.impostaLingua(p.l);
+    location.href = 'lingue/giochi.html';
+  });
+
+  /* verifica su carta: una bozza per «Verifiche in un clic», poi il docente la rifinisce lì */
+  var VUOTE = ['the', 'and', 'you', 'your', 'les', 'des', 'une', 'vous', 'est', 'los', 'las', 'una', 'por', 'der', 'die', 'das', 'und', 'sie', 'ist', 'ein', 'eine', 'with', 'avec', 'con', 'mit', 'for', 'pour', 'para', 'für'];
+  function buco(frase) {
+    var parole = frase.match(/[\p{L}][\p{L}'’-]*/gu) || []; if (parole.length < 2) return null;
+    var cand = parole.filter(function (w) { return w.length >= 4 && VUOTE.indexOf(w.toLowerCase()) < 0; });
+    if (!cand.length) return null;
+    var w = cand.sort(function (a, b) { return b.length - a.length; })[0];
+    return frase.replace(w, '[' + w + ']');
+  }
+  function nid() { return Math.random().toString(36).slice(2, 9); }
+  $('cr-carta').addEventListener('click', function () {
+    var p = pacchetto(); if (!p) return;
+    if (L.leggi('verifica-bozza', null) && !confirm('In «Verifiche in un clic» c\'è già una verifica in preparazione: sostituirla con questa?')) return;
+    var v = L.mescola(p.f.map(function (f) { return { it: f[0], tr: f[1] }; })), nome = L.lingua(p.l).nome.toLowerCase(), dom = [], i = 0;
+    var n = v.length, nt = Math.min(4, Math.ceil(n / 4)), ns = Math.min(4, Math.ceil(n / 4)), na = n - nt - ns >= 2 ? Math.min(6, n - nt - ns) : 0, nc = n - nt - ns - na;
+    v.slice(i, i += nt).forEach(function (x) { dom.push({ id: nid(), tipo: 'traduci', consegna: 'Traduci in ' + nome + ':', frase: x.it, risposta: x.tr, punti: 2 }); });
+    v.slice(i, i += ns).forEach(function (x) {
+      var alt = L.mescola(v.filter(function (y) { return y.tr !== x.tr; })).map(function (y) { return y.tr; }).slice(0, 3);
+      if (alt.length >= 2) dom.push({ id: nid(), tipo: 'scelta', consegna: 'Come si dice «' + x.it + '» in ' + nome + '?', opzioni: [x.tr].concat(alt), giusta: 0, punti: 1 });
+    });
+    if (na >= 2) { var c = v.slice(i, i += na); dom.push({ id: nid(), tipo: 'abbina', consegna: 'Collega ogni frase italiana alla sua traduzione, scrivendo la lettera giusta.', coppie: c.map(function (x) { return [x.it, x.tr]; }), punti: c.length }); }
+    v.slice(i, i + nc).forEach(function (x) { var b = buco(x.tr); if (b) dom.push({ id: nid(), tipo: 'completa', consegna: 'Completa la frase (' + x.it + '):', testo: b, banca: false, punti: 1 }); });
+    L.salva('verifica-bozza', { id: nid(), lingua: p.l, intest: { titolo: p.t, classe: '', data: '', durata: '50 minuti', istruzioni: 'Leggi con attenzione ogni consegna. Scrivi in modo chiaro e leggibile.', griglia: true, nomi: true }, domande: dom });
+    location.href = 'lingue/verifiche.html';
+  });
+
+  opzSez(); disegnaVoc(); tipi(); aggiorna();
+})();
+</script>
+</body>
+</html>

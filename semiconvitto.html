@@ -103,41 +103,76 @@
       <style>
         .sc-testo{font-family:var(--fu);font-size:.88rem;line-height:1.7;color:#1a1a1a;margin:0 0 .9rem}
         .sc-testo:last-child{margin-bottom:0}
-        .sc-dest{font-family:var(--fu);font-size:.85rem;line-height:1.6;color:#1a1a1a;margin-bottom:1rem}
+        .sc-sub{font-family:var(--fu);font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--bosco);margin:0 0 .75rem;padding:0}
+        .sc-grid-via{grid-template-columns:3fr 1fr;gap:.85rem}
+        .sc-grid>*,.sc-grid-via>*{min-width:0}
+        .sc-field input{min-width:0;width:100%;box-sizing:border-box}
+        @media (max-width:640px){.sc-grid-via{grid-template-columns:3fr 1fr}}
+        .sc-fieldset{border:0;margin:1.75rem 0 0;padding:0;min-width:0}
+        .sc-fieldset .sc-check-row{margin-bottom:.45rem}
+        .sc-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+        .sc-check-row input[type=radio]{width:17px;height:17px;margin-top:2px;accent-color:var(--bosco);cursor:pointer;flex-shrink:0}
+        .sc-dich{font-family:var(--fu);font-size:.88rem;line-height:1.8;color:#1a1a1a;margin:0;padding-left:1.4rem}
+        .sc-dich li{margin-bottom:.7rem}
+        .sc-inline{display:inline-block;width:5.5rem;padding:.2rem .5rem;border:1.5px solid #d1d5db;border-radius:6px;font-family:var(--fu);font-size:.88rem;color:#1a1a1a;background:#fafafa;outline:0;vertical-align:baseline}
+        .sc-inline:focus{border-color:var(--bosco);box-shadow:0 0 0 3px rgba(44,62,45,.1);background:#fff}
         .sc-chiede{font-family:var(--fu);font-weight:800;font-size:.8rem;letter-spacing:.16em;text-align:center;color:var(--bosco);margin:0 0 1rem}
-        @media print{.sc-schermo{display:none!important}.sc-field input{border:0;border-bottom:1px solid #999;border-radius:0;background:#fff;padding:.3rem 0}}
+        @media print{.sc-schermo{display:none!important}.sc-field input,.sc-inline{border:0;border-bottom:1px solid #999;border-radius:0;background:#fff;padding:.3rem 0;box-shadow:none}.sc-inline{padding:0 .2rem}}
       </style>
-      <form id="sc-form" novalidate onsubmit="return false" aria-label="Richiesta di autorizzazione per la partecipazione al semiconvitto">
+      <form id="sc-form" novalidate onsubmit="return false" aria-label="Modulo di ammissione al Semiconvitto, anno scolastico 2026/2027">
 
         <div class="sc-section">
           <div class="sc-section-hdr">
-            <h2>Richiesta di autorizzazione</h2>
-            <span>semiconvitto ed esonero da responsabilità</span>
+            <h2>Modulo di ammissione al Semiconvitto</h2>
+            <span>IPSSEOA “R. A. Costaggini” · Rieti · A.S. 2026/2027</span>
           </div>
           <div class="sc-section-body">
-            <div class="sc-dest"><strong>Al Dirigente Scolastico</strong><br>I.P.S.S.E.O.A. “Costaggini”<br>Via dei Salici, 62 – 02100 Rieti</div>
-            <p class="sc-testo"><strong>Oggetto:</strong> Richiesta di autorizzazione per partecipazione ad attività di semiconvitto e dichiarazione di esonero da responsabilità</p>
+            <p class="sc-testo">Domanda di iscrizione/riconferma in qualità di semiconvittore/semiconvittrice per l'A.S. 2026/2027.</p>
+            <div class="sc-grid sc-grid-2">
+              <div class="sc-field">
+                <label for="sc-alunno">Alunno/a</label>
+                <input type="text" id="sc-alunno" name="alunno" autocomplete="off"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-classe">Classe</label>
+                <input type="text" id="sc-classe" name="classe" autocomplete="off"/>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="sc-section">
           <div class="sc-section-hdr">
-            <h2>1 — Il dichiarante</h2>
-            <span>genitore / tutore</span>
+            <h2>Sezione A</h2>
+            <span>dati dello/a studente/ssa</span>
           </div>
           <div class="sc-section-body">
             <div class="sc-grid sc-grid-2">
               <div class="sc-field" style="grid-column:1/-1">
-                <label for="sc-dich">Il/La sottoscritto/a (nome e cognome)</label>
-                <input type="text" id="sc-dich" name="dichiarante"/>
+                <label for="sc-a-nome">Cognome e Nome</label>
+                <input type="text" id="sc-a-nome" name="studente_nome" autocomplete="off"/>
               </div>
               <div class="sc-field">
-                <label for="sc-luogo">Nato/a a</label>
-                <input type="text" id="sc-luogo" name="luogo_nascita"/>
+                <label for="sc-a-luogo">Nata/o a</label>
+                <input type="text" id="sc-a-luogo" name="studente_luogo_nascita" autocomplete="off"/>
               </div>
               <div class="sc-field">
-                <label for="sc-nascita">Il (data di nascita)</label>
-                <input type="text" id="sc-nascita" name="data_nascita" placeholder="gg/mm/aaaa"/>
+                <label for="sc-a-data">Il</label>
+                <input type="text" id="sc-a-data" name="studente_data_nascita" placeholder="gg/mm/aaaa" autocomplete="off"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-a-res">Residente a</label>
+                <input type="text" id="sc-a-res" name="studente_residenza" autocomplete="off"/>
+              </div>
+              <div class="sc-grid sc-grid-via">
+                <div class="sc-field">
+                  <label for="sc-a-via">In Via</label>
+                  <input type="text" id="sc-a-via" name="studente_via" autocomplete="off"/>
+                </div>
+                <div class="sc-field">
+                  <label for="sc-a-civ">N°</label>
+                  <input type="text" id="sc-a-civ" name="studente_civico" autocomplete="off"/>
+                </div>
               </div>
             </div>
           </div>
@@ -145,58 +180,138 @@
 
         <div class="sc-section">
           <div class="sc-section-hdr">
-            <h2>2 — L'alunno/a</h2>
-            <span>di cui è genitore / tutore</span>
+            <h2>Sezione B</h2>
+            <span>dati dei genitori / esercenti la responsabilità genitoriale</span>
           </div>
           <div class="sc-section-body">
-            <div class="sc-grid sc-grid-4">
-              <div class="sc-field" style="grid-column:1/-1">
-                <label for="sc-alunno">Genitore/tutore dell'alunno/a (nome e cognome)</label>
-                <input type="text" id="sc-alunno" name="alunno"/>
+
+            <h3 class="sc-sub">Genitore 1 (Padre / Esercente)</h3>
+            <div class="sc-grid sc-grid-2">
+              <div class="sc-field">
+                <label for="sc-g1-nome">Cognome e Nome</label>
+                <input type="text" id="sc-g1-nome" name="genitore1_nome" autocomplete="off"/>
               </div>
               <div class="sc-field">
-                <label for="sc-classe">Frequentante la classe</label>
-                <input type="text" id="sc-classe" name="classe"/>
+                <label for="sc-g1-nasc">Luogo e Data di Nascita</label>
+                <input type="text" id="sc-g1-nasc" name="genitore1_nascita" autocomplete="off"/>
               </div>
               <div class="sc-field">
-                <label for="sc-sez">Sez.</label>
-                <input type="text" id="sc-sez" name="sezione"/>
+                <label for="sc-g1-res">Residente (se diversa dallo studente): a</label>
+                <input type="text" id="sc-g1-res" name="genitore1_residenza" autocomplete="off"/>
+              </div>
+              <div class="sc-grid sc-grid-via">
+                <div class="sc-field">
+                  <label for="sc-g1-via">In Via</label>
+                  <input type="text" id="sc-g1-via" name="genitore1_via" autocomplete="off"/>
+                </div>
+                <div class="sc-field">
+                  <label for="sc-g1-civ">N°</label>
+                  <input type="text" id="sc-g1-civ" name="genitore1_civico" autocomplete="off"/>
+                </div>
+              </div>
+              <div class="sc-field">
+                <label for="sc-g1-tel">Recapito telefonico</label>
+                <input type="tel" id="sc-g1-tel" name="genitore1_telefono" inputmode="tel" autocomplete="off"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-g1-mail">E-mail</label>
+                <input type="email" id="sc-g1-mail" name="genitore1_email" autocomplete="off"/>
               </div>
             </div>
-            <p class="sc-testo" style="margin-top:.9rem">dell'I.P.S.S.E.O.A. “Costaggini” di Rieti,</p>
+
+            <h3 class="sc-sub" style="margin-top:1.75rem">Genitore 2 (Madre / Esercente)</h3>
+            <div class="sc-grid sc-grid-2">
+              <div class="sc-field">
+                <label for="sc-g2-nome">Cognome e Nome</label>
+                <input type="text" id="sc-g2-nome" name="genitore2_nome" autocomplete="off"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-g2-nasc">Luogo e Data di Nascita</label>
+                <input type="text" id="sc-g2-nasc" name="genitore2_nascita" autocomplete="off"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-g2-res">Residente (se diversa dallo studente): a</label>
+                <input type="text" id="sc-g2-res" name="genitore2_residenza" autocomplete="off"/>
+              </div>
+              <div class="sc-grid sc-grid-via">
+                <div class="sc-field">
+                  <label for="sc-g2-via">In Via</label>
+                  <input type="text" id="sc-g2-via" name="genitore2_via" autocomplete="off"/>
+                </div>
+                <div class="sc-field">
+                  <label for="sc-g2-civ">N°</label>
+                  <input type="text" id="sc-g2-civ" name="genitore2_civico" autocomplete="off"/>
+                </div>
+              </div>
+              <div class="sc-field">
+                <label for="sc-g2-tel">Recapito telefonico</label>
+                <input type="tel" id="sc-g2-tel" name="genitore2_telefono" inputmode="tel" autocomplete="off"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-g2-mail">E-mail</label>
+                <input type="email" id="sc-g2-mail" name="genitore2_email" autocomplete="off"/>
+              </div>
+            </div>
+
+            <fieldset class="sc-fieldset">
+              <legend class="sc-sub">Situazione familiare</legend>
+              <p class="sc-testo" style="font-size:.8rem;color:#6b7280;margin-bottom:.7rem">(Barrare l'opzione che riflette la situazione attuale)</p>
+              <div class="sc-check-row">
+                <input type="radio" id="sc-sit-1" name="situazione_familiare" value="coniugati"/>
+                <label for="sc-sit-1">Genitori Coniugati / Convivenza</label>
+              </div>
+              <div class="sc-check-row">
+                <input type="radio" id="sc-sit-2" name="situazione_familiare" value="separati"/>
+                <label for="sc-sit-2">Genitori Separati / Divorziati / Non Coniugati</label>
+              </div>
+              <div class="sc-check-row">
+                <input type="radio" id="sc-sit-3" name="situazione_familiare" value="altra"/>
+                <label for="sc-sit-3">Altra situazione (Specificare):</label>
+              </div>
+              <div class="sc-field" style="margin-top:.5rem">
+                <label for="sc-sit-altra" class="sc-vh">Altra situazione: specificare</label>
+                <input type="text" id="sc-sit-altra" name="situazione_altra" autocomplete="off"/>
+              </div>
+            </fieldset>
+
           </div>
         </div>
 
         <div class="sc-section">
           <div class="sc-section-hdr">
-            <h2>3 — Richiesta e dichiarazione</h2>
-            <span></span>
+            <h2>Sezione C</h2>
+            <span>richiesta e dichiarazioni</span>
           </div>
           <div class="sc-section-body">
-            <p class="sc-chiede">CHIEDE</p>
-            <p class="sc-testo">l'autorizzazione affinché il/la proprio/a figlio/a possa partecipare all'attività di <strong>semiconvitto</strong> presso il Convitto per il giorno:</p>
-            <div class="sc-field" style="margin-bottom:1.1rem">
-              <label for="sc-giorni">Giorno o giorni di partecipazione</label>
-              <input type="text" id="sc-giorni" name="giorni"/>
-            </div>
-            <p class="sc-testo">Il/La sottoscritto/a <strong>dichiara di sollevare</strong> il Dirigente Scolastico e l'Istituzione scolastica <strong>da ogni responsabilità civile e penale</strong> per eventuali danni a persone o cose che dovessero verificarsi durante lo svolgimento dell'attività, non imputabili a negligenza dell'Istituto o del personale scolastico.</p>
-            <p class="sc-testo">Si allega copia del documento di identità del dichiarante.</p>
+            <p class="sc-testo">I sottoscritti, in qualità di genitori (esercenti la responsabilità genitoriale) dello studente/ssa indicato/a nella Sezione A:</p>
+            <p class="sc-chiede">CHIEDONO PER L'ANNO SCOLASTICO 2026/2027</p>
+            <p class="sc-testo">l'iscrizione del/la proprio/a figlio/a presso l'IPSSEOA “R. A. Costaggini” in qualità di semiconvittore/trice. A tal fine:</p>
+            <ol class="sc-dich">
+              <li>Dichiarano di essere a conoscenza che per l'avvio dell'attività di semiconvitto l'iscrizione sarà gratuita.</li>
+              <li>Dichiarano di essere a conoscenza che il semiconvitto si svolge da dopo le lezioni fino alle ore 17,30 e che in tale fascia verrà offerto pranzo e sostegno allo studio.</li>
+              <li>Dichiarano che sarà corrisposto un ticket stabilito nella cifra di euro <input type="text" class="sc-inline" name="ticket" aria-label="Importo del ticket, in euro" inputmode="decimal" autocomplete="off"/>. Il ticket sarà corrisposto solo se si utilizzerà il servizio.</li>
+              <li>Dichiarano di aver preso visione dei servizi offerti dal semiconvitto (tra cui pranzo, merenda, guida e assistenza nello studio, laboratori didattici, attività ludico-sportive).</li>
+            </ol>
           </div>
 
           <div class="sc-sig-row">
-            <div class="sc-sig">
+            <div class="sc-sig" style="flex-basis:100%">
               <div class="sc-field">
-                <label for="sc-data">Rieti, data</label>
-                <input type="text" id="sc-data" name="data" placeholder="gg/mm/aaaa"/>
+                <label for="sc-luogo-data">Luogo e Data</label>
+                <input type="text" id="sc-luogo-data" name="luogo_data" autocomplete="off"/>
               </div>
             </div>
             <div class="sc-sig">
               <div class="sc-sig-line"></div>
-              <div class="sc-sig-label">Firma del genitore / tutore</div>
+              <div class="sc-sig-label">Firma Genitore 1</div>
+            </div>
+            <div class="sc-sig">
+              <div class="sc-sig-line"></div>
+              <div class="sc-sig-label">Firma Genitore 2</div>
             </div>
           </div>
 
-          <div class="sc-footer-note">Da inviare a <strong>convitto@alberghierorieti.it</strong> allegando il documento d'identità.</div>
+          <div class="sc-footer-note"><strong>NOTA BENE:</strong> la domanda è valida solo con la firma di entrambi gli esercenti la responsabilità genitoriale. Se la firma è di uno solo, è necessario allegare una dichiarazione di accordo sottoscritta e datata dal genitore non firmatario. Si prega di allegare copia dei documenti di identità in corso di validità di entrambi i firmatari.</div>
         </div>
 
       </form>

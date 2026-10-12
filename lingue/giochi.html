@@ -51,7 +51,7 @@
   /* memory */
   .gc-mem{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(.4rem,1vw,.8rem);max-width:min(100%,118vh);margin:0 auto}
   @media (max-width:520px){.gc-mem{grid-template-columns:repeat(3,minmax(0,1fr))}}
-  .gc-carta{aspect-ratio:4/3;border-radius:14px;border:0;cursor:pointer;font:600 clamp(.72rem,1.6vw,1.15rem)/1.25 var(--fu);padding:.4rem;color:var(--bosco);background:#f5f0e8;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;overflow-wrap:anywhere;min-width:0;transition:transform .25s,background .25s}
+  .gc-carta{min-height:clamp(78px,15vh,170px);border-radius:14px;border:0;cursor:pointer;font:600 clamp(.72rem,1.6vw,1.15rem)/1.25 var(--fu);padding:.5rem .4rem;color:var(--bosco);background:#f5f0e8;display:flex;align-items:center;justify-content:center;text-align:center;overflow-wrap:break-word;hyphens:auto;min-width:0;transition:transform .25s,background .25s}
   .gc-carta.coperta{background:repeating-linear-gradient(45deg,#b8922a,#b8922a 10px,#c9a33c 10px,#c9a33c 20px);color:transparent;font-size:2rem}
   .gc-carta.coperta::after{content:'?';color:#fff;font-family:var(--fd)}
   .gc-carta.tr{background:#fff;color:#1a4a7a}
@@ -64,9 +64,9 @@
 
   /* indovina la parola */
   .gc-slot{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(.3rem,.8vw,.5rem) clamp(.9rem,2vw,1.6rem);margin:.6rem 0 1rem}
-  .gc-slot .par{display:flex;gap:clamp(.2rem,.5vw,.35rem)}
-  .gc-slot span{display:inline-flex;align-items:flex-end;justify-content:center;width:clamp(1.5rem,3.6vw,2.8rem);height:clamp(2rem,4.8vw,3.6rem);border-bottom:3px solid var(--oro2);font-family:var(--fd);font-size:clamp(1.3rem,3.6vw,2.6rem);text-transform:uppercase}
-  .gc-slot span.seg{border-bottom-color:transparent;width:auto}
+  .gc-slot .par{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(.15rem,.5vw,.35rem);max-width:100%}
+  .gc-slot .par>span{display:inline-flex;align-items:flex-end;justify-content:center;width:clamp(1.1rem,3.6vw,2.8rem);height:clamp(1.7rem,4.8vw,3.6rem);border-bottom:3px solid var(--oro2);font-family:var(--fd);font-size:clamp(1.05rem,3.6vw,2.6rem);text-transform:uppercase}
+  .gc-slot .par>span.seg{border-bottom-color:transparent;width:auto}
   .gc-tast{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(.25rem,.6vw,.45rem);max-width:900px;margin:0 auto}
   .gc-tast button{width:clamp(2.4rem,5.4vw,3.6rem);height:clamp(2.4rem,5.4vw,3.6rem);border-radius:10px;border:0;font:800 clamp(.95rem,2vw,1.4rem) var(--fu);background:#f5f0e8;color:var(--bosco);cursor:pointer}
   .gc-tast button.ok{background:#15803d;color:#fff}
@@ -212,7 +212,7 @@
     var c = M.carte[i], el = area.querySelector('[data-carta="' + i + '"]');
     if (M.blocco || !el.classList.contains('coperta')) return;
     el.classList.remove('coperta'); if (c.tr) el.classList.add('tr');
-    el.innerHTML = '<span><small>' + (c.tr ? esc(NOME_L()) : 'italiano') + '</small>' + esc(c.t) + '</span>';
+    el.innerHTML = '<span lang="' + (c.tr ? lingua : 'it') + '"><small>' + (c.tr ? esc(NOME_L()) : 'italiano') + '</small>' + esc(c.t) + '</span>';
     el.setAttribute('aria-label', c.t);
     if (c.tr) L.ascolta(c.t, lingua);
     M.su.push(i);

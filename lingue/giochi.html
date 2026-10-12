@@ -23,6 +23,14 @@
   .gc-gioco small{display:block;font-size:.76rem;color:var(--txt2);line-height:1.4;margin-top:.1rem}
   .gc-gioco[aria-pressed=true]{border-color:var(--bosco);background:#eef3ee;box-shadow:0 0 0 2px var(--bosco) inset}
 
+  .gc-mie label{display:block;font:800 .66rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);margin:0 0 .45rem}
+  .gc-mie textarea{width:100%;box-sizing:border-box;min-height:150px;font:500 .9rem/1.6 var(--fu);padding:.7rem .85rem;border:1.5px solid var(--av3);border-radius:10px;background:#fff;color:var(--txt);resize:vertical}
+  .gc-mie textarea:focus{outline:none;border-color:var(--oro)}
+  .gc-mie-aiuto{font-size:.78rem;color:var(--txt2);line-height:1.5;margin:.4rem 0 0}
+  .gc-mie-err{font-size:.8rem;color:#b91c1c;margin:.3rem 0 0;min-height:1em}
+  .gc-mie-err.ok{color:#15803d}
+  .gc-mie-az{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem}
+
   /* il palco: la parte da proiettare */
   .gc-palco{background:linear-gradient(160deg,#16261a,var(--bosco));border-radius:20px;padding:1rem;color:#fff;position:relative;min-width:0}
   .gc-palco:fullscreen{border-radius:0;padding:2vh 2.5vw;overflow:auto;display:flex;flex-direction:column}
@@ -125,8 +133,15 @@
         <div class="lg-chips" id="gc-livelli" role="group" aria-label="Livello"></div>
         <p class="lbl" style="margin-top:.4rem">Il gioco</p>
         <div class="gc-giochi" id="gc-giochi" role="group" aria-label="Gioco"></div>
-        <p class="lbl" style="margin-top:.4rem">Le parole di</p>
-        <div class="lg-chips scorre" id="gc-ambiti" role="group" aria-label="Ambito"></div>
+        <div id="gc-amb-box"><p class="lbl" style="margin-top:.4rem">Le parole di</p>
+        <div class="lg-chips scorre" id="gc-ambiti" role="group" aria-label="Ambito"></div></div>
+        <div class="gc-mie lg-card" id="gc-mie" hidden>
+          <label for="gc-mie-t">Le frasi della lezione · <span id="gc-mie-l"></span></label>
+          <textarea id="gc-mie-t" spellcheck="false" placeholder="Il conto, per favore = The bill, please&#10;Un tavolo per due = A table for two&#10;…"></textarea>
+          <p class="gc-mie-aiuto">Una frase per riga, nel formato <b>italiano = traduzione</b>. Ne servono almeno 4 (meglio 6 o più). Le frasi restano solo su questo computer, una lista per ogni lingua: il sito non riceve nulla.</p>
+          <p class="gc-mie-err" id="gc-mie-err" role="alert"></p>
+          <div class="gc-mie-az"><button type="button" class="lg-btn pieno" id="gc-mie-usa">✓ Usa queste frasi</button><button type="button" class="lg-btn" id="gc-mie-es">Esempio</button><button type="button" class="lg-btn" id="gc-mie-via">Svuota</button></div>
+        </div>
       </div>
 
       <div class="gc-palco" id="gc-palco">
@@ -159,7 +174,24 @@
     { id: 'ascolta', ic: '👂', nome: 'Ascolta e scegli', desc: 'Senti la frase, tocca il significato' }
   ];
   var lingua = L.linguaScelta(), gioco = L.leggi('gioco-lim', 'memory'), ambito = L.leggi('ambito-lim', 'tutti'), livello = L.leggi('livello-lim', 'base');
-  var AV = window.AVANZATO; if (livello !== 'avanzato') livello = 'base';
+  var AV = window.AVANZATO; if (livello !== 'avanzato' && livello !== 'mie') livello = 'base';
+  /* frasi del docente: una lista per lingua, solo nel browser di questo computer */
+  function testoMie() { return L.leggi('mie-frasi-' + lingua, ''); }
+  function leggiMie(t) {
+    var out = [], err = [];
+    String(t).split('\n').forEach(function (r, i) {
+      if (!r.trim()) return;
+      var c = r.split('=').map(function (x) { return x.trim(); });
+      if (c.length < 2 || !c[0] || !c[1]) err.push(i + 1); else out.push({ it: c[0], tr: c[1] });
+    });
+    return { voci: out, err: err };
+  }
+  var ESEMPI = {
+    en: 'Il conto, per favore = The bill, please\nUn tavolo per due = A table for two\nAvete prenotato? = Do you have a reservation?\nDesidera qualcosa da bere? = Would you like something to drink?\nIl piatto del giorno = The dish of the day\nBuon appetito! = Enjoy your meal!',
+    fr: "Il conto, per favore = L'addition, s'il vous plaît\nUn tavolo per due = Une table pour deux\nAvete prenotato? = Vous avez réservé ?\nDesidera qualcosa da bere? = Vous désirez quelque chose à boire ?\nIl piatto del giorno = Le plat du jour\nBuon appetito! = Bon appétit !",
+    es: 'Il conto, per favore = La cuenta, por favor\nUn tavolo per due = Una mesa para dos\nAvete prenotato? = ¿Tienen reserva?\nDesidera qualcosa da bere? = ¿Desea algo de beber?\nIl piatto del giorno = El plato del día\nBuon appetito! = ¡Buen provecho!',
+    de: 'Il conto, per favore = Die Rechnung, bitte\nUn tavolo per due = Ein Tisch für zwei\nAvete prenotato? = Haben Sie reserviert?\nDesidera qualcosa da bere? = Möchten Sie etwas trinken?\nIl piatto del giorno = Das Tagesgericht\nBuon appetito! = Guten Appetit!'
+  };
   if (!GIOCHI.some(function (g) { return g.id === gioco; })) gioco = 'memory';
   var sq = [{ nome: L.leggi('sq-0', 'Squadra 1'), punti: 0 }, { nome: L.leggi('sq-1', 'Squadra 2'), punti: 0 }], turno = 0;
   var area = document.getElementById('gc-area'), $turno = document.getElementById('gc-turno');
@@ -168,6 +200,7 @@
   /* ── dati ── */
   function voci() {
     var out = [], visto = {};
+    if (livello === 'mie') return leggiMie(testoMie()).voci;
     if (livello === 'avanzato') {
       AV.SITUAZIONI.forEach(function (s) { if (ambito === 'tutti' || s.ambito === ambito) s.frasi.forEach(function (f) { out.push({ it: f[0], tr: f[1][lingua] }); }); });
       return out;
@@ -211,15 +244,17 @@
       '<div class="gc-azioni"><button type="button" class="gc-b oro" data-az="ancora">▶ Un\'altra partita</button></div></div>';
   }
   function ferma() { clearInterval(timer); timer = null; clearTimeout(attesa); attesa = null; if (window.speechSynthesis) speechSynthesis.cancel(); }
-  function pochi() { area.innerHTML = '<p class="gc-medio">Non ci sono abbastanza frasi per questo gioco: scegliete «Tutti gli ambiti».</p>'; dici(''); }
+  function pochi(n) {
+    area.innerHTML = '<p class="gc-medio">' + (livello === 'mie' ? 'Per questo gioco servono almeno ' + (n || 4) + ' frasi: scrivetele nel riquadro qui sopra e toccate «Usa queste frasi».' : 'Non ci sono abbastanza frasi per questo gioco: scegliete «Tutti gli ambiti».') + '</p>'; dici('');
+  }
 
   /* ── 1. MEMORY ── */
   var M;
   function memory() {
     var av = livello === 'avanzato', carte = [];
     /* avanzato: la frase sbrigativa e quella professionale, entrambe nella lingua scelta */
-    var scelte = av ? prendi(AV.REGISTRO, 6).map(function (r) { return { it: r[2][lingua][0], tr: r[2][lingua][1] }; }) : prendi(brevi(34), 6);
-    if (scelte.length < 6) return pochi();
+    var scelte = av ? prendi(AV.REGISTRO, 6).map(function (r) { return { it: r[2][lingua][0], tr: r[2][lingua][1] }; }) : livello === 'mie' ? prendi(voci(), 6) : prendi(brevi(34), 6);
+    if (scelte.length < (livello === 'mie' ? 3 : 6)) return pochi(3);
     scelte.forEach(function (v, k) {
       carte.push({ k: k, t: v.it, tr: av, et: av ? 'così no' : 'italiano' }, { k: k, t: v.tr, tr: true, et: av ? 'così sì' : NOME_L() });
     });
@@ -242,7 +277,7 @@
     if (a.k === b.k) {
       [ea, el].forEach(function (x) { x.classList.add('presa', turno ? 'sqb' : 'sqa'); x.disabled = true; });
       M.su = []; M.prese++; punto(turno);
-      if (M.prese === 6) attesa = setTimeout(function () { fine('<p class="gc-regole">' + M.voci.map(function (v) { return esc(v.it) + (livello === 'avanzato' ? ' → ' : ' = ') + '<b>' + esc(v.tr) + '</b>'; }).join('<br/>') + '</p>'); }, 900);
+      if (M.prese === M.carte.length / 2) attesa = setTimeout(function () { fine('<p class="gc-regole">' + M.voci.map(function (v) { return esc(v.it) + (livello === 'avanzato' ? ' → ' : ' = ') + '<b>' + esc(v.tr) + '</b>'; }).join('<br/>') + '</p>'); }, 900);
       else dici('Coppia! ' + sq[turno].nome + ' gioca ancora');
     } else {
       M.blocco = true;
@@ -259,7 +294,14 @@
   function lettera(ch) { return /\p{L}/u.test(ch); }
   function parola() {
     if (livello === 'avanzato') return riordina();
-    var lista = voci().filter(function (v) { return v.tr.length >= 4 && v.tr.length <= 22 && v.tr.split(' ').length <= 3 && !/[\/()…]/.test(v.tr); });
+    var tutte = voci(), lista = tutte.filter(function (v) { return v.tr.length >= 4 && v.tr.length <= 22 && v.tr.split(' ').length <= 3 && !/[\/()…]/.test(v.tr); });
+    /* frasi del docente: le brevi si indovinano lettera per lettera, le lunghe si riordinano */
+    if (livello === 'mie') {
+      if (!tutte.length) return pochi(1);
+      var x = prendi(tutte, 1)[0];
+      if (lista.indexOf(x) < 0) return x.tr.split(' ').length >= 2 ? riordina(x) : pochi(1);
+      lista = [x];
+    }
     if (!lista.length) return pochi();
     var v = prendi(lista, 1)[0];
     P = { v: v, usate: {}, errori: 0, finita: false };
@@ -301,8 +343,8 @@
 
   /* ── 2b. RIORDINA LA FRASE (livello avanzato) ── */
   var O;
-  function riordina() {
-    var lista = voci().filter(function (v) { var n = v.tr.split(' ').length; return n >= 5 && n <= 14; });
+  function riordina(scelta) {
+    var lista = scelta ? [scelta] : voci().filter(function (v) { var n = v.tr.split(' ').length; return n >= 5 && n <= 14; });
     if (!lista.length) return pochi();
     var v = prendi(lista, 1)[0], pezzi = v.tr.split(' ').map(function (w, i) { return { i: i, w: w }; });
     var mix = L.mescola(pezzi);
@@ -410,12 +452,17 @@
     ({ memory: memory, parola: parola, tempo: tempo, ascolta: ascolta })[gioco]();
   }
   function disegnaScelte() {
-    document.getElementById('gc-livelli').innerHTML = [['base', '🟢', 'Base · parole e frasi brevi'], ['avanzato', '🎓', 'Avanzato · frasi complete']].map(function (l) {
+    document.getElementById('gc-livelli').innerHTML = [['base', '🟢', 'Base · parole e frasi brevi'], ['avanzato', '🎓', 'Avanzato · frasi complete'], ['mie', '📝', 'Le mie frasi']].map(function (l) {
       return '<button type="button" class="lg-chip" data-liv="' + l[0] + '" aria-pressed="' + (l[0] === livello) + '">' + l[1] + ' ' + l[2] + '</button>';
     }).join('');
     var AVG = { memory: { desc: 'Frase sbrigativa ↔ frase professionale' }, parola: { ic: '🧩', nome: 'Riordina la frase', desc: 'Le parole in ordine, a turno' } };
+    var MIE = { parola: { ic: '🔤', nome: 'Indovina o riordina', desc: 'Le frasi brevi lettera per lettera, le lunghe parola per parola' } };
+    var cambi = livello === 'avanzato' ? AVG : livello === 'mie' ? MIE : {};
+    document.getElementById('gc-amb-box').hidden = livello === 'mie';
+    document.getElementById('gc-mie').hidden = livello !== 'mie';
+    if (livello === 'mie') { document.getElementById('gc-mie-l').textContent = L.lingua(lingua).nome.toLowerCase(); if (document.activeElement !== mieT) mieT.value = testoMie(); }
     document.getElementById('gc-giochi').innerHTML = GIOCHI.map(function (g0) {
-      var g = livello === 'avanzato' && AVG[g0.id] ? Object.assign({}, g0, AVG[g0.id]) : g0;
+      var g = cambi[g0.id] ? Object.assign({}, g0, cambi[g0.id]) : g0;
       return '<button type="button" class="gc-gioco" data-g="' + g.id + '" aria-pressed="' + (g.id === gioco) + '"><span class="ic" aria-hidden="true">' + g.ic + '</span><span><b>' + g.nome + '</b><small>' + g.desc + '</small></span></button>';
     }).join('');
     document.getElementById('gc-ambiti').innerHTML = [{ id: 'tutti', nome: 'Tutti gli ambiti', icona: '🌟' }].concat(V.AMBITI).map(function (a) {
@@ -460,7 +507,18 @@
     if (gioco !== 'parola' || livello === 'avanzato' || !P || e.ctrlKey || e.metaKey || e.altKey || /input|textarea/i.test(e.target.tagName)) return;
     if (/^[a-z]$/i.test(e.key)) provaLettera(e.key.toLowerCase());
   });
-  document.addEventListener('lingua', function (e) { lingua = e.detail; avvia(); });
+  var mieT = document.getElementById('gc-mie-t'), mieErr = document.getElementById('gc-mie-err');
+  function usaMie() {
+    var r = leggiMie(mieT.value);
+    L.salva('mie-frasi-' + lingua, mieT.value);
+    mieErr.className = 'gc-mie-err' + (r.err.length ? '' : ' ok');
+    mieErr.textContent = r.err.length ? 'Righe senza «=» o incomplete, non usate: ' + r.err.join(', ') + '.' : r.voci.length + (r.voci.length === 1 ? ' frase pronta.' : ' frasi pronte.');
+    avvia();
+  }
+  document.getElementById('gc-mie-usa').addEventListener('click', usaMie);
+  document.getElementById('gc-mie-es').addEventListener('click', function () { mieT.value = ESEMPI[lingua]; usaMie(); });
+  document.getElementById('gc-mie-via').addEventListener('click', function () { if (mieT.value.trim() && !confirm('Cancellare le frasi di questa lingua?')) return; mieT.value = ''; usaMie(); mieErr.textContent = ''; });
+  document.addEventListener('lingua', function (e) { lingua = e.detail; mieErr.textContent = ''; disegnaScelte(); avvia(); });
   disegnaScelte(); punteggio(); avvia();
 })();
 </script>

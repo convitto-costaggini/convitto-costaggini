@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Esercizio – Lingue | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Un esercizio di lingua preparato dal docente: si fa dal telefono, senza registrarsi."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .es-hero{padding:2rem 1.25rem 1.6rem}
+  .es-hero h1{font-size:clamp(1.7rem,6vw,2.6rem)}
+  .es-lista{margin-top:1.5rem}
+  .es-lista summary{cursor:pointer;font:700 .82rem var(--fu);color:var(--bosco)}
+  .es-lista ul{list-style:none;margin:.6rem 0 0;padding:0}
+  .es-lista li{display:flex;gap:.6rem;align-items:center;padding:.5rem .7rem;background:#fff;border:1px solid var(--av3);border-radius:10px;margin-bottom:.35rem;font-size:.9rem}
+  .es-lista li span{flex:1;min-width:0;overflow-wrap:break-word}
+  .es-lista li small{display:block;color:var(--txt2)}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="esercizio">
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero es-hero">
+    <div class="w">
+      <p class="lbl" id="es-lbl">Esercizio del docente</p>
+      <h1 id="es-tit">Un momento…</h1>
+      <p id="es-sot"></p>
+    </div>
+  </section>
+  <section class="lg-sez">
+    <div class="w">
+      <div class="lg-chips scorre" id="es-tipi" role="group" aria-label="Tipo di esercizio" style="margin-bottom:1rem"></div>
+      <div id="es-box"></div>
+      <details class="es-lista" id="es-lista" hidden><summary>📋 Le frasi dell'esercizio</summary><ul id="es-ul"></ul></details>
+      <p class="lg-nota" style="margin-top:1.5rem">💡 Questo esercizio è stato preparato dal tuo docente: è tutto dentro il link, il sito non salva niente e non serve registrarsi. Per altri esercizi visita il <a href="lingue/">Laboratorio delle lingue</a>.</p>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/esercizi.js"></script>
+<script src="lingue/pacchetto.js"></script>
+<script>
+(function () {
+  var L = window.LINGUE_SITO, E = window.ESERCIZI, esc = L.esc;
+  var $ = function (id) { return document.getElementById(id); };
+  function errore(t) { $('es-tit').textContent = 'Esercizio non trovato'; $('es-sot').textContent = t; $('es-box').innerHTML = ''; }
+  /* un altro link aperto nella stessa scheda: si ricarica con il nuovo esercizio */
+  window.addEventListener('hashchange', function () { location.reload(); });
+  var m = location.hash.match(/[#&]e=([A-Za-z0-9_-]+)/);
+  if (!m) return errore('Il link è incompleto: chiedi al docente di mandarlo di nuovo, o inquadra di nuovo il codice QR.');
+  window.PACCHETTO.decodifica(m[1]).then(function (p) {
+    if (!p || !Array.isArray(p.f) || !L.lingua(p.l)) throw new Error('formato');
+    var voci = p.f.filter(function (f) { return f && f[0] && f[1]; }).map(function (f) { return { it: String(f[0]), tr: String(f[1]), pr: f[2] ? String(f[2]) : '' }; });
+    var tipo = E.TIPI[p.k] ? p.k : 'scelta', lin = L.lingua(p.l);
+    document.title = p.t + ' – Lingue | Convitto "Costaggini"';
+    $('es-lbl').textContent = 'Esercizio del docente · ' + lin.nome;
+    $('es-tit').textContent = p.t;
+    $('es-sot').textContent = voci.length + ' frasi. Quando hai finito, prova anche gli altri tipi di esercizio con le stesse frasi.';
+    function avvia() {
+      $('es-tipi').innerHTML = Object.keys(E.TIPI).map(function (k) { return '<button type="button" class="lg-chip" data-tipo="' + k + '" aria-pressed="' + (k === tipo) + '">' + E.TIPI[k].icona + ' ' + E.TIPI[k].nome + '</button>'; }).join('');
+      E.avvia($('es-box'), { tipo: tipo, lingua: p.l, voci: voci });
+    }
+    document.addEventListener('click', function (e) { var b = e.target.closest('[data-tipo]'); if (b) { tipo = b.dataset.tipo; avvia(); } });
+    $('es-ul').innerHTML = voci.map(function (v) { return '<li><span>' + esc(v.it) + '<small lang="' + p.l + '">' + esc(v.tr) + '</small></span>' + L.play(v.tr, p.l) + '</li>'; }).join('');
+    $('es-lista').hidden = false;
+    avvia();
+  }).catch(function () { errore('Il link non si legge: forse è stato copiato solo in parte. Chiedi al docente di mandarlo di nuovo.'); });
+})();
+</script>
+</body>
+</html>

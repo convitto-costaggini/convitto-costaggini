@@ -65,7 +65,7 @@ window.LINGUE_SITO = (function () {
   var GRUPPI = [
     { id: 'home', ic: '🏠', nome: 'Home', pagine: [['index', '🏠', 'Home del minisito', '']] },
     { id: 'impara', ic: '📖', nome: 'Impara', pagine: [['vocabolario', '📖', 'Vocabolario', 'Le frasi di sala, cucina, pasticceria, reception e bar'], ['dialoghi', '💬', 'Dialoghi', 'Una scena di lavoro per ambito, a due voci'], ['illustrato', '🖼️', 'Il ristorante illustrato', 'Tocca un oggetto e ascolta il suo nome']] },
-    { id: 'allenati', ic: '🎯', nome: 'Allenati', pagine: [['esercizi', '✏️', 'Esercizi', 'Scelta multipla, abbinamento, riordina, ascolta e scrivi'], ['imprevisti', '🎭', 'Imprevisti', 'Storie a scelta: rispondi al cliente nel modo giusto']] },
+    { id: 'allenati', ic: '🎯', nome: 'Allenati', pagine: [['esercizi', '✏️', 'Esercizi', 'Scelta multipla, abbinamento, riordina, ascolta e scrivi'], ['imprevisti', '🎭', 'Imprevisti', 'Storie a scelta: rispondi al cliente nel modo giusto'], ['giochi', '🎲', 'Giochi alla LIM', 'Memory, indovina la parola, a tempo, ascolta: a squadre']] },
     { id: 'risorse', ic: '🌐', nome: 'Risorse', pagine: [['risorse', '🌐', 'Risorse', '']] },
     { id: 'docenti', ic: '👩‍🏫', nome: 'Docenti', pagine: [['verifiche', '📝', 'Verifiche in un clic', 'Verifiche pronte da stampare, in più file'], ['docenti', '👩‍🏫', 'Area docenti', 'Cosa arriverà con l\'accesso dei docenti']] }
   ];

@@ -82,6 +82,7 @@ window.LINGUE_SITO = (function () {
   }
 
   var CSS_NAV = '' +
+    '.lg-nav{position:relative!important;top:auto!important}' +
     '.lg-nav-in{display:flex;justify-content:space-between;gap:.15rem;overflow:visible}' +
     '.lg-nav .lg-g{position:static}' +
     '.lg-nav .lg-gb{display:flex;flex-direction:column;align-items:center;gap:.1rem;font:700 .7rem var(--fu);color:var(--bosco);background:transparent;border:0;border-radius:12px;padding:.4rem .55rem;cursor:pointer;text-decoration:none;min-width:58px;white-space:nowrap}' +
@@ -95,15 +96,18 @@ window.LINGUE_SITO = (function () {
     '.lg-menu{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--av3);box-shadow:0 14px 30px rgba(44,62,45,.14);padding:.6rem 1rem .9rem;display:none;animation:lgGiu .18s ease}' +
     '.lg-menu.aperto{display:block}' +
     '@keyframes lgGiu{from{opacity:0;transform:translateY(-6px)}}' +
-    '.lg-menu-in{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.4rem}' +
+    '.lg-menu-in{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:.4rem}' +
     '.lg-menu a,.lg-menu button{display:flex;gap:.7rem;align-items:flex-start;text-align:left;padding:.7rem .8rem;border-radius:12px;text-decoration:none;color:var(--txt);border:1.5px solid transparent;background:var(--av);font-family:var(--fu);cursor:pointer}' +
     '.lg-menu a:hover,.lg-menu button:hover{border-color:var(--oro)}' +
     '.lg-menu a[aria-current],.lg-menu button[aria-pressed=true]{border-color:var(--bosco);background:#eef3ee}' +
     '.lg-menu .i{font-size:1.3rem;line-height:1.2}' +
+    '.lg-menu a>span:last-child,.lg-menu button>span:last-child{min-width:0;flex:1;overflow-wrap:anywhere}' +
     '.lg-menu b{display:block;font-size:.88rem;color:var(--bosco)}' +
     '.lg-menu small{display:block;font-size:.74rem;color:var(--txt2);line-height:1.4;margin-top:.1rem}' +
     '.lg-menu-tit{max-width:900px;margin:0 auto .4rem;font:800 .6rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro)}' +
-    '@media (max-width:420px){.lg-nav .lg-gb{min-width:0;padding:.4rem .4rem;font-size:.64rem}.lg-nav-in{padding:.45rem .5rem}}';
+    '@media (max-width:420px){.lg-nav .lg-gb{min-width:0;padding:.4rem .4rem;font-size:.64rem}.lg-nav-in{padding:.45rem .5rem}}' +
+    /* sul telefono i pulsanti tondi fissi del sito stanno sul bordo destro: il testo dei menu non ci finisce sotto */
+    '@media (max-width:760px){.lg-menu{padding-right:68px}}';
 
   function nav() {
     var box = document.querySelector('[data-lingue-nav]'); if (!box) return;
@@ -145,7 +149,10 @@ window.LINGUE_SITO = (function () {
     document.addEventListener('click', function (e) { if (!e.target.closest('.lg-nav')) chiudi(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') chiudi(); });
     /* la barra si ferma sotto l'intestazione del sito madre (anch'essa fissa) */
-    function sotto() { var hd = document.getElementById('hdr'); bar.style.top = (hd ? hd.offsetHeight : 0) + 'px'; }
+    /* resta visibile scorrendo: «sticky» va sul contenitore (figlio di <main>), non sulla barra,
+       che altrimenti non avrebbe spazio per restare ferma */
+    box.style.position = 'sticky'; box.style.zIndex = '40';
+    function sotto() { var hd = document.getElementById('hdr'); box.style.top = (hd ? hd.offsetHeight : 0) + 'px'; }
     sotto(); window.addEventListener('resize', sotto); setTimeout(sotto, 800);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', nav); else nav();
@@ -168,35 +175,51 @@ window.LINGUE_SITO = (function () {
 
   /* Righe orizzontali che escono dallo schermo (barra del minisito, ambiti,
      sezioni, lingue): niente movimento continuo, che disorienta.
-     - Sfumatura e freccetta "›" sul bordo destro finché c'è altro da vedere.
+     - Sfumatura e freccia "›" sul bordo destro finché c'è altro da vedere,
+       "‹" a sinistra quando si è già scorso: un clic sposta la riga.
      - Un solo accenno, la prima volta che la riga entra nello schermo: scivola
        un poco e torna, una riga alla volta (mai insieme). Poi resta ferma.
      - Con "riduci movimento" resta solo la sfumatura. */
   var RIGHE = '.lg-chips.scorre, #ps-ambiti, #ps-sezioni';
   var fermo = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var CSS_RIGHE = '.lg-altro{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent)}' +
-    '.lg-freccia{position:absolute;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--bosco,#2C3E2D);color:#fff;font:800 15px/26px sans-serif;text-align:center;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.18);opacity:0;transition:opacity .25s}' +
-    '.lg-freccia.on{opacity:.9}.lg-riga-box{position:relative}';
+    '.lg-prima{-webkit-mask-image:linear-gradient(90deg,transparent,#000 44px);mask-image:linear-gradient(90deg,transparent,#000 44px)}' +
+    '.lg-altro.lg-prima{-webkit-mask-image:linear-gradient(90deg,transparent,#000 44px,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(90deg,transparent,#000 44px,#000 calc(100% - 44px),transparent)}' +
+    '.lg-freccia{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;padding:0;border:0;border-radius:50%;background:var(--bosco,#2C3E2D);color:#fff;font:800 18px/32px sans-serif;text-align:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .25s;z-index:2}' +
+    '.lg-freccia.on{opacity:.92;pointer-events:auto}.lg-freccia:hover{opacity:1}.lg-riga-box{position:relative}';
+  function freccia(el, verso) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'lg-freccia';
+    b.textContent = verso > 0 ? '›' : '‹'; b.setAttribute('aria-label', verso > 0 ? 'Mostra le voci successive' : 'Mostra le voci precedenti');
+    b.addEventListener('click', function () {
+      el._toccato = true;
+      var da = el.scrollLeft, passo = verso * Math.max(120, el.clientWidth * .7);
+      el.scrollBy({ left: passo, behavior: fermo ? 'auto' : 'smooth' });
+      /* se l'animazione non parte (browser che la sospende), si sposta direttamente */
+      setTimeout(function () { if (Math.abs(el.scrollLeft - da) < 2) el.scrollTo({ left: da + passo, behavior: 'auto' }); }, 500);   /* «auto» annulla l'animazione rimasta in sospeso */
+    });
+    return b;
+  }
   var visti = new WeakSet(), coda = [], inCorso = false;
   function sistema(el) {
     if (!el.parentNode) return;
     var box = el.parentNode;
     if (!box.classList.contains('lg-riga-box') && getComputedStyle(box).position === 'static') box.classList.add('lg-riga-box');
-    var fr = el._freccia;
-    if (!fr) { fr = document.createElement('span'); fr.className = 'lg-freccia'; fr.setAttribute('aria-hidden', 'true'); fr.textContent = '›'; el._freccia = fr; }
-    if (fr.parentNode !== box) box.appendChild(fr);
-    fr.style.top = (el.offsetTop + el.offsetHeight / 2) + 'px';
-    fr.style.left = (el.offsetLeft + el.clientWidth - 30) + 'px';
-    var altro = el.scrollWidth - el.clientWidth - el.scrollLeft > 6;
-    el.classList.toggle('lg-altro', altro); fr.classList.toggle('on', altro);
+    if (!el._fr) el._fr = [freccia(el, -1), freccia(el, 1)];
+    var sx = el._fr[0], dx = el._fr[1], y = (el.offsetTop + el.offsetHeight / 2) + 'px';
+    [sx, dx].forEach(function (f) { if (f.parentNode !== box) box.appendChild(f); f.style.top = y; });
+    sx.style.left = (el.offsetLeft + 2) + 'px';
+    dx.style.left = (el.offsetLeft + el.clientWidth - 34) + 'px';
+    var altro = el.scrollWidth - el.clientWidth - el.scrollLeft > 6, prima = el.scrollLeft > 6;
+    el.classList.toggle('lg-altro', altro); dx.classList.toggle('on', altro);
+    el.classList.toggle('lg-prima', prima); sx.classList.toggle('on', prima);
   }
   function accenno() {
     if (inCorso || !coda.length) return;
-    var el = coda.shift(); if (el.scrollWidth - el.clientWidth < 8) return accenno();
+    var el = coda.shift(); if (el._toccato || el.scrollWidth - el.clientWidth < 8) return accenno();
     inCorso = true;
     var da = el.scrollLeft, a = Math.min(da + 70, el.scrollWidth - el.clientWidth);
     el.scrollTo({ left: a, behavior: 'smooth' });
-    setTimeout(function () { el.scrollTo({ left: da, behavior: 'smooth' }); }, 650);
+    setTimeout(function () { if (!el._toccato) el.scrollTo({ left: da, behavior: 'smooth' }); }, 650);   /* se l'utente è intervenuto, non lo si contraddice */
     setTimeout(function () { inCorso = false; accenno(); }, 1500);
   }
   function osserva() {
@@ -209,7 +232,10 @@ window.LINGUE_SITO = (function () {
     }, { threshold: .9 }) : null;
     function aggiorna() {
       document.querySelectorAll(RIGHE).forEach(function (el) {
-        if (!el._legato) { el._legato = true; el.addEventListener('scroll', function () { sistema(el); }, { passive: true }); if (io) io.observe(el); }
+        if (!el._legato) {
+          el._legato = true; el.addEventListener('scroll', function () { sistema(el); }, { passive: true }); if (io) io.observe(el);
+          ['pointerdown', 'touchstart', 'wheel'].forEach(function (t) { el.addEventListener(t, function () { el._toccato = true; }, { passive: true }); });
+        }
         sistema(el);
       });
     }

@@ -12,12 +12,13 @@
   <link rel="stylesheet" href="style.min.css"/>
   <link rel="stylesheet" href="lingue/lingue.css"/>
   <link rel="icon" href="favicon.ico" sizes="any"/>
-  <link rel="manifest" href="manifest.webmanifest"/>
   <script src="app.js" defer></script>
   <style>
   .dl-ctrl{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:1rem 0 1.25rem}
   .dl-modo{display:flex;background:#fff;border:1.5px solid var(--av3);border-radius:12px;padding:3px;gap:3px}
   .dl-modo button{font:700 .74rem var(--fu);border:0;background:transparent;color:var(--bosco);padding:.55rem .8rem;border-radius:9px;cursor:pointer}
+  .dl-modo{max-width:100%}
+  @media (max-width:420px){.dl-modo{width:100%}.dl-modo button{flex:1;padding:.5rem .35rem;font-size:.7rem;line-height:1.25}}
   .dl-modo button[aria-pressed=true]{background:var(--bosco);color:#fff}
   .dl-sw{display:inline-flex;align-items:center;gap:.45rem;font:600 .78rem var(--fu);color:var(--txt2);cursor:pointer}
   .dl-sw input{width:18px;height:18px;accent-color:var(--bosco)}

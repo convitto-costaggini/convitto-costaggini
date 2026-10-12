@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Il cliente virtuale – Lingue | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Prototipo per i docenti: una conversazione scritta con un cliente straniero simulato, con valutazione finale in italiano."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .cv-box{max-width:680px;margin:0 auto}
+  .cv-cod{max-width:420px;margin:0 auto}
+  .cv-cod label{display:block;font:700 .7rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco);margin:0 0 .4rem}
+  .cv-cod input,.cv-scrivi textarea{width:100%;box-sizing:border-box;font:500 .95rem var(--fu);padding:.75rem .9rem;border:1.5px solid var(--av3);border-radius:10px;background:#fff;color:var(--txt)}
+  .cv-cod input:focus,.cv-scrivi textarea:focus{outline:none;border-color:var(--oro)}
+  .cv-err{color:#b91c1c;font-size:.82rem;margin:.5rem 0 0;min-height:1em}
+  .cv-avviso{display:flex;gap:.6rem;align-items:flex-start;font-size:.8rem;line-height:1.5;color:var(--txt2);background:#fdf8ea;border:1px solid #ecdcae;border-radius:12px;padding:.7rem .85rem;margin:0 0 1.2rem}
+  .cv-testa{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:space-between;margin:1.2rem 0 .8rem}
+  .cv-conta{font:700 .7rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--txt2)}
+  .cv-chat{display:flex;flex-direction:column;gap:.7rem;min-height:120px}
+  .cv-r{display:flex;gap:.55rem;align-items:flex-end;min-width:0}
+  .cv-r.io{flex-direction:row-reverse}
+  .cv-av{flex-shrink:0;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;background:var(--av2);border:1px solid var(--av3)}
+  .cv-r.io .cv-av{background:var(--bosco);border-color:var(--bosco)}
+  .cv-b{max-width:82%;min-width:0;background:#fff;border:1px solid var(--av3);border-radius:16px 16px 16px 4px;padding:.7rem .9rem;box-shadow:var(--sh-sm)}
+  .cv-r.io .cv-b{background:#eef3ee;border-color:#cfdccf;border-radius:16px 16px 4px 16px}
+  .cv-chi{font:800 .56rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:.2rem}
+  .cv-t{display:flex;gap:.5rem;align-items:flex-start}
+  .cv-t span{flex:1;min-width:0;font-size:.96rem;line-height:1.45;color:var(--txt);overflow-wrap:anywhere;white-space:pre-wrap}
+  .cv-t .lg-play{width:32px;height:32px;font-size:.8rem}
+  .cv-attesa span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--bosco2);animation:cv-p 1.2s infinite ease-in-out}
+  .cv-attesa span:nth-child(2){animation-delay:.15s}.cv-attesa span:nth-child(3){animation-delay:.3s}
+  @keyframes cv-p{0%,80%,100%{opacity:.25}40%{opacity:1}}
+  @media (prefers-reduced-motion:reduce){.cv-attesa span{animation:none;opacity:.6}}
+  .cv-scrivi{margin-top:1rem}
+  .cv-scrivi textarea{min-height:76px;resize:vertical;line-height:1.5}
+  .cv-riga{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-top:.55rem}
+  .cv-riga .sp{flex:1}
+  .cv-car{font:600 .72rem var(--fu);color:var(--txt2)}
+  .cv-val{margin-top:1.5rem}
+  .cv-liv{display:flex;align-items:center;gap:.9rem;margin-bottom:1rem}
+  .cv-liv b{font-family:var(--fd);font-size:2rem;color:#fff;background:var(--bosco);border-radius:14px;padding:.25rem .8rem;line-height:1.2}
+  .cv-liv small{font:700 .66rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--txt2)}
+  .cv-pu{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.35rem .8rem;align-items:center;margin-bottom:1.1rem}
+  .cv-pu span{font-size:.84rem;color:var(--txt)}
+  .cv-pu i{font-style:normal;letter-spacing:.12em;color:var(--oro);white-space:nowrap}
+  .cv-val h3{font:800 .7rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);margin:1.1rem 0 .4rem}
+  .cv-val ul{margin:0;padding-left:1.1rem;font-size:.9rem;line-height:1.55;color:var(--txt)}
+  .cv-cor{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.84rem}
+  .cv-cor th{font:700 .62rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--txt2);text-align:left;padding:.35rem .4rem;border-bottom:1.5px solid var(--av3)}
+  .cv-cor td{padding:.45rem .4rem;border-bottom:1px solid var(--av3);vertical-align:top;overflow-wrap:anywhere;line-height:1.45}
+  .cv-cor td:first-child{color:#9a3412;text-decoration:line-through;text-decoration-color:rgba(154,52,18,.4)}
+  .cv-cor td:nth-child(2){color:var(--bosco);font-weight:600}
+  @media (max-width:560px){.cv-cor,.cv-cor tbody,.cv-cor tr,.cv-cor td{display:block}.cv-cor thead{display:none}.cv-cor tr{border-bottom:1px solid var(--av3);padding:.4rem 0}.cv-cor td{border:0;padding:.15rem 0}}
+  .cv-frase{display:flex;gap:.6rem;align-items:center;background:#eef3ee;border-radius:12px;padding:.7rem .85rem;font-size:.95rem;color:var(--bosco)}
+  .cv-frase span{flex:1;min-width:0}
+  .cv-msg{font-family:var(--fd);font-size:1.12rem;color:var(--bosco);line-height:1.45;margin:1.1rem 0 0}
+  @media print{.lg-anteprima,#hdr,[data-lingue-nav],.lg-hero,.cv-avviso,.cv-scrivi,.cv-testa .lg-btn,.cv-noprint,.lg-play{display:none!important}}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="cliente">
+<div class="lg-anteprima">Prototipo per i docenti · intelligenza artificiale, non ancora aperto ai ragazzi</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Prototipo per i docenti</p>
+      <h1>Il cliente <em>virtuale</em></h1>
+      <p>Un cliente straniero, simulato dall'intelligenza artificiale, entra nel locale. Voi rispondete per scritto, nella lingua scelta, come farebbe un ragazzo in servizio: il cliente si adatta al livello di chi scrive. Dopo sei-dieci battute arriva una valutazione in italiano, con le correzioni.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez">
+    <div class="w">
+      <div class="cv-box">
+        <div class="cv-avviso"><span aria-hidden="true">ℹ️</span><span>Per ora la pagina è riservata ai docenti, in attesa del parere della DPO sull'uso con i ragazzi. Le conversazioni non vengono salvate da nessuna parte; per prudenza, non scrivete nomi veri o altri dati personali.</span></div>
+
+        <form class="cv-cod lg-card" id="cv-cod" autocomplete="off">
+          <label for="cv-codice">Codice docenti</label>
+          <input id="cv-codice" type="password" autocomplete="off" required/>
+          <button type="submit" class="lg-btn pieno" style="width:100%;margin-top:.9rem">Entra</button>
+          <p class="cv-err" id="cv-cod-err" role="alert"></p>
+        </form>
+
+        <div id="cv-gioco" hidden>
+          <div class="lg-chips scorre" id="cv-scene" role="group" aria-label="Scena"></div>
+          <h2 class="lg-h2" id="cv-tit" style="margin-top:1.2rem"></h2>
+          <p class="lg-sot" id="cv-sot"></p>
+          <div class="cv-testa">
+            <span class="cv-conta" id="cv-conta"></span>
+            <button type="button" class="lg-btn pieno" id="cv-via">▶ Inizia la scena</button>
+          </div>
+          <div class="cv-chat" id="cv-chat" aria-live="polite"></div>
+          <div class="cv-scrivi" id="cv-scrivi" hidden>
+            <label for="cv-testo" class="cv-conta" id="cv-etich"></label>
+            <textarea id="cv-testo" maxlength="400" spellcheck="false" autocomplete="off" style="margin-top:.35rem"></textarea>
+            <div class="cv-riga">
+              <span class="cv-car" id="cv-car">0/400</span><span class="sp"></span>
+              <button type="button" class="lg-btn" id="cv-fine">🏁 Termina e valuta</button>
+              <button type="button" class="lg-btn pieno" id="cv-invia">Invia</button>
+            </div>
+          </div>
+          <p class="cv-err" id="cv-err" role="alert"></p>
+          <div id="cv-val"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script>
+(function () {
+  var L = window.LINGUE_SITO;
+  var URL_F = 'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/cliente-virtuale';
+  var CHIAVE = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
+  var MAX = 12;
+  /* le scene corrispondono a quelle della funzione su Supabase */
+  var SCENE = [
+    { id: 'cena', ic: '🍽️', tit: 'Una cena al ristorante', sot: 'Siete il cameriere. Il cliente ha un\'allergia alla frutta a guscio: ordina, beve, chiede il conto.', ruolo: 'Cameriere', io: '🤵' },
+    { id: 'bar', ic: '🍸', tit: 'Al bar dell\'hotel', sot: 'Siete il barman. Il cliente non beve alcol e vuole un cocktail analcolico e qualcosa da mangiare.', ruolo: 'Barman', io: '🧑‍🍳' },
+    { id: 'checkin', ic: '🛎️', tit: 'Il check-in', sot: 'Siete al ricevimento. Il cliente arriva, vorrebbe una camera tranquilla e chiede della colazione e del centro.', ruolo: 'Receptionist', io: '🛎️' },
+    { id: 'pasticceria', ic: '🧁', tit: 'In pasticceria', sot: 'Siete al banco. Il cliente cerca una torta di compleanno per otto persone; un invitato non può mangiare lattosio.', ruolo: 'Pasticcere', io: '🧁' },
+    { id: 'reclamo', ic: '😠', tit: 'Il piatto è freddo', sot: 'Siete il cameriere. Il cliente è deluso: il piatto è arrivato tardi e freddo. Scusatevi e trovate una soluzione.', ruolo: 'Cameriere', io: '🤵' }
+  ];
+  var lingua = L.linguaScelta(), scena = L.leggi('scena-cv', 'cena'), messaggi = [], stato = 'pronto';
+  if (!SCENE.some(function (s) { return s.id === scena; })) scena = 'cena';
+  var codice = '';
+  try { codice = sessionStorage.getItem('convitto-lingue-codice-cv') || ''; } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  var chat = $('cv-chat'), testo = $('cv-testo');
+  function sc() { return SCENE.filter(function (s) { return s.id === scena; })[0]; }
+  function turni() { return messaggi.filter(function (m) { return m.chi === 'studente'; }).length; }
+
+  async function chiama(corpo) {
+    corpo.codice = codice; corpo.lingua = lingua; corpo.scena = scena;
+    var r = await fetch(URL_F, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: CHIAVE, Authorization: 'Bearer ' + CHIAVE }, body: JSON.stringify(corpo) });
+    var d = await r.json().catch(function () { return {}; });
+    if (!r.ok) { var e = new Error(d.errore || 'Il servizio non risponde (' + r.status + ').'); e.stato = r.status; throw e; }
+    return d;
+  }
+
+  function disegna() {
+    var s = sc();
+    $('cv-scene').innerHTML = SCENE.map(function (x) { return '<button type="button" class="lg-chip" data-sc="' + x.id + '" aria-pressed="' + (x.id === scena) + '">' + x.ic + ' ' + L.esc(x.tit) + '</button>'; }).join('');
+    $('cv-tit').textContent = s.tit;
+    $('cv-sot').textContent = s.sot + ' Lingua: ' + L.lingua(lingua).nome.toLowerCase() + ' (si cambia dal pulsante 🌍).';
+    var io = s.io;
+    chat.innerHTML = messaggi.map(function (m) {
+      var cl = m.chi === 'cliente';
+      return '<div class="cv-r' + (cl ? '' : ' io') + '"><span class="cv-av" aria-hidden="true">' + (cl ? '🧳' : io) + '</span><div class="cv-b"><div class="cv-chi">' + (cl ? 'Cliente' : L.esc(s.ruolo)) + '</div><div class="cv-t"><span lang="' + lingua + '">' + L.esc(m.testo) + '</span>' + (cl ? L.play(m.testo, lingua) : '') + '</div></div></div>';
+    }).join('') + (stato === 'attesa' ? '<div class="cv-r"><span class="cv-av" aria-hidden="true">🧳</span><div class="cv-b cv-attesa" aria-label="Il cliente sta scrivendo"><span></span><span></span><span></span></div></div>' : '');
+    var gioca = stato === 'turno' || stato === 'attesa';
+    $('cv-scrivi').hidden = !gioca;
+    $('cv-invia').disabled = $('cv-fine').disabled = testo.disabled = stato !== 'turno';
+    if (stato === 'turno') $('cv-fine').disabled = turni() === 0;
+    $('cv-etich').textContent = 'La vostra risposta, in ' + L.lingua(lingua).nome.toLowerCase();
+    $('cv-conta').textContent = messaggi.length ? 'Battute: ' + turni() + ' di ' + MAX : '';
+    var via = $('cv-via');
+    via.hidden = stato === 'attesa' || stato === 'valuto';
+    via.textContent = stato === 'pronto' ? '▶ Inizia la scena' : '↺ Ricomincia';
+    via.className = 'lg-btn' + (stato === 'pronto' || stato === 'valutata' ? ' pieno' : '');
+  }
+
+  function errore(e) {
+    $('cv-err').textContent = e.message || 'Qualcosa non ha funzionato: riprova.';
+    if (e.stato === 401) { codice = ''; try { sessionStorage.removeItem('convitto-lingue-codice-cv'); } catch (x) {} $('cv-gioco').hidden = true; $('cv-cod').hidden = false; $('cv-cod-err').textContent = e.message; }
+  }
+
+  async function cliente() {
+    stato = 'attesa'; $('cv-err').textContent = ''; disegna(); fondo();
+    try {
+      var d = await chiama({ messaggi: messaggi });
+      messaggi.push({ chi: 'cliente', testo: d.battuta });
+      if (d.conclusa) { stato = 'valuto'; disegna(); fondo(); return valuta(); }
+      stato = 'turno'; disegna(); fondo(); testo.focus({ preventScroll: true });
+    } catch (e) {
+      /* se il cliente non risponde, si torna al proprio turno senza perdere la battuta */
+      var ultimo = messaggi[messaggi.length - 1];
+      if (ultimo && ultimo.chi === 'studente') { testo.value = ultimo.testo; messaggi.pop(); aggiornaCar(); }
+      stato = messaggi.length ? 'turno' : 'pronto'; disegna(); errore(e);
+    }
+  }
+
+  async function valuta() {
+    stato = 'valuto'; disegna();
+    $('cv-val').innerHTML = '<div class="lg-card cv-val"><p class="lg-sot" style="margin:0">⏳ Il docente virtuale sta leggendo la conversazione…</p></div>';
+    $('cv-val').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    try {
+      var d = await chiama({ messaggi: messaggi, valuta: true });
+      stato = 'valutata'; disegna(); scheda(d.valutazione);
+    } catch (e) { stato = 'turno'; $('cv-val').innerHTML = ''; disegna(); errore(e); }
+  }
+
+  function stelle(n) { n = Math.max(1, Math.min(5, Math.round(+n || 1))); return '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n); }
+  function lista(a) { return (a && a.length) ? '<ul>' + a.map(function (x) { return '<li>' + L.esc(x) + '</li>'; }).join('') + '</ul>' : '<p class="lg-sot" style="margin:0">—</p>'; }
+  function scheda(v) {
+    var p = v.punteggi || {}, VOCI = [['comunicazione', 'Comunicazione'], ['correttezza', 'Correttezza'], ['lessico_professionale', 'Lessico professionale'], ['cortesia', 'Cortesia e registro']];
+    $('cv-val').innerHTML = '<div class="lg-card cv-val">' +
+      '<p class="lbl" style="margin:0 0 .6rem">La valutazione · ' + L.esc(sc().tit) + ' · ' + L.esc(L.lingua(lingua).nome) + '</p>' +
+      '<div class="cv-liv"><b>' + L.esc(v.livello) + '</b><small>Livello stimato<br/>(quadro europeo)</small></div>' +
+      '<div class="cv-pu">' + VOCI.map(function (x) { return '<span>' + x[1] + '</span><i aria-label="' + (p[x[0]] || 0) + ' su 5">' + stelle(p[x[0]]) + '</i>'; }).join('') + '</div>' +
+      '<h3>👍 Cosa è andato bene</h3>' + lista(v.punti_forza) +
+      '<h3>🎯 Su cosa lavorare</h3>' + lista(v.da_migliorare) +
+      (v.correzioni && v.correzioni.length ? '<h3>✏️ Le correzioni</h3><table class="cv-cor"><thead><tr><th>Hai scritto</th><th>Meglio</th><th>Perché</th></tr></thead><tbody>' +
+        v.correzioni.map(function (c) { return '<tr><td lang="' + lingua + '">' + L.esc(c.scritto) + '</td><td lang="' + lingua + '">' + L.esc(c.meglio) + '</td><td>' + L.esc(c.perche) + '</td></tr>'; }).join('') + '</tbody></table>' : '') +
+      '<h3>💡 La frase da ricordare</h3><div class="cv-frase"><span>' + L.esc(v.frase_utile) + '</span></div>' +
+      '<p class="cv-msg">' + L.esc(v.messaggio) + '</p>' +
+      '<div class="cv-riga cv-noprint" style="margin-top:1.2rem"><button type="button" class="lg-btn pieno" data-ricomincia>↺ Un\'altra scena</button><button type="button" class="lg-btn" onclick="window.print()">🖨️ Stampa</button></div>' +
+      '<p class="lg-nota" style="margin-top:1rem">La valutazione è generata automaticamente e può sbagliare: è uno spunto per il docente, non un voto.</p></div>';
+  }
+
+  function nuova() { messaggi = []; stato = 'pronto'; testo.value = ''; aggiornaCar(); $('cv-val').innerHTML = ''; $('cv-err').textContent = ''; disegna(); }
+  function fondo() { var u = chat.lastElementChild; if (u) u.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+  function aggiornaCar() { $('cv-car').textContent = testo.value.length + '/400'; }
+  function invia() {
+    var t = testo.value.trim();
+    if (!t || stato !== 'turno') return;
+    messaggi.push({ chi: 'studente', testo: t }); testo.value = ''; aggiornaCar();
+    cliente();
+  }
+
+  $('cv-cod').addEventListener('submit', function (e) {
+    e.preventDefault();
+    codice = $('cv-codice').value.trim(); if (!codice) return;
+    try { sessionStorage.setItem('convitto-lingue-codice-cv', codice); } catch (x) {}
+    $('cv-cod-err').textContent = ''; $('cv-cod').hidden = true; $('cv-gioco').hidden = false; disegna();
+  });
+  $('cv-via').addEventListener('click', function () {
+    if (stato !== 'pronto' && turni() > 0 && stato !== 'valutata' && !confirm('Ricominciare? La conversazione in corso andrà persa.')) return;
+    nuova(); cliente();
+  });
+  $('cv-invia').addEventListener('click', invia);
+  $('cv-fine').addEventListener('click', function () { if (turni() && stato === 'turno') valuta(); });
+  testo.addEventListener('input', aggiornaCar);
+  testo.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); invia(); } });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-sc]');
+    if (b && b.dataset.sc !== scena) {
+      if (stato === 'attesa' || stato === 'valuto') return;
+      if (turni() > 0 && stato !== 'valutata' && !confirm('Cambiare scena? La conversazione in corso andrà persa.')) return;
+      scena = b.dataset.sc; L.salva('scena-cv', scena); nuova();
+    }
+    if (e.target.closest('[data-ricomincia]')) { nuova(); $('cv-gioco').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+  /* la lingua si sceglie dal pulsante 🌍 della barra: una conversazione iniziata riparte da capo */
+  document.addEventListener('lingua', function (e) { lingua = e.detail; if (stato !== 'attesa' && stato !== 'valuto') nuova(); else disegna(); });
+  if (codice) { $('cv-cod').hidden = true; $('cv-gioco').hidden = false; }
+  disegna();
+})();
+</script>
+</body>
+</html>

@@ -67,7 +67,7 @@ window.LINGUE_SITO = (function () {
     { id: 'impara', ic: '📖', nome: 'Impara', pagine: [['vocabolario', '📖', 'Vocabolario', 'Le frasi di sala, cucina, pasticceria, reception e bar'], ['dialoghi', '💬', 'Dialoghi', 'Una scena di lavoro per ambito, a due voci'], ['illustrato', '🖼️', 'Il ristorante illustrato', 'Tocca un oggetto e ascolta il suo nome']] },
     { id: 'allenati', ic: '🎯', nome: 'Allenati', pagine: [['esercizi', '✏️', 'Esercizi', 'Scelta multipla, abbinamento, riordina, ascolta e scrivi'], ['imprevisti', '🎭', 'Imprevisti', 'Storie a scelta: rispondi al cliente nel modo giusto']] },
     { id: 'risorse', ic: '🌐', nome: 'Risorse', pagine: [['risorse', '🌐', 'Risorse', '']] },
-    { id: 'docenti', ic: '👩‍🏫', nome: 'Docenti', pagine: [['verifiche', '📝', 'Verifiche in un clic', 'Verifiche pronte da stampare, in più file'], ['docenti', '👩‍🏫', 'Area docenti', 'Cosa arriverà con l\'accesso dei docenti']] }
+    { id: 'docenti', ic: '👩‍🏫', nome: 'Docenti', pagine: [['verifiche', '📝', 'Verifiche in un clic', 'Verifiche pronte da stampare, in più file'], ['cliente', '🤖', 'Il cliente virtuale', 'Prototipo: conversa per scritto con un cliente simulato'], ['docenti', '👩‍🏫', 'Area docenti', 'Cosa arriverà con l\'accesso dei docenti']] }
   ];
   function url(p) { return 'lingue/' + (p === 'index' ? '' : p + '.html'); }
 

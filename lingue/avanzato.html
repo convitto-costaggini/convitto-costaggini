@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Livello avanzato – Lingue | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Per gli studenti più avanzati (B1–B2): frasi complete per le situazioni di lavoro, il registro professionale, testi da ascoltare, frasi da completare ed e-mail, in inglese, francese, spagnolo e tedesco."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .av-tab{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(170px,100%),1fr));gap:.5rem;margin:0 0 1.3rem}
+  .av-tab button{display:flex;gap:.55rem;align-items:center;font:700 .78rem var(--fu);color:var(--bosco);background:#fff;border:2px solid var(--av3);border-radius:12px;padding:.65rem .8rem;cursor:pointer;text-align:left;min-width:0}
+  .av-tab button span{font-size:1.25rem;line-height:1}
+  .av-tab button[aria-pressed=true]{border-color:var(--bosco);background:#eef3ee;box-shadow:0 0 0 2px var(--bosco) inset}
+  .av-riga{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:0 0 1rem}
+  .av-sw{display:inline-flex;align-items:center;gap:.45rem;font:600 .78rem var(--fu);color:var(--txt2);cursor:pointer}
+  .av-sw input{width:18px;height:18px;accent-color:var(--bosco)}
+  .av-sit{margin:0 0 1.4rem}
+  .av-sit h3{font-family:var(--fd);font-weight:400;font-size:1.25rem;color:var(--bosco);margin:0 0 .6rem;display:flex;gap:.5rem;align-items:center}
+  .av-sit h3 small{font:800 .58rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)}
+  .av-f{display:flex;gap:.6rem;align-items:flex-start;padding:.75rem .85rem;background:#fff;border:1px solid var(--av3);border-radius:12px;margin:0 0 .45rem}
+  .av-f>div{flex:1;min-width:0}
+  .av-f p{margin:0;font-size:.98rem;line-height:1.55;color:var(--txt);overflow-wrap:break-word}
+  .av-f .it{font-size:.82rem;color:var(--txt2);font-style:italic;margin-top:.25rem}
+  .senza-it .it{display:none}
+  .av-f .lg-play{flex-shrink:0}
+  .av-reg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:.5rem;margin:0 0 .6rem}
+  @media (max-width:600px){.av-reg{grid-template-columns:minmax(0,1fr)}}
+  .av-reg .av-f{margin:0}
+  .av-reg .no{background:#fef2f2;border-color:#fecaca}
+  .av-reg .si{background:#f0fdf4;border-color:#bbf7d0}
+  .av-et{display:block;font:800 .56rem var(--fu);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.2rem}
+  .no .av-et{color:#b91c1c}.si .av-et{color:#15803d}
+  .av-testo{background:#fff;border:1px solid var(--av3);border-radius:14px;padding:1rem 1.1rem;font-size:1rem;line-height:1.7;color:var(--txt);margin:0 0 1rem}
+  .av-testo.it{font-style:italic;color:var(--txt2);font-size:.9rem}
+  .av-dom{background:#fff;border:1px solid var(--av3);border-radius:14px;padding:.9rem 1rem;margin:0 0 .6rem}
+  .av-dom p{margin:0 0 .5rem;font-weight:700;color:var(--bosco);font-size:.92rem}
+  .av-opz{display:flex;flex-wrap:wrap;gap:.4rem}
+  .av-opz button{font:600 .86rem var(--fu);padding:.55rem .85rem;border-radius:10px;border:1.5px solid var(--av3);background:var(--av);color:var(--txt);cursor:pointer;text-align:left;max-width:100%}
+  .av-opz button.giusta{background:#15803d;border-color:#15803d;color:#fff}
+  .av-opz button.sbagliata{background:#b91c1c;border-color:#b91c1c;color:#fff}
+  .av-opz button:disabled{cursor:default}
+  .av-cloze{font-size:1.05rem;line-height:1.7;color:var(--txt);margin:0 0 .3rem}
+  .av-cloze b{display:inline-block;min-width:4.5em;border-bottom:2px solid var(--oro);color:var(--bosco);text-align:center}
+  .av-punti{font:800 .7rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)}
+  .av-ord{display:flex;flex-direction:column;gap:.45rem}
+  .av-ord button,.av-par{font:500 .92rem/1.55 var(--fu);text-align:left;padding:.7rem .85rem;border-radius:12px;border:1.5px solid var(--av3);background:#fff;color:var(--txt);white-space:pre-line;overflow-wrap:break-word}
+  .av-ord button{cursor:pointer;border-style:dashed}
+  .av-par{display:flex;gap:.6rem;align-items:flex-start}
+  .av-par>div{flex:1;min-width:0}
+  .av-par.fisso{background:var(--av)}
+  .av-par.ok{border-color:#15803d;background:#f0fdf4}
+  .av-par.ko{border-color:#b91c1c;background:#fef2f2}
+  .av-num{font:800 .7rem var(--fu);color:var(--oro);flex-shrink:0;margin-top:.2rem}
+  .av-esito{font-weight:700;margin:.8rem 0 0;min-height:1.2em}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="avanzato">
+<div class="lg-anteprima">Anteprima per i docenti · contenuti in revisione, non ancora pubblicati</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Per chi vuole andare oltre · B1–B2</p>
+      <h1>Livello <em>avanzato</em></h1>
+      <p>Non più solo parole, ma frasi complete: descrivere un piatto, consigliare un vino, gestire un reclamo, prendere una prenotazione, scrivere un'e-mail. Per i ragazzi di quarta e quinta e per chi si prepara allo stage all'estero.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez">
+    <div class="w">
+      <div class="av-tab" id="av-tab" role="group" aria-label="Sezione"></div>
+      <div id="av-box"></div>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/avanzato-dati.js"></script>
+<script>
+(function () {
+  var L = window.LINGUE_SITO, A = window.AVANZATO, esc = L.esc;
+  var SEZ = [
+    { id: 'frasi', ic: '📚', nome: 'Frasi per situazione' },
+    { id: 'registro', ic: '🎩', nome: 'Dire bene' },
+    { id: 'ascolta', ic: '🎧', nome: 'Ascolta e capisci' },
+    { id: 'completa', ic: '✍️', nome: 'Completa la frase' },
+    { id: 'email', ic: '✉️', nome: 'Scrivere un\'e-mail' }
+  ];
+  var AMBITI = [['tutti', '🌟', 'Tutti'], ['sala', '🍽️', 'Sala'], ['cucina', '👨‍🍳', 'Cucina'], ['pasticceria', '🧁', 'Pasticceria'], ['accoglienza', '🛎️', 'Accoglienza'], ['bar', '🍸', 'Bar']];
+  var lingua = L.linguaScelta(), sez = L.leggi('av-sez', 'frasi'), ambito = L.leggi('av-ambito', 'tutti'), conIt = L.leggi('av-it', true);
+  var ascoltoId = A.ASCOLTI[0].id, emailId = A.EMAIL[0].id, modoEmail = 'leggi';
+  if (!SEZ.some(function (s) { return s.id === sez; })) sez = 'frasi';
+  var box = document.getElementById('av-box');
+  function NL() { return L.lingua(lingua).nome.toLowerCase(); }
+  function chips(lista, attr, sel) {
+    return '<div class="lg-chips scorre" role="group">' + lista.map(function (a) { return '<button type="button" class="lg-chip" ' + attr + '="' + a[0] + '" aria-pressed="' + (a[0] === sel) + '">' + a[1] + ' ' + esc(a[2]) + '</button>'; }).join('') + '</div>';
+  }
+  function swIt() { return '<label class="av-sw"><input type="checkbox" data-it' + (conIt ? ' checked' : '') + '/> Mostra l\'italiano</label>'; }
+  function frase(t, it, extra) {
+    return '<div class="av-f' + (extra || '') + '"><div>' + (extra && extra.indexOf('no') >= 0 ? '<span class="av-et">Così no</span>' : extra && extra.indexOf('si') >= 0 ? '<span class="av-et">Così sì</span>' : '') +
+      '<p lang="' + lingua + '">' + esc(t) + '</p><p class="it">' + esc(it) + '</p></div>' + L.play(t, lingua) + '</div>';
+  }
+  function situazioni() { return A.SITUAZIONI.filter(function (s) { return ambito === 'tutti' || s.ambito === ambito; }); }
+
+  /* ── frasi ── */
+  function vFrasi() {
+    box.innerHTML = '<h2 class="lg-h2">Frasi per <em>situazione</em></h2><p class="lg-sot">Dodici situazioni di lavoro, cinque frasi ciascuna. Ascoltatele, ripetetele ad alta voce, poi provate a dirle senza guardare l\'italiano.</p>' +
+      chips(AMBITI, 'data-amb', ambito) + '<div class="av-riga" style="margin-top:.9rem">' + swIt() + '</div>' +
+      '<div class="' + (conIt ? '' : 'senza-it') + '" id="av-lista">' + situazioni().map(function (s) {
+        return '<div class="av-sit"><h3>' + s.icona + ' ' + esc(s.nome) + ' <small>' + esc(s.ambito) + '</small></h3>' + s.frasi.map(function (f) { return frase(f[1][lingua], f[0]); }).join('') + '</div>';
+      }).join('') + '</div>';
+  }
+
+  /* ── registro ── */
+  function vRegistro() {
+    box.innerHTML = '<h2 class="lg-h2">Dire <em>bene</em></h2><p class="lg-sot">La stessa cosa si può dire in modo sbrigativo o in modo professionale. Con il cliente si usa sempre la seconda: condizionale, «per cortesia», una proposta al posto di un no.</p>' +
+      '<div class="av-riga">' + swIt() + '</div><div class="' + (conIt ? '' : 'senza-it') + '" id="av-lista">' + A.REGISTRO.map(function (r) {
+        var t = r[2][lingua];
+        return '<div class="av-reg">' + frase(t[0], r[0], ' no') + frase(t[1], r[1], ' si') + '</div>';
+      }).join('') + '</div>';
+  }
+
+  /* ── ascolta e capisci ── */
+  function vAscolta() {
+    var a = A.ASCOLTI.filter(function (x) { return x.id === ascoltoId; })[0];
+    box.innerHTML = '<h2 class="lg-h2">Ascolta e <em>capisci</em></h2><p class="lg-sot">Ascoltate il testo, anche più volte, senza leggerlo. Poi rispondete alle domande; il testo si può mostrare alla fine per controllare.</p>' +
+      chips(A.ASCOLTI.map(function (x) { return [x.id, x.icona, x.titolo]; }), 'data-asc', ascoltoId) +
+      '<div class="av-riga" style="margin-top:1rem">' + (L.parla ? '<button type="button" class="lg-btn pieno" data-az="ascolta">▶ Ascolta</button><button type="button" class="lg-btn" data-az="lento">🐢 Più lento</button>' : '') +
+      '<button type="button" class="lg-btn" data-az="testo">📄 Mostra il testo</button></div>' +
+      '<div id="av-testo" hidden><div class="av-testo" lang="' + lingua + '">' + esc(a.testi[lingua]) + '</div><div class="av-testo it">' + esc(a.testi.it) + '</div></div>' +
+      a.domande.map(function (d, i) {
+        return '<div class="av-dom"><p>' + (i + 1) + '. ' + esc(d[0]) + '</p><div class="av-opz">' + d[1].map(function (o, j) { return '<button type="button" data-dom="' + i + '" data-r="' + j + '">' + esc(o) + '</button>'; }).join('') + '</div></div>';
+      }).join('') + '<p class="av-esito" id="av-esito"></p>';
+    if (!L.parla) box.querySelector('#av-testo').hidden = false;
+  }
+  function rispondi(b) {
+    var a = A.ASCOLTI.filter(function (x) { return x.id === ascoltoId; })[0], i = +b.dataset.dom, d = a.domande[i];
+    var tutti = box.querySelectorAll('[data-dom="' + i + '"]');
+    tutti.forEach(function (x, j) { x.disabled = true; if (j === d[2]) x.classList.add('giusta'); else if (x === b) x.classList.add('sbagliata'); });
+    var fatte = 0, g = 0;
+    a.domande.forEach(function (dd, k) { if (box.querySelector('[data-dom="' + k + '"]:disabled')) { fatte++; if (!box.querySelector('[data-dom="' + k + '"].sbagliata')) g++; } });
+    if (fatte === a.domande.length) document.getElementById('av-esito').textContent = (g === a.domande.length ? '🎉 ' : '') + g + ' risposte giuste su ' + a.domande.length + '. Ora potete leggere il testo per controllare.';
+  }
+
+  /* ── completa la frase ── */
+  var C;
+  var NOMI = /^(Montepulciano|Abruzzo|Rieti|Terminillo|Belvedere|Marco|Francesco|Franziskus|François|Francis|Rufo|Roma|Rome|Roms|Italia|Italy|Italie|Italien|Italiens|Gin|Valle|Santa|Hotel|Hôtel)$/;
+  function pulisci(w) { return w.replace(/^[«"¿¡(]+|[.,;:!?»")]+$/g, ''); }
+  function candidati(t) {
+    return t.split(' ').map(function (w, i) { return { w: pulisci(w), i: i }; }).filter(function (x) {
+      if (x.w.length < 5 || /[0-9'’-]/.test(x.w) || NOMI.test(x.w)) return false;
+      if (lingua !== 'de' && /^\p{Lu}/u.test(x.w)) return false;
+      return x.i > 0 || lingua !== 'de';
+    });
+  }
+  function vCompleta() {
+    var tutte = [];
+    situazioni().forEach(function (s) { s.frasi.forEach(function (f) { tutte.push({ it: f[0], t: f[1][lingua] }); }); });
+    var pool = []; A.SITUAZIONI.forEach(function (s) { s.frasi.forEach(function (f) { candidati(f[1][lingua]).forEach(function (c) { pool.push(c.w); }); }); });
+    var dom = [];
+    L.mescola(tutte).forEach(function (f) {
+      if (dom.length >= 8) return;
+      var c = candidati(f.t); if (!c.length) return;
+      var g = c[Math.floor(Math.random() * c.length)];
+      var dist = L.mescola(pool.filter(function (w) { return w.toLowerCase() !== g.w.toLowerCase() && Math.abs(w.length - g.w.length) <= 3 && /^\p{Lu}/u.test(w) === /^\p{Lu}/u.test(g.w); }));
+      var vis = {}, opz = []; dist.forEach(function (w) { var k = w.toLowerCase(); if (opz.length < 3 && !vis[k]) { vis[k] = 1; opz.push(w); } });
+      if (opz.length < 3) return;
+      var parole = f.t.split(' '), w = parole[g.i];
+      parole[g.i] = w.replace(g.w, '\u0000');
+      dom.push({ f: f, giusta: g.w, opz: L.mescola(opz.concat(g.w)), testo: parole.join(' ') });
+    });
+    C = { dom: dom, punti: 0, fatte: 0 };
+    box.innerHTML = '<h2 class="lg-h2">Completa <em>la frase</em></h2><p class="lg-sot">Otto frasi con una parola mancante: scegliete quella giusta. L\'italiano aiuta a capire il senso. Ogni giro le frasi e le parole cambiano.</p>' +
+      chips(AMBITI, 'data-amb', ambito) + '<p class="av-punti" id="av-punti" style="margin:1rem 0 .6rem"></p>' +
+      dom.map(function (d, i) {
+        return '<div class="av-dom"><p class="av-cloze" lang="' + lingua + '">' + esc(d.testo).replace('\u0000', '<b id="av-b' + i + '">…</b>') + '</p><p style="font-weight:400;font-style:italic;color:var(--txt2);font-size:.82rem">' + esc(d.f.it) + '</p>' +
+          '<div class="av-opz">' + d.opz.map(function (o) { return '<button type="button" data-cl="' + i + '" data-w="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') + '</div></div>';
+      }).join('') + '<div class="av-riga"><button type="button" class="lg-btn pieno" data-az="giro">↻ Nuovo giro</button></div>';
+    punti();
+  }
+  function punti() { document.getElementById('av-punti').textContent = C.fatte ? 'Giuste: ' + C.punti + ' su ' + C.fatte + (C.fatte === C.dom.length ? ' · fine del giro' : '') : C.dom.length + ' frasi'; }
+  function completa(b) {
+    var i = +b.dataset.cl, d = C.dom[i], ok = b.dataset.w === d.giusta;
+    box.querySelectorAll('[data-cl="' + i + '"]').forEach(function (x) { x.disabled = true; if (x.dataset.w === d.giusta) x.classList.add('giusta'); else if (x === b) x.classList.add('sbagliata'); });
+    document.getElementById('av-b' + i).textContent = d.giusta;
+    C.fatte++; if (ok) C.punti++; punti();
+    L.ascolta(d.f.t, lingua);
+  }
+
+  /* ── e-mail ── */
+  var E;
+  function vEmail() {
+    var e = A.EMAIL.filter(function (x) { return x.id === emailId; })[0], p = e.par[lingua], it = e.par.it;
+    var h = '<h2 class="lg-h2">Scrivere <em>un\'e-mail</em></h2><p class="lg-sot">Due modelli di e-mail professionali, con le formule di apertura e di chiusura. Leggeteli, poi provate a rimettere in ordine i paragrafi.</p>' +
+      chips(A.EMAIL.map(function (x) { return [x.id, x.icona, x.titolo]; }), 'data-em', emailId) +
+      '<div class="av-riga" style="margin-top:1rem">' + chips([['leggi', '📖', 'Leggi il modello'], ['ordina', '🧩', 'Rimetti in ordine']], 'data-modo', modoEmail) + '</div>';
+    if (modoEmail === 'leggi') {
+      h += '<div class="av-riga">' + swIt() + '</div><div class="av-ord ' + (conIt ? '' : 'senza-it') + '" id="av-lista">' + p.map(function (t, i) {
+        return '<div class="av-par"><div><p lang="' + lingua + '" style="margin:0;white-space:pre-line">' + esc(t) + '</p><p class="it" style="margin:.25rem 0 0;font-size:.82rem;color:var(--txt2);font-style:italic;white-space:pre-line">' + esc(it[i]) + '</p></div>' + L.play(t, lingua) + '</div>';
+      }).join('') + '</div>';
+    } else {
+      var mezzo = [1, 2, 3, 4];
+      E = { messi: [], resto: L.mescola(mezzo), fine: false };
+      while (E.resto.join() === mezzo.join()) E.resto = L.mescola(mezzo);
+      h += '<div id="av-ord"></div>';
+    }
+    box.innerHTML = h;
+    if (modoEmail === 'ordina') disegnaOrdine();
+  }
+  function disegnaOrdine() {
+    var e = A.EMAIL.filter(function (x) { return x.id === emailId; })[0], p = e.par[lingua];
+    var giusto = E.fine && E.messi.join() === '1,2,3,4';
+    var h = '<p class="lg-sot" style="margin:0 0 .6rem">Toccate i paragrafi qui sotto nell\'ordine giusto. Saluto e firma sono già al loro posto.</p><div class="av-ord">' +
+      '<div class="av-par fisso"><div>' + esc(p[0]) + '</div></div>' +
+      E.messi.map(function (k, n) { return '<div class="av-par' + (E.fine ? (k === n + 1 ? ' ok' : ' ko') : '') + '"><span class="av-num">' + (n + 1) + '</span><div>' + esc(p[k]) + '</div></div>'; }).join('') +
+      E.resto.map(function () { return '<div class="av-par" style="border-style:dotted;color:var(--txt2)">…</div>'; }).join('') +
+      '<div class="av-par fisso"><div>' + esc(p[5]) + '</div></div></div>';
+    if (E.resto.length) h += '<p class="av-punti" style="margin:1.1rem 0 .5rem">Da sistemare</p><div class="av-ord">' + E.resto.map(function (k) { return '<button type="button" data-par="' + k + '" lang="' + lingua + '">' + esc(p[k]) + '</button>'; }).join('') + '</div>';
+    h += '<p class="av-esito">' + (E.fine ? (giusto ? '🎉 Perfetto: l\'e-mail è in ordine!' : 'Non ancora: i paragrafi in rosso sono fuori posto.') : '') + '</p>' +
+      (E.fine ? '<div class="av-riga"><button type="button" class="lg-btn pieno" data-az="riordina">↻ Riprova</button></div>' : '');
+    document.getElementById('av-ord').innerHTML = h;
+  }
+  function metti(k) { E.messi.push(k); E.resto = E.resto.filter(function (x) { return x !== k; }); E.fine = !E.resto.length; disegnaOrdine(); }
+
+  /* ── regia ── */
+  function disegna() {
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    document.getElementById('av-tab').innerHTML = SEZ.map(function (s) { return '<button type="button" data-sez="' + s.id + '" aria-pressed="' + (s.id === sez) + '"><span aria-hidden="true">' + s.ic + '</span>' + s.nome + '</button>'; }).join('');
+    ({ frasi: vFrasi, registro: vRegistro, ascolta: vAscolta, completa: vCompleta, email: vEmail })[sez]();
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b || !box.contains(b) && !b.dataset.sez) return;
+    var d = b.dataset;
+    if (d.sez) { sez = d.sez; L.salva('av-sez', sez); return disegna(); }
+    if (d.amb) { ambito = d.amb; L.salva('av-ambito', ambito); return disegna(); }
+    if (d.asc) { ascoltoId = d.asc; return disegna(); }
+    if (d.em) { emailId = d.em; return disegna(); }
+    if (d.modo) { modoEmail = d.modo; return disegna(); }
+    if (d.dom) return rispondi(b);
+    if (d.cl) return completa(b);
+    if (d.par) return metti(+d.par);
+    var a = A.ASCOLTI.filter(function (x) { return x.id === ascoltoId; })[0];
+    if (d.az === 'ascolta') L.ascolta(a.testi[lingua], lingua, { rate: .9 });
+    if (d.az === 'lento') L.ascolta(a.testi[lingua], lingua, { rate: .7 });
+    if (d.az === 'testo') { var t = document.getElementById('av-testo'); t.hidden = !t.hidden; b.textContent = t.hidden ? '📄 Mostra il testo' : '📄 Nascondi il testo'; }
+    if (d.az === 'giro') vCompleta();
+    if (d.az === 'riordina') vEmail();
+  });
+  document.addEventListener('change', function (e) {
+    if (!e.target.matches('[data-it]')) return;
+    conIt = e.target.checked; L.salva('av-it', conIt);
+    var l = document.getElementById('av-lista'); if (l) l.classList.toggle('senza-it', !conIt);
+  });
+  document.addEventListener('lingua', function (e) { lingua = e.detail; disegna(); });
+  disegna();
+})();
+</script>
+</body>
+</html>

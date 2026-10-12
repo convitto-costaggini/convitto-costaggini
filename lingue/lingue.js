@@ -97,7 +97,7 @@ window.LINGUE_SITO = (function () {
     '.lg-menu.aperto{display:block}' +
     '@keyframes lgGiu{from{opacity:0;transform:translateY(-6px)}}' +
     '.lg-menu-in{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:.4rem}' +
-    '.lg-menu a,.lg-menu button{display:flex;gap:.7rem;align-items:flex-start;text-align:left;padding:.7rem .8rem;border-radius:12px;text-decoration:none;color:var(--txt);border:1.5px solid transparent;background:var(--av);font-family:var(--fu);cursor:pointer}' +
+    '.lg-menu a,.lg-menu button{display:flex;gap:.7rem;align-items:flex-start;text-align:left;padding:.7rem .8rem;border-radius:12px;text-decoration:none;color:var(--txt);border:1.5px solid transparent;background:var(--av);font-family:var(--fu);font-weight:400;white-space:normal;min-width:0;cursor:pointer}' +
     '.lg-menu a:hover,.lg-menu button:hover{border-color:var(--oro)}' +
     '.lg-menu a[aria-current],.lg-menu button[aria-pressed=true]{border-color:var(--bosco);background:#eef3ee}' +
     '.lg-menu .i{font-size:1.3rem;line-height:1.2}' +

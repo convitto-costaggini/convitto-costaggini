@@ -37,7 +37,7 @@
   .gc-mid{display:flex;flex-direction:column;gap:.35rem;justify-content:center}
   .gc-mini{font:800 .58rem var(--fu);letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:.45rem .6rem;cursor:pointer;white-space:nowrap}
   .gc-mini:hover{background:rgba(255,255,255,.2)}
-  @media (max-width:520px){.gc-mini span{display:none}.gc-mini{font-size:1rem;padding:.35rem .6rem}}
+  @media (max-width:520px){.gc-barra{grid-template-columns:repeat(2,minmax(0,1fr))}.gc-mid{grid-column:1/-1;order:3;flex-direction:row;justify-content:center}.gc-sq{padding:.5rem .65rem}.gc-sq input{letter-spacing:.04em;font-size:.78rem}}
   .gc-turno{text-align:center;font:800 .7rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro2);margin:0 0 .8rem;min-height:1em}
   .gc-grande{font-family:var(--fd);font-size:clamp(1.6rem,4.6vw,3.4rem);line-height:1.2;text-align:center;margin:.4rem 0;overflow-wrap:anywhere}
   .gc-medio{font-size:clamp(1rem,2.4vw,1.5rem);text-align:center;color:rgba(245,240,232,.82);margin:.3rem 0;overflow-wrap:anywhere}

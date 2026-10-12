@@ -12,12 +12,12 @@
   <link rel="stylesheet" href="style.min.css"/>
   <link rel="stylesheet" href="lingue/lingue.css"/>
   <link rel="icon" href="favicon.ico" sizes="any"/>
-  <link rel="manifest" href="manifest.webmanifest"/>
   <script src="app.js" defer></script>
   <style>
   .il-ctrl{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.9rem 0 1rem}
-  .il-modo{display:flex;background:#fff;border:1.5px solid var(--av3);border-radius:12px;padding:3px;gap:3px}
+  .il-modo{display:flex;background:#fff;border:1.5px solid var(--av3);border-radius:12px;padding:3px;gap:3px;max-width:100%}
   .il-modo button{font:700 .74rem var(--fu);border:0;background:transparent;color:var(--bosco);padding:.55rem .75rem;border-radius:9px;cursor:pointer;white-space:nowrap}
+  @media (max-width:420px){.il-modo{width:100%}.il-modo button{flex:1;white-space:normal;padding:.5rem .35rem;font-size:.7rem;line-height:1.25}}
   .il-modo button[aria-pressed=true]{background:var(--bosco);color:#fff}
   .il-scena{position:relative;max-width:980px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 14px 40px rgba(44,62,45,.18);border:1px solid var(--av3);background:#fff}
   .il-scena svg{display:block;width:100%;height:auto;touch-action:manipulation;user-select:none;-webkit-user-select:none}

@@ -12,9 +12,12 @@
   <link rel="stylesheet" href="style.min.css"/>
   <link rel="stylesheet" href="lingue/lingue.css"/>
   <link rel="icon" href="favicon.ico" sizes="any"/>
-  <link rel="manifest" href="manifest.webmanifest"/>
   <script src="app.js" defer></script>
   <style>
+  .hm-giro{position:relative}
+  .hm-giro #hm-giro{display:inline-block;transition:opacity .6s ease}
+  .hm-giro #hm-giro.via{opacity:0}
+  .hm-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .hm-card{display:flex;flex-direction:column;gap:.35rem;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}
   .hm-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(44,62,45,.12)}
   .hm-ico{font-size:1.7rem;line-height:1}
@@ -50,7 +53,7 @@
   <section class="lg-hero">
     <div class="lg-saluti" aria-hidden="true">Welcome<br/>Bienvenue<br/>Bienvenidos<br/>Willkommen</div>
     <div class="w">
-      <p class="lbl">Il laboratorio delle lingue</p>
+      <p class="lbl hm-giro"><span class="hm-sr">Il laboratorio delle lingue</span><span id="hm-giro" aria-hidden="true" lang="it">Il laboratorio delle lingue</span></p>
       <h1>Le lingue <em>dell'Alberghiero</em></h1>
       <p>Le parole e le frasi che servono davvero in sala, in cucina, in pasticceria, al ricevimento e al bar: in quattro lingue, da ascoltare, ripetere ed esercitare dal telefono. Pensato per i ragazzi del Costaggini, costruito insieme ai loro docenti.</p>
       <div class="lg-bandiere"><span>English</span><span>Français</span><span>Español</span><span>Deutsch</span></div>
@@ -100,7 +103,7 @@
       <div class="hm-punti" style="margin-top:1rem">
         <div class="hm-punto"><span class="n">📱</span><div><h3>Nessuna registrazione</h3><p>I ragazzi usano tutto liberamente. Nessun dato personale: le spunte e i risultati restano solo sul loro telefono.</p></div></div>
         <div class="hm-punto"><span class="n">🔊</span><div><h3>La voce del telefono</h3><p>Ogni frase si ascolta con la sintesi vocale del dispositivo. Su Android, in <i>Impostazioni › Sintesi vocale</i>, si possono scaricare le voci delle quattro lingue.</p></div></div>
-        <div class="hm-punto"><span class="n">✈️</span><div><h3>Anche senza rete</h3><p>Chi ha installato il sito del Convitto come app può ripassare anche offline, per esempio in pullman.</p></div></div>
+        <div class="hm-punto"><span class="n">🖨️</span><div><h3>Anche su carta</h3><p>Il vocabolario si stampa per sezione, da tenere in tasca durante le esercitazioni; i docenti stampano le verifiche già impaginate.</p></div></div>
         <div class="hm-punto"><span class="n">🎓</span><div><h3>Con i docenti</h3><p>Traduzioni e pronunce sono verificate dai docenti di lingue dell'Istituto, che potranno aggiungere esercizi e materiali.</p></div></div>
       </div>
     </div>
@@ -109,6 +112,27 @@
 <script src="nav.min.js"></script>
 <script src="lingue/lingue.js"></script>
 <script src="lingue/parole.js"></script>
+<script>
+/* il titolo «Il laboratorio delle lingue» si traduce da solo ogni 5 secondi, con una dissolvenza */
+(function () {
+  var el = document.getElementById('hm-giro'); if (!el) return;
+  var T = [['it', 'Il laboratorio delle lingue'], ['en', 'The language lab'], ['fr', 'Le laboratoire des langues'], ['es', 'El laboratorio de idiomas'], ['de', 'Das Sprachlabor']];
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* altezza fissa sulla traduzione più lunga: il testo sotto non deve saltare */
+  function misura() {
+    var p = el.parentNode, max = 0, prima = el.textContent; p.style.minHeight = '';
+    T.forEach(function (t) { el.textContent = t[1]; max = Math.max(max, p.offsetHeight); });
+    el.textContent = prima; p.style.minHeight = max + 'px';
+  }
+  misura(); window.addEventListener('resize', misura); if (document.fonts) document.fonts.ready.then(misura);
+  var i = 0;
+  setInterval(function () {
+    if (document.hidden) return;
+    el.classList.add('via');
+    setTimeout(function () { i = (i + 1) % T.length; el.textContent = T[i][1]; el.setAttribute('lang', T[i][0]); el.classList.remove('via'); }, 600);
+  }, 5000);
+})();
+</script>
 <script>
 (function () {
   var L = window.LINGUE_SITO, P = window.VOCABOLARIO, tutte = [], conta = {};

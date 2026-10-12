@@ -12,11 +12,16 @@
   <link rel="stylesheet" href="style.min.css"/>
   <link rel="stylesheet" href="lingue/lingue.css"/>
   <link rel="icon" href="favicon.ico" sizes="any"/>
-  <link rel="manifest" href="manifest.webmanifest"/>
   <script src="app.js" defer></script>
   <style>
   .vf-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:1.5rem;align-items:start;max-width:1240px;margin:0 auto}
-  @media (max-width:980px){.vf-grid{grid-template-columns:1fr}}
+  @media (max-width:980px){.vf-grid{grid-template-columns:minmax(0,1fr)}}
+  .vf-pan,.vf-dx,.vf-box{min-width:0}
+  .vf-l select,.vf-l input,.vf-l textarea{min-width:0;max-width:100%}
+  .vf-qt{table-layout:fixed}
+  .vf-qt th:first-child,.vf-qt td:first-child{width:46%}
+  .vf-qt input{width:100%;max-width:70px;box-sizing:border-box}
+  @media (max-width:420px){.vf-box{padding:1rem .85rem}.vf-qt td,.vf-qt th{font-size:.78rem}}
   .vf-pan{display:flex;flex-direction:column;gap:1.1rem}
   .vf-box{background:#fff;border:1px solid var(--av3);border-radius:16px;padding:1.15rem 1.2rem;box-shadow:var(--sh-sm)}
   .vf-box h2{font-family:var(--fd);font-weight:400;font-size:1.3rem;color:var(--bosco);margin:0 0 .2rem;display:flex;align-items:center;gap:.5rem}

@@ -74,6 +74,16 @@
   .gc-vite{text-align:center;font-size:clamp(1.2rem,2.6vw,1.8rem);letter-spacing:.2em;margin:.2rem 0 .6rem}
   .gc-vite .persa{filter:grayscale(1);opacity:.25}
 
+  /* riordina la frase */
+  .gc-ris{min-height:3.4rem;border:2px dashed rgba(255,255,255,.35);border-radius:14px;padding:.6rem;display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;align-items:center;margin:.6rem auto 1rem;max-width:1000px;font-size:clamp(1rem,2.4vw,1.6rem);text-align:center;overflow-wrap:break-word}
+  .gc-ris.ok{border-color:#4ade80;background:rgba(21,128,61,.25)}
+  .gc-ris.ko{border-color:#fca5a5;background:rgba(185,28,28,.2)}
+  .gc-ris .vuoto{color:rgba(255,255,255,.5);font-size:.9rem}
+  .gc-ris button,.gc-tess button{font:600 clamp(.95rem,2.2vw,1.45rem) var(--fu);border-radius:12px;border:0;padding:clamp(.5rem,1.2vw,.8rem) clamp(.7rem,1.6vw,1.1rem);cursor:pointer;min-height:48px}
+  .gc-ris button{background:var(--oro);color:#fff}
+  .gc-tess{display:flex;flex-wrap:wrap;gap:clamp(.35rem,.9vw,.6rem);justify-content:center;max-width:1000px;margin:0 auto}
+  .gc-tess button{background:#f5f0e8;color:var(--bosco)}
+
   /* a tempo */
   .gc-tempo{font-family:var(--fd);font-size:clamp(3rem,10vw,7rem);text-align:center;line-height:1;color:var(--oro3)}
   .gc-tempo.fine{color:#fca5a5}
@@ -111,7 +121,9 @@
   <section class="lg-sez">
     <div class="w">
       <div class="gc-ctrl">
-        <p class="lbl">Il gioco</p>
+        <p class="lbl">Il livello</p>
+        <div class="lg-chips" id="gc-livelli" role="group" aria-label="Livello"></div>
+        <p class="lbl" style="margin-top:.4rem">Il gioco</p>
         <div class="gc-giochi" id="gc-giochi" role="group" aria-label="Gioco"></div>
         <p class="lbl" style="margin-top:.4rem">Le parole di</p>
         <div class="lg-chips scorre" id="gc-ambiti" role="group" aria-label="Ambito"></div>
@@ -136,6 +148,7 @@
 <script src="nav.min.js"></script>
 <script src="lingue/lingue.js"></script>
 <script src="lingue/parole.js"></script>
+<script src="lingue/avanzato-dati.js"></script>
 <script>
 (function () {
   var L = window.LINGUE_SITO, V = window.VOCABOLARIO, esc = L.esc;
@@ -145,7 +158,8 @@
     { id: 'tempo', ic: '⏱️', nome: 'Traduci a tempo', desc: 'Un minuto per squadra' },
     { id: 'ascolta', ic: '👂', nome: 'Ascolta e scegli', desc: 'Senti la frase, tocca il significato' }
   ];
-  var lingua = L.linguaScelta(), gioco = L.leggi('gioco-lim', 'memory'), ambito = L.leggi('ambito-lim', 'tutti');
+  var lingua = L.linguaScelta(), gioco = L.leggi('gioco-lim', 'memory'), ambito = L.leggi('ambito-lim', 'tutti'), livello = L.leggi('livello-lim', 'base');
+  var AV = window.AVANZATO; if (livello !== 'avanzato') livello = 'base';
   if (!GIOCHI.some(function (g) { return g.id === gioco; })) gioco = 'memory';
   var sq = [{ nome: L.leggi('sq-0', 'Squadra 1'), punti: 0 }, { nome: L.leggi('sq-1', 'Squadra 2'), punti: 0 }], turno = 0;
   var area = document.getElementById('gc-area'), $turno = document.getElementById('gc-turno');
@@ -154,6 +168,10 @@
   /* ── dati ── */
   function voci() {
     var out = [], visto = {};
+    if (livello === 'avanzato') {
+      AV.SITUAZIONI.forEach(function (s) { if (ambito === 'tutti' || s.ambito === ambito) s.frasi.forEach(function (f) { out.push({ it: f[0], tr: f[1][lingua] }); }); });
+      return out;
+    }
     V.SEZIONI.forEach(function (s) {
       if (ambito !== 'tutti' && s.ambito !== ambito) return;
       (V.PAROLE[s.id] || []).forEach(function (p) {
@@ -198,21 +216,24 @@
   /* ── 1. MEMORY ── */
   var M;
   function memory() {
-    var scelte = prendi(brevi(34), 6);
+    var av = livello === 'avanzato', carte = [];
+    /* avanzato: la frase sbrigativa e quella professionale, entrambe nella lingua scelta */
+    var scelte = av ? prendi(AV.REGISTRO, 6).map(function (r) { return { it: r[2][lingua][0], tr: r[2][lingua][1] }; }) : prendi(brevi(34), 6);
     if (scelte.length < 6) return pochi();
-    var carte = [];
-    scelte.forEach(function (v, k) { carte.push({ k: k, t: v.it, tr: false }, { k: k, t: v.tr, tr: true }); });
+    scelte.forEach(function (v, k) {
+      carte.push({ k: k, t: v.it, tr: av, et: av ? 'così no' : 'italiano' }, { k: k, t: v.tr, tr: true, et: av ? 'così sì' : NOME_L() });
+    });
     M = { carte: L.mescola(carte), su: [], prese: 0, voci: scelte, blocco: false };
     tocca();
     area.innerHTML = '<div class="gc-mem">' + M.carte.map(function (c, i) {
       return '<button type="button" class="gc-carta coperta" data-carta="' + i + '" aria-label="Carta coperta"></button>';
-    }).join('') + '</div><p class="gc-regole">Girate due carte: se sono la stessa frase in italiano e in ' + NOME_L() + ' la coppia è vostra e giocate ancora; altrimenti tocca all\'altra squadra.</p>';
+    }).join('') + '</div><p class="gc-regole">' + (livello === 'avanzato' ? 'Girate due carte: se trovate la frase sbrigativa e la sua versione professionale' : 'Girate due carte: se sono la stessa frase in italiano e in ' + NOME_L()) + ', la coppia è vostra e giocate ancora; altrimenti tocca all\'altra squadra.</p>';
   }
   function giraCarta(i) {
     var c = M.carte[i], el = area.querySelector('[data-carta="' + i + '"]');
     if (M.blocco || !el.classList.contains('coperta')) return;
     el.classList.remove('coperta'); if (c.tr) el.classList.add('tr');
-    el.innerHTML = '<span lang="' + (c.tr ? lingua : 'it') + '"><small>' + (c.tr ? esc(NOME_L()) : 'italiano') + '</small>' + esc(c.t) + '</span>';
+    el.innerHTML = '<span lang="' + (c.tr ? lingua : 'it') + '"><small>' + esc(c.et) + '</small>' + esc(c.t) + '</span>';
     el.setAttribute('aria-label', c.t);
     if (c.tr) L.ascolta(c.t, lingua);
     M.su.push(i);
@@ -221,7 +242,7 @@
     if (a.k === b.k) {
       [ea, el].forEach(function (x) { x.classList.add('presa', turno ? 'sqb' : 'sqa'); x.disabled = true; });
       M.su = []; M.prese++; punto(turno);
-      if (M.prese === 6) attesa = setTimeout(function () { fine('<p class="gc-regole">' + M.voci.map(function (v) { return esc(v.it) + ' = <b>' + esc(v.tr) + '</b>'; }).join('<br/>') + '</p>'); }, 900);
+      if (M.prese === 6) attesa = setTimeout(function () { fine('<p class="gc-regole">' + M.voci.map(function (v) { return esc(v.it) + (livello === 'avanzato' ? ' → ' : ' = ') + '<b>' + esc(v.tr) + '</b>'; }).join('<br/>') + '</p>'); }, 900);
       else dici('Coppia! ' + sq[turno].nome + ' gioca ancora');
     } else {
       M.blocco = true;
@@ -237,6 +258,7 @@
   function base(ch) { return ch.toLowerCase() === 'ß' ? 's' : ch.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
   function lettera(ch) { return /\p{L}/u.test(ch); }
   function parola() {
+    if (livello === 'avanzato') return riordina();
     var lista = voci().filter(function (v) { return v.tr.length >= 4 && v.tr.length <= 22 && v.tr.split(' ').length <= 3 && !/[\/()…]/.test(v.tr); });
     if (!lista.length) return pochi();
     var v = prendi(lista, 1)[0];
@@ -275,6 +297,39 @@
       else cambia();
     }
     disegnaParola();
+  }
+
+  /* ── 2b. RIORDINA LA FRASE (livello avanzato) ── */
+  var O;
+  function riordina() {
+    var lista = voci().filter(function (v) { var n = v.tr.split(' ').length; return n >= 5 && n <= 14; });
+    if (!lista.length) return pochi();
+    var v = prendi(lista, 1)[0], pezzi = v.tr.split(' ').map(function (w, i) { return { i: i, w: w }; });
+    var mix = L.mescola(pezzi);
+    while (mix.map(function (x) { return x.i; }).join() === pezzi.map(function (x) { return x.i; }).join()) mix = L.mescola(pezzi);
+    O = { v: v, mix: mix, messi: [], errori: 0, finita: false };
+    P = { v: v, finita: false };
+    tocca(); disegnaRiordina();
+  }
+  function disegnaRiordina(esito) {
+    var resto = O.mix.filter(function (x) { return O.messi.indexOf(x) < 0; });
+    area.innerHTML = '<p class="gc-medio">In italiano: <b>' + esc(O.v.it) + '</b></p>' +
+      '<div class="gc-ris' + (esito ? ' ' + esito : '') + '" lang="' + lingua + '">' + (O.finita ? esc(O.v.tr) : O.messi.map(function (x, n) { return '<button type="button" data-tolto="' + n + '">' + esc(x.w) + '</button>'; }).join('') || '<span class="vuoto">Toccate le parole nell\'ordine giusto</span>') + '</div>' +
+      (O.finita ? '<div class="gc-azioni"><button type="button" class="gc-b" data-az="riascolta">🔊 Ascolta</button><button type="button" class="gc-b oro" data-az="prossima">▶ Prossima frase</button></div>'
+        : '<div class="gc-tess" lang="' + lingua + '">' + resto.map(function (x) { return '<button type="button" data-pezzo="' + O.mix.indexOf(x) + '">' + esc(x.w) + '</button>'; }).join('') + '</div>' +
+        '<div class="gc-azioni"><button type="button" class="gc-b" data-az="rivela">👁 Rivela</button></div>' +
+        '<p class="gc-regole">La squadra di turno compone la frase toccando le parole; un tocco su una parola già messa la rimette a posto. Frase giusta: 2 punti. Se è sbagliata ci prova l\'altra squadra; dopo due errori si vede la soluzione.</p>');
+  }
+  function mettiPezzo(k) {
+    if (O.finita) return;
+    O.messi.push(O.mix[k]);
+    if (O.messi.length < O.mix.length) return disegnaRiordina();
+    var frase = O.messi.map(function (x) { return x.w; }).join(' ');
+    if (frase === O.v.tr) { O.finita = P.finita = true; punto(turno, 2); dici('Bravi! 2 punti a ' + sq[turno].nome); L.ascolta(O.v.tr, lingua); return disegnaRiordina('ok'); }
+    O.errori++;
+    if (O.errori >= 2) { O.finita = P.finita = true; dici('Niente punti: ecco la frase giusta'); L.ascolta(O.v.tr, lingua); return disegnaRiordina('ko'); }
+    O.messi = []; cambia(); dici('Non è giusta: ci prova ' + sq[turno].nome);
+    disegnaRiordina();
   }
 
   /* ── 3. TRADUCI A TEMPO ── */
@@ -355,7 +410,12 @@
     ({ memory: memory, parola: parola, tempo: tempo, ascolta: ascolta })[gioco]();
   }
   function disegnaScelte() {
-    document.getElementById('gc-giochi').innerHTML = GIOCHI.map(function (g) {
+    document.getElementById('gc-livelli').innerHTML = [['base', '🟢', 'Base · parole e frasi brevi'], ['avanzato', '🎓', 'Avanzato · frasi complete']].map(function (l) {
+      return '<button type="button" class="lg-chip" data-liv="' + l[0] + '" aria-pressed="' + (l[0] === livello) + '">' + l[1] + ' ' + l[2] + '</button>';
+    }).join('');
+    var AVG = { memory: { desc: 'Frase sbrigativa ↔ frase professionale' }, parola: { ic: '🧩', nome: 'Riordina la frase', desc: 'Le parole in ordine, a turno' } };
+    document.getElementById('gc-giochi').innerHTML = GIOCHI.map(function (g0) {
+      var g = livello === 'avanzato' && AVG[g0.id] ? Object.assign({}, g0, AVG[g0.id]) : g0;
       return '<button type="button" class="gc-gioco" data-g="' + g.id + '" aria-pressed="' + (g.id === gioco) + '"><span class="ic" aria-hidden="true">' + g.ic + '</span><span><b>' + g.nome + '</b><small>' + g.desc + '</small></span></button>';
     }).join('');
     document.getElementById('gc-ambiti').innerHTML = [{ id: 'tutti', nome: 'Tutti gli ambiti', icona: '🌟' }].concat(V.AMBITI).map(function (a) {
@@ -365,6 +425,9 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return;
     if (b.dataset.g) { gioco = b.dataset.g; L.salva('gioco-lim', gioco); disegnaScelte(); avvia(); return; }
+    if (b.dataset.liv) { livello = b.dataset.liv; L.salva('livello-lim', livello); disegnaScelte(); avvia(); return; }
+    if (b.dataset.pezzo) return mettiPezzo(+b.dataset.pezzo);
+    if (b.dataset.tolto) { if (!O.finita) { O.messi.splice(+b.dataset.tolto, 1); disegnaRiordina(); } return; }
     if (b.dataset.a) { ambito = b.dataset.a; L.salva('ambito-lim', ambito); disegnaScelte(); avvia(); return; }
     if (b.dataset.carta) return giraCarta(+b.dataset.carta);
     if (b.dataset.l) return provaLettera(b.dataset.l);
@@ -372,7 +435,7 @@
     switch (b.dataset.az) {
       case 'ancora': return avvia();
       case 'prossima': cambia(); return parola();
-      case 'rivela': P.finita = true; dici('Ecco la soluzione: nessun punto'); L.ascolta(P.v.tr, lingua); return disegnaParola();
+      case 'rivela': if (livello === 'avanzato') { O.finita = P.finita = true; dici('Ecco la soluzione: nessun punto'); L.ascolta(O.v.tr, lingua); return disegnaRiordina(); } P.finita = true; dici('Ecco la soluzione: nessun punto'); L.ascolta(P.v.tr, lingua); return disegnaParola();
       case 'riascolta': return L.ascolta(P.v.tr, lingua);
       case 'via': return via();
       case 'mostra': L.ascolta(corrente().tr, lingua); return disegnaTempo(true);
@@ -394,7 +457,7 @@
   document.addEventListener('fullscreenchange', function () { bSchermo.innerHTML = document.fullscreenElement ? '✕<span> Esci</span>' : '⛶<span> Schermo intero</span>'; });
   /* con la tastiera fisica si possono dare le lettere anche nell'Indovina */
   document.addEventListener('keydown', function (e) {
-    if (gioco !== 'parola' || !P || e.ctrlKey || e.metaKey || e.altKey || /input|textarea/i.test(e.target.tagName)) return;
+    if (gioco !== 'parola' || livello === 'avanzato' || !P || e.ctrlKey || e.metaKey || e.altKey || /input|textarea/i.test(e.target.tagName)) return;
     if (/^[a-z]$/i.test(e.key)) provaLettera(e.key.toLowerCase());
   });
   document.addEventListener('lingua', function (e) { lingua = e.detail; avvia(); });

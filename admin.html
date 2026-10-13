@@ -634,6 +634,11 @@ async function salvaNotizia() {
   let url = SB_N + '/rest/v1/notizie';
   let method = 'POST';
   if (editNotiziaId) { url += '?id=eq.' + editNotiziaId; method = 'PATCH'; }
+  else {
+    // Una notizia nuova va in cima: ordine più basso di tutte quelle già presenti
+    const ordini = (notizieCache || []).map(n => n.ordine).filter(o => typeof o === 'number');
+    payload.ordine = ordini.length ? Math.min(...ordini) - 10 : 10;
+  }
 
   const resp = await fetch(url, {
     method,

@@ -176,10 +176,6 @@ function admConfirm(opts) {
         <div class="fg"><label>Testo del link</label><input type="text" id="n-link-testo" placeholder="Leggi →"/></div>
         <div class="fg"><label>URL immagine</label><input type="text" id="n-img" placeholder="https://images.unsplash.com/…"/></div>
         <div class="fg"><label>Descrizione immagine</label><input type="text" id="n-img-alt" placeholder="Breve descrizione"/></div>
-        <div class="fg" style="display:flex;gap:1.25rem;flex-wrap:wrap">
-          <label class="fg-check"><input type="checkbox" id="n-evidenza"/> In evidenza</label>
-          <label class="fg-check"><input type="checkbox" id="n-featured"/> In primo piano</label>
-        </div>
         <input type="hidden" id="n-edit-id"/>
         <div class="form-btns">
           <button class="btn-pubblica" id="n-btn-salva" onclick="salvaNotizia()">📌 Pubblica</button>
@@ -627,9 +623,10 @@ async function salvaNotizia() {
   const img    = document.getElementById('n-img').value.trim();
   const link   = document.getElementById('n-link').value.trim();
   const linkT  = document.getElementById('n-link-testo').value.trim();
+  const imgAlt = document.getElementById('n-img-alt').value.trim();
   if (!titolo) { alert('Inserire il titolo.'); return; }
 
-  const payload = { titolo, testo, categoria: cat, data_pub: data, immagine: img, link, link_testo: linkT };
+  const payload = { titolo, testo, categoria: cat, data_pub: data, immagine: img, immagine_alt: imgAlt, link, link_testo: linkT };
 
   let url = SB_N + '/rest/v1/notizie';
   let method = 'POST';
@@ -666,6 +663,7 @@ async function editNotizia(id) {
   document.getElementById('n-cat').value    = n.categoria || 'istituzionale';
   document.getElementById('n-data').value   = n.data_pub || '';
   document.getElementById('n-img').value    = n.immagine || '';
+  document.getElementById('n-img-alt').value = n.immagine_alt || '';
   document.getElementById('n-link').value   = n.link || '';
   document.getElementById('n-link-testo').value = n.link_testo || '';
   editNotiziaId = id;
@@ -684,7 +682,7 @@ async function deleteNotizia(id) {
 
 function resetNotizia() { resetFormNotizia(); }
 function resetFormNotizia() {
-  ['n-titolo','n-testo','n-data','n-img','n-link','n-link-testo'].forEach(id => {
+  ['n-titolo','n-testo','n-data','n-img','n-img-alt','n-link','n-link-testo'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';
   });

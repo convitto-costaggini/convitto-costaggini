@@ -7,7 +7,12 @@
 (function () {
   'use strict';
 
-  var DURATA = 6000; // ms per foto nello scorrimento automatico
+  var DURATA = 6000; // ms minimi per foto nello scorrimento automatico
+  /* Con una didascalia lunga la foto resta ferma il tempo di leggerla (circa 65 ms a lettera, al massimo 25 s) */
+  function durata(s) {
+    var n = (s && s.didascalia || '').length;
+    return Math.max(DURATA, Math.min(25000, 4000 + n * 65));
+  }
   var GALLERIE = null;
   var lb, fig, slideA, slideB, capt, counter, thumbs, btnPrev, btnNext, btnPlay, prog, titoloEl;
   var slides = [], idx = -1, titolo = '', lastFocus = null, attiva = null, token = 0;
@@ -248,9 +253,10 @@
     prog.style.transform = 'scaleX(0)';
     if (!play || slides.length < 2 || document.hidden || lb.hidden || zs > 1.01) return;
     void prog.offsetWidth;
-    prog.style.transition = 'transform ' + DURATA + 'ms linear';
+    var t = durata(slides[idx]);
+    prog.style.transition = 'transform ' + t + 'ms linear';
     prog.style.transform = 'scaleX(1)';
-    timer = setTimeout(function () { vai(idx + 1, 1); }, DURATA);
+    timer = setTimeout(function () { vai(idx + 1, 1); }, t);
   }
   function imposta(on) {
     play = on && !reduce;

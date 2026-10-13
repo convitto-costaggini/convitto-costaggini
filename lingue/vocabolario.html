@@ -88,7 +88,6 @@
           <input type="search" class="ps-cerca" id="ps-cerca" placeholder="Cerca una parola… (es. prenotato)" aria-label="Cerca una parola"/>
           <button type="button" class="ps-btn pieno" id="ps-allena">🎴 Allenati</button>
           <button type="button" class="ps-btn" id="ps-stampa">🖨️ Stampa</button>
-          <button type="button" class="ps-btn" id="ps-tutte" aria-pressed="true" title="Mostra tutte le lingue o solo quella scelta">🌍 Tutte</button>
         </div>
         <div class="ps-riga" id="ps-ambiti" role="group" aria-label="Ambito"></div>
         <div class="ps-riga" id="ps-sezioni" role="group" aria-label="Sezione"></div>
@@ -135,7 +134,8 @@
   var dalLink = (location.search.match(/[?&]a=([a-z]+)/) || [])[1];
   var ambito = ambitoDi(dalLink) ? dalLink : (ambitoDi(st.ambito) ? st.ambito : 'sala');
   var SITO = window.LINGUE_SITO;
-  var lingua = st.soloMia ? SITO.linguaScelta() : 'tutte', sezione = sezioniDi(ambito)[0].id, cerca = '';
+  /* una lingua sola, quella scelta col pulsante 🌍 della barra: niente confusione tra le quattro */
+  var lingua = SITO.linguaScelta(), sezione = sezioniDi(ambito)[0].id, cerca = '';
   function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function norm(t) { return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
 
@@ -155,10 +155,8 @@
     speechSynthesis.speak(u);
   }
 
-  var elSez = document.getElementById('ps-sezioni'), elTutte = document.getElementById('ps-tutte');
+  var elSez = document.getElementById('ps-sezioni');
   function chips() {
-    elTutte.setAttribute('aria-pressed', lingua === 'tutte');
-    elTutte.textContent = lingua === 'tutte' ? '🌍 Tutte' : '🌍 Solo ' + SITO.linguaScelta().toUpperCase();
     document.getElementById('ps-ambiti').innerHTML = AMBITI.map(function (a) {
       return '<button type="button" class="ps-chip ps-amb" data-amb="' + a.id + '" aria-pressed="' + (ambito === a.id) + '">' + a.icona + ' ' + a.nome + '</button>';
     }).join('');
@@ -167,13 +165,13 @@
       return '<button type="button" class="ps-chip" data-s="' + s.id + '" aria-pressed="' + (sezione === s.id) + '"' + (c ? '' : ' disabled title="In preparazione"') + '>' + s.nome + (c ? '' : ' · presto') + '</button>';
     }).join('');
   }
-  function lingueAttive() { return lingua === 'tutte' ? LINGUE : LINGUE.filter(function (l) { return l.cod === lingua; }); }
+  function lingueAttive() { return LINGUE.filter(function (l) { return l.cod === lingua; }); }
   function voci() {
     var q = norm(cerca), out = [];
     SEZIONI.forEach(function (s) {
       (PAROLE[s.id] || []).forEach(function (p) {
         if (!q && s.id !== sezione) return;
-        var testo = norm(p[0] + ' ' + LINGUE.map(function (l) { return p[1][l.cod][0]; }).join(' '));
+        var testo = norm(p[0] + ' ' + p[1][lingua][0]);
         if (!q || testo.indexOf(q) >= 0) out.push({ sez: s, p: p });
       });
     });
@@ -194,17 +192,15 @@
   }
 
   /* allenamento a flashcard */
-  var mazzo = [], pos = 0, sapute = 0, tot = 0, primo = 0, visti = {}, linAll = 'en';
-  function iniziaAllenamento(tieni) {
-    if (!tieni) linAll = lingua === 'tutte' ? SITO.linguaScelta() : lingua;
+  var mazzo = [], pos = 0, sapute = 0, tot = 0, primo = 0, visti = {}, linAll = lingua;
+  function iniziaAllenamento() {
+    linAll = lingua;
     mazzo = (PAROLE[sezione] || []).slice().sort(function () { return Math.random() - .5; });
     pos = 0; sapute = 0; tot = mazzo.length; primo = 0; visti = {}; carta();
   }
   function carta() {
     var box = document.getElementById('ps-all'), l = LINGUE.filter(function (x) { return x.cod === linAll; })[0];
-    var scelta = '<div class="ps-riga" style="justify-content:center;margin-bottom:1rem">' + LINGUE.map(function (x) {
-      return '<button type="button" class="ps-chip" data-al="' + x.cod + '" aria-pressed="' + (x.cod === linAll) + '">' + x.nome + '</button>';
-    }).join('') + '</div>';
+    var scelta = '';
     if (pos >= mazzo.length) {
       box.innerHTML = scelta + '<div class="ps-fc ps-fine" style="cursor:default"><div class="ps-fc-it">' + (primo === tot ? '🏆 Perfetto!' : '👏 Mazzo completato!') + '</div><p class="ps-fc-hint" style="display:block">Al primo colpo ne sapevi ' + primo + ' su ' + tot + ' in ' + l.nome.toLowerCase() + (primo < tot ? '; le altre le hai ripassate fino a saperle.' : '.') + '</p>' +
         '<div class="ps-fc-b"><button type="button" class="ps-btn pieno" data-a="ricomincia">↺ Ricomincia</button><button type="button" class="ps-btn" data-a="esci">← Torna alla lista</button></div></div>';
@@ -222,11 +218,12 @@
   function stampa() {
     var s = SEZIONI.filter(function (x) { return x.id === sezione; })[0];
     var righe = (PAROLE[sezione] || []).map(function (p) {
-      return '<tr><td class="it">' + esc(p[0]) + '</td>' + LINGUE.map(function (l) { var t = p[1][l.cod]; return '<td>' + esc(t[0]) + '<small>' + esc(t[1]) + '</small></td>'; }).join('') + '</tr>';
+      var t = p[1][lingua]; return '<tr><td class="it">' + esc(p[0]) + '</td><td>' + esc(t[0]) + '<small>' + esc(t[1]) + '</small></td></tr>';
     }).join('');
+    var nomeL = LINGUE.filter(function (x) { return x.cod === lingua; })[0].nome;
     var w = window.open('', '_blank'); if (!w) { window.print(); return; }
-    w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>Vocabolario — ' + esc(ambitoDi(s.ambito).nome) + ' — ' + esc(s.nome.replace(/^\S+\s/, '')) + '</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#1a1a1a}h1{font-size:16pt;margin:0 0 2px}p{font-size:9pt;color:#555;margin:0 0 12px}table{width:100%;border-collapse:collapse;font-size:9.5pt}th{background:#2C3E2D;color:#fff;text-align:left;padding:5px;font-size:8.5pt;text-transform:uppercase}td{border-bottom:1px solid #ccc;padding:5px;vertical-align:top}td.it{font-weight:bold}small{display:block;color:#666;font-style:italic;font-size:8pt}@page{size:A4 landscape;margin:12mm}</style></head><body>' +
-      '<h1>' + esc(ambitoDi(s.ambito).nome) + ' — ' + esc(s.nome.replace(/^\S+\s/, '')) + '</h1><p>Convitto "Costaggini" · IPSSEOA Rieti — pronuncia scritta all\'italiana</p><table><thead><tr><th>Italiano</th><th>Inglese</th><th>Francese</th><th>Spagnolo</th><th>Tedesco</th></tr></thead><tbody>' + righe + '</tbody></table>' +
+    w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>Vocabolario ' + esc(nomeL.toLowerCase()) + ' — ' + esc(ambitoDi(s.ambito).nome) + ' — ' + esc(s.nome.replace(/^\S+\s/, '')) + '</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#1a1a1a}h1{font-size:16pt;margin:0 0 2px}p{font-size:9pt;color:#555;margin:0 0 12px}table{width:100%;border-collapse:collapse;font-size:9.5pt}th{background:#2C3E2D;color:#fff;text-align:left;padding:5px;font-size:8.5pt;text-transform:uppercase}td{border-bottom:1px solid #ccc;padding:5px;vertical-align:top}td.it{font-weight:bold;width:45%}small{display:block;color:#666;font-style:italic;font-size:8pt}@page{size:A4;margin:12mm}</style></head><body>' +
+      '<h1>' + esc(ambitoDi(s.ambito).nome) + ' — ' + esc(s.nome.replace(/^\S+\s/, '')) + '</h1><p>Convitto "Costaggini" · IPSSEOA Rieti — pronuncia scritta all\'italiana</p><table><thead><tr><th>Italiano</th><th>' + esc(nomeL) + '</th></tr></thead><tbody>' + righe + '</tbody></table>' +
       '<script>window.onload=function(){window.print()}<\/script></body></html>');
     w.document.close();
   }
@@ -236,9 +233,7 @@
     var b;
     if ((b = e.target.closest('.ps-play'))) { e.stopPropagation(); ascolta(b.dataset.t, b.dataset.c, b); return; }
     if ((b = e.target.closest('[data-amb]'))) { ambito = b.dataset.amb; st.ambito = ambito; salva(); sezione = sezioniDi(ambito)[0].id; cerca = ''; document.getElementById('ps-cerca').value = ''; chips(); lista(); if (ps.classList.contains('allena')) iniziaAllenamento(); return; }
-    if (e.target.closest('#ps-tutte')) { st.soloMia = lingua === 'tutte'; salva(); lingua = st.soloMia ? SITO.linguaScelta() : 'tutte'; chips(); lista(); return; }
     if ((b = e.target.closest('[data-s]')) && !b.disabled) { sezione = b.dataset.s; cerca = ''; document.getElementById('ps-cerca').value = ''; chips(); lista(); if (ps.classList.contains('allena')) iniziaAllenamento(); return; }
-    if ((b = e.target.closest('[data-al]'))) { linAll = b.dataset.al; st.linAll = linAll; salva(); iniziaAllenamento(true); return; }
     if ((b = e.target.closest('[data-a]'))) {
       var a = b.dataset.a;
       if (a === 'sapevo') { if (!visti[mazzo[pos][0]]) primo++; visti[mazzo[pos][0]] = 1; sapute++; pos++; carta(); }
@@ -259,7 +254,7 @@
   document.getElementById('ps-cerca').addEventListener('input', function () { cerca = this.value.trim(); if (ps.classList.contains('allena')) { ps.classList.remove('allena'); document.getElementById('ps-allena').textContent = '🎴 Allenati'; } lista(); });
   if (parla) speechSynthesis.getVoices();
   /* la lingua si sceglie una volta sola, dal pulsante 🌍 della barra */
-  document.addEventListener('lingua', function () { if (lingua !== 'tutte') lingua = SITO.linguaScelta(); chips(); lista(); });
+  document.addEventListener('lingua', function () { lingua = SITO.linguaScelta(); chips(); lista(); if (ps.classList.contains('allena')) iniziaAllenamento(); });
   chips(); lista();
 })();
 </script>

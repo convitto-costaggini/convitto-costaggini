@@ -148,8 +148,14 @@
   document.getElementById('hm-amb').innerHTML = P.AMBITI.map(function (a) { return '<a href="lingue/vocabolario.html?a=' + a.id + '"><span class="ic">' + a.icona + '</span><b>' + L.esc(a.nome) + '</b><small>' + conta[a.id] + ' frasi</small></a>'; }).join('');
   var oggi = new Date(), n = Math.floor(Date.UTC(oggi.getFullYear(), oggi.getMonth(), oggi.getDate()) / 864e5);
   var p = tutte[(n * 37) % tutte.length];
-  document.getElementById('hm-gg').innerHTML = '<p class="lbl" style="margin:0">' + oggi.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' }) + '</p><p class="hm-gg-it">' + L.esc(p[0]) + '</p>' +
-    L.LINGUE.map(function (l) { var t = p[1][l.cod]; return '<div class="hm-gg-l"><b>' + l.cod.toUpperCase() + '</b><span lang="' + l.cod + '">' + L.esc(t[0]) + '</span>' + L.play(t[0], l.cod, 'Ascolta in ' + l.nome.toLowerCase()) + '<small>' + L.esc(t[1]) + '</small></div>'; }).join('');
+  /* la frase del giorno nella sola lingua scelta col pulsante 🌍 */
+  function frase() {
+    var l = L.lingua(L.linguaScelta()), t = p[1][l.cod];
+    document.getElementById('hm-gg').innerHTML = '<p class="lbl" style="margin:0">' + oggi.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' }) + '</p><p class="hm-gg-it">' + L.esc(p[0]) + '</p>' +
+      '<div class="hm-gg-l"><b>' + l.cod.toUpperCase() + '</b><span lang="' + l.cod + '">' + L.esc(t[0]) + '</span>' + L.play(t[0], l.cod, 'Ascolta in ' + l.nome.toLowerCase()) + '<small>' + L.esc(t[1]) + '</small></div>';
+  }
+  frase();
+  document.addEventListener('lingua', frase);
 })();
 </script>
 </body>

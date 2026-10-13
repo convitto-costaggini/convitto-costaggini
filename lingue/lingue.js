@@ -64,10 +64,10 @@ window.LINGUE_SITO = (function () {
   /* barra del minisito: cinque voci, tre con menu a tendina, più la lingua */
   var GRUPPI = [
     { id: 'home', ic: '🏠', nome: 'Home', pagine: [['index', '🏠', 'Home del minisito', '']] },
-    { id: 'impara', ic: '📖', nome: 'Impara', pagine: [['vocabolario', '📖', 'Vocabolario', 'Le frasi di sala, cucina, pasticceria, reception e bar'], ['dialoghi', '💬', 'Dialoghi', 'Una scena di lavoro per ambito, a due voci'], ['illustrato', '🖼️', 'Il ristorante illustrato', 'Tocca un oggetto e ascolta il suo nome'], ['avanzato', '🎓', 'Livello avanzato', 'Frasi complete, registro, ascolti ed e-mail (B1–B2)']] },
-    { id: 'allenati', ic: '🎯', nome: 'Allenati', pagine: [['esercizi', '✏️', 'Esercizi', 'Scelta multipla, abbinamento, riordina, ascolta e scrivi'], ['imprevisti', '🎭', 'Imprevisti', 'Storie a scelta: rispondi al cliente nel modo giusto'], ['giochi', '🎲', 'Giochi alla LIM', 'Memory, indovina la parola, a tempo, ascolta: a squadre']] },
+    { id: 'impara', ic: '📖', nome: 'Impara', pagine: [['vocabolario', '📖', 'Vocabolario', 'Le frasi di sala, cucina, pasticceria, reception e bar'], ['illustrato', '🖼️', 'Il ristorante illustrato', 'Tocca un oggetto e ascolta il suo nome'], ['dialoghi', '💬', 'Dialoghi', 'Una scena di lavoro per ambito, a due voci'], ['avanzato', '🎓', 'Livello avanzato', 'Frasi complete, registro, ascolti ed e-mail (B1–B2)']] },
+    { id: 'allenati', ic: '🎯', nome: 'Allenati', pagine: [['esercizi', '✏️', 'Esercizi', 'Scelta multipla, abbinamento, riordina, ascolta e scrivi'], ['giochi', '🎲', 'Giochi alla LIM', 'Memory, indovina la parola, a tempo, ascolta: a squadre'], ['imprevisti', '🎭', 'Imprevisti', 'Storie a scelta: rispondi al cliente nel modo giusto']] },
     { id: 'risorse', ic: '🌐', nome: 'Risorse', pagine: [['risorse', '🌐', 'Risorse', '']] },
-    { id: 'docenti', ic: '👩‍🏫', nome: 'Docenti', pagine: [['crea', '✏️', 'Crea i tuoi esercizi', 'Le frasi della lezione: link e QR per la classe, LIM, carta'], ['verifiche', '📝', 'Verifiche in un clic', 'Verifiche pronte da stampare, in più file'], ['docenti', '👩‍🏫', 'Area docenti', 'Cosa arriverà con l\'accesso dei docenti']] }
+    { id: 'docenti', ic: '👩‍🏫', nome: 'Docenti', pagine: [['crea', '🛠️', 'Crea i tuoi esercizi', 'Le frasi della lezione: link e QR per la classe, LIM, carta'], ['verifiche', '📝', 'Verifiche in un clic', 'Verifiche pronte da stampare, in più file'], ['docenti', '👩‍🏫', 'Area docenti', 'Cosa arriverà con l\'accesso dei docenti']] }
   ];
   function url(p) { return 'lingue/' + (p === 'index' ? '' : p + '.html'); }
 

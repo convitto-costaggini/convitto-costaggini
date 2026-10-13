@@ -1,5 +1,41 @@
 {
   "_come_si_usa": "Ogni voce collega la foto di copertina di una notizia (lo stesso testo scritto in 'URL immagine' nell'Admin) alle foto dello slideshow. La copertina viene aggiunta da sola come prima foto, se non è già nell'elenco. Istruzioni complete in COME-AGGIORNARE-NOTIZIE.txt. Con \"includi_copertina\": false la copertina non viene ripetuta nello slideshow (utile quando è un ritaglio di una delle foto).",
+  "img/notizie/prima-e-dopo-ottobre-2026/01.jpg": {
+    "titolo": "Dal primo giorno al quarto anno: 1B e 4A a confronto",
+    "includi_copertina": false,
+    "foto": [
+      {
+        "src": "img/notizie/prima-e-dopo-ottobre-2026/01.jpg",
+        "mini": "img/notizie/prima-e-dopo-ottobre-2026/01-mini.webp",
+        "alt": "Dittico: a sinistra le mani degli allievi della 1B sul banco accanto ai primi piatti, a destra i bignè craquelin della 4A",
+        "didascalia": "Primo anno e quarto anno, stesso laboratorio. A sinistra le mani della 1B al primo giorno, ancora un po' timide accanto ai primi piatti; a destra i bignè craquelin della 4A. In mezzo, tre anni di pentole."
+      },
+      {
+        "src": "img/notizie/prima-e-dopo-ottobre-2026/02.jpg",
+        "mini": "img/notizie/prima-e-dopo-ottobre-2026/02-mini.webp",
+        "alt": "Dittico: pizzette rosse della 1B a sinistra, sfoglia croccante con uovo, pancetta e provola della 4A a destra",
+        "didascalia": "Tutto comincia da un impasto. La 1B impara la pizza a lavorazione diretta; la 4A quell'impasto lo fa diventare sfoglia croccante con uovo, pancetta e provola filante."
+      },
+      {
+        "src": "img/notizie/prima-e-dopo-ottobre-2026/03.jpg",
+        "mini": "img/notizie/prima-e-dopo-ottobre-2026/03-mini.webp",
+        "alt": "Dittico: spaghetti al pesto con granella di pistacchio della 1B, risotto agli scampi con zucchine e frutti di bosco della 4A",
+        "didascalia": "Il primo piatto. Al primo anno si impara «la sacra arte della bollitura della pasta» con un pesto alla genovese e granella di pistacchio; al quarto il chicco diventa risotto agli scampi con carpaccio, zucchine e un tocco di frutti di bosco."
+      },
+      {
+        "src": "img/notizie/prima-e-dopo-ottobre-2026/04.jpg",
+        "mini": "img/notizie/prima-e-dopo-ottobre-2026/04-mini.webp",
+        "alt": "Dittico: pizzette con fettine di patate della 1B, rollè di faraona in pancetta su purè di patate della 4A",
+        "didascalia": "La stessa patata, due mondi. La 1B la stende a fettine sulla pizza; la 4A la trasforma in un purè cremoso sotto un rollè di faraona avvolto nella pancetta, con erbe aromatiche."
+      },
+      {
+        "src": "img/notizie/prima-e-dopo-ottobre-2026/05.jpg",
+        "mini": "img/notizie/prima-e-dopo-ottobre-2026/05-mini.webp",
+        "alt": "Dittico: crêpe farcita con confettura di frutti di bosco della 1B, fetta di baked cheesecake con frutti di bosco della 4A",
+        "didascalia": "Il dolce si chiude con lo stesso frutto. I frutti di bosco della crêpe con crema diplomatica della 1B ritornano, tre anni dopo, sulla baked cheesecake della 4A."
+      }
+    ]
+  },
   "img/notizie/piatti-ottobre-2026/01.jpg": {
     "titolo": "Piccoli cuochi che crescono, un piatto alla volta",
     "foto": [

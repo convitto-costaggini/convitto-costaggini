@@ -46,15 +46,6 @@
 
   <section class="lg-sez">
     <div class="w">
-      <div class="lg-chips scorre" id="rs-filtro" role="group" aria-label="Filtra per lingua">
-        <button type="button" class="lg-chip" data-f="tutte" aria-pressed="true">Tutte</button>
-        <button type="button" class="lg-chip" data-f="en" aria-pressed="false">Inglese</button>
-        <button type="button" class="lg-chip" data-f="fr" aria-pressed="false">Francese</button>
-        <button type="button" class="lg-chip" data-f="es" aria-pressed="false">Spagnolo</button>
-        <button type="button" class="lg-chip" data-f="de" aria-pressed="false">Tedesco</button>
-        <button type="button" class="lg-chip" data-f="tutti" aria-pressed="false">Strumenti</button>
-      </div>
-
       <div class="rs-blocco" data-r="en">
         <h2 class="lg-h2">🇬🇧 <em>Inglese</em></h2>
         <div class="lg-grid" style="margin-top:.8rem">
@@ -121,12 +112,11 @@
 <script src="nav.min.js"></script>
 <script src="lingue/lingue.js"></script>
 <script>
-document.getElementById('rs-filtro').addEventListener('click', function (e) {
-  var b = e.target.closest('[data-f]'); if (!b) return;
-  this.querySelectorAll('[data-f]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
-  var f = b.dataset.f;
-  document.querySelectorAll('.rs-blocco').forEach(function (s) { s.hidden = !(f === 'tutte' || s.dataset.r === f || s.dataset.r === 'ia');   /* il riquadro sull'IA resta sempre */ });
-});
+/* solo la lingua scelta col pulsante 🌍, più gli strumenti validi per tutte e il riquadro sull'IA */
+(function () {
+  function filtra() { var f = window.LINGUE_SITO.linguaScelta(); document.querySelectorAll('.rs-blocco').forEach(function (s) { s.hidden = !(s.dataset.r === f || s.dataset.r === 'tutti' || s.dataset.r === 'ia'); }); }
+  filtra(); document.addEventListener('lingua', filtra);
+})();
 </script>
 </body>
 </html>

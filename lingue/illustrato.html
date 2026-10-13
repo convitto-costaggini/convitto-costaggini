@@ -39,9 +39,6 @@
   .il-card .tr{font-family:var(--fd);font-size:clamp(1.6rem,6vw,2.2rem);color:var(--bosco);line-height:1.1;margin:0}
   .il-card .pr{font-size:.9rem;color:var(--txt2);font-style:italic}
   .il-card .lg-play{width:48px;height:48px;font-size:1.2rem}
-  .il-altre{display:flex;flex-wrap:wrap;gap:.35rem .9rem;width:100%;border-top:1px dashed var(--av3);padding-top:.55rem;margin-top:.1rem}
-  .il-altre span{font-size:.82rem;color:var(--txt2)}
-  .il-altre b{font:800 .58rem var(--fu);color:var(--oro);margin-right:.3rem}
   .il-suggerimento{text-align:center;color:var(--txt2);font-size:.88rem;padding:1.4rem .5rem}
   .il-gioco{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;background:var(--bosco);color:#fff;border-radius:16px;padding:.9rem 1.1rem}
   .il-gioco .dom{font:800 .62rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro3)}
@@ -129,8 +126,7 @@
   }
   function mostraOggetto(k) {
     var p = IDX[k], t = p[1][lingua], l = L.lingua(lingua);
-    scheda.innerHTML = '<div class="il-card"><p class="it">' + esc(k) + '</p><div style="flex:1;min-width:180px"><p class="tr" lang="' + lingua + '">' + esc(t[0]) + '</p><span class="pr">' + esc(t[1]) + '</span></div>' + L.play(t[0], lingua, 'Ascolta in ' + l.nome.toLowerCase()) +
-      '<div class="il-altre">' + L.LINGUE.filter(function (x) { return x.cod !== lingua; }).map(function (x) { return '<span><b>' + x.cod.toUpperCase() + '</b>' + esc(p[1][x.cod][0]) + '</span>'; }).join('') + '</div></div>';
+    scheda.innerHTML = '<div class="il-card"><p class="it">' + esc(k) + '</p><div style="flex:1;min-width:180px"><p class="tr" lang="' + lingua + '">' + esc(t[0]) + '</p><span class="pr">' + esc(t[1]) + '</span></div>' + L.play(t[0], lingua, 'Ascolta in ' + l.nome.toLowerCase()) + '</div>';
     if (L.parla) L.ascolta(t[0], lingua, { btn: scheda.querySelector('.lg-play') });
   }
   function suggerimento() {

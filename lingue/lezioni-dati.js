@@ -464,10 +464,238 @@ window.LEZIONI = [
     ]
   }
   }
+},
+{
+  id: "reclamo", icona: "🛎️", ambito: "Accoglienza", titolo: "Il reclamo in hotel", sottotitolo: "I tempi del passato e le scuse formali",
+  livello: "B1–B2", classi: "Triennio", durata: "1 ora",
+  descrizione: "Un ospite arrabbiato alla reception: ascoltare, scusarsi, raccontare che cosa è successo, proporre una soluzione e scrivere l'e-mail di scuse.",
+  docente: {
+    obiettivi: [
+      "Gestire un reclamo con il metodo LAST: ascoltare, scusarsi, risolvere, ringraziare.",
+      "Raccontare che cosa è successo (past simple · pretérito indefinido) e che cosa si è appena fatto (present perfect · pretérito perfecto, acabo de).",
+      "Usare formule di scusa formali e proporre soluzioni (Would you like me to… · ¿Quiere que le…?).",
+      "Scrivere una breve e-mail di scuse a un ospite."
+    ],
+    scaletta: [
+      ["10'", "Mini-lezione alla LIM: le schede insieme, la classe risponde alle domande lampo."],
+      ["25'", "Esercizi sul telefono (link o QR qui sotto), da soli o a coppie."],
+      ["15'", "Missione «Il turno di sera»: alla LIM la classe vota ogni risposta; poi role play a coppie, ospite e receptionist, con un reclamo inventato da loro."],
+      ["10'", "Verifica (file A e B) o, come compito, l'e-mail di scuse."]
+    ],
+    spunti: [
+      "Professione: molte catene alberghiere insegnano un metodo per i reclami, per esempio LAST (Listen, Apologise, Solve, Thank). Un reclamo risolto bene crea spesso un cliente più fedele di prima.",
+      "Recensioni online: leggere in classe vere risposte di direttori d'albergo a recensioni negative e riscriverle insieme, nel registro giusto.",
+      "Estero: alla reception di un hotel a Edimburgo o a Siviglia il reclamo è la prova più difficile per uno stagista, e la più formativa.",
+      "Con i docenti di accoglienza turistica: simulazione alla reception del laboratorio, con il registro dei reclami da compilare in lingua."
+    ]
+  },
+  lingue: {
+  /* ───────────────────────── INGLESE ───────────────────────── */
+  en: {
+    schede: [
+      { titolo: "Un ospite arrabbiato", testo: "Alla reception arriva un ospite furioso. Non serve avere ragione: serve **ascoltare**, **scusarsi** e **trovare una soluzione**.",
+        esempi: [["I booked a sea-view room and I've got a room facing the car park!", "Ho prenotato una camera vista mare e mi avete dato una camera sul parcheggio!", ""], ["I'm terribly sorry, sir. Let me see what I can do.", "Mi dispiace moltissimo, signore. Vediamo che cosa posso fare.", "àim tèribli sòri, söör. let mi sìi uòt ài chen du"]],
+        domanda: { testo: "Davanti a un reclamo la prima cosa da fare è…", o: ["ascoltare e scusarsi", "spiegare che non è colpa tua", "chiamare subito il direttore"], spiega: "Prima si ascolta e ci si scusa; le spiegazioni vengono dopo, e brevi." } },
+      { titolo: "Che cosa è successo: il past simple", testo: "Per i fatti conclusi in un momento preciso (**last night**, **this morning**, **when I arrived**) usi il past simple: regolari in **-ed** (booked, waited), irregolari da imparare (got, found, was, had).\nNegativa: **didn't** + verbo.",
+        esempi: [["I booked a double room.", "Ho prenotato una camera doppia.", ""], ["The shower didn't work last night.", "Ieri sera la doccia non funzionava.", "də sciàuer dìdnt uöörk làast nàit"], ["We waited for forty minutes.", "Abbiamo aspettato quaranta minuti.", ""]],
+        domanda: { testo: "«Ieri sera il riscaldamento non funzionava»", o: ["The heating didn't work last night.", "The heating hasn't worked last night.", "The heating didn't worked last night."], spiega: "Last night = past simple; dopo didn't il verbo resta base: didn't work." } },
+      { titolo: "Che cosa ho fatto: il present perfect", testo: "Per un'azione appena fatta, che conta **adesso**, usi **have / has** + participio: I've called, we've changed. Con **just** (appena) e **already** (già).\nAttenzione: con yesterday, last night, two days ago **mai** il present perfect.",
+        esempi: [["I've just called maintenance.", "Ho appena chiamato la manutenzione.", "àiv giàst còold mèintenans"], ["We've already changed your room.", "Le abbiamo già cambiato la camera.", ""], ["Has anyone helped you?", "Qualcuno l'ha già aiutata?", ""]],
+        domanda: { testo: "«Ho appena parlato con il direttore»", o: ["I've just spoken to the manager.", "I've just spoke to the manager.", "I have spoken to the manager last night."], spiega: "Have + participio (spoken); e niente last night con il present perfect." } },
+      { titolo: "Scusarsi da professionista", testo: "Le formule della reception: cortesi, calme, mai sulla difensiva.",
+        esempi: [["I'm terribly sorry.", "Mi dispiace moltissimo.", ""], ["I do apologise for the inconvenience.", "Mi scuso davvero per il disagio.", "ài du apòlogiais for di inconvìinions"], ["I'm afraid there's been a mistake.", "Temo che ci sia stato un errore.", ""], ["I completely understand.", "La capisco perfettamente.", ""], ["Thank you for letting us know.", "Grazie per avercelo segnalato.", ""]],
+        domanda: { testo: "Qual è la scusa più professionale?", o: ["I do apologise for the inconvenience.", "Sorry, it's not my fault.", "Oops, sorry!"], spiega: "Formale e senza cercare colpevoli." } },
+      { titolo: "Proporre una soluzione", testo: "Dopo le scuse, sempre una **proposta concreta**.",
+        esempi: [["Would you like me to change your room?", "Vuole che le cambi la camera?", "uùd iu làik mi tu cèing iòr rùum"], ["Let me upgrade you to a superior room.", "Le assegno una camera superiore.", ""], ["I'll send someone up straight away.", "Mando subito qualcuno in camera.", ""], ["We'd be happy to offer you a free dinner.", "Saremmo lieti di offrirle una cena.", ""], ["I'll make sure it doesn't happen again.", "Mi assicurerò che non succeda più.", ""]],
+        domanda: { testo: "L'aria condizionata è rotta. Che cosa dici?", o: ["I'm so sorry. I'll send a technician straight away, or would you like a different room?", "The technician comes tomorrow.", "All the rooms are the same."], spiega: "Scuse, soluzione subito e un'alternativa." } },
+      { titolo: "Le parole del reclamo", testo: "Tocca 🔊 e ripeti.",
+        esempi: [["complaint", "reclamo", "complèint"], ["booking", "prenotazione", "bùking"], ["refund", "rimborso", "rìifand"], ["discount", "sconto", "dìscaunt"], ["upgrade", "camera superiore", "àpgreid"], ["inconvenience", "disagio", "inconvìinions"], ["noisy", "rumoroso", "nòisi"], ["dirty", "sporco", "döörti"], ["broken", "rotto", "bròukən"], ["maintenance", "manutenzione", "mèintenans"]],
+        domanda: { testo: "«Refund» vuol dire…", o: ["rimborso", "sconto", "reclamo"], spiega: "Refund = rimborso, discount = sconto." } },
+      { titolo: "In tasca: il metodo LAST", testo: "**L**isten · ascolta senza interrompere.\n**A**pologise · *I'm terribly sorry / I do apologise.*\n**S**olve · *Would you like me to…? / I'll send someone…*\n**T**hank · *Thank you for letting us know.*\nChe cosa è successo → **past simple** (didn't work). Che cosa ho appena fatto → **present perfect** (I've just called).",
+        esempi: [], domanda: null }
+    ],
+    esercizi: [
+      { tipo: "abbina", titolo: "Le parole del reclamo", consegna: "Tocca una parola e poi il suo significato.",
+        coppie: [["complaint", "reclamo"], ["refund", "rimborso"], ["upgrade", "camera superiore"], ["noisy", "rumoroso"], ["broken", "rotto"], ["discount", "sconto"]] },
+      { tipo: "scelta", titolo: "Past simple o present perfect?", consegna: "Scegli il tempo giusto.",
+        voci: [
+          { d: "The air conditioning _____ last night. (non funzionava)", o: ["didn't work", "hasn't worked", "doesn't worked"] },
+          { d: "_____ maintenance: they're on their way. (ho appena chiamato)", o: ["I've just called", "I just have called", "I called just"] },
+          { d: "When we _____ , the room wasn't ready. (siamo arrivati)", o: ["arrived", "have arrived", "arrive"] },
+          { d: "We _____ your room. It's ready now. (abbiamo già cambiato)", o: ["have already changed", "already change", "had changing"] },
+          { d: "I _____ a sea-view room two weeks ago. (ho prenotato)", o: ["booked", "have booked", "book"] },
+          { d: "The guest in room 12 _____ about the noise three times today. (si è lamentato)", o: ["has complained", "complain", "is complain"] }
+        ] },
+      { tipo: "completa", titolo: "L'e-mail di scuse", consegna: "Completa l'e-mail della responsabile del ricevimento.",
+        testo: "Dear Mr Wilson, Thank you for [letting] us know about your stay. I am terribly [sorry] that the shower [didn't] work during your first night. Our maintenance team [has] already repaired it, and we would be happy to [offer] you a free dinner in our restaurant. I will personally make [sure] that this does not happen again. Kind regards, Giulia Rossi, Front Office Manager",
+        intrusi: ["apologise", "hasn't"] },
+      { tipo: "ordina", titolo: "Il reclamo, passo per passo", consegna: "Tocca le battute nell'ordine giusto.",
+        passi: [["Excuse me, my room is very noisy. I couldn't sleep last night.", "Scusi, la mia camera è molto rumorosa. Stanotte non ho dormito."], ["I'm terribly sorry to hear that. What exactly happened?", "Mi dispiace moltissimo. Che cosa è successo esattamente?"], ["There was loud music from the bar until two in the morning.", "C'era musica alta dal bar fino alle due di notte."], ["I completely understand. Would you like me to move you to a quieter room?", "La capisco perfettamente. Vuole che la sposti in una camera più tranquilla?"], ["Yes, please. On a higher floor, if possible.", "Sì, grazie. A un piano più alto, se possibile."], ["Of course. I've just found a room on the fifth floor. Thank you for letting us know.", "Certo. Ho appena trovato una camera al quinto piano. Grazie per avercelo segnalato."]] },
+      { tipo: "scelta", titolo: "La risposta giusta", consegna: "L'ospite si lamenta: scegli la risposta più professionale.",
+        voci: [
+          { d: "«The room is dirty!»", o: ["I do apologise. I'll send housekeeping straight away.", "That's impossible, we cleaned it.", "OK, clean it yourself."] },
+          { d: "«There's no hot water!»", o: ["I'm so sorry. I'll call maintenance right now.", "Hot water is extra.", "Wait until tomorrow."] },
+          { d: "«I booked a sea view!»", o: ["I'm afraid there's been a mistake. Let me upgrade you.", "You're wrong, you didn't.", "The sea isn't important."] },
+          { d: "«We waited forty minutes for breakfast!»", o: ["I'm terribly sorry. Breakfast is on us today.", "The kitchen is busy, sorry.", "Next time come earlier."] },
+          { d: "«Can I have a refund?»", o: ["I'll speak to the manager and get back to you within the hour.", "No refunds, ever.", "Ask someone else."] },
+          { d: "«Thank you, you've been very helpful.»", o: ["You're welcome. Thank you for your patience.", "Yes, I know.", "Finally!"] }
+        ] },
+      { tipo: "ascolta", titolo: "Ascolta l'ospite", consegna: "Ascolta il reclamo e scegli che cosa vuol dire.",
+        voci: [
+          { t: "The air conditioning in my room isn't working.", o: ["L'aria condizionata in camera non funziona.", "L'aria condizionata è troppo forte.", "Vorrei l'aria condizionata in camera."] },
+          { t: "I've been waiting for my room for over an hour.", o: ["Aspetto la mia camera da più di un'ora.", "Ho aspettato un'ora per il taxi.", "La mia camera è pronta da un'ora."] },
+          { t: "The people next door were very noisy last night.", o: ["I vicini di camera hanno fatto molto rumore ieri sera.", "Ieri sera i vicini sono partiti.", "Ieri sera il bar era chiuso."] },
+          { t: "I'd like to speak to the manager, please.", o: ["Vorrei parlare con il direttore, per favore.", "Vorrei cambiare camera, per favore.", "Vorrei pagare il conto, per favore."] },
+          { t: "We were charged twice for the minibar.", o: ["Ci avete addebitato due volte il minibar.", "Il minibar era vuoto.", "Abbiamo usato due volte il minibar."] }
+        ] }
+    ],
+    missione: {
+      titolo: "Il turno di sera", chef: "Mrs Taylor", avatar: "👩", domanda: "Che cosa rispondi?",
+      intro: "Sei in stage alla reception di un hotel di Edimburgo. È sera e arriva la signora Taylor, molto arrabbiata. Applica il metodo LAST: ascolta, scusati, risolvi, ringrazia.",
+      passi: [
+        { dice: "Excuse me! I booked a room with a view of the castle, and I've got a room facing the car park!", it: "Scusi! Ho prenotato una camera con vista sul castello e mi avete dato una camera sul parcheggio!",
+          o: [["I'm terribly sorry, madam. Let me check your booking straight away.", 1, "Ti scusi e ti attivi subito."], ["That's not possible. You booked a standard room.", 0, "Anche se fosse vero, prima ci si scusa e si verifica."], ["The car park view is very nice too.", 0, "Suona ironico: l'ospite si sente presa in giro."]] },
+        { dice: "Here's my confirmation email. It clearly says 'castle view'.", it: "Ecco l'e-mail di conferma. C'è scritto chiaramente «vista castello».",
+          o: [["You're absolutely right. I'm afraid there's been a mistake on our side.", 1, "Ammetti l'errore con una formula professionale."], ["The computer made the mistake, not me.", 0, "All'ospite non interessa di chi sia la colpa."], ["Emails are often wrong.", 0, "Metti in dubbio l'ospite: peggio di prima."]] },
+        { dice: "So what are you going to do about it?", it: "Allora, che cosa pensate di fare?",
+          o: [["I've just checked: we have a superior room with a castle view. I'd be happy to upgrade you at no extra cost.", 1, "Present perfect (I've just checked) e una soluzione generosa."], ["Nothing, the hotel is full.", 0, "Mai lasciare l'ospite senza una soluzione."], ["You can change hotel if you want.", 0, "Così perdi la cliente."]] },
+        { dice: "That's better. But I waited twenty minutes at reception!", it: "Così va meglio. Ma ho aspettato venti minuti alla reception!",
+          o: [["I do apologise for the wait. A large group arrived at the same time.", 1, "Scusa e breve spiegazione al past simple (arrived)."], ["Twenty minutes isn't a long time.", 0, "Minimizzare irrita."], ["I have waited too, every day.", 0, "Fuori luogo: stai parlando di te."]] },
+        { dice: "And the Wi-Fi didn't work in the other room.", it: "E nell'altra camera il Wi-Fi non funzionava.",
+          o: [["I'm sorry about that. I'll ask our technician to check it, and here's the password for your new room.", 1, "Scusa, soluzione e un aiuto concreto."], ["The Wi-Fi works, you're doing it wrong.", 0, "Mai dare la colpa all'ospite."], ["Wi-Fi isn't included.", 0, "Falso e scortese."]] },
+        { dice: "Well… thank you. You've been very kind.", it: "Be'… grazie. Molto gentile da parte sua.",
+          o: [["Thank you for your patience, madam. Please enjoy your stay.", 1, "Thank: chiudi ringraziando."], ["Finally you're happy!", 0, "Inopportuno."], ["You're welcome. Next time read your booking more carefully.", 0, "Una frecciata che rovina tutto."]] },
+        { situazione: "Il giorno dopo il direttore ti chiede di scrivere una riga nel registro dei reclami.", domanda: "Che cosa scrivi?",
+          o: [["The guest in room 214 complained about the view. We upgraded her to a superior room.", 1, "Past simple: fatti conclusi, chiari e oggettivi."], ["The guest has complained yesterday and we have upgraded her.", 0, "Con yesterday si usa il past simple: complained, upgraded."], ["Angry woman, problem solved.", 0, "Troppo vago e poco professionale."]] }
+      ],
+      esiti: ["La signora Taylor scrive una recensione: «A fantastic receptionist turned a problem into a great stay!»", "«Thank you, everything is fine now.» Ottimo lavoro.", "«Well, it's OK…» Ripassa le scuse e il present perfect, poi riprova.", "La signora chiede di parlare con il direttore. Rifai la lezione e riprova!"]
+    },
+    verifica: [
+      { tipo: "traduci", titolo: "Scrivi la parola in inglese", punti: 1,
+        voci: [["reclamo", "complaint"], ["prenotazione", "booking"], ["rimborso", "refund"], ["sconto", "discount"], ["disagio", "inconvenience"], ["rumoroso", "noisy"], ["sporco", "dirty"], ["rotto", "broken"], ["manutenzione", "maintenance"], ["camera superiore (passaggio a)", "upgrade"]] },
+      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
+        voci: [
+          { d: "The shower _____ last night. (non funzionava)", o: ["didn't work", "hasn't worked", "doesn't work"] },
+          { d: "_____ the manager: he's coming. (ho appena chiamato)", o: ["I've just called", "I just have called", "I called just"] },
+          { d: "We _____ at the hotel at ten. (siamo arrivati)", o: ["arrived", "have arrived", "arrive"] },
+          { d: "Housekeeping _____ your room. It's ready now. (ha già pulito)", o: ["has already cleaned", "have already clean", "already cleans"] },
+          { d: "I _____ for the inconvenience. (mi scuso, formale)", o: ["do apologise", "am apologise", "apologising"] },
+          { d: "I'm _____ there's been a mistake. (temo che)", o: ["afraid", "scared", "fear"] },
+          { d: "_____ me to change your room? (vuole che…)", o: ["Would you like", "Do you want that", "Would you"] },
+          { d: "I'll make _____ it doesn't happen again.", o: ["sure", "certain of", "safe"] }
+        ] },
+      { tipo: "traduci", titolo: "Traduci in inglese", punti: 2,
+        voci: [["Mi dispiace moltissimo.", "I'm terribly sorry."], ["Ieri sera la doccia non funzionava.", "The shower didn't work last night."], ["Ho appena chiamato la manutenzione.", "I've just called maintenance."], ["Temo che ci sia stato un errore.", "I'm afraid there's been a mistake."], ["Vuole che le cambi la camera?", "Would you like me to change your room?"], ["Grazie per avercelo segnalato.", "Thank you for letting us know."]] },
+      { tipo: "aperta", titolo: "L'e-mail di scuse", punti: 5,
+        testo: "Scrivi in inglese un'e-mail di scuse (80–100 parole) a un ospite che si è lamentato del rumore: racconta che cosa è successo (past simple), che cosa avete già fatto (present perfect) e proponi una soluzione.",
+        facile: "Scrivi in inglese tre frasi a un ospite che si è lamentato: una scusa, che cosa è successo, una soluzione. Puoi usare: I'm terribly sorry · didn't work · I've just…" }
+    ]
+  },
+  /* ───────────────────────── SPAGNOLO ───────────────────────── */
+  es: {
+    schede: [
+      { titolo: "Un ospite arrabbiato", testo: "Alla reception arriva un ospite furioso. Non serve avere ragione: serve **ascoltare**, **scusarsi** e **trovare una soluzione**. Sempre con il **lei** (usted).",
+        esempi: [["¡Reservé una habitación con vistas al mar y me han dado una con vistas al aparcamiento!", "Ho prenotato una camera vista mare e me ne avete data una sul parcheggio!", ""], ["Lo siento muchísimo, señor. Déjeme ver qué puedo hacer.", "Mi dispiace moltissimo, signore. Vediamo che cosa posso fare.", "lo siènto muciìsimo, segnòr. dèheme ver chè puèdo athèr"]],
+        domanda: { testo: "Davanti a un reclamo la prima cosa da fare è…", o: ["ascoltare e scusarsi", "spiegare che non è colpa tua", "chiamare subito il direttore"], spiega: "Prima si ascolta e ci si scusa; le spiegazioni vengono dopo, e brevi." } },
+      { titolo: "Che cosa è successo: l'indefinido", testo: "Per i fatti conclusi in un tempo finito (**ayer**, **anoche**, **la semana pasada**, **cuando llegué**) si usa il pretérito indefinido: reservar → **reservé**, llegar → **llegamos**, funcionar → **funcionó**.\nIrregolari frequenti: estar → **estuvo**, tener → **tuvo**, ser/ir → **fue**, hacer → **hizo**.",
+        esempi: [["Reservé una habitación doble.", "Ho prenotato una camera doppia.", ""], ["Anoche la ducha no funcionó.", "Ieri sera la doccia non ha funzionato.", "anòce la dùcia no funthionò"], ["Esperamos cuarenta minutos.", "Abbiamo aspettato quaranta minuti.", ""]],
+        domanda: { testo: "«Ieri sera il riscaldamento non ha funzionato»", o: ["Anoche la calefacción no funcionó.", "Anoche la calefacción no ha funcionado.", "Anoche la calefacción no funcionaste."], spiega: "Con anoche si usa l'indefinido: no funcionó." } },
+      { titolo: "Che cosa ho fatto: il pretérito perfecto", testo: "Per ciò che è successo **oggi** o si è **appena / già** fatto: **he, ha, hemos** + participio (-ado, -ido): he llamado, hemos cambiado.\nPer «ho appena»: **acabo de** + infinito.",
+        esempi: [["He llamado a mantenimiento.", "Ho chiamato la manutenzione.", ""], ["Ya hemos cambiado su habitación.", "Le abbiamo già cambiato la camera.", ""], ["Acabo de hablar con el director.", "Ho appena parlato con il direttore.", "acàbo de ablàr con el diretòr"]],
+        domanda: { testo: "«Ho appena parlato con il direttore»", o: ["Acabo de hablar con el director.", "Acabo hablar con el director.", "He acabado hablar con el director."], spiega: "Acabo de + infinito: acabo de hablar." } },
+      { titolo: "Scusarsi da professionista", testo: "Le formule della reception: cortesi, calme, mai sulla difensiva.",
+        esempi: [["Lo siento muchísimo.", "Mi dispiace moltissimo.", ""], ["Le pido disculpas por las molestias.", "Le chiedo scusa per il disagio.", "le pìdo discùlpas por las molèstias"], ["Me temo que ha habido un error.", "Temo che ci sia stato un errore.", ""], ["Tiene usted toda la razón.", "Ha perfettamente ragione.", ""], ["Gracias por avisarnos.", "Grazie per avercelo segnalato.", ""]],
+        domanda: { testo: "Qual è la scusa più professionale?", o: ["Le pido disculpas por las molestias.", "Lo siento, no es culpa mía.", "¡Uy, perdón!"], spiega: "Formale e senza cercare colpevoli." } },
+      { titolo: "Proporre una soluzione", testo: "Dopo le scuse, sempre una **proposta concreta**. «¿Quiere que le…?» è una formula fissa, da imparare così.",
+        esempi: [["¿Quiere que le cambie de habitación?", "Vuole che le cambi la camera?", "chière che le càmbie de abitathiòn"], ["Le ofrecemos una habitación superior sin coste adicional.", "Le offriamo una camera superiore senza costi aggiuntivi.", ""], ["Ahora mismo le envío a un técnico.", "Le mando subito un tecnico.", ""], ["La cena de esta noche corre de nuestra cuenta.", "La cena di stasera la offriamo noi.", ""], ["Me aseguraré de que no vuelva a pasar.", "Mi assicurerò che non succeda più.", ""]],
+        domanda: { testo: "L'aria condizionata è rotta. Che cosa dici?", o: ["Lo siento mucho. Ahora mismo le envío a un técnico o, si prefiere, le cambio de habitación.", "El técnico viene mañana.", "Todas las habitaciones son iguales."], spiega: "Scuse, soluzione subito e un'alternativa." } },
+      { titolo: "Le parole del reclamo", testo: "Tocca 🔊 e ripeti.",
+        esempi: [["la queja", "il reclamo", "la chèha"], ["la reserva", "la prenotazione", "la rresèrva"], ["el reembolso", "il rimborso", "el rreembòlso"], ["el descuento", "lo sconto", "el descuènto"], ["la molestia", "il disagio", "la molèstia"], ["ruidoso", "rumoroso", "rruidòso"], ["sucio", "sporco", "sùthio"], ["roto", "rotto", "rròto"], ["el mantenimiento", "la manutenzione", "el mantenimiènto"], ["la habitación superior", "la camera superiore", "la abitathiòn superiòr"]],
+        domanda: { testo: "«El reembolso» è…", o: ["il rimborso", "lo sconto", "il reclamo"], spiega: "Reembolso = rimborso, descuento = sconto." } },
+      { titolo: "In tasca: il metodo in quattro passi", testo: "**Ascolta** senza interrompere.\n**Scusati**: *Lo siento muchísimo · Le pido disculpas.*\n**Risolvi**: *¿Quiere que le cambie…? · Ahora mismo le envío…*\n**Ringrazia**: *Gracias por avisarnos.*\nChe cosa è successo (anoche, ayer) → **indefinido**: no funcionó. Che cosa ho appena fatto → **perfecto** o **acabo de**: he llamado, acabo de llamar.",
+        esempi: [], domanda: null }
+    ],
+    esercizi: [
+      { tipo: "abbina", titolo: "Le parole del reclamo", consegna: "Tocca una parola e poi il suo significato.",
+        coppie: [["la queja", "reclamo"], ["el reembolso", "rimborso"], ["el descuento", "sconto"], ["ruidoso", "rumoroso"], ["roto", "rotto"], ["sucio", "sporco"]] },
+      { tipo: "scelta", titolo: "Indefinido o perfecto?", consegna: "Scegli il tempo giusto.",
+        voci: [
+          { d: "Anoche el aire acondicionado no _____ . (ha funzionato)", o: ["funcionó", "ha funcionado", "funciona"] },
+          { d: "_____ llamar al técnico: ya viene. (ho appena)", o: ["Acabo de", "Acabo", "He acabado"] },
+          { d: "Cuando _____ , la habitación no estaba lista. (siamo arrivati)", o: ["llegamos", "hemos llegado", "llegáis"] },
+          { d: "Ya _____ su habitación. Está lista. (abbiamo cambiato)", o: ["hemos cambiado", "cambiaremos", "cambiábamos"] },
+          { d: "_____ una habitación con vistas al mar hace dos semanas. (ho prenotato)", o: ["Reservé", "He reservado", "Reservo"] },
+          { d: "Hoy el cliente de la 12 _____ tres veces por el ruido. (si è lamentato)", o: ["se ha quejado", "se queja ayer", "se quejará ayer"] }
+        ] },
+      { tipo: "completa", titolo: "El correo de disculpa", consegna: "Completa l'e-mail della responsabile del ricevimento.",
+        testo: "Estimado señor Martín: Gracias por [avisarnos] de lo ocurrido durante su estancia. Le pido [disculpas] porque la ducha no [funcionó] la primera noche. Nuestro equipo de mantenimiento ya la [ha] reparado y nos gustaría [ofrecerle] una cena gratuita en nuestro restaurante. Me [aseguraré] personalmente de que no vuelva a pasar. Un cordial saludo, Giulia Rossi, Jefa de Recepción",
+        intrusi: ["funcionado", "perdón"] },
+      { tipo: "ordina", titolo: "El reclamo, paso a paso", consegna: "Tocca le battute nell'ordine giusto.",
+        passi: [["Perdone, mi habitación es muy ruidosa. Anoche no pude dormir.", "Scusi, la mia camera è molto rumorosa. Stanotte non ho dormito."], ["Lo siento muchísimo. ¿Qué pasó exactamente?", "Mi dispiace moltissimo. Che cosa è successo esattamente?"], ["Hubo música muy alta en el bar hasta las dos de la mañana.", "C'era musica altissima al bar fino alle due di notte."], ["Le entiendo perfectamente. ¿Quiere que le pase a una habitación más tranquila?", "La capisco perfettamente. Vuole che la sposti in una camera più tranquilla?"], ["Sí, por favor. En un piso más alto, si es posible.", "Sì, grazie. A un piano più alto, se possibile."], ["Por supuesto. Acabo de encontrar una en el quinto piso. Gracias por avisarnos.", "Certo. Ne ho appena trovata una al quinto piano. Grazie per avercelo segnalato."]] },
+      { tipo: "scelta", titolo: "La risposta giusta", consegna: "L'ospite si lamenta: scegli la risposta più professionale.",
+        voci: [
+          { d: "«¡La habitación está sucia!»", o: ["Le pido disculpas. Ahora mismo envío al servicio de limpieza.", "Imposible, la limpiamos esta mañana.", "Pues límpiela usted."] },
+          { d: "«¡No hay agua caliente!»", o: ["Lo siento mucho. Llamo ahora mismo a mantenimiento.", "El agua caliente se paga aparte.", "Espere hasta mañana."] },
+          { d: "«¡Reservé con vistas al mar!»", o: ["Me temo que ha habido un error. Permítame pasarle a una habitación superior.", "Se equivoca, no es verdad.", "El mar no es importante."] },
+          { d: "«¡Esperamos cuarenta minutos el desayuno!»", o: ["Lo siento muchísimo. Hoy el desayuno corre de nuestra cuenta.", "La cocina está llena, lo siento.", "La próxima vez vengan antes."] },
+          { d: "«¿Me pueden devolver el dinero?»", o: ["Hablo con el director y le respondo en menos de una hora.", "Nunca devolvemos el dinero.", "Pregunte a otra persona."] },
+          { d: "«Gracias, ha sido usted muy amable.»", o: ["A usted, gracias por su paciencia.", "Sí, ya lo sé.", "¡Por fin!"] }
+        ] },
+      { tipo: "ascolta", titolo: "Ascolta l'ospite", consegna: "Ascolta il reclamo e scegli che cosa vuol dire.",
+        voci: [
+          { t: "El aire acondicionado de mi habitación no funciona.", o: ["L'aria condizionata in camera non funziona.", "L'aria condizionata è troppo forte.", "Vorrei l'aria condizionata in camera."] },
+          { t: "Llevo más de una hora esperando mi habitación.", o: ["Aspetto la mia camera da più di un'ora.", "Ho aspettato un'ora per il taxi.", "La mia camera è pronta da un'ora."] },
+          { t: "Los vecinos de la habitación de al lado hicieron mucho ruido anoche.", o: ["I vicini di camera hanno fatto molto rumore ieri sera.", "Ieri sera i vicini sono partiti.", "Ieri sera il bar era chiuso."] },
+          { t: "Quisiera hablar con el director, por favor.", o: ["Vorrei parlare con il direttore, per favore.", "Vorrei cambiare camera, per favore.", "Vorrei pagare il conto, per favore."] },
+          { t: "Nos han cobrado dos veces el minibar.", o: ["Ci avete addebitato due volte il minibar.", "Il minibar era vuoto.", "Abbiamo usato due volte il minibar."] }
+        ] }
+    ],
+    missione: {
+      titolo: "Il turno di sera", chef: "Señora Ortega", avatar: "👩", domanda: "Che cosa rispondi?",
+      intro: "Sei in stage alla reception di un hotel di Siviglia. È sera e arriva la signora Ortega, molto arrabbiata. Ascolta, scusati, risolvi, ringrazia: sempre con il lei.",
+      passi: [
+        { dice: "¡Perdone! Reservé una habitación con vistas a la catedral y me han dado una con vistas al aparcamiento.", it: "Scusi! Ho prenotato una camera con vista sulla cattedrale e me ne avete data una sul parcheggio.",
+          o: [["Lo siento muchísimo, señora. Ahora mismo compruebo su reserva.", 1, "Ti scusi e ti attivi subito."], ["No es posible. Usted reservó una habitación estándar.", 0, "Anche se fosse vero, prima ci si scusa e si verifica."], ["Las vistas al aparcamiento también son bonitas.", 0, "Suona ironico: l'ospite si sente presa in giro."]] },
+        { dice: "Aquí tiene el correo de confirmación. Dice claramente «vistas a la catedral».", it: "Ecco l'e-mail di conferma. C'è scritto chiaramente «vista sulla cattedrale».",
+          o: [["Tiene usted toda la razón. Me temo que ha habido un error por nuestra parte.", 1, "Ammetti l'errore con una formula professionale."], ["El ordenador se equivocó, no yo.", 0, "All'ospite non interessa di chi sia la colpa."], ["Los correos se equivocan a menudo.", 0, "Metti in dubbio l'ospite: peggio di prima."]] },
+        { dice: "¿Y qué van a hacer?", it: "E che cosa pensate di fare?",
+          o: [["Acabo de comprobarlo: tenemos una habitación superior con vistas a la catedral. Puedo pasarla a esa habitación sin coste adicional.", 1, "Acabo de + una soluzione generosa."], ["Nada, el hotel está lleno.", 0, "Mai lasciare l'ospite senza una soluzione."], ["Si quiere, puede cambiar de hotel.", 0, "Così perdi la cliente."]] },
+        { dice: "Mejor así. ¡Pero esperé veinte minutos en recepción!", it: "Così va meglio. Ma ho aspettato venti minuti alla reception!",
+          o: [["Le pido disculpas por la espera. Llegó un grupo grande al mismo tiempo.", 1, "Scusa e breve spiegazione all'indefinido (llegó)."], ["Veinte minutos no es mucho.", 0, "Minimizzare irrita."], ["Yo también espero todos los días.", 0, "Fuori luogo: stai parlando di te."]] },
+        { dice: "Y en la otra habitación el wifi no funcionó.", it: "E nell'altra camera il wifi non ha funzionato.",
+          o: [["Lo siento. Le pido al técnico que lo revise, y aquí tiene la contraseña de su nueva habitación.", 1, "Scusa, soluzione e un aiuto concreto."], ["El wifi funciona, lo usa usted mal.", 0, "Mai dare la colpa all'ospite."], ["El wifi no está incluido.", 0, "Falso e scortese."]] },
+        { dice: "Bueno… gracias. Ha sido usted muy amable.", it: "Be'… grazie. Molto gentile da parte sua.",
+          o: [["Gracias a usted por su paciencia, señora. Que disfrute de su estancia.", 1, "Chiudi ringraziando."], ["¡Por fin está contenta!", 0, "Inopportuno."], ["De nada. La próxima vez lea mejor su reserva.", 0, "Una frecciata che rovina tutto."]] },
+        { situazione: "Il giorno dopo il direttore ti chiede di scrivere una riga nel registro dei reclami.", domanda: "Che cosa scrivi?",
+          o: [["La clienta de la 214 se quejó de las vistas. La pasamos a una habitación superior.", 1, "Indefinido: fatti conclusi, chiari e oggettivi."], ["La clienta se ha quejado ayer y la hemos pasado a otra habitación.", 0, "Con ayer si usa l'indefinido: se quejó, la pasamos."], ["Señora enfadada, problema resuelto.", 0, "Troppo vago e poco professionale."]] }
+      ],
+      esiti: ["La signora Ortega scrive una recensione: «¡Una recepcionista fantástica convirtió un problema en una estancia estupenda!»", "«Gracias, ahora todo está bien.» Ottimo lavoro.", "«Bueno, está bien…» Ripassa le scuse e i tempi del passato, poi riprova.", "La signora chiede di parlare con il direttore. Rifai la lezione e riprova!"]
+    },
+    verifica: [
+      { tipo: "traduci", titolo: "Scrivi la parola in spagnolo", punti: 1,
+        voci: [["il reclamo", "la queja"], ["la prenotazione", "la reserva"], ["il rimborso", "el reembolso"], ["lo sconto", "el descuento"], ["il disagio", "la molestia"], ["rumoroso", "ruidoso"], ["sporco", "sucio"], ["rotto", "roto"], ["la manutenzione", "el mantenimiento"], ["la camera superiore", "la habitación superior"]] },
+      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
+        voci: [
+          { d: "Anoche la ducha no _____ . (ha funzionato)", o: ["funcionó", "ha funcionado", "funciona"] },
+          { d: "_____ llamar al director: ya viene. (ho appena)", o: ["Acabo de", "Acabo", "He acabado"] },
+          { d: "Ayer _____ al hotel a las diez. (siamo arrivati)", o: ["llegamos", "hemos llegado", "llegaremos"] },
+          { d: "El servicio de limpieza ya _____ su habitación. (ha pulito)", o: ["ha limpiado", "limpiará", "limpiaba"] },
+          { d: "Le pido _____ por las molestias.", o: ["disculpas", "perdón de", "lo siento"] },
+          { d: "Me _____ que ha habido un error. (temo)", o: ["temo", "miedo", "asusto"] },
+          { d: "¿Quiere que le _____ de habitación? (che io cambi)", o: ["cambie", "cambio", "cambiar"] },
+          { d: "Me aseguraré de que no _____ a pasar.", o: ["vuelva", "vuelve", "volver"] }
+        ] },
+      { tipo: "traduci", titolo: "Traduci in spagnolo", punti: 2,
+        voci: [["Mi dispiace moltissimo.", "Lo siento muchísimo."], ["Ieri sera la doccia non ha funzionato.", "Anoche la ducha no funcionó."], ["Ho appena chiamato la manutenzione.", "Acabo de llamar a mantenimiento."], ["Temo che ci sia stato un errore.", "Me temo que ha habido un error."], ["Vuole che le cambi la camera?", "¿Quiere que le cambie de habitación?"], ["Grazie per avercelo segnalato.", "Gracias por avisarnos."]] },
+      { tipo: "aperta", titolo: "El correo de disculpa", punti: 5,
+        testo: "Scrivi in spagnolo un'e-mail di scuse (80–100 parole, con il lei) a un ospite che si è lamentato del rumore: racconta che cosa è successo (indefinido), che cosa avete già fatto (perfecto) e proponi una soluzione.",
+        facile: "Scrivi in spagnolo tre frasi a un ospite che si è lamentato: una scusa, che cosa è successo, una soluzione. Puoi usare: Lo siento muchísimo · no funcionó · acabo de…" }
+    ]
+  }
+  }
 }
 ];
 
 /* le prossime lezioni, già annunciate nel catalogo */
 window.LEZIONI_IN_ARRIVO = [
-  { icona: "🛎️", ambito: "Accoglienza", titolo: "Il reclamo in hotel", sottotitolo: "I tempi del passato e le scuse formali", livello: "B1–B2", classi: "Triennio" }
 ];

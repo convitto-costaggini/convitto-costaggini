@@ -93,13 +93,17 @@ window.LINGUE_SITO = (function () {
       if (occupato && !opz.coda) setTimeout(di, 80); else di();
     });
   }
-  /* pulsanti 🔊 dichiarativi: <button class="lg-play" data-t="..." data-c="en"> */
+  /* pulsanti 🔊 dichiarativi: <button class="lg-play" data-t="..." data-c="en">; con data-lento la voce va più piano */
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('.lg-play[data-t]');
-    if (b) { e.stopPropagation(); ascolta(b.dataset.t, b.dataset.c, { btn: b }); }
+    if (b) { e.stopPropagation(); ascolta(b.dataset.t, b.dataset.c, { btn: b, rate: b.dataset.lento ? .6 : 0 }); }
   });
-  function play(testo, cod, etichetta) {
-    return parla ? '<button type="button" class="lg-play" data-t="' + esc(testo) + '" data-c="' + cod + '" aria-label="' + esc(etichetta || 'Ascolta') + '">🔊</button>' : '';
+  /* per le frasi da quattro parole in su, accanto al 🔊 c'è anche 🐢 (più lento); lento === false lo toglie */
+  function play(testo, cod, etichetta, lento) {
+    if (!parla) return '';
+    var t = esc(testo), b = '<button type="button" class="lg-play" data-t="' + t + '" data-c="' + cod + '" aria-label="' + esc(etichetta || 'Ascolta') + '">🔊</button>';
+    if (lento === false || String(testo).trim().split(/\s+/).length < 4) return b;
+    return '<span class="lg-voci">' + b + '<button type="button" class="lg-play lento" data-t="' + t + '" data-c="' + cod + '" data-lento="1" aria-label="Ascolta più lentamente" title="Più lento">🐢</button></span>';
   }
 
   /* barra del minisito: cinque voci, tre con menu a tendina, più la lingua */

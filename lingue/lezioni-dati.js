@@ -236,11 +236,238 @@ window.LEZIONI = [
     ]
   }
   }
+},
+{
+  id: "consigliare", icona: "🍷", ambito: "Sala", titolo: "Consigliare", sottotitolo: "Comparativi e superlativi",
+  livello: "A2–B1", classi: "Biennio e triennio", durata: "1 ora",
+  descrizione: "«Che cosa mi consiglia?»: confrontare piatti e vini, presentare il migliore della carta e convincere il cliente con garbo.",
+  docente: {
+    obiettivi: [
+      "Confrontare piatti e vini: comparativi di maggioranza, minoranza e uguaglianza.",
+      "Usare i superlativi e le forme irregolari (better / the best · mejor / el mejor).",
+      "Descrivere sapori e consistenze con dieci aggettivi della sala.",
+      "Consigliare in modo cortese (I recommend… / Le recomiendo…) e rispondere alle domande del cliente."
+    ],
+    scaletta: [
+      ["10'", "Mini-lezione alla LIM: le schede insieme, la classe risponde alle domande lampo."],
+      ["25'", "Esercizi sul telefono (link o QR qui sotto), da soli o a coppie."],
+      ["15'", "Missione «Il tavolo 7»: alla LIM la classe vota ogni risposta; poi, a coppie, role play cliente-cameriere con il menu vero del laboratorio di sala."],
+      ["10'", "Verifica breve (file A e B) o un dialogo scritto come compito."]
+    ],
+    spunti: [
+      "Cultura: nel Regno Unito e in Irlanda la mancia si aggira sul 10–12,5% (spesso è già in conto come «service charge»), negli Stati Uniti sul 15–20%; in Spagna è facoltativa e piccola. Consigliare bene fa la differenza.",
+      "Estero: in un ristorante italiano all'estero il cliente si aspetta che sia proprio il cameriere italiano a spiegargli la differenza tra due piatti o due vini.",
+      "Con i docenti di sala ed enogastronomia: presentare in lingua i vini e l'olio del territorio (Sabina DOP) e confrontarli."
+    ]
+  },
+  lingue: {
+  /* ───────────────────────── INGLESE ───────────────────────── */
+  en: {
+    schede: [
+      { titolo: "«What do you recommend?»", testo: "È la domanda che ogni cameriere sente ogni sera. Rispondere «è tutto buono» non basta: chi consiglia bene **confronta** e **spiega**.",
+        esempi: [["What do you recommend?", "Che cosa mi consiglia?", "uòt du iu recomènd"], ["The sea bass is lighter than the steak, and our tiramisù is the best in town.", "Il branzino è più leggero della bistecca, e il nostro tiramisù è il migliore della città.", ""]],
+        domanda: { testo: "Consigliare bene vuol dire…", o: ["confrontare e spiegare", "dire «è tutto buono»", "indicare il piatto più caro"], spiega: "Il cliente si fida di chi gli spiega le differenze." } },
+      { titolo: "Più… di: gli aggettivi corti", testo: "Con gli aggettivi corti aggiungi **-er** e poi **than**: light → **lighter than**, fresh → **fresher than**, cheap → **cheaper than**.\nSe finisce in -y diventa **-ier**: spicy → **spicier**. Alcuni raddoppiano: hot → **hotter**.",
+        esempi: [["The fish is lighter than the meat.", "Il pesce è più leggero della carne.", "də fìsc is làiter dhen də mìit"], ["This wine is cheaper than that one.", "Questo vino costa meno di quello.", ""], ["The arrabbiata is spicier than the amatriciana.", "L'arrabbiata è più piccante dell'amatriciana.", ""]],
+        domanda: { testo: "«Il pesce è più fresco della carne»", o: ["The fish is fresher than the meat.", "The fish is more fresh than the meat.", "The fish is fresher of the meat."], spiega: "Fresh è corto: fresher, e il paragone si fa con than." } },
+      { titolo: "Più… di: gli aggettivi lunghi", testo: "Con gli aggettivi lunghi usi **more … than**: more delicate, more expensive. Per «meno» usi **less**: less spicy. Per «tanto quanto» usi **as … as**: as good as.",
+        esempi: [["The risotto is more delicate than the pasta.", "Il risotto è più delicato della pasta.", ""], ["This red is less expensive than the champagne.", "Questo rosso è meno costoso dello champagne.", ""], ["Our pizza is as good as in Naples!", "La nostra pizza è buona come a Napoli!", ""]],
+        domanda: { testo: "«Più costoso»", o: ["more expensive", "expensiver", "most expensive"], spiega: "Expensive è lungo: more expensive (than)." } },
+      { titolo: "Il migliore: i superlativi", testo: "Per dire «il più…»: **the -est** con gli aggettivi corti (the freshest), **the most** con quelli lunghi (the most popular).\nAttenzione agli irregolari: good → **better** → **the best**; bad → **worse** → **the worst**.",
+        esempi: [["The tiramisù is our most popular dessert.", "Il tiramisù è il nostro dolce più richiesto.", ""], ["This is the best wine on the list.", "Questo è il vino migliore della carta.", "dhis is də bèst uàin on də list"], ["The sea bass is the freshest fish today.", "Il branzino è il pesce più fresco di oggi.", ""]],
+        domanda: { testo: "«Il migliore»", o: ["the best", "the goodest", "the most good"], spiega: "Good è irregolare: better, the best." } },
+      { titolo: "Le parole del gusto", testo: "Tocca 🔊 e ripeti: servono per descrivere un piatto o un vino.",
+        esempi: [["light", "leggero", "làit"], ["rich", "sostanzioso, ricco", "rìc"], ["spicy", "piccante", "spàisi"], ["sweet", "dolce", "suìit"], ["dry", "secco (vino)", "dràai"], ["full-bodied", "corposo", "fùl bòdid"], ["delicate", "delicato", "dèlicat"], ["crispy", "croccante", "crìspi"], ["tender", "tenero", "tènder"], ["homemade", "fatto in casa", "hòum mèid"]],
+        domanda: { testo: "Un vino «full-bodied» è…", o: ["corposo", "dolce", "frizzante"], spiega: "Full-bodied = corposo, di struttura." } },
+      { titolo: "Le frasi per consigliare", testo: "Formule cortesi, pronte da usare al tavolo.",
+        esempi: [["I recommend the sea bass.", "Le consiglio il branzino.", "ài recomènd də sìi bès"], ["If you like fish, try the risotto with prawns.", "Se le piace il pesce, provi il risotto ai gamberi.", ""], ["It goes very well with a dry white wine.", "Si abbina molto bene a un bianco secco.", ""], ["It's our chef's speciality.", "È la specialità del nostro chef.", ""], ["Would you like to taste the wine first?", "Desidera assaggiare prima il vino?", ""]],
+        domanda: { testo: "Il cliente vuole qualcosa di leggero. Che cosa dici?", o: ["I recommend the grilled sea bass: it's lighter than the lasagne.", "Take the lasagne, it's the heaviest dish.", "I don't know."], spiega: "Consigli, confronti e spieghi il perché." } },
+      { titolo: "In tasca", testo: "**Corti**: -er than · the -est (lighter than, the freshest).\n**Lunghi**: more … than · the most (more delicate, the most popular).\n**Meno**: less … than · **Uguale**: as … as.\n**Irregolari**: good → better → the best · bad → worse → the worst.\nPer consigliare: **I recommend…** · **It goes well with…**",
+        esempi: [], domanda: null }
+    ],
+    esercizi: [
+      { tipo: "abbina", titolo: "Le parole del gusto", consegna: "Tocca un aggettivo e poi il suo significato.",
+        coppie: [["light", "leggero"], ["spicy", "piccante"], ["dry", "secco"], ["full-bodied", "corposo"], ["crispy", "croccante"], ["homemade", "fatto in casa"]] },
+      { tipo: "scelta", titolo: "Più o meno?", consegna: "Scegli il comparativo giusto.",
+        voci: [
+          { d: "The fish is _____ than the meat. (leggero)", o: ["lighter", "more light", "lightest"] },
+          { d: "This wine is _____ than the house wine. (costoso)", o: ["more expensive", "expensiver", "most expensive"] },
+          { d: "The arrabbiata is _____ than the carbonara. (piccante)", o: ["spicier", "spicyer", "more spicier"] },
+          { d: "Our tiramisù is _____ than the panna cotta. (buono)", o: ["better", "gooder", "more good"] },
+          { d: "The soup is _____ than the salad. (caldo)", o: ["hotter", "hoter", "more hot"] },
+          { d: "The risotto is _____ than the pizza. (delicato)", o: ["more delicate", "delicater", "most delicate"] }
+        ] },
+      { tipo: "completa", titolo: "I piatti del giorno", consegna: "Il cameriere presenta i piatti del giorno: completa con la parola giusta.",
+        testo: "Today we have two specials. The sea bass is [lighter] than the steak and it's very fresh: it arrived this morning! The steak is [more] tender than last week's. For dessert, the tiramisù is the [most] popular, but in my opinion the panna cotta is the [best]. Both go very well [with] a glass of sweet wine.",
+        intrusi: ["gooder", "than"] },
+      { tipo: "ordina", titolo: "Il dialogo al tavolo", consegna: "Tocca le battute nell'ordine giusto.",
+        passi: [["Good evening. Are you ready to order?", "Buonasera. Siete pronti per ordinare?"], ["Not yet. What do you recommend?", "Non ancora. Che cosa ci consiglia?"], ["If you like fish, the sea bass is the freshest dish today.", "Se vi piace il pesce, il branzino è il piatto più fresco di oggi."], ["Is it lighter than the lasagne?", "È più leggero delle lasagne?"], ["Yes, much lighter. It goes well with a dry white wine.", "Sì, molto più leggero. Si abbina bene a un bianco secco."], ["Perfect, I'll have the sea bass, then.", "Perfetto, allora prendo il branzino."]] },
+      { tipo: "scelta", titolo: "Il migliore della carta", consegna: "Scegli il superlativo giusto.",
+        voci: [
+          { d: "This is _____ wine on our list. (il migliore)", o: ["the best", "the better", "the goodest"] },
+          { d: "The tiramisù is our _____ dessert. (più richiesto)", o: ["most popular", "popularest", "more popular"] },
+          { d: "The sea bass is _____ fish today. (il più fresco)", o: ["the freshest", "the most fresh", "the fresher"] },
+          { d: "That was _____ pizza of my life! (la peggiore)", o: ["the worst", "the baddest", "the worse"] },
+          { d: "The truffle pasta is _____ dish on the menu. (il più caro)", o: ["the most expensive", "the expensivest", "the more expensive"] },
+          { d: "Our lemon sorbet is _____ dessert. (il più leggero)", o: ["the lightest", "the most light", "the lighter"] }
+        ] },
+      { tipo: "ascolta", titolo: "Ascolta il cliente", consegna: "Ascolta la domanda del cliente e scegli che cosa vuol dire.",
+        voci: [
+          { t: "Which is lighter, the fish or the meat?", o: ["Che cosa è più leggero, il pesce o la carne?", "Il pesce è più caro della carne?", "Preferisco la carne al pesce."] },
+          { t: "I'd like something less spicy.", o: ["Vorrei qualcosa di meno piccante.", "Vorrei qualcosa di più piccante.", "Vorrei qualcosa di più dolce."] },
+          { t: "Is this wine drier than the other one?", o: ["Questo vino è più secco dell'altro?", "Questo vino è più dolce dell'altro?", "Questo vino costa più dell'altro?"] },
+          { t: "What's your most popular dish?", o: ["Qual è il vostro piatto più richiesto?", "Qual è il vostro piatto più caro?", "Qual è il piatto del giorno?"] },
+          { t: "This is the best tiramisù I've ever had!", o: ["È il tiramisù più buono che abbia mai mangiato!", "Il tiramisù è troppo dolce!", "Vorrei un altro tiramisù."] }
+        ] }
+    ],
+    missione: {
+      titolo: "Il tavolo 7", chef: "Tavolo 7", avatar: "🧑‍🤝‍🧑", domanda: "Che cosa rispondi?",
+      intro: "Sei in stage in un ristorante italiano di Dublino. Al tavolo 7 una coppia irlandese non sa che cosa scegliere e chiede consiglio a te. Rispondi nel modo più professionale.",
+      passi: [
+        { dice: "Good evening! We'd like something light. What do you recommend?", it: "Buonasera! Vorremmo qualcosa di leggero. Che cosa ci consiglia?",
+          o: [["I recommend the grilled sea bass: it's lighter than the lasagne.", 1, "Consigli, confronti e spieghi: perfetto."], ["The lasagne: it's the heaviest dish.", 0, "Hanno chiesto qualcosa di leggero!"], ["Everything is good.", 0, "Non è un consiglio: confronta due piatti."]] },
+        { dice: "Is the sea bass fresh?", it: "Il branzino è fresco?",
+          o: [["Yes, it's the freshest fish today: it arrived this morning.", 1, "Superlativo giusto e una prova concreta."], ["Yes, it's fresher fish.", 0, "Più fresco di che cosa? Qui serve il superlativo: the freshest."], ["Yes, it's more fresh.", 0, "Fresh è corto: fresher, the freshest."]] },
+        { dice: "My wife doesn't eat fish. Any suggestions?", it: "Mia moglie non mangia pesce. Qualche suggerimento?",
+          o: [["Try the lemon chicken: it's as light as the sea bass.", 1, "as … as = leggero quanto il branzino."], ["She can eat the fish anyway.", 0, "Scortese: il cliente ha sempre l'ultima parola."], ["The steak: it's lighter than the fish.", 0, "Una bistecca più leggera del pesce? Consiglio poco credibile."]] },
+        { dice: "Which wine goes with the sea bass?", it: "Quale vino si abbina al branzino?",
+          o: [["A dry white: our Vermentino is fresher than the Chardonnay.", 1, "Abbinamento classico e confronto chiaro."], ["A full-bodied red: it's the strongest.", 0, "Con un pesce delicato si consiglia di solito un bianco secco."], ["Water is better than wine.", 0, "Non tocca a te decidere per il cliente!"]] },
+        { dice: "Is the Vermentino expensive?", it: "Il Vermentino è caro?",
+          o: [["No, it's less expensive than the Chardonnay.", 1, "Less … than: meno costoso."], ["No, it's cheapest.", 0, "Serve the (the cheapest) oppure il confronto (cheaper than…)."], ["Yes, but it's the better.", 0, "Si dice the best, non the better."]] },
+        { dice: "We'd love a dessert. What's your best one?", it: "Ci piacerebbe un dolce. Qual è il vostro migliore?",
+          o: [["Our tiramisù: it's the most popular dessert, and it's homemade.", 1, "Superlativo e un buon motivo in più: homemade."], ["The tiramisù is more popular dessert.", 0, "Superlativo: the most popular."], ["All the desserts are the same.", 0, "Il cliente vuole sentirsi consigliato."]] },
+        { dice: "That was the best dinner of our holiday!", it: "È stata la cena migliore della nostra vacanza!",
+          o: [["Thank you very much! I'm so glad you enjoyed it.", 1, "Ringrazi con calore: il cliente tornerà."], ["Yes, I know.", 0, "Suona presuntuoso: ringrazia."], ["It was better than you think.", 0, "Non serve: ringrazia e basta."]] }
+      ],
+      esiti: ["La coppia lascia una recensione a cinque stelle: «The best waiter in Dublin!»", "«Thank you, a lovely evening.» Ottimo lavoro.", "«It was OK.» Ripassa comparativi e superlativi e riprova.", "La coppia esce poco convinta. Rifai la lezione e riprova!"]
+    },
+    verifica: [
+      { tipo: "traduci", titolo: "Scrivi l'aggettivo in inglese", punti: 1,
+        voci: [["leggero", "light"], ["piccante", "spicy"], ["secco (vino)", "dry"], ["corposo", "full-bodied"], ["croccante", "crispy"], ["fatto in casa", "homemade"], ["dolce", "sweet"], ["tenero", "tender"], ["delicato", "delicate"], ["sostanzioso", "rich"]] },
+      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
+        voci: [
+          { d: "The fish is _____ than the meat. (leggero)", o: ["lighter", "more light", "lightest"] },
+          { d: "This is _____ wine on the list. (il migliore)", o: ["the best", "the better", "the most good"] },
+          { d: "The red wine is _____ than the white. (costoso)", o: ["more expensive", "expensiver", "most expensive"] },
+          { d: "The tiramisù is our _____ dessert. (più richiesto)", o: ["most popular", "more popular", "popularest"] },
+          { d: "The chilli pasta is _____ than the carbonara. (piccante)", o: ["spicier", "spicyer", "spiciest"] },
+          { d: "This bread is _____ than yesterday's. (fresco)", o: ["fresher", "more fresher", "freshest"] },
+          { d: "That was _____ steak of my life! (la peggiore)", o: ["the worst", "the worse", "the baddest"] },
+          { d: "The chicken is as light _____ the fish.", o: ["as", "than", "of"] }
+        ] },
+      { tipo: "traduci", titolo: "Traduci in inglese", punti: 2,
+        voci: [["Il pesce è più leggero della carne.", "The fish is lighter than the meat."], ["Le consiglio il risotto.", "I recommend the risotto."], ["È il nostro dolce più richiesto.", "It's our most popular dessert."], ["Questo vino è meno costoso.", "This wine is less expensive."], ["Il tiramisù è fatto in casa.", "The tiramisù is homemade."], ["Questo è il vino migliore della carta.", "This is the best wine on the list."]] },
+      { tipo: "aperta", titolo: "Al tavolo", punti: 5,
+        testo: "Un cliente ti chiede un consiglio. Scrivi in inglese un breve dialogo (almeno sei battute) in cui confronti due piatti e due vini, con almeno due comparativi e un superlativo.",
+        facile: "Scrivi in inglese tre frasi per consigliare un piatto. Usa: lighter than, more … than, the best." }
+    ]
+  },
+  /* ───────────────────────── SPAGNOLO ───────────────────────── */
+  es: {
+    schede: [
+      { titolo: "«¿Qué me recomienda?»", testo: "È la domanda che ogni cameriere sente ogni sera. Con i clienti si usa il **lei** (usted). Rispondere «è tutto buono» non basta: chi consiglia bene **confronta** e **spiega**.",
+        esempi: [["¿Qué me recomienda?", "Che cosa mi consiglia?", "che me recomiènda"], ["La lubina es más ligera que el chuletón, y nuestro tiramisú es el mejor de la ciudad.", "Il branzino è più leggero della bistecca, e il nostro tiramisù è il migliore della città.", ""]],
+        domanda: { testo: "Consigliare bene vuol dire…", o: ["confrontare e spiegare", "dire «è tutto buono»", "indicare il piatto più caro"], spiega: "Il cliente si fida di chi gli spiega le differenze." } },
+      { titolo: "Più, meno, tanto quanto", testo: "**más** + aggettivo + **que** (più… di) · **menos** + aggettivo + **que** (meno… di) · **tan** + aggettivo + **como** (… quanto).\nL'aggettivo si accorda: el pescado más ligero, la tarta más ligera.",
+        esempi: [["El pescado es más ligero que la carne.", "Il pesce è più leggero della carne.", "el pescàdo es màs lihèro che la càrne"], ["Este vino es menos caro que el otro.", "Questo vino è meno caro dell'altro.", ""], ["La pasta es tan buena como en Italia.", "La pasta è buona come in Italia.", ""]],
+        domanda: { testo: "«Il pesce è più fresco della carne»", o: ["El pescado es más fresco que la carne.", "El pescado es más fresco de la carne.", "El pescado es más fresco como la carne."], spiega: "Il paragone si fa con que: más fresco que." } },
+      { titolo: "Migliore e peggiore", testo: "Alcuni comparativi sono irregolari: bueno → **mejor**, malo → **peor**. Non si dice «más mejor»!\nPer il migliore: **el mejor / la mejor**, e il resto si accorda: el plato más pedido, la tarta más rica.",
+        esempi: [["Este vino es mejor que el de la casa.", "Questo vino è migliore di quello della casa.", ""], ["Es el mejor vino de la carta.", "È il vino migliore della carta.", "es el mehòr vìno de la càrta"], ["Es nuestro plato más pedido.", "È il nostro piatto più richiesto.", ""]],
+        domanda: { testo: "«Il vino migliore»", o: ["el mejor vino", "el más mejor vino", "el bueno vino"], spiega: "Mejor è già «più buono»: el mejor vino." } },
+      { titolo: "Il più… e i «buonissimo»", testo: "Per dire «il più… di»: **el / la** + nome + **más** + aggettivo + **de**: la lubina es el pescado más fresco de hoy.\nPer dire «molto, moltissimo» si aggiunge **-ísimo**: rico → **riquísimo**, bueno → **buenísimo**. Senza articolo: *¡Está riquísimo!*",
+        esempi: [["Es el plato más típico de la casa.", "È il piatto più tipico della casa.", ""], ["Este jamón está riquísimo.", "Questo prosciutto è buonissimo.", "èste hamòn està rrichìsimo"], ["La lubina es el pescado más fresco de hoy.", "Il branzino è il pesce più fresco di oggi.", ""]],
+        domanda: { testo: "«È buonissimo!»", o: ["¡Está buenísimo!", "¡Está más bueno!", "¡Está muy buenísimo!"], spiega: "-ísimo vuol già dire «molto»: niente muy." } },
+      { titolo: "Le parole del gusto", testo: "Tocca 🔊 e ripeti: servono per descrivere un piatto o un vino.",
+        esempi: [["ligero", "leggero", "lihèro"], ["contundente", "sostanzioso", "contundènte"], ["picante", "piccante", "picànte"], ["dulce", "dolce", "dùlthe"], ["seco", "secco (vino)", "sèco"], ["con cuerpo", "corposo", "con cuèrpo"], ["suave", "delicato", "suàve"], ["crujiente", "croccante", "cruhiènte"], ["tierno", "tenero", "tièrno"], ["casero", "fatto in casa", "casèro"]],
+        domanda: { testo: "Un vino «con cuerpo» è…", o: ["corposo", "dolce", "frizzante"], spiega: "Con cuerpo = corposo, di struttura." } },
+      { titolo: "Le frasi per consigliare", testo: "Formule cortesi, con il lei, pronte da usare al tavolo.",
+        esempi: [["Le recomiendo la lubina.", "Le consiglio il branzino.", "le recomièndo la lubìna"], ["Si le gusta el pescado, pruebe el arroz con gambas.", "Se le piace il pesce, provi il riso con i gamberi.", ""], ["Va muy bien con un vino blanco seco.", "Si abbina molto bene a un bianco secco.", ""], ["Es la especialidad del chef.", "È la specialità dello chef.", ""], ["¿Quiere probar el vino primero?", "Desidera assaggiare prima il vino?", ""]],
+        domanda: { testo: "Il cliente vuole qualcosa di leggero. Che cosa dici?", o: ["Le recomiendo la lubina a la plancha: es más ligera que la lasaña.", "Tome la lasaña, es la más contundente.", "No sé."], spiega: "Consigli, confronti e spieghi il perché." } },
+      { titolo: "In tasca", testo: "**más … que** · **menos … que** · **tan … como**.\n**Irregolari**: mejor, peor (mai «más mejor»).\n**Il più**: el plato más fresco **de** hoy.\n**Moltissimo**: riquísimo, buenísimo (senza muy).\nCon il cliente il **lei**: *Le recomiendo… · ¿Quiere probar…?*",
+        esempi: [], domanda: null }
+    ],
+    esercizi: [
+      { tipo: "abbina", titolo: "Le parole del gusto", consegna: "Tocca un aggettivo e poi il suo significato.",
+        coppie: [["ligero", "leggero"], ["picante", "piccante"], ["seco", "secco"], ["con cuerpo", "corposo"], ["crujiente", "croccante"], ["casero", "fatto in casa"]] },
+      { tipo: "scelta", titolo: "Più, meno, tanto quanto", consegna: "Scegli la forma giusta.",
+        voci: [
+          { d: "El pescado es más ligero _____ la carne.", o: ["que", "de", "como"] },
+          { d: "Este vino es _____ que el vino de la casa. (migliore)", o: ["mejor", "más mejor", "bueno"] },
+          { d: "La tarta es _____ dulce como el helado. (altrettanto)", o: ["tan", "más", "muy"] },
+          { d: "La paella es _____ cara que el marisco. (meno)", o: ["menos", "más poco", "poco"] },
+          { d: "Este plato está _____ . (buonissimo)", o: ["buenísimo", "muy buenísimo", "más bueno"] },
+          { d: "Las patatas bravas son _____ que las fritas. (più piccanti)", o: ["más picantes", "más picante", "picantes más"] }
+        ] },
+      { tipo: "completa", titolo: "Las sugerencias del día", consegna: "Il cameriere presenta i piatti del giorno: completa con la parola giusta.",
+        testo: "Hoy tenemos dos sugerencias. La lubina es [más] ligera que el chuletón y está [riquísima]: ¡ha llegado esta mañana! El chuletón es [tan] tierno como siempre. De postre, la tarta de queso es la más pedida, pero para mí el flan es el [mejor]. Los dos van muy bien [con] una copa de vino dulce.",
+        intrusi: ["muy", "peor"] },
+      { tipo: "ordina", titolo: "El diálogo en la mesa", consegna: "Tocca le battute nell'ordine giusto.",
+        passi: [["Buenas noches. ¿Ya han decidido?", "Buonasera. Avete già deciso?"], ["Todavía no. ¿Qué nos recomienda?", "Non ancora. Che cosa ci consiglia?"], ["Si les gusta el pescado, la lubina es lo más fresco de hoy.", "Se vi piace il pesce, il branzino è la cosa più fresca di oggi."], ["¿Es más ligera que la lasaña?", "È più leggero delle lasagne?"], ["Sí, mucho más ligera. Va muy bien con un blanco seco.", "Sì, molto più leggero. Si abbina bene a un bianco secco."], ["Perfecto, entonces tomamos la lubina.", "Perfetto, allora prendiamo il branzino."]] },
+      { tipo: "scelta", titolo: "El mejor de la carta", consegna: "Scegli la forma giusta.",
+        voci: [
+          { d: "Es _____ vino de la carta. (il migliore)", o: ["el mejor", "el más mejor", "lo mejor"] },
+          { d: "El tiramisú es el postre _____ pedido. (più)", o: ["más", "mejor", "muy"] },
+          { d: "La lubina es el pescado más fresco _____ hoy.", o: ["de", "que", "como"] },
+          { d: "¡Fue la _____ pizza de mi vida! (peggiore)", o: ["peor", "más mala", "peora"] },
+          { d: "La pasta con trufa es el plato más _____ de la carta. (caro)", o: ["caro", "cara", "caros"] },
+          { d: "Esta tarta está _____ . (buonissima)", o: ["riquísima", "riquísimo", "muy riquísima"] }
+        ] },
+      { tipo: "ascolta", titolo: "Ascolta il cliente", consegna: "Ascolta la domanda del cliente e scegli che cosa vuol dire.",
+        voci: [
+          { t: "¿Qué es más ligero, el pescado o la carne?", o: ["Che cosa è più leggero, il pesce o la carne?", "Il pesce è più caro della carne?", "Preferisco la carne al pesce."] },
+          { t: "Quisiera algo menos picante.", o: ["Vorrei qualcosa di meno piccante.", "Vorrei qualcosa di più piccante.", "Vorrei qualcosa di più dolce."] },
+          { t: "¿Este vino es más seco que el otro?", o: ["Questo vino è più secco dell'altro?", "Questo vino è più dolce dell'altro?", "Questo vino costa più dell'altro?"] },
+          { t: "¿Cuál es su plato más pedido?", o: ["Qual è il vostro piatto più richiesto?", "Qual è il vostro piatto più caro?", "Qual è il piatto del giorno?"] },
+          { t: "¡Es el mejor tiramisú que he probado nunca!", o: ["È il tiramisù più buono che abbia mai mangiato!", "Il tiramisù è troppo dolce!", "Vorrei un altro tiramisù."] }
+        ] }
+    ],
+    missione: {
+      titolo: "La mesa 7", chef: "Mesa 7", avatar: "🧑‍🤝‍🧑", domanda: "Che cosa rispondi?",
+      intro: "Sei in stage in un ristorante italiano di Barcellona. Al tavolo 7 una coppia non sa che cosa scegliere e chiede consiglio a te. Con i clienti si usa il lei (usted, ustedes).",
+      passi: [
+        { dice: "Buenas noches. Queremos algo ligero. ¿Qué nos recomienda?", it: "Buonasera. Vorremmo qualcosa di leggero. Che cosa ci consiglia?",
+          o: [["Les recomiendo la lubina a la plancha: es más ligera que la lasaña.", 1, "Consigli, confronti e spieghi: perfetto."], ["La lasaña: es el plato más contundente.", 0, "Hanno chiesto qualcosa di leggero!"], ["Todo está bueno.", 0, "Non è un consiglio: confronta due piatti."]] },
+        { dice: "¿La lubina es fresca?", it: "Il branzino è fresco?",
+          o: [["Sí, es el pescado más fresco de hoy: ha llegado esta mañana.", 1, "Superlativo giusto e una prova concreta."], ["Sí, es más fresca.", 0, "Più fresca di che cosa? Qui serve il superlativo: el pescado más fresco de hoy."], ["Sí, es la fresquísima.", 0, "Con -ísimo niente articolo: «Está fresquísima»."]] },
+        { dice: "Mi mujer no come pescado. ¿Qué le recomienda?", it: "Mia moglie non mangia pesce. Che cosa le consiglia?",
+          o: [["El pollo al limón: es tan ligero como la lubina.", 1, "tan … como = leggero quanto il branzino."], ["Que coma pescado igualmente.", 0, "Scortese: il cliente ha sempre l'ultima parola."], ["El chuletón: es más ligero que el pescado.", 0, "Una bistecca più leggera del pesce? Consiglio poco credibile."]] },
+        { dice: "¿Qué vino va bien con la lubina?", it: "Quale vino si abbina al branzino?",
+          o: [["Un blanco seco: nuestro albariño es más fresco que el chardonnay.", 1, "Abbinamento classico e confronto chiaro."], ["Un tinto con cuerpo: es el más fuerte.", 0, "Con un pesce delicato si consiglia di solito un bianco secco."], ["El agua es mejor que el vino.", 0, "Non tocca a te decidere per il cliente!"]] },
+        { dice: "¿El albariño es caro?", it: "L'albariño è caro?",
+          o: [["No, es menos caro que el chardonnay.", 1, "menos … que: meno caro."], ["No, es el más barato que.", 0, "Frase incompleta: «es más barato que el chardonnay» o «es el más barato de la carta»."], ["Sí, pero es el más mejor.", 0, "Mejor è già comparativo: el mejor."]] },
+        { dice: "Queremos un postre. ¿Cuál es el mejor?", it: "Vorremmo un dolce. Qual è il migliore?",
+          o: [["La tarta de queso: es la más pedida y es casera.", 1, "Superlativo e un buon motivo in più: casera."], ["La tarta de queso es más pedida postre.", 0, "Superlativo: el postre más pedido / la más pedida."], ["Todos los postres son iguales.", 0, "Il cliente vuole sentirsi consigliato."]] },
+        { dice: "¡Ha sido la mejor cena de nuestras vacaciones!", it: "È stata la cena migliore delle nostre vacanze!",
+          o: [["¡Muchísimas gracias! Me alegro mucho de que les haya gustado.", 1, "Ringrazi con calore: il cliente tornerà."], ["Sí, ya lo sé.", 0, "Suona presuntuoso: ringrazia."], ["Fue mejor de lo que creen.", 0, "Non serve: ringrazia e basta."]] }
+      ],
+      esiti: ["La coppia lascia una recensione a cinque stelle: «¡El mejor camarero de Barcelona!»", "«Gracias, una cena muy agradable.» Ottimo lavoro.", "«Estuvo bien.» Ripassa i comparativi e riprova.", "La coppia esce poco convinta. Rifai la lezione e riprova!"]
+    },
+    verifica: [
+      { tipo: "traduci", titolo: "Scrivi l'aggettivo in spagnolo", punti: 1,
+        voci: [["leggero", "ligero"], ["piccante", "picante"], ["secco (vino)", "seco"], ["corposo", "con cuerpo"], ["croccante", "crujiente"], ["fatto in casa", "casero"], ["dolce", "dulce"], ["tenero", "tierno"], ["delicato", "suave"], ["sostanzioso", "contundente"]] },
+      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
+        voci: [
+          { d: "El pescado es más ligero _____ la carne.", o: ["que", "de", "como"] },
+          { d: "Es _____ vino de la carta. (il migliore)", o: ["el mejor", "el más mejor", "lo mejor"] },
+          { d: "El tinto es _____ caro que el blanco. (più)", o: ["más", "mejor", "muy"] },
+          { d: "La tarta de queso es el postre más _____ . (richiesto)", o: ["pedido", "pedida", "pedidos"] },
+          { d: "Las patatas bravas son _____ que las fritas. (più piccanti)", o: ["más picantes", "más picante", "picantes más"] },
+          { d: "El pollo es _____ ligero como el pescado. (altrettanto)", o: ["tan", "tanto", "más"] },
+          { d: "¡Fue la _____ cena de mi vida! (peggiore)", o: ["peor", "más mala", "peora"] },
+          { d: "Este jamón está _____ . (buonissimo)", o: ["riquísimo", "muy riquísimo", "el riquísimo"] }
+        ] },
+      { tipo: "traduci", titolo: "Traduci in spagnolo", punti: 2,
+        voci: [["Il pesce è più leggero della carne.", "El pescado es más ligero que la carne."], ["Le consiglio il risotto.", "Le recomiendo el risotto."], ["È il nostro dolce più richiesto.", "Es nuestro postre más pedido."], ["Questo vino è meno caro.", "Este vino es menos caro."], ["La torta è fatta in casa.", "La tarta es casera."], ["Questo è il vino migliore della carta.", "Este es el mejor vino de la carta."]] },
+      { tipo: "aperta", titolo: "En la mesa", punti: 5,
+        testo: "Un cliente ti chiede un consiglio. Scrivi in spagnolo un breve dialogo (almeno sei battute, con il lei) in cui confronti due piatti e due vini, con almeno due comparativi e un superlativo.",
+        facile: "Scrivi in spagnolo tre frasi per consigliare un piatto. Usa: más … que, tan … como, el mejor." }
+    ]
+  }
+  }
 }
 ];
 
 /* le prossime lezioni, già annunciate nel catalogo */
 window.LEZIONI_IN_ARRIVO = [
-  { icona: "🍷", ambito: "Sala", titolo: "Consigliare", sottotitolo: "Comparativi e superlativi", livello: "A2–B1", classi: "Biennio e triennio" },
   { icona: "🛎️", ambito: "Accoglienza", titolo: "Il reclamo in hotel", sottotitolo: "I tempi del passato e le scuse formali", livello: "B1–B2", classi: "Triennio" }
 ];

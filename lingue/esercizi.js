@@ -71,7 +71,7 @@ window.ESERCIZI = (function () {
           L.mescola(pezzi(v.tr).map(function (p, i) { return { p: p, i: i }; })).map(function (x) { return '<button type="button" class="ex-pezzo" data-ex="pezzo" lang="' + cod + '">' + esc(x.p) + '</button>'; }).join('') +
           '</div><div style="display:flex;gap:.5rem;margin-top:1rem"><button type="button" class="lg-btn" data-ex="annulla" style="flex:1">↺ Ricomincia</button><button type="button" class="lg-btn pieno" data-ex="verifica" style="flex:2">Verifica</button></div><div data-ex="fb"></div>';
       } else if (tipo === 'ascolta') {
-        h += '<p class="ex-dom">Ascolta e scrivi in ' + lin.nome.toLowerCase() + '</p><div class="ex-grande">' + (L.parla ? L.play(v.tr, cod, 'Ascolta la frase') : '<p class="ex-it">' + esc(v.pr || v.tr) + '</p>') + '</div>' +
+        h += '<p class="ex-dom">Ascolta e scrivi in ' + lin.nome.toLowerCase() + '</p><div class="ex-grande">' + (L.parla ? L.play(v.tr, cod, 'Ascolta la frase', false) : '<p class="ex-it">' + esc(v.pr || v.tr) + '</p>') + '</div>' +
           (L.parla ? '<p style="text-align:center;margin:-.4rem 0 1rem"><button type="button" class="lg-btn" data-ex="lento" style="min-height:36px;padding:.45rem .8rem">🐢 Più lento</button></p>' : '') +
           '<input type="text" class="ex-input" data-ex="scrivi" lang="' + cod + '" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Scrivi qui quello che senti"/>' +
           '<button type="button" class="lg-btn pieno ex-avanti" data-ex="verifica">Verifica</button><div data-ex="fb"></div>';

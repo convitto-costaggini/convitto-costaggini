@@ -92,3 +92,6 @@
 .ex-fine .tit{font-family:var(--fd);font-size:2rem;color:var(--bosco);margin:.2rem 0}
 .ex-fine p{color:var(--txt2);font-size:.9rem;line-height:1.6}
 .ex-fine .bott{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1rem}
+
+/* sul telefono, nel minisito, dei pulsanti tondi in basso a destra resta solo «Aa» (lettura facilitata) */
+@media (max-width:760px){#fab-wrap>.fab-c:not(#lf-fab){display:none!important}}

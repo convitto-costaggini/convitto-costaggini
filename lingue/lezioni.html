@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Lezioni guidate | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Un argomento alla volta: una mini-lezione a schede, esercizi interattivi e una missione in situazione. Per i docenti: scaletta, link e QR per la classe, verifica in due file e versione facilitata."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  /* catalogo */
+  .lz-elenco{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem}
+  .lz-card{text-align:left;font-family:var(--fu);display:flex;flex-direction:column;gap:.35rem;border:1.5px solid var(--av3);background:#fff;border-radius:16px;padding:1.1rem;box-shadow:var(--sh-sm);text-decoration:none;color:inherit;transition:transform .2s,border-color .2s}
+  a.lz-card:hover{transform:translateY(-3px);border-color:var(--oro)}
+  .lz-card .ic{font-size:2rem;line-height:1}
+  .lz-card .amb{font:800 .58rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro)}
+  .lz-card h3{font-family:var(--fd);font-weight:400;font-size:1.35rem;color:var(--bosco);margin:0}
+  .lz-card .sot{font-weight:700;font-size:.84rem;color:var(--bosco2);margin:0}
+  .lz-card p{font-size:.84rem;color:var(--txt2);line-height:1.55;margin:0}
+  .lz-card .vai{margin-top:auto;padding-top:.5rem;font:800 .62rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)}
+  .lz-card.presto{opacity:.6;border-style:dashed;box-shadow:none}
+  /* testata della lezione */
+  .lz-testa{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin-bottom:.8rem}
+  .lz-testa h2{font-family:var(--fd);font-weight:400;font-size:clamp(1.3rem,4.5vw,1.7rem);color:var(--bosco);margin:0;flex:1;min-width:200px;line-height:1.2}
+  .lz-testa h2 small{display:block;font:700 .8rem var(--fu);color:var(--bosco2);margin-top:.15rem}
+  .lz-tab{display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;margin-bottom:1rem}
+  .lz-tab button{font:800 .64rem var(--fu);letter-spacing:.04em;padding:.55rem .3rem;border-radius:12px;border:1.5px solid var(--av3);background:#fff;color:var(--bosco);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.15rem;min-height:56px}
+  .lz-tab button span{font-size:1.15rem;line-height:1}
+  .lz-tab button[aria-pressed=true]{background:var(--bosco);border-color:var(--bosco);color:#fff}
+  .lz-tab button.doc{border-color:var(--oro)}
+  .lz-facile{display:inline-flex;align-items:center;gap:.45rem;font:600 .82rem var(--fu);color:var(--txt2);cursor:pointer;margin:0 0 1rem}
+  .lz-facile input{width:18px;height:18px;accent-color:var(--bosco)}
+  .lz-avviso{text-align:center}
+  .lz-avviso .bott{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:.8rem}
+  .lz-box{max-width:640px;margin:0 auto}
+  /* schede della mini-lezione */
+  .lz-punti{display:flex;gap:.3rem;justify-content:center;margin-bottom:.8rem}
+  .lz-punti i{width:9px;height:9px;border-radius:50%;background:var(--av3);transition:background .2s,transform .2s}
+  .lz-punti i.ora{background:var(--oro);transform:scale(1.3)}.lz-punti i.fatto{background:var(--bosco2)}
+  .lz-scheda{background:#fff;border:1px solid var(--av3);border-radius:18px;box-shadow:var(--sh-sm);padding:1.3rem 1.2rem;animation:lzEntra .3s ease}
+  @keyframes lzEntra{from{opacity:0;transform:translateX(14px)}}
+  .lz-scheda h3{font-family:var(--fd);font-weight:400;font-size:1.45rem;color:var(--bosco);margin:0 0 .5rem;line-height:1.2}
+  .lz-scheda .tx{font-size:.95rem;line-height:1.7;color:var(--txt);margin:0 0 .9rem}
+  .lz-scheda .tx b{color:var(--bosco)}
+  .lz-es{display:flex;gap:.6rem;align-items:center;padding:.55rem 0;border-top:1px dashed var(--av3)}
+  .lz-es>div{flex:1;min-width:0}
+  .lz-es .fr{font-weight:700;font-size:1.02rem;color:var(--txt);display:block}
+  .lz-es .pr{font-size:.74rem;color:var(--txt2);font-style:italic;display:block}
+  .lz-es .it{font-size:.82rem;color:var(--bosco2);display:block}
+  .lz-griglia{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0 .9rem}
+  .lz-lampo{margin-top:1rem;background:var(--av);border-radius:14px;padding:.9rem 1rem}
+  .lz-lampo .q{font:800 .6rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin:0 0 .3rem}
+  .lz-lampo .d{font-weight:700;color:var(--bosco);margin:0 0 .6rem}
+  .lz-nav{display:flex;gap:.5rem;margin-top:1rem}
+  .lz-nav .lg-btn{flex:1}
+  /* esercizi */
+  .lz-et{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;margin:0 0 .5rem}
+  .lz-et b{font-family:var(--fd);font-weight:400;font-size:1.3rem;color:var(--bosco)}
+  .lz-et span{font:800 .62rem var(--fu);letter-spacing:.08em;color:var(--bosco2);white-space:nowrap}
+  .lz-cons{font-size:.86rem;color:var(--txt2);margin:0 0 .8rem}
+  .lz-ric{font-size:1rem;line-height:2.3;color:var(--txt)}
+  .lz-ric select{font:700 .92rem var(--fu);padding:.25rem .4rem;border-radius:8px;border:1.5px solid var(--av3);background:var(--bco);color:var(--bosco);max-width:46vw}
+  .lz-ric select.si{border-color:#10b981;background:#ecfdf5;color:#065f46}
+  .lz-ric select.no{border-color:#f87171;background:#fef2f2;color:#991b1b}
+  .lz-ric .ini{font:800 .7rem var(--fu);color:var(--oro);margin-right:.15rem}
+  .lz-ord{display:grid;gap:.45rem}
+  .lz-ord button{font:600 .9rem var(--fu);text-align:left;padding:.75rem .9rem;border-radius:12px;border:1.5px solid var(--av3);background:var(--bco);color:var(--txt);cursor:pointer;line-height:1.4}
+  .lz-ord button small{display:block;font-weight:500;font-size:.76rem;color:var(--txt2);font-style:italic}
+  .lz-ord button.err{animation:exScuoti .35s;border-color:#f87171}
+  .lz-fatti{list-style:none;margin:0 0 .8rem;padding:0;counter-reset:n}
+  .lz-fatti li{counter-increment:n;display:flex;gap:.55rem;padding:.5rem .7rem;margin-bottom:.35rem;border-radius:10px;background:#ecfdf5;color:#065f46;font-size:.9rem;line-height:1.4;animation:lzEntra .25s ease}
+  .lz-fatti li::before{content:counter(n);font:800 .75rem var(--fu);background:#10b981;color:#fff;border-radius:50%;width:22px;height:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .lz-asc{display:flex;justify-content:center;margin:.2rem 0 1rem}
+  .lz-asc .lg-play{width:72px;height:72px;font-size:1.8rem}
+  .lz-testo-asc{text-align:center;font-weight:700;color:var(--bosco);margin:-.4rem 0 1rem}
+  .lz-ris{text-align:center}
+  .lz-ris .big{font-size:3rem;line-height:1}
+  .lz-ris .tit{font-family:var(--fd);font-size:1.6rem;color:var(--bosco);margin:.3rem 0}
+  .lz-ris p{color:var(--txt2);font-size:.9rem;line-height:1.6}
+  .lz-ris .bott{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1rem}
+  .lz-ris ul{text-align:left;list-style:none;padding:0;margin:1rem 0 0}
+  .lz-ris li{display:flex;gap:.5rem;font-size:.86rem;color:var(--txt2);padding:.35rem 0;border-top:1px dashed var(--av3)}
+  /* missione */
+  .lz-sit{font-size:.9rem;color:var(--txt2);font-style:italic;margin:0 0 .7rem;line-height:1.6}
+  .lz-chef{display:flex;gap:.6rem;align-items:flex-end;margin-bottom:.9rem}
+  .lz-chef .av{flex-shrink:0;width:42px;height:42px;border-radius:50%;background:var(--av2);border:1px solid var(--av3);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+  .lz-chef .bb{flex:1;background:#fff;border:1px solid var(--av3);border-radius:16px 16px 16px 4px;padding:.75rem 1rem;box-shadow:var(--sh-sm)}
+  .lz-chef .nm{font:800 .58rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)}
+  .lz-chef .tx{display:flex;gap:.6rem;align-items:flex-start}
+  .lz-chef .tx span{flex:1;font-size:1.04rem;line-height:1.45}
+  .lz-chef .it{font-size:.8rem;color:var(--txt2);font-style:italic;margin-top:.3rem;display:none}
+  .lz-mostra-it .lz-chef .it,.facile .lz-chef .it{display:block}
+  .lz-mi{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-bottom:.8rem}
+  .lz-mi label{display:inline-flex;align-items:center;gap:.4rem;font:600 .78rem var(--fu);color:var(--txt2);cursor:pointer}
+  .lz-mi .pt{font:800 .66rem var(--fu);color:var(--bosco2)}
+  /* area docente */
+  .lz-doc h3{font-family:var(--fd);font-weight:400;font-size:1.3rem;color:var(--bosco);margin:1.4rem 0 .5rem}
+  .lz-doc h3:first-child{margin-top:0}
+  .lz-doc ul{margin:0;padding-left:1.1rem;font-size:.9rem;line-height:1.65;color:var(--txt)}
+  .lz-scal{width:100%;border-collapse:collapse;font-size:.88rem}
+  .lz-scal td{padding:.5rem .4rem;border-top:1px dashed var(--av3);vertical-align:top;line-height:1.55}
+  .lz-scal td:first-child{font:800 .8rem var(--fu);color:var(--oro);white-space:nowrap;width:3.2rem}
+  .lz-qr{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  .lz-qr canvas{width:150px;height:150px;border:1px solid var(--av3);border-radius:10px;background:#fff}
+  .lz-qr .lk{flex:1;min-width:220px}
+  .lz-qr input{width:100%;font:600 .78rem var(--fu);padding:.55rem .6rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--bco);color:var(--txt);margin-bottom:.5rem}
+  .lz-bott{display:flex;flex-wrap:wrap;gap:.5rem}
+  .lz-doc .lg-nota{margin-top:1rem}
+  /* versione facilitata (DSA/BES): più grande, più aria, niente corsivo */
+  .facile .lz-scheda .tx,.facile .lz-ric,.facile .ex-opz button,.facile .lz-ord button{font-size:1.12rem;line-height:1.85;letter-spacing:.01em}
+  .facile .lz-es .fr{font-size:1.15rem}
+  .facile .lz-es .pr,.facile .lz-ord button small,.facile .lz-chef .it,.facile .lz-sit{font-style:normal}
+  .facile .lz-chef .tx span{font-size:1.15rem}
+  .facile .ex-opz button{padding:1rem 1.1rem}
+  @media (max-width:420px){.lz-tab button{font-size:.58rem}}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="lezioni">
+<div class="lg-anteprima">Anteprima per i docenti · lezioni in revisione, non ancora pubblicate</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Un argomento alla volta</p>
+      <h1>Le lezioni <em>guidate</em></h1>
+      <p>Prima una mini-lezione a schede, leggera e da ascoltare; poi gli esercizi; alla fine una missione in una cucina, in una sala o in un hotel all'estero. Per i docenti, tutto il necessario per un'ora di lezione: scaletta, link e QR per la classe, verifica in due file e versione facilitata.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez" id="lz">
+    <div class="w" style="max-width:900px">
+      <div id="lz-vista"></div>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/qrcode.js"></script>
+<script src="lingue/lezioni-dati.js"></script>
+<script>
+(function () {
+  'use strict';
+  var L = window.LINGUE_SITO, esc = L.esc, vista = document.getElementById('lz-vista'), sez = document.getElementById('lz');
+  var DISPONIBILI = ['en', 'es'];
+  var q = new URLSearchParams(location.search);
+  if (q.get('lin') && L.lingua(q.get('lin'))) L.impostaLingua(q.get('lin'));
+  var lez = null, lin = L.linguaScelta(), tab = 'lezione', facile = !!L.leggi('lz-facile', false);
+  var schedaN = 0, esN = 0, esPunti = [], miN = 0, miPunti = [];
+
+  function md(t) { return esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<i>$1</i>').replace(/\n/g, '<br/>'); }
+  function D() { return lez.lingue[lin]; }
+  function opzioni(o) { var g = o[0], s = L.mescola(o.slice(1)); if (facile) s = s.slice(0, 1); return L.mescola([g].concat(s)); }
+  function sezionePronta() { var y = sez.getBoundingClientRect().top + scrollY - 130; if (scrollY > y) scrollTo({ top: y, behavior: 'smooth' }); }
+
+  /* ───── catalogo ───── */
+  function catalogo() {
+    lez = null;
+    vista.innerHTML = '<h2 class="lg-h2">Scegli <em>la lezione</em></h2><p class="lg-sot">Ogni lezione vale un\'ora di lavoro, in inglese e in spagnolo. Se serve, attiva la versione facilitata: caratteri più grandi, meno alternative, traduzione sempre visibile.</p><div class="lz-elenco">' +
+      window.LEZIONI.map(function (l) {
+        return '<a class="lz-card" href="lingue/lezioni.html?l=' + l.id + '"><span class="ic">' + l.icona + '</span><span class="amb">' + esc(l.ambito) + ' · ' + esc(l.livello) + ' · ' + esc(l.classi) + '</span><h3>' + esc(l.titolo) + '</h3><p class="sot">' + esc(l.sottotitolo) + '</p><p>' + esc(l.descrizione) + '</p><span class="vai">Inizia la lezione →</span></a>';
+      }).join('') +
+      (window.LEZIONI_IN_ARRIVO || []).map(function (l) {
+        return '<div class="lz-card presto"><span class="ic">' + l.icona + '</span><span class="amb">' + esc(l.ambito) + ' · ' + esc(l.livello) + ' · ' + esc(l.classi) + '</span><h3>' + esc(l.titolo) + '</h3><p class="sot">' + esc(l.sottotitolo) + '</p><span class="vai" style="color:var(--txt2)">In preparazione</span></div>';
+      }).join('') + '</div>';
+  }
+
+  /* ───── la lezione ───── */
+  function apri(id) {
+    lez = window.LEZIONI.filter(function (l) { return l.id === id; })[0];
+    if (!lez) { catalogo(); return; }
+    tab = ['lezione', 'esercizi', 'missione', 'docente'].indexOf(q.get('t')) >= 0 ? q.get('t') : 'lezione';
+    schedaN = 0; esN = 0; esPunti = []; miN = 0; miPunti = [];
+    disegna();
+  }
+  function disegna() {
+    sez.classList.toggle('facile', facile);
+    var h = '<div class="lz-testa"><a class="lg-btn" href="lingue/lezioni.html" style="min-height:38px;padding:.45rem .8rem" aria-label="Tutte le lezioni">←</a><h2>' + lez.icona + ' ' + esc(lez.titolo) + '<small>' + esc(lez.sottotitolo) + ' · ' + esc(lez.livello) + ' · ' + esc(lez.classi) + '</small></h2></div>';
+    if (!lez.lingue[lin]) {
+      vista.innerHTML = h + '<div class="lg-card lz-avviso"><p style="margin:0">Per ora questa lezione è disponibile in <b>inglese</b> e in <b>spagnolo</b>.</p><div class="bott">' + DISPONIBILI.map(function (c) { return '<button type="button" class="lg-btn pieno" data-lin="' + c + '">Passa allo ' + (c === 'en' ? 'inglese' : 'spagnolo') + '</button>'; }).join('').replace('allo inglese', 'all\'inglese') + '</div></div>';
+      return;
+    }
+    var T = [['lezione', '📖', 'Lezione'], ['esercizi', '✏️', 'Esercizi'], ['missione', '🎯', 'Missione'], ['docente', '👩‍🏫', 'Docente']];
+    h += '<div class="lz-tab" role="group" aria-label="Parti della lezione">' + T.map(function (t) { return '<button type="button" data-tab="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '"' + (t[0] === 'docente' ? ' class="doc"' : '') + '><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>' +
+      '<label class="lz-facile"><input type="checkbox" id="lz-fac"' + (facile ? ' checked' : '') + '/> Versione facilitata (DSA/BES)</label><div id="lz-corpo"></div>';
+    vista.innerHTML = h;
+    ({ lezione: scheda, esercizi: esercizio, missione: missione, docente: docente })[tab]();
+  }
+  function corpo(html) { document.getElementById('lz-corpo').innerHTML = html; }
+
+  /* mini-lezione a schede */
+  function scheda() {
+    var S = D().schede, s = S[schedaN];
+    var punti = '<div class="lz-punti" aria-hidden="true">' + S.map(function (x, i) { return '<i class="' + (i === schedaN ? 'ora' : i < schedaN ? 'fatto' : '') + '"></i>'; }).join('') + '</div>';
+    var es = s.esempi.length > 6 ? '<div class="lz-griglia">' + s.esempi.map(esempio).join('') + '</div>' : s.esempi.map(esempio).join('');
+    var lampo = s.domanda ? '<div class="lz-lampo"><p class="q">⚡ Domanda lampo</p><p class="d">' + esc(s.domanda.testo) + '</p><div class="ex-opz" id="lz-lampo">' + opzioni(s.domanda.o).map(function (o) { return '<button type="button" data-lampo="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') + '</div><div id="lz-lampo-fb"></div></div>' : '';
+    var ultima = schedaN === S.length - 1;
+    corpo('<div class="lz-box">' + punti + '<article class="lz-scheda"><h3>' + esc(s.titolo) + '</h3><p class="tx">' + md(s.testo) + '</p>' + es + lampo + '</article>' +
+      '<div class="lz-nav">' + (schedaN > 0 ? '<button type="button" class="lg-btn" data-sch="-1">← Indietro</button>' : '') + (ultima ? '<button type="button" class="lg-btn oro" data-tab="esercizi">Ora allenati →</button>' : '<button type="button" class="lg-btn pieno" data-sch="1">Avanti →</button>') + '</div></div>');
+  }
+  function esempio(e) {
+    return '<div class="lz-es"><div><span class="fr" lang="' + lin + '">' + esc(e[0]) + '</span>' + (e[2] ? '<span class="pr">' + esc(e[2]) + '</span>' : '') + '<span class="it">' + esc(e[1]) + '</span></div>' + L.play(e[0], lin, 'Ascolta') + '</div>';
+  }
+  function rispondiLampo(b) {
+    var s = D().schede[schedaN], giusta = b.dataset.lampo === s.domanda.o[0];
+    document.querySelectorAll('[data-lampo]').forEach(function (x) { x.disabled = true; if (x.dataset.lampo === s.domanda.o[0]) x.classList.add('giusta'); else if (x === b) x.classList.add('sbagliata'); });
+    document.getElementById('lz-lampo-fb').innerHTML = '<div class="ex-fb ' + (giusta ? 'si' : 'no') + '">' + (giusta ? '✓ Giusto! ' : '✗ Non proprio. ') + esc(s.domanda.spiega || '') + '</div>';
+  }
+
+  /* esercizi */
+  var stato = {};
+  function esercizio() {
+    var E = D().esercizi;
+    if (esN >= E.length) return fineEsercizi();
+    var e = E[esN];
+    stato = { e: e, i: 0, err: 0, tot: 0 };
+    var testa = '<div class="lz-et"><b>' + esc(e.titolo) + '</b><span>Esercizio ' + (esN + 1) + ' di ' + E.length + '</span></div><div class="ex-bar" style="margin-bottom:.9rem"><i style="width:' + (esN / E.length * 100) + '%"></i></div><p class="lz-cons">' + esc(e.consegna) + '</p>';
+    corpo('<div class="lz-box">' + testa + '<div class="ex-card" id="lz-ex"></div></div>');
+    ({ scelta: exScelta, abbina: exAbbina, completa: exCompleta, ordina: exOrdina, ascolta: exAscolta })[e.tipo]();
+  }
+  function box() { return document.getElementById('lz-ex'); }
+  function chiudiEsercizio(giuste, totale) {
+    esPunti[esN] = [giuste, totale];
+    box().insertAdjacentHTML('beforeend', '<div class="ex-fb ' + (giuste === totale ? 'si' : 'no') + '" style="justify-content:center">' + (giuste === totale ? '🏆 Tutto giusto!' : '✓ Fatto: ' + giuste + ' su ' + totale + ' al primo colpo') + '</div><button type="button" class="lg-btn pieno ex-avanti" data-esavanti>' + (esN + 1 < D().esercizi.length ? 'Prossimo esercizio →' : 'Vedi il risultato') + '</button>');
+  }
+  /* scelta multipla (anche «ascolta») */
+  function exScelta(ascolto) {
+    var e = stato.e, v = e.voci[stato.i];
+    if (!v) return chiudiEsercizio(stato.tot - stato.err, stato.tot);
+    var dom = ascolto ? '<div class="lz-asc">' + L.play(v.t, lin, 'Ascolta di nuovo') + '</div>' + (facile ? '<p class="lz-testo-asc" lang="' + lin + '">' + esc(v.t) + '</p>' : '') : '<p class="ex-it" lang="' + lin + '">' + esc(v.d) + '</p>';
+    box().innerHTML = '<p class="ex-dom">' + (stato.i + 1) + ' di ' + e.voci.length + '</p>' + dom + '<div class="ex-opz">' + opzioni(v.o).map(function (o) { return '<button type="button" data-sc="' + esc(o) + '"' + (ascolto ? '' : ' lang="' + lin + '"') + '>' + esc(o) + '</button>'; }).join('') + '</div><div id="lz-fb"></div>';
+    if (ascolto && L.parla) setTimeout(function () { L.ascolta(v.t, lin, { btn: box().querySelector('.lg-play') }); }, 250);
+  }
+  function rispondiScelta(b) {
+    var v = stato.e.voci[stato.i], ok = b.dataset.sc === v.o[0];
+    stato.tot++; if (!ok) stato.err++;
+    box().querySelectorAll('[data-sc]').forEach(function (x) { x.disabled = true; if (x.dataset.sc === v.o[0]) x.classList.add('giusta'); else if (x === b) x.classList.add('sbagliata'); });
+    var sol = stato.e.tipo === 'ascolta' ? '<span class="pr" lang="' + lin + '">' + esc(v.t) + '</span>' : (ok ? '' : '<span class="pr">Risposta giusta: ' + esc(v.o[0]) + '</span>');
+    document.getElementById('lz-fb').innerHTML = '<div class="ex-fb ' + (ok ? 'si' : 'no') + '"><div>' + (ok ? '✓ Giusto!' : '✗ Sbagliato.') + sol + '</div></div><button type="button" class="lg-btn pieno ex-avanti" data-scavanti>Avanti →</button>';
+    if (L.parla && stato.e.tipo === 'scelta') L.ascolta(v.d.replace(/_+/, v.o[0]).replace(/\s*\(.*\)\s*$/, ''), lin);
+  }
+  function exAscolta() { exScelta(true); }
+  /* abbinamento */
+  function exAbbina() {
+    var c = stato.e.coppie.slice(); if (facile) c = c.slice(0, 4);
+    stato.coppie = c; stato.fatte = 0; stato.sel = null;
+    var sx = L.mescola(c.map(function (x, i) { return i; })), dx = L.mescola(c.map(function (x, i) { return i; }));
+    box().innerHTML = '<div class="ex-abb"><div style="display:grid;gap:.5rem">' + sx.map(function (i) { return '<button type="button" data-ab="s" data-i="' + i + '" lang="' + lin + '">' + esc(c[i][0]) + '</button>'; }).join('') + '</div><div style="display:grid;gap:.5rem">' + dx.map(function (i) { return '<button type="button" data-ab="d" data-i="' + i + '">' + esc(c[i][1]) + '</button>'; }).join('') + '</div></div>';
+  }
+  function tocca(b) {
+    if (b.classList.contains('fatto')) return;
+    if (b.dataset.ab === 's') { box().querySelectorAll('[data-ab=s]').forEach(function (x) { x.classList.remove('sel'); }); b.classList.add('sel'); stato.sel = b; if (L.parla) L.ascolta(b.textContent, lin); return; }
+    if (!stato.sel) return;
+    if (stato.sel.dataset.i === b.dataset.i) {
+      stato.sel.classList.remove('sel'); stato.sel.classList.add('fatto'); b.classList.add('fatto'); stato.sel = null; stato.fatte++;
+      if (stato.fatte === stato.coppie.length) chiudiEsercizio(Math.max(0, stato.coppie.length - stato.err), stato.coppie.length);
+    } else { stato.err++; b.classList.remove('err'); void b.offsetWidth; b.classList.add('err'); }
+  }
+  /* completa la ricetta */
+  function exCompleta() {
+    var e = stato.e, buchi = [], i = 0;
+    e.testo.replace(/\[([^\]]+)\]/g, function (m, p) { buchi.push(p); return m; });
+    var banca = buchi.concat(e.intrusi || []).filter(function (x, k, a) { return a.indexOf(x) === k; });
+    stato.buchi = buchi;
+    var html = esc(e.testo).replace(/\[([^\]]+)\]/g, function (m, p) {
+      var k = i++, giusta = buchi[k], ops = facile ? L.mescola([giusta, L.mescola(banca.filter(function (x) { return x.toLowerCase() !== giusta.toLowerCase(); }))[0]]) : L.mescola(banca);
+      return (facile ? '<span class="ini">' + esc(giusta.charAt(0)) + '…</span>' : '') + '<select data-buco="' + k + '" aria-label="Spazio ' + (k + 1) + '"><option value="">…</option>' + ops.map(function (o) { return '<option>' + esc(o) + '</option>'; }).join('') + '</select>';
+    });
+    box().innerHTML = '<p class="lz-ric" lang="' + lin + '">' + html + '</p><button type="button" class="lg-btn pieno ex-avanti" data-controlla>Controlla</button><div id="lz-fb"></div>';
+  }
+  function controllaRicetta() {
+    var sel = box().querySelectorAll('[data-buco]'), giuste = 0, vuote = 0;
+    sel.forEach(function (s) { var g = stato.buchi[+s.dataset.buco]; if (!s.value) { vuote++; return; } var ok = s.value.toLowerCase() === g.toLowerCase(); s.className = ok ? 'si' : 'no'; if (ok) giuste++; });
+    if (vuote) { document.getElementById('lz-fb').innerHTML = '<div class="ex-fb no">Completa tutti gli spazi (ne mancano ' + vuote + ').</div>'; return; }
+    if (stato.primo == null) stato.primo = giuste;
+    if (giuste < sel.length) { document.getElementById('lz-fb').innerHTML = '<div class="ex-fb no">Giuste ' + giuste + ' su ' + sel.length + ': correggi quelle in rosso e ricontrolla.</div>'; return; }
+    sel.forEach(function (s) { s.disabled = true; });
+    box().querySelector('[data-controlla]').remove(); document.getElementById('lz-fb').innerHTML = '';
+    if (L.parla) L.ascolta(stato.e.testo.replace(/\[([^\]]+)\]/g, '$1'), lin);
+    chiudiEsercizio(stato.primo, sel.length);
+  }
+  /* metti in ordine */
+  function exOrdina() {
+    var p = stato.e.passi.map(function (x, i) { return { t: x[0], it: x[1], i: i }; });
+    stato.prossimo = facile ? 1 : 0; stato.n = p.length;
+    var resto = L.mescola(p.slice(stato.prossimo));
+    box().innerHTML = '<ol class="lz-fatti" id="lz-fatti">' + (facile ? '<li lang="' + lin + '">' + esc(p[0].t) + '</li>' : '') + '</ol><div class="lz-ord">' + resto.map(function (x) { return '<button type="button" data-ord="' + x.i + '"><span lang="' + lin + '">' + esc(x.t) + '</span>' + (facile ? '<small>' + esc(x.it) + '</small>' : '') + '</button>'; }).join('') + '</div>';
+  }
+  function ordina(b) {
+    var i = +b.dataset.ord;
+    if (i === stato.prossimo) {
+      document.getElementById('lz-fatti').insertAdjacentHTML('beforeend', '<li lang="' + lin + '">' + esc(stato.e.passi[i][0]) + '</li>');
+      if (L.parla) L.ascolta(stato.e.passi[i][0], lin);
+      b.remove(); stato.prossimo++;
+      if (stato.prossimo === stato.n) { var tot = stato.n - (facile ? 1 : 0); chiudiEsercizio(Math.max(0, tot - stato.err), tot); }
+    } else { stato.err++; b.classList.remove('err'); void b.offsetWidth; b.classList.add('err'); }
+  }
+  function fineEsercizi() {
+    var g = 0, t = 0; esPunti.forEach(function (p) { if (p) { g += p[0]; t += p[1]; } });
+    var r = t ? g / t : 0;
+    corpo('<div class="lz-box"><div class="lg-card lz-ris"><div class="big">' + (r >= .9 ? '🏆' : r >= .6 ? '👏' : '💪') + '</div><p class="tit">' + (r >= .9 ? 'Ottimo lavoro!' : r >= .6 ? 'Bene così!' : 'Ancora un po\' di allenamento') + '</p><p>Al primo colpo: <b>' + g + ' su ' + t + '</b></p>' +
+      '<ul>' + D().esercizi.map(function (e, i) { var p = esPunti[i] || [0, 0]; return '<li><span>' + (p[0] === p[1] ? '✅' : '🟡') + '</span><span>' + esc(e.titolo) + ' · ' + p[0] + '/' + p[1] + '</span></li>'; }).join('') + '</ul>' +
+      '<div class="bott"><button type="button" class="lg-btn" data-esrifai>↺ Rifai gli esercizi</button><button type="button" class="lg-btn oro" data-tab="missione">Ora la missione →</button></div></div></div>');
+  }
+
+  /* missione */
+  function missione() {
+    var M = D().missione;
+    if (miN === 0 && !miPunti.length && !stato.miPartita) {
+      stato.miPartita = true;
+      corpo('<div class="lz-box"><div class="lg-card lz-ris"><div class="big">🎯</div><p class="tit">' + esc(M.titolo) + '</p><p>' + esc(M.intro) + '</p><div class="bott"><button type="button" class="lg-btn oro" data-miva>Si comincia →</button></div></div></div>');
+      return;
+    }
+    if (miN >= M.passi.length) return fineMissione();
+    var p = M.passi[miN], ordine = L.mescola(p.o.map(function (x, i) { return i; }));
+    if (facile) { var g = ordine.filter(function (i) { return p.o[i][1]; })[0], s = ordine.filter(function (i) { return !p.o[i][1]; })[0]; ordine = L.mescola([g, s]); }
+    var pt = miPunti.reduce(function (a, b) { return a + b; }, 0);
+    corpo('<div class="lz-box' + (L.leggi('lz-mi-it', false) ? ' lz-mostra-it' : '') + '" id="lz-mbox"><div class="lz-mi"><label><input type="checkbox" id="lz-mi-it"' + (L.leggi('lz-mi-it', false) ? ' checked' : '') + '/> Traduzione italiana</label><span class="pt">Passo ' + (miN + 1) + ' di ' + M.passi.length + ' · ⭐ ' + pt + '</span></div>' +
+      (p.situazione ? '<p class="lz-sit">' + esc(p.situazione) + '</p>' : '') +
+      (p.dice ? '<div class="lz-chef"><span class="av" aria-hidden="true">👩‍🍳</span><div class="bb"><span class="nm">' + esc(M.chef) + '</span><div class="tx"><span lang="' + lin + '">' + esc(p.dice) + '</span>' + L.play(p.dice, lin, 'Ascolta') + '</div><div class="it">' + esc(p.it) + '</div></div></div>' : '') +
+      '<p class="ex-dom" style="text-align:left">' + esc(p.domanda || 'Che cosa fai?') + '</p><div class="ex-opz">' + ordine.map(function (i) { return '<button type="button" data-mi="' + i + '">' + esc(p.o[i][0]) + '</button>'; }).join('') + '</div><div id="lz-fb"></div></div>');
+    if (p.dice && L.parla) setTimeout(function () { L.ascolta(p.dice, lin, { btn: document.querySelector('.lz-chef .lg-play') }); }, 300);
+  }
+  function rispondiMissione(b) {
+    var p = D().missione.passi[miN], o = p.o[+b.dataset.mi];
+    miPunti.push(o[1] ? 1 : 0);
+    document.querySelectorAll('[data-mi]').forEach(function (x) { x.disabled = true; var oo = p.o[+x.dataset.mi]; if (oo[1]) x.classList.add('giusta'); else if (x === b) x.classList.add('sbagliata'); });
+    document.getElementById('lz-fb').innerHTML = '<div class="ex-fb ' + (o[1] ? 'si' : 'no') + '">' + (o[1] ? '✓ ' : '✗ ') + esc(o[2]) + '</div><button type="button" class="lg-btn pieno ex-avanti" data-miavanti>' + (miN + 1 < D().missione.passi.length ? 'Avanti →' : 'Com\'è andata?') + '</button>';
+    if (o[1] && /^[^\u{1F300}-\u{1FAFF}]/u.test(o[0]) && L.parla) L.ascolta(o[0], lin);
+  }
+  function fineMissione() {
+    var M = D().missione, pt = miPunti.reduce(function (a, b) { return a + b; }, 0), n = M.passi.length, r = pt / n;
+    var rec = L.leggi('lz-rec-' + lez.id + '-' + lin, null); if (rec == null || pt > rec) L.salva('lz-rec-' + lez.id + '-' + lin, pt);
+    corpo('<div class="lz-box"><div class="lg-card lz-ris"><div class="big">' + (r === 1 ? '🏆' : r >= .7 ? '😊' : r >= .4 ? '😐' : '😬') + '</div><p class="tit">' + pt + ' su ' + n + '</p><p>' + esc(M.esiti[r === 1 ? 0 : r >= .7 ? 1 : r >= .4 ? 2 : 3]) + '</p>' + (rec != null ? '<p>Il tuo record: ' + Math.max(rec, pt) + ' su ' + n + '</p>' : '') +
+      '<div class="bott"><button type="button" class="lg-btn" data-mirifai>↺ Rifai la missione</button><a class="lg-btn pieno" href="lingue/lezioni.html">Altre lezioni</a></div></div></div>');
+  }
+
+  /* area docente */
+  function linkStudenti() { return location.origin + '/lingue/lezioni.html?l=' + lez.id + '&lin=' + lin; }
+  function docente() {
+    var d = lez.docente;
+    corpo('<div class="lz-doc">' +
+      '<div class="lg-card"><h3>🔗 Per i ragazzi</h3><p class="lz-cons">Proiettate il QR alla LIM o mandate il link sul gruppo della classe: la lezione si apre già in ' + L.lingua(lin).nome.toLowerCase() + '. Nessuna registrazione, nessun dato raccolto.</p><div class="lz-qr"><canvas id="lz-qr" width="150" height="150" aria-label="Codice QR della lezione"></canvas><div class="lk"><input type="text" readonly id="lz-link" value="' + esc(linkStudenti()) + '"/><div class="lz-bott"><button type="button" class="lg-btn pieno" data-copia>📋 Copia il link</button><button type="button" class="lg-btn" data-lim>🖥️ QR a tutto schermo</button></div></div></div></div>' +
+      '<div class="lg-card" style="margin-top:1rem"><h3>📝 La verifica</h3><p class="lz-cons">Due file con domande diverse (A e B), da stampare. La versione facilitata ha caratteri grandi, meno alternative e i suggerimenti. Le soluzioni sono su un foglio a parte.</p><div class="lz-bott"><button type="button" class="lg-btn pieno" data-stampa="A">🖨️ File A</button><button type="button" class="lg-btn pieno" data-stampa="B">🖨️ File B</button><button type="button" class="lg-btn" data-stampa="A" data-fac="1">File A facilitato</button><button type="button" class="lg-btn" data-stampa="B" data-fac="1">File B facilitato</button><button type="button" class="lg-btn oro" data-stampa="S">Soluzioni</button></div></div>' +
+      '<div class="lg-card" style="margin-top:1rem"><h3>⏱️ In un\'ora di lezione</h3><table class="lz-scal">' + d.scaletta.map(function (r) { return '<tr><td>' + esc(r[0]) + '</td><td>' + esc(r[1]) + '</td></tr>'; }).join('') + '</table>' +
+      '<h3>🎯 Obiettivi</h3><ul>' + d.obiettivi.map(function (o) { return '<li>' + esc(o) + '</li>'; }).join('') + '</ul>' +
+      '<h3>🌍 Spunti</h3><ul>' + d.spunti.map(function (o) { return '<li>' + esc(o) + '</li>'; }).join('') + '</ul></div>' +
+      '<p class="lg-nota">🎓 <b>Contenuti in revisione.</b> Traduzioni ed esercizi sono in verifica da parte dei docenti di lingue. Segnalazioni e proposte sono benvenute: questa lezione è un esempio di ciò che i docenti potranno preparare in pochi minuti.</p></div>');
+    qr(linkStudenti(), document.getElementById('lz-qr'), 4);
+  }
+  function qr(testo, canvas, cella) {
+    var c = qrcode(0, 'M'); c.addData(testo); c.make();
+    var n = c.getModuleCount(), m = 4, s = (n + m * 2) * cella, x = canvas.getContext('2d');
+    canvas.width = canvas.height = s; x.fillStyle = '#fff'; x.fillRect(0, 0, s, s); x.fillStyle = '#000';
+    for (var r = 0; r < n; r++) for (var k = 0; k < n; k++) if (c.isDark(r, k)) x.fillRect((k + m) * cella, (r + m) * cella, cella, cella);
+  }
+  function qrGrande() {
+    var w = window.open('', '_blank'); if (!w) return;
+    var cv = document.createElement('canvas'); qr(linkStudenti(), cv, 14);
+    w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(lez.titolo) + ' — QR</title><style>body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Arial,sans-serif;background:#fff;color:#2C3E2D}img{width:min(70vh,90vw);height:auto}h1{font-size:4vh;margin:0 0 2vh}p{font-size:2.4vh;color:#555}</style></head><body><h1>' + esc(lez.icona + ' ' + lez.titolo) + ' · ' + esc(L.lingua(lin).nome) + '</h1><img src="' + cv.toDataURL() + '" alt="QR"/><p>Inquadra il codice con la fotocamera del telefono</p></body></html>');
+    w.document.close();
+  }
+
+  /* verifica stampabile: file A = voci pari, file B = voci dispari */
+  function seme(n) { return function () { n = (n * 9301 + 49297) % 233280; return n / 233280; }; }
+  function mescolaS(a, rnd) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function voci(sz, file) { return (sz.voci || []).filter(function (v, i) { return i % 2 === (file === 'A' ? 0 : 1); }); }
+  function stampa(file, fac) {
+    var V = D().verifica, nomeL = L.lingua(lin).nome, rnd = seme(file === 'A' ? 7 : 13), tot = 0, corpoV = '';
+    if (file === 'S') {
+      corpoV = ['A', 'B'].map(function (f) {
+        return '<h2>Soluzioni · file ' + f + '</h2>' + V.map(function (sz, k) {
+          if (sz.tipo === 'aperta') return '<h3>' + (k + 1) + '. ' + esc(sz.titolo) + '</h3><p class="sol">Risposta libera (' + sz.punti + ' punti): valutare correttezza degli ordini, lessico e quantità.</p>';
+          return '<h3>' + (k + 1) + '. ' + esc(sz.titolo) + '</h3><ol>' + voci(sz, f).map(function (v) { return '<li>' + (sz.tipo === 'scelta' ? esc(v.d.replace(/_+/, v.o[0]).replace(/\s*\([^)]*\)\s*$/, '')) : esc(v[0]) + ' → <b>' + esc(v[1]) + '</b>') + '</li>'; }).join('') + '</ol>';
+        }).join('');
+      }).join('<div class="pag"></div>');
+    } else {
+      corpoV = V.map(function (sz, k) {
+        var vv = voci(sz, file), pts = sz.tipo === 'aperta' ? sz.punti : vv.length * sz.punti, h;
+        tot += pts;
+        h = '<h3>' + (k + 1) + '. ' + esc(sz.titolo) + ' <span class="pt">(' + pts + ' punti)</span></h3>';
+        if (sz.tipo === 'traduci') {
+          /* facilitata: per le parole la banca delle risposte, per le frasi solo la parola d'inizio */
+          var frasi = sz.punti > 1;
+          if (fac && !frasi) h += '<p class="banca">Parole da usare: ' + mescolaS(vv.map(function (v) { return v[1]; }), rnd).map(esc).join(' · ') + '</p>';
+          h += '<ol>' + vv.map(function (v) { return '<li>' + esc(v[0]) + (fac && frasi ? ' <span class="pt">(inizia con: ' + esc(v[1].split(' ')[0]) + ' …)</span>' : '') + ' <span class="riga"></span></li>'; }).join('') + '</ol>';
+        } else if (sz.tipo === 'scelta') {
+          h += '<ol>' + vv.map(function (v) { var o = mescolaS(fac ? [v.o[0], v.o[1]] : v.o, rnd); return '<li>' + esc(v.d) + '<div class="opz">' + o.map(function (x) { return '<span>☐ ' + esc(x) + '</span>'; }).join('') + '</div></li>'; }).join('') + '</ol>';
+        } else {
+          h += '<p>' + esc(fac ? sz.facile : sz.testo) + '</p>' + new Array(fac ? 5 : 8).join('<div class="riga piena"></div>');
+        }
+        return h;
+      }).join('');
+    }
+    var css = 'body{font-family:Arial,Helvetica,sans-serif;margin:22px;color:#1a1a1a;font-size:' + (fac ? '14pt' : '11pt') + ';line-height:' + (fac ? '1.8' : '1.5') + (fac ? ';letter-spacing:.02em' : '') + '}h1{font-size:' + (fac ? '18pt' : '15pt') + ';margin:0}h2{font-size:14pt;margin:0 0 8px}.sot{font-size:9pt;color:#555;margin:2px 0 10px}.dati{display:flex;gap:16px;border:1px solid #999;border-radius:6px;padding:8px 10px;margin-bottom:12px;font-size:10pt}.dati span{flex:1;border-bottom:1px solid #999;padding-bottom:12px}h3{font-size:' + (fac ? '14pt' : '11.5pt') + ';margin:14px 0 6px;color:#2C3E2D}.pt{font-weight:normal;color:#666;font-size:9pt}ol{margin:0;padding-left:22px}li{margin:0 0 ' + (fac ? '12px' : '8px') + '}.opz{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:3px}.riga{display:inline-block;width:55%;border-bottom:1px solid #999;height:1.1em;vertical-align:bottom}.riga.piena{display:block;width:100%;height:' + (fac ? '2.2em' : '1.8em') + '}.banca{border:1.5px dashed #b8922a;border-radius:6px;padding:6px 10px;background:#fdf8ea}.sol{color:#555}.tot{text-align:right;font-weight:bold;margin-top:14px}.pag{page-break-after:always}@page{size:A4;margin:14mm}';
+    var tit = file === 'S' ? 'Soluzioni' : 'Verifica · file ' + file + (fac ? ' · versione facilitata' : '');
+    var w = window.open('', '_blank'); if (!w) return;
+    w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(lez.titolo) + ' — ' + esc(nomeL) + ' — ' + esc(tit) + '</title><style>' + css + '</style></head><body>' +
+      '<h1>' + esc(lez.titolo) + ' · ' + esc(nomeL) + ' — ' + esc(tit) + '</h1><p class="sot">' + esc(lez.sottotitolo) + ' · livello ' + esc(lez.livello) + ' · IPSSEOA «Costaggini» Rieti</p>' +
+      (file === 'S' ? '' : '<div class="dati"><span>Nome e cognome</span><span style="flex:.4">Classe</span><span style="flex:.5">Data</span></div>') + corpoV +
+      (file === 'S' ? '' : '<p class="tot">Totale: ______ / ' + tot + '</p>') +
+      '<script>window.onload=function(){window.print()}<\/script></body></html>');
+    w.document.close();
+  }
+
+  /* eventi */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button, a'); if (!b || !vista.contains(b)) return;
+    var d = b.dataset;
+    if (d.tab) { if (window.speechSynthesis) speechSynthesis.cancel(); tab = d.tab; if (tab === 'esercizi' && esN >= D().esercizi.length) { esN = 0; esPunti = []; } disegna(); sezionePronta(); }
+    else if (d.lin) L.impostaLingua(d.lin);
+    else if (d.sch) { schedaN += +d.sch; scheda(); sezionePronta(); }
+    else if (d.lampo != null) rispondiLampo(b);
+    else if (d.sc != null) rispondiScelta(b);
+    else if (d.scavanti != null) { stato.i++; exScelta(stato.e.tipo === 'ascolta'); }
+    else if (d.ab) tocca(b);
+    else if (d.controlla != null) controllaRicetta();
+    else if (d.ord != null) ordina(b);
+    else if (d.esavanti != null) { esN++; esercizio(); sezionePronta(); }
+    else if (d.esrifai != null) { esN = 0; esPunti = []; esercizio(); }
+    else if (d.miva != null) missione();
+    else if (d.mi != null) rispondiMissione(b);
+    else if (d.miavanti != null) { miN++; missione(); }
+    else if (d.mirifai != null) { miN = 0; miPunti = []; stato.miPartita = true; missione(); }
+    else if (d.copia != null) { var inp = document.getElementById('lz-link'); inp.select(); try { navigator.clipboard.writeText(inp.value); } catch (x) { document.execCommand('copy'); } b.textContent = '✓ Copiato'; setTimeout(function () { b.textContent = '📋 Copia il link'; }, 1600); }
+    else if (d.lim != null) qrGrande();
+    else if (d.stampa) stampa(d.stampa, !!d.fac);
+  });
+  document.addEventListener('change', function (e) {
+    if (e.target.id === 'lz-fac') { facile = e.target.checked; L.salva('lz-facile', facile); disegna(); }
+    else if (e.target.id === 'lz-mi-it') { L.salva('lz-mi-it', e.target.checked); document.getElementById('lz-mbox').classList.toggle('lz-mostra-it', e.target.checked); }
+  });
+  /* la lingua si sceglie una volta sola, dal pulsante 🌍 della barra */
+  document.addEventListener('lingua', function (e) {
+    lin = e.detail;
+    if (!lez) return;
+    schedaN = 0; esN = 0; esPunti = []; miN = 0; miPunti = []; stato = {};
+    disegna();
+  });
+  if (q.get('l')) apri(q.get('l')); else catalogo();
+})();
+</script>
+</body>
+</html>

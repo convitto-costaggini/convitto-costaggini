@@ -235,7 +235,7 @@
     if (!v) return chiudiEsercizio(stato.tot - stato.err, stato.tot);
     var dom = ascolto ? '<div class="lz-asc">' + L.play(v.t, lin, 'Ascolta di nuovo') + '</div>' + (facile ? '<p class="lz-testo-asc" lang="' + lin + '">' + esc(v.t) + '</p>' : '') : '<p class="ex-it" lang="' + lin + '">' + esc(v.d) + '</p>';
     box().innerHTML = '<p class="ex-dom">' + (stato.i + 1) + ' di ' + e.voci.length + '</p>' + dom + '<div class="ex-opz">' + opzioni(v.o).map(function (o) { return '<button type="button" data-sc="' + esc(o) + '"' + (ascolto ? '' : ' lang="' + lin + '"') + '>' + esc(o) + '</button>'; }).join('') + '</div><div id="lz-fb"></div>';
-    if (ascolto && L.parla) setTimeout(function () { L.ascolta(v.t, lin, { btn: box().querySelector('.lg-play') }); }, 250);
+    if (ascolto && L.parla) { var qui = stato; setTimeout(function () { var bx = box(); if (bx && stato === qui && qui.e.voci[qui.i] === v) L.ascolta(v.t, lin, { btn: bx.querySelector('.lg-play') }); }, 250); }
   }
   function rispondiScelta(b) {
     var v = stato.e.voci[stato.i], ok = b.dataset.sc === v.o[0];

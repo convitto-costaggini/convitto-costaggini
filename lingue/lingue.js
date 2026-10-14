@@ -39,18 +39,37 @@ window.LINGUE_SITO = (function () {
     var l = lingua(cod), v = speechSynthesis.getVoices().filter(function (x) { return x.lang && x.lang.replace('_', '-').toLowerCase().indexOf(cod) === 0; });
     return v.filter(function (x) { return x.lang.replace('_', '-') === l.voce; })[0] || v[0] || null;
   }
+  /* Chrome e Android hanno alcuni difetti noti con la sintesi vocale:
+     - al primo uso l'elenco delle voci può essere ancora vuoto: senza voce scelta il telefono usa il
+       motore predefinito, che può non avere la lingua e restare muto → si aspetta l'elenco (max 1 s);
+     - una frase avviata subito dopo cancel() può andare persa → se qualcosa stava parlando, un attimo di pausa;
+     - la voce può restare «in pausa» → resume();
+     - una frase senza riferimenti può essere eliminata prima della fine → la teniamo in «corrente». */
+  var corrente = null;
+  function conVoci(cb) {
+    if (speechSynthesis.getVoices().length) { cb(); return; }
+    var fatto = false;
+    function via() { if (fatto) return; fatto = true; cb(); }
+    try { speechSynthesis.addEventListener('voiceschanged', via, { once: true }); } catch (e) {}
+    setTimeout(via, 1000);
+  }
   function ascolta(testo, cod, opz) {
     opz = opz || {};
     if (!parla) return;
+    var btn = opz.btn, occupato = speechSynthesis.speaking || speechSynthesis.pending;
     if (!opz.coda) speechSynthesis.cancel();
-    var u = new SpeechSynthesisUtterance(String(testo).replace(/[¿¡…]/g, ' ').replace(/\s+/g, ' '));
-    u.lang = cod === 'it' ? 'it-IT' : lingua(cod).voce; u.rate = opz.rate || .9; if (opz.pitch) u.pitch = opz.pitch;
-    var v = cod === 'it' ? null : voce(cod); if (v) u.voice = v;
-    var btn = opz.btn;
-    document.querySelectorAll('.lg-play.va').forEach(function (b) { if (b !== btn) b.classList.remove('va'); });
+    document.querySelectorAll('.lg-play.va, .ps-play.va').forEach(function (b) { if (b !== btn) b.classList.remove('va'); });
     if (btn) btn.classList.add('va');
-    u.onend = u.onerror = function () { if (btn) btn.classList.remove('va'); if (opz.fine) opz.fine(); };
-    speechSynthesis.speak(u);
+    function di() {
+      var u = new SpeechSynthesisUtterance(String(testo).replace(/[¿¡…]/g, ' ').replace(/\s+/g, ' '));
+      u.lang = cod === 'it' ? 'it-IT' : lingua(cod).voce; u.rate = opz.rate || .9; if (opz.pitch) u.pitch = opz.pitch;
+      var v = cod === 'it' ? null : voce(cod); if (v) u.voice = v;
+      u.onend = u.onerror = function () { if (corrente === u) corrente = null; if (btn) btn.classList.remove('va'); if (opz.fine) opz.fine(); };
+      corrente = u;
+      if (speechSynthesis.paused) speechSynthesis.resume();
+      speechSynthesis.speak(u);
+    }
+    conVoci(function () { if (occupato && !opz.coda) setTimeout(di, 80); else di(); });
   }
   /* pulsanti 🔊 dichiarativi: <button class="lg-play" data-t="..." data-c="en"> */
   document.addEventListener('click', function (e) {

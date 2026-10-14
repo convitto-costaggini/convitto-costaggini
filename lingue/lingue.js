@@ -53,6 +53,22 @@ window.LINGUE_SITO = (function () {
     try { speechSynthesis.addEventListener('voiceschanged', via, { once: true }); } catch (e) {}
     setTimeout(via, 1000);
   }
+  /* se il dispositivo non ha la voce di una lingua, o la voce va in errore, lo diciamo (una volta per lingua)
+     invece di restare muti */
+  var avvisati = {};
+  function avvisoVoce(cod, motivo) {
+    if (avvisati[cod + motivo]) return; avvisati[cod + motivo] = 1;
+    var nome = cod === 'it' ? 'italiano' : lingua(cod).nome.toLowerCase();
+    var testo = motivo === 'not-allowed' ? 'Il browser ha bloccato la voce: toccate di nuovo 🔊.'
+      : 'Su questo dispositivo manca la voce in ' + nome + '. Per sentirla, installatela: sul telefono in Impostazioni › Sintesi vocale (Samsung: Gestione generale › Sintesi vocale); su Windows in Impostazioni › Ora e lingua › Voce.';
+    var d = document.createElement('div');
+    d.setAttribute('role', 'status');
+    d.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:300;max-width:min(520px,calc(100vw - 32px));background:#2C3E2D;color:#fff;font:600 .84rem/1.5 var(--fu,sans-serif);padding:.8rem 1rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.25);cursor:pointer';
+    d.textContent = '🔇 ' + testo;
+    d.onclick = function () { d.remove(); };
+    document.body.appendChild(d);
+    setTimeout(function () { if (d.parentNode) d.remove(); }, 9000);
+  }
   function ascolta(testo, cod, opz) {
     opz = opz || {};
     if (!parla) return;
@@ -64,12 +80,18 @@ window.LINGUE_SITO = (function () {
       var u = new SpeechSynthesisUtterance(String(testo).replace(/[¿¡…]/g, ' ').replace(/\s+/g, ' '));
       u.lang = cod === 'it' ? 'it-IT' : lingua(cod).voce; u.rate = opz.rate || .9; if (opz.pitch) u.pitch = opz.pitch;
       var v = cod === 'it' ? null : voce(cod); if (v) u.voice = v;
-      u.onend = u.onerror = function () { if (corrente === u) corrente = null; if (btn) btn.classList.remove('va'); if (opz.fine) opz.fine(); };
+      u.onend = u.onerror = function (ev) {
+        if (corrente === u) corrente = null; if (btn) btn.classList.remove('va'); if (opz.fine) opz.fine();
+        var err = ev && ev.error; if (err && err !== 'interrupted' && err !== 'canceled') avvisoVoce(cod, err === 'not-allowed' ? err : 'manca');
+      };
       corrente = u;
       if (speechSynthesis.paused) speechSynthesis.resume();
       speechSynthesis.speak(u);
     }
-    conVoci(function () { if (occupato && !opz.coda) setTimeout(di, 80); else di(); });
+    conVoci(function () {
+      if (cod !== 'it' && speechSynthesis.getVoices().length && !voce(cod)) avvisoVoce(cod, 'manca');
+      if (occupato && !opz.coda) setTimeout(di, 80); else di();
+    });
   }
   /* pulsanti 🔊 dichiarativi: <button class="lg-play" data-t="..." data-c="en"> */
   document.addEventListener('click', function (e) {

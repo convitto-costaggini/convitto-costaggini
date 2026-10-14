@@ -141,19 +141,12 @@
 
   /* voce del telefono */
   var parla = 'speechSynthesis' in window;
+  /* la voce passa dalla funzione comune del minisito (lingue.js), che aggira i difetti noti di Chrome e Android */
   function ascolta(testo, cod, btn) {
     if (!parla) return;
-    var l = LINGUE.filter(function (x) { return x.cod === cod; })[0];
-    speechSynthesis.cancel();
-    var u = new SpeechSynthesisUtterance(testo.replace(/[¿¡]/g, ''));
-    u.lang = l.voce; u.rate = .9;
-    var v = speechSynthesis.getVoices().filter(function (x) { return x.lang && x.lang.replace('_', '-').indexOf(cod) === 0; });
-    var pref = v.filter(function (x) { return x.lang.replace('_', '-') === l.voce; })[0] || v[0];
-    if (pref) u.voice = pref;
-    document.querySelectorAll('.ps-play.va').forEach(function (b) { b.classList.remove('va'); });
-    if (btn) { btn.classList.add('va'); u.onend = u.onerror = function () { btn.classList.remove('va'); }; }
-    speechSynthesis.speak(u);
+    SITO.ascolta(testo, cod, { btn: btn });
   }
+
 
   var elSez = document.getElementById('ps-sezioni');
   function chips() {

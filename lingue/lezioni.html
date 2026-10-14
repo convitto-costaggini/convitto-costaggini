@@ -323,8 +323,8 @@
     var pt = miPunti.reduce(function (a, b) { return a + b; }, 0);
     corpo('<div class="lz-box' + (L.leggi('lz-mi-it', false) ? ' lz-mostra-it' : '') + '" id="lz-mbox"><div class="lz-mi"><label><input type="checkbox" id="lz-mi-it"' + (L.leggi('lz-mi-it', false) ? ' checked' : '') + '/> Traduzione italiana</label><span class="pt">Passo ' + (miN + 1) + ' di ' + M.passi.length + ' · ⭐ ' + pt + '</span></div>' +
       (p.situazione ? '<p class="lz-sit">' + esc(p.situazione) + '</p>' : '') +
-      (p.dice ? '<div class="lz-chef"><span class="av" aria-hidden="true">👩‍🍳</span><div class="bb"><span class="nm">' + esc(M.chef) + '</span><div class="tx"><span lang="' + lin + '">' + esc(p.dice) + '</span>' + L.play(p.dice, lin, 'Ascolta') + '</div><div class="it">' + esc(p.it) + '</div></div></div>' : '') +
-      '<p class="ex-dom" style="text-align:left">' + esc(p.domanda || 'Che cosa fai?') + '</p><div class="ex-opz">' + ordine.map(function (i) { return '<button type="button" data-mi="' + i + '">' + esc(p.o[i][0]) + '</button>'; }).join('') + '</div><div id="lz-fb"></div></div>');
+      (p.dice ? '<div class="lz-chef"><span class="av" aria-hidden="true">' + (M.avatar || '👩‍🍳') + '</span><div class="bb"><span class="nm">' + esc(M.chef) + '</span><div class="tx"><span lang="' + lin + '">' + esc(p.dice) + '</span>' + L.play(p.dice, lin, 'Ascolta') + '</div><div class="it">' + esc(p.it) + '</div></div></div>' : '') +
+      '<p class="ex-dom" style="text-align:left">' + esc(p.domanda || M.domanda || 'Che cosa fai?') + '</p><div class="ex-opz">' + ordine.map(function (i) { return '<button type="button" data-mi="' + i + '">' + esc(p.o[i][0]) + '</button>'; }).join('') + '</div><div id="lz-fb"></div></div>');
     if (p.dice && L.parla) setTimeout(function () { L.ascolta(p.dice, lin, { btn: document.querySelector('.lz-chef .lg-play') }); }, 300);
   }
   function rispondiMissione(b) {

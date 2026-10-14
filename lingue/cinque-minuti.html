@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Lezione in 5 minuti | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Per i docenti: una lezione guidata completa (mini-lezione, esercizi, missione, verifica A/B, versione facilitata) preparata con un'intelligenza artificiale gratuita, senza account e senza costi."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .cm-passo{background:#fff;border:1px solid var(--av3);border-radius:18px;box-shadow:var(--sh-sm);padding:1.2rem 1.15rem;margin-bottom:1.1rem}
+  .cm-passo h2{font-family:var(--fd);font-weight:400;font-size:1.4rem;color:var(--bosco);margin:0 0 .3rem;display:flex;gap:.6rem;align-items:center}
+  .cm-passo h2 .n{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--oro);color:#fff;font:800 .9rem var(--fu);display:flex;align-items:center;justify-content:center}
+  .cm-passo.spento{opacity:.55}
+  .cm-griglia{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:.8rem;margin-top:.8rem}
+  .cm-campo label{display:block;font:800 .62rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);margin-bottom:.3rem}
+  .cm-campo select,.cm-campo input,.cm-campo textarea{width:100%;font:500 .92rem var(--fu);padding:.6rem .7rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--bco);color:var(--txt)}
+  .cm-campo textarea{min-height:90px;resize:vertical;line-height:1.5}
+  .cm-campo small{display:block;font-size:.74rem;color:var(--txt2);margin-top:.25rem;line-height:1.45}
+  .cm-largo{grid-column:1/-1}
+  .cm-bott{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+  .cm-ia{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+  .cm-ia a{font:700 .74rem var(--fu);padding:.5rem .85rem;border-radius:999px;border:1.5px solid var(--av3);background:var(--bco);color:var(--bosco);text-decoration:none}
+  .cm-ia a:hover{border-color:var(--oro)}
+  .cm-richiesta{width:100%;min-height:150px;font:500 .78rem/1.5 ui-monospace,Consolas,monospace;padding:.7rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--av);color:var(--txt);margin-top:.7rem}
+  .cm-risposta{width:100%;min-height:170px;font:500 .8rem/1.5 ui-monospace,Consolas,monospace;padding:.7rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--bco);color:var(--txt)}
+  .cm-esito{margin-top:.9rem}
+  .cm-ok{background:#ecfdf5;border:1px solid #a7f3d0;border-radius:14px;padding:1rem 1.1rem;color:#065f46}
+  .cm-ok h3{font-family:var(--fd);font-weight:400;font-size:1.35rem;margin:0 0 .3rem;color:#065f46}
+  .cm-ok ul{margin:.3rem 0 0;padding-left:1.1rem;font-size:.86rem;line-height:1.6}
+  .cm-ko{background:#fef2f2;border:1px solid #fecaca;border-radius:14px;padding:1rem 1.1rem;color:#991b1b;font-size:.88rem;line-height:1.6}
+  .cm-ko ul{margin:.3rem 0 .6rem;padding-left:1.1rem}
+  .cm-avv{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:.7rem .9rem;color:#713f12;font-size:.82rem;line-height:1.55;margin-top:.7rem}
+  .cm-mie{display:grid;gap:.5rem;margin-top:.7rem}
+  .cm-mia{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;background:var(--av);border-radius:12px;padding:.65rem .8rem}
+  .cm-mia .t{flex:1;min-width:180px}
+  .cm-mia b{display:block;color:var(--bosco)}
+  .cm-mia small{color:var(--txt2);font-size:.76rem}
+  .cm-mia .lg-btn{min-height:36px;padding:.4rem .7rem}
+  .cm-vuoto{font-size:.86rem;color:var(--txt2);margin:.5rem 0 0}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="cinque-minuti">
+<div class="lg-anteprima">Anteprima per i docenti · strumento in prova</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Per i docenti · gratis, senza account</p>
+      <h1>Lezione in <em>5 minuti</em></h1>
+      <p>Scegliete lingua, livello, indirizzo e argomento: il sito scrive per voi la richiesta perfetta per un'intelligenza artificiale gratuita. Incollate la risposta e ottenete una lezione guidata completa, come quelle già pronte: mini-lezione, esercizi, missione, verifica in due file e versione facilitata.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez">
+    <div class="w" style="max-width:900px">
+
+      <div class="cm-passo" id="cm-p1">
+        <h2><span class="n">1</span> Che lezione vi serve?</h2>
+        <div class="cm-griglia">
+          <div class="cm-campo"><label for="cm-lin">Lingua</label><select id="cm-lin"><option value="en">Inglese</option><option value="es">Spagnolo</option></select></div>
+          <div class="cm-campo"><label for="cm-liv">Livello</label><select id="cm-liv"><option>A1</option><option selected>A2</option><option>B1</option><option>B2</option></select><small>A1–A2 biennio · B1–B2 triennio</small></div>
+          <div class="cm-campo"><label for="cm-amb">Indirizzo / ambito</label><select id="cm-amb"><option>Cucina</option><option>Sala</option><option>Pasticceria</option><option>Accoglienza</option><option>Bar</option><option>Cultura e viaggi</option><option>Lavoro all'estero</option></select></div>
+          <div class="cm-campo cm-largo"><label for="cm-arg">Argomento</label><input id="cm-arg" list="cm-arg-l" placeholder="es. Le allergie e le intolleranze a tavola"/><datalist id="cm-arg-l"></datalist></div>
+          <div class="cm-campo cm-largo"><label for="cm-gra">Grammatica da inserire</label><input id="cm-gra" list="cm-gra-l" placeholder="es. il condizionale di cortesia"/><datalist id="cm-gra-l"></datalist><small>Facoltativa, ma è il bello: la regola entra dentro il mestiere.</small></div>
+          <div class="cm-campo cm-largo"><label for="cm-mat">Materiale autentico (facoltativo)</label><textarea id="cm-mat" placeholder="Incollate qui un menu, una ricetta, un'e-mail, un articolo: l'IA lo userà come base per lessico ed esercizi."></textarea><small>Non incollate mai nomi o dati personali di studenti o colleghi.</small></div>
+          <div class="cm-campo cm-largo"><label for="cm-not">Indicazioni per l'IA (facoltative)</label><input id="cm-not" placeholder="es. ambientare la missione in un hotel di Valencia; classe con molti principianti"/></div>
+        </div>
+        <div class="cm-bott"><button type="button" class="lg-btn pieno" id="cm-prepara">✍️ Prepara la richiesta</button></div>
+      </div>
+
+      <div class="cm-passo spento" id="cm-p2">
+        <h2><span class="n">2</span> Copiate la richiesta e incollatela in un'IA gratuita</h2>
+        <p class="lg-sot" style="margin:0">Una qualsiasi va bene. Se la risposta si interrompe a metà, scrivete all'IA: «continua».</p>
+        <textarea class="cm-richiesta" id="cm-rich" readonly placeholder="Compilate il passo 1 e premete «Prepara la richiesta»."></textarea>
+        <div class="cm-bott"><button type="button" class="lg-btn pieno" id="cm-copia" disabled>📋 Copia la richiesta</button></div>
+        <div class="cm-ia"><a href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT ↗</a><a href="https://gemini.google.com/" target="_blank" rel="noopener">Gemini ↗</a><a href="https://copilot.microsoft.com/" target="_blank" rel="noopener">Copilot ↗</a><a href="https://claude.ai/" target="_blank" rel="noopener">Claude ↗</a></div>
+        <div class="cm-avv">🔒 Il sito non manda nulla a nessuno: la richiesta la incollate voi, nel servizio che preferite, con il vostro account. Non inserite dati personali.</div>
+      </div>
+
+      <div class="cm-passo spento" id="cm-p3">
+        <h2><span class="n">3</span> Incollate qui la risposta dell'IA</h2>
+        <textarea class="cm-risposta" id="cm-risp" placeholder="Incollate tutta la risposta, anche se contiene altro testo: il sito trova da solo la parte che serve."></textarea>
+        <div class="cm-bott"><button type="button" class="lg-btn pieno" id="cm-crea">⚡ Crea la lezione</button><button type="button" class="lg-btn" id="cm-esempio">Prova con un esempio</button></div>
+        <div class="cm-esito" id="cm-esito"></div>
+      </div>
+
+      <div class="cm-passo" id="cm-p4">
+        <h2><span class="n">★</span> Le mie lezioni</h2>
+        <p class="lg-sot" style="margin:0">Restano solo in questo browser. Per passarle a un collega o tenerle al sicuro, scaricate il file.</p>
+        <div class="cm-mie" id="cm-mie"></div>
+        <div class="cm-bott"><label class="lg-btn" style="cursor:pointer">📂 Carica un file di lezione<input type="file" id="cm-file" accept=".json,application/json" hidden/></label></div>
+      </div>
+
+      <p class="lg-nota">🎓 <b>Il docente resta l'autore.</b> L'IA sbaglia: prima di usare la lezione in classe, apritela e controllatela tutta (scheda «Docente» compresa). Le lezioni preparate qui non vengono pubblicate sul sito: le vede solo chi riceve il link.</p>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/pacchetto.js"></script>
+<script src="lingue/lezioni-dati.js"></script>
+<script>
+(function () {
+  'use strict';
+  var L = window.LINGUE_SITO, esc = L.esc, $ = function (id) { return document.getElementById(id); };
+
+  /* suggerimenti */
+  var ARG = {
+    'Cucina': ['Leggere e spiegare una ricetta', 'Le attrezzature della cucina', 'Igiene e sicurezza (HACCP)', 'Ordinare le forniture al telefono'],
+    'Sala': ['Le allergie e le intolleranze a tavola', 'Presentare il menu del giorno', 'La mise en place', 'Il conto e i metodi di pagamento'],
+    'Pasticceria': ['Presentare la vetrina dei dolci', 'Una torta su ordinazione', 'Ingredienti, dosi e cotture'],
+    'Accoglienza': ['Il check-in', 'Il check-out e il conto', 'Indicare la strada e consigliare la città', 'Prenotazioni al telefono e per e-mail'],
+    'Bar': ['Ordinare e servire i cocktail', 'La colazione al bar', 'Caffè: le varianti italiane spiegate agli stranieri'],
+    'Cultura e viaggi': ['A tavola nel mondo: usi e galateo', 'Le feste e i piatti tradizionali', 'Presentare la cucina italiana regionale'],
+    "Lavoro all'estero": ['Il curriculum e la lettera di presentazione', 'Il colloquio per una stagione all\'estero', 'Il primo giorno di lavoro all\'estero']
+  };
+  var GRA = {
+    en: { A1: ['present simple', 'the imperative', 'there is / there are', 'can for requests', 'numbers, prices and quantities'], A2: ['past simple', 'comparatives and superlatives', 'going to for plans', 'would like / could for polite requests'], B1: ['present perfect vs past simple', 'first conditional', 'modal verbs of obligation and advice', 'polite indirect questions'], B2: ['the passive', 'reported speech', 'second and third conditional', 'formal register in e-mails'] },
+    es: { A1: ['presente de indicativo', 'ser y estar', 'hay / está', 'imperativo con tú', 'números, precios y cantidades'], A2: ['pretérito indefinido', 'comparativos y superlativos', 'ir a + infinitivo', 'imperativo con usted'], B1: ['pretérito perfecto vs indefinido', 'pretérito imperfecto', 'condicional de cortesía', 'perífrasis de obligación'], B2: ['subjuntivo para recomendar y pedir', 'estilo indirecto', 'oraciones condicionales', 'registro formal en correos'] }
+  };
+  function suggerimenti() {
+    $('cm-arg-l').innerHTML = (ARG[$('cm-amb').value] || []).map(function (a) { return '<option value="' + esc(a) + '">'; }).join('');
+    $('cm-gra-l').innerHTML = (GRA[$('cm-lin').value][$('cm-liv').value] || []).map(function (a) { return '<option value="' + esc(a) + '">'; }).join('');
+  }
+  ['cm-lin', 'cm-liv', 'cm-amb'].forEach(function (id) { $(id).addEventListener('change', suggerimenti); });
+  suggerimenti();
+
+  /* ───── la richiesta per l'IA ───── */
+  var NOME = { en: 'inglese', es: 'spagnolo' }, LUOGHI = { en: 'Londra, Dublino, Edimburgo o New York', es: 'Madrid, Barcellona, Siviglia o Valencia' };
+  function richiesta() {
+    var lin = $('cm-lin').value, liv = $('cm-liv').value, amb = $('cm-amb').value, arg = $('cm-arg').value.trim(), gra = $('cm-gra').value.trim(), mat = $('cm-mat').value.trim(), note = $('cm-not').value.trim();
+    var N = NOME[lin];
+    return [
+      'Sei un docente esperto di ' + N + ' in un istituto alberghiero italiano (enogastronomia, sala, pasticceria, accoglienza turistica). Prepara una lezione interattiva completa per studenti italiani di livello ' + liv + ' (QCER).',
+      '',
+      'ARGOMENTO: ' + (arg || 'a tua scelta, legato all\'ambito') + '. AMBITO: ' + amb + '.' + (gra ? ' GRAMMATICA DA INSEGNARE DENTRO IL CONTESTO PROFESSIONALE: ' + gra + '.' : ''),
+      'Contesto: lavoro vero in ristoranti, cucine, bar e hotel, con uno sguardo alla cultura internazionale e ai viaggi: molti studenti lavoreranno all\'estero. Ambienta la missione in una città come ' + LUOGHI[lin] + '.',
+      note ? 'INDICAZIONI DEL DOCENTE: ' + note : '',
+      mat ? 'MATERIALE AUTENTICO DA USARE COME BASE (lessico, esempi, esercizi):\n"""\n' + mat.slice(0, 6000) + '\n"""' : '',
+      '',
+      'REGOLE',
+      '- Tutte le frasi in ' + N + ' devono essere corrette, naturali e adatte al livello ' + liv + '. Le spiegazioni, le consegne e le traduzioni sono in italiano, semplici e brevi.',
+      '- La "pronuncia" è una trascrizione all\'italiana semplice (es. "a pinc əv sòlt"); se non sei sicuro lascia "".',
+      '- Nelle domande a scelta la PRIMA opzione è sempre quella giusta (il sito le mescola); le altre sono errori plausibili e tipici degli studenti italiani.',
+      '- Nella missione ogni passo ha esattamente una risposta giusta (1) e due sbagliate (0), ciascuna con una spiegazione in italiano.',
+      '- Nell\'esercizio "completa" le parole da indovinare vanno tra parentesi quadre, es. "[Add] a pinch of salt"; 5-7 parentesi.',
+      '- Niente nomi di studenti reali né dati personali.',
+      '- Rispondi SOLO con un oggetto JSON valido (doppi apici, nessun commento, nessun testo prima o dopo), con ESATTAMENTE questa struttura e queste chiavi:',
+      '',
+      JSON.stringify(SCHEMA(lin), null, 1),
+      '',
+      'Quantità: 6 schede più una scheda finale di riepilogo (esempi [] e domanda null); esercizi nell\'ordine: abbina (6 coppie), scelta (6 voci), completa, ordina (6 passi), scelta (6 voci), ascolta (5 voci); missione di 7 passi; verifica con 10 parole, 8 domande a scelta, 6 frasi da tradurre e una prova aperta.'
+    ].filter(function (r) { return r !== ''; }).join('\n').replace(/\n{3,}/g, '\n\n');
+  }
+  function SCHEMA(lin) {
+    var F = 'frase in ' + NOME[lin];
+    return {
+      titolo: 'titolo breve in italiano', sottotitolo: 'la grammatica o il tema in italiano', icona: 'una emoji', descrizione: 'una frase in italiano per gli studenti',
+      docente: { obiettivi: ['obiettivo in italiano', '…'], spunti: ['spunto di cultura, estero o collegamento con i laboratori, in italiano', '…'] },
+      schede: [{ titolo: 'titolo in italiano', testo: 'spiegazione breve in italiano; **grassetto** per le parole chiave', esempi: [[F, 'traduzione italiana', 'pronuncia all\'italiana']], domanda: { testo: 'domanda lampo in italiano', o: ['risposta giusta', 'sbagliata', 'sbagliata'], spiega: 'perché, in italiano' } }],
+      esercizi: [
+        { tipo: 'abbina', titolo: 'titolo', consegna: 'consegna in italiano', coppie: [['parola in ' + NOME[lin], 'significato italiano']] },
+        { tipo: 'scelta', titolo: 'titolo', consegna: 'consegna', voci: [{ d: F + ' con _____ al posto della parola mancante (suggerimento in italiano tra parentesi)', o: ['giusta', 'sbagliata', 'sbagliata'] }] },
+        { tipo: 'completa', titolo: 'titolo', consegna: 'consegna', testo: 'testo in ' + NOME[lin] + ' con le [parole] da completare tra parentesi quadre', intrusi: ['parola sbagliata', 'parola sbagliata'] },
+        { tipo: 'ordina', titolo: 'titolo', consegna: 'consegna', passi: [[F + ' (in ordine giusto)', 'traduzione italiana']] },
+        { tipo: 'ascolta', titolo: 'titolo', consegna: 'consegna', voci: [{ t: F + ' da ascoltare', o: ['significato italiano giusto', 'sbagliato', 'sbagliato'] }] }
+      ],
+      missione: { titolo: 'titolo in italiano', chef: 'nome di chi parla (cliente, chef, ospite)', avatar: 'una emoji', domanda: 'Che cosa rispondi?', intro: 'situazione in italiano', passi: [{ dice: F, it: 'traduzione italiana', situazione: 'facoltativa, in italiano', o: [['risposta giusta in ' + NOME[lin], 1, 'spiegazione'], ['risposta sbagliata', 0, 'spiegazione'], ['risposta sbagliata', 0, 'spiegazione']] }], esiti: ['finale ottimo', 'finale buono', 'finale incerto', 'finale negativo'] },
+      verifica: [
+        { tipo: 'traduci', titolo: 'Scrivi la parola in ' + NOME[lin], punti: 1, voci: [['parola italiana', 'traduzione']] },
+        { tipo: 'scelta', titolo: 'Scegli la forma corretta', punti: 1, voci: [{ d: F + ' con _____', o: ['giusta', 'sbagliata', 'sbagliata'] }] },
+        { tipo: 'traduci', titolo: 'Traduci in ' + NOME[lin], punti: 2, voci: [['frase italiana', 'traduzione']] },
+        { tipo: 'aperta', titolo: 'titolo', punti: 5, testo: 'consegna di produzione scritta', facile: 'versione semplificata della consegna' }
+      ]
+    };
+  }
+  $('cm-prepara').addEventListener('click', function () {
+    $('cm-rich').value = richiesta(); $('cm-copia').disabled = false;
+    $('cm-p2').classList.remove('spento'); $('cm-p3').classList.remove('spento');
+    $('cm-p2').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  function copia(testo, b, etichetta) {
+    var fatto = function () { b.textContent = '✓ Copiata'; setTimeout(function () { b.textContent = etichetta; }, 1800); };
+    if (navigator.clipboard) navigator.clipboard.writeText(testo).then(fatto, function () { $('cm-rich').select(); document.execCommand('copy'); fatto(); });
+    else { $('cm-rich').select(); document.execCommand('copy'); fatto(); }
+  }
+  $('cm-copia').addEventListener('click', function () { copia($('cm-rich').value, this, '📋 Copia la richiesta'); });
+
+  /* ───── dalla risposta alla lezione ───── */
+  function estrai(t) {
+    t = String(t || '').replace(/```(?:json)?/gi, '');
+    var a = t.indexOf('{'), b = t.lastIndexOf('}');
+    if (a < 0) throw new Error('Nella risposta non trovo la lezione: l\'IA deve rispondere con un testo che inizia con { e finisce con }.');
+    if (b <= a) throw new Error('La risposta sembra interrotta a metà. Scrivete all\'IA «continua» e incollate qui tutta la risposta, oppure chiedetele di ripetere solo il JSON.');
+    var j = t.slice(a, b + 1).replace(/[“”]/g, '"').replace(/,\s*([}\]])/g, '$1');
+    try { return JSON.parse(j); } catch (e) { throw new Error('Il JSON non è valido (' + e.message + '). Forse la risposta si è interrotta: chiedete all\'IA di «continuare» o di ripetere solo il JSON.'); }
+  }
+  var TIPI = ['abbina', 'scelta', 'completa', 'ordina', 'ascolta'];
+  function testo(x) { return typeof x === 'string' && x.trim() !== ''; }
+  function controlla(o) {
+    var err = [], avv = [];
+    if (!testo(o.titolo)) err.push('manca il titolo');
+    if (!Array.isArray(o.schede) || o.schede.length < 3) err.push('servono almeno 3 schede della mini-lezione');
+    (o.schede || []).forEach(function (s, i) {
+      if (!testo(s.titolo) || !testo(s.testo)) err.push('scheda ' + (i + 1) + ': manca titolo o testo');
+      s.esempi = Array.isArray(s.esempi) ? s.esempi.filter(function (e) { return Array.isArray(e) && testo(e[0]); }).map(function (e) { return [e[0], e[1] || '', e[2] || '']; }) : [];
+      if (s.domanda && !(Array.isArray(s.domanda.o) && s.domanda.o.length >= 2 && testo(s.domanda.testo))) { avv.push('scheda ' + (i + 1) + ': domanda lampo incompleta, tolta'); s.domanda = null; }
+    });
+    if (!Array.isArray(o.esercizi) || !o.esercizi.length) err.push('mancano gli esercizi');
+    o.esercizi = (o.esercizi || []).filter(function (e, i) {
+      var n = 'esercizio ' + (i + 1) + ' (' + (e.tipo || '?') + ')';
+      if (TIPI.indexOf(e.tipo) < 0) { avv.push(n + ': tipo sconosciuto, tolto'); return false; }
+      e.titolo = e.titolo || 'Esercizio'; e.consegna = e.consegna || '';
+      if (e.tipo === 'abbina') { e.coppie = (e.coppie || []).filter(function (c) { return Array.isArray(c) && testo(c[0]) && testo(c[1]); }); if (e.coppie.length < 3) { avv.push(n + ': meno di 3 coppie, tolto'); return false; } }
+      if (e.tipo === 'scelta') { e.voci = (e.voci || []).filter(function (v) { return v && testo(v.d) && Array.isArray(v.o) && v.o.length >= 2; }); if (e.voci.length < 2) { avv.push(n + ': troppe poche domande, tolto'); return false; } }
+      if (e.tipo === 'ascolta') { e.voci = (e.voci || []).filter(function (v) { return v && testo(v.t) && Array.isArray(v.o) && v.o.length >= 2; }); if (e.voci.length < 2) { avv.push(n + ': troppe poche frasi, tolto'); return false; } }
+      if (e.tipo === 'completa') { if (!testo(e.testo) || (e.testo.match(/\[[^\]]+\]/g) || []).length < 2) { avv.push(n + ': mancano le [parole] da completare, tolto'); return false; } e.intrusi = Array.isArray(e.intrusi) ? e.intrusi : []; }
+      if (e.tipo === 'ordina') { e.passi = (e.passi || []).map(function (p) { return Array.isArray(p) ? [p[0], p[1] || ''] : [p, '']; }).filter(function (p) { return testo(p[0]); }); if (e.passi.length < 3) { avv.push(n + ': meno di 3 passi, tolto'); return false; } }
+      return true;
+    });
+    if (o.esercizi && !o.esercizi.length && !err.length) err.push('nessun esercizio utilizzabile');
+    var M = o.missione;
+    if (!M || !Array.isArray(M.passi) || !M.passi.length) err.push('manca la missione');
+    else {
+      M.passi = M.passi.filter(function (p, i) {
+        if (!Array.isArray(p.o)) { avv.push('missione, passo ' + (i + 1) + ': senza risposte, tolto'); return false; }
+        p.o = p.o.map(function (x) { return Array.isArray(x) ? [x[0], x[1] ? 1 : 0, x[2] || ''] : [x.testo || x.t || '', x.giusta ? 1 : 0, x.spiega || '']; }).filter(function (x) { return testo(x[0]); });
+        var g = p.o.filter(function (x) { return x[1]; }).length;
+        if (g !== 1 || p.o.length < 2) { avv.push('missione, passo ' + (i + 1) + ': deve avere una sola risposta giusta, tolto'); return false; }
+        if (!testo(p.dice) && !testo(p.situazione)) { avv.push('missione, passo ' + (i + 1) + ': manca la battuta, tolto'); return false; }
+        return true;
+      });
+      if (!M.passi.length) err.push('nessun passo della missione utilizzabile');
+      M.titolo = M.titolo || 'La missione'; M.intro = M.intro || ''; M.chef = M.chef || ''; M.avatar = M.avatar || '🧑';
+      if (!Array.isArray(M.esiti) || M.esiti.length < 4) M.esiti = ['Perfetto!', 'Bene così!', 'Quasi: riprova.', 'Rifai la lezione e riprova!'];
+    }
+    o.verifica = (Array.isArray(o.verifica) ? o.verifica : []).filter(function (v) {
+      if (v.tipo === 'aperta') return testo(v.testo);
+      if (v.tipo === 'traduci') { v.voci = (v.voci || []).filter(function (x) { return Array.isArray(x) && testo(x[0]) && testo(x[1]); }); return v.voci.length >= 2; }
+      if (v.tipo === 'scelta') { v.voci = (v.voci || []).filter(function (x) { return x && testo(x.d) && Array.isArray(x.o) && x.o.length >= 2; }); return v.voci.length >= 2; }
+      return false;
+    }).map(function (v) { v.punti = +v.punti || 1; v.titolo = v.titolo || 'Esercizio'; if (v.tipo === 'aperta' && !v.facile) v.facile = v.testo; return v; });
+    if (!o.verifica.length) avv.push('la verifica manca o è incompleta: la scheda Docente non avrà le stampe');
+    return { err: err, avv: avv };
+  }
+  function lezioneDa(o, lin) {
+    var d = o.docente || {};
+    var lez = {
+      id: 'mia-' + Date.now().toString(36), propria: true, creata: new Date().toISOString().slice(0, 10),
+      icona: o.icona || '✨', ambito: $('cm-amb').value, titolo: o.titolo, sottotitolo: o.sottotitolo || '', livello: $('cm-liv').value, classi: /^A/.test($('cm-liv').value) ? 'Biennio' : 'Triennio', durata: '1 ora',
+      descrizione: o.descrizione || '',
+      docente: { obiettivi: Array.isArray(d.obiettivi) ? d.obiettivi : [], spunti: Array.isArray(d.spunti) ? d.spunti : [], scaletta: [["10'", 'Mini-lezione alla LIM, con le domande lampo per alzata di mano.'], ["25'", 'Esercizi sul telefono (link qui sotto), da soli o a coppie.'], ["15'", 'Missione alla LIM: la classe vota ogni scelta.'], ["10'", 'Verifica breve (file A e B) o compito scritto.']] },
+      lingue: {}
+    };
+    lez.lingue[lin] = { schede: o.schede, esercizi: o.esercizi, missione: o.missione, verifica: o.verifica };
+    return lez;
+  }
+  var ultima = null;
+  function crea(testoRisposta, lin) {
+    var box = $('cm-esito'), o;
+    try { o = estrai(testoRisposta); } catch (e) { box.innerHTML = '<div class="cm-ko"><b>Non riesco a leggere la risposta.</b><br/>' + esc(e.message) + correzione([e.message]) + '</div>'; return; }
+    var c = controlla(o);
+    if (c.err.length) { box.innerHTML = '<div class="cm-ko"><b>La risposta è incompleta:</b><ul>' + c.err.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' + correzione(c.err.concat(c.avv)) + '</div>'; return; }
+    ultima = lezioneDa(o, lin);
+    mostra(ultima, c.avv);
+  }
+  function correzione(problemi) {
+    var t = 'La risposta che mi hai dato non va bene per questi motivi:\n- ' + problemi.join('\n- ') + '\nCorreggila rispettando esattamente la struttura richiesta e rispondi SOLO con il JSON completo e valido, senza testo prima o dopo.';
+    return '<p style="margin:.5rem 0 .3rem">Copiate questa richiesta di correzione e mandatela all\'IA nella stessa conversazione:</p><textarea class="cm-richiesta" readonly style="min-height:90px">' + esc(t) + '</textarea>';
+  }
+  function conta(l) { var D = l.lingue[Object.keys(l.lingue)[0]]; return D.schede.length + ' schede · ' + D.esercizi.length + ' esercizi · missione di ' + D.missione.passi.length + ' passi · ' + (D.verifica.length ? 'verifica A/B' : 'senza verifica'); }
+  function mostra(l, avv) {
+    $('cm-esito').innerHTML = '<div class="cm-ok"><h3>' + esc(l.icona + ' ' + l.titolo) + '</h3><div>' + esc(l.sottotitolo) + ' · ' + esc(L.lingua(Object.keys(l.lingue)[0]).nome) + ' · ' + esc(l.livello) + '</div><ul><li>' + esc(conta(l)) + '</li></ul>' +
+      (avv && avv.length ? '<div class="cm-avv" style="margin-top:.6rem">Ho sistemato da solo alcune parti:<br/>' + avv.map(esc).join('<br/>') + '</div>' : '') +
+      '<div class="cm-bott"><button type="button" class="lg-btn pieno" data-salva>💾 Salva e apri la lezione</button><button type="button" class="lg-btn" data-scarica>⬇️ Scarica il file</button></div></div>';
+  }
+
+  /* ───── le mie lezioni (solo in questo browser) ───── */
+  function mie() { return L.leggi('mie-lezioni', []) || []; }
+  function salvaMie(a) { L.salva('mie-lezioni', a); elenco(); }
+  function elenco() {
+    var a = mie();
+    $('cm-mie').innerHTML = a.length ? a.map(function (l) {
+      return '<div class="cm-mia"><div class="t"><b>' + esc(l.icona + ' ' + l.titolo) + '</b><small>' + esc(L.lingua(Object.keys(l.lingue)[0]).nome + ' · ' + l.livello + ' · ' + l.ambito + (l.creata ? ' · ' + l.creata : '')) + '</small></div><a class="lg-btn pieno" href="lingue/lezioni.html?mia=' + esc(l.id) + '">Apri</a><button type="button" class="lg-btn" data-giu="' + esc(l.id) + '">⬇️</button><button type="button" class="lg-btn" data-via="' + esc(l.id) + '" aria-label="Elimina">🗑️</button></div>';
+    }).join('') : '<p class="cm-vuoto">Ancora nessuna lezione salvata in questo browser.</p>';
+  }
+  function scarica(l) {
+    var b = new Blob([JSON.stringify(l, null, 1)], { type: 'application/json' }), a = document.createElement('a');
+    a.href = URL.createObjectURL(b); a.download = 'lezione-' + l.titolo.toLowerCase().replace(/[^a-z0-9àèéìòù]+/g, '-').replace(/^-|-$/g, '') + '.json';
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.hasAttribute('data-salva') && ultima) { var a = mie().filter(function (x) { return x.id !== ultima.id; }); a.unshift(ultima); salvaMie(a); location.href = 'lingue/lezioni.html?mia=' + ultima.id; }
+    else if (b.hasAttribute('data-scarica') && ultima) scarica(ultima);
+    else if (b.dataset.giu) { var l = mie().filter(function (x) { return x.id === b.dataset.giu; })[0]; if (l) scarica(l); }
+    else if (b.dataset.via) { if (confirm('Eliminare questa lezione da questo browser?')) salvaMie(mie().filter(function (x) { return x.id !== b.dataset.via; })); }
+  });
+  $('cm-file').addEventListener('change', function () {
+    var f = this.files[0]; if (!f) return;
+    f.text().then(function (t) {
+      var l = JSON.parse(t);
+      if (!l || !l.lingue || !l.titolo) throw new Error();
+      l.id = l.id && /^mia-/.test(l.id) ? l.id : 'mia-' + Date.now().toString(36); l.propria = true;
+      var a = mie().filter(function (x) { return x.id !== l.id; }); a.unshift(l); salvaMie(a);
+      alert('Lezione «' + l.titolo + '» caricata.');
+    }).catch(function () { alert('Questo file non è una lezione valida.'); });
+    this.value = '';
+  });
+  $('cm-crea').addEventListener('click', function () { crea($('cm-risp').value, $('cm-lin').value); });
+
+  /* esempio: una delle lezioni pronte, nel formato che chiediamo all'IA */
+  $('cm-esempio').addEventListener('click', function () {
+    var lin = $('cm-lin').value, l = window.LEZIONI[1], D = l.lingue[lin];
+    $('cm-amb').value = l.ambito; $('cm-liv').value = 'A2';
+    var o = { titolo: l.titolo + ' (esempio)', sottotitolo: l.sottotitolo, icona: l.icona, descrizione: l.descrizione, docente: { obiettivi: l.docente.obiettivi, spunti: l.docente.spunti }, schede: D.schede, esercizi: D.esercizi, missione: D.missione, verifica: D.verifica };
+    $('cm-risp').value = 'Ecco la lezione richiesta:\n```json\n' + JSON.stringify(o, null, 1) + '\n```';
+    $('cm-p3').classList.remove('spento');
+    crea($('cm-risp').value, lin);
+  });
+  elenco();
+})();
+</script>
+</body>
+</html>

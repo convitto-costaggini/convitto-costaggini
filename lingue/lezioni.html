@@ -143,12 +143,12 @@
 <script src="nav.min.js"></script>
 <script src="lingue/lingue.js"></script>
 <script src="lingue/qrcode.js"></script>
+<script src="lingue/pacchetto.js"></script>
 <script src="lingue/lezioni-dati.js"></script>
 <script>
 (function () {
   'use strict';
   var L = window.LINGUE_SITO, esc = L.esc, vista = document.getElementById('lz-vista'), sez = document.getElementById('lz');
-  var DISPONIBILI = ['en', 'es'];
   var q = new URLSearchParams(location.search);
   if (q.get('lin') && L.lingua(q.get('lin'))) L.impostaLingua(q.get('lin'));
   var lez = null, lin = L.linguaScelta(), tab = 'lezione', facile = !!L.leggi('lz-facile', false);
@@ -168,13 +168,23 @@
       }).join('') +
       (window.LEZIONI_IN_ARRIVO || []).map(function (l) {
         return '<div class="lz-card presto"><span class="ic">' + l.icona + '</span><span class="amb">' + esc(l.ambito) + ' · ' + esc(l.livello) + ' · ' + esc(l.classi) + '</span><h3>' + esc(l.titolo) + '</h3><p class="sot">' + esc(l.sottotitolo) + '</p><span class="vai" style="color:var(--txt2)">In preparazione</span></div>';
-      }).join('') + '</div>';
+      }).join('') + '</div>' + mieCatalogo();
+  }
+  function mie() { return L.leggi('mie-lezioni', []) || []; }
+  function mieCatalogo() {
+    var a = mie(); if (!a.length) return '';
+    return '<h2 class="lg-h2" style="margin-top:2rem">Le mie <em>lezioni</em></h2><p class="lg-sot">Preparate con «Lezione in 5 minuti» e salvate solo in questo browser.</p><div class="lz-elenco">' + a.map(function (l) {
+      return '<a class="lz-card" href="lingue/lezioni.html?mia=' + esc(l.id) + '"><span class="ic">' + esc(l.icona) + '</span><span class="amb">' + esc(l.ambito) + ' · ' + esc(l.livello) + ' · ' + esc(L.lingua(Object.keys(l.lingue)[0]).nome) + '</span><h3>' + esc(l.titolo) + '</h3><p class="sot">' + esc(l.sottotitolo) + '</p><span class="vai">Apri la lezione →</span></a>';
+    }).join('') + '</div>';
   }
 
   /* ───── la lezione ───── */
-  function apri(id) {
-    lez = window.LEZIONI.filter(function (l) { return l.id === id; })[0];
+  function apri(id) { apriLezione(window.LEZIONI.filter(function (l) { return l.id === id; })[0]); }
+  /* anche le lezioni dei docenti: salvate nel browser (?mia=) o dentro il link (#p=, versione per i ragazzi) */
+  function apriLezione(l) {
+    lez = l;
     if (!lez) { catalogo(); return; }
+    if (!lez.lingue[lin]) { lin = Object.keys(lez.lingue)[0]; L.impostaLingua(lin); }
     tab = ['lezione', 'esercizi', 'missione', 'docente'].indexOf(q.get('t')) >= 0 ? q.get('t') : 'lezione';
     schedaN = 0; esN = 0; esPunti = []; miN = 0; miPunti = [];
     disegna();
@@ -183,10 +193,12 @@
     sez.classList.toggle('facile', facile);
     var h = '<div class="lz-testa"><a class="lg-btn" href="lingue/lezioni.html" style="min-height:38px;padding:.45rem .8rem" aria-label="Tutte le lezioni">←</a><h2>' + lez.icona + ' ' + esc(lez.titolo) + '<small>' + esc(lez.sottotitolo) + ' · ' + esc(lez.livello) + ' · ' + esc(lez.classi) + '</small></h2></div>';
     if (!lez.lingue[lin]) {
-      vista.innerHTML = h + '<div class="lg-card lz-avviso"><p style="margin:0">Per ora questa lezione è disponibile in <b>inglese</b> e in <b>spagnolo</b>.</p><div class="bott">' + DISPONIBILI.map(function (c) { return '<button type="button" class="lg-btn pieno" data-lin="' + c + '">Passa allo ' + (c === 'en' ? 'inglese' : 'spagnolo') + '</button>'; }).join('').replace('allo inglese', 'all\'inglese') + '</div></div>';
+      var disp = Object.keys(lez.lingue);
+      vista.innerHTML = h + '<div class="lg-card lz-avviso"><p style="margin:0">Questa lezione è disponibile in: <b>' + disp.map(function (c) { return L.lingua(c).nome.toLowerCase(); }).join('</b> e <b>') + '</b>.</p><div class="bott">' + disp.map(function (c) { return '<button type="button" class="lg-btn pieno" data-lin="' + c + '">Passa a: ' + L.lingua(c).nome.toLowerCase() + '</button>'; }).join('') + '</div></div>';
       return;
     }
-    var T = [['lezione', '📖', 'Lezione'], ['esercizi', '✏️', 'Esercizi'], ['missione', '🎯', 'Missione'], ['docente', '👩‍🏫', 'Docente']];
+    var T = [['lezione', '📖', 'Lezione'], ['esercizi', '✏️', 'Esercizi'], ['missione', '🎯', 'Missione'], ['docente', '👩‍🏫', 'Docente']].filter(function (t) { return t[0] !== 'docente' || lez.docente; });
+    if (tab === 'docente' && !lez.docente) tab = 'lezione';
     h += '<div class="lz-tab" role="group" aria-label="Parti della lezione">' + T.map(function (t) { return '<button type="button" data-tab="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '"' + (t[0] === 'docente' ? ' class="doc"' : '') + '><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>' +
       '<label class="lz-facile"><input type="checkbox" id="lz-fac"' + (facile ? ' checked' : '') + '/> Versione facilitata (DSA/BES)</label><div id="lz-corpo"></div>';
     vista.innerHTML = h;
@@ -342,17 +354,33 @@
   }
 
   /* area docente */
-  function linkStudenti() { return location.origin + '/lingue/lezioni.html?l=' + lez.id + '&lin=' + lin; }
+  var linkCorrente = '';
+  function linkStudenti() {
+    if (!lez.propria) return Promise.resolve(location.origin + '/lingue/lezioni.html?l=' + lez.id + '&lin=' + lin);
+    /* lezione del docente: viaggia dentro il link, senza verifica né scheda docente */
+    var v = { id: lez.id, icona: lez.icona, ambito: lez.ambito, titolo: lez.titolo, sottotitolo: lez.sottotitolo, livello: lez.livello, classi: lez.classi, descrizione: lez.descrizione, lingue: {} };
+    v.lingue[lin] = { schede: D().schede, esercizi: D().esercizi, missione: D().missione, verifica: [] };
+    return window.PACCHETTO.codifica(v).then(function (t) { return location.origin + '/lingue/lezioni.html#p=' + t; });
+  }
   function docente() {
     var d = lez.docente;
     corpo('<div class="lz-doc">' +
-      '<div class="lg-card"><h3>🔗 Per i ragazzi</h3><p class="lz-cons">Proiettate il QR alla LIM o mandate il link sul gruppo della classe: la lezione si apre già in ' + L.lingua(lin).nome.toLowerCase() + '. Nessuna registrazione, nessun dato raccolto.</p><div class="lz-qr"><canvas id="lz-qr" width="150" height="150" aria-label="Codice QR della lezione"></canvas><div class="lk"><input type="text" readonly id="lz-link" value="' + esc(linkStudenti()) + '"/><div class="lz-bott"><button type="button" class="lg-btn pieno" data-copia>📋 Copia il link</button><button type="button" class="lg-btn" data-lim>🖥️ QR a tutto schermo</button></div></div></div></div>' +
+      '<div class="lg-card"><h3>🔗 Per i ragazzi</h3><p class="lz-cons">Proiettate il QR alla LIM o mandate il link sul gruppo della classe: la lezione si apre già in ' + L.lingua(lin).nome.toLowerCase() + '. Nessuna registrazione, nessun dato raccolto.</p><div class="lz-qr"><canvas id="lz-qr" width="150" height="150" aria-label="Codice QR della lezione"></canvas><div class="lk"><input type="text" readonly id="lz-link" value="…"/><div class="lz-bott"><button type="button" class="lg-btn pieno" data-copia>📋 Copia il link</button><button type="button" class="lg-btn" data-lim>🖥️ QR a tutto schermo</button></div></div></div></div>' +
       '<div class="lg-card" style="margin-top:1rem"><h3>📝 La verifica</h3><p class="lz-cons">Due file con domande diverse (A e B), da stampare. La versione facilitata ha caratteri grandi, meno alternative e i suggerimenti. Le soluzioni sono su un foglio a parte.</p><div class="lz-bott"><button type="button" class="lg-btn pieno" data-stampa="A">🖨️ File A</button><button type="button" class="lg-btn pieno" data-stampa="B">🖨️ File B</button><button type="button" class="lg-btn" data-stampa="A" data-fac="1">File A facilitato</button><button type="button" class="lg-btn" data-stampa="B" data-fac="1">File B facilitato</button><button type="button" class="lg-btn oro" data-stampa="S">Soluzioni</button></div></div>' +
       '<div class="lg-card" style="margin-top:1rem"><h3>⏱️ In un\'ora di lezione</h3><table class="lz-scal">' + d.scaletta.map(function (r) { return '<tr><td>' + esc(r[0]) + '</td><td>' + esc(r[1]) + '</td></tr>'; }).join('') + '</table>' +
       '<h3>🎯 Obiettivi</h3><ul>' + d.obiettivi.map(function (o) { return '<li>' + esc(o) + '</li>'; }).join('') + '</ul>' +
       '<h3>🌍 Spunti</h3><ul>' + d.spunti.map(function (o) { return '<li>' + esc(o) + '</li>'; }).join('') + '</ul></div>' +
       '<p class="lg-nota">🎓 <b>Contenuti in revisione.</b> Traduzioni ed esercizi sono in verifica da parte dei docenti di lingue. Segnalazioni e proposte sono benvenute: questa lezione è un esempio di ciò che i docenti potranno preparare in pochi minuti.</p></div>');
-    qr(linkStudenti(), document.getElementById('lz-qr'), 4);
+    var verifica = D().verifica && D().verifica.length;
+    if (!verifica) { var vv = document.querySelector('[data-stampa]').closest('.lg-card'); vv.querySelector('.lz-cons').textContent = 'Questa lezione non ha una verifica.'; vv.querySelector('.lz-bott').remove(); }
+    if (lez.propria) document.querySelector('.lz-doc .lg-nota').innerHTML = '🎓 <b>Lezione preparata con l\'IA.</b> Controllatela tutta prima di usarla in classe: l\'IA può sbagliare. Il link per i ragazzi contiene la lezione senza la verifica e senza questa scheda.';
+    linkStudenti().then(function (u) {
+      linkCorrente = u; document.getElementById('lz-link').value = u;
+      var cv = document.getElementById('lz-qr');
+      /* un QR leggibile regge circa 2000 caratteri: le lezioni dei docenti sono più lunghe */
+      if (u.length <= 2000) { qr(u, cv, 4); }
+      else { cv.style.display = 'none'; var b = document.querySelector('[data-lim]'); if (b) b.remove(); cv.insertAdjacentHTML('afterend', '<p class="lz-cons" style="flex:1;min-width:200px;margin:0">Questa lezione è troppo lunga per un codice QR: mandate il link sul gruppo della classe o sul registro elettronico. Alla LIM, aprite il link sul computer di classe.</p>'); }
+    });
   }
   function qr(testo, canvas, cella) {
     var c = qrcode(0, 'M'); c.addData(testo); c.make();
@@ -362,7 +390,7 @@
   }
   function qrGrande() {
     var w = window.open('', '_blank'); if (!w) return;
-    var cv = document.createElement('canvas'); qr(linkStudenti(), cv, 14);
+    var cv = document.createElement('canvas'); qr(linkCorrente, cv, 14);
     w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(lez.titolo) + ' — QR</title><style>body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Arial,sans-serif;background:#fff;color:#2C3E2D}img{width:min(70vh,90vw);height:auto}h1{font-size:4vh;margin:0 0 2vh}p{font-size:2.4vh;color:#555}</style></head><body><h1>' + esc(lez.icona + ' ' + lez.titolo) + ' · ' + esc(L.lingua(lin).nome) + '</h1><img src="' + cv.toDataURL() + '" alt="QR"/><p>Inquadra il codice con la fotocamera del telefono</p></body></html>');
     w.document.close();
   }
@@ -443,7 +471,10 @@
     schedaN = 0; esN = 0; esPunti = []; miN = 0; miPunti = []; stato = {};
     disegna();
   });
-  if (q.get('l')) apri(q.get('l')); else catalogo();
+  var hp = location.hash.match(/^#p=(.+)$/);
+  if (hp) window.PACCHETTO.decodifica(hp[1]).then(function (l) { l.propria = true; apriLezione(l); }).catch(function () { vista.innerHTML = '<div class="lg-card lz-avviso"><p style="margin:0">Questo link non contiene una lezione valida: forse è stato copiato solo in parte. Chiedete al docente di mandarlo di nuovo.</p></div>'; });
+  else if (q.get('mia')) apriLezione(mie().filter(function (l) { return l.id === q.get('mia'); })[0]);
+  else if (q.get('l')) apri(q.get('l')); else catalogo();
 })();
 </script>
 </body>

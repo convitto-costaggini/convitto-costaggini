@@ -60,7 +60,8 @@ function pulisci(html) {
 function estraiTitolo(html) {
   const m = html.match(/<title>([\s\S]*?)<\/title>/i);
   if (!m) return '';
-  return stripTags(m[1]).replace(/\s*\|\s*Convitto.*$/i, '').trim();
+  // Toglie la coda dopo l'ultimo "|" (es. "| Convitto ..." o "| "Costaggini" Rieti")
+  return stripTags(m[1]).replace(/\s*\|[^|]*$/, '').trim();
 }
 
 function estraiDescrizione(html) {

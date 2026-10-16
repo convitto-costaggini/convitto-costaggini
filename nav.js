@@ -254,7 +254,7 @@
     if (!isHome) {
       const fHome = document.createElement('a');
       fHome.id = 'fab-home'; fHome.className = 'fab-c';
-      fHome.href = 'index.html';
+      fHome.href = './';
       fHome.setAttribute('aria-label','Torna alla Home'); fHome.setAttribute('data-tip','Home');
       fHome.innerHTML = '<svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>';
       wrap.appendChild(fHome);

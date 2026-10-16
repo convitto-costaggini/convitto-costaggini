@@ -11,7 +11,7 @@
 </div>
 <header id="hdr">
   <div class="hdr-in">
-    <a class="logo" href="index.html" aria-label="Home — Convitto Costaggini Rieti">
+    <a class="logo" href="./" aria-label="Home — Convitto Costaggini Rieti">
       <div class="logo-d" aria-hidden="true">
         <picture><source type="image/webp" srcset="img/logo.webp"/><img src="img/logo.png" alt="Logo Alberghiero Costaggini Rieti" style="height:44px;width:auto;display:block" width="120" height="107"/></picture>
       </div>

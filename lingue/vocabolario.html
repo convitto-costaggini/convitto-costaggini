@@ -6,7 +6,7 @@
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Vocabolario delle lingue | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Il vocabolario di sala, cucina, pasticceria, accoglienza turistica e bar in inglese, francese, spagnolo e tedesco, con la pronuncia e l'ascolto."/>
+  <meta name="description" content="Il vocabolario di sala, cucina, pasticceria, accoglienza turistica e bar in inglese, francese, spagnolo e tedesco, con l'ascolto."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -68,14 +68,14 @@
   </style>
 </head>
 <body data-page="lingue" data-lingue="vocabolario">
-<div class="lg-anteprima">Anteprima per i docenti · traduzioni e pronunce in revisione</div>
+<div class="lg-anteprima">Anteprima per i docenti · traduzioni in revisione</div>
 <script src="nav-header.min.js"></script>
 <main id="main">
   <section class="lg-hero">
     <div class="w">
       <p class="lbl">Il vocabolario dell'Alberghiero</p>
       <h1>Il <em>vocabolario</em></h1>
-      <p>Le frasi che si usano davvero in sala, in cucina, in pasticceria, al ricevimento e al bar: in quattro lingue, con la pronuncia scritta all'italiana e la voce del telefono per ascoltarle.</p>
+      <p>Le frasi che si usano davvero in sala, in cucina, in pasticceria, al ricevimento e al bar: in quattro lingue, con la voce del telefono per ascoltarle.</p>
       <div class="lg-bandiere"><span>English</span><span>Français</span><span>Español</span><span>Deutsch</span></div>
     </div>
   </section>
@@ -97,18 +97,8 @@
       <div class="ps-all" id="ps-all"></div>
 
       <div class="ps-leg">
-        <h3>Come leggere la pronuncia</h3>
-        La pronuncia è scritta come la leggerebbe un italiano; l'accento indica la sillaba da marcare. Pochi segni speciali:<br/>
-        <b>ü</b> — di' «i» con le labbra a forma di «u» (francese <i>tu</i>, tedesco <i>zurück</i>) ·
-        <b>ö</b> — di' «e» con le labbra a forma di «o» (tedesco <i>möchten</i>) ·
-        <b>N</b> — la vocale prima si dice «nel naso», senza pronunciare la n (francese <i>bon</i>) ·
-        <b>ə</b> — vocale breve e debole, quasi muta (francese <i>je</i>) ·
-        <b>j</b> — come la «g» di <i>garage</i> (francese <i>bonjour</i>) ·
-        <b>h</b> — aspirata, come un soffio (inglese <i>here</i>, tedesco <i>ich</i>, spagnolo <i>tarjeta</i>, dove è più forte) ·
-        <b>sh</b> — come «sci» di <i>scena</i> (tedesco <i>Tisch</i>) ·
-        <b>th</b> — la lingua tra i denti, come l'inglese <i>think</i> (spagnolo <i>cerveza</i>) ·
-        <b>ə</b> anche in inglese indica una vocale debole (<i>water</i> → «uòtər»).
-        <br/>Il pulsante 🔊 usa la voce del tuo telefono o computer: se una lingua non è installata, la voce può mancare o avere un accento diverso.
+        <h3>Come si ascolta</h3>
+        Il pulsante 🔊 usa la voce del tuo telefono o computer: se una lingua non è installata, la voce può mancare o avere un accento diverso.
       </div>
     </div>
   </section>
@@ -179,7 +169,7 @@
         var t = x.p[1][l.cod];
         return '<div class="ps-l"><span class="ps-cod" title="' + l.nome + '">' + l.cod.toUpperCase() + '</span><span class="ps-fr" lang="' + l.cod + '">' + esc(t[0]) + '</span>' +
           (parla ? '<button type="button" class="ps-play" data-t="' + esc(t[0]) + '" data-c="' + l.cod + '" aria-label="Ascolta in ' + l.nome.toLowerCase() + '">🔊</button>' : '') +
-          '<span class="ps-pr">' + esc(t[1]) + '</span>' + (t[2] ? '<span class="ps-nota">ℹ️ ' + esc(t[2]) + '</span>' : '') + '</div>';
+          (t[2] ? '<span class="ps-nota">ℹ️ ' + esc(t[2]) + '</span>' : '') + '</div>';
       }).join('') + '</article>';
     }).join('') + '</div>';
   }
@@ -203,7 +193,7 @@
     var p = mazzo[pos], t = p[1][linAll];
     box.innerHTML = scelta + '<div class="ps-prog">Sapute ' + sapute + ' di ' + tot + (mazzo.length - pos > 1 ? ' · ancora ' + (mazzo.length - pos) + ' carte' : ' · ultima carta') + '</div>' +
       '<div class="ps-fc" id="ps-fc" role="button" tabindex="0" aria-label="Gira la carta"><div class="ps-fc-cod">Come si dice in ' + l.nome.toLowerCase() + '?</div><div class="ps-fc-it">' + esc(p[0]) + '</div><div class="ps-fc-hint">Pensa alla risposta, poi tocca la carta per girarla</div>' +
-      '<div class="ps-fc-ris"><div class="ps-fc-fr" lang="' + linAll + '">' + esc(t[0]) + '</div><div class="ps-fc-pr">' + esc(t[1]) + '</div>' + (parla ? '<button type="button" class="ps-play" style="margin:0 auto" data-t="' + esc(t[0]) + '" data-c="' + linAll + '" aria-label="Ascolta">🔊</button>' : '') +
+      '<div class="ps-fc-ris"><div class="ps-fc-fr" lang="' + linAll + '">' + esc(t[0]) + '</div>' + (parla ? '<button type="button" class="ps-play" style="margin:0 auto" data-t="' + esc(t[0]) + '" data-c="' + linAll + '" aria-label="Ascolta">🔊</button>' : '') +
       '<div class="ps-fc-b"><button type="button" class="ps-btn no" data-a="ripasso">Da ripassare</button><button type="button" class="ps-btn si" data-a="sapevo">✓ Lo sapevo</button></div></div></div>' +
       '<p style="text-align:center;margin-top:1rem"><button type="button" class="ps-btn" data-a="esci">← Torna alla lista</button></p>';
   }
@@ -211,12 +201,12 @@
   function stampa() {
     var s = SEZIONI.filter(function (x) { return x.id === sezione; })[0];
     var righe = (PAROLE[sezione] || []).map(function (p) {
-      var t = p[1][lingua]; return '<tr><td class="it">' + esc(p[0]) + '</td><td>' + esc(t[0]) + '<small>' + esc(t[1]) + '</small></td></tr>';
+      var t = p[1][lingua]; return '<tr><td class="it">' + esc(p[0]) + '</td><td>' + esc(t[0]) + '</td></tr>';
     }).join('');
     var nomeL = LINGUE.filter(function (x) { return x.cod === lingua; })[0].nome;
     var w = window.open('', '_blank'); if (!w) { window.print(); return; }
     w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>Vocabolario ' + esc(nomeL.toLowerCase()) + ' — ' + esc(ambitoDi(s.ambito).nome) + ' — ' + esc(s.nome.replace(/^\S+\s/, '')) + '</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#1a1a1a}h1{font-size:16pt;margin:0 0 2px}p{font-size:9pt;color:#555;margin:0 0 12px}table{width:100%;border-collapse:collapse;font-size:9.5pt}th{background:#2C3E2D;color:#fff;text-align:left;padding:5px;font-size:8.5pt;text-transform:uppercase}td{border-bottom:1px solid #ccc;padding:5px;vertical-align:top}td.it{font-weight:bold;width:45%}small{display:block;color:#666;font-style:italic;font-size:8pt}@page{size:A4;margin:12mm}</style></head><body>' +
-      '<h1>' + esc(ambitoDi(s.ambito).nome) + ' — ' + esc(s.nome.replace(/^\S+\s/, '')) + '</h1><p>Convitto "Costaggini" · IPSSEOA Rieti — pronuncia scritta all\'italiana</p><table><thead><tr><th>Italiano</th><th>' + esc(nomeL) + '</th></tr></thead><tbody>' + righe + '</tbody></table>' +
+      '<h1>' + esc(ambitoDi(s.ambito).nome) + ' — ' + esc(s.nome.replace(/^\S+\s/, '')) + '</h1><p>Convitto "Costaggini" · IPSSEOA Rieti</p><table><thead><tr><th>Italiano</th><th>' + esc(nomeL) + '</th></tr></thead><tbody>' + righe + '</tbody></table>' +
       '<script>window.onload=function(){window.print()}<\/script></body></html>');
     w.document.close();
   }

@@ -148,7 +148,6 @@
       '',
       'REGOLE',
       '- Tutte le frasi in ' + N + ' devono essere corrette, naturali e adatte al livello ' + liv + '. Le spiegazioni, le consegne e le traduzioni sono in italiano, semplici e brevi.',
-      '- La "pronuncia" è una trascrizione all\'italiana semplice (es. "a pinc əv sòlt"); se non sei sicuro lascia "".',
       '- Nelle domande a scelta la PRIMA opzione è sempre quella giusta (il sito le mescola); le altre sono errori plausibili e tipici degli studenti italiani.',
       '- Nella missione ogni passo ha esattamente una risposta giusta (1) e due sbagliate (0), ciascuna con una spiegazione in italiano.',
       '- Nell\'esercizio "completa" le parole da indovinare vanno tra parentesi quadre, es. "[Add] a pinch of salt"; 5-7 parentesi.',
@@ -165,7 +164,7 @@
     return {
       titolo: 'titolo breve in italiano', sottotitolo: 'la grammatica o il tema in italiano', icona: 'una emoji', descrizione: 'una frase in italiano per gli studenti',
       docente: { obiettivi: ['obiettivo in italiano', '…'], spunti: ['spunto di cultura, estero o collegamento con i laboratori, in italiano', '…'] },
-      schede: [{ titolo: 'titolo in italiano', testo: 'spiegazione breve in italiano; **grassetto** per le parole chiave', esempi: [[F, 'traduzione italiana', 'pronuncia all\'italiana']], domanda: { testo: 'domanda lampo in italiano', o: ['risposta giusta', 'sbagliata', 'sbagliata'], spiega: 'perché, in italiano' } }],
+      schede: [{ titolo: 'titolo in italiano', testo: 'spiegazione breve in italiano; **grassetto** per le parole chiave', esempi: [[F, 'traduzione italiana']], domanda: { testo: 'domanda lampo in italiano', o: ['risposta giusta', 'sbagliata', 'sbagliata'], spiega: 'perché, in italiano' } }],
       esercizi: [
         { tipo: 'abbina', titolo: 'titolo', consegna: 'consegna in italiano', coppie: [['parola in ' + NOME[lin], 'significato italiano']] },
         { tipo: 'scelta', titolo: 'titolo', consegna: 'consegna', voci: [{ d: F + ' con _____ al posto della parola mancante (suggerimento in italiano tra parentesi)', o: ['giusta', 'sbagliata', 'sbagliata'] }] },

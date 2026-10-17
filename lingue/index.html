@@ -89,7 +89,7 @@
       <div class="lg-grid">
         <p class="hm-gruppo">📖 Impara</p>
         <a class="lg-card hm-card" href="lingue/lezioni.html"><span class="hm-ico">🧭</span><h3>Lezioni guidate <span class="lg-badge ok" style="vertical-align:middle">Novità</span></h3><p>Un argomento alla volta: una mini-lezione a schede da ascoltare, gli esercizi e una missione in una cucina all'estero. Con la versione facilitata per chi ne ha bisogno.</p><span class="vai">Inizia una lezione →</span></a>
-        <a class="lg-card hm-card" href="lingue/vocabolario.html"><span class="hm-ico">📖</span><h3>Vocabolario</h3><p><span id="hm-num">Centinaia di</span> frasi in cinque ambiti, con la pronuncia scritta all'italiana e l'ascolto.</p><span class="vai">Apri il vocabolario →</span></a>
+        <a class="lg-card hm-card" href="lingue/vocabolario.html"><span class="hm-ico">📖</span><h3>Vocabolario</h3><p><span id="hm-num">Centinaia di</span> frasi in cinque ambiti, con l'ascolto.</p><span class="vai">Apri il vocabolario →</span></a>
         <a class="lg-card hm-card" href="lingue/illustrato.html"><span class="hm-ico">🖼️</span><h3>Il ristorante illustrato</h3><p>Cinque scene da esplorare: tocca un oggetto e ascolta il suo nome, poi gioca a trovarlo. Perfetto anche sulla LIM.</p><span class="vai">Entra nella scena →</span></a>
         <a class="lg-card hm-card" href="lingue/dialoghi.html"><span class="hm-ico">💬</span><h3>Dialoghi</h3><p>Una scena per ambito: una cena, la brigata, una torta su ordinazione, il check-in, la colazione al bar. Ascolta, poi interpreta tu il ruolo.</p><span class="vai">Entra in sala →</span></a>
         <a class="lg-card hm-card" href="lingue/avanzato.html"><span class="hm-ico">🎓</span><h3>Livello avanzato</h3><p>Per chi vuole andare oltre: frasi complete per descrivere un piatto, gestire un reclamo o prendere una prenotazione, testi da ascoltare ed e-mail professionali.</p><span class="vai">Vai oltre →</span></a>
@@ -112,7 +112,7 @@
         <div class="hm-punto"><span class="n">📱</span><div><h3>Nessuna registrazione</h3><p>I ragazzi usano tutto liberamente. Nessun dato personale: le spunte e i risultati restano solo sul loro telefono.</p></div></div>
         <div class="hm-punto"><span class="n">🔊</span><div><h3>La voce del telefono</h3><p>Ogni frase si ascolta con la sintesi vocale del dispositivo. Su Android, in <i>Impostazioni › Sintesi vocale</i>, si possono scaricare le voci delle quattro lingue.</p></div></div>
         <div class="hm-punto"><span class="n">🖨️</span><div><h3>Anche su carta</h3><p>Il vocabolario si stampa per sezione, da tenere in tasca durante le esercitazioni; i docenti stampano le verifiche già impaginate.</p></div></div>
-        <div class="hm-punto"><span class="n">🎓</span><div><h3>Con i docenti</h3><p>Traduzioni e pronunce sono verificate dai docenti di lingue dell'Istituto, che potranno aggiungere esercizi e materiali.</p></div></div>
+        <div class="hm-punto"><span class="n">🎓</span><div><h3>Con i docenti</h3><p>Le traduzioni sono verificate dai docenti di lingue dell'Istituto, che potranno aggiungere esercizi e materiali.</p></div></div>
       </div>
     </div>
   </section>
@@ -153,7 +153,7 @@
   function frase() {
     var l = L.lingua(L.linguaScelta()), t = p[1][l.cod];
     document.getElementById('hm-gg').innerHTML = '<p class="lbl" style="margin:0">' + oggi.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' }) + '</p><p class="hm-gg-it">' + L.esc(p[0]) + '</p>' +
-      '<div class="hm-gg-l"><b>' + l.cod.toUpperCase() + '</b><span lang="' + l.cod + '">' + L.esc(t[0]) + '</span>' + L.play(t[0], l.cod, 'Ascolta in ' + l.nome.toLowerCase()) + '<small>' + L.esc(t[1]) + '</small></div>';
+      '<div class="hm-gg-l"><b>' + l.cod.toUpperCase() + '</b><span lang="' + l.cod + '">' + L.esc(t[0]) + '</span>' + L.play(t[0], l.cod, 'Ascolta in ' + l.nome.toLowerCase()) + '</div>';
   }
   frase();
   document.addEventListener('lingua', frase);

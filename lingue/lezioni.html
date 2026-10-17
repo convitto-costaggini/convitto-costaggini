@@ -247,7 +247,7 @@
       '<div class="lz-nav">' + (schedaN > 0 ? '<button type="button" class="lg-btn" data-sch="-1">← Indietro</button>' : '') + (ultima ? '<button type="button" class="lg-btn oro" data-tab="esercizi">Ora allenati →</button>' : '<button type="button" class="lg-btn pieno" data-sch="1">Avanti →</button>') + '</div></div>');
   }
   function esempio(e) {
-    return '<div class="lz-es"><div><span class="fr" lang="' + lin + '">' + esc(e[0]) + '</span>' + (e[2] ? '<span class="pr">' + esc(e[2]) + '</span>' : '') + '<span class="it">' + esc(e[1]) + '</span></div>' + L.play(e[0], lin, 'Ascolta') + '</div>';
+    return '<div class="lz-es"><div><span class="fr" lang="' + lin + '">' + esc(e[0]) + '</span>' + '<span class="it">' + esc(e[1]) + '</span></div>' + L.play(e[0], lin, 'Ascolta') + '</div>';
   }
   function rispondiLampo(b) {
     var s = D().schede[schedaN], giusta = b.dataset.lampo === s.domanda.o[0];
@@ -455,7 +455,7 @@
     var css = 'body{font-family:Arial,Helvetica,sans-serif;margin:22px;color:#1a1a1a;font-size:' + (fac ? '14pt' : '11pt') + ';line-height:' + (fac ? '1.8' : '1.5') + (fac ? ';letter-spacing:.02em' : '') + '}h1{font-size:' + (fac ? '19pt' : '16pt') + ';margin:0}.sot{font-size:9.5pt;color:#555;margin:2px 0 14px}h3{font-size:' + (fac ? '14pt' : '12pt') + ';color:#2C3E2D;margin:14px 0 4px}p{margin:0 0 6px}table{width:100%;border-collapse:collapse;margin:4px 0 6px}td{border-bottom:1px solid #ccc;padding:4px 6px;vertical-align:top;width:50%}td.fr{font-weight:bold}small{display:block;font-weight:normal;color:#666;' + (fac ? '' : 'font-style:italic;') + 'font-size:' + (fac ? '11pt' : '8.5pt') + '}.dom{margin-top:6px;font-weight:bold}.opz{color:#333}.blocco{page-break-inside:avoid}.nome{border:1px solid #999;border-radius:6px;padding:6px 10px;margin-bottom:12px;font-size:10pt}@page{size:A4;margin:14mm}';
     var w = window.open('', '_blank'); if (!w) return;
     w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(lez.titolo) + ' — ' + esc(nomeL) + ' — scheda' + (fac ? ' facilitata' : '') + '</title><style>' + css + '</style></head><body>' +
-      '<h1>' + esc(lez.titolo) + ' · ' + esc(nomeL) + '</h1><p class="sot">' + esc(lez.sottotitolo) + ' · livello ' + esc(lez.livello) + ' · IPSSEOA «Costaggini» Rieti · la pronuncia è scritta all\'italiana</p><div class="nome">Nome e cognome ____________________________ Classe ______</div>' + corpoS +
+      '<h1>' + esc(lez.titolo) + ' · ' + esc(nomeL) + '</h1><p class="sot">' + esc(lez.sottotitolo) + ' · livello ' + esc(lez.livello) + ' · IPSSEOA «Costaggini» Rieti</p><div class="nome">Nome e cognome ____________________________ Classe ______</div>' + corpoS +
       '<script>window.onload=function(){window.print()}<\/script></body></html>');
     w.document.close();
   }
@@ -491,7 +491,7 @@
     h += blocco('gen', 'Generale', '', cIn('titolo', 'Titolo') + cIn('sottotitolo', 'Sottotitolo') + cIn('descrizione', 'Descrizione per i ragazzi', true));
     Dz.schede.forEach(function (sc, i) {
       var P = B + '.schede.' + i, d = cIn(P + '.titolo', 'Titolo') + cIn(P + '.testo', 'Testo', true, '**parola** = grassetto, *parola* = corsivo');
-      d += '<h4>Frasi</h4>' + sc.esempi.map(function (e, j) { var Q = P + '.esempi.' + j; return '<div class="riga">' + cIn(Q + '.0', 'Frase in ' + L.lingua(lin).nome.toLowerCase()) + cIn(Q + '.1', 'Traduzione') + cIn(Q + '.2', 'Pronuncia') + x(Q) + '</div>'; }).join('') + piu(P + '.esempi', 'esempio', 'aggiungi una frase');
+      d += '<h4>Frasi</h4>' + sc.esempi.map(function (e, j) { var Q = P + '.esempi.' + j; return '<div class="riga">' + cIn(Q + '.0', 'Frase in ' + L.lingua(lin).nome.toLowerCase()) + cIn(Q + '.1', 'Traduzione') + x(Q) + '</div>'; }).join('') + piu(P + '.esempi', 'esempio', 'aggiungi una frase');
       if (sc.domanda) d += '<h4>Domanda lampo</h4>' + cIn(P + '.domanda.testo', 'Domanda') + cOpz(P + '.domanda.o') + cIn(P + '.domanda.spiega', 'Spiegazione');
       h += blocco('s' + i, 'Scheda ' + (i + 1), sc.titolo, d);
     });

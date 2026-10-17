@@ -44,7 +44,7 @@ window.ESERCIZI = (function () {
       return '<div class="ex-top"><div class="ex-bar"><i style="width:' + Math.round(fatti / totale * 100) + '%"></i></div><span class="ex-num">' + Math.min(pos + 1, totale) + ' / ' + totale + '</span></div>';
     }
     function feedback(ok, voce, testo) {
-      return '<div class="ex-fb ' + (ok ? 'si' : 'no') + '"><div style="flex:1">' + (ok ? '✓ ' : '✗ ') + testo + (voce.pr ? '<span class="pr">' + esc(voce.pr) + '</span>' : '') + '</div>' + L.play(voce.tr, cod, 'Ascolta') + '</div>' +
+      return '<div class="ex-fb ' + (ok ? 'si' : 'no') + '"><div style="flex:1">' + (ok ? '✓ ' : '✗ ') + testo + '</div>' + L.play(voce.tr, cod, 'Ascolta') + '</div>' +
         '<button type="button" class="lg-btn pieno ex-avanti" data-ex="avanti">' + (pos + 1 < totale ? 'Avanti →' : 'Vedi il risultato') + '</button>';
     }
     function mostra() {
@@ -71,7 +71,7 @@ window.ESERCIZI = (function () {
           L.mescola(pezzi(v.tr).map(function (p, i) { return { p: p, i: i }; })).map(function (x) { return '<button type="button" class="ex-pezzo" data-ex="pezzo" lang="' + cod + '">' + esc(x.p) + '</button>'; }).join('') +
           '</div><div style="display:flex;gap:.5rem;margin-top:1rem"><button type="button" class="lg-btn" data-ex="annulla" style="flex:1">↺ Ricomincia</button><button type="button" class="lg-btn pieno" data-ex="verifica" style="flex:2">Verifica</button></div><div data-ex="fb"></div>';
       } else if (tipo === 'ascolta') {
-        h += '<p class="ex-dom">Ascolta e scrivi in ' + lin.nome.toLowerCase() + '</p><div class="ex-grande">' + (L.parla ? L.play(v.tr, cod, 'Ascolta la frase', false) : '<p class="ex-it">' + esc(v.pr || v.tr) + '</p>') + '</div>' +
+        h += '<p class="ex-dom">Ascolta e scrivi in ' + lin.nome.toLowerCase() + '</p><div class="ex-grande">' + (L.parla ? L.play(v.tr, cod, 'Ascolta la frase', false) : '<p class="ex-it">' + esc(v.tr) + '</p>') + '</div>' +
           (L.parla ? '<p style="text-align:center;margin:-.4rem 0 1rem"><button type="button" class="lg-btn" data-ex="lento" style="min-height:36px;padding:.45rem .8rem">🐢 Più lento</button></p>' : '') +
           '<input type="text" class="ex-input" data-ex="scrivi" lang="' + cod + '" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Scrivi qui quello che senti"/>' +
           '<button type="button" class="lg-btn pieno ex-avanti" data-ex="verifica">Verifica</button><div data-ex="fb"></div>';
@@ -87,7 +87,7 @@ window.ESERCIZI = (function () {
       box.innerHTML = '<div class="ex"><div class="ex-card ex-fine"><p class="ex-dom">' + esc(TIPI[tipo].nome) + ' · ' + lin.nome + '</p><p class="tit">' + tit + '</p>' +
         '<p>Risultato: <b>' + punti + ' su ' + totale + '</b> (' + perc + '%)' + (best != null && k ? '<br/>Il tuo record su questo esercizio: ' + Math.max(best, perc) + '%' : '') + '</p>' +
         (errori.length ? '<div style="text-align:left;margin-top:1rem"><p class="ex-dom" style="text-align:left">Da ripassare</p>' + errori.map(function (v) {
-          return '<div class="ex-fb no" style="margin-top:.4rem"><div style="flex:1"><b>' + esc(v.it) + '</b><br/>' + esc(v.tr) + (v.pr ? '<span class="pr">' + esc(v.pr) + '</span>' : '') + '</div>' + L.play(v.tr, cod) + '</div>';
+          return '<div class="ex-fb no" style="margin-top:.4rem"><div style="flex:1"><b>' + esc(v.it) + '</b><br/>' + esc(v.tr) + '</div>' + L.play(v.tr, cod) + '</div>';
         }).join('') + '</div>' : '') +
         '<div class="bott">' + (errori.length && tipo !== 'abbina' ? '<button type="button" class="lg-btn oro" data-ex="errori">Ripeti solo gli errori</button>' : '') +
         '<button type="button" class="lg-btn pieno" data-ex="ancora">↺ Ricomincia</button></div></div></div>';

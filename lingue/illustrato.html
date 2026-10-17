@@ -126,7 +126,7 @@
   }
   function mostraOggetto(k) {
     var p = IDX[k], t = p[1][lingua], l = L.lingua(lingua);
-    scheda.innerHTML = '<div class="il-card"><p class="it">' + esc(k) + '</p><div style="flex:1;min-width:180px"><p class="tr" lang="' + lingua + '">' + esc(t[0]) + '</p><span class="pr">' + esc(t[1]) + '</span></div>' + L.play(t[0], lingua, 'Ascolta in ' + l.nome.toLowerCase()) + '</div>';
+    scheda.innerHTML = '<div class="il-card"><p class="it">' + esc(k) + '</p><div style="flex:1;min-width:180px"><p class="tr" lang="' + lingua + '">' + esc(t[0]) + '</p></div>' + L.play(t[0], lingua, 'Ascolta in ' + l.nome.toLowerCase()) + '</div>';
     if (L.parla) L.ascolta(t[0], lingua, { btn: scheda.querySelector('.lg-play') });
   }
   function suggerimento() {

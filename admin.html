@@ -142,6 +142,7 @@ function admConfirm(opts) {
     <button class="main-tab" onclick="switchTab('eventi',this)">🗓️ Eventi</button>
     <button class="main-tab" onclick="switchTab('menu',this)">🍽️ Menu Settimanale</button>
     <button class="main-tab" onclick="switchTab('ricordi',this)">💬 Ricordi</button>
+    <button class="main-tab" onclick="switchTab('lingue',this)">🌐 Lingue</button>
       <button class="main-tab" onclick="switchTab('mappa',this)">🗺️ Mappa — Pin in attesa</button>
     <button class="main-tab" onclick="switchTab('alumni',this)">👥 <em>Alumni</em> — Schede in attesa</button>
     <button class="main-tab" onclick="switchTab('openday',this)">📅 Open Day</button>
@@ -373,6 +374,23 @@ function admConfirm(opts) {
         <div id="ricordi-list">
           <p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB LINGUE: schede di riscontro del Dipartimento -->
+  <div class="tab-section" id="tab-lingue">
+    <div style="padding:1.5rem 1.25rem">
+      <div class="adm-card">
+        <h2>Lingue: schede di <em>riscontro</em></h2>
+        <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1.25rem;line-height:1.65">
+          Le schede inviate dal Dipartimento di Lingue dalla presentazione del minisito (lingue/presentazione.html) arrivano qui.
+        </p>
+        <div style="display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap">
+          <button class="btn-approva" style="font-size:.65rem" onclick="lingueLoad(false)">⏳ Da leggere</button>
+          <button class="btn-ed" onclick="lingueLoad(null)">Tutte</button>
+        </div>
+        <div id="lingue-list"><p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p></div>
       </div>
     </div>
   </div>
@@ -1455,6 +1473,53 @@ async function ricordiElimina(id) {
   else { alert('Errore: ' + resp.status); }
 }
 
+// ═══ LINGUE: schede di riscontro ═══
+async function lingueLoad(letto) {
+  const list = document.getElementById('lingue-list');
+  list.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p>';
+  try {
+    const filtro = letto === null ? '' : '&letto=eq.' + letto;
+    const data = await sbFetch('lingue_riscontri?order=created_at.desc' + filtro);
+    window._lingueDati = data;
+    if (!data.length) { list.innerHTML = '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessuna scheda.</p>'; return; }
+    list.innerHTML = data.map(r => `
+      <div class="fam-card ${r.letto ? 'approvata' : 'in_attesa'}" style="margin-bottom:.75rem">
+        <div class="fam-info">
+          <div class="fam-campo"><strong>Ricevuta</strong>${escapeHtml(new Date(r.created_at).toLocaleString('it-IT'))}</div>
+          <div class="fam-campo"><strong>Docenti</strong>${escapeHtml(r.docenti) || '-'}</div>
+          <div class="fam-campo" style="grid-column:1/-1"><strong>Scheda</strong><div style="white-space:pre-wrap;font-size:.85rem;line-height:1.6">${escapeHtml(r.testo)}</div></div>
+        </div>
+        <div class="fam-azioni" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem">
+          ${r.letto ? `<button class="btn-annulla-fam" onclick="lingueLetto('${r.id}', false)">↩ Da leggere</button>` : `<button class="btn-approva" onclick="lingueLetto('${r.id}', true)">✅ Segna come letta</button>`}
+          <button class="btn-ed edit" onclick="lingueCopia('${r.id}')">📋 Copia</button>
+          <button class="btn-rifiuta" onclick="lingueElimina('${r.id}')">🗑️ Elimina</button>
+        </div>
+      </div>`).join('');
+  } catch (e) {
+    list.innerHTML = '<p style="color:#b91c1c;font-size:.85rem">Impossibile caricare le schede: ' + escapeHtml(e.message) + '</p>';
+  }
+}
+async function lingueLetto(id, v) {
+  const resp = await fetch(SB_N + '/rest/v1/lingue_riscontri?id=eq.' + id, {
+    method: 'PATCH',
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN(), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ letto: v })
+  });
+  if (resp.ok) lingueLoad(v ? false : null); else alert('Errore: ' + resp.status);
+}
+function lingueCopia(id) {
+  const r = (window._lingueDati || []).find(x => x.id === id);
+  if (r && navigator.clipboard) navigator.clipboard.writeText(r.testo);
+}
+async function lingueElimina(id) {
+  if (!await admConfirm({icon:'🗑️',title:'Elimina scheda',message:'Operazione irreversibile.',confirmText:'Elimina',type:'danger'})) return;
+  const resp = await fetch(SB_N + '/rest/v1/lingue_riscontri?id=eq.' + id, {
+    method: 'DELETE',
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN() }
+  });
+  if (resp.ok) lingueLoad(null); else alert('Errore: ' + resp.status);
+}
+
 // ═══ ALUMNI ═══
 // Dal 28/09/2026 la colonna email di alumni non è leggibile via API (misure DPO):
 // gli admin la ottengono dalla funzione admin_email_alumni().
@@ -1803,6 +1868,7 @@ function switchTab(nome, btn) {
   if (btn) btn.classList.add('on');
   // Carica dati al primo accesso al tab
   if (nome === 'ricordi') ricordiLoad(false);
+  if (nome === 'lingue')  lingueLoad(false);
   if (nome === 'alumni')  loadAlumni();
   if (nome === 'mappa')   loadPins();
   if (nome === 'openday') odLoad('nuova');

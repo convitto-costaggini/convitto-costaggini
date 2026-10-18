@@ -413,7 +413,7 @@
     { p: 4, tit: 'Cosa chiedo al Dipartimento', tipo: 'nat', mount: mChiusura, etic: 'Provate voi: la scheda si compila qui', oro: true, dwell: 0, beats: [
       { t: 'Per finire: il progetto non è chiuso e non deve esserlo. Si costruisce con chi lo usa.' },
       { t: 'Chiedo tre contributi: controllare le frasi della propria lingua, dire cosa manca per ogni indirizzo, scegliere la prossima funzione dell\'area docenti.' },
-      { t: 'La scheda qui accanto si compila direttamente qui, in ogni sua parte: scrivete, spuntate, aggiungete o togliete voci. Alla fine si può inviare alla posta dell\'Educatore Gaggiano, copiare o stampare.' },
+      { t: 'La scheda qui accanto si compila direttamente qui, in ogni sua parte: scrivete, spuntate, aggiungete o togliete voci. Alla fine si può inviare direttamente all\'Educatore Gaggiano con un clic, oppure copiare o stampare.' },
       { t: 'Se il Dipartimento è favorevole, il passo successivo è informare la Dirigente e chiedere l\'autorizzazione.' }
     ] },
     { p: 4, tit: 'Se la risposta è sì: la Dirigente', tipo: 'nat', mount: mLettera, etic: 'Bozza di richiesta, modificabile', oro: true, dwell: 0, beats: [
@@ -825,7 +825,7 @@
       '<label class="et" for="z-oss">Osservazioni del team dipartimentale</label><textarea id="z-oss"></textarea>' +
       '<label class="et">Il Dipartimento è favorevole a proseguire?</label><div class="fav"><label><input type="radio" name="z-fav" value="Sì"/><span>Sì</span></label><label><input type="radio" name="z-fav" value="Da approfondire"/><span>Da approfondire</span></label><label><input type="radio" name="z-fav" value="No"/><span>No</span></label></div>' +
       '<div class="passo" id="z-passo"><b>Se la risposta è sì:</b> il passo successivo è informare la Dirigente e chiedere l\'autorizzazione. <button type="button" class="mini pieno" id="z-lett" style="margin-left:.4rem">Prepara la richiesta →</button></div>' +
-      '<div class="riga"><button type="button" class="lg-btn pieno" id="z-mail">✉️ Invia a Michele Gaggiano</button><button type="button" class="lg-btn" id="z-copia">📋 Copia il testo</button><button type="button" class="lg-btn" id="z-stampa">🖨️ Stampa</button></div><p class="stato" id="z-st"></p></div>';
+      '<div class="riga"><button type="button" class="lg-btn pieno" id="z-invia">📨 Invia la scheda</button><button type="button" class="lg-btn" id="z-mail">✉️ Invia per posta</button><button type="button" class="lg-btn" id="z-copia">📋 Copia il testo</button><button type="button" class="lg-btn" id="z-stampa">🖨️ Stampa</button></div><p class="stato" id="z-st"></p><p class="nota" style="margin:.4rem 0 0">«Invia la scheda» la consegna direttamente all\'Educatore Gaggiano, nel pannello riservato del sito: non serve alcun accesso alla posta. Il testo inviato è visibile solo all\'amministratore.</p></div>';
     var doc = $('z-doc'), cor = $('z-cor'), serv = $('z-serv'), oss = $('z-oss'), vv = $('z-voci');
     doc.value = st.doc; cor.value = st.cor; serv.value = st.serv; oss.value = st.oss;
     [].forEach.call(el.querySelectorAll('input[name=z-fav]'), function (r) { r.checked = r.value === st.fav; });
@@ -849,6 +849,20 @@
     el.addEventListener('change', function (e) { if (e.target.name === 'z-fav') { st.fav = e.target.value; salvaSt(); passo(); } });
     $('z-lett').addEventListener('click', function () { impostaAuto(false); vai(cur + 1); });
     $('z-mail').addEventListener('click', function () { posta('michele.gaggiano@alberghierorieti.it', 'Scheda di riscontro: Dipartimento di Lingue', testo(), $('z-st')); });
+    $('z-invia').addEventListener('click', function () {
+      var b = this, el = $('z-st'), t = testo();
+      b.disabled = true; el.className = 'stato'; el.textContent = 'Invio in corso…';
+      fetch('https://sawclsysqnjsvbobioqo.supabase.co/rest/v1/lingue_riscontri', {
+        method: 'POST',
+        headers: { 'apikey': 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ', 'Authorization': 'Bearer sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ', 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+        body: JSON.stringify({ tipo: 'scheda', docenti: (st.doc || '').slice(0, 200) || null, testo: t.slice(0, 8000) })
+      }).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        el.className = 'stato'; el.textContent = 'Scheda inviata: la riceve l\'Educatore Gaggiano. Grazie.';
+      }).catch(function () {
+        el.className = 'stato no'; el.textContent = 'Invio non riuscito. Potete usare «Invia per posta» oppure «Copia il testo».';
+      }).then(function () { b.disabled = false; });
+    });
     $('z-copia').addEventListener('click', function () { copia(testo(), $('z-st')); });
     $('z-stampa').addEventListener('click', function () { stampa(testo()); });
   }

@@ -54,7 +54,7 @@
   .palco.entra>*{animation:entra .7s ease both}
   @keyframes entra{from{opacity:0;transform:translateY(14px) scale(.985)}}
   .etic{position:absolute;left:50%;top:.5rem;transform:translateX(-50%);z-index:5;display:inline-flex;align-items:center;gap:.45rem;font:800 .58rem var(--fu);letter-spacing:.14em;text-transform:uppercase;background:#fff;color:var(--bosco);padding:.32rem .75rem;border-radius:999px;box-shadow:0 4px 14px rgba(20,34,22,.18);white-space:nowrap;max-width:94%;overflow:hidden;text-overflow:ellipsis}
-  .palco.entra>.etic{animation:none}
+  .palco.entra>.etic,.palco.entra>.sugg{animation:none}
   .etic .p{width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 0 rgba(22,163,74,.6);animation:punto 1.6s infinite}
   .etic.oro{background:var(--oro);color:#fff}
   @keyframes punto{70%{box-shadow:0 0 0 7px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
@@ -194,6 +194,46 @@
   .scheda p{margin:.7rem 0 .2rem;font:700 .7rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco)}
   .scheda label{display:block;font-size:.9rem;line-height:1.85;color:var(--txt)}
   .scheda .linea{border-bottom:1.5px solid var(--av3);height:1.8rem}
+  .sugg{position:absolute;left:50%;bottom:.55rem;transform:translateX(-50%);z-index:5;font:700 .72rem var(--fu);background:#fff7dc;color:#713f12;border:1.5px solid var(--oro);padding:.38rem .85rem;border-radius:999px;box-shadow:0 4px 14px rgba(20,34,22,.15);max-width:96%;text-align:center}
+  .palco.cs .tel,.palco.cs .fin{height:calc(100% - 3.5rem)}
+  .g-b.prova{font-style:normal;font-family:var(--fu);font-weight:600;font-size:clamp(.98rem,1.4vw,1.15rem);color:#1c1405;background:linear-gradient(135deg,#EDD98A,#D4AA4A);border-left:0;border-radius:12px;padding:.75rem .95rem;margin-top:1rem;opacity:0}
+  .g-b.prova.on{opacity:1}
+  .g-b.prova.vecchio{opacity:1}
+  .g-av{font:600 .76rem var(--fu);color:rgba(245,240,232,.75);background:rgba(237,217,138,.12);border:1px dashed rgba(237,217,138,.4);border-radius:10px;padding:.5rem .7rem;margin:0 0 .9rem}
+  .ed{display:grid;gap:1.1rem;grid-template-columns:minmax(0,1fr)}
+  @media (min-width:800px){.ed{grid-template-columns:1.1fr .9fr}}
+  .ed label.et{margin-top:.55rem}
+  .ed input,.ed textarea,.ed select{width:100%;font:500 .92rem var(--fu);padding:.6rem .75rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--av)}
+  .ed textarea{line-height:1.55;resize:vertical}
+  .ed .chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.9rem}
+  .ed .chips span{font:800 .6rem var(--fu);letter-spacing:.06em;text-transform:uppercase;padding:.3rem .6rem;border-radius:999px;background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+  .ph{background:#111;border-radius:28px;padding:10px;max-width:300px;margin:0 auto;box-shadow:0 18px 40px rgba(20,34,22,.28)}
+  .ph>div{background:var(--av);border-radius:19px;padding:1rem .9rem 1.1rem;min-height:330px}
+  .ph .kk{font:800 .56rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro);margin:0 0 .2rem}
+  .ph h4{font-family:var(--fd);font-weight:500;font-size:1.3rem;color:var(--bosco);margin:0 0 .5rem;line-height:1.15;transition:background .5s}
+  .ph .gr{background:#fff;border-left:3px solid var(--oro);border-radius:0 10px 10px 0;padding:.5rem .65rem;margin-bottom:.6rem;font-size:.8rem;line-height:1.5}
+  .ph .gr b{display:block;color:var(--bosco);font-size:.78rem}
+  .ph ul{list-style:none;margin:0 0 .6rem;padding:0;display:grid;gap:.3rem}
+  .ph li{display:flex;align-items:center;gap:.4rem;background:#fff;border:1px solid var(--av3);border-radius:9px;padding:.35rem .5rem;font-size:.78rem;line-height:1.3}
+  .ph li span{flex:1}.ph li small{display:block;color:var(--txt2);font-size:.68rem}
+  .ph .lampo{border:1.5px solid var(--oro);border-radius:12px;padding:.55rem .6rem;background:#fffbeb}
+  .ph .lampo p{margin:0 0 .35rem;font:700 .76rem var(--fu);color:var(--bosco)}
+  .ph .lampo button{display:block;width:100%;text-align:left;font:600 .76rem var(--fu);border:1.5px solid var(--av3);background:#fff;border-radius:8px;padding:.4rem .5rem;margin-top:.25rem;cursor:pointer}
+  .ph .lampo button.ok{border-color:#10b981;background:#ecfdf5}.ph .lampo button.no{border-color:#ef4444;background:#fef2f2}
+  .fl{animation:fl2 .7s}@keyframes fl2{0%{background:#fde68a}100%{background:transparent}}
+  .sch label.et{margin-top:.7rem}
+  .sch input[type=text],.sch textarea,.sch select{width:100%;font:500 .92rem var(--fu);padding:.55rem .7rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--av)}
+  .sch textarea{line-height:1.5;min-height:70px;resize:vertical}
+  .vo{display:flex;gap:.5rem;align-items:center;margin-bottom:.4rem}
+  .vo input[type=checkbox]{width:20px;height:20px;accent-color:var(--bosco);flex:none}
+  .vo button{border:0;background:transparent;color:#991b1b;font-size:1.1rem;cursor:pointer}
+  .fav{display:flex;gap:.5rem;flex-wrap:wrap;margin:.3rem 0}
+  .fav label{display:inline-flex;gap:.4rem;align-items:center;border:1.5px solid var(--av3);border-radius:999px;padding:.4rem .8rem;background:#fff;cursor:pointer;font-weight:600;font-size:.86rem}
+  .fav input:checked+span{color:var(--bosco);font-weight:800}
+  .sch .passo{margin-top:.9rem;background:#ecfdf5;border:1.5px solid #10b981;border-radius:12px;padding:.8rem 1rem;font-size:.9rem;display:none}
+  .sch .passo.on{display:block}
+  .lett{width:100%;min-height:380px;font:500 .9rem/1.65 var(--fu);padding:1rem 1.1rem;border:1.5px solid var(--av3);border-radius:12px;background:#fff;resize:vertical}
+  #pz-print pre{white-space:pre-wrap;font:500 12pt/1.55 var(--fu)}
   #pz-print{display:none}
   @media print{
     html,body{overflow:visible;height:auto;background:#fff}
@@ -208,6 +248,7 @@
     <a class="es" href="lingue/">‹ Minisito</a>
     <div class="ti" id="ti">Le lingue dell'Alberghiero · visita guidata</div>
     <button type="button" id="b-ind">☰ Indice</button>
+    <button type="button" id="b-voce" aria-pressed="true">🔊 Voce</button>
     <button type="button" id="b-auto" aria-pressed="false">▶ Automatica</button>
     <button type="button" id="b-fs" aria-label="Schermo intero">⛶</button>
   </header>
@@ -243,39 +284,49 @@
     { n: 'Affidabilità e futuro' }
   ];
   var SC = [
-    { p: 0, tit: 'Benvenuti', tipo: 'nat', mount: mIntro, etic: 'Come leggere questa visita', dwell: 12000, beats: [
+    { p: 0, tit: 'Benvenuti', tipo: 'nat', mount: mIntro, etic: 'Come leggere questa visita', dwell: 14000, beats: [
       { t: 'Quello che state per vedere è un sito di lingue per gli studenti dell\'Alberghiero: vocabolario, esercizi, dialoghi e giochi in inglese, francese, spagnolo e tedesco.' },
       { t: 'Funziona dal telefono, senza registrazione. E per voi docenti è uno strumento che prepara il materiale al posto vostro.' },
-      { t: 'Questa visita si guida da sola. Il testo che si dissolve in questo riquadro scuro è la voce di chi spiega; ciò che appare nello schermo accanto è il sito vero, dal vivo.' },
-      { t: 'Premete «Avanti» quando volete, oppure scegliete la visita automatica.' }
+      { t: 'Questa visita si guida da sola. La voce che spiega legge il testo che si dissolve in questo riquadro scuro; si può spegnere con il pulsante in alto.' },
+      { t: 'Lo schermo accanto non è un video né un\'immagine: è il sito funzionante. Potete toccarlo, scrivere, provare. Quando vedete la cornice con il pallino verde, o quella dorata, tocca a voi.' },
+      { t: 'Un avvertimento importante: tutto ciò che vedrete è un esempio, non un percorso stabilito. Ogni docente potrà sostituire lezioni, grammatica e frasi con le proprie, e vederle cambiare in tempo reale.' },
+      { t: 'Premete «Avvia» per la visita automatica, oppure «Avanti» quando volete.' }
     ] },
     { p: 0, tit: 'Il punto di partenza', tipo: 'nat', mount: mNumeri, etic: 'Dati veri, contati adesso', beats: [
       { t: 'Prima i fatti. Questi numeri non sono scritti a mano: vengono contati in questo istante sui file veri del sito.' },
       { t: 'Frasi, sezioni, indirizzi, lezioni, dialoghi e imprevisti: è già un contenuto consistente.' },
       { t: 'Quando si aggiunge una frase, i numeri salgono da soli.' }
     ] },
-    { p: 1, tit: 'La porta d\'ingresso', tipo: 'sito', dev: 'tel', url: 'lingue/', beats: [
+    { p: 1, tit: 'La porta d\'ingresso', tipo: 'sito', dev: 'tel', url: 'lingue/', sugg: 'Il sito funziona davvero: toccate, scorrete, ascoltate', beats: [
       { t: 'Così appare il sito sul telefono di uno studente. Nessun account, nessuna app da installare.', hl: '.lg-hero' },
       { t: 'Ogni giorno c\'è una frase nuova da ascoltare e ripetere ad alta voce.', hl: '#hm-gg' },
       { t: 'Poi ognuno sceglie il proprio indirizzo di studi.', hl: '#hm-amb' },
       { t: 'E scopre tutto quello che si può fare: ci sono molti modi diversi per imparare.', hl: '.lg-grid' }
     ] },
-    { p: 1, tit: 'Il vocabolario', tipo: 'sito', dev: 'tel', url: 'lingue/vocabolario.html', beats: [
+    { p: 1, tit: 'Il vocabolario', tipo: 'sito', dev: 'tel', url: 'lingue/vocabolario.html', sugg: 'Provate: scorrete le frasi e toccate 🔊', beats: [
       { t: 'Il vocabolario raccoglie le frasi che servono davvero in servizio, divise per ambito e per situazione.', hl: '.ps-barra' },
       { t: 'Ogni frase si ascolta con la voce del telefono.', hl: '.ps-card' }
     ] },
-    { p: 1, tit: 'La lezione guidata', tipo: 'sito', dev: 'tel', url: 'lingue/lezioni.html?l=brigata', beats: [
+    { p: 1, tit: 'La lezione guidata', tipo: 'sito', dev: 'tel', url: 'lingue/lezioni.html?l=brigata', sugg: 'Lezione d\'esempio: la vostra potrà sostituirla', prova: 'Ora provate voi: toccate le schede e le risposte. Ricordate che questa è una lezione d\'esempio, che la vostra potrà sostituire.', beats: [
       { t: 'Una lezione guidata vale un\'ora. Comincia con una mini-lezione a schede, leggera e da ascoltare.', hl: '#lz-corpo' },
       { t: 'Poi arrivano le domande lampo: lo studente sceglie e vede subito se ha risposto bene.', hl: '#lz-lampo' },
       { t: 'Alla fine c\'è una missione: per esempio, il primo giorno in una brigata di cucina.' },
-      { t: 'Per gli studenti con DSA e BES c\'è la versione facilitata, attivabile con un tocco.', hl: '.lz-facile' }
+      { t: 'Per gli studenti con DSA e BES c\'è la versione facilitata, attivabile con un tocco.', hl: '.lz-facile' },
+      { t: 'Oggi le lezioni guidate esistono in inglese e spagnolo. Se il progetto va in porto, ci saranno anche il francese e il tedesco.' },
+      { t: 'E attenzione: questa è soltanto una lezione di esempio. Nella prossima scena vedrete come ogni docente potrà sostituirla con la propria.' }
     ] },
-    { p: 1, tit: 'Il ristorante illustrato', tipo: 'sito', dev: 'tel', url: 'lingue/illustrato.html', beats: [
+    { p: 1, tit: 'La lezione sarà la vostra', tipo: 'nat', mount: mPers, etic: 'Provate voi: scrivete la vostra lezione', oro: true, dwell: 35000, beats: [
+      { t: 'Fermiamoci un momento, perché questo è il punto più importante. Le lezioni che avete visto sono esempi: non sono un percorso stabilito.' },
+      { t: 'Ogni lezione può essere sostituita dalla vostra: la vostra regola di grammatica, le vostre frasi, il vostro argomento. Decidete voi quanto e come personalizzare: poco, per ritoccare un esempio, oppure tutto, per partire da zero.' },
+      { t: 'E succede in tempo reale. Scrivete nei campi qui accanto e guardate lo schermo del telefono cambiare mentre digitate.' },
+      { t: 'Provate a cambiare il titolo, la regola di grammatica o una frase. La domanda lampo si ricostruisce da sola.' }
+    ] },
+    { p: 1, tit: 'Il ristorante illustrato', tipo: 'sito', dev: 'tel', url: 'lingue/illustrato.html', sugg: 'Provate: toccate gli oggetti della scena', beats: [
       { t: 'Scene illustrate di ambienti di lavoro: lo studente tocca un oggetto e ne sente il nome nella lingua scelta.', hl: '#il-scena' },
       { t: 'Poi si passa alla modalità di gioco.', hl: '.il-modo' },
       { t: 'Alla LIM, questa pagina coinvolge subito tutta la classe.' }
     ] },
-    { p: 1, tit: 'Gli esercizi', tipo: 'sito', dev: 'tel', url: 'lingue/esercizi.html', beats: [
+    { p: 1, tit: 'Gli esercizi', tipo: 'sito', dev: 'tel', url: 'lingue/esercizi.html', sugg: 'Provate: scegliete un tipo di esercizio', beats: [
       { t: 'Diversi tipi di esercizio, da scegliere con un tocco.', hl: '#es-tipi' },
       { t: 'Il riscontro è immediato. Il docente non deve correggere nulla né raccogliere fogli.' }
     ] },
@@ -287,17 +338,17 @@
       { t: 'Dieci minuti di verifica breve, in due file, oppure la ricetta scritta come compito.', fn: function () { aula(3); } },
       { t: 'Il docente guida, i ragazzi fanno: nessuno resta spettatore. E con i docenti di cucina la ricetta si può preparare davvero in laboratorio.', fn: function () { aula(4); } }
     ] },
-    { p: 2, tit: 'I giochi a squadre alla LIM', tipo: 'sito', dev: 'fin', url: 'lingue/giochi.html', beats: [
+    { p: 2, tit: 'I giochi a squadre alla LIM', tipo: 'sito', dev: 'fin', url: 'lingue/giochi.html', sugg: 'Provate: scegliete un gioco e giocate', beats: [
       { t: 'Alla lavagna ci sono quattro giochi a due squadre: memory, indovina la parola, traduci a tempo, ascolta e scegli.', hl: '#gc-giochi' },
       { t: 'La classe si divide in squadre e il punteggio resta sempre in vista.', hl: '#gc-giochi', click: '.gc-gioco' },
       { t: 'Le frasi vengono dal vocabolario, oppure dalle frasi che scrivete voi.' }
     ] },
-    { p: 2, tit: 'Recitare un dialogo', tipo: 'sito', dev: 'tel', url: 'lingue/dialoghi.html', beats: [
+    { p: 2, tit: 'Recitare un dialogo', tipo: 'sito', dev: 'tel', url: 'lingue/dialoghi.html', sugg: 'Dialoghi d\'esempio: potranno essere i vostri', beats: [
       { t: 'Nei dialoghi lo studente ascolta una scena di lavoro, oppure ne interpreta un ruolo.', hl: '.dl-ctrl' },
       { t: 'In coppia, uno fa il cameriere e l\'altro il cliente.' },
       { t: 'È il momento in cui le parole imparate diventano una conversazione.' }
     ] },
-    { p: 2, tit: 'Gli imprevisti', tipo: 'sito', dev: 'tel', url: 'lingue/imprevisti.html', beats: [
+    { p: 2, tit: 'Gli imprevisti', tipo: 'sito', dev: 'tel', url: 'lingue/imprevisti.html', sugg: 'Imprevisti d\'esempio: potranno essere i vostri', beats: [
       { t: 'Gli imprevisti mettono alla prova il sangue freddo: una situazione difficile con un cliente, da gestire nella sua lingua.', hl: '.im-elenco' },
       { t: 'Lo studente sceglie come rispondere e riceve subito la reazione e la spiegazione del perché.' },
       { t: 'Ottimo spunto per discutere insieme registro, cortesia e gestione del reclamo.' }
@@ -307,12 +358,14 @@
       { t: 'Con un clic nasce un link con un codice QR da dare ai ragazzi: inquadrano, e l\'esercizio si apre sul loro telefono.' },
       { t: 'Provateci: il generatore qui accanto è vero. Le stesse frasi si possono giocare anche alla LIM.' }
     ] },
-    { p: 3, tit: 'La lezione in 5 minuti', tipo: 'sito', dev: 'fin', url: 'lingue/cinque-minuti.html', beats: [
+    { p: 3, tit: 'La lezione in 5 minuti', tipo: 'sito', dev: 'fin', url: 'lingue/cinque-minuti.html', sugg: 'Strumento funzionante: scrivete un argomento vostro', prova: 'Ora provate voi: scrivete un argomento vostro nel campo, anche se non è tra i suggerimenti.', beats: [
       { t: 'Se serve una lezione completa su un argomento nuovo, il sito prepara la richiesta per un\'intelligenza artificiale gratuita.' },
-      { t: 'Voi incollate la risposta e ottenete la lezione pronta all\'uso.' },
-      { t: 'La bozza si legge e si rivede: il controllo resta sempre al docente.' }
+      { t: 'Attenzione ai menu a discesa: suggeriscono, ma non limitano. Negli spazi Argomento e Grammatica potete scrivere qualsiasi contenuto vi serva.', hl: '#cm-arg' },
+      { t: 'E nel materiale autentico potete incollare un vostro testo, un menu, una ricetta, un articolo: la lezione nascerà da lì.', hl: '#cm-mat' },
+      { t: 'Per ora la lingua può essere inglese o spagnolo. Se il progetto va in porto, si aggiungeranno francese e tedesco.', hl: '#cm-lin' },
+      { t: 'Voi incollate la risposta e ottenete la lezione pronta all\'uso. La bozza si legge e si rivede: il controllo resta sempre al docente.' }
     ] },
-    { p: 3, tit: 'Verifiche in un clic', tipo: 'sito', dev: 'fin', url: 'lingue/verifiche.html', beats: [
+    { p: 3, tit: 'Verifiche in un clic', tipo: 'sito', dev: 'fin', url: 'lingue/verifiche.html', sugg: 'Strumento funzionante: provate a creare una verifica', beats: [
       { t: 'Si sceglie lingua e argomento, e lo strumento prepara una verifica dal vocabolario dell\'Alberghiero.' },
       { t: 'Si stampano le versioni con le domande in ordine diverso, più il foglio delle soluzioni.' }
     ] },
@@ -341,14 +394,24 @@
       { t: 'È nato dentro la scuola, da un educatore che conosce i ragazzi e i problemi di ogni giorno.' },
       { t: 'Non pretende di sapere le lingue meglio di voi: costruisce lo strumento, e lascia a voi il giudizio sul contenuto.' }
     ] },
-    { p: 4, tit: 'Cosa chiedo al Dipartimento', tipo: 'nat', mount: mChiusura, etic: 'Scheda da compilare in riunione', oro: true, dwell: 0, beats: [
+    { p: 4, tit: 'Cosa chiedo al Dipartimento', tipo: 'nat', mount: mChiusura, etic: 'Provate voi: la scheda si compila qui', oro: true, dwell: 0, beats: [
       { t: 'Per finire: il progetto non è chiuso e non deve esserlo. Si costruisce con chi lo usa.' },
       { t: 'Chiedo tre contributi: controllare le frasi della propria lingua, dire cosa manca per ogni indirizzo, scegliere la prossima funzione dell\'area docenti.' },
-      { t: 'La scheda qui accanto si stampa e si compila in riunione. Grazie per l\'attenzione.' }
+      { t: 'La scheda qui accanto si compila direttamente online, in ogni sua parte: scrivete, spuntate, aggiungete o togliete voci. Alla fine si può inviare alla posta dell\'Educatore Gaggiano, copiare o stampare.' },
+      { t: 'Se il Dipartimento è favorevole, il passo successivo è informare la Dirigente e chiedere l\'autorizzazione.' }
+    ] },
+    { p: 4, tit: 'Se la risposta è sì: la Dirigente', tipo: 'nat', mount: mLettera, etic: 'Bozza di richiesta, modificabile', oro: true, dwell: 0, beats: [
+      { t: 'Se la risposta del Dipartimento è positiva, conviene informare la Dirigente e chiedere un\'autorizzazione, in modo che l\'uso in classe sia riconosciuto e condiviso.' },
+      { t: 'Per risparmiare tempo, ecco una bozza di richiesta. È modificabile direttamente qui: adattatela, copiatela, oppure apritela nella vostra posta.' },
+      { t: 'Grazie per l\'attenzione. Il minisito è aperto, e aspetta le vostre lezioni.' }
     ] }
   ];
 
-  var cur = -1, timers = [], auto = false, ifr = null, pronto = false, coda = [];
+  var cur = -1, timers = [], auto = false, ifr = null, pronto = false, coda = [], gen = 0, voceOn = true, attivato = false;
+  var PROVA = 'Ora provate voi: quello che vedete qui accanto è il sito vero, non un\'immagine. Toccate, scorrete, ascoltate.';
+  document.addEventListener('pointerdown', function () { attivato = true; }, true);
+  document.addEventListener('keydown', function () { attivato = true; }, true);
+  function sentire() { return voceOn && 'speechSynthesis' in window && (navigator.userActivation ? navigator.userActivation.hasBeenActive : attivato); }
   var prog = $('prog'), palco = $('palco'), gin = $('g-in'), guida = $('guida');
   prog.innerHTML = SC.map(function (s, i) { return '<i data-i="' + i + '"' + (PARTI[s.p].cuore ? ' class="cuore"' : '') + ' title="' + esc(s.tit) + '"></i>'; }).join('');
   function pulisciTimer() { timers.forEach(clearTimeout); timers = []; }
@@ -365,8 +428,10 @@
 
   function vai(i) {
     if (i < 0 || i >= SC.length) return;
-    pulisciTimer(); coda = []; pronto = false; cur = i;
+    pulisciTimer(); coda = []; pronto = false; cur = i; gen++;
+    try { if ('speechSynthesis' in window) speechSynthesis.cancel(); } catch (e) {}
     var s = SC[i];
+    s._b = s.beats.concat(s.tipo === 'sito' ? [{ t: s.prova || PROVA, prova: true }] : []);
     [].forEach.call(prog.children, function (e, k) { e.className = (PARTI[SC[k].p].cuore ? 'cuore ' : '') + (k < i ? 'fatto' : k === i ? 'ora' : ''); });
     $('b-n').textContent = (i + 1) + ' / ' + SC.length;
     $('ti').textContent = 'Parte ' + (s.p + 1) + ' · ' + PARTI[s.p].n;
@@ -375,37 +440,43 @@
     guida.scrollTop = 0; guida.classList.remove('ferma');
     gin.innerHTML = '<div class="g-etichetta"><span class="g-onda"><i></i><i></i><i></i><i></i></span>La voce che spiega</div>' +
       '<p class="g-parte' + (PARTI[s.p].cuore ? ' cuore' : '') + '">' + (PARTI[s.p].cuore ? '★ ' : '') + 'Parte ' + (s.p + 1) + ' · ' + esc(PARTI[s.p].n) + '</p>' +
-      '<h2 class="g-tit" id="g-tit">' + esc(s.tit) + '</h2><div id="g-bb"></div>';
-    palco.className = 'palco'; palco.innerHTML = ''; ifr = null;
+      '<h2 class="g-tit" id="n-tit">' + esc(s.tit) + '</h2><div id="n-bb"></div>';
+    palco.className = 'palco' + (s.sugg ? ' cs' : ''); palco.innerHTML = ''; ifr = null;
     void palco.offsetWidth; palco.classList.add('entra');
-    var avvio = function () { dopo(function () { $('g-tit').classList.add('on'); }, 150); dopo(function () { battute(s, 0); }, 1500); };
+    var avvio = function () { dopo(function () { $('n-tit').classList.add('on'); }, 150); dopo(function () { battute(s, 0, gen); }, 1500); };
     if (s.tipo === 'sito') montaSito(s, avvio); else { montaNat(s); avvio(); }
     try { history.replaceState(null, '', location.pathname + '#s' + (i + 1)); } catch (e) {}
   }
 
-  function battute(s, k) {
-    if (SC[cur] !== s) return;
-    if (k >= s.beats.length) { fine(s); return; }
-    var b = s.beats[k], bb = $('g-bb');
+  function battute(s, k, g) {
+    if (SC[cur] !== s || g !== gen) return;
+    var B = s._b;
+    if (k >= B.length) { fine(s); return; }
+    var b = B[k], bb = $('n-bb');
     [].forEach.call(bb.children, function (e) { e.classList.remove('ultimo'); e.classList.add('vecchio'); });
-    var p = document.createElement('p'); p.className = 'g-b'; p.textContent = b.t; bb.appendChild(p);
+    var p = document.createElement('p'); p.className = 'g-b' + (b.prova ? ' prova' : ''); p.textContent = b.t; bb.appendChild(p);
     void p.offsetWidth; p.classList.add('on', 'ultimo');
     guida.scrollTo({ top: guida.scrollHeight, behavior: ridotto ? 'auto' : 'smooth' });
     azione(b); if (b.fn) b.fn(s);
-    dopo(function () { battute(s, k + 1); }, 1700 + b.t.length * 48);
+    var dur = 1700 + b.t.length * 48, fatto = false;
+    var avanti = function (ms) { if (fatto) return; fatto = true; dopo(function () { battute(s, k + 1, g); }, ms); };
+    if (sentire()) {
+      L.ascolta(b.t, 'it', { rate: .96, fine: function () { if (g === gen) avanti(800); } });
+      dopo(function () { avanti(0); }, dur * 1.8 + 3500);
+    } else dopo(function () { avanti(0); }, dur);
   }
   function fine(s) {
     guida.classList.add('ferma');
     if (cur < SC.length - 1) $('b-av').classList.add('pronto');
-    if (auto && cur < SC.length - 1) dopo(function () { if (auto) vai(cur + 1); }, s.dwell != null ? s.dwell : 3800);
+    if (auto && cur < SC.length - 1) dopo(function () { if (auto) vai(cur + 1); }, s.dwell != null ? s.dwell : (s.tipo === 'sito' ? 12000 : 3800));
   }
 
   var CSS_IN = '#hdr,.lg-anteprima,#fab-wrap,#tr-btn,.sec-nav-arrow{display:none!important} body{padding-top:0!important}' +
-    '.pz-hl{outline:3px solid #D4AA4A!important;outline-offset:5px!important;border-radius:14px;box-shadow:0 0 0 9999px rgba(10,20,12,.38)!important;position:relative!important;z-index:60!important;animation:pzh 1.6s ease-in-out infinite}' +
+    '.pz-hl{outline:3px solid #D4AA4A!important;outline-offset:5px!important;border-radius:14px;box-shadow:0 0 0 9999px rgba(10,20,12,.22)!important;position:relative!important;z-index:60!important;animation:pzh 1.6s ease-in-out infinite}' +
     '@keyframes pzh{50%{outline-color:#fff}}';
   function montaSito(s, quando) {
     var tel = s.dev === 'tel', url = location.host + '/' + s.url.replace(/^\//, '');
-    palco.innerHTML = '<span class="etic"><span class="p"></span>Il sito vero, dal vivo</span>' +
+    palco.innerHTML = '<span class="etic"><span class="p"></span>Il sito vero, funzionante: toccate e provate</span>' + (s.sugg ? '<span class="sugg">' + esc(s.sugg) + '</span>' : '') +
       (tel ? '<div class="tel"><div class="sc" id="pz-sc"></div></div>' : '<div class="fin"><span class="url">' + esc(url) + '</span><div class="sc" id="pz-sc"></div></div>');
     var fr = document.createElement('iframe'); fr.title = s.tit; ifr = fr; var fatto = false;
     function ok() {
@@ -422,12 +493,13 @@
     dopo(function () { trova(d, sel, tent - 1, cb); }, 400);
   }
   function azione(b) {
-    if (!b.hl && !b.click) return;
+    if (!b.hl && !b.click && !b.prova) return;
     if (!ifr) return;
     if (!pronto) { coda.push(b); return; }
     var d; try { d = ifr.contentDocument; } catch (e) { return; }
     if (!d || !d.body) return;
     [].forEach.call(d.querySelectorAll('.pz-hl'), function (e) { e.classList.remove('pz-hl'); });
+    if (b.prova) return;
     if (b.hl) trova(d, b.hl, 6, function (el) { if (!el) return; el.classList.add('pz-hl'); try { el.scrollIntoView({ block: 'center', behavior: ridotto ? 'auto' : 'smooth' }); } catch (e) {} });
     if (b.click) dopo(function () { trova(d, b.click, 4, function (el) { if (el) try { el.click(); } catch (e) {} }); }, b.hl ? 1300 : 300);
   }
@@ -442,13 +514,14 @@
       '<p class="nota" style="font-size:.95rem">Presentazione per il Dipartimento di Lingue · a cura dell\'Educatore Michele Gaggiano</p>' +
       '<p style="margin:1.1rem 0 .2rem"><b>In questa visita ci sono tre tipi di schermo:</b></p>' +
       '<div class="leg"><div class="a"><b>La voce che spiega</b><p>Testo bianco su fondo scuro, che appare lentamente. È la spiegazione.</p></div>' +
-      '<div class="b"><b>● Il sito vero, dal vivo</b><p>Cornice chiara con il pallino verde. Sono le pagine reali, come le vedono gli studenti.</p></div>' +
+      '<div class="b"><b>● Il sito vero, funzionante</b><p>Cornice chiara con il pallino verde. Sono le pagine reali, come le vedono gli studenti: toccatele, funzionano.</p></div>' +
       '<div class="c"><b>✋ Provate voi</b><p>Cornice dorata. Si può scrivere, cliccare, giocare.</p></div></div>' +
-      '<div class="riga"><button type="button" class="lg-btn pieno" id="i-auto">▶ Avvia la visita automatica</button><button type="button" class="lg-btn" id="i-man">Preferisco andare avanti io</button></div>' +
-      '<p class="nota" style="margin-top:1rem">Con le frecce della tastiera ci si sposta tra le scene; «Indice» permette di saltare a quella che interessa.</p>';
+      '<div class="ponte on" style="margin:.2rem 0 1rem"><b>Attenzione:</b> lezioni, frasi ed esercizi che vedrete sono esempi, non un percorso fisso. Ogni docente potrà sostituirli con i propri, in tempo reale.</div>' +
+      '<div class="riga"><button type="button" class="lg-btn pieno" id="i-auto">▶ Avvia la visita automatica, con la voce</button><button type="button" class="lg-btn" id="i-man">Preferisco andare avanti io</button></div>' +
+      '<p class="nota" style="margin-top:1rem">🔊 La voce legge il testo ad alta voce: il pulsante «Voce» in alto la accende e la spegne. Con le frecce della tastiera ci si sposta tra le scene; «Indice» permette di saltare a quella che interessa.</p>';
     var SAL = ['Welcome', 'Bienvenue', 'Bienvenidos', 'Willkommen', 'Benvenuti'], i = 0, e = $('pz-saluto');
     if (!ridotto) (function giro() { dopo(function () { e.classList.add('via'); dopo(function () { i = (i + 1) % SAL.length; e.textContent = SAL[i]; e.classList.remove('via'); giro(); }, 500); }, 2400); })();
-    $('i-auto').addEventListener('click', function () { impostaAuto(true); });
+    $('i-auto').addEventListener('click', function () { impostaAuto(true); vai(0); });
     $('i-man').addEventListener('click', function () { impostaAuto(false); vai(cur + 1); });
   }
 
@@ -456,7 +529,7 @@
     el.innerHTML = '<h3>Il minisito in numeri</h3><div class="pz-cifre">' +
       [['frasi', 'Frasi nel vocabolario'], ['sezioni', 'Sezioni tematiche'], ['ambiti', 'Indirizzi coperti'], ['lingue', 'Lingue'], ['lezioni', 'Lezioni guidate da un\'ora'], ['dialoghi', 'Dialoghi da recitare'], ['imprevisti', 'Imprevisti con scelta'], ['oggetti', 'Oggetti nelle scene illustrate']]
         .map(function (c) { return '<div class="pz-cifra"><b data-k="' + c[0] + '">0</b><span>' + c[1] + '</span></div>'; }).join('') +
-      '</div><p class="nota" style="margin-top:1rem">Le lezioni guidate sono oggi in inglese e spagnolo; vocabolario, esercizi e giochi lavorano in tutte e quattro le lingue.</p>';
+      '</div><p class="nota" style="margin-top:1rem">Le lezioni guidate sono oggi in inglese e spagnolo; se il progetto va in porto, arriveranno anche francese e tedesco. Vocabolario, esercizi e giochi lavorano già in tutte e quattro le lingue.</p>';
     Promise.all(['lingue/parole.js', 'lingue/lezioni-dati.js', 'lingue/dialoghi-dati.js', 'lingue/imprevisti-dati.js', 'lingue/illustrato-scene.js'].map(carica)).then(function () {
       var V = window.VOCABOLARIO || { PAROLE: {}, SEZIONI: [], AMBITI: [] }, n = 0, k, og = 0;
       for (k in V.PAROLE) n += (V.PAROLE[k] || []).length;
@@ -634,16 +707,114 @@
       '<li><b>L\'impegno</b>Lavoro trasparente: ogni scelta si può discutere, ogni errore si corregge, ogni contenuto resta controllabile da chi ne è competente.</li></ul></div>';
   }
 
-  var SCHEDA = '<h4>Scheda di riscontro del Dipartimento di Lingue</h4><p>Lingua e docente</p><div class="linea"></div><p>Per prima cosa vorrei (anche più di una)</p>' +
-    '<label><input type="checkbox"/> Un archivio personale dei miei esercizi</label><label><input type="checkbox"/> Correggere le frasi del vocabolario nella mia lingua</label><label><input type="checkbox"/> Lezioni guidate nella mia lingua</label><label><input type="checkbox"/> Proporre risorse e siti per gli studenti</label><label><input type="checkbox"/> Altro: ______________________________</label>' +
-    '<p>Ho trovato da correggere</p><div class="linea"></div><div class="linea"></div><p>Nel mio indirizzo servirebbero</p><div class="linea"></div><div class="linea"></div>';
+  /* ── utilità condivise: copia, posta, stampa ── */
+  function copia(t, el) {
+    function ok() { if (el) { el.className = 'stato'; el.textContent = 'Testo copiato negli appunti.'; } }
+    function no() { if (el) { el.className = 'stato no'; el.textContent = 'Copia non riuscita: selezionate il testo e copiatelo a mano.'; } }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, no); else no();
+  }
+  function posta(dest, ogg, corpo, el) {
+    var q = '?subject=' + encodeURIComponent(ogg) + '&body=' + encodeURIComponent(corpo);
+    if (q.length > 1800) {
+      copia(corpo);
+      q = '?subject=' + encodeURIComponent(ogg) + '&body=' + encodeURIComponent('(Il testo completo è stato copiato negli appunti: incollatelo qui sotto.)');
+      if (el) { el.className = 'stato'; el.textContent = 'Il testo è lungo: l\'ho copiato negli appunti, incollatelo nel messaggio che si apre.'; }
+    }
+    location.href = 'mailto:' + dest + q;
+  }
+  function stampa(t) {
+    $('pz-print').innerHTML = '<pre>' + esc(t) + '</pre>'; document.body.classList.add('pz-stampa');
+    var f = function () { document.body.classList.remove('pz-stampa'); window.removeEventListener('afterprint', f); }; window.addEventListener('afterprint', f); window.print();
+  }
+
+  /* ── la lezione è vostra: editor in tempo reale ── */
+  var PERS = {
+    en: { tit: 'Al ristorante: la richiesta cortese', gr: 'Could e would per le richieste cortesi', sp: 'Per chiedere con garbo si usa «Could I…?» e «Would you like…?» al posto di «Can I…?» e «Do you want…?».',
+      f: 'Potrei avere il conto, per favore? = Could I have the bill, please?\nDesidera un caffè? = Would you like a coffee?\nPotrebbe ripetere, per favore? = Could you repeat that, please?\nLe porto subito il menu. = I\'ll bring you the menu right away.' },
+    es: { tit: 'En el restaurante: pedir con cortesía', gr: 'Il condizionale di cortesia: podría, querría', sp: 'Per chiedere con garbo si usa il condizionale: «¿Podría…?» e «Querría…» al posto del presente.',
+      f: 'Potrei avere il conto, per favore? = ¿Podría traerme la cuenta, por favor?\nDesidera un caffè? = ¿Querría un café?\nPotrebbe ripetere, per favore? = ¿Podría repetirlo, por favor?\nLe porto subito il menu. = Le traigo enseguida la carta.' }
+  };
+  function mPers(el) {
+    el.innerHTML = '<h3>Cambiate la lezione e guardate il telefono</h3><div class="ed"><div>' +
+      '<label class="et" for="pe-lin">Lingua della lezione</label><select id="pe-lin"><option value="en">Inglese</option><option value="es">Spagnolo</option></select>' +
+      '<label class="et" for="pe-tit">Titolo della lezione</label><input id="pe-tit" type="text" maxlength="70"/>' +
+      '<label class="et" for="pe-gra">Regola di grammatica</label><input id="pe-gra" type="text" maxlength="90"/>' +
+      '<label class="et" for="pe-sp">Spiegazione breve</label><textarea id="pe-sp" rows="3"></textarea>' +
+      '<label class="et" for="pe-f">Frasi: italiano = traduzione (una per riga)</label><textarea id="pe-f" rows="6" spellcheck="false"></textarea>' +
+      '<div class="chips"><span>Titolo</span><span>Grammatica</span><span>Frasi</span><span>Lingua</span><span>Livello</span><span>Indirizzo</span><span>Domande</span><span>Missione</span></div>' +
+      '<p class="nota" style="margin-top:.6rem">Ogni docente decide quanto e come personalizzare. Simulazione: nel sito vero lo stesso principio vale con «Crea esercizi» e «Lezione in 5 minuti», e l\'area docenti permetterà di conservare e correggere le proprie lezioni. Le lezioni complete sono in inglese e spagnolo; se il progetto va in porto, anche francese e tedesco.</p></div>' +
+      '<div><p class="nota" style="margin:0 0 .5rem;text-align:center"><b>Come la vede lo studente, subito</b></p><div class="ph"><div id="pe-sc"></div></div></div></div>';
+    var lin = $('pe-lin'), tit = $('pe-tit'), gra = $('pe-gra'), sp = $('pe-sp'), f = $('pe-f'), sc = $('pe-sc');
+    function carica_(c) { var d = PERS[c]; tit.value = d.tit; gra.value = d.gr; sp.value = d.sp; f.value = d.f; }
+    function disegna(flash) {
+      var v = PK.voci(f.value).voci, cod = lin.value, h = '<p class="kk">Lezione · ' + esc(L.lingua(cod).nome) + '</p><h4>' + esc(tit.value || 'Titolo della lezione') + '</h4>';
+      if (gra.value || sp.value) h += '<div class="gr"><b>' + esc(gra.value) + '</b>' + esc(sp.value) + '</div>';
+      h += '<ul>' + v.slice(0, 5).map(function (x) { return '<li><span>' + esc(x.tr) + '<small>' + esc(x.it) + '</small></span>' + L.play(x.tr, cod, 'Ascolta', false) + '</li>'; }).join('') + '</ul>';
+      if (v.length >= 3) {
+        var q = v[0], o = [v[1].tr, q.tr, v[2].tr];
+        h += '<div class="lampo"><p>Domanda lampo: come si dice «' + esc(q.it) + '»?</p>' + o.map(function (t) { return '<button type="button" data-ok="' + (t === q.tr ? 1 : 0) + '">' + esc(t) + '</button>'; }).join('') + '</div>';
+      }
+      sc.innerHTML = h;
+      if (flash) { sc.classList.remove('fl'); void sc.offsetWidth; sc.classList.add('fl'); }
+    }
+    lin.addEventListener('change', function () { carica_(lin.value); disegna(true); });
+    [tit, gra, sp, f].forEach(function (x) { x.addEventListener('input', function () { disegna(true); }); });
+    sc.addEventListener('click', function (e) { var b = e.target.closest('.lampo button'); if (b) b.classList.add(b.dataset.ok === '1' ? 'ok' : 'no'); });
+    carica_('en'); disegna(false);
+  }
+
+  /* ── la scheda di riscontro, modificabile online ── */
+  var VOCI0 = ['Un archivio personale dei miei esercizi', 'Correggere le frasi del vocabolario nella mia lingua', 'Lezioni guidate nella mia lingua', 'Proporre risorse e siti per gli studenti'];
   function mChiusura(el) {
+    var st = L.leggi('pz-scheda', null) || { doc: '', voci: VOCI0.map(function (t) { return { c: false, t: t }; }), cor: '', serv: '', oss: '', fav: '' };
     el.innerHTML = '<div class="chiedo"><div><i>1</i><h4>Controllare le frasi</h4><p>Ogni docente rilegge le sezioni della propria lingua e segnala cosa correggere.</p></div><div><i>2</i><h4>Dire cosa manca</h4><p>Per ogni indirizzo: quali situazioni, parole e dialoghi servono davvero in classe e in stage.</p></div><div><i>3</i><h4>Scegliere la prossima funzione</h4><p>Dell\'area docenti, quale vorreste per prima?</p></div></div>' +
-      '<div class="scheda">' + SCHEDA + '</div><div class="riga"><button type="button" class="lg-btn pieno" id="z-stampa">🖨️ Stampa la scheda</button><a class="lg-btn" href="lingue/">Esplora il minisito</a><a class="lg-btn" href="lingue/docenti.html">Strumenti per i docenti</a></div>';
-    $('z-stampa').addEventListener('click', function () {
-      $('pz-print').innerHTML = '<div class="scheda">' + SCHEDA + '</div>'; document.body.classList.add('pz-stampa');
-      var f = function () { document.body.classList.remove('pz-stampa'); window.removeEventListener('afterprint', f); }; window.addEventListener('afterprint', f); window.print();
-    });
+      '<div class="scheda sch"><h4>Scheda di riscontro del Dipartimento di Lingue</h4><p class="nota" style="margin:0;text-transform:none;letter-spacing:0">Si compila qui, in ogni sua parte. Quello che scrivete resta sul vostro dispositivo finché non lo inviate.</p>' +
+      '<label class="et" for="z-doc">Lingua e docenti presenti</label><input type="text" id="z-doc"/>' +
+      '<label class="et">Per prima cosa vorremmo (anche più di una voce)</label><div id="z-voci"></div><button type="button" class="mini" id="z-add">+ Aggiungi una voce</button>' +
+      '<label class="et" for="z-cor">Frasi o contenuti da correggere</label><textarea id="z-cor"></textarea>' +
+      '<label class="et" for="z-serv">Nel nostro indirizzo servirebbero</label><textarea id="z-serv"></textarea>' +
+      '<label class="et" for="z-oss">Osservazioni del team dipartimentale</label><textarea id="z-oss"></textarea>' +
+      '<label class="et">Il Dipartimento è favorevole a proseguire?</label><div class="fav"><label><input type="radio" name="z-fav" value="Sì"/><span>Sì</span></label><label><input type="radio" name="z-fav" value="Da approfondire"/><span>Da approfondire</span></label><label><input type="radio" name="z-fav" value="No"/><span>No</span></label></div>' +
+      '<div class="passo" id="z-passo"><b>Se la risposta è sì:</b> il passo successivo è informare la Dirigente e chiedere l\'autorizzazione. <button type="button" class="mini pieno" id="z-lett" style="margin-left:.4rem">Prepara la richiesta →</button></div>' +
+      '<div class="riga"><button type="button" class="lg-btn pieno" id="z-mail">✉️ Invia a Michele Gaggiano</button><button type="button" class="lg-btn" id="z-copia">📋 Copia il testo</button><button type="button" class="lg-btn" id="z-stampa">🖨️ Stampa</button></div><p class="stato" id="z-st"></p></div>';
+    var doc = $('z-doc'), cor = $('z-cor'), serv = $('z-serv'), oss = $('z-oss'), vv = $('z-voci');
+    doc.value = st.doc; cor.value = st.cor; serv.value = st.serv; oss.value = st.oss;
+    [].forEach.call(el.querySelectorAll('input[name=z-fav]'), function (r) { r.checked = r.value === st.fav; });
+    function voci() {
+      vv.innerHTML = st.voci.map(function (v, i) { return '<div class="vo"><input type="checkbox" data-c="' + i + '"' + (v.c ? ' checked' : '') + ' aria-label="Scegli"/><input type="text" data-t="' + i + '" value="' + esc(v.t) + '"/><button type="button" data-x="' + i + '" aria-label="Togli la voce">✕</button></div>'; }).join('');
+    }
+    function passo() { $('z-passo').classList.toggle('on', st.fav === 'Sì'); }
+    function salvaSt() { st.doc = doc.value; st.cor = cor.value; st.serv = serv.value; st.oss = oss.value; L.salva('pz-scheda', st); }
+    function testo() {
+      salvaSt();
+      return 'SCHEDA DI RISCONTRO DEL DIPARTIMENTO DI LINGUE\nMinisito «Le lingue dell\'Alberghiero»\n\nLingua e docenti presenti: ' + (st.doc || '-') + '\n\nPer prima cosa vorremmo:\n' +
+        (st.voci.length ? st.voci.map(function (v) { return (v.c ? '[x] ' : '[ ] ') + v.t; }).join('\n') : '-') +
+        '\n\nFrasi o contenuti da correggere:\n' + (st.cor || '-') + '\n\nNel nostro indirizzo servirebbero:\n' + (st.serv || '-') + '\n\nOsservazioni del team dipartimentale:\n' + (st.oss || '-') + '\n\nIl Dipartimento è favorevole a proseguire: ' + (st.fav || 'non indicato');
+    }
+    voci(); passo();
+    [doc, cor, serv, oss].forEach(function (x) { x.addEventListener('input', salvaSt); });
+    vv.addEventListener('input', function (e) { var t = e.target; if (t.dataset.t != null) { st.voci[+t.dataset.t].t = t.value; salvaSt(); } });
+    vv.addEventListener('change', function (e) { var t = e.target; if (t.dataset.c != null) { st.voci[+t.dataset.c].c = t.checked; salvaSt(); } });
+    vv.addEventListener('click', function (e) { var t = e.target.closest('[data-x]'); if (t) { st.voci.splice(+t.dataset.x, 1); salvaSt(); voci(); } });
+    $('z-add').addEventListener('click', function () { st.voci.push({ c: true, t: '' }); voci(); var k = vv.querySelectorAll('input[type=text]'); if (k.length) k[k.length - 1].focus(); });
+    el.addEventListener('change', function (e) { if (e.target.name === 'z-fav') { st.fav = e.target.value; salvaSt(); passo(); } });
+    $('z-lett').addEventListener('click', function () { impostaAuto(false); vai(cur + 1); });
+    $('z-mail').addEventListener('click', function () { posta('michele.gaggiano@alberghierorieti.it', 'Scheda di riscontro: Dipartimento di Lingue', testo(), $('z-st')); });
+    $('z-copia').addEventListener('click', function () { copia(testo(), $('z-st')); });
+    $('z-stampa').addEventListener('click', function () { stampa(testo()); });
+  }
+
+  /* ── bozza di richiesta alla Dirigente ── */
+  var LETT0 = 'Alla Dirigente Scolastica\nIPSSEOA «R. A. Costaggini», Rieti\n\nOggetto: minisito «Le lingue dell\'Alberghiero»: informativa e richiesta di autorizzazione all\'utilizzo didattico\n\nGentile Dirigente,\n\nil Dipartimento di Lingue, nella riunione del ____________, ha preso visione del minisito «Le lingue dell\'Alberghiero» (convitto.alberghierorieti.edu.it/lingue), realizzato dall\'Educatore Michele Gaggiano: uno strumento gratuito, senza registrazione per gli studenti, con vocabolario professionale, esercizi, dialoghi, giochi a squadre per la LIM e lezioni guidate in inglese e spagnolo.\n\nIl Dipartimento ha espresso parere favorevole e intende:\n1. verificare e correggere i contenuti nelle lingue di propria competenza;\n2. sperimentare lo strumento nelle classi, anche con materiali propri;\n3. collaborare con l\'Educatore Gaggiano per i passi successivi (area riservata ai docenti, lezioni di francese e tedesco).\n\nSi chiede pertanto di essere informati e di autorizzare l\'utilizzo didattico del minisito nelle classi e la collaborazione sopra indicata. Il minisito non comporta oneri per l\'Istituto.\n\nEventuali osservazioni del Dipartimento: ____________________\n\nCon osservanza,\nIl Dipartimento di Lingue\n\nRieti, ____________';
+  function mLettera(el) {
+    el.innerHTML = '<h3>Richiesta alla Dirigente: bozza da adattare</h3><p class="nota" style="margin:0 0 .6rem">La bozza si modifica direttamente qui. Va firmata e inviata dal Dipartimento o da un suo referente: compilate le parti con i trattini e correggete ciò che serve.</p>' +
+      '<textarea class="lett" id="l-t" spellcheck="true"></textarea><div class="riga"><button type="button" class="lg-btn pieno" id="l-mail">✉️ Apri nella posta</button><button type="button" class="lg-btn" id="l-copia">📋 Copia il testo</button><button type="button" class="lg-btn" id="l-stampa">🖨️ Stampa</button><button type="button" class="lg-btn" id="l-ripr">Ripristina la bozza</button></div><p class="stato" id="l-st"></p>';
+    var t = $('l-t'); t.value = L.leggi('pz-lettera', null) || LETT0;
+    t.addEventListener('input', function () { L.salva('pz-lettera', t.value); });
+    $('l-mail').addEventListener('click', function () { posta('', 'Minisito «Le lingue dell\'Alberghiero»: informativa e richiesta di autorizzazione', t.value, $('l-st')); });
+    $('l-copia').addEventListener('click', function () { copia(t.value, $('l-st')); });
+    $('l-stampa').addEventListener('click', function () { stampa(t.value); });
+    $('l-ripr').addEventListener('click', function () { t.value = LETT0; L.salva('pz-lettera', t.value); });
   }
 
   function impostaAuto(v) {
@@ -651,6 +822,10 @@
     if (v && guida.classList.contains('ferma') && cur < SC.length - 1) { pulisciTimer(); dopo(function () { if (auto) vai(cur + 1); }, 1200); }
   }
   $('b-auto').addEventListener('click', function () { impostaAuto(!auto); });
+  $('b-voce').addEventListener('click', function () {
+    voceOn = !voceOn; this.setAttribute('aria-pressed', String(voceOn)); this.textContent = voceOn ? '🔊 Voce' : '🔇 Voce';
+    if (!voceOn) { try { speechSynthesis.cancel(); } catch (e) {} }
+  });
   $('b-av').addEventListener('click', function () { impostaAuto(false); vai(cur + 1); });
   $('b-ind-p').addEventListener('click', function () { impostaAuto(false); vai(cur - 1); });
   prog.addEventListener('click', function (e) { var i = e.target.closest('i[data-i]'); if (i) { impostaAuto(false); vai(+i.dataset.i); } });

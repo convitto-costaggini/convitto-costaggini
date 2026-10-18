@@ -469,7 +469,7 @@
     primo = false;
     var avvio = function () {
       dopo(function () { $('n-tit').classList.add('on'); }, 150);
-      if (attesa) { dopo(function () { var m = document.createElement('p'); m.className = 'g-b prova'; m.textContent = '🔊 Per ascoltare la voce, premete uno dei pulsanti «Avvia» nello schermo accanto: la voce si attiva solo dopo un vostro clic.'; $('n-bb').appendChild(m); void m.offsetWidth; m.classList.add('on'); }, 1200); return; }
+      if (attesa) { dopo(function () { var m = document.createElement('p'); m.className = 'g-b prova'; m.textContent = '🔊 Per ascoltare la voce, premete uno dei pulsanti nello schermo accanto: la voce si attiva solo dopo un vostro clic, e la visita prosegue dalla scena successiva.'; $('n-bb').appendChild(m); void m.offsetWidth; m.classList.add('on'); }, 1200); return; }
       dopo(function () { battute(s, 0, gen); }, 1500);
     };
     if (s.tipo === 'sito') montaSito(s, avvio); else { montaNat(s); avvio(); }
@@ -546,12 +546,12 @@
       '<div class="c"><b>✋ Provate voi</b><p>Cornice dorata. Si può scrivere, cliccare, giocare.</p></div></div>' +
       '<div class="ponte on" style="margin:.2rem 0 1rem"><b>Attenzione:</b> lezioni, frasi ed esercizi che vedrete sono esempi, non un percorso fisso. Ogni docente potrà sostituirli con i propri, in tempo reale.</div>' +
       '<div class="riga"><button type="button" class="lg-btn pieno" id="i-auto">▶ Avvia la visita automatica, con la voce</button><button type="button" class="lg-btn" id="i-man">Avvia, ma vado avanti io</button><button type="button" class="lg-btn" id="i-muto">Senza voce</button></div>' +
-      '<p class="nota" style="margin-top:1rem">🔊 La voce legge il testo ad alta voce: il pulsante «Voce» in alto la accende e la spegne. Con le frecce della tastiera ci si sposta tra le scene; «Indice» permette di saltare a quella che interessa.</p>';
+      '<p class="nota" style="margin-top:1rem">I pulsanti portano alla scena successiva: questa pagina si legge a schermo e non va riascoltata. 🔊 La voce legge il testo ad alta voce: il pulsante «Voce» in alto la accende e la spegne. Con le frecce della tastiera ci si sposta tra le scene; «Indice» permette di saltare a quella che interessa.</p>';
     var SAL = ['Welcome', 'Bienvenue', 'Bienvenidos', 'Willkommen', 'Benvenuti'], i = 0, e = $('pz-saluto');
     if (!ridotto) (function giro() { dopo(function () { e.classList.add('via'); dopo(function () { i = (i + 1) % SAL.length; e.textContent = SAL[i]; e.classList.remove('via'); giro(); }, 500); }, 2400); })();
-    $('i-auto').addEventListener('click', function () { impostaAuto(true); vai(0); });
-    $('i-man').addEventListener('click', function () { impostaAuto(false); vai(0); });
-    $('i-muto').addEventListener('click', function () { impostaAuto(false); voceOn = false; $('b-voce').setAttribute('aria-pressed', 'false'); $('b-voce').textContent = '🔇 Voce'; vai(0); });
+    $('i-auto').addEventListener('click', function () { impostaAuto(true); vai(1); });
+    $('i-man').addEventListener('click', function () { impostaAuto(false); vai(1); });
+    $('i-muto').addEventListener('click', function () { impostaAuto(false); voceOn = false; $('b-voce').setAttribute('aria-pressed', 'false'); $('b-voce').textContent = '🔇 Voce'; vai(1); });
   }
 
   function mNumeri(el) {

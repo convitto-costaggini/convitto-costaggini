@@ -858,7 +858,7 @@
         body: JSON.stringify({ tipo: 'scheda', docenti: (st.doc || '').slice(0, 200) || null, testo: t.slice(0, 8000) })
       }).then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
-        el.className = 'stato'; el.textContent = 'Scheda inviata: la riceve l\'Educatore Gaggiano. Grazie.';
+        el.className = 'stato'; el.textContent = 'Scheda inviata. Grazie.';
       }).catch(function () {
         el.className = 'stato no'; el.textContent = 'Invio non riuscito. Potete usare «Invia per posta» oppure «Copia il testo».';
       }).then(function () { b.disabled = false; });

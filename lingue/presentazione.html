@@ -411,7 +411,6 @@
         <ul class="pz-fatti">
           <li><b>Il metodo</b>Ogni modifica viene controllata prima di essere pubblicata: sintassi, collegamenti, prova su telefono e su computer. Il minisito è stato riletto pagina per pagina anche per questa presentazione.</li>
           <li><b>Il precedente</b>Il sito istituzionale del Convitto, con oltre settanta pagine, e il gestionale interno sono stati realizzati con lo stesso criterio: strumenti gratuiti, nessun costo per l'Istituto, attenzione a sicurezza e privacy.</li>
-          <li><b>Il rapporto con i ragazzi</b>Da oltre vent'anni dirige il Laboratorio Musicale del Convitto e organizza i concerti degli studenti. Sa che cosa serve a un gruppo di ragazzi per imparare facendo.</li>
           <li><b>L'impegno</b>Lavora in modo trasparente: ogni scelta si può discutere, ogni errore si corregge, ogni contenuto resta controllabile da chi ne è competente.</li>
         </ul>
       </div>
@@ -673,17 +672,17 @@
   /* ── richieste e tempi ── */
   var RIC = [
     ['Correggere o aggiungere una frase', 'Si modifica la riga nell\'archivio del vocabolario e la correzione compare in vocabolario, esercizi, giochi e verifiche.', 'Pochi minuti'],
-    ['Una sezione nuova di vocabolario', 'Servono le frasi in italiano e nelle lingue interessate; la sezione appare subito nell\'indirizzo scelto, già collegata a esercizi e giochi.', 'Nella stessa giornata, se il materiale è pronto'],
-    ['Un dialogo o un imprevisto nuovo', 'Si scrive la scena con le risposte possibili e un voto per ciascuna; il motore che la fa funzionare esiste già.', 'Circa un giorno'],
-    ['Una lezione guidata nella mia lingua', 'Lo strumento «Lezione in 5 minuti» prepara la bozza completa; voi la rivedete e la rifinite, poi entra tra le lezioni.', 'Una bozza in pochi minuti, la revisione è vostra'],
-    ['Una nuova lingua', 'Il lavoro vero è la traduzione e la revisione delle frasi da parte di un docente di quella lingua; l\'impianto del sito è già pronto ad accoglierla.', 'Alcuni giorni, secondo la revisione'],
-    ['Un gioco nuovo per la LIM', 'Si costruisce sul modello dei quattro già presenti e si prova in classe prima di pubblicarlo.', 'Alcuni giorni']
+    ['Una sezione nuova di vocabolario', 'Servono le frasi in italiano e nelle lingue interessate; la sezione appare subito nell\'indirizzo scelto, già collegata a esercizi e giochi.', 'Nella stessa giornata'],
+    ['Un dialogo o un imprevisto nuovo', 'Si scrive la scena con le risposte possibili e un voto per ciascuna; il motore che la fa funzionare esiste già.', 'Un giorno'],
+    ['Una lezione guidata nella mia lingua', 'Lo strumento «Lezione in 5 minuti» prepara la bozza completa; voi la rivedete e la rifinite, poi entra tra le lezioni.', 'Bozza in pochi minuti, poi la revisione è vostra'],
+    ['Una nuova lingua', 'Il lavoro vero è la traduzione e la revisione delle frasi da parte di un docente di quella lingua; l\'impianto del sito è già pronto ad accoglierla.', 'Al massimo un paio di giorni'],
+    ['Un gioco nuovo per la LIM', 'Si costruisce sul modello dei quattro già presenti e si prova in classe prima di pubblicarlo.', 'Al massimo un paio di giorni']
   ];
   $('r-chips').innerHTML = RIC.map(function (r, i) { return '<button type="button" class="lg-chip" data-r="' + i + '" aria-pressed="false">' + esc(r[0]) + '</button>'; }).join('');
   $('r-chips').addEventListener('click', function (e) {
     var b = e.target.closest('[data-r]'); if (!b) return; var r = RIC[+b.dataset.r];
     [].forEach.call($('r-chips').children, function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-    $('r-ris').innerHTML = '<b>' + esc(r[0]) + '</b><br>' + esc(r[1]) + '<small>Tempo indicativo: ' + esc(r[2]) + '. Dipende da quanto materiale è già pronto.</small>';
+    $('r-ris').innerHTML = '<b>' + esc(r[0]) + '</b><br>' + esc(r[1]) + '<small>Tempo indicativo: ' + esc(r[2]) + '. Con il materiale già pronto.</small>';
   });
 
   /* ── scheda stampabile ── */

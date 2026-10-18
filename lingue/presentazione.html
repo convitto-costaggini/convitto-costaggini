@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Presentazione del progetto | Le lingue dell'Alberghiero</title>
+  <meta name="description" content="Presentazione autonoma del minisito Le lingue dell'Alberghiero per il Dipartimento di Lingue: provalo dal vivo, strumenti per i docenti, area docenti, affidabilità e tempi di adattamento."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  .sec-nav-arrow{display:none!important}
+  .pz-barra{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--oro),var(--oro3));z-index:10000;transition:width .15s linear}
+
+  /* indice dei capitoli (solo schermi larghi) */
+  .pz-rail{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:60;display:none;flex-direction:column;gap:.55rem}
+  @media (min-width:1100px){.pz-rail{display:flex}}
+  .pz-rail a{display:block;width:11px;height:11px;border-radius:50%;border:2px solid var(--oro);background:transparent;position:relative;transition:transform .2s,background .2s}
+  .pz-rail a[aria-current]{background:var(--oro);transform:scale(1.25)}
+  .pz-rail a span{position:absolute;right:20px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--bosco);color:#fff;font:700 .68rem var(--fu);padding:.3rem .6rem;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .15s}
+  .pz-rail a:hover span,.pz-rail a:focus-visible span{opacity:1}
+
+  .pz-cap{padding:4.5rem 1.25rem 4.5rem;background:var(--av);position:relative}
+  .pz-cap.chiara{background:var(--bco)}
+  .pz-cap.scura{background:radial-gradient(110% 80% at 85% 0%,rgba(184,146,42,.2),transparent 60%),linear-gradient(160deg,#16261a,var(--bosco));color:#fff}
+  .pz-cap .w{max-width:1000px;margin:0 auto}
+  .pz-num{font:800 .66rem var(--fu);letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin:0 0 .5rem}
+  .pz-cap.scura .pz-num{color:var(--oro2)}
+  .pz-cap h2{font-family:var(--fd);font-weight:400;font-size:clamp(1.9rem,5.6vw,3rem);line-height:1.1;color:var(--bosco);margin:0 0 .8rem;max-width:24ch}
+  .pz-cap h2 em{color:var(--oro)}
+  .pz-cap.scura h2{color:#fff}
+  .pz-cap.scura h2 em{color:var(--oro3)}
+  .pz-lead{font-size:1.05rem;line-height:1.7;color:var(--txt2);max-width:62ch;margin:0 0 2rem}
+  .pz-cap.scura .pz-lead{color:rgba(245,240,232,.82)}
+  .pz-avanti{display:inline-flex;margin-top:2rem;font:800 .66rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);text-decoration:none}
+  .pz-avanti:hover{text-decoration:underline}
+
+  .pz-rev{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .pz-rev.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.pz-rev{opacity:1;transform:none;transition:none}}
+
+  /* apertura */
+  .pz-hero{min-height:calc(100vh - 40px);display:flex;align-items:center;padding-top:5rem}
+  .pz-hero h1{font-family:var(--fd);font-weight:300;font-size:clamp(2.4rem,8vw,4.8rem);line-height:1.04;margin:.4rem 0 1.1rem;color:#fff;max-width:16ch}
+  .pz-hero h1 em{color:var(--oro3)}
+  .pz-saluto{font-family:var(--fd);font-style:italic;font-size:clamp(1.3rem,3.6vw,1.9rem);color:var(--oro3);height:1.4em;margin:0 0 .6rem;transition:opacity .5s}
+  .pz-saluto.via{opacity:0}
+  .pz-hero .pz-lead{font-size:1.15rem}
+  .pz-firma{font:700 .8rem var(--fu);letter-spacing:.06em;color:rgba(245,240,232,.7);margin:1.6rem 0 0}
+  .pz-firma b{color:#fff}
+  .pz-tasti{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+  .pz-hero .lg-btn{border-color:var(--oro2);color:#fff}
+  .pz-hero .lg-btn.oro{background:var(--oro);border-color:var(--oro)}
+  .pz-scorri{position:absolute;left:50%;bottom:1.3rem;transform:translateX(-50%);font:800 .6rem var(--fu);letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.55);text-decoration:none;animation:pzSu 2s ease-in-out infinite}
+  @keyframes pzSu{50%{transform:translate(-50%,6px)}}
+  @media (prefers-reduced-motion:reduce){.pz-scorri{animation:none}}
+
+  /* numeri */
+  .pz-cifre{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:0 0 1.4rem}
+  .pz-cifra{background:#fff;border:1px solid var(--av3);border-radius:16px;padding:1.2rem 1rem;text-align:center;box-shadow:var(--sh-sm)}
+  .pz-cifra b{display:block;font-family:var(--fd);font-weight:400;font-size:clamp(2.2rem,6vw,3.2rem);line-height:1;color:var(--bosco)}
+  .pz-cifra span{display:block;margin-top:.45rem;font:700 .7rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--txt2)}
+  .pz-nota-p{font-size:.84rem;color:var(--txt2);max-width:62ch;line-height:1.6}
+
+  /* vetrina */
+  .pz-tab{display:flex;flex-wrap:wrap;gap:.45rem;margin:0 0 1.3rem}
+  .pz-vetrina{display:grid;grid-template-columns:minmax(0,1fr);gap:1.6rem;align-items:start}
+  @media (min-width:900px){.pz-vetrina{grid-template-columns:330px minmax(0,1fr)}}
+  .pz-dida h3{font-family:var(--fd);font-weight:400;font-size:1.6rem;color:var(--bosco);margin:.1rem 0 .5rem;line-height:1.2}
+  .pz-dida p{font-size:.95rem;line-height:1.7;color:var(--txt2);margin:0 0 .8rem}
+  .pz-dida .lg-badge{margin-bottom:.8rem}
+  .pz-schermo{background:#111;border-radius:30px;padding:12px;box-shadow:0 24px 50px rgba(20,34,22,.28);max-width:392px;width:100%;margin:0 auto}
+  .pz-schermo.largo{max-width:none;border-radius:16px;padding:8px}
+  .pz-schermo .pz-sc{position:relative;background:var(--av);border-radius:20px;overflow:hidden;height:min(72vh,680px);min-height:460px}
+  .pz-schermo.largo .pz-sc{border-radius:10px;height:min(66vh,620px)}
+  .pz-schermo iframe{width:100%;height:100%;border:0;display:block;background:var(--av)}
+  .pz-avvia{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;background:linear-gradient(160deg,#16261a,var(--bosco));color:#fff;border:0;cursor:pointer;font:700 .9rem var(--fu)}
+  .pz-avvia b{font-family:var(--fd);font-weight:400;font-size:1.6rem}
+  .pz-avvia span.p{width:62px;height:62px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+  .pz-apri{display:inline-flex;margin-top:.3rem;font:800 .64rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);text-decoration:none;border-bottom:2px solid var(--oro);padding-bottom:2px}
+
+  /* meno lavoro */
+  .pz-passi{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:0 0 2.2rem}
+  .pz-passo{background:#fff;border:1px solid var(--av3);border-radius:16px;padding:1.2rem;box-shadow:var(--sh-sm)}
+  .pz-passo i{font-style:normal;font-size:1.7rem;line-height:1;display:block;margin-bottom:.5rem}
+  .pz-passo h3{font:800 .76rem var(--fu);letter-spacing:.07em;text-transform:uppercase;color:var(--bosco);margin:0 0 .35rem}
+  .pz-passo p{font-size:.88rem;line-height:1.6;color:var(--txt2);margin:0}
+  .pz-gen{display:grid;gap:1.4rem;grid-template-columns:minmax(0,1fr);background:#fff;border:2px solid var(--bosco);border-radius:20px;padding:1.4rem;box-shadow:0 14px 34px rgba(44,62,45,.12)}
+  @media (min-width:860px){.pz-gen{grid-template-columns:1fr 1fr}}
+  .pz-gen label{display:block;font:700 .7rem var(--fu);letter-spacing:.07em;text-transform:uppercase;color:var(--bosco);margin:0 0 .35rem}
+  .pz-gen textarea,.pz-gen input,.pz-gen select{width:100%;box-sizing:border-box;font:500 .95rem var(--fu);padding:.7rem .85rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--av)}
+  .pz-gen textarea{min-height:170px;line-height:1.6;resize:vertical}
+  .pz-gen .riga{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+  .pz-out{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.8rem;min-height:260px;background:var(--bco);border:1.5px dashed var(--av3);border-radius:14px;padding:1rem}
+  .pz-out canvas{width:200px;height:200px;image-rendering:pixelated;border-radius:8px;border:1px solid var(--av3);background:#fff}
+  .pz-out small{color:var(--txt2);font-size:.8rem;line-height:1.5;max-width:30ch}
+  .pz-stato{font:700 .74rem var(--fu);color:var(--bosco2);margin:.5rem 0 0;min-height:1.2em}
+  .pz-stato.no{color:#991b1b}
+
+  /* competenza */
+  .pz-corr{display:grid;gap:1.4rem;grid-template-columns:minmax(0,1fr)}
+  @media (min-width:860px){.pz-corr{grid-template-columns:1.2fr .8fr}}
+  .pz-riga{display:grid;grid-template-columns:1fr;gap:.35rem;background:#fff;border:1px solid var(--av3);border-radius:14px;padding:.9rem 1rem;margin-bottom:.7rem}
+  .pz-riga .it{font-family:var(--fd);font-size:1.25rem;color:var(--bosco)}
+  .pz-riga input{width:100%;box-sizing:border-box;font:600 .98rem var(--fu);padding:.6rem .75rem;border:1.5px solid var(--av3);border-radius:9px;background:var(--av)}
+  .pz-riga input:focus{outline:2px solid var(--oro);border-color:var(--oro)}
+  .pz-dove{display:flex;flex-wrap:wrap;gap:.4rem;margin:.9rem 0 .4rem}
+  .pz-dove span{font:800 .64rem var(--fu);letter-spacing:.07em;text-transform:uppercase;padding:.35rem .65rem;border-radius:999px;background:var(--av2);color:var(--bosco2);transition:background .3s,color .3s}
+  .pz-dove span.lampo{background:var(--oro);color:#fff}
+  .pz-tel{background:#111;border-radius:26px;padding:10px;max-width:300px;margin:0 auto;box-shadow:0 18px 40px rgba(20,34,22,.25)}
+  .pz-tel>div{background:var(--av);border-radius:18px;padding:1.2rem 1rem;min-height:250px}
+  .pz-tel .dom{font:800 .6rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro);text-align:center;margin:0 0 .3rem}
+  .pz-tel .q{font-family:var(--fd);font-size:1.3rem;color:var(--bosco);text-align:center;margin:0 0 .9rem;line-height:1.25}
+  .pz-tel .r{display:flex;align-items:center;gap:.6rem;background:#fff;border:1.5px solid #10b981;border-radius:12px;padding:.7rem .8rem;font-weight:600;font-size:.95rem;color:#065f46;transition:background .4s}
+  .pz-tel .r.n{animation:pzFl .8s}
+  @keyframes pzFl{0%{background:#fde68a}100%{background:#fff}}
+  .pz-tel .r span{flex:1}
+
+  /* area docenti prototipo */
+  .pz-proto{position:relative;background:#fff;border:1px solid var(--av3);border-radius:20px;box-shadow:0 18px 44px rgba(44,62,45,.14);overflow:hidden}
+  .pz-proto-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;background:var(--bosco);color:#fff;padding:.9rem 1.2rem}
+  .pz-proto-top b{font-family:var(--fd);font-weight:400;font-size:1.3rem}
+  .pz-proto-top span{font:800 .6rem var(--fu);letter-spacing:.14em;text-transform:uppercase;background:var(--oro);padding:.3rem .65rem;border-radius:999px}
+  .pz-proto-tab{display:flex;gap:.3rem;padding:.7rem 1rem 0;border-bottom:1px solid var(--av3);overflow-x:auto;scrollbar-width:none}
+  .pz-proto-tab button{font:700 .74rem var(--fu);border:0;background:transparent;padding:.6rem .9rem;color:var(--txt2);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+  .pz-proto-tab button[aria-selected=true]{color:var(--bosco);border-bottom-color:var(--oro)}
+  .pz-proto-corpo{padding:1.2rem;min-height:300px}
+  .pz-el{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;border:1px solid var(--av3);border-radius:12px;padding:.8rem 1rem;margin-bottom:.6rem;background:var(--bco)}
+  .pz-el .t{flex:1;min-width:160px}
+  .pz-el .t b{display:block;color:var(--bosco);font-size:.95rem}
+  .pz-el .t small{color:var(--txt2);font-size:.76rem}
+  .pz-stat{font:800 .6rem var(--fu);letter-spacing:.08em;text-transform:uppercase;padding:.28rem .6rem;border-radius:6px}
+  .pz-stat.b{background:#fffbeb;color:#92400e}
+  .pz-stat.p{background:#ecfdf5;color:#047857}
+  .pz-stat.a{background:#eef2ff;color:#3730a3}
+  .pz-mini{font:700 .66rem var(--fu);letter-spacing:.06em;text-transform:uppercase;padding:.45rem .7rem;border-radius:8px;border:1.5px solid var(--bosco);background:transparent;color:var(--bosco);cursor:pointer}
+  .pz-mini.pieno{background:var(--bosco);color:#fff}
+  .pz-proto-corpo input,.pz-proto-corpo textarea{width:100%;box-sizing:border-box;font:500 .92rem var(--fu);padding:.65rem .8rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--av);margin-bottom:.6rem}
+  .pz-msg{font:700 .8rem var(--fu);color:#047857;margin:.4rem 0 0;min-height:1.2em}
+  .pz-fasi{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin-top:2rem}
+  .pz-fase{border-radius:16px;padding:1.1rem 1.2rem;border:1px solid var(--av3);background:#fff}
+  .pz-fase.ora{border:2px solid var(--bosco);background:linear-gradient(135deg,#fff,#eef3ee)}
+  .pz-fase h3{font:800 .68rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin:0 0 .3rem}
+  .pz-fase b{display:block;font-family:var(--fd);font-weight:400;font-size:1.25rem;color:var(--bosco);margin-bottom:.4rem}
+  .pz-fase ul{margin:0;padding-left:1.1rem;font-size:.84rem;line-height:1.7;color:var(--txt2)}
+
+  /* solidità */
+  .pz-live{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:0 0 2rem}
+  .pz-live div{background:rgba(255,255,255,.07);border:1px solid rgba(237,217,138,.3);border-radius:16px;padding:1.1rem;text-align:center}
+  .pz-live b{display:block;font-family:var(--fd);font-weight:400;font-size:2.4rem;color:var(--oro3);line-height:1}
+  .pz-live span{display:block;margin-top:.4rem;font:700 .66rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.75)}
+  .pz-domande{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+  .pz-dom{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:1.2rem}
+  .pz-dom h3{font-family:var(--fd);font-weight:400;font-size:1.25rem;color:var(--oro3);margin:0 0 .45rem;line-height:1.25}
+  .pz-dom p{margin:0;font-size:.9rem;line-height:1.65;color:rgba(245,240,232,.84)}
+
+  /* adattabilità */
+  .pz-fila{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;counter-reset:s;margin:0 0 2.2rem}
+  .pz-fila div{counter-increment:s;background:#fff;border:1px solid var(--av3);border-radius:16px;padding:1.2rem 1.1rem 1.1rem;position:relative}
+  .pz-fila div::before{content:counter(s);position:absolute;top:-14px;left:16px;width:30px;height:30px;border-radius:50%;background:var(--oro);color:#fff;font:800 .8rem var(--fu);display:flex;align-items:center;justify-content:center}
+  .pz-fila h3{font:800 .76rem var(--fu);letter-spacing:.07em;text-transform:uppercase;color:var(--bosco);margin:.3rem 0 .35rem}
+  .pz-fila p{margin:0;font-size:.86rem;line-height:1.6;color:var(--txt2)}
+  .pz-richieste{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+  .pz-risposta{background:#fff;border:2px solid var(--oro);border-radius:16px;padding:1.2rem 1.3rem;min-height:92px;font-size:.98rem;line-height:1.65;color:var(--txt)}
+  .pz-risposta b{color:var(--bosco)}
+  .pz-risposta small{display:block;margin-top:.5rem;font-size:.76rem;color:var(--txt2)}
+  .pz-esempio{margin-top:2rem;border-left:4px solid var(--oro);background:#fffbeb;border-radius:0 14px 14px 0;padding:1rem 1.2rem;font-size:.92rem;line-height:1.65;color:#713f12}
+
+  /* chi c'è dietro */
+  .pz-chi{display:grid;gap:2rem;grid-template-columns:minmax(0,1fr);align-items:start}
+  @media (min-width:860px){.pz-chi{grid-template-columns:1fr 1fr}}
+  .pz-chi blockquote{margin:0;font-family:var(--fd);font-size:clamp(1.4rem,3.6vw,1.9rem);line-height:1.35;color:#fff;border-left:3px solid var(--oro2);padding-left:1.1rem}
+  .pz-chi blockquote small{display:block;margin-top:.9rem;font:700 .8rem var(--fu);letter-spacing:.06em;color:var(--oro3)}
+  .pz-fatti{list-style:none;margin:0;padding:0;display:grid;gap:.8rem}
+  .pz-fatti li{background:rgba(255,255,255,.07);border:1px solid rgba(237,217,138,.25);border-radius:14px;padding:.95rem 1.1rem;font-size:.92rem;line-height:1.6;color:rgba(245,240,232,.88)}
+  .pz-fatti b{color:var(--oro3);display:block;font:800 .68rem var(--fu);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem}
+
+  /* chiusura e scheda */
+  .pz-chiedo{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:0 0 2rem}
+  .pz-chiedo div{background:#fff;border:1px solid var(--av3);border-radius:16px;padding:1.3rem;box-shadow:var(--sh-sm)}
+  .pz-chiedo i{font-style:normal;font-family:var(--fd);font-size:2.4rem;color:var(--oro);line-height:1;display:block}
+  .pz-chiedo h3{font-family:var(--fd);font-weight:400;font-size:1.3rem;color:var(--bosco);margin:.2rem 0 .4rem}
+  .pz-chiedo p{margin:0;font-size:.9rem;line-height:1.65;color:var(--txt2)}
+  .pz-scheda{background:#fff;border:1.5px solid var(--bosco);border-radius:16px;padding:1.4rem 1.5rem;max-width:720px}
+  .pz-scheda h3{font-family:var(--fd);font-weight:400;font-size:1.5rem;color:var(--bosco);margin:0 0 .8rem}
+  .pz-scheda p{margin:.8rem 0 .3rem;font:700 .74rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco)}
+  .pz-scheda label{display:block;font-size:.92rem;line-height:1.9;color:var(--txt)}
+  .pz-scheda .linea{border-bottom:1.5px solid var(--av3);height:1.9rem}
+  .pz-piede{background:var(--bosco);color:rgba(245,240,232,.7);text-align:center;padding:2rem 1.25rem;font-size:.82rem;line-height:1.7}
+  .pz-piede a{color:var(--oro3)}
+
+  @media print{
+    body.pz-stampa > *:not(main){display:none!important}
+    body.pz-stampa main > *:not(#scheda-sez){display:none!important}
+    body.pz-stampa #scheda-sez{display:block;background:#fff;padding:0}
+    body.pz-stampa #scheda-sez .pz-num,body.pz-stampa #scheda-sez h2,body.pz-stampa #scheda-sez .pz-lead,body.pz-stampa #scheda-sez .pz-chiedo,body.pz-stampa #scheda-sez .pz-tasti{display:none!important}
+    body.pz-stampa .pz-scheda{border:0;max-width:none}
+  }
+  </style>
+</head>
+<body data-page="lingue" data-lingue="docenti">
+<div class="pz-barra" id="pz-barra" aria-hidden="true"></div>
+<div class="lg-anteprima">Anteprima per i docenti · presentazione del progetto, pagina non indicizzata</div>
+<script src="nav-header.min.js"></script>
+<nav class="pz-rail" id="pz-rail" aria-label="Capitoli della presentazione"></nav>
+<main id="main">
+
+  <!-- 0 · APERTURA -->
+  <section class="pz-cap scura pz-hero" id="apertura" data-cap="Apertura">
+    <div class="w">
+      <p class="pz-saluto" id="pz-saluto" aria-hidden="true">Welcome</p>
+      <p class="pz-num">Presentazione per il Dipartimento di Lingue</p>
+      <h1>Le lingue <em>dell'Alberghiero</em></h1>
+      <p class="pz-lead">Quattro lingue, cinque indirizzi, centinaia di frasi da ascoltare, esercitare e giocare. Costruito perché la vostra competenza diventi, in pochi clic, materiale pronto per la classe. Questa pagina parla da sola: ogni capitolo si può provare dal vivo.</p>
+      <div class="pz-tasti">
+        <a class="lg-btn oro" href="lingue/presentazione.html#numeri">Inizia la visita</a>
+        <button type="button" class="lg-btn" id="pz-schermo">⛶ Schermo intero</button>
+        <a class="lg-btn" href="lingue/">Vai al minisito</a>
+      </div>
+      <p class="pz-firma">Progetto e realizzazione: <b>Educatore Michele Gaggiano</b> · Convitto «Costaggini», Rieti</p>
+    </div>
+    <a class="pz-scorri" href="lingue/presentazione.html#numeri" aria-label="Scorri">Scorri ↓</a>
+  </section>
+
+  <!-- 1 · NUMERI -->
+  <section class="pz-cap" id="numeri" data-cap="Numeri">
+    <div class="w">
+      <p class="pz-num">Capitolo 1 · Il punto di partenza</p>
+      <h2 class="pz-rev">Non una promessa: <em>un sito già pieno</em></h2>
+      <p class="pz-lead pz-rev">Questi numeri non sono scritti a mano: vengono contati in questo istante sui file veri del minisito. Se domani si aggiunge una frase, il numero sale da solo.</p>
+      <div class="pz-cifre pz-rev" id="pz-cifre">
+        <div class="pz-cifra"><b data-k="frasi">0</b><span>Frasi nel vocabolario</span></div>
+        <div class="pz-cifra"><b data-k="sezioni">0</b><span>Sezioni tematiche</span></div>
+        <div class="pz-cifra"><b data-k="ambiti">0</b><span>Indirizzi coperti</span></div>
+        <div class="pz-cifra"><b data-k="lingue">0</b><span>Lingue</span></div>
+        <div class="pz-cifra"><b data-k="lezioni">0</b><span>Lezioni guidate da un'ora</span></div>
+        <div class="pz-cifra"><b data-k="dialoghi">0</b><span>Dialoghi da interpretare</span></div>
+        <div class="pz-cifra"><b data-k="imprevisti">0</b><span>Imprevisti con scelta</span></div>
+        <div class="pz-cifra"><b data-k="oggetti">0</b><span>Oggetti nelle scene illustrate</span></div>
+      </div>
+      <p class="pz-nota-p pz-rev">Le lezioni guidate sono oggi in inglese e spagnolo; il vocabolario, gli esercizi e i giochi lavorano in tutte e quattro le lingue. Tutto gira sul telefono dello studente, senza registrazione e senza raccogliere dati personali.</p>
+      <a class="pz-avanti" href="lingue/presentazione.html#vetrina">Capitolo 2: provatelo ↓</a>
+    </div>
+  </section>
+
+  <!-- 2 · VETRINA -->
+  <section class="pz-cap chiara" id="vetrina" data-cap="Provatelo">
+    <div class="w">
+      <p class="pz-num">Capitolo 2 · Dal vivo</p>
+      <h2 class="pz-rev">Toccate, <em>ascoltate, giocate</em></h2>
+      <p class="pz-lead pz-rev">Qui sotto non ci sono schermate: sono le pagine vere, dentro lo schermo di un telefono. Scegliete una funzione e usatela come la userebbe uno studente. Per la voce serve il suono attivo.</p>
+      <div class="pz-tab" id="pz-tab" role="tablist" aria-label="Funzioni del minisito"></div>
+      <div class="pz-vetrina">
+        <div class="pz-dida" id="pz-dida"></div>
+        <div class="pz-schermo" id="pz-schermo-box"><div class="pz-sc" id="pz-sc"></div></div>
+      </div>
+      <a class="pz-avanti" href="lingue/presentazione.html#lavoro">Capitolo 3: meno lavoro per voi ↓</a>
+    </div>
+  </section>
+
+  <!-- 3 · MENO LAVORO -->
+  <section class="pz-cap" id="lavoro" data-cap="Meno lavoro">
+    <div class="w">
+      <p class="pz-num">Capitolo 3 · Il tempo dei docenti</p>
+      <h2 class="pz-rev">Le vostre frasi, <em>in un minuto</em></h2>
+      <p class="pz-lead pz-rev">L'obiettivo è uno: togliervi il lavoro ripetitivo e lasciarvi quello che solo voi sapete fare. Scrivete o incollate le frasi della vostra lezione, anche da Word o da Excel: il resto lo fa il sistema.</p>
+      <div class="pz-passi pz-rev">
+        <div class="pz-passo"><i>📲</i><h3>Link e codice QR</h3><p>Gli studenti aprono l'esercizio dal telefono, senza account. Il link si incolla nel registro, in Classroom o in una chat.</p></div>
+        <div class="pz-passo"><i>🎲</i><h3>Giochi alla LIM</h3><p>Le stesse frasi diventano quattro giochi a due squadre, a schermo intero, con pulsanti grandi.</p></div>
+        <div class="pz-passo"><i>📝</i><h3>Verifica su carta</h3><p>Fila A, B e C con le domande in ordine diverso e il foglio delle soluzioni. Ogni domanda si modifica a mano.</p></div>
+        <div class="pz-passo"><i>⚡</i><h3>Lezione in 5 minuti</h3><p>Il sito scrive la richiesta perfetta per un'intelligenza artificiale gratuita: incollate la risposta e avete una lezione completa.</p></div>
+        <div class="pz-passo"><i>♿</i><h3>Versione facilitata</h3><p>Nelle lezioni guidate, un interruttore per DSA e BES: testo più grande, più aria, niente corsivo.</p></div>
+      </div>
+      <h3 class="pz-rev" style="font-family:var(--fd);font-weight:400;font-size:1.6rem;color:var(--bosco);margin:0 0 .8rem">Provate adesso: scrivete tre frasi</h3>
+      <div class="pz-gen pz-rev">
+        <div>
+          <label for="g-lin">Lingua</label>
+          <select id="g-lin"></select>
+          <label for="g-tit" style="margin-top:.8rem">Titolo dell'esercizio</label>
+          <input id="g-tit" type="text" maxlength="80" value="Al bar: le bevande calde"/>
+          <label for="g-txt" style="margin-top:.8rem">Una frase per riga: italiano = traduzione</label>
+          <textarea id="g-txt" spellcheck="false"></textarea>
+          <div class="riga">
+            <button type="button" class="lg-btn pieno" id="g-genera">📲 Genera link e QR</button>
+            <button type="button" class="lg-btn" id="g-lim">🎲 Gioca alla LIM</button>
+          </div>
+          <p class="pz-stato" id="g-stato"></p>
+        </div>
+        <div class="pz-out" id="g-out">
+          <span style="font-size:2.4rem">📲</span>
+          <small>Qui comparirà il codice QR: inquadratelo con il telefono e l'esercizio si apre subito, con quattro tipi di prova.</small>
+        </div>
+      </div>
+      <a class="pz-avanti" href="lingue/presentazione.html#competenza">Capitolo 4: la competenza resta vostra ↓</a>
+    </div>
+  </section>
+
+  <!-- 4 · COMPETENZA -->
+  <section class="pz-cap chiara" id="competenza" data-cap="La vostra competenza">
+    <div class="w">
+      <p class="pz-num">Capitolo 4 · Chi decide cosa è giusto</p>
+      <h2 class="pz-rev">Il sistema serve <em>la vostra competenza</em></h2>
+      <p class="pz-lead pz-rev">Un sito di lingue vale quanto le sue frasi. Per questo ogni frase vive in un solo posto, ed è correggibile da chi la lingua la insegna. Le traduzioni di partenza sono una base di lavoro: la revisione finale spetta al Dipartimento.</p>
+      <div class="pz-corr pz-rev">
+        <div>
+          <p class="pz-num" style="margin-bottom:.7rem">Provate: correggete una traduzione</p>
+          <div class="pz-riga"><span class="it">Vuole lo zucchero?</span><input id="c-1" type="text" value="Would you like some sugar?" aria-label="Traduzione inglese 1"/></div>
+          <div class="pz-riga"><span class="it">Il conto, per favore.</span><input id="c-2" type="text" value="The bill, please." aria-label="Traduzione inglese 2"/></div>
+          <div class="pz-riga"><span class="it">Siamo al completo.</span><input id="c-3" type="text" value="We are fully booked." aria-label="Traduzione inglese 3"/></div>
+          <p class="pz-num" style="margin:1rem 0 .3rem">Dove compare la frase</p>
+          <div class="pz-dove" id="c-dove"><span>Vocabolario</span><span>Esercizi</span><span>Giochi alla LIM</span><span>Verifiche</span></div>
+          <p class="pz-nota-p">Nel vocabolario, negli esercizi, nei giochi e nelle verifiche le frasi arrivano dallo stesso archivio: una correzione vale ovunque. Qui è una simulazione sul vostro schermo; nel sito vero ogni correzione passa da un controllo prima di essere pubblicata.</p>
+        </div>
+        <div>
+          <p class="pz-num" style="margin-bottom:.7rem">Come la vede lo studente</p>
+          <div class="pz-tel"><div>
+            <p class="dom">Come si dice in inglese?</p>
+            <p class="q" id="c-q">Vuole lo zucchero?</p>
+            <div class="r" id="c-r"><span id="c-t">Would you like some sugar?</span><button type="button" class="lg-play" id="c-ascolta" aria-label="Ascolta la frase">🔊</button></div>
+            <div class="lg-chips" style="justify-content:center;margin-top:1rem" id="c-sel"></div>
+          </div></div>
+        </div>
+      </div>
+      <a class="pz-avanti" href="lingue/presentazione.html#docenti">Capitolo 5: l'area docenti ↓</a>
+    </div>
+  </section>
+
+  <!-- 5 · AREA DOCENTI -->
+  <section class="pz-cap" id="docenti" data-cap="Area docenti">
+    <div class="w">
+      <p class="pz-num">Capitolo 5 · Che cosa diventerà</p>
+      <h2 class="pz-rev">L'area docenti, <em>già visibile</em></h2>
+      <p class="pz-lead pz-rev">L'accesso personale è la prossima fase. Intanto potete esplorare un prototipo funzionante: i dati sono di esempio e non vengono salvati, ma i comandi rispondono come risponderanno nel sito vero.</p>
+      <div class="pz-proto pz-rev">
+        <div class="pz-proto-top"><b>Area docenti · benvenuto</b><span>Prototipo, non ancora attivo</span></div>
+        <div class="pz-proto-tab" role="tablist" id="p-tab">
+          <button type="button" role="tab" aria-selected="true" data-p="es">✏️ I miei esercizi</button>
+          <button type="button" role="tab" aria-selected="false" data-p="co">📖 Correzioni al vocabolario</button>
+          <button type="button" role="tab" aria-selected="false" data-p="ri">🌐 Proponi una risorsa</button>
+          <button type="button" role="tab" aria-selected="false" data-p="ac">🔒 Accesso</button>
+        </div>
+        <div class="pz-proto-corpo" id="p-corpo"></div>
+      </div>
+      <div class="pz-fasi pz-rev">
+        <div class="pz-fase ora"><h3>Fase 1 · Oggi</h3><b>Strumenti già attivi</b><ul><li>Crea esercizi con link e QR</li><li>Giochi alla LIM con le vostre frasi</li><li>Verifiche A, B, C con soluzioni</li><li>Lezioni guidate e Lezione in 5 minuti</li></ul></div>
+        <div class="pz-fase"><h3>Fase 2 · Area riservata</h3><b>Accesso personale</b><ul><li>Archivio degli esercizi, da casa e da scuola</li><li>Correzione di un esercizio già condiviso senza rifare il link</li><li>Bozza o pubblicato</li><li>Verifica in due passaggi</li></ul></div>
+        <div class="pz-fase"><h3>Fase 3 · Su vostra richiesta</h3><b>Da concordare insieme</b><ul><li>Lezioni guidate nelle altre due lingue</li><li>Nuove sezioni per indirizzo</li><li>Registrazioni di voci madrelingua</li><li>Quello che direte voi</li></ul></div>
+      </div>
+      <a class="pz-avanti" href="lingue/presentazione.html#solidita">Capitolo 6: veloce e solido ↓</a>
+    </div>
+  </section>
+
+  <!-- 6 · SOLIDITA -->
+  <section class="pz-cap scura" id="solidita" data-cap="Veloce e solido">
+    <div class="w">
+      <p class="pz-num">Capitolo 6 · Affidabilità</p>
+      <h2 class="pz-rev">Leggero, veloce, <em>difficile da rompere</em></h2>
+      <p class="pz-lead pz-rev">Le cifre qui sotto sono misurate dal vostro browser mentre leggete: riguardano questa stessa pagina, scaricata ora.</p>
+      <div class="pz-live pz-rev">
+        <div><b id="m-tempo">…</b><span>Millisecondi per caricarsi</span></div>
+        <div><b id="m-kb">…</b><span>Kilobyte scaricati</span></div>
+        <div><b id="m-req">…</b><span>Richieste di rete</span></div>
+        <div><b>0</b><span>Account richiesti agli studenti</span></div>
+      </div>
+      <div class="pz-domande pz-rev">
+        <div class="pz-dom"><h3>E se internet in aula è lento?</h3><p>Le pagine sono leggere e statiche. La voce e i giochi girano sul dispositivo, non su un server lontano che si può intasare.</p></div>
+        <div class="pz-dom"><h3>E se qualcuno sbaglia una modifica?</h3><p>Ogni versione del sito è conservata. Un errore si annulla tornando alla versione precedente, in un minuto, senza perdere nulla.</p></div>
+        <div class="pz-dom"><h3>E se il servizio ha un guasto?</h3><p>Non c'è un server proprietario da riparare: il sito è statico, servito da una rete di distribuzione, con HTTPS. Meno parti in movimento, meno cose che si rompono.</p></div>
+        <div class="pz-dom"><h3>E i dati degli studenti?</h3><p>Il minisito non chiede account e non conserva nulla degli studenti sui nostri sistemi: i progressi restano sul telefono di chi li fa. Meno dati ci sono, meno ce ne sono da proteggere.</p></div>
+        <div class="pz-dom"><h3>E se chi l'ha costruito non c'è?</h3><p>I contenuti sono in file di testo semplici e leggibili, non in un programma chiuso. Qualunque sviluppatore può prenderli in mano e capirli.</p></div>
+        <div class="pz-dom"><h3>E i costi?</h3><p>Zero per l'Istituto: nessun abbonamento, nessuna licenza, nessun fornitore da rinnovare ogni anno.</p></div>
+      </div>
+      <a class="pz-avanti" href="lingue/presentazione.html#adattabile" style="color:var(--oro3)">Capitolo 7: si adatta a voi ↓</a>
+    </div>
+  </section>
+
+  <!-- 7 · ADATTABILITA -->
+  <section class="pz-cap" id="adattabile" data-cap="Si adatta">
+    <div class="w">
+      <p class="pz-num">Capitolo 7 · Cambia quando serve a voi</p>
+      <h2 class="pz-rev">Una richiesta, <em>pochi giorni</em></h2>
+      <p class="pz-lead pz-rev">Un software comprato si adatta con l'aggiornamento del fornitore, quando arriva. Questo si adatta con voi: dite che cosa manca, lo si costruisce, lo si prova insieme prima che gli studenti lo vedano.</p>
+      <div class="pz-fila pz-rev">
+        <div><h3>Voi dite cosa serve</h3><p>A voce o per iscritto: una frase sbagliata, una sezione mancante, una funzione nuova.</p></div>
+        <div><h3>Si costruisce</h3><p>La modifica viene fatta e provata su telefono e computer.</p></div>
+        <div><h3>Voi controllate</h3><p>Prima della pubblicazione vedete l'anteprima, e dite se va bene.</p></div>
+        <div><h3>Si pubblica</h3><p>La nuova versione è online per tutti e si può sempre annullare.</p></div>
+      </div>
+      <p class="pz-num pz-rev" style="margin-bottom:.7rem">Scegliete una richiesta e vedete come si affronta</p>
+      <div class="pz-richieste pz-rev" id="r-chips" role="group" aria-label="Richieste di esempio"></div>
+      <div class="pz-risposta pz-rev" id="r-ris" aria-live="polite"><b>Scegliete una richiesta qui sopra.</b> Per ciascuna trovate come si procede e un tempo indicativo.</div>
+      <div class="pz-esempio pz-rev"><b>Un caso reale, di sabato 17 ottobre.</b> È stata presa una scelta didattica: togliere ovunque le pronunce scritte all'italiana. La modifica è stata applicata a tutte le pagine del minisito nell'arco della stessa giornata, verificata e pubblicata. I dati sono rimasti intatti: bastava cambiare cosa mostrare.</div>
+      <a class="pz-avanti" href="lingue/presentazione.html#chi">Capitolo 8: chi lo ha costruito ↓</a>
+    </div>
+  </section>
+
+  <!-- 8 · CHI -->
+  <section class="pz-cap scura" id="chi" data-cap="Chi lo ha costruito">
+    <div class="w">
+      <p class="pz-num">Capitolo 8 · Le persone</p>
+      <h2 class="pz-rev">Uno strumento nato <em>dentro la scuola</em></h2>
+      <div class="pz-chi pz-rev">
+        <blockquote>Non sono un docente di lingue e non pretendo di sembrarlo. Ho costruito lo strumento; la competenza per renderlo giusto è la vostra. Il progetto funziona davvero solo se ci mettiamo le due cose insieme.<small>Educatore Michele Gaggiano</small></blockquote>
+        <ul class="pz-fatti">
+          <li><b>Il metodo</b>Ogni modifica viene controllata prima di essere pubblicata: sintassi, collegamenti, prova su telefono e su computer. Il minisito è stato riletto pagina per pagina anche per questa presentazione.</li>
+          <li><b>Il precedente</b>Il sito istituzionale del Convitto, con oltre settanta pagine, e il gestionale interno sono stati realizzati con lo stesso criterio: strumenti gratuiti, nessun costo per l'Istituto, attenzione a sicurezza e privacy.</li>
+          <li><b>Il rapporto con i ragazzi</b>Da oltre vent'anni dirige il Laboratorio Musicale del Convitto e organizza i concerti degli studenti. Sa che cosa serve a un gruppo di ragazzi per imparare facendo.</li>
+          <li><b>L'impegno</b>Lavora in modo trasparente: ogni scelta si può discutere, ogni errore si corregge, ogni contenuto resta controllabile da chi ne è competente.</li>
+        </ul>
+      </div>
+      <a class="pz-avanti" href="lingue/presentazione.html#scheda-sez" style="color:var(--oro3)">Capitolo 9: cosa chiedo al Dipartimento ↓</a>
+    </div>
+  </section>
+
+  <!-- 9 · CHIUSURA -->
+  <section class="pz-cap chiara" id="scheda-sez" data-cap="Prossimi passi">
+    <div class="w">
+      <p class="pz-num">Capitolo 9 · Insieme</p>
+      <h2 class="pz-rev">Tre cose, <em>da fare insieme</em></h2>
+      <p class="pz-lead pz-rev">Il progetto non è finito e non deve esserlo: si costruisce con chi lo usa. Per cominciare chiedo al Dipartimento tre contributi, e una scheda da compilare in riunione.</p>
+      <div class="pz-chiedo pz-rev">
+        <div><i>1</i><h3>Controllare le frasi</h3><p>Ogni docente rilegge le sezioni della propria lingua e segnala che cosa correggere. È il contributo che dà valore a tutto il resto.</p></div>
+        <div><i>2</i><h3>Dire cosa manca</h3><p>Per ogni indirizzo: quali situazioni, quali parole, quali dialoghi servono davvero in classe e in stage.</p></div>
+        <div><i>3</i><h3>Scegliere la prossima funzione</h3><p>Dell'area docenti, quale vorreste per prima? La scheda qui sotto serve proprio a decidere.</p></div>
+      </div>
+      <div class="pz-scheda pz-rev">
+        <h3>Scheda di riscontro del Dipartimento di Lingue</h3>
+        <p>Lingua e docente</p><div class="linea"></div>
+        <p>Per prima cosa vorrei (anche più di una)</p>
+        <label><input type="checkbox"/> Un archivio personale dei miei esercizi</label>
+        <label><input type="checkbox"/> Correggere le frasi del vocabolario nella mia lingua</label>
+        <label><input type="checkbox"/> Lezioni guidate nella mia lingua</label>
+        <label><input type="checkbox"/> Proporre risorse e siti per gli studenti</label>
+        <label><input type="checkbox"/> Vedere i risultati della classe, in forma anonima</label>
+        <label><input type="checkbox"/> Altro: ______________________________</label>
+        <p>Ho trovato da correggere</p><div class="linea"></div><div class="linea"></div>
+        <p>Nel mio indirizzo servirebbero</p><div class="linea"></div><div class="linea"></div>
+      </div>
+      <div class="pz-tasti" style="margin-top:1.4rem">
+        <button type="button" class="lg-btn pieno" id="pz-stampa">🖨️ Stampa la scheda</button>
+        <a class="lg-btn" href="lingue/">Esplora il minisito</a>
+        <a class="lg-btn" href="lingue/docenti.html">Strumenti per i docenti</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="pz-piede">Le lingue dell'Alberghiero · Convitto «Costaggini», Rieti<br>Presentazione a cura dell'Educatore Michele Gaggiano.</div>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/pacchetto.js"></script>
+<script>
+(function () {
+  'use strict';
+  var L = window.LINGUE_SITO, PK = window.PACCHETTO, esc = L.esc;
+  var $ = function (id) { return document.getElementById(id); };
+  var ridotto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── barra di avanzamento, indice dei capitoli, comparsa dei blocchi ── */
+  var caps = [].slice.call(document.querySelectorAll('[data-cap]'));
+  $('pz-rail').innerHTML = caps.map(function (c) { return '<a href="lingue/presentazione.html#' + c.id + '" data-v="' + c.id + '" aria-label="' + esc(c.dataset.cap) + '"><span>' + esc(c.dataset.cap) + '</span></a>'; }).join('');
+  var punti = [].slice.call($('pz-rail').querySelectorAll('a'));
+  function scorri() {
+    var h = document.documentElement, tot = h.scrollHeight - h.clientHeight;
+    $('pz-barra').style.width = (tot > 0 ? Math.min(100, h.scrollTop / tot * 100) : 0) + '%';
+    var y = window.innerHeight * .4, cur = caps[0].id;
+    caps.forEach(function (c) { if (c.getBoundingClientRect().top <= y) cur = c.id; });
+    punti.forEach(function (a) { if (a.dataset.v === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  }
+  window.addEventListener('scroll', scorri, { passive: true }); window.addEventListener('resize', scorri); scorri();
+  /* i link «#capitolo» scorrono nella pagina senza ricaricarla (la pagina usa <base href="/">) */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href*="presentazione.html#"]'); if (!a) return;
+    var id = a.getAttribute('href').split('#')[1], t = $(id); if (!t) return;
+    e.preventDefault(); t.scrollIntoView({ behavior: ridotto ? 'auto' : 'smooth', block: 'start' });
+    try { history.replaceState(null, '', location.pathname + '#' + id); } catch (x) {}
+  });
+  var rev = [].slice.call(document.querySelectorAll('.pz-rev'));
+  if ('IntersectionObserver' in window && !ridotto) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: .12 });
+    rev.forEach(function (r) { io.observe(r); });
+  } else rev.forEach(function (r) { r.classList.add('in'); });
+
+  /* ── schermo intero e tastiera (per la LIM) ── */
+  $('pz-schermo').addEventListener('click', function () {
+    var d = document.documentElement;
+    if (document.fullscreenElement) document.exitFullscreen(); else if (d.requestFullscreen) d.requestFullscreen().catch(function () {});
+  });
+  document.addEventListener('keydown', function (e) {
+    if (/INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || '')) return;
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    var i = 0; caps.forEach(function (c, k) { if (c.getBoundingClientRect().top <= window.innerHeight * .4) i = k; });
+    var n = Math.max(0, Math.min(caps.length - 1, i + (e.key === 'ArrowRight' ? 1 : -1)));
+    caps[n].scrollIntoView({ behavior: ridotto ? 'auto' : 'smooth' });
+  });
+
+  /* ── saluti che ruotano ── */
+  var SAL = ['Welcome', 'Bienvenue', 'Bienvenidos', 'Willkommen', 'Benvenuti'], si = 0, sal = $('pz-saluto');
+  if (!ridotto) setInterval(function () {
+    if (document.hidden) return;
+    sal.classList.add('via');
+    setTimeout(function () { si = (si + 1) % SAL.length; sal.textContent = SAL[si]; sal.classList.remove('via'); }, 500);
+  }, 2600);
+
+  /* ── numeri veri: i file dei contenuti si caricano quando il capitolo compare ── */
+  var contati = false;
+  function carica(src) { return new Promise(function (ok) { var s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = ok; document.head.appendChild(s); }); }
+  function conta() {
+    if (contati) return; contati = true;
+    Promise.all(['lingue/parole.js', 'lingue/lezioni-dati.js', 'lingue/dialoghi-dati.js', 'lingue/imprevisti-dati.js', 'lingue/illustrato-scene.js'].map(carica)).then(function () {
+      var V = window.VOCABOLARIO || { PAROLE: {}, SEZIONI: [], AMBITI: [] }, n = 0, k;
+      for (k in V.PAROLE) n += V.PAROLE[k].length;
+      var og = 0; (window.SCENE_ILLUSTRATE || []).forEach(function (s) { og += (s.oggetti || []).length; });
+      var val = { frasi: n, sezioni: V.SEZIONI.length, ambiti: V.AMBITI.length, lingue: L.LINGUE.length, lezioni: (window.LEZIONI || []).length, dialoghi: (window.DIALOGHI || []).length, imprevisti: (window.IMPREVISTI || []).length, oggetti: og };
+      [].forEach.call(document.querySelectorAll('#pz-cifre b'), function (b) {
+        var fine = val[b.dataset.k] || 0, t0 = null;
+        if (ridotto) { b.textContent = fine; return; }
+        (function passo(t) { if (t0 === null) t0 = t; var p = Math.min(1, (t - t0) / 1100); b.textContent = Math.round(fine * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(passo); })(performance.now());
+      });
+    });
+  }
+  if ('IntersectionObserver' in window) { var io2 = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { conta(); io2.disconnect(); } }, { threshold: .15 }); io2.observe($('pz-cifre')); } else conta();
+
+  /* ── vetrina con le pagine vere ── */
+  var FUN = [
+    { id: 'lezioni', ic: '🧭', nome: 'Lezione guidata', url: 'lingue/lezioni.html?l=brigata', t: 'Un\'ora di lezione già pronta', badge: 'Per voi e per i ragazzi', p: 'Mini-lezione a schede da ascoltare, esercizi e una missione in una cucina all\'estero. Provate la versione facilitata per DSA e BES.', d: 'Al docente: scaletta, link e QR per la classe, verifica in due file.' },
+    { id: 'esercizi', ic: '✏️', nome: 'Esercizi', url: 'lingue/esercizi.html', t: 'Quattro modi per fissare le parole', badge: 'Autonomia dello studente', p: 'Scelta multipla, abbinamento, riordina la frase, ascolta e scrivi. Il feedback è immediato e la voce corregge la pronuncia.', d: 'Al docente: nessuna correzione da fare, nessun foglio da raccogliere.' },
+    { id: 'illustrato', ic: '🖼️', nome: 'Ristorante illustrato', url: 'lingue/illustrato.html', t: 'Toccare un oggetto, sentirne il nome', badge: 'Ottimo alla LIM', p: 'Cinque scene, dalla sala al bar: si tocca un oggetto e si ascolta il suo nome, poi si gioca a ritrovarlo.', d: 'Al docente: un\'apertura di lezione che coinvolge subito tutta la classe.' },
+    { id: 'imprevisti', ic: '🎭', nome: 'Imprevisti', url: 'lingue/imprevisti.html', t: 'Il cliente si lamenta: e adesso?', badge: 'Lingua in situazione', p: 'Il vino sa di tappo, una reazione allergica, la prenotazione sparita: si sceglie la risposta giusta nella lingua del cliente.', d: 'Al docente: spunto per discutere registro, cortesia e gestione del reclamo.' },
+    { id: 'giochi', ic: '🎲', nome: 'Giochi alla LIM', url: 'lingue/giochi.html', t: 'Quattro giochi a due squadre', badge: 'Per la lavagna', largo: true, p: 'Memory, indovina la parola, traduci a tempo, ascolta e scegli. Pulsanti grandi, schermo intero, punteggio sempre in vista.', d: 'Al docente: dieci minuti di ripasso che sembrano un gioco.' }
+  ];
+  var cur = null;
+  $('pz-tab').innerHTML = FUN.map(function (f, i) { return '<button type="button" class="lg-chip" role="tab" data-i="' + i + '" aria-pressed="false">' + f.ic + ' ' + esc(f.nome) + '</button>'; }).join('');
+  function mostra(i) {
+    var f = FUN[i]; cur = i;
+    [].forEach.call($('pz-tab').children, function (b, k) { b.setAttribute('aria-pressed', String(k === i)); });
+    $('pz-dida').innerHTML = '<span class="lg-badge ok">' + esc(f.badge) + '</span><h3>' + esc(f.t) + '</h3><p>' + esc(f.p) + '</p><p><b>' + esc(f.d) + '</b></p><a class="pz-apri" href="' + esc(f.url) + '" target="_blank" rel="noopener">Apri a pagina intera ↗</a>';
+    var box = $('pz-schermo-box'); box.className = 'pz-schermo' + (f.largo ? ' largo' : '');
+    $('pz-sc').innerHTML = '<button type="button" class="pz-avvia" id="pz-avvia"><span class="p">▶</span><b>' + esc(f.nome) + '</b><span>Toccate per avviare</span></button>';
+    $('pz-avvia').addEventListener('click', function () { carica_if(f); });
+  }
+  function pulisci(doc) {
+    try {
+      var s = doc.createElement('style');
+      s.textContent = '#hdr,.lg-anteprima,#fab-wrap,#tr-btn,.sec-nav-arrow{display:none!important} body{padding-top:0!important}';
+      doc.head.appendChild(s);
+    } catch (e) {}
+  }
+  function carica_if(f) {
+    var fr = document.createElement('iframe'); fr.title = f.nome; fr.src = f.url; fr.loading = 'lazy';
+    fr.addEventListener('load', function () { try { pulisci(fr.contentDocument); } catch (e) {} });
+    $('pz-sc').innerHTML = ''; $('pz-sc').appendChild(fr);
+  }
+  $('pz-tab').addEventListener('click', function (e) { var b = e.target.closest('[data-i]'); if (b) mostra(+b.dataset.i); });
+  mostra(0);
+
+  /* ── generatore di link e QR ── */
+  var ES = {
+    en: 'Un caffè = A coffee\nUn cappuccino = A cappuccino\nUn tè caldo = A hot tea\nUna cioccolata calda = A hot chocolate\nCon latte o limone? = With milk or lemon?\nVuole lo zucchero? = Would you like some sugar?',
+    fr: 'Un caffè = Un café\nUn cappuccino = Un cappuccino\nUn tè caldo = Un thé chaud\nUna cioccolata calda = Un chocolat chaud\nCon latte o limone? = Avec du lait ou du citron ?\nVuole lo zucchero? = Vous voulez du sucre ?',
+    es: 'Un caffè = Un café\nUn cappuccino = Un capuchino\nUn tè caldo = Un té caliente\nUna cioccolata calda = Un chocolate caliente\nCon latte o limone? = ¿Con leche o limón?\nVuole lo zucchero? = ¿Quiere azúcar?',
+    de: 'Un caffè = Einen Kaffee\nUn cappuccino = Einen Cappuccino\nUn tè caldo = Einen heißen Tee\nUna cioccolata calda = Eine heiße Schokolade\nCon latte o limone? = Mit Milch oder Zitrone?\nVuole lo zucchero? = Möchten Sie Zucker?'
+  };
+  var gl = $('g-lin'), gt = $('g-txt'), gs = $('g-stato');
+  gl.innerHTML = L.LINGUE.map(function (l) { return '<option value="' + l.cod + '">' + l.nome + '</option>'; }).join('');
+  gl.value = 'en'; gt.value = ES.en;
+  gl.addEventListener('change', function () { gt.value = ES[gl.value]; $('g-out').innerHTML = USCITA0; gs.textContent = ''; });
+  var USCITA0 = $('g-out').innerHTML;
+  function grandezza() { var r = PK.voci(gt.value); gs.className = 'pz-stato' + (r.err.length ? ' no' : ''); gs.textContent = r.err.length ? 'Righe da sistemare (manca «=»): ' + r.err.join(', ') : r.voci.length + ' frasi pronte'; return r; }
+  gt.addEventListener('input', grandezza); grandezza();
+  function qr(testo, canvas, cella) {
+    var q = qrcode(0, 'L'); q.addData(testo); q.make();
+    var n = q.getModuleCount(), m = 4, s = (n + m * 2) * cella, c = canvas.getContext('2d');
+    canvas.width = canvas.height = s; c.fillStyle = '#fff'; c.fillRect(0, 0, s, s); c.fillStyle = '#000';
+    for (var r = 0; r < n; r++) for (var k = 0; k < n; k++) if (q.isDark(r, k)) c.fillRect((k + m) * cella, (r + m) * cella, cella, cella);
+  }
+  var qrPronto = null;
+  function caricaQr() { if (window.qrcode) return Promise.resolve(); if (!qrPronto) qrPronto = carica('lingue/qrcode.js'); return qrPronto; }
+  $('g-genera').addEventListener('click', function () {
+    var r = grandezza(); if (r.voci.length < 2) { gs.className = 'pz-stato no'; gs.textContent = 'Servono almeno due frasi.'; return; }
+    var p = { v: 1, t: $('g-tit').value.trim() || 'Esercizio di ' + L.lingua(gl.value).nome.toLowerCase(), l: gl.value, k: 'scelta', f: r.voci.map(function (v) { return v.pr ? [v.it, v.tr, v.pr] : [v.it, v.tr]; }) };
+    Promise.all([PK.codifica(p), caricaQr()]).then(function (ris) {
+      var cod = ris[0], url = location.origin + '/lingue/esercizio.html#e=' + cod;
+      if (url.length > 2800) { $('g-out').innerHTML = '<small>Le frasi sono troppe per un codice QR: dividetele in due esercizi.</small>'; return; }
+      $('g-out').innerHTML = '<canvas id="g-qrc" aria-label="Codice QR dell\'esercizio"></canvas><small><b>' + esc(p.t) + '</b> · ' + p.f.length + ' frasi. Inquadratelo col telefono, oppure aprite il link.</small><div class="riga" style="justify-content:center"><a class="lg-btn pieno" href="' + esc(url) + '" target="_blank" rel="noopener">Apri l\'esercizio ↗</a></div>';
+      qr(url, $('g-qrc'), 4);
+    });
+  });
+  $('g-lim').addEventListener('click', function () {
+    var r = grandezza(); if (r.voci.length < 2) return;
+    L.salva('mie-frasi-' + gl.value, r.voci.map(function (v) { return v.it + ' = ' + v.tr; }).join('\n'));
+    L.salva('livello-lim', 'mie'); L.impostaLingua(gl.value);
+    window.open('lingue/giochi.html', '_blank');
+  });
+
+  /* ── correzione di una frase ── */
+  var cs = [$('c-1'), $('c-2'), $('c-3')], ci = 0, IT = ['Vuole lo zucchero?', 'Il conto, per favore.', 'Siamo al completo.'];
+  $('c-sel').innerHTML = IT.map(function (t, i) { return '<button type="button" class="lg-chip" data-c="' + i + '" aria-pressed="' + (i === 0) + '">' + (i + 1) + '</button>'; }).join('');
+  function disegnaC() {
+    $('c-q').textContent = IT[ci]; $('c-t').textContent = cs[ci].value || '…';
+    [].forEach.call($('c-sel').children, function (b, k) { b.setAttribute('aria-pressed', String(k === ci)); });
+  }
+  $('c-sel').addEventListener('click', function (e) { var b = e.target.closest('[data-c]'); if (b) { ci = +b.dataset.c; disegnaC(); } });
+  cs.forEach(function (inp, i) {
+    inp.addEventListener('input', function () {
+      ci = i; disegnaC();
+      var r = $('c-r'); r.classList.remove('n'); void r.offsetWidth; r.classList.add('n');
+      [].forEach.call($('c-dove').children, function (s, k) { setTimeout(function () { s.classList.add('lampo'); setTimeout(function () { s.classList.remove('lampo'); }, 500); }, k * 120); });
+    });
+    inp.addEventListener('focus', function () { ci = i; disegnaC(); });
+  });
+  $('c-ascolta').addEventListener('click', function () { L.ascolta(cs[ci].value, 'en', { btn: this }); });
+
+  /* ── prototipo dell'area docenti ── */
+  var ES_P = [
+    { id: 1, t: 'Al bar: le bevande calde', m: 'Inglese · 6 frasi', s: 'p' },
+    { id: 2, t: 'Il check-in in hotel', m: 'Francese · 8 frasi', s: 'b' },
+    { id: 3, t: 'Gli ingredienti del dolce', m: 'Spagnolo · 10 frasi', s: 'p' }
+  ];
+  var CO_P = [
+    { id: 1, t: 'Vuole lo zucchero?', m: 'Proposta di modifica in inglese', s: 'a' },
+    { id: 2, t: 'Siamo al completo.', m: 'Proposta di modifica in inglese', s: 'a' }
+  ];
+  var tabP = 'es';
+  function nomeStato(s) { return s === 'p' ? '<span class="pz-stat p">Pubblicato</span>' : s === 'b' ? '<span class="pz-stat b">Bozza</span>' : '<span class="pz-stat a">Da approvare</span>'; }
+  function disegnaP() {
+    var h = '';
+    if (tabP === 'es') {
+      h = ES_P.map(function (e) { return '<div class="pz-el"><span class="t"><b>' + esc(e.t) + '</b><small>' + esc(e.m) + '</small></span>' + nomeStato(e.s) + '<button type="button" class="pz-mini pieno" data-pub="' + e.id + '">' + (e.s === 'p' ? 'Rimetti in bozza' : 'Pubblica') + '</button><button type="button" class="pz-mini" data-dup="' + e.id + '">Duplica</button></div>'; }).join('') + '<button type="button" class="pz-mini" id="p-nuovo" style="margin-top:.4rem">+ Nuovo esercizio</button><p class="pz-msg" id="p-msg"></p>';
+    } else if (tabP === 'co') {
+      h = '<p class="pz-nota-p" style="margin:0 0 .8rem">Le correzioni proposte dai docenti arrivano qui. Quando una è approvata, vale subito per vocabolario, esercizi, giochi e verifiche.</p>' + CO_P.map(function (e) { return '<div class="pz-el"><span class="t"><b>' + esc(e.t) + '</b><small>' + esc(e.m) + '</small></span>' + nomeStato(e.s) + (e.s === 'a' ? '<button type="button" class="pz-mini pieno" data-ok="' + e.id + '">Approva</button>' : '') + '</div>'; }).join('') + '<p class="pz-msg" id="p-msg"></p>';
+    } else if (tabP === 'ri') {
+      h = '<p class="pz-nota-p" style="margin:0 0 .8rem">Un sito, un video o un podcast utile ai ragazzi? Compare nella pagina Risorse dopo l\'approvazione.</p><input id="p-url" type="text" placeholder="Indirizzo della risorsa"/><textarea id="p-note" rows="3" placeholder="Perché è utile, per quale lingua e livello"></textarea><button type="button" class="pz-mini pieno" id="p-invia">Invia alla revisione</button><p class="pz-msg" id="p-msg"></p>';
+    } else {
+      h = '<div style="max-width:380px"><p class="pz-nota-p" style="margin:0 0 .8rem">Ogni docente ha un accesso personale creato dall\'amministratore del sito. Gli studenti continuano a non registrarsi.</p><input type="text" placeholder="nome.cognome@alberghierorieti.it" disabled/><input type="password" placeholder="••••••••" disabled/><input type="text" placeholder="Codice a 6 cifre dal telefono" disabled/><button type="button" class="pz-mini pieno" disabled style="width:100%;padding:.7rem">Accedi</button><p class="pz-nota-p" style="margin-top:.8rem">Verifica in due passaggi, come per il pannello di gestione del Convitto.</p></div>';
+    }
+    $('p-corpo').innerHTML = h;
+  }
+  $('p-tab').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-p]'); if (!b) return; tabP = b.dataset.p;
+    [].forEach.call($('p-tab').children, function (x) { x.setAttribute('aria-selected', String(x === b)); }); disegnaP();
+  });
+  $('p-corpo').addEventListener('click', function (e) {
+    var t = e.target.closest('button'); if (!t) return;
+    var msg = function (m) { var x = $('p-msg'); if (x) x.textContent = m; };
+    if (t.dataset.pub) { var o = ES_P.filter(function (x) { return x.id == t.dataset.pub; })[0]; o.s = o.s === 'p' ? 'b' : 'p'; disegnaP(); msg(o.s === 'p' ? 'Pubblicato: i ragazzi vedono subito la versione nuova, con lo stesso link di prima.' : 'Tornato in bozza: i ragazzi non lo vedono più, fino a nuova pubblicazione.'); }
+    else if (t.dataset.dup) { var d = ES_P.filter(function (x) { return x.id == t.dataset.dup; })[0]; ES_P.push({ id: Date.now(), t: d.t + ' (copia)', m: d.m, s: 'b' }); disegnaP(); msg('Copia creata in bozza: potete rielaborarla per un\'altra classe.'); }
+    else if (t.id === 'p-nuovo') { ES_P.push({ id: Date.now(), t: 'Nuovo esercizio', m: 'Da compilare', s: 'b' }); disegnaP(); msg('Nuovo esercizio in bozza. Nel sito vero si apre l\'editor delle frasi.'); }
+    else if (t.dataset.ok) { var c = CO_P.filter(function (x) { return x.id == t.dataset.ok; })[0]; c.s = 'p'; c.m = 'Approvata: già visibile agli studenti'; disegnaP(); msg('Correzione approvata e pubblicata ovunque.'); }
+    else if (t.id === 'p-invia') { if (!$('p-url').value.trim()) { msg('Inserite l\'indirizzo della risorsa.'); return; } $('p-url').value = ''; $('p-note').value = ''; msg('Inviata alla revisione. Nel sito vero comparirà dopo l\'approvazione.'); }
+  });
+  disegnaP();
+
+  /* ── misure reali di questa pagina ── */
+  function misura() {
+    try {
+      var nav = performance.getEntriesByType('navigation')[0], res = performance.getEntriesByType('resource'), b = 0, n = 1;
+      if (nav) b += nav.transferSize || nav.encodedBodySize || 0;
+      res.forEach(function (r) { if (r.name.indexOf(location.origin) === 0 && r.name.indexOf('/lingue/lezioni') < 0) { b += r.transferSize || r.encodedBodySize || 0; n++; } });
+      $('m-tempo').textContent = nav ? Math.round(nav.domContentLoadedEventEnd) : '–';
+      $('m-kb').textContent = Math.round(b / 1024); $('m-req').textContent = n;
+    } catch (e) { $('m-tempo').textContent = $('m-kb').textContent = $('m-req').textContent = '–'; }
+  }
+  window.addEventListener('load', function () { setTimeout(misura, 600); });
+
+  /* ── richieste e tempi ── */
+  var RIC = [
+    ['Correggere o aggiungere una frase', 'Si modifica la riga nell\'archivio del vocabolario e la correzione compare in vocabolario, esercizi, giochi e verifiche.', 'Pochi minuti'],
+    ['Una sezione nuova di vocabolario', 'Servono le frasi in italiano e nelle lingue interessate; la sezione appare subito nell\'indirizzo scelto, già collegata a esercizi e giochi.', 'Nella stessa giornata, se il materiale è pronto'],
+    ['Un dialogo o un imprevisto nuovo', 'Si scrive la scena con le risposte possibili e un voto per ciascuna; il motore che la fa funzionare esiste già.', 'Circa un giorno'],
+    ['Una lezione guidata nella mia lingua', 'Lo strumento «Lezione in 5 minuti» prepara la bozza completa; voi la rivedete e la rifinite, poi entra tra le lezioni.', 'Una bozza in pochi minuti, la revisione è vostra'],
+    ['Una nuova lingua', 'Il lavoro vero è la traduzione e la revisione delle frasi da parte di un docente di quella lingua; l\'impianto del sito è già pronto ad accoglierla.', 'Alcuni giorni, secondo la revisione'],
+    ['Un gioco nuovo per la LIM', 'Si costruisce sul modello dei quattro già presenti e si prova in classe prima di pubblicarlo.', 'Alcuni giorni']
+  ];
+  $('r-chips').innerHTML = RIC.map(function (r, i) { return '<button type="button" class="lg-chip" data-r="' + i + '" aria-pressed="false">' + esc(r[0]) + '</button>'; }).join('');
+  $('r-chips').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-r]'); if (!b) return; var r = RIC[+b.dataset.r];
+    [].forEach.call($('r-chips').children, function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    $('r-ris').innerHTML = '<b>' + esc(r[0]) + '</b><br>' + esc(r[1]) + '<small>Tempo indicativo: ' + esc(r[2]) + '. Dipende da quanto materiale è già pronto.</small>';
+  });
+
+  /* ── scheda stampabile ── */
+  $('pz-stampa').addEventListener('click', function () {
+    document.body.classList.add('pz-stampa');
+    var fine = function () { document.body.classList.remove('pz-stampa'); window.removeEventListener('afterprint', fine); };
+    window.addEventListener('afterprint', fine); window.print();
+  });
+})();
+</script>
+</body>
+</html>

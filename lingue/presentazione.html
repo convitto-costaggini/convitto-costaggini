@@ -16,7 +16,8 @@
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;background:#0b150e;color:var(--txt);font-family:var(--fu);overflow:hidden}
   button{font-family:inherit}
-  .app{display:grid;height:100vh;height:100dvh;grid-template-rows:auto auto minmax(0,1fr) auto}
+  .app{display:grid;height:100vh;height:100dvh;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto}
+  @media (max-width:640px){.top{gap:.35rem;padding:.5rem .55rem}.top .ti{display:none}.top .es{flex:1}.top button{padding:.45rem .55rem;font-size:.58rem}.com button{padding:.75rem 1.1rem}}
   .top{display:flex;align-items:center;gap:.6rem;padding:.55rem .9rem;background:#0b150e;color:#f5f0e8;border-bottom:1px solid rgba(237,217,138,.18)}
   .top a.es{color:var(--oro3);text-decoration:none;font:800 .62rem var(--fu);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
   .top .ti{flex:1;text-align:center;font-family:var(--fd);font-size:1.05rem;color:#f5f0e8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -67,6 +68,10 @@
   .tel iframe,.fin iframe{width:100%;height:100%;border:0;display:block;background:var(--av)}
   .nat{width:100%;max-width:1000px;height:calc(100% - 1.6rem);margin-top:1.6rem;background:var(--bco);border:1px solid var(--av3);border-radius:18px;box-shadow:0 22px 48px rgba(20,34,22,.25);overflow:auto;padding:1.4rem 1.4rem 1.6rem}
   .nat.oro{border:2px solid var(--oro)}
+  .nat{min-width:0;flex:0 1 auto}
+  .nat *{min-width:0}
+  .nat .riga{max-width:100%}
+  @media (max-width:600px){.nat{padding:1rem .9rem 1.2rem}.nat .lg-btn{white-space:normal;text-align:center}}
   .nat h3{font-family:var(--fd);font-weight:400;font-size:1.5rem;color:var(--bosco);margin:0 0 .6rem;line-height:1.2}
   .nat p{line-height:1.65}
   .nota{font-size:.82rem;color:var(--txt2);line-height:1.6}
@@ -200,6 +205,12 @@
   .g-b.prova.on{opacity:1}
   .g-b.prova.vecchio{opacity:1}
   .g-av{font:600 .76rem var(--fu);color:rgba(245,240,232,.75);background:rgba(237,217,138,.12);border:1px dashed rgba(237,217,138,.4);border-radius:10px;padding:.5rem .7rem;margin:0 0 .9rem}
+  .come{background:#fffbeb;border:2px solid var(--oro);border-radius:14px;padding:.9rem 1.1rem;margin:.4rem 0 .9rem}
+  .come h4{font-family:var(--fd);font-weight:500;font-size:1.25rem;color:var(--bosco);margin:0 0 .4rem}
+  .come ol{margin:0 0 .4rem;padding-left:1.2rem;font-size:.9rem;line-height:1.6;color:var(--txt)}
+  .come li{margin-bottom:.25rem}.come li b{color:var(--bosco)}
+  .come p{margin:0;font:700 .8rem var(--fu);color:#713f12}
+  #nat .riga .lg-btn.pieno{animation:pulsa 1.6s ease-in-out infinite}
   .ed{display:grid;gap:1.1rem;grid-template-columns:minmax(0,1fr)}
   @media (min-width:800px){.ed{grid-template-columns:1.1fr .9fr}}
   .ed label.et{margin-top:.55rem}
@@ -469,7 +480,7 @@
     primo = false;
     var avvio = function () {
       dopo(function () { $('n-tit').classList.add('on'); }, 150);
-      if (attesa) { dopo(function () { var m = document.createElement('p'); m.className = 'g-b prova'; m.textContent = '🔊 Per ascoltare la voce, premete uno dei pulsanti nello schermo accanto: la voce si attiva solo dopo un vostro clic, e la visita prosegue dalla scena successiva.'; $('n-bb').appendChild(m); void m.offsetWidth; m.classList.add('on'); }, 1200); return; }
+      if (attesa) { dopo(function () { var m = document.createElement('p'); m.className = 'g-b prova'; m.textContent = '🔊 Per ascoltare la voce, premete uno dei pulsanti nel riquadro chiaro: la voce si attiva solo dopo un vostro clic, e la visita prosegue dalla scena successiva.'; $('n-bb').appendChild(m); void m.offsetWidth; m.classList.add('on'); }, 1200); return; }
       dopo(function () { battute(s, 0, gen); }, 1500);
     };
     if (s.tipo === 'sito') montaSito(s, avvio); else { montaNat(s); avvio(); }
@@ -538,15 +549,19 @@
   }
 
   function mIntro(el) {
-    el.innerHTML = '<p class="pz-saluto" id="pz-saluto" aria-hidden="true">Welcome</p><h3 style="font-size:2.2rem;margin-top:.2rem">Le lingue dell\'Alberghiero</h3>' +
-      '<p class="nota" style="font-size:.95rem">Presentazione per il Dipartimento di Lingue · a cura dell\'Educatore Michele Gaggiano</p>' +
-      '<p style="margin:1.1rem 0 .2rem"><b>In questa visita ci sono tre tipi di schermo:</b></p>' +
+    el.innerHTML = '<p class="pz-saluto" id="pz-saluto" aria-hidden="true">Welcome</p><h3 style="font-size:2rem;margin-top:.1rem">Le lingue dell\'Alberghiero</h3>' +
+      '<p class="nota" style="font-size:.92rem;margin-top:0">Presentazione per il Dipartimento di Lingue · a cura dell\'Educatore Michele Gaggiano</p>' +
+      '<div class="come"><h4>Come iniziare: scegliete un pulsante</h4><div class="riga" style="margin:.2rem 0 .7rem"><button type="button" class="lg-btn pieno" id="i-auto">▶ Avvia la visita automatica, con la voce</button><button type="button" class="lg-btn" id="i-man">Avvia, ma vado avanti io</button><button type="button" class="lg-btn" id="i-muto">Senza voce</button></div><ol>' +
+      '<li><b>Visita automatica, con la voce</b>: si passa alla scena 2 e la visita prosegue da sola, con la voce che legge il testo.</li>' +
+      '<li><b>Vado avanti io</b>: si passa alla scena 2, con la voce; poi si prosegue con il pulsante «Avanti» in basso.</li>' +
+      '<li><b>Senza voce</b>: come il precedente, ma solo testo.</li></ol>' +
+      '<p>Questa pagina non va riascoltata: si legge a schermo, e i pulsanti portano direttamente alla scena 2.</p></div>' +
+      '<div class="ponte on" style="margin:.2rem 0 .9rem"><b>Attenzione:</b> lezioni, frasi ed esercizi che vedrete sono esempi, non un percorso fisso. Ogni docente potrà sostituirli con i propri, in tempo reale.</div>' +
+      '<p style="margin:.6rem 0 .2rem"><b>In questa visita ci sono tre tipi di schermo:</b></p>' +
       '<div class="leg"><div class="a"><b>La voce che spiega</b><p>Testo bianco su fondo scuro, che appare lentamente. È la spiegazione.</p></div>' +
       '<div class="b"><b>● Il sito vero, funzionante</b><p>Cornice chiara con il pallino verde. Sono le pagine reali, come le vedono gli studenti: toccatele, funzionano.</p></div>' +
       '<div class="c"><b>✋ Provate voi</b><p>Cornice dorata. Si può scrivere, cliccare, giocare.</p></div></div>' +
-      '<div class="ponte on" style="margin:.2rem 0 1rem"><b>Attenzione:</b> lezioni, frasi ed esercizi che vedrete sono esempi, non un percorso fisso. Ogni docente potrà sostituirli con i propri, in tempo reale.</div>' +
-      '<div class="riga"><button type="button" class="lg-btn pieno" id="i-auto">▶ Avvia la visita automatica, con la voce</button><button type="button" class="lg-btn" id="i-man">Avvia, ma vado avanti io</button><button type="button" class="lg-btn" id="i-muto">Senza voce</button></div>' +
-      '<p class="nota" style="margin-top:1rem">I pulsanti portano alla scena successiva: questa pagina si legge a schermo e non va riascoltata. 🔊 La voce legge il testo ad alta voce: il pulsante «Voce» in alto la accende e la spegne. Con le frecce della tastiera ci si sposta tra le scene; «Indice» permette di saltare a quella che interessa.</p>';
+      '<p class="nota" style="margin-top:.8rem">🔊 Il pulsante «Voce» in alto accende e spegne la lettura. Con le frecce della tastiera ci si sposta tra le scene; «Indice» permette di saltare a quella che interessa.</p>';
     var SAL = ['Welcome', 'Bienvenue', 'Bienvenidos', 'Willkommen', 'Benvenuti'], i = 0, e = $('pz-saluto');
     if (!ridotto) (function giro() { dopo(function () { e.classList.add('via'); dopo(function () { i = (i + 1) % SAL.length; e.textContent = SAL[i]; e.classList.remove('via'); giro(); }, 500); }, 2400); })();
     $('i-auto').addEventListener('click', function () { impostaAuto(true); vai(1); });

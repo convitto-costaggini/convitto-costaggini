@@ -298,6 +298,7 @@
     { p: 0, tit: 'Benvenuti', tipo: 'nat', mount: mIntro, etic: 'Come leggere questa visita', dwell: 14000, beats: [
       { t: 'Quello che state per vedere è un sito di lingue per gli studenti dell\'Alberghiero: vocabolario, esercizi, dialoghi e giochi in inglese, francese, spagnolo e tedesco.' },
       { t: 'Funziona dal telefono, senza registrazione. E per voi docenti è uno strumento che prepara il materiale al posto vostro.' },
+      { t: 'Una cosa va detta subito, per evitare equivoci: a voi non è chiesto di revisionare nulla. Il sito è già pronto, e serve a togliervi lavoro, non ad aggiungerne.' },
       { t: 'Questa visita si guida da sola. La voce che spiega legge il testo che si dissolve in questo riquadro scuro; si può spegnere con il pulsante in alto.' },
       { t: 'Lo schermo accanto non è un video né un\'immagine: è il sito funzionante. Potete toccarlo, scrivere, provare. Quando vedete la cornice con il pallino verde, o quella dorata, tocca a voi.' },
       { t: 'Un avvertimento importante: tutto ciò che vedrete è un esempio, non un percorso stabilito. Ogni docente potrà sostituire lezioni, grammatica e frasi con le proprie, e vederle cambiare in tempo reale.' },
@@ -307,6 +308,14 @@
       { t: 'Prima i fatti. Questi numeri non sono scritti a mano: vengono contati in questo istante sui contenuti veri del sito.' },
       { t: 'Frasi, sezioni, indirizzi, lezioni, dialoghi e imprevisti: è già un contenuto consistente.' },
       { t: 'Quando si aggiunge una frase, i numeri salgono da soli.' }
+    ] },
+    { p: 0, tit: 'Quanto lavoro vi toglie', tipo: 'sito', dev: 'fin', url: 'lingue/lunedi.html', sugg: 'Quattro situazioni reali: verifica, supplenza, DSA/BES, le vostre frasi', beats: [
+      { t: 'Prima di entrare nel sito, la domanda che conta davvero: quanto lavoro vi toglie? Ecco quattro situazioni che ogni docente conosce.', hl: '.ln-ris' },
+      { t: 'Una verifica per domani: le file A, B e C con le soluzioni nascono in pochi minuti, invece di un\'ora di impaginazione.', hl: '.ln-sc:nth-of-type(1)' },
+      { t: 'Una supplenza: un\'ora di lezione già completa, con scaletta, scheda per i ragazzi e verifica, a un clic di distanza.', hl: '.ln-sc:nth-of-type(2)' },
+      { t: 'Una classe con DSA o BES: la versione facilitata si attiva con un tocco, e la scheda si stampa già adattata.', hl: '.ln-sc:nth-of-type(3)' },
+      { t: 'Le vostre frasi: in circa un minuto diventano un link con codice QR, un gioco per la lavagna e una verifica su carta.', hl: '.ln-sc:nth-of-type(4)' },
+      { t: 'Nessuna revisione richiesta, nessun account, nessun impegno continuativo: lo si usa quando serve, anche una volta sola.' }
     ] },
     { p: 1, tit: 'La porta d\'ingresso', tipo: 'sito', dev: 'fin', url: 'lingue/', sugg: 'Il sito funziona davvero: toccate, scorrete, ascoltate', beats: [
       { t: 'Questa è la porta d\'ingresso del minisito, a schermo intero come si apre da computer. Nessuna registrazione, nessuna applicazione da installare.', hl: '.lg-hero' },
@@ -379,16 +388,16 @@
       { t: 'Attenzione ai menu a discesa: suggeriscono, ma non limitano. Negli spazi Argomento e Grammatica potete scrivere qualsiasi contenuto vi serva.', hl: '#cm-arg' },
       { t: 'E nel materiale autentico potete incollare un vostro testo, un menu, una ricetta, un articolo: la lezione nascerà da lì.', hl: '#cm-mat' },
       { t: 'Per ora la lingua può essere inglese o spagnolo. Se il progetto va in porto, si aggiungeranno francese e tedesco.', hl: '#cm-lin' },
-      { t: 'Voi incollate la risposta e ottenete la lezione pronta all\'uso. La bozza si legge e si rivede: il controllo resta sempre al docente.' }
+      { t: 'Voi incollate la risposta e ottenete la lezione pronta all\'uso. Come per qualsiasi materiale, basta una lettura veloce prima di usarla in classe.' }
     ] },
     { p: 3, tit: 'Verifiche in un clic', tipo: 'sito', dev: 'fin', url: 'lingue/verifiche.html', sugg: 'Strumento funzionante: provate a creare una verifica', beats: [
       { t: 'Si sceglie lingua e argomento, e lo strumento prepara una verifica dal vocabolario dell\'Alberghiero.' },
       { t: 'Si stampano le versioni con le domande in ordine diverso, più il foglio delle soluzioni.' }
     ] },
-    { p: 3, tit: 'La competenza è vostra', tipo: 'nat', mount: mCompetenza, etic: 'Provate voi: correggete una traduzione', oro: true, dwell: 24000, beats: [
-      { t: 'Un sito di lingue vale quanto le sue frasi. E le frasi, per essere giuste, hanno bisogno di chi la lingua la insegna.' },
-      { t: 'Ogni frase vive in un solo posto: se la correggete, cambia insieme in vocabolario, esercizi, giochi e verifiche.' },
-      { t: 'Provate: modificate una traduzione e guardate cosa vede lo studente. Le traduzioni di partenza sono una base di lavoro: la revisione finale spetta a voi.' }
+    { p: 3, tit: 'Se un giorno vorrete cambiare qualcosa', tipo: 'nat', mount: mCompetenza, etic: 'Facoltativo: provate com\'è semplice', oro: true, dwell: 24000, beats: [
+      { t: 'Nessuno vi chiede di rileggere il sito: frasi, esercizi e lezioni funzionano già così come sono.' },
+      { t: 'Se però un giorno una frase vi sembrerà migliorabile, la correzione si fa in un punto solo e cambia insieme in vocabolario, esercizi, giochi e verifiche.' },
+      { t: 'Provate: modificate una traduzione e guardate cosa vede lo studente. È una facoltà, non un compito.' }
     ] },
     { p: 3, tit: 'L\'area docenti', tipo: 'nat', mount: mProto, etic: 'Prototipo da provare, non ancora attivo', oro: true, dwell: 30000, beats: [
       { t: 'L\'accesso personale è la fase successiva, ma ne potete già provare un prototipo funzionante.' },
@@ -408,11 +417,11 @@
     { p: 4, tit: 'Una persona, un metodo', tipo: 'nat', mount: mChi, etic: 'Chi ha costruito il progetto', dwell: 18000, beats: [
       { t: 'Ultima domanda, la più giusta: chi lo ha costruito, e con quale metodo.' },
       { t: 'È nato dentro la scuola, da un educatore che conosce i ragazzi e i problemi di ogni giorno.' },
-      { t: 'Non pretende di sapere le lingue meglio di voi: costruisce lo strumento, e lascia a voi il giudizio sul contenuto.' }
+      { t: 'Non pretende di sapere le lingue meglio di voi: costruisce lo strumento perché a voi resti il tempo per insegnare.' }
     ] },
     { p: 4, tit: 'Cosa chiedo al Dipartimento', tipo: 'nat', mount: mChiusura, etic: 'Provate voi: la scheda si compila qui', oro: true, dwell: 0, beats: [
       { t: 'Per finire: il progetto non è chiuso e non deve esserlo. Si costruisce con chi lo usa.' },
-      { t: 'Chiederei, se i colleghi Docenti abbiano intravisto delle possibilità di utilizzo, tre contributi: controllare le frasi della propria lingua, dire cosa manca per ogni indirizzo, scegliere la prossima funzione dell\'area docenti.' },
+      { t: 'Chiederei, se i colleghi Docenti hanno intravisto delle possibilità di utilizzo, soltanto tre cose, tutte leggere: provare uno strumento nella prossima lezione, dire cosa manca per ogni indirizzo, scegliere la prossima funzione dell\'area docenti.' },
       { t: 'La scheda accanto si compila direttamente qui, in ogni sua parte: scrivete, spuntate, aggiungete o togliete voci. Alla fine si può inviare direttamente all\'Educatore Gaggiano con un clic, oppure copiare o stampare.' },
       { t: 'Se il Dipartimento è favorevole, il passo successivo è informare la Dirigente e chiedere l\'autorizzazione.' }
     ] },
@@ -670,7 +679,7 @@
 
   function mCompetenza(el) {
     var IT = ['Vuole lo zucchero?', 'Il conto, per favore.', 'Siamo al completo.'], EN = ['Would you like some sugar?', 'The bill, please.', 'We are fully booked.'], ci = 0;
-    el.innerHTML = '<div class="corr"><div><p class="nota" style="margin:0 0 .6rem"><b>Correggete una traduzione:</b> scrivete nei campi.</p>' +
+    el.innerHTML = '<div class="corr"><div><p class="nota" style="margin:0 0 .6rem"><b>Se un giorno vorrete correggere una traduzione:</b> scrivete nei campi.</p>' +
       IT.map(function (t, i) { return '<div class="rg"><span class="it">' + esc(t) + '</span><input type="text" data-c="' + i + '" value="' + esc(EN[i]) + '" aria-label="Traduzione inglese ' + (i + 1) + '"/></div>'; }).join('') +
       '<p class="nota" style="margin:.8rem 0 .2rem"><b>Dove compare la frase</b></p><div class="dove" id="c-dove"><span>Vocabolario</span><span>Esercizi</span><span>Giochi alla lavagna interattiva</span><span>Verifiche</span></div>' +
       '<p class="nota">Simulazione sul vostro schermo.</p></div>' +
@@ -705,7 +714,7 @@
       var h = '';
       if (tabP === 'es') h = ES_P.map(function (e) { return '<div class="el"><span class="t"><b>' + esc(e.t) + '</b><small>' + esc(e.m) + '</small></span>' + stato(e.s) + '<button type="button" class="mini pieno" data-pub="' + e.id + '">' + (e.s === 'p' ? 'Rimetti in bozza' : 'Pubblica') + '</button><button type="button" class="mini" data-dup="' + e.id + '">Duplica</button></div>'; }).join('') + '<button type="button" class="mini" id="p-nuovo">+ Nuovo esercizio</button><p class="msg" id="p-msg"></p>';
       else if (tabP === 'co') h = '<p class="nota" style="margin:0 0 .7rem">Le correzioni proposte dai colleghi arrivano qui. Quando una è approvata, vale subito ovunque.</p>' + CO_P.map(function (e) { return '<div class="el"><span class="t"><b>' + esc(e.t) + '</b><small>' + esc(e.m) + '</small></span>' + stato(e.s) + (e.s === 'a' ? '<button type="button" class="mini pieno" data-ok="' + e.id + '">Approva</button>' : '') + '</div>'; }).join('') + '<p class="msg" id="p-msg"></p>';
-      else if (tabP === 'ri') h = '<p class="nota" style="margin:0 0 .7rem">Un sito, un video o un podcast utile ai ragazzi? Compare tra le risorse dopo l\'approvazione.</p><input id="p-url" type="text" placeholder="Indirizzo della risorsa"/><textarea id="p-note" rows="2" placeholder="Perché è utile, per quale lingua e livello"></textarea><button type="button" class="mini pieno" id="p-invia">Invia alla revisione</button><p class="msg" id="p-msg"></p>';
+      else if (tabP === 'ri') h = '<p class="nota" style="margin:0 0 .7rem">Un sito, un video o un podcast utile ai ragazzi? Compare tra le risorse dopo l\'approvazione.</p><input id="p-url" type="text" placeholder="Indirizzo della risorsa"/><textarea id="p-note" rows="2" placeholder="Perché è utile, per quale lingua e livello"></textarea><button type="button" class="mini pieno" id="p-invia">Invia per l\'approvazione</button><p class="msg" id="p-msg"></p>';
       else h = '<div style="max-width:360px"><p class="nota" style="margin:0 0 .7rem">Ogni docente avrà un accesso personale. Gli studenti continuano a non registrarsi.</p><input type="text" placeholder="nome.cognome@..." disabled/><input type="password" placeholder="••••••••" disabled/><button type="button" class="mini pieno" disabled style="width:100%;padding:.7rem">Accedi (non ancora attivo)</button></div>';
       $('p-corpo').innerHTML = h;
     }
@@ -717,7 +726,7 @@
       else if (t.dataset.dup) { var d = tr(ES_P, t.dataset.dup); ES_P.push({ id: Date.now(), t: d.t + ' (copia)', m: d.m, s: 'b' }); disegna(); msg('Copia creata in bozza: si può rielaborare per un\'altra classe.'); }
       else if (t.id === 'p-nuovo') { ES_P.push({ id: Date.now(), t: 'Nuovo esercizio', m: 'Da compilare', s: 'b' }); disegna(); msg('Nuovo esercizio in bozza.'); }
       else if (t.dataset.ok) { var c = tr(CO_P, t.dataset.ok); c.s = 'p'; c.m = 'Approvata: visibile agli studenti'; disegna(); msg('Correzione approvata e pubblicata ovunque.'); }
-      else if (t.id === 'p-invia') { if (!$('p-url').value.trim()) { msg('Inserite l\'indirizzo della risorsa.'); return; } $('p-url').value = ''; $('p-note').value = ''; msg('Inviata alla revisione (simulazione).'); }
+      else if (t.id === 'p-invia') { if (!$('p-url').value.trim()) { msg('Inserite l\'indirizzo della risorsa.'); return; } $('p-url').value = ''; $('p-note').value = ''; msg('Inviata per l\'approvazione (simulazione).'); }
     });
     disegna();
   }
@@ -745,7 +754,7 @@
     ['Correggere o aggiungere una frase', 'Si modifica la riga nell\'archivio del vocabolario e la correzione compare in vocabolario, esercizi, giochi e verifiche.', 'Pochi minuti'],
     ['Una sezione nuova di vocabolario', 'Servono le frasi in italiano e nelle lingue interessate; la sezione appare già collegata a esercizi e giochi.', 'Nella stessa giornata'],
     ['Un dialogo o un imprevisto nuovo', 'Si scrive la scena con le risposte possibili; il motore che la fa funzionare esiste già.', 'Un giorno'],
-    ['Una lezione guidata nella mia lingua', 'Lo strumento «Lezione in 5 minuti» prepara la bozza; voi la rivedete e la rifinite, poi entra tra le lezioni.', 'Bozza in pochi minuti, poi la revisione è vostra'],
+    ['Una lezione guidata nella mia lingua', 'Lo strumento «Lezione in 5 minuti» prepara la bozza; una lettura veloce e, se volete, un ritocco, poi entra tra le lezioni.', 'Bozza in pochi minuti'],
     ['Un gioco nuovo per la lavagna interattiva', 'Si costruisce sul modello di quelli già presenti e si prova in classe prima di pubblicarlo.', 'Al massimo un paio di giorni'],
     ['Una funzione dell\'area docenti', 'Si parte dal prototipo che avete appena provato e lo si adatta a ciò che chiedete.', 'Al massimo un paio di giorni']
   ];
@@ -761,7 +770,7 @@
   }
 
   function mChi(el) {
-    el.innerHTML = '<div class="chi"><blockquote>Non sono un docente di lingue e non pretendo di sembrarlo. Ho costruito lo strumento; la competenza per renderlo giusto è la vostra. Il progetto funziona davvero solo se ci mettiamo le due cose insieme.<small>Educatore Michele Gaggiano</small></blockquote>' +
+    el.innerHTML = '<div class="chi"><blockquote>Non sono un docente di lingue e non pretendo di sembrarlo. Ho costruito lo strumento perché vi tolga lavoro, non perché ve ne dia. Se qualcuno di voi vorrà metterci la propria competenza, sarà un contributo prezioso, mai un obbligo.<small>Educatore Michele Gaggiano</small></blockquote>' +
       '<ul class="fatti"><li><b>Il metodo</b>Ogni modifica viene controllata prima di essere pubblicata: sintassi, collegamenti, prova su telefono e su computer. Il minisito è stato riletto pagina per pagina anche per questa presentazione.</li>' +
       '<li><b>Il precedente</b>Il sito istituzionale del Convitto, con oltre settanta pagine, è stato realizzato con lo stesso criterio: strumenti gratuiti, nessun costo per l\'Istituto, attenzione a sicurezza e privacy.</li>' +
       '<li><b>L\'impegno</b>Lavoro trasparente: ogni scelta si può discutere, ogni errore si corregge, ogni contenuto resta controllabile da chi ne è competente.</li></ul></div>';
@@ -824,14 +833,14 @@
   }
 
   /* ── la scheda di riscontro, modificabile online ── */
-  var VOCI0 = ['Un archivio personale dei miei esercizi', 'Correggere le frasi del vocabolario nella mia lingua', 'Lezioni guidate nella mia lingua', 'Proporre risorse e siti per gli studenti'];
+  var VOCI0 = ['Un archivio personale dei miei esercizi', 'Segnalare una frase da migliorare, quando capita', 'Lezioni guidate nella mia lingua', 'Proporre risorse e siti per gli studenti'];
   function mChiusura(el) {
     var st = L.leggi('pz-scheda', null) || { doc: '', voci: VOCI0.map(function (t) { return { c: false, t: t }; }), cor: '', serv: '', oss: '', fav: '' };
-    el.innerHTML = '<div class="chiedo"><div><i>1</i><h4>Controllare le frasi</h4><p>Ogni docente rilegge le sezioni della propria lingua e segnala cosa correggere.</p></div><div><i>2</i><h4>Dire cosa manca</h4><p>Per ogni indirizzo: quali situazioni, parole e dialoghi servono davvero in classe e in stage.</p></div><div><i>3</i><h4>Scegliere la prossima funzione</h4><p>Dell\'area docenti, quale vorreste per prima?</p></div></div>' +
+    el.innerHTML = '<div class="chiedo"><div><i>1</i><h4>Provare uno strumento</h4><p>Nella prossima lezione, una verifica o una lezione pronta: basta un tentativo, senza impegno.</p></div><div><i>2</i><h4>Dire cosa manca</h4><p>Per ogni indirizzo: quali situazioni, parole e dialoghi servono davvero in classe e in stage.</p></div><div><i>3</i><h4>Scegliere la prossima funzione</h4><p>Dell\'area docenti, quale vorreste per prima?</p></div></div>' +
       '<div class="scheda sch"><h4>Scheda di riscontro del Dipartimento di Lingue</h4><p class="nota" style="margin:0;text-transform:none;letter-spacing:0">Si compila qui, in ogni sua parte. Quello che scrivete resta sul vostro dispositivo finché non lo inviate.</p>' +
       '<label class="et" for="z-doc">Lingua e docenti presenti</label><input type="text" id="z-doc"/>' +
       '<label class="et">Per prima cosa vorremmo (anche più di una voce)</label><div id="z-voci"></div><button type="button" class="mini" id="z-add">+ Aggiungi una voce</button>' +
-      '<label class="et" for="z-cor">Frasi o contenuti da correggere</label><textarea id="z-cor"></textarea>' +
+      '<label class="et" for="z-cor">Frasi o contenuti che vorreste migliorare (facoltativo)</label><textarea id="z-cor"></textarea>' +
       '<label class="et" for="z-serv">Nel nostro indirizzo servirebbero</label><textarea id="z-serv"></textarea>' +
       '<label class="et" for="z-oss">Osservazioni del team dipartimentale</label><textarea id="z-oss"></textarea>' +
       '<label class="et">Il Dipartimento è favorevole a proseguire?</label><div class="fav"><label><input type="radio" name="z-fav" value="Sì"/><span>Sì</span></label><label><input type="radio" name="z-fav" value="Da approfondire"/><span>Da approfondire</span></label><label><input type="radio" name="z-fav" value="No"/><span>No</span></label></div>' +
@@ -849,7 +858,7 @@
       salvaSt();
       return 'SCHEDA DI RISCONTRO DEL DIPARTIMENTO DI LINGUE\nMinisito «Le lingue dell\'Alberghiero»\n\nLingua e docenti presenti: ' + (st.doc || '-') + '\n\nPer prima cosa vorremmo:\n' +
         (st.voci.length ? st.voci.map(function (v) { return (v.c ? '[x] ' : '[ ] ') + v.t; }).join('\n') : '-') +
-        '\n\nFrasi o contenuti da correggere:\n' + (st.cor || '-') + '\n\nNel nostro indirizzo servirebbero:\n' + (st.serv || '-') + '\n\nOsservazioni del team dipartimentale:\n' + (st.oss || '-') + '\n\nIl Dipartimento è favorevole a proseguire: ' + (st.fav || 'non indicato');
+        '\n\nFrasi o contenuti da migliorare (facoltativo):\n' + (st.cor || '-') + '\n\nNel nostro indirizzo servirebbero:\n' + (st.serv || '-') + '\n\nOsservazioni del team dipartimentale:\n' + (st.oss || '-') + '\n\nIl Dipartimento è favorevole a proseguire: ' + (st.fav || 'non indicato');
     }
     voci(); passo();
     [doc, cor, serv, oss].forEach(function (x) { x.addEventListener('input', salvaSt); });
@@ -879,7 +888,7 @@
   }
 
   /* ── bozza di richiesta alla Dirigente ── */
-  var LETT0 = 'Alla Dirigente Scolastica\nIPSSEOA «R. A. Costaggini», Rieti\n\nOggetto: mini-sito «Le lingue dell\'Alberghiero»: informativa e richiesta di autorizzazione all\'utilizzo didattico\n\nGentile Dirigente,\n\nil Dipartimento di Lingue, nella riunione del ____________, ha preso visione del mini-sito «Le lingue dell\'Alberghiero» (convitto.alberghierorieti.edu.it/lingue), realizzato dall\'Educatore Michele Gaggiano: uno strumento gratuito, senza registrazione per gli studenti, con vocabolario professionale, esercizi, dialoghi, giochi a squadre per la LIM e lezioni guidate in inglese e spagnolo.\n\nIl Dipartimento ha espresso parere favorevole e intende:\n1. verificare e supervisionare i contenuti nelle lingue di propria competenza;\n2. sperimentare lo strumento nelle classi, anche con materiali propri;\n3. collaborare con l\'Educatore Gaggiano per i passi successivi (area riservata ai docenti, lezioni di francese e tedesco).\n\nSi chiede pertanto di autorizzare l\'utilizzo didattico del mini-sito nelle classi e la collaborazione sopra indicata. \n\nEventuali osservazioni del Dipartimento: ____________________\n\nCon osservanza,\nIl Dipartimento di Lingue\n\nRieti, ____________';
+  var LETT0 = 'Alla Dirigente Scolastica\nIPSSEOA «R. A. Costaggini», Rieti\n\nOggetto: mini-sito «Le lingue dell\'Alberghiero»: informativa e richiesta di autorizzazione all\'utilizzo didattico\n\nGentile Dirigente,\n\nil Dipartimento di Lingue, nella riunione del ____________, ha preso visione del mini-sito «Le lingue dell\'Alberghiero» (convitto.alberghierorieti.edu.it/lingue), realizzato dall\'Educatore Michele Gaggiano: uno strumento gratuito, senza registrazione per gli studenti, con vocabolario professionale, esercizi, dialoghi, giochi a squadre per la LIM e lezioni guidate in inglese e spagnolo.\n\nIl Dipartimento ha espresso parere favorevole e intende:\n1. sperimentare lo strumento nelle classi, anche con materiali propri, senza alcun onere di revisione dei contenuti;\n2. segnalare, se e quando lo riterrà utile, eventuali miglioramenti;\n3. collaborare con l\'Educatore Gaggiano per i passi successivi (area riservata ai docenti, lezioni di francese e tedesco).\n\nSi chiede pertanto di autorizzare l\'utilizzo didattico del mini-sito nelle classi e la collaborazione sopra indicata. \n\nEventuali osservazioni del Dipartimento: ____________________\n\nCon osservanza,\nIl Dipartimento di Lingue\n\nRieti, ____________';
   function mLettera(el) {
     el.innerHTML = '<h3>Richiesta alla Dirigente: bozza da adattare</h3><p class="nota" style="margin:0 0 .6rem">La bozza si modifica direttamente qui. Va firmata e inviata dal Dipartimento o da un suo referente: compilate le parti con i trattini e correggete ciò che serve.</p>' +
       '<textarea class="lett" id="l-t" spellcheck="true"></textarea><div class="riga"><button type="button" class="lg-btn pieno" id="l-mail">✉️ Apri nella posta</button><button type="button" class="lg-btn" id="l-copia">📋 Copia il testo</button><button type="button" class="lg-btn" id="l-stampa">🖨️ Stampa</button><button type="button" class="lg-btn" id="l-ripr">Ripristina la bozza</button></div><p class="stato" id="l-st"></p>';

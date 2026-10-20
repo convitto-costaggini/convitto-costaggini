@@ -2,7 +2,7 @@
    LINGUE — stile comune del minisito /lingue/
    Usa le variabili del sito madre (style.min.css).
    ════════════════════════════════════════════════════════ */
-.lg-anteprima{background:#7f1d1d;color:#fff;text-align:center;font:800 .66rem var(--fu);letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1rem;line-height:1.5}
+.lg-anteprima{background:var(--bosco);color:var(--oro3);text-align:center;font:800 .66rem var(--fu);letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1rem;line-height:1.5}
 .lg-hero{background:radial-gradient(120% 90% at 85% 0%,rgba(184,146,42,.22),transparent 60%),linear-gradient(160deg,#16261a,var(--bosco));padding:3rem 1.25rem 2.25rem;color:#fff;position:relative;overflow:hidden}
 .lg-hero .w{max-width:900px;position:relative}
 .lg-hero .lbl{color:var(--oro2)}

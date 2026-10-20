@@ -22,6 +22,8 @@
   .cm-campo label{display:block;font:800 .62rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);margin-bottom:.3rem}
   .cm-campo select,.cm-campo input,.cm-campo textarea{width:100%;font:500 .92rem var(--fu);padding:.6rem .7rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--bco);color:var(--txt)}
   .cm-campo textarea{min-height:90px;resize:vertical;line-height:1.5}
+  .cm-gra-chips{margin-bottom:.5rem}
+  .cm-gra-chips .lg-chip{font-size:.7rem;padding:.4rem .7rem;text-align:left}
   .cm-campo small{display:block;font-size:.74rem;color:var(--txt2);margin-top:.25rem;line-height:1.45}
   .cm-largo{grid-column:1/-1}
   .cm-bott{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
@@ -69,7 +71,10 @@
           <div class="cm-campo"><label for="cm-liv">Livello</label><select id="cm-liv"><option>A1</option><option selected>A2</option><option>B1</option><option>B2</option></select><small>A1–A2 biennio · B1–B2 triennio</small></div>
           <div class="cm-campo"><label for="cm-amb">Indirizzo / ambito</label><select id="cm-amb"><option>Cucina</option><option>Sala</option><option>Pasticceria</option><option>Accoglienza</option><option>Bar</option><option>Cultura e viaggi</option><option>Lavoro all'estero</option></select></div>
           <div class="cm-campo cm-largo"><label for="cm-arg">Argomento</label><input id="cm-arg" list="cm-arg-l" placeholder="es. Le allergie e le intolleranze a tavola"/><datalist id="cm-arg-l"></datalist></div>
-          <div class="cm-campo cm-largo"><label for="cm-gra">Grammatica da inserire</label><input id="cm-gra" list="cm-gra-l" placeholder="es. il condizionale di cortesia"/><datalist id="cm-gra-l"></datalist><small>Facoltativa, ma è il bello: la regola entra dentro il mestiere.</small></div>
+          <div class="cm-campo cm-largo"><label for="cm-gra">Grammatica da inserire</label>
+            <div class="lg-chips cm-gra-chips" id="cm-gra-chips" role="group" aria-label="Regole di grammatica suggerite"></div>
+            <input id="cm-gra" placeholder="oppure scrivete un'altra regola, es. il condizionale di cortesia"/>
+            <small>Facoltativa, ma è il bello: la regola entra dentro il mestiere. Scegliete una delle dieci regole più utili per lingua e livello, oppure scrivetene un'altra: la lezione la spiegherà nelle schede e gli esercizi e la verifica la metteranno alla prova.</small></div>
           <div class="cm-campo cm-largo"><label for="cm-mat">Materiale autentico (facoltativo)</label><textarea id="cm-mat" placeholder="Incollate qui un menu, una ricetta, un'e-mail, un articolo: l'IA lo userà come base per lessico ed esercizi."></textarea><small>Non incollate mai nomi o dati personali di studenti o colleghi.</small></div>
           <div class="cm-campo cm-largo"><label for="cm-not">Indicazioni per l'IA (facoltative)</label><input id="cm-not" placeholder="es. ambientare la missione in un hotel di Valencia; classe con molti principianti"/></div>
         </div>
@@ -123,12 +128,32 @@
     "Lavoro all'estero": ['Il curriculum e la lettera di presentazione', 'Il colloquio per una stagione all\'estero', 'Il primo giorno di lavoro all\'estero']
   };
   var GRA = {
-    en: { A1: ['present simple', 'the imperative', 'there is / there are', 'can for requests', 'numbers, prices and quantities'], A2: ['past simple', 'comparatives and superlatives', 'going to for plans', 'would like / could for polite requests'], B1: ['present perfect vs past simple', 'first conditional', 'modal verbs of obligation and advice', 'polite indirect questions'], B2: ['the passive', 'reported speech', 'second and third conditional', 'formal register in e-mails'] },
-    es: { A1: ['presente de indicativo', 'ser y estar', 'hay / está', 'imperativo con tú', 'números, precios y cantidades'], A2: ['pretérito indefinido', 'comparativos y superlativos', 'ir a + infinitivo', 'imperativo con usted'], B1: ['pretérito perfecto vs indefinido', 'pretérito imperfecto', 'condicional de cortesía', 'perífrasis de obligación'], B2: ['subjuntivo para recomendar y pedir', 'estilo indirecto', 'oraciones condicionales', 'registro formal en correos'] }
+    en: {
+      A1: ['to be: am, is, are', 'present simple', 'the imperative', 'there is / there are', 'a, an, the', 'countable and uncountable nouns: some / any', 'plurals of nouns', 'can for requests and ability', 'prepositions of place and time', 'numbers, prices and quantities'],
+      A2: ['past simple (regular and irregular)', 'present continuous', 'comparatives and superlatives', 'going to for plans', 'would like / could for polite requests', 'much / many / a lot of', 'adverbs of frequency', 'must / have to / should', 'will for offers and promises', 'object pronouns and possessives'],
+      B1: ['present perfect vs past simple', 'past continuous vs past simple', 'first conditional', 'second conditional', 'modal verbs of obligation and advice', 'polite indirect questions', 'relative clauses (who, which, that)', 'used to', 'the passive (present and past simple)', 'phrasal verbs for work'],
+      B2: ['the passive (all tenses)', 'reported speech', 'second and third conditional', 'modal verbs of deduction', 'gerund vs infinitive', 'defining and non-defining relative clauses', 'wish and if only', 'linking words and discourse markers', 'future forms: will, going to, present continuous', 'formal register in e-mails']
+    },
+    es: {
+      A1: ['presente de indicativo (verbos regulares)', 'verbos irregulares: ser, estar, tener, ir', 'ser y estar', 'hay / está', 'género y número', 'artículos determinados e indeterminados', 'gustar y verbos como gustar', 'números, precios y cantidades', 'querer y poder para pedir', 'preposiciones de lugar'],
+      A2: ['pretérito perfecto', 'pretérito indefinido (regular e irregular)', 'comparativos y superlativos', 'ir a + infinitivo', 'imperativo con usted', 'presente con cambio vocálico (e>ie, o>ue)', 'pronombres de objeto directo e indirecto', 'verbos reflexivos', 'hay que / tener que + infinitivo', 'muy / mucho / demasiado'],
+      B1: ['pretérito perfecto vs indefinido', 'pretérito imperfecto', 'imperfecto vs indefinido', 'futuro simple', 'condicional de cortesía', 'perífrasis de obligación', 'imperativo afirmativo y negativo', 'por y para', 'pronombres combinados (se lo, me lo)', 'subjuntivo presente (introducción)'],
+      B2: ['subjuntivo para recomendar y pedir', 'imperfecto de subjuntivo', 'estilo indirecto', 'oraciones condicionales (reales e irreales)', 'pretérito pluscuamperfecto', 'voz pasiva y pasiva refleja', 'ser y estar: usos avanzados', 'conectores del discurso', 'oraciones de relativo', 'registro formal en correos']
+    }
   };
+  function chipsGrammatica() {
+    var el = $('cm-gra-chips'), v = $('cm-gra').value.trim();
+    el.innerHTML = (GRA[$('cm-lin').value][$('cm-liv').value] || []).map(function (g) { return '<button type="button" class="lg-chip" data-g="' + esc(g) + '" aria-pressed="' + (g === v) + '">' + esc(g) + '</button>'; }).join('');
+  }
+  $('cm-gra-chips').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-g]'); if (!b) return;
+    var gia = b.getAttribute('aria-pressed') === 'true';
+    $('cm-gra').value = gia ? '' : b.getAttribute('data-g'); chipsGrammatica();
+  });
+  $('cm-gra').addEventListener('input', chipsGrammatica);
   function suggerimenti() {
     $('cm-arg-l').innerHTML = (ARG[$('cm-amb').value] || []).map(function (a) { return '<option value="' + esc(a) + '">'; }).join('');
-    $('cm-gra-l').innerHTML = (GRA[$('cm-lin').value][$('cm-liv').value] || []).map(function (a) { return '<option value="' + esc(a) + '">'; }).join('');
+    chipsGrammatica();
   }
   ['cm-lin', 'cm-liv', 'cm-amb'].forEach(function (id) { $(id).addEventListener('change', suggerimenti); });
   suggerimenti();
@@ -151,6 +176,7 @@
       '- Nelle domande a scelta la PRIMA opzione è sempre quella giusta (il sito le mescola); le altre sono errori plausibili e tipici degli studenti italiani.',
       '- Nella missione ogni passo ha esattamente una risposta giusta (1) e due sbagliate (0), ciascuna con una spiegazione in italiano.',
       '- Nell\'esercizio "completa" le parole da indovinare vanno tra parentesi quadre, es. "[Add] a pinch of salt"; 5-7 parentesi.',
+      gra ? '- LA REGOLA DI GRAMMATICA («' + gra + '») È IL CUORE DELLA LEZIONE: nel campo "sottotitolo" indicala; dedica almeno due schede a spiegarla in italiano (forma, uso, errori tipici degli italiani) con esempi professionali; le frasi d\'esempio delle schede la usano; tra gli esercizi, "scelta", "completa" e "ordina" devono mettere alla prova proprio questa regola (le opzioni sbagliate sono errori plausibili sulla regola); anche le domande a scelta e le frasi da tradurre della verifica la richiedono; la missione fa usare la regola nelle risposte giuste.' : '',
       '- Niente nomi di studenti reali né dati personali.',
       '- Rispondi SOLO con un oggetto JSON valido (doppi apici, nessun commento, nessun testo prima o dopo), con ESATTAMENTE questa struttura e queste chiavi:',
       '',

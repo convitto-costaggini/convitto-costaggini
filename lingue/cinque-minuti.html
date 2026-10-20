@@ -70,7 +70,10 @@
           <div class="cm-campo"><label for="cm-lin">Lingua</label><select id="cm-lin"><option value="en">Inglese</option><option value="es">Spagnolo</option></select></div>
           <div class="cm-campo"><label for="cm-liv">Livello</label><select id="cm-liv"><option>A1</option><option selected>A2</option><option>B1</option><option>B2</option></select><small>A1–A2 biennio · B1–B2 triennio</small></div>
           <div class="cm-campo"><label for="cm-amb">Indirizzo / ambito</label><select id="cm-amb"><option>Cucina</option><option>Sala</option><option>Pasticceria</option><option>Accoglienza</option><option>Bar</option><option>Cultura e viaggi</option><option>Lavoro all'estero</option></select></div>
-          <div class="cm-campo cm-largo"><label for="cm-arg">Argomento</label><input id="cm-arg" list="cm-arg-l" placeholder="es. Le allergie e le intolleranze a tavola"/><datalist id="cm-arg-l"></datalist></div>
+          <div class="cm-campo cm-largo"><label for="cm-arg">Argomento</label>
+            <div class="lg-chips cm-gra-chips" id="cm-arg-chips" role="group" aria-label="Argomenti suggeriti per l'ambito scelto"></div>
+            <input id="cm-arg" placeholder="oppure scrivete un altro argomento, es. Le allergie e le intolleranze a tavola"/>
+            <small>Dieci argomenti per ogni ambito: cambiano quando scegliete l'indirizzo. Potete anche scriverne uno vostro.</small></div>
           <div class="cm-campo cm-largo"><label for="cm-gra">Grammatica da inserire</label>
             <div class="lg-chips cm-gra-chips" id="cm-gra-chips" role="group" aria-label="Regole di grammatica suggerite"></div>
             <input id="cm-gra" placeholder="oppure scrivete un'altra regola, es. il condizionale di cortesia"/>
@@ -119,13 +122,13 @@
 
   /* suggerimenti */
   var ARG = {
-    'Cucina': ['Leggere e spiegare una ricetta', 'Le attrezzature della cucina', 'Igiene e sicurezza (HACCP)', 'Ordinare le forniture al telefono'],
-    'Sala': ['Le allergie e le intolleranze a tavola', 'Presentare il menu del giorno', 'La mise en place', 'Il conto e i metodi di pagamento'],
-    'Pasticceria': ['Presentare la vetrina dei dolci', 'Una torta su ordinazione', 'Ingredienti, dosi e cotture'],
-    'Accoglienza': ['Il check-in', 'Il check-out e il conto', 'Indicare la strada e consigliare la città', 'Prenotazioni al telefono e per e-mail'],
-    'Bar': ['Ordinare e servire i cocktail', 'La colazione al bar', 'Caffè: le varianti italiane spiegate agli stranieri'],
-    'Cultura e viaggi': ['A tavola nel mondo: usi e galateo', 'Le feste e i piatti tradizionali', 'Presentare la cucina italiana regionale'],
-    "Lavoro all'estero": ['Il curriculum e la lettera di presentazione', 'Il colloquio per una stagione all\'estero', 'Il primo giorno di lavoro all\'estero']
+    'Cucina': ['Leggere e spiegare una ricetta', 'Le attrezzature della cucina', 'Igiene e sicurezza (HACCP)', 'Ordinare le forniture al telefono', 'La brigata di cucina e i ruoli', 'Le tecniche di cottura', 'Ingredienti, dosi e pesi', 'Allergeni e intolleranze in cucina', 'Conservazione e gestione degli alimenti', 'La scheda tecnica di un piatto'],
+    'Sala': ['Le allergie e le intolleranze a tavola', 'Presentare il menu del giorno', 'La mise en place', 'Il conto e i metodi di pagamento', 'Accogliere e accompagnare al tavolo', 'Prendere l\'ordinazione', 'Consigliare il vino e gli abbinamenti', 'Gestire un reclamo', 'Prenotare un tavolo', 'Le fasi del servizio, dall\'antipasto al dolce'],
+    'Pasticceria': ['Presentare la vetrina dei dolci', 'Una torta su ordinazione', 'Ingredienti, dosi e cotture', 'Impasti e lievitazioni', 'Le attrezzature del laboratorio', 'Dolci tipici italiani spiegati agli stranieri', 'Allergeni e diete speciali (senza glutine, vegano)', 'Gelati e semifreddi: gusti e consigli', 'Decorare e confezionare un dolce', 'Conservazione e durata dei dolci'],
+    'Accoglienza': ['Il check-in', 'Il check-out e il conto', 'Indicare la strada e consigliare la città', 'Prenotazioni al telefono e per e-mail', 'Presentare le camere e i servizi dell\'hotel', 'Gestire un reclamo dell\'ospite', 'Orari, colazione e Wi-Fi: le informazioni più richieste', 'Proporre escursioni e visite', 'Rispondere al telefono in reception', 'Richieste speciali e cambio camera'],
+    'Bar': ['Ordinare e servire i cocktail', 'La colazione al bar', 'Caffè: le varianti italiane spiegate agli stranieri', 'L\'aperitivo italiano', 'Birre, vini e bevande analcoliche', 'Cocktail analcolici e mocktail', 'Il conto e la cassa', 'Servire alcolici con responsabilità', 'Panini, tramezzini e snack', 'Gestire l\'ora di punta al banco'],
+    'Cultura e viaggi': ['A tavola nel mondo: usi e galateo', 'Le feste e i piatti tradizionali', 'Presentare la cucina italiana regionale', 'I prodotti DOP e IGP raccontati agli stranieri', 'La dieta mediterranea', 'Le cucine del mondo a confronto', 'Mance, orari e abitudini a tavola nei vari paesi', 'Il turismo enogastronomico', 'Orientarsi in aeroporto e in stazione', 'Descrivere la propria città e i suoi piatti'],
+    "Lavoro all'estero": ['Il curriculum e la lettera di presentazione', 'Il colloquio per una stagione all\'estero', 'Il primo giorno di lavoro all\'estero', 'Leggere un annuncio di lavoro', 'Il contratto, la paga e gli orari', 'Cercare alloggio all\'estero', 'Presentarsi ai colleghi e alla brigata', 'Chiedere un turno libero o un permesso', 'Ricevere istruzioni e chiedere chiarimenti', 'Telefonare al datore di lavoro']
   };
   var GRA = {
     en: {
@@ -145,6 +148,16 @@
     var el = $('cm-gra-chips'), v = $('cm-gra').value.trim();
     el.innerHTML = (GRA[$('cm-lin').value][$('cm-liv').value] || []).map(function (g) { return '<button type="button" class="lg-chip" data-g="' + esc(g) + '" aria-pressed="' + (g === v) + '">' + esc(g) + '</button>'; }).join('');
   }
+  function chipsArgomento() {
+    var el = $('cm-arg-chips'), v = $('cm-arg').value.trim();
+    el.innerHTML = (ARG[$('cm-amb').value] || []).map(function (g) { return '<button type="button" class="lg-chip" data-g="' + esc(g) + '" aria-pressed="' + (g === v) + '">' + esc(g) + '</button>'; }).join('');
+  }
+  $('cm-arg-chips').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-g]'); if (!b) return;
+    var gia = b.getAttribute('aria-pressed') === 'true';
+    $('cm-arg').value = gia ? '' : b.getAttribute('data-g'); chipsArgomento();
+  });
+  $('cm-arg').addEventListener('input', chipsArgomento);
   $('cm-gra-chips').addEventListener('click', function (e) {
     var b = e.target.closest('[data-g]'); if (!b) return;
     var gia = b.getAttribute('aria-pressed') === 'true';
@@ -152,7 +165,7 @@
   });
   $('cm-gra').addEventListener('input', chipsGrammatica);
   function suggerimenti() {
-    $('cm-arg-l').innerHTML = (ARG[$('cm-amb').value] || []).map(function (a) { return '<option value="' + esc(a) + '">'; }).join('');
+    chipsArgomento();
     chipsGrammatica();
   }
   ['cm-lin', 'cm-liv', 'cm-amb'].forEach(function (id) { $(id).addEventListener('change', suggerimenti); });

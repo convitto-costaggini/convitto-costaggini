@@ -168,7 +168,19 @@
     chipsArgomento();
     chipsGrammatica();
   }
-  ['cm-lin', 'cm-liv', 'cm-amb'].forEach(function (id) { $(id).addEventListener('change', suggerimenti); });
+  /* quando cambiano lingua, livello o ambito, un valore scelto dall'elenco precedente non vale più e si toglie;
+     un testo scritto a mano dal docente resta */
+  var prec = { lin: $('cm-lin').value, liv: $('cm-liv').value, amb: $('cm-amb').value };
+  function elenchi() { return { gra: (GRA[prec.lin] || {})[prec.liv] || [], arg: ARG[prec.amb] || [] }; }
+  ['cm-lin', 'cm-liv', 'cm-amb'].forEach(function (id) {
+    $(id).addEventListener('change', function () {
+      var e = elenchi(), nuovo = { lin: $('cm-lin').value, liv: $('cm-liv').value, amb: $('cm-amb').value };
+      if ((nuovo.lin !== prec.lin || nuovo.liv !== prec.liv) && e.gra.indexOf($('cm-gra').value.trim()) >= 0) $('cm-gra').value = '';
+      if (nuovo.amb !== prec.amb && e.arg.indexOf($('cm-arg').value.trim()) >= 0) $('cm-arg').value = '';
+      prec = nuovo;
+      suggerimenti();
+    });
+  });
   suggerimenti();
 
   /* ───── la richiesta per l'IA ───── */

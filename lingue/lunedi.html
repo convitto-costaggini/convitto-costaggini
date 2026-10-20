@@ -34,6 +34,11 @@
   .ln-prima .ln-tempo{background:#fff;border:1px solid var(--av3);color:var(--txt2)}
   .ln-ora .ln-tempo{background:var(--bosco);color:#fff}
   .ln-sc .ln-vai{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.5rem}
+  .ln-mod{margin-top:.9rem;background:#fffaf0;border:1.5px solid var(--oro);border-radius:14px;padding:.9rem 1rem}
+  .ln-mod h4{font:800 .62rem var(--fu);letter-spacing:.12em;text-transform:uppercase;margin:0 0 .5rem;color:var(--oro)}
+  .ln-mod ol{margin:0;padding-left:1.2rem;font-size:.86rem;line-height:1.65;color:var(--txt)}
+  .ln-mod li+li{margin-top:.25rem}
+  .ln-mod small{display:block;margin-top:.55rem;font-size:.78rem;line-height:1.55;color:var(--txt2)}
   .ln-pass{counter-reset:p;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
   .ln-pass li{list-style:none;counter-increment:p;background:#fff;border:1px solid var(--av3);border-radius:16px;padding:1rem 1.1rem 1rem 3.2rem;position:relative;font-size:.88rem;line-height:1.6;color:var(--txt)}
   .ln-pass li::before{content:counter(p);position:absolute;left:1rem;top:.9rem;width:1.6rem;height:1.6rem;border-radius:50%;background:var(--bosco);color:#fff;font:800 .8rem var(--fu);display:flex;align-items:center;justify-content:center}
@@ -71,7 +76,7 @@
     <div class="w">
       <p class="lbl">Quattro situazioni</p>
       <h2 class="lg-h2">Cosa cambia, <em>in pratica</em></h2>
-      <p class="lg-sot">A sinistra come si fa di solito, a destra come si fa con il sito. I tempi a sinistra sono stime: dipendono da chi prepara e dalla classe.</p>
+      <p class="lg-sot">A sinistra come si fa di solito, a destra come si fa con il sito. I tempi a sinistra sono stime: dipendono da chi prepara e dalla classe. In ogni situazione trovate anche il percorso preciso per adattare il materiale alla vostra classe.</p>
 
       <article class="ln-sc">
         <p class="n">Situazione 1</p>
@@ -81,6 +86,12 @@
           <div class="ln-prima"><h4>Di solito</h4><ul><li>Scrivere le domande una per una</li><li>Impaginare e rimescolarle a mano per le varie file</li><li>Preparare a parte il foglio delle soluzioni</li></ul><span class="ln-tempo">Stima: 45-60 minuti</span></div>
           <div class="ln-ora"><h4>Con il sito</h4><ul><li>Si sceglie lingua e argomento</li><li>La verifica nasce dal vocabolario dell'Alberghiero, in file A, B e C</li><li>Le soluzioni sono già nel foglio dedicato; ogni testo resta modificabile</li></ul><span class="ln-tempo">Pochi minuti</span></div>
         </div>
+        <div class="ln-mod"><h4>✏️ Per adattarla alla vostra classe</h4><ol>
+          <li>In «Verifiche in un clic», nel riquadro <b>2 · Genera dal vocabolario</b>, scegliete lingua, ambito e sezione; indicate quante domande di ogni tipo e quanti punti.</li>
+          <li>Premete <b>✨ Genera le domande</b>: ogni clic produce una verifica diversa.</li>
+          <li>Nel riquadro <b>3 · Le domande</b> cambiate qualsiasi testo (l'anteprima si aggiorna mentre scrivete), spostate le domande con ↑ ↓, aggiungete le vostre con «Aggiungi una domanda vostra».</li>
+          <li>Nel riquadro <b>4 · Stampa e salva</b> scegliete le file (A, B, C) e le soluzioni, poi <b>🖨️ Stampa le file</b>.</li>
+        </ol><small>La bozza resta nel browser di chi la prepara. Per riprenderla su un altro computer o passarla a un collega: <b>💾 Esporta in un file</b>, poi <b>📂 Apri da file</b>.</small></div>
         <div class="ln-vai"><a href="lingue/verifiche.html" class="lg-btn pieno">📝 Provate una verifica</a></div>
       </article>
 
@@ -92,6 +103,12 @@
           <div class="ln-prima"><h4>Di solito</h4><ul><li>Cercare materiale adatto al gruppo</li><li>Oppure lasciare un compito generico</li></ul><span class="ln-tempo">Stima: 20-30 minuti, o un'ora persa</span></div>
           <div class="ln-ora"><h4>Con il sito</h4><ul><li>Si apre una lezione già completa: scaletta minuto per minuto, mini-lezione da proiettare, esercizi sul telefono con link e QR, missione, verifica breve</li><li>Disponibile oggi in inglese e spagnolo; il francese e il tedesco arriveranno se il progetto prosegue</li></ul><span class="ln-tempo">Un clic</span></div>
         </div>
+        <div class="ln-mod"><h4>✏️ Per adattarla alla vostra classe</h4><ol>
+          <li>Aprite una lezione da «Lezioni guidate» e andate alla scheda <b>👩‍🏫 Docente</b>.</li>
+          <li>Nel riquadro <b>🛠️ Strumenti</b> premete <b>📋 Fai una copia da modificare</b>: l'originale resta com'è, la copia va tra «Le mie lezioni».</li>
+          <li>Si apre l'editor: cambiate frasi, schede, esercizi, missione e verifica (anche risposte e soluzioni, aggiungendo o togliendo voci), poi premete <b>💾 Salva</b>.</li>
+          <li>Il link e il codice QR per i ragazzi mostrano subito la versione modificata.</li>
+        </ol><small>La copia resta nel browser di chi la crea. Per riaprirla: «Le mie lezioni», in fondo all'elenco delle lezioni.</small></div>
         <div class="ln-vai"><a href="lingue/lezioni.html?l=brigata&amp;t=docente" class="lg-btn pieno">🧭 Aprite una lezione pronta</a></div>
       </article>
 
@@ -103,6 +120,11 @@
           <div class="ln-prima"><h4>Di solito</h4><ul><li>Rifare il materiale a mano, studente per studente</li><li>Rimpaginare schede e verifiche</li></ul><span class="ln-tempo">Stima: 30 minuti a lezione</span></div>
           <div class="ln-ora"><h4>Con il sito</h4><ul><li>La versione facilitata si attiva con un tocco: caratteri più grandi, meno alternative, traduzione sempre visibile</li><li>Scheda facilitata e verifica facilitata già pronte da stampare</li></ul><span class="ln-tempo">Un tocco</span></div>
         </div>
+        <div class="ln-mod"><h4>✏️ Per adattarla alla vostra classe</h4><ol>
+          <li>Aprite una lezione: sopra il contenuto spuntate <b>Versione facilitata (DSA/BES)</b>. Vale per Lezione, Esercizi e Missione.</li>
+          <li>Per la carta, nella scheda <b>👩‍🏫 Docente</b>: <b>🖨️ Scheda facilitata</b>, <b>File A facilitato</b>, <b>File B facilitato</b> e <b>Soluzioni</b>.</li>
+          <li>Per cambiare i contenuti (ad esempio semplificare una consegna): <b>📋 Fai una copia da modificare</b>, come nella situazione 2.</li>
+        </ol></div>
         <p class="lg-nota" style="margin-top:.9rem">L'adattamento del sito facilita il lavoro ma non sostituisce il PDP: le misure restano quelle stabilite dal consiglio di classe.</p>
         <div class="ln-vai"><a href="lingue/lezioni.html?l=brigata" class="lg-btn pieno">🧭 Vedete la versione facilitata</a></div>
       </article>
@@ -115,6 +137,11 @@
           <div class="ln-prima"><h4>Di solito</h4><ul><li>Fotocopie, schede da correggere una per una</li><li>Gli esercizi vivono solo su carta</li></ul><span class="ln-tempo">Stima: 30-40 minuti, più la correzione</span></div>
           <div class="ln-ora"><h4>Con il sito</h4><ul><li>Si incollano le frasi della lezione</li><li>Nascono un link con codice QR per il telefono, un gioco a squadre per la LIM e una verifica su carta</li><li>I ragazzi vedono subito se hanno risposto bene</li></ul><span class="ln-tempo">Circa un minuto</span></div>
         </div>
+        <div class="ln-mod"><h4>✏️ Per adattarla alla vostra classe</h4><ol>
+          <li>In «Crea i tuoi esercizi», passo <b>1 · Le frasi</b>: scrivete il titolo, scegliete la lingua e inserite le frasi, una per riga, nella forma <b>italiano = traduzione</b>.</li>
+          <li>In alternativa, incollate due colonne copiate da Excel o da una tabella di Word, oppure usate <b>📖 Pesca dal vocabolario del sito</b>.</li>
+          <li>Controllate l'anteprima (potete cambiare il tipo di esercizio), poi nel passo <b>2 · Usatelo in classe</b> scegliete <b>📲 Link e codice QR</b>, <b>🎲 Gioca alla LIM</b> o <b>🖨️ Verifica su carta</b>.</li>
+        </ol><small>Se cambiate le frasi dopo aver condiviso l'esercizio, create un link nuovo: con l'accesso personale dei docenti (fase 2, facoltativa) lo stesso link si potrà correggere senza rifarlo.</small></div>
         <div class="ln-vai"><a href="lingue/crea.html" class="lg-btn pieno">🛠️ Provate con le vostre frasi</a></div>
       </article>
     </div>

@@ -332,7 +332,7 @@
       { t: 'Poi arrivano le domande lampo: lo studente sceglie e vede subito se ha risposto bene.', hl: '#lz-lampo' },
       { t: 'Alla fine c\'è una missione: per esempio, il primo giorno in una brigata di cucina.' },
       { t: 'Per gli studenti con disturbi specifici dell\'apprendimento o bisogni educativi speciali c\'è la versione facilitata, attivabile con un tocco.', hl: '.lz-facile' },
-      { t: 'Oggi le lezioni guidate esistono in inglese e spagnolo. Se il progetto va in porto, ci sarà anche il francese.' },
+      { t: 'Le lezioni guidate esistono in inglese, francese e spagnolo.' },
       { t: 'E attenzione: questa è soltanto una lezione di esempio. Nella prossima scena vedrete come ogni docente potrà sostituirla con la propria.' }
     ] },
     { p: 1, tit: 'La lezione sarà la vostra', tipo: 'nat', mount: mPers, etic: 'Provate voi: scrivete la vostra lezione', oro: true, dwell: 35000, beats: [
@@ -387,7 +387,7 @@
       { t: 'Se serve una lezione completa su un argomento nuovo, il sito prepara la richiesta per un\'intelligenza artificiale gratuita.' },
       { t: 'Attenzione ai menu a discesa: suggeriscono, ma non limitano. Negli spazi Argomento e Grammatica potete scrivere qualsiasi contenuto vi serva.', hl: '#cm-arg' },
       { t: 'E nel materiale autentico potete incollare un vostro testo, un menu, una ricetta, un articolo: la lezione nascerà da lì.', hl: '#cm-mat' },
-      { t: 'Per ora la lingua può essere inglese o spagnolo. Se il progetto va in porto, si aggiungerà il francese.', hl: '#cm-lin' },
+      { t: 'La lingua può essere inglese, francese o spagnolo.', hl: '#cm-lin' },
       { t: 'Voi incollate la risposta e ottenete la lezione pronta all\'uso. Come per qualsiasi materiale, basta una lettura veloce prima di usarla in classe.' }
     ] },
     { p: 3, tit: 'Verifiche in un clic', tipo: 'sito', dev: 'fin', url: 'lingue/verifiche.html', sugg: 'Strumento funzionante: provate a creare una verifica', beats: [
@@ -598,7 +598,7 @@
     el.innerHTML = '<h3>Il minisito in numeri</h3><div class="pz-cifre">' +
       [['frasi', 'Frasi nel vocabolario'], ['sezioni', 'Sezioni tematiche'], ['ambiti', 'Indirizzi coperti'], ['lingue', 'Lingue'], ['lezioni', 'Lezioni guidate da un\'ora'], ['dialoghi', 'Dialoghi da recitare'], ['imprevisti', 'Imprevisti con scelta'], ['oggetti', 'Oggetti nelle scene illustrate']]
         .map(function (c) { return '<div class="pz-cifra"><b data-k="' + c[0] + '">0</b><span>' + c[1] + '</span></div>'; }).join('') +
-      '</div><p class="nota" style="margin-top:1rem">Le lezioni guidate sono oggi in inglese e spagnolo; se il progetto va in porto, arriverà anche il francese. Vocabolario, esercizi e giochi lavorano già in tutte e tre le lingue.</p>';
+      '</div><p class="nota" style="margin-top:1rem">Lezioni guidate, vocabolario, esercizi e giochi lavorano in tutte e tre le lingue.</p>';
     Promise.all(['lingue/parole.js', 'lingue/lezioni-dati.js', 'lingue/dialoghi-dati.js', 'lingue/imprevisti-dati.js', 'lingue/illustrato-scene.js'].map(carica)).then(function () {
       var V = window.VOCABOLARIO || { PAROLE: {}, SEZIONI: [], AMBITI: [] }, n = 0, k, og = 0;
       for (k in V.PAROLE) n += (V.PAROLE[k] || []).length;
@@ -799,18 +799,20 @@
   var PERS = {
     en: { tit: 'Al ristorante: la richiesta cortese', gr: 'Could e would per le richieste cortesi', sp: 'Per chiedere con garbo si usa «Could I…?» e «Would you like…?» al posto di «Can I…?» e «Do you want…?».',
       f: 'Potrei avere il conto, per favore? = Could I have the bill, please?\nDesidera un caffè? = Would you like a coffee?\nPotrebbe ripetere, per favore? = Could you repeat that, please?\nLe porto subito il menu. = I\'ll bring you the menu right away.' },
+    fr: { tit: 'Au restaurant : la demande polie', gr: 'Le conditionnel de politesse: pourrais-je, voudriez-vous', sp: 'Per chiedere con garbo si usa il condizionale: «Pourrais-je… ?» e «Voudriez-vous… ?» al posto del presente.',
+      f: 'Potrei avere il conto, per favore? = Pourrais-je avoir l\'addition, s\'il vous plaît ?\nDesidera un caffè? = Voudriez-vous un café ?\nPotrebbe ripetere, per favore? = Pourriez-vous répéter, s\'il vous plaît ?\nLe porto subito il menu. = Je vous apporte tout de suite la carte.' },
     es: { tit: 'En el restaurante: pedir con cortesía', gr: 'Il condizionale di cortesia: podría, querría', sp: 'Per chiedere con garbo si usa il condizionale: «¿Podría…?» e «Querría…» al posto del presente.',
       f: 'Potrei avere il conto, per favore? = ¿Podría traerme la cuenta, por favor?\nDesidera un caffè? = ¿Querría un café?\nPotrebbe ripetere, per favore? = ¿Podría repetirlo, por favor?\nLe porto subito il menu. = Le traigo enseguida la carta.' }
   };
   function mPers(el) {
     el.innerHTML = '<h3>Cambiate la lezione e guardate il telefono</h3><div class="ed"><div>' +
-      '<label class="et" for="pe-lin">Lingua della lezione</label><select id="pe-lin"><option value="en">Inglese</option><option value="es">Spagnolo</option></select>' +
+      '<label class="et" for="pe-lin">Lingua della lezione</label><select id="pe-lin"><option value="en">Inglese</option><option value="fr">Francese</option><option value="es">Spagnolo</option></select>' +
       '<label class="et" for="pe-tit">Titolo della lezione</label><input id="pe-tit" type="text" maxlength="70"/>' +
       '<label class="et" for="pe-gra">Regola di grammatica</label><input id="pe-gra" type="text" maxlength="90"/>' +
       '<label class="et" for="pe-sp">Spiegazione breve</label><textarea id="pe-sp" rows="3"></textarea>' +
       '<label class="et" for="pe-f">Frasi: italiano = traduzione (una per riga)</label><textarea id="pe-f" rows="6" spellcheck="false"></textarea>' +
       '<div class="chips"><span>Titolo</span><span>Grammatica</span><span>Frasi</span><span>Lingua</span><span>Livello</span><span>Indirizzo</span><span>Domande</span><span>Missione</span></div>' +
-      '<p class="nota" style="margin-top:.6rem">Ogni docente decide quanto e come personalizzare. Simulazione: nel sito vero lo stesso principio vale con «Crea esercizi» e «Lezione in 5 minuti», e l\'area docenti permetterà di conservare e correggere le proprie lezioni. Le lezioni complete sono in inglese e spagnolo; se il progetto va in porto, anche il francese.</p></div>' +
+      '<p class="nota" style="margin-top:.6rem">Ogni docente decide quanto e come personalizzare. Simulazione: nel sito vero lo stesso principio vale con «Crea esercizi» e «Lezione in 5 minuti», e l\'area docenti permetterà di conservare e correggere le proprie lezioni. Le lezioni complete sono in inglese, francese e spagnolo.</p></div>' +
       '<div><p class="nota" style="margin:0 0 .5rem;text-align:center"><b>Come la vede lo studente, subito</b></p><div class="ph"><div id="pe-sc"></div></div></div></div>';
     var lin = $('pe-lin'), tit = $('pe-tit'), gra = $('pe-gra'), sp = $('pe-sp'), f = $('pe-f'), sc = $('pe-sc');
     function carica_(c) { var d = PERS[c]; tit.value = d.tit; gra.value = d.gr; sp.value = d.sp; f.value = d.f; }
@@ -887,7 +889,7 @@
   }
 
   /* ── bozza di richiesta alla Dirigente ── */
-  var LETT0 = 'Alla Dirigente Scolastica\nIPSSEOA «R. A. Costaggini», Rieti\n\nOggetto: mini-sito «Le lingue dell\'Alberghiero»: informativa e richiesta di autorizzazione all\'utilizzo didattico\n\nGentile Dirigente,\n\nil Dipartimento di Lingue, nella riunione del ____________, ha preso visione del mini-sito «Le lingue dell\'Alberghiero» (convitto.alberghierorieti.edu.it/lingue), realizzato dall\'Educatore Michele Gaggiano: uno strumento gratuito, senza registrazione per gli studenti, con vocabolario professionale, esercizi, dialoghi, giochi a squadre per la LIM e lezioni guidate in inglese e spagnolo.\n\nIl Dipartimento ha espresso parere favorevole e intende:\n1. sperimentare lo strumento nelle classi, anche con materiali propri, senza alcun onere di revisione dei contenuti;\n2. segnalare, se e quando lo riterrà utile, eventuali miglioramenti;\n3. collaborare con l\'Educatore Gaggiano per i passi successivi (area riservata ai docenti, lezioni di francese).\n\nSi chiede pertanto di autorizzare l\'utilizzo didattico del mini-sito nelle classi e la collaborazione sopra indicata. \n\nEventuali osservazioni del Dipartimento: ____________________\n\nCon osservanza,\nIl Dipartimento di Lingue\n\nRieti, ____________';
+  var LETT0 = 'Alla Dirigente Scolastica\nIPSSEOA «R. A. Costaggini», Rieti\n\nOggetto: mini-sito «Le lingue dell\'Alberghiero»: informativa e richiesta di autorizzazione all\'utilizzo didattico\n\nGentile Dirigente,\n\nil Dipartimento di Lingue, nella riunione del ____________, ha preso visione del mini-sito «Le lingue dell\'Alberghiero» (convitto.alberghierorieti.edu.it/lingue), realizzato dall\'Educatore Michele Gaggiano: uno strumento gratuito, senza registrazione per gli studenti, con vocabolario professionale, esercizi, dialoghi, giochi a squadre per la LIM e lezioni guidate in inglese, francese e spagnolo.\n\nIl Dipartimento ha espresso parere favorevole e intende:\n1. sperimentare lo strumento nelle classi, anche con materiali propri, senza alcun onere di revisione dei contenuti;\n2. segnalare, se e quando lo riterrà utile, eventuali miglioramenti;\n3. collaborare con l\'Educatore Gaggiano per i passi successivi (area riservata ai docenti, nuove lezioni guidate).\n\nSi chiede pertanto di autorizzare l\'utilizzo didattico del mini-sito nelle classi e la collaborazione sopra indicata. \n\nEventuali osservazioni del Dipartimento: ____________________\n\nCon osservanza,\nIl Dipartimento di Lingue\n\nRieti, ____________';
   function mLettera(el) {
     el.innerHTML = '<h3>Richiesta alla Dirigente: bozza da adattare</h3><p class="nota" style="margin:0 0 .6rem">La bozza si modifica direttamente qui. Va firmata e inviata dal Dipartimento o da un suo referente: compilate le parti con i trattini e correggete ciò che serve.</p>' +
       '<textarea class="lett" id="l-t" spellcheck="true"></textarea><div class="riga"><button type="button" class="lg-btn pieno" id="l-mail">✉️ Apri nella posta</button><button type="button" class="lg-btn" id="l-copia">📋 Copia il testo</button><button type="button" class="lg-btn" id="l-stampa">🖨️ Stampa</button><button type="button" class="lg-btn" id="l-ripr">Ripristina la bozza</button></div><p class="stato" id="l-st"></p>';

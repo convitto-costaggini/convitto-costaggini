@@ -191,7 +191,7 @@
   /* ───── catalogo ───── */
   function catalogo() {
     lez = null;
-    vista.innerHTML = '<h2 class="lg-h2">Scegli <em>la lezione</em></h2><p class="lg-sot">Ogni lezione vale un\'ora di lavoro, in inglese e in spagnolo. Se serve, attiva la versione facilitata: caratteri più grandi, meno alternative, traduzione sempre visibile.</p><div class="lz-elenco">' +
+    vista.innerHTML = '<h2 class="lg-h2">Scegli <em>la lezione</em></h2><p class="lg-sot">Ogni lezione vale un\'ora di lavoro, in inglese, francese e spagnolo. Se serve, attiva la versione facilitata: caratteri più grandi, meno alternative, traduzione sempre visibile.</p><div class="lz-elenco">' +
       window.LEZIONI.map(function (l) {
         return '<a class="lz-card" href="lingue/lezioni.html?l=' + l.id + '"><span class="ic">' + l.icona + '</span><span class="amb">' + esc(l.ambito) + ' · ' + esc(l.livello) + ' · ' + esc(l.classi) + '</span><h3>' + esc(l.titolo) + '</h3><p class="sot">' + esc(l.sottotitolo) + '</p><p>' + esc(l.descrizione) + '</p><span class="vai">Inizia la lezione →</span></a>';
       }).join('') +

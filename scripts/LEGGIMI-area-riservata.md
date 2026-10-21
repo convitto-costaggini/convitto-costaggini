@@ -34,7 +34,7 @@ Nel frattempo il **codice del Dipartimento** funziona senza nulla di tutto quest
 - *Il codice non arriva*: controllare la posta indesiderata; poi Dashboard, Edge Functions, `lingue-accesso`, Logs. Se lo script risponde
   "non autorizzato", `TOKEN` e `GAS_TOKEN` non coincidono. Dopo ogni modifica al codice dello script serve una nuova distribuzione.
 - *Limiti*: Gmail consente circa 1500 invii al giorno con un account Workspace, ampiamente sufficienti.
-- Il codice funziona solo per indirizzi che finiscono con `@alberghierorieti.it` (controllo anche nello script).
+- Il codice funziona solo per indirizzi che finiscono con `@alberghierorieti.it` o `@alberghierorieti.edu.it` (controllo anche nello script).
 
 ## Aggiungere un docente (SQL Editor di Supabase)
     insert into public.lingue_docenti(email, nome) values ('nome.cognome@alberghierorieti.it', 'Nome Cognome');

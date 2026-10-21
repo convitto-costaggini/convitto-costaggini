@@ -1,28 +1,34 @@
 # Sala studio (/studio): dalle foto del libro alla lezione interattiva
 
-- `studio/` è il minisito: `index.html` (ingresso e codice), `lezione.html` (la lezione dei ragazzi), `docente.html` (foto → lezione → QR).
+- `studio/` è il minisito: `index.html` (ingresso e codice), `lezione.html` (la lezione dei ragazzi), `docente.html` (pagina degli educatori).
 - `studio/studio.js` disegna la lezione: gancio, idee chiave, mnemotecniche (parola magica, palazzo della memoria,
   filastrocca a scomparsa progressiva, immagini mentali), esercizi (quiz, vero/falso, completa, abbina, in ordine),
   flashcard con ripetizione, sfida finale, cose da ricordare. Lettura ad alta voce, testo regolabile, carattere ad alta leggibilità.
-- `studio/lezione.html?c=DEMO` è una lezione di esempio completa (`studio/demo.js`): funziona già senza configurare nulla.
-- La funzione `scripts/studio-genera/index.ts` riceve le foto, le manda a Claude e salva solo la lezione (non le foto)
-  nella tabella `studio_lezioni`, con un codice di 6 lettere per il QR.
+- `studio/lezione.html?c=DEMO` è una lezione di esempio completa (`studio/demo.js`).
+- La funzione `scripts/studio-genera/index.ts` (già pubblicata su Supabase) salva la lezione nella tabella `studio_lezioni`
+  con un codice di 6 lettere per il QR.
 
-## Da fare per attivarla (circa 10 minuti)
-- [x] **Database**: migrazione `supabase/migrazioni/2026-10-21_studio_lezioni.sql` applicata (21/10/2026).
-- [ ] **Chiave dell'IA**: creare una chiave API su console.anthropic.com (con un limite di spesa mensile). Ogni lezione costa
-      qualche centesimo.
-- [ ] **Segreti**: Dashboard Supabase, Edge Functions, Secrets. Aggiungere `ANTHROPIC_API_KEY` (la chiave) e `STUDIO_CODICI`
-      (il codice o i codici degli educatori, separati da virgola, es. `aquila-ventitre,orso-blu`). Non vanno scritti in chat né nel repository.
-- [x] **Funzione**: `studio-genera` pubblicata (21/10/2026) con "Verify JWT" disattivato (i controlli sono dentro la funzione).
-      Se si modifica `scripts/studio-genera/index.ts` va ripubblicata.
-- [ ] **Prova**: aprire `studio/docente.html`, fotografare due pagine, scrivere il codice, "Crea la lezione".
+## Come si crea una lezione (nessun costo a consumo)
+1. In `studio/docente.html` l'educatore scrive (se vuole) materia, classe e indicazioni e preme **Copia le istruzioni**.
+2. Apre claude.ai con il proprio abbonamento, allega le foto delle pagine, incolla le istruzioni e invia.
+3. Copia tutta la risposta di Claude, la incolla nel passo 3, scrive il codice educatori e preme **Pubblica la lezione**:
+   la lezione viene salvata e compaiono il codice e il QR.
 
-Finché la funzione non è attiva, la **modalità manuale** in fondo a `studio/docente.html` funziona già: si copiano le istruzioni,
-si incollano in claude.ai con le foto, si incolla la risposta e si ottiene il link (la lezione viaggia dentro il link).
+Se il servizio non risponde, lo stesso passo 3 offre **Crea solo il link**: la lezione viaggia dentro il link (troppo lungo per un QR).
+
+## Da fare per attivarla
+- [x] Database e funzione `studio-genera` attivati su Supabase (21/10/2026).
+- [ ] **Codice educatori**: Dashboard Supabase, Edge Functions, Secrets, aggiungere `STUDIO_CODICI` con il codice o i codici
+      degli educatori, separati da virgola (es. `aquila-ventitre,orso-blu`). Non va scritto in chat né nel repository.
+- [ ] **Prova**: aprire `studio/docente.html` e seguire i passi 1-2-3.
+
+## Facoltativo: creazione automatica dalle foto (a consumo)
+Nella pagina c'è anche "Creazione automatica dalle foto": il sito manda le foto direttamente all'IA, senza passare da claude.ai.
+Funziona solo aggiungendo il segreto `ANTHROPIC_API_KEY` (chiave API da console.anthropic.com, a consumo: stima 10-30 centesimi
+a lezione). Senza chiave quel riquadro avvisa che non è attivo; tutto il resto funziona.
 
 ## Limiti e controlli
-- Solo chi conosce un codice di `STUDIO_CODICI` può creare lezioni; al massimo 30 lezioni all'ora in tutto, 8 foto per lezione.
+- Solo chi conosce un codice di `STUDIO_CODICI` può pubblicare lezioni; al massimo 30 lezioni all'ora in tutto.
 - I ragazzi aprono una lezione solo dal codice: nessuno può elencarle. I progressi restano sul telefono del ragazzo.
-- Per cambiare il codice degli educatori basta cambiare `STUDIO_CODICI`.
+- Se si modifica `scripts/studio-genera/index.ts` la funzione va ripubblicata su Supabase.
 - Per togliere una lezione: `delete from public.studio_lezioni where codice = 'ABCDEF';`

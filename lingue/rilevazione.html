@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Scheda di rilevazione dei tempi | Le lingue dell'Alberghiero</title>
+  <meta name="description" content="Una pagina per misurare quanto tempo fa risparmiare il minisito: il cronometro per ogni compito, il confronto con il solito, il riepilogo da stampare o copiare."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .rv-pass{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.8rem;margin:1rem 0 1.4rem;padding:0;counter-reset:p}
+  .rv-pass li{list-style:none;counter-increment:p;background:#fff;border:1px solid var(--av3);border-radius:14px;padding:.9rem 1rem .9rem 3rem;position:relative;font-size:.88rem;line-height:1.55}
+  .rv-pass li::before{content:counter(p);position:absolute;left:.9rem;top:.8rem;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--bosco);color:#fff;font:800 .78rem var(--fu);display:flex;align-items:center;justify-content:center}
+  .rv-t{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--av3);border-radius:14px;overflow:hidden;font-size:.86rem}
+  .rv-t th{font:800 .6rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);text-align:left;padding:.6rem .6rem;background:var(--av);border-bottom:1px solid var(--av3)}
+  .rv-t td{padding:.55rem .6rem;border-bottom:1px solid var(--av2);vertical-align:middle;line-height:1.4}
+  .rv-t tr:last-child td{border-bottom:0}
+  .rv-t .st{font-size:.76rem;color:var(--txt2);white-space:nowrap}
+  .rv-t input[type=number]{width:4.6rem;font:700 1rem var(--fu);padding:.45rem .4rem;border:1.5px solid var(--av3);border-radius:8px;text-align:center}
+  .rv-cron{display:flex;align-items:center;gap:.4rem}
+  .rv-cron button{font:800 .62rem var(--fu);letter-spacing:.08em;text-transform:uppercase;padding:.5rem .7rem;border-radius:8px;border:1.5px solid var(--bosco);background:#fff;color:var(--bosco);cursor:pointer;min-height:40px;white-space:nowrap}
+  .rv-cron button.on{background:#b91c1c;border-color:#b91c1c;color:#fff}
+  .rv-tot{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin:1.2rem 0}
+  .rv-tot div{background:#fff;border:1px solid var(--av3);border-radius:14px;padding:.9rem 1rem;text-align:center}
+  .rv-tot div.ok{background:#eef3ee;border:1.5px solid var(--bosco)}
+  .rv-tot b{display:block;font-family:var(--fd);font-weight:400;font-size:2rem;line-height:1.1;color:var(--bosco)}
+  .rv-tot span{display:block;font:700 .62rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--txt2);margin-top:.3rem}
+  .rv-f{display:grid;gap:.8rem;margin-top:1rem}
+  .rv-f label{display:block;font:700 .78rem var(--fu);color:var(--txt2)}
+  .rv-f textarea,.rv-f input[type=text],.rv-f select{display:block;width:100%;margin-top:.25rem;font:400 .95rem var(--fu);padding:.55rem .65rem;border:1.5px solid var(--av3);border-radius:8px;background:#fff}
+  .rv-az{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem}
+  .rv-msg{font-size:.84rem;color:var(--bosco);min-height:1.4em;margin-top:.5rem}
+  .rv-solo-stampa{display:none}
+  @media (max-width:640px){.rv-t thead{display:none}.rv-t tr{display:block;padding:.6rem .5rem;border-bottom:1px solid var(--av3)}.rv-t td{display:block;border:0;padding:.25rem .3rem}.rv-t td[data-l]::before{content:attr(data-l) ": ";font:800 .6rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--txt2)}}
+  @media print{
+    body>*:not(main){display:none!important}
+    .lg-hero,[data-lingue-nav],.noprint,.rv-pass{display:none!important}
+    .rv-solo-stampa{display:block;font-size:11pt;margin:0 0 6pt}
+    .lg-sez{padding:0!important;background:none!important}
+    .rv-t{font-size:9pt}.rv-t td,.rv-t th{padding:3pt 4pt}.rv-t input{border:0!important;border-bottom:1px solid #000!important;border-radius:0!important}
+    .rv-tot{margin:6pt 0}.rv-tot b{font-size:15pt}.rv-f textarea{min-height:46pt;border:1px solid #000}
+    .rv-t .st{white-space:normal}
+    @page{size:A4;margin:12mm}
+  }
+  </style>
+</head>
+<body data-page="lingue" data-lingue="rilevazione">
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Per i docenti di lingue</p>
+      <h1>Misuratelo <em>voi</em></h1>
+      <p>Una pagina, tre minuti. Scrivete quanto ci mettete di solito, cronometrate lo stesso compito con il sito, leggete la differenza. Il risultato è vostro: resta su questo dispositivo.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez">
+    <div class="w">
+      <ol class="rv-pass">
+        <li><b>Di solito:</b> scrivete i minuti che impiegate a fare quel compito.</li>
+        <li><b>Con il sito:</b> premete ▶ e fate il compito. ■ scrive i minuti da solo.</li>
+        <li><b>Confronto:</b> in fondo trovate il risparmio. Stampate o copiate il riepilogo.</li>
+      </ol>
+      <p class="rv-solo-stampa"><b>Le lingue dell'Alberghiero · rilevazione dei tempi.</b> Lingua e classe: <span id="rv-st-cl"></span> · Data: <span id="rv-st-data"></span></p>
+      <table class="rv-t" id="rv-t">
+        <thead><tr><th>Compito</th><th>Stima del sito</th><th>Di solito (min)</th><th>Con il sito (min)</th></tr></thead>
+        <tbody id="rv-corpo"></tbody>
+      </table>
+      <div class="rv-tot" id="rv-tot" aria-live="polite"></div>
+      <div class="rv-f">
+        <label>Lingua e classe in cui l'avete provato (facoltativo)<input type="text" id="rv-cl" placeholder="es. inglese, 3ª B"/></label>
+        <label>Il materiale era utilizzabile senza modifiche?
+          <select id="rv-uso"><option value="">Scegliete</option><option>Sì, senza modifiche</option><option>Sì, con piccole modifiche</option><option>No, ho dovuto rifarlo in gran parte</option></select></label>
+        <label>Errori trovati (lingua, frase, pagina) o cosa manca
+          <textarea id="rv-err" rows="3" placeholder="es. inglese, vocabolario, Bar: la frase … va corretta così …"></textarea></label>
+      </div>
+      <div class="rv-az noprint">
+        <button type="button" class="lg-btn pieno" id="rv-stampa">🖨️ Stampa la scheda</button>
+        <button type="button" class="lg-btn oro" id="rv-copia">📋 Copia il riepilogo</button>
+        <button type="button" class="lg-btn" id="rv-azzera">Azzera</button>
+        <a class="lg-btn" href="lingue/lunedi.html">☀️ Le situazioni reali</a>
+      </div>
+      <p class="rv-msg noprint" id="rv-msg" aria-live="polite"></p>
+      <p class="lg-nota noprint" style="margin-top:1rem">Il riepilogo copiato si incolla in una e-mail all'educatore Michele Gaggiano (michele.gaggiano@alberghierorieti.it): servono i vostri tempi veri, anche se il risultato è peggiore delle stime. Gli errori segnalati vengono corretti in un paio di giorni.</p>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="lingue/lingue.js"></script>
+<script src="lingue/tempi.js"></script>
+<script>
+(function () {
+  'use strict';
+  var L = window.LINGUE_SITO, T = window.TEMPI, esc = L.esc;
+  var $ = function (id) { return document.getElementById(id); };
+  var S = L.leggi('rilevazione', {}) || {};
+  if (!S.v) S.v = {};
+  var corre = null, t0 = 0, tick = null;
+
+  function num(x) { var n = parseFloat(String(x).replace(',', '.')); return isFinite(n) && n >= 0 ? n : null; }
+  function fmt(n) { return (Math.round(n * 10) / 10).toString().replace('.', ','); }
+  function salva() { L.salva('rilevazione', S); }
+
+  $('rv-corpo').innerHTML = T.COMPITI.map(function (c) {
+    var an = T.somma(c.an), si = T.somma(c.sito);
+    return '<tr data-id="' + c.id + '"><td data-l="Compito"><b>' + esc(c.nome) + '</b></td>' +
+      '<td class="st" data-l="Stima del sito">' + si + ' min invece di ' + an + '</td>' +
+      '<td data-l="Di solito (min)"><input type="number" min="0" step="0.5" inputmode="decimal" data-k="an" aria-label="Minuti di solito: ' + esc(c.nome) + '"/></td>' +
+      '<td data-l="Con il sito (min)"><div class="rv-cron"><input type="number" min="0" step="0.5" inputmode="decimal" data-k="sito" aria-label="Minuti con il sito: ' + esc(c.nome) + '"/><button type="button" class="noprint" data-cron="' + c.id + '">▶ Via</button></div></td></tr>';
+  }).join('');
+  [].forEach.call($('rv-corpo').querySelectorAll('tr'), function (tr) {
+    var v = S.v[tr.dataset.id] || {};
+    [].forEach.call(tr.querySelectorAll('input'), function (i) { if (v[i.dataset.k] != null) i.value = v[i.dataset.k]; });
+  });
+  $('rv-cl').value = S.cl || ''; $('rv-uso').value = S.uso || ''; $('rv-err').value = S.err || '';
+
+  function calcola() {
+    var an = 0, si = 0, n = 0;
+    [].forEach.call($('rv-corpo').querySelectorAll('tr'), function (tr) {
+      var a = num(tr.querySelector('[data-k=an]').value), s = num(tr.querySelector('[data-k=sito]').value);
+      S.v[tr.dataset.id] = { an: a, sito: s };
+      if (a != null && s != null) { an += a; si += s; n++; }
+    });
+    S.cl = $('rv-cl').value; S.uso = $('rv-uso').value; S.err = $('rv-err').value; salva();
+    $('rv-st-cl').textContent = S.cl || '…'; $('rv-st-data').textContent = new Date().toLocaleDateString('it-IT');
+    if (!n) { $('rv-tot').innerHTML = '<div style="grid-column:1/-1"><b>—</b><span>Compilate almeno una riga: «di solito» e «con il sito»</span></div>'; return null; }
+    var ris = an - si, vol = si > 0 ? an / si : null;
+    $('rv-tot').innerHTML =
+      '<div><b>' + fmt(an) + '</b><span>minuti di solito</span></div>' +
+      '<div><b>' + fmt(si) + '</b><span>minuti con il sito</span></div>' +
+      '<div class="ok"><b>' + fmt(ris) + '</b><span>minuti risparmiati</span></div>' +
+      '<div class="ok"><b>' + (vol ? fmt(vol) + '×' : '—') + '</b><span>più veloce (' + n + (n === 1 ? ' compito' : ' compiti') + ')</span></div>';
+    return { an: an, si: si, ris: ris, vol: vol, n: n };
+  }
+  $('rv-corpo').addEventListener('input', calcola);
+  ['rv-cl', 'rv-uso', 'rv-err'].forEach(function (id) { $(id).addEventListener('input', calcola); });
+
+  function ferma() {
+    if (!corre) return;
+    var tr = $('rv-corpo').querySelector('tr[data-id="' + corre + '"]'), btn = tr.querySelector('[data-cron]');
+    var min = Math.max(0.5, Math.round(((Date.now() - t0) / 60000) * 2) / 2);
+    tr.querySelector('[data-k=sito]').value = min;
+    btn.classList.remove('on'); btn.textContent = '▶ Via';
+    clearInterval(tick); corre = null; calcola();
+  }
+  $('rv-corpo').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-cron]'); if (!b) return;
+    if (corre === b.dataset.cron) { ferma(); return; }
+    ferma();
+    corre = b.dataset.cron; t0 = Date.now(); b.classList.add('on');
+    var mostra = function () { var s = Math.floor((Date.now() - t0) / 1000); b.textContent = '■ ' + Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); };
+    mostra(); tick = setInterval(mostra, 500);
+  });
+
+  function riepilogo() {
+    var r = calcola(), righe = ['Le lingue dell\'Alberghiero · rilevazione dei tempi', 'Lingua e classe: ' + (S.cl || '-') + ' · ' + new Date().toLocaleDateString('it-IT'), ''];
+    T.COMPITI.forEach(function (c) {
+      var v = S.v[c.id] || {};
+      if (v.an != null || v.sito != null) righe.push('- ' + c.nome + ': di solito ' + (v.an == null ? '?' : fmt(v.an)) + ' min, con il sito ' + (v.sito == null ? '?' : fmt(v.sito)) + ' min');
+    });
+    if (r) righe.push('', 'Totale: ' + fmt(r.an) + ' min di solito, ' + fmt(r.si) + ' min con il sito, risparmio ' + fmt(r.ris) + ' min' + (r.vol ? ' (' + fmt(r.vol) + '×)' : ''));
+    if (S.uso) righe.push('Utilizzabile senza modifiche: ' + S.uso);
+    if (S.err) righe.push('Errori o mancanze: ' + S.err);
+    return righe.join('\n');
+  }
+  function msg(t) { $('rv-msg').textContent = t; clearTimeout(msg.t); msg.t = setTimeout(function () { $('rv-msg').textContent = ''; }, 3500); }
+  $('rv-stampa').addEventListener('click', function () { ferma(); calcola(); window.print(); });
+  $('rv-copia').addEventListener('click', function () {
+    ferma(); var t = riepilogo();
+    function ok() { msg('Riepilogo copiato: incollatelo in una e-mail.'); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, function () { prompt('Copiate il riepilogo:', t); });
+    else { var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); ok(); } catch (x) { prompt('Copiate il riepilogo:', t); } ta.remove(); }
+  });
+  $('rv-azzera').addEventListener('click', function () {
+    if (!confirm('Cancellare tutti i tempi inseriti su questo dispositivo?')) return;
+    ferma(); S = { v: {} }; salva();
+    [].forEach.call(document.querySelectorAll('#rv-corpo input'), function (i) { i.value = ''; });
+    $('rv-cl').value = ''; $('rv-uso').value = ''; $('rv-err').value = ''; calcola();
+  });
+  calcola();
+})();
+</script>
+</body>
+</html>

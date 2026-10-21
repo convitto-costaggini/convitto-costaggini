@@ -169,6 +169,40 @@
   .live div{background:#0e1a11;border-radius:14px;padding:.9rem;text-align:center}
   .live b{display:block;font-family:var(--fd);font-weight:400;font-size:2.2rem;color:var(--oro3);line-height:1}
   .live span{display:block;margin-top:.35rem;font:700 .6rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.75)}
+
+  .tp-nota{font-size:.8rem;color:var(--txt2);margin:.1rem 0 .8rem}
+  .tp-r{background:#fff;border:1px solid var(--av3);border-radius:12px;padding:.7rem .8rem;margin-bottom:.55rem}
+  .tp-top{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between;margin-bottom:.45rem}
+  .tp-n{font:700 .9rem var(--fu);color:var(--bosco);flex:1 1 260px;line-height:1.35}
+  .tp-in{display:flex;gap:.7rem;font:700 .66rem var(--fu);letter-spacing:.04em;color:var(--txt2);text-transform:uppercase;align-items:center}
+  .tp-in input{width:3.6rem;font:700 .95rem var(--fu);padding:.3rem .25rem;border:1.5px solid var(--av3);border-radius:8px;text-align:center;margin-left:.3rem}
+  .tp-b{display:grid;gap:.25rem}
+  .tp-bar{height:1.5rem;border-radius:6px;display:flex;align-items:center;padding:0 .5rem;font:800 .7rem var(--fu);white-space:nowrap;min-width:max-content;transition:width .6s}
+  .tp-bar.an{background:#e7ded0;color:#4a4840}.tp-bar.ai{background:#f2d9a6;color:#5a4410}.tp-bar.si{background:var(--bosco);color:#fff}
+  .tp-r details{margin-top:.4rem;font-size:.8rem;color:var(--txt2)}
+  .tp-r summary{cursor:pointer;font:700 .68rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--oro)}
+  .tp-pas{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem;margin-top:.4rem}
+  .tp-pas ul{margin:0;padding-left:1rem;line-height:1.5}.tp-pas b{display:block;font-size:.72rem;color:var(--bosco)}
+  .tp-tot{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin:.9rem 0}
+  .tp-tot div{background:#fff;border:1px solid var(--av3);border-radius:14px;padding:.8rem .6rem;text-align:center}
+  .tp-tot div.g{background:var(--bosco);border-color:var(--bosco);color:#fff}
+  .tp-tot b{display:block;font-family:var(--fd);font-weight:400;font-size:2.1rem;line-height:1.05}
+  .tp-tot span{display:block;margin-top:.3rem;font:700 .62rem var(--fu);letter-spacing:.07em;text-transform:uppercase;opacity:.85}
+  .tp-cf{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:.4rem}
+  .tp-cf th,.tp-cf td{border:1px solid var(--av3);padding:.35rem .45rem;text-align:left;vertical-align:top;line-height:1.4}
+  .tp-cf th{background:var(--av);font:800 .6rem var(--fu);text-transform:uppercase;letter-spacing:.06em}
+  .tp-cf td:last-child{background:#eef3ee;font-weight:600}
+  .cr-ris{background:#fff;border:2px solid var(--oro);border-radius:14px;padding:1rem 1.1rem;margin-top:.8rem;line-height:1.6}
+  .cr-ris .big{font-family:var(--fd);font-size:2.4rem;color:var(--bosco);line-height:1.1}
+  .cr-ris ol{margin:.5rem 0 0;padding-left:1.2rem;font-size:.86rem;color:var(--txt2)}
+  .dq{border:1px solid var(--av3);border-radius:12px;margin-bottom:.5rem;background:#fff;overflow:hidden}
+  .dq>button{width:100%;text-align:left;background:transparent;border:0;padding:.75rem 1rem;font-family:var(--fd);font-style:italic;font-size:1.12rem;color:var(--bosco);cursor:pointer;display:flex;justify-content:space-between;gap:1rem}
+  .dq>button::after{content:"+";color:var(--oro);font-weight:700;font-style:normal}
+  .dq.aperto>button::after{content:"−"}
+  .dq .r{max-height:0;overflow:hidden;padding:0 1rem;font-size:.9rem;color:var(--txt);line-height:1.6;transition:max-height .4s,padding .4s}
+  .dq.aperto .r{max-height:700px;padding:0 1rem .9rem}
+  .dq .r p{margin:.1rem 0 .6rem}
+  .dq .r .lg-btn{min-height:36px;padding:.45rem .8rem}
   .acc{border:1px solid var(--av3);border-radius:12px;margin-bottom:.5rem;background:#fff;overflow:hidden}
   .acc button{width:100%;text-align:left;background:transparent;border:0;padding:.8rem 1rem;font-family:var(--fd);font-size:1.12rem;color:var(--bosco);cursor:pointer;display:flex;justify-content:space-between;gap:1rem}
   .acc button::after{content:"+";color:var(--oro);font-weight:700}
@@ -279,6 +313,7 @@
 
 <script src="lingue/lingue.js"></script>
 <script src="lingue/pacchetto.js"></script>
+<script src="lingue/tempi.js"></script>
 <script>
 (function () {
   'use strict';
@@ -295,14 +330,21 @@
     { n: 'Affidabilità e futuro' }
   ];
   var SC = [
-    { p: 0, tit: 'Benvenuti', tipo: 'nat', mount: mIntro, etic: 'Come leggere questa visita', dwell: 14000, beats: [
-      { t: 'Quello che state per vedere è un sito di lingue per gli studenti dell\'Alberghiero: vocabolario, esercizi, dialoghi e giochi in inglese, francese e spagnolo.' },
-      { t: 'Funziona dal telefono, senza registrazione. E per voi docenti è uno strumento che prepara il materiale al posto vostro.' },
-      { t: 'Una cosa va detta subito, per evitare equivoci: a voi non è chiesto di revisionare nulla. Il sito è già pronto, e serve a togliervi lavoro, non ad aggiungerne.' },
-      { t: 'Questa visita si guida da sola. La voce che spiega legge il testo che si dissolve in questo riquadro scuro; si può spegnere con il pulsante in alto.' },
-      { t: 'Lo schermo accanto non è un video né un\'immagine: è il sito funzionante. Potete toccarlo, scrivere, provare. Quando vedete la cornice con il pallino verde, o quella dorata, tocca a voi.' },
-      { t: 'Un avvertimento importante: tutto ciò che vedrete è un esempio, non un percorso stabilito. Ogni docente potrà sostituire lezioni, grammatica e frasi con le proprie, e vederle cambiare in tempo reale.' },
-      { t: 'Premete «Avvia» per la visita automatica, oppure «Avanti» quando volete.' }
+    { p: 0, tit: 'Benvenuti', tipo: 'nat', mount: mIntro, etic: 'Scegliete come iniziare', dwell: 9000, beats: [
+      { t: 'Un sito di lingue per gli studenti dell\'Alberghiero, in inglese, francese e spagnolo. Per voi prepara il materiale al posto vostro.' },
+      { t: 'Tutto quello che vedete funziona: toccate, scrivete, provate. Nessun account, nessuna revisione richiesta.' },
+      { t: 'Si comincia dal tempo: quanto vi restituisce.' }
+    ] },
+    { p: 0, tit: 'Quanto tempo vi restituisce', tipo: 'nat', mount: mTempo, etic: 'Provate voi: mettete i vostri minuti', oro: true, dwell: 40000, beats: [
+      { t: 'Sei compiti che ogni docente di lingue conosce. Per ciascuno, tre modi di farlo: a mano, con un\'intelligenza artificiale generica, con questo sito.' },
+      { t: 'Una verifica con file A e B e soluzioni: circa un\'ora a mano, circa trentacinque minuti con un\'intelligenza artificiale generica, circa tre minuti qui.' },
+      { t: 'Con l\'intelligenza artificiale generica il tempo non sparisce: si sposta sul controllo degli errori e sull\'impaginazione. Qui, quel lavoro è già fatto.' },
+      { t: 'Sono stime. Cambiate i minuti con i vostri, o dimezzate le mie: il risparmio resta grande.' },
+      { t: 'Poi misuratelo davvero, con la scheda di rilevazione.' }
+    ] },
+    { p: 0, tit: 'Il cronometro', tipo: 'nat', mount: mCrono, etic: 'Provate voi: una verifica vera, adesso', oro: true, dwell: 30000, beats: [
+      { t: 'Premete il pulsante: il sito costruisce adesso una verifica vera, con il suo motore, in questa stessa pagina.' },
+      { t: 'Domande, file A e B, soluzioni. Il resto del vostro tempo è scegliere l\'argomento e stampare.' }
     ] },
     { p: 0, tit: 'Il punto di partenza', tipo: 'nat', mount: mNumeri, etic: 'Dati veri, contati adesso', beats: [
       { t: 'Prima i fatti. Questi numeri non sono scritti a mano: vengono contati in questo istante sui contenuti veri del sito.' },
@@ -405,9 +447,8 @@
       { t: 'I dati sono d\'esempio e non vengono salvati: i comandi mostrano come funzionerà.' }
     ] },
     { p: 4, tit: 'Leggero, veloce, solido', tipo: 'nat', mount: mSolido, etic: 'Misure fatte dal vostro dispositivo', dwell: 22000, beats: [
-      { t: 'Le domande che farebbe un docente prudente. Intanto le cifre: sono misurate dal vostro dispositivo su questa stessa pagina.' },
-      { t: 'Pagine leggere, nessuna registrazione, nessun impianto da riparare, nessun costo per l\'Istituto.' },
-      { t: 'Aprite le domande qui accanto: ognuna ha una risposta concreta.' }
+      { t: 'Le cifre sono misurate dal vostro dispositivo, su questa stessa pagina.' },
+      { t: 'Pagine leggere, nessuna registrazione, nessun impianto da riparare, nessun costo per l\'Istituto.' }
     ] },
     { p: 4, tit: 'Si adatta a voi', tipo: 'nat', mount: mAdatta, etic: 'Provate voi: scegliete una richiesta', oro: true, dwell: 22000, beats: [
       { t: 'Un programma comprato cambia quando arriva l\'aggiornamento. Questo cambia con voi: dite cosa manca, lo si costruisce, lo si prova insieme.' },
@@ -418,6 +459,10 @@
       { t: 'Ultima domanda, la più giusta: chi lo ha costruito, e con quale metodo.' },
       { t: 'È nato dentro la scuola, da un educatore che conosce i ragazzi e i problemi di ogni giorno.' },
       { t: 'Non pretende di sapere le lingue meglio di voi: costruisce lo strumento perché a voi resti il tempo per insegnare.' }
+    ] },
+    { p: 4, tit: 'Il docente diffidente', tipo: 'nat', mount: mDiffidente, etic: 'Provate voi: fate le domande più dure', oro: true, dwell: 0, beats: [
+      { t: 'Le dodici obiezioni che un docente esperto ha il diritto di fare. Una risposta concreta ciascuna, con la prova a un clic.' },
+      { t: 'Aprite quella che vi convince di meno.' }
     ] },
     { p: 4, tit: 'Cosa chiedo al Dipartimento', tipo: 'nat', mount: mChiusura, etic: 'Provate voi: la scheda si compila qui', oro: true, dwell: 0, beats: [
       { t: 'Per finire: il progetto non è chiuso e non deve esserlo. Si costruisce con chi lo usa.' },
@@ -576,22 +621,131 @@
   function mIntro(el) {
     el.innerHTML = '<p class="pz-saluto" id="pz-saluto" aria-hidden="true">Welcome</p><h3 style="font-size:2rem;margin-top:.1rem">Le lingue dell\'Alberghiero</h3>' +
       '<p class="nota" style="font-size:.92rem;margin-top:0">Presentazione per il Dipartimento di Lingue · a cura dell\'educatore Michele Gaggiano</p>' +
-      '<div class="come"><h4>Come iniziare: scegliete un pulsante</h4><div class="riga" style="margin:.2rem 0 .7rem"><button type="button" class="lg-btn pieno" id="i-auto">▶ Avvia la visita automatica, con la voce</button><button type="button" class="lg-btn" id="i-man">Avvia, ma vado avanti io</button><button type="button" class="lg-btn" id="i-muto">Senza voce</button></div><ol>' +
-      '<li><b>Visita automatica, con la voce</b>: si passa alla scena 2 e la visita prosegue da sola, con la voce che legge il testo.</li>' +
-      '<li><b>Vado avanti io</b>: si passa alla scena 2, con la voce; poi si prosegue con il pulsante «Avanti» in basso.</li>' +
-      '<li><b>Senza voce</b>: come il precedente, ma solo testo.</li></ol>' +
-      '<p>Questa pagina non va riascoltata: si legge a schermo, e i pulsanti portano direttamente alla scena 2.</p></div>' +
-      '<div class="ponte on" style="margin:.2rem 0 .9rem"><b>Attenzione:</b> lezioni, frasi ed esercizi che vedrete sono esempi, non un percorso fisso. Ogni docente potrà sostituirli con i propri, in tempo reale.</div>' +
-      '<p style="margin:.6rem 0 .2rem"><b>In questa visita ci sono tre tipi di schermo:</b></p>' +
-      '<div class="leg"><div class="a"><b>La voce che spiega</b><p>Testo bianco su fondo scuro, che appare lentamente. È la spiegazione.</p></div>' +
-      '<div class="b"><b>● Il sito vero, funzionante</b><p>Cornice chiara con il pallino verde. Sono le pagine reali, come le vedono gli studenti: toccatele, funzionano.</p></div>' +
-      '<div class="c"><b>✋ Provate voi</b><p>Cornice dorata. Si può scrivere, cliccare, giocare.</p></div></div>' +
-      '<p class="nota" style="margin-top:.8rem">🔊 Il pulsante «Voce» in alto accende e spegne la lettura. Con le frecce della tastiera ci si sposta tra le scene; «Indice» permette di saltare a quella che interessa.</p>';
-    var SAL = ['Welcome', 'Bienvenue', 'Bienvenidos', 'Willkommen', 'Benvenuti'], i = 0, e = $('pz-saluto');
+      '<div class="come"><div class="riga" style="margin:.2rem 0 .7rem"><button type="button" class="lg-btn pieno" id="i-auto">▶ Visita automatica, con la voce</button><button type="button" class="lg-btn" id="i-man">Vado avanti io, con la voce</button><button type="button" class="lg-btn" id="i-muto">Solo testo</button></div></div>' +
+      '<div class="leg"><div class="a"><b>Fondo scuro</b><p>La voce che spiega.</p></div>' +
+      '<div class="b"><b>● Pallino verde</b><p>Il sito vero: toccatelo, funziona.</p></div>' +
+      '<div class="c"><b>✋ Cornice dorata</b><p>Tocca a voi: scrivere, cliccare, provare.</p></div></div>' +
+      '<p class="nota" style="margin-top:.8rem">Lezioni e frasi che vedrete sono esempi: ogni docente può sostituirli con i propri.</p>';
+    var SAL = ['Welcome', 'Bienvenue', 'Bienvenidos', 'Benvenuti'], i = 0, e = $('pz-saluto');
     if (!ridotto) (function giro() { dopo(function () { e.classList.add('via'); dopo(function () { i = (i + 1) % SAL.length; e.textContent = SAL[i]; e.classList.remove('via'); giro(); }, 500); }, 2400); })();
     $('i-auto').addEventListener('click', function () { impostaAuto(true); vai(1); });
     $('i-man').addEventListener('click', function () { impostaAuto(false); vai(1); });
     $('i-muto').addEventListener('click', function () { impostaAuto(false); voceOn = false; $('b-voce').setAttribute('aria-pressed', 'false'); $('b-voce').textContent = '🔇 Voce'; vai(1); });
+  }
+
+  /* ── Il tempo: stima ragionata, con i minuti modificabili dal docente */
+  function mTempo(el) {
+    var T = window.TEMPI, dim = false;
+    var st = T.COMPITI.map(function (c) { return { an: T.somma(c.an), mese: c.mese }; });
+    function render() {
+      var f = dim ? 0.5 : 1, tm = { an: 0, ai: 0, si: 0 };
+      var righe = T.COMPITI.map(function (c, i) {
+        var an = st[i].an * 1, ai = T.somma(c.ai) * f * (st[i].an / T.somma(c.an)), si = T.somma(c.sito), m = st[i].mese;
+        if (dim) { an = st[i].an * f; }
+        ai = Math.round(ai); an = Math.round(an);
+        tm.an += an * m; tm.ai += ai * m; tm.si += si * m;
+        var mx = Math.max(an, ai, si, 1), w = function (v) { return Math.max(4, Math.round(v / mx * 100)); };
+        var lista = function (p) { return '<ul>' + p.map(function (x) { return '<li>' + esc(x[0]) + ': ' + x[1] + '′</li>'; }).join('') + '</ul>'; };
+        return '<div class="tp-r"><div class="tp-top"><div class="tp-n">' + esc(c.nome) + '</div><div class="tp-in"><label>Volte al mese<input type="number" min="0" max="30" step="1" data-m="' + i + '" value="' + m + '"/></label><label>I vostri minuti, a mano<input type="number" min="1" max="600" data-a="' + i + '" value="' + st[i].an + '"/></label></div></div>' +
+          '<div class="tp-b"><div class="tp-bar an" style="width:' + w(an) + '%">A mano ' + an + '′</div><div class="tp-bar ai" style="width:' + w(ai) + '%">Con un\'IA generica ' + ai + '′</div><div class="tp-bar si" style="width:' + w(si) + '%">Con il sito ' + si + '′</div></div>' +
+          '<details><summary>Dove va il tempo</summary><div class="tp-pas"><div><b>A mano</b>' + lista(c.an) + '</div><div><b>Con un\'IA generica</b>' + lista(c.ai) + '</div><div><b>Con il sito</b>' + lista(c.sito) + '</div></div></details></div>';
+      }).join('');
+      var h = function (min) { return (Math.round(min * T.MESI / 6) / 10).toString().replace('.', ','); };
+      var vol = tm.si ? Math.round(tm.an / tm.si) : 0;
+      el.querySelector('#tp-lista').innerHTML = righe;
+      el.querySelector('#tp-tot').innerHTML = '<div><b>' + h(tm.an) + ' h</b><span>a mano, in un anno scolastico</span></div><div><b>' + h(tm.ai) + ' h</b><span>con un\'IA generica</span></div><div><b>' + h(tm.si) + ' h</b><span>con il sito</span></div><div class="g"><b>' + h(tm.an - tm.si) + ' h</b><span>restituite a ogni docente (circa ' + vol + ' volte più veloce)</span></div>';
+    }
+    el.innerHTML = '<h3>Quanto tempo vi restituisce</h3>' +
+      '<p class="tp-nota"><b>Stime dell\'autore, non misure</b>: docente esperto, materiale di livello A2-B1, ' + T.MESI + ' mesi di scuola. Cambiate i minuti e le frequenze con i vostri.</p>' +
+      '<div class="riga" style="margin:0 0 .7rem"><button type="button" class="lg-chip" id="tp-dim" aria-pressed="false">E se io sono il doppio più veloce?</button><a class="lg-btn oro" href="lingue/rilevazione.html" target="_blank" rel="noopener">⏱️ Misuratelo voi: scheda di rilevazione</a></div>' +
+      '<div id="tp-tot" class="tp-tot"></div><div id="tp-lista"></div>' +
+      '<details style="margin-top:.5rem"><summary style="cursor:pointer;font:800 .7rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--oro)">Cosa resta a carico vostro nei tre modi</summary>' +
+      '<table class="tp-cf"><thead><tr><th></th><th>A mano</th><th>Con un\'IA generica</th><th>Con il sito</th></tr></thead><tbody>' +
+      T.CONFRONTO.map(function (r) { return '<tr><td><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td><td>' + esc(r[3]) + '</td></tr>'; }).join('') + '</tbody></table></details>';
+    render();
+    el.addEventListener('input', function (e) {
+      var t = e.target, v = parseFloat(t.value);
+      if (!(v >= 0)) return;
+      if (t.dataset.m != null) st[+t.dataset.m].mese = v;
+      else if (t.dataset.a != null) st[+t.dataset.a].an = Math.max(1, v);
+      else return;
+      var pos = t.dataset.m != null ? 'm' : 'a', idx = t.dataset.m != null ? t.dataset.m : t.dataset.a;
+      render();
+      var n = el.querySelector('[data-' + pos + '="' + idx + '"]'); if (n) { n.focus(); try { n.setSelectionRange(n.value.length, n.value.length); } catch (x) {} }
+    });
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('#tp-dim'); if (!b) return;
+      dim = !dim; b.setAttribute('aria-pressed', String(dim)); render();
+    });
+  }
+
+  /* ── Il cronometro: la verifica vera, generata adesso dal motore del sito */
+  function mCrono(el) {
+    el.innerHTML = '<h3>Il cronometro</h3>' +
+      '<div class="riga"><button type="button" class="lg-btn pieno" id="cr-via">▶ Costruisci adesso una verifica vera</button><a class="lg-btn" href="lingue/verifiche.html" target="_blank" rel="noopener">Apri lo strumento completo</a></div>' +
+      '<div id="cr-ris" class="cr-ris" aria-live="polite"><b>Premete il pulsante.</b> Il sito costruisce una verifica di inglese con domande di quattro tipi, usando il suo motore, qui dentro.</div>';
+    var CHV = 'convitto-lingue-verifica-bozza', occupato = false;
+    $('cr-via').addEventListener('click', function () {
+      if (occupato) return; occupato = true;
+      var prima = null; try { prima = localStorage.getItem(CHV); } catch (x) {}
+      $('cr-ris').innerHTML = 'Costruzione in corso…';
+      var fr = document.createElement('iframe');
+      fr.setAttribute('aria-hidden', 'true'); fr.tabIndex = -1;
+      fr.style.cssText = 'position:fixed;left:-3000px;top:0;width:1100px;height:900px;border:0;visibility:hidden';
+      function fine() { occupato = false; try { if (prima === null) { if (!window.__crTieni) localStorage.removeItem(CHV); } else localStorage.setItem(CHV, prima); } catch (x) {} if (fr.parentNode) fr.parentNode.removeChild(fr); }
+      fr.onload = function () {
+        try {
+          var d = fr.contentDocument, w = fr.contentWindow, tent = 0;
+          (function pronto() {
+            if (!d.getElementById('vf-genera') && tent++ < 40) { return setTimeout(pronto, 100); }
+            var t0 = performance.now();
+            d.getElementById('vf-genera').click();
+            (function attesa() {
+              var q = d.querySelectorAll('#vf-lista .vf-q');
+              if (!q.length && performance.now() - t0 < 4000) { return requestAnimationFrame(attesa); }
+              var ms = Math.max(1, Math.round(performance.now() - t0));
+              var tot = d.getElementById('vf-tot').textContent;
+              var ex = [].slice.call(q, 0, 4).map(function (n) {
+                var tp = (n.querySelector('.vf-tipo') || {}).textContent || '', v = [].map.call(n.querySelectorAll('.vf-qb input, .vf-qb textarea'), function (i) { return i.value; }).filter(Boolean).slice(0, 2).join(' → ');
+                return '<li>' + esc(tp.trim() + ': ' + v.slice(0, 120)) + '</li>'; }).join('');
+              $('cr-ris').innerHTML = '<div class="big">' + ms + ' millisecondi</div><b>' + esc(tot) + '</b>, con file A e B e foglio delle soluzioni, costruite adesso dal sito.' +
+                '<ol>' + ex + '</ol><p class="nota" style="margin:.7rem 0 0">Il resto del vostro tempo: scegliere lingua e argomento (1 minuto), guardare l\'anteprima e stampare (2 minuti). In totale, circa 3 minuti. A mano, circa un\'ora.</p>';
+              setTimeout(fine, 1500);
+            })();
+          })();
+        } catch (x) { $('cr-ris').innerHTML = 'Non riesco a costruirla qui: <a href="lingue/verifiche.html" target="_blank" rel="noopener">aprite lo strumento</a>.'; fine(); }
+      };
+      fr.src = 'lingue/verifiche.html';
+      document.body.appendChild(fr);
+    });
+  }
+
+  /* ── Il docente diffidente: le obiezioni più dure, con la prova */
+  var OBIEZIONI = [
+    ['«Un altro sito da imparare? Non ho tempo.»', 'Niente da imparare, niente da installare, nessun account. Si apre una lezione e la scheda del docente è già lì: scaletta, link e QR per la classe, verifica. Tre mosse, due minuti.', ['Aprite una lezione pronta', 'lingue/lezioni.html?l=brigata&t=docente']],
+    ['«Perché non faccio tutto con ChatGPT?»', 'Si può, e «Lezione in 5 minuti» lo fa per voi: scrive la richiesta, controlla la risposta e la trasforma in lezione. Con un\'IA generica il lavoro vero comincia dopo la risposta: controllare ogni frase, copiare in Word, impaginare i file A e B, rifare tutto per i DSA, costruire un modulo per il telefono. Per una verifica: circa 35 minuti contro 3.', ['Vedete la stima, voce per voce', '#tempo']],
+    ['«E se l\'IA inventa errori di lingua?»', 'Il rischio esiste con qualsiasi IA. Per questo i contenuti del sito sono stati riletti da quattro revisioni indipendenti (inglese, francese, spagnolo, italiano) più un controllo ortografico automatico, con decine di correzioni già applicate. Zero errori non lo garantisce nessuno: per questo c\'è la segnalazione, e una correzione in un paio di giorni. Nella lezione costruita con l\'IA il sito controlla la struttura; la lingua va letta, e quei minuti sono già nella stima.', ['Segnalate un errore trovato', 'lingue/rilevazione.html']],
+    ['«E i dati dei miei studenti?»', 'I ragazzi non inseriscono nome, e-mail o altri dati: aprono il link e lavorano. Nessun account. Le bozze dei docenti restano nel browser del dispositivo; il sito non ha un database dei dati personali.', null],
+    ['«Reggerà con il Wi-Fi della scuola e i telefoni dei ragazzi?»', 'Pagine leggere e statiche; voce e giochi girano sul dispositivo, non su un server che si può intasare. Le cifre sono misurate adesso, dal vostro dispositivo.', ['Vedete le misure', '#solido']],
+    ['«Ho alunni con DSA o BES.»', 'La versione facilitata si attiva con un tocco: caratteri grandi, più spazio, niente corsivo, meno testo. Si stampano scheda e verifica già adattate. A mano: circa 30 minuti, qui: 1.', ['Provatela su una lezione', 'lingue/lezioni.html?l=brigata&t=docente']],
+    ['«Il mio programma è diverso.»', 'Dite tema e livello a «Lezione in 5 minuti»: nasce una lezione completa, con scheda, esercizi, missione e verifica. Oppure scrivete le vostre frasi in «Crea i tuoi esercizi»: link e QR per la classe, gioco per la lavagna, verifica su carta.', ['Provate con un vostro tema', 'lingue/cinque-minuti.html']],
+    ['«Costa? C\'è pubblicità?»', 'Gratuito, senza pubblicità, senza registrazione. Nessun abbonamento e nessuna licenza da rinnovare ogni anno.', null],
+    ['«E se un giorno sparisce quello che ho preparato?»', 'Quello che stampate o salvate resta vostro. Le lezioni create con «Lezione in 5 minuti» e le verifiche si esportano in un file; le lezioni e gli esercizi viaggiano dentro il link. Il sito è statico, senza server da riparare, e ogni versione viene conservata.', null],
+    ['«E se chi l\'ha costruito non c\'è più?»', 'I contenuti sono semplici testi leggibili, non un programma chiuso. Qualunque sviluppatore può prenderli in mano e capirli.', null],
+    ['«Mi state dicendo che farà il mio lavoro?»', 'No. Restano la lezione, la classe, la valutazione. Il sito toglie quello che nessuno ha scelto di fare: cercare materiale, impaginare, ricopiare le soluzioni, rifare le schede per i DSA, fotocopiare.', null],
+    ['«Le vostre stime sono inventate.»', 'Sono stime, dichiarate come tali, con ogni passaggio visibile e i minuti modificabili. Poi c\'è una scheda per misurarle davvero: cronometro per ogni compito, confronto con il vostro solito. Se il vostro risultato è peggiore delle stime, scrivetelo: serve quanto il resto. Ancora dubbi? Provate adesso.', ['Costruite una verifica adesso', '#crono']]
+  ];
+  function mDiffidente(el) {
+    el.innerHTML = '<h3>Il docente diffidente</h3><p class="tp-nota">Le obiezioni più dure, con la risposta e la prova a un clic.</p>' +
+      OBIEZIONI.map(function (o, i) {
+        var az = o[2] ? '<p><a class="lg-btn" ' + (o[2][1].charAt(0) === '#' ? 'href="#" data-vai="' + o[2][1].slice(1) + '"' : 'href="' + esc(o[2][1]) + '" target="_blank" rel="noopener"') + '>' + esc(o[2][0]) + ' ›</a></p>' : '';
+        return '<div class="dq' + (i === 0 ? ' aperto' : '') + '"><button type="button">' + esc(o[0]) + '</button><div class="r"><p>' + esc(o[1]) + '</p>' + az + '</div></div>';
+      }).join('');
+    el.addEventListener('click', function (e) {
+      var v = e.target.closest('[data-vai]');
+      if (v) { e.preventDefault(); var m = { tempo: mTempo, crono: mCrono, solido: mSolido }[v.dataset.vai], k = SC.findIndex(function (s) { return s.mount === m; }); if (k >= 0) vai(k); return; }
+      var b = e.target.closest('.dq > button'); if (b) b.parentNode.classList.toggle('aperto');
+    });
   }
 
   function mNumeri(el) {
@@ -730,18 +884,8 @@
     disegna();
   }
 
-  var FAQ = [
-    ['E se internet in aula è lento?', 'Le pagine sono leggere e statiche. La voce e i giochi girano sul dispositivo, non su un server lontano che si può intasare.'],
-    ['E se qualcuno sbaglia una modifica?', 'Ogni versione del sito viene conservata. Un errore si annulla tornando alla versione precedente, senza perdere nulla.'],
-    ['E se il servizio ha un guasto?', 'Non c\'è un server proprietario da riparare: il sito è statico, con HTTPS. Meno parti in movimento, meno cose che si rompono.'],
-    ['E i dati degli studenti?', 'Il minisito non richiede account agli studenti.'],
-    ['E se chi l\'ha costruito non c\'è?', 'I contenuti sono in semplici testi leggibili, non in un programma chiuso. Qualunque sviluppatore può prenderli in mano e capirli.'],
-    ['E i costi?', 'Nessun abbonamento e nessuna licenza da rinnovare ogni anno.']
-  ];
   function mSolido(el) {
-    el.innerHTML = '<div class="live"><div><b id="m-t">…</b><span>Millisecondi per caricarsi</span></div><div><b id="m-k">…</b><span>Kilobyte scaricati</span></div><div><b id="m-r">…</b><span>Richieste di rete</span></div><div><b>0</b><span>Account richiesti agli studenti</span></div></div>' +
-      FAQ.map(function (f, i) { return '<div class="acc' + (i === 0 ? ' aperto' : '') + '"><button type="button">' + esc(f[0]) + '</button><p>' + esc(f[1]) + '</p></div>'; }).join('');
-    el.addEventListener('click', function (e) { var b = e.target.closest('.acc > button'); if (b) b.parentNode.classList.toggle('aperto'); });
+    el.innerHTML = '<div class="live"><div><b id="m-t">…</b><span>Millisecondi per caricarsi</span></div><div><b id="m-k">…</b><span>Kilobyte scaricati</span></div><div><b id="m-r">…</b><span>Richieste di rete</span></div><div><b>0</b><span>Account richiesti agli studenti</span></div></div>';
     try {
       var nav = performance.getEntriesByType('navigation')[0], res = performance.getEntriesByType('resource'), by = nav ? (nav.transferSize || nav.encodedBodySize || 0) : 0, n = 1;
       res.forEach(function (r) { if (r.name.indexOf(location.origin) === 0 && !/parole|-dati|scene/.test(r.name)) { by += r.transferSize || r.encodedBodySize || 0; n++; } });

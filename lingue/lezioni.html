@@ -155,7 +155,7 @@
   </style>
 </head>
 <body data-page="lingue" data-lingue="lezioni">
-<div class="lg-anteprima">Minisito per i docenti · già pronto da usare, nessuna revisione richiesta</div>
+<div class="lg-anteprima">Le lingue dell'Alberghiero · minisito di prova, già utilizzabile</div>
 <script src="nav-header.min.js"></script>
 <main id="main">
   <section class="lg-hero">
@@ -441,7 +441,7 @@
       '<div class="lg-card" style="margin-top:1rem"><h3>⏱️ In un\'ora di lezione</h3><table class="lz-scal">' + d.scaletta.map(function (r) { return '<tr><td>' + esc(r[0]) + '</td><td>' + esc(r[1]) + '</td></tr>'; }).join('') + '</table>' +
       '<h3>🎯 Obiettivi</h3><ul>' + d.obiettivi.map(function (o) { return '<li>' + esc(o) + '</li>'; }).join('') + '</ul>' +
       '<h3>🌍 Spunti</h3><ul>' + d.spunti.map(function (o) { return '<li>' + esc(o) + '</li>'; }).join('') + '</ul></div>' +
-      '<p class="lg-nota">🎓 <b>Pronta da usare.</b> Non c\'è nulla da controllare o da preparare: stampate la scheda, proiettate o girate il link ai ragazzi. Se un giorno vorrete cambiare qualcosa, basta dirlo. Questa lezione è un esempio di ciò che il sito prepara al posto vostro.</p></div>');
+      '<p class="lg-nota">🎓 <b>Pronta da usare.</b> Stampate la scheda, proiettate o girate il link ai ragazzi. Controllate la lezione come fareste con qualsiasi materiale e adattatela alla vostra classe con la grammatica scelta da voi.</p></div>');
     var verifica = D().verifica && D().verifica.length;
     if (!verifica) { var vv = document.querySelector('[data-stampa]').closest('.lg-card'); vv.querySelector('.lz-cons').textContent = 'Questa lezione non ha una verifica.'; vv.querySelector('.lz-bott').remove(); }
     if (lez.propria) document.querySelector('.lz-doc .lg-nota').innerHTML = '🎓 <b>Lezione preparata con l\'IA.</b> Controllatela tutta prima di usarla in classe: l\'IA può sbagliare. Il link per i ragazzi contiene la lezione senza la verifica e senza questa scheda.';

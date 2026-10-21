@@ -6,7 +6,7 @@
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Area docenti – Lingue | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="L'area in cui i docenti di lingue trovano gli strumenti già pronti (lezioni, esercizi con link e QR, giochi, verifiche) e, più avanti, potranno conservare i propri materiali."/>
+  <meta name="description" content="Che cosa vi serve oggi? Verifica, lezione, esercizi, gioco: un solo clic per ogni compito, già pronto."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -14,114 +14,98 @@
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <script src="app.js" defer></script>
   <style>
-  .dc-feat{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.9rem}
-  .dc-feat .lg-card{display:flex;gap:.75rem;align-items:flex-start}
-  .dc-feat .ic{font-size:1.5rem;line-height:1}
-  .dc-feat h3{font:800 .74rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco);margin:.15rem 0 .3rem}
-  .dc-feat p{font-size:.82rem;color:var(--txt2);line-height:1.55;margin:0}
-  .dc-login{max-width:420px;margin:0 auto;position:relative}
-  .dc-login .lg-card{padding:1.4rem}
-  .dc-login label{display:block;font:700 .7rem var(--fu);letter-spacing:.06em;text-transform:uppercase;color:var(--bosco);margin:.8rem 0 .35rem}
-  .dc-login input{width:100%;box-sizing:border-box;font:500 .95rem var(--fu);padding:.75rem .9rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--av)}
-  .dc-fase{position:absolute;top:-10px;right:-6px;background:var(--oro);color:#fff;font:800 .58rem var(--fu);letter-spacing:.1em;text-transform:uppercase;padding:.3rem .6rem;border-radius:999px;transform:rotate(4deg)}
-  .dc-aiuto{font-size:.76rem;color:var(--txt2);margin:.35rem 0 0;line-height:1.5}
+  .dc-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:1rem}
+  .dc-t{display:flex;flex-direction:column;gap:.35rem;text-decoration:none;color:var(--txt);background:#fff;border:2px solid var(--av3);border-radius:18px;padding:1.2rem 1.2rem 1rem;transition:border-color .15s,transform .15s}
+  .dc-t:hover,.dc-t:focus-visible{border-color:var(--oro);transform:translateY(-2px)}
+  .dc-t .ic{font-size:2.1rem;line-height:1}
+  .dc-t .q{font:800 .62rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro)}
+  .dc-t h3{font-family:var(--fd);font-size:1.3rem;color:var(--bosco);line-height:1.2;margin:0}
+  .dc-t p{font-size:.86rem;line-height:1.55;color:var(--txt2);margin:0;flex:1}
+  .dc-t .vai{font:800 .66rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);margin-top:.4rem}
+  .dc-tre{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:.7rem;margin:0 0 1.6rem}
+  .dc-tre div{background:#eef3ee;border-radius:14px;padding:.8rem 1rem;font-size:.88rem;line-height:1.5}
+  .dc-tre b{display:block;color:var(--bosco)}
+  .dc-pre{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:.7rem}
+  .dc-pre a{display:flex;gap:.7rem;align-items:flex-start;text-decoration:none;color:var(--txt);background:var(--av);border:1.5px solid var(--av3);border-radius:14px;padding:.8rem 1rem}
+  .dc-pre a:hover{border-color:var(--oro)}
+  .dc-pre .i{font-size:1.4rem;line-height:1.2}
+  .dc-pre b{display:block;font-size:.9rem;color:var(--bosco)}
+  .dc-pre small{display:block;font-size:.78rem;color:var(--txt2);line-height:1.45}
+  .dc-piu{background:#fff;border:1.5px solid var(--av3);border-radius:14px;padding:.8rem 1.1rem;margin-top:1.6rem}
+  .dc-piu summary{cursor:pointer;font:700 .85rem var(--fu);color:var(--bosco)}
+  .dc-piu p{font-size:.85rem;line-height:1.6;color:var(--txt2);margin:.6rem 0 0}
   </style>
 </head>
 <body data-page="lingue" data-lingue="docenti">
-<div class="lg-anteprima">Area docenti · tutto già pronto da usare; l'accesso personale è un'aggiunta futura e facoltativa</div>
 <script src="nav-header.min.js"></script>
 <main id="main">
   <section class="lg-hero">
     <div class="w">
-      <p class="lbl">Per i docenti di lingue</p>
-      <h1>Area <em>docenti</em></h1>
-      <p>Qui il lavoro lo fa il sito. Lezioni complete, esercizi con link e codice QR, giochi per la lavagna e verifiche con soluzioni sono già pronti: a voi non è chiesto di controllare, correggere o preparare nulla.</p>
+      <p class="lbl">Area docenti</p>
+      <h1>Che cosa <em>vi serve</em> oggi?</h1>
+      <p>Scegliete il compito. Ogni strada porta a uno strumento già pronto, con le soluzioni.</p>
     </div>
   </section>
   <div data-lingue-nav></div>
 
   <section class="lg-sez">
     <div class="w">
-      <a href="lingue/lunedi.html" class="lg-card" style="display:flex;gap:1rem;align-items:center;text-decoration:none;margin:0 0 1rem;border:2px solid var(--bosco);background:linear-gradient(135deg,#fff,#eef3ee)">
-        <span style="font-size:2.2rem;line-height:1">☀️</span>
-        <span style="flex:1"><span style="display:block;font:800 .6rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro)">Cominciate da qui · 2 minuti</span><span style="display:block;font-family:var(--fd);font-size:1.35rem;color:var(--bosco);line-height:1.25">Il vostro lunedì mattina</span><span style="display:block;font-size:.84rem;color:var(--txt2);line-height:1.55;margin-top:.2rem">Una verifica per domani, una supplenza, una classe con DSA o BES, le proprie frasi: quattro situazioni reali e come le risolve il sito, con il lavoro che vi toglie.</span></span>
-        <span style="font:800 .64rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);white-space:nowrap">Guarda →</span>
-      </a>
-      <a href="lingue/rilevazione.html" class="lg-card" style="display:flex;gap:1rem;align-items:center;text-decoration:none;margin:0 0 1rem;border:2px solid var(--oro);background:linear-gradient(135deg,#fff,#fffaf0)">
-        <span style="font-size:2.2rem;line-height:1">⏱️</span>
-        <span style="flex:1"><span style="display:block;font:800 .6rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro)">Provate · 3 minuti</span><span style="display:block;font-family:var(--fd);font-size:1.35rem;color:var(--bosco);line-height:1.25">Misuratelo voi</span><span style="display:block;font-size:.84rem;color:var(--txt2);line-height:1.55;margin-top:.2rem">Cronometrate un compito vero con il sito, scrivete quanto ci mettete di solito, leggete il risparmio. Scheda stampabile.</span></span>
-        <span style="font:800 .64rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);white-space:nowrap">Misura →</span>
-      </a>
-      <div class="lg-card" style="margin:0 0 2rem;background:#fff;border:1.5px solid var(--av3)">
-        <p class="lbl" style="margin:0 0 .5rem">Quello che non vi viene chiesto</p>
-        <ul style="margin:0;padding-left:1.1rem;font-size:.9rem;line-height:1.75;color:var(--txt)">
-          <li><b>Nessuna revisione del sito:</b> frasi, lezioni ed esercizi sono già pronti.</li>
-          <li><b>Nessun account e nessun programma da imparare:</b> si apre una pagina e si usa.</li>
-          <li><b>Nessun materiale da preparare da zero:</b> lezione, scheda per i ragazzi e verifica con soluzioni sono già compilate.</li>
-          <li><b>Nessun impegno continuativo:</b> si usa quando serve, anche una volta sola.</li>
-        </ul>
+      <div class="dc-tre">
+        <div><b>Nessun account</b>Si apre la pagina e si usa.</div>
+        <div><b>Nulla da controllare</b>Frasi, esercizi e soluzioni sono già verificati.</div>
+        <div><b>Quando serve</b>Anche una volta sola. Nessun impegno.</div>
       </div>
-      <a href="lingue/presentazione.html" class="lg-card" style="display:flex;gap:1rem;align-items:center;text-decoration:none;margin:0 0 2rem;border:2px solid var(--oro);background:linear-gradient(135deg,#fff,#fdf8ea)">
-        <span style="font-size:2.2rem;line-height:1">🎬</span>
-        <span style="flex:1"><span style="display:block;font:800 .6rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro)">Per il Dipartimento</span><span style="display:block;font-family:var(--fd);font-size:1.35rem;color:var(--bosco);line-height:1.25">Presentazione del progetto</span><span style="display:block;font-size:.84rem;color:var(--txt2);line-height:1.55;margin-top:.2rem">Una visita guidata e interattiva in nove capitoli: si prova tutto dal vivo, senza bisogno di spiegazioni.</span></span>
-        <span style="font:800 .64rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);white-space:nowrap">Guarda →</span>
-      </a>
-      <a href="lingue/cinque-minuti.html" class="lg-card" style="display:flex;gap:1rem;align-items:center;text-decoration:none;margin:0 0 2rem;border:2px solid var(--bosco);background:linear-gradient(135deg,#fff,#eef3ee)">
-        <span style="font-size:2.2rem;line-height:1">⚡</span>
-        <span style="flex:1"><span style="display:block;font:800 .6rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro)">Novità · gratis, senza account</span><span style="display:block;font-family:var(--fd);font-size:1.35rem;color:var(--bosco);line-height:1.25">Lezione in 5 minuti</span><span style="display:block;font-size:.84rem;color:var(--txt2);line-height:1.55;margin-top:.2rem">Scegliete argomento, livello e grammatica: il sito prepara la richiesta per un'IA gratuita, voi incollate la risposta e ottenete una lezione guidata completa, con verifica A/B e versione facilitata.</span></span>
-        <span style="font:800 .64rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);white-space:nowrap">Prova →</span>
-      </a>
-      <a href="lingue/lezioni.html?l=brigata&amp;t=docente" class="lg-card" style="display:flex;gap:1rem;align-items:center;text-decoration:none;margin:0 0 2rem;border:2px solid var(--oro);background:linear-gradient(135deg,#fff,#fdf8ea)">
-        <span style="font-size:2.2rem;line-height:1">🧭</span>
-        <span style="flex:1"><span style="display:block;font:800 .6rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro)">Novità · un'ora di lezione già pronta</span><span style="display:block;font-family:var(--fd);font-size:1.35rem;color:var(--bosco);line-height:1.25">Lezioni guidate</span><span style="display:block;font-size:.84rem;color:var(--txt2);line-height:1.55;margin-top:.2rem">Mini-lezione da proiettare, esercizi sul telefono con link e QR, una missione da fare con la classe, verifica in due file con soluzioni e versione facilitata per DSA e BES. In inglese, francese e spagnolo.</span></span>
-        <span style="font:800 .64rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);white-space:nowrap">Prova →</span>
-      </a>
-      <a href="lingue/crea.html" class="lg-card" style="display:flex;gap:1rem;align-items:center;text-decoration:none;margin:0 0 2rem;border:2px solid var(--bosco);background:linear-gradient(135deg,#fff,#eef3ee)">
-        <span style="font-size:2.2rem;line-height:1">🛠️</span>
-        <span style="flex:1"><span style="display:block;font:800 .6rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro)">Novità · già disponibile</span><span style="display:block;font-family:var(--fd);font-size:1.35rem;color:var(--bosco);line-height:1.25">Crea i tuoi esercizi</span><span style="display:block;font-size:.84rem;color:var(--txt2);line-height:1.55;margin-top:.2rem">Le frasi della vostra lezione diventano un esercizio da aprire sul telefono con un link o un codice QR, un gioco alla LIM o una verifica su carta. Senza account.</span></span>
-        <span style="font:800 .64rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);white-space:nowrap">Prova →</span>
-      </a>
-      <a href="lingue/verifiche.html" class="lg-card" style="display:flex;gap:1rem;align-items:center;text-decoration:none;margin:0 0 2rem;border:2px solid var(--oro);background:linear-gradient(135deg,#fff,#fdf8ea)">
-        <span style="font-size:2.2rem;line-height:1">📝</span>
-        <span style="flex:1"><span style="display:block;font:800 .6rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro)">Già disponibile</span><span style="display:block;font-family:var(--fd);font-size:1.35rem;color:var(--bosco);line-height:1.25">Verifiche in un clic</span><span style="display:block;font-size:.84rem;color:var(--txt2);line-height:1.55;margin-top:.2rem">Una verifica pronta in pochi secondi dal vocabolario, modificabile, con le file A, B e C e le soluzioni.</span></span>
-        <span style="font:800 .64rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);white-space:nowrap">Prova →</span>
-      </a>
-      <p class="lbl">Più avanti · facoltativo</p>
-      <h2 class="lg-h2">Se un giorno <em>vorrete</em></h2>
-      <p class="lg-sot">Niente di quello che segue serve per usare il sito oggi. Con un accesso personale, chi lo desidera potrà conservare i propri esercizi e adattare i contenuti. I ragazzi continueranno a usare tutto senza registrarsi.</p>
-      <div class="dc-feat">
-        <div class="lg-card"><span class="ic">✏️</span><div><h3>Un archivio online</h3><p>Gli esercizi creati si salvano nel proprio spazio e si ritrovano da qualsiasi computer, a scuola o a casa.</p></div></div>
-        <div class="lg-card"><span class="ic">📲</span><div><h3>Correggere senza rifare il link</h3><p>Oggi il link contiene l'esercizio; con l'accesso, un esercizio già condiviso si potrà correggere e i ragazzi vedranno subito la versione nuova.</p></div></div>
-        <div class="lg-card"><span class="ic">👁️</span><div><h3>Bozza o pubblicato</h3><p>Si lavora in bozza e si pubblica quando è pronto; un esercizio si può nascondere o modificare in qualsiasi momento.</p></div></div>
-        <div class="lg-card"><span class="ic">📖</span><div><h3>Personalizzare, se volete</h3><p>Adattare una traduzione o aggiungere frasi per la propria lingua o il proprio indirizzo. Mai richiesto: il materiale funziona già così com'è.</p></div></div>
-        <div class="lg-card"><span class="ic">🌐</span><div><h3>Segnalare risorse</h3><p>Se incontrate un sito, un video o un podcast utile, potete segnalarlo: compare nella pagina Risorse dopo l'approvazione.</p></div></div>
-        <div class="lg-card"><span class="ic">🔒</span><div><h3>Sicuro e semplice</h3><p>Accessi creati dall'amministratore del sito, con verifica in due passaggi come per il pannello del Convitto.</p></div></div>
-      </div>
-    </div>
-  </section>
 
-  <section class="lg-sez chiara">
-    <div class="w">
-      <p class="lbl">Come potrà essere l'accesso</p>
-      <h2 class="lg-h2">Entrare <em>nell'area</em></h2>
-      <div class="dc-login" style="margin-top:1.25rem">
-        <span class="dc-fase">Fase 2</span>
-        <div class="lg-card" aria-disabled="true">
-          <label for="dc-mail">E-mail istituzionale</label><input id="dc-mail" type="email" placeholder="nome.cognome@alberghierorieti.it" disabled/>
-          <label for="dc-pw">Password</label><input id="dc-pw" type="password" placeholder="••••••••" disabled/>
-          <button type="button" class="lg-btn pieno" style="width:100%;margin-top:1.1rem" disabled>Accedi</button>
-          <p class="dc-aiuto" style="text-align:center;margin-top:.8rem">Al primo accesso si attiva il codice sul telefono (verifica in due passaggi).</p>
-        </div>
+      <div class="dc-tiles">
+        <a class="dc-t" href="lingue/verifiche.html">
+          <span class="ic" aria-hidden="true">📝</span><span class="q">Ho una verifica da fare · circa 3 minuti</span>
+          <h3>Preparare una verifica</h3>
+          <p>Scegliete argomento e numero di domande: file A, B e C, soluzioni e versione per DSA. Anche di grammatica, con le regole scelte da voi.</p>
+          <span class="vai">Apri le verifiche →</span>
+        </a>
+        <a class="dc-t" href="lingue/lezioni.html?l=brigata&amp;t=docente">
+          <span class="ic" aria-hidden="true">🧭</span><span class="q">Ho un'ora da riempire · circa 2 minuti</span>
+          <h3>Fare una lezione o una supplenza</h3>
+          <p>Mini-lezione da proiettare, esercizi sul telefono, una missione per la classe e la verifica. Con la grammatica che volete e la versione facilitata.</p>
+          <span class="vai">Apri le lezioni →</span>
+        </a>
+        <a class="dc-t" href="lingue/crea.html">
+          <span class="ic" aria-hidden="true">📱</span><span class="q">Ho le mie frasi · circa 2 minuti</span>
+          <h3>Esercizi con le mie frasi</h3>
+          <p>Incollate le frasi della vostra lezione: diventano un esercizio con link e codice QR per il telefono, un gioco alla LIM, un foglio su carta.</p>
+          <span class="vai">Crea gli esercizi →</span>
+        </a>
+        <a class="dc-t" href="lingue/giochi.html">
+          <span class="ic" aria-hidden="true">🎮</span><span class="q">Voglio animare la classe · circa 1 minuto</span>
+          <h3>Un gioco per la LIM</h3>
+          <p>Memory, indovina la parola, sfida a tempo: a squadre, con il vocabolario del vostro indirizzo.</p>
+          <span class="vai">Scegli il gioco →</span>
+        </a>
+        <a class="dc-t" href="lingue/cinque-minuti.html">
+          <span class="ic" aria-hidden="true">⚡</span><span class="q">Ho un tema tutto mio · circa 15 minuti</span>
+          <h3>Una lezione su un tema vostro</h3>
+          <p>Quando l'argomento non c'è nel sito: il sito prepara la richiesta per un'IA gratuita, voi incollate la risposta e ottenete la lezione completa.</p>
+          <span class="vai">Prepara la lezione →</span>
+        </a>
+        <a class="dc-t" href="lingue/verifiche.html#vf-g-miei" id="dc-gram">
+          <span class="ic" aria-hidden="true">🧩</span><span class="q">Una regola che non c'è nell'elenco</span>
+          <h3>Aggiungere una regola vostra</h3>
+          <p>Scrivete nome, regola e qualche frase: diventa un argomento che si sceglie come gli altri, in verifiche e lezioni.</p>
+          <span class="vai">Aggiungi la regola →</span>
+        </a>
       </div>
-    </div>
-  </section>
 
-  <section class="lg-sez">
-    <div class="w" style="text-align:center">
-      <p class="lbl">Per preparare un esercizio</p>
-      <h2 class="lg-h2">Le frasi della vostra lezione, <em>in un minuto</em></h2>
-      <p class="lg-sot" style="margin:0 auto 1.2rem">Scrivete o incollate le frasi, guardate l'anteprima e date ai ragazzi un link o un codice QR. Le stesse frasi diventano anche giochi alla LIM e una verifica su carta.</p>
-      <a href="lingue/crea.html" class="lg-btn pieno">🛠️ Crea i tuoi esercizi</a>
+      <h2 class="lg-h2" style="margin-top:2.4rem">Prima di <em>cominciare</em></h2>
+      <div class="dc-pre">
+        <a href="lingue/lunedi.html"><span class="i" aria-hidden="true">☀️</span><span><b>Il vostro lunedì mattina</b><small>Quattro situazioni reali, già risolte dal sito. 2 minuti.</small></span></a>
+        <a href="lingue/rilevazione.html"><span class="i" aria-hidden="true">⏱️</span><span><b>Misuratelo voi</b><small>Cronometrate un compito vero e leggete il tempo risparmiato.</small></span></a>
+        <a href="lingue/presentazione.html"><span class="i" aria-hidden="true">🎬</span><span><b>Presentazione del progetto</b><small>Per il Dipartimento: si prova tutto dal vivo.</small></span></a>
+      </div>
+
+      <details class="dc-piu">
+        <summary>Idee per il futuro (facoltative)</summary>
+        <p>Un accesso personale, per chi lo desidera, potrebbe conservare gli esercizi creati e permettere di correggerli senza rifare il link. Oggi non serve: tutto funziona senza registrazione, per i docenti e per i ragazzi.</p>
+      </details>
     </div>
   </section>
 </main>

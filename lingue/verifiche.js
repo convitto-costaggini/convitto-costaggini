@@ -263,9 +263,10 @@
     var G = window.GRAMMATICA, gSel = (L.leggi('gram-argomenti', []) || []).slice();
     function gDisegna() {
       var ar = G ? G.argomenti(ver.lingua) : [];
+      if (G && G.editorMiei) G.editorMiei(document.getElementById('vf-g-miei'), ver.lingua, function (id) { if (id && gSel.indexOf(id) < 0) gSel.push(id); gDisegna(); });
       gSel = gSel.filter(function (id) { return ar.some(function (a) { return a.id === id; }); });
       document.getElementById('vf-g-chips').innerHTML = ar.map(function (a) {
-        return '<button type="button" class="lg-chip" data-g="' + a.id + '" aria-pressed="' + (gSel.indexOf(a.id) >= 0) + '" title="' + esc(a.liv) + '">' + esc(a.nome) + '</button>';
+        return '<button type="button" class="lg-chip" data-g="' + a.id + '" aria-pressed="' + (gSel.indexOf(a.id) >= 0) + '" title="' + esc(a.liv) + '">' + (a.mio ? '✏️ ' : '') + esc(a.nome) + '</button>';
       }).join('') || '<span class="sot">Nessun argomento disponibile per questa lingua.</span>';
     }
     gDisegna();
@@ -281,8 +282,8 @@
       var n = function (id) { return Math.max(0, Math.min(30, parseInt(document.getElementById(id).value, 10) || 0)); };
       var p = function (id) { return Math.max(0, parseFloat(String(document.getElementById(id).value).replace(',', '.')) || 0); };
       var nuove = G.domandeVerifica(ver.lingua, gSel, document.getElementById('vf-g-liv').value,
-        { scelta: n('vf-g-n-scelta'), ordine: n('vf-g-n-ordine'), traduci: n('vf-g-n-traduci') },
-        { scelta: p('vf-g-p-scelta'), ordine: p('vf-g-p-ordine'), traduci: p('vf-g-p-traduci') }, nid, document.getElementById('vf-g-trad').checked);
+        { scelta: n('vf-g-n-scelta'), completa: n('vf-g-n-completa'), ordine: n('vf-g-n-ordine'), traduci: n('vf-g-n-traduci') },
+        { scelta: p('vf-g-p-scelta'), completa: p('vf-g-p-completa'), ordine: p('vf-g-p-ordine'), traduci: p('vf-g-p-traduci') }, nid, document.getElementById('vf-g-trad').checked);
       if (!nuove.length) { m.textContent = 'Nessuna domanda: controllate quantità e livello.'; return; }
       ver.domande = ver.domande.concat(nuove); cambiato(true);
       m.textContent = nuove.length + ' domande di grammatica aggiunte in coda.';

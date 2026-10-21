@@ -180,6 +180,7 @@
 <script src="lingue/lezioni-dati.js"></script>
 <script src="lingue/grammatica-dati.js"></script>
 <script src="lingue/grammatica.js"></script>
+<script src="lingue/grammatica-ui.js"></script>
 <script>
 (function () {
   'use strict';
@@ -196,7 +197,7 @@
     var ar = G.argomenti(lin).map(function (a) { return a.id; }), ids = gram.filter(function (id) { return ar.indexOf(id) >= 0; });
     if (!ids.length) return null;
     var k = [lez.id, lin, ids.join(','), gramSeme].join('|');
-    if (!gramEx || gramEx.k !== k) gramEx = { k: k, esercizi: G.esercizi(lin, ids, livLez()), verifica: G.sezioniVerifica(lin, ids, livLez()) };
+    if (!gramEx || gramEx.k !== k) gramEx = { k: k, schede: G.schede(lin, ids), esercizi: G.esercizi(lin, ids, livLez()), verifica: G.sezioniVerifica(lin, ids, livLez()) };
     return gramEx;
   }
   function gramPannello() {
@@ -204,14 +205,14 @@
     var ar = G.argomenti(lin), n = gram.filter(function (id) { return ar.some(function (a) { return a.id === id; }); }).length;
     return '<details class="lz-gram"' + (n ? ' open' : '') + '><summary>🧩 Grammatica da verificare' + (n ? ' · ' + n + (n === 1 ? ' argomento scelto' : ' argomenti scelti') : '') + '</summary>' +
       '<p>Scegliete uno o più argomenti: negli <b>Esercizi</b> compaiono domande sulla regola e nella <b>verifica</b> (scheda Docente) domande a scelta e di riordino delle parole.</p>' +
-      '<div class="lg-chips" role="group" aria-label="Argomenti di grammatica">' + ar.map(function (a) { return '<button type="button" class="lg-chip" data-gram="' + a.id + '" aria-pressed="' + (gram.indexOf(a.id) >= 0) + '" title="' + esc(a.liv) + '">' + esc(a.nome) + '</button>'; }).join('') + '</div>' +
+      '<div class="lg-chips" role="group" aria-label="Argomenti di grammatica">' + ar.map(function (a) { return '<button type="button" class="lg-chip" data-gram="' + a.id + '" aria-pressed="' + (gram.indexOf(a.id) >= 0) + '" title="' + esc(a.liv) + '">' + (a.mio ? '✏️ ' : '') + esc(a.nome) + '</button>'; }).join('') + '</div><div id="lz-gm"></div>' +
       (n ? '<p style="margin-bottom:0"><button type="button" class="lg-btn" data-gram-nuovo style="min-height:36px;padding:.4rem .8rem">🔄 Altre frasi</button> <button type="button" class="lg-btn" data-gram-via style="min-height:36px;padding:.4rem .8rem">Togli la grammatica</button></p>' : '') + '</details>';
   }
 
   function md(t) { return esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<i>$1</i>').replace(/\n/g, '<br/>'); }
   function D() {
     var b = lez.lingue[lin], x = gramPronta();
-    return x ? { schede: b.schede, esercizi: b.esercizi.concat(x.esercizi), missione: b.missione, verifica: (b.verifica || []).concat(x.verifica), luogo: b.luogo } : b;
+    return x ? { schede: b.schede.concat(x.schede), esercizi: b.esercizi.concat(x.esercizi), missione: b.missione, verifica: (b.verifica || []).concat(x.verifica), luogo: b.luogo } : b;
   }
   function opzioni(o) { var g = o[0], s = L.mescola(o.slice(1)); if (facile) s = s.slice(0, 1); return L.mescola([g].concat(s)); }
   function sezionePronta() { var y = sez.getBoundingClientRect().top + scrollY - 130; if (scrollY > y) scrollTo({ top: y, behavior: 'smooth' }); }
@@ -260,6 +261,8 @@
     h += '<div class="lz-tab" role="group" aria-label="Parti della lezione">' + T.map(function (t) { return '<button type="button" data-tab="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '"' + (t[0] === 'docente' ? ' class="doc"' : '') + '><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>' +
       '<label class="lz-facile"><input type="checkbox" id="lz-fac"' + (facile ? ' checked' : '') + '/> Versione facilitata (DSA/BES)</label>' + gramPannello() + '<div id="lz-corpo"></div>';
     vista.innerHTML = h;
+    var gm = document.getElementById('lz-gm');
+    if (gm && G.editorMiei) G.editorMiei(gm, lin, function () { gram = (L.leggi('gram-argomenti', []) || []).slice(); gramSeme++; esN = 0; esPunti = []; stato = {}; disegna(); });
     ({ lezione: scheda, esercizi: esercizio, missione: missione, docente: docente, modifica: editor })[tab]();
   }
   function corpo(html) { document.getElementById('lz-corpo').innerHTML = html; }
@@ -414,7 +417,12 @@
   /* area docente */
   var linkCorrente = '';
   function linkStudenti() {
-    if (!lez.propria) return Promise.resolve(location.origin + '/lingue/lezioni.html?l=' + lez.id + '&lin=' + lin + (gram.length ? '&g=' + gram.join(',') : ''));
+    var proprie = G ? G.miei().filter(function (m) { return gram.indexOf(m.id) >= 0 && m.lin === lin; }) : [];
+    if (!lez.propria) {
+      var base = location.origin + '/lingue/lezioni.html?l=' + lez.id + '&lin=' + lin + (gram.length ? '&g=' + gram.join(',') : '');
+      /* argomenti propri: sul telefono dei ragazzi non esistono, quindi viaggiano dentro il link (poche righe) */
+      return proprie.length ? window.PACCHETTO.codifica({ m: proprie }).then(function (t) { return base + '&gp=' + t; }) : Promise.resolve(base);
+    }
     /* lezione del docente: viaggia dentro il link, senza verifica né scheda docente */
     var v = { id: lez.id, icona: lez.icona, ambito: lez.ambito, titolo: lez.titolo, sottotitolo: lez.sottotitolo, livello: lez.livello, classi: lez.classi, descrizione: lez.descrizione, lingue: {} };
     v.lingue[lin] = { schede: D().schede, esercizi: D().esercizi, missione: D().missione, verifica: [] };
@@ -696,9 +704,12 @@
     disegna();
   });
   var hp = location.hash.match(/^#p=(.+)$/);
+  function parti() {
   if (hp) window.PACCHETTO.decodifica(hp[1]).then(function (l) { l.propria = true; apriLezione(l); }).catch(function () { vista.innerHTML = '<div class="lg-card lz-avviso"><p style="margin:0">Questo link non contiene una lezione valida: forse è stato copiato solo in parte. Chiedete al docente di mandarlo di nuovo.</p></div>'; });
   else if (q.get('mia')) apriLezione(mie().filter(function (l) { return l.id === q.get('mia'); })[0]);
   else if (q.get('l')) apri(q.get('l')); else catalogo();
+  }
+  if (q.get('gp') && G) window.PACCHETTO.decodifica(q.get('gp')).then(function (o) { G.temporanei(o && o.m); parti(); }).catch(parti); else parti();
 })();
 </script>
 </body>

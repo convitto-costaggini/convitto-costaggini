@@ -4,17 +4,28 @@ Le pagine dell'area docenti (hub, Lunedì, Misuratelo voi, presentazione, Lezion
 con le verifiche delle lezioni non sono nel repository in chiaro: stanno in `lingue/docenti/*.enc`, cifrate con AES-256-GCM.
 Le pagine pubbliche `lingue/<nome>.html` sono solo un guscio che chiede l'accesso (`lingue/accesso.js`).
 
-## Chi entra
-- **Account personale**: e-mail confermata, presente nella tabella `lingue_docenti` (Supabase) e secondo fattore (app di autenticazione).
-  Il database rilascia la chiave di decifratura solo a chi ha tutte e tre le cose (funzione `lingue_accesso`).
-- **Codice del Dipartimento**: una chiave di scorta (`lingue/docenti/accesso-dipartimento.json`) apribile con il codice.
+## Come si entra
+- **E-mail istituzionale e codice monouso**: il docente scrive la sua e-mail, riceve un codice per posta, lo inserisce. Il codice parte solo
+  per gli indirizzi presenti nella tabella `lingue_docenti` (Supabase). Il database consegna la chiave di decifratura solo a chi ha
+  una sessione valida e un indirizzo abilitato (funzione `lingue_accesso`).
+- **Codice del Dipartimento**: una chiave di scorta (`lingue/docenti/accesso-dipartimento.json`) apribile con un codice condiviso.
+
+## Da fare una volta sola su Supabase (Dashboard)
+1. **Authentication, URL Configuration**: aggiungere `https://convitto.alberghierorieti.edu.it/lingue/*` tra i Redirect URLs.
+2. **Authentication, Email Templates**: nei modelli **Magic Link** e **Confirm signup** scrivere il codice, per esempio:
+   `Il vostro codice di accesso all'area docenti è: {{ .Token }}` (senza il codice il messaggio contiene solo un collegamento e l'accesso non funziona).
+3. **Posta in uscita (SMTP)**: il servizio predefinito di Supabase invia pochissimi messaggi all'ora e solo a indirizzi della propria
+   organizzazione, quindi per i colleghi serve un SMTP proprio. In **Authentication, SMTP Settings** si può usare l'account Google Workspace
+   della scuola (smtp.gmail.com, porta 465, con una password per le app) o un altro servizio di posta.
+4. **Authentication, Providers, Email**: lasciare attiva la conferma dell'e-mail; durata del codice a piacere (predefinita 1 ora).
 
 ## Aggiungere un docente (SQL Editor di Supabase)
     insert into public.lingue_docenti(email, nome) values ('nome.cognome@alberghierorieti.it', 'Nome Cognome');
 Per togliere l'accesso: `update public.lingue_docenti set attivo = false where email = '...';`
+(chi era già dentro mantiene la chiave finché non si ruota, vedi sotto).
 
 ## Modificare una pagina riservata
-La chiave è in `select chiave from public.lingue_chiave;` (solo da chi amministra il database).
+La chiave si legge con `select chiave from public.lingue_chiave;` (solo da chi amministra il database).
     export LINGUE_CHIAVE=<chiave>
     node scripts/lingue-riservato.js decifra presentazione /percorso/presentazione.html   # porta in chiaro
     # ...modifica il file...

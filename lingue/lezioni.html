@@ -178,6 +178,7 @@
 <script src="lingue/qrcode.js"></script>
 <script src="lingue/pacchetto.js"></script>
 <script src="lingue/lezioni-dati.js"></script>
+<script src="lingue/accesso.js"></script>
 <script src="lingue/grammatica-dati.js"></script>
 <script src="lingue/grammatica.js"></script>
 <script src="lingue/grammatica-ui.js"></script>
@@ -256,9 +257,10 @@
       return;
     }
     var T = [['lezione', '📖', 'Lezione'], ['esercizi', '✏️', 'Esercizi'], ['missione', '🎯', 'Missione'], ['docente', '👩‍🏫', 'Docente']].filter(function (t) { return t[0] !== 'docente' || lez.docente; });
+    if (!lez.docente && !lez.propria) T.push(['accedi', '🔒', 'Docente']);
     if ((tab === 'docente' || tab === 'modifica') && !lez.docente) tab = 'lezione';
     if (tab === 'modifica' && !salvataNelBrowser()) tab = 'docente';
-    h += '<div class="lz-tab" role="group" aria-label="Parti della lezione">' + T.map(function (t) { return '<button type="button" data-tab="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '"' + (t[0] === 'docente' ? ' class="doc"' : '') + '><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>' +
+    h += '<div class="lz-tab" role="group" aria-label="Parti della lezione">' + T.map(function (t) { return t[0] === 'accedi' ? '<button type="button" data-accedi class="doc" title="Riservato ai docenti: serve l\'accesso"><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>' : '<button type="button" data-tab="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '"' + (t[0] === 'docente' ? ' class="doc"' : '') + '><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>' +
       '<label class="lz-facile"><input type="checkbox" id="lz-fac"' + (facile ? ' checked' : '') + '/> Versione facilitata (DSA/BES)</label>' + gramPannello() + '<div id="lz-corpo"></div>';
     vista.innerHTML = h;
     var gm = document.getElementById('lz-gm');
@@ -709,7 +711,10 @@
   else if (q.get('mia')) apriLezione(mie().filter(function (l) { return l.id === q.get('mia'); })[0]);
   else if (q.get('l')) apri(q.get('l')); else catalogo();
   }
-  if (q.get('gp') && G) window.PACCHETTO.decodifica(q.get('gp')).then(function (o) { G.temporanei(o && o.m); parti(); }).catch(parti); else parti();
+  function via() { if (q.get('gp') && G) window.PACCHETTO.decodifica(q.get('gp')).then(function (o) { G.temporanei(o && o.m); parti(); }).catch(parti); else parti(); }
+  document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('[data-accedi]')) window.ACCESSO.entra(); });
+  /* la scheda Docente e le verifiche sono riservate: si caricano solo se chi guarda è già entrato */
+  window.ACCESSO.preparaLezioni().then(via, via);
 })();
 </script>
 </body>

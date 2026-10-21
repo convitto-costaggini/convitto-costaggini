@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Crea una lezione – Sala studio | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Per gli educatori: fotografa le pagine del libro e ottieni in un minuto una lezione interattiva con QR per i ragazzi."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="studio/studio.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .dc label:not(.st-btn){display:block;font:800 .72rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);margin:1rem 0 .35rem}
+  .dc input[type=text],.dc input[type=password],.dc textarea,.dc select{width:100%;font:inherit;font-size:1rem;padding:.7rem .85rem;border:2px solid var(--av3);border-radius:12px;background:#fff;color:var(--txt)}
+  .dc input:focus,.dc textarea:focus{outline:none;border-color:var(--oro)}
+  .dc textarea{min-height:80px;resize:vertical}
+  .dc-due{display:grid;grid-template-columns:1fr 1fr;gap:0 .8rem}
+  @media (max-width:560px){.dc-due{grid-template-columns:1fr}}
+  .dc-passo{display:flex;gap:.7rem;align-items:center;margin:0 0 .4rem}
+  .dc-passo b{flex:0 0 34px;height:34px;border-radius:50%;background:var(--oro);color:#fff;display:flex;align-items:center;justify-content:center;font:800 1rem var(--fu)}
+  .dc-passo h2{margin:0;font-size:1.5rem}
+  .dc-foto{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.6rem;margin-top:1rem}
+  .dc-foto figure{margin:0;position:relative;border-radius:12px;overflow:hidden;border:2px solid var(--av3);aspect-ratio:3/4;background:var(--av)}
+  .dc-foto img{width:100%;height:100%;object-fit:cover;display:block}
+  .dc-foto figcaption{position:absolute;left:.3rem;top:.3rem;background:var(--bosco);color:#fff;font:800 .75rem var(--fu);border-radius:99px;padding:.1rem .5rem}
+  .dc-foto button{position:absolute;right:.3rem;top:.3rem;width:32px;height:32px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;font-size:.9rem}
+  .dc-vuoto{border:3px dashed var(--av3);border-radius:16px;padding:1.6rem 1rem;text-align:center;color:var(--txt2)}
+  .dc-vuoto .big{font-size:2.6rem}
+  .dc-lavoro{text-align:center;padding:2rem 1rem}
+  .dc-lavoro .ruota{font-size:3.4rem;display:inline-block;animation:dc-gira 1.6s ease-in-out infinite}
+  @keyframes dc-gira{50%{transform:scale(1.15) rotate(12deg)}}
+  .dc-fasi{list-style:none;padding:0;margin:1rem auto 0;max-width:380px;text-align:left;display:grid;gap:.45rem}
+  .dc-fasi li{opacity:.35;transition:opacity .4s;font-size:.95rem}
+  .dc-fasi li.on{opacity:1;font-weight:700}
+  .dc-fasi li.ok{opacity:.8}
+  .dc-fasi li.ok::before{content:'✓ ';color:var(--st-ok)}
+  .dc-qr{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap}
+  .dc-qr canvas{width:180px;height:180px;border-radius:12px;border:1px solid var(--av3);image-rendering:pixelated}
+  .dc-qr .lk{flex:1;min-width:220px}
+  .dc-codice{font:800 2.2rem var(--fu);letter-spacing:.2em;color:var(--bosco)}
+  .dc-mie{list-style:none;padding:0;margin:0;display:grid;gap:.45rem}
+  .dc-mie li{display:flex;gap:.6rem;align-items:center;background:#fff;border:1px solid var(--av3);border-radius:12px;padding:.55rem .8rem}
+  .dc-mie li span{flex:1;min-width:0}
+  .dc-mie small{display:block;color:var(--txt2)}
+  .dc-mie code{font:800 .9rem var(--fu);letter-spacing:.1em;color:var(--oro)}
+  .dc details summary{cursor:pointer;font:800 .85rem var(--fu);color:var(--bosco)}
+  .dc-err{color:var(--st-no);font-weight:700;margin-top:.6rem}
+  </style>
+</head>
+<body data-page="studio">
+<div class="st-anteprima">Sala studio del Convitto · area educatori</div>
+<script src="nav-header.min.js"></script>
+<main id="main" class="st dc">
+  <section class="st-hero">
+    <div class="w">
+      <p class="lbl">Per gli educatori</p>
+      <h1><span class="ic" aria-hidden="true">📸</span>Dal libro alla lezione</h1>
+      <p>Fotografa le pagine che i ragazzi devono studiare. In circa un minuto ottieni una lezione interattiva con idee chiave, mnemotecniche, esercizi e flashcard, costruita <b>solo</b> su quelle pagine. Poi la proietti o la stampi con un QR.</p>
+    </div>
+  </section>
+
+  <div class="st-palco">
+    <div id="dc-modulo">
+      <div class="st-card">
+        <div class="dc-passo"><b>1</b><h2>Le pagine del libro</h2></div>
+        <p class="st-sot">Fino a 8 pagine. Foto dritta, con buona luce, senza ombre della mano. Vanno bene anche due pagine affiancate in una foto.</p>
+        <div class="st-azioni">
+          <label class="st-btn pieno">📷 Scatta una foto<input type="file" accept="image/*" capture="environment" id="dc-cam" hidden/></label>
+          <label class="st-btn">🖼️ Scegli dalla galleria<input type="file" accept="image/*" multiple id="dc-gal" hidden/></label>
+        </div>
+        <div id="dc-foto"></div>
+      </div>
+
+      <div class="st-card">
+        <div class="dc-passo"><b>2</b><h2>Qualche dettaglio</h2></div>
+        <p class="st-sot">Facoltativo, ma aiuta a centrare la lezione.</p>
+        <div class="dc-due">
+          <div><label for="dc-mat">Materia</label><input type="text" id="dc-mat" list="dc-materie" maxlength="80" placeholder="es. Storia"/>
+            <datalist id="dc-materie"><option>Italiano</option><option>Storia</option><option>Geografia</option><option>Matematica</option><option>Inglese</option><option>Francese</option><option>Spagnolo</option><option>Scienze integrate</option><option>Diritto ed economia</option><option>Scienza e cultura dell'alimentazione</option><option>Laboratorio di cucina</option><option>Laboratorio di sala e vendita</option><option>Accoglienza turistica</option><option>Tecniche di comunicazione</option></datalist></div>
+          <div><label for="dc-cla">Classe</label><input type="text" id="dc-cla" maxlength="40" placeholder="es. 2ª B"/></div>
+        </div>
+        <label for="dc-note">Indicazioni per la lezione</label>
+        <textarea id="dc-note" maxlength="600" placeholder="es. Domani c'è l'interrogazione: insisti sulle date. Oppure: solo il paragrafo 3."></textarea>
+      </div>
+
+      <div class="st-card">
+        <div class="dc-passo"><b>3</b><h2>Crea</h2></div>
+        <div class="dc-due">
+          <div><label for="dc-cod">Codice educatori</label><input type="password" id="dc-cod" autocomplete="current-password" placeholder="Il codice della sala studio"/></div>
+          <div><label for="dc-aut">Il tuo nome (facoltativo)</label><input type="text" id="dc-aut" maxlength="80" autocomplete="name"/></div>
+        </div>
+        <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-crea" disabled>✨ Crea la lezione</button><span class="st-nota" id="dc-quante">Aggiungi almeno una foto.</span></div>
+        <p class="dc-err" id="dc-err" role="alert"></p>
+        <p class="st-nota" style="margin-top:.8rem">🔒 Le foto vanno solo al servizio di intelligenza artificiale che prepara la lezione e non vengono conservate. Non fotografate quaderni o fogli con nomi o dati dei ragazzi.</p>
+      </div>
+    </div>
+
+    <div id="dc-lavoro" hidden></div>
+    <div id="dc-esito" hidden></div>
+
+    <h3>📚 Le lezioni create da questo dispositivo</h3>
+    <ul class="dc-mie" id="dc-mie"></ul>
+
+    <div class="st-card" style="margin-top:1.6rem">
+      <details>
+        <summary>🛠️ Modalità manuale (se l'IA del sito non risponde)</summary>
+        <p class="st-nota">1. Copia le istruzioni. 2. Aprile in Claude (claude.ai) o in un altro assistente, allega le foto delle pagine e incolla le istruzioni. 3. Incolla qui sotto la risposta (il testo tra parentesi graffe) e crea il link.</p>
+        <div class="st-azioni"><button type="button" class="st-btn" id="dc-copia-prompt">📋 Copia le istruzioni</button></div>
+        <label for="dc-json">Risposta dell'IA</label>
+        <textarea id="dc-json" style="min-height:140px;font-family:monospace;font-size:.82rem" placeholder='{"titolo": "...", ...}'></textarea>
+        <div class="st-azioni"><button type="button" class="st-btn pieno" id="dc-manuale">🔗 Crea il link</button></div>
+        <p class="dc-err" id="dc-err2" role="alert"></p>
+      </details>
+    </div>
+  </div>
+</main>
+<script src="nav.min.js"></script>
+<script src="supabase.js"></script>
+<script src="lingue/qrcode.js"></script>
+<script src="lingue/pacchetto.js"></script>
+<script src="studio/studio.js"></script>
+<script src="studio/demo.js"></script>
+<script>
+(function () {
+  'use strict';
+  var esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
+  var FUNZIONE = SUPABASE_URL + '/functions/v1/studio-genera';
+  var MAX = 8, foto = [];
+  var BASE = location.origin + '/studio/lezione.html';
+
+  function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  $('dc-cod').value = ls('studio-codice') || '';
+  $('dc-aut').value = ls('studio-autore') || '';
+
+  /* ───── foto: ridotte nel browser (lato lungo 1600 px) prima dell'invio ───── */
+  function riduci(file) {
+    return new Promise(function (ok, ko) {
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var s = Math.min(1, 1600 / Math.max(img.naturalWidth, img.naturalHeight)), c = document.createElement('canvas');
+        c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+        ok(c.toDataURL('image/jpeg', 0.85));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); ko(new Error('immagine')); };
+      img.src = url;
+    });
+  }
+  function aggiungi(files) {
+    var nuove = Array.prototype.slice.call(files || []).filter(function (f) { return /^image\//.test(f.type); });
+    if (foto.length + nuove.length > MAX) { STUDIO.toast('Al massimo ' + MAX + ' pagine'); nuove = nuove.slice(0, MAX - foto.length); }
+    Promise.all(nuove.map(riduci)).then(function (d) { foto = foto.concat(d); disegnaFoto(); })
+      .catch(function () { STUDIO.toast('Una foto non si legge: riprova con un\'altra'); });
+  }
+  function disegnaFoto() {
+    $('dc-foto').innerHTML = foto.length ? '<div class="dc-foto">' + foto.map(function (f, i) {
+      return '<figure><img src="' + f + '" alt="Pagina ' + (i + 1) + '"/><figcaption>' + (i + 1) + '</figcaption><button type="button" data-via="' + i + '" aria-label="Togli la pagina ' + (i + 1) + '">✕</button></figure>';
+    }).join('') + '</div>' : '<div class="dc-vuoto" style="margin-top:1rem"><div class="big">📖</div>Nessuna pagina ancora. Le pagine vanno nell\'ordine del libro.</div>';
+    $('dc-crea').disabled = !foto.length;
+    $('dc-quante').textContent = foto.length ? foto.length + (foto.length === 1 ? ' pagina pronta' : ' pagine pronte') : 'Aggiungi almeno una foto.';
+  }
+  $('dc-foto').addEventListener('click', function (e) { var b = e.target.closest('[data-via]'); if (b) { foto.splice(+b.getAttribute('data-via'), 1); disegnaFoto(); } });
+  $('dc-cam').onchange = function () { aggiungi(this.files); this.value = ''; };
+  $('dc-gal').onchange = function () { aggiungi(this.files); this.value = ''; };
+  disegnaFoto();
+
+  /* ───── creazione ───── */
+  var FASI = ['Leggo le pagine del libro 📖', 'Trovo le idee chiave 💡', 'Invento la parola magica e il palazzo della memoria 🧠', 'Scrivo la filastrocca 🎵', 'Preparo quiz, vero o falso, abbinamenti ✏️', 'Mescolo le flashcard 🃏', 'Ultimi ritocchi ✨'];
+  var ERRORI = {
+    codice: 'Il codice educatori non è giusto.', configurazione: 'Il servizio non è ancora attivato (manca la configurazione su Supabase). Intanto si può usare la modalità manuale qui sotto.',
+    foto: 'Una delle foto non va bene: riprova con foto più piccole o in JPEG.', troppe: 'Sono state create molte lezioni nell\'ultima ora: riprova tra un po\'.',
+    ia: 'L\'intelligenza artificiale non ha risposto bene. Riprova tra un minuto.', server: 'Errore del server: riprova tra un minuto.'
+  };
+  $('dc-crea').onclick = function () {
+    var cod = $('dc-cod').value.trim();
+    $('dc-err').textContent = '';
+    if (!cod) { $('dc-err').textContent = 'Scrivi il codice educatori.'; $('dc-cod').focus(); return; }
+    ls('studio-codice', cod); ls('studio-autore', $('dc-aut').value.trim());
+    $('dc-modulo').hidden = true; $('dc-esito').hidden = true;
+    var lav = $('dc-lavoro'); lav.hidden = false;
+    lav.innerHTML = '<div class="st-card dc-lavoro st-entra"><div class="ruota">🧑‍🍳</div><h2>Sto cucinando la lezione…</h2><p class="st-sot">Di solito ci vuole circa un minuto. <span id="dc-sec">0</span> s</p><ol class="dc-fasi">' + FASI.map(function (f) { return '<li>' + f + '</li>'; }).join('') + '</ol></div>';
+    lav.scrollIntoView({ behavior: 'smooth' });
+    var t0 = Date.now(), lis = lav.querySelectorAll('.dc-fasi li');
+    var iv = setInterval(function () {
+      var s = Math.round((Date.now() - t0) / 1000), k = Math.min(lis.length - 1, Math.floor(s / 11));
+      $('dc-sec').textContent = s;
+      lis.forEach(function (li, i) { li.className = i < k ? 'ok' : i === k ? 'on' : ''; });
+    }, 500);
+    fetch(FUNZIONE, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUB },
+      body: JSON.stringify({
+        codice_docente: cod, materia: $('dc-mat').value, classe: $('dc-cla').value, note: $('dc-note').value, autore: $('dc-aut').value,
+        immagini: foto.map(function (f) { return { tipo: 'image/jpeg', dati: f.split(',')[1] }; })
+      })
+    }).then(function (r) { return r.json().catch(function () { return { ok: false, errore: r.status === 404 ? 'configurazione' : 'server' }; }); })
+      .then(function (r) {
+        clearInterval(iv); lav.hidden = true;
+        if (!r.ok) { $('dc-modulo').hidden = false; $('dc-err').textContent = r.errore === 'illeggibile' ? '📷 ' + (r.messaggio || 'Le foto non si leggono bene.') + ' Rifai le foto e riprova.' : (ERRORI[r.errore] || ERRORI.server); return; }
+        ricorda({ codice: r.codice, titolo: r.lezione.titolo, icona: r.lezione.icona, materia: r.lezione.materia, classe: $('dc-cla').value, data: new Date().toISOString().slice(0, 10) });
+        foto = []; disegnaFoto(); $('dc-note').value = '';
+        esito(BASE + '?c=' + r.codice, r.lezione, r.codice);
+      })
+      .catch(function () { clearInterval(iv); lav.hidden = true; $('dc-modulo').hidden = false; $('dc-err').textContent = 'Connessione assente o servizio non raggiungibile. Riprova, o usa la modalità manuale qui sotto.'; });
+  };
+
+  /* ───── risultato: QR, link, cartello ───── */
+  function qr(testo, canvas, cella) {
+    var c = qrcode(0, 'M'); c.addData(testo); c.make();
+    var n = c.getModuleCount(), m = 4, s = (n + m * 2) * cella, x = canvas.getContext('2d');
+    canvas.width = canvas.height = s; x.fillStyle = '#fff'; x.fillRect(0, 0, s, s); x.fillStyle = '#000';
+    for (var r = 0; r < n; r++) for (var k = 0; k < n; k++) if (c.isDark(r, k)) x.fillRect((k + m) * cella, (r + m) * cella, cella, cella);
+  }
+  function cartello(url, L, codice, stampa) {
+    var cv = document.createElement('canvas'); qr(url, cv, 14);
+    var w = window.open('', '_blank'); if (!w) return STUDIO.toast('Consenti le finestre a comparsa');
+    w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(L.titolo) + ' — QR</title><style>' +
+      'body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Arial,sans-serif;background:#fff;color:#2C3E2D;text-align:center;padding:2vh}' +
+      '.m{font-size:2.2vh;letter-spacing:.2em;text-transform:uppercase;color:#B8922A;font-weight:bold}h1{font-size:5vh;margin:1vh 0 2vh}img{width:min(58vh,80vw);height:auto}' +
+      '.c{font-size:4vh;letter-spacing:.3em;font-weight:bold;margin:1vh 0}p{font-size:2.3vh;color:#555;margin:.5vh}@media print{body{min-height:auto}}</style></head><body>' +
+      '<div class="m">Sala studio · ' + esc(L.materia || '') + '</div><h1>' + esc((L.icona || '📚') + ' ' + L.titolo) + '</h1><img src="' + cv.toDataURL() + '" alt="Codice QR"/>' +
+      (codice ? '<div class="c">' + esc(codice) + '</div>' : '') + '<p>Inquadra il codice con la fotocamera del telefono.</p><p>Idee chiave · trucchi per ricordare · esercizi · flashcard · sfida finale</p>' +
+      (stampa ? '<script>onload=function(){print()}<\/script>' : '') + '</body></html>');
+    w.document.close();
+  }
+  function esito(url, L, codice) {
+    var el = $('dc-esito'); el.hidden = false;
+    el.innerHTML = '<div class="st-card st-entra" style="border:2px solid var(--oro)"><div class="dc-passo"><b>✓</b><h2>' + esc((L.icona || '📚') + ' ' + L.titolo) + '</h2></div>' +
+      '<p class="st-sot">' + esc(L.sottotitolo || '') + '</p><div class="dc-qr"><canvas id="dc-qrc" aria-label="Codice QR della lezione"></canvas><div class="lk">' +
+      (codice ? '<div class="st-nota">Codice della lezione</div><div class="dc-codice">' + esc(codice) + '</div>' : '') +
+      '<input type="text" readonly value="' + esc(url) + '" id="dc-link" style="margin:.4rem 0"/>' +
+      '<div class="st-azioni" style="margin-top:.4rem"><a class="st-btn pieno" href="' + esc(url) + '" target="_blank" rel="noopener">👀 Apri la lezione</a><button type="button" class="st-btn" id="dc-cp">📋 Copia</button>' +
+      (navigator.share ? '<button type="button" class="st-btn" id="dc-sh">📤 Condividi</button>' : '') + '</div></div></div>' +
+      '<div class="st-azioni"><button type="button" class="st-btn oro" id="dc-lim">🖥️ QR a tutto schermo</button><button type="button" class="st-btn" id="dc-st">🖨️ Stampa il cartello</button><button type="button" class="st-btn" id="dc-altra">➕ Un\'altra lezione</button></div>' +
+      '<p class="st-nota" style="margin-top:1rem">🎓 Date un\'occhiata alla lezione prima di proporla: l\'IA lavora solo sulle pagine fotografate, ma può sbagliare.</p></div>';
+    var cv = $('dc-qrc');
+    if (url.length <= 2200) qr(url, cv, 5); else { cv.remove(); $('dc-lim').remove(); $('dc-st').remove(); el.querySelector('.dc-qr').insertAdjacentHTML('afterbegin', '<p class="st-nota" style="flex-basis:100%">Questa lezione è stata creata in modalità manuale ed è troppo lunga per un QR: mandate il link sul gruppo o aprite il link alla LIM.</p>'); }
+    $('dc-cp').onclick = function () { var i = $('dc-link'); i.select(); (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).catch(function () { document.execCommand('copy'); }); STUDIO.toast('Link copiato 📋'); };
+    if ($('dc-sh')) $('dc-sh').onclick = function () { navigator.share({ title: L.titolo, text: 'Lezione interattiva: ' + L.titolo, url: url }).catch(function () {}); };
+    if ($('dc-lim')) $('dc-lim').onclick = function () { cartello(url, L, codice, false); };
+    if ($('dc-st')) $('dc-st').onclick = function () { cartello(url, L, codice, true); };
+    $('dc-altra').onclick = function () { el.hidden = true; $('dc-modulo').hidden = false; scrollTo({ top: 0, behavior: 'smooth' }); };
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  /* ───── le lezioni di questo dispositivo ───── */
+  function mie() { try { return JSON.parse(ls('studio-mie') || '[]'); } catch (e) { return []; } }
+  function ricorda(x) { var m = mie().filter(function (y) { return y.codice !== x.codice; }); m.unshift(x); ls('studio-mie', JSON.stringify(m.slice(0, 40))); disegnaMie(); }
+  function disegnaMie() {
+    var m = mie();
+    $('dc-mie').innerHTML = m.length ? m.map(function (x, i) {
+      return '<li><span>' + esc((x.icona || '📚') + ' ' + x.titolo) + '<small>' + esc([x.materia, x.classe, x.data].filter(Boolean).join(' · ')) + '</small></span><code>' + esc(x.codice) + '</code><button type="button" class="st-btn" style="min-height:38px;padding:.3rem .7rem" data-qr="' + i + '">QR</button></li>';
+    }).join('') : '<li><span class="st-nota">Ancora nessuna. Intanto guardate la <a href="studio/lezione.html?c=DEMO" target="_blank">lezione di esempio</a>.</span></li>';
+  }
+  $('dc-mie').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-qr]'); if (!b) return;
+    var x = mie()[+b.getAttribute('data-qr')]; esito(BASE + '?c=' + x.codice, x, x.codice);
+  });
+  disegnaMie();
+
+  /* ───── modalità manuale: la lezione viaggia dentro il link ───── */
+  function scheletro(o) {
+    if (Array.isArray(o)) return o.length ? [scheletro(o[0])] : [];
+    if (o && typeof o === 'object') { var r = {}; Object.keys(o).forEach(function (k) { r[k] = scheletro(o[k]); }); return r; }
+    return o;
+  }
+  var PROMPT = 'Sei un educatore esperto di didattica per ragazzi con DSA in un convitto di un istituto alberghiero (14-19 anni). Nelle foto allegate ci sono pagine di un libro di scuola.\n' +
+    'Crea una lezione interattiva in italiano usando SOLO i concetti, i fatti, le date e le definizioni presenti in quelle pagine: niente argomenti esterni.\n' +
+    'Stile: frasi brevi, una idea per frase, parole semplici, tono caldo e diretto (tu), niente domande trabocchetto né doppie negazioni.\n' +
+    'Contenuti: gancio (domanda curiosa + risposta); 4-8 concetti (spiegazione max 3 frasi, parola_chiave presente nella spiegazione, esempio concreto); 4-10 parole di glossario; mnemonica con acronimo (parola, frase buffa con le stesse iniziali, una voce per lettera), storia "palazzo della memoria" ambientata nel convitto (4-7 tappe con immagini assurde), filastrocca in rima (4-8 versi, a capo con \\n), 3-6 immagini mentali con emoji, 2-4 trucchi; sequenza (4-7 passi in ordine, o passi vuoti se non c\'è un ordine); 8-10 quiz con 3 opzioni e indice "corretta" da 0; 6-8 vero_falso; 5-7 completa (una ___ per frase, 2 distrattori); 5-6 coppie abbina; 8-12 flashcard; 5 frasi da_ricordare.\n' +
+    'Rispondi SOLO con un oggetto JSON valido con esattamente questa struttura (gli elenchi qui hanno un elemento di esempio, tu mettine quanti indicato):\n' + JSON.stringify(scheletro(window.STUDIO_DEMO), null, 1);
+  $('dc-copia-prompt').onclick = function () {
+    (navigator.clipboard ? navigator.clipboard.writeText(PROMPT) : Promise.reject()).then(function () { STUDIO.toast('Istruzioni copiate 📋'); })
+      .catch(function () { $('dc-json').value = PROMPT; $('dc-json').select(); STUDIO.toast('Copia il testo dal riquadro'); });
+  };
+  $('dc-manuale').onclick = function () {
+    $('dc-err2').textContent = '';
+    var t = $('dc-json').value, a = t.indexOf('{'), b = t.lastIndexOf('}'), L;
+    try { L = JSON.parse(t.slice(a, b + 1)); } catch (e) { $('dc-err2').textContent = 'Il testo incollato non è un JSON valido: copiate tutta la risposta, dalla prima { all\'ultima }.'; return; }
+    if (!L.titolo || !Array.isArray(L.concetti) || !L.concetti.length) { $('dc-err2').textContent = 'Nella risposta mancano il titolo o i concetti.'; return; }
+    window.PACCHETTO.codifica(L).then(function (p) { esito(BASE + '#l=' + p, L, ''); });
+  };
+})();
+</script>
+</body>
+</html>

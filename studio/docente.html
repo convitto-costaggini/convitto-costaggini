@@ -49,6 +49,7 @@
   .dc-mie code{font:800 .9rem var(--fu);letter-spacing:.1em;color:var(--oro)}
   .dc details summary{cursor:pointer;font:800 .85rem var(--fu);color:var(--bosco)}
   .dc-err{color:var(--st-no);font-weight:700;margin-top:.6rem}
+  .dc-guida{margin:.2rem 0 .8rem;padding-left:1.3rem;display:grid;gap:.5rem}
   </style>
 </head>
 <body data-page="studio">
@@ -59,25 +60,15 @@
     <div class="w">
       <p class="lbl">Per gli educatori</p>
       <h1><span class="ic" aria-hidden="true">📸</span>Dal libro alla lezione</h1>
-      <p>Fotografa le pagine che i ragazzi devono studiare. In circa un minuto ottieni una lezione interattiva con idee chiave, mnemotecniche, esercizi e flashcard, costruita <b>solo</b> su quelle pagine. Poi la proietti o la stampi con un QR.</p>
+      <p>Fotografa le pagine che i ragazzi devono studiare e falle leggere a <b>Claude</b> (claude.ai, con il vostro abbonamento: nessun costo a consumo). In pochi minuti ottieni una lezione interattiva con idee chiave, mnemotecniche, esercizi e flashcard, costruita <b>solo</b> su quelle pagine, con il QR per i ragazzi.</p>
     </div>
   </section>
 
   <div class="st-palco">
     <div id="dc-modulo">
       <div class="st-card">
-        <div class="dc-passo"><b>1</b><h2>Le pagine del libro</h2></div>
-        <p class="st-sot">Fino a 8 pagine. Foto dritta, con buona luce, senza ombre della mano. Vanno bene anche due pagine affiancate in una foto.</p>
-        <div class="st-azioni">
-          <label class="st-btn pieno">📷 Scatta una foto<input type="file" accept="image/*" capture="environment" id="dc-cam" hidden/></label>
-          <label class="st-btn">🖼️ Scegli dalla galleria<input type="file" accept="image/*" multiple id="dc-gal" hidden/></label>
-        </div>
-        <div id="dc-foto"></div>
-      </div>
-
-      <div class="st-card">
-        <div class="dc-passo"><b>2</b><h2>Qualche dettaglio</h2></div>
-        <p class="st-sot">Facoltativo, ma aiuta a centrare la lezione.</p>
+        <div class="dc-passo"><b>1</b><h2>Le istruzioni per Claude</h2></div>
+        <p class="st-sot">Facoltativo: materia, classe e indicazioni aiutano a centrare la lezione. Poi copia le istruzioni.</p>
         <div class="dc-due">
           <div><label for="dc-mat">Materia</label><input type="text" id="dc-mat" list="dc-materie" maxlength="80" placeholder="es. Storia"/>
             <datalist id="dc-materie"><option>Italiano</option><option>Storia</option><option>Geografia</option><option>Matematica</option><option>Inglese</option><option>Francese</option><option>Spagnolo</option><option>Scienze integrate</option><option>Diritto ed economia</option><option>Scienza e cultura dell'alimentazione</option><option>Laboratorio di cucina</option><option>Laboratorio di sala e vendita</option><option>Accoglienza turistica</option><option>Tecniche di comunicazione</option></datalist></div>
@@ -85,17 +76,44 @@
         </div>
         <label for="dc-note">Indicazioni per la lezione</label>
         <textarea id="dc-note" maxlength="600" placeholder="es. Domani c'è l'interrogazione: insisti sulle date. Oppure: solo il paragrafo 3."></textarea>
+        <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-copia-prompt">📋 Copia le istruzioni</button><a class="st-btn pieno" href="https://claude.ai/new" target="_blank" rel="noopener">Apri Claude ↗</a></div>
       </div>
 
       <div class="st-card">
-        <div class="dc-passo"><b>3</b><h2>Crea</h2></div>
+        <div class="dc-passo"><b>2</b><h2>In Claude</h2></div>
+        <ol class="dc-guida">
+          <li>Tocca <b>📎 / +</b> e allega le <b>foto delle pagine</b>, nell'ordine del libro (puoi scattarle lì direttamente).</li>
+          <li><b>Incolla</b> le istruzioni nel messaggio e invia.</li>
+          <li>Quando Claude ha finito, <b>copia tutta la risposta</b> (il tasto copia sotto il messaggio o sul riquadro del codice).</li>
+        </ol>
+        <p class="st-nota">🔒 Non fotografate quaderni o fogli con nomi o dati dei ragazzi.</p>
+      </div>
+
+      <div class="st-card">
+        <div class="dc-passo"><b>3</b><h2>Incolla e pubblica</h2></div>
+        <label for="dc-json">La risposta di Claude</label>
+        <textarea id="dc-json" style="min-height:120px;font-family:monospace;font-size:.82rem" placeholder='{"titolo": "...", ...}'></textarea>
+        <div class="st-azioni" style="margin-top:.5rem"><button type="button" class="st-btn" id="dc-incolla">📋 Incolla</button><span class="st-nota" id="dc-letto"></span></div>
         <div class="dc-due">
           <div><label for="dc-cod">Codice educatori</label><input type="password" id="dc-cod" autocomplete="current-password" placeholder="Il codice della sala studio"/></div>
           <div><label for="dc-aut">Il tuo nome (facoltativo)</label><input type="text" id="dc-aut" maxlength="80" autocomplete="name"/></div>
         </div>
-        <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-crea" disabled>✨ Crea la lezione</button><span class="st-nota" id="dc-quante">Aggiungi almeno una foto.</span></div>
-        <p class="dc-err" id="dc-err" role="alert"></p>
-        <p class="st-nota" style="margin-top:.8rem">🔒 Le foto vanno solo al servizio di intelligenza artificiale che prepara la lezione e non vengono conservate. Non fotografate quaderni o fogli con nomi o dati dei ragazzi.</p>
+        <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-manuale">✨ Pubblica la lezione</button></div>
+        <p class="dc-err" id="dc-err2" role="alert"></p>
+      </div>
+
+      <div class="st-card">
+        <details>
+          <summary>📸 Creazione automatica dalle foto (solo se attivata: a consumo)</summary>
+          <p class="st-nota">Il sito manda le foto direttamente all'IA, senza passare da claude.ai. Funziona solo se su Supabase è stata inserita una chiave API Anthropic, che si paga a consumo. Usa materia, classe, indicazioni (passo 1) e codice educatori (passo 3).</p>
+          <div class="st-azioni">
+            <label class="st-btn pieno">📷 Scatta una foto<input type="file" accept="image/*" capture="environment" id="dc-cam" hidden/></label>
+            <label class="st-btn">🖼️ Scegli dalla galleria<input type="file" accept="image/*" multiple id="dc-gal" hidden/></label>
+          </div>
+          <div id="dc-foto"></div>
+          <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-crea" disabled>✨ Crea la lezione dalle foto</button><span class="st-nota" id="dc-quante">Aggiungi almeno una foto.</span></div>
+          <p class="dc-err" id="dc-err" role="alert"></p>
+        </details>
       </div>
     </div>
 
@@ -104,18 +122,6 @@
 
     <h3>📚 Le lezioni create da questo dispositivo</h3>
     <ul class="dc-mie" id="dc-mie"></ul>
-
-    <div class="st-card" style="margin-top:1.6rem">
-      <details>
-        <summary>🛠️ Modalità manuale (se l'IA del sito non risponde)</summary>
-        <p class="st-nota">1. Copia le istruzioni. 2. Aprile in Claude (claude.ai) o in un altro assistente, allega le foto delle pagine e incolla le istruzioni. 3. Incolla qui sotto la risposta (il testo tra parentesi graffe) e crea il link.</p>
-        <div class="st-azioni"><button type="button" class="st-btn" id="dc-copia-prompt">📋 Copia le istruzioni</button></div>
-        <label for="dc-json">Risposta dell'IA</label>
-        <textarea id="dc-json" style="min-height:140px;font-family:monospace;font-size:.82rem" placeholder='{"titolo": "...", ...}'></textarea>
-        <div class="st-azioni"><button type="button" class="st-btn pieno" id="dc-manuale">🔗 Crea il link</button></div>
-        <p class="dc-err" id="dc-err2" role="alert"></p>
-      </details>
-    </div>
   </div>
 </main>
 <script src="nav.min.js"></script>
@@ -171,14 +177,16 @@
   /* ───── creazione ───── */
   var FASI = ['Leggo le pagine del libro 📖', 'Trovo le idee chiave 💡', 'Invento la parola magica e il palazzo della memoria 🧠', 'Scrivo la filastrocca 🎵', 'Preparo quiz, vero o falso, abbinamenti ✏️', 'Mescolo le flashcard 🃏', 'Ultimi ritocchi ✨'];
   var ERRORI = {
-    codice: 'Il codice educatori non è giusto.', configurazione: 'Il servizio non è ancora attivato (manca la configurazione su Supabase). Intanto si può usare la modalità manuale qui sotto.',
+    codice: 'Il codice educatori non è giusto.', configurazione: 'Il servizio non è ancora attivato: manca il codice educatori su Supabase (STUDIO_CODICI).',
+    automatica: 'La creazione automatica non è attivata (serve la chiave API, a consumo). Usate i passi 1-2-3 con claude.ai.',
+    lezione: 'La risposta incollata non è una lezione completa: copiate di nuovo tutta la risposta di Claude.',
     foto: 'Una delle foto non va bene: riprova con foto più piccole o in JPEG.', troppe: 'Sono state create molte lezioni nell\'ultima ora: riprova tra un po\'.',
     ia: 'L\'intelligenza artificiale non ha risposto bene. Riprova tra un minuto.', server: 'Errore del server: riprova tra un minuto.'
   };
   $('dc-crea').onclick = function () {
     var cod = $('dc-cod').value.trim();
     $('dc-err').textContent = '';
-    if (!cod) { $('dc-err').textContent = 'Scrivi il codice educatori.'; $('dc-cod').focus(); return; }
+    if (!cod) { $('dc-err').textContent = 'Scrivi il codice educatori (al passo 3).'; $('dc-cod').focus(); return; }
     ls('studio-codice', cod); ls('studio-autore', $('dc-aut').value.trim());
     $('dc-modulo').hidden = true; $('dc-esito').hidden = true;
     var lav = $('dc-lavoro'); lav.hidden = false;
@@ -204,7 +212,7 @@
         foto = []; disegnaFoto(); $('dc-note').value = '';
         esito(BASE + '?c=' + r.codice, r.lezione, r.codice);
       })
-      .catch(function () { clearInterval(iv); lav.hidden = true; $('dc-modulo').hidden = false; $('dc-err').textContent = 'Connessione assente o servizio non raggiungibile. Riprova, o usa la modalità manuale qui sotto.'; });
+      .catch(function () { clearInterval(iv); lav.hidden = true; $('dc-modulo').hidden = false; $('dc-err').textContent = 'Connessione assente o servizio non raggiungibile. Riprova, o usa i passi 1-2-3 con claude.ai.'; });
   };
 
   /* ───── risultato: QR, link, cartello ───── */
@@ -237,7 +245,7 @@
       '<div class="st-azioni"><button type="button" class="st-btn oro" id="dc-lim">🖥️ QR a tutto schermo</button><button type="button" class="st-btn" id="dc-st">🖨️ Stampa il cartello</button><button type="button" class="st-btn" id="dc-altra">➕ Un\'altra lezione</button></div>' +
       '<p class="st-nota" style="margin-top:1rem">🎓 Date un\'occhiata alla lezione prima di proporla: l\'IA lavora solo sulle pagine fotografate, ma può sbagliare.</p></div>';
     var cv = $('dc-qrc');
-    if (url.length <= 2200) qr(url, cv, 5); else { cv.remove(); $('dc-lim').remove(); $('dc-st').remove(); el.querySelector('.dc-qr').insertAdjacentHTML('afterbegin', '<p class="st-nota" style="flex-basis:100%">Questa lezione è stata creata in modalità manuale ed è troppo lunga per un QR: mandate il link sul gruppo o aprite il link alla LIM.</p>'); }
+    if (url.length <= 2200) qr(url, cv, 5); else { cv.remove(); $('dc-lim').remove(); $('dc-st').remove(); el.querySelector('.dc-qr').insertAdjacentHTML('afterbegin', '<p class="st-nota" style="flex-basis:100%">Questo link contiene tutta la lezione ed è troppo lungo per un QR: mandatelo sul gruppo o apritelo alla LIM.</p>'); }
     $('dc-cp').onclick = function () { var i = $('dc-link'); i.select(); (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).catch(function () { document.execCommand('copy'); }); STUDIO.toast('Link copiato 📋'); };
     if ($('dc-sh')) $('dc-sh').onclick = function () { navigator.share({ title: L.titolo, text: 'Lezione interattiva: ' + L.titolo, url: url }).catch(function () {}); };
     if ($('dc-lim')) $('dc-lim').onclick = function () { cartello(url, L, codice, false); };
@@ -261,27 +269,89 @@
   });
   disegnaMie();
 
-  /* ───── modalità manuale: la lezione viaggia dentro il link ───── */
+  /* ───── lezione preparata in claude.ai: istruzioni, incolla, pubblica ───── */
   function scheletro(o) {
     if (Array.isArray(o)) return o.length ? [scheletro(o[0])] : [];
     if (o && typeof o === 'object') { var r = {}; Object.keys(o).forEach(function (k) { r[k] = scheletro(o[k]); }); return r; }
-    return o;
+    return typeof o === 'string' ? '...' : typeof o === 'number' ? 0 : o; /* segnaposto: nessun contenuto della lezione d'esempio */
   }
-  var PROMPT = 'Sei un educatore esperto di didattica per ragazzi con DSA in un convitto di un istituto alberghiero (14-19 anni). Nelle foto allegate ci sono pagine di un libro di scuola.\n' +
-    'Crea una lezione interattiva in italiano usando SOLO i concetti, i fatti, le date e le definizioni presenti in quelle pagine: niente argomenti esterni.\n' +
-    'Stile: frasi brevi, una idea per frase, parole semplici, tono caldo e diretto (tu), niente domande trabocchetto né doppie negazioni.\n' +
-    'Contenuti: gancio (domanda curiosa + risposta); 4-8 concetti (spiegazione max 3 frasi, parola_chiave presente nella spiegazione, esempio concreto); 4-10 parole di glossario; mnemonica con acronimo (parola, frase buffa con le stesse iniziali, una voce per lettera), storia "palazzo della memoria" ambientata nel convitto (4-7 tappe con immagini assurde), filastrocca in rima (4-8 versi, a capo con \\n), 3-6 immagini mentali con emoji, 2-4 trucchi; sequenza (4-7 passi in ordine, o passi vuoti se non c\'è un ordine); 8-10 quiz con 3 opzioni e indice "corretta" da 0; 6-8 vero_falso; 5-7 completa (una ___ per frase, 2 distrattori); 5-6 coppie abbina; 8-12 flashcard; 5 frasi da_ricordare.\n' +
-    'Rispondi SOLO con un oggetto JSON valido con esattamente questa struttura (gli elenchi qui hanno un elemento di esempio, tu mettine quanti indicato):\n' + JSON.stringify(scheletro(window.STUDIO_DEMO), null, 1);
+  var ISTRUZIONI = 'Sei un educatore esperto di didattica per ragazzi con DSA (dislessia, disortografia, discalculia) in un convitto di un istituto alberghiero italiano (14-19 anni).\n' +
+    'Nelle foto allegate ci sono alcune pagine di un libro di scuola. Trasformale in una lezione interattiva in italiano che i ragazzi faranno dal telefono in sala studio.\n\n' +
+    'REGOLA FONDAMENTALE: usa SOLO i concetti, i fatti, le date, i nomi e le definizioni presenti nelle pagine fotografate. Non aggiungere argomenti che non ci sono. Ogni esercizio deve poter essere risolto da chi ha studiato quelle pagine.\n\n' +
+    'STILE (pensato per DSA): frasi brevi, una idea per frase, parole semplici; spiega i termini tecnici la prima volta. Niente doppie negazioni, niente domande trabocchetto, niente "tutte le precedenti". Tono caldo, diretto ("tu"), un po\' di ironia; mai infantile.\n\n' +
+    'CONTENUTI:\n' +
+    '- gancio: una domanda curiosa o sorprendente legata all\'argomento, con la risposta presa dalle pagine.\n' +
+    '- concetti: da 4 a 8 idee chiave, nell\'ordine del libro. spiegazione max 3 frasi; parola_chiave = la parola da evidenziare, che deve comparire nella spiegazione; esempio concreto, se possibile dalla cucina, dalla sala o dall\'albergo.\n' +
+    '- parole: 4-10 termini del glossario con definizione semplice.\n' +
+    '- mnemonica: mnemotecniche vere ed efficaci, costruite sui concetti delle pagine.\n' +
+    '  - acronimo: una parola o sigla facile da ricordare formata dalle iniziali di elementi da memorizzare; "frase" e\' una frase buffa le cui parole iniziano con quelle lettere; lettere: una voce per lettera.\n' +
+    '  - storia: un "palazzo della memoria" ambientato nel convitto (ingresso, refettorio, cucina, sala studio, camerata, cortile...): 4-7 tappe, in ogni luogo un\'immagine assurda, esagerata, colorata o divertente che richiama un concetto.\n' +
+    '  - filastrocca: 4-8 versi in rima con i fatti principali; ogni verso separato da \\n.\n' +
+    '  - immagini: 3-6 associazioni visive concetto-immagine mentale, con emoji.\n' +
+    '  - trucchi: 2-4 altri trucchi (associazioni numeriche, parole simili, collegamenti con cose note).\n' +
+    '- sequenza: se l\'argomento ha un ordine (fasi, cronologia, procedimento) da 4 a 7 passi nell\'ordine giusto; altrimenti titolo vuoto e passi vuoti.\n' +
+    '- quiz: 8-10 domande, 3 opzioni ciascuna (una sola corretta), "corretta" e\' l\'indice della risposta giusta contando da 0; spiegazione in una frase.\n' +
+    '- vero_falso: 6-8 affermazioni, circa meta\' vere.\n' +
+    '- completa: 5-7 frasi con una sola parola chiave sostituita da ___; 2 distrattori plausibili.\n' +
+    '- abbina: 5-6 coppie (termine-definizione, personaggio-fatto, causa-effetto, data-evento...).\n' +
+    '- flashcard: 8-12 carte domanda/risposta brevi.\n' +
+    '- da_ricordare: le 5 frasi essenziali da sapere a memoria.\n\n' +
+    'FORMATO DELLA RISPOSTA: rispondi con UN SOLO blocco di codice json, senza testo prima o dopo e senza creare artefatti o documenti. Il JSON deve avere esattamente questa struttura (gli elenchi qui hanno un solo elemento di esempio: tu mettine quanti indicato sopra):\n';
+  var FORMA = JSON.stringify(scheletro(window.STUDIO_DEMO));
+  function prompt() {
+    var extra = [
+      $('dc-mat').value.trim() && 'Materia: ' + $('dc-mat').value.trim() + '.',
+      $('dc-cla').value.trim() && 'Classe: ' + $('dc-cla').value.trim() + '.',
+      $('dc-note').value.trim() && 'Indicazioni dell\'educatore (seguile, ma sempre e solo sui contenuti delle pagine): ' + $('dc-note').value.trim()
+    ].filter(Boolean).join('\n');
+    return ISTRUZIONI + FORMA + (extra ? '\n\n' + extra : '') + '\n\nOra crea la lezione sulle pagine allegate.';
+  }
   $('dc-copia-prompt').onclick = function () {
-    (navigator.clipboard ? navigator.clipboard.writeText(PROMPT) : Promise.reject()).then(function () { STUDIO.toast('Istruzioni copiate 📋'); })
-      .catch(function () { $('dc-json').value = PROMPT; $('dc-json').select(); STUDIO.toast('Copia il testo dal riquadro'); });
+    var t = prompt();
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { STUDIO.toast('Istruzioni copiate: ora apri Claude 📋'); })
+      .catch(function () { $('dc-json').value = t; $('dc-json').select(); STUDIO.toast('Copia il testo dal riquadro del passo 3'); });
+  };
+  function leggiLezione() {
+    var t = $('dc-json').value, a = t.indexOf('{'), b = t.lastIndexOf('}'), L;
+    try { L = JSON.parse(t.slice(a, b + 1)); } catch (e) { return null; }
+    return L && L.titolo && Array.isArray(L.concetti) && L.concetti.length ? L : null;
+  }
+  function controlla() {
+    var L = leggiLezione();
+    $('dc-letto').textContent = !$('dc-json').value.trim() ? '' : L ? '✅ Lezione letta: «' + L.titolo + '»' : '⚠️ Non sembra ancora una lezione completa';
+  }
+  $('dc-json').addEventListener('input', controlla);
+  $('dc-incolla').onclick = function () {
+    if (!navigator.clipboard || !navigator.clipboard.readText) { $('dc-json').focus(); return STUDIO.toast('Tieni premuto nel riquadro e scegli Incolla'); }
+    navigator.clipboard.readText().then(function (t) { $('dc-json').value = t; controlla(); })
+      .catch(function () { $('dc-json').focus(); STUDIO.toast('Tieni premuto nel riquadro e scegli Incolla'); });
   };
   $('dc-manuale').onclick = function () {
-    $('dc-err2').textContent = '';
-    var t = $('dc-json').value, a = t.indexOf('{'), b = t.lastIndexOf('}'), L;
-    try { L = JSON.parse(t.slice(a, b + 1)); } catch (e) { $('dc-err2').textContent = 'Il testo incollato non è un JSON valido: copiate tutta la risposta, dalla prima { all\'ultima }.'; return; }
-    if (!L.titolo || !Array.isArray(L.concetti) || !L.concetti.length) { $('dc-err2').textContent = 'Nella risposta mancano il titolo o i concetti.'; return; }
-    window.PACCHETTO.codifica(L).then(function (p) { esito(BASE + '#l=' + p, L, ''); });
+    var e2 = $('dc-err2'), L = leggiLezione(), cod = $('dc-cod').value.trim(), btn = this;
+    e2.textContent = '';
+    if (!$('dc-json').value.trim()) { e2.textContent = 'Incolla prima la risposta di Claude.'; return; }
+    if (!L) { e2.textContent = 'Il testo incollato non è una lezione completa: copiate tutta la risposta di Claude, dalla prima { all\'ultima }. Se la risposta si è interrotta, scrivete a Claude «continua» oppure rifate la richiesta.'; return; }
+    if (!cod) { e2.textContent = 'Scrivi il codice educatori.'; $('dc-cod').focus(); return; }
+    if ($('dc-mat').value.trim() && !L.materia) L.materia = $('dc-mat').value.trim();
+    ls('studio-codice', cod); ls('studio-autore', $('dc-aut').value.trim());
+    btn.disabled = true; btn.textContent = '⏳ Pubblico…';
+    fetch(FUNZIONE, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUB },
+      body: JSON.stringify({ codice_docente: cod, lezione: L, classe: $('dc-cla').value, autore: $('dc-aut').value })
+    }).then(function (r) { return r.json().catch(function () { return { ok: false, errore: r.status === 404 ? 'configurazione' : 'server' }; }); })
+      .then(function (r) {
+        if (!r.ok) throw r;
+        ricorda({ codice: r.codice, titolo: r.lezione.titolo, icona: r.lezione.icona, materia: r.lezione.materia, classe: $('dc-cla').value, data: new Date().toISOString().slice(0, 10) });
+        $('dc-json').value = ''; $('dc-note').value = ''; controlla();
+        $('dc-modulo').hidden = true; esito(BASE + '?c=' + r.codice, r.lezione, r.codice);
+      })
+      .catch(function (r) {
+        e2.innerHTML = STUDIO.esc((r && ERRORI[r.errore]) || 'Connessione assente o servizio non raggiungibile.') +
+          (r && r.errore === 'codice' ? '' : ' <button type="button" class="st-btn" id="dc-solo-link" style="margin-top:.5rem">🔗 Crea solo il link (senza codice breve)</button>');
+        var sl = $('dc-solo-link');
+        if (sl) sl.onclick = function () { window.PACCHETTO.codifica(L).then(function (p) { $('dc-modulo').hidden = true; esito(BASE + '#l=' + p, L, ''); }); };
+      })
+      .then(function () { btn.disabled = false; btn.textContent = '✨ Pubblica la lezione'; });
   };
 })();
 </script>

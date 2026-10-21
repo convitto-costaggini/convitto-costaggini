@@ -1,8 +1,11 @@
 // Edge Function "studio-genera": dalle foto delle pagine del libro a una lezione interattiva (minisito /studio).
 // Deploy con verify_jwt=false (i controlli sono qui dentro).
-// Segreti richiesti: ANTHROPIC_API_KEY, STUDIO_CODICI (uno o piu' codici educatore separati da virgola).
+// Segreti: STUDIO_CODICI (uno o piu' codici educatore separati da virgola), obbligatorio.
+//          ANTHROPIC_API_KEY, facoltativo: solo per la creazione automatica dalle foto (a consumo).
 // SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY sono forniti da Supabase.
-// Richiesta (POST JSON): {codice_docente, immagini:[{tipo:"image/jpeg", dati:<base64>}], materia?, classe?, note?, autore?}
+// Richieste (POST JSON):
+//   {codice_docente, lezione, classe?, autore?}  -> salva una lezione gia' pronta (preparata in claude.ai): nessun costo
+//   {codice_docente, immagini:[{tipo:"image/jpeg", dati:<base64>}], materia?, classe?, note?, autore?} -> la crea dalle foto
 // Risposta: {ok:true, codice, lezione} oppure {ok:false, errore, messaggio?}
 // Le foto non vengono salvate: vanno a Claude e poi si buttano. Resta solo la lezione.
 
@@ -13,6 +16,7 @@ const MODELLO = "claude-opus-5-5";
 const MAX_FOTO = 8;
 const MAX_BYTES_FOTO = 4_500_000; // base64 di una foto gia' ridotta dal browser
 const MAX_ORA = 30; // lezioni create in un'ora, in tutto: freno contro gli abusi
+const MAX_LEZIONE = 120_000; // caratteri del JSON di una lezione incollata
 const ALFABETO = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // niente 0/O, 1/I
 
 const CORS = {
@@ -108,8 +112,23 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
 
     if (!codici.length) return risposta({ ok: false, errore: "configurazione" }, 503);
     if (!codici.includes(String(c.codice_docente || "").trim().toLowerCase())) return risposta({ ok: false, errore: "codice" }, 403);
-    if (c.prova) return risposta({ ok: true }); // solo verifica del codice
+    if (c.prova) return risposta({ ok: true, automatica: !!env.AUTOMATICA }); // solo verifica del codice
 
+    const { count } = await db.from("studio_lezioni").select("codice", { count: "exact", head: true }).gte("created_at", new Date(ora() - 3600_000).toISOString());
+    if ((count ?? 0) >= MAX_ORA) return risposta({ ok: false, errore: "troppe" }, 429);
+    const classe = testo(c.classe, 40), autore = testo(c.autore, 80);
+
+    // lezione gia' pronta, preparata dall'educatore in claude.ai
+    if (c.lezione !== undefined) {
+      const l = c.lezione;
+      if (!l || typeof l !== "object" || Array.isArray(l) || JSON.stringify(l).length > MAX_LEZIONE) return risposta({ ok: false, errore: "lezione" }, 400);
+      if (typeof l.titolo !== "string" || !l.titolo.trim() || !Array.isArray(l.concetti) || !l.concetti.length) return risposta({ ok: false, errore: "lezione" }, 400);
+      const pulita: any = {};
+      for (const k of Object.keys(SCHEMA.properties)) if (k !== "problema" && l[k] !== undefined) pulita[k] = l[k];
+      return salva(db, pulita, { classe, autore, pagine: 0 });
+    }
+
+    if (!env.AUTOMATICA) return risposta({ ok: false, errore: "automatica" }, 503);
     const immagini = Array.isArray(c.immagini) ? c.immagini : [];
     if (!immagini.length || immagini.length > MAX_FOTO) return risposta({ ok: false, errore: "foto" }, 400);
     for (const im of immagini) {
@@ -118,10 +137,7 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
       }
     }
 
-    const { count } = await db.from("studio_lezioni").select("codice", { count: "exact", head: true }).gte("created_at", new Date(ora() - 3600_000).toISOString());
-    if ((count ?? 0) >= MAX_ORA) return risposta({ ok: false, errore: "troppe" }, 429);
-
-    const materia = testo(c.materia, 80), classe = testo(c.classe, 40), note = testo(c.note, 600), autore = testo(c.autore, 80);
+    const materia = testo(c.materia, 80), note = testo(c.note, 600);
     const extra = [
       materia && `Materia: ${materia}.`,
       classe && `Classe: ${classe}.`,
@@ -134,23 +150,26 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
     if (!lez) return risposta({ ok: false, errore: "ia" }, 502);
     if (lez.problema) return risposta({ ok: false, errore: "illeggibile", messaggio: testo(lez.problema, 300) }, 422);
     if (!lez.titolo || !Array.isArray(lez.concetti) || !lez.concetti.length) return risposta({ ok: false, errore: "ia" }, 502);
-    // le risposte del quiz devono puntare a un'opzione che esiste
-    lez.quiz = (lez.quiz || []).filter((q: any) => Array.isArray(q.opzioni) && q.corretta >= 0 && q.corretta < q.opzioni.length);
     delete lez.problema;
     if (materia && !lez.materia) lez.materia = materia;
-    if (classe) lez.classe = classe;
-
-    for (let tentativo = 0; tentativo < 5; tentativo++) {
-      const codice = codiceCasuale();
-      const { error } = await db.from("studio_lezioni").insert({
-        codice, titolo: testo(lez.titolo, 200), materia: testo(lez.materia, 80) || null, classe: classe || null,
-        autore: autore || null, pagine: immagini.length, contenuto: lez,
-      });
-      if (!error) return risposta({ ok: true, codice, lezione: lez });
-      if (error.code !== "23505") { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
-    }
-    return risposta({ ok: false, errore: "server" }, 500);
+    return salva(db, lez, { classe, autore, pagine: immagini.length });
   };
+}
+
+async function salva(db: Db, lez: any, d: { classe: string; autore: string; pagine: number }) {
+  // le risposte del quiz devono puntare a un'opzione che esiste
+  lez.quiz = (Array.isArray(lez.quiz) ? lez.quiz : []).filter((q: any) => q && Array.isArray(q.opzioni) && Number.isInteger(q.corretta) && q.corretta >= 0 && q.corretta < q.opzioni.length);
+  if (d.classe) lez.classe = d.classe;
+  for (let tentativo = 0; tentativo < 5; tentativo++) {
+    const codice = codiceCasuale();
+    const { error } = await db.from("studio_lezioni").insert({
+      codice, titolo: testo(lez.titolo, 200), materia: testo(lez.materia, 80) || null, classe: d.classe || null,
+      autore: d.autore || null, pagine: d.pagine, contenuto: lez,
+    });
+    if (!error) return risposta({ ok: true, codice, lezione: lez });
+    if (error.code !== "23505") { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
+  }
+  return risposta({ ok: false, errore: "server" }, 500);
 }
 
 export function chiamaClaude(client: Anthropic): Chiama {
@@ -181,6 +200,6 @@ export function chiamaClaude(client: Anthropic): Chiama {
 const D: any = (globalThis as any).Deno;
 if (D && D.serve && D.env) {
   const db = createClient(D.env.get("SUPABASE_URL")!, D.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { auth: { persistSession: false } });
-  const env = { STUDIO_CODICI: D.env.get("STUDIO_CODICI") };
+  const env = { STUDIO_CODICI: D.env.get("STUDIO_CODICI"), AUTOMATICA: D.env.get("ANTHROPIC_API_KEY") ? "1" : "" };
   D.serve(crea(db, env, chiamaClaude(new Anthropic({ apiKey: D.env.get("ANTHROPIC_API_KEY") }))));
 }

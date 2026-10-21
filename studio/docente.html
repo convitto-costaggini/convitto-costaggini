@@ -60,14 +60,14 @@
     <div class="w">
       <p class="lbl">Per gli educatori</p>
       <h1><span class="ic" aria-hidden="true">📸</span>Dal libro alla lezione</h1>
-      <p>Fotografa le pagine che i ragazzi devono studiare e falle leggere a <b>Claude</b> (claude.ai, con il vostro abbonamento: nessun costo a consumo). In pochi minuti ottieni una lezione interattiva con idee chiave, mnemotecniche, esercizi e flashcard, costruita <b>solo</b> su quelle pagine, con il QR per i ragazzi.</p>
+      <p>Fotografa le pagine che i ragazzi devono studiare e falle leggere al tuo assistente di intelligenza artificiale: <b>Claude, ChatGPT o Gemini</b>, con l'account che usi già (nessun costo a consumo). In pochi minuti ottieni una lezione interattiva con idee chiave, mnemotecniche, esercizi e flashcard, costruita <b>solo</b> su quelle pagine, con il QR per i ragazzi.</p>
     </div>
   </section>
 
   <div class="st-palco">
     <div id="dc-modulo">
       <div class="st-card">
-        <div class="dc-passo"><b>1</b><h2>Le istruzioni per Claude</h2></div>
+        <div class="dc-passo"><b>1</b><h2>Le istruzioni per l'IA</h2></div>
         <p class="st-sot">Facoltativo: materia, classe e indicazioni aiutano a centrare la lezione. Poi copia le istruzioni.</p>
         <div class="dc-due">
           <div><label for="dc-mat">Materia</label><input type="text" id="dc-mat" list="dc-materie" maxlength="80" placeholder="es. Storia"/>
@@ -76,22 +76,25 @@
         </div>
         <label for="dc-note">Indicazioni per la lezione</label>
         <textarea id="dc-note" maxlength="600" placeholder="es. Domani c'è l'interrogazione: insisti sulle date. Oppure: solo il paragrafo 3."></textarea>
-        <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-copia-prompt">📋 Copia le istruzioni</button><a class="st-btn pieno" href="https://claude.ai/new" target="_blank" rel="noopener">Apri Claude ↗</a></div>
+        <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-copia-prompt">📋 Copia le istruzioni</button></div>
+        <p class="st-nota" style="margin:.8rem 0 .3rem">Poi apri l'assistente che preferisci:</p>
+        <div class="st-azioni" style="margin-top:0"><a class="st-btn pieno" href="https://claude.ai/new" target="_blank" rel="noopener">Claude ↗</a><a class="st-btn pieno" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT ↗</a><a class="st-btn pieno" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini ↗</a></div>
       </div>
 
       <div class="st-card">
-        <div class="dc-passo"><b>2</b><h2>In Claude</h2></div>
+        <div class="dc-passo"><b>2</b><h2>Nell'assistente IA</h2></div>
         <ol class="dc-guida">
           <li>Tocca <b>📎 / +</b> e allega le <b>foto delle pagine</b>, nell'ordine del libro (puoi scattarle lì direttamente).</li>
           <li><b>Incolla</b> le istruzioni nel messaggio e invia.</li>
-          <li>Quando Claude ha finito, <b>copia tutta la risposta</b> (il tasto copia sotto il messaggio o sul riquadro del codice).</li>
+          <li>Quando ha finito, <b>copia tutta la risposta</b> (il tasto copia sotto il messaggio o sul riquadro del codice).</li>
         </ol>
+        <p class="st-nota">💡 Va bene la versione gratuita o quella in abbonamento di ciascuno: serve solo che accetti le foto. Se apre un riquadro laterale (Canvas, artefatto), copia il testo da lì.</p>
         <p class="st-nota">🔒 Non fotografate quaderni o fogli con nomi o dati dei ragazzi.</p>
       </div>
 
       <div class="st-card">
         <div class="dc-passo"><b>3</b><h2>Incolla e pubblica</h2></div>
-        <label for="dc-json">La risposta di Claude</label>
+        <label for="dc-json">La risposta dell'IA</label>
         <textarea id="dc-json" style="min-height:120px;font-family:monospace;font-size:.82rem" placeholder='{"titolo": "...", ...}'></textarea>
         <div class="st-azioni" style="margin-top:.5rem"><button type="button" class="st-btn" id="dc-incolla">📋 Incolla</button><span class="st-nota" id="dc-letto"></span></div>
         <div class="dc-due">
@@ -105,7 +108,7 @@
       <div class="st-card">
         <details>
           <summary>📸 Creazione automatica dalle foto (solo se attivata: a consumo)</summary>
-          <p class="st-nota">Il sito manda le foto direttamente all'IA, senza passare da claude.ai. Funziona solo se su Supabase è stata inserita una chiave API Anthropic, che si paga a consumo. Usa materia, classe, indicazioni (passo 1) e codice educatori (passo 3).</p>
+          <p class="st-nota">Il sito manda le foto direttamente all'IA, senza passare da Claude, ChatGPT o Gemini. Funziona solo se su Supabase è stata inserita una chiave API Anthropic, che si paga a consumo. Usa materia, classe, indicazioni (passo 1) e codice educatori (passo 3).</p>
           <div class="st-azioni">
             <label class="st-btn pieno">📷 Scatta una foto<input type="file" accept="image/*" capture="environment" id="dc-cam" hidden/></label>
             <label class="st-btn">🖼️ Scegli dalla galleria<input type="file" accept="image/*" multiple id="dc-gal" hidden/></label>
@@ -178,8 +181,8 @@
   var FASI = ['Leggo le pagine del libro 📖', 'Trovo le idee chiave 💡', 'Invento la parola magica e il palazzo della memoria 🧠', 'Scrivo la filastrocca 🎵', 'Preparo quiz, vero o falso, abbinamenti ✏️', 'Mescolo le flashcard 🃏', 'Ultimi ritocchi ✨'];
   var ERRORI = {
     codice: 'Il codice educatori non è giusto.', configurazione: 'Il servizio non è ancora attivato: manca il codice educatori su Supabase (STUDIO_CODICI).',
-    automatica: 'La creazione automatica non è attivata (serve la chiave API, a consumo). Usate i passi 1-2-3 con claude.ai.',
-    lezione: 'La risposta incollata non è una lezione completa: copiate di nuovo tutta la risposta di Claude.',
+    automatica: 'La creazione automatica non è attivata (serve la chiave API, a consumo). Usate i passi 1-2-3 con Claude, ChatGPT o Gemini.',
+    lezione: 'La risposta incollata non è una lezione completa: copiate di nuovo tutta la risposta dell\'IA.',
     foto: 'Una delle foto non va bene: riprova con foto più piccole o in JPEG.', troppe: 'Sono state create molte lezioni nell\'ultima ora: riprova tra un po\'.',
     ia: 'L\'intelligenza artificiale non ha risposto bene. Riprova tra un minuto.', server: 'Errore del server: riprova tra un minuto.'
   };
@@ -212,7 +215,7 @@
         foto = []; disegnaFoto(); $('dc-note').value = '';
         esito(BASE + '?c=' + r.codice, r.lezione, r.codice);
       })
-      .catch(function () { clearInterval(iv); lav.hidden = true; $('dc-modulo').hidden = false; $('dc-err').textContent = 'Connessione assente o servizio non raggiungibile. Riprova, o usa i passi 1-2-3 con claude.ai.'; });
+      .catch(function () { clearInterval(iv); lav.hidden = true; $('dc-modulo').hidden = false; $('dc-err').textContent = 'Connessione assente o servizio non raggiungibile. Riprova, o usa i passi 1-2-3 con Claude, ChatGPT o Gemini.'; });
   };
 
   /* ───── risultato: QR, link, cartello ───── */
@@ -269,7 +272,7 @@
   });
   disegnaMie();
 
-  /* ───── lezione preparata in claude.ai: istruzioni, incolla, pubblica ───── */
+  /* ───── lezione preparata in Claude, ChatGPT o Gemini: istruzioni, incolla, pubblica ───── */
   function scheletro(o) {
     if (Array.isArray(o)) return o.length ? [scheletro(o[0])] : [];
     if (o && typeof o === 'object') { var r = {}; Object.keys(o).forEach(function (k) { r[k] = scheletro(o[k]); }); return r; }
@@ -296,7 +299,7 @@
     '- abbina: 5-6 coppie (termine-definizione, personaggio-fatto, causa-effetto, data-evento...).\n' +
     '- flashcard: 8-12 carte domanda/risposta brevi.\n' +
     '- da_ricordare: le 5 frasi essenziali da sapere a memoria.\n\n' +
-    'FORMATO DELLA RISPOSTA: rispondi con UN SOLO blocco di codice json, senza testo prima o dopo e senza creare artefatti o documenti. Il JSON deve avere esattamente questa struttura (gli elenchi qui hanno un solo elemento di esempio: tu mettine quanti indicato sopra):\n';
+    'FORMATO DELLA RISPOSTA: rispondi con UN SOLO blocco di codice json, senza testo prima o dopo e senza creare artefatti, canvas o documenti a parte. Il JSON deve avere esattamente questa struttura (gli elenchi qui hanno un solo elemento di esempio: tu mettine quanti indicato sopra):\n';
   var FORMA = JSON.stringify(scheletro(window.STUDIO_DEMO));
   function prompt() {
     var extra = [
@@ -308,12 +311,16 @@
   }
   $('dc-copia-prompt').onclick = function () {
     var t = prompt();
-    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { STUDIO.toast('Istruzioni copiate: ora apri Claude 📋'); })
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { STUDIO.toast('Istruzioni copiate: ora apri l\'assistente IA 📋'); })
       .catch(function () { $('dc-json').value = t; $('dc-json').select(); STUDIO.toast('Copia il testo dal riquadro del passo 3'); });
   };
   function leggiLezione() {
     var t = $('dc-json').value, a = t.indexOf('{'), b = t.lastIndexOf('}'), L;
-    try { L = JSON.parse(t.slice(a, b + 1)); } catch (e) { return null; }
+    t = t.slice(a, b + 1);
+    try { L = JSON.parse(t); } catch (e) {
+      /* qualche assistente lascia una virgola prima di } o ] */
+      try { L = JSON.parse(t.replace(/,(\s*[}\]])/g, '$1')); } catch (e2) { return null; }
+    }
     return L && L.titolo && Array.isArray(L.concetti) && L.concetti.length ? L : null;
   }
   function controlla() {
@@ -329,8 +336,8 @@
   $('dc-manuale').onclick = function () {
     var e2 = $('dc-err2'), L = leggiLezione(), cod = $('dc-cod').value.trim(), btn = this;
     e2.textContent = '';
-    if (!$('dc-json').value.trim()) { e2.textContent = 'Incolla prima la risposta di Claude.'; return; }
-    if (!L) { e2.textContent = 'Il testo incollato non è una lezione completa: copiate tutta la risposta di Claude, dalla prima { all\'ultima }. Se la risposta si è interrotta, scrivete a Claude «continua» oppure rifate la richiesta.'; return; }
+    if (!$('dc-json').value.trim()) { e2.textContent = 'Incolla prima la risposta dell\'IA.'; return; }
+    if (!L) { e2.textContent = 'Il testo incollato non è una lezione completa: copiate tutta la risposta dell\'IA, dalla prima { all\'ultima }. Se la risposta si è interrotta, scrivete «continua» oppure rifate la richiesta.'; return; }
     if (!cod) { e2.textContent = 'Scrivi il codice educatori.'; $('dc-cod').focus(); return; }
     if ($('dc-mat').value.trim() && !L.materia) L.materia = $('dc-mat').value.trim();
     ls('studio-codice', cod); ls('studio-autore', $('dc-aut').value.trim());

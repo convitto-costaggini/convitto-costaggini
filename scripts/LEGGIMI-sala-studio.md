@@ -10,8 +10,8 @@
 
 ## Come si crea una lezione (nessun costo a consumo)
 1. In `studio/docente.html` l'educatore scrive (se vuole) materia, classe e indicazioni e preme **Copia le istruzioni**.
-2. Apre claude.ai con il proprio abbonamento, allega le foto delle pagine, incolla le istruzioni e invia.
-3. Copia tutta la risposta di Claude, la incolla nel passo 3, scrive il codice educatori e preme **Pubblica la lezione**:
+2. Apre Claude, ChatGPT o Gemini (versione gratuita o in abbonamento), allega le foto delle pagine, incolla le istruzioni e invia.
+3. Copia tutta la risposta dell'IA, la incolla nel passo 3, scrive il codice educatori e preme **Pubblica la lezione**:
    la lezione viene salvata e compaiono il codice e il QR.
 
 Se il servizio non risponde, lo stesso passo 3 offre **Crea solo il link**: la lezione viaggia dentro il link (troppo lungo per un QR).
@@ -23,7 +23,7 @@ Se il servizio non risponde, lo stesso passo 3 offre **Crea solo il link**: la l
 - [ ] **Prova**: aprire `studio/docente.html` e seguire i passi 1-2-3.
 
 ## Facoltativo: creazione automatica dalle foto (a consumo)
-Nella pagina c'è anche "Creazione automatica dalle foto": il sito manda le foto direttamente all'IA, senza passare da claude.ai.
+Nella pagina c'è anche "Creazione automatica dalle foto": il sito manda le foto direttamente all'IA, senza passare da Claude, ChatGPT o Gemini.
 Funziona solo aggiungendo il segreto `ANTHROPIC_API_KEY` (chiave API da console.anthropic.com, a consumo: stima 10-30 centesimi
 a lezione). Senza chiave quel riquadro avvisa che non è attivo; tutto il resto funziona.
 

@@ -67,7 +67,7 @@
       <div class="cm-passo" id="cm-p1">
         <h2><span class="n">1</span> Che lezione vi serve?</h2>
         <div class="cm-griglia">
-          <div class="cm-campo"><label for="cm-lin">Lingua</label><select id="cm-lin"><option value="en">Inglese</option><option value="es">Spagnolo</option></select></div>
+          <div class="cm-campo"><label for="cm-lin">Lingua</label><select id="cm-lin"><option value="en">Inglese</option><option value="fr">Francese</option><option value="es">Spagnolo</option></select></div>
           <div class="cm-campo"><label for="cm-liv">Livello</label><select id="cm-liv"><option>A1</option><option selected>A2</option><option>B1</option><option>B2</option></select><small>A1–A2 biennio · B1–B2 triennio</small></div>
           <div class="cm-campo"><label for="cm-amb">Indirizzo / ambito</label><select id="cm-amb"><option>Cucina</option><option>Sala</option><option>Pasticceria</option><option>Accoglienza</option><option>Bar</option><option>Cultura e viaggi</option><option>Lavoro all'estero</option></select></div>
           <div class="cm-campo cm-largo"><label for="cm-arg">Argomento</label>
@@ -137,6 +137,12 @@
       B1: ['present perfect vs past simple', 'past continuous vs past simple', 'first conditional', 'second conditional', 'modal verbs of obligation and advice', 'polite indirect questions', 'relative clauses (who, which, that)', 'used to', 'the passive (present and past simple)', 'phrasal verbs for work'],
       B2: ['the passive (all tenses)', 'reported speech', 'second and third conditional', 'modal verbs of deduction', 'gerund vs infinitive', 'defining and non-defining relative clauses', 'wish and if only', 'linking words and discourse markers', 'future forms: will, going to, present continuous', 'formal register in e-mails']
     },
+    fr: {
+      A1: ['le présent (verbes en -er)', 'être et avoir', 'aller, faire, prendre, vouloir, pouvoir', 'il y a / c\'est', 'genre et nombre des noms', 'articles définis, indéfinis et partitifs', 'la négation ne… pas', 'l\'impératif', 'nombres, prix et quantités', 'prépositions de lieu et de temps'],
+      A2: ['le passé composé (avoir et être)', 'l\'imparfait', 'comparatifs et superlatifs', 'le futur proche (aller + infinitif)', 'je voudrais / pourriez-vous pour demander poliment', 'les pronoms COD et COI', 'les verbes pronominaux', 'il faut / devoir + infinitif', 'très / beaucoup / trop', 'les adjectifs possessifs et démonstratifs'],
+      B1: ['passé composé vs imparfait', 'le futur simple', 'le conditionnel de politesse', 'l\'impératif et les pronoms', 'les pronoms en et y', 'les pronoms relatifs (qui, que, où)', 'le subjonctif présent (introduction)', 'la voix passive', 'les expressions de temps (depuis, il y a, pendant)', 'les connecteurs logiques'],
+      B2: ['le subjonctif pour demander et recommander', 'le plus-que-parfait', 'le discours indirect', 'les phrases hypothétiques avec si', 'le conditionnel passé', 'les pronoms relatifs composés (lequel, dont)', 'le gérondif et le participe présent', 'la mise en relief (c\'est… qui / que)', 'les connecteurs du discours', 'le registre formel dans les courriels']
+    },
     es: {
       A1: ['presente de indicativo (verbos regulares)', 'verbos irregulares: ser, estar, tener, ir', 'ser y estar', 'hay / está', 'género y número', 'artículos determinados e indeterminados', 'gustar y verbos como gustar', 'números, precios y cantidades', 'querer y poder para pedir', 'preposiciones de lugar'],
       A2: ['pretérito perfecto', 'pretérito indefinido (regular e irregular)', 'comparativos y superlativos', 'ir a + infinitivo', 'imperativo con usted', 'presente con cambio vocálico (e>ie, o>ue)', 'pronombres de objeto directo e indirecto', 'verbos reflexivos', 'hay que / tener que + infinitivo', 'muy / mucho / demasiado'],
@@ -184,7 +190,7 @@
   suggerimenti();
 
   /* ───── la richiesta per l'IA ───── */
-  var NOME = { en: 'inglese', es: 'spagnolo' }, LUOGHI = { en: 'Londra, Dublino, Edimburgo o New York', es: 'Madrid, Barcellona, Siviglia o Valencia' };
+  var NOME = { en: 'inglese', fr: 'francese', es: 'spagnolo' }, LUOGHI = { en: 'Londra, Dublino, Edimburgo o New York', fr: 'Parigi, Lione, Bordeaux o Nizza', es: 'Madrid, Barcellona, Siviglia o Valencia' };
   function richiesta() {
     var lin = $('cm-lin').value, liv = $('cm-liv').value, amb = $('cm-amb').value, arg = $('cm-arg').value.trim(), gra = $('cm-gra').value.trim(), mat = $('cm-mat').value.trim(), note = $('cm-not').value.trim();
     var N = NOME[lin];

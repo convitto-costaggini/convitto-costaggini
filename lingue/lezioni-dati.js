@@ -15,7 +15,7 @@ window.LEZIONI = [
     obiettivi: [
       "Capire e dare ordini brevi in cucina (imperativo affermativo e negativo).",
       "Conoscere dieci verbi della preparazione e le parole della brigata.",
-      "Leggere e chiedere quantità (How much / How many · ¿Cuánto/a? / ¿Cuántos/as?).",
+      "Leggere e chiedere quantità (How much / How many · ¿Cuánto/a? / ¿Cuántos/as? · Combien de… ?).",
       "Seguire una ricetta semplice e metterne in ordine i passaggi."
     ],
     scaletta: [
@@ -25,8 +25,8 @@ window.LEZIONI = [
       ["10'", "Verifica breve (file A e B) o, in alternativa, la ricetta scritta come compito."]
     ],
     spunti: [
-      "Cultura: la «brigade de cuisine» nasce con Auguste Escoffier; ancora oggi in molte cucine del mondo si risponde «Yes, chef!» / «¡Oído, chef!».",
-      "Estero: chi va in stage a Londra, Dublino, Madrid o Barcellona sente questi ordini dal primo giorno, spesso detti in fretta e con il rumore della cucina.",
+      "Cultura: la «brigade de cuisine» nasce con Auguste Escoffier; ancora oggi in molte cucine del mondo si risponde «Yes, chef!» / «¡Oído, chef!» / «Oui, chef !».",
+      "Estero: chi va in stage a Londra, Dublino, Madrid, Barcellona o Lione sente questi ordini dal primo giorno, spesso detti in fretta e con il rumore della cucina.",
       "Con i docenti di cucina: la ricetta della missione si può preparare davvero in laboratorio, dando gli ordini in lingua."
     ]
   },
@@ -131,6 +131,108 @@ window.LEZIONI = [
       { tipo: "aperta", titolo: "La tua ricetta", punti: 5,
         testo: "Scrivi in inglese la ricetta di un piatto che conosci, con almeno cinque ordini (usa anche una quantità e un don't).",
         facile: "Scrivi in inglese tre ordini per preparare un piatto che conosci. Puoi usare i verbi: wash, peel, cut, add, boil, stir." }
+    ]
+  },
+  /* ───────────────────────── FRANCESE ───────────────────────── */
+  fr: {
+    luogo: "un ristorante di Lione",
+    schede: [
+      { titolo: "Il primo giorno in brigata", testo: "In cucina il tempo è poco e il rumore è tanto: gli ordini sono **brevissimi**. Ascolta lo chef e la risposta del commis.",
+        esempi: [["Hache l'oignon, s'il te plaît !", "Trita la cipolla, per favore!", "àsc lonión, sil te plè"], ["Oui, chef !", "Sì, chef!", "uì, scèf"]],
+        domanda: { testo: "In cucina gli ordini sono…", o: ["brevi e diretti", "lunghi e complicati", "sempre scritti"], spiega: "Poche parole, subito chiare: in servizio non c'è tempo per le frasi lunghe." } },
+      { titolo: "L'ordine con il «tu»", testo: "Tra colleghi in cucina ci si dà del tu. L'imperativo si ricava dal **tu** del presente; per i verbi in **-er** si toglie la **-s**: tu coupes → **coupe**, tu ajoutes → **ajoute**. Per gli altri verbi la forma resta uguale: tu bats → **bats**, tu fais → **fais**, tu mets → **mets**.\nNelle ricette scritte trovi spesso l'infinito: *Éplucher les pommes de terre.*",
+        esempi: [["Coupe le pain.", "Taglia il pane.", "cùp le pàn"], ["Bats les œufs.", "Sbatti le uova.", "bà lez ö"], ["Ajoute le sel.", "Aggiungi il sale.", "ajùt le sèl"]],
+        domanda: { testo: "Come si dice «lava» (da laver)?", o: ["Lave", "Laves", "Laver"], spiega: "Laver finisce in -er, quindi si toglie la -s: Lave !" } },
+      { titolo: "Attenzione a questi", testo: "Alcuni verbi sono irregolari: **mets** (metti, da mettre), **fais** (fai, da faire), **prends** (prendi, da prendre).\nPer vietare: **ne… pas** attorno al verbo, da imparare come formula. Per essere gentile: **s'il te plaît**.",
+        esempi: [["Mets de l'eau à bouillir.", "Metti l'acqua a bollire.", "mè de lò a buiìr"], ["Remue la sauce.", "Mescola il sugo.", "remù la sòs"], ["Ne touche pas le four !", "Non toccare il forno!", "ne tùsc pa le fùr"], ["Ne cours pas en cuisine !", "Non correre in cucina!", "ne cùr pa zan cuizìn"]],
+        domanda: { testo: "Come dici «Non toccare il forno!»?", o: ["Ne touche pas le four !", "Ne pas touche le four !", "Touche ne pas le four !"], spiega: "Il divieto si forma con ne… pas attorno al verbo: ne touche pas, ne cours pas, n'ajoute pas." } },
+      { titolo: "Dieci verbi da cucina", testo: "Tocca 🔊 e ripeti ad alta voce. Sono gli ordini che sentirai più spesso.",
+        esempi: [["hache", "trita", "àsc"], ["coupe", "taglia", "cùp"], ["épluche", "sbuccia", "eplìsc"], ["lave", "lava", "làv"], ["remue", "mescola", "remù"], ["ajoute", "aggiungi", "ajùt"], ["verse", "versa", "vèrs"], ["fais frire", "friggi", "fè frìr"], ["enfourne", "cuoci in forno", "anfùrn"], ["bats", "sbatti", "bà"]],
+        domanda: { testo: "«Épluche» vuol dire…", o: ["sbuccia", "friggi", "versa"], spiega: "Épluche = sbuccia: Épluche les pommes de terre." } },
+      { titolo: "Combien de… ?", testo: "Le quantità della ricetta. Per chiedere si usa **combien de** (non cambia mai) sia per ciò che non si conta (combien de sel, combien de farine) sia per ciò che si conta (combien d'œufs, combien d'oignons). Dopo la quantità c'è sempre **de** (o **d'** davanti a vocale): une pincée **de** sel, une gousse **d'**ail.",
+        esempi: [["une pincée de sel", "un pizzico di sale", "ün pansé de sèl"], ["une cuillère à soupe de sucre", "un cucchiaio di zucchero", "ün cuiièr a sùp de sücr"], ["deux cents grammes de farine", "200 grammi di farina", "dö san gram de farìn"], ["un demi-litre de lait", "mezzo litro di latte", "àn demi lìtr de lè"], ["une gousse d'ail", "uno spicchio d'aglio", "ün gùs dàj"], ["Combien d'œufs faut-il ?", "Quante uova servono?", "combiàn dö fo-tìl"]],
+        domanda: { testo: "«_____ œufs faut-il ?»", o: ["Combien d'", "Combien de", "Combien des"], spiega: "Davanti a vocale de diventa d': Combien d'œufs faut-il ?" } },
+      { titolo: "Le parole della brigata", testo: "Brevi grida che evitano incidenti e tengono il ritmo. Si sentono in tutte le cucine professionali francesi.",
+        esempi: [["Oui, chef !", "Ricevuto, chef! (si risponde sempre così)", "uì, scèf"], ["Derrière !", "Dietro! (passo alle tue spalle)", "derièr"], ["Je passe !", "Passo! (fatemi passare)", "je pàs"], ["Attention, ça brûle !", "Attenzione, scotta!", "atansión, sa brül"], ["Table cinq, on envoie !", "Tavolo cinque, si parte! (si inizia a cucinare)", "tàbl sènc, on anvuà"]],
+        domanda: { testo: "Passi alle spalle di un collega con una pentola calda. Cosa dici?", o: ["Derrière ! Attention, ça brûle !", "Table cinq, on envoie !", "Oui, chef !"], spiega: "Derrière ! avvisa che sei dietro, «ça brûle» che porti qualcosa che scotta." } },
+      { titolo: "In tasca", testo: "**Ordine** con il tu: verbi in -er → senza **-s** (coupe, ajoute).\nDa ricordare: **mets**, **fais**, **prends**.\n**Divieto**: *Ne touche pas ! Ne cours pas !*\n**Gentilezza**: s'il te plaît.\n**Combien de…** (sel, farine, œufs).\nAlla fine di ogni ordine: **Oui, chef !**",
+        esempi: [], domanda: null }
+    ],
+    esercizi: [
+      { tipo: "abbina", titolo: "I verbi della cucina", consegna: "Tocca un verbo e poi il suo significato.",
+        coppie: [["hache", "trita"], ["épluche", "sbuccia"], ["remue", "mescola"], ["verse", "versa"], ["enfourne", "cuoci in forno"], ["fais frire", "friggi"]] },
+      { tipo: "scelta", titolo: "Dai l'ordine giusto", consegna: "Scegli la forma corretta.",
+        voci: [
+          { d: "_____ les carottes. (sbuccia)", o: ["Épluche", "Épluches", "Éplucher"] },
+          { d: "_____ le four ! (non toccare)", o: ["Ne touche pas", "Ne touches pas", "Touche ne pas"] },
+          { d: "_____ de l'eau à bouillir. (metti)", o: ["Mets", "Mettes", "Mettre"] },
+          { d: "_____ les mains, s'il te plaît. (lavati)", o: ["Lave-toi", "Tu laves", "Je lave"] },
+          { d: "_____ en cuisine ! (non correre)", o: ["Ne cours pas", "Ne courir pas", "Cours ne pas"] },
+          { d: "_____ la sauce doucement. (mescola)", o: ["Remue", "Remues", "Remuer"] }
+        ] },
+      { tipo: "completa", titolo: "La vinaigrette", consegna: "Completa la ricetta: per ogni spazio scegli il verbo giusto.",
+        testo: "[Mets] une cuillère à café de moutarde dans un bol. [Ajoute] une pincée de sel et du poivre. [Verse] un peu de vinaigre. [Fouette] bien le mélange. [Incorpore] l'huile d'olive petit à petit. [Goûte] la sauce, et c'est prêt !",
+        intrusi: ["épluche", "enfourne"] },
+      { tipo: "ordina", titolo: "L'omelette", consegna: "Tocca i passaggi nell'ordine giusto.",
+        passi: [["Casse les œufs dans un bol.", "Rompi le uova in una ciotola."], ["Bats les œufs avec une pincée de sel.", "Sbatti le uova con un pizzico di sale."], ["Fais fondre le beurre dans la poêle.", "Fai sciogliere il burro nella padella."], ["Verse les œufs dans la poêle chaude.", "Versa le uova nella padella calda."], ["Replie l'omelette avec une spatule.", "Ripiega la frittata con una spatola."], ["Sers tout de suite, avec une salade !", "Servi subito, con un'insalata!"]] },
+      { tipo: "scelta", titolo: "Les quantités", consegna: "Scegli la quantità che ha senso.",
+        voci: [
+          { d: "Ajoute _____ sel.", o: ["une pincée de", "un litre de", "une gousse de"] },
+          { d: "Hache _____ ail.", o: ["une gousse d'", "une cuillère à soupe d'", "un demi-litre d'"] },
+          { d: "Verse _____ lait.", o: ["un demi-litre de", "une pincée de", "une gousse de"] },
+          { d: "Il nous faut deux cents _____ farine.", o: ["grammes de", "gousses de", "pincées de"] },
+          { d: "_____ œufs faut-il ?", o: ["Combien d'", "Combien", "Combien des"] },
+          { d: "_____ sel faut-il ?", o: ["Combien de", "Combien", "Combien du"] }
+        ] },
+      { tipo: "ascolta", titolo: "Ascolta lo chef", consegna: "Ascolta l'ordine e scegli che cosa vuol dire.",
+        voci: [
+          { t: "Épluche les pommes de terre.", o: ["Sbuccia le patate.", "Friggi le patate.", "Lava le patate."] },
+          { t: "Ne touche pas le couteau !", o: ["Non toccare il coltello!", "Prendi il coltello!", "Lava il coltello!"] },
+          { t: "Ajoute une cuillère à soupe de sucre.", o: ["Aggiungi un cucchiaio di zucchero.", "Aggiungi un pizzico di sale.", "Togli lo zucchero."] },
+          { t: "Derrière ! Attention, ça brûle !", o: ["Dietro di te, attenzione: scotta!", "Il piatto è pronto!", "Accendi il forno!"] },
+          { t: "Enfourne la tarte pendant trente minutes.", o: ["Cuoci la torta in forno per trenta minuti.", "Taglia la torta in trenta pezzi.", "Servi la torta tra trenta minuti."] }
+        ] }
+    ],
+    missione: {
+      titolo: "Il primo giorno in brigata", chef: "Chef Camille",
+      intro: "Sei in stage in un ristorante di Lione. È il tuo primo giorno e la chef Camille ti dà gli ordini. Capisci che cosa vuole e reagisci nel modo giusto.",
+      passi: [
+        { dice: "Bonjour ! Mets ton tablier et lave-toi les mains, s'il te plaît.", it: "Buongiorno! Mettiti il grembiule e lavati le mani, per favore.",
+          o: [["🧼 Ti metti il grembiule e ti lavi le mani.", 1, "Perfetto: igiene prima di tutto."], ["🔥 Accendi subito i fornelli.", 0, "Prima il grembiule e le mani: tablier = grembiule, lave-toi les mains = lavati le mani."], ["☕ Vai a prenderti un caffè.", 0, "Non è proprio il momento! La chef ti ha chiesto grembiule e mani pulite."]] },
+        { dice: "Épluche cinq pommes de terre et coupe l'oignon.", it: "Sbuccia cinque patate e taglia la cipolla.",
+          o: [["🥔 Sbucci cinque patate e tagli la cipolla.", 1, "Esatto: épluche = sbuccia, coupe = taglia."], ["🥔 Sbucci due patate e friggi la cipolla.", 0, "Cinq = cinque, coupe = taglia (friggere è faire frire)."], ["🧅 Tagli le patate e sbucci la cipolla.", 0, "Hai scambiato i verbi: épluche le patate, coupe la cipolla."]] },
+        { dice: "C'est clair ?", it: "È chiaro?", domanda: "Che cosa rispondi?",
+          o: [["Oui, chef !", 1, "La risposta di ogni buon commis."], ["Ouais, ça va.", 0, "«Ouais» è troppo familiare: alla chef si risponde «Oui, chef !»."], ["Quoi ?", 0, "Suona brusco. Se non hai capito: «Pardon, chef, vous pouvez répéter ?»."]] },
+        { dice: "Ajoute une pincée de sel dans l'eau.", it: "Aggiungi un pizzico di sale nell'acqua.",
+          o: [["🧂 Aggiungi un pizzico di sale.", 1, "Une pincée de sel = un pizzico di sale."], ["🥄 Aggiungi un cucchiaio di zucchero.", 0, "Sel è il sale, e une pincée è un pizzico."], ["🧂 Versi tutto il pacco di sale.", 0, "Une pincée è solo un pizzico!"]] },
+        { situazione: "Devi passare alle spalle di un collega portando una pentola di acqua bollente.", domanda: "Che cosa dici?",
+          o: [["Derrière ! Attention, ça brûle !", 1, "Così il collega non si gira all'improvviso: niente incidenti."], ["Table cinq, on envoie !", 0, "Quello lo dice chi coordina il servizio, per far partire un tavolo."], ["Ne touche pas !", 0, "Non basta: devi avvisare che sei dietro e che porti qualcosa che scotta."]] },
+        { dice: "Combien d'œufs faut-il pour l'omelette ?", it: "Quante uova servono per l'omelette?", situazione: "Sulla ricetta leggi: 6 œufs · 1 kg de pommes de terre · 1 oignon.", domanda: "Che cosa rispondi?",
+          o: [["Six œufs, chef.", 1, "Esatto: sei uova."], ["Six kilos, chef.", 0, "Le uova si contano: six œufs, non kilos."], ["Beaucoup œufs, chef.", 0, "Serve il numero: six œufs."]] },
+        { dice: "Table cinq, on envoie ! Ne brûle pas l'oignon !", it: "Tavolo cinque, si parte! Non bruciare la cipolla!",
+          o: [["🔥 Abbassi il fuoco sotto la cipolla.", 1, "Ne brûle pas = non bruciare: hai salvato la cipolla!"], ["🔥 Alzi il fuoco al massimo.", 0, "Così la bruci! Ne brûle pas = non bruciare."], ["🗑️ Butti via la cipolla.", 0, "Non serve buttarla: basta non bruciarla."]] }
+      ],
+      esiti: ["La chef ti stringe la mano: « Très bien ! À demain. »", "« Bon travail. » Domani torni, e andrà ancora meglio.", "« Bon… on s'entraîne demain. » Ripassa gli ordini e riprova.", "La chef soupire : « On recommence. » Rifai la lezione e riprova!"]
+    },
+    verifica: [
+      { tipo: "traduci", titolo: "Scrivi il verbo in francese (con il tu)", punti: 1,
+        voci: [["trita", "hache"], ["sbuccia", "épluche"], ["taglia", "coupe"], ["mescola", "remue"], ["aggiungi", "ajoute"], ["versa", "verse"], ["friggi", "fais frire"], ["cuoci in forno", "enfourne"], ["lava", "lave"], ["sbatti", "bats"]] },
+      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
+        voci: [
+          { d: "_____ l'oignon. (taglia)", o: ["Coupe", "Coupes", "Couper"] },
+          { d: "_____ la poêle ! (non toccare)", o: ["Ne touche pas", "Ne touches pas", "Touche ne pas"] },
+          { d: "_____ le lait. (versa)", o: ["Verse", "Verses", "Verser"] },
+          { d: "_____ la tarte une heure. (cuoci in forno)", o: ["Enfourne", "Enfournes", "Enfourner"] },
+          { d: "_____ sel faut-il ?", o: ["Combien de", "Combien", "Combien du"] },
+          { d: "_____ oignons faut-il ?", o: ["Combien d'", "Combien", "Combien des"] },
+          { d: "Ajoute _____ sel.", o: ["une pincée de", "une gousse de", "un litre de"] },
+          { d: "Utilise _____ ail.", o: ["une gousse d'", "une pincée d'", "un demi-litre d'"] }
+        ] },
+      { tipo: "traduci", titolo: "Traduci gli ordini in francese", punti: 2,
+        voci: [["Sbuccia le patate.", "Épluche les pommes de terre."], ["Non toccare il forno!", "Ne touche pas le four !"], ["Aggiungi un pizzico di sale.", "Ajoute une pincée de sel."], ["Mescola il sugo, per favore.", "Remue la sauce, s'il te plaît."], ["Non correre in cucina!", "Ne cours pas en cuisine !"], ["Metti l'acqua a bollire.", "Mets de l'eau à bouillir."]] },
+      { tipo: "aperta", titolo: "La tua ricetta", punti: 5,
+        testo: "Scrivi in francese la ricetta di un piatto che conosci, con almeno cinque ordini (usa anche una quantità e un divieto con «ne… pas»).",
+        facile: "Scrivi in francese tre ordini per preparare un piatto che conosci. Puoi usare i verbi: lave, épluche, coupe, ajoute, mets, remue." }
     ]
   },
   /* ───────────────────────── SPAGNOLO ───────────────────────── */
@@ -244,9 +346,9 @@ window.LEZIONI = [
   docente: {
     obiettivi: [
       "Confrontare piatti e vini: comparativi di maggioranza, minoranza e uguaglianza.",
-      "Usare i superlativi e le forme irregolari (better / the best · mejor / el mejor).",
+      "Usare i superlativi e le forme irregolari (better / the best · mejor / el mejor · meilleur / le meilleur).",
       "Descrivere sapori e consistenze con dieci aggettivi della sala.",
-      "Consigliare in modo cortese (I recommend… / Le recomiendo…) e rispondere alle domande del cliente."
+      "Consigliare in modo cortese (I recommend… / Le recomiendo… / Je vous recommande…) e rispondere alle domande del cliente."
     ],
     scaletta: [
       ["10'", "Mini-lezione alla LIM: le schede insieme, la classe risponde alle domande lampo."],
@@ -255,7 +357,7 @@ window.LEZIONI = [
       ["10'", "Verifica breve (file A e B) o un dialogo scritto come compito."]
     ],
     spunti: [
-      "Cultura: nel Regno Unito e in Irlanda la mancia si aggira sul 10–12,5% (spesso è già in conto come «service charge»), negli Stati Uniti sul 15–20%; in Spagna è facoltativa e piccola. Consigliare bene fa la differenza.",
+      "Cultura: nel Regno Unito e in Irlanda la mancia si aggira sul 10–12,5% (spesso è già in conto come «service charge»), negli Stati Uniti sul 15–20%; in Spagna è facoltativa e piccola; in Francia il servizio è già compreso nel conto e lasciare qualcosa è facoltativo. Consigliare bene fa la differenza.",
       "Estero: in un ristorante italiano all'estero il cliente si aspetta che sia proprio il cameriere italiano a spiegargli la differenza tra due piatti o due vini.",
       "Con i docenti di sala ed enogastronomia: presentare in lingua i vini e l'olio del territorio (Sabina DOP) e confrontarli."
     ]
@@ -360,6 +462,107 @@ window.LEZIONI = [
       { tipo: "aperta", titolo: "Al tavolo", punti: 5,
         testo: "Un cliente ti chiede un consiglio. Scrivi in inglese un breve dialogo (almeno sei battute) in cui confronti due piatti e due vini, con almeno due comparativi e un superlativo.",
         facile: "Scrivi in inglese tre frasi per consigliare un piatto. Usa: lighter than, more … than, the best." }
+    ]
+  },
+  /* ───────────────────────── FRANCESE ───────────────────────── */
+  fr: {
+    schede: [
+      { titolo: "« Que me conseillez-vous ? »", testo: "È la domanda che ogni cameriere sente ogni sera. Con i clienti si usa il **lei** (vous). Rispondere «è tutto buono» non basta: chi consiglia bene **confronta** e **spiega**.",
+        esempi: [["Que me conseillez-vous ?", "Che cosa mi consiglia?", "ke me consseié vù"], ["Le bar est plus léger que l'entrecôte, et notre tiramisu est le meilleur de la ville.", "Il branzino è più leggero della bistecca, e il nostro tiramisù è il migliore della città.", ""]],
+        domanda: { testo: "Consigliare bene vuol dire…", o: ["confrontare e spiegare", "dire «è tutto buono»", "indicare il piatto più caro"], spiega: "Il cliente si fida di chi gli spiega le differenze." } },
+      { titolo: "Più, meno, tanto quanto", testo: "**plus** + aggettivo + **que** (più… di) · **moins** + aggettivo + **que** (meno… di) · **aussi** + aggettivo + **que** (… quanto).\nL'aggettivo si accorda: un poisson plus léger, une tarte plus légère.",
+        esempi: [["Le poisson est plus léger que la viande.", "Il pesce è più leggero della carne.", "le poassòn è plü lejé ke la viànd"], ["Ce vin est moins cher que l'autre.", "Questo vino è meno caro dell'altro.", ""], ["Les pâtes sont aussi bonnes qu'en Italie.", "La pasta è buona come in Italia.", ""]],
+        domanda: { testo: "«Il pesce è più fresco della carne»", o: ["Le poisson est plus frais que la viande.", "Le poisson est plus frais de la viande.", "Le poisson est plus frais comme la viande."], spiega: "Il paragone si fa con que: plus frais que." } },
+      { titolo: "Migliore e peggiore", testo: "Alcuni comparativi sono irregolari: bon → **meilleur**, mauvais → **pire**. Non si dice «plus bon»! (Con i verbi e gli avverbi: bien → **mieux**.)\nPer il migliore: **le meilleur / la meilleure**, e il resto si accorda: le plat le plus demandé, la tarte la plus savoureuse.",
+        esempi: [["Ce vin est meilleur que le vin de la maison.", "Questo vino è migliore di quello della casa.", ""], ["C'est le meilleur vin de la carte.", "È il vino migliore della carta.", "sè le meiör vàn de la càrt"], ["C'est notre plat le plus demandé.", "È il nostro piatto più richiesto.", ""]],
+        domanda: { testo: "«Il vino migliore»", o: ["le meilleur vin", "le plus meilleur vin", "le plus bon vin"], spiega: "Meilleur è già «più buono»: le meilleur vin." } },
+      { titolo: "Il più… e i «buonissimo»", testo: "Per dire «il più… di»: **le / la** + nome + **le / la plus** + aggettivo + **de**: le bar est le poisson le plus frais **du** jour (de + le = **du**). Con meilleur basta un articolo: le meilleur plat du jour.\nPer dire «molto, moltissimo» si usa **très** o **vraiment**: très bon, vraiment bon. Alcuni aggettivi sono già forti: **délicieux**, **excellent**, **exquis**: *C'est délicieux !*",
+        esempi: [["C'est le plat le plus typique de la maison.", "È il piatto più tipico della casa.", ""], ["Ce jambon est délicieux.", "Questo prosciutto è buonissimo.", "se gianbòn è delissiö"], ["Le bar est le poisson le plus frais du jour.", "Il branzino è il pesce più fresco di oggi.", ""]],
+        domanda: { testo: "«È buonissimo!»", o: ["C'est délicieux !", "C'est plus bon !", "C'est très meilleur !"], spiega: "Délicieux è già «molto buono»; plus bon e très meilleur sono errori." } },
+      { titolo: "Le parole del gusto", testo: "Tocca 🔊 e ripeti: servono per descrivere un piatto o un vino.",
+        esempi: [["léger", "leggero", "lejé"], ["copieux", "sostanzioso", "copiö"], ["épicé", "piccante", "episé"], ["sucré", "dolce", "sücré"], ["sec", "secco (vino)", "sèc"], ["corsé", "corposo", "corsé"], ["délicat", "delicato", "delicà"], ["croustillant", "croccante", "crustiàn"], ["tendre", "tenero", "tàndr"], ["fait maison", "fatto in casa", "fè mezòn"]],
+        domanda: { testo: "Un vino «corsé» è…", o: ["corposo", "dolce", "frizzante"], spiega: "Corsé = corposo, di struttura." } },
+      { titolo: "Le frasi per consigliare", testo: "Formule cortesi, con il lei, pronte da usare al tavolo.",
+        esempi: [["Je vous recommande le bar.", "Le consiglio il branzino.", "je vu recomànd le bàr"], ["Si vous aimez le poisson, goûtez le risotto aux gambas.", "Se le piace il pesce, provi il risotto ai gamberi.", ""], ["Il s'accorde très bien avec un vin blanc sec.", "Si abbina molto bene a un bianco secco.", ""], ["C'est la spécialité du chef.", "È la specialità dello chef.", ""], ["Voulez-vous goûter le vin d'abord ?", "Desidera assaggiare prima il vino?", ""]],
+        domanda: { testo: "Il cliente vuole qualcosa di leggero. Che cosa dici?", o: ["Je vous recommande le bar grillé : il est plus léger que les lasagnes.", "Prenez les lasagnes, c'est le plus copieux.", "Je ne sais pas."], spiega: "Consigli, confronti e spieghi il perché." } },
+      { titolo: "In tasca", testo: "**plus … que** · **moins … que** · **aussi … que**.\n**Irregolari**: meilleur, pire (mai «plus bon»).\n**Il più**: le plat le plus frais **du** jour (de + le = du).\n**Moltissimo**: très, vraiment; délicieux, excellent.\nCon il cliente il **vous**: *Je vous recommande… · Voulez-vous goûter… ?*",
+        esempi: [], domanda: null }
+    ],
+    esercizi: [
+      { tipo: "abbina", titolo: "Le parole del gusto", consegna: "Tocca un aggettivo e poi il suo significato.",
+        coppie: [["léger", "leggero"], ["épicé", "piccante"], ["sec", "secco"], ["corsé", "corposo"], ["croustillant", "croccante"], ["fait maison", "fatto in casa"]] },
+      { tipo: "scelta", titolo: "Più, meno, tanto quanto", consegna: "Scegli la forma giusta.",
+        voci: [
+          { d: "Le poisson est plus léger _____ la viande.", o: ["que", "de", "comme"] },
+          { d: "Ce vin est _____ que le vin de la maison. (migliore)", o: ["meilleur", "plus bon", "bon"] },
+          { d: "La tarte est _____ sucrée que la glace. (altrettanto)", o: ["aussi", "plus", "très"] },
+          { d: "Le homard est _____ cher que le saumon. (meno)", o: ["moins", "plus peu", "peu"] },
+          { d: "Ce plat est _____ . (buonissimo)", o: ["délicieux", "très meilleur", "plus bon"] },
+          { d: "Ces piments sont _____ que les poivrons. (più piccanti)", o: ["plus épicés", "plus épicé", "épicés plus"] }
+        ] },
+      { tipo: "completa", titolo: "Les suggestions du jour", consegna: "Il cameriere presenta i piatti del giorno: completa con la parola giusta.",
+        testo: "Aujourd'hui, nous avons deux suggestions. Le bar est [plus] léger que l'entrecôte et il est [délicieux] : il est arrivé ce matin ! L'entrecôte est [aussi] tendre que d'habitude. En dessert, la tarte au citron est la plus demandée, mais pour moi la crème brûlée est la [meilleure]. Les deux vont très bien [avec] un verre de vin doux.",
+        intrusi: ["très", "pire"] },
+      { tipo: "ordina", titolo: "Le dialogue à table", consegna: "Tocca le battute nell'ordine giusto.",
+        passi: [["Bonsoir. Vous avez déjà choisi ?", "Buonasera. Avete già scelto?"], ["Pas encore. Que nous conseillez-vous ?", "Non ancora. Che cosa ci consiglia?"], ["Si vous aimez le poisson, le bar est ce qu'il y a de plus frais aujourd'hui.", "Se vi piace il pesce, il branzino è la cosa più fresca di oggi."], ["Est-il plus léger que les lasagnes ?", "È più leggero delle lasagne?"], ["Oui, beaucoup plus léger. Il s'accorde bien avec un vin blanc sec.", "Sì, molto più leggero. Si abbina bene a un bianco secco."], ["Parfait, alors nous prenons le bar.", "Perfetto, allora prendiamo il branzino."]] },
+      { tipo: "scelta", titolo: "Le meilleur de la carte", consegna: "Scegli la forma giusta.",
+        voci: [
+          { d: "C'est _____ vin de la carte. (il migliore)", o: ["le meilleur", "le plus meilleur", "le plus bon"] },
+          { d: "Le tiramisu est le dessert _____ demandé. (più)", o: ["le plus", "le meilleur", "le très"] },
+          { d: "Le bar est le poisson le plus frais _____ jour.", o: ["du", "que", "comme"] },
+          { d: "C'était la _____ pizza de ma vie ! (peggiore)", o: ["pire", "plus pire", "plus mal"] },
+          { d: "Les pâtes à la truffe sont le plat le plus _____ de la carte. (caro)", o: ["cher", "chère", "chers"] },
+          { d: "Cette tarte est _____ . (buonissima)", o: ["délicieuse", "délicieux", "très meilleure"] }
+        ] },
+      { tipo: "ascolta", titolo: "Ascolta il cliente", consegna: "Ascolta la domanda del cliente e scegli che cosa vuol dire.",
+        voci: [
+          { t: "Qu'est-ce qui est plus léger, le poisson ou la viande ?", o: ["Che cosa è più leggero, il pesce o la carne?", "Il pesce è più caro della carne?", "Preferisco la carne al pesce."] },
+          { t: "Je voudrais quelque chose de moins épicé.", o: ["Vorrei qualcosa di meno piccante.", "Vorrei qualcosa di più piccante.", "Vorrei qualcosa di più dolce."] },
+          { t: "Ce vin est-il plus sec que l'autre ?", o: ["Questo vino è più secco dell'altro?", "Questo vino è più dolce dell'altro?", "Questo vino costa più dell'altro?"] },
+          { t: "Quel est votre plat le plus demandé ?", o: ["Qual è il vostro piatto più richiesto?", "Qual è il vostro piatto più caro?", "Qual è il piatto del giorno?"] },
+          { t: "C'est le meilleur tiramisu de ma vie !", o: ["È il tiramisù più buono della mia vita!", "Il tiramisù è troppo dolce!", "Vorrei un altro tiramisù."] }
+        ] }
+    ],
+    missione: {
+      titolo: "La table 7", chef: "Table 7", avatar: "🧑‍🤝‍🧑", domanda: "Che cosa rispondi?",
+      intro: "Sei in stage in un ristorante italiano di Parigi. Al tavolo 7 una coppia non sa che cosa scegliere e chiede consiglio a te. Con i clienti si usa il lei (vous).",
+      passi: [
+        { dice: "Bonsoir. Nous voudrions quelque chose de léger. Que nous conseillez-vous ?", it: "Buonasera. Vorremmo qualcosa di leggero. Che cosa ci consiglia?",
+          o: [["Je vous recommande le bar grillé : il est plus léger que les lasagnes.", 1, "Consigli, confronti e spieghi: perfetto."], ["Les lasagnes : c'est le plat le plus copieux.", 0, "Hanno chiesto qualcosa di leggero!"], ["Tout est bon.", 0, "Non è un consiglio: confronta due piatti."]] },
+        { dice: "Le bar est-il frais ?", it: "Il branzino è fresco?",
+          o: [["Oui, c'est le poisson le plus frais du jour : il est arrivé ce matin.", 1, "Superlativo giusto e una prova concreta."], ["Oui, il est plus frais.", 0, "Più fresco di che cosa? Qui serve il superlativo: le poisson le plus frais du jour."], ["Oui, il est très plus frais.", 0, "Très e plus non si mettono insieme: «il est très frais» oppure «le plus frais»."]] },
+        { dice: "Ma femme ne mange pas de poisson. Que lui conseillez-vous ?", it: "Mia moglie non mangia pesce. Che cosa le consiglia?",
+          o: [["Le poulet au citron : il est aussi léger que le bar.", 1, "aussi … que = leggero quanto il branzino."], ["Qu'elle mange du poisson quand même.", 0, "Scortese: il cliente ha sempre l'ultima parola."], ["L'entrecôte : elle est plus légère que le poisson.", 0, "Una bistecca più leggera del pesce? Consiglio poco credibile."]] },
+        { dice: "Quel vin va bien avec le bar ?", it: "Quale vino si abbina al branzino?",
+          o: [["Un blanc sec : notre muscadet est plus frais que le chardonnay.", 1, "Abbinamento classico e confronto chiaro."], ["Un rouge corsé : c'est le plus fort.", 0, "Con un pesce delicato si consiglia di solito un bianco secco."], ["L'eau est meilleure que le vin.", 0, "Non tocca a te decidere per il cliente!"]] },
+        { dice: "Le muscadet est-il cher ?", it: "Il muscadet è caro?",
+          o: [["Non, il est moins cher que le chardonnay.", 1, "moins … que: meno caro."], ["Non, c'est le moins cher que.", 0, "Frase incompleta: «il est moins cher que le chardonnay» o «c'est le moins cher de la carte»."], ["Oui, mais c'est le plus meilleur.", 0, "Meilleur è già comparativo: le meilleur."]] },
+        { dice: "Nous voulons un dessert. Quel est le meilleur ?", it: "Vorremmo un dolce. Qual è il migliore?",
+          o: [["La tarte au citron : c'est la plus demandée et elle est faite maison.", 1, "Superlativo e un buon motivo in più: faite maison."], ["La tarte au citron est plus demandée dessert.", 0, "Superlativo: le dessert le plus demandé / la plus demandée."], ["Tous les desserts sont pareils.", 0, "Il cliente vuole sentirsi consigliato."]] },
+        { dice: "C'était le meilleur dîner de nos vacances !", it: "È stata la cena migliore delle nostre vacanze!",
+          o: [["Merci mille fois ! Cela me fait vraiment plaisir.", 1, "Ringrazi con calore: il cliente tornerà."], ["Oui, je sais.", 0, "Suona presuntuoso: ringrazia."], ["C'était meilleur que vous ne croyez.", 0, "Non serve: ringrazia e basta."]] }
+      ],
+      esiti: ["La coppia lascia una recensione a cinque stelle: « Le meilleur serveur de Paris ! »", "« Merci, un dîner très agréable. » Ottimo lavoro.", "« C'était bien. » Ripassa i comparativi e riprova.", "La coppia esce poco convinta. Rifai la lezione e riprova!"]
+    },
+    verifica: [
+      { tipo: "traduci", titolo: "Scrivi l'aggettivo in francese", punti: 1,
+        voci: [["leggero", "léger"], ["piccante", "épicé"], ["secco (vino)", "sec"], ["corposo", "corsé"], ["croccante", "croustillant"], ["fatto in casa", "fait maison"], ["dolce", "sucré"], ["tenero", "tendre"], ["delicato", "délicat"], ["sostanzioso", "copieux"]] },
+      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
+        voci: [
+          { d: "Le poisson est plus léger _____ la viande.", o: ["que", "de", "comme"] },
+          { d: "C'est _____ vin de la carte. (il migliore)", o: ["le meilleur", "le plus meilleur", "le plus bon"] },
+          { d: "Le rouge est _____ cher que le blanc. (più)", o: ["plus", "meilleur", "très"] },
+          { d: "La tarte au citron est le dessert le plus _____ . (richiesto)", o: ["demandé", "demandée", "demandés"] },
+          { d: "Ces piments sont _____ que les poivrons. (più piccanti)", o: ["plus épicés", "plus épicé", "épicés plus"] },
+          { d: "Le poulet est _____ léger que le poisson. (altrettanto)", o: ["aussi", "autant", "plus"] },
+          { d: "C'était la _____ soirée de ma vie ! (peggiore)", o: ["pire", "plus pire", "plus mal"] },
+          { d: "Ce jambon est _____ . (buonissimo)", o: ["délicieux", "très meilleur", "plus bon"] }
+        ] },
+      { tipo: "traduci", titolo: "Traduci in francese", punti: 2,
+        voci: [["Il pesce è più leggero della carne.", "Le poisson est plus léger que la viande."], ["Le consiglio il risotto.", "Je vous recommande le risotto."], ["È il nostro dolce più richiesto.", "C'est notre dessert le plus demandé."], ["Questo vino è meno caro.", "Ce vin est moins cher."], ["La torta è fatta in casa.", "La tarte est faite maison."], ["Questo è il vino migliore della carta.", "C'est le meilleur vin de la carte."]] },
+      { tipo: "aperta", titolo: "À table", punti: 5,
+        testo: "Un cliente ti chiede un consiglio. Scrivi in francese un breve dialogo (almeno sei battute, con il vous) in cui confronti due piatti e due vini, con almeno due comparativi e un superlativo.",
+        facile: "Scrivi in francese tre frasi per consigliare un piatto. Usa: plus … que, aussi … que, le meilleur." }
     ]
   },
   /* ───────────────────────── SPAGNOLO ───────────────────────── */
@@ -472,8 +675,8 @@ window.LEZIONI = [
   docente: {
     obiettivi: [
       "Gestire un reclamo con il metodo LAST: ascoltare, scusarsi, risolvere, ringraziare.",
-      "Raccontare che cosa è successo (past simple · pretérito indefinido) e che cosa si è appena fatto (present perfect · pretérito perfecto, acabo de).",
-      "Usare formule di scusa formali e proporre soluzioni (Would you like me to… · ¿Quiere que le…?).",
+      "Raccontare che cosa è successo (past simple · pretérito indefinido · passé composé), com'era la situazione (imparfait) e che cosa si è appena fatto (present perfect · pretérito perfecto, acabo de · je viens de).",
+      "Usare formule di scusa formali e proporre soluzioni (Would you like me to… · ¿Quiere que le…? · Voulez-vous que je vous… ?).",
       "Scrivere una breve e-mail di scuse a un ospite."
     ],
     scaletta: [
@@ -485,7 +688,7 @@ window.LEZIONI = [
     spunti: [
       "Professione: molte catene alberghiere insegnano un metodo per i reclami, per esempio LAST (Listen, Apologise, Solve, Thank). Un reclamo risolto bene crea spesso un cliente più fedele di prima.",
       "Recensioni online: leggere in classe vere risposte di direttori d'albergo a recensioni negative e riscriverle insieme, nel registro giusto.",
-      "Estero: alla reception di un hotel a Edimburgo o a Siviglia il reclamo è la prova più difficile per uno stagista, e la più formativa.",
+      "Estero: alla reception di un hotel a Edimburgo, a Siviglia o a Nizza il reclamo è la prova più difficile per uno stagista, e la più formativa.",
       "Con i docenti di accoglienza turistica: simulazione alla reception del laboratorio, con il registro dei reclami da compilare in lingua."
     ]
   },
@@ -589,6 +792,110 @@ window.LEZIONI = [
       { tipo: "aperta", titolo: "L'e-mail di scuse", punti: 5,
         testo: "Scrivi in inglese un'e-mail di scuse (80–100 parole) a un ospite che si è lamentato del rumore: racconta che cosa è successo (past simple), che cosa avete già fatto (present perfect) e proponi una soluzione.",
         facile: "Scrivi in inglese tre frasi a un ospite che si è lamentato: una scusa, che cosa è successo, una soluzione. Puoi usare: I'm terribly sorry · didn't work · I've just…" }
+    ]
+  },
+  /* ───────────────────────── FRANCESE ───────────────────────── */
+  fr: {
+    schede: [
+      { titolo: "Un ospite arrabbiato", testo: "Alla reception arriva un ospite furioso. Non serve avere ragione: serve **ascoltare**, **scusarsi** e **trovare una soluzione**. Sempre con il **lei** (vous).",
+        esempi: [["J'ai réservé une chambre avec vue sur la mer et on m'a donné une chambre sur le parking !", "Ho prenotato una camera vista mare e me ne avete data una sul parcheggio!", ""], ["Je vous présente mes excuses, monsieur. Laissez-moi voir ce que je peux faire.", "Le porgo le mie scuse, signore. Vediamo che cosa posso fare.", "je vu prezànt mèz eskùz, mesiö. lesé mua vuàr ce ke je pö fèr"]],
+        domanda: { testo: "Davanti a un reclamo la prima cosa da fare è…", o: ["ascoltare e scusarsi", "spiegare che non è colpa tua", "chiamare subito il direttore"], spiega: "Prima si ascolta e ci si scusa; le spiegazioni vengono dopo, e brevi." } },
+      { titolo: "Che cosa è successo: il passé composé", testo: "Per i fatti conclusi (**hier**, **hier soir**, **la semaine dernière**, **quand je suis arrivé**) si usa il **passé composé**: **avoir** al presente + participio passato: j'ai réservé, nous avons attendu, la douche n'a pas fonctionné.\nCon alcuni verbi di movimento (arriver, partir, rester, aller…) si usa **être**: nous sommes arrivés, elle est partie.\nParticipi irregolari frequenti: être → **été**, avoir → **eu**, faire → **fait**, prendre → **pris**.",
+        esempi: [["J'ai réservé une chambre double.", "Ho prenotato una camera doppia.", ""], ["Hier soir, la douche n'a pas fonctionné.", "Ieri sera la doccia non ha funzionato.", "ièr suàr, la dùsc na pa fonksionè"], ["Nous avons attendu quarante minutes.", "Abbiamo aspettato quaranta minuti.", ""]],
+        domanda: { testo: "«Ieri sera il riscaldamento non ha funzionato»", o: ["Hier soir, le chauffage n'a pas fonctionné.", "Hier soir, le chauffage ne fonctionne pas.", "Hier soir, le chauffage n'avoir pas fonctionné."], spiega: "Con hier soir si usa il passé composé: n'a pas fonctionné." } },
+      { titolo: "Che cosa ho appena fatto: venir de", testo: "Per ciò che si è **appena** fatto: **venir de** al presente + infinito: **je viens de** appeler, **nous venons de** changer.\nPer ciò che è già fatto si usa il passé composé con **déjà**: nous avons déjà changé votre chambre.",
+        esempi: [["J'ai appelé l'entretien.", "Ho chiamato la manutenzione.", ""], ["Nous avons déjà changé votre chambre.", "Le abbiamo già cambiato la camera.", ""], ["Je viens de parler avec le directeur.", "Ho appena parlato con il direttore.", "je viàn de parlé avèc le dirèctör"]],
+        domanda: { testo: "«Ho appena parlato con il direttore»", o: ["Je viens de parler avec le directeur.", "Je viens parler avec le directeur.", "J'ai venu de parler avec le directeur."], spiega: "Je viens de + infinito: je viens de parler." } },
+      { titolo: "Com'era la situazione: l'imparfait", testo: "Per descrivere lo **sfondo** (com'era la camera, che cosa c'era) si usa l'**imparfait**: il y avait, c'était, la chambre était sale.\nIn una stessa frase si mescolano: *La chambre était sale quand nous sommes arrivés.* (sfondo + fatto)",
+        esempi: [["Il y avait beaucoup de bruit.", "C'era molto rumore.", ""], ["La musique était trop forte.", "La musica era troppo alta.", ""], ["La chambre était sale quand nous sommes arrivés.", "La camera era sporca quando siamo arrivati.", "la sciànbr etè sàl kan nuz sòm arrivé"]],
+        domanda: { testo: "«C'era molto rumore»", o: ["Il y avait beaucoup de bruit.", "Il y a beaucoup de bruit.", "Il y aura beaucoup de bruit."], spiega: "Per descrivere la situazione di ieri si usa l'imparfait: il y avait." } },
+      { titolo: "Scusarsi da professionista", testo: "Le formule della reception: cortesi, calme, mai sulla difensiva.",
+        esempi: [["Nous sommes vraiment désolés.", "Siamo davvero spiacenti.", "nu sòm vrèman dezolé"], ["Je vous prie de m'excuser pour le dérangement.", "Le chiedo scusa per il disagio.", "je vu prì de mecskuzé pur le derangemàn"], ["Je crains qu'il y ait eu une erreur.", "Temo che ci sia stato un errore.", ""], ["Vous avez tout à fait raison.", "Ha perfettamente ragione.", ""], ["Merci de nous l'avoir signalé.", "Grazie per avercelo segnalato.", ""]],
+        domanda: { testo: "Qual è la scusa più professionale?", o: ["Je vous prie de m'excuser pour le dérangement.", "Désolé, ce n'est pas ma faute.", "Oups, pardon !"], spiega: "Formale e senza cercare colpevoli." } },
+      { titolo: "Proporre una soluzione", testo: "Dopo le scuse, sempre una **proposta concreta**. «Voulez-vous que je vous… ?» è una formula fissa (dopo **que** il verbo cambia forma), da imparare così.",
+        esempi: [["Voulez-vous que je vous change de chambre ?", "Vuole che le cambi la camera?", "vulé vu ke je vu sciànj de sciànbr"], ["Nous vous offrons une chambre supérieure sans supplément.", "Le offriamo una camera superiore senza costi aggiuntivi.", ""], ["J'envoie un technicien tout de suite.", "Le mando subito un tecnico.", ""], ["Le dîner de ce soir est offert par la maison.", "La cena di stasera la offriamo noi.", ""], ["Je veillerai à ce que cela ne se reproduise pas.", "Mi assicurerò che non succeda più.", ""]],
+        domanda: { testo: "L'aria condizionata è rotta. Che cosa dici?", o: ["Nous sommes vraiment désolés. J'envoie un technicien tout de suite ou, si vous préférez, je vous change de chambre.", "Le technicien vient demain.", "Toutes les chambres sont pareilles."], spiega: "Scuse, soluzione subito e un'alternativa." } },
+      { titolo: "Le parole del reclamo", testo: "Tocca 🔊 e ripeti.",
+        esempi: [["la plainte", "il reclamo", "la plànt"], ["la réservation", "la prenotazione", "la rezervasión"], ["le remboursement", "il rimborso", "le ramborsemàn"], ["la réduction", "lo sconto", "la redüksión"], ["le dérangement", "il disagio", "le derangemàn"], ["bruyant", "rumoroso", "bruiàn"], ["sale", "sporco", "sàl"], ["cassé", "rotto", "casé"], ["l'entretien", "la manutenzione", "lantretiàn"], ["la chambre supérieure", "la camera superiore", "la sciànbr superiör"]],
+        domanda: { testo: "«Le remboursement» è…", o: ["il rimborso", "lo sconto", "il reclamo"], spiega: "Remboursement = rimborso, réduction = sconto." } },
+      { titolo: "In tasca: il metodo in quattro passi", testo: "**Ascolta** senza interrompere.\n**Scusati**: *Nous sommes vraiment désolés · Je vous prie de m'excuser.*\n**Risolvi**: *Voulez-vous que je vous change de chambre ? · J'envoie… tout de suite.*\n**Ringrazia**: *Merci de nous l'avoir signalé.*\nChe cosa è successo (hier) → **passé composé**: n'a pas fonctionné. Com'era la situazione → **imparfait**: il y avait. Che cosa ho appena fatto → **je viens de**: je viens d'appeler.",
+        esempi: [], domanda: null }
+    ],
+    esercizi: [
+      { tipo: "abbina", titolo: "Le parole del reclamo", consegna: "Tocca una parola e poi il suo significato.",
+        coppie: [["la plainte", "reclamo"], ["le remboursement", "rimborso"], ["la réduction", "sconto"], ["bruyant", "rumoroso"], ["cassé", "rotto"], ["sale", "sporco"]] },
+      { tipo: "scelta", titolo: "Passé composé, imparfait o venir de?", consegna: "Scegli il tempo giusto.",
+        voci: [
+          { d: "Hier soir, la climatisation _____ . (non ha funzionato)", o: ["n'a pas fonctionné", "n'est pas fonctionné", "ne fonctionnera pas"] },
+          { d: "Je _____ appeler le technicien : il arrive. (ho appena)", o: ["viens d'", "vais d'", "ai venu d'"] },
+          { d: "Quand nous _____ , la chambre n'était pas prête. (siamo arrivati)", o: ["sommes arrivés", "avons arrivé", "arriverons"] },
+          { d: "Nous _____ déjà changé votre chambre. Elle est prête.", o: ["avons", "sommes", "aurons"] },
+          { d: "_____ une chambre avec vue sur la mer il y a deux semaines. (ho prenotato)", o: ["J'ai réservé", "Je réserve", "Je vais réserver"] },
+          { d: "Aujourd'hui, le client de la 12 _____ trois fois à cause du bruit. (si è lamentato)", o: ["s'est plaint", "se plaindra", "se plaignent"] }
+        ] },
+      { tipo: "completa", titolo: "Le courriel d'excuses", consegna: "Completa l'e-mail della responsabile del ricevimento.",
+        testo: "Cher Monsieur Martin, Merci de nous avoir [signalé] ce qui s'est passé pendant votre séjour. Je vous prie de nous [excuser] car la douche n'a pas [fonctionné] la première nuit. Notre équipe d'entretien l'[a] déjà réparée et nous souhaiterions vous [offrir] un dîner gratuit dans notre restaurant. Je veillerai personnellement à ce que cela ne se [reproduise] pas. Cordialement, Giulia Rossi, Responsable de la réception",
+        intrusi: ["fonctionner", "désolé"] },
+      { tipo: "ordina", titolo: "La plainte, étape par étape", consegna: "Tocca le battute nell'ordine giusto.",
+        passi: [["Excusez-moi, ma chambre est très bruyante. Hier soir, je n'ai pas pu dormir.", "Scusi, la mia camera è molto rumorosa. Stanotte non ho dormito."], ["Nous sommes vraiment désolés. Que s'est-il passé exactement ?", "Mi dispiace moltissimo. Che cosa è successo esattamente?"], ["Il y avait de la musique très forte au bar jusqu'à deux heures du matin.", "C'era musica altissima al bar fino alle due di notte."], ["Je vous comprends parfaitement. Voulez-vous que je vous change pour une chambre plus calme ?", "La capisco perfettamente. Vuole che la sposti in una camera più tranquilla?"], ["Oui, s'il vous plaît. À un étage plus élevé, si possible.", "Sì, grazie. A un piano più alto, se possibile."], ["Bien sûr. Je viens d'en trouver une au cinquième étage. Merci de nous l'avoir signalé.", "Certo. Ne ho appena trovata una al quinto piano. Grazie per avercelo segnalato."]] },
+      { tipo: "scelta", titolo: "La réponse juste", consegna: "L'ospite si lamenta: scegli la risposta più professionale.",
+        voci: [
+          { d: "« La chambre est sale ! »", o: ["Je vous prie de m'excuser. J'envoie tout de suite l'équipe de ménage.", "Impossible, nous l'avons nettoyée ce matin.", "Eh bien, nettoyez-la vous-même."] },
+          { d: "« Il n'y a pas d'eau chaude ! »", o: ["Nous sommes vraiment désolés. J'appelle l'entretien tout de suite.", "L'eau chaude est en supplément.", "Attendez jusqu'à demain."] },
+          { d: "« J'ai réservé avec vue sur la mer ! »", o: ["Je crains qu'il y ait eu une erreur. Permettez-moi de vous proposer une chambre supérieure.", "Vous vous trompez, ce n'est pas vrai.", "La mer n'est pas importante."] },
+          { d: "« Nous avons attendu quarante minutes le petit-déjeuner ! »", o: ["Nous sommes vraiment désolés. Le petit-déjeuner est offert par la maison.", "La cuisine est pleine, désolé.", "La prochaine fois, venez plus tôt."] },
+          { d: "« Pouvez-vous me rembourser ? »", o: ["Je parle au directeur et je vous réponds dans moins d'une heure.", "Nous ne remboursons jamais.", "Demandez à quelqu'un d'autre."] },
+          { d: "« Merci, vous avez été très aimable. »", o: ["Merci à vous pour votre patience.", "Oui, je sais.", "Enfin !"] }
+        ] },
+      { tipo: "ascolta", titolo: "Ascolta l'ospite", consegna: "Ascolta il reclamo e scegli che cosa vuol dire.",
+        voci: [
+          { t: "La climatisation de ma chambre ne fonctionne pas.", o: ["L'aria condizionata in camera non funziona.", "L'aria condizionata è troppo forte.", "Vorrei l'aria condizionata in camera."] },
+          { t: "J'attends ma chambre depuis plus d'une heure.", o: ["Aspetto la mia camera da più di un'ora.", "Ho aspettato un'ora per il taxi.", "La mia camera è pronta da un'ora."] },
+          { t: "Les voisins de la chambre d'à côté ont fait beaucoup de bruit hier soir.", o: ["I vicini di camera hanno fatto molto rumore ieri sera.", "Ieri sera i vicini sono partiti.", "Ieri sera il bar era chiuso."] },
+          { t: "Je voudrais parler au directeur, s'il vous plaît.", o: ["Vorrei parlare con il direttore, per favore.", "Vorrei cambiare camera, per favore.", "Vorrei pagare il conto, per favore."] },
+          { t: "On nous a facturé deux fois le minibar.", o: ["Ci avete addebitato due volte il minibar.", "Il minibar era vuoto.", "Abbiamo usato due volte il minibar."] }
+        ] }
+    ],
+    missione: {
+      titolo: "Il turno di sera", chef: "Madame Lefèvre", avatar: "👩", domanda: "Che cosa rispondi?",
+      intro: "Sei in stage alla reception di un hotel di Nizza. È sera e arriva la signora Lefèvre, molto arrabbiata. Ascolta, scusati, risolvi, ringrazia: sempre con il lei (vous).",
+      passi: [
+        { dice: "Excusez-moi ! J'ai réservé une chambre avec vue sur la mer et on m'a donné une chambre sur le parking.", it: "Scusi! Ho prenotato una camera con vista sul mare e me ne avete data una sul parcheggio.",
+          o: [["Nous sommes vraiment désolés, madame. Je vérifie votre réservation tout de suite.", 1, "Ti scusi e ti attivi subito."], ["Ce n'est pas possible. Vous avez réservé une chambre standard.", 0, "Anche se fosse vero, prima ci si scusa e si verifica."], ["La vue sur le parking est jolie aussi.", 0, "Suona ironico: l'ospite si sente presa in giro."]] },
+        { dice: "Voici l'e-mail de confirmation. Il est écrit clairement « vue sur la mer ».", it: "Ecco l'e-mail di conferma. C'è scritto chiaramente «vista sul mare».",
+          o: [["Vous avez tout à fait raison. Je crains qu'il y ait eu une erreur de notre part.", 1, "Ammetti l'errore con una formula professionale."], ["L'ordinateur s'est trompé, pas moi.", 0, "All'ospite non interessa di chi sia la colpa."], ["Les e-mails se trompent souvent.", 0, "Metti in dubbio l'ospite: peggio di prima."]] },
+        { dice: "Et qu'allez-vous faire ?", it: "E che cosa pensate di fare?",
+          o: [["Je viens de vérifier : nous avons une chambre supérieure avec vue sur la mer. Je peux vous y installer sans supplément.", 1, "Je viens de + una soluzione generosa."], ["Rien, l'hôtel est complet.", 0, "Mai lasciare l'ospite senza una soluzione."], ["Si vous voulez, vous pouvez changer d'hôtel.", 0, "Così perdi la cliente."]] },
+        { dice: "C'est mieux. Mais j'ai attendu vingt minutes à la réception !", it: "Così va meglio. Ma ho aspettato venti minuti alla reception!",
+          o: [["Je vous prie de m'excuser pour l'attente. Un grand groupe est arrivé en même temps.", 1, "Scusa e breve spiegazione al passé composé (est arrivé)."], ["Vingt minutes, ce n'est pas beaucoup.", 0, "Minimizzare irrita."], ["Moi aussi, j'attends tous les jours.", 0, "Fuori luogo: stai parlando di te."]] },
+        { dice: "Et dans l'autre chambre, le wifi ne fonctionnait pas.", it: "E nell'altra camera il wifi non funzionava.",
+          o: [["Nous sommes désolés. Je demande au technicien de le vérifier, et voici le mot de passe de votre nouvelle chambre.", 1, "Scusa, soluzione e un aiuto concreto."], ["Le wifi fonctionne, vous l'utilisez mal.", 0, "Mai dare la colpa all'ospite."], ["Le wifi n'est pas inclus.", 0, "Falso e scortese."]] },
+        { dice: "Bon… merci. Vous avez été très aimable.", it: "Be'… grazie. Molto gentile da parte sua.",
+          o: [["Merci à vous pour votre patience, madame. Bon séjour !", 1, "Chiudi ringraziando."], ["Enfin, vous êtes contente !", 0, "Inopportuno."], ["De rien. La prochaine fois, lisez mieux votre réservation.", 0, "Una frecciata che rovina tutto."]] },
+        { situazione: "Il giorno dopo il direttore ti chiede di scrivere una riga nel registro dei reclami.", domanda: "Che cosa scrivi?",
+          o: [["La cliente de la 214 s'est plainte de la vue. Nous l'avons installée dans une chambre supérieure.", 1, "Passé composé: fatti conclusi, chiari e oggettivi."], ["La cliente se plaint hier et nous l'installons ailleurs.", 0, "Per i fatti di ieri si usa il passé composé: s'est plainte, nous l'avons installée."], ["Dame énervée, problème réglé.", 0, "Troppo vago e poco professionale."]] }
+      ],
+      esiti: ["Madame Lefèvre écrit un avis : « Une réceptionniste fantastique a transformé un problème en un séjour formidable ! »", "« Merci, tout va bien maintenant. » Ottimo lavoro.", "« Bon, ça va… » Ripassa le scuse e i tempi del passato, poi riprova.", "La signora chiede di parlare con il direttore. Rifai la lezione e riprova!"]
+    },
+    verifica: [
+      { tipo: "traduci", titolo: "Scrivi la parola in francese", punti: 1,
+        voci: [["il reclamo", "la plainte"], ["la prenotazione", "la réservation"], ["il rimborso", "le remboursement"], ["lo sconto", "la réduction"], ["il disagio", "le dérangement"], ["rumoroso", "bruyant"], ["sporco", "sale"], ["rotto", "cassé"], ["la manutenzione", "l'entretien"], ["la camera superiore", "la chambre supérieure"]] },
+      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
+        voci: [
+          { d: "Hier soir, la douche _____ . (non ha funzionato)", o: ["n'a pas fonctionné", "ne fonctionne pas", "n'est pas fonctionné"] },
+          { d: "Je _____ appeler le directeur : il arrive. (ho appena)", o: ["viens d'", "vais d'", "ai venu d'"] },
+          { d: "Hier, nous _____ à l'hôtel à dix heures. (siamo arrivati)", o: ["sommes arrivés", "avons arrivé", "arriverons"] },
+          { d: "L'équipe de ménage _____ déjà nettoyé votre chambre.", o: ["a", "est", "aura"] },
+          { d: "Je vous prie de _____ pour le dérangement. (scusarmi)", o: ["m'excuser", "excuser", "me désoler"] },
+          { d: "Je _____ qu'il y ait eu une erreur. (temo)", o: ["crains", "peur", "effraie"] },
+          { d: "Voulez-vous que je vous _____ de chambre ? (che io cambi)", o: ["change", "changerai", "changer"] },
+          { d: "Je veillerai à ce que cela ne se _____ pas.", o: ["reproduise", "reproduit", "reproduire"] }
+        ] },
+      { tipo: "traduci", titolo: "Traduci in francese", punti: 2,
+        voci: [["Mi dispiace moltissimo.", "Nous sommes vraiment désolés."], ["Ieri sera la doccia non ha funzionato.", "Hier soir, la douche n'a pas fonctionné."], ["Ho appena chiamato la manutenzione.", "Je viens d'appeler l'entretien."], ["Temo che ci sia stato un errore.", "Je crains qu'il y ait eu une erreur."], ["Vuole che le cambi la camera?", "Voulez-vous que je vous change de chambre ?"], ["Grazie per avercelo segnalato.", "Merci de nous l'avoir signalé."]] },
+      { tipo: "aperta", titolo: "Le courriel d'excuses", punti: 5,
+        testo: "Scrivi in francese un'e-mail di scuse (80–100 parole, con il vous) a un ospite che si è lamentato del rumore: racconta che cosa è successo (passé composé), com'era la situazione (imparfait) e proponi una soluzione.",
+        facile: "Scrivi in francese tre frasi a un ospite che si è lamentato: una scusa, che cosa è successo, una soluzione. Puoi usare: Nous sommes vraiment désolés · n'a pas fonctionné · je viens de…" }
     ]
   },
   /* ───────────────────────── SPAGNOLO ───────────────────────── */

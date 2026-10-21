@@ -659,7 +659,7 @@
     }
     $('g-genera').addEventListener('click', function () {
       var r = verifica(); if (r.voci.length < 2) { gs.className = 'stato no'; gs.textContent = 'Servono almeno due frasi.'; return; }
-      var p = { v: 1, t: $('g-tit').value.trim() || 'Esercizio', l: gl.value, k: 'scelta', f: r.voci.map(function (v) { return v.pr ? [v.it, v.tr, v.pr] : [v.it, v.tr]; }) };
+      var p = { v: 1, t: $('g-tit').value.trim() || 'Esercizio', l: gl.value, k: 'scelta', f: r.voci.map(function (v) { return [v.it, v.tr]; }) };
       if (!window.qrcode && !QR_P) QR_P = carica('lingue/qrcode.js');
       Promise.all([PK.codifica(p), window.qrcode ? 1 : QR_P]).then(function (ris) {
         var url = location.origin + '/lingue/esercizio.html#e=' + ris[0];

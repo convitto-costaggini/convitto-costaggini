@@ -1,6 +1,6 @@
 /* ════════════════════════════════════════════════════════
    ESERCIZI — motore comune (pagina Esercizi e Area docenti)
-   ESERCIZI.avvia(box, { tipo, lingua, voci: [{ it, tr, pr }], titolo, chiave })
+   ESERCIZI.avvia(box, { tipo, lingua, voci: [{ it, tr }], titolo, chiave })
    tipi: 'scelta' (scelta multipla), 'abbina' (abbinamento),
          'riordina' (riordina la frase), 'ascolta' (ascolta e scrivi)
    Nessun dato esce dal telefono: il miglior risultato resta in locale.
@@ -161,7 +161,7 @@ window.ESERCIZI = (function () {
     P.SEZIONI.forEach(function (s) {
       if (ambito && s.ambito !== ambito) return;
       if (sezione && sezione !== 'tutte' && s.id !== sezione) return;
-      (P.PAROLE[s.id] || []).forEach(function (p) { var t = p[1][cod]; out.push({ it: p[0], tr: t[0], pr: t[1], s: s.id }); });
+      (P.PAROLE[s.id] || []).forEach(function (p) { var t = p[1][cod]; out.push({ it: p[0], tr: t[0], s: s.id }); });
     });
     return out;
   }

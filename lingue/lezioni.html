@@ -448,7 +448,7 @@
     var S = D().schede, nomeL = L.lingua(lin).nome, rnd = seme(5);
     var corpoS = S.map(function (s, i) {
       var h = '<h3>' + (i + 1) + '. ' + esc(s.titolo) + '</h3><p>' + md(s.testo.replace(/[^.!?\n]*🔊[^.!?\n]*[.!?]?\s*/g, '')) + '</p>';
-      if (s.esempi.length) h += '<table><tbody>' + s.esempi.map(function (e) { return '<tr><td class="fr">' + esc(e[0]) + (e[2] ? '<small>' + esc(e[2]) + '</small>' : '') + '</td><td>' + esc(e[1]) + '</td></tr>'; }).join('') + '</tbody></table>';
+      if (s.esempi.length) h += '<table><tbody>' + s.esempi.map(function (e) { return '<tr><td class="fr">' + esc(e[0]) + '</td><td>' + esc(e[1]) + '</td></tr>'; }).join('') + '</tbody></table>';
       if (s.domanda) h += '<p class="dom">✎ ' + esc(s.domanda.testo) + '</p><p class="opz">' + mescolaS(s.domanda.o, rnd).map(function (o) { return '☐ ' + esc(o); }).join('&nbsp;&nbsp;&nbsp; ') + '</p>';
       return '<div class="blocco">' + h + '</div>';
     }).join('');

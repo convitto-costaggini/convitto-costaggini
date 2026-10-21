@@ -36,7 +36,7 @@
   function salva() { L.salva(CH, ver); var s = document.getElementById('vf-salvato'); if (s) { s.textContent = '✓ Bozza salvata in questo browser'; clearTimeout(salva.t); salva.t = setTimeout(function () { s.textContent = ''; }, 2000); } }
   function nomeLingua() { return L.lingua(ver.lingua).nome; }
   /* titolo automatico: si aggiorna con lingua e ambito, finché il docente non lo riscrive a mano */
-  var AUTO = /^Verifica di (inglese|francese|spagnolo|tedesco)( — .*)?$/;
+  var AUTO = /^Verifica di (inglese|francese|spagnolo)( — .*)?$/;
   function titoloAuto(ambito) {
     var I = ver.intest; if (I.titolo && !AUTO.test(I.titolo)) return;
     var am = V.AMBITI.filter(function (a) { return a.id === ambito; })[0];

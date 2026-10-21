@@ -6,7 +6,7 @@
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Le lingue dell'Alberghiero | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Il laboratorio delle lingue del Convitto Costaggini: il vocabolario di sala, cucina, pasticceria, accoglienza turistica e bar in inglese, francese, spagnolo e tedesco, con esercizi, dialoghi e risorse per imparare dal telefono."/>
+  <meta name="description" content="Il laboratorio delle lingue del Convitto Costaggini: il vocabolario di sala, cucina, pasticceria, accoglienza turistica e bar in inglese, francese e spagnolo, con esercizi, dialoghi e risorse per imparare dal telefono."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -57,8 +57,8 @@
     <div class="w">
       <p class="lbl hm-giro"><span class="hm-sr">Il laboratorio delle lingue</span><span id="hm-giro" aria-hidden="true" lang="it">Il laboratorio delle lingue</span></p>
       <h1>Le lingue <em>dell'Alberghiero</em></h1>
-      <p>Le parole e le frasi che servono davvero in sala, in cucina, in pasticceria, al ricevimento e al bar: in quattro lingue, da ascoltare, ripetere ed esercitare dal telefono. Pensato per i ragazzi del Costaggini, e pensato per togliere lavoro ai loro docenti: lezioni, esercizi e verifiche arrivano già pronti.</p>
-      <div class="lg-bandiere"><span>English</span><span>Français</span><span>Español</span><span>Deutsch</span></div>
+      <p>Le parole e le frasi che servono davvero in sala, in cucina, in pasticceria, al ricevimento e al bar: in tre lingue, da ascoltare, ripetere ed esercitare dal telefono. Pensato per i ragazzi del Costaggini, e pensato per togliere lavoro ai loro docenti: lezioni, esercizi e verifiche arrivano già pronti.</p>
+      <div class="lg-bandiere"><span>English</span><span>Français</span><span>Español</span></div>
     </div>
   </section>
   <div data-lingue-nav></div>
@@ -111,7 +111,7 @@
       <h2 class="lg-h2">Semplice, <em>dal telefono</em></h2>
       <div class="hm-punti" style="margin-top:1rem">
         <div class="hm-punto"><span class="n">📱</span><div><h3>Nessuna registrazione</h3><p>I ragazzi usano tutto liberamente. Nessun dato personale: le spunte e i risultati restano solo sul loro telefono.</p></div></div>
-        <div class="hm-punto"><span class="n">🔊</span><div><h3>La voce del telefono</h3><p>Ogni frase si ascolta con la sintesi vocale del dispositivo. Su Android, in <i>Impostazioni › Sintesi vocale</i>, si possono scaricare le voci delle quattro lingue.</p></div></div>
+        <div class="hm-punto"><span class="n">🔊</span><div><h3>La voce del telefono</h3><p>Ogni frase si ascolta con la sintesi vocale del dispositivo. Su Android, in <i>Impostazioni › Sintesi vocale</i>, si possono scaricare le voci delle tre lingue.</p></div></div>
         <div class="hm-punto"><span class="n">🖨️</span><div><h3>Anche su carta</h3><p>Il vocabolario si stampa per sezione, da tenere in tasca durante le esercitazioni; i docenti stampano le verifiche già impaginate.</p></div></div>
         <div class="hm-punto"><span class="n">🎓</span><div><h3>Nessun lavoro in più</h3><p>Ai docenti non è chiesto di controllare né di preparare nulla: il materiale è già pronto. Chi vorrà potrà personalizzarlo o segnalare un miglioramento, quando e se lo desidera.</p></div></div>
       </div>
@@ -125,7 +125,7 @@
 /* il titolo «Il laboratorio delle lingue» si traduce da solo ogni 5 secondi, con una dissolvenza */
 (function () {
   var el = document.getElementById('hm-giro'); if (!el) return;
-  var T = [['it', 'Il laboratorio delle lingue'], ['en', 'The language lab'], ['fr', 'Le laboratoire des langues'], ['es', 'El laboratorio de idiomas'], ['de', 'Das Sprachlabor']];
+  var T = [['it', 'Il laboratorio delle lingue'], ['en', 'The language lab'], ['fr', 'Le laboratoire des langues'], ['es', 'El laboratorio de idiomas']];
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   /* altezza fissa sulla traduzione più lunga: il testo sotto non deve saltare */
   function misura() {

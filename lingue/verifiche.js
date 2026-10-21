@@ -259,6 +259,35 @@
       cambiato(true);
       document.getElementById('vf-domande').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+    /* grammatica: argomenti a scelta, domande che verificano la regola */
+    var G = window.GRAMMATICA, gSel = (L.leggi('gram-argomenti', []) || []).slice();
+    function gDisegna() {
+      var ar = G ? G.argomenti(ver.lingua) : [];
+      gSel = gSel.filter(function (id) { return ar.some(function (a) { return a.id === id; }); });
+      document.getElementById('vf-g-chips').innerHTML = ar.map(function (a) {
+        return '<button type="button" class="lg-chip" data-g="' + a.id + '" aria-pressed="' + (gSel.indexOf(a.id) >= 0) + '" title="' + esc(a.liv) + '">' + esc(a.nome) + '</button>';
+      }).join('') || '<span class="sot">Nessun argomento disponibile per questa lingua.</span>';
+    }
+    gDisegna();
+    selL.addEventListener('change', gDisegna);
+    document.getElementById('vf-g-chips').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-g]'); if (!b) return;
+      var i = gSel.indexOf(b.dataset.g); if (i >= 0) gSel.splice(i, 1); else gSel.push(b.dataset.g);
+      b.setAttribute('aria-pressed', String(i < 0)); L.salva('gram-argomenti', gSel);
+    });
+    document.getElementById('vf-g-genera').addEventListener('click', function () {
+      var m = document.getElementById('vf-g-msg');
+      if (!gSel.length) { m.textContent = 'Scegliete almeno un argomento qui sopra.'; return; }
+      var n = function (id) { return Math.max(0, Math.min(30, parseInt(document.getElementById(id).value, 10) || 0)); };
+      var p = function (id) { return Math.max(0, parseFloat(String(document.getElementById(id).value).replace(',', '.')) || 0); };
+      var nuove = G.domandeVerifica(ver.lingua, gSel, document.getElementById('vf-g-liv').value,
+        { scelta: n('vf-g-n-scelta'), ordine: n('vf-g-n-ordine'), traduci: n('vf-g-n-traduci') },
+        { scelta: p('vf-g-p-scelta'), ordine: p('vf-g-p-ordine'), traduci: p('vf-g-p-traduci') }, nid, document.getElementById('vf-g-trad').checked);
+      if (!nuove.length) { m.textContent = 'Nessuna domanda: controllate quantità e livello.'; return; }
+      ver.domande = ver.domande.concat(nuove); cambiato(true);
+      m.textContent = nuove.length + ' domande di grammatica aggiunte in coda.';
+      document.getElementById('vf-domande').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
     /* aggiungi domanda propria */
     document.getElementById('vf-aggiungi').innerHTML = Object.keys(TIPI).map(function (k) { return '<button type="button" class="lg-chip" data-nuova="' + k + '">' + TIPI[k].ic + ' ' + TIPI[k].nome + '</button>'; }).join('');
     document.getElementById('vf-aggiungi').addEventListener('click', function (e) {

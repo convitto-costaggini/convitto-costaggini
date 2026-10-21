@@ -201,6 +201,42 @@ window.LINGUE_SITO = (function () {
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', nav); else nav();
 
+  /* Bussola: in ogni pagina dell'area docenti, un pulsante in alto che riassume in venti secondi
+     come usarla al meglio. Il testo sta qui, in un solo posto. */
+  var BUSSOLA = {
+    docenti: { t: 'Come si sceglie', min: 'Mezzo minuto', passi: ['Chiedetevi: <b>che cosa devo fare oggi?</b> Una verifica, un\'ora di lezione, esercizi con le vostre frasi, un gioco.', 'Premete il riquadro con quel nome: <b>ogni compito ha una sola strada</b>, senza doppioni.', 'Non sapete da dove cominciare? Aprite «Il vostro lunedì mattina»: quattro casi reali, già risolti.'], nota: 'Nessun account, nessuna registrazione, nulla da controllare.' },
+    verifiche: { t: 'Una verifica in tre mosse', min: 'Circa 3 minuti', passi: ['Scegliete <b>lingua, ambito e numero di domande</b>, poi premete «Genera le domande».', 'Volete la grammatica? Nel riquadro <b>2b</b> scegliete uno o più argomenti e premete «Aggiungi le domande di grammatica»: si aggiungono in coda.', 'La regola che vi serve non c\'è? Scrivetela voi in «<b>Aggiungete un vostro argomento</b>»: nome, regola e qualche frase.', 'Controllate l\'anteprima, correggete a mano se volete, poi «Stampa le file»: A, B, C e soluzioni.'], nota: 'Per una verifica più facile per DSA e BES, riducete le domande e scegliete il livello A.' },
+    lezioni: { t: 'Una lezione in tre mosse', min: 'Circa 2 minuti', passi: ['Scegliete <b>la lezione</b> e la lingua. In alto trovate <b>Lezione, Esercizi, Missione e Docente</b>: si proiettano nell\'ordine.', 'Aggiungete la <b>grammatica</b> dal riquadro «Grammatica da verificare» (anche una regola vostra): compaiono schede ed esercizi in più.', 'Nella scheda <b>Docente</b> trovate verifica, soluzioni e versione facilitata; per la classe copiate il <b>link o il QR</b>: i ragazzi lavorano dal telefono.'], nota: 'Per una supplenza basta aprire la lezione e proiettarla: non c\'è nulla da preparare.' },
+    crea: { t: 'Dalle vostre frasi a un esercizio', min: 'Circa 2 minuti', passi: ['Scrivete o incollate <b>le frasi della vostra lezione</b> (o provate «Esempio»), poi «Aggiungi alla lista».', 'Scegliete <b>il tipo di esercizio</b> e guardate l\'anteprima.', 'Date alla classe <b>il link o il codice QR</b>, oppure proiettate il gioco alla LIM, oppure stampate il foglio.'], nota: 'Le frasi restano nel vostro browser: nessun dato viene inviato.' },
+    'cinque-minuti': { t: 'Una lezione su un tema vostro', min: 'Circa 15 minuti', passi: ['Questa pagina serve <b>solo se l\'argomento non c\'è</b> in Lezioni: altrimenti è più veloce usare quelle.', 'Scegliete tema, livello e grammatica, poi <b>copiate la richiesta</b> nell\'IA gratuita indicata.', 'Incollate qui la risposta: ottenete la lezione guidata, con verifica A/B e versione facilitata.'], nota: 'Non scrivete mai nell\'IA nomi o dati dei ragazzi.' },
+    giochi: { t: 'Un gioco per la LIM', min: 'Circa 1 minuto', passi: ['Scegliete <b>lingua e ambito</b> (sala, cucina, bar...).', 'Aprite il gioco e <b>formate due squadre</b>: va proiettato a schermo intero.', 'Per usare le vostre frasi invece del vocabolario, passate da «Esercizi con le mie frasi».'], nota: 'Memory, indovina la parola, sfida a tempo e ascolto: partite da quello che preferite.' },
+    lunedi: { t: 'Come leggere questa pagina', min: '2 minuti', passi: ['Trovate <b>il caso che somiglia alla vostra giornata</b>: verifica per domani, supplenza, DSA o BES, le vostre frasi.', 'Premete il pulsante del caso: <b>si apre lo strumento già pronto</b>.', 'Alla fine confrontate il tempo con il vostro di solito (pagina «Misuratelo voi»).'], nota: 'Nessuna revisione richiesta: tutto è già controllato.' },
+    rilevazione: { t: 'Misurare in tre minuti', min: '3 minuti', passi: ['Scegliete <b>un compito vero</b> (per esempio la verifica) e scrivete quanti minuti ci mettete di solito.', 'Premete «Via», <b>fate il compito con il sito</b> e fermate il cronometro.', 'Leggete il risparmio, poi «Stampa» o «Copia il riepilogo» per inviarcelo.'], nota: 'Ci aiuta anche l\'elenco degli errori o delle cose poco chiare, nell\'ultimo riquadro.' }
+  };
+  function bussola() {
+    var qui = document.body.getAttribute('data-lingue'), d = BUSSOLA[qui], nav = document.querySelector('[data-lingue-nav]');
+    if (!d || !nav || document.getElementById('lg-bus')) return;
+    var st = document.createElement('style');
+    st.textContent = '.lg-bus{max-width:900px;margin:.9rem auto 0;padding:0 1rem}' +
+      '.lg-bus-b{display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;font:800 .9rem var(--fu);color:var(--bosco);background:linear-gradient(135deg,#fffaf0,#fdf1cf);border:2px solid var(--oro);border-radius:14px;padding:.75rem 1rem;cursor:pointer}' +
+      '.lg-bus-b:hover,.lg-bus-b:focus-visible{background:#fdf1cf}' +
+      '.lg-bus-b .i{font-size:1.4rem;line-height:1}.lg-bus-b .m{margin-left:auto;font:700 .66rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--oro3,#8a6d1f);white-space:nowrap}' +
+      '.lg-bus-p{display:none;background:#fff;border:2px solid var(--oro);border-top:0;border-radius:0 0 14px 14px;padding:.9rem 1.1rem 1rem;margin-top:-6px}' +
+      '.lg-bus.aperto .lg-bus-p{display:block}.lg-bus.aperto .lg-bus-b{border-radius:14px 14px 0 0}' +
+      '.lg-bus-p ol{margin:0;padding-left:1.2rem;font-size:.9rem;line-height:1.65;color:var(--txt)}.lg-bus-p li{margin:.2rem 0}' +
+      '.lg-bus-p .n{margin:.6rem 0 0;font-size:.82rem;color:var(--txt2);line-height:1.5}' +
+      '@media print{.lg-bus{display:none}}';
+    document.head.appendChild(st);
+    var w = document.createElement('div'); w.className = 'lg-bus'; w.id = 'lg-bus';
+    w.innerHTML = '<button type="button" class="lg-bus-b" aria-expanded="false" aria-controls="lg-bus-p"><span class="i" aria-hidden="true">🧭</span><span>Bussola · ' + d.t + '</span><span class="m">' + d.min + ' ▾</span></button>' +
+      '<div class="lg-bus-p" id="lg-bus-p"><ol>' + d.passi.map(function (p) { return '<li>' + p + '</li>'; }).join('') + '</ol><p class="n">' + d.nota + '</p></div>';
+    nav.parentNode.insertBefore(w, nav.nextSibling);
+    w.querySelector('button').addEventListener('click', function () {
+      var a = w.classList.toggle('aperto'); this.setAttribute('aria-expanded', a);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bussola); else bussola();
+
   /* le etichette delle lingue nell'intestazione diventano pulsanti di scelta */
   function bandiere() {
     document.querySelectorAll('.lg-bandiere span').forEach(function (sp) {

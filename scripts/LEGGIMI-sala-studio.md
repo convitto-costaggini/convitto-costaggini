@@ -9,13 +9,13 @@
   nella tabella `studio_lezioni`, con un codice di 6 lettere per il QR.
 
 ## Da fare per attivarla (circa 10 minuti)
-- [ ] **Database**: SQL Editor di Supabase, eseguire `supabase/migrazioni/2026-10-21_studio_lezioni.sql`.
+- [x] **Database**: migrazione `supabase/migrazioni/2026-10-21_studio_lezioni.sql` applicata (21/10/2026).
 - [ ] **Chiave dell'IA**: creare una chiave API su console.anthropic.com (con un limite di spesa mensile). Ogni lezione costa
       qualche centesimo.
 - [ ] **Segreti**: Dashboard Supabase, Edge Functions, Secrets. Aggiungere `ANTHROPIC_API_KEY` (la chiave) e `STUDIO_CODICI`
       (il codice o i codici degli educatori, separati da virgola, es. `aquila-ventitre,orso-blu`). Non vanno scritti in chat né nel repository.
-- [ ] **Funzione**: Edge Functions, nuova funzione `studio-genera` con il contenuto di `scripts/studio-genera/index.ts`,
-      con "Verify JWT" disattivato (i controlli sono dentro la funzione).
+- [x] **Funzione**: `studio-genera` pubblicata (21/10/2026) con "Verify JWT" disattivato (i controlli sono dentro la funzione).
+      Se si modifica `scripts/studio-genera/index.ts` va ripubblicata.
 - [ ] **Prova**: aprire `studio/docente.html`, fotografare due pagine, scrivere il codice, "Crea la lezione".
 
 Finché la funzione non è attiva, la **modalità manuale** in fondo a `studio/docente.html` funziona già: si copiano le istruzioni,

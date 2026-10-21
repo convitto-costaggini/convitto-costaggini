@@ -6,7 +6,7 @@
 // Risposta: {ok:true, codice, lezione} oppure {ok:false, errore, messaggio?}
 // Le foto non vengono salvate: vanno a Claude e poi si buttano. Resta solo la lezione.
 
-import Anthropic from "npm:@anthropic-ai/sdk";
+import Anthropic from "npm:@anthropic-ai/sdk@0.133.0";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const MODELLO = "claude-opus-5-5";

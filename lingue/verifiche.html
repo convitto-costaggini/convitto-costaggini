@@ -124,10 +124,12 @@
           <h2><span class="n">2b</span>Grammatica da verificare</h2>
           <p class="sot">Scegliete uno o più argomenti: le domande verificano la regola, non solo il lessico. Si aggiungono in coda a quelle che ci sono già.</p>
           <div class="lg-chips" id="vf-g-chips" role="group" aria-label="Argomenti di grammatica" style="margin-bottom:.8rem"></div>
+          <div id="vf-g-miei"></div>
           <label class="vf-l">Livello<select id="vf-g-liv"><option value="tutti">Tutti i livelli</option><option value="a">Biennio (A1-A2)</option><option value="b">Triennio (B1-B2)</option></select></label>
           <table class="vf-qt">
             <tr><th>Tipo</th><th>Quante</th><th>Punti ciascuna</th></tr>
             <tr><td>🎯 Scegli la forma corretta</td><td><input id="vf-g-n-scelta" type="number" min="0" max="30" value="5"/></td><td><input id="vf-g-p-scelta" type="number" min="0" step="0.5" value="1"/></td></tr>
+            <tr><td>✏️ Completa lo spazio <small>(risposta libera)</small></td><td><input id="vf-g-n-completa" type="number" min="0" max="30" value="0"/></td><td><input id="vf-g-p-completa" type="number" min="0" step="0.5" value="1"/></td></tr>
             <tr><td>🧩 Rimetti in ordine le parole <small>(sintassi)</small></td><td><input id="vf-g-n-ordine" type="number" min="0" max="30" value="3"/></td><td><input id="vf-g-p-ordine" type="number" min="0" step="0.5" value="2"/></td></tr>
             <tr><td>🔤 Traduci la frase <small>(sul tema scelto)</small></td><td><input id="vf-g-n-traduci" type="number" min="0" max="30" value="2"/></td><td><input id="vf-g-p-traduci" type="number" min="0" step="0.5" value="2"/></td></tr>
           </table>
@@ -188,6 +190,7 @@
 <script src="lingue/parole.js"></script>
 <script src="lingue/grammatica-dati.js"></script>
 <script src="lingue/grammatica.js"></script>
+<script src="lingue/grammatica-ui.js"></script>
 <script src="lingue/verifiche.js"></script>
 </body>
 </html>

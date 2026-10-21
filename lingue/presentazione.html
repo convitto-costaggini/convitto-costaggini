@@ -103,6 +103,7 @@
   .leg .a b{color:var(--oro2)}.leg .a p{font-family:var(--fd);font-style:italic;font-size:1.08rem}
   .leg .b{background:#fff;border:2px solid var(--bosco)}.leg .b b{color:var(--bosco)}
   .leg .c{background:#fffbeb;border:2px solid var(--oro)}.leg .c b{color:var(--oro)}
+  .leg .d{background:#fdf1cf;border:2px dashed var(--oro)}.leg .d b{color:var(--bosco)}
   .pz-cifre{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.9rem}
   .pz-cifra{background:#fff;border:1px solid var(--av3);border-radius:14px;padding:1rem .8rem;text-align:center;box-shadow:var(--sh-sm)}
   .pz-cifra b{display:block;font-family:var(--fd);font-weight:400;font-size:2.6rem;line-height:1;color:var(--bosco)}
@@ -333,6 +334,7 @@
     { p: 0, tit: 'Benvenuti', tipo: 'nat', mount: mIntro, etic: 'Scegliete come iniziare', dwell: 9000, beats: [
       { t: 'Un sito di lingue per gli studenti dell\'Alberghiero, in inglese, francese e spagnolo. Per voi prepara il materiale al posto vostro.' },
       { t: 'Tutto quello che vedete funziona: toccate, scrivete, provate. Nessun account, nessuna revisione richiesta.' },
+      { t: 'In ogni pagina dell\'area docenti c\'è la Bussola: un pulsante dorato in alto che, in venti secondi, spiega come usare quella pagina nel modo più rapido.' },
       { t: 'Si comincia dal tempo: quanto vi restituisce.' }
     ] },
     { p: 0, tit: 'Quanto tempo vi restituisce', tipo: 'nat', mount: mTempo, etic: 'Provate voi: mettete i vostri minuti', oro: true, dwell: 40000, beats: [
@@ -353,6 +355,7 @@
     ] },
     { p: 0, tit: 'Quanto lavoro vi toglie', tipo: 'sito', dev: 'fin', url: 'lingue/lunedi.html', sugg: 'Quattro situazioni reali: verifica, supplenza, DSA/BES, le vostre frasi', beats: [
       { t: 'Prima di entrare nel sito, la domanda che conta davvero: quanto lavoro vi toglie? Ecco quattro situazioni che ogni docente conosce.', hl: '.ln-ris' },
+      { t: 'In ogni pagina dell\'area docenti, in alto, c\'è un pulsante dorato: la Bussola. Si preme e, in venti secondi, dice cosa fare e in che ordine. Non c\'è nulla da cercare: la strada è già indicata.', hl: '#lg-bus', click: '#lg-bus .lg-bus-b' },
       { t: 'Una verifica per domani: le file A, B e C con le soluzioni nascono in pochi minuti, invece di un\'ora di impaginazione.', hl: '.ln-sc:nth-of-type(1)' },
       { t: 'Una supplenza: un\'ora di lezione già completa, con scaletta, scheda per i ragazzi e verifica, a un clic di distanza.', hl: '.ln-sc:nth-of-type(2)' },
       { t: 'Una classe con DSA o BES: la versione facilitata si attiva con un tocco, e la scheda si stampa già adattata.', hl: '.ln-sc:nth-of-type(3)' },
@@ -370,6 +373,7 @@
       { t: 'Ogni frase si ascolta con la voce del dispositivo.', hl: '.ps-card' }
     ] },
     { p: 1, tit: 'La lezione guidata', tipo: 'sito', dev: 'fin', url: 'lingue/lezioni.html?l=brigata', sugg: 'Lezione d\'esempio: la vostra potrà sostituirla', prova: 'Adesso a voi: toccate le schede e le risposte. Ricordate che questa è una lezione d\'esempio, che la vostra potrà sostituire.', beats: [
+      { t: 'Anche qui, in alto, c\'è la Bussola: tre passi per usare la lezione, con la grammatica che volete.', hl: '#lg-bus', click: '#lg-bus .lg-bus-b' },
       { t: 'Una lezione guidata vale un\'ora. Comincia con una mini-lezione a schede, leggera e da ascoltare.', hl: '#lz-corpo' },
       { t: 'Poi arrivano le domande lampo: lo studente sceglie e vede subito se ha risposto bene.', hl: '#lz-lampo' },
       { t: 'Alla fine c\'è una missione: per esempio, il primo giorno in una brigata di cucina.' },
@@ -406,6 +410,7 @@
       { t: 'Il docente guida, i ragazzi fanno: nessuno resta spettatore. E con i docenti di cucina la ricetta si può preparare davvero in laboratorio.', fn: function () { aula(4); } }
     ] },
     { p: 2, tit: 'I giochi a squadre alla lavagna interattiva', tipo: 'sito', dev: 'fin', url: 'lingue/giochi.html', sugg: 'Provate: scegliete un gioco e giocate', beats: [
+      { t: 'Come in ogni pagina docenti, la Bussola in alto riassume come si usa: un minuto e si gioca.', hl: '#lg-bus', click: '#lg-bus .lg-bus-b' },
       { t: 'Alla lavagna ci sono quattro giochi a due squadre: le coppie da ritrovare, indovina la parola, traduci a tempo, ascolta e scegli.', hl: '#gc-giochi' },
       { t: 'La classe si divide in squadre e il punteggio resta sempre in vista.', hl: '#gc-giochi', click: '.gc-gioco' },
       { t: 'Le frasi vengono dal vocabolario, oppure dalle frasi che scrivete voi.' }
@@ -423,10 +428,12 @@
     { p: 3, tit: 'Le vostre frasi, in un minuto', tipo: 'nat', mount: mGenera, etic: 'Provate voi: scrivete e generate', oro: true, dwell: 30000, beats: [
       { t: 'Passiamo agli strumenti per voi. Si scrivono o si incollano le frasi della lezione, anche da un documento di testo o da un foglio di calcolo.' },
       { t: 'Con un clic nasce un collegamento con un codice QR da dare ai ragazzi: inquadrano, e l\'esercizio si apre sul loro telefono.' },
+      { t: 'Nel sito vero, questa pagina ha in alto la Bussola: tre passi, due minuti, e sapete cosa fare.' },
       { t: 'Provateci: il generatore qui accanto è vero. Le stesse frasi si possono giocare anche alla lavagna interattiva.' },
       { t: 'E la grammatica? In verifiche e lezioni si scelgono dodici argomenti già pronti; se una regola manca, la scrivete voi in due minuti e si sceglie come le altre.' }
     ] },
     { p: 3, tit: 'La lezione in 5 minuti', tipo: 'sito', dev: 'fin', url: 'lingue/cinque-minuti.html', sugg: 'Strumento funzionante: scrivete un argomento vostro', prova: 'Tocca a voi: scrivete un argomento vostro nel campo, anche se non è tra i suggerimenti.', beats: [
+      { t: 'La Bussola, qui in alto, dice quando conviene questa pagina e quando è più veloce usare le lezioni già pronte.', hl: '#lg-bus', click: '#lg-bus .lg-bus-b' },
       { t: 'Se serve una lezione completa su un argomento nuovo, il sito prepara la richiesta per un\'intelligenza artificiale gratuita.' },
       { t: 'Attenzione ai menu a discesa: suggeriscono, ma non limitano. Negli spazi Argomento e Grammatica potete scrivere qualsiasi contenuto vi serva.', hl: '#cm-arg' },
       { t: 'E nel materiale autentico potete incollare un vostro testo, un menu, una ricetta, un articolo: la lezione nascerà da lì.', hl: '#cm-mat' },
@@ -434,6 +441,7 @@
       { t: 'Voi incollate la risposta e ottenete la lezione pronta all\'uso. Come per qualsiasi materiale, basta una lettura veloce prima di usarla in classe.' }
     ] },
     { p: 3, tit: 'Verifiche in un clic', tipo: 'sito', dev: 'fin', url: 'lingue/verifiche.html', sugg: 'Strumento funzionante: provate a creare una verifica', beats: [
+      { t: 'La Bussola in alto spiega la verifica in quattro mosse, compresa la grammatica e le regole scritte da voi.', hl: '#lg-bus', click: '#lg-bus .lg-bus-b' },
       { t: 'Si sceglie lingua e argomento, e lo strumento prepara una verifica dal vocabolario dell\'Alberghiero.' },
       { t: 'Si stampano le versioni con le domande in ordine diverso, più il foglio delle soluzioni.' }
     ] },
@@ -625,7 +633,7 @@
       '<div class="come"><div class="riga" style="margin:.2rem 0 .7rem"><button type="button" class="lg-btn pieno" id="i-auto">▶ Visita automatica, con la voce</button><button type="button" class="lg-btn" id="i-man">Vado avanti io, con la voce</button><button type="button" class="lg-btn" id="i-muto">Solo testo</button></div></div>' +
       '<div class="leg"><div class="a"><b>Fondo scuro</b><p>La voce che spiega.</p></div>' +
       '<div class="b"><b>● Pallino verde</b><p>Il sito vero: toccatelo, funziona.</p></div>' +
-      '<div class="c"><b>✋ Cornice dorata</b><p>Tocca a voi: scrivere, cliccare, provare.</p></div></div>' +
+      '<div class="c"><b>✋ Cornice dorata</b><p>Tocca a voi: scrivere, cliccare, provare.</p></div><div class="d"><b>🧭 Bussola</b><p>Nelle pagine docenti: un pulsante in alto che spiega come usarle, in venti secondi.</p></div></div>' +
       '<p class="nota" style="margin-top:.8rem">Lezioni e frasi che vedrete sono esempi: ogni docente può sostituirli con i propri.</p>';
     var SAL = ['Welcome', 'Bienvenue', 'Bienvenidos', 'Benvenuti'], i = 0, e = $('pz-saluto');
     if (!ridotto) (function giro() { dopo(function () { e.classList.add('via'); dopo(function () { i = (i + 1) % SAL.length; e.textContent = SAL[i]; e.classList.remove('via'); giro(); }, 500); }, 2400); })();
@@ -732,9 +740,9 @@
     ['«Il mio programma è diverso.»', 'Dite tema e livello a «Lezione in 5 minuti»: nasce una lezione completa, con scheda, esercizi, missione e verifica. Oppure scrivete le vostre frasi in «Crea i tuoi esercizi»: link e QR per la classe, gioco per la lavagna, verifica su carta.', ['Provate con un vostro tema', 'lingue/cinque-minuti.html']],
     ['«Costa? C\'è pubblicità?»', 'Gratuito, senza pubblicità, senza registrazione. Nessun abbonamento e nessuna licenza da rinnovare ogni anno.', null],
     ['«E se un giorno sparisce quello che ho preparato?»', 'Quello che stampate o salvate resta vostro. Le lezioni create con «Lezione in 5 minuti» e le verifiche si esportano in un file; le lezioni e gli esercizi viaggiano dentro il link. Il sito è statico, senza server da riparare, e ogni versione viene conservata.', null],
-    ['«E se chi l\'ha costruito non c\'è più?»', 'I contenuti sono semplici testi leggibili, non un programma chiuso. Qualunque sviluppatore può prenderli in mano e capirli.', null],
-    ['«Mi state dicendo che farà il mio lavoro?»', 'No. Restano la lezione, la classe, la valutazione. Il sito toglie quello che nessuno ha scelto di fare: cercare materiale, impaginare, ricopiare le soluzioni, rifare le schede per i DSA, fotocopiare.', null],
-    ['«Le vostre stime sono inventate.»', 'Sono stime, dichiarate come tali, con ogni passaggio visibile e i minuti modificabili. Poi c\'è una scheda per misurarle davvero: cronometro per ogni compito, confronto con il vostro solito. Se il vostro risultato è peggiore delle stime, scrivetelo: serve quanto il resto. Ancora dubbi? Provate adesso.', ['Costruite una verifica adesso', '#crono']]
+    ['«Cosa succede se chi ha costruito il sito non fosse più disponibile?»', 'I contenuti sono semplici testi leggibili, non un programma chiuso. Qualunque sviluppatore può prenderli in mano e capirli.', null],
+    ['«Questo vuol dire che lo strumento farà il mio lavoro?»', 'No. Restano la lezione, la classe, la valutazione. Il sito toglie quello che nessuno ha scelto di fare: cercare materiale, impaginare, ricopiare le soluzioni, rifare le schede per i DSA, fotocopiare.', null],
+    ['«Le stime che leggo sono “inventate”»', 'Sono stime, dichiarate come tali, con ogni passaggio visibile e i minuti modificabili. Poi c\'è una scheda per misurarle davvero: cronometro per ogni compito, confronto con il vostro solito. Se il vostro risultato è peggiore delle stime, scrivetelo: serve quanto il resto. Ancora dubbi? Provate adesso.', ['Costruite una verifica adesso', '#crono']]
   ];
   function mDiffidente(el) {
     el.innerHTML = '<h3>Il docente diffidente</h3><p class="tp-nota">Le obiezioni più dure, con la risposta e la prova a un clic.</p>' +

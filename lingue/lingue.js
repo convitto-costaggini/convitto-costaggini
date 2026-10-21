@@ -12,8 +12,7 @@ window.LINGUE_SITO = (function () {
   var LINGUE = [
     { cod: 'en', nome: 'Inglese', nativo: 'English', voce: 'en-GB' },
     { cod: 'fr', nome: 'Francese', nativo: 'Français', voce: 'fr-FR' },
-    { cod: 'es', nome: 'Spagnolo', nativo: 'Español', voce: 'es-ES' },
-    { cod: 'de', nome: 'Tedesco', nativo: 'Deutsch', voce: 'de-DE' }
+    { cod: 'es', nome: 'Spagnolo', nativo: 'Español', voce: 'es-ES' }
   ];
 
   /* link "#..." con <base href="/">: restano nella pagina */

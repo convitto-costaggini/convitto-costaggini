@@ -6,7 +6,7 @@
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Livello avanzato – Lingue | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Per gli studenti più avanzati (B1–B2): frasi complete per le situazioni di lavoro, il registro professionale, testi da ascoltare, frasi da completare ed e-mail, in inglese, francese, spagnolo e tedesco."/>
+  <meta name="description" content="Per gli studenti più avanzati (B1–B2): frasi complete per le situazioni di lavoro, il registro professionale, testi da ascoltare, frasi da completare ed e-mail, in inglese, francese e spagnolo."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -152,13 +152,13 @@
 
   /* ── completa la frase ── */
   var C;
-  var NOMI = /^(Montepulciano|Abruzzo|Rieti|Terminillo|Belvedere|Marco|Francesco|Franziskus|François|Francis|Rufo|Roma|Rome|Roms|Italia|Italy|Italie|Italien|Italiens|Gin|Valle|Santa|Hotel|Hôtel)$/;
+  var NOMI = /^(Montepulciano|Abruzzo|Rieti|Terminillo|Belvedere|Marco|Francesco|François|Francis|Rufo|Roma|Rome|Italia|Italy|Italie|Gin|Valle|Santa|Hotel|Hôtel)$/;
   function pulisci(w) { return w.replace(/^[«"¿¡(]+|[.,;:!?»")]+$/g, ''); }
   function candidati(t) {
     return t.split(' ').map(function (w, i) { return { w: pulisci(w), i: i }; }).filter(function (x) {
       if (x.w.length < 5 || /[0-9'’-]/.test(x.w) || NOMI.test(x.w)) return false;
-      if (lingua !== 'de' && /^\p{Lu}/u.test(x.w)) return false;
-      return x.i > 0 || lingua !== 'de';
+      if (/^\p{Lu}/u.test(x.w)) return false;
+      return true;
     });
   }
   function vCompleta() {

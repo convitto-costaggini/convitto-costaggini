@@ -6,7 +6,7 @@
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Vocabolario delle lingue | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Il vocabolario di sala, cucina, pasticceria, accoglienza turistica e bar in inglese, francese, spagnolo e tedesco, con l'ascolto."/>
+  <meta name="description" content="Il vocabolario di sala, cucina, pasticceria, accoglienza turistica e bar in inglese, francese e spagnolo, con l'ascolto."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -75,8 +75,8 @@
     <div class="w">
       <p class="lbl">Il vocabolario dell'Alberghiero</p>
       <h1>Il <em>vocabolario</em></h1>
-      <p>Le frasi che si usano davvero in sala, in cucina, in pasticceria, al ricevimento e al bar: in quattro lingue, con la voce del telefono per ascoltarle.</p>
-      <div class="lg-bandiere"><span>English</span><span>Français</span><span>Español</span><span>Deutsch</span></div>
+      <p>Le frasi che si usano davvero in sala, in cucina, in pasticceria, al ricevimento e al bar: in tre lingue, con la voce del telefono per ascoltarle.</p>
+      <div class="lg-bandiere"><span>English</span><span>Français</span><span>Español</span></div>
     </div>
   </section>
   <div data-lingue-nav></div>
@@ -112,8 +112,7 @@
   var LINGUE = [
     { cod: 'en', nome: 'Inglese', voce: 'en-GB' },
     { cod: 'fr', nome: 'Francese', voce: 'fr-FR' },
-    { cod: 'es', nome: 'Spagnolo', voce: 'es-ES' },
-    { cod: 'de', nome: 'Tedesco', voce: 'de-DE' }
+    { cod: 'es', nome: 'Spagnolo', voce: 'es-ES' }
   ];
   var V = window.VOCABOLARIO, AMBITI = V.AMBITI, SEZIONI = V.SEZIONI, PAROLE = V.PAROLE;
   function sezioniDi(a) { return SEZIONI.filter(function (s) { return s.ambito === a; }); }
@@ -124,7 +123,7 @@
   var dalLink = (location.search.match(/[?&]a=([a-z]+)/) || [])[1];
   var ambito = ambitoDi(dalLink) ? dalLink : (ambitoDi(st.ambito) ? st.ambito : 'sala');
   var SITO = window.LINGUE_SITO;
-  /* una lingua sola, quella scelta col pulsante 🌍 della barra: niente confusione tra le quattro */
+  /* una lingua sola, quella scelta col pulsante 🌍 della barra: niente confusione tra le tre */
   var lingua = SITO.linguaScelta(), sezione = sezioniDi(ambito)[0].id, cerca = '';
   function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function norm(t) { return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }

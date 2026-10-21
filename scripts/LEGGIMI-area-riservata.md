@@ -5,19 +5,36 @@ con le verifiche delle lezioni non sono nel repository in chiaro: stanno in `lin
 Le pagine pubbliche `lingue/<nome>.html` sono solo un guscio che chiede l'accesso (`lingue/accesso.js`).
 
 ## Come si entra
-- **E-mail istituzionale e codice monouso**: il docente scrive la sua e-mail, riceve un codice per posta, lo inserisce. Il codice parte solo
-  per gli indirizzi presenti nella tabella `lingue_docenti` (Supabase). Il database consegna la chiave di decifratura solo a chi ha
-  una sessione valida e un indirizzo abilitato (funzione `lingue_accesso`).
+- **E-mail istituzionale e codice monouso**: il docente scrive la sua e-mail, riceve un codice di sei cifre per posta, lo inserisce e entra.
+  Non c'è nessun account da creare e nessuna password. Il codice parte solo per gli indirizzi presenti nella tabella `lingue_docenti`
+  (Supabase), vale 10 minuti, si usa una volta sola, ha al massimo 5 tentativi e 5 invii all'ora. Del codice il database conserva solo
+  l'impronta (hash). La chiave di decifratura viene consegnata dalla funzione `lingue-accesso` solo dopo il codice giusto.
 - **Codice del Dipartimento**: una chiave di scorta (`lingue/docenti/accesso-dipartimento.json`) apribile con un codice condiviso.
 
-## Da fare una volta sola su Supabase (Dashboard)
-1. **Authentication, URL Configuration**: aggiungere `https://convitto.alberghierorieti.edu.it/lingue/*` tra i Redirect URLs.
-2. **Authentication, Email Templates**: nei modelli **Magic Link** e **Confirm signup** scrivere il codice, per esempio:
-   `Il vostro codice di accesso all'area docenti è: {{ .Token }}` (senza il codice il messaggio contiene solo un collegamento e l'accesso non funziona).
-3. **Posta in uscita (SMTP)**: il servizio predefinito di Supabase invia pochissimi messaggi all'ora e solo a indirizzi della propria
-   organizzazione, quindi per i colleghi serve un SMTP proprio. In **Authentication, SMTP Settings** si può usare l'account Google Workspace
-   della scuola (smtp.gmail.com, porta 465, con una password per le app) o un altro servizio di posta.
-4. **Authentication, Providers, Email**: lasciare attiva la conferma dell'e-mail; durata del codice a piacere (predefinita 1 ora).
+La mail parte da uno script Google Apps Script (`scripts/lingue-invio-codici.gs`), come le mail dei moduli del Convitto: nessuna casella
+nuova, nessun SMTP, nessun intervento dell'amministratore del Workspace.
+
+## Da fare per completare il setup (in quest'ordine, circa 10 minuti)
+- [ ] **Pubblicare lo script di invio**: vai su script.google.com con l'account `@alberghierorieti.it`, Nuovo progetto, incolla il contenuto di
+      `scripts/lingue-invio-codici.gs`. Impostazioni progetto (icona ingranaggio), Proprietà script, Aggiungi proprietà: nome `TOKEN`,
+      valore una stringa lunga e casuale (almeno 32 caratteri; tienila, ti serve al passo dopo). Poi Esegui il deployment, Nuova distribuzione,
+      tipo Applicazione web, "Esegui come: me", "Chi ha accesso: Chiunque", Distribuisci. Autorizza i permessi richiesti (invio e-mail)
+      e copia l'URL che termina con `/exec`.
+- [ ] **Inserire i due segreti in Supabase**: Dashboard, Edge Functions, Secrets. Aggiungi `GAS_URL` (l'URL `/exec`) e `GAS_TOKEN`
+      (la stessa stringa messa in `TOKEN`). Non vanno scritti in chat né nel repository.
+- [ ] **Abilitare i docenti** nella tabella `lingue_docenti` (vedi sotto).
+- [ ] **Prova**: aprire `lingue/docenti.html`, scrivere un indirizzo abilitato, verificare che la mail arrivi e che il codice faccia entrare.
+- [ ] Unire il ramo su GitHub (finché non è unito, le pagine pubbliche sono ancora quelle vecchie).
+- [ ] Facoltativo, a prova riuscita: eliminare le funzioni SQL non più usate
+      `drop function public.lingue_codice_ok(text), public.lingue_stato(), public.lingue_accesso();`
+
+Nel frattempo il **codice del Dipartimento** funziona senza nulla di tutto questo.
+
+## Se qualcosa non va
+- *Il codice non arriva*: controllare la posta indesiderata; poi Dashboard, Edge Functions, `lingue-accesso`, Logs. Se lo script risponde
+  "non autorizzato", `TOKEN` e `GAS_TOKEN` non coincidono. Dopo ogni modifica al codice dello script serve una nuova distribuzione.
+- *Limiti*: Gmail consente circa 1500 invii al giorno con un account Workspace, ampiamente sufficienti.
+- Il codice funziona solo per indirizzi che finiscono con `@alberghierorieti.it` (controllo anche nello script).
 
 ## Aggiungere un docente (SQL Editor di Supabase)
     insert into public.lingue_docenti(email, nome) values ('nome.cognome@alberghierorieti.it', 'Nome Cognome');

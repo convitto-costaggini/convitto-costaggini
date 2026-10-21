@@ -1,21 +1,18 @@
 /* Area docenti: accesso protetto.
    Le pagine riservate stanno nel repository solo in forma cifrata (lingue/docenti/*.enc, AES-256-GCM).
    La chiave si ottiene in due modi:
-   1) con il proprio indirizzo istituzionale: un codice monouso arriva per e-mail; la chiave viene rilasciata dal database
-      (funzione lingue_accesso) solo ai docenti abilitati nell'elenco;
+   1) con il proprio indirizzo istituzionale: un codice monouso arriva per e-mail; la funzione lingue-accesso
+      rilascia la chiave solo ai docenti abilitati nell'elenco;
    2) con il codice del Dipartimento: una chiave di scorta, a sua volta cifrata con il codice.
+   La chiave resta solo nella memoria della scheda (sessionStorage) e sparisce alla chiusura.
    Dopo la decifratura la pagina viene aperta in questa stessa scheda. */
 (function () {
   'use strict';
-  var URL_SB = 'https://sawclsysqnjsvbobioqo.supabase.co';
-  var CHIAVE_SB = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
-  var SDK = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
+  var API = 'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/lingue-accesso';
   var MAIL = 'michele.gaggiano@alberghierorieti.it';
-  var K_AUTH = 'lingue-docenti-auth', K_DIP = 'lingue-chiave-dip';
-  var sb = null, sdkP = null;
+  var K_DIP = 'lingue-chiave-dip';
 
   function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); if (v === null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch (e) {} return null; }
-  function haSessione() { try { return !!localStorage.getItem(K_AUTH); } catch (e) { return false; } }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
   /* ───── cifratura ───── */
@@ -45,38 +42,16 @@
     });
   }
 
-  /* ───── Supabase ───── */
-  function caricaSdk() {
-    if (window.supabase && window.supabase.createClient) return Promise.resolve();
-    if (sdkP) return sdkP;
-    sdkP = new Promise(function (ok, no) {
-      var s = document.createElement('script'); s.src = SDK; s.onload = function () { ok(); }; s.onerror = function () { no(new Error('sdk')); };
-      document.head.appendChild(s);
-    });
-    return sdkP;
-  }
-  function cliente() {
-    return caricaSdk().then(function () {
-      if (!sb) sb = window.supabase.createClient(URL_SB, CHIAVE_SB, { auth: { storageKey: K_AUTH, persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
-      return sb;
-    });
-  }
-  function chiaveDaAccount() {
-    return cliente().then(function (c) {
-      return c.auth.getSession().then(function (r) {
-        if (!r.data || !r.data.session) throw new Error('no-sessione');
-        return c.rpc('lingue_accesso');
-      }).then(function (r) {
-        if (r.error || !r.data || !r.data.chiave) throw new Error('no-abilitato');
-        return r.data.chiave;
-      });
+  /* ───── servizio di accesso ───── */
+  function chiama(corpo) {
+    return fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.ok) { var e = new Error(j.errore || 'rete'); e.stato = r.status; throw e; } return j; });
     });
   }
   /* prova ad avere la chiave senza mostrare nulla */
   function silenzioso() {
-    var d = ss(K_DIP); if (d) return Promise.resolve(d);
-    if (!haSessione()) return Promise.reject(new Error('no-sessione'));
-    return chiaveDaAccount();
+    var d = ss(K_DIP);
+    return d ? Promise.resolve(d) : Promise.reject(new Error('no-chiave'));
   }
 
   /* ───── dati delle lezioni (scheda Docente e verifiche) ───── */
@@ -113,16 +88,17 @@
 
   function errore(e) {
     var m = String((e && e.message) || e || '');
-    if (/rate|too many|seconds|security purposes/i.test(m)) return 'Troppi tentativi: attendete un minuto e riprovate.';
-    if (/expired|invalid|token/i.test(m)) return 'Codice non valido o scaduto. Richiedetene uno nuovo.';
-    if (/sdk|fetch|network|Failed/i.test(m)) return 'Connessione non riuscita. Controllate la rete e riprovate.';
+    if (/troppo-presto/.test(m)) return 'Attendete mezzo minuto prima di chiedere un altro codice.';
+    if (/troppi/.test(m)) return 'Troppe richieste: riprovate tra un po\'.';
+    if (/codice/.test(m)) return 'Codice non valido o scaduto. Richiedetene uno nuovo.';
+    if (/invio/.test(m)) return 'Non è stato possibile spedire la mail. Riprovate tra poco.';
+    if (/rete|fetch|network|Failed/i.test(m)) return 'Connessione non riuscita. Controllate la rete e riprovate.';
     return 'Operazione non riuscita. Riprovate tra poco.';
   }
 
   /* disegna la procedura dentro `box`; chiama fine(chiave) quando la chiave è disponibile */
   function interfaccia(box, fine) {
     stile();
-    var cl = null;
     function vista(h) { box.innerHTML = '<div class="ac"><div class="ac-c">' + h + '</div></div>'; var i = box.querySelector('input'); if (i) try { i.focus(); } catch (e) {} }
     function msg(t, ok) { var p = box.querySelector('.ac-m'); if (!p) return; p.className = 'ac-m ' + (ok ? 'o' : 'e'); p.textContent = t; }
     function occupato(b, on) { if (b) b.disabled = on; }
@@ -146,19 +122,10 @@
       });
     }
     /* il codice parte solo per gli indirizzi abilitati; la risposta a video è la stessa in ogni caso */
-    function invia(mail) {
-      return cliente().then(function (c) {
-        cl = c;
-        return c.rpc('lingue_codice_ok', { p_email: mail }).then(function (r) {
-          if (r.error) throw r.error;
-          if (!r.data) return;
-          return c.auth.signInWithOtp({ email: mail, options: { shouldCreateUser: true } }).then(function (o) { if (o.error) throw o.error; });
-        });
-      });
-    }
+    function invia(mail) { return chiama({ azione: 'richiedi', email: mail }); }
     function codice(mail) {
       vista(intesta() + '<p class="s">Se l\'indirizzo <b>' + esc(mail) + '</b> è abilitato, tra pochi istanti riceverete un messaggio con un codice. Controllate anche la posta indesiderata.</p>' +
-        '<form id="ac-f"><label for="ac-t">Codice ricevuto per e-mail</label><input id="ac-t" class="cod" inputmode="numeric" autocomplete="one-time-code" maxlength="8" pattern="[0-9]{6,8}" required/>' +
+        '<form id="ac-f"><label for="ac-t">Codice ricevuto per e-mail</label><input id="ac-t" class="cod" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required/>' +
         '<p class="ac-m" role="alert"></p><button class="b" type="submit">Entra</button></form>' +
         '<button type="button" class="l" id="ac-ri">Invia di nuovo il codice</button> <button type="button" class="l" id="ac-ind">Cambia indirizzo</button>');
       box.querySelector('#ac-ind').addEventListener('click', accedi);
@@ -168,31 +135,12 @@
       });
       box.querySelector('#ac-f').addEventListener('submit', function (e) {
         e.preventDefault(); var b = e.target.querySelector('button'); occupato(b, true);
-        cliente().then(function (c) { cl = c; return c.auth.verifyOtp({ email: mail, token: box.querySelector('#ac-t').value.trim(), type: 'email' }); })
-          .then(function (r) { if (r.error) throw r.error; return verifica(); })
+        chiama({ azione: 'verifica', email: mail, codice: box.querySelector('#ac-t').value.trim() })
+          .then(function (r) { ss(K_DIP, r.chiave); fine(r.chiave); })
           .catch(function (er) { occupato(b, false); msg(errore(er)); });
       });
     }
-    function esci() { return cliente().then(function (c) { return c.auth.signOut(); }).catch(function () {}).then(function () { ss(K_DIP, null); accedi(); }); }
-    function nonAbilitato(email) {
-      vista(intesta() + '<p class="s">L\'account <b>' + esc(email || '') + '</b> non è abilitato all\'area docenti.</p><p class="o">Per l\'abilitazione scrivete a <b>' + MAIL + '</b>, indicando questo indirizzo.</p><button type="button" class="b" id="ac-esci">Esci</button>');
-      box.querySelector('#ac-esci').addEventListener('click', esci);
-    }
-    /* sessione presente: abilitato? allora chiave e apertura */
-    function verifica() {
-      return cliente().then(function (c) {
-        cl = c;
-        return c.rpc('lingue_stato').then(function (r) {
-          if (r.error || !r.data || !r.data.abilitato) { nonAbilitato(r.data && r.data.email); return; }
-          return chiaveDaAccount().then(fine);
-        });
-      });
-    }
-
-    if (haSessione()) {
-      vista(intesta() + '<p class="s">Controllo dell\'accesso…</p>');
-      verifica().catch(function () { accedi(); });
-    } else accedi();
+    accedi();
   }
 
   /* ───── pagina riservata ───── */
@@ -227,9 +175,7 @@
     var b = document.createElement('div'); b.className = 'ac-bar'; b.innerHTML = '<span>🔒 Area riservata</span><button type="button">Esci</button>';
     b.querySelector('button').addEventListener('click', function () {
       ss(K_DIP, null);
-      var fine = function () { location.href = 'lingue/docenti.html'; };
-      if (!haSessione()) return fine();
-      cliente().then(function (c) { return c.auth.signOut(); }).then(fine, fine);
+      location.href = 'lingue/docenti.html';
     });
     document.body.appendChild(b);
   }

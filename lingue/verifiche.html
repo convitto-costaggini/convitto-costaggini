@@ -120,6 +120,22 @@
           <button type="button" class="lg-btn oro" id="vf-genera" style="width:100%;margin-top:.4rem">✨ Genera le domande</button>
         </div>
 
+        <div class="vf-box" id="vf-gram">
+          <h2><span class="n">2b</span>Grammatica da verificare</h2>
+          <p class="sot">Scegliete uno o più argomenti: le domande verificano la regola, non solo il lessico. Si aggiungono in coda a quelle che ci sono già.</p>
+          <div class="lg-chips" id="vf-g-chips" role="group" aria-label="Argomenti di grammatica" style="margin-bottom:.8rem"></div>
+          <label class="vf-l">Livello<select id="vf-g-liv"><option value="tutti">Tutti i livelli</option><option value="a">Biennio (A1-A2)</option><option value="b">Triennio (B1-B2)</option></select></label>
+          <table class="vf-qt">
+            <tr><th>Tipo</th><th>Quante</th><th>Punti ciascuna</th></tr>
+            <tr><td>🎯 Scegli la forma corretta</td><td><input id="vf-g-n-scelta" type="number" min="0" max="30" value="5"/></td><td><input id="vf-g-p-scelta" type="number" min="0" step="0.5" value="1"/></td></tr>
+            <tr><td>🧩 Rimetti in ordine le parole <small>(sintassi)</small></td><td><input id="vf-g-n-ordine" type="number" min="0" max="30" value="3"/></td><td><input id="vf-g-p-ordine" type="number" min="0" step="0.5" value="2"/></td></tr>
+            <tr><td>🔤 Traduci la frase <small>(sul tema scelto)</small></td><td><input id="vf-g-n-traduci" type="number" min="0" max="30" value="2"/></td><td><input id="vf-g-p-traduci" type="number" min="0" step="0.5" value="2"/></td></tr>
+          </table>
+          <label class="vf-c"><input type="checkbox" id="vf-g-trad"/> Nelle domande a scelta mostra la traduzione italiana tra parentesi (utile in A1-A2)</label>
+          <button type="button" class="lg-btn oro" id="vf-g-genera" style="width:100%;margin-top:.4rem">🧠 Aggiungi le domande di grammatica</button>
+          <p class="sot" id="vf-g-msg" style="margin:.5rem 0 0" aria-live="polite"></p>
+        </div>
+
         <div class="vf-box" id="vf-domande">
           <h2><span class="n">3</span>Le domande</h2>
           <p class="sot">Modificate qualsiasi testo: l'anteprima si aggiorna mentre scrivete. Con ↑ ↓ si cambia l'ordine.</p>
@@ -170,6 +186,8 @@
 <script src="nav.min.js"></script>
 <script src="lingue/lingue.js"></script>
 <script src="lingue/parole.js"></script>
+<script src="lingue/grammatica-dati.js"></script>
+<script src="lingue/grammatica.js"></script>
 <script src="lingue/verifiche.js"></script>
 </body>
 </html>

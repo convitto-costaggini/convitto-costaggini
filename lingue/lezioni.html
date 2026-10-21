@@ -36,6 +36,10 @@
   .lz-tab button.doc{border-color:var(--oro)}
   .lz-facile{display:inline-flex;align-items:center;gap:.45rem;font:600 .82rem var(--fu);color:var(--txt2);cursor:pointer;margin:0 0 1rem}
   .lz-facile input{width:18px;height:18px;accent-color:var(--bosco)}
+  .lz-gram{background:#fffaf0;border:1.5px solid var(--oro);border-radius:14px;padding:.7rem .9rem;margin:0 0 1rem}
+  .lz-gram summary{cursor:pointer;font:800 .68rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--oro)}
+  .lz-gram p{margin:.5rem 0;font-size:.84rem;line-height:1.55;color:var(--txt2)}
+  .lz-gram .lg-chips{margin:.4rem 0 .2rem}
   .lz-avviso{text-align:center}
   .lz-avviso .bott{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:.8rem}
   .lz-box{max-width:640px;margin:0 auto}
@@ -174,6 +178,8 @@
 <script src="lingue/qrcode.js"></script>
 <script src="lingue/pacchetto.js"></script>
 <script src="lingue/lezioni-dati.js"></script>
+<script src="lingue/grammatica-dati.js"></script>
+<script src="lingue/grammatica.js"></script>
 <script>
 (function () {
   'use strict';
@@ -182,9 +188,31 @@
   if (q.get('lin') && L.lingua(q.get('lin'))) L.impostaLingua(q.get('lin'));
   var lez = null, lin = L.linguaScelta(), tab = 'lezione', facile = !!L.leggi('lz-facile', false);
   var schedaN = 0, esN = 0, esPunti = [], miN = 0, miPunti = [];
+  /* grammatica: argomenti scelti (dal link ?g= oppure salvati su questo dispositivo) */
+  var G = window.GRAMMATICA, gram = q.get('g') ? q.get('g').split(',').filter(Boolean) : (L.leggi('gram-argomenti', []) || []).slice(), gramEx = null, gramSeme = 0;
+  function livLez() { return lez && /^B/i.test(lez.livello || '') ? 'b' : 'a'; }
+  function gramPronta() {
+    if (!G || !lez || !lez.lingue[lin]) return null;
+    var ar = G.argomenti(lin).map(function (a) { return a.id; }), ids = gram.filter(function (id) { return ar.indexOf(id) >= 0; });
+    if (!ids.length) return null;
+    var k = [lez.id, lin, ids.join(','), gramSeme].join('|');
+    if (!gramEx || gramEx.k !== k) gramEx = { k: k, esercizi: G.esercizi(lin, ids, livLez()), verifica: G.sezioniVerifica(lin, ids, livLez()) };
+    return gramEx;
+  }
+  function gramPannello() {
+    if (!G || !G.argomenti(lin).length) return '';
+    var ar = G.argomenti(lin), n = gram.filter(function (id) { return ar.some(function (a) { return a.id === id; }); }).length;
+    return '<details class="lz-gram"' + (n ? ' open' : '') + '><summary>🧩 Grammatica da verificare' + (n ? ' · ' + n + (n === 1 ? ' argomento scelto' : ' argomenti scelti') : '') + '</summary>' +
+      '<p>Scegliete uno o più argomenti: negli <b>Esercizi</b> compaiono domande sulla regola e nella <b>verifica</b> (scheda Docente) domande a scelta e di riordino delle parole.</p>' +
+      '<div class="lg-chips" role="group" aria-label="Argomenti di grammatica">' + ar.map(function (a) { return '<button type="button" class="lg-chip" data-gram="' + a.id + '" aria-pressed="' + (gram.indexOf(a.id) >= 0) + '" title="' + esc(a.liv) + '">' + esc(a.nome) + '</button>'; }).join('') + '</div>' +
+      (n ? '<p style="margin-bottom:0"><button type="button" class="lg-btn" data-gram-nuovo style="min-height:36px;padding:.4rem .8rem">🔄 Altre frasi</button> <button type="button" class="lg-btn" data-gram-via style="min-height:36px;padding:.4rem .8rem">Togli la grammatica</button></p>' : '') + '</details>';
+  }
 
   function md(t) { return esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<i>$1</i>').replace(/\n/g, '<br/>'); }
-  function D() { return lez.lingue[lin]; }
+  function D() {
+    var b = lez.lingue[lin], x = gramPronta();
+    return x ? { schede: b.schede, esercizi: b.esercizi.concat(x.esercizi), missione: b.missione, verifica: (b.verifica || []).concat(x.verifica), luogo: b.luogo } : b;
+  }
   function opzioni(o) { var g = o[0], s = L.mescola(o.slice(1)); if (facile) s = s.slice(0, 1); return L.mescola([g].concat(s)); }
   function sezionePronta() { var y = sez.getBoundingClientRect().top + scrollY - 130; if (scrollY > y) scrollTo({ top: y, behavior: 'smooth' }); }
 
@@ -230,7 +258,7 @@
     if ((tab === 'docente' || tab === 'modifica') && !lez.docente) tab = 'lezione';
     if (tab === 'modifica' && !salvataNelBrowser()) tab = 'docente';
     h += '<div class="lz-tab" role="group" aria-label="Parti della lezione">' + T.map(function (t) { return '<button type="button" data-tab="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '"' + (t[0] === 'docente' ? ' class="doc"' : '') + '><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>' +
-      '<label class="lz-facile"><input type="checkbox" id="lz-fac"' + (facile ? ' checked' : '') + '/> Versione facilitata (DSA/BES)</label><div id="lz-corpo"></div>';
+      '<label class="lz-facile"><input type="checkbox" id="lz-fac"' + (facile ? ' checked' : '') + '/> Versione facilitata (DSA/BES)</label>' + gramPannello() + '<div id="lz-corpo"></div>';
     vista.innerHTML = h;
     ({ lezione: scheda, esercizi: esercizio, missione: missione, docente: docente, modifica: editor })[tab]();
   }
@@ -386,7 +414,7 @@
   /* area docente */
   var linkCorrente = '';
   function linkStudenti() {
-    if (!lez.propria) return Promise.resolve(location.origin + '/lingue/lezioni.html?l=' + lez.id + '&lin=' + lin);
+    if (!lez.propria) return Promise.resolve(location.origin + '/lingue/lezioni.html?l=' + lez.id + '&lin=' + lin + (gram.length ? '&g=' + gram.join(',') : ''));
     /* lezione del docente: viaggia dentro il link, senza verifica né scheda docente */
     var v = { id: lez.id, icona: lez.icona, ambito: lez.ambito, titolo: lez.titolo, sottotitolo: lez.sottotitolo, livello: lez.livello, classi: lez.classi, descrizione: lez.descrizione, lingue: {} };
     v.lingue[lin] = { schede: D().schede, esercizi: D().esercizi, missione: D().missione, verifica: [] };
@@ -628,6 +656,9 @@
     var b = e.target.closest('button, a'); if (!b || !vista.contains(b)) return;
     var d = b.dataset;
     if (d.tab) { if (window.speechSynthesis) speechSynthesis.cancel(); tab = d.tab; if (tab === 'esercizi' && esN >= D().esercizi.length) { esN = 0; esPunti = []; } disegna(); sezionePronta(); }
+    else if (d.gram) { var i = gram.indexOf(d.gram); if (i >= 0) gram.splice(i, 1); else gram.push(d.gram); L.salva('gram-argomenti', gram); gramSeme++; esN = 0; esPunti = []; stato = {}; disegna(); }
+    else if (d.gramNuovo != null) { gramSeme++; esN = 0; esPunti = []; stato = {}; disegna(); }
+    else if (d.gramVia != null) { gram = []; L.salva('gram-argomenti', gram); esN = 0; esPunti = []; stato = {}; disegna(); }
     else if (d.lin) L.impostaLingua(d.lin);
     else if (d.sch) { schedaN += +d.sch; scheda(); sezionePronta(); }
     else if (d.lampo != null) rispondiLampo(b);

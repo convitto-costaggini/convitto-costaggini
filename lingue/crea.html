@@ -164,7 +164,7 @@
     var gia = {}; lista().voci.forEach(function (v) { gia[v.it] = 1; });
     var nuove = [].filter.call($('cr-voc').querySelectorAll('input:checked'), function () { return true; }).map(function (x) {
       var p = V.PAROLE[sez.value][+x.dataset.v], t = p[1][lin.value]; x.checked = false;
-      return gia[p[0]] ? null : p[0] + ' = ' + t[0] + (t[1] ? ' = ' + t[1] : '');
+      return gia[p[0]] ? null : p[0] + ' = ' + t[0];
     }).filter(Boolean);
     if (!nuove.length) return;
     txt.value = (txt.value.trim() ? txt.value.replace(/\s+$/, '') + '\n' : '') + nuove.join('\n');
@@ -175,7 +175,7 @@
   function pacchetto() {
     var r = lista();
     if (r.voci.length < 2) { alert('Servono almeno due frasi.'); return null; }
-    return { v: 1, t: tit.value.trim() || 'Esercizio di ' + L.lingua(lin.value).nome.toLowerCase(), l: lin.value, k: bozza.tipo, f: r.voci.map(function (v) { return v.pr ? [v.it, v.tr, v.pr] : [v.it, v.tr]; }) };
+    return { v: 1, t: tit.value.trim() || 'Esercizio di ' + L.lingua(lin.value).nome.toLowerCase(), l: lin.value, k: bozza.tipo, f: r.voci.map(function (v) { return [v.it, v.tr]; }) };
   }
   function qr(testo, canvas, cella) {
     var q = qrcode(0, 'L'); q.addData(testo); q.make();

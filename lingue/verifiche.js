@@ -21,7 +21,7 @@
     vf: { nome: 'Vero o falso', ic: '✅' },
     aperta: { nome: 'Domanda aperta', ic: '💬' }
   };
-  var ISTITUTO = 'IPSSEOA «R. A. Costaggini» — Rieti';
+  var ISTITUTO = 'IPSSEOA «R. A. Costaggini», Rieti';
 
   /* ── numeri casuali riproducibili (stessa fila = stesso ordine, anche per le soluzioni) */
   function rng(seme) { var a = 0; for (var i = 0; i < seme.length; i++) a = (a * 31 + seme.charCodeAt(i)) | 0; return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
@@ -36,11 +36,11 @@
   function salva() { L.salva(CH, ver); var s = document.getElementById('vf-salvato'); if (s) { s.textContent = '✓ Bozza salvata in questo browser'; clearTimeout(salva.t); salva.t = setTimeout(function () { s.textContent = ''; }, 2000); } }
   function nomeLingua() { return L.lingua(ver.lingua).nome; }
   /* titolo automatico: si aggiorna con lingua e ambito, finché il docente non lo riscrive a mano */
-  var AUTO = /^Verifica di (inglese|francese|spagnolo)( — .*)?$/;
+  var AUTO = /^Verifica di (inglese|francese|spagnolo)(( — |: ).*)?$/;
   function titoloAuto(ambito) {
     var I = ver.intest; if (I.titolo && !AUTO.test(I.titolo)) return;
     var am = V.AMBITI.filter(function (a) { return a.id === ambito; })[0];
-    var coda = ambito === undefined ? (I.titolo && I.titolo.indexOf(' — ') > 0 ? I.titolo.slice(I.titolo.indexOf(' — ')) : '') : (am ? ' — ' + am.nome : '');
+    var coda = ambito === undefined ? (I.titolo && /( — |: )/.test(I.titolo) ? ': ' + I.titolo.split(/ — |: /).slice(1).join(': ') : '') : (am ? ': ' + am.nome : '');
     I.titolo = 'Verifica di ' + nomeLingua().toLowerCase() + coda;
     var el = document.getElementById('vf-titolo'); if (el) el.value = I.titolo;
   }
@@ -135,7 +135,7 @@
       voti.map(function (v) { return '<td><b>' + f(v) + '</b></td>'; }).join('') + '</tr></table><p class="gvn">Conversione proporzionale (punteggio ÷ totale × 10, arrotondato al mezzo voto; minimo 3). Punteggio ottenuto: ______ / ' + f(tot) + '</p>';
   }
   function soluzioni(file) {
-    var h = '<div class="pg sol"><div class="ist"><span>' + esc(ISTITUTO) + '</span><span>Soluzioni — riservato al docente</span></div><h1>' + esc(ver.intest.titolo || 'Verifica') + ' — soluzioni</h1>';
+    var h = '<div class="pg sol"><div class="ist"><span>' + esc(ISTITUTO) + '</span><span>Soluzioni (riservato al docente)</span></div><h1>' + esc(ver.intest.titolo || 'Verifica') + ' — soluzioni</h1>';
     file.forEach(function (fila) {
       h += '<h2>Fila ' + fila + '</h2><ol>';
       preparaFila(fila).forEach(function (d) {
@@ -340,7 +340,7 @@
     if (primaVolta) {
       ver.domande = genera({ ambito: 'sala', sezione: 'tutte', direzione: 'it', traduci: 4, scelta: 3, abbina: 5, completa: 3, pt: { traduci: 2, scelta: 1, abbina: 1, completa: 1 } });
       ver.domande.push({ id: nid(), tipo: 'aperta', consegna: 'Un cliente inglese ti chiede di consigliargli un piatto della cucina reatina. Scrivi la tua risposta (3-4 frasi).', righe: 4, traccia: '', punti: 4 });
-      I.titolo = 'Verifica di inglese — Sala e vendita'; document.getElementById('vf-titolo').value = I.titolo;
+      I.titolo = 'Verifica di inglese: Sala e vendita'; document.getElementById('vf-titolo').value = I.titolo;
     }
     disegnaLista(); aggiornaTot(); aggiornaAnteprima(); if (primaVolta) salva();
   }

@@ -448,14 +448,14 @@
     var S = D().schede, nomeL = L.lingua(lin).nome, rnd = seme(5);
     var corpoS = S.map(function (s, i) {
       var h = '<h3>' + (i + 1) + '. ' + esc(s.titolo) + '</h3><p>' + md(s.testo.replace(/[^.!?\n]*🔊[^.!?\n]*[.!?]?\s*/g, '')) + '</p>';
-      if (s.esempi.length) h += '<table><tbody>' + s.esempi.map(function (e) { return '<tr><td class="fr">' + esc(e[0]) + (e[2] ? '<small>' + esc(e[2]) + '</small>' : '') + '</td><td>' + esc(e[1]) + '</td></tr>'; }).join('') + '</tbody></table>';
+      if (s.esempi.length) h += '<table><tbody>' + s.esempi.map(function (e) { return '<tr><td class="fr">' + esc(e[0]) + '</td><td>' + esc(e[1]) + '</td></tr>'; }).join('') + '</tbody></table>';
       if (s.domanda) h += '<p class="dom">✎ ' + esc(s.domanda.testo) + '</p><p class="opz">' + mescolaS(s.domanda.o, rnd).map(function (o) { return '☐ ' + esc(o); }).join('&nbsp;&nbsp;&nbsp; ') + '</p>';
       return '<div class="blocco">' + h + '</div>';
     }).join('');
     var css = 'body{font-family:Arial,Helvetica,sans-serif;margin:22px;color:#1a1a1a;font-size:' + (fac ? '14pt' : '11pt') + ';line-height:' + (fac ? '1.8' : '1.5') + (fac ? ';letter-spacing:.02em' : '') + '}h1{font-size:' + (fac ? '19pt' : '16pt') + ';margin:0}.sot{font-size:9.5pt;color:#555;margin:2px 0 14px}h3{font-size:' + (fac ? '14pt' : '12pt') + ';color:#2C3E2D;margin:14px 0 4px}p{margin:0 0 6px}table{width:100%;border-collapse:collapse;margin:4px 0 6px}td{border-bottom:1px solid #ccc;padding:4px 6px;vertical-align:top;width:50%}td.fr{font-weight:bold}small{display:block;font-weight:normal;color:#666;' + (fac ? '' : 'font-style:italic;') + 'font-size:' + (fac ? '11pt' : '8.5pt') + '}.dom{margin-top:6px;font-weight:bold}.opz{color:#333}.blocco{page-break-inside:avoid}.nome{border:1px solid #999;border-radius:6px;padding:6px 10px;margin-bottom:12px;font-size:10pt}@page{size:A4;margin:14mm}';
     var w = window.open('', '_blank'); if (!w) return;
     w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(lez.titolo) + ' — ' + esc(nomeL) + ' — scheda' + (fac ? ' facilitata' : '') + '</title><style>' + css + '</style></head><body>' +
-      '<h1>' + esc(lez.titolo) + ' · ' + esc(nomeL) + '</h1><p class="sot">' + esc(lez.sottotitolo) + ' · livello ' + esc(lez.livello) + ' · IPSSEOA «Costaggini» Rieti</p><div class="nome">Nome e cognome ____________________________ Classe ______</div>' + corpoS +
+      '<h1>' + esc(lez.titolo) + ' · ' + esc(nomeL) + '</h1><p class="sot">' + esc(lez.sottotitolo) + ' · livello ' + esc(lez.livello) + ' · IPSSEOA «Costaggini» Rieti</p><div class="nome">Cognome e nome ____________________________ Classe ______</div>' + corpoS +
       '<script>window.onload=function(){window.print()}<\/script></body></html>');
     w.document.close();
   }
@@ -617,7 +617,7 @@
     var w = window.open('', '_blank'); if (!w) return;
     w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(lez.titolo) + ' — ' + esc(nomeL) + ' — ' + esc(tit) + '</title><style>' + css + '</style></head><body>' +
       '<h1>' + esc(lez.titolo) + ' · ' + esc(nomeL) + ' — ' + esc(tit) + '</h1><p class="sot">' + esc(lez.sottotitolo) + ' · livello ' + esc(lez.livello) + ' · IPSSEOA «Costaggini» Rieti</p>' +
-      (file === 'S' ? '' : '<div class="dati"><span>Nome e cognome</span><span style="flex:.4">Classe</span><span style="flex:.5">Data</span></div>') + corpoV +
+      (file === 'S' ? '' : '<div class="dati"><span>Cognome e nome</span><span style="flex:.4">Classe</span><span style="flex:.5">Data</span></div>') + corpoV +
       (file === 'S' ? '' : '<p class="tot">Totale: ______ / ' + tot + '</p>') +
       '<script>window.onload=function(){window.print()}<\/script></body></html>');
     w.document.close();

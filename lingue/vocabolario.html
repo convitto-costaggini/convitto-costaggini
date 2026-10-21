@@ -168,7 +168,7 @@
         var t = x.p[1][l.cod];
         return '<div class="ps-l"><span class="ps-cod" title="' + l.nome + '">' + l.cod.toUpperCase() + '</span><span class="ps-fr" lang="' + l.cod + '">' + esc(t[0]) + '</span>' +
           (parla ? '<button type="button" class="ps-play" data-t="' + esc(t[0]) + '" data-c="' + l.cod + '" aria-label="Ascolta in ' + l.nome.toLowerCase() + '">🔊</button>' : '') +
-          (t[2] ? '<span class="ps-nota">ℹ️ ' + esc(t[2]) + '</span>' : '') + '</div>';
+          (t[1] ? '<span class="ps-nota">ℹ️ ' + esc(t[1]) + '</span>' : '') + '</div>';
       }).join('') + '</article>';
     }).join('') + '</div>';
   }

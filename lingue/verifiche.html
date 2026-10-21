@@ -88,8 +88,8 @@
 
         <div class="vf-box">
           <h2><span class="n">1</span>Intestazione</h2>
-          <p class="sot">Compare in cima a ogni foglio, insieme al nome dell'Istituto e agli spazi per nome e classe.</p>
-          <label class="vf-l">Titolo<input id="vf-titolo" type="text" placeholder="Verifica di inglese — Sala e vendita"/></label>
+          <p class="sot">Compare in cima a ogni foglio, insieme al nome dell'Istituto e agli spazi per cognome e nome, classe e data.</p>
+          <label class="vf-l">Titolo<input id="vf-titolo" type="text" placeholder="Verifica di inglese: Sala e vendita"/></label>
           <div class="vf-row">
             <label class="vf-l">Classe<input id="vf-classe" type="text" placeholder="es. 3ª B"/></label>
             <label class="vf-l">Data<input id="vf-data" type="text" placeholder="es. 15 ottobre 2026"/></label>
@@ -116,7 +116,7 @@
             <tr><td>🔗 Abbinamento <small>(coppie)</small></td><td><input id="vf-n-abbina" type="number" min="0" max="12" value="5"/></td><td><input id="vf-p-abbina" type="number" min="0" step="0.5" value="1"/></td></tr>
             <tr><td>✏️ Completamento</td><td><input id="vf-n-completa" type="number" min="0" max="30" value="3"/></td><td><input id="vf-p-completa" type="number" min="0" step="0.5" value="1"/></td></tr>
           </table>
-          <label class="vf-c"><input type="checkbox" id="vf-sostituisci" checked/> Sostituisci le domande attuali (togliete la spunta per aggiungerle in coda)</label>
+          <label class="vf-c"><input type="checkbox" id="vf-sostituisci" checked/> Sostituite le domande attuali (togliete la spunta per aggiungerle in coda)</label>
           <button type="button" class="lg-btn oro" id="vf-genera" style="width:100%;margin-top:.4rem">✨ Genera le domande</button>
         </div>
 
@@ -125,7 +125,7 @@
           <p class="sot">Modificate qualsiasi testo: l'anteprima si aggiorna mentre scrivete. Con ↑ ↓ si cambia l'ordine.</p>
           <p class="vf-tot" id="vf-tot"></p>
           <div id="vf-lista"></div>
-          <p class="sot" style="margin:.6rem 0 .5rem"><b>Aggiungi una domanda vostra:</b></p>
+          <p class="sot" style="margin:.6rem 0 .5rem"><b>Aggiungete una domanda vostra:</b></p>
           <div class="lg-chips" id="vf-aggiungi"></div>
         </div>
 

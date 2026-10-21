@@ -5,7 +5,7 @@
    Il contenuto sta dopo il "#": il browser non lo manda al server,
    quindi nessuno lo riceve né lo salva. Se il browser sa comprimere
    (CompressionStream) il testo è più corto ("z…"), altrimenti "j…".
-   PACCHETTO.voci(testo): righe "italiano = traduzione (= pronuncia)",
+   PACCHETTO.voci(testo): righe "italiano = traduzione",
    oppure due o tre colonne incollate da Excel o Word (tabulazione).
    ════════════════════════════════════════════════════════ */
 window.PACCHETTO = (function () {
@@ -40,7 +40,7 @@ window.PACCHETTO = (function () {
     String(testo || '').split(/\r?\n/).forEach(function (r, i) {
       if (!r.trim()) return;
       var c = (r.indexOf('\t') >= 0 ? r.split('\t') : r.split('=')).map(function (x) { return x.trim(); });
-      if (c.length < 2 || !c[0] || !c[1]) err.push(i + 1); else out.push({ it: c[0], tr: c[1], pr: c[2] || '' });
+      if (c.length < 2 || !c[0] || !c[1]) err.push(i + 1); else out.push({ it: c[0], tr: c[1] });
     });
     return { voci: out, err: err };
   }

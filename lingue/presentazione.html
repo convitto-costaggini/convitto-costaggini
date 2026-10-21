@@ -421,8 +421,8 @@
     ] },
     { p: 4, tit: 'Cosa chiedo al Dipartimento', tipo: 'nat', mount: mChiusura, etic: 'Provate voi: la scheda si compila qui', oro: true, dwell: 0, beats: [
       { t: 'Per finire: il progetto non è chiuso e non deve esserlo. Si costruisce con chi lo usa.' },
-      { t: 'Chiederei, se i colleghi Docenti hanno intravisto delle possibilità di utilizzo, soltanto tre cose, tutte leggere: provare uno strumento nella prossima lezione, dire cosa manca per ogni indirizzo, scegliere la prossima funzione dell\'area docenti.' },
-      { t: 'La scheda accanto si compila direttamente qui, in ogni sua parte: scrivete, spuntate, aggiungete o togliete voci. Alla fine si può inviare direttamente all\'Educatore Gaggiano con un clic, oppure copiare o stampare.' },
+      { t: 'Chiederei, se i colleghi docenti hanno intravisto delle possibilità di utilizzo, soltanto tre cose, tutte leggere: provare uno strumento nella prossima lezione, dire cosa manca per ogni indirizzo, scegliere la prossima funzione dell\'area docenti.' },
+      { t: 'La scheda accanto si compila direttamente qui, in ogni sua parte: scrivete, spuntate, aggiungete o togliete voci. Alla fine si può inviare direttamente all\'educatore Gaggiano con un clic, oppure copiare o stampare.' },
       { t: 'Se il Dipartimento è favorevole, il passo successivo è informare la Dirigente e chiedere l\'autorizzazione.' }
     ] },
     { p: 4, tit: 'Se la risposta è sì: la Dirigente', tipo: 'nat', mount: mLettera, etic: 'Bozza di richiesta, modificabile', oro: true, dwell: 0, beats: [
@@ -575,7 +575,7 @@
 
   function mIntro(el) {
     el.innerHTML = '<p class="pz-saluto" id="pz-saluto" aria-hidden="true">Welcome</p><h3 style="font-size:2rem;margin-top:.1rem">Le lingue dell\'Alberghiero</h3>' +
-      '<p class="nota" style="font-size:.92rem;margin-top:0">Presentazione per il Dipartimento di Lingue · a cura dell\'Educatore Michele Gaggiano</p>' +
+      '<p class="nota" style="font-size:.92rem;margin-top:0">Presentazione per il Dipartimento di Lingue · a cura dell\'educatore Michele Gaggiano</p>' +
       '<div class="come"><h4>Come iniziare: scegliete un pulsante</h4><div class="riga" style="margin:.2rem 0 .7rem"><button type="button" class="lg-btn pieno" id="i-auto">▶ Avvia la visita automatica, con la voce</button><button type="button" class="lg-btn" id="i-man">Avvia, ma vado avanti io</button><button type="button" class="lg-btn" id="i-muto">Senza voce</button></div><ol>' +
       '<li><b>Visita automatica, con la voce</b>: si passa alla scena 2 e la visita prosegue da sola, con la voce che legge il testo.</li>' +
       '<li><b>Vado avanti io</b>: si passa alla scena 2, con la voce; poi si prosegue con il pulsante «Avanti» in basso.</li>' +
@@ -659,7 +659,7 @@
     }
     $('g-genera').addEventListener('click', function () {
       var r = verifica(); if (r.voci.length < 2) { gs.className = 'stato no'; gs.textContent = 'Servono almeno due frasi.'; return; }
-      var p = { v: 1, t: $('g-tit').value.trim() || 'Esercizio', l: gl.value, k: 'scelta', f: r.voci.map(function (v) { return v.pr ? [v.it, v.tr, v.pr] : [v.it, v.tr]; }) };
+      var p = { v: 1, t: $('g-tit').value.trim() || 'Esercizio', l: gl.value, k: 'scelta', f: r.voci.map(function (v) { return [v.it, v.tr]; }) };
       if (!window.qrcode && !QR_P) QR_P = carica('lingue/qrcode.js');
       Promise.all([PK.codifica(p), window.qrcode ? 1 : QR_P]).then(function (ris) {
         var url = location.origin + '/lingue/esercizio.html#e=' + ris[0];
@@ -812,7 +812,7 @@
       '<label class="et" for="pe-sp">Spiegazione breve</label><textarea id="pe-sp" rows="3"></textarea>' +
       '<label class="et" for="pe-f">Frasi: italiano = traduzione (una per riga)</label><textarea id="pe-f" rows="6" spellcheck="false"></textarea>' +
       '<div class="chips"><span>Titolo</span><span>Grammatica</span><span>Frasi</span><span>Lingua</span><span>Livello</span><span>Indirizzo</span><span>Domande</span><span>Missione</span></div>' +
-      '<p class="nota" style="margin-top:.6rem">Ogni docente decide quanto e come personalizzare. Simulazione: nel sito vero lo stesso principio vale con «Crea esercizi» e «Lezione in 5 minuti», e l\'area docenti permetterà di conservare e correggere le proprie lezioni. Le lezioni complete sono in inglese, francese e spagnolo.</p></div>' +
+      '<p class="nota" style="margin-top:.6rem">Ogni docente decide quanto e come personalizzare. Simulazione: nel sito vero lo stesso principio vale con «Crea i tuoi esercizi» e «Lezione in 5 minuti», e l\'area docenti permetterà di conservare e correggere le proprie lezioni. Le lezioni complete sono in inglese, francese e spagnolo.</p></div>' +
       '<div><p class="nota" style="margin:0 0 .5rem;text-align:center"><b>Come la vede lo studente, subito</b></p><div class="ph"><div id="pe-sc"></div></div></div></div>';
     var lin = $('pe-lin'), tit = $('pe-tit'), gra = $('pe-gra'), sp = $('pe-sp'), f = $('pe-f'), sc = $('pe-sc');
     function carica_(c) { var d = PERS[c]; tit.value = d.tit; gra.value = d.gr; sp.value = d.sp; f.value = d.f; }
@@ -846,7 +846,7 @@
       '<label class="et" for="z-oss">Osservazioni del team dipartimentale</label><textarea id="z-oss"></textarea>' +
       '<label class="et">Il Dipartimento è favorevole a proseguire?</label><div class="fav"><label><input type="radio" name="z-fav" value="Sì"/><span>Sì</span></label><label><input type="radio" name="z-fav" value="Da approfondire"/><span>Da approfondire</span></label><label><input type="radio" name="z-fav" value="No"/><span>No</span></label></div>' +
       '<div class="passo" id="z-passo"><b>Se la risposta è sì:</b> il passo successivo è informare la Dirigente e chiedere l\'autorizzazione. <button type="button" class="mini pieno" id="z-lett" style="margin-left:.4rem">Prepara la richiesta →</button></div>' +
-      '<div class="riga"><button type="button" class="lg-btn pieno" id="z-invia">📨 Invia la scheda</button><button type="button" class="lg-btn" id="z-mail">✉️ Invia per posta</button><button type="button" class="lg-btn" id="z-copia">📋 Copia il testo</button><button type="button" class="lg-btn" id="z-stampa">🖨️ Stampa</button></div><p class="stato" id="z-st"></p><p class="nota" style="margin:.4rem 0 0">«Invia la scheda» la consegna direttamente all\'Educatore Gaggiano, nel pannello riservato del sito: non serve alcun accesso alla posta. Il testo inviato è visibile solo all\'amministratore.</p></div>';
+      '<div class="riga"><button type="button" class="lg-btn pieno" id="z-invia">📨 Invia la scheda</button><button type="button" class="lg-btn" id="z-mail">✉️ Invia per posta</button><button type="button" class="lg-btn" id="z-copia">📋 Copia il testo</button><button type="button" class="lg-btn" id="z-stampa">🖨️ Stampa</button></div><p class="stato" id="z-st"></p><p class="nota" style="margin:.4rem 0 0">«Invia la scheda» la consegna direttamente all\'educatore Gaggiano, nel pannello riservato del sito: non serve alcun accesso alla posta. Il testo inviato è visibile solo all\'amministratore.</p></div>';
     var doc = $('z-doc'), cor = $('z-cor'), serv = $('z-serv'), oss = $('z-oss'), vv = $('z-voci');
     doc.value = st.doc; cor.value = st.cor; serv.value = st.serv; oss.value = st.oss;
     [].forEach.call(el.querySelectorAll('input[name=z-fav]'), function (r) { r.checked = r.value === st.fav; });
@@ -889,7 +889,7 @@
   }
 
   /* ── bozza di richiesta alla Dirigente ── */
-  var LETT0 = 'Alla Dirigente Scolastica\nIPSSEOA «R. A. Costaggini», Rieti\n\nOggetto: mini-sito «Le lingue dell\'Alberghiero»: informativa e richiesta di autorizzazione all\'utilizzo didattico\n\nGentile Dirigente,\n\nil Dipartimento di Lingue, nella riunione del ____________, ha preso visione del mini-sito «Le lingue dell\'Alberghiero» (convitto.alberghierorieti.edu.it/lingue), realizzato dall\'Educatore Michele Gaggiano: uno strumento gratuito, senza registrazione per gli studenti, con vocabolario professionale, esercizi, dialoghi, giochi a squadre per la LIM e lezioni guidate in inglese, francese e spagnolo.\n\nIl Dipartimento ha espresso parere favorevole e intende:\n1. sperimentare lo strumento nelle classi, anche con materiali propri, senza alcun onere di revisione dei contenuti;\n2. segnalare, se e quando lo riterrà utile, eventuali miglioramenti;\n3. collaborare con l\'Educatore Gaggiano per i passi successivi (area riservata ai docenti, nuove lezioni guidate).\n\nSi chiede pertanto di autorizzare l\'utilizzo didattico del mini-sito nelle classi e la collaborazione sopra indicata. \n\nEventuali osservazioni del Dipartimento: ____________________\n\nCon osservanza,\nIl Dipartimento di Lingue\n\nRieti, ____________';
+  var LETT0 = 'Alla Dirigente Scolastica\nIPSSEOA «R. A. Costaggini», Rieti\n\nOggetto: minisito «Le lingue dell\'Alberghiero»: informativa e richiesta di autorizzazione all\'utilizzo didattico\n\nGentile Dirigente,\n\nil Dipartimento di Lingue, nella riunione del ____________, ha preso visione del minisito «Le lingue dell\'Alberghiero» (convitto.alberghierorieti.edu.it/lingue), realizzato dall\'educatore Michele Gaggiano: uno strumento gratuito, senza registrazione per gli studenti, con vocabolario professionale, esercizi, dialoghi, giochi a squadre per la LIM e lezioni guidate in inglese, francese e spagnolo.\n\nIl Dipartimento ha espresso parere favorevole e intende:\n1. sperimentare lo strumento nelle classi, anche con materiali propri, senza alcun onere di revisione dei contenuti;\n2. segnalare, se e quando lo riterrà utile, eventuali miglioramenti;\n3. collaborare con l\'educatore Gaggiano per i passi successivi (area riservata ai docenti, nuove lezioni guidate).\n\nSi chiede pertanto di autorizzare l\'utilizzo didattico del minisito nelle classi e la collaborazione sopra indicata. \n\nEventuali osservazioni del Dipartimento: ____________________\n\nCon osservanza,\nIl Dipartimento di Lingue\n\nRieti, ____________';
   function mLettera(el) {
     el.innerHTML = '<h3>Richiesta alla Dirigente: bozza da adattare</h3><p class="nota" style="margin:0 0 .6rem">La bozza si modifica direttamente qui. Va firmata e inviata dal Dipartimento o da un suo referente: compilate le parti con i trattini e correggete ciò che serve.</p>' +
       '<textarea class="lett" id="l-t" spellcheck="true"></textarea><div class="riga"><button type="button" class="lg-btn pieno" id="l-mail">✉️ Apri nella posta</button><button type="button" class="lg-btn" id="l-copia">📋 Copia il testo</button><button type="button" class="lg-btn" id="l-stampa">🖨️ Stampa</button><button type="button" class="lg-btn" id="l-ripr">Ripristina la bozza</button></div><p class="stato" id="l-st"></p>';

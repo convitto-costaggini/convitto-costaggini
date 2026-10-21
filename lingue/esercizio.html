@@ -58,7 +58,7 @@
   if (!m) return errore('Il link è incompleto: chiedi al docente di mandarlo di nuovo, o inquadra di nuovo il codice QR.');
   window.PACCHETTO.decodifica(m[1]).then(function (p) {
     if (!p || !Array.isArray(p.f) || !L.lingua(p.l)) throw new Error('formato');
-    var voci = p.f.filter(function (f) { return f && f[0] && f[1]; }).map(function (f) { return { it: String(f[0]), tr: String(f[1]), pr: f[2] ? String(f[2]) : '' }; });
+    var voci = p.f.filter(function (f) { return f && f[0] && f[1]; }).map(function (f) { return { it: String(f[0]), tr: String(f[1]) }; });
     var tipo = E.TIPI[p.k] ? p.k : 'scelta', lin = L.lingua(p.l);
     document.title = p.t + ' – Lingue | Convitto "Costaggini"';
     $('es-lbl').textContent = 'Esercizio del docente · ' + lin.nome;

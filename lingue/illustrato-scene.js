@@ -1,7 +1,7 @@
 /* ════════════════════════════════════════════════════════
    IL RISTORANTE ILLUSTRATO — le cinque scene (SVG 800×500)
    Ogni oggetto toccabile è un gruppo con la chiave italiana del
-   Vocabolario (k): traduzioni e pronunce arrivano da lì.
+   Vocabolario (k): le traduzioni arrivano da lì.
    "sfondo" è decorazione, non toccabile. lx/ly (facoltativi) = dove
    mettere l'etichetta, per gli oggetti grandi che si sovrappongono.
    ════════════════════════════════════════════════════════ */

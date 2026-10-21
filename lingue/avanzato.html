@@ -112,7 +112,7 @@
 
   /* ── frasi ── */
   function vFrasi() {
-    box.innerHTML = '<h2 class="lg-h2">Frasi per <em>situazione</em></h2><p class="lg-sot">Dodici situazioni di lavoro, cinque frasi ciascuna. Ascoltatele, ripetetele ad alta voce, poi provate a dirle senza guardare l\'italiano.</p>' +
+    box.innerHTML = '<h2 class="lg-h2">Frasi per <em>situazione</em></h2><p class="lg-sot">Dodici situazioni di lavoro, cinque frasi ciascuna. Ascoltale, ripetile ad alta voce, poi prova a dirle senza guardare l\'italiano.</p>' +
       chips(AMBITI, 'data-amb', ambito) + '<div class="av-riga" style="margin-top:.9rem">' + swIt() + '</div>' +
       '<div class="' + (conIt ? '' : 'senza-it') + '" id="av-lista">' + situazioni().map(function (s) {
         return '<div class="av-sit"><h3>' + s.icona + ' ' + esc(s.nome) + ' <small>' + esc(s.ambito) + '</small></h3>' + s.frasi.map(function (f) { return frase(f[1][lingua], f[0]); }).join('') + '</div>';
@@ -131,7 +131,7 @@
   /* ── ascolta e capisci ── */
   function vAscolta() {
     var a = A.ASCOLTI.filter(function (x) { return x.id === ascoltoId; })[0];
-    box.innerHTML = '<h2 class="lg-h2">Ascolta e <em>capisci</em></h2><p class="lg-sot">Ascoltate il testo, anche più volte, senza leggerlo. Poi rispondete alle domande; il testo si può mostrare alla fine per controllare.</p>' +
+    box.innerHTML = '<h2 class="lg-h2">Ascolta e <em>capisci</em></h2><p class="lg-sot">Ascolta il testo, anche più volte, senza leggerlo. Poi rispondi alle domande; il testo si può mostrare alla fine per controllare.</p>' +
       chips(A.ASCOLTI.map(function (x) { return [x.id, x.icona, x.titolo]; }), 'data-asc', ascoltoId) +
       '<div class="av-riga" style="margin-top:1rem">' + (L.parla ? '<button type="button" class="lg-btn pieno" data-az="ascolta">▶ Ascolta</button><button type="button" class="lg-btn" data-az="lento">🐢 Più lento</button>' : '') +
       '<button type="button" class="lg-btn" data-az="testo">📄 Mostra il testo</button></div>' +
@@ -178,7 +178,7 @@
       dom.push({ f: f, giusta: g.w, opz: L.mescola(opz.concat(g.w)), testo: parole.join(' ') });
     });
     C = { dom: dom, punti: 0, fatte: 0 };
-    box.innerHTML = '<h2 class="lg-h2">Completa <em>la frase</em></h2><p class="lg-sot">Otto frasi con una parola mancante: scegliete quella giusta. L\'italiano aiuta a capire il senso. Ogni giro le frasi e le parole cambiano.</p>' +
+    box.innerHTML = '<h2 class="lg-h2">Completa <em>la frase</em></h2><p class="lg-sot">Otto frasi con una parola mancante: scegli quella giusta. L\'italiano aiuta a capire il senso. Ogni giro le frasi e le parole cambiano.</p>' +
       chips(AMBITI, 'data-amb', ambito) + '<p class="av-punti" id="av-punti" style="margin:1rem 0 .6rem"></p>' +
       dom.map(function (d, i) {
         return '<div class="av-dom"><p class="av-cloze" lang="' + lingua + '">' + esc(d.testo).replace('\u0000', '<b id="av-b' + i + '">…</b>') + '</p><p style="font-weight:400;font-style:italic;color:var(--txt2);font-size:.82rem">' + esc(d.f.it) + '</p>' +
@@ -199,7 +199,7 @@
   var E;
   function vEmail() {
     var e = A.EMAIL.filter(function (x) { return x.id === emailId; })[0], p = e.par[lingua], it = e.par.it;
-    var h = '<h2 class="lg-h2">Scrivere <em>un\'e-mail</em></h2><p class="lg-sot">Due modelli di e-mail professionali, con le formule di apertura e di chiusura. Leggeteli, poi provate a rimettere in ordine i paragrafi.</p>' +
+    var h = '<h2 class="lg-h2">Scrivere <em>un\'e-mail</em></h2><p class="lg-sot">Due modelli di e-mail professionali, con le formule di apertura e di chiusura. Leggili, poi prova a rimettere in ordine i paragrafi.</p>' +
       chips(A.EMAIL.map(function (x) { return [x.id, x.icona, x.titolo]; }), 'data-em', emailId) +
       '<div class="av-riga" style="margin-top:1rem">' + chips([['leggi', '📖', 'Leggi il modello'], ['ordina', '🧩', 'Rimetti in ordine']], 'data-modo', modoEmail) + '</div>';
     if (modoEmail === 'leggi') {
@@ -218,7 +218,7 @@
   function disegnaOrdine() {
     var e = A.EMAIL.filter(function (x) { return x.id === emailId; })[0], p = e.par[lingua];
     var giusto = E.fine && E.messi.join() === '1,2,3,4';
-    var h = '<p class="lg-sot" style="margin:0 0 .6rem">Toccate i paragrafi qui sotto nell\'ordine giusto. Saluto e firma sono già al loro posto.</p><div class="av-ord">' +
+    var h = '<p class="lg-sot" style="margin:0 0 .6rem">Tocca i paragrafi qui sotto nell\'ordine giusto. Saluto e firma sono già al loro posto.</p><div class="av-ord">' +
       '<div class="av-par fisso"><div>' + esc(p[0]) + '</div></div>' +
       E.messi.map(function (k, n) { return '<div class="av-par' + (E.fine ? (k === n + 1 ? ' ok' : ' ko') : '') + '"><span class="av-num">' + (n + 1) + '</span><div>' + esc(p[k]) + '</div></div>'; }).join('') +
       E.resto.map(function () { return '<div class="av-par" style="border-style:dotted;color:var(--txt2)">…</div>'; }).join('') +

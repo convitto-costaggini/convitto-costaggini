@@ -4,6 +4,7 @@
 //          ANTHROPIC_API_KEY, facoltativo: solo per la creazione automatica dalle foto (a consumo).
 // SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY sono forniti da Supabase.
 // Richieste (POST JSON):
+//   {codice_docente, elenco:true}                -> tutte le lezioni pubblicate (per la pagina educatori)
 //   {codice_docente, lezione, classe?, autore?}  -> salva una lezione gia' pronta (preparata in claude.ai): nessun costo
 //   {codice_docente, immagini:[{tipo:"image/jpeg", dati:<base64>}], materia?, classe?, note?, autore?} -> la crea dalle foto
 // Risposta: {ok:true, codice, lezione} oppure {ok:false, errore, messaggio?}
@@ -17,6 +18,7 @@ const MAX_FOTO = 8;
 const MAX_BYTES_FOTO = 4_500_000; // base64 di una foto gia' ridotta dal browser
 const MAX_ORA = 30; // lezioni create in un'ora, in tutto: freno contro gli abusi
 const MAX_LEZIONE = 120_000; // caratteri del JSON di una lezione incollata
+const MAX_ELENCO = 300; // lezioni mostrate nell'elenco degli educatori
 const ALFABETO = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // niente 0/O, 1/I
 
 const CORS = {
@@ -113,6 +115,14 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
     if (!codici.length) return risposta({ ok: false, errore: "configurazione" }, 503);
     if (!codici.includes(String(c.codice_docente || "").trim().toLowerCase())) return risposta({ ok: false, errore: "codice" }, 403);
     if (c.prova) return risposta({ ok: true, automatica: !!env.AUTOMATICA }); // solo verifica del codice
+
+    if (c.elenco) {
+      const { data, error } = await db.from("studio_lezioni")
+        .select("codice,titolo,materia,classe,autore,aperture,created_at,icona:contenuto->>icona,sottotitolo:contenuto->>sottotitolo")
+        .order("created_at", { ascending: false }).limit(MAX_ELENCO);
+      if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
+      return risposta({ ok: true, lezioni: data });
+    }
 
     const { count } = await db.from("studio_lezioni").select("codice", { count: "exact", head: true }).gte("created_at", new Date(ora() - 3600_000).toISOString());
     if ((count ?? 0) >= MAX_ORA) return risposta({ ok: false, errore: "troppe" }, 429);

@@ -47,6 +47,11 @@
   .dc-mie li span{flex:1;min-width:0}
   .dc-mie small{display:block;color:var(--txt2)}
   .dc-mie code{font:800 .9rem var(--fu);letter-spacing:.1em;color:var(--oro)}
+  .dc-mie li .az{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:flex-end}
+  .dc-mie li .az .st-btn{min-height:38px;padding:.3rem .7rem}
+  @media (max-width:560px){.dc-mie li{flex-wrap:wrap}.dc-mie li>span{flex-basis:100%}.dc-mie li .az{margin-left:auto}}
+  .dc-cerca{display:flex;gap:.5rem;margin-bottom:.4rem}
+  .dc-cerca input{flex:1;min-width:0;font:inherit;font-size:1rem;padding:.6rem .8rem;border:2px solid var(--av3);border-radius:12px;background:#fff}
   .dc details summary{cursor:pointer;font:800 .85rem var(--fu);color:var(--bosco)}
   .dc-err{color:var(--st-no);font-weight:700;margin-top:.6rem}
   .dc-guida{margin:.2rem 0 .8rem;padding-left:1.3rem;display:grid;gap:.5rem}
@@ -123,8 +128,12 @@
     <div id="dc-lavoro" hidden></div>
     <div id="dc-esito" hidden></div>
 
-    <h3>📚 Le lezioni create da questo dispositivo</h3>
-    <ul class="dc-mie" id="dc-mie"></ul>
+    <h3>📚 Tutte le lezioni della Sala studio</h3>
+    <div class="st-card">
+      <div class="dc-cerca"><input type="search" id="dc-cerca" placeholder="Cerca per titolo, materia, classe, autore…" aria-label="Cerca fra le lezioni"/><button type="button" class="st-btn" id="dc-aggiorna">🔄 Mostra</button></div>
+      <p class="st-nota" id="dc-elenco-stato" aria-live="polite"></p>
+      <ul class="dc-mie" id="dc-mie"></ul>
+    </div>
   </div>
 </main>
 <script src="nav.min.js"></script>
@@ -211,7 +220,7 @@
       .then(function (r) {
         clearInterval(iv); lav.hidden = true;
         if (!r.ok) { $('dc-modulo').hidden = false; $('dc-err').textContent = r.errore === 'illeggibile' ? '📷 ' + (r.messaggio || 'Le foto non si leggono bene.') + ' Rifai le foto e riprova.' : (ERRORI[r.errore] || ERRORI.server); return; }
-        ricorda({ codice: r.codice, titolo: r.lezione.titolo, icona: r.lezione.icona, materia: r.lezione.materia, classe: $('dc-cla').value, data: new Date().toISOString().slice(0, 10) });
+        caricaElenco();
         foto = []; disegnaFoto(); $('dc-note').value = '';
         esito(BASE + '?c=' + r.codice, r.lezione, r.codice);
       })
@@ -257,20 +266,39 @@
     el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  /* ───── le lezioni di questo dispositivo ───── */
-  function mie() { try { return JSON.parse(ls('studio-mie') || '[]'); } catch (e) { return []; } }
-  function ricorda(x) { var m = mie().filter(function (y) { return y.codice !== x.codice; }); m.unshift(x); ls('studio-mie', JSON.stringify(m.slice(0, 40))); disegnaMie(); }
+  /* ───── tutte le lezioni pubblicate (con il codice educatori, da qualsiasi dispositivo) ───── */
+  var lezioni = null; /* null = elenco non ancora caricato */
+  function data(d) { var m = String(d || '').match(/^(\d{4})-(\d\d)-(\d\d)/); return m ? m[3] + '/' + m[2] + '/' + m[1] : ''; }
+  function caricaElenco() {
+    var cod = $('dc-cod').value.trim(), st = $('dc-elenco-stato');
+    if (!cod) { st.textContent = 'Scrivi il codice educatori (al passo 3) e premi Mostra.'; return; }
+    st.textContent = 'Carico l\'elenco…';
+    fetch(FUNZIONE, { method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUB }, body: JSON.stringify({ codice_docente: cod, elenco: true }) })
+      .then(function (r) { return r.json().catch(function () { return { ok: false, errore: 'server' }; }); })
+      .then(function (r) {
+        if (!r.ok) { st.textContent = ERRORI[r.errore] || ERRORI.server; return; }
+        ls('studio-codice', cod); lezioni = r.lezioni || []; disegnaMie();
+      })
+      .catch(function () { st.textContent = 'Connessione assente: riprova.'; });
+  }
   function disegnaMie() {
-    var m = mie();
-    $('dc-mie').innerHTML = m.length ? m.map(function (x, i) {
-      return '<li><span>' + esc((x.icona || '📚') + ' ' + x.titolo) + '<small>' + esc([x.materia, x.classe, x.data].filter(Boolean).join(' · ')) + '</small></span><code>' + esc(x.codice) + '</code><button type="button" class="st-btn" style="min-height:38px;padding:.3rem .7rem" data-qr="' + i + '">QR</button></li>';
-    }).join('') : '<li><span class="st-nota">Ancora nessuna. Intanto guardate la <a href="studio/lezione.html?c=DEMO" target="_blank">lezione di esempio</a>.</span></li>';
+    if (!lezioni) return;
+    var q = $('dc-cerca').value.trim().toLowerCase();
+    var m = lezioni.filter(function (x) { return !q || [x.titolo, x.materia, x.classe, x.autore, x.codice].join(' ').toLowerCase().indexOf(q) >= 0; });
+    $('dc-elenco-stato').textContent = lezioni.length ? (q ? m.length + ' di ' : '') + lezioni.length + (lezioni.length === 1 ? ' lezione pubblicata' : ' lezioni pubblicate') : '';
+    $('dc-mie').innerHTML = m.length ? m.map(function (x) {
+      return '<li><span>' + esc((x.icona || '📚') + ' ' + x.titolo) + '<small>' + esc([x.materia, x.classe, x.autore, data(x.created_at), x.aperture ? '👀 ' + x.aperture : ''].filter(Boolean).join(' · ')) + '</small></span><code>' + esc(x.codice) + '</code>' +
+        '<div class="az"><a class="st-btn" href="studio/lezione.html?c=' + esc(x.codice) + '" target="_blank" rel="noopener">Apri</a><button type="button" class="st-btn" data-qr="' + esc(x.codice) + '">QR</button></div></li>';
+    }).join('') : '<li><span class="st-nota">' + (lezioni.length ? 'Nessuna lezione corrisponde alla ricerca.' : 'Ancora nessuna lezione. Intanto guardate la <a href="studio/lezione.html?c=DEMO" target="_blank">lezione di esempio</a>.') + '</span></li>';
   }
   $('dc-mie').addEventListener('click', function (e) {
     var b = e.target.closest('[data-qr]'); if (!b) return;
-    var x = mie()[+b.getAttribute('data-qr')]; esito(BASE + '?c=' + x.codice, x, x.codice);
+    var x = lezioni.filter(function (y) { return y.codice === b.getAttribute('data-qr'); })[0];
+    $('dc-modulo').hidden = true; esito(BASE + '?c=' + x.codice, x, x.codice);
   });
-  disegnaMie();
+  $('dc-aggiorna').onclick = caricaElenco;
+  $('dc-cerca').addEventListener('input', function () { if (lezioni) disegnaMie(); else caricaElenco(); });
+  caricaElenco();
 
   /* ───── lezione preparata in Claude, ChatGPT o Gemini: istruzioni, incolla, pubblica ───── */
   function scheletro(o) {
@@ -348,7 +376,7 @@
     }).then(function (r) { return r.json().catch(function () { return { ok: false, errore: r.status === 404 ? 'configurazione' : 'server' }; }); })
       .then(function (r) {
         if (!r.ok) throw r;
-        ricorda({ codice: r.codice, titolo: r.lezione.titolo, icona: r.lezione.icona, materia: r.lezione.materia, classe: $('dc-cla').value, data: new Date().toISOString().slice(0, 10) });
+        caricaElenco();
         $('dc-json').value = ''; $('dc-note').value = ''; controlla();
         $('dc-modulo').hidden = true; esito(BASE + '?c=' + r.codice, r.lezione, r.codice);
       })

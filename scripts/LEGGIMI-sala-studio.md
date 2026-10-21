@@ -29,6 +29,7 @@ a lezione). Senza chiave quel riquadro avvisa che non è attivo; tutto il resto 
 
 ## Limiti e controlli
 - Solo chi conosce un codice di `STUDIO_CODICI` può pubblicare lezioni; al massimo 30 lezioni all'ora in tutto.
-- I ragazzi aprono una lezione solo dal codice: nessuno può elencarle. I progressi restano sul telefono del ragazzo.
+- I ragazzi aprono una lezione solo dal codice: non possono elencarle. L'elenco di tutte le lezioni è in fondo a `studio/docente.html`
+  e si vede solo con il codice educatori, da qualsiasi dispositivo. I progressi restano sul telefono del ragazzo.
 - Se si modifica `scripts/studio-genera/index.ts` la funzione va ripubblicata su Supabase.
 - Per togliere una lezione: `delete from public.studio_lezioni where codice = 'ABCDEF';`

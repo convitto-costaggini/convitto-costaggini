@@ -4,7 +4,7 @@
  * Proprietà dello script richiesta: TOKEN (una stringa lunga e casuale, la stessa di GAS_TOKEN su Supabase).
  * Riceve dalla funzione Supabase "lingue-accesso" un POST {token, to, codice} e spedisce la mail.
  */
-var DOMINIO = '@alberghierorieti.it';
+var DOMINI = ['@alberghierorieti.it', '@alberghierorieti.edu.it'];
 
 function doPost(e) {
   try {
@@ -13,7 +13,8 @@ function doPost(e) {
     if (!token || d.token !== token) return risposta_(false, 'non autorizzato');
     var to = String(d.to || '').trim().toLowerCase();
     var codice = String(d.codice || '');
-    if (to.slice(-DOMINIO.length) !== DOMINIO || !/^[^\s@]+@[^\s@]+$/.test(to)) return risposta_(false, 'destinatario');
+    var dominioOk = DOMINI.some(function (dom) { return to.slice(-dom.length) === dom; });
+    if (!dominioOk || !/^[^\s@]+@[^\s@]+$/.test(to)) return risposta_(false, 'destinatario');
     if (!/^\d{6}$/.test(codice)) return risposta_(false, 'codice');
     MailApp.sendEmail({
       to: to,

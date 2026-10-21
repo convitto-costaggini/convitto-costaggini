@@ -106,7 +106,7 @@
 
     function accedi() {
       vista(intesta() + '<p class="s">Materiali per i docenti di lingue. Scrivete la vostra e-mail istituzionale: vi invieremo un codice di accesso.</p>' +
-        '<form id="ac-f"><label for="ac-m1">E-mail istituzionale</label><input id="ac-m1" type="email" autocomplete="username" required placeholder="nome.cognome@alberghierorieti.it"/>' +
+        '<form id="ac-f"><label for="ac-m1">E-mail istituzionale</label><input id="ac-m1" type="email" autocomplete="username" required placeholder="nome.cognome@alberghierorieti.edu.it"/>' +
         '<p class="ac-m" role="alert"></p><button class="b" type="submit">Invia il codice</button></form>' +
         '<div class="sep">oppure</div><form id="ac-fd"><label for="ac-c1">Codice del Dipartimento</label><input id="ac-c1" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX"/>' +
         '<p class="ac-m2" role="alert"></p><button class="b" type="submit" style="background:#8a6d1f">Entra con il codice</button></form>' +

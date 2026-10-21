@@ -11,25 +11,6 @@ window.LEZIONI = [
   id: "brigata", icona: "👨‍🍳", ambito: "Cucina", titolo: "In brigata", sottotitolo: "L'imperativo e le quantità",
   livello: "A1–A2", classi: "Biennio", durata: "1 ora",
   descrizione: "Il primo giorno in una cucina all'estero: capire gli ordini dello chef, dare istruzioni, leggere le quantità di una ricetta.",
-  docente: {
-    obiettivi: [
-      "Capire e dare ordini brevi in cucina (imperativo affermativo e negativo).",
-      "Conoscere dieci verbi della preparazione e le parole della brigata.",
-      "Leggere e chiedere quantità (How much / How many · ¿Cuánto/a? / ¿Cuántos/as? · Combien de… ?).",
-      "Seguire una ricetta semplice e metterne in ordine i passaggi."
-    ],
-    scaletta: [
-      ["10'", "Mini-lezione alla LIM: le schede si scorrono insieme, la classe risponde alle domande lampo per alzata di mano."],
-      ["25'", "Esercizi sul telefono (link o QR qui sotto), da soli o a coppie. Chi finisce prima rifà la missione."],
-      ["15'", "Missione «Il primo giorno in brigata»: alla LIM, la classe vota ogni scelta; oppure sul telefono."],
-      ["10'", "Verifica breve (file A e B) o, in alternativa, la ricetta scritta come compito."]
-    ],
-    spunti: [
-      "Cultura: la «brigade de cuisine» nasce con Auguste Escoffier; ancora oggi in molte cucine del mondo si risponde «Yes, chef!» / «¡Oído, chef!» / «Oui, chef !».",
-      "Estero: chi va in stage a Londra, Dublino, Madrid, Barcellona o Lione sente questi ordini dal primo giorno, spesso detti in fretta e con il rumore della cucina.",
-      "Con i docenti di cucina: la ricetta della missione si può preparare davvero in laboratorio, dando gli ordini in lingua."
-    ]
-  },
   lingue: {
   /* ───────────────────────── INGLESE ───────────────────────── */
   en: {
@@ -112,26 +93,6 @@ window.LEZIONI = [
       ],
       esiti: ["La chef ti stringe la mano: «Well done! See you tomorrow.»", "«Good job.» Domani torni, e andrà ancora meglio.", "«OK… we'll practise tomorrow.» Ripassa gli ordini e riprova.", "La chef sospira: «Let's start again.» Rifai la lezione e riprova!"]
     },
-    verifica: [
-      { tipo: "traduci", titolo: "Scrivi il verbo in inglese", punti: 1,
-        voci: [["trita", "chop"], ["sbuccia", "peel"], ["affetta", "slice"], ["mescola", "stir"], ["aggiungi", "add"], ["versa", "pour"], ["friggi", "fry"], ["cuoci in forno", "bake"], ["lava", "wash"], ["fai bollire", "boil"]] },
-      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
-        voci: [
-          { d: "_____ the onions. (affetta)", o: ["Slice", "Slices", "Slicing"] },
-          { d: "_____ the hot pan! (non toccare)", o: ["Don't touch", "No touch", "Not touch"] },
-          { d: "_____ the milk. (versa)", o: ["Pour", "Pours", "Pouring"] },
-          { d: "_____ the cake for an hour. (cuoci in forno)", o: ["Bake", "Bakes", "To baking"] },
-          { d: "_____ salt do we need?", o: ["How much", "How many", "How"] },
-          { d: "_____ onions do we need?", o: ["How many", "How much", "How"] },
-          { d: "Add _____ salt.", o: ["a pinch of", "a clove of", "a litre of"] },
-          { d: "Use _____ garlic.", o: ["a clove of", "a pinch of", "half a litre of"] }
-        ] },
-      { tipo: "traduci", titolo: "Traduci gli ordini in inglese", punti: 2,
-        voci: [["Sbuccia le patate.", "Peel the potatoes."], ["Non toccare il forno!", "Don't touch the oven!"], ["Aggiungi un pizzico di sale.", "Add a pinch of salt."], ["Mescola il sugo, per favore.", "Stir the sauce, please."], ["Non correre in cucina!", "Don't run in the kitchen!"], ["Fai bollire l'acqua.", "Boil the water."]] },
-      { tipo: "aperta", titolo: "La tua ricetta", punti: 5,
-        testo: "Scrivi in inglese la ricetta di un piatto che conosci, con almeno cinque ordini (usa anche una quantità e un don't).",
-        facile: "Scrivi in inglese tre ordini per preparare un piatto che conosci. Puoi usare i verbi: wash, peel, cut, add, boil, stir." }
-    ]
   },
   /* ───────────────────────── FRANCESE ───────────────────────── */
   fr: {
@@ -214,26 +175,6 @@ window.LEZIONI = [
       ],
       esiti: ["La chef ti stringe la mano: « Très bien ! À demain. »", "« Bon travail. » Domani torni, e andrà ancora meglio.", "« Bon… on s'entraîne demain. » Ripassa gli ordini e riprova.", "La chef soupire : « On recommence. » Rifai la lezione e riprova!"]
     },
-    verifica: [
-      { tipo: "traduci", titolo: "Scrivi il verbo in francese (con il tu)", punti: 1,
-        voci: [["trita", "hache"], ["sbuccia", "épluche"], ["taglia", "coupe"], ["mescola", "remue"], ["aggiungi", "ajoute"], ["versa", "verse"], ["friggi", "fais frire"], ["cuoci in forno", "enfourne"], ["lava", "lave"], ["sbatti", "bats"]] },
-      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
-        voci: [
-          { d: "_____ l'oignon. (taglia)", o: ["Coupe", "Coupes", "Couper"] },
-          { d: "_____ la poêle ! (non toccare)", o: ["Ne touche pas", "Ne touches pas", "Touche ne pas"] },
-          { d: "_____ le lait. (versa)", o: ["Verse", "Verses", "Verser"] },
-          { d: "_____ la tarte une heure. (cuoci in forno)", o: ["Enfourne", "Enfournes", "Enfourner"] },
-          { d: "_____ sel faut-il ?", o: ["Combien de", "Combien", "Combien du"] },
-          { d: "_____ oignons faut-il ?", o: ["Combien d'", "Combien", "Combien des"] },
-          { d: "Ajoute _____ sel.", o: ["une pincée de", "une gousse de", "un litre de"] },
-          { d: "Utilise _____ ail.", o: ["une gousse d'", "une pincée d'", "un demi-litre d'"] }
-        ] },
-      { tipo: "traduci", titolo: "Traduci gli ordini in francese", punti: 2,
-        voci: [["Sbuccia le patate.", "Épluche les pommes de terre."], ["Non toccare il forno!", "Ne touche pas le four !"], ["Aggiungi un pizzico di sale.", "Ajoute une pincée de sel."], ["Mescola il sugo, per favore.", "Remue la sauce, s'il te plaît."], ["Non correre in cucina!", "Ne cours pas en cuisine !"], ["Metti l'acqua a bollire.", "Mets de l'eau à bouillir."]] },
-      { tipo: "aperta", titolo: "La tua ricetta", punti: 5,
-        testo: "Scrivi in francese la ricetta di un piatto che conosci, con almeno cinque ordini (usa anche una quantità e un divieto con «ne… pas»).",
-        facile: "Scrivi in francese tre ordini per preparare un piatto che conosci. Puoi usare i verbi: lave, épluche, coupe, ajoute, mets, remue." }
-    ]
   },
   /* ───────────────────────── SPAGNOLO ───────────────────────── */
   es: {
@@ -316,26 +257,6 @@ window.LEZIONI = [
       ],
       esiti: ["La chef ti stringe la mano: «¡Muy bien! Hasta mañana.»", "«Buen trabajo.» Domani torni, e andrà ancora meglio.", "«Bueno… mañana practicamos.» Ripassa gli ordini e riprova.", "La chef sospira: «Empezamos otra vez.» Rifai la lezione e riprova!"]
     },
-    verifica: [
-      { tipo: "traduci", titolo: "Scrivi il verbo in spagnolo (con il tú)", punti: 1,
-        voci: [["trita", "pica"], ["sbuccia", "pela"], ["taglia", "corta"], ["mescola", "remueve"], ["aggiungi", "añade"], ["versa", "echa"], ["friggi", "fríe"], ["cuoci in forno", "hornea"], ["lava", "lava"], ["sbatti", "bate"]] },
-      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
-        voci: [
-          { d: "_____ la cebolla. (taglia)", o: ["Corta", "Cortas", "Corto"] },
-          { d: "¡_____ la sartén! (non toccare)", o: ["No toques", "No toca", "No toco"] },
-          { d: "_____ la leche. (versa)", o: ["Echa", "Echas", "Echo"] },
-          { d: "_____ la tarta una hora. (cuoci in forno)", o: ["Hornea", "Horneas", "Horneo"] },
-          { d: "¿_____ sal necesitamos?", o: ["Cuánta", "Cuántos", "Cuántas"] },
-          { d: "¿_____ cebollas necesitamos?", o: ["Cuántas", "Cuánto", "Cuántos"] },
-          { d: "Añade _____ sal.", o: ["una pizca de", "un diente de", "un litro de"] },
-          { d: "Usa _____ ajo.", o: ["un diente de", "una pizca de", "medio litro de"] }
-        ] },
-      { tipo: "traduci", titolo: "Traduci gli ordini in spagnolo", punti: 2,
-        voci: [["Sbuccia le patate.", "Pela las patatas."], ["Non toccare il forno!", "¡No toques el horno!"], ["Aggiungi un pizzico di sale.", "Añade una pizca de sal."], ["Mescola il sugo, per favore.", "Remueve la salsa, por favor."], ["Non correre in cucina!", "¡No corras en la cocina!"], ["Metti l'acqua a bollire.", "Pon el agua a hervir."]] },
-      { tipo: "aperta", titolo: "La tua ricetta", punti: 5,
-        testo: "Scrivi in spagnolo la ricetta di un piatto che conosci, con almeno cinque ordini (usa anche una quantità e un divieto con «no»).",
-        facile: "Scrivi in spagnolo tre ordini per preparare un piatto che conosci. Puoi usare i verbi: lava, pela, corta, añade, pon, remueve." }
-    ]
   }
   }
 },
@@ -343,25 +264,6 @@ window.LEZIONI = [
   id: "consigliare", icona: "🍷", ambito: "Sala", titolo: "Consigliare", sottotitolo: "Comparativi e superlativi",
   livello: "A2–B1", classi: "Biennio e triennio", durata: "1 ora",
   descrizione: "«Che cosa mi consiglia?»: confrontare piatti e vini, presentare il migliore della carta e convincere il cliente con garbo.",
-  docente: {
-    obiettivi: [
-      "Confrontare piatti e vini: comparativi di maggioranza, minoranza e uguaglianza.",
-      "Usare i superlativi e le forme irregolari (better / the best · mejor / el mejor · meilleur / le meilleur).",
-      "Descrivere sapori e consistenze con dieci aggettivi della sala.",
-      "Consigliare in modo cortese (I recommend… / Le recomiendo… / Je vous recommande…) e rispondere alle domande del cliente."
-    ],
-    scaletta: [
-      ["10'", "Mini-lezione alla LIM: le schede insieme, la classe risponde alle domande lampo."],
-      ["25'", "Esercizi sul telefono (link o QR qui sotto), da soli o a coppie."],
-      ["15'", "Missione «Il tavolo 7»: alla LIM la classe vota ogni risposta; poi, a coppie, role play cliente-cameriere con il menu vero del laboratorio di sala."],
-      ["10'", "Verifica breve (file A e B) o un dialogo scritto come compito."]
-    ],
-    spunti: [
-      "Cultura: nel Regno Unito e in Irlanda la mancia si aggira sul 10–12,5% (spesso è già in conto come «service charge»), negli Stati Uniti sul 15–20%; in Spagna è facoltativa e piccola; in Francia il servizio è già compreso nel conto e lasciare qualcosa è facoltativo. Consigliare bene fa la differenza.",
-      "Estero: in un ristorante italiano all'estero il cliente si aspetta che sia proprio il cameriere italiano a spiegargli la differenza tra due piatti o due vini.",
-      "Con i docenti di sala ed enogastronomia: presentare in lingua i vini e l'olio del territorio (Sabina DOP) e confrontarli."
-    ]
-  },
   lingue: {
   /* ───────────────────────── INGLESE ───────────────────────── */
   en: {
@@ -443,26 +345,6 @@ window.LEZIONI = [
       ],
       esiti: ["La coppia lascia una recensione a cinque stelle: «The best waiter in Dublin!»", "«Thank you, a lovely evening.» Ottimo lavoro.", "«It was OK.» Ripassa comparativi e superlativi e riprova.", "La coppia esce poco convinta. Rifai la lezione e riprova!"]
     },
-    verifica: [
-      { tipo: "traduci", titolo: "Scrivi l'aggettivo in inglese", punti: 1,
-        voci: [["leggero", "light"], ["piccante", "spicy"], ["secco (vino)", "dry"], ["corposo", "full-bodied"], ["croccante", "crispy"], ["fatto in casa", "homemade"], ["dolce", "sweet"], ["tenero", "tender"], ["delicato", "delicate"], ["sostanzioso", "rich"]] },
-      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
-        voci: [
-          { d: "The fish is _____ than the meat. (leggero)", o: ["lighter", "more light", "lightest"] },
-          { d: "This is _____ wine on the list. (il migliore)", o: ["the best", "the better", "the most good"] },
-          { d: "The red wine is _____ than the white. (costoso)", o: ["more expensive", "expensiver", "most expensive"] },
-          { d: "The tiramisù is our _____ dessert. (più richiesto)", o: ["most popular", "more popular", "popularest"] },
-          { d: "The chilli pasta is _____ than the carbonara. (piccante)", o: ["spicier", "spicyer", "spiciest"] },
-          { d: "This bread is _____ than yesterday's. (fresco)", o: ["fresher", "more fresher", "freshest"] },
-          { d: "That was _____ steak of my life! (la peggiore)", o: ["the worst", "the worse", "the baddest"] },
-          { d: "The chicken is as light _____ the fish.", o: ["as", "than", "of"] }
-        ] },
-      { tipo: "traduci", titolo: "Traduci in inglese", punti: 2,
-        voci: [["Il pesce è più leggero della carne.", "The fish is lighter than the meat."], ["Le consiglio il risotto.", "I recommend the risotto."], ["È il nostro dolce più richiesto.", "It's our most popular dessert."], ["Questo vino è meno costoso.", "This wine is less expensive."], ["Il tiramisù è fatto in casa.", "The tiramisù is homemade."], ["Questo è il vino migliore della carta.", "This is the best wine on the list."]] },
-      { tipo: "aperta", titolo: "Al tavolo", punti: 5,
-        testo: "Un cliente ti chiede un consiglio. Scrivi in inglese un breve dialogo (almeno sei battute) in cui confronti due piatti e due vini, con almeno due comparativi e un superlativo.",
-        facile: "Scrivi in inglese tre frasi per consigliare un piatto. Usa: lighter than, more … than, the best." }
-    ]
   },
   /* ───────────────────────── FRANCESE ───────────────────────── */
   fr: {
@@ -544,26 +426,6 @@ window.LEZIONI = [
       ],
       esiti: ["La coppia lascia una recensione a cinque stelle: « Le meilleur serveur de Paris ! »", "« Merci, un dîner très agréable. » Ottimo lavoro.", "« C'était bien. » Ripassa i comparativi e riprova.", "La coppia esce poco convinta. Rifai la lezione e riprova!"]
     },
-    verifica: [
-      { tipo: "traduci", titolo: "Scrivi l'aggettivo in francese", punti: 1,
-        voci: [["leggero", "léger"], ["piccante", "épicé"], ["secco (vino)", "sec"], ["corposo", "corsé"], ["croccante", "croustillant"], ["fatto in casa", "fait maison"], ["dolce", "sucré"], ["tenero", "tendre"], ["delicato", "délicat"], ["sostanzioso", "copieux"]] },
-      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
-        voci: [
-          { d: "Le poisson est plus léger _____ la viande.", o: ["que", "de", "comme"] },
-          { d: "C'est _____ vin de la carte. (il migliore)", o: ["le meilleur", "le plus meilleur", "le plus bon"] },
-          { d: "Le rouge est _____ cher que le blanc. (più)", o: ["plus", "meilleur", "très"] },
-          { d: "La tarte au citron est le dessert le plus _____ . (richiesto)", o: ["demandé", "demandée", "demandés"] },
-          { d: "Ces piments sont _____ que les poivrons. (più piccanti)", o: ["plus épicés", "plus épicé", "épicés plus"] },
-          { d: "Le poulet est _____ léger que le poisson. (altrettanto)", o: ["aussi", "autant", "plus"] },
-          { d: "C'était la _____ soirée de ma vie ! (peggiore)", o: ["pire", "plus pire", "plus mal"] },
-          { d: "Ce jambon est _____ . (buonissimo)", o: ["délicieux", "très meilleur", "plus bon"] }
-        ] },
-      { tipo: "traduci", titolo: "Traduci in francese", punti: 2,
-        voci: [["Il pesce è più leggero della carne.", "Le poisson est plus léger que la viande."], ["Le consiglio il risotto.", "Je vous recommande le risotto."], ["È il nostro dolce più richiesto.", "C'est notre dessert le plus demandé."], ["Questo vino è meno caro.", "Ce vin est moins cher."], ["La torta è fatta in casa.", "La tarte est faite maison."], ["Questo è il vino migliore della carta.", "C'est le meilleur vin de la carte."]] },
-      { tipo: "aperta", titolo: "À table", punti: 5,
-        testo: "Un cliente ti chiede un consiglio. Scrivi in francese un breve dialogo (almeno sei battute, con il vous) in cui confronti due piatti e due vini, con almeno due comparativi e un superlativo.",
-        facile: "Scrivi in francese tre frasi per consigliare un piatto. Usa: plus … que, aussi … que, le meilleur." }
-    ]
   },
   /* ───────────────────────── SPAGNOLO ───────────────────────── */
   es: {
@@ -645,26 +507,6 @@ window.LEZIONI = [
       ],
       esiti: ["La coppia lascia una recensione a cinque stelle: «¡El mejor camarero de Barcelona!»", "«Gracias, una cena muy agradable.» Ottimo lavoro.", "«Estuvo bien.» Ripassa i comparativi e riprova.", "La coppia esce poco convinta. Rifai la lezione e riprova!"]
     },
-    verifica: [
-      { tipo: "traduci", titolo: "Scrivi l'aggettivo in spagnolo", punti: 1,
-        voci: [["leggero", "ligero"], ["piccante", "picante"], ["secco (vino)", "seco"], ["corposo", "con cuerpo"], ["croccante", "crujiente"], ["fatto in casa", "casero"], ["dolce", "dulce"], ["tenero", "tierno"], ["delicato", "suave"], ["sostanzioso", "contundente"]] },
-      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
-        voci: [
-          { d: "El pescado es más ligero _____ la carne.", o: ["que", "de", "como"] },
-          { d: "Es _____ vino de la carta. (il migliore)", o: ["el mejor", "el más mejor", "lo mejor"] },
-          { d: "El tinto es _____ caro que el blanco. (più)", o: ["más", "mejor", "muy"] },
-          { d: "La tarta de queso es el postre más _____ . (richiesto)", o: ["pedido", "pedida", "pedidos"] },
-          { d: "Las patatas bravas son _____ que las fritas. (più piccanti)", o: ["más picantes", "más picante", "picantes más"] },
-          { d: "El pollo es _____ ligero como el pescado. (altrettanto)", o: ["tan", "tanto", "más"] },
-          { d: "¡Fue la _____ cena de mi vida! (peggiore)", o: ["peor", "más mala", "peora"] },
-          { d: "Este jamón está _____ . (buonissimo)", o: ["riquísimo", "muy riquísimo", "el riquísimo"] }
-        ] },
-      { tipo: "traduci", titolo: "Traduci in spagnolo", punti: 2,
-        voci: [["Il pesce è più leggero della carne.", "El pescado es más ligero que la carne."], ["Le consiglio il risotto.", "Le recomiendo el risotto."], ["È il nostro dolce più richiesto.", "Es nuestro postre más pedido."], ["Questo vino è meno caro.", "Este vino es menos caro."], ["La torta è fatta in casa.", "La tarta es casera."], ["Questo è il vino migliore della carta.", "Este es el mejor vino de la carta."]] },
-      { tipo: "aperta", titolo: "En la mesa", punti: 5,
-        testo: "Un cliente ti chiede un consiglio. Scrivi in spagnolo un breve dialogo (almeno sei battute, con il lei) in cui confronti due piatti e due vini, con almeno due comparativi e un superlativo.",
-        facile: "Scrivi in spagnolo tre frasi per consigliare un piatto. Usa: más … que, tan … como, el mejor." }
-    ]
   }
   }
 },
@@ -672,26 +514,6 @@ window.LEZIONI = [
   id: "reclamo", icona: "🛎️", ambito: "Accoglienza", titolo: "Il reclamo in hotel", sottotitolo: "I tempi del passato e le scuse formali",
   livello: "B1–B2", classi: "Triennio", durata: "1 ora",
   descrizione: "Un ospite arrabbiato alla reception: ascoltare, scusarsi, raccontare che cosa è successo, proporre una soluzione e scrivere l'e-mail di scuse.",
-  docente: {
-    obiettivi: [
-      "Gestire un reclamo con il metodo LAST: ascoltare, scusarsi, risolvere, ringraziare.",
-      "Raccontare che cosa è successo (past simple · pretérito indefinido · passé composé), com'era la situazione (imparfait) e che cosa si è appena fatto (present perfect · pretérito perfecto, acabo de · je viens de).",
-      "Usare formule di scusa formali e proporre soluzioni (Would you like me to… · ¿Quiere que le…? · Voulez-vous que je vous… ?).",
-      "Scrivere una breve e-mail di scuse a un ospite."
-    ],
-    scaletta: [
-      ["10'", "Mini-lezione alla LIM: le schede insieme, la classe risponde alle domande lampo."],
-      ["25'", "Esercizi sul telefono (link o QR qui sotto), da soli o a coppie."],
-      ["15'", "Missione «Il turno di sera»: alla LIM la classe vota ogni risposta; poi role play a coppie, ospite e receptionist, con un reclamo inventato da loro."],
-      ["10'", "Verifica (file A e B) o, come compito, l'e-mail di scuse."]
-    ],
-    spunti: [
-      "Professione: molte catene alberghiere insegnano un metodo per i reclami, per esempio LAST (Listen, Apologise, Solve, Thank). Un reclamo risolto bene crea spesso un cliente più fedele di prima.",
-      "Recensioni online: leggere in classe vere risposte di direttori d'albergo a recensioni negative e riscriverle insieme, nel registro giusto.",
-      "Estero: alla reception di un hotel a Edimburgo, a Siviglia o a Nizza il reclamo è la prova più difficile per uno stagista, e la più formativa.",
-      "Con i docenti di accoglienza turistica: simulazione alla reception del laboratorio, con il registro dei reclami da compilare in lingua."
-    ]
-  },
   lingue: {
   /* ───────────────────────── INGLESE ───────────────────────── */
   en: {
@@ -773,26 +595,6 @@ window.LEZIONI = [
       ],
       esiti: ["La signora Taylor scrive una recensione: «A fantastic receptionist turned a problem into a great stay!»", "«Thank you, everything is fine now.» Ottimo lavoro.", "«Well, it's OK…» Ripassa le scuse e il present perfect, poi riprova.", "La signora chiede di parlare con il direttore. Rifai la lezione e riprova!"]
     },
-    verifica: [
-      { tipo: "traduci", titolo: "Scrivi la parola in inglese", punti: 1,
-        voci: [["reclamo", "complaint"], ["prenotazione", "booking"], ["rimborso", "refund"], ["sconto", "discount"], ["disagio", "inconvenience"], ["rumoroso", "noisy"], ["sporco", "dirty"], ["rotto", "broken"], ["manutenzione", "maintenance"], ["camera superiore (passaggio a)", "upgrade"]] },
-      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
-        voci: [
-          { d: "The shower _____ last night. (non funzionava)", o: ["didn't work", "hasn't worked", "doesn't work"] },
-          { d: "_____ the manager: he's coming. (ho appena chiamato)", o: ["I've just called", "I just have called", "I called just"] },
-          { d: "We _____ at the hotel at ten. (siamo arrivati)", o: ["arrived", "have arrived", "arrive"] },
-          { d: "Housekeeping _____ your room. It's ready now. (ha già pulito)", o: ["has already cleaned", "have already clean", "already cleans"] },
-          { d: "I _____ for the inconvenience. (mi scuso, formale)", o: ["do apologise", "am apologise", "apologising"] },
-          { d: "I'm _____ there's been a mistake. (temo che)", o: ["afraid", "scared", "fear"] },
-          { d: "_____ me to change your room? (vuole che…)", o: ["Would you like", "Do you want that", "Would you"] },
-          { d: "I'll make _____ it doesn't happen again.", o: ["sure", "certain of", "safe"] }
-        ] },
-      { tipo: "traduci", titolo: "Traduci in inglese", punti: 2,
-        voci: [["Mi dispiace moltissimo.", "I'm terribly sorry."], ["Ieri sera la doccia non funzionava.", "The shower didn't work last night."], ["Ho appena chiamato la manutenzione.", "I've just called maintenance."], ["Temo che ci sia stato un errore.", "I'm afraid there's been a mistake."], ["Vuole che le cambi la camera?", "Would you like me to change your room?"], ["Grazie per avercelo segnalato.", "Thank you for letting us know."]] },
-      { tipo: "aperta", titolo: "L'e-mail di scuse", punti: 5,
-        testo: "Scrivi in inglese un'e-mail di scuse (80–100 parole) a un ospite che si è lamentato del rumore: racconta che cosa è successo (past simple), che cosa avete già fatto (present perfect) e proponi una soluzione.",
-        facile: "Scrivi in inglese tre frasi a un ospite che si è lamentato: una scusa, che cosa è successo, una soluzione. Puoi usare: I'm terribly sorry · didn't work · I've just…" }
-    ]
   },
   /* ───────────────────────── FRANCESE ───────────────────────── */
   fr: {
@@ -877,26 +679,6 @@ window.LEZIONI = [
       ],
       esiti: ["Madame Lefèvre écrit un avis : « Une réceptionniste fantastique a transformé un problème en un séjour formidable ! »", "« Merci, tout va bien maintenant. » Ottimo lavoro.", "« Bon, ça va… » Ripassa le scuse e i tempi del passato, poi riprova.", "La signora chiede di parlare con il direttore. Rifai la lezione e riprova!"]
     },
-    verifica: [
-      { tipo: "traduci", titolo: "Scrivi la parola in francese", punti: 1,
-        voci: [["il reclamo", "la plainte"], ["la prenotazione", "la réservation"], ["il rimborso", "le remboursement"], ["lo sconto", "la réduction"], ["il disagio", "le dérangement"], ["rumoroso", "bruyant"], ["sporco", "sale"], ["rotto", "cassé"], ["la manutenzione", "l'entretien"], ["la camera superiore", "la chambre supérieure"]] },
-      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
-        voci: [
-          { d: "Hier soir, la douche _____ . (non ha funzionato)", o: ["n'a pas fonctionné", "ne fonctionne pas", "n'est pas fonctionné"] },
-          { d: "Je _____ appeler le directeur : il arrive. (ho appena)", o: ["viens d'", "vais d'", "ai venu d'"] },
-          { d: "Hier, nous _____ à l'hôtel à dix heures. (siamo arrivati)", o: ["sommes arrivés", "avons arrivé", "arriverons"] },
-          { d: "L'équipe de ménage _____ déjà nettoyé votre chambre.", o: ["a", "est", "aura"] },
-          { d: "Je vous prie de _____ pour le dérangement. (scusarmi)", o: ["m'excuser", "excuser", "me désoler"] },
-          { d: "Je _____ qu'il y ait eu une erreur. (temo)", o: ["crains", "peur", "effraie"] },
-          { d: "Voulez-vous que je vous _____ de chambre ? (che io cambi)", o: ["change", "changerai", "changer"] },
-          { d: "Je veillerai à ce que cela ne se _____ pas.", o: ["reproduise", "reproduit", "reproduire"] }
-        ] },
-      { tipo: "traduci", titolo: "Traduci in francese", punti: 2,
-        voci: [["Siamo davvero spiacenti.", "Nous sommes vraiment désolés."], ["Ieri sera la doccia non ha funzionato.", "Hier soir, la douche n'a pas fonctionné."], ["Ho appena chiamato la manutenzione.", "Je viens d'appeler l'entretien."], ["Temo che ci sia stato un errore.", "Je crains qu'il y ait eu une erreur."], ["Vuole che le cambi la camera?", "Voulez-vous que je vous change de chambre ?"], ["Grazie per avercelo segnalato.", "Merci de nous l'avoir signalé."]] },
-      { tipo: "aperta", titolo: "Le courriel d'excuses", punti: 5,
-        testo: "Scrivi in francese un'e-mail di scuse (80–100 parole, con il vous) a un ospite che si è lamentato del rumore: racconta che cosa è successo (passé composé), com'era la situazione (imparfait) e proponi una soluzione.",
-        facile: "Scrivi in francese tre frasi a un ospite che si è lamentato: una scusa, che cosa è successo, una soluzione. Puoi usare: Nous sommes vraiment désolés · n'a pas fonctionné · je viens de…" }
-    ]
   },
   /* ───────────────────────── SPAGNOLO ───────────────────────── */
   es: {
@@ -978,26 +760,6 @@ window.LEZIONI = [
       ],
       esiti: ["La signora Ortega scrive una recensione: «¡Una recepcionista fantástica convirtió un problema en una estancia estupenda!»", "«Gracias, ahora todo está bien.» Ottimo lavoro.", "«Bueno, está bien…» Ripassa le scuse e i tempi del passato, poi riprova.", "La signora chiede di parlare con il direttore. Rifai la lezione e riprova!"]
     },
-    verifica: [
-      { tipo: "traduci", titolo: "Scrivi la parola in spagnolo", punti: 1,
-        voci: [["il reclamo", "la queja"], ["la prenotazione", "la reserva"], ["il rimborso", "el reembolso"], ["lo sconto", "el descuento"], ["il disagio", "la molestia"], ["rumoroso", "ruidoso"], ["sporco", "sucio"], ["rotto", "roto"], ["la manutenzione", "el mantenimiento"], ["la camera superiore", "la habitación superior"]] },
-      { tipo: "scelta", titolo: "Scegli la forma corretta", punti: 1,
-        voci: [
-          { d: "Anoche la ducha no _____ . (ha funzionato)", o: ["funcionó", "ha funcionado", "funciona"] },
-          { d: "_____ llamar al director: ya viene. (ho appena)", o: ["Acabo de", "Acabo", "He acabado"] },
-          { d: "Ayer _____ al hotel a las diez. (siamo arrivati)", o: ["llegamos", "hemos llegado", "llegaremos"] },
-          { d: "El servicio de limpieza ya _____ su habitación. (ha pulito)", o: ["ha limpiado", "limpiará", "limpiaba"] },
-          { d: "Le pido _____ por las molestias.", o: ["disculpas", "perdón de", "lo siento"] },
-          { d: "Me _____ que ha habido un error. (temo)", o: ["temo", "miedo", "asusto"] },
-          { d: "¿Quiere que le _____ de habitación? (che io cambi)", o: ["cambie", "cambio", "cambiar"] },
-          { d: "Me aseguraré de que no _____ a pasar.", o: ["vuelva", "vuelve", "volver"] }
-        ] },
-      { tipo: "traduci", titolo: "Traduci in spagnolo", punti: 2,
-        voci: [["Mi dispiace moltissimo.", "Lo siento muchísimo."], ["Ieri sera la doccia non ha funzionato.", "Anoche la ducha no funcionó."], ["Ho appena chiamato la manutenzione.", "Acabo de llamar a mantenimiento."], ["Temo che ci sia stato un errore.", "Me temo que ha habido un error."], ["Vuole che le cambi la camera?", "¿Quiere que le cambie de habitación?"], ["Grazie per avercelo segnalato.", "Gracias por avisarnos."]] },
-      { tipo: "aperta", titolo: "El correo de disculpa", punti: 5,
-        testo: "Scrivi in spagnolo un'e-mail di scuse (80–100 parole, con il lei) a un ospite che si è lamentato del rumore: racconta che cosa è successo (indefinido), che cosa avete già fatto (perfecto) e proponi una soluzione.",
-        facile: "Scrivi in spagnolo tre frasi a un ospite che si è lamentato: una scusa, che cosa è successo, una soluzione. Puoi usare: Lo siento muchísimo · no funcionó · acabo de…" }
-    ]
   }
   }
 }

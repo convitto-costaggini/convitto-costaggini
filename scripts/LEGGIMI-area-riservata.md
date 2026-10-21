@@ -10,10 +10,25 @@ Le pagine pubbliche `lingue/<nome>.html` sono solo un guscio che chiede l'access
   una sessione valida e un indirizzo abilitato (funzione `lingue_accesso`).
 - **Codice del Dipartimento**: una chiave di scorta (`lingue/docenti/accesso-dipartimento.json`) apribile con un codice condiviso.
 
-## Da fare una volta sola su Supabase (Dashboard)
+## Da fare per completare il setup (in quest'ordine)
+- [ ] **Casella di servizio**: farsi creare dall'amministratore del Workspace (RTD) una casella `@alberghierorieti.it` (ad esempio
+      `lingue@alberghierorieti.it`) con verifica in due passaggi e "password per le app" consentita.
+- [ ] **Password per le app**: generarla su quell'account (Sicurezza, Password per le app) e copiarla subito.
+- [ ] **SMTP in Supabase**: Authentication, Emails (SMTP Settings): host `smtp.gmail.com`, porta `465`, utente e mittente = la casella, password = quella per le app.
+- [ ] **Limite orario**: Authentication, Rate Limits, alzare l'invio e-mail (ad esempio 100 all'ora).
+- [ ] **Modelli e-mail**: "Magic Link" e "Confirm signup" con il testo del codice (vedi sotto), oggetto "Codice di accesso all'area docenti".
+- [ ] **Redirect**: aggiungere `https://convitto.alberghierorieti.edu.it/lingue/*` in URL Configuration.
+- [ ] **Abilitare i docenti** nella tabella `lingue_docenti` (vedi sotto).
+- [ ] **Prova**: chiedere il codice dalla pagina di accesso con un indirizzo abilitato e verificare che la mail arrivi.
+- [ ] Unire il ramo su GitHub (finché non è unito, le pagine pubbliche sono ancora quelle vecchie).
+
+Nel frattempo il **codice del Dipartimento** funziona senza nulla di tutto questo.
+
+## Dettaglio dei passi su Supabase (Dashboard)
 1. **Authentication, URL Configuration**: aggiungere `https://convitto.alberghierorieti.edu.it/lingue/*` tra i Redirect URLs.
 2. **Authentication, Email Templates**: nei modelli **Magic Link** e **Confirm signup** scrivere il codice, per esempio:
-   `Il vostro codice di accesso all'area docenti è: {{ .Token }}` (senza il codice il messaggio contiene solo un collegamento e l'accesso non funziona).
+   `Il vostro codice di accesso all'area docenti è: <b>{{ .Token }}</b>`: `{{ .Token }}` è un segnaposto che Supabase sostituisce con il codice
+   a sei cifre (senza, il messaggio contiene solo un collegamento e l'accesso non funziona).
 3. **Posta in uscita (SMTP)**: il servizio predefinito di Supabase invia pochissimi messaggi all'ora e solo a indirizzi della propria
    organizzazione, quindi per i colleghi serve un SMTP proprio. In **Authentication, SMTP Settings** si può usare l'account Google Workspace
    della scuola (smtp.gmail.com, porta 465, con una password per le app) o un altro servizio di posta.

@@ -11,7 +11,7 @@ window.DIALOGHI = [
     righe: [
       ["S","Buonasera, benvenuti! Avete prenotato?",{"en":"Good evening, welcome! Do you have a reservation?","fr":"Bonsoir, bienvenue ! Vous avez réservé ?","es":"Buenas noches, ¡bienvenidos! ¿Tienen reserva?"}],
       ["A","Sì, a nome Rossi, per due persone.",{"en":"Yes, under the name Rossi, for two people.","fr":"Oui, au nom de Rossi, pour deux personnes.","es":"Sí, a nombre de Rossi, para dos personas."}],
-      ["S","Prego, da questa parte. Ecco il menù.",{"en":"This way, please. Here is the menu.","fr":"Par ici, s'il vous plaît. Voici la carte.","es":"Por aquí, por favor. Aquí tienen la carta."}],
+      ["S","Prego, da questa parte. Ecco il menu.",{"en":"This way, please. Here is the menu.","fr":"Par ici, s'il vous plaît. Voici la carte.","es":"Por aquí, por favor. Aquí tienen la carta."}],
       ["A","Grazie.",{"en":"Thank you.","fr":"Merci.","es":"Gracias."}],
       ["S","Desiderate qualcosa da bere?",{"en":"Would you like something to drink?","fr":"Désirez-vous quelque chose à boire ?","es":"¿Desean algo de beber?"}],
       ["A","Una bottiglia di acqua naturale e due calici di vino rosso, per favore.",{"en":"A bottle of still water and two glasses of red wine, please.","fr":"Une bouteille d'eau plate et deux verres de vin rouge, s'il vous plaît.","es":"Una botella de agua sin gas y dos copas de vino tinto, por favor."}],
@@ -64,7 +64,7 @@ window.DIALOGHI = [
     righe: [
       ["S","Buonasera e benvenuta! Ha una prenotazione?",{"en":"Good evening and welcome! Do you have a booking?","fr":"Bonsoir et bienvenue ! Vous avez une réservation ?","es":"¡Buenas tardes y bienvenida! ¿Tiene una reserva?"}],
       ["A","Sì, a nome Müller, per tre notti.",{"en":"Yes, under the name Müller, for three nights.","fr":"Oui, au nom de Müller, pour trois nuits.","es":"Sí, a nombre de Müller, para tres noches."}],
-      ["S","Perfetto. Posso vedere un documento, per favore?",{"en":"Perfect. May I see your passport or ID, please?","fr":"Parfait. Puis-je voir une pièce d'identité, s'il vous plaît ?","es":"Perfecto. ¿Me permite un documento de identidad, por favor?"}],
+      ["S","Perfetto. Posso vedere un documento, per favore?",{"en":"Perfect. May I see your passport or ID, please?","fr":"Parfait. Puis-je voir une pièce d'identité, s'il vous plaît ?","es":"Perfecto. ¿Me permite su documento de identidad, por favor?"}],
       ["A","Ecco qui.",{"en":"Here you are.","fr":"Voilà.","es":"Aquí tiene."}],
       ["S","Grazie. Ha una camera doppia al secondo piano, con vista sulle montagne.",{"en":"Thank you. You have a double room on the second floor, with a mountain view.","fr":"Merci. Vous avez une chambre double au deuxième étage, avec vue sur les montagnes.","es":"Gracias. Tiene una habitación doble en la segunda planta, con vistas a la montaña."}],
       ["A","Che bello! A che ora è la colazione?",{"en":"Lovely! What time is breakfast?","fr":"Super ! Le petit-déjeuner est à quelle heure ?","es":"¡Qué bien! ¿A qué hora es el desayuno?"}],

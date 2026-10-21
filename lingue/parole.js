@@ -52,7 +52,7 @@ window.VOCABOLARIO = (function () {
     ["Prego, da questa parte",{"en":["This way, please"],"fr":["Par ici, s'il vous plaît"],"es":["Por aquí, por favor"]}],
     ["Prego, si accomodi",{"en":["Please, have a seat"],"fr":["Je vous en prie, asseyez-vous"],"es":["Siéntese, por favor"]}],
     ["Posso prendere il suo cappotto?",{"en":["May I take your coat?"],"fr":["Puis-je prendre votre manteau ?"],"es":["¿Me permite su abrigo?"]}],
-    ["Ecco il menù",{"en":["Here is the menu"],"fr":["Voici la carte"],"es":["Aquí tiene la carta"]}],
+    ["Ecco il menu",{"en":["Here is the menu"],"fr":["Voici la carte"],"es":["Aquí tiene la carta"]}],
     ["Desidera un aperitivo?",{"en":["Would you like an aperitif?"],"fr":["Désirez-vous un apéritif ?"],"es":["¿Desea un aperitivo?"]}],
     ["Torno subito",{"en":["I'll be right back"],"fr":["Je reviens tout de suite"],"es":["Enseguida vuelvo"]}],
     ["Mi dispiace, siamo al completo",{"en":["I'm sorry, we're fully booked"],"fr":["Désolé, nous sommes complets"],"es":["Lo siento, estamos completos"]}],
@@ -120,7 +120,7 @@ window.VOCABOLARIO = (function () {
     ["Contiene frutta a guscio",{"en":["It contains nuts"],"fr":["Il contient des fruits à coque"],"es":["Contiene frutos secos"]}],
     ["Contiene arachidi",{"en":["It contains peanuts"],"fr":["Il contient des arachides"],"es":["Contiene cacahuetes"]}],
     ["Contiene pesce",{"en":["It contains fish"],"fr":["Il contient du poisson"],"es":["Contiene pescado"]}],
-    ["Contiene crostacei",{"en":["It contains shellfish"],"fr":["Il contient des crustacés"],"es":["Contiene marisco"]}],
+    ["Contiene crostacei",{"en":["It contains shellfish"],"fr":["Il contient des crustacés"],"es":["Contiene crustáceos"]}],
     ["Contiene sedano",{"en":["It contains celery"],"fr":["Il contient du céleri"],"es":["Contiene apio"]}],
     ["Verifico subito con la cucina",{"en":["I'll check with the kitchen right away"],"fr":["Je vérifie tout de suite avec la cuisine"],"es":["Lo consulto ahora mismo con la cocina"]}],
     ["Possiamo prepararle un piatto senza…",{"en":["We can prepare a dish without…"],"fr":["Nous pouvons vous préparer un plat sans…"],"es":["Podemos prepararle un plato sin…"]}],
@@ -178,7 +178,7 @@ window.VOCABOLARIO = (function () {
     ["Sbollentare",{"en":["To blanch"],"fr":["Blanchir"],"es":["Escaldar"]}],
     ["Rosolare",{"en":["To brown"],"fr":["Faire revenir"],"es":["Dorar"]}],
     ["Bollire",{"en":["To boil"],"fr":["Faire bouillir"],"es":["Hervir"]}],
-    ["Cuocere al forno",{"en":["To roast","per dolci e pane: «to bake»"],"fr":["Cuire au four"],"es":["Asar al horno"]}],
+    ["Cuocere al forno",{"en":["To bake","per carne e verdure: «to roast»"],"fr":["Cuire au four"],"es":["Asar al horno"]}],
     ["Grigliare",{"en":["To grill"],"fr":["Griller"],"es":["Asar a la parrilla"]}],
     ["Friggere",{"en":["To fry"],"fr":["Frire"],"es":["Freír"]}],
     ["Cuocere al vapore",{"en":["To steam"],"fr":["Cuire à la vapeur"],"es":["Cocer al vapor"]}],
@@ -256,7 +256,7 @@ window.VOCABOLARIO = (function () {
     ["Sciogliere a bagnomaria",{"en":["To melt in a bain-marie"],"fr":["Faire fondre au bain-marie"],"es":["Derretir al baño maría"]}],
     ["Farcire",{"en":["To fill"],"fr":["Garnir"],"es":["Rellenar"]}],
     ["Decorare",{"en":["To decorate"],"fr":["Décorer"],"es":["Decorar"]}],
-    ["La sac à poche",{"en":["The piping bag"],"fr":["La poche à douille"],"es":["La manga pastelera"]}],
+    ["Il sac à poche",{"en":["The piping bag"],"fr":["La poche à douille"],"es":["La manga pastelera"]}],
     ["Caramellare",{"en":["To caramelise"],"fr":["Caraméliser"],"es":["Caramelizar"]}]
   ],
   "pa-misure": [
@@ -286,7 +286,7 @@ window.VOCABOLARIO = (function () {
   "ac-checkin": [
     ["Benvenuto nel nostro hotel",{"en":["Welcome to our hotel"],"fr":["Bienvenue dans notre hôtel"],"es":["Bienvenido a nuestro hotel"]}],
     ["Ha una prenotazione?",{"en":["Do you have a booking?"],"fr":["Vous avez une réservation ?"],"es":["¿Tiene una reserva?"]}],
-    ["Posso vedere un documento?",{"en":["May I see your passport or ID?"],"fr":["Puis-je voir une pièce d'identité ?"],"es":["¿Me permite un documento de identidad?"]}],
+    ["Posso vedere un documento?",{"en":["May I see your passport or ID?"],"fr":["Puis-je voir une pièce d'identité ?"],"es":["¿Me permite su documento de identidad, por favor?"]}],
     ["Compili questo modulo, per favore",{"en":["Please fill in this form"],"fr":["Veuillez remplir ce formulaire"],"es":["Rellene este formulario, por favor"]}],
     ["Ecco la chiave della camera",{"en":["Here is your room key"],"fr":["Voici la clé de votre chambre"],"es":["Aquí tiene la llave de la habitación"]}],
     ["La camera è al secondo piano",{"en":["Your room is on the second floor"],"fr":["La chambre est au deuxième étage"],"es":["La habitación está en la segunda planta"]}],
@@ -295,7 +295,7 @@ window.VOCABOLARIO = (function () {
     ["Il Wi-Fi è gratuito",{"en":["The Wi-Fi is free"],"fr":["Le wifi est gratuit"],"es":["El wifi es gratuito"]}],
     ["A che ora è il check-out?",{"en":["What time is check-out?"],"fr":["À quelle heure faut-il libérer la chambre ?"],"es":["¿A qué hora es la salida?"]}],
     ["Il check-out è entro le 11",{"en":["Check-out is by eleven"],"fr":["Il faut libérer la chambre avant 11 h"],"es":["La salida es antes de las once"]}],
-    ["Ecco la sua fattura",{"en":["Here is your bill"],"fr":["Voici votre facture"],"es":["Aquí tiene su factura"]}],
+    ["Ecco la sua fattura",{"en":["Here is your invoice"],"fr":["Voici votre facture"],"es":["Aquí tiene su factura"]}],
     ["Buon soggiorno!",{"en":["Enjoy your stay!"],"fr":["Bon séjour !"],"es":["¡Feliz estancia!"]}]
   ],
   "ac-camere": [
@@ -320,7 +320,7 @@ window.VOCABOLARIO = (function () {
     ["Costa 90 euro a notte",{"en":["It's ninety euros per night"],"fr":["C'est 90 euros la nuit"],"es":["Son noventa euros por noche"]}],
     ["Mi lascia un numero di telefono?",{"en":["Could I have a phone number?"],"fr":["Pouvez-vous me laisser un numéro de téléphone ?"],"es":["¿Me deja un número de teléfono?"]}],
     ["Può ripetere, per favore?",{"en":["Could you repeat that, please?"],"fr":["Pouvez-vous répéter, s'il vous plaît ?"],"es":["¿Puede repetir, por favor?"]}],
-    ["Glielo confermo via email",{"en":["I'll confirm it by email"],"fr":["Je vous le confirme par e-mail"],"es":["Se lo confirmo por correo electrónico"]}],
+    ["Glielo confermo via e-mail",{"en":["I'll confirm it by email"],"fr":["Je vous le confirme par e-mail"],"es":["Se lo confirmo por correo electrónico"]}],
     ["Resti in linea, per favore",{"en":["Please hold the line"],"fr":["Ne quittez pas, s'il vous plaît"],"es":["No cuelgue, por favor"]}],
     ["Cancellazione gratuita fino a 24 ore prima",{"en":["Free cancellation up to 24 hours before"],"fr":["Annulation gratuite jusqu'à 24 heures avant"],"es":["Cancelación gratuita hasta 24 horas antes"]}]
   ],

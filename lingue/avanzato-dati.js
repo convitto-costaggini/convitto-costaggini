@@ -49,8 +49,8 @@ window.AVANZATO = {
         en: "I'll check with the kitchen right away and let you know whether the dish can be prepared without dairy products.",
         fr: "Je vérifie tout de suite avec la cuisine et je vous confirme si le plat peut être préparé sans produits laitiers.",
         es: "Lo compruebo enseguida con la cocina y le confirmo si el plato se puede preparar sin lácteos." }],
-      ["Nel menù trova gli allergeni indicati con un numero accanto a ogni piatto.", {
-        en: "In the menu you'll find the allergens indicated by a number next to each dish.",
+      ["Nel menu trova gli allergeni indicati con un numero accanto a ogni piatto.", {
+        en: "On the menu you'll find the allergens indicated by a number next to each dish.",
         fr: "Sur la carte, vous trouverez les allergènes indiqués par un numéro à côté de chaque plat.",
         es: "En la carta encontrará los alérgenos indicados con un número al lado de cada plato." }]
     ]},
@@ -269,7 +269,7 @@ window.AVANZATO = {
         en: "The aperitif is served with a few snacks: olives, crisps and small bruschettas.",
         fr: "L'apéritif est servi avec quelques amuse-bouches : olives, chips et petites bruschettas.",
         es: "El aperitivo se sirve con algo para picar: aceitunas, patatas fritas y pequeñas bruschettas." }],
-      ["Mi dispiace, non posso servire alcolici ai minori di diciotto anni: posso proporti qualcos'altro?", {
+      ["Mi dispiace, non posso servire alcolici ai minori di diciotto anni: posso proporle qualcos'altro?", {
         en: "I'm sorry, I can't serve alcohol to anyone under eighteen: can I offer you something else?",
         fr: "Je suis désolé, je ne peux pas servir d'alcool aux moins de dix-huit ans : je peux te proposer autre chose ?",
         es: "Lo siento, no puedo servir alcohol a menores de dieciocho años: ¿te puedo ofrecer otra cosa?" }]
@@ -378,7 +378,7 @@ window.AVANZATO = {
       it: ["Gentile signora Weber,", "La ringraziamo per averci contattato e per l'interesse verso il nostro hotel.", "Siamo lieti di confermarle la disponibilità di una camera doppia dal 12 al 15 maggio, al prezzo di 110 euro a notte, colazione inclusa.", "Per confermare la prenotazione, la invitiamo a completarla entro tre giorni tramite il link qui sotto.", "Restiamo a disposizione per qualsiasi informazione.", "Cordiali saluti,\nMarco Rossi – Reception"],
       en: ["Dear Mrs Weber,", "Thank you for contacting us and for your interest in our hotel.", "We are pleased to confirm that a double room is available from 12 to 15 May, at a price of 110 euros per night, breakfast included.", "To confirm your booking, please complete it within three days using the link below.", "Please do not hesitate to contact us if you need any further information.", "Kind regards,\nMarco Rossi – Reception"],
       fr: ["Chère Madame Weber,", "Nous vous remercions de nous avoir contactés et de l'intérêt que vous portez à notre hôtel.", "Nous avons le plaisir de vous confirmer la disponibilité d'une chambre double du 12 au 15 mai, au prix de 110 euros la nuit, petit-déjeuner compris.", "Pour confirmer votre réservation, nous vous invitons à la finaliser dans un délai de trois jours grâce au lien ci-dessous.", "Nous restons à votre disposition pour tout renseignement complémentaire.", "Cordialement,\nMarco Rossi – Réception"],
-      es: ["Estimada señora Weber:", "Le agradecemos que se haya puesto en contacto con nosotros y su interés por nuestro hotel.", "Nos complace confirmarle la disponibilidad de una habitación doble del 12 al 15 de mayo, al precio de 110 euros por noche, desayuno incluido.", "Para confirmar la reserva, le rogamos que la complete en un plazo de tres días a través del enlace que encontrará más abajo.", "Quedamos a su disposición para cualquier información.", "Atentamente,\nMarco Rossi – Recepción"] }},
+      es: ["Estimada señora Weber:", "Le agradecemos que se haya puesto en contacto con nosotros y su interés por nuestro hotel.", "Nos complace confirmarle la disponibilidad de una habitación doble del 12 al 15 de mayo, al precio de 110 euros por noche, desayuno incluido.", "Para confirmar la reserva, le rogamos que la formalice en un plazo de tres días a través del enlace que encontrará más abajo.", "Quedamos a su disposición para cualquier información.", "Atentamente,\nMarco Rossi – Recepción"] }},
     { id: "scuse", titolo: "Rispondere a un reclamo", icona: "✉️", par: {
       it: ["Gentile signor Martin,", "La ringraziamo per averci segnalato i problemi riscontrati durante il suo soggiorno.", "Ci scusiamo sinceramente per il guasto al riscaldamento e per il disagio che le abbiamo causato.", "Abbiamo già fatto controllare l'impianto e preso provvedimenti perché non accada più.", "Come segno di scuse, saremmo lieti di offrirle una cena per due persone nel nostro ristorante durante il suo prossimo soggiorno.", "Con i più cordiali saluti,\nAnna Verdi – Direzione"],
       en: ["Dear Mr Martin,", "Thank you for letting us know about the problems you experienced during your stay.", "We sincerely apologise for the faulty heating and for the inconvenience this caused you.", "We have already had the system checked and have taken steps to make sure it does not happen again.", "As a token of our apology, we would be delighted to offer you dinner for two in our restaurant during your next stay.", "With our warmest regards,\nAnna Verdi – Management"],

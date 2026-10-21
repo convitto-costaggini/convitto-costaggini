@@ -49,7 +49,7 @@ window.GRAMMATICA_DATI = {
       ["a", "_____ I open the window for you, madam?", "Shall", "Do", "Am", "Le apro la finestra, signora?"],
       ["a", "Could you _____ me the salt, please?", "pass", "passing", "to pass", "Potrebbe passarmi il sale, per favore?"],
       ["a", "_____ you like to see the dessert menu?", "Would", "Will", "Are", "Desidera vedere il menù dei dolci?"],
-      ["b", "Excuse me, _____ you mind if I took this chair?", "would", "will", "do", "Mi scusi, le dispiacerebbe se prendessi questa sedia?"],
+      ["b", "Excuse me, _____ you mind if I took this chair?", "would", "will", "are", "Mi scusi, le dispiacerebbe se prendessi questa sedia?"],
       ["b", "Would you mind _____ the music down a little?", "turning", "to turn", "turn", "Le dispiacerebbe abbassare un po' la musica?"],
       ["b", "Would you prefer _____ inside or on the terrace?", "to sit", "sit", "sat", "Preferisce sedersi dentro o in terrazza?"],
       ["b", "I'd rather _____ the fish than the meat, if that's possible.", "have", "to have", "having", "Preferirei prendere il pesce invece della carne, se è possibile."]
@@ -64,7 +64,7 @@ window.GRAMMATICA_DATI = {
       ["b", "Add _____ salt, just a pinch.", "a little", "a few", "many", "Aggiungi un po' di sale, solo un pizzico."],
       ["b", "We only have _____ rooms left for the weekend.", "a few", "a little", "much", "Ci restano solo poche camere per il fine settimana."],
       ["b", "Could you give me _____ advice about the wine list?", "some", "an", "many", "Potrebbe darmi qualche consiglio sulla carta dei vini?"],
-      ["b", "Not _____ guests came to the late dinner.", "many", "much", "little", "Non molti ospiti sono venuti alla cena tardiva."]
+      ["b", "Not _____ guests came to the late dinner.", "many", "much", "little", "Non molti ospiti sono venuti alla cena di tarda sera."]
     ],
     prep: [
       ["a", "The restaurant opens _____ seven o'clock.", "at", "in", "on", "Il ristorante apre alle sette."],
@@ -83,7 +83,7 @@ window.GRAMMATICA_DATI = {
       ["a", "The chocolate cake is _____ dessert on the menu.", "the best", "the better", "the most good", "La torta al cioccolato è il dolce migliore del menù."],
       ["a", "Our new chef is _____ than the old one.", "more creative", "creativer", "most creative", "Il nostro nuovo chef è più creativo di quello vecchio."],
       ["a", "This is the _____ hotel in town.", "cheapest", "cheaper", "most cheap", "Questo è l'hotel più economico della città."],
-      ["a", "The soup today is _____ than yesterday.", "hotter", "more hot", "hottest", "La zuppa oggi è più calda di ieri."],
+      ["a", "Today's soup is _____ than yesterday's.", "hotter", "more hot", "hottest", "La zuppa di oggi è più calda di quella di ieri."],
       ["a", "Tea is not as strong _____ coffee.", "as", "than", "like", "Il tè non è forte quanto il caffè."],
       ["b", "The dish tasted _____ than we expected.", "worse", "badder", "worst", "Il piatto aveva un sapore peggiore di quanto ci aspettassimo."],
       ["b", "This wine is _____ expensive than the champagne.", "less", "least", "fewer", "Questo vino è meno costoso dello champagne."],
@@ -169,7 +169,7 @@ window.GRAMMATICA_DATI = {
       ["a", "La cliente _____ à l'hôtel vers vingt heures.", "est arrivée", "a arrivé", "est arrivé", "La cliente è arrivata in albergo verso le venti."],
       ["a", "Le chef _____ une nouvelle recette de tarte.", "a créé", "est créé", "a crée", "Lo chef ha creato una nuova ricetta di crostata."],
       ["a", "Les touristes _____ de l'hôtel ce matin.", "sont partis", "ont partis", "sont parti", "I turisti sono partiti dall'albergo stamattina."],
-      ["a", "Autrefois, le restaurant _____ tous les jours.", "ouvrait", "ouvrais", "a ouvert", "Una volta il ristorante apriva tutti i giorni."],
+      ["a", "Autrefois, le restaurant _____ tous les jours.", "ouvrait", "ouvrais", "ouvre", "Una volta il ristorante apriva tutti i giorni."],
       ["a", "Le client _____ son manteau au vestiaire.", "a laissé", "est laissé", "a laissée", "Il cliente ha lasciato il cappotto al guardaroba."],
       ["b", "Le chef _____ en train de préparer la sauce quand le téléphone a sonné.", "était", "a été", "est été", "Lo chef stava preparando la salsa quando ha squillato il telefono."],
       ["b", "Les serveuses _____ rapidement après le service.", "se sont changées", "se sont changé", "ont se changé", "Le cameriere si sono cambiate velocemente dopo il servizio."],
@@ -184,7 +184,7 @@ window.GRAMMATICA_DATI = {
       ["a", "Les serveurs _____ la terrasse cet après-midi.", "vont nettoyer", "va nettoyer", "vont nettoient", "I camerieri puliranno la terrazza questo pomeriggio."],
       ["a", "Ce soir, tu _____ au bar avec moi.", "vas travailler", "vais travailler", "vas travaille", "Stasera lavorerai al bar con me."],
       ["b", "Nous _____ le dessert à vingt-deux heures.", "servirons", "serverons", "servirerons", "Serviremo il dolce alle ventidue."],
-      ["b", "Le chef _____ une conférence au salon de la gastronomie.", "fera", "faira", "fairait", "Lo chef terrà una conferenza al salone della gastronomia."],
+      ["b", "Le chef _____ une démonstration au salon de la gastronomie.", "fera", "faira", "fairait", "Lo chef farà una dimostrazione al salone della gastronomia."],
       ["b", "Les clients _____ visiter la cave à vins après le repas.", "pourront", "pouvront", "pourrons", "I clienti potranno visitare la cantina dopo il pasto."],
       ["b", "Il _____ beau demain, nous dresserons les tables dehors.", "fera", "faira", "ferra", "Domani farà bel tempo, apparecchieremo i tavoli fuori."]
     ],
@@ -225,10 +225,10 @@ window.GRAMMATICA_DATI = {
       ["b", "Le chef a décidé _____ changer la carte.", "de", "à", "par", "Lo chef ha deciso di cambiare il menù."]
     ],
     comp: [
-      ["a", "Ce dessert est _____ sucré que la tarte.", "plus", "plus de", "le plus", "Questo dolce è più dolce della crostata."],
+      ["a", "Ce dessert est _____ sucré que la tarte.", "plus", "plus de", "le plus", "Questo dolce è più zuccherato della crostata."],
       ["a", "Cette chambre est _____ grande que la suite.", "moins", "moins de", "de moins", "Questa camera è meno grande della suite."],
       ["a", "Le vin rouge est aussi bon _____ le vin blanc.", "que", "comme", "de", "Il vino rosso è buono quanto il vino bianco."],
-      ["a", "Ce restaurant est _____ que l'autre.", "meilleur", "plus bon", "mieux", "Questo ristorante è migliore dell'altro."],
+      ["a", "Ce restaurant est _____ que l'autre.", "meilleur", "plus bon", "le meilleur", "Questo ristorante è migliore dell'altro."],
       ["a", "Notre chef cuisine _____ que l'ancien.", "mieux", "meilleur", "plus bien", "Il nostro chef cucina meglio di quello di prima."],
       ["b", "C'est le plat _____ cher de la carte.", "le plus", "plus le", "la plus", "È il piatto più caro del menù."],
       ["b", "C'est la _____ pâtisserie de la ville.", "meilleure", "meilleur", "mieux", "È la migliore pasticceria della città."],
@@ -338,12 +338,12 @@ window.GRAMMATICA_DATI = {
       ["a", "Buenas noches, _____ reservar una mesa para cuatro.", "quería", "quiería", "querío", "Buonasera, volevo prenotare un tavolo per quattro."],
       ["a", "¿_____ traerme la carta de vinos, por favor?", "Podría", "Pudería", "Poderia", "Potrebbe portarmi la carta dei vini, per favore?"],
       ["a", "_____ un café con leche, por favor.", "Quisiera", "Quisiería", "Quesiera", "Vorrei un caffellatte, per favore."],
-      ["a", "¿Me _____ su pasaporte, por favor?", "permite", "permete", "permitte", "Mi permette il suo passaporto, per favore?"],
+      ["a", "¿Me _____ su pasaporte, por favor?", "permite", "permete", "permitte", "Mi può dare il suo passaporto, per favore?"],
       ["a", "Señor, aquí no _____ fumar.", "puede", "pode", "puoede", "Signore, qui non può fumare."],
       ["a", "¿_____ ayudarle con las maletas?", "Puedo", "Pueda", "Podo", "Posso aiutarla con le valigie?"],
       ["b", "¿Le _____ cambiar de mesa? Esta está junto a la puerta.", "importaría", "importería", "importarías", "Le dispiacerebbe cambiare tavolo? Questo è vicino alla porta."],
       ["b", "Para el pescado, yo le _____ un vino blanco seco.", "recomendaría", "recomendería", "recomiendaría", "Con il pesce le consiglierei un vino bianco secco."],
-      ["b", "Los empleados _____ llevar siempre el uniforme limpio.", "deben", "deben de", "deven", "I dipendenti devono indossare sempre la divisa pulita."],
+      ["b", "Los empleados _____ llevar siempre el uniforme limpio.", "deben", "tienen", "deven", "I dipendenti devono indossare sempre la divisa pulita."],
       ["b", "¿Le _____ esperar unos minutos en el bar mientras preparamos su mesa?", "importa", "importe", "importan", "Le dispiace aspettare qualche minuto al bar mentre prepariamo il suo tavolo?"]
     ],
     quan: [
@@ -352,7 +352,7 @@ window.GRAMMATICA_DATI = {
       ["a", "Hoy tenemos _____ trabajo en la cocina.", "mucho", "muy", "muchos", "Oggi abbiamo molto lavoro in cucina."],
       ["a", "¿Me pone _____ de pan, por favor?", "un poco", "poco", "un pocos", "Mi dà un po' di pane, per favore?"],
       ["a", "¿Hay _____ mesa libre en la terraza?", "alguna", "algún", "algúna", "C'è qualche tavolo libero in terrazza?"],
-      ["a", "No queda _____ tarta de queso en la vitrina.", "nada de", "nadie de", "algo de", "Non è rimasta per niente cheesecake in vetrina."],
+      ["a", "No queda _____ tarta de queso en la vitrina.", "nada de", "nadie de", "algo de", "In vetrina non è rimasta neanche un po' di cheesecake."],
       ["b", "_____ más importante en la sala es la sonrisa.", "Lo", "El", "Los", "La cosa più importante in sala è il sorriso."],
       ["b", "Este es el _____ restaurante de la ciudad con estrella.", "primer", "primero", "prima", "Questo è il primo ristorante stellato della città."],
       ["b", "No tenemos _____ habitación doble libre para este fin de semana.", "ninguna", "ningún", "ninguno", "Non abbiamo nessuna camera doppia libera per questo fine settimana."],
@@ -377,7 +377,7 @@ window.GRAMMATICA_DATI = {
       ["a", "Hoy hay _____ clientes como ayer.", "tantos", "tanto", "tan", "Oggi ci sono tanti clienti quanti ieri."],
       ["a", "El café de este bar es _____ que el de la estación.", "peor", "pior", "más peor", "Il caffè di questo bar è peggiore di quello della stazione."],
       ["b", "Esta es la habitación _____ grande del hotel.", "más", "muy", "tan", "Questa è la camera più grande dell'hotel."],
-      ["b", "El chef es _____ que todos sus ayudantes.", "mayor", "mayore", "maggiore", "Lo chef è più grande di età di tutti i suoi aiutanti."],
+      ["b", "El chef es _____ que todos sus ayudantes.", "mayor", "mayore", "maggiore", "Lo chef è più anziano di tutti i suoi aiutanti."],
       ["b", "Este pastel está _____, ¡quiero probarlo otra vez!", "buenísimo", "buonísimo", "buenisímo", "Questo dolce è buonissimo, voglio assaggiarlo di nuovo!"],
       ["b", "En esta temporada tenemos _____ turistas que el año pasado.", "menos", "meno", "menores", "In questa stagione abbiamo meno turisti dell'anno scorso."],
       ["b", "Es el peor servicio _____ he recibido nunca.", "que", "como", "de", "È il peggior servizio che io abbia mai ricevuto."]
@@ -385,7 +385,7 @@ window.GRAMMATICA_DATI = {
     impe: [
       ["a", "Pase, señora, y _____ asiento, por favor.", "tome", "toma", "tomi", "Entri, signora, e si accomodi, per favore."],
       ["a", "Oye, _____ el horno a 180 grados, por favor.", "pon", "pone", "ponga", "Senti, accendi il forno a 180 gradi, per favore."],
-      ["a", "Señores, _____ por aquí, por favor.", "pasen", "pasad", "pasan", "Signori, prego, da questa parte."],
+      ["a", "Señores, _____ por aquí, por favor.", "pasen", "pase", "pasan", "Signori, prego, da questa parte."],
       ["a", "No _____ el pescado demasiado tiempo, que se seca.", "cocines", "cocinas", "cocina", "Non cuocere il pesce troppo a lungo, perché si secca."],
       ["a", "Por favor, _____ aquí su firma, señor.", "ponga", "pone", "ponge", "Per favore, metta qui la sua firma, signore."],
       ["b", "Señora, no se _____, el taxi llega en cinco minutos.", "preocupe", "preocupa", "preocupes", "Signora, non si preoccupi, il taxi arriva tra cinque minuti."],
@@ -410,7 +410,7 @@ window.GRAMMATICA_DATI = {
       ["a", "¿_____ desea tomar de primero?", "Qué", "Que", "Cómo", "Che cosa desidera prendere come primo?"],
       ["a", "¿_____ personas son en total?", "Cuántas", "Cuántos", "Cuantas", "Quante persone siete in totale?"],
       ["a", "¿_____ está el baño, por favor?", "Dónde", "Donde", "Adónde", "Dov'è il bagno, per favore?"],
-      ["a", "¿_____ quiere el filete: poco hecho o al punto?", "Cómo", "Como", "Qué", "Come vuole il filetto: al sangue o a puntino?"],
+      ["a", "¿_____ quiere el filete: poco hecho o al punto?", "Cómo", "Como", "Qué", "Come vuole il filetto: al sangue o a media cottura?"],
       ["a", "¿_____ llega su vuelo?", "Cuándo", "Cuando", "Cuánto", "Quando arriva il suo volo?"],
       ["b", "¿_____ de estos vinos prefiere?", "Cuál", "Qué", "Quál", "Quale di questi vini preferisce?"],
       ["b", "¿_____ es el chef de este restaurante?", "Quién", "Quien", "Quiénes", "Chi è lo chef di questo ristorante?"],
@@ -440,7 +440,7 @@ window.GRAMMATICA_DATI = {
       ["b", "El camarero nuevo _____ muy listo: aprende todo enseguida.", "es", "está", "ser", "Il cameriere nuovo è molto sveglio: impara tutto subito."],
       ["b", "Señores, la mesa ya _____ lista, pueden pasar.", "está", "es", "son", "Signori, il tavolo è già pronto, possono accomodarsi."],
       ["b", "La cena de gala _____ en el salón principal a las nueve.", "es", "está", "esta", "La cena di gala si tiene nel salone principale alle nove."],
-      ["b", "Las habitaciones _____ limpiadas cada mañana por el personal.", "son", "están", "estan", "Le camere vengono pulite ogni mattina dal personale."]
+      ["b", "El hotel _____ construido en 1920 por un arquitecto famoso.", "fue", "estuvo", "era", "L'hotel fu costruito nel 1920 da un architetto famoso."]
     ]
   }
 };

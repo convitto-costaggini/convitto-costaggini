@@ -8,7 +8,7 @@
 var DOMINI = ['@alberghierorieti.it', '@alberghierorieti.edu.it'];
 var SERVIZI = {
   lingue: { nome: 'Le lingue dell\'Alberghiero', area: 'all\'area docenti di <b>Le lingue dell\'Alberghiero</b>' },
-  studio: { nome: 'Sala studio del Convitto', area: 'alla <b>Sala studio del Convitto</b> (area docenti ed educatori)' }
+  studio: { nome: 'Sala Studio della Scuola', area: 'alla <b>Sala Studio della Scuola</b> (area docenti ed educatori)' }
 };
 
 function doPost(e) {

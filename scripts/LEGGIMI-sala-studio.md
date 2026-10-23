@@ -29,12 +29,16 @@ Se il servizio non risponde, lo stesso passo 3 offre **Crea solo il link**: la l
 - Dopo l'accesso il dispositivo resta riconosciuto per **60 giorni** con un lasciapassare firmato dalla funzione
   (la chiave deriva da `SUPABASE_SERVICE_ROLE_KEY`). Sui computer condivisi, a fine lavoro: **Esci**.
 - La mail parte dallo stesso script di Lingue (`scripts/lingue-invio-codici.gs`, segreti `GAS_URL` e `GAS_TOKEN`).
-  Lo script riconosce il campo `servizio: "studio"` e scrive "Sala studio del Convitto": dopo averlo aggiornato
+  Lo script riconosce il campo `servizio: "studio"` e firma la mail "Sala Studio della Scuola": dopo averlo aggiornato
   va pubblicata una **nuova versione** della stessa distribuzione (l'URL non cambia). Finché non lo si aggiorna, le mail
   arrivano lo stesso ma con l'intestazione di Lingue.
 - **Codice di scorta**: `STUDIO_CODICI` resta valido, come il codice del Dipartimento di Lingue, per quando la posta non arriva.
   Le lezioni pubblicate con il codice di scorta non sono di nessuno in particolare: le può modificare chiunque sia entrato,
   e diventano di chi le modifica per primo.
+
+- Le pagine riservate (`docente.html`, `modifica.html`, `archivio.html`) hanno in cima la stessa barra:
+  Crea una lezione · Le mie lezioni · Archivio, con il nome di chi è entrato, la data fino a cui resta dentro ed **Esci**.
+  Finché non si è entrati, la pagina mostra solo il percorso guidato in 3 passi (mail → codice dalla posta → dentro).
 
 ## Autori, modifica, condivisione
 - L'**autore** di una lezione è la persona che l'ha pubblicata (il database conserva solo l'impronta della sua mail);

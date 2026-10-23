@@ -84,6 +84,7 @@
 <script src="nav.min.js"></script>
 <script src="lingue/lingue.js"></script>
 <script src="lingue/finestra.js"></script>
+<script src="lingue/revisione.js"></script>
 <script src="lingue/avanzato-dati.js"></script>
 <script>
 (function () {
@@ -106,7 +107,7 @@
   }
   function swIt() { return '<label class="av-sw"><input type="checkbox" data-it' + (conIt ? ' checked' : '') + '/> Mostra l\'italiano</label>'; }
   function frase(t, it, extra) {
-    return '<div class="av-f' + (extra || '') + '"><div>' + (extra && extra.indexOf('no') >= 0 ? '<span class="av-et">Così no</span>' : extra && extra.indexOf('si') >= 0 ? '<span class="av-et">Così sì</span>' : '') +
+    return '<div class="av-f' + (extra || '') + '"' + (window.REVISIONE ? REVISIONE.attr('av|' + it, lingua, t) : '') + '><div>' + (extra && extra.indexOf('no') >= 0 ? '<span class="av-et">Così no</span>' : extra && extra.indexOf('si') >= 0 ? '<span class="av-et">Così sì</span>' : '') +
       '<p lang="' + lingua + '">' + esc(t) + '</p><p class="it">' + esc(it) + '</p></div>' + L.play(t, lingua) + '</div>';
   }
   function situazioni() { return A.SITUAZIONI.filter(function (s) { return ambito === 'tutti' || s.ambito === ambito; }); }
@@ -136,7 +137,7 @@
       chips(A.ASCOLTI.map(function (x) { return [x.id, x.icona, x.titolo]; }), 'data-asc', ascoltoId) +
       '<div class="av-riga" style="margin-top:1rem">' + (L.parla ? '<button type="button" class="lg-btn pieno" data-az="ascolta">▶ Ascolta</button><button type="button" class="lg-btn" data-az="lento">🐢 Più lento</button>' : '') +
       '<button type="button" class="lg-btn" data-az="testo">📄 Mostra il testo</button></div>' +
-      '<div id="av-testo" hidden><div class="av-testo" lang="' + lingua + '">' + esc(a.testi[lingua]) + '</div><div class="av-testo it">' + esc(a.testi.it) + '</div></div>' +
+      '<div id="av-testo" hidden><div class="av-testo" lang="' + lingua + '"' + (window.REVISIONE ? REVISIONE.attr('av-ascolto|' + a.id, lingua, a.testi[lingua]) : '') + '>' + esc(a.testi[lingua]) + '</div><div class="av-testo it">' + esc(a.testi.it) + '</div></div>' +
       a.domande.map(function (d, i) {
         return '<div class="av-dom"><p>' + (i + 1) + '. ' + esc(d[0]) + '</p><div class="av-opz">' + d[1].map(function (o, j) { return '<button type="button" data-dom="' + i + '" data-r="' + j + '">' + esc(o) + '</button>'; }).join('') + '</div></div>';
       }).join('') + '<p class="av-esito" id="av-esito"></p>';
@@ -205,7 +206,7 @@
       '<div class="av-riga" style="margin-top:1rem">' + chips([['leggi', '📖', 'Leggi il modello'], ['ordina', '🧩', 'Rimetti in ordine']], 'data-modo', modoEmail) + '</div>';
     if (modoEmail === 'leggi') {
       h += '<div class="av-riga">' + swIt() + '</div><div class="av-ord ' + (conIt ? '' : 'senza-it') + '" id="av-lista">' + p.map(function (t, i) {
-        return '<div class="av-par"><div><p lang="' + lingua + '" style="margin:0;white-space:pre-line">' + esc(t) + '</p><p class="it" style="margin:.25rem 0 0;font-size:.82rem;color:var(--txt2);font-style:italic;white-space:pre-line">' + esc(it[i]) + '</p></div>' + L.play(t, lingua) + '</div>';
+        return '<div class="av-par"' + (window.REVISIONE ? REVISIONE.attr('av-email|' + e.id + '|' + i, lingua, t) : '') + '><div><p lang="' + lingua + '" style="margin:0;white-space:pre-line">' + esc(t) + '</p><p class="it" style="margin:.25rem 0 0;font-size:.82rem;color:var(--txt2);font-style:italic;white-space:pre-line">' + esc(it[i]) + '</p></div>' + L.play(t, lingua) + '</div>';
       }).join('') + '</div>';
     } else {
       var mezzo = [1, 2, 3, 4];

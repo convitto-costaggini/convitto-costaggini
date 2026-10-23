@@ -54,11 +54,15 @@ Il file in chiaro non va mai committato.
 Cambiare il codice non toglie l'accesso a chi lo conosceva già e ha salvato la chiave: per questo serve ruotare anche la chiave
 (nuova riga in `lingue_chiave`, poi `decifra` e `cifra` di ogni pagina con la nuova chiave).
 
-## Le spunte dei docenti sul vocabolario (lingue/revisione.js)
+## Le spunte dei docenti sulle frasi (lingue/revisione.js)
 Nessuna revisione sistematica: un docente, mentre usa il vocabolario, se una frase gli passa sotto gli occhi può toccare
 **✔** (va bene) o **✏️** (la scriverei così, con una nota facoltativa). Gli studenti non vedono niente.
 - Si entra dal link discreto in fondo al vocabolario («Sei un docente?…») con la mail della scuola: è lo stesso accesso
   della Sala studio (funzione `studio-genera`), vale 60 giorni sul dispositivo. «Nascondi le spunte» le toglie.
+- Pagine: vocabolario, dialoghi (ogni battuta), imprevisti (la frase del cliente e la risposta migliore), livello
+  avanzato (frasi, testi da ascoltare, e-mail) e lezioni guidate (gli esempi delle schede). Una pagina partecipa se
+  carica `lingue/revisione.js` e mette `REVISIONE.attr(chiave, lingua, testo)` sull'elemento della frase: le spunte
+  e il link in fondo arrivano da soli.
 - Le spunte stanno nella tabella `lingue_revisioni` (chiave = sezione|frase italiana, lingua, docente). I docenti
   vedono i nomi di chi ha già spuntato e i suggerimenti degli altri; le mail non escono dalla funzione.
 - Le correzioni NON cambiano da sole il sito: chi cura il vocabolario le legge e le applica in `lingue/parole.js`.

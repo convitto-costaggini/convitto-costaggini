@@ -176,6 +176,7 @@
 <script src="nav.min.js"></script>
 <script src="lingue/lingue.js"></script>
 <script src="lingue/finestra.js"></script>
+<script src="lingue/revisione.js"></script>
 <script src="lingue/qrcode.js"></script>
 <script src="lingue/pacchetto.js"></script>
 <script src="lingue/lezioni-dati.js"></script>
@@ -281,7 +282,7 @@
       '<div class="lz-nav">' + (schedaN > 0 ? '<button type="button" class="lg-btn" data-sch="-1">← Indietro</button>' : '') + (ultima ? '<button type="button" class="lg-btn oro" data-tab="esercizi">Ora allenati →</button>' : '<button type="button" class="lg-btn pieno" data-sch="1">Avanti →</button>') + '</div></div>');
   }
   function esempio(e) {
-    return '<div class="lz-es"><div><span class="fr" lang="' + lin + '">' + esc(e[0]) + '</span>' + '<span class="it">' + esc(e[1]) + '</span></div>' + L.play(e[0], lin, 'Ascolta') + '</div>';
+    return '<div class="lz-es"' + (window.REVISIONE ? REVISIONE.attr('lz|' + e[1], lin, e[0]) : '') + '><div><span class="fr" lang="' + lin + '">' + esc(e[0]) + '</span>' + '<span class="it">' + esc(e[1]) + '</span></div>' + L.play(e[0], lin, 'Ascolta') + '</div>';
   }
   function rispondiLampo(b) {
     var s = D().schede[schedaN], giusta = b.dataset.lampo === s.domanda.o[0];

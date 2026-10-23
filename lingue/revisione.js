@@ -37,12 +37,13 @@ window.REVISIONE = (function () {
   }
   function di(k, l) { return (dati || []).filter(function (x) { return x.chiave === k && x.lingua === l; }); }
 
-  function decora(radice) {
-    ultima = radice;
+  /* soloNuove: aggiunge le spunte solo dove mancano (lo usa l'osservatore, che le mette da sé quando la pagina cambia) */
+  function decora(radice, soloNuove) {
+    radice = radice || document.body; ultima = document.body;
     if (!attiva()) return;
-    if (!dati) { prendi().then(function () { if (ultima) decora(ultima); }); return; }
+    if (!dati) { prendi().then(function () { decora(document.body); }); return; }
     radice.querySelectorAll('[data-rv-k]').forEach(function (el) {
-      var vecchio = el.querySelector(':scope > .rv-spunte'); if (vecchio) vecchio.remove();
+      var vecchio = el.querySelector(':scope > .rv-spunte'); if (vecchio) { if (soloNuove) return; vecchio.remove(); }
       var k = el.getAttribute('data-rv-k'), l = el.getAttribute('data-rv-l'), tutte = di(k, l);
       var mia = tutte.filter(function (x) { return x.mia; })[0], ok = tutte.filter(function (x) { return x.stato === 'ok'; }), prop = tutte.filter(function (x) { return x.stato === 'proposta'; });
       var box = document.createElement('div'); box.className = 'rv-spunte';
@@ -140,5 +141,23 @@ window.REVISIONE = (function () {
     el.querySelector('[data-rv-c]').addEventListener('input', function () { if (this.value.replace(/\D/g, '').length === 6) verifica(); });
     el.querySelector('[data-rv-m]').focus();
   }
-  return { porta: porta, decora: decora };
+  /* gli attributi da mettere sull'elemento che contiene una frase: chiave stabile, lingua, testo mostrato */
+  function attr(k, l, t) { return ' data-rv-k="' + esc(k) + '" data-rv-l="' + esc(l) + '" data-rv-t="' + esc(t) + '"'; }
+
+  /* da sé: quando la pagina mostra frasi nuove (cambio di scena, di lingua, di passo) arrivano anche le spunte;
+     e in fondo alla pagina compare il link per i docenti, se la pagina non l'ha già messo */
+  if (window.MutationObserver) new MutationObserver(function (m) {
+    if (!attiva()) return;
+    for (var i = 0; i < m.length; i++) for (var j = 0; j < m[i].addedNodes.length; j++) {
+      var n = m[i].addedNodes[j];
+      if (n.nodeType === 1 && (n.hasAttribute('data-rv-k') || n.querySelector('[data-rv-k]'))) return decora(document.body, true);
+    }
+  }).observe(document.documentElement, { childList: true, subtree: true });
+  function avvio() {
+    if (!barra) { var d = document.getElementById('rv-porta'); if (!d) { d = document.createElement('div'); d.id = 'rv-porta'; d.className = 'w'; (document.querySelector('main') || document.body).appendChild(d); } porta(d); }
+    decora(document.body, true);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', avvio); else setTimeout(avvio, 0);
+
+  return { porta: porta, decora: decora, attr: attr };
 })();

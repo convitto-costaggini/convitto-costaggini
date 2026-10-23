@@ -40,7 +40,7 @@ const SOGLIA_PUNTEGGIO = 0.5;
 const AZIONE_ATTESA = "richiesta_accesso";
 const RECAPTCHA_PROJECT_ID = "convitto-costagg-1786033824350";
 const RECAPTCHA_SITE_KEY = "6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO";
-const INFORMATIVA_AREA = "area-famiglie-2026-10-09";
+const INFORMATIVA_AREA = "area-famiglie-2026-10-24";
 
 async function verificaRecaptcha(token: string): Promise<boolean> {
   const apiKey = Deno.env.get("RECAPTCHA_API_KEY");

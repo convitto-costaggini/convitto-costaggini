@@ -6,7 +6,7 @@
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Modifica una lezione – Sala studio | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Per gli educatori: correggere, condividere o cancellare una lezione della Sala studio."/>
+  <meta name="description" content="Per docenti ed educatori: correggere, condividere o cancellare una lezione della Sala studio."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -37,7 +37,7 @@
   </style>
 </head>
 <body data-page="studio">
-<div class="st-anteprima">Sala studio del Convitto · area educatori</div>
+<div class="st-anteprima">Sala studio del Convitto · area docenti ed educatori</div>
 <script src="nav-header.min.js"></script>
 <main id="main" class="st dc">
   <section class="st-hero">
@@ -49,13 +49,7 @@
   </section>
 
   <div class="st-palco">
-    <div id="md-gate" class="st-card dc-gate" hidden>
-      <div class="dc-passo"><b>🔑</b><h2>Codice educatori</h2></div>
-      <p class="st-sot">Per modificare una lezione serve il codice con cui l'hai pubblicata.</p>
-      <input type="password" id="md-cod" autocomplete="off" placeholder="Il tuo codice educatori"/>
-      <div class="st-azioni"><button type="button" class="st-btn pieno" id="md-entra">Entra</button></div>
-      <p class="dc-err" id="md-err-gate" role="alert"></p>
-    </div>
+    <div id="md-gate" class="st-card"></div>
 
     <div id="md-app" hidden>
       <div class="st-card md-sola" id="md-sola" hidden>
@@ -73,7 +67,7 @@
           <div><label for="md-cla">Classe (facoltativa)</label><input type="text" id="md-cla" maxlength="40"/></div>
           <div><label for="md-aut">Autore (facoltativo)</label><input type="text" id="md-aut" maxlength="80"/></div>
         </div>
-        <label class="dc-spunta" for="md-cond"><input type="checkbox" id="md-cond"/><span><b>🌐 Condivisa nell'Archivio degli educatori</b><small>Se la togli, la lezione resta raggiungibile dal suo QR ma sparisce dall'Archivio dei colleghi.</small></span></label>
+        <label class="dc-spunta" for="md-cond"><input type="checkbox" id="md-cond"/><span><b>🌐 Condivisa nell'Archivio della Sala studio</b><small>Se la togli, la lezione resta raggiungibile dal suo QR ma sparisce dall'Archivio dei colleghi.</small></span></label>
         <div class="st-azioni"><a class="st-btn" id="md-apri" target="_blank" rel="noopener">👀 Apri la lezione</a><button type="button" class="st-btn" id="md-qr">🖥️ QR a tutto schermo</button><span class="st-nota" id="md-codice"></span></div>
       </div>
 
@@ -243,17 +237,17 @@
   }
 
   /* ───── caricamento ───── */
-  function errore(t) { $('md-gate').hidden = true; $('md-app').hidden = true; $('md-tit').textContent = 'Lezione non disponibile'; $('md-sot').textContent = t; }
+  function errore(t) { $('md-app').hidden = true; $('md-tit').textContent = 'Lezione non disponibile'; $('md-sot').textContent = t; }
   function carica() {
     if (!/^[A-Z2-9]{6}$/.test(codice)) return errore('Il link è incompleto: apri la modifica dall\'elenco "Le mie lezioni".');
-    if (!E.codice()) { $('md-gate').hidden = false; $('md-cod').focus(); return; }
+    if (!E.entrato()) { $('md-app').hidden = true; return; }
     E.chiama({ leggi: codice }).then(function (r) {
       if (!r.ok) {
-        if (r.errore === 'codice') { $('md-gate').hidden = false; $('md-err-gate').textContent = r.messaggioErrore; return; }
+        if (['codice', 'sessione', 'accesso'].indexOf(r.errore) >= 0) { aggiornaAccesso(r.messaggioErrore); $('md-app').hidden = true; return; }
         return errore(r.messaggioErrore);
       }
       var x = r.lezione; L = x.contenuto; mia = !!x.mia;
-      $('md-gate').hidden = true; $('md-app').hidden = false; $('md-sola').hidden = mia;
+      $('md-app').hidden = false; $('md-sola').hidden = mia;
       $('md-elimina-box').hidden = !mia; $('md-ia-box').hidden = !mia;
       $('md-tit').innerHTML = '<span class="ic" aria-hidden="true">' + esc(L.icona || '✏️') + '</span>' + esc(L.titolo);
       $('md-sot').textContent = mia ? 'Le modifiche valgono subito per tutti quando salvi: codice e QR non cambiano.' : 'Lezione condivisa da un collega: puoi consultarla, non modificarla.';
@@ -268,11 +262,7 @@
       disegnaForm();
     });
   }
-  $('md-entra').onclick = function () {
-    var c = $('md-cod').value.trim(); if (!c) return $('md-cod').focus();
-    E.codice(c); $('md-err-gate').textContent = ''; carica();
-  };
-  $('md-cod').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('md-entra').click(); });
+  var aggiornaAccesso = E.accesso($('md-gate'), function () { carica(); });
 
   /* ───── salva, QR, IA, cancella ───── */
   $('md-salva').onclick = function () {

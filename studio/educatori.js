@@ -1,8 +1,9 @@
 /* ════════════════════════════════════════════════════════
    SALA STUDIO — parti comuni alle pagine degli educatori
    (docente.html, modifica.html, archivio.html)
-   EDUCATORI.chiama({...})      → Promise della risposta della funzione studio-genera
-   EDUCATORI.codice() / .codice(valore)  il codice educatori ricordato nel browser
+   EDUCATORI.accesso(elemento, alCambio)  il pannello per entrare con la mail istituzionale (o il codice di scorta)
+   EDUCATORI.entrato() → {email, nome} oppure {scorta:true} oppure null
+   EDUCATORI.chiama({...})      → Promise della risposta della funzione studio-genera (con l'accesso di chi è entrato)
    EDUCATORI.AREE, .ANNI, .riempiMaterie(select), .riempiAnni(select), .annoDaClasse(classe)
    EDUCATORI.istruzioni({...}) / .correzione(lezione, richiesta)  testi da dare all'IA
    EDUCATORI.leggi(testo)       → la lezione contenuta in una risposta dell'IA, o null
@@ -39,10 +40,21 @@ window.EDUCATORI = (function () {
 
   function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
   function codice(v) { if (v === undefined) return ls('studio-codice') || ''; ls('studio-codice', String(v).trim()); }
+  /* l'accesso con la mail resta valido sul dispositivo per 60 giorni (la funzione ne controlla la firma) */
+  function sessione(v) {
+    if (v === null) { try { localStorage.removeItem('studio-sessione'); } catch (e) {} return null; }
+    if (v) return ls('studio-sessione', JSON.stringify(v));
+    try { var o = JSON.parse(ls('studio-sessione') || 'null'); return o && o.t && o.scade > Date.now() ? o : null; } catch (e) { return null; }
+  }
+  function entrato() { var s = sessione(); return s ? { email: s.email, nome: s.nome } : codice() ? { scorta: true } : null; }
   function autore(v) { if (v === undefined) return ls('studio-autore') || ''; ls('studio-autore', String(v).trim()); }
 
   var ERRORI = {
-    codice: 'Il codice educatori non è giusto.', configurazione: 'Il servizio non è ancora attivato: manca il codice educatori su Supabase (STUDIO_CODICI).',
+    codice: 'Il codice di scorta non è giusto.', configurazione: 'Il servizio non è ancora configurato su Supabase.',
+    accesso: 'Prima entra con la tua mail istituzionale (riquadro "Accesso").', sessione: 'L\'accesso è scaduto: entra di nuovo con la tua mail.',
+    email: 'Serve una mail della scuola: @alberghierorieti.it o @alberghierorieti.edu.it.', otp: 'Codice sbagliato o scaduto: controlla la mail o richiedine un altro.',
+    'troppo-presto': 'Aspetta mezzo minuto prima di chiedere un altro codice.', troppi: 'Hai chiesto troppi codici: riprova tra un\'ora.',
+    posta: 'In questo momento non riesco a spedire la mail. Se hai il codice di scorta, usa quello.',
     automatica: 'La creazione automatica non è attivata (serve la chiave API, a consumo). Usate i passi 1-2-3 con Claude, ChatGPT o Gemini.',
     lezione: 'La lezione non è completa: servono almeno il titolo e un\'idea chiave.',
     foto: 'Aggiungete almeno una foto oppure scrivete l\'argomento (passo 1). Se le foto ci sono, riprovate con foto più piccole o in JPEG.',
@@ -52,11 +64,76 @@ window.EDUCATORI = (function () {
     rete: 'Connessione assente o servizio non raggiungibile: riprova.'
   };
   function chiama(dati) {
-    dati.codice_docente = dati.codice_docente || codice();
+    var s = sessione();
+    if (!dati.azione) { if (s) dati.sessione = s.t; else if (codice()) dati.codice_docente = codice(); }
     return fetch(FUNZIONE, { method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUB }, body: JSON.stringify(dati) })
       .then(function (r) { return r.json().catch(function () { return { ok: false, errore: r.status === 404 ? 'configurazione' : 'server' }; }); })
       .catch(function () { return { ok: false, errore: 'rete' }; })
-      .then(function (r) { if (r && !r.ok) r.messaggioErrore = ERRORI[r.errore] || ERRORI.server; return r; });
+      .then(function (r) {
+        if (r && !r.ok) { r.messaggioErrore = ERRORI[r.errore] || ERRORI.server; if (r.errore === 'sessione') sessione(null); if (r.errore === 'codice') codice(''); }
+        return r;
+      });
+  }
+
+  /* ───── il pannello di accesso: mail istituzionale → codice per posta → dentro ───── */
+  function accesso(box, alCambio) {
+    var mail = '';
+    function fatto() { disegna(); if (alCambio) alCambio(entrato()); }
+    function disegna(messaggio) {
+      var chi = entrato();
+      if (chi) {
+        box.innerHTML = '<div class="dc-chi"><span>👤 ' + (chi.scorta ? 'Sei entrato con il <b>codice di scorta</b>' : 'Sei entrato come <b>' + esc(chi.nome) + '</b> <small>' + esc(chi.email) + '</small>') +
+          '</span><button type="button" class="st-btn" data-esci>Esci</button></div>';
+        box.querySelector('[data-esci]').onclick = function () { sessione(null); codice(''); fatto(); };
+        return;
+      }
+      box.innerHTML = '<div class="dc-passo"><b>🔑</b><h2>Accesso docenti ed educatori</h2></div>' +
+        '<p class="st-sot">Entra con la tua mail della scuola: ti mandiamo un codice di 6 cifre. Il dispositivo resta riconosciuto per 60 giorni.</p>' +
+        '<div data-fase="mail"><label for="ac-mail">La tua mail istituzionale</label><input type="email" id="ac-mail" autocomplete="email" placeholder="nome.cognome@alberghierorieti.it" value="' + esc(mail) + '"/>' +
+        '<div class="st-azioni"><button type="button" class="st-btn pieno" data-manda>📧 Mandami il codice</button></div></div>' +
+        '<div data-fase="otp" hidden><p class="st-nota" style="margin:.6rem 0 0">📬 Codice spedito a <b data-a></b>. Controlla anche la posta indesiderata.</p>' +
+        '<label for="ac-otp">Codice ricevuto</label><input type="text" id="ac-otp" inputmode="numeric" autocomplete="one-time-code" maxlength="7" placeholder="123456"/>' +
+        '<div class="st-azioni"><button type="button" class="st-btn pieno" data-entra>Entra</button><button type="button" class="st-btn" data-cambia>Cambia mail o rimanda</button></div></div>' +
+        '<p class="dc-err" data-err role="alert"></p>' +
+        '<details style="margin-top:.6rem"><summary>Hai il codice di scorta?</summary><label for="ac-scorta">Codice di scorta</label><input type="password" id="ac-scorta" autocomplete="off"/>' +
+        '<div class="st-azioni"><button type="button" class="st-btn" data-scorta>Entra con il codice</button></div></details>';
+      var err = box.querySelector('[data-err]'), q = function (s) { return box.querySelector(s); };
+      if (messaggio) err.textContent = messaggio;
+      function errore(r) { err.textContent = r.messaggioErrore || ERRORI.server; }
+      function manda() {
+        mail = q('#ac-mail').value.trim().toLowerCase(); err.textContent = '';
+        if (!/^[^\s@]+@alberghierorieti\.(edu\.)?it$/.test(mail)) { err.textContent = ERRORI.email; return; }
+        var b = q('[data-manda]'); b.disabled = true; b.textContent = '⏳ Spedisco…';
+        chiama({ azione: 'richiedi', email: mail }).then(function (r) {
+          b.disabled = false; b.textContent = '📧 Mandami il codice';
+          if (!r.ok) return errore(r);
+          q('[data-fase="mail"]').hidden = true; q('[data-fase="otp"]').hidden = false; q('[data-a]').textContent = mail; q('#ac-otp').focus();
+        });
+      }
+      function entra() {
+        err.textContent = '';
+        var b = q('[data-entra]'); b.disabled = true;
+        chiama({ azione: 'verifica', email: mail, codice: q('#ac-otp').value }).then(function (r) {
+          b.disabled = false;
+          if (!r.ok) return errore(r);
+          sessione({ t: r.sessione, email: r.email, nome: r.nome, scade: Date.now() + 59 * 24 * 3600 * 1000 }); codice('');
+          if (!autore()) autore(r.nome);
+          window.STUDIO.toast('Benvenuto/a, ' + r.nome + ' 👋'); fatto();
+        });
+      }
+      q('[data-manda]').onclick = manda;
+      q('#ac-mail').addEventListener('keydown', function (e) { if (e.key === 'Enter') manda(); });
+      q('[data-entra]').onclick = entra;
+      q('#ac-otp').addEventListener('keydown', function (e) { if (e.key === 'Enter') entra(); });
+      q('[data-cambia]').onclick = function () { q('[data-fase="otp"]').hidden = true; q('[data-fase="mail"]').hidden = false; q('#ac-mail').focus(); };
+      q('[data-scorta]').onclick = function () {
+        var c = q('#ac-scorta').value.trim(); if (!c) return q('#ac-scorta').focus();
+        err.textContent = '';
+        chiama({ codice_docente: c, prova: true }).then(function (r) { if (!r.ok) return errore(r); codice(c); fatto(); });
+      };
+    }
+    disegna();
+    return disegna;
   }
 
   function riempiMaterie(sel, valore) {
@@ -172,7 +249,7 @@ window.EDUCATORI = (function () {
   function data(d) { var m = String(d || '').match(/^(\d{4})-(\d\d)-(\d\d)/); return m ? m[3] + '/' + m[2] + '/' + m[1] : ''; }
 
   return {
-    AREE: AREE, ANNI: ANNI, ALTRA: ALTRA, ERRORI: ERRORI, chiama: chiama, codice: codice, autore: autore,
+    AREE: AREE, ANNI: ANNI, ALTRA: ALTRA, ERRORI: ERRORI, chiama: chiama, accesso: accesso, entrato: entrato, autore: autore,
     riempiMaterie: riempiMaterie, materiaScelta: materiaScelta, riempiAnni: riempiAnni, annoDaClasse: annoDaClasse, ordineMateria: ordineMateria,
     istruzioni: istruzioni, correzione: correzione, leggi: leggi, qr: qr, cartello: cartello, data: data
   };

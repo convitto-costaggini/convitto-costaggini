@@ -6,7 +6,7 @@
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Crea una lezione – Sala studio | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Per gli educatori: dalla foto di una pagina, di appunti o di una mappa concettuale, oppure dal solo titolo, una lezione interattiva con QR per i ragazzi."/>
+  <meta name="description" content="Per docenti ed educatori: dalla foto di una pagina, di appunti o di una mappa concettuale, oppure dal solo titolo, una lezione interattiva con QR per i ragazzi."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -15,12 +15,12 @@
   <script src="app.js" defer></script>
 </head>
 <body data-page="studio">
-<div class="st-anteprima">Sala studio del Convitto · area educatori</div>
+<div class="st-anteprima">Sala studio del Convitto · area docenti ed educatori</div>
 <script src="nav-header.min.js"></script>
 <main id="main" class="st dc">
   <section class="st-hero">
     <div class="w">
-      <p class="lbl">Per gli educatori</p>
+      <p class="lbl">Per docenti ed educatori</p>
       <h1><span class="ic" aria-hidden="true">📸</span>Dal libro alla lezione</h1>
       <p>Fotografa le pagine del libro, gli appunti o una mappa concettuale, oppure scrivi soltanto il titolo dell'argomento. Il tuo assistente di intelligenza artificiale (<b>Claude, ChatGPT o Gemini</b>, con l'account che usi già, nessun costo a consumo) prepara una lezione interattiva con idee chiave, mnemotecniche, esercizi e flashcard, con il QR per i ragazzi.</p>
       <div class="st-azioni"><a class="st-btn oro" href="studio/archivio.html">🗂️ Archivio delle lezioni condivise</a></div>
@@ -28,6 +28,7 @@
   </section>
 
   <div class="st-palco">
+    <div class="st-card" id="dc-accesso"></div>
     <div id="dc-modulo">
       <div class="st-card">
         <div class="dc-passo"><b>1</b><h2>Le istruzioni per l'IA</h2></div>
@@ -67,11 +68,8 @@
         <label for="dc-json">La risposta dell'IA</label>
         <textarea id="dc-json" style="min-height:120px;font-family:monospace;font-size:.82rem" placeholder='{"titolo": "...", ...}'></textarea>
         <div class="st-azioni" style="margin-top:.5rem"><button type="button" class="st-btn" id="dc-incolla">📋 Incolla</button><span class="st-nota" id="dc-letto"></span></div>
-        <div class="dc-due">
-          <div><label for="dc-cod">Codice educatori</label><input type="password" id="dc-cod" autocomplete="off" placeholder="Il tuo codice educatori"/></div>
-          <div><label for="dc-aut">Il tuo nome (facoltativo)</label><input type="text" id="dc-aut" maxlength="80" autocomplete="name"/></div>
-        </div>
-        <label class="dc-spunta" for="dc-cond"><input type="checkbox" id="dc-cond"/><span><b>🌐 Condividi nell'Archivio degli educatori</b><small>I colleghi la troveranno nell'Archivio, per anno e materia, e potranno usarla con i loro ragazzi. Solo tu potrai modificarla o cancellarla. Puoi cambiare idea quando vuoi da "Modifica".</small></span></label>
+        <label for="dc-aut">Autore (come comparirà nell'Archivio)</label><input type="text" id="dc-aut" maxlength="80" autocomplete="name"/>
+        <label class="dc-spunta" for="dc-cond"><input type="checkbox" id="dc-cond"/><span><b>🌐 Condividi nell'Archivio della Sala studio</b><small>Docenti ed educatori la troveranno nell'Archivio, per anno e materia, e potranno usarla con i loro ragazzi. Solo tu potrai modificarla o cancellarla. Puoi cambiare idea quando vuoi da "Modifica".</small></span></label>
         <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-manuale">✨ Pubblica la lezione</button></div>
         <p class="dc-err" id="dc-err2" role="alert"></p>
       </div>
@@ -79,7 +77,7 @@
       <div class="st-card">
         <details>
           <summary>📸 Creazione automatica (solo se attivata: a consumo)</summary>
-          <p class="st-nota">Il sito manda le foto, o il solo argomento, direttamente all'IA, senza passare da Claude, ChatGPT o Gemini. Funziona solo se su Supabase è stata inserita una chiave API Anthropic, che si paga a consumo. Usa argomento, materia, anno e indicazioni (passo 1), codice educatori e condivisione (passo 3).</p>
+          <p class="st-nota">Il sito manda le foto, o il solo argomento, direttamente all'IA, senza passare da Claude, ChatGPT o Gemini. Funziona solo se su Supabase è stata inserita una chiave API Anthropic, che si paga a consumo. Usa argomento, materia, anno e indicazioni (passo 1), autore e condivisione (passo 3).</p>
           <div class="st-azioni">
             <label class="st-btn pieno">📷 Scatta una foto<input type="file" accept="image/*" capture="environment" id="dc-cam" hidden/></label>
             <label class="st-btn">🖼️ Scegli dalla galleria<input type="file" accept="image/*" multiple id="dc-gal" hidden/></label>
@@ -99,7 +97,7 @@
       <div class="dc-cerca"><input type="search" id="dc-cerca" placeholder="Cerca per titolo, materia, classe…" aria-label="Cerca fra le mie lezioni"/><button type="button" class="st-btn" id="dc-aggiorna">🔄 Mostra</button></div>
       <p class="st-nota" id="dc-elenco-stato" aria-live="polite"></p>
       <ul class="dc-mie" id="dc-mie"></ul>
-      <p class="st-nota" style="margin-top:.8rem">Qui trovi le lezioni pubblicate con il tuo codice educatori, da qualsiasi dispositivo. Quelle dei colleghi, se condivise, sono nell'<a href="studio/archivio.html">Archivio</a>.</p>
+      <p class="st-nota" style="margin-top:.8rem">Qui trovi le lezioni che hai pubblicato, da qualsiasi dispositivo su cui sei entrato. Quelle dei colleghi, se condivise, sono nell'<a href="studio/archivio.html">Archivio</a>.</p>
     </div>
   </div>
 </main>
@@ -117,8 +115,11 @@
   var MAX = 8, foto = [];
   var BASE = location.origin + '/studio/lezione.html';
 
-  $('dc-cod').value = E.codice();
   $('dc-aut').value = E.autore();
+  E.accesso($('dc-accesso'), function (chi) {
+    if (chi && chi.nome && !$('dc-aut').value) $('dc-aut').value = chi.nome;
+    lezioni = null; caricaElenco();
+  });
   E.riempiMaterie($('dc-mat'));
   E.riempiAnni($('dc-anno'));
   function materia() { return E.materiaScelta($('dc-mat'), $('dc-mat-altra')); }
@@ -126,9 +127,14 @@
   $('dc-cla').addEventListener('input', function () { var a = E.annoDaClasse(this.value); if (a && !$('dc-anno').value) $('dc-anno').value = a; });
   /* i dati comuni a ogni pubblicazione */
   function dati() {
-    var cod = $('dc-cod').value.trim();
-    E.codice(cod); E.autore($('dc-aut').value);
-    return { codice_docente: cod, materia: materia(), anno: +$('dc-anno').value || null, classe: $('dc-cla').value.trim(), autore: $('dc-aut').value.trim(), condivisa: $('dc-cond').checked };
+    E.autore($('dc-aut').value);
+    return { materia: materia(), anno: +$('dc-anno').value || null, classe: $('dc-cla').value.trim(), autore: $('dc-aut').value.trim(), condivisa: $('dc-cond').checked };
+  }
+  function nonEntrato(err) {
+    if (E.entrato()) return false;
+    err.textContent = E.ERRORI.accesso; $('dc-accesso').scrollIntoView({ behavior: 'smooth' });
+    var m = document.getElementById('ac-mail'); if (m) m.focus();
+    return true;
   }
 
   /* ───── foto: ridotte nel browser (lato lungo 1600 px) prima dell'invio ───── */
@@ -170,7 +176,7 @@
   $('dc-crea').onclick = function () {
     var d = dati();
     $('dc-err').textContent = '';
-    if (!d.codice_docente) { $('dc-err').textContent = 'Scrivi il codice educatori (al passo 3).'; $('dc-cod').focus(); return; }
+    if (nonEntrato($('dc-err'))) return;
     d.argomento = $('dc-arg').value.trim(); d.note = $('dc-note').value.trim();
     d.immagini = foto.map(function (f) { return { tipo: 'image/jpeg', dati: f.split(',')[1] }; });
     $('dc-modulo').hidden = true; $('dc-esito').hidden = true;
@@ -215,15 +221,15 @@
     el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  /* ───── le mie lezioni (con il codice educatori, da qualsiasi dispositivo) ───── */
+  /* ───── le mie lezioni (di chi è entrato, da qualsiasi dispositivo) ───── */
   var lezioni = null; /* null = elenco non ancora caricato */
   function caricaElenco() {
-    var cod = $('dc-cod').value.trim(), st = $('dc-elenco-stato');
-    if (!cod) { st.textContent = 'Scrivi il tuo codice educatori (al passo 3) e premi Mostra.'; return; }
+    var st = $('dc-elenco-stato');
+    if (!E.entrato()) { st.textContent = 'Entra con la tua mail (riquadro "Accesso" in alto) per vedere le tue lezioni.'; $('dc-mie').innerHTML = ''; return; }
     st.textContent = 'Carico l\'elenco…';
-    E.chiama({ codice_docente: cod, mie: true }).then(function (r) {
+    E.chiama({ mie: true }).then(function (r) {
       if (!r.ok) { st.textContent = r.messaggioErrore; return; }
-      E.codice(cod); lezioni = r.lezioni || []; disegnaMie();
+      lezioni = r.lezioni || []; disegnaMie();
     });
   }
   function disegnaMie() {
@@ -267,7 +273,7 @@
     e2.textContent = '';
     if (!$('dc-json').value.trim()) { e2.textContent = 'Incolla prima la risposta dell\'IA.'; return; }
     if (!L) { e2.textContent = 'Il testo incollato non è una lezione completa: copiate tutta la risposta dell\'IA, dalla prima { all\'ultima }. Se la risposta si è interrotta, scrivete «continua» oppure rifate la richiesta.'; return; }
-    if (!d.codice_docente) { e2.textContent = 'Scrivi il codice educatori.'; $('dc-cod').focus(); return; }
+    if (nonEntrato(e2)) return;
     if (d.condivisa && (!d.materia || !d.anno)) { e2.textContent = 'Per condividerla nell\'Archivio scegli materia e anno di corso (passo 1).'; $('dc-mat').focus(); return; }
     d.lezione = L;
     btn.disabled = true; btn.textContent = '⏳ Pubblico…';
@@ -280,7 +286,7 @@
         return;
       }
       e2.innerHTML = esc(r.messaggioErrore) +
-        (r.errore === 'codice' ? '' : ' <button type="button" class="st-btn" id="dc-solo-link" style="margin-top:.5rem">🔗 Crea solo il link (senza codice breve)</button>');
+        (['rete', 'server', 'configurazione', 'troppe'].indexOf(r.errore) < 0 ? '' : ' <button type="button" class="st-btn" id="dc-solo-link" style="margin-top:.5rem">🔗 Crea solo il link (senza codice breve)</button>');
       var sl = $('dc-solo-link');
       if (sl) sl.onclick = function () { window.PACCHETTO.codifica(L).then(function (p) { $('dc-modulo').hidden = true; esito(L, '', BASE + '#l=' + p); }); };
     });

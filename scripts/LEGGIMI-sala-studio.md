@@ -17,28 +17,41 @@
 1. In `studio/docente.html` l'educatore scrive l'argomento e (se vuole) materia, anno, classe e indicazioni, e preme **Copia le istruzioni**.
 2. Apre Claude, ChatGPT o Gemini (versione gratuita o in abbonamento), allega le foto (pagine del libro, appunti o una mappa
    concettuale) oppure nessuna foto, incolla le istruzioni e invia. Senza foto la lezione nasce dall'argomento.
-3. Copia tutta la risposta dell'IA, la incolla nel passo 3, scrive il codice educatori, sceglie se **condividerla nell'Archivio**
+3. Copia tutta la risposta dell'IA, la incolla nel passo 3 (dopo essere entrato con la mail), sceglie se **condividerla nell'Archivio**
    e preme **Pubblica la lezione**: compaiono il codice e il QR.
 
 Se il servizio non risponde, lo stesso passo 3 offre **Crea solo il link**: la lezione viaggia dentro il link (troppo lungo per un QR).
 
+## Accesso di docenti ed educatori
+- Si entra con la **mail istituzionale** (`@alberghierorieti.it` o `@alberghierorieti.edu.it`): chi la scrive riceve per posta
+  un codice di 6 cifre (vale 10 minuti, si usa una volta, 5 tentativi, 5 invii all'ora). Nessun elenco da tenere aggiornato:
+  entra chiunque abbia una mail della scuola. Del codice il database conserva solo l'impronta (tabella `studio_otp`).
+- Dopo l'accesso il dispositivo resta riconosciuto per **60 giorni** con un lasciapassare firmato dalla funzione
+  (la chiave deriva da `SUPABASE_SERVICE_ROLE_KEY`). Sui computer condivisi, a fine lavoro: **Esci**.
+- La mail parte dallo stesso script di Lingue (`scripts/lingue-invio-codici.gs`, segreti `GAS_URL` e `GAS_TOKEN`).
+  Lo script riconosce il campo `servizio: "studio"` e scrive "Sala studio del Convitto": dopo averlo aggiornato
+  va pubblicata una **nuova versione** della stessa distribuzione (l'URL non cambia). Finché non lo si aggiorna, le mail
+  arrivano lo stesso ma con l'intestazione di Lingue.
+- **Codice di scorta**: `STUDIO_CODICI` resta valido, come il codice del Dipartimento di Lingue, per quando la posta non arriva.
+  Le lezioni pubblicate con il codice di scorta non sono di nessuno in particolare: le può modificare chiunque sia entrato,
+  e diventano di chi le modifica per primo.
+
 ## Autori, modifica, condivisione
-- L'**autore** di una lezione è chi l'ha pubblicata: il database conserva solo l'impronta (sha256) del suo codice educatori.
-  Per questo conviene che **ogni educatore abbia il proprio codice** in `STUDIO_CODICI` (separati da virgola):
-  con un codice unico per tutti, tutti sono "autori" di tutto.
+- L'**autore** di una lezione è la persona che l'ha pubblicata (il database conserva solo l'impronta della sua mail);
+  il nome dell'autore si compila da solo dalla mail (mario.rossi@… → Mario Rossi) e si può cambiare.
 - **Modifica** (`studio/modifica.html?c=CODICE`): editor a schede di ogni parte della lezione, oppure correzione con l'IA
   (si scrive cosa cambiare, si copia, si incolla la risposta). Codice e QR non cambiano.
 - **Cancella**: dalla pagina Modifica; il QR smette di funzionare.
-- **Condividi**: la lezione compare nell'Archivio di tutti gli educatori (servono materia e anno). Si può togliere quando si vuole.
-- Le lezioni pubblicate prima di questa funzione non hanno autore: le può modificare chiunque abbia un codice educatori,
-  e diventano di chi le modifica per primo.
+- **Condividi**: la lezione compare nell'Archivio di tutti i docenti ed educatori (servono materia e anno). Si può togliere quando si vuole.
+- Le lezioni pubblicate prima di queste funzioni non hanno autore: diventano di chi le modifica per primo.
 - Materie e anni seguono i quadri orari dell'istituto professionale "Enogastronomia e ospitalità alberghiera"
   (D.Lgs. 61/2017): biennio (1°-2°) e triennio (3°-5°), area generale e area di indirizzo (elenco in `studio/educatori.js`).
 
-## Da fare per attivarla
-- [x] Database e funzione `studio-genera` attivati su Supabase (21/10/2026); autori, condivisione e anno (23/10/2026).
-- [x] **Codice educatori**: segreto `STUDIO_CODICI` (Dashboard Supabase, Edge Functions, Secrets). Non va scritto in chat né nel repository.
-- [ ] Facoltativo ma consigliato: un codice diverso per ogni educatore.
+## Da fare
+- [x] Database e funzione `studio-genera` attivati su Supabase; autori, condivisione, anno e accesso con la mail (23/10/2026).
+- [ ] **Aggiornare lo script di posta**: script.google.com, progetto dello script di Lingue, incollare il nuovo
+      `scripts/lingue-invio-codici.gs`, poi Esegui il deployment → Gestisci deployment → modifica (matita) →
+      Versione: Nuova versione → Esegui il deployment. L'URL resta lo stesso.
 
 ## Facoltativo: creazione automatica (a consumo)
 Nella pagina c'è anche "Creazione automatica": il sito manda le foto, o il solo argomento, direttamente all'IA, senza passare da
@@ -46,7 +59,7 @@ Claude, ChatGPT o Gemini. Funziona solo aggiungendo il segreto `ANTHROPIC_API_KE
 a consumo: stima 10-30 centesimi a lezione). Senza chiave quel riquadro avvisa che non è attivo; tutto il resto funziona.
 
 ## Limiti e controlli
-- Solo chi conosce un codice di `STUDIO_CODICI` può pubblicare, vedere l'Archivio, modificare; al massimo 30 lezioni nuove all'ora in tutto.
+- Solo chi è entrato (mail della scuola o codice di scorta) può pubblicare, vedere l'Archivio, modificare; al massimo 30 lezioni nuove all'ora in tutto.
 - I ragazzi aprono una lezione solo dal codice: non possono elencarle. I progressi restano sul telefono del ragazzo.
 - Se si modifica `scripts/studio-genera/index.ts` la funzione va ripubblicata su Supabase.
 - Per togliere una lezione da SQL: `delete from public.studio_lezioni where codice = 'ABCDEF';`

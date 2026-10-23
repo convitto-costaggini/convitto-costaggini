@@ -6,7 +6,7 @@
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Archivio delle lezioni – Sala studio | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Per gli educatori: le lezioni interattive condivise dai colleghi, per anno di corso e materia."/>
+  <meta name="description" content="Per docenti ed educatori: le lezioni interattive condivise dai colleghi, per anno di corso e materia."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -28,26 +28,20 @@
   </style>
 </head>
 <body data-page="studio">
-<div class="st-anteprima">Sala studio del Convitto · area educatori</div>
+<div class="st-anteprima">Sala studio del Convitto · area docenti ed educatori</div>
 <script src="nav-header.min.js"></script>
 <main id="main" class="st dc">
   <section class="st-hero">
     <div class="w">
-      <p class="lbl">Per gli educatori</p>
+      <p class="lbl">Per docenti ed educatori</p>
       <h1><span class="ic" aria-hidden="true">🗂️</span>Archivio delle lezioni</h1>
-      <p>Le lezioni che i colleghi hanno scelto di condividere, ordinate per anno di corso e materia secondo i quadri orari dell'istituto professionale alberghiero: <b>biennio</b> (1° e 2° anno) e <b>triennio</b> (3°, 4° e 5° anno). Ognuna si usa subito con il suo QR.</p>
+      <p>Le lezioni che docenti ed educatori hanno scelto di condividere, ordinate per anno di corso e materia secondo i quadri orari dell'istituto professionale alberghiero: <b>biennio</b> (1° e 2° anno) e <b>triennio</b> (3°, 4° e 5° anno). Ognuna si usa subito con il suo QR.</p>
       <div class="st-azioni"><a class="st-btn oro" href="studio/docente.html">➕ Crea una lezione</a></div>
     </div>
   </section>
 
   <div class="st-palco">
-    <div id="ar-gate" class="st-card dc-gate" hidden>
-      <div class="dc-passo"><b>🔑</b><h2>Codice educatori</h2></div>
-      <p class="st-sot">L'Archivio è riservato agli educatori.</p>
-      <input type="password" id="ar-cod" autocomplete="off" placeholder="Il tuo codice educatori"/>
-      <div class="st-azioni"><button type="button" class="st-btn pieno" id="ar-entra">Entra</button></div>
-      <p class="dc-err" id="ar-err" role="alert"></p>
-    </div>
+    <div id="ar-gate" class="st-card"></div>
 
     <div id="ar-app" hidden>
       <div class="st-card ar-filtri">
@@ -108,7 +102,7 @@
     });
     $('ar-stato').textContent = tutte.length ? (m.length === tutte.length ? '' : m.length + ' di ') + tutte.length + (tutte.length === 1 ? ' lezione condivisa' : ' lezioni condivise') : '';
     if (!tutte.length) {
-      $('ar-elenco').innerHTML = '<div class="st-card ar-vuoto"><div class="e">🗂️</div><p>L\'Archivio è ancora vuoto.</p><p class="st-nota">Quando pubblichi una lezione, spunta <b>«Condividi nell\'Archivio degli educatori»</b>. Per quelle già pubblicate: <b>✏️ Modifica</b> e spunta la condivisione.</p><div class="st-azioni" style="justify-content:center"><a class="st-btn pieno" href="studio/docente.html">Le mie lezioni</a></div></div>';
+      $('ar-elenco').innerHTML = '<div class="st-card ar-vuoto"><div class="e">🗂️</div><p>L\'Archivio è ancora vuoto.</p><p class="st-nota">Quando pubblichi una lezione, spunta <b>«Condividi nell\'Archivio della Sala studio»</b>. Per quelle già pubblicate: <b>✏️ Modifica</b> e spunta la condivisione.</p><div class="st-azioni" style="justify-content:center"><a class="st-btn pieno" href="studio/docente.html">Le mie lezioni</a></div></div>';
       return;
     }
     if (!m.length) { $('ar-elenco').innerHTML = '<div class="st-card ar-vuoto"><p>Nessuna lezione con questi filtri.</p></div>'; return; }
@@ -133,11 +127,11 @@
     }).join('');
   }
   function carica() {
-    if (!E.codice()) { $('ar-gate').hidden = false; $('ar-cod').focus(); return; }
+    if (!E.entrato()) { $('ar-app').hidden = true; return; }
     $('ar-stato').textContent = 'Carico l\'Archivio…';
     E.chiama({ archivio: true }).then(function (r) {
-      if (!r.ok) { $('ar-app').hidden = true; $('ar-gate').hidden = false; $('ar-err').textContent = r.messaggioErrore; return; }
-      $('ar-gate').hidden = true; $('ar-app').hidden = false;
+      if (!r.ok) { $('ar-app').hidden = true; aggiornaAccesso(r.messaggioErrore); return; }
+      $('ar-app').hidden = false;
       tutte = r.lezioni || []; materie(); disegna();
     });
   }
@@ -150,8 +144,7 @@
     var x = tutte.filter(function (y) { return y.codice === b.getAttribute('data-qr'); })[0];
     E.cartello(BASE + x.codice, x, x.codice, false);
   });
-  $('ar-entra').onclick = function () { var c = $('ar-cod').value.trim(); if (!c) return $('ar-cod').focus(); E.codice(c); $('ar-err').textContent = ''; carica(); };
-  $('ar-cod').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('ar-entra').click(); });
+  var aggiornaAccesso = E.accesso($('ar-gate'), function () { carica(); });
   carica();
 })();
 </script>

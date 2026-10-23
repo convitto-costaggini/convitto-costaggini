@@ -221,5 +221,9 @@ mark.st-k{background:linear-gradient(transparent 55%,var(--oro3) 55%);color:inhe
 .dc-spunta b{display:block;color:var(--bosco)}
 .dc-spunta small{display:block;color:var(--txt2);font-size:.85em;line-height:1.5}
 .dc-gate{max-width:460px}
+.dc-chi{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.dc-chi span{flex:1;min-width:200px}
+.dc-chi small{display:block;color:var(--txt2);font-size:.82em}
+.dc input[type=email]{width:100%;font:inherit;font-size:1rem;padding:.7rem .85rem;border:2px solid var(--av3);border-radius:12px;background:#fff;color:var(--txt)}
 @media (prefers-reduced-motion:reduce){.st *{animation:none!important;transition:none!important}.st-lett{opacity:1;transform:none}}
 @media print{.st-barra,.st-mappa,.st-azioni,.st-leggi,header,footer,.st-anteprima{display:none!important}}

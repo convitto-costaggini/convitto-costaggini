@@ -149,7 +149,9 @@ function codiceSeiCifre() { const v = new Uint32Array(1); crypto.getRandomValues
 // una lezione incollata o corretta: solo i campi previsti, e almeno titolo e concetti
 function pulisci(l: any) {
   if (!l || typeof l !== "object" || Array.isArray(l) || JSON.stringify(l).length > MAX_LEZIONE) return null;
-  if (typeof l.titolo !== "string" || !l.titolo.trim() || !Array.isArray(l.concetti) || !l.concetti.length) return null;
+  // "..." è il segnaposto delle istruzioni: una lezione vera ha un titolo e almeno un'idea spiegata con parole
+  const pieno = (v: unknown) => typeof v === "string" && /[\p{L}\p{N}]/u.test(v);
+  if (!pieno(l.titolo) || !Array.isArray(l.concetti) || !l.concetti.some((c: any) => c && pieno(c.spiegazione))) return null;
   const p: any = {};
   for (const k of Object.keys(SCHEMA.properties)) if (k !== "problema" && l[k] !== undefined) p[k] = l[k];
   // le risposte del quiz devono puntare a un'opzione che esiste

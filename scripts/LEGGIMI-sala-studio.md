@@ -23,6 +23,11 @@
 Se il servizio non risponde, lo stesso passo 3 offre **Crea solo il link**: la lezione viaggia dentro il link (troppo lungo per un QR).
 
 ## Accesso di docenti ed educatori
+- A prova di malinteso: basta scrivere `nome.cognome` (il dominio si aggiunge da solo); se la chiave scade mentre si lavora
+  ricompare subito il riquadro per entrare, e quanto scritto resta lì; «Crea una lezione» ricorda i campi anche se il
+  telefono ricarica la pagina tornando dall'app dell'IA (`localStorage` `studio-bozza`, cancellata alla pubblicazione).
+- Se si incollano per sbaglio le istruzioni (o lo schema con i segnaposto `...`) al posto della risposta dell'IA, la pagina
+  lo dice e la funzione rifiuta la lezione. La creazione automatica si vede solo se è attiva (`ANTHROPIC_API_KEY`).
 - Si entra con la **mail istituzionale** (`@alberghierorieti.it` o `@alberghierorieti.edu.it`): chi la scrive riceve per posta
   un codice di 6 cifre (vale 10 minuti, si usa una volta, 5 tentativi, 5 invii all'ora). Nessun elenco da tenere aggiornato:
   entra chiunque abbia una mail della scuola. Del codice il database conserva solo l'impronta (tabella `studio_otp`).

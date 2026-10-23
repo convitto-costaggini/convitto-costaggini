@@ -22,7 +22,13 @@
     <div class="w">
       <p class="lbl">Per docenti ed educatori</p>
       <h1><span class="ic" aria-hidden="true">📸</span>Dal libro alla lezione</h1>
-      <p>Da una foto (pagina del libro, appunti, mappa concettuale) o dal solo titolo, una lezione interattiva con il QR per i ragazzi. La prepara il tuo assistente IA: <b>Claude, ChatGPT o Gemini</b>, senza costi a consumo.</p>
+      <p>Una foto del libro, degli appunti o di una mappa (o anche solo il titolo) diventa una lezione interattiva, con il <b>QR</b> per i ragazzi.</p>
+      <ul class="dc-patti">
+        <li><b>⏱️ 3 minuti</b><span>dalla foto al QR</span></li>
+        <li><b>🆓 Gratis</b><span>anche con l'IA gratuita</span></li>
+        <li><b>📵 Niente da installare</b><span>telefono o PC</span></li>
+        <li><b>✅ Niente da correggere</b><span>né voti né registri</span></li>
+      </ul>
     </div>
   </section>
 
@@ -32,20 +38,20 @@
     <div id="dc-modulo">
       <div class="st-card">
         <div class="dc-passo"><b>1</b><h2>Le istruzioni per l'IA</h2></div>
-        <p class="st-sot">Scrivi l'argomento e, se vuoi, materia, anno e indicazioni. Poi copia le istruzioni.</p>
+        <p class="st-sot">Scrivi l'argomento e premi <b>Copia le istruzioni</b>. Tutto il resto è facoltativo.</p>
         <label for="dc-arg">Argomento / titolo della lezione</label>
         <input type="text" id="dc-arg" maxlength="200" placeholder="es. La Rivoluzione francese · Il sistema HACCP · I vini DOC"/>
-        <p class="st-nota" style="margin:.3rem 0 0">Con le foto è facoltativo. Senza foto è indispensabile: l'IA costruisce la lezione partendo da qui.</p>
+        <p class="st-nota" style="margin:.3rem 0 0">Se hai le foto puoi anche lasciarlo vuoto. Se non hai foto, scrivilo: l'IA parte da qui.</p>
         <div class="dc-due">
-          <div><label for="dc-mat">Materia</label><select id="dc-mat"></select>
+          <div><label for="dc-mat">Materia (facoltativa)</label><select id="dc-mat"></select>
             <input type="text" id="dc-mat-altra" maxlength="80" placeholder="Scrivi la materia" hidden style="margin-top:.4rem"/></div>
-          <div><label for="dc-anno">Anno di corso</label><select id="dc-anno"></select></div>
+          <div><label for="dc-anno">Anno di corso (facoltativo)</label><select id="dc-anno"></select></div>
         </div>
         <div class="dc-due">
           <div><label for="dc-cla">Classe (facoltativa)</label><input type="text" id="dc-cla" maxlength="40" placeholder="es. 2ª B"/></div>
           <div></div>
         </div>
-        <label for="dc-note">Indicazioni per la lezione</label>
+        <label for="dc-note">Indicazioni per l'IA (facoltative)</label>
         <textarea id="dc-note" maxlength="600" placeholder="es. Domani c'è l'interrogazione: insisti sulle date. Oppure: solo il paragrafo 3."></textarea>
         <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-copia-prompt">📋 Copia le istruzioni</button></div>
         <p class="st-nota" style="margin:.8rem 0 .3rem">Poi apri l'assistente che preferisci:</p>
@@ -57,9 +63,10 @@
         <ol class="dc-guida">
           <li>Tocca <b>📎 / +</b> e allega le <b>foto</b>: pagine del libro (nell'ordine), appunti o una <b>mappa concettuale</b>. Puoi scattarle lì direttamente. <b>Nessuna foto?</b> Va bene lo stesso: la lezione nasce dall'argomento del passo 1.</li>
           <li><b>Incolla</b> le istruzioni nel messaggio e invia.</li>
-          <li>Quando ha finito, <b>copia tutta la risposta</b> (il tasto copia sotto il messaggio o sul riquadro del codice).</li>
+          <li>Quando ha finito, <b>copia tutta la risposta</b> con il tasto <b>Copia</b> (📋) che trovi sotto la risposta o in alto sul riquadro.</li>
         </ol>
-        <p class="st-nota">💡 Va bene la versione gratuita o quella in abbonamento di ciascuno. Se apre un riquadro laterale (Canvas, artefatto), copia il testo da lì.</p>
+        <p class="st-nota">😌 <b>La risposta sembra scritta in codice da programmatori: è normale.</b> Non devi leggerla né capirla: si copia e si incolla, la lezione la vedi al passo 3.</p>
+        <p class="st-nota">💡 Va bene la versione gratuita. Se la risposta compare in un riquadro a parte, accanto alla chat, copia il testo da lì.</p>
         <p class="st-nota">🔒 Non fotografate quaderni o fogli con nomi o dati dei ragazzi.</p>
       </div>
 
@@ -74,10 +81,10 @@
         <p class="dc-err" id="dc-err2" role="alert"></p>
       </div>
 
-      <div class="st-card">
+      <div class="st-card" id="dc-auto" hidden>
         <details>
-          <summary>📸 Creazione automatica (solo se attivata: a consumo)</summary>
-          <p class="st-nota">Il sito manda le foto, o il solo argomento, direttamente all'IA, senza passare da Claude, ChatGPT o Gemini. Funziona solo se su Supabase è stata inserita una chiave API Anthropic, che si paga a consumo. Usa argomento, materia, anno e indicazioni (passo 1), autore e condivisione (passo 3).</p>
+          <summary>📸 Creazione automatica, senza passare dall'IA</summary>
+          <p class="st-nota">Il sito manda le foto, o il solo argomento, direttamente all'IA della scuola: niente da copiare e incollare. Usa argomento, materia, anno e indicazioni (passo 1), autore e condivisione (passo 3).</p>
           <div class="st-azioni">
             <label class="st-btn pieno">📷 Scatta una foto<input type="file" accept="image/*" capture="environment" id="dc-cam" hidden/></label>
             <label class="st-btn">🖼️ Scegli dalla galleria<input type="file" accept="image/*" multiple id="dc-gal" hidden/></label>
@@ -120,7 +127,7 @@
   E.area({ pagina: location.hash === '#mie' ? 'mie' : 'crea', dentro: $('ed-dentro'), alCambio: function (chi) {
     if (chi && chi.nome && !$('dc-aut').value) $('dc-aut').value = chi.nome;
     lezioni = null; caricaElenco();
-  } });
+  }, alControllo: function (r) { $('dc-auto').hidden = !r.automatica; } });
   window.addEventListener('hashchange', function () { if (location.hash === '#mie') $('mie').scrollIntoView({ behavior: 'smooth' }); });
   E.riempiMaterie($('dc-mat'));
   E.riempiAnni($('dc-anno'));
@@ -255,27 +262,41 @@
   $('dc-cerca').addEventListener('input', function () { if (lezioni) disegnaMie(); else caricaElenco(); });
   caricaElenco();
 
+  /* ───── bozza: tornando dall'app dell'IA il telefono a volte ricarica la pagina; quello che era scritto resta ───── */
+  var CAMPI = ['dc-arg', 'dc-mat', 'dc-mat-altra', 'dc-anno', 'dc-cla', 'dc-note', 'dc-json'];
+  function bozza(v) {
+    try {
+      if (v === null) return localStorage.removeItem('studio-bozza');
+      var o = {}; CAMPI.forEach(function (id) { o[id] = $(id).value; }); o.cond = $('dc-cond').checked;
+      localStorage.setItem('studio-bozza', JSON.stringify(o));
+    } catch (e) {}
+  }
+  try {
+    var B = JSON.parse(localStorage.getItem('studio-bozza') || 'null');
+    if (B) { CAMPI.forEach(function (id) { if (B[id]) $(id).value = B[id]; }); $('dc-cond').checked = !!B.cond; materia(); controlla(); disegnaFoto(); }
+  } catch (e) {}
+  CAMPI.concat('dc-cond').forEach(function (id) { $(id).addEventListener('change', function () { bozza(); }); $(id).addEventListener('input', function () { bozza(); }); });
+
   /* ───── lezione preparata in Claude, ChatGPT o Gemini: istruzioni, incolla, pubblica ───── */
   $('dc-copia-prompt').onclick = function () {
     var t = E.istruzioni({ argomento: $('dc-arg').value.trim(), materia: materia(), anno: $('dc-anno').value, classe: $('dc-cla').value.trim(), note: $('dc-note').value.trim() });
-    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { STUDIO.toast('Istruzioni copiate: ora apri l\'assistente IA 📋'); })
-      .catch(function () { $('dc-json').value = t; $('dc-json').select(); STUDIO.toast('Copia il testo dal riquadro del passo 3'); });
+    E.copia(t, this, 'Istruzioni copiate: ora apri l\'assistente IA 📋');
   };
   function controlla() {
     var L = E.leggi($('dc-json').value);
-    $('dc-letto').textContent = !$('dc-json').value.trim() ? '' : L ? '✅ Lezione letta: «' + L.titolo + '»' : '⚠️ Non sembra ancora una lezione completa';
+    $('dc-letto').textContent = !$('dc-json').value.trim() ? '' : L ? '✅ Lezione letta: «' + L.titolo + '»' : '⚠️ ' + E.perche($('dc-json').value);
+    bozza();
   }
   $('dc-json').addEventListener('input', controlla);
   $('dc-incolla').onclick = function () {
     if (!navigator.clipboard || !navigator.clipboard.readText) { $('dc-json').focus(); return STUDIO.toast('Tieni premuto nel riquadro e scegli Incolla'); }
-    navigator.clipboard.readText().then(function (t) { $('dc-json').value = t; controlla(); })
+    navigator.clipboard.readText().then(function (t) { if (!t.trim()) return STUDIO.toast('Negli appunti non c\'è niente: copia prima la risposta dell\'IA'); $('dc-json').value = t; controlla(); })
       .catch(function () { $('dc-json').focus(); STUDIO.toast('Tieni premuto nel riquadro e scegli Incolla'); });
   };
   $('dc-manuale').onclick = function () {
     var e2 = $('dc-err2'), L = E.leggi($('dc-json').value), d = dati(), btn = this;
     e2.textContent = '';
-    if (!$('dc-json').value.trim()) { e2.textContent = 'Incolla prima la risposta dell\'IA.'; return; }
-    if (!L) { e2.textContent = 'Il testo incollato non è una lezione completa: copiate tutta la risposta dell\'IA, dalla prima { all\'ultima }. Se la risposta si è interrotta, scrivete «continua» oppure rifate la richiesta.'; return; }
+    if (!L) { e2.textContent = E.perche($('dc-json').value); return; }
     if (nonEntrato(e2)) return;
     if (d.condivisa && (!d.materia || !d.anno)) { e2.textContent = 'Per condividerla nell\'Archivio scegli materia e anno di corso (passo 1).'; $('dc-mat').focus(); return; }
     d.lezione = L;
@@ -284,7 +305,7 @@
       btn.disabled = false; btn.textContent = '✨ Pubblica la lezione';
       if (r.ok) {
         caricaElenco();
-        $('dc-json').value = ''; $('dc-note').value = ''; $('dc-arg').value = ''; controlla();
+        $('dc-json').value = ''; $('dc-note').value = ''; $('dc-arg').value = ''; controlla(); bozza(null);
         $('dc-modulo').hidden = true; esito(r.lezione, r.codice);
         return;
       }

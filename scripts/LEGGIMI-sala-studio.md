@@ -22,7 +22,7 @@
 
 Se il servizio non risponde, lo stesso passo 3 offre **Crea solo il link**: la lezione viaggia dentro il link (troppo lungo per un QR).
 
-## Quattro modi di studiare la stessa lezione
+## Sette modi di studiare la stessa lezione
 Nessun lavoro in più: tutti i modi nascono dal JSON che ogni lezione ha già (`studio/formati.js`).
 Nella pagina della lezione i ragazzi scelgono «Come vuoi studiare?»; il link può già indicarlo con `&m=...`.
 - **🧭 Percorso guidato** (`m` assente): le 7 tappe di sempre.
@@ -31,6 +31,13 @@ Nella pagina della lezione i ragazzi scelgono «Come vuoi studiare?»; il link p
   lettere in ordine si apre la porta. Niente timer; dopo un errore compare l'aiuto.
 - **🗺️ Costruisci la mappa** (`m=mappa`): l'argomento al centro, le idee chiave intorno senza nome; si tocca
   un'etichetta e poi la casella. Livello 2 a memoria: solo emoji e prima lettera.
+- **🔍 Caccia all'errore** (`m=caccia`): il riassunto di un compagno distratto (7 frasi, fino a 3 errori presi dai
+  vero/falso falsi e dalle frasi da completare con la parola sbagliata); si tocca la frase sbagliata e la si corregge.
+- **🎭 Intervista impossibile** (`m=intervista`): l'ospite risponde in chat e si sceglie la risposta vera. Usa il campo
+  `intervista` della lezione (personaggio, chi, emoji, domande con risposta e 2 sbagliate), che le istruzioni chiedono
+  all'IA; nelle lezioni che non l'hanno, l'ospite è l'argomento stesso e le domande sono le flashcard.
+- **⚡ Il minuto** (`m=minuto`): quante risposte giuste in 60 o 90 secondi; record nel telefono; alla fine gli errori
+  da ripassare con la risposta giusta.
 - **🏆 Sfida a squadre** (`m=squadre`): alla LIM, da 2 a 4 squadre a turno, rubapalla dopo un errore,
   tempo facoltativo (30 s o 1 minuto), classifica finale; tasti A B C D sulla tastiera; schermo intero.
 

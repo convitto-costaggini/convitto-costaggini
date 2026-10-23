@@ -409,3 +409,42 @@ button.fm-tessera:focus-visible{outline:3px solid var(--oro);outline-offset:2px}
 .fm-guida .col.ora .casella{border:2px solid var(--oro);box-shadow:0 0 0 4px rgba(212,170,74,.25);color:var(--oro)}
 .fm-guida .casella.si{border:2px solid var(--st-ok);background:var(--st-ok2);color:var(--bosco);animation:st-pop .4s}
 button.fm-tessera.no{border-color:var(--st-no);animation:st-scuoti .4s}
+/* caccia all'errore: il quaderno del compagno */
+.fm-quaderno{background:#fff;border:1px solid var(--av3);border-radius:14px;padding:.6rem;background-image:repeating-linear-gradient(transparent 0 2.6rem,rgba(184,146,42,.12) 2.6rem 2.7rem)}
+.fm-riga{display:flex;align-items:flex-start;gap:.3rem}
+.fm-riga .st-leggi{position:static;flex:none}
+.fm-frase{flex:1;display:flex;gap:.6rem;align-items:flex-start;text-align:left;background:transparent;border:2px solid transparent;border-radius:10px;padding:.55rem .6rem;font:inherit;color:var(--txt);cursor:pointer;line-height:1.55}
+.fm-frase:hover:not(:disabled){border-color:var(--oro3);background:#FFFBEA}
+.fm-frase:focus-visible{outline:3px solid var(--oro);outline-offset:1px}
+.fm-frase .n{flex:none;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--av);color:var(--bosco);font:800 .85rem var(--fu);display:flex;align-items:center;justify-content:center;margin-top:.1rem}
+.fm-frase .t{flex:1}
+.fm-frase .tag{flex:none;font:800 .7rem var(--fu);border-radius:99px;padding:.15rem .5rem;margin-top:.2rem}
+.fm-riga.corretta .fm-frase{background:var(--st-ok2);cursor:default}
+.fm-riga.corretta .tag{background:var(--st-ok);color:#fff}
+.fm-riga.giusta .fm-frase{opacity:.6;cursor:default}
+.fm-riga.giusta .tag{background:var(--av);color:var(--bosco)}
+.fm-nota-err{margin:.1rem 0 .5rem 2.9rem;font-size:.9rem;color:#1d5236}
+.fm-barrata{text-decoration:line-through;text-decoration-color:var(--st-no);text-decoration-thickness:2px;color:var(--st-no)}
+#fm-correggi{margin-top:.8rem}
+/* intervista impossibile: la chat */
+.fm-chat{display:flex;flex-direction:column;gap:.5rem;background:#fff;border:1px solid var(--av3);border-radius:16px;padding:.8rem}
+.fm-ospite{display:flex;align-items:center;gap:.6rem;border-bottom:1px solid var(--av3);padding-bottom:.6rem;font-family:var(--fu);color:var(--bosco)}
+.fm-ospite .av{font-size:2rem;width:3rem;height:3rem;border-radius:50%;background:#FFF8E1;display:flex;align-items:center;justify-content:center}
+.fm-bolla{max-width:85%;border-radius:16px;padding:.55rem .8rem;line-height:1.5;animation:st-entra .3s ease}
+.fm-bolla small{display:block;font:800 .7rem var(--fu);letter-spacing:.05em;opacity:.75}
+.fm-bolla.io{align-self:flex-end;background:var(--bosco);color:#fff;border-bottom-right-radius:4px}
+.fm-bolla.lui{align-self:flex-start;background:#FFF8E1;border:1px solid var(--oro3);border-bottom-left-radius:4px}
+/* il minuto */
+.fm-crono{display:flex;justify-content:space-between;align-items:center;margin:.4rem 0}
+.fm-crono-n{display:flex;align-items:baseline;gap:.4rem;font:800 2.6rem var(--fu);color:var(--bosco)}
+.fm-crono-n small{font-size:.8rem;color:var(--txt2)}
+.fm-crono-p{font:800 1.6rem var(--fu);color:var(--st-ok)}
+.fm-ripasso{display:grid;gap:.5rem}
+/* il minuto: il cronometro resta in vista mentre si risponde */
+.fm-crono-box{position:sticky;top:64px;z-index:6;background:rgba(253,250,245,.97);padding:.2rem 0 .4rem;margin:0 -.8rem .4rem;padding-left:.8rem;padding-right:.8rem;border-bottom:1px solid var(--av3)}
+#st-app{scroll-margin-top:70px}
+/* «Come vuoi studiare?» chiuso in una riga, dopo la scelta */
+.fm-modi-chiuso{display:flex;align-items:center;justify-content:space-between;gap:.6rem;background:#fff;border:2px solid var(--av3);border-radius:14px;padding:.55rem .8rem;font-family:var(--fu);color:var(--bosco)}
+.fm-modi-chiuso span{font-size:.9rem}
+.fm-modi-chiuso b{font-size:1rem}
+.fm-modi-chiuso button{font:800 .85rem var(--fu);border:2px solid var(--bosco);background:#fff;color:var(--bosco);border-radius:99px;padding:.45rem .9rem;min-height:40px;cursor:pointer;white-space:nowrap}

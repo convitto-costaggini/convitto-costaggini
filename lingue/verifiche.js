@@ -167,7 +167,7 @@
     '.sol ol{margin:4px 0 0;padding-left:22px}.sol li{margin:2px 0}';
   function stampa(file, conSoluzioni) {
     var corpo = file.map(function (f) { return foglio(f); }).join('') + (conSoluzioni ? soluzioni(file) : '');
-    var w = window.open('', '_blank'); if (!w) { alert('Il browser ha bloccato la finestra di stampa: consentite i popup per questo sito.'); return; }
+    var w = window.open('', '_blank'); if (!w) { FINESTRA.avvisa({ titolo: 'Stampa bloccata', testo: 'Il browser ha bloccato la finestra di stampa. Consentite le finestre a comparsa per questo sito e riprovate.' }); return; }
     w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(ver.intest.titolo || 'Verifica') + '</title><style>' + CSS_FOGLIO + '</style></head><body>' + corpo + '<script>window.onload=function(){window.print()}<\/script></body></html>');
     w.document.close();
   }
@@ -253,7 +253,7 @@
         traduci: n('vf-n-traduci'), scelta: n('vf-n-scelta'), abbina: n('vf-n-abbina'), completa: n('vf-n-completa'),
         pt: { traduci: p('vf-p-traduci'), scelta: p('vf-p-scelta'), abbina: p('vf-p-abbina'), completa: p('vf-p-completa') } };
       var nuove = genera(opz);
-      if (!nuove.length) { alert('Nessuna domanda generata: controllate le quantità.'); return; }
+      if (!nuove.length) { FINESTRA.avvisa({ titolo: 'Nessuna domanda', testo: 'Nessuna domanda generata: controllate le quantità.' }); return; }
       if (document.getElementById('vf-sostituisci').checked) ver.domande = nuove; else ver.domande = ver.domande.concat(nuove);
       if (document.getElementById('vf-sostituisci').checked) titoloAuto(selA.value); else titoloAuto();
       cambiato(true);
@@ -315,7 +315,10 @@
     lista.addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return; var d = domanda(b); if (!d) return;
       var i = ver.domande.indexOf(d);
-      if (b.hasAttribute('data-elimina')) { if (!confirm('Eliminare la domanda ' + (i + 1) + '?')) return; ver.domande.splice(i, 1); }
+      if (b.hasAttribute('data-elimina')) {
+        FINESTRA.chiedi({ titolo: 'Eliminare la domanda ' + (i + 1) + '?', si: 'Elimina', pericolo: true }).then(function (ok) { if (ok) { ver.domande.splice(ver.domande.indexOf(d), 1); cambiato(true); } });
+        return;
+      }
       else if (b.hasAttribute('data-su') && i > 0) { ver.domande.splice(i - 1, 0, ver.domande.splice(i, 1)[0]); }
       else if (b.hasAttribute('data-giu') && i < ver.domande.length - 1) { ver.domande.splice(i + 1, 0, ver.domande.splice(i, 1)[0]); }
       else if (b.hasAttribute('data-aggop')) { d.opzioni.push(''); }
@@ -332,14 +335,14 @@
     document.getElementById('vf-stampa').addEventListener('click', function () {
       var file = [].filter.call(document.querySelectorAll('[data-fila]'), function (c) { return c.checked; }).map(function (c) { return c.dataset.fila; });
       var sol = document.getElementById('vf-sol').checked;
-      if (!ver.domande.length) { alert('La verifica non ha ancora domande.'); return; }
-      if (!file.length && !sol) { alert('Scegliete almeno una fila da stampare.'); return; }
+      if (!ver.domande.length) { FINESTRA.avvisa({ titolo: 'Verifica vuota', testo: 'La verifica non ha ancora domande.' }); return; }
+      if (!file.length && !sol) { FINESTRA.avvisa({ titolo: 'Nessuna fila', testo: 'Scegliete almeno una fila da stampare.' }); return; }
       stampa(file.length ? file : ['A'], sol);
     });
     document.getElementById('vf-stampa-sol').addEventListener('click', function () {
       if (!ver.domande.length) return;
       var file = [].filter.call(document.querySelectorAll('[data-fila]'), function (c) { return c.checked; }).map(function (c) { return c.dataset.fila; });
-      var w = window.open('', '_blank'); if (!w) return;
+      var w = window.open('', '_blank'); if (!w) { FINESTRA.avvisa({ titolo: 'Stampa bloccata', testo: 'Il browser ha bloccato la finestra di stampa. Consentite le finestre a comparsa per questo sito e riprovate.' }); return; }
       w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>Soluzioni</title><style>' + CSS_FOGLIO + '</style></head><body>' + soluzioni(file.length ? file : ['A']) + '<script>window.onload=function(){window.print()}<\/script></body></html>');
       w.document.close();
     });
@@ -356,15 +359,15 @@
           var j = JSON.parse(lettore.result), v = j.verifica || j;
           if (!v || !Array.isArray(v.domande) || !v.intest) throw new Error('formato');
           v.domande = v.domande.filter(function (d) { return d && TIPI[d.tipo]; }).map(function (d) { d.id = d.id || nid(); return d; });
-          if (ver.domande.length && !confirm('Aprire la verifica dal file? Quella attuale verrà sostituita (esportatela prima, se vi serve).')) return;
-          ver = v; ver.id = ver.id || nid(); L.salva(CH, ver); location.reload();
-        } catch (e) { alert('Il file non è una verifica valida.'); }
+        } catch (e) { FINESTRA.avvisa({ titolo: 'File non valido', testo: 'Il file non è una verifica valida.' }); return; }
+        (ver.domande.length ? FINESTRA.chiedi({ titolo: 'Aprire la verifica dal file?', testo: 'Quella attuale verrà sostituita (esportatela prima, se vi serve).', si: 'Apri' }) : Promise.resolve(true))
+          .then(function (ok) { if (!ok) return; ver = v; ver.id = ver.id || nid(); L.salva(CH, ver); location.reload(); });
       };
       lettore.readAsText(f); this.value = '';
     });
     document.getElementById('vf-nuova').addEventListener('click', function () {
-      if (ver.domande.length && !confirm('Iniziare una verifica nuova? Quella attuale verrà cancellata da questo browser (esportatela prima, se vi serve).')) return;
-      L.salva(CH, null); location.reload();
+      (ver.domande.length ? FINESTRA.chiedi({ titolo: 'Iniziare una verifica nuova?', testo: 'Quella attuale verrà cancellata da questo browser (esportatela prima, se vi serve).', si: 'Inizia da capo', pericolo: true }) : Promise.resolve(true))
+        .then(function (ok) { if (ok) { L.salva(CH, null); location.reload(); } });
     });
     /* esempio alla prima apertura: si vede subito cosa fa */
     if (primaVolta) {

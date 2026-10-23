@@ -113,6 +113,7 @@
 <script src="supabase.js"></script>
 <script src="lingue/qrcode.js"></script>
 <script src="lingue/pacchetto.js"></script>
+<script src="lingue/finestra.js"></script>
 <script src="studio/studio.js"></script>
 <script src="studio/demo.js"></script>
 <script src="studio/educatori.js"></script>
@@ -257,11 +258,13 @@
     var k = e.target.closest('[data-canc]');
     if (k) {
       var cod = k.getAttribute('data-canc'), y = lezioni.filter(function (z) { return z.codice === cod; })[0];
-      if (!confirm('Cancellare per sempre «' + y.titolo + '»?\nIl QR e il codice ' + cod + ' smetteranno di funzionare per tutti i ragazzi.')) return;
-      k.disabled = true; k.textContent = '⏳';
-      E.chiama({ elimina: cod }).then(function (r) {
-        if (!r.ok) { k.disabled = false; k.textContent = '🗑️ Cancella'; return STUDIO.toast(r.messaggioErrore); }
-        lezioni = lezioni.filter(function (z) { return z.codice !== cod; }); disegnaMie(); STUDIO.toast('Lezione cancellata 🗑️');
+      FINESTRA.chiedi({ titolo: 'Cancellare «' + y.titolo + '»?', testo: 'Il QR e il codice ' + cod + ' smetteranno di funzionare per tutti i ragazzi. Non si può annullare.', si: 'Cancella', pericolo: true }).then(function (ok) {
+        if (!ok) return;
+        k.disabled = true; k.textContent = '⏳';
+        E.chiama({ elimina: cod }).then(function (r) {
+          if (!r.ok) { k.disabled = false; k.textContent = '🗑️ Cancella'; return STUDIO.toast(r.messaggioErrore); }
+          lezioni = lezioni.filter(function (z) { return z.codice !== cod; }); disegnaMie(); STUDIO.toast('Lezione cancellata 🗑️');
+        });
       });
       return;
     }

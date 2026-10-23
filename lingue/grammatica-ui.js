@@ -54,7 +54,12 @@
     el.addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       if (b.dataset.gmMod) { modifica = b.dataset.gmMod; disegna(true); }
-      else if (b.dataset.gmDel) { if (confirm('Eliminare questo argomento?')) { G.salvaMiei(G.miei().filter(function (m) { return m.id !== b.dataset.gmDel; })); modifica = null; disegna(); if (st.dopo) st.dopo(); } }
+      else if (b.dataset.gmDel) {
+        var via = b.dataset.gmDel;
+        FINESTRA.chiedi({ titolo: 'Eliminare questo argomento?', si: 'Elimina', pericolo: true }).then(function (ok) {
+          if (ok) { G.salvaMiei(G.miei().filter(function (m) { return m.id !== via; })); modifica = null; disegna(); if (st.dopo) st.dopo(); }
+        });
+      }
       else if (b.hasAttribute('data-gm-ann')) { modifica = null; disegna(); }
       else if (b.hasAttribute('data-gm-salva')) {
         var nome = campo('nome').trim(), regola = campo('regola').trim(), righe = campo('righe'), r = G.leggiRighe(righe), v = el.querySelector('[data-gm-v]');

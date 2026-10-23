@@ -162,6 +162,7 @@
 </main>
 <script src="nav.min.js"></script>
 <script src="lingue/lingue.js"></script>
+<script src="lingue/finestra.js"></script>
 <script src="lingue/parole.js"></script>
 <script src="lingue/avanzato-dati.js"></script>
 <script>
@@ -516,7 +517,10 @@
   }
   document.getElementById('gc-mie-usa').addEventListener('click', usaMie);
   document.getElementById('gc-mie-es').addEventListener('click', function () { mieT.value = ESEMPI[lingua]; usaMie(); });
-  document.getElementById('gc-mie-via').addEventListener('click', function () { if (mieT.value.trim() && !confirm('Cancellare le frasi di questa lingua?')) return; mieT.value = ''; usaMie(); mieErr.textContent = ''; });
+  document.getElementById('gc-mie-via').addEventListener('click', function () {
+    (mieT.value.trim() ? FINESTRA.chiedi({ titolo: 'Cancellare le frasi di questa lingua?', si: 'Cancella', pericolo: true }) : Promise.resolve(true))
+      .then(function (ok) { if (ok) { mieT.value = ''; usaMie(); mieErr.textContent = ''; } });
+  });
   document.addEventListener('lingua', function (e) { lingua = e.detail; mieErr.textContent = ''; disegnaScelte(); avvia(); });
   disegnaScelte(); punteggio(); avvia();
 })();

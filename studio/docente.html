@@ -22,8 +22,8 @@
     <div class="w">
       <p class="lbl">Per docenti ed educatori</p>
       <h1><span class="ic" aria-hidden="true">📸</span>Dal libro alla lezione</h1>
-      <p>Una foto del libro, degli appunti o di una mappa (o anche solo il titolo) diventa una lezione interattiva, con il <b>QR</b> per i ragazzi.</p>
-      <ul class="dc-patti">
+      <p id="dc-presenta" hidden>Una foto del libro, degli appunti o di una mappa (o anche solo il titolo) diventa una lezione interattiva, con il <b>QR</b> per i ragazzi.</p>
+      <ul class="dc-patti" id="dc-patti" hidden>
         <li><b>⏱️ 3 minuti</b><span>dalla foto al QR</span></li>
         <li><b>🆓 Gratis</b><span>anche con l'IA gratuita</span></li>
         <li><b>📵 Niente da installare</b><span>telefono o PC</span></li>
@@ -125,7 +125,11 @@
   var BASE = location.origin + '/studio/lezione.html';
 
   $('dc-aut').value = E.autore();
+  /* la presentazione (cosa fa, quanto costa) solo a chi è entrato: fuori si vede solo come entrare */
+  function presenta() { $('dc-presenta').hidden = $('dc-patti').hidden = !E.entrato(); }
+  presenta();
   E.area({ pagina: location.hash === '#mie' ? 'mie' : 'crea', dentro: $('ed-dentro'), alCambio: function (chi) {
+    presenta();
     if (chi && chi.nome && !$('dc-aut').value) $('dc-aut').value = chi.nome;
     lezioni = null; caricaElenco();
   }, alControllo: function (r) { $('dc-auto').hidden = !r.automatica; } });

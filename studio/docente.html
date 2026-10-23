@@ -250,10 +250,21 @@
     $('dc-mie').innerHTML = m.length ? m.map(function (x) {
       return '<li><span>' + esc((x.icona || '📚') + ' ' + x.titolo) + (x.condivisa ? '<i class="dc-badge si">🌐 condivisa</i>' : '<i class="dc-badge no">🔒 solo mia</i>') +
         '<small>' + esc([x.materia, x.anno ? x.anno + '° anno' : '', x.classe, E.data(x.modificata || x.created_at), x.aperture ? '👀 ' + x.aperture : ''].filter(Boolean).join(' · ')) + '</small></span><code>' + esc(x.codice) + '</code>' +
-        '<div class="az"><a class="st-btn" href="studio/lezione.html?c=' + esc(x.codice) + '" target="_blank" rel="noopener">Apri</a><button type="button" class="st-btn" data-qr="' + esc(x.codice) + '">QR</button><a class="st-btn" href="studio/modifica.html?c=' + esc(x.codice) + '">✏️ Modifica</a></div></li>';
+        '<div class="az"><a class="st-btn" href="studio/lezione.html?c=' + esc(x.codice) + '" target="_blank" rel="noopener">Apri</a><button type="button" class="st-btn" data-qr="' + esc(x.codice) + '">QR</button><a class="st-btn" href="studio/modifica.html?c=' + esc(x.codice) + '">✏️ Modifica</a><button type="button" class="st-btn dc-canc" data-canc="' + esc(x.codice) + '" aria-label="Cancella la lezione ' + esc(x.titolo) + '">🗑️ Cancella</button></div></li>';
     }).join('') : '<li><span class="st-nota">' + (lezioni.length ? 'Nessuna lezione corrisponde alla ricerca.' : 'Ancora nessuna lezione. Intanto guardate la <a href="studio/lezione.html?c=DEMO" target="_blank">lezione di esempio</a> o l\'<a href="studio/archivio.html">Archivio</a>.') + '</span></li>';
   }
   $('dc-mie').addEventListener('click', function (e) {
+    var k = e.target.closest('[data-canc]');
+    if (k) {
+      var cod = k.getAttribute('data-canc'), y = lezioni.filter(function (z) { return z.codice === cod; })[0];
+      if (!confirm('Cancellare per sempre «' + y.titolo + '»?\nIl QR e il codice ' + cod + ' smetteranno di funzionare per tutti i ragazzi.')) return;
+      k.disabled = true; k.textContent = '⏳';
+      E.chiama({ elimina: cod }).then(function (r) {
+        if (!r.ok) { k.disabled = false; k.textContent = '🗑️ Cancella'; return STUDIO.toast(r.messaggioErrore); }
+        lezioni = lezioni.filter(function (z) { return z.codice !== cod; }); disegnaMie(); STUDIO.toast('Lezione cancellata 🗑️');
+      });
+      return;
+    }
     var b = e.target.closest('[data-qr]'); if (!b) return;
     var x = lezioni.filter(function (y) { return y.codice === b.getAttribute('data-qr'); })[0];
     $('dc-modulo').hidden = true; esito(x, x.codice);

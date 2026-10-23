@@ -282,3 +282,5 @@ body[data-page="studio"] #fab-top,body[data-page="studio"] #tr-fab,body[data-pag
 .ed-cartello .az{display:flex;gap:.6rem;margin-top:2vh}
 html.ed-cartello-aperto{overflow:hidden}
 @media print{html.ed-cartello-aperto body>*:not(.ed-cartello){display:none!important}.ed-cartello{position:static}.ed-cartello .az{display:none}}
+
+.dc-mie .dc-canc{border-color:var(--st-no);color:var(--st-no)}

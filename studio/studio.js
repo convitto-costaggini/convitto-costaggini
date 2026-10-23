@@ -451,7 +451,7 @@ window.STUDIO = (function () {
         '<p class="st-nota">🔁 <b>Il trucco del ripasso</b>: torna su questa lezione <b>domani</b>, poi <b>tra 3 giorni</b> e <b>tra una settimana</b>. Bastano 5 minuti di flashcard: è così che si ricorda per sempre.</p>' +
         '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn" data-tappa="4">🃏 Ripassa con le flashcard</button><button type="button" class="st-btn" id="st-azzera">↺ Ricomincia da zero</button></div></div>';
       fatta('ricorda');
-      el.querySelector('#st-azzera').onclick = function () { if (confirm('Cancellare i progressi di questa lezione?')) { stato = { fatte: {}, punti: 0, vista: 0 }; salva(); radice.querySelector('.st-punti b').textContent = 0; vai(0, true); } };
+      el.querySelector('#st-azzera').onclick = function () { FINESTRA.chiedi({ titolo: 'Ricominciare da zero?', testo: 'Tappe fatte e punti di questa lezione si cancellano.', si: 'Ricomincia', pericolo: true }).then(function (ok) { if (ok) { stato = { fatte: {}, punti: 0, vista: 0 }; salva(); radice.querySelector('.st-punti b').textContent = 0; vai(0, true); } }); };
     }
 
     vai(corrente);

@@ -106,6 +106,7 @@
 <script src="nav.min.js"></script>
 <script src="supabase.js"></script>
 <script src="lingue/qrcode.js"></script>
+<script src="lingue/finestra.js"></script>
 <script src="studio/studio.js"></script>
 <script src="studio/demo.js"></script>
 <script src="studio/educatori.js"></script>
@@ -202,7 +203,7 @@
           var v = el('div', { class: 'md-voce' }), tit = el('div', { class: 'md-tit' }, '<span>' + esc(et) + ' ' + (i + 1) + '</span>');
           tit.appendChild(bottone('↑', 'Sposta su', function () { if (i) { arr.splice(i - 1, 0, arr.splice(i, 1)[0]); segna(); ridisegna(); } }));
           tit.appendChild(bottone('↓', 'Sposta giù', function () { if (i < arr.length - 1) { arr.splice(i + 1, 0, arr.splice(i, 1)[0]); segna(); ridisegna(); } }));
-          tit.appendChild(bottone('🗑', 'Togli', function () { if (confirm('Togliere ' + et.toLowerCase() + ' ' + (i + 1) + '?')) { arr.splice(i, 1); segna(); ridisegna(); } }));
+          tit.appendChild(bottone('🗑', 'Togli', function () { FINESTRA.chiedi({ titolo: 'Togliere ' + et.toLowerCase() + ' ' + (i + 1) + '?', si: 'Togli', pericolo: true }).then(function (ok) { if (ok) { arr.splice(i, 1); segna(); ridisegna(); } }); }));
           v.appendChild(tit); campi(v, voce, d[3]); lista.appendChild(v);
         });
         lista.appendChild(aggiungi('+ ' + et, function () { arr.push(vuota(d[3])); segna(); ridisegna(); }));
@@ -294,13 +295,23 @@
     $('md-form').scrollIntoView({ behavior: 'smooth' });
   };
   $('md-elimina').onclick = function () {
-    if (!confirm('Cancellare per sempre «' + L.titolo + '»?\nIl QR e il codice ' + codice + ' smetteranno di funzionare.')) return;
-    E.chiama({ elimina: codice }).then(function (r) {
-      if (!r.ok) return STUDIO.toast(r.messaggioErrore);
-      cambiata = false; STUDIO.toast('Lezione cancellata 🗑️');
-      setTimeout(function () { location.href = 'studio/docente.html'; }, 900);
+    FINESTRA.chiedi({ titolo: 'Cancellare «' + L.titolo + '»?', testo: 'Il QR e il codice ' + codice + ' smetteranno di funzionare per tutti i ragazzi. Non si può annullare.', si: 'Cancella', pericolo: true }).then(function (ok) {
+      if (!ok) return;
+      E.chiama({ elimina: codice }).then(function (r) {
+        if (!r.ok) return STUDIO.toast(r.messaggioErrore);
+        cambiata = false; STUDIO.toast('Lezione cancellata 🗑️');
+        setTimeout(function () { location.href = 'studio/docente.html#mie'; }, 900);
+      });
     });
   };
+  /* modifiche non salvate: per i link della pagina la nostra finestra; quella del browser resta solo per chiudere la scheda */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href]');
+    if (!a || !(cambiata && mia) || a.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey || a.getAttribute('href').charAt(0) === '#') return;
+    e.preventDefault();
+    FINESTRA.chiedi({ icona: '✏️', titolo: 'Modifiche non salvate', testo: 'Se esci adesso, le correzioni fatte qui si perdono.', si: 'Esci senza salvare', no: 'Resta qui', pericolo: true })
+      .then(function (ok) { if (ok) { cambiata = false; location.href = a.href; } });
+  }, true);
   window.addEventListener('beforeunload', function (e) { if (cambiata && mia) { e.preventDefault(); e.returnValue = ''; } });
   carica();
 })();

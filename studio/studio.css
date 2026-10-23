@@ -271,3 +271,14 @@ body[data-page="studio"] #fab-top,body[data-page="studio"] #tr-fab,body[data-pag
 .dc-copia-a-mano textarea{min-height:110px;font:.8rem/1.4 monospace;background:#fffbea}
 /* sul telefono Home e Aa più piccoli e più in basso, per coprire meno il testo */
 @media (max-width:700px){body[data-page="studio"] #fab-wrap{bottom:.6rem;right:.45rem;gap:.35rem}body[data-page="studio"] #fab-wrap .fab-c{width:34px;height:34px;font-size:.85rem}body[data-page="studio"] #fab-wrap .fab-c svg{width:15px;height:15px}}
+
+/* il cartello del QR dentro la pagina (quando le finestre nuove sono bloccate) */
+.ed-cartello{position:fixed;inset:0;z-index:99999;background:#fff;color:#2C3E2D;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2vh 1rem;overflow:auto;font-family:Arial,sans-serif}
+.ed-cartello .m{font-size:2.2vh;letter-spacing:.2em;text-transform:uppercase;color:#B8922A;font-weight:bold}
+.ed-cartello h2{font-size:clamp(1.4rem,5vh,3rem);margin:1vh 0 2vh}
+.ed-cartello img{width:min(58vh,80vw);height:auto;image-rendering:pixelated}
+.ed-cartello .c{font-size:4vh;letter-spacing:.3em;font-weight:bold;margin:1vh 0}
+.ed-cartello p{font-size:2.3vh;color:#555;margin:.5vh 0}
+.ed-cartello .az{display:flex;gap:.6rem;margin-top:2vh}
+html.ed-cartello-aperto{overflow:hidden}
+@media print{html.ed-cartello-aperto body>*:not(.ed-cartello){display:none!important}.ed-cartello{position:static}.ed-cartello .az{display:none}}

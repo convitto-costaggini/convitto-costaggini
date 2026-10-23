@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Archivio delle lezioni – Sala studio | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Per docenti ed educatori: le lezioni interattive condivise dai colleghi, per anno di corso e materia."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="studio/studio.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .ar-filtri{display:grid;gap:.6rem}
+  .ar-chips{display:flex;gap:.4rem;flex-wrap:wrap}
+  .ar-chips button{font:800 .8rem var(--fu);border:2px solid var(--av3);background:#fff;color:var(--bosco);border-radius:99px;padding:.4rem .85rem;cursor:pointer;min-height:40px}
+  .ar-chips button[aria-pressed="true"]{border-color:var(--bosco);background:var(--bosco);color:#fff}
+  .ar-periodo{font-family:var(--fd);font-weight:400;color:var(--bosco);font-size:clamp(1.6rem,5vw,2.1rem);margin:1.8rem 0 .2rem;border-bottom:2px solid var(--oro3);padding-bottom:.2rem}
+  .ar-anno{font:800 .8rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin:1.2rem 0 .5rem}
+  .ar-materia{margin:0 0 .8rem}
+  .ar-materia>summary{cursor:pointer;font:800 .95rem var(--fu);color:var(--bosco);padding:.5rem 0}
+  .ar-materia>summary small{color:var(--txt2);font-weight:600}
+  .ar-vuoto{text-align:center;padding:2rem 1rem}
+  .ar-vuoto .e{font-size:2.6rem}
+  </style>
+</head>
+<body data-page="studio">
+<div class="st-anteprima">Sala studio del Convitto · area docenti ed educatori</div>
+<script src="nav-header.min.js"></script>
+<main id="main" class="st dc">
+  <section class="st-hero">
+    <div class="w">
+      <p class="lbl">Per docenti ed educatori</p>
+      <h1><span class="ic" aria-hidden="true">🗂️</span>Archivio delle lezioni</h1>
+      <p>Le lezioni che docenti ed educatori hanno scelto di condividere, ordinate per anno di corso e materia secondo i quadri orari dell'istituto professionale alberghiero: <b>biennio</b> (1° e 2° anno) e <b>triennio</b> (3°, 4° e 5° anno). Ognuna si usa subito con il suo QR.</p>
+      <div class="st-azioni"><a class="st-btn oro" href="studio/docente.html">➕ Crea una lezione</a></div>
+    </div>
+  </section>
+
+  <div class="st-palco">
+    <div id="ar-gate" class="st-card"></div>
+
+    <div id="ar-app" hidden>
+      <div class="st-card ar-filtri">
+        <div class="ar-chips" id="ar-periodi" role="group" aria-label="Periodo"></div>
+        <div class="ar-chips" id="ar-anni" role="group" aria-label="Anno di corso"></div>
+        <div class="dc-due">
+          <div><label for="ar-mat">Materia</label><select id="ar-mat"></select></div>
+          <div><label for="ar-cerca">Cerca</label><input type="search" id="ar-cerca" placeholder="Titolo, autore, classe…"/></div>
+        </div>
+        <p class="st-nota" id="ar-stato" aria-live="polite" style="margin:0"></p>
+      </div>
+      <div id="ar-elenco"></div>
+    </div>
+  </div>
+</main>
+<script src="nav.min.js"></script>
+<script src="supabase.js"></script>
+<script src="lingue/qrcode.js"></script>
+<script src="studio/studio.js"></script>
+<script src="studio/demo.js"></script>
+<script src="studio/educatori.js"></script>
+<script>
+(function () {
+  'use strict';
+  var E = window.EDUCATORI, esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
+  var BASE = location.origin + '/studio/lezione.html?c=';
+  var tutte = [], periodo = '', anno = 0;
+  var PERIODI = [['', 'Tutto'], ['Biennio', 'Biennio (1°-2°)'], ['Triennio', 'Triennio (3°-5°)']];
+
+  function chips() {
+    $('ar-periodi').innerHTML = PERIODI.map(function (p) { return '<button type="button" data-p="' + p[0] + '" aria-pressed="' + (periodo === p[0] && !anno) + '">' + p[1] + '</button>'; }).join('');
+    $('ar-anni').innerHTML = E.ANNI.filter(function (a) { return !periodo || a.periodo === periodo; }).map(function (a) {
+      var n = tutte.filter(function (x) { return x.anno === a.n; }).length;
+      return '<button type="button" data-a="' + a.n + '" aria-pressed="' + (anno === a.n) + '">' + a.nome + (n ? ' · ' + n : '') + '</button>';
+    }).join('');
+  }
+  function materie() {
+    var v = $('ar-mat').value, presenti = {};
+    tutte.forEach(function (x) { presenti[x.materia || 'Materia non indicata'] = (presenti[x.materia || 'Materia non indicata'] || 0) + 1; });
+    var nomi = Object.keys(presenti).sort(function (a, b) { return E.ordineMateria(a) - E.ordineMateria(b) || a.localeCompare(b); });
+    $('ar-mat').innerHTML = '<option value="">Tutte le materie</option>' + nomi.map(function (m) { return '<option value="' + esc(m) + '">' + esc(m) + ' (' + presenti[m] + ')</option>'; }).join('');
+    $('ar-mat').value = presenti[v] ? v : '';
+  }
+  function voce(x) {
+    return '<li><span>' + esc((x.icona || '📚') + ' ' + x.titolo) + (x.mia ? '<i class="dc-badge si">mia</i>' : '') +
+      '<small>' + esc([x.autore, x.classe, E.data(x.modificata || x.created_at), x.aperture ? '👀 ' + x.aperture : ''].filter(Boolean).join(' · ')) + '</small>' +
+      (x.sottotitolo ? '<small>' + esc(x.sottotitolo) + '</small>' : '') + '</span><code>' + esc(x.codice) + '</code>' +
+      '<div class="az"><a class="st-btn" href="' + esc(BASE + x.codice) + '" target="_blank" rel="noopener">Apri</a><button type="button" class="st-btn" data-qr="' + esc(x.codice) + '">QR</button>' +
+      (x.mia ? '<a class="st-btn" href="studio/modifica.html?c=' + esc(x.codice) + '">✏️ Modifica</a>' : '') + '</div></li>';
+  }
+  function disegna() {
+    chips();
+    var mat = $('ar-mat').value, q = $('ar-cerca').value.trim().toLowerCase();
+    var m = tutte.filter(function (x) {
+      var p = x.anno ? E.ANNI[x.anno - 1].periodo : '';
+      return (!periodo || p === periodo) && (!anno || x.anno === anno) && (!mat || (x.materia || 'Materia non indicata') === mat) &&
+        (!q || [x.titolo, x.sottotitolo, x.autore, x.classe, x.materia, x.codice].join(' ').toLowerCase().indexOf(q) >= 0);
+    });
+    $('ar-stato').textContent = tutte.length ? (m.length === tutte.length ? '' : m.length + ' di ') + tutte.length + (tutte.length === 1 ? ' lezione condivisa' : ' lezioni condivise') : '';
+    if (!tutte.length) {
+      $('ar-elenco').innerHTML = '<div class="st-card ar-vuoto"><div class="e">🗂️</div><p>L\'Archivio è ancora vuoto.</p><p class="st-nota">Quando pubblichi una lezione, spunta <b>«Condividi nell\'Archivio della Sala studio»</b>. Per quelle già pubblicate: <b>✏️ Modifica</b> e spunta la condivisione.</p><div class="st-azioni" style="justify-content:center"><a class="st-btn pieno" href="studio/docente.html">Le mie lezioni</a></div></div>';
+      return;
+    }
+    if (!m.length) { $('ar-elenco').innerHTML = '<div class="st-card ar-vuoto"><p>Nessuna lezione con questi filtri.</p></div>'; return; }
+    /* periodo → anno → materia */
+    var gruppi = [];
+    E.ANNI.concat([{ n: null, nome: 'Anno non indicato', periodo: 'Altre lezioni' }]).forEach(function (a) {
+      var dellAnno = m.filter(function (x) { return (x.anno || null) === a.n; });
+      if (!dellAnno.length) return;
+      var g = gruppi.filter(function (y) { return y.periodo === a.periodo; })[0];
+      if (!g) { g = { periodo: a.periodo, anni: [] }; gruppi.push(g); }
+      var perMateria = {};
+      dellAnno.forEach(function (x) { var k = x.materia || 'Materia non indicata'; (perMateria[k] = perMateria[k] || []).push(x); });
+      g.anni.push({ nome: a.nome, materie: Object.keys(perMateria).sort(function (p, q2) { return E.ordineMateria(p) - E.ordineMateria(q2) || p.localeCompare(q2); }).map(function (k) { return { nome: k, lezioni: perMateria[k] }; }) });
+    });
+    var aperte = m.length <= 12 || !!mat || !!q;
+    $('ar-elenco').innerHTML = gruppi.map(function (g) {
+      return '<h2 class="ar-periodo">' + esc(g.periodo) + '</h2>' + g.anni.map(function (a) {
+        return '<p class="ar-anno">' + esc(a.nome) + '</p>' + a.materie.map(function (mm) {
+          return '<details class="st-card ar-materia"' + (aperte ? ' open' : '') + '><summary>' + esc(mm.nome) + ' <small>(' + mm.lezioni.length + ')</small></summary><ul class="dc-mie">' + mm.lezioni.map(voce).join('') + '</ul></details>';
+        }).join('');
+      }).join('');
+    }).join('');
+  }
+  function carica() {
+    if (!E.entrato()) { $('ar-app').hidden = true; return; }
+    $('ar-stato').textContent = 'Carico l\'Archivio…';
+    E.chiama({ archivio: true }).then(function (r) {
+      if (!r.ok) { $('ar-app').hidden = true; aggiornaAccesso(r.messaggioErrore); return; }
+      $('ar-app').hidden = false;
+      tutte = r.lezioni || []; materie(); disegna();
+    });
+  }
+  $('ar-periodi').addEventListener('click', function (e) { var b = e.target.closest('[data-p]'); if (b) { periodo = b.getAttribute('data-p'); anno = 0; disegna(); } });
+  $('ar-anni').addEventListener('click', function (e) { var b = e.target.closest('[data-a]'); if (b) { var n = +b.getAttribute('data-a'); anno = anno === n ? 0 : n; if (anno) periodo = E.ANNI[n - 1].periodo; disegna(); } });
+  $('ar-mat').onchange = disegna;
+  $('ar-cerca').addEventListener('input', disegna);
+  $('ar-elenco').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-qr]'); if (!b) return;
+    var x = tutte.filter(function (y) { return y.codice === b.getAttribute('data-qr'); })[0];
+    E.cartello(BASE + x.codice, x, x.codice, false);
+  });
+  var aggiornaAccesso = E.accesso($('ar-gate'), function () { carica(); });
+  carica();
+})();
+</script>
+</body>
+</html>

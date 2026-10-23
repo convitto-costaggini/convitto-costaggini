@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Modifica una lezione – Sala studio | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Per docenti ed educatori: correggere, condividere o cancellare una lezione della Sala studio."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="studio/studio.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .md-sez{margin:0 0 .8rem}
+  .md-sez>summary{list-style:none;cursor:pointer;display:flex;gap:.6rem;align-items:center;padding:.9rem 1.1rem;font:800 1rem var(--fu);color:var(--bosco)}
+  .md-sez>summary::-webkit-details-marker{display:none}
+  .md-sez>summary::after{content:'▾';margin-left:auto;color:var(--oro);transition:transform .2s}
+  .md-sez[open]>summary::after{transform:rotate(180deg)}
+  .md-sez>summary small{font-weight:600;color:var(--txt2);font-size:.8rem}
+  .md-corpo{padding:0 1.1rem 1.1rem}
+  .md-voce{border:1px solid var(--av3);border-radius:12px;padding:.2rem .9rem .9rem;margin:.7rem 0;background:var(--bco);position:relative}
+  .md-voce>.md-tit{display:flex;gap:.4rem;align-items:center;margin:.5rem 0 0;font:800 .7rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)}
+  .md-voce>.md-tit span{flex:1}
+  .md-voce>.md-tit button,.md-riga button{border:1px solid var(--av3);background:#fff;border-radius:8px;min-width:34px;height:34px;cursor:pointer;font-size:.9rem}
+  .md-riga{display:flex;gap:.4rem;align-items:center;margin:.35rem 0}
+  .md-riga input{flex:1}
+  .md-agg{margin-top:.5rem}
+  .md-agg .st-btn{min-height:40px;padding:.4rem .8rem;font-size:.8rem}
+  .md-barra{position:sticky;bottom:0;z-index:20;background:rgba(253,250,245,.97);border-top:1px solid var(--av3);padding:.6rem .8rem;margin:1.2rem -0.8rem 0;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+  .md-barra .st-nota{flex:1;min-width:160px;margin:0}
+  @media (max-width:640px){.md-barra{padding-right:72px}.md-barra .st-nota{flex-basis:100%}}
+  .md-sola{border-color:var(--oro);background:#fdf8ea}
+  .dc .md-voce textarea{min-height:64px}
+  </style>
+</head>
+<body data-page="studio">
+<div class="st-anteprima">Sala studio del Convitto · area docenti ed educatori</div>
+<script src="nav-header.min.js"></script>
+<main id="main" class="st dc">
+  <section class="st-hero">
+    <div class="w">
+      <p class="lbl">Modifica</p>
+      <h1 id="md-tit"><span class="ic" aria-hidden="true">✏️</span>Correggi la lezione</h1>
+      <p id="md-sot">Le modifiche valgono subito per tutti: codice e QR non cambiano.</p>
+    </div>
+  </section>
+
+  <div class="st-palco">
+    <div id="md-gate" class="st-card"></div>
+
+    <div id="md-app" hidden>
+      <div class="st-card md-sola" id="md-sola" hidden>
+        <p style="margin:0">👀 <b>Questa lezione è di un collega</b> ed è condivisa nell'Archivio: puoi usarla e copiarne il link, ma solo l'autore può modificarla o cancellarla.</p>
+      </div>
+
+      <div class="st-card">
+        <div class="dc-passo"><b>ℹ️</b><h2>La lezione</h2></div>
+        <div class="dc-due">
+          <div><label for="md-mat">Materia</label><select id="md-mat"></select>
+            <input type="text" id="md-mat-altra" maxlength="80" placeholder="Scrivi la materia" hidden style="margin-top:.4rem"/></div>
+          <div><label for="md-anno">Anno di corso</label><select id="md-anno"></select></div>
+        </div>
+        <div class="dc-due">
+          <div><label for="md-cla">Classe (facoltativa)</label><input type="text" id="md-cla" maxlength="40"/></div>
+          <div><label for="md-aut">Autore (facoltativo)</label><input type="text" id="md-aut" maxlength="80"/></div>
+        </div>
+        <label class="dc-spunta" for="md-cond"><input type="checkbox" id="md-cond"/><span><b>🌐 Condivisa nell'Archivio della Sala studio</b><small>Se la togli, la lezione resta raggiungibile dal suo QR ma sparisce dall'Archivio dei colleghi.</small></span></label>
+        <div class="st-azioni"><a class="st-btn" id="md-apri" target="_blank" rel="noopener">👀 Apri la lezione</a><button type="button" class="st-btn" id="md-qr">🖥️ QR a tutto schermo</button><span class="st-nota" id="md-codice"></span></div>
+      </div>
+
+      <h3>✍️ I contenuti</h3>
+      <p class="st-sot">Apri una sezione, correggi il testo e premi <b>Salva</b> in fondo alla pagina.</p>
+      <div id="md-form"></div>
+
+      <div class="st-card" id="md-ia-box">
+        <details id="md-ia">
+          <summary>🤖 Fatti aiutare dall'IA a correggerla</summary>
+          <p class="st-nota">Scrivi cosa cambiare, copia la richiesta e incollala in Claude, ChatGPT o Gemini. Poi incolla qui la risposta: i contenuti si aggiornano nella pagina e li salvi quando ti vanno bene.</p>
+          <label for="md-rich">Cosa cambiare</label>
+          <textarea id="md-rich" maxlength="800" placeholder="es. La data della scoperta del fuoco è sbagliata. Oppure: rendi le domande del quiz più facili. Oppure: aggiungi il Neolitico."></textarea>
+          <div class="st-azioni"><button type="button" class="st-btn oro" id="md-copia">📋 Copia la richiesta</button><a class="st-btn pieno" href="https://claude.ai/new" target="_blank" rel="noopener">Claude ↗</a><a class="st-btn pieno" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT ↗</a><a class="st-btn pieno" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini ↗</a></div>
+          <label for="md-risp">La risposta dell'IA</label>
+          <textarea id="md-risp" style="min-height:100px;font-family:monospace;font-size:.82rem" placeholder='{"titolo": "...", ...}'></textarea>
+          <div class="st-azioni"><button type="button" class="st-btn" id="md-incolla">📋 Incolla</button><button type="button" class="st-btn pieno" id="md-applica">↻ Usa questa versione</button></div>
+          <p class="dc-err" id="md-err-ia" role="alert"></p>
+        </details>
+      </div>
+
+      <div class="st-card" id="md-elimina-box">
+        <details>
+          <summary>🗑️ Cancella la lezione</summary>
+          <p class="st-nota">La lezione sparisce per sempre: il QR e il codice smettono di funzionare per tutti i ragazzi. Non si può annullare.</p>
+          <div class="st-azioni"><button type="button" class="st-btn" id="md-elimina" style="border-color:var(--st-no);color:var(--st-no)">🗑️ Cancella definitivamente</button></div>
+        </details>
+      </div>
+
+      <div class="md-barra" id="md-barra">
+        <span class="st-nota" id="md-stato" aria-live="polite">Nessuna modifica.</span>
+        <a class="st-btn" href="studio/docente.html">← Le mie lezioni</a>
+        <button type="button" class="st-btn oro" id="md-salva" disabled>💾 Salva</button>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="nav.min.js"></script>
+<script src="supabase.js"></script>
+<script src="lingue/qrcode.js"></script>
+<script src="studio/studio.js"></script>
+<script src="studio/demo.js"></script>
+<script src="studio/educatori.js"></script>
+<script>
+(function () {
+  'use strict';
+  var E = window.EDUCATORI, esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
+  var codice = (new URLSearchParams(location.search).get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  var L = null, mia = false, cambiata = false;
+  var url = location.origin + '/studio/lezione.html?c=' + codice;
+
+  /* ───── come si presenta ogni parte della lezione: [campo, etichetta, tipo, sottocampi] ─────
+     tipi: testo, lungo, sino (vero/falso), indice (risposta giusta fra le opzioni), testi (elenco di righe), lista (elenco di schede) */
+  var SEZIONI = [
+    { t: '🏷️ Titolo', ob: '', campi: [['titolo', 'Titolo'], ['sottotitolo', 'Sottotitolo', 'lungo'], ['icona', 'Icona (una emoji)']] },
+    { t: '🎣 Il gancio', ob: 'gancio', campi: [['domanda', 'Domanda', 'lungo'], ['risposta', 'Risposta', 'lungo']] },
+    { t: '💡 Le idee chiave', ob: '', campi: [['concetti', 'Idea', 'lista', [['emoji', 'Emoji'], ['titolo', 'Titolo'], ['spiegazione', 'Spiegazione', 'lungo'], ['parola_chiave', 'Parola da evidenziare (deve comparire nella spiegazione)'], ['esempio', 'Esempio', 'lungo']]]] },
+    { t: '📖 Le parole importanti', ob: '', campi: [['parole', 'Parola', 'lista', [['termine', 'Termine'], ['definizione', 'Definizione', 'lungo']]]] },
+    { t: '🔤 La parola magica', ob: 'mnemonica.acronimo', campi: [['parola', 'Parola o sigla'], ['frase', 'Frase buffa con le stesse iniziali', 'lungo'], ['lettere', 'Lettera', 'lista', [['lettera', 'Lettera'], ['significato', 'Cosa vuol dire']]]] },
+    { t: '🏰 Il palazzo della memoria', ob: 'mnemonica.storia', campi: [['titolo', 'Titolo del giro'], ['tappe', 'Tappa', 'lista', [['luogo', 'Luogo'], ['immagine', 'Scena da immaginare', 'lungo'], ['concetto', 'Concetto da ricordare']]]] },
+    { t: '🎵 La filastrocca', ob: 'mnemonica', campi: [['filastrocca', 'Versi (uno per riga)', 'lungo']] },
+    { t: '🖼️ Le immagini mentali', ob: 'mnemonica', campi: [['immagini', 'Immagine', 'lista', [['emoji', 'Emoji'], ['concetto', 'Concetto'], ['immagine', 'Immagine mentale', 'lungo']]]] },
+    { t: '🪄 Altri trucchi', ob: 'mnemonica', campi: [['trucchi', 'Trucco', 'testi']] },
+    { t: '🔢 In ordine', ob: 'sequenza', campi: [['titolo', 'Consegna (vuota se l\'argomento non ha un ordine)'], ['passi', 'Passo, nell\'ordine giusto', 'testi']] },
+    { t: '❓ Quiz', ob: '', campi: [['quiz', 'Domanda', 'lista', [['domanda', 'Domanda', 'lungo'], ['opzioni', 'Risposta possibile', 'testi'], ['corretta', 'Risposta giusta', 'indice'], ['spiegazione', 'Spiegazione', 'lungo']]]] },
+    { t: '✔️ Vero o falso', ob: '', campi: [['vero_falso', 'Affermazione', 'lista', [['affermazione', 'Affermazione', 'lungo'], ['vero', 'È vera', 'sino'], ['spiegazione', 'Spiegazione', 'lungo']]]] },
+    { t: '✏️ Completa la frase', ob: '', campi: [['completa', 'Frase', 'lista', [['frase', 'Frase con ___ al posto della parola', 'lungo'], ['risposta', 'Parola giusta'], ['distrattori', 'Parola sbagliata', 'testi']]]] },
+    { t: '🔗 Abbina', ob: '', campi: [['abbina', 'Coppia', 'lista', [['sinistra', 'A sinistra'], ['destra', 'A destra']]]] },
+    { t: '🃏 Flashcard', ob: '', campi: [['flashcard', 'Carta', 'lista', [['fronte', 'Domanda (fronte)', 'lungo'], ['retro', 'Risposta (retro)', 'lungo']]]] },
+    { t: '📌 Da ricordare', ob: '', campi: [['da_ricordare', 'Frase', 'testi']] }
+  ];
+  /* una scheda vuota con la stessa forma dei sottocampi */
+  function vuota(campi) { var o = {}; campi.forEach(function (c) { o[c[0]] = c[2] === 'testi' || c[2] === 'lista' ? [] : c[2] === 'sino' ? true : c[2] === 'indice' ? 0 : ''; }); return o; }
+  function oggetto(path) {
+    var o = L; if (!path) return o;
+    path.split('.').forEach(function (k) { if (!o[k] || typeof o[k] !== 'object') o[k] = {}; o = o[k]; });
+    return o;
+  }
+  function segna() { cambiata = true; $('md-salva').disabled = !mia; $('md-stato').textContent = mia ? '✏️ Modifiche da salvare.' : 'Le modifiche non si possono salvare: la lezione è di un collega.'; }
+  function el(tag, attr, html) { var e = document.createElement(tag); Object.keys(attr || {}).forEach(function (k) { e.setAttribute(k, attr[k]); }); if (html != null) e.innerHTML = html; return e; }
+  var conta = 0;
+  function campoTesto(o, k, et, lungo) {
+    var id = 'md-f' + (++conta), w = el('div');
+    w.appendChild(el('label', { for: id }, esc(et)));
+    var i = el(lungo ? 'textarea' : 'input', { id: id }); if (!lungo) i.type = 'text';
+    i.value = o[k] == null ? '' : o[k];
+    i.oninput = function () { o[k] = i.value; segna(); };
+    w.appendChild(i); return w;
+  }
+  /* disegna i campi di un oggetto dentro un contenitore */
+  function campi(box, o, defs) {
+    var aggiornaIndice = [];
+    defs.forEach(function (d) {
+      var k = d[0], et = d[1], tipo = d[2] || 'testo';
+      if (tipo === 'testo' || tipo === 'lungo') return box.appendChild(campoTesto(o, k, et, tipo === 'lungo'));
+      if (tipo === 'sino') {
+        var id = 'md-f' + (++conta), lab = el('label', { class: 'dc-spunta', for: id }), c = el('input', { id: id, type: 'checkbox' });
+        c.checked = !!o[k]; c.onchange = function () { o[k] = c.checked; segna(); };
+        lab.appendChild(c); lab.appendChild(el('span', {}, '<b>' + esc(et) + '</b><small>Togli la spunta se l\'affermazione è falsa.</small>'));
+        return box.appendChild(lab);
+      }
+      if (tipo === 'indice') {
+        var id2 = 'md-f' + (++conta), w = el('div'), s = el('select', { id: id2 });
+        w.appendChild(el('label', { for: id2 }, esc(et)));
+        var rif = defs.filter(function (x) { return x[2] === 'testi'; })[0][0];
+        var aggiorna = function () {
+          var op = Array.isArray(o[rif]) ? o[rif] : [];
+          s.innerHTML = op.map(function (t, i) { return '<option value="' + i + '">' + (i + 1) + '. ' + esc(t || '(vuota)') + '</option>'; }).join('');
+          if (o[k] >= op.length) { o[k] = 0; }
+          s.value = String(o[k] || 0);
+        };
+        s.onchange = function () { o[k] = +s.value; segna(); };
+        aggiornaIndice.push(aggiorna); aggiorna();
+        w.appendChild(s); return box.appendChild(w);
+      }
+      if (!Array.isArray(o[k])) o[k] = [];
+      var arr = o[k], lista = el('div');
+      box.appendChild(lista);
+      var ridisegna = function () {
+        lista.innerHTML = '';
+        if (tipo === 'testi') {
+          lista.appendChild(el('label', {}, esc(et) + (arr.length ? '' : ' — nessuna')));
+          arr.forEach(function (t, i) {
+            var r = el('div', { class: 'md-riga' }), inp = el('input', { type: 'text', 'aria-label': et + ' ' + (i + 1) });
+            inp.value = t; inp.oninput = function () { arr[i] = inp.value; segna(); aggiornaIndice.forEach(function (f) { f(); }); };
+            r.appendChild(inp);
+            r.appendChild(bottone('✕', 'Togli', function () { arr.splice(i, 1); segna(); ridisegna(); aggiornaIndice.forEach(function (f) { f(); }); }));
+            lista.appendChild(r);
+          });
+          lista.appendChild(aggiungi('+ ' + et, function () { arr.push(''); segna(); ridisegna(); aggiornaIndice.forEach(function (f) { f(); }); var u = lista.querySelectorAll('input'); if (u.length) u[u.length - 1].focus(); }));
+          return;
+        }
+        arr.forEach(function (voce, i) {
+          var v = el('div', { class: 'md-voce' }), tit = el('div', { class: 'md-tit' }, '<span>' + esc(et) + ' ' + (i + 1) + '</span>');
+          tit.appendChild(bottone('↑', 'Sposta su', function () { if (i) { arr.splice(i - 1, 0, arr.splice(i, 1)[0]); segna(); ridisegna(); } }));
+          tit.appendChild(bottone('↓', 'Sposta giù', function () { if (i < arr.length - 1) { arr.splice(i + 1, 0, arr.splice(i, 1)[0]); segna(); ridisegna(); } }));
+          tit.appendChild(bottone('🗑', 'Togli', function () { if (confirm('Togliere ' + et.toLowerCase() + ' ' + (i + 1) + '?')) { arr.splice(i, 1); segna(); ridisegna(); } }));
+          v.appendChild(tit); campi(v, voce, d[3]); lista.appendChild(v);
+        });
+        lista.appendChild(aggiungi('+ ' + et, function () { arr.push(vuota(d[3])); segna(); ridisegna(); }));
+      };
+      ridisegna();
+    });
+  }
+  function bottone(t, et, fn) { var b = el('button', { type: 'button', 'aria-label': et, title: et }, t); b.onclick = fn; return b; }
+  function aggiungi(t, fn) { var w = el('div', { class: 'md-agg' }), b = el('button', { type: 'button', class: 'st-btn' }, esc(t)); b.onclick = fn; w.appendChild(b); return w; }
+  function quante(s) {
+    var d = s.campi[0], o = oggetto(s.ob);
+    return d[2] === 'lista' || d[2] === 'testi' ? (Array.isArray(o[d[0]]) ? o[d[0]].length : 0) : null;
+  }
+  function disegnaForm() {
+    var f = $('md-form'); f.innerHTML = '';
+    SEZIONI.forEach(function (s, i) {
+      var n = quante(s), det = el('details', { class: 'st-card md-sez' });
+      if (!i) det.open = true;
+      det.appendChild(el('summary', {}, esc(s.t) + (n != null ? ' <small>(' + n + ')</small>' : '')));
+      var corpo = el('div', { class: 'md-corpo' }); det.appendChild(corpo);
+      var fatto = false;
+      var apri = function () {
+        if (fatto) return; fatto = true; campi(corpo, oggetto(s.ob), s.campi);
+        if (!mia) corpo.querySelectorAll('input,textarea,select,button').forEach(function (x) { x.disabled = true; });
+      };
+      det.addEventListener('toggle', function () { if (det.open) apri(); });
+      if (det.open) apri();
+      f.appendChild(det);
+    });
+  }
+
+  /* ───── caricamento ───── */
+  function errore(t) { $('md-app').hidden = true; $('md-tit').textContent = 'Lezione non disponibile'; $('md-sot').textContent = t; }
+  function carica() {
+    if (!/^[A-Z2-9]{6}$/.test(codice)) return errore('Il link è incompleto: apri la modifica dall\'elenco "Le mie lezioni".');
+    if (!E.entrato()) { $('md-app').hidden = true; return; }
+    E.chiama({ leggi: codice }).then(function (r) {
+      if (!r.ok) {
+        if (['codice', 'sessione', 'accesso'].indexOf(r.errore) >= 0) { aggiornaAccesso(r.messaggioErrore); $('md-app').hidden = true; return; }
+        return errore(r.messaggioErrore);
+      }
+      var x = r.lezione; L = x.contenuto; mia = !!x.mia;
+      $('md-app').hidden = false; $('md-sola').hidden = mia;
+      $('md-elimina-box').hidden = !mia; $('md-ia-box').hidden = !mia;
+      $('md-tit').innerHTML = '<span class="ic" aria-hidden="true">' + esc(L.icona || '✏️') + '</span>' + esc(L.titolo);
+      $('md-sot').textContent = mia ? 'Le modifiche valgono subito per tutti quando salvi: codice e QR non cambiano.' : 'Lezione condivisa da un collega: puoi consultarla, non modificarla.';
+      E.riempiMaterie($('md-mat'), x.materia || L.materia || ''); E.materiaScelta($('md-mat'), $('md-mat-altra'));
+      E.riempiAnni($('md-anno'), x.anno || E.annoDaClasse(x.classe));
+      $('md-cla').value = x.classe || ''; $('md-aut').value = x.autore || ''; $('md-cond').checked = !!x.condivisa;
+      ['md-mat', 'md-mat-altra', 'md-anno', 'md-cla', 'md-aut', 'md-cond'].forEach(function (id) { $(id).disabled = !mia; $(id).addEventListener(id === 'md-cond' || id === 'md-mat' || id === 'md-anno' ? 'change' : 'input', function () { E.materiaScelta($('md-mat'), $('md-mat-altra')); segna(); }); });
+      $('md-apri').href = url; $('md-codice').textContent = 'Codice ' + codice;
+      $('md-barra').hidden = false; if (!mia) $('md-salva').hidden = true;
+      $('md-stato').textContent = mia ? 'Nessuna modifica.' : '';
+      document.title = 'Modifica: ' + L.titolo + ' – Sala studio';
+      disegnaForm();
+    });
+  }
+  var aggiornaAccesso = E.accesso($('md-gate'), function () { carica(); });
+
+  /* ───── salva, QR, IA, cancella ───── */
+  $('md-salva').onclick = function () {
+    var materia = E.materiaScelta($('md-mat'), $('md-mat-altra')), anno = +$('md-anno').value || null, cond = $('md-cond').checked, b = this;
+    if (!String(L.titolo || '').trim()) { $('md-stato').textContent = '⚠️ Manca il titolo.'; return; }
+    if (!Array.isArray(L.concetti) || !L.concetti.length) { $('md-stato').textContent = '⚠️ Serve almeno un\'idea chiave.'; return; }
+    if (cond && (!materia || !anno)) { $('md-stato').textContent = '⚠️ Per condividerla nell\'Archivio scegli materia e anno.'; return; }
+    if (L.mnemonica && typeof L.mnemonica.filastrocca === 'string') L.mnemonica.filastrocca = L.mnemonica.filastrocca.replace(/\r/g, '');
+    b.disabled = true; $('md-stato').textContent = '⏳ Salvo…';
+    E.chiama({ modifica: codice, lezione: L, materia: materia, anno: anno, classe: $('md-cla').value.trim(), autore: $('md-aut').value.trim(), condivisa: cond }).then(function (r) {
+      if (!r.ok) { b.disabled = false; $('md-stato').textContent = '⚠️ ' + r.messaggioErrore; return; }
+      L = r.lezione; cambiata = false; $('md-stato').textContent = '✅ Salvata. I ragazzi vedono già la versione nuova.'; STUDIO.toast('Lezione salvata 💾');
+      $('md-tit').innerHTML = '<span class="ic" aria-hidden="true">' + esc(L.icona || '✏️') + '</span>' + esc(L.titolo);
+      disegnaForm();
+    });
+  };
+  $('md-qr').onclick = function () { E.cartello(url, { titolo: L.titolo, icona: L.icona, materia: E.materiaScelta($('md-mat'), $('md-mat-altra')) }, codice, false); };
+  $('md-copia').onclick = function () {
+    var t = E.correzione(L, $('md-rich').value.trim());
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { STUDIO.toast('Richiesta copiata: ora apri l\'assistente IA 📋'); })
+      .catch(function () { $('md-risp').value = t; $('md-risp').select(); STUDIO.toast('Copia il testo dal riquadro qui sotto'); });
+  };
+  $('md-incolla').onclick = function () {
+    if (!navigator.clipboard || !navigator.clipboard.readText) { $('md-risp').focus(); return STUDIO.toast('Tieni premuto nel riquadro e scegli Incolla'); }
+    navigator.clipboard.readText().then(function (t) { $('md-risp').value = t; }).catch(function () { $('md-risp').focus(); STUDIO.toast('Tieni premuto nel riquadro e scegli Incolla'); });
+  };
+  $('md-applica').onclick = function () {
+    var N = E.leggi($('md-risp').value);
+    if (!N) { $('md-err-ia').textContent = 'La risposta incollata non è una lezione completa: copiate tutta la risposta dell\'IA, dalla prima { all\'ultima }.'; return; }
+    $('md-err-ia').textContent = ''; L = N; segna(); disegnaForm(); $('md-risp').value = '';
+    $('md-stato').textContent = '✏️ Versione dell\'IA caricata: controllala e premi Salva.';
+    $('md-form').scrollIntoView({ behavior: 'smooth' });
+  };
+  $('md-elimina').onclick = function () {
+    if (!confirm('Cancellare per sempre «' + L.titolo + '»?\nIl QR e il codice ' + codice + ' smetteranno di funzionare.')) return;
+    E.chiama({ elimina: codice }).then(function (r) {
+      if (!r.ok) return STUDIO.toast(r.messaggioErrore);
+      cambiata = false; STUDIO.toast('Lezione cancellata 🗑️');
+      setTimeout(function () { location.href = 'studio/docente.html'; }, 900);
+    });
+  };
+  window.addEventListener('beforeunload', function (e) { if (cambiata && mia) { e.preventDefault(); e.returnValue = ''; } });
+  carica();
+})();
+</script>
+</body>
+</html>

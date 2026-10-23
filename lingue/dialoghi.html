@@ -76,6 +76,7 @@
 <script src="nav.min.js"></script>
 <script src="lingue/lingue.js"></script>
 <script src="lingue/finestra.js"></script>
+<script src="lingue/revisione.js"></script>
 <script src="lingue/dialoghi-dati.js"></script>
 <script>
 (function () {
@@ -94,7 +95,7 @@
     document.getElementById('dl-coppia').innerHTML = '🎭 <b>In coppia:</b> uno interpreta il ruolo di ' + L.esc(s.altro.nome.toLowerCase()) + ', l&#39;altro quello di ' + L.esc(s.staff.nome.toLowerCase()) + ', poi ci si scambia i ruoli. Le voci del telefono sono due, una più grave e una più acuta, per distinguere chi parla.';
     chat.innerHTML = s.righe.map(function (r, i) {
       var staff = r[0] === 'S', ruolo = staff ? s.staff : s.altro, t = r[2][lingua], nasc = staff && modo === 'staff';
-      return '<div class="dl-r' + (staff ? ' cam' : '') + '"><span class="dl-av" aria-hidden="true">' + ruolo.icona + '</span><div class="dl-b' + (nasc ? ' dl-nasc' : '') + '" data-i="' + i + '">' +
+      return '<div class="dl-r' + (staff ? ' cam' : '') + '"><span class="dl-av" aria-hidden="true">' + ruolo.icona + '</span><div class="dl-b' + (nasc ? ' dl-nasc' : '') + '" data-i="' + i + '"' + (window.REVISIONE ? REVISIONE.attr('dl|' + s.id + '|' + i, lingua, t) : '') + '>' +
         '<div class="dl-chi">' + L.esc(ruolo.nome) + '</div><div class="dl-t"><span lang="' + lingua + '">' + L.esc(t) + '</span>' + L.play(t, lingua) + '</div>' +
         '<div class="dl-it">' + (nasc ? '<b style="display:block;font:800 .58rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)">Di&#39; in ' + L.lingua(lingua).nome.toLowerCase() + ':</b>' : '') + L.esc(r[1]) + '</div>' +
         '<button type="button" class="dl-svela" data-svela="' + i + '">Dillo ad alta voce, poi tocca per controllare</button></div></div>';

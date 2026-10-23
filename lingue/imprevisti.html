@@ -105,6 +105,7 @@
 <script src="nav.min.js"></script>
 <script src="lingue/lingue.js"></script>
 <script src="lingue/finestra.js"></script>
+<script src="lingue/revisione.js"></script>
 <script src="lingue/parole.js"></script>
 <script src="lingue/imprevisti-dati.js"></script>
 <script>
@@ -134,7 +135,7 @@
     ordine = L.mescola([0, 1, 2]);
     vista.innerHTML = '<div class="im-gioco">' + testa() + (passo === 0 ? '<div class="im-intro">' + esc(storia.intro) + '</div>' : '') +
       '<p class="im-sit">' + esc(p.situazione) + '</p>' +
-      '<div class="im-cli"><span class="av" aria-hidden="true">🧑</span><div class="bb"><div class="tx"><span lang="' + lingua + '">' + esc(t) + '</span>' + L.play(t, lingua, 'Ascolta il cliente') + '</div><div class="im-trad">' + esc(p.clienteIt) + '</div></div></div>' +
+      '<div class="im-cli"><span class="av" aria-hidden="true">🧑</span><div class="bb"' + (window.REVISIONE ? REVISIONE.attr('im|' + storia.id + '|' + passo + '|cliente', lingua, t) : '') + '><div class="tx"><span lang="' + lingua + '">' + esc(t) + '</span>' + L.play(t, lingua, 'Ascolta il cliente') + '</div><div class="im-trad">' + esc(p.clienteIt) + '</div></div></div>' +
       '<p class="im-dom">Che cosa rispondi?</p><div class="im-opz">' + ordine.map(function (k) { var o = p.opzioni[k]; return '<button type="button" data-o="' + k + '"><span class="fr" lang="' + lingua + '">' + esc(o.testo[lingua]) + '</span><span class="tr">' + esc(o.it) + '</span></button>'; }).join('') + '</div><div id="im-esito"></div></div>';
     if (L.parla) setTimeout(function () { L.ascolta(t, lingua, { btn: vista.querySelector('.im-cli .lg-play'), pitch: .9 }); }, 300);
   }
@@ -144,7 +145,7 @@
     vista.querySelectorAll('[data-o]').forEach(function (b) { b.disabled = true; var v = p.opzioni[+b.dataset.o].voto; if (+b.dataset.o === k) b.classList.add('v' + v); else if (v === 3 && o.voto !== 3) b.classList.add('v3'); else b.classList.add('spenta'); });
     var e = ESITO[o.voto];
     document.getElementById('im-esito').innerHTML = '<div class="im-esito"><span class="im-badge ' + e[0] + '">' + e[1] + '</span><p class="im-reaz">' + esc(o.reazione) + '</p><p class="im-perche">' + esc(o.perche) + '</p>' +
-      (o.voto !== 3 ? '<div class="im-meglio"><div><b>La risposta migliore:</b><br/><span class="fr" lang="' + lingua + '">' + esc(migliore.testo[lingua]) + '</span><span class="it">' + esc(migliore.it) + '</span></div>' + L.play(migliore.testo[lingua], lingua, 'Ascolta la risposta migliore') + '</div>' : '') +
+      (o.voto !== 3 ? '<div class="im-meglio"><div' + (window.REVISIONE ? REVISIONE.attr('im|' + storia.id + '|' + passo + '|' + p.opzioni.indexOf(migliore), lingua, migliore.testo[lingua]) : '') + '><b>La risposta migliore:</b><br/><span class="fr" lang="' + lingua + '">' + esc(migliore.testo[lingua]) + '</span><span class="it">' + esc(migliore.it) + '</span></div>' + L.play(migliore.testo[lingua], lingua, 'Ascolta la risposta migliore') + '</div>' : '') +
       '<button type="button" class="lg-btn pieno" data-avanti style="width:100%;margin-top:1rem">' + (passo + 1 < storia.passi.length ? 'Avanti →' : 'Com\'è andata?') + '</button></div>';
     var f = document.getElementById('im-faccia'); f.textContent = faccia(punti()); f.classList.add('cambia'); setTimeout(function () { f.classList.remove('cambia'); }, 300);
     vista.querySelectorAll('.im-passi i')[passo].className = o.voto === 3 ? 'ok' : o.voto === 1 ? 'mh' : 'ko';

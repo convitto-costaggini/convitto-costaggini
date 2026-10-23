@@ -127,8 +127,10 @@ window.EDUCATORI = (function () {
       }
       function errore(r) { err.textContent = r.messaggioErrore || ERRORI.server; }
       function manda() {
-        mail = q('#ac-mail').value.replace(/\s+/g, '').toLowerCase(); err.textContent = '';
-        if (mail && mail.indexOf('@') < 0) { mail += '@alberghierorieti.it'; q('#ac-mail').value = mail; } /* basta nome.cognome */
+        mail = q('#ac-mail').value.trim().toLowerCase(); err.textContent = '';
+        /* basta nome.cognome (anche scritto «Mario Rossi»): il dominio si aggiunge da solo */
+        if (mail && mail.indexOf('@') < 0) mail = mail.replace(/\s+/g, '.') + '@alberghierorieti.it';
+        mail = mail.replace(/\s+/g, ''); q('#ac-mail').value = mail;
         if (!/^[^\s@]+@alberghierorieti\.(edu\.)?it$/.test(mail)) { err.textContent = ERRORI.email; q('#ac-mail').focus(); return; }
         var b = q('[data-manda]'); b.disabled = true; b.textContent = '⏳ Spedisco…';
         chiama({ azione: 'richiedi', email: mail }).then(function (r) {
@@ -242,7 +244,7 @@ window.EDUCATORI = (function () {
       d.note && 'Indicazioni dell\'educatore: ' + d.note
     ].filter(Boolean).join('\n');
     return REGOLE + FORMATO + (extra ? '\n\n' + extra : '') +
-      '\n\nOra crea la lezione: sulle foto allegate se ci sono, altrimenti ' + (d.argomento ? 'sull\'argomento indicato.' : 'sull\'argomento che ti scrivo qui sotto.');
+      '\n\nOra crea la lezione: sulle foto allegate se ci sono, altrimenti ' + (d.argomento ? 'sull\'argomento indicato.' : 'sull\'argomento che ti scrivo qui sotto. Se non ci sono né foto né argomento, non creare niente: chiedimi soltanto, con una frase breve, di allegare le foto o di scrivere l\'argomento.');
   }
   function correzione(L, richiesta) {
     return 'Qui sotto c\'è una lezione interattiva per ragazzi con DSA di un istituto professionale alberghiero, in formato JSON.\n' +
@@ -294,7 +296,7 @@ window.EDUCATORI = (function () {
   }
   function cartello(url, L, cod, stampa) {
     var cv = document.createElement('canvas'); qr(url, cv, 14);
-    var w = window.open('', '_blank'); if (!w) return window.STUDIO.toast('Consenti le finestre a comparsa');
+    var w = window.open('', '_blank'); if (!w) return cartelloQui(cv, L, cod, stampa);
     w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(L.titolo) + ' — QR</title><style>' +
       'body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Arial,sans-serif;background:#fff;color:#2C3E2D;text-align:center;padding:2vh}' +
       '.m{font-size:2.2vh;letter-spacing:.2em;text-transform:uppercase;color:#B8922A;font-weight:bold}h1{font-size:5vh;margin:1vh 0 2vh}img{width:min(58vh,80vw);height:auto}' +
@@ -303,6 +305,19 @@ window.EDUCATORI = (function () {
       (cod ? '<div class="c">' + esc(cod) + '</div>' : '') + '<p>Inquadra il codice con la fotocamera del telefono.</p><p>Idee chiave · trucchi per ricordare · esercizi · flashcard · sfida finale</p>' +
       (stampa ? '<script>onload=function(){print()}<\/script>' : '') + '</body></html>');
     w.document.close();
+  }
+  /* se il browser blocca le finestre nuove: il cartello a tutto schermo nella pagina stessa */
+  function cartelloQui(cv, L, cod, stampa) {
+    var o = document.createElement('div'); o.className = 'ed-cartello'; o.setAttribute('role', 'dialog'); o.setAttribute('aria-label', 'QR della lezione');
+    o.innerHTML = '<div class="m">Sala studio · ' + esc(L.materia || '') + '</div><h2>' + esc((L.icona || '📚') + ' ' + L.titolo) + '</h2><img alt="Codice QR" src="' + cv.toDataURL() + '"/>' +
+      (cod ? '<div class="c">' + esc(cod) + '</div>' : '') + '<p>Inquadra il codice con la fotocamera del telefono.</p>' +
+      '<div class="az"><button type="button" class="st-btn" data-st>🖨️ Stampa</button><button type="button" class="st-btn pieno" data-ch>✕ Chiudi</button></div>';
+    document.body.appendChild(o); document.documentElement.classList.add('ed-cartello-aperto');
+    function chiudi() { o.remove(); document.documentElement.classList.remove('ed-cartello-aperto'); }
+    o.querySelector('[data-ch]').onclick = chiudi;
+    o.querySelector('[data-st]').onclick = function () { window.print(); };
+    document.addEventListener('keydown', function k(e) { if (e.key === 'Escape') { chiudi(); document.removeEventListener('keydown', k); } });
+    if (stampa) setTimeout(function () { window.print(); }, 300);
   }
   function data(d) { var m = String(d || '').match(/^(\d{4})-(\d\d)-(\d\d)/); return m ? m[3] + '/' + m[2] + '/' + m[1] : ''; }
 

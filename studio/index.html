@@ -41,10 +41,11 @@
       <p>Le pagine del tuo libro diventano una lezione da fare dal telefono: le idee chiave una alla volta, i trucchi per ricordare, gli esercizi, le flashcard e una sfida finale. Niente registrazione.</p>
       <form class="sx-cod" id="sx-form" autocomplete="off">
         <label for="sx-c" class="hm-sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Codice della lezione</label>
-        <input id="sx-c" maxlength="6" placeholder="CODICE" inputmode="text" autocapitalize="characters" spellcheck="false"/>
+        <input id="sx-c" maxlength="9" placeholder="CODICE" inputmode="text" autocapitalize="characters" spellcheck="false"/>
         <button class="st-btn oro" type="submit">Entra →</button>
       </form>
-      <p style="font-size:.82rem;margin-top:.6rem">Il codice di 6 lettere te lo dà il docente o l'educatore: è scritto sotto il QR della lezione.</p>
+      <p style="font-size:.82rem;margin-top:.6rem" id="sx-aiuto" aria-live="polite">Il codice di 6 lettere te lo dà il docente o l'educatore: è scritto sotto il QR della lezione.</p>
+      <p style="font-size:.82rem;margin-top:.8rem"><a href="studio/docente.html" style="color:var(--oro3);font-weight:700">👩‍🏫 Sei un docente o un educatore? Crea una lezione →</a></p>
     </div>
   </section>
 
@@ -82,7 +83,7 @@ document.getElementById('sx-form').addEventListener('submit', function (e) {
   e.preventDefault();
   var c = document.getElementById('sx-c').value.toUpperCase().replace(/[^A-Z0-9]/g, '');
   if (c.length === 6 || c === 'DEMO') location.href = 'studio/lezione.html?c=' + c;
-  else document.getElementById('sx-c').focus();
+  else { document.getElementById('sx-aiuto').innerHTML = '<b>⚠️ Il codice ha 6 caratteri</b> (lettere e numeri): lo trovi sotto il QR della lezione.'; document.getElementById('sx-c').focus(); }
 });
 </script>
 </body>

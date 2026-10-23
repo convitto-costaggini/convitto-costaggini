@@ -6,56 +6,13 @@
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Crea una lezione – Sala studio | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Per gli educatori: fotografa le pagine del libro e ottieni in un minuto una lezione interattiva con QR per i ragazzi."/>
+  <meta name="description" content="Per gli educatori: dalla foto di una pagina, di appunti o di una mappa concettuale, oppure dal solo titolo, una lezione interattiva con QR per i ragazzi."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
   <link rel="stylesheet" href="studio/studio.css"/>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <script src="app.js" defer></script>
-  <style>
-  .dc label:not(.st-btn){display:block;font:800 .72rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--bosco);margin:1rem 0 .35rem}
-  .dc input[type=text],.dc input[type=password],.dc textarea,.dc select{width:100%;font:inherit;font-size:1rem;padding:.7rem .85rem;border:2px solid var(--av3);border-radius:12px;background:#fff;color:var(--txt)}
-  .dc input:focus,.dc textarea:focus{outline:none;border-color:var(--oro)}
-  .dc textarea{min-height:80px;resize:vertical}
-  .dc-due{display:grid;grid-template-columns:1fr 1fr;gap:0 .8rem}
-  @media (max-width:560px){.dc-due{grid-template-columns:1fr}}
-  .dc-passo{display:flex;gap:.7rem;align-items:center;margin:0 0 .4rem}
-  .dc-passo b{flex:0 0 34px;height:34px;border-radius:50%;background:var(--oro);color:#fff;display:flex;align-items:center;justify-content:center;font:800 1rem var(--fu)}
-  .dc-passo h2{margin:0;font-size:1.5rem}
-  .dc-foto{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.6rem;margin-top:1rem}
-  .dc-foto figure{margin:0;position:relative;border-radius:12px;overflow:hidden;border:2px solid var(--av3);aspect-ratio:3/4;background:var(--av)}
-  .dc-foto img{width:100%;height:100%;object-fit:cover;display:block}
-  .dc-foto figcaption{position:absolute;left:.3rem;top:.3rem;background:var(--bosco);color:#fff;font:800 .75rem var(--fu);border-radius:99px;padding:.1rem .5rem}
-  .dc-foto button{position:absolute;right:.3rem;top:.3rem;width:32px;height:32px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;font-size:.9rem}
-  .dc-vuoto{border:3px dashed var(--av3);border-radius:16px;padding:1.6rem 1rem;text-align:center;color:var(--txt2)}
-  .dc-vuoto .big{font-size:2.6rem}
-  .dc-lavoro{text-align:center;padding:2rem 1rem}
-  .dc-lavoro .ruota{font-size:3.4rem;display:inline-block;animation:dc-gira 1.6s ease-in-out infinite}
-  @keyframes dc-gira{50%{transform:scale(1.15) rotate(12deg)}}
-  .dc-fasi{list-style:none;padding:0;margin:1rem auto 0;max-width:380px;text-align:left;display:grid;gap:.45rem}
-  .dc-fasi li{opacity:.35;transition:opacity .4s;font-size:.95rem}
-  .dc-fasi li.on{opacity:1;font-weight:700}
-  .dc-fasi li.ok{opacity:.8}
-  .dc-fasi li.ok::before{content:'✓ ';color:var(--st-ok)}
-  .dc-qr{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap}
-  .dc-qr canvas{width:180px;height:180px;border-radius:12px;border:1px solid var(--av3);image-rendering:pixelated}
-  .dc-qr .lk{flex:1;min-width:220px}
-  .dc-codice{font:800 2.2rem var(--fu);letter-spacing:.2em;color:var(--bosco)}
-  .dc-mie{list-style:none;padding:0;margin:0;display:grid;gap:.45rem}
-  .dc-mie li{display:flex;gap:.6rem;align-items:center;background:#fff;border:1px solid var(--av3);border-radius:12px;padding:.55rem .8rem}
-  .dc-mie li span{flex:1;min-width:0}
-  .dc-mie small{display:block;color:var(--txt2)}
-  .dc-mie code{font:800 .9rem var(--fu);letter-spacing:.1em;color:var(--oro)}
-  .dc-mie li .az{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:flex-end}
-  .dc-mie li .az .st-btn{min-height:38px;padding:.3rem .7rem}
-  @media (max-width:560px){.dc-mie li{flex-wrap:wrap}.dc-mie li>span{flex-basis:100%}.dc-mie li .az{margin-left:auto}}
-  .dc-cerca{display:flex;gap:.5rem;margin-bottom:.4rem}
-  .dc-cerca input{flex:1;min-width:0;font:inherit;font-size:1rem;padding:.6rem .8rem;border:2px solid var(--av3);border-radius:12px;background:#fff}
-  .dc details summary{cursor:pointer;font:800 .85rem var(--fu);color:var(--bosco)}
-  .dc-err{color:var(--st-no);font-weight:700;margin-top:.6rem}
-  .dc-guida{margin:.2rem 0 .8rem;padding-left:1.3rem;display:grid;gap:.5rem}
-  </style>
 </head>
 <body data-page="studio">
 <div class="st-anteprima">Sala studio del Convitto · area educatori</div>
@@ -65,7 +22,8 @@
     <div class="w">
       <p class="lbl">Per gli educatori</p>
       <h1><span class="ic" aria-hidden="true">📸</span>Dal libro alla lezione</h1>
-      <p>Fotografa le pagine che i ragazzi devono studiare e falle leggere al tuo assistente di intelligenza artificiale: <b>Claude, ChatGPT o Gemini</b>, con l'account che usi già (nessun costo a consumo). In pochi minuti ottieni una lezione interattiva con idee chiave, mnemotecniche, esercizi e flashcard, costruita <b>solo</b> su quelle pagine, con il QR per i ragazzi.</p>
+      <p>Fotografa le pagine del libro, gli appunti o una mappa concettuale, oppure scrivi soltanto il titolo dell'argomento. Il tuo assistente di intelligenza artificiale (<b>Claude, ChatGPT o Gemini</b>, con l'account che usi già, nessun costo a consumo) prepara una lezione interattiva con idee chiave, mnemotecniche, esercizi e flashcard, con il QR per i ragazzi.</p>
+      <div class="st-azioni"><a class="st-btn oro" href="studio/archivio.html">🗂️ Archivio delle lezioni condivise</a></div>
     </div>
   </section>
 
@@ -73,11 +31,18 @@
     <div id="dc-modulo">
       <div class="st-card">
         <div class="dc-passo"><b>1</b><h2>Le istruzioni per l'IA</h2></div>
-        <p class="st-sot">Facoltativo: materia, classe e indicazioni aiutano a centrare la lezione. Poi copia le istruzioni.</p>
+        <p class="st-sot">Scrivi l'argomento e, se vuoi, materia, anno e indicazioni. Poi copia le istruzioni.</p>
+        <label for="dc-arg">Argomento / titolo della lezione</label>
+        <input type="text" id="dc-arg" maxlength="200" placeholder="es. La Rivoluzione francese · Il sistema HACCP · I vini DOC"/>
+        <p class="st-nota" style="margin:.3rem 0 0">Con le foto è facoltativo. Senza foto è indispensabile: l'IA costruisce la lezione partendo da qui.</p>
         <div class="dc-due">
-          <div><label for="dc-mat">Materia</label><input type="text" id="dc-mat" list="dc-materie" maxlength="80" placeholder="es. Storia"/>
-            <datalist id="dc-materie"><option>Italiano</option><option>Storia</option><option>Geografia</option><option>Matematica</option><option>Inglese</option><option>Francese</option><option>Spagnolo</option><option>Scienze integrate</option><option>Diritto ed economia</option><option>Scienza e cultura dell'alimentazione</option><option>Laboratorio di cucina</option><option>Laboratorio di sala e vendita</option><option>Accoglienza turistica</option><option>Tecniche di comunicazione</option></datalist></div>
-          <div><label for="dc-cla">Classe</label><input type="text" id="dc-cla" maxlength="40" placeholder="es. 2ª B"/></div>
+          <div><label for="dc-mat">Materia</label><select id="dc-mat"></select>
+            <input type="text" id="dc-mat-altra" maxlength="80" placeholder="Scrivi la materia" hidden style="margin-top:.4rem"/></div>
+          <div><label for="dc-anno">Anno di corso</label><select id="dc-anno"></select></div>
+        </div>
+        <div class="dc-due">
+          <div><label for="dc-cla">Classe (facoltativa)</label><input type="text" id="dc-cla" maxlength="40" placeholder="es. 2ª B"/></div>
+          <div></div>
         </div>
         <label for="dc-note">Indicazioni per la lezione</label>
         <textarea id="dc-note" maxlength="600" placeholder="es. Domani c'è l'interrogazione: insisti sulle date. Oppure: solo il paragrafo 3."></textarea>
@@ -89,11 +54,11 @@
       <div class="st-card">
         <div class="dc-passo"><b>2</b><h2>Nell'assistente IA</h2></div>
         <ol class="dc-guida">
-          <li>Tocca <b>📎 / +</b> e allega le <b>foto delle pagine</b>, nell'ordine del libro (puoi scattarle lì direttamente).</li>
+          <li>Tocca <b>📎 / +</b> e allega le <b>foto</b>: pagine del libro (nell'ordine), appunti o una <b>mappa concettuale</b>. Puoi scattarle lì direttamente. <b>Nessuna foto?</b> Va bene lo stesso: la lezione nasce dall'argomento del passo 1.</li>
           <li><b>Incolla</b> le istruzioni nel messaggio e invia.</li>
           <li>Quando ha finito, <b>copia tutta la risposta</b> (il tasto copia sotto il messaggio o sul riquadro del codice).</li>
         </ol>
-        <p class="st-nota">💡 Va bene la versione gratuita o quella in abbonamento di ciascuno: serve solo che accetti le foto. Se apre un riquadro laterale (Canvas, artefatto), copia il testo da lì.</p>
+        <p class="st-nota">💡 Va bene la versione gratuita o quella in abbonamento di ciascuno. Se apre un riquadro laterale (Canvas, artefatto), copia il testo da lì.</p>
         <p class="st-nota">🔒 Non fotografate quaderni o fogli con nomi o dati dei ragazzi.</p>
       </div>
 
@@ -103,23 +68,24 @@
         <textarea id="dc-json" style="min-height:120px;font-family:monospace;font-size:.82rem" placeholder='{"titolo": "...", ...}'></textarea>
         <div class="st-azioni" style="margin-top:.5rem"><button type="button" class="st-btn" id="dc-incolla">📋 Incolla</button><span class="st-nota" id="dc-letto"></span></div>
         <div class="dc-due">
-          <div><label for="dc-cod">Codice educatori</label><input type="password" id="dc-cod" autocomplete="current-password" placeholder="Il codice della sala studio"/></div>
+          <div><label for="dc-cod">Codice educatori</label><input type="password" id="dc-cod" autocomplete="off" placeholder="Il tuo codice educatori"/></div>
           <div><label for="dc-aut">Il tuo nome (facoltativo)</label><input type="text" id="dc-aut" maxlength="80" autocomplete="name"/></div>
         </div>
+        <label class="dc-spunta" for="dc-cond"><input type="checkbox" id="dc-cond"/><span><b>🌐 Condividi nell'Archivio degli educatori</b><small>I colleghi la troveranno nell'Archivio, per anno e materia, e potranno usarla con i loro ragazzi. Solo tu potrai modificarla o cancellarla. Puoi cambiare idea quando vuoi da "Modifica".</small></span></label>
         <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-manuale">✨ Pubblica la lezione</button></div>
         <p class="dc-err" id="dc-err2" role="alert"></p>
       </div>
 
       <div class="st-card">
         <details>
-          <summary>📸 Creazione automatica dalle foto (solo se attivata: a consumo)</summary>
-          <p class="st-nota">Il sito manda le foto direttamente all'IA, senza passare da Claude, ChatGPT o Gemini. Funziona solo se su Supabase è stata inserita una chiave API Anthropic, che si paga a consumo. Usa materia, classe, indicazioni (passo 1) e codice educatori (passo 3).</p>
+          <summary>📸 Creazione automatica (solo se attivata: a consumo)</summary>
+          <p class="st-nota">Il sito manda le foto, o il solo argomento, direttamente all'IA, senza passare da Claude, ChatGPT o Gemini. Funziona solo se su Supabase è stata inserita una chiave API Anthropic, che si paga a consumo. Usa argomento, materia, anno e indicazioni (passo 1), codice educatori e condivisione (passo 3).</p>
           <div class="st-azioni">
             <label class="st-btn pieno">📷 Scatta una foto<input type="file" accept="image/*" capture="environment" id="dc-cam" hidden/></label>
             <label class="st-btn">🖼️ Scegli dalla galleria<input type="file" accept="image/*" multiple id="dc-gal" hidden/></label>
           </div>
           <div id="dc-foto"></div>
-          <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-crea" disabled>✨ Crea la lezione dalle foto</button><span class="st-nota" id="dc-quante">Aggiungi almeno una foto.</span></div>
+          <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-crea" disabled>✨ Crea la lezione</button><span class="st-nota" id="dc-quante"></span></div>
           <p class="dc-err" id="dc-err" role="alert"></p>
         </details>
       </div>
@@ -128,11 +94,12 @@
     <div id="dc-lavoro" hidden></div>
     <div id="dc-esito" hidden></div>
 
-    <h3>📚 Tutte le lezioni della Sala studio</h3>
+    <h3>📚 Le mie lezioni</h3>
     <div class="st-card">
-      <div class="dc-cerca"><input type="search" id="dc-cerca" placeholder="Cerca per titolo, materia, classe, autore…" aria-label="Cerca fra le lezioni"/><button type="button" class="st-btn" id="dc-aggiorna">🔄 Mostra</button></div>
+      <div class="dc-cerca"><input type="search" id="dc-cerca" placeholder="Cerca per titolo, materia, classe…" aria-label="Cerca fra le mie lezioni"/><button type="button" class="st-btn" id="dc-aggiorna">🔄 Mostra</button></div>
       <p class="st-nota" id="dc-elenco-stato" aria-live="polite"></p>
       <ul class="dc-mie" id="dc-mie"></ul>
+      <p class="st-nota" style="margin-top:.8rem">Qui trovi le lezioni pubblicate con il tuo codice educatori, da qualsiasi dispositivo. Quelle dei colleghi, se condivise, sono nell'<a href="studio/archivio.html">Archivio</a>.</p>
     </div>
   </div>
 </main>
@@ -142,17 +109,27 @@
 <script src="lingue/pacchetto.js"></script>
 <script src="studio/studio.js"></script>
 <script src="studio/demo.js"></script>
+<script src="studio/educatori.js"></script>
 <script>
 (function () {
   'use strict';
-  var esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
-  var FUNZIONE = SUPABASE_URL + '/functions/v1/studio-genera';
+  var E = window.EDUCATORI, esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
   var MAX = 8, foto = [];
   var BASE = location.origin + '/studio/lezione.html';
 
-  function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
-  $('dc-cod').value = ls('studio-codice') || '';
-  $('dc-aut').value = ls('studio-autore') || '';
+  $('dc-cod').value = E.codice();
+  $('dc-aut').value = E.autore();
+  E.riempiMaterie($('dc-mat'));
+  E.riempiAnni($('dc-anno'));
+  function materia() { return E.materiaScelta($('dc-mat'), $('dc-mat-altra')); }
+  $('dc-mat').onchange = function () { materia(); if (!$('dc-mat-altra').hidden) $('dc-mat-altra').focus(); };
+  $('dc-cla').addEventListener('input', function () { var a = E.annoDaClasse(this.value); if (a && !$('dc-anno').value) $('dc-anno').value = a; });
+  /* i dati comuni a ogni pubblicazione */
+  function dati() {
+    var cod = $('dc-cod').value.trim();
+    E.codice(cod); E.autore($('dc-aut').value);
+    return { codice_docente: cod, materia: materia(), anno: +$('dc-anno').value || null, classe: $('dc-cla').value.trim(), autore: $('dc-aut').value.trim(), condivisa: $('dc-cond').checked };
+  }
 
   /* ───── foto: ridotte nel browser (lato lungo 1600 px) prima dell'invio ───── */
   function riduci(file) {
@@ -170,36 +147,32 @@
   }
   function aggiungi(files) {
     var nuove = Array.prototype.slice.call(files || []).filter(function (f) { return /^image\//.test(f.type); });
-    if (foto.length + nuove.length > MAX) { STUDIO.toast('Al massimo ' + MAX + ' pagine'); nuove = nuove.slice(0, MAX - foto.length); }
+    if (foto.length + nuove.length > MAX) { STUDIO.toast('Al massimo ' + MAX + ' foto'); nuove = nuove.slice(0, MAX - foto.length); }
     Promise.all(nuove.map(riduci)).then(function (d) { foto = foto.concat(d); disegnaFoto(); })
       .catch(function () { STUDIO.toast('Una foto non si legge: riprova con un\'altra'); });
   }
   function disegnaFoto() {
     $('dc-foto').innerHTML = foto.length ? '<div class="dc-foto">' + foto.map(function (f, i) {
-      return '<figure><img src="' + f + '" alt="Pagina ' + (i + 1) + '"/><figcaption>' + (i + 1) + '</figcaption><button type="button" data-via="' + i + '" aria-label="Togli la pagina ' + (i + 1) + '">✕</button></figure>';
-    }).join('') + '</div>' : '<div class="dc-vuoto" style="margin-top:1rem"><div class="big">📖</div>Nessuna pagina ancora. Le pagine vanno nell\'ordine del libro.</div>';
-    $('dc-crea').disabled = !foto.length;
-    $('dc-quante').textContent = foto.length ? foto.length + (foto.length === 1 ? ' pagina pronta' : ' pagine pronte') : 'Aggiungi almeno una foto.';
+      return '<figure><img src="' + f + '" alt="Foto ' + (i + 1) + '"/><figcaption>' + (i + 1) + '</figcaption><button type="button" data-via="' + i + '" aria-label="Togli la foto ' + (i + 1) + '">✕</button></figure>';
+    }).join('') + '</div>' : '<div class="dc-vuoto" style="margin-top:1rem"><div class="big">📖</div>Pagine del libro, appunti o una mappa concettuale. Senza foto la lezione nasce dall\'argomento del passo 1.</div>';
+    var arg = $('dc-arg').value.trim();
+    $('dc-crea').disabled = !foto.length && !arg;
+    $('dc-quante').textContent = foto.length ? foto.length + (foto.length === 1 ? ' foto pronta' : ' foto pronte') : arg ? 'Nessuna foto: userò l\'argomento.' : 'Aggiungi una foto o scrivi l\'argomento (passo 1).';
   }
   $('dc-foto').addEventListener('click', function (e) { var b = e.target.closest('[data-via]'); if (b) { foto.splice(+b.getAttribute('data-via'), 1); disegnaFoto(); } });
   $('dc-cam').onchange = function () { aggiungi(this.files); this.value = ''; };
   $('dc-gal').onchange = function () { aggiungi(this.files); this.value = ''; };
+  $('dc-arg').addEventListener('input', disegnaFoto);
   disegnaFoto();
 
-  /* ───── creazione ───── */
-  var FASI = ['Leggo le pagine del libro 📖', 'Trovo le idee chiave 💡', 'Invento la parola magica e il palazzo della memoria 🧠', 'Scrivo la filastrocca 🎵', 'Preparo quiz, vero o falso, abbinamenti ✏️', 'Mescolo le flashcard 🃏', 'Ultimi ritocchi ✨'];
-  var ERRORI = {
-    codice: 'Il codice educatori non è giusto.', configurazione: 'Il servizio non è ancora attivato: manca il codice educatori su Supabase (STUDIO_CODICI).',
-    automatica: 'La creazione automatica non è attivata (serve la chiave API, a consumo). Usate i passi 1-2-3 con Claude, ChatGPT o Gemini.',
-    lezione: 'La risposta incollata non è una lezione completa: copiate di nuovo tutta la risposta dell\'IA.',
-    foto: 'Una delle foto non va bene: riprova con foto più piccole o in JPEG.', troppe: 'Sono state create molte lezioni nell\'ultima ora: riprova tra un po\'.',
-    ia: 'L\'intelligenza artificiale non ha risposto bene. Riprova tra un minuto.', server: 'Errore del server: riprova tra un minuto.'
-  };
+  /* ───── creazione automatica (a consumo) ───── */
+  var FASI = ['Leggo la fonte 📖', 'Trovo le idee chiave 💡', 'Invento la parola magica e il palazzo della memoria 🧠', 'Scrivo la filastrocca 🎵', 'Preparo quiz, vero o falso, abbinamenti ✏️', 'Mescolo le flashcard 🃏', 'Ultimi ritocchi ✨'];
   $('dc-crea').onclick = function () {
-    var cod = $('dc-cod').value.trim();
+    var d = dati();
     $('dc-err').textContent = '';
-    if (!cod) { $('dc-err').textContent = 'Scrivi il codice educatori (al passo 3).'; $('dc-cod').focus(); return; }
-    ls('studio-codice', cod); ls('studio-autore', $('dc-aut').value.trim());
+    if (!d.codice_docente) { $('dc-err').textContent = 'Scrivi il codice educatori (al passo 3).'; $('dc-cod').focus(); return; }
+    d.argomento = $('dc-arg').value.trim(); d.note = $('dc-note').value.trim();
+    d.immagini = foto.map(function (f) { return { tipo: 'image/jpeg', dati: f.split(',')[1] }; });
     $('dc-modulo').hidden = true; $('dc-esito').hidden = true;
     var lav = $('dc-lavoro'); lav.hidden = false;
     lav.innerHTML = '<div class="st-card dc-lavoro st-entra"><div class="ruota">🧑‍🍳</div><h2>Sto cucinando la lezione…</h2><p class="st-sot">Di solito ci vuole circa un minuto. <span id="dc-sec">0</span> s</p><ol class="dc-fasi">' + FASI.map(function (f) { return '<li>' + f + '</li>'; }).join('') + '</ol></div>';
@@ -210,149 +183,77 @@
       $('dc-sec').textContent = s;
       lis.forEach(function (li, i) { li.className = i < k ? 'ok' : i === k ? 'on' : ''; });
     }, 500);
-    fetch(FUNZIONE, {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUB },
-      body: JSON.stringify({
-        codice_docente: cod, materia: $('dc-mat').value, classe: $('dc-cla').value, note: $('dc-note').value, autore: $('dc-aut').value,
-        immagini: foto.map(function (f) { return { tipo: 'image/jpeg', dati: f.split(',')[1] }; })
-      })
-    }).then(function (r) { return r.json().catch(function () { return { ok: false, errore: r.status === 404 ? 'configurazione' : 'server' }; }); })
-      .then(function (r) {
-        clearInterval(iv); lav.hidden = true;
-        if (!r.ok) { $('dc-modulo').hidden = false; $('dc-err').textContent = r.errore === 'illeggibile' ? '📷 ' + (r.messaggio || 'Le foto non si leggono bene.') + ' Rifai le foto e riprova.' : (ERRORI[r.errore] || ERRORI.server); return; }
-        caricaElenco();
-        foto = []; disegnaFoto(); $('dc-note').value = '';
-        esito(BASE + '?c=' + r.codice, r.lezione, r.codice);
-      })
-      .catch(function () { clearInterval(iv); lav.hidden = true; $('dc-modulo').hidden = false; $('dc-err').textContent = 'Connessione assente o servizio non raggiungibile. Riprova, o usa i passi 1-2-3 con Claude, ChatGPT o Gemini.'; });
+    E.chiama(d).then(function (r) {
+      clearInterval(iv); lav.hidden = true;
+      if (!r.ok) { $('dc-modulo').hidden = false; $('dc-err').textContent = r.errore === 'illeggibile' ? '📷 ' + (r.messaggio || 'Le foto non si leggono bene.') + ' Rifai le foto e riprova.' : r.messaggioErrore; return; }
+      caricaElenco();
+      foto = []; disegnaFoto(); $('dc-note').value = '';
+      esito(r.lezione, r.codice);
+    });
   };
 
-  /* ───── risultato: QR, link, cartello ───── */
-  function qr(testo, canvas, cella) {
-    var c = qrcode(0, 'M'); c.addData(testo); c.make();
-    var n = c.getModuleCount(), m = 4, s = (n + m * 2) * cella, x = canvas.getContext('2d');
-    canvas.width = canvas.height = s; x.fillStyle = '#fff'; x.fillRect(0, 0, s, s); x.fillStyle = '#000';
-    for (var r = 0; r < n; r++) for (var k = 0; k < n; k++) if (c.isDark(r, k)) x.fillRect((k + m) * cella, (r + m) * cella, cella, cella);
-  }
-  function cartello(url, L, codice, stampa) {
-    var cv = document.createElement('canvas'); qr(url, cv, 14);
-    var w = window.open('', '_blank'); if (!w) return STUDIO.toast('Consenti le finestre a comparsa');
-    w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(L.titolo) + ' — QR</title><style>' +
-      'body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Arial,sans-serif;background:#fff;color:#2C3E2D;text-align:center;padding:2vh}' +
-      '.m{font-size:2.2vh;letter-spacing:.2em;text-transform:uppercase;color:#B8922A;font-weight:bold}h1{font-size:5vh;margin:1vh 0 2vh}img{width:min(58vh,80vw);height:auto}' +
-      '.c{font-size:4vh;letter-spacing:.3em;font-weight:bold;margin:1vh 0}p{font-size:2.3vh;color:#555;margin:.5vh}@media print{body{min-height:auto}}</style></head><body>' +
-      '<div class="m">Sala studio · ' + esc(L.materia || '') + '</div><h1>' + esc((L.icona || '📚') + ' ' + L.titolo) + '</h1><img src="' + cv.toDataURL() + '" alt="Codice QR"/>' +
-      (codice ? '<div class="c">' + esc(codice) + '</div>' : '') + '<p>Inquadra il codice con la fotocamera del telefono.</p><p>Idee chiave · trucchi per ricordare · esercizi · flashcard · sfida finale</p>' +
-      (stampa ? '<script>onload=function(){print()}<\/script>' : '') + '</body></html>');
-    w.document.close();
-  }
-  function esito(url, L, codice) {
-    var el = $('dc-esito'); el.hidden = false;
+  /* ───── risultato: QR, link, cartello, modifica ───── */
+  function esito(L, codice, urlLungo) {
+    var url = urlLungo || BASE + '?c=' + codice, el = $('dc-esito'); el.hidden = false;
     el.innerHTML = '<div class="st-card st-entra" style="border:2px solid var(--oro)"><div class="dc-passo"><b>✓</b><h2>' + esc((L.icona || '📚') + ' ' + L.titolo) + '</h2></div>' +
       '<p class="st-sot">' + esc(L.sottotitolo || '') + '</p><div class="dc-qr"><canvas id="dc-qrc" aria-label="Codice QR della lezione"></canvas><div class="lk">' +
       (codice ? '<div class="st-nota">Codice della lezione</div><div class="dc-codice">' + esc(codice) + '</div>' : '') +
       '<input type="text" readonly value="' + esc(url) + '" id="dc-link" style="margin:.4rem 0"/>' +
       '<div class="st-azioni" style="margin-top:.4rem"><a class="st-btn pieno" href="' + esc(url) + '" target="_blank" rel="noopener">👀 Apri la lezione</a><button type="button" class="st-btn" id="dc-cp">📋 Copia</button>' +
       (navigator.share ? '<button type="button" class="st-btn" id="dc-sh">📤 Condividi</button>' : '') + '</div></div></div>' +
-      '<div class="st-azioni"><button type="button" class="st-btn oro" id="dc-lim">🖥️ QR a tutto schermo</button><button type="button" class="st-btn" id="dc-st">🖨️ Stampa il cartello</button><button type="button" class="st-btn" id="dc-altra">➕ Un\'altra lezione</button></div>' +
-      '<p class="st-nota" style="margin-top:1rem">🎓 Date un\'occhiata alla lezione prima di proporla: l\'IA lavora solo sulle pagine fotografate, ma può sbagliare.</p></div>';
+      '<div class="st-azioni"><button type="button" class="st-btn oro" id="dc-lim">🖥️ QR a tutto schermo</button><button type="button" class="st-btn" id="dc-st">🖨️ Stampa il cartello</button>' +
+      (codice ? '<a class="st-btn" href="studio/modifica.html?c=' + esc(codice) + '">✏️ Modifica</a>' : '') +
+      '<button type="button" class="st-btn" id="dc-altra">➕ Un\'altra lezione</button></div>' +
+      '<p class="st-nota" style="margin-top:1rem">🎓 Date un\'occhiata alla lezione prima di proporla: l\'IA può sbagliare. Se trovate un errore, <b>✏️ Modifica</b> permette di correggerla senza cambiare codice e QR.</p></div>';
     var cv = $('dc-qrc');
-    if (url.length <= 2200) qr(url, cv, 5); else { cv.remove(); $('dc-lim').remove(); $('dc-st').remove(); el.querySelector('.dc-qr').insertAdjacentHTML('afterbegin', '<p class="st-nota" style="flex-basis:100%">Questo link contiene tutta la lezione ed è troppo lungo per un QR: mandatelo sul gruppo o apritelo alla LIM.</p>'); }
-    $('dc-cp').onclick = function () { var i = $('dc-link'); i.select(); (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).catch(function () { document.execCommand('copy'); }); STUDIO.toast('Link copiato 📋'); };
+    if (url.length <= 2200) E.qr(url, cv, 5); else { cv.remove(); $('dc-lim').remove(); $('dc-st').remove(); el.querySelector('.dc-qr').insertAdjacentHTML('afterbegin', '<p class="st-nota" style="flex-basis:100%">Questo link contiene tutta la lezione ed è troppo lungo per un QR: mandatelo sul gruppo o apritelo alla LIM.</p>'); }
+    $('dc-cp').onclick = function () { $('dc-link').select(); (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).catch(function () { document.execCommand('copy'); }); STUDIO.toast('Link copiato 📋'); };
     if ($('dc-sh')) $('dc-sh').onclick = function () { navigator.share({ title: L.titolo, text: 'Lezione interattiva: ' + L.titolo, url: url }).catch(function () {}); };
-    if ($('dc-lim')) $('dc-lim').onclick = function () { cartello(url, L, codice, false); };
-    if ($('dc-st')) $('dc-st').onclick = function () { cartello(url, L, codice, true); };
+    if ($('dc-lim')) $('dc-lim').onclick = function () { E.cartello(url, L, codice, false); };
+    if ($('dc-st')) $('dc-st').onclick = function () { E.cartello(url, L, codice, true); };
     $('dc-altra').onclick = function () { el.hidden = true; $('dc-modulo').hidden = false; scrollTo({ top: 0, behavior: 'smooth' }); };
     el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  /* ───── tutte le lezioni pubblicate (con il codice educatori, da qualsiasi dispositivo) ───── */
+  /* ───── le mie lezioni (con il codice educatori, da qualsiasi dispositivo) ───── */
   var lezioni = null; /* null = elenco non ancora caricato */
-  function data(d) { var m = String(d || '').match(/^(\d{4})-(\d\d)-(\d\d)/); return m ? m[3] + '/' + m[2] + '/' + m[1] : ''; }
   function caricaElenco() {
     var cod = $('dc-cod').value.trim(), st = $('dc-elenco-stato');
-    if (!cod) { st.textContent = 'Scrivi il codice educatori (al passo 3) e premi Mostra.'; return; }
+    if (!cod) { st.textContent = 'Scrivi il tuo codice educatori (al passo 3) e premi Mostra.'; return; }
     st.textContent = 'Carico l\'elenco…';
-    fetch(FUNZIONE, { method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUB }, body: JSON.stringify({ codice_docente: cod, elenco: true }) })
-      .then(function (r) { return r.json().catch(function () { return { ok: false, errore: 'server' }; }); })
-      .then(function (r) {
-        if (!r.ok) { st.textContent = ERRORI[r.errore] || ERRORI.server; return; }
-        ls('studio-codice', cod); lezioni = r.lezioni || []; disegnaMie();
-      })
-      .catch(function () { st.textContent = 'Connessione assente: riprova.'; });
+    E.chiama({ codice_docente: cod, mie: true }).then(function (r) {
+      if (!r.ok) { st.textContent = r.messaggioErrore; return; }
+      E.codice(cod); lezioni = r.lezioni || []; disegnaMie();
+    });
   }
   function disegnaMie() {
     if (!lezioni) return;
     var q = $('dc-cerca').value.trim().toLowerCase();
     var m = lezioni.filter(function (x) { return !q || [x.titolo, x.materia, x.classe, x.autore, x.codice].join(' ').toLowerCase().indexOf(q) >= 0; });
-    $('dc-elenco-stato').textContent = lezioni.length ? (q ? m.length + ' di ' : '') + lezioni.length + (lezioni.length === 1 ? ' lezione pubblicata' : ' lezioni pubblicate') : '';
+    $('dc-elenco-stato').textContent = lezioni.length ? (q ? m.length + ' di ' : '') + lezioni.length + (lezioni.length === 1 ? ' lezione' : ' lezioni') : '';
     $('dc-mie').innerHTML = m.length ? m.map(function (x) {
-      return '<li><span>' + esc((x.icona || '📚') + ' ' + x.titolo) + '<small>' + esc([x.materia, x.classe, x.autore, data(x.created_at), x.aperture ? '👀 ' + x.aperture : ''].filter(Boolean).join(' · ')) + '</small></span><code>' + esc(x.codice) + '</code>' +
-        '<div class="az"><a class="st-btn" href="studio/lezione.html?c=' + esc(x.codice) + '" target="_blank" rel="noopener">Apri</a><button type="button" class="st-btn" data-qr="' + esc(x.codice) + '">QR</button></div></li>';
-    }).join('') : '<li><span class="st-nota">' + (lezioni.length ? 'Nessuna lezione corrisponde alla ricerca.' : 'Ancora nessuna lezione. Intanto guardate la <a href="studio/lezione.html?c=DEMO" target="_blank">lezione di esempio</a>.') + '</span></li>';
+      return '<li><span>' + esc((x.icona || '📚') + ' ' + x.titolo) + (x.condivisa ? '<i class="dc-badge si">🌐 condivisa</i>' : '<i class="dc-badge no">🔒 solo mia</i>') +
+        '<small>' + esc([x.materia, x.anno ? x.anno + '° anno' : '', x.classe, E.data(x.modificata || x.created_at), x.aperture ? '👀 ' + x.aperture : ''].filter(Boolean).join(' · ')) + '</small></span><code>' + esc(x.codice) + '</code>' +
+        '<div class="az"><a class="st-btn" href="studio/lezione.html?c=' + esc(x.codice) + '" target="_blank" rel="noopener">Apri</a><button type="button" class="st-btn" data-qr="' + esc(x.codice) + '">QR</button><a class="st-btn" href="studio/modifica.html?c=' + esc(x.codice) + '">✏️ Modifica</a></div></li>';
+    }).join('') : '<li><span class="st-nota">' + (lezioni.length ? 'Nessuna lezione corrisponde alla ricerca.' : 'Ancora nessuna lezione. Intanto guardate la <a href="studio/lezione.html?c=DEMO" target="_blank">lezione di esempio</a> o l\'<a href="studio/archivio.html">Archivio</a>.') + '</span></li>';
   }
   $('dc-mie').addEventListener('click', function (e) {
     var b = e.target.closest('[data-qr]'); if (!b) return;
     var x = lezioni.filter(function (y) { return y.codice === b.getAttribute('data-qr'); })[0];
-    $('dc-modulo').hidden = true; esito(BASE + '?c=' + x.codice, x, x.codice);
+    $('dc-modulo').hidden = true; esito(x, x.codice);
   });
   $('dc-aggiorna').onclick = caricaElenco;
   $('dc-cerca').addEventListener('input', function () { if (lezioni) disegnaMie(); else caricaElenco(); });
   caricaElenco();
 
   /* ───── lezione preparata in Claude, ChatGPT o Gemini: istruzioni, incolla, pubblica ───── */
-  function scheletro(o) {
-    if (Array.isArray(o)) return o.length ? [scheletro(o[0])] : [];
-    if (o && typeof o === 'object') { var r = {}; Object.keys(o).forEach(function (k) { r[k] = scheletro(o[k]); }); return r; }
-    return typeof o === 'string' ? '...' : typeof o === 'number' ? 0 : o; /* segnaposto: nessun contenuto della lezione d'esempio */
-  }
-  var ISTRUZIONI = 'Sei un educatore esperto di didattica per ragazzi con DSA (dislessia, disortografia, discalculia) in un convitto di un istituto alberghiero italiano (14-19 anni).\n' +
-    'Nelle foto allegate ci sono alcune pagine di un libro di scuola. Trasformale in una lezione interattiva in italiano che i ragazzi faranno dal telefono in sala studio.\n\n' +
-    'REGOLA FONDAMENTALE: usa SOLO i concetti, i fatti, le date, i nomi e le definizioni presenti nelle pagine fotografate. Non aggiungere argomenti che non ci sono. Ogni esercizio deve poter essere risolto da chi ha studiato quelle pagine.\n\n' +
-    'STILE (pensato per DSA): frasi brevi, una idea per frase, parole semplici; spiega i termini tecnici la prima volta. Niente doppie negazioni, niente domande trabocchetto, niente "tutte le precedenti". Tono caldo, diretto ("tu"), un po\' di ironia; mai infantile.\n\n' +
-    'CONTENUTI:\n' +
-    '- gancio: una domanda curiosa o sorprendente legata all\'argomento, con la risposta presa dalle pagine.\n' +
-    '- concetti: da 4 a 8 idee chiave, nell\'ordine del libro. spiegazione max 3 frasi; parola_chiave = la parola da evidenziare, che deve comparire nella spiegazione; esempio concreto, se possibile dalla cucina, dalla sala o dall\'albergo.\n' +
-    '- parole: 4-10 termini del glossario con definizione semplice.\n' +
-    '- mnemonica: mnemotecniche vere ed efficaci, costruite sui concetti delle pagine.\n' +
-    '  - acronimo: una parola o sigla facile da ricordare formata dalle iniziali di elementi da memorizzare; "frase" e\' una frase buffa le cui parole iniziano con quelle lettere; lettere: una voce per lettera.\n' +
-    '  - storia: un "palazzo della memoria" ambientato nel convitto (ingresso, refettorio, cucina, sala studio, camerata, cortile...): 4-7 tappe, in ogni luogo un\'immagine assurda, esagerata, colorata o divertente che richiama un concetto.\n' +
-    '  - filastrocca: 4-8 versi in rima con i fatti principali; ogni verso separato da \\n.\n' +
-    '  - immagini: 3-6 associazioni visive concetto-immagine mentale, con emoji.\n' +
-    '  - trucchi: 2-4 altri trucchi (associazioni numeriche, parole simili, collegamenti con cose note).\n' +
-    '- sequenza: se l\'argomento ha un ordine (fasi, cronologia, procedimento) da 4 a 7 passi nell\'ordine giusto; altrimenti titolo vuoto e passi vuoti.\n' +
-    '- quiz: 8-10 domande, 3 opzioni ciascuna (una sola corretta), "corretta" e\' l\'indice della risposta giusta contando da 0; spiegazione in una frase.\n' +
-    '- vero_falso: 6-8 affermazioni, circa meta\' vere.\n' +
-    '- completa: 5-7 frasi con una sola parola chiave sostituita da ___; 2 distrattori plausibili.\n' +
-    '- abbina: 5-6 coppie (termine-definizione, personaggio-fatto, causa-effetto, data-evento...).\n' +
-    '- flashcard: 8-12 carte domanda/risposta brevi.\n' +
-    '- da_ricordare: le 5 frasi essenziali da sapere a memoria.\n\n' +
-    'FORMATO DELLA RISPOSTA: rispondi con UN SOLO blocco di codice json, senza testo prima o dopo e senza creare artefatti, canvas o documenti a parte. Il JSON deve avere esattamente questa struttura (gli elenchi qui hanno un solo elemento di esempio: tu mettine quanti indicato sopra):\n';
-  var FORMA = JSON.stringify(scheletro(window.STUDIO_DEMO));
-  function prompt() {
-    var extra = [
-      $('dc-mat').value.trim() && 'Materia: ' + $('dc-mat').value.trim() + '.',
-      $('dc-cla').value.trim() && 'Classe: ' + $('dc-cla').value.trim() + '.',
-      $('dc-note').value.trim() && 'Indicazioni dell\'educatore (seguile, ma sempre e solo sui contenuti delle pagine): ' + $('dc-note').value.trim()
-    ].filter(Boolean).join('\n');
-    return ISTRUZIONI + FORMA + (extra ? '\n\n' + extra : '') + '\n\nOra crea la lezione sulle pagine allegate.';
-  }
   $('dc-copia-prompt').onclick = function () {
-    var t = prompt();
+    var t = E.istruzioni({ argomento: $('dc-arg').value.trim(), materia: materia(), anno: $('dc-anno').value, classe: $('dc-cla').value.trim(), note: $('dc-note').value.trim() });
     (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { STUDIO.toast('Istruzioni copiate: ora apri l\'assistente IA 📋'); })
       .catch(function () { $('dc-json').value = t; $('dc-json').select(); STUDIO.toast('Copia il testo dal riquadro del passo 3'); });
   };
-  function leggiLezione() {
-    var t = $('dc-json').value, a = t.indexOf('{'), b = t.lastIndexOf('}'), L;
-    t = t.slice(a, b + 1);
-    try { L = JSON.parse(t); } catch (e) {
-      /* qualche assistente lascia una virgola prima di } o ] */
-      try { L = JSON.parse(t.replace(/,(\s*[}\]])/g, '$1')); } catch (e2) { return null; }
-    }
-    return L && L.titolo && Array.isArray(L.concetti) && L.concetti.length ? L : null;
-  }
   function controlla() {
-    var L = leggiLezione();
+    var L = E.leggi($('dc-json').value);
     $('dc-letto').textContent = !$('dc-json').value.trim() ? '' : L ? '✅ Lezione letta: «' + L.titolo + '»' : '⚠️ Non sembra ancora una lezione completa';
   }
   $('dc-json').addEventListener('input', controlla);
@@ -362,31 +263,27 @@
       .catch(function () { $('dc-json').focus(); STUDIO.toast('Tieni premuto nel riquadro e scegli Incolla'); });
   };
   $('dc-manuale').onclick = function () {
-    var e2 = $('dc-err2'), L = leggiLezione(), cod = $('dc-cod').value.trim(), btn = this;
+    var e2 = $('dc-err2'), L = E.leggi($('dc-json').value), d = dati(), btn = this;
     e2.textContent = '';
     if (!$('dc-json').value.trim()) { e2.textContent = 'Incolla prima la risposta dell\'IA.'; return; }
     if (!L) { e2.textContent = 'Il testo incollato non è una lezione completa: copiate tutta la risposta dell\'IA, dalla prima { all\'ultima }. Se la risposta si è interrotta, scrivete «continua» oppure rifate la richiesta.'; return; }
-    if (!cod) { e2.textContent = 'Scrivi il codice educatori.'; $('dc-cod').focus(); return; }
-    if ($('dc-mat').value.trim() && !L.materia) L.materia = $('dc-mat').value.trim();
-    ls('studio-codice', cod); ls('studio-autore', $('dc-aut').value.trim());
+    if (!d.codice_docente) { e2.textContent = 'Scrivi il codice educatori.'; $('dc-cod').focus(); return; }
+    if (d.condivisa && (!d.materia || !d.anno)) { e2.textContent = 'Per condividerla nell\'Archivio scegli materia e anno di corso (passo 1).'; $('dc-mat').focus(); return; }
+    d.lezione = L;
     btn.disabled = true; btn.textContent = '⏳ Pubblico…';
-    fetch(FUNZIONE, {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUB },
-      body: JSON.stringify({ codice_docente: cod, lezione: L, classe: $('dc-cla').value, autore: $('dc-aut').value })
-    }).then(function (r) { return r.json().catch(function () { return { ok: false, errore: r.status === 404 ? 'configurazione' : 'server' }; }); })
-      .then(function (r) {
-        if (!r.ok) throw r;
+    E.chiama(d).then(function (r) {
+      btn.disabled = false; btn.textContent = '✨ Pubblica la lezione';
+      if (r.ok) {
         caricaElenco();
-        $('dc-json').value = ''; $('dc-note').value = ''; controlla();
-        $('dc-modulo').hidden = true; esito(BASE + '?c=' + r.codice, r.lezione, r.codice);
-      })
-      .catch(function (r) {
-        e2.innerHTML = STUDIO.esc((r && ERRORI[r.errore]) || 'Connessione assente o servizio non raggiungibile.') +
-          (r && r.errore === 'codice' ? '' : ' <button type="button" class="st-btn" id="dc-solo-link" style="margin-top:.5rem">🔗 Crea solo il link (senza codice breve)</button>');
-        var sl = $('dc-solo-link');
-        if (sl) sl.onclick = function () { window.PACCHETTO.codifica(L).then(function (p) { $('dc-modulo').hidden = true; esito(BASE + '#l=' + p, L, ''); }); };
-      })
-      .then(function () { btn.disabled = false; btn.textContent = '✨ Pubblica la lezione'; });
+        $('dc-json').value = ''; $('dc-note').value = ''; $('dc-arg').value = ''; controlla();
+        $('dc-modulo').hidden = true; esito(r.lezione, r.codice);
+        return;
+      }
+      e2.innerHTML = esc(r.messaggioErrore) +
+        (r.errore === 'codice' ? '' : ' <button type="button" class="st-btn" id="dc-solo-link" style="margin-top:.5rem">🔗 Crea solo il link (senza codice breve)</button>');
+      var sl = $('dc-solo-link');
+      if (sl) sl.onclick = function () { window.PACCHETTO.codifica(L).then(function (p) { $('dc-modulo').hidden = true; esito(L, '', BASE + '#l=' + p); }); };
+    });
   };
 })();
 </script>

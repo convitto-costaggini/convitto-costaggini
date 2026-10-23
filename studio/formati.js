@@ -102,11 +102,84 @@ window.FORMATI = (function () {
     disegna();
   }
 
+  /* risposta da scrivere (ricordare senza suggerimenti è più efficace che riconoscere).
+     Pensata anche per chi ha DSA: maiuscole, accenti e un piccolo errore di battitura vanno bene;
+     dopo un errore compare l'iniziale, dopo due si può scegliere fra tre parole. */
+  function norm(t) { return String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
+  function vicine(a, b) {
+    a = norm(a); b = norm(b); if (a === b) return true;
+    if (b.length < 5 || Math.abs(a.length - b.length) > 1) return false;
+    var d = [], i, j; /* distanza di modifica: al massimo 1 */
+    for (i = 0; i <= a.length; i++) { d[i] = [i]; for (j = 1; j <= b.length; j++) d[i][j] = i ? Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)) : j; }
+    return d[a.length][b.length] <= 1;
+  }
+  function scrivi(box, voci, fatto, conto) {
+    var k = 0;
+    function una() {
+      if (k >= voci.length) return fatto();
+      var v = voci[k], errori = 0;
+      box.innerHTML = '<div class="fm-dom st-entra">' + S.tastoVoce(v.voce) + '<p class="st-cont">' + (k + 1) + ' di ' + voci.length + '</p><p class="st-dom">' + v.html + '</p>' +
+        '<div class="fm-scrivi"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Scrivi la risposta" placeholder="Scrivi qui la parola"/><button type="button" class="st-btn pieno" data-ok>Controlla</button></div>' +
+        '<div class="fm-aiuti" aria-live="polite"></div><div class="st-esito" aria-live="polite"></div></div>';
+      var inp = box.querySelector('input'), aiuti = box.querySelector('.fm-aiuti');
+      function giusta() {
+        inp.disabled = true; box.querySelector('[data-ok]').remove(); inp.value = v.risposta; inp.classList.add('ok'); toast(S.pesca(S.BRAVO));
+        setTimeout(function () { k++; una(); }, 1100);
+      }
+      function prova(t) {
+        if (!norm(t)) return inp.focus();
+        if (vicine(t, v.risposta)) return giusta();
+        errori++; if (conto) conto(); inp.classList.add('no'); setTimeout(function () { inp.classList.remove('no'); }, 450);
+        if (errori === 1) {
+          var r = String(v.risposta), n = r.replace(/[^A-Za-zÀ-ÿ]/g, '').length, parole = r.trim().split(/\s+/).length;
+          aiuti.innerHTML = '<div class="st-spiega no">🤔 Non è questa. 💡 Inizia con <b>«' + esc(r.charAt(0).toUpperCase()) + '»</b>' +
+            (/\d/.test(r) ? ' (è un numero)' : parole > 1 ? ' ed è formata da ' + parole + ' parole' : ' e ha ' + n + ' lettere') + '.</div>';
+        }
+        else {
+          var opz = mescola([v.risposta].concat(v.altre.slice(0, 2)));
+          aiuti.innerHTML = '<div class="st-spiega no">💡 Scegli fra queste:</div><div class="st-chips">' + opz.map(function (o) { return '<button type="button" class="st-scelta">' + esc(o) + '</button>'; }).join('') + '</div>';
+          aiuti.querySelectorAll('.st-scelta').forEach(function (b) { b.onclick = function () { if (b.textContent === v.risposta) giusta(); else { b.classList.add('no'); b.disabled = true; if (conto) conto(); } }; });
+        }
+        inp.select();
+      }
+      box.querySelector('[data-ok]').onclick = function () { prova(inp.value); };
+      inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') prova(inp.value); });
+      inp.focus({ preventScroll: true });
+    }
+    una();
+  }
+  /* «tre di fila»: un errore azzera il conto, le domande continuano dal mazzo */
+  function raffica(box, mazzo, quante, fatto, conto) {
+    var fila = 0, k = 0, M = mescola(mazzo);
+    function una() {
+      if (fila >= quante) return fatto();
+      if (k >= M.length) { M = mescola(mazzo); k = 0; }
+      var d = M[k++];
+      box.innerHTML = '<div class="fm-dom st-entra">' + S.tastoVoce(d.testo + '. ' + d.opz.join('. ')) +
+        '<div class="fm-fila" aria-label="Risposte giuste di fila">' + Array.from({ length: quante }, function (_, i) { return '<span class="' + (i < fila ? 'si' : '') + '">' + (i < fila ? '✔' : i + 1) + '</span>'; }).join('') + '</div>' +
+        '<p class="st-dom">' + (d.html || esc(d.testo)) + '</p><div class="' + (d.vf ? 'st-vf' : 'st-scelte') + '">' + d.opz.map(function (o, i) { return '<button type="button" class="st-scelta" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div><div class="st-esito" aria-live="polite"></div></div>';
+      box.querySelectorAll('.st-scelta').forEach(function (b) {
+        b.onclick = function () {
+          box.querySelectorAll('.st-scelta').forEach(function (x) { x.disabled = true; });
+          var es = box.querySelector('.st-esito');
+          if (+b.getAttribute('data-i') === d.giusta) { b.classList.add('ok'); fila++; toast(S.pesca(S.BRAVO)); setTimeout(una, 900); }
+          else {
+            b.classList.add('no'); box.querySelectorAll('.st-scelta')[d.giusta].classList.add('ok'); if (conto) conto();
+            es.innerHTML = '<div class="st-spiega no">❌ Lo chef scuote la testa: si ricomincia da zero.' + (d.spiega ? '<br>💡 ' + esc(d.spiega) : '') + '</div><div class="st-azioni"><button type="button" class="st-btn pieno">Riprova →</button></div>';
+            fila = 0; es.querySelector('button').onclick = una; es.querySelector('button').focus();
+          }
+        };
+      });
+    }
+    una();
+  }
+
   /* ═══════════════ 🔐 ESCAPE ROOM ═══════════════ */
   function lettere(L) {
     function pulisci(t) { return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().replace(/[^A-Z]/g, ''); }
     var A = (L.mnemonica || {}).acronimo || {}, p = pulisci(A.parola);
-    if (p.length >= 3 && p.length <= 10) return { parola: p, aiuto: A.frase ? 'È la parola magica della lezione. Ricordi la frase? «' + A.frase + '»' : 'È la parola magica della lezione.' };
+    var LT = arr(A.lettere).filter(function (l) { return l && l.lettera && l.significato; });
+    if (p.length >= 3 && p.length <= 10) return { parola: p, aiuto: A.frase ? 'È la parola magica della lezione. Ricordi la frase? «' + A.frase + '»' : 'È la parola magica della lezione.', lettere: LT.length >= 3 && LT.length <= 8 ? LT : null };
     var k = arr(L.concetti).map(function (c) { return pulisci(c.parola_chiave); }).filter(function (x) { return x.length >= 4 && x.length <= 9; })[0];
     if (k) return { parola: k, aiuto: 'È una delle parole chiave della lezione.' };
     return { parola: 'STUDIO', aiuto: 'È quello che stai facendo adesso!' };
@@ -115,13 +188,52 @@ window.FORMATI = (function () {
     var C = arr(L.concetti), seg = lettere(L), prove = [], errori = 0, t0 = 0;
     var haSeq = L.sequenza && arr(L.sequenza.passi).length >= 3;
     function conto() { errori++; }
-    if (arr(L.vero_falso).length >= 2) prove.push({ ic: '🖍️', nome: 'La lavagna dello chef', scena: 'Sulla lavagna lo chef ha scritto alcune frasi, ma qualcuna è falsa. Di\' tu quali sono vere e quali false.', gioca: function (b, f) { serie(b, mescola(arr(L.vero_falso)).slice(0, 3).map(daVF), f, conto); } });
-    if (arr(L.completa).length >= 2) prove.push({ ic: '📜', nome: 'Il ricettario strappato', scena: 'Nel ricettario mancano delle parole. Rimetti ogni parola al suo posto.', gioca: function (b, f) { serie(b, mescola(arr(L.completa)).slice(0, 3).map(daCompleta), f, conto); } });
-    if (arr(L.abbina).length >= 3) prove.push({ ic: '🗄️', nome: 'I cassetti delle spezie', scena: 'Le etichette sono cadute dai cassetti. Rimetti ogni etichetta sul cassetto giusto.', gioca: function (b, f) { abbina(b, mescola(arr(L.abbina)).slice(0, 4), f, conto); } });
+    var VF = arr(L.vero_falso), Q = arr(L.quiz), CO = arr(L.completa), PA = arr(L.parole).filter(function (p) { return p.termine && p.definizione; });
+    /* 1. vero o falso, e poi «perché?»: non basta indovinare, bisogna sapere il motivo */
+    if (VF.length >= 3) prove.push({ ic: '🖍️', nome: 'La lavagna dello chef', scena: 'Sulla lavagna lo chef ha scritto delle frasi. Per ognuna: è vera o falsa? E soprattutto: perché?', gioca: function (b, f) {
+      var spiegate = VF.filter(function (q) { return q.spiegazione; }), d = [];
+      mescola(VF).slice(0, 3).forEach(function (q) {
+        d.push(daVF(q));
+        var altre = mescola(spiegate.filter(function (x) { return x !== q; })).slice(0, 2).map(function (x) { return x.spiegazione; });
+        if (q.spiegazione && altre.length === 2) {
+          var o = mescola([q.spiegazione].concat(altre));
+          d.push({ testo: 'Perché? «' + q.affermazione + '» è ' + (q.vero ? 'vera' : 'falsa') + ' perché…', html: '<small class="st-cont">Perché è ' + (q.vero ? 'vera' : 'falsa') + '?</small><br>«' + esc(q.affermazione) + '»', opz: o, giusta: o.indexOf(q.spiegazione) });
+        }
+      });
+      serie(b, d, f, conto);
+    } });
+    /* 2. frasi da completare scrivendo la parola, senza suggerimenti */
+    if (CO.length >= 2) prove.push({ ic: '📜', nome: 'Il ricettario strappato', scena: 'Nel ricettario mancano delle parole e non ci sono foglietti da scegliere: la parola va scritta. (Un piccolo errore di battitura va bene.)', gioca: function (b, f) {
+      scrivi(b, mescola(CO).slice(0, 3).map(function (q) {
+        var p = String(q.frase || '').split(/_{2,}/);
+        return { html: esc(p[0]) + '<span class="st-buco">?</span>' + esc(p.slice(1).join(' ')), voce: String(q.frase || '').replace(/_{2,}/, ' … '), risposta: q.risposta, altre: arr(q.distrattori) };
+      }), f, conto);
+    } });
+    /* 3. il messaggio cifrato: dalla definizione al termine, da scrivere */
+    if (PA.length >= 3) prove.push({ ic: '📨', nome: 'Il messaggio cifrato', scena: 'Sul frigorifero c\'è un biglietto con delle definizioni. Scrivi la parola che descrivono.', gioca: function (b, f) {
+      scrivi(b, mescola(PA).slice(0, 3).map(function (p) {
+        return { html: '«' + esc(p.definizione) + '»', voce: p.definizione, risposta: p.termine, altre: mescola(PA.filter(function (x) { return x !== p; })).map(function (x) { return x.termine; }) };
+      }), f, conto);
+    } });
+    /* 4. tutte le coppie */
+    if (arr(L.abbina).length >= 4) prove.push({ ic: '🗄️', nome: 'I cassetti delle spezie', scena: 'Tutte le etichette sono cadute dai cassetti. Rimettile tutte al posto giusto.', gioca: function (b, f) { abbina(b, mescola(arr(L.abbina)).slice(0, 6), f, conto); } });
+    /* 5. la sequenza */
     if (haSeq) prove.push({ ic: '🔢', nome: 'Il lucchetto a combinazione', scena: 'La combinazione è l\'ordine giusto. Metti i passaggi in fila.', gioca: function (b, f) { ordina(b, L.sequenza.titolo, arr(L.sequenza.passi), f, conto); } });
-    if (C.length >= 3) prove.push({ ic: '📦', nome: 'Le scatole senza etichetta', scena: 'In dispensa ci sono scatole con una descrizione ma senza nome. Riconosci l\'idea giusta.', gioca: function (b, f) { serie(b, daConcetti(C).slice(0, 3), f, conto); } });
-    if (arr(L.quiz).length >= 2) prove.push({ ic: '🧑‍🍳', nome: 'Lo chef guardiano', scena: 'Davanti alla porta c\'è lo chef. Prima di farti passare ti fa qualche domanda.', gioca: function (b, f) { serie(b, mescola(arr(L.quiz)).slice(0, 3).map(daQuiz), f, conto); } });
-    prove = prove.slice(0, 5);
+    /* 6. dall'esempio all'idea: riconoscere un concetto in una situazione concreta */
+    var conEsempio = C.filter(function (c) { return c.esempio && c.titolo; });
+    if (conEsempio.length >= 3 && C.length >= 4) prove.push({ ic: '📦', nome: 'Le scatole misteriose', scena: 'In ogni scatola c\'è un esempio preso dalla vita di tutti i giorni. A quale idea della lezione appartiene?', gioca: function (b, f) {
+      serie(b, mescola(conEsempio).slice(0, 3).map(function (c) {
+        var o = mescola([c].concat(mescola(C.filter(function (x) { return x !== c; })).slice(0, 3)));
+        return { testo: 'A quale idea appartiene questo esempio? ' + c.esempio, html: '<small class="st-cont">A quale idea appartiene?</small><br>📦 «' + esc(c.esempio) + '»', opz: o.map(function (x) { return x.titolo; }), giusta: o.indexOf(c) };
+      }), f, conto);
+    } });
+    else if (C.length >= 3) prove.push({ ic: '📦', nome: 'Le scatole senza etichetta', scena: 'In dispensa ci sono scatole con una descrizione ma senza nome. Riconosci l\'idea giusta.', gioca: function (b, f) { serie(b, daConcetti(C).slice(0, 3), f, conto); } });
+    /* 7. lo chef vuole tre risposte giuste di fila */
+    var mazzoChef = Q.map(daQuiz).concat(VF.map(daVF));
+    if (mazzoChef.length >= 5) prove.push({ ic: '🧑‍🍳', nome: 'Lo chef guardiano', scena: 'Lo chef ti lascia passare solo con 3 risposte giuste DI FILA. Se ne sbagli una, il conto riparte da zero.', gioca: function (b, f) { raffica(b, Q.length >= 3 ? Q.map(daQuiz) : mazzoChef, 3, f, conto); } });
+    /* al massimo 6 lucchetti, sempre con lo chef per ultimo */
+    var chef = prove.filter(function (p) { return p.ic === '🧑‍🍳'; });
+    prove = prove.filter(function (p) { return p.ic !== '🧑‍🍳'; }).slice(0, chef.length ? 5 : 6).concat(chef);
     /* le lettere della parola segreta, distribuite fra i lucchetti */
     var P = seg.parola.split(''), m = Math.min(prove.length, P.length), base = Math.floor(P.length / m), resto = P.length % m, da = 0;
     prove = prove.slice(0, m);
@@ -129,9 +241,9 @@ window.FORMATI = (function () {
     var aperti = 0;
 
     R.innerHTML = '<div class="st-palco">' + comeFunziona('🔐', 'Chiusi in dispensa!', 'Lo chef ha chiuso la porta della dispensa e ha nascosto la chiave dietro <b>' + prove.length + ' lucchetti</b>. Per uscire devi dimostrare di sapere: <b>' + esc(L.titolo) + '</b>.', [
-      'Apri i lucchetti <b>uno alla volta</b>, nell\'ordine. Ognuno è una piccola prova sulla lezione.',
-      'Se sbagli non succede niente: compare un <b>aiuto</b> e riprovi. Nessun timer ti mette fretta.',
-      'Ogni lucchetto aperto ti regala <b>una lettera</b>. Alla fine metti in ordine le lettere e la porta si apre.'
+      'Apri i lucchetti <b>uno alla volta</b>. Ognuno è una prova diversa: in alcune devi <b>scrivere</b> la risposta, in altre spiegare <b>perché</b>.',
+      'Se sbagli compare un <b>aiuto</b> e riprovi. Nessun timer ti mette fretta, ma lo chef finale è severo!',
+      'Ogni lucchetto aperto ti regala <b>delle lettere</b>. Alla fine, con le lettere in ordine, sblocchi la porta.'
     ], 'Entra nella dispensa →') + '</div>';
     R.querySelector('.fm-via').onclick = function () { t0 = Date.now(); stanza(); };
 
@@ -179,7 +291,7 @@ window.FORMATI = (function () {
           b.onclick = function () {
             scelte.push(mazzo[+b.getAttribute('data-k')]); disegna();
             if (scelte.length === P.length) {
-              if (scelte.map(function (x) { return x.l; }).join('') === seg.parola) return fuori();
+              if (scelte.map(function (x) { return x.l; }).join('') === seg.parola) return seg.lettere ? significati() : fuori();
               conto(); R.querySelector('.st-esito').innerHTML = '<div class="st-spiega no">🔒 La porta non si apre: l\'ordine non è giusto. Premi «Ricomincia la parola» e riprova.</div>';
             }
           };
@@ -189,8 +301,14 @@ window.FORMATI = (function () {
       }
       disegna();
     }
+    /* la porta ha una seconda serratura: cosa vuol dire ogni lettera della parola magica */
+    function significati() {
+      R.innerHTML = '<div class="st-palco"><div class="st-card st-entra fm-prova"><h2><span aria-hidden="true">🚪</span> L\'ultima serratura</h2>' +
+        '<p class="st-sot">La parola è giusta: <b>' + esc(seg.parola) + '</b>! Ma la porta ha un\'ultima serratura: abbina ogni lettera a quello che vuol dire.</p><div id="fm-gioco"></div></div></div>';
+      abbina(R.querySelector('#fm-gioco'), seg.lettere.map(function (l, i) { return { sinistra: (i + 1) + ' · ' + l.lettera, destra: l.significato }; }), fuori, conto);
+    }
     function fuori() {
-      var min = Math.max(1, Math.round((Date.now() - t0) / 60000)), chiavi = errori <= 2 ? 3 : errori <= 6 ? 2 : 1;
+      var min = Math.max(1, Math.round((Date.now() - t0) / 60000)), chiavi = errori <= 3 ? 3 : errori <= 8 ? 2 : 1;
       S.coriandoli();
       R.innerHTML = '<div class="st-palco"><div class="st-card st-finale st-entra"><div class="st-medaglia">🗝️</div><h2>Sei fuori dalla dispensa!</h2>' +
         '<p class="st-sot">La parola segreta era <b>' + esc(seg.parola) + '</b>.</p>' +

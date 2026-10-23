@@ -377,3 +377,13 @@ main:fullscreen .st-hero,main:fullscreen #st-modi{display:none}
 .fm-podio li{display:flex;align-items:center;gap:.8rem;background:#fff;border:2px solid var(--av3);border-radius:14px;padding:.6rem 1rem;font:800 clamp(1.1rem,2.4vw,1.6rem) var(--fu);color:var(--bosco)}
 .fm-podio li:first-child{border-color:var(--oro);background:#FFF8E1}
 .fm-podio li span:nth-child(2){flex:1}
+/* escape room: risposta da scrivere e «tre di fila» */
+.fm-scrivi{display:flex;gap:.5rem;flex-wrap:wrap;margin:.6rem 0}
+.fm-scrivi input{flex:1;min-width:180px;font:700 1.2rem var(--st-f);padding:.7rem .9rem;border:2px solid var(--av3);border-radius:12px;background:#fff}
+.fm-scrivi input:focus{outline:3px solid var(--oro);outline-offset:1px}
+.fm-scrivi input.ok{border-color:var(--st-ok);background:var(--st-ok2)}
+.fm-scrivi input.no{border-color:var(--st-no);animation:st-scuoti .4s}
+.fm-aiuti .st-chips{margin-top:.5rem}
+.fm-fila{display:flex;gap:.4rem;justify-content:center;margin:.2rem 0 .6rem}
+.fm-fila span{width:2.2rem;height:2.2rem;border-radius:50%;border:2px dashed var(--av3);display:flex;align-items:center;justify-content:center;font:800 .95rem var(--fu);color:var(--txt2)}
+.fm-fila span.si{border:2px solid var(--st-ok);background:var(--st-ok2);color:var(--st-ok)}

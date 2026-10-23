@@ -399,3 +399,13 @@ main:fullscreen .st-hero,main:fullscreen #st-modi{display:none}
 button.fm-tessera{cursor:pointer}
 button.fm-tessera:disabled{opacity:.3;cursor:default}
 button.fm-tessera:focus-visible{outline:3px solid var(--oro);outline-offset:2px}
+/* la porta: sotto ogni parola del biglietto, la casella della sua iniziale */
+.fm-guida{display:grid;grid-template-columns:repeat(auto-fill,minmax(6.2rem,1fr));gap:.5rem;margin-top:.7rem}
+.fm-guida .col{display:flex;flex-direction:column;align-items:center;gap:.35rem;background:#fff;border:1px solid var(--av3);border-radius:12px;padding:.5rem .3rem}
+.fm-guida .col.ora{border:2px solid var(--oro)}
+.fm-guida .w{font-family:var(--fd);font-size:1.25rem;color:var(--bosco);white-space:nowrap}
+.fm-guida .w b{font-family:var(--fu);font-size:1.15em;color:var(--oro);text-decoration:underline;text-underline-offset:.15em}
+.fm-guida .casella{width:2.8rem;height:3rem;display:flex;align-items:center;justify-content:center;border:2px dashed var(--av3);border-radius:10px;background:#fff;font:800 1.5rem var(--fu);color:var(--txt2)}
+.fm-guida .col.ora .casella{border:2px solid var(--oro);box-shadow:0 0 0 4px rgba(212,170,74,.25);color:var(--oro)}
+.fm-guida .casella.si{border:2px solid var(--st-ok);background:var(--st-ok2);color:var(--bosco);animation:st-pop .4s}
+button.fm-tessera.no{border-color:var(--st-no);animation:st-scuoti .4s}

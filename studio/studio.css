@@ -387,3 +387,15 @@ main:fullscreen .st-hero,main:fullscreen #st-modi{display:none}
 .fm-fila{display:flex;gap:.4rem;justify-content:center;margin:.2rem 0 .6rem}
 .fm-fila span{width:2.2rem;height:2.2rem;border-radius:50%;border:2px dashed var(--av3);display:flex;align-items:center;justify-content:center;font:800 .95rem var(--fu);color:var(--txt2)}
 .fm-fila span.si{border:2px solid var(--st-ok);background:var(--st-ok2);color:var(--st-ok)}
+/* escape room: il taccuino delle lettere e il biglietto dello chef */
+.fm-taccuino,.fm-biglietto{background:#FFFBEA;border:2px solid var(--oro3);border-radius:14px;padding:.7rem .9rem;margin:.6rem 0 1rem}
+.fm-biglietto{transform:rotate(-.6deg);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.fm-tac-t{font:800 .75rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro);margin:0 0 .5rem}
+.fm-big-testo{font-family:var(--fd);font-size:1.45rem;line-height:1.35;color:var(--bosco);margin:0 0 .4rem}
+.fm-tessere-v{display:flex;gap:.45rem;flex-wrap:wrap;justify-content:center}
+.fm-tessera{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:3.2rem;min-height:3.2rem;padding:.35rem .5rem;background:#fff;border:2px solid var(--oro);border-radius:12px;color:var(--bosco);font-family:var(--fu);line-height:1.15}
+.fm-tessera b{font-size:1.5rem}
+.fm-tessera small{font-size:.72rem;color:var(--txt2);max-width:7rem;text-align:center}
+button.fm-tessera{cursor:pointer}
+button.fm-tessera:disabled{opacity:.3;cursor:default}
+button.fm-tessera:focus-visible{outline:3px solid var(--oro);outline-offset:2px}

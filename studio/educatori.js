@@ -1,13 +1,13 @@
 /* ════════════════════════════════════════════════════════
    SALA STUDIO — parti comuni alle pagine degli educatori
    (docente.html, modifica.html, archivio.html)
-   EDUCATORI.area({pagina, dentro, alCambio})  la barra dell'area riservata e, finché non si è entrati, il percorso guidato
+   EDUCATORI.area({pagina, dentro, alCambio, alControllo})  la barra dell'area riservata e, finché non si è entrati, il percorso guidato
                                 per entrare con la mail istituzionale (o il codice di scorta); "dentro" si vede solo dopo
    EDUCATORI.entrato() → {email, nome} oppure {scorta:true} oppure null
    EDUCATORI.chiama({...})      → Promise della risposta della funzione studio-genera (con l'accesso di chi è entrato)
    EDUCATORI.AREE, .ANNI, .riempiMaterie(select), .riempiAnni(select), .annoDaClasse(classe)
    EDUCATORI.istruzioni({...}) / .correzione(lezione, richiesta)  testi da dare all'IA
-   EDUCATORI.leggi(testo)       → la lezione contenuta in una risposta dell'IA, o null
+   EDUCATORI.leggi(testo)       → la lezione contenuta in una risposta dell'IA, o null; .perche(testo) spiega perché non lo è
    EDUCATORI.qr(testo, canvas, cella), .cartello(url, lezione, codice, stampa), .data(iso)
    Materie e anni seguono i quadri orari dell'istituto professionale
    "Enogastronomia e ospitalità alberghiera" (D.Lgs. 61/2017): biennio (1°-2°) e triennio (3°-5°).
@@ -66,14 +66,19 @@ window.EDUCATORI = (function () {
     ia: 'L\'intelligenza artificiale non ha risposto bene. Riprova tra un minuto.', server: 'Errore del server: riprova tra un minuto.',
     rete: 'Connessione assente o servizio non raggiungibile: riprova.'
   };
+  var ridisegna = null; /* l'area riservata, da ridisegnare se l'accesso scade mentre si lavora */
   function chiama(dati) {
-    var s = sessione();
+    var s = sessione(), prima = !!entrato();
     if (!dati.azione) { if (s) dati.sessione = s.t; else if (codice()) dati.codice_docente = codice(); }
     return fetch(FUNZIONE, { method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUB }, body: JSON.stringify(dati) })
       .then(function (r) { return r.json().catch(function () { return { ok: false, errore: r.status === 404 ? 'configurazione' : 'server' }; }); })
       .catch(function () { return { ok: false, errore: 'rete' }; })
       .then(function (r) {
-        if (r && !r.ok) { r.messaggioErrore = ERRORI[r.errore] || ERRORI.server; if (r.errore === 'sessione') sessione(null); if (r.errore === 'codice') codice(''); }
+        if (r && !r.ok) {
+          r.messaggioErrore = ERRORI[r.errore] || ERRORI.server; if (r.errore === 'sessione') sessione(null); if (r.errore === 'codice') codice('');
+          /* chi era dentro e non lo è più rivede subito il riquadro per entrare; quello che stava scrivendo resta lì */
+          if (prima && !entrato() && ridisegna) { ridisegna(r.messaggioErrore); scrollTo({ top: 0, behavior: 'smooth' }); }
+        }
         return r;
       });
   }
@@ -103,7 +108,7 @@ window.EDUCATORI = (function () {
         '<div data-fase="1"><label for="ac-mail">La tua mail della scuola</label>' +
           '<input type="email" id="ac-mail" class="ed-grande" autocomplete="email" inputmode="email" placeholder="nome.cognome@alberghierorieti.it" value="' + esc(mail) + '"/>' +
           '<div class="st-azioni"><button type="button" class="st-btn oro ed-vai" data-manda>Mandami il codice →</button></div>' +
-          '<p class="st-nota">Va bene anche l\'indirizzo @alberghierorieti.edu.it.</p></div>' +
+          '<p class="st-nota">Basta anche solo <b>nome.cognome</b>: il resto lo aggiungo io. Va bene anche @alberghierorieti.edu.it.</p></div>' +
         '<div data-fase="2" hidden><div class="ed-posta">📬 Ti abbiamo scritto a <b data-a></b>.<br>Apri la posta e cerca il messaggio <b>«Il tuo codice di accesso»</b>. Non c\'è? Guarda anche in <b>Spam / Posta indesiderata</b>.</div>' +
           '<label for="ac-otp">Il codice di 6 cifre</label><input type="text" id="ac-otp" class="ed-grande ed-otp" inputmode="numeric" autocomplete="one-time-code" maxlength="7" placeholder="● ● ● ● ● ●"/>' +
           '<div class="st-azioni"><button type="button" class="st-btn oro ed-vai" data-entra>Entra →</button><button type="button" class="st-btn" data-rimanda>Rimanda il codice</button><button type="button" class="st-btn" data-cambia>Cambia mail</button></div></div>' +
@@ -122,7 +127,8 @@ window.EDUCATORI = (function () {
       }
       function errore(r) { err.textContent = r.messaggioErrore || ERRORI.server; }
       function manda() {
-        mail = q('#ac-mail').value.trim().toLowerCase(); err.textContent = '';
+        mail = q('#ac-mail').value.replace(/\s+/g, '').toLowerCase(); err.textContent = '';
+        if (mail && mail.indexOf('@') < 0) { mail += '@alberghierorieti.it'; q('#ac-mail').value = mail; } /* basta nome.cognome */
         if (!/^[^\s@]+@alberghierorieti\.(edu\.)?it$/.test(mail)) { err.textContent = ERRORI.email; q('#ac-mail').focus(); return; }
         var b = q('[data-manda]'); b.disabled = true; b.textContent = '⏳ Spedisco…';
         chiama({ azione: 'richiedi', email: mail }).then(function (r) {
@@ -159,7 +165,10 @@ window.EDUCATORI = (function () {
         chiama({ codice_docente: c, prova: true }).then(function (r) { if (!r.ok) return errore(r); codice(c); fatto(); });
       };
     }
+    ridisegna = disegna;
     disegna();
+    /* una volta per pagina: la chiave è ancora buona? (se no, si rivede subito il riquadro per entrare) */
+    if (entrato()) chiama({ prova: true }).then(function (r) { if (r.ok && o.alControllo) o.alControllo(r); });
     return disegna;
   }
 
@@ -251,7 +260,29 @@ window.EDUCATORI = (function () {
       /* qualche assistente lascia una virgola prima di } o ] */
       try { L = JSON.parse(t.replace(/,(\s*[}\]])/g, '$1')); } catch (e2) { return null; }
     }
-    return L && L.titolo && Array.isArray(L.concetti) && L.concetti.length ? L : null;
+    return L && pieno(L.titolo) && Array.isArray(L.concetti) && L.concetti.some(function (c) { return c && pieno(c.spiegazione); }) ? L : null;
+  }
+  function pieno(v) { return typeof v === 'string' && /[A-Za-zÀ-ÿ0-9]/.test(v); } /* "..." è il segnaposto delle istruzioni */
+  /* perché un testo incollato non è una lezione: il messaggio da mostrare */
+  function perche(t) {
+    t = String(t || '');
+    if (!t.trim()) return 'Incolla prima la risposta dell\'IA.';
+    if (t.indexOf('Correggila così:') >= 0) return 'Questa è la richiesta per l\'IA, non la sua risposta. Incollala in Claude, ChatGPT o Gemini; poi copia qui quello che l\'IA ti risponde.';
+    if (t.indexOf('Sei un educatore esperto') >= 0 || t.indexOf('"titolo":"..."') >= 0 || /"titolo":\s*"\.\.\."/.test(t))
+      return 'Questo è il testo delle istruzioni, non la risposta dell\'IA. Incollalo in Claude, ChatGPT o Gemini (passo 2); poi copia qui quello che l\'IA ti risponde.';
+    return 'Il testo incollato non è una lezione completa: copia tutta la risposta dell\'IA, dall\'inizio alla fine. Se la risposta si è interrotta, scrivi all\'IA «continua» oppure rifai la richiesta.';
+  }
+
+  /* copia negli appunti; se il telefono non lo permette, mostra il testo già selezionato sotto il pulsante (mai nel riquadro della risposta) */
+  function copia(testo, pulsante, fatto) {
+    var vecchio = pulsante.parentNode.parentNode.querySelector('.dc-copia-a-mano'); if (vecchio) vecchio.remove();
+    (navigator.clipboard ? navigator.clipboard.writeText(testo) : Promise.reject()).then(function () { window.STUDIO.toast(fatto); })
+      .catch(function () {
+        var d = document.createElement('div'); d.className = 'dc-copia-a-mano';
+        d.innerHTML = '<p class="st-nota"><b>Il telefono non mi lascia copiare da solo.</b> Il testo qui sotto è già selezionato: tieni premuto e scegli <b>Copia</b>.</p><textarea readonly></textarea>';
+        pulsante.parentNode.insertAdjacentElement('afterend', d);
+        var ta = d.querySelector('textarea'); ta.value = testo; ta.focus(); ta.select();
+      });
   }
 
   /* ───── QR e cartello ───── */
@@ -278,6 +309,6 @@ window.EDUCATORI = (function () {
   return {
     AREE: AREE, ANNI: ANNI, ALTRA: ALTRA, ERRORI: ERRORI, chiama: chiama, area: area, entrato: entrato, autore: autore,
     riempiMaterie: riempiMaterie, materiaScelta: materiaScelta, riempiAnni: riempiAnni, annoDaClasse: annoDaClasse, ordineMateria: ordineMateria,
-    istruzioni: istruzioni, correzione: correzione, leggi: leggi, qr: qr, cartello: cartello, data: data
+    istruzioni: istruzioni, correzione: correzione, leggi: leggi, perche: perche, copia: copia, qr: qr, cartello: cartello, data: data
   };
 })();

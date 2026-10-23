@@ -282,8 +282,7 @@
   $('md-qr').onclick = function () { E.cartello(url, { titolo: L.titolo, icona: L.icona, materia: E.materiaScelta($('md-mat'), $('md-mat-altra')) }, codice, false); };
   $('md-copia').onclick = function () {
     var t = E.correzione(L, $('md-rich').value.trim());
-    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { STUDIO.toast('Richiesta copiata: ora apri l\'assistente IA 📋'); })
-      .catch(function () { $('md-risp').value = t; $('md-risp').select(); STUDIO.toast('Copia il testo dal riquadro qui sotto'); });
+    E.copia(t, this, 'Richiesta copiata: ora apri l\'assistente IA 📋');
   };
   $('md-incolla').onclick = function () {
     if (!navigator.clipboard || !navigator.clipboard.readText) { $('md-risp').focus(); return STUDIO.toast('Tieni premuto nel riquadro e scegli Incolla'); }
@@ -291,7 +290,7 @@
   };
   $('md-applica').onclick = function () {
     var N = E.leggi($('md-risp').value);
-    if (!N) { $('md-err-ia').textContent = 'La risposta incollata non è una lezione completa: copiate tutta la risposta dell\'IA, dalla prima { all\'ultima }.'; return; }
+    if (!N) { $('md-err-ia').textContent = E.perche($('md-risp').value); return; }
     $('md-err-ia').textContent = ''; L = N; segna(); disegnaForm(); $('md-risp').value = '';
     $('md-stato').textContent = '✏️ Versione dell\'IA caricata: controllala e premi Salva.';
     $('md-form').scrollIntoView({ behavior: 'smooth' });

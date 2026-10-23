@@ -28,6 +28,10 @@ Se il servizio non risponde, lo stesso passo 3 offre **Crea solo il link**: la l
   entra chiunque abbia una mail della scuola. Del codice il database conserva solo l'impronta (tabella `studio_otp`).
 - Dopo l'accesso il dispositivo resta riconosciuto per **60 giorni** con un lasciapassare firmato dalla funzione
   (la chiave deriva da `SUPABASE_SERVICE_ROLE_KEY`). Sui computer condivisi, a fine lavoro: **Esci**.
+  La scadenza è una misura di sicurezza (telefono perso, computer lasciato acceso): 60 giorni significano mail e codice
+  4 o 5 volte in un anno scolastico. Se docenti ed educatori lo chiedono, si può prolungare fino alla fine dell'anno
+  scolastico: si cambia `SESSIONE_MS` in `scripts/studio-genera/index.ts` (e la data mostrata in `studio/educatori.js`,
+  dove si calcola `scade`), poi si ripubblica la funzione. Le pagine di accesso spiegano tutto questo in «Perché scade?».
 - La mail parte dallo stesso script di Lingue (`scripts/lingue-invio-codici.gs`, segreti `GAS_URL` e `GAS_TOKEN`).
   Lo script riconosce il campo `servizio: "studio"` e firma la mail "Sala Studio della Scuola": dopo averlo aggiornato
   va pubblicata una **nuova versione** della stessa distribuzione (l'URL non cambia). Finché non lo si aggiorna, le mail

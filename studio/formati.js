@@ -188,7 +188,9 @@ window.FORMATI = (function () {
         parola: p, significati: sig, lettere: sig && LT.length <= 8 ? LT : null,
         /* la frase buffa, se le sue maiuscole formano la parola; altrimenti l'elenco dei significati, in ordine */
         biglietto: maiuscole ? '«' + A.frase + '»' : sig ? '«' + sig.join(' · ') + '»' : A.frase ? '«' + A.frase + '»' : '',
-        regola: maiuscole ? 'Guarda le lettere <b>maiuscole</b> del biglietto: ti dicono l\'ordine.' : sig || A.frase ? 'Le <b>iniziali</b> del biglietto ti dicono l\'ordine delle lettere.' : 'È la parola magica della lezione.'
+        regola: maiuscole ? 'Guarda le lettere <b>maiuscole</b> del biglietto: ti dicono l\'ordine.' : sig || A.frase ? 'Le <b>iniziali</b> del biglietto ti dicono l\'ordine delle lettere.' : 'È la parola magica della lezione.',
+        /* le parole-guida: una per lettera, nell'ordine giusto; sotto ognuna va la tessera con la stessa iniziale */
+        guida: maiuscole ? String(A.frase).split(/[\s,;.:!?'’]+/).filter(function (w) { return /^[A-ZÀ-Ý]/.test(w); }) : sig
       };
     }
     var c = arr(L.concetti).filter(function (x) { var k = pulisci(x.parola_chiave); return k.length >= 4 && k.length <= 9 && x.spiegazione && new RegExp(String(x.parola_chiave).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i').test(x.spiegazione); })[0];
@@ -256,7 +258,7 @@ window.FORMATI = (function () {
     R.innerHTML = '<div class="st-palco">' + comeFunziona('🔐', 'Chiusi in dispensa!', 'Lo chef ha chiuso la porta della dispensa e ha nascosto la chiave dietro <b>' + prove.length + ' lucchetti</b>. Per uscire devi dimostrare di sapere: <b>' + esc(L.titolo) + '</b>.', [
       'Apri i lucchetti <b>uno alla volta</b>. Ognuno è una prova diversa: in alcune devi <b>scrivere</b> la risposta, in altre spiegare <b>perché</b>.',
       'Se sbagli compare un <b>aiuto</b> e riprovi. Nessun timer ti mette fretta, ma lo chef finale è severo!',
-      'Ogni lucchetto aperto ti dà <b>una o più lettere</b>, che finiscono nel tuo <b>taccuino</b>. Alla porta lo chef ti lascia un <b>biglietto</b> con l\'indizio per metterle in ordine.'
+      'Ogni lucchetto aperto ti dà <b>una o più lettere</b>, che finiscono nel tuo <b>taccuino</b>. Alla porta trovi un <b>biglietto</b>: sotto ogni sua parola metti la lettera con la stessa iniziale, e la porta si apre.'
     ], 'Entra nella dispensa →') + '</div>';
     R.querySelector('.fm-via').onclick = function () { t0 = Date.now(); stanza(); };
 
@@ -293,28 +295,49 @@ window.FORMATI = (function () {
       });
     }
     function finale() {
-      var scelte = [], mazzo = mescola(tessere), aiuti = 0;
+      var scelte = [], mazzo = mescola(tessere), aiuti = 0, G = seg.guida && seg.guida.length === P.length ? seg.guida : null;
       if (mazzo.every(function (x, k) { return x.i === k; })) mazzo.reverse();
-      function disegna() {
+      function parolaGuida(w) { return '<b>' + esc(w.charAt(0)) + '</b>' + esc(w.slice(1)); }
+      function disegna(msg) {
+        var n = scelte.length;
         R.innerHTML = '<div class="st-palco"><div class="st-card st-entra fm-prova"><h2><span aria-hidden="true">🚪</span> La porta</h2>' +
-          '<div class="fm-biglietto"><p class="fm-tac-t">✉️ Sulla porta lo chef ha lasciato un biglietto</p>' + (seg.biglietto ? '<p class="fm-big-testo">' + esc(seg.biglietto) + '</p>' : '') + '<p class="st-nota" style="margin:0">' + seg.regola + '</p></div>' +
-          '<p class="st-sot">Tocca le lettere del taccuino nell\'ordine giusto.</p>' +
-          '<div class="fm-lettere grandi">' + P.map(function (_, i) { return '<span class="' + (scelte[i] ? 'si' : '') + '">' + (scelte[i] ? esc(scelte[i].l) : '_') + '</span>'; }).join('') + '</div>' +
+          (G
+            ? '<div class="fm-biglietto"><p class="fm-tac-t">✉️ Il biglietto dello chef</p><p class="st-nota" style="margin:0">Sotto ogni parola del biglietto metti la tessera che comincia con <b>la stessa lettera</b>. Si parte dalla prima parola, a sinistra.</p>' +
+                '<div class="fm-guida">' + G.map(function (w, i) {
+                  return '<div class="col' + (i === n ? ' ora' : '') + '"><span class="w">' + parolaGuida(w) + '</span><span class="casella' + (scelte[i] ? ' si' : '') + '">' + (scelte[i] ? esc(scelte[i].l) : i === n ? '?' : '') + '</span></div>';
+                }).join('') + '</div></div>' +
+              (n < P.length ? '<p class="st-sot">Ora tocca la tessera che comincia con <b>' + esc(G[n].charAt(0).toUpperCase()) + '</b>, come «' + esc(G[n]) + '».</p>' : '')
+            : '<div class="fm-biglietto"><p class="fm-tac-t">✉️ Il biglietto dello chef</p>' + (seg.biglietto ? '<p class="fm-big-testo">' + esc(seg.biglietto) + '</p>' : '') + '<p class="st-nota" style="margin:0">' + seg.regola + '</p></div>' +
+              '<p class="st-sot">Tocca le lettere del taccuino nell\'ordine giusto.</p>' +
+              '<div class="fm-lettere grandi">' + P.map(function (_, i) { return '<span class="' + (scelte[i] ? 'si' : '') + '">' + (scelte[i] ? esc(scelte[i].l) : '_') + '</span>'; }).join('') + '</div>') +
+          '<p class="fm-tac-t" style="text-align:center;margin-top:.8rem">📒 Le tessere del tuo taccuino</p>' +
           '<div class="fm-tessere fm-tessere-v">' + mazzo.map(function (x, k) { return '<button type="button" class="fm-tessera" data-k="' + k + '"' + (scelte.indexOf(x) >= 0 ? ' disabled' : '') + '><b>' + esc(x.l) + '</b>' + (x.sig ? '<small>come ' + esc(x.sig) + '</small>' : '') + '</button>'; }).join('') + '</div>' +
-          '<div class="st-esito" aria-live="polite"></div>' +
-          '<div class="st-azioni"><button type="button" class="st-btn" data-canc>↺ Ricomincia la parola</button><button type="button" class="st-btn" data-aiuto>💡 Un aiuto</button></div></div></div>';
+          '<div class="st-esito" aria-live="polite">' + (msg || '') + '</div>' +
+          (G ? '' : '<div class="st-azioni"><button type="button" class="st-btn" data-canc>↺ Ricomincia la parola</button><button type="button" class="st-btn" data-aiuto>💡 Un aiuto</button></div>') + '</div></div>';
         R.querySelectorAll('[data-k]').forEach(function (b) {
           b.onclick = function () {
-            scelte.push(mazzo[+b.getAttribute('data-k')]); disegna();
+            var t = mazzo[+b.getAttribute('data-k')];
+            if (G) {
+              /* con il biglietto-guida la tessera sbagliata non entra, e si dice subito perché */
+              if (t.l !== P[scelte.length]) {
+                conto(); b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 450);
+                R.querySelector('.st-esito').innerHTML = '<div class="st-spiega no">«' + esc(G[scelte.length]) + '» comincia con <b>' + esc(P[scelte.length]) + '</b>, non con ' + esc(t.l) + '. Cerca la tessera con la ' + esc(P[scelte.length]) + '.</div>';
+                return;
+              }
+              scelte.push(t);
+              if (scelte.length === P.length) return seg.lettere ? significati() : fuori();
+              return disegna();
+            }
+            scelte.push(t); disegna();
             if (scelte.length === P.length) {
               if (scelte.map(function (x) { return x.l; }).join('') === seg.parola) return seg.lettere ? significati() : fuori();
               conto(); R.querySelector('.st-esito').innerHTML = '<div class="st-spiega no">🔒 La porta non si apre: l\'ordine non è giusto. Rileggi il biglietto, premi «Ricomincia la parola» e riprova.</div>';
             }
           };
         });
-        R.querySelector('[data-canc]').onclick = function () { scelte = []; disegna(); };
+        var c = R.querySelector('[data-canc]'); if (c) c.onclick = function () { scelte = []; disegna(); };
         /* un aiuto alla volta: ogni volta si scopre la lettera successiva */
-        R.querySelector('[data-aiuto]').onclick = function () {
+        var a = R.querySelector('[data-aiuto]'); if (a) a.onclick = function () {
           aiuti = Math.min(P.length - 1, aiuti + 1);
           R.querySelector('.st-esito').innerHTML = '<div class="st-spiega">💡 La parola comincia così: <b>' + esc(seg.parola.slice(0, aiuti)) + '…</b></div>';
         };

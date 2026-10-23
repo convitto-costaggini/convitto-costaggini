@@ -100,3 +100,26 @@
 /* Solo in questa sezione: dei pulsanti tondi in basso a destra restano Home e Aa (lettura facilitata) */
 body[data-page="lingue"] #fab-top,body[data-page="lingue"] #tr-fab,body[data-page="lingue"] #cc-fab{display:none!important}
 @media (max-width:700px){body[data-page="lingue"] #fab-wrap{bottom:.6rem;right:.45rem;gap:.35rem}body[data-page="lingue"] #fab-wrap .fab-c{width:34px;height:34px;font-size:.85rem}body[data-page="lingue"] #fab-wrap .fab-c svg{width:15px;height:15px}}
+
+/* ═══ revisione dei docenti (lingue/revisione.js): le spunte, solo per chi è entrato ═══ */
+.rv-spunte{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;flex-basis:100%;margin:.25rem 0 .1rem}
+.rv-b{font:700 .8rem 'Source Sans 3',system-ui,sans-serif;border:1.5px solid #cfc6b4;background:#fff;color:#2C3E2D;border-radius:99px;padding:.2rem .65rem;min-height:32px;cursor:pointer}
+.rv-b.si{border-color:#2e7d4f;background:#e3f3e8;color:#1d5236}
+.rv-b.pieno{background:#2C3E2D;border-color:#2C3E2D;color:#fff}
+.rv-b:focus-visible,.rv-link:focus-visible{outline:3px solid #B8922A;outline-offset:2px}
+.rv-i{font:600 .75rem 'Source Sans 3',system-ui,sans-serif;color:#6b6457}
+.rv-link{background:none;border:none;padding:0;font:600 .8rem 'Source Sans 3',system-ui,sans-serif;color:#2C3E2D;text-decoration:underline;cursor:pointer}
+.rv-form,.rv-sugg{flex-basis:100%;background:#FFFBEA;border:1px solid #e6d9a8;border-radius:10px;padding:.5rem .7rem;margin:.3rem 0;font-size:.85rem}
+.rv-form label{display:block;font-weight:700;margin-bottom:.4rem}
+.rv-form input{display:block;width:100%;margin-top:.15rem;font:400 .9rem 'Source Sans 3',system-ui,sans-serif;padding:.4rem .5rem;border:1.5px solid #cfc6b4;border-radius:8px}
+.rv-az{display:flex;gap:.4rem;justify-content:flex-end;margin:.2rem 0 .3rem}
+.rv-sugg p{margin:.2rem 0}
+.rv-barra{background:#FFFBEA;border:1px solid #e6d9a8;border-radius:12px;padding:.7rem .9rem;margin:1rem 0;font-size:.88rem;line-height:1.5}
+.rv-barra p{margin:0 0 .4rem}
+.rv-riga{display:flex;gap:.4rem;flex-wrap:wrap;margin:.3rem 0}
+.rv-riga input{flex:1;min-width:200px;font:400 1rem 'Source Sans 3',system-ui,sans-serif;padding:.5rem .6rem;border:1.5px solid #cfc6b4;border-radius:8px}
+.rv-err{min-height:1.2em;margin:.2rem 0;color:#7a5b10}
+.rv-porta{text-align:right;margin:1.2rem 0 0;opacity:.8}
+.rv-toast{position:fixed;left:50%;bottom:1.5rem;transform:translate(-50%,150%);background:#2C3E2D;color:#fff;font:700 .9rem 'Source Sans 3',system-ui,sans-serif;padding:.6rem 1.1rem;border-radius:99px;z-index:9500;transition:transform .25s}
+.rv-toast.su{transform:translate(-50%,0)}
+.ps-l>.rv-spunte,.ps-l>.rv-form,.ps-l>.rv-sugg{grid-column:1/-1}

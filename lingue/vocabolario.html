@@ -100,6 +100,7 @@
         <h3>Come si ascolta</h3>
         Il pulsante 🔊 usa la voce del tuo telefono o computer: se una lingua non è installata, la voce può mancare o avere un accento diverso.
       </div>
+      <div id="rv-porta"></div>
     </div>
   </section>
 </main>
@@ -107,6 +108,7 @@
 <script src="lingue/lingue.js"></script>
 <script src="lingue/finestra.js"></script>
 <script src="lingue/parole.js"></script>
+<script src="lingue/revisione.js"></script>
 <script>
 (function () {
   'use strict';
@@ -167,11 +169,12 @@
     document.getElementById('ps-lista').innerHTML = testa + '<div class="ps-grid">' + v.map(function (x) {
       return '<article class="ps-card">' + (cerca ? '<p class="ps-dove">' + ambitoDi(x.sez.ambito).icona + ' ' + esc(ambitoDi(x.sez.ambito).nome) + ' · ' + esc(x.sez.nome.replace(/^\S+\s/, '')) + '</p>' : '') + '<h3 class="ps-it">' + esc(x.p[0]) + '</h3>' + lingueAttive().map(function (l) {
         var t = x.p[1][l.cod];
-        return '<div class="ps-l"><span class="ps-cod" title="' + l.nome + '">' + l.cod.toUpperCase() + '</span><span class="ps-fr" lang="' + l.cod + '">' + esc(t[0]) + '</span>' +
+        return '<div class="ps-l" data-rv-k="' + esc(x.sez.id + '|' + x.p[0]) + '" data-rv-l="' + l.cod + '" data-rv-t="' + esc(t[0]) + '"><span class="ps-cod" title="' + l.nome + '">' + l.cod.toUpperCase() + '</span><span class="ps-fr" lang="' + l.cod + '">' + esc(t[0]) + '</span>' +
           (parla ? '<button type="button" class="ps-play" data-t="' + esc(t[0]) + '" data-c="' + l.cod + '" aria-label="Ascolta in ' + l.nome.toLowerCase() + '">🔊</button>' : '') +
           (t[1] ? '<span class="ps-nota">ℹ️ ' + esc(t[1]) + '</span>' : '') + '</div>';
       }).join('') + '</article>';
     }).join('') + '</div>';
+    REVISIONE.decora(document.getElementById('ps-lista'));
   }
 
   /* allenamento a flashcard */
@@ -239,6 +242,7 @@
   /* la lingua si sceglie una volta sola, dal pulsante 🌍 della barra */
   document.addEventListener('lingua', function () { lingua = SITO.linguaScelta(); chips(); lista(); if (ps.classList.contains('allena')) iniziaAllenamento(); });
   chips(); lista();
+  REVISIONE.porta(document.getElementById('rv-porta'));
 })();
 </script>
 </body>

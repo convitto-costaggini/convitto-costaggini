@@ -90,6 +90,7 @@
       '<small>' + esc([x.autore, x.classe, E.data(x.modificata || x.created_at), x.aperture ? '👀 ' + x.aperture : ''].filter(Boolean).join(' · ')) + '</small>' +
       (x.sottotitolo ? '<small>' + esc(x.sottotitolo) + '</small>' : '') + '</span><code>' + esc(x.codice) + '</code>' +
       '<div class="az"><a class="st-btn" href="' + esc(BASE + x.codice) + '" target="_blank" rel="noopener">Apri</a><button type="button" class="st-btn" data-qr="' + esc(x.codice) + '">QR</button>' +
+      '<a class="st-btn" href="studio/verifica.html?c=' + esc(x.codice) + '">📝 Verifica</a>' +
       (x.mia ? '<a class="st-btn" href="studio/modifica.html?c=' + esc(x.codice) + '">✏️ Modifica</a>' : '') + '</div></li>';
   }
   function disegna() {

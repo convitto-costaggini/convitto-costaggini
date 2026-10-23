@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Verifica – Sala studio | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Per docenti ed educatori: una verifica stampabile dalla lezione, con fila B, versione facilitata e soluzioni."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="studio/studio.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  /* ── il modulo ── */
+  .vf-tipi{display:grid;gap:.4rem;margin:.4rem 0}
+  .vf-tipo{display:flex;align-items:center;gap:.7rem;background:#fff;border:1px solid var(--av3);border-radius:12px;padding:.45rem .7rem}
+  .vf-tipo span{flex:1}
+  .vf-tipo small{display:block;color:var(--txt2);font-size:.78rem}
+  .vf-tipo input{width:4.2rem;text-align:center;font:800 1rem var(--fu);padding:.4rem;border:2px solid var(--av3);border-radius:10px}
+  .vf-scelte{display:grid;gap:.35rem}
+  .vf-barra{position:sticky;bottom:0;z-index:20;background:rgba(253,250,245,.97);border-top:1px solid var(--av3);padding:.6rem .8rem;margin:1rem -.8rem 0;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+  .vf-barra .st-nota{flex:1;min-width:160px;margin:0}
+  @media (max-width:640px){.vf-barra{padding-right:3.4rem}}
+  /* ── i fogli: a schermo come pagine bianche, in stampa A4 ── */
+  #vf-fogli{margin-top:1rem}
+  .vf-foglio{background:#fff;color:#111;box-shadow:0 2px 14px rgba(0,0,0,.12);border-radius:4px;padding:14mm 14mm 16mm;margin:0 auto 1.2rem;max-width:210mm;font-family:Arial,Helvetica,sans-serif;font-size:11.5pt;line-height:1.45}
+  .vf-etichetta{font:800 .72rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro);text-align:center;margin:0 auto .3rem;max-width:210mm}
+  .vf-foglio h1{font-size:15pt;margin:0 0 2mm;font-family:Arial,Helvetica,sans-serif;color:#111}
+  .vf-int{display:grid;grid-template-columns:1fr auto;gap:1mm 6mm;border-bottom:1.5px solid #111;padding-bottom:3mm;margin-bottom:4mm;font-size:10.5pt}
+  .vf-int .riga{display:flex;gap:2mm;align-items:flex-end}
+  .vf-int .riga i{flex:1;border-bottom:1px solid #555;min-width:30mm;height:1.1em}
+  .vf-scuola{font-size:9pt;color:#444}
+  .vf-es{margin:0 0 5mm;break-inside:avoid-page}
+  .vf-es h2{font-family:Arial,Helvetica,sans-serif;font-size:12pt;margin:0 0 1.5mm;display:flex;justify-content:space-between;gap:4mm;color:#111;border-bottom:1px solid #bbb;padding-bottom:1mm}
+  .vf-es h2 small{font-weight:400;white-space:nowrap}
+  .vf-consegna{font-weight:700;margin:0 0 2mm}
+  .vf-es ol{margin:0;padding-left:6mm}
+  .vf-es li{margin:0 0 2.5mm;break-inside:avoid}
+  .vf-opz{display:flex;flex-wrap:wrap;gap:1mm 7mm;margin-top:1mm}
+  .vf-opz span{white-space:nowrap}
+  .vf-box{display:inline-block;width:3.6mm;height:3.6mm;border:1.2px solid #111;vertical-align:-.5mm;margin-right:1.5mm}
+  .vf-vf{display:flex;justify-content:space-between;gap:4mm}
+  .vf-vf b{white-space:nowrap;font-weight:400}
+  .vf-buco{display:inline-block;min-width:32mm;border-bottom:1px solid #111}
+  .vf-banca{border:1.2px dashed #555;border-radius:2mm;padding:1.5mm 3mm;margin:0 0 2.5mm;font-size:.95em}
+  .vf-abb{display:grid;grid-template-columns:1fr 1fr;gap:1mm 8mm}
+  .vf-abb div{break-inside:avoid}
+  .vf-griglia{margin-top:2mm;display:flex;flex-wrap:wrap;gap:2mm 6mm}
+  .vf-righe i{display:block;border-bottom:1px solid #777;height:8mm}
+  .vf-voto{margin-top:5mm;text-align:right;font-weight:700}
+  /* versione facilitata: carattere più grande e più aria */
+  .vf-foglio.facile{font-size:13.5pt;line-height:1.75;letter-spacing:.01em}
+  .vf-foglio.facile .vf-es li{margin-bottom:4mm}
+  .vf-foglio.facile .vf-opz{flex-direction:column;gap:1.5mm}
+  /* la mappa (strumento compensativo) */
+  .vf-mappa{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-top:3mm}
+  .vf-mappa .c{grid-column:1/-1;text-align:center;border:2px solid #111;border-radius:3mm;padding:3mm;font-size:14pt;font-weight:700}
+  .vf-mappa .n{border:1.2px solid #555;border-radius:3mm;padding:2mm 3mm;break-inside:avoid}
+  .vf-mappa .n b{display:block}
+  .vf-sol table{border-collapse:collapse;width:100%;font-size:10.5pt}
+  .vf-sol td,.vf-sol th{border:1px solid #999;padding:1mm 2mm;text-align:left;vertical-align:top}
+  @media print{
+    @page{size:A4;margin:12mm 0 14mm}
+    /* si stampano solo i fogli: tutto il resto sparisce (anche dallo spazio occupato) */
+    body>*:not(main),main>*:not(.st-palco),.st-palco>*:not(#vf-dentro),#vf-dentro>*:not(#vf-app),#vf-app>*:not(#vf-fogli){display:none!important}
+    body,main,.st-palco,#vf-dentro,#vf-app{margin:0!important;padding:0!important;background:#fff!important}
+    #vf-fogli{margin:0}
+    .vf-etichetta{display:none}
+    .vf-foglio{box-shadow:none;border-radius:0;margin:0;max-width:none;break-after:page;padding:0 14mm}
+    .vf-foglio:last-child{break-after:auto}
+  }
+  </style>
+</head>
+<body data-page="studio">
+<div class="st-anteprima">Sala studio del Convitto · area docenti ed educatori</div>
+<script src="nav-header.min.js"></script>
+<main id="main" class="st dc">
+  <section class="st-hero">
+    <div class="w">
+      <p class="lbl">Per docenti ed educatori</p>
+      <h1 id="vf-tit"><span class="ic" aria-hidden="true">📝</span>Verifica dalla lezione</h1>
+      <p id="vf-sot" hidden>Una prova scritta pronta da stampare, con la fila B, la versione facilitata e le soluzioni. Le domande vengono dalla lezione: niente da scrivere.</p>
+    </div>
+  </section>
+
+  <div class="st-palco">
+    <div id="ed-area"></div>
+    <div id="vf-dentro" hidden>
+      <p class="dc-err" id="vf-err" role="alert"></p>
+      <div id="vf-app" hidden>
+        <div class="st-card">
+          <div class="dc-passo"><b>1</b><h2>Che cosa mettere</h2></div>
+          <p class="st-sot">Il numero di domande per ogni tipo. Metti 0 per toglierne uno.</p>
+          <div class="vf-tipi" id="vf-tipi"></div>
+        </div>
+        <div class="st-card">
+          <div class="dc-passo"><b>2</b><h2>L'intestazione</h2></div>
+          <label for="vf-titolo">Titolo</label><input type="text" id="vf-titolo" maxlength="120"/>
+          <div class="dc-due">
+            <div><label for="vf-classe">Classe (facoltativa)</label><input type="text" id="vf-classe" maxlength="40" placeholder="es. 2ª B"/></div>
+            <div><label for="vf-data">Data (facoltativa)</label><input type="text" id="vf-data" maxlength="30" placeholder="gg/mm/aaaa"/></div>
+          </div>
+        </div>
+        <div class="st-card">
+          <div class="dc-passo"><b>3</b><h2>Che cosa stampare</h2></div>
+          <div class="vf-scelte">
+            <label class="dc-spunta"><input type="checkbox" id="vf-b" checked/><span><b>🔀 Anche la fila B</b><small>Stesse domande, in ordine diverso e con le risposte mescolate: i vicini di banco non possono copiare.</small></span></label>
+            <label class="dc-spunta"><input type="checkbox" id="vf-facile"/><span><b>♿ Anche la versione facilitata</b><small>Per chi ha un PDP (DSA o BES): meno domande, 2 sole risposte fra cui scegliere, le parole da inserire già elencate, carattere più grande e più spazio. Sul foglio non c'è scritto «facilitata»: sembra una verifica come le altre.</small></span></label>
+            <label class="dc-spunta"><input type="checkbox" id="vf-mappa"/><span><b>🗺️ Anche la mappa della lezione</b><small>Una pagina con le idee chiave da usare durante la prova come strumento compensativo, se previsto dal PDP (legge 170/2010).</small></span></label>
+            <label class="dc-spunta"><input type="checkbox" id="vf-sol" checked/><span><b>✅ Le soluzioni per il docente</b><small>Una pagina con le risposte giuste di ogni fila, per correggere in fretta.</small></span></label>
+          </div>
+        </div>
+        <div class="vf-barra">
+          <span class="st-nota" id="vf-stato"></span>
+          <button type="button" class="st-btn" id="vf-mescola">🔀 Altre domande</button>
+          <button type="button" class="st-btn oro" id="vf-stampa">🖨️ Stampa</button>
+        </div>
+        <h3>👀 Anteprima</h3>
+        <p class="st-nota">Ecco i fogli come verranno stampati. Se una domanda non ti convince, premi «Altre domande», oppure correggila nella lezione con ✏️ Modifica.</p>
+        <div id="vf-fogli"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="nav.min.js"></script>
+<script src="supabase.js"></script>
+<script src="lingue/qrcode.js"></script>
+<script src="lingue/finestra.js"></script>
+<script src="studio/studio.js"></script>
+<script src="studio/demo.js"></script>
+<script src="studio/educatori.js"></script>
+<script>
+(function () {
+  'use strict';
+  var E = window.EDUCATORI, esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
+  var codice = (new URLSearchParams(location.search).get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  var L = null, seme = Date.now() % 100000;
+  function arr(x) { return Array.isArray(x) ? x : []; }
+
+  /* mescolamento ripetibile: con lo stesso seme, stessa verifica (e stesse soluzioni) */
+  function rng(s) { return function () { s |= 0; s = s + 0x6D2B79F5 | 0; var t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function mescola(a, r) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  var LET = 'abcdefghij';
+
+  /* i tipi di esercizio: [chiave, nome, spiegazione, quante disponibili, quante di solito] */
+  function tipi() {
+    var seq = L.sequenza && arr(L.sequenza.passi).length >= 3;
+    return [
+      ['quiz', 'Scelta multipla', 'Una sola risposta giusta fra tre', arr(L.quiz).length, 5],
+      ['vf', 'Vero o falso', '', arr(L.vero_falso).length, 5],
+      ['completa', 'Completa la frase', 'Con la parola mancante', arr(L.completa).length, 4],
+      ['abbina', 'Collega', 'Coppie da collegare (un esercizio)', arr(L.abbina).length, Math.min(5, arr(L.abbina).length)],
+      ['ordina', 'Metti in ordine', 'I passaggi della sequenza (un esercizio)', seq ? 1 : 0, seq ? 1 : 0],
+      ['aperte', 'Domande aperte', 'Risposta breve, scritta', arr(L.flashcard).length, 2]
+    ].filter(function (t) { return t[3] > 0; });
+  }
+  function disegnaTipi() {
+    $('vf-tipi').innerHTML = tipi().map(function (t) {
+      return '<label class="vf-tipo"><span><b>' + esc(t[1]) + '</b>' + (t[2] ? '<small>' + esc(t[2]) + '</small>' : '') + '</span>' +
+        '<input type="number" min="0" max="' + t[3] + '" value="' + Math.min(t[3], t[4]) + '" data-t="' + t[0] + '" aria-label="' + esc(t[1]) + ': quante"/>' +
+        '<small style="width:3.5rem">su ' + t[3] + '</small></label>';
+    }).join('');
+  }
+  function quante(t) { var i = document.querySelector('[data-t="' + t + '"]'); return i ? Math.max(0, Math.min(+i.max, +i.value || 0)) : 0; }
+
+  /* ───── le domande scelte (uguali per tutte le file) ───── */
+  function scegli() {
+    var r = rng(seme), s = {};
+    s.quiz = mescola(arr(L.quiz), r).slice(0, quante('quiz'));
+    s.vf = mescola(arr(L.vero_falso), r).slice(0, quante('vf'));
+    s.completa = mescola(arr(L.completa), r).slice(0, quante('completa'));
+    s.abbina = mescola(arr(L.abbina), r).slice(0, quante('abbina'));
+    s.ordina = quante('ordina') ? arr(L.sequenza.passi) : [];
+    s.aperte = mescola(arr(L.flashcard), r).slice(0, quante('aperte'));
+    return s;
+  }
+  /* versione facilitata: circa il 70% delle domande (almeno 2), 2 sole opzioni, al massimo 4 coppie, 1 domanda aperta */
+  function facilita(s) {
+    function meno(a) { return a.slice(0, a.length <= 2 ? a.length : Math.max(2, Math.ceil(a.length * 0.7))); }
+    return {
+      quiz: meno(s.quiz).map(function (q) { var sb = q.opzioni.filter(function (_, i) { return i !== q.corretta; }); return { domanda: q.domanda, opzioni: [q.opzioni[q.corretta], sb[0]], corretta: 0 }; }),
+      vf: meno(s.vf), completa: meno(s.completa), abbina: s.abbina.slice(0, 4), ordina: s.ordina, aperte: s.aperte.slice(0, 1), facile: true
+    };
+  }
+  /* una fila: ordine delle domande e delle risposte; le soluzioni seguono */
+  function fila(s, nome, r) {
+    var B = nome !== 'A' || s.facile, f = { nome: nome, facile: !!s.facile, es: [] };
+    function ord(a) { return B ? mescola(a, r) : a; }
+    if (s.quiz.length) f.es.push({ t: 'quiz', voci: ord(s.quiz).map(function (q) { var o = mescola(q.opzioni.map(function (_, i) { return i; }), r); return { d: q.domanda, o: o.map(function (i) { return q.opzioni[i]; }), g: o.indexOf(q.corretta) }; }) });
+    if (s.vf.length) f.es.push({ t: 'vf', voci: ord(s.vf) });
+    if (s.completa.length) {
+      var voci = ord(s.completa);
+      f.es.push({ t: 'completa', voci: voci, banca: s.facile ? mescola(voci.map(function (q) { return q.risposta; }).concat(voci.map(function (q) { return arr(q.distrattori)[0]; }).filter(Boolean)), r) : null });
+    }
+    if (s.abbina.length) { var dx = mescola(s.abbina.map(function (_, i) { return i; }), r); f.es.push({ t: 'abbina', sx: ord(s.abbina), dx: dx.map(function (i) { return s.abbina[i]; }) }); }
+    if (s.ordina.length) { var p = mescola(s.ordina.map(function (_, i) { return i; }), r); if (p.every(function (v, i) { return v === i; })) p.reverse(); f.es.push({ t: 'ordina', p: p }); }
+    if (s.aperte.length) f.es.push({ t: 'aperte', voci: ord(s.aperte) });
+    return f;
+  }
+
+  /* ───── i fogli ───── */
+  var NOMI = { quiz: 'Scelta multipla', vf: 'Vero o falso', completa: 'Completa le frasi', abbina: 'Collega', ordina: 'Metti in ordine', aperte: 'Rispondi' };
+  function punti(e) { return e.t === 'abbina' ? e.sx.length : e.t === 'ordina' ? 2 : e.t === 'aperte' ? e.voci.length * 2 : e.voci.length; }
+  function intestazione(f) {
+    var classe = $('vf-classe').value.trim(), data = $('vf-data').value.trim();
+    return '<div class="vf-scuola">IPSSEOA «R. A. Costaggini» — Rieti' + (L.materia ? ' · ' + esc(L.materia) : '') + '</div>' +
+      '<h1>' + esc($('vf-titolo').value.trim() || L.titolo) + '</h1>' +
+      '<div class="vf-int"><div class="riga">Nome e cognome <i></i></div><div class="riga">Fila ' + f.nome + '</div>' +
+      '<div class="riga">Classe ' + (classe ? '<b>' + esc(classe) + '</b>' : '<i></i>') + '</div><div class="riga">Data ' + (data ? '<b>' + esc(data) + '</b>' : '<i style="min-width:22mm"></i>') + '</div></div>';
+  }
+  function foglio(f) {
+    var tot = 0;
+    var h = f.es.map(function (e, k) {
+      var p = punti(e); tot += p;
+      var testa = '<h2><span>' + (k + 1) + '. ' + NOMI[e.t] + '</span><small>____ / ' + p + '</small></h2>';
+      if (e.t === 'quiz') return '<div class="vf-es">' + testa + '<p class="vf-consegna">Fai una crocetta sulla risposta giusta. Ce n\'è una sola.</p><ol>' + e.voci.map(function (q) {
+        return '<li>' + esc(q.d) + '<div class="vf-opz">' + q.o.map(function (o, i) { return '<span><i class="vf-box"></i>' + LET[i] + ') ' + esc(o) + '</span>'; }).join('') + '</div></li>';
+      }).join('') + '</ol></div>';
+      if (e.t === 'vf') return '<div class="vf-es">' + testa + '<p class="vf-consegna">Segna V se la frase è vera, F se è falsa.</p><ol>' + e.voci.map(function (q) {
+        return '<li><div class="vf-vf"><span>' + esc(q.affermazione) + '</span><b><i class="vf-box"></i>V &nbsp; <i class="vf-box"></i>F</b></div></li>';
+      }).join('') + '</ol></div>';
+      if (e.t === 'completa') return '<div class="vf-es">' + testa + '<p class="vf-consegna">Scrivi la parola che manca' + (e.banca ? ', scegliendola fra queste (alcune non servono):' : '.') + '</p>' +
+        (e.banca ? '<div class="vf-banca">' + e.banca.map(esc).join(' &nbsp;·&nbsp; ') + '</div>' : '') + '<ol>' + e.voci.map(function (q) {
+        var pz = String(q.frase || '').split(/_{2,}/); return '<li>' + esc(pz[0]) + '<span class="vf-buco"></span>' + esc(pz.slice(1).join(' ')) + '</li>';
+      }).join('') + '</ol></div>';
+      if (e.t === 'abbina') return '<div class="vf-es">' + testa + '<p class="vf-consegna">Collega ogni numero alla lettera giusta. Scrivi la lettera accanto al numero.</p><div class="vf-abb"><div>' +
+        e.sx.map(function (c, i) { return '<div>' + (i + 1) + '. ' + esc(c.sinistra) + '</div>'; }).join('') + '</div><div>' +
+        e.dx.map(function (c, i) { return '<div>' + LET[i] + ') ' + esc(c.destra) + '</div>'; }).join('') + '</div></div>' +
+        '<div class="vf-griglia">' + e.sx.map(function (_, i) { return '<span>' + (i + 1) + ' → ____</span>'; }).join('') + '</div></div>';
+      if (e.t === 'ordina') return '<div class="vf-es">' + testa + '<p class="vf-consegna">' + esc(L.sequenza.titolo || 'Metti in ordine') + ': scrivi nel quadratino il numero (1 = il primo).</p><div>' +
+        e.p.map(function (v) { return '<div style="margin-bottom:2mm"><i class="vf-box" style="width:6mm;height:6mm"></i> ' + esc(L.sequenza.passi[v]) + '</div>'; }).join('') + '</div></div>';
+      return '<div class="vf-es">' + testa + '<p class="vf-consegna">Rispondi con una o due frasi' + (f.facile ? ' (va bene anche un elenco)' : '') + '.</p><ol>' + e.voci.map(function (q) {
+        return '<li>' + esc(q.fronte) + '<div class="vf-righe"><i></i><i></i>' + (f.facile ? '<i></i>' : '') + '</div></li>';
+      }).join('') + '</ol></div>';
+    }).join('');
+    return '<div class="vf-foglio' + (f.facile ? ' facile' : '') + '">' + intestazione(f) + h + '<p class="vf-voto">Punteggio: ____ / ' + tot + ' &nbsp;&nbsp; Voto: ______</p></div>';
+  }
+  function soluzioni(file) {
+    return '<div class="vf-foglio vf-sol"><div class="vf-scuola">Solo per il docente</div><h1>Soluzioni · ' + esc($('vf-titolo').value.trim() || L.titolo) + '</h1>' + file.map(function (f) {
+      return '<h2 style="font:700 12pt Arial,Helvetica,sans-serif;margin:4mm 0 2mm;color:#111">Fila ' + f.nome + (f.facile ? ' · versione facilitata' : '') + '</h2><table>' + f.es.map(function (e, k) {
+        var r;
+        if (e.t === 'quiz') r = e.voci.map(function (q, i) { return (i + 1) + ' ' + LET[q.g]; }).join(' · ');
+        else if (e.t === 'vf') r = e.voci.map(function (q, i) { return (i + 1) + ' ' + (q.vero ? 'V' : 'F'); }).join(' · ');
+        else if (e.t === 'completa') r = e.voci.map(function (q, i) { return (i + 1) + ' ' + esc(q.risposta); }).join(' · ');
+        else if (e.t === 'abbina') r = e.sx.map(function (c, i) { return (i + 1) + '→' + LET[e.dx.indexOf(c)]; }).join(' · ');
+        else if (e.t === 'ordina') r = e.p.map(function (v) { return v + 1; }).join(' · ') + ' <small>(i numeri da scrivere, dall\'alto in basso)</small>';
+        else r = e.voci.map(function (q, i) { return (i + 1) + '. ' + esc(q.retro); }).join('<br>');
+        return '<tr><th style="width:32%">' + (k + 1) + '. ' + NOMI[e.t] + '</th><td>' + r + '</td></tr>';
+      }).join('') + '</table>';
+    }).join('') + '</div>';
+  }
+  function mappa() {
+    var A = (L.mnemonica || {}).acronimo || {};
+    return '<div class="vf-foglio facile"><div class="vf-scuola">Mappa della lezione · strumento compensativo</div><div class="vf-mappa"><div class="c">' + esc((L.icona || '') + ' ' + L.titolo) + '</div>' +
+      arr(L.concetti).map(function (c) { return '<div class="n"><b>' + esc((c.emoji || '•') + ' ' + c.titolo) + '</b>' + esc((String(c.spiegazione || '').match(/^.*?[.!?](\s|$)/) || [String(c.spiegazione || '')])[0]) + '</div>'; }).join('') + '</div>' +
+      (A.parola && A.frase ? '<p style="margin-top:4mm"><b>Per ricordare: ' + esc(A.parola) + '</b> — «' + esc(A.frase) + '»</p>' : '') +
+      (arr(L.parole).length ? '<p style="margin-top:3mm"><b>Parole importanti:</b> ' + arr(L.parole).map(function (p) { return '<b>' + esc(p.termine) + '</b>: ' + esc(p.definizione); }).join(' · ') + '</p>' : '') + '</div>';
+  }
+  function anteprima() {
+    if (!L) return;
+    var s = scegli(), r = rng(seme + 7), file = [fila(s, 'A', r)];
+    if ($('vf-b').checked) file.push(fila(s, 'B', r));
+    /* la versione facilitata porta la stessa lettera della fila A: sul foglio niente la distingue dagli altri */
+    if ($('vf-facile').checked) file.push(fila(facilita(s), 'A', r));
+    var vuota = !file[0].es.length, h = '';
+    file.forEach(function (f) { h += '<p class="vf-etichetta">Fila ' + f.nome + (f.facile ? ' · versione facilitata (sul foglio non compare)' : '') + '</p>' + foglio(f); });
+    if ($('vf-mappa').checked) h += '<p class="vf-etichetta">Mappa per chi ha il PDP</p>' + mappa();
+    if ($('vf-sol').checked) h += '<p class="vf-etichetta">Soluzioni</p>' + soluzioni(file);
+    $('vf-fogli').innerHTML = vuota ? '<div class="st-card">Scegli almeno una domanda al passo 1.</div>' : h;
+    $('vf-stampa').disabled = vuota;
+    var parti = ['fila A'].concat($('vf-b').checked ? ['fila B'] : [], $('vf-facile').checked ? ['versione facilitata'] : [], $('vf-mappa').checked ? ['mappa'] : [], $('vf-sol').checked ? ['soluzioni'] : []);
+    $('vf-stato').textContent = vuota ? '' : 'Si stampano: ' + parti.join(', ') + '.';
+  }
+
+  /* ───── carica la lezione (solo per chi è entrato) ───── */
+  function carica() {
+    $('vf-sot').hidden = !E.entrato();
+    if (!E.entrato()) return;
+    if (!codice) { $('vf-err').textContent = 'Apri la verifica da «Le mie lezioni» o dall\'Archivio: manca il codice della lezione.'; return; }
+    if (codice === 'DEMO') return pronta(window.STUDIO_DEMO);
+    $('vf-err').textContent = '';
+    E.chiama({ leggi: codice }).then(function (r) { if (!r.ok) { $('vf-err').textContent = r.messaggioErrore; return; } pronta(r.lezione.contenuto); });
+  }
+  function pronta(l) {
+    L = l; $('vf-app').hidden = false;
+    $('vf-tit').innerHTML = '<span class="ic" aria-hidden="true">📝</span>Verifica: ' + esc(L.titolo);
+    if (!$('vf-titolo').value) $('vf-titolo').value = 'Verifica' + (L.materia ? ' di ' + L.materia : '') + ': ' + L.titolo;
+    if (!$('vf-classe').value && L.classe) $('vf-classe').value = L.classe;
+    disegnaTipi(); anteprima();
+  }
+  $('vf-app').addEventListener('input', function (e) { if (!e.target.closest('#vf-fogli')) anteprima(); });
+  $('vf-app').addEventListener('change', function (e) { if (!e.target.closest('#vf-fogli')) anteprima(); });
+  $('vf-mescola').onclick = function () { seme = (seme * 31 + 17) % 100000; anteprima(); STUDIO.toast('Domande e ordine cambiati 🔀'); };
+  $('vf-stampa').onclick = function () { window.print(); };
+  E.area({ pagina: 'verifica', dentro: $('vf-dentro'), alCambio: carica });
+  carica();
+})();
+</script>
+</body>
+</html>

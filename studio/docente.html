@@ -217,7 +217,9 @@
       '<input type="text" readonly value="' + esc(url) + '" id="dc-link" style="margin:.4rem 0"/>' +
       '<div class="st-azioni" style="margin-top:.4rem"><a class="st-btn pieno" href="' + esc(url) + '" target="_blank" rel="noopener">👀 Apri la lezione</a><button type="button" class="st-btn" id="dc-cp">📋 Copia</button>' +
       (navigator.share ? '<button type="button" class="st-btn" id="dc-sh">📤 Condividi</button>' : '') + '</div></div></div>' +
-      '<div class="st-azioni"><button type="button" class="st-btn oro" id="dc-lim">🖥️ QR a tutto schermo</button><button type="button" class="st-btn" id="dc-st">🖨️ Stampa il cartello</button>' +
+      (codice ? '<p class="st-nota" style="margin-top:1rem">🎲 <b>Già pronta in 4 modi</b>, senza fare altro: percorso guidato, escape room, costruisci la mappa e sfida a squadre alla LIM. I ragazzi scelgono il modo nella pagina della lezione.</p>' : '') +
+      '<div class="st-azioni"><button type="button" class="st-btn oro" id="dc-lim">🖥️ QR a tutto schermo</button>' +
+      (codice ? '<a class="st-btn" href="' + esc(url) + '&m=squadre" target="_blank" rel="noopener">🏆 Sfida a squadre alla LIM</a>' : '') + '<button type="button" class="st-btn" id="dc-st">🖨️ Stampa il cartello</button>' +
       (codice ? '<a class="st-btn" href="studio/modifica.html?c=' + esc(codice) + '">✏️ Modifica</a>' : '') +
       '<button type="button" class="st-btn" id="dc-altra">➕ Un\'altra lezione</button></div>' +
       '<p class="st-nota" style="margin-top:1rem">🎓 Date un\'occhiata alla lezione prima di proporla: l\'IA può sbagliare. Se trovate un errore, <b>✏️ Modifica</b> permette di correggerla senza cambiare codice e QR.</p></div>';

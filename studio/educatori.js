@@ -302,7 +302,7 @@ window.EDUCATORI = (function () {
       '.m{font-size:2.2vh;letter-spacing:.2em;text-transform:uppercase;color:#B8922A;font-weight:bold}h1{font-size:5vh;margin:1vh 0 2vh}img{width:min(58vh,80vw);height:auto}' +
       '.c{font-size:4vh;letter-spacing:.3em;font-weight:bold;margin:1vh 0}p{font-size:2.3vh;color:#555;margin:.5vh}@media print{body{min-height:auto}}</style></head><body>' +
       '<div class="m">Sala studio · ' + esc(L.materia || '') + '</div><h1>' + esc((L.icona || '📚') + ' ' + L.titolo) + '</h1><img src="' + cv.toDataURL() + '" alt="Codice QR"/>' +
-      (cod ? '<div class="c">' + esc(cod) + '</div>' : '') + '<p>Inquadra il codice con la fotocamera del telefono.</p><p>Idee chiave · trucchi per ricordare · esercizi · flashcard · sfida finale</p>' +
+      (cod ? '<div class="c">' + esc(cod) + '</div>' : '') + '<p>Inquadra il codice con la fotocamera del telefono.</p><p>Percorso guidato · Escape room · Costruisci la mappa · Sfida a squadre</p>' +
       (stampa ? '<script>onload=function(){print()}<\/script>' : '') + '</body></html>');
     w.document.close();
   }

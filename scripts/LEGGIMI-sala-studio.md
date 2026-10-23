@@ -22,6 +22,18 @@
 
 Se il servizio non risponde, lo stesso passo 3 offre **Crea solo il link**: la lezione viaggia dentro il link (troppo lungo per un QR).
 
+## Quattro modi di studiare la stessa lezione
+Nessun lavoro in più: tutti i modi nascono dal JSON che ogni lezione ha già (`studio/formati.js`).
+Nella pagina della lezione i ragazzi scelgono «Come vuoi studiare?»; il link può già indicarlo con `&m=...`.
+- **🧭 Percorso guidato** (`m` assente): le 7 tappe di sempre.
+- **🔐 Escape room** (`m=escape`): fino a 5 lucchetti (vero/falso, frasi da completare, abbinamenti, sequenza,
+  «di quale idea parla?», quiz); ogni lucchetto dà una o più lettere della parola magica dell'acronimo; con le
+  lettere in ordine si apre la porta. Niente timer; dopo un errore compare l'aiuto.
+- **🗺️ Costruisci la mappa** (`m=mappa`): l'argomento al centro, le idee chiave intorno senza nome; si tocca
+  un'etichetta e poi la casella. Livello 2 a memoria: solo emoji e prima lettera.
+- **🏆 Sfida a squadre** (`m=squadre`): alla LIM, da 2 a 4 squadre a turno, rubapalla dopo un errore,
+  tempo facoltativo (30 s o 1 minuto), classifica finale; tasti A B C D sulla tastiera; schermo intero.
+
 ## Accesso di docenti ed educatori
 - A prova di malinteso: basta scrivere `nome.cognome` (il dominio si aggiunge da solo); se la chiave scade mentre si lavora
   ricompare subito il riquadro per entrare, e quanto scritto resta lì; «Crea una lezione» ricorda i campi anche se il

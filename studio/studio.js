@@ -457,5 +457,6 @@ window.STUDIO = (function () {
     vai(corrente);
   }
 
-  return { avvia: avvia, esc: esc, toast: toast };
+  /* anche per i formati (studio/formati.js): escape room, mappa, sfida a squadre */
+  return { avvia: avvia, esc: esc, toast: toast, mescola: mescola, pesca: pesca, coriandoli: coriandoli, leggi: leggi, zitto: zitto, tastoVoce: tastoVoce, BRAVO: BRAVO };
 })();

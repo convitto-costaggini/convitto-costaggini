@@ -26,6 +26,7 @@
       <span class="st-badge" id="st-cod" hidden></span>
     </div>
   </section>
+  <div id="st-modi"></div>
   <div id="st-app"></div>
 </main>
 <script src="nav.min.js"></script>
@@ -33,6 +34,7 @@
 <script src="lingue/pacchetto.js"></script>
 <script src="lingue/finestra.js"></script>
 <script src="studio/studio.js"></script>
+<script src="studio/formati.js"></script>
 <script src="studio/demo.js"></script>
 <script>
 (function () {
@@ -47,7 +49,38 @@
     $('st-tit').innerHTML = '<span class="ic" aria-hidden="true">' + esc(L.icona || '📚') + '</span>' + esc(L.titolo);
     $('st-sot').textContent = L.sottotitolo || '';
     if (id && id !== 'DEMO' && id.length === 6) { $('st-cod').hidden = false; $('st-cod').textContent = 'Codice ' + id; }
-    STUDIO.avvia(L, $('st-app'), { id: id });
+    modi(L, id);
+  }
+  /* «Come vuoi studiare?»: la stessa lezione in quattro modi (?m= nel link) */
+  var MODI = [
+    ['percorso', '🧭', 'Percorso guidato', '7 tappe, da solo'],
+    ['escape', '🔐', 'Escape room', 'apri i lucchetti'],
+    ['mappa', '🗺️', 'Costruisci la mappa', 'ogni idea al suo posto'],
+    ['squadre', '🏆', 'Sfida a squadre', 'alla LIM, con la classe']
+  ];
+  function modi(L, id) {
+    var q = new URLSearchParams(location.search), m = q.get('m');
+    if (!MODI.some(function (x) { return x[0] === m; })) m = 'percorso';
+    $('st-modi').innerHTML = '<nav class="fm-modi st" aria-label="Come vuoi studiare?"><p class="fm-modi-t">Come vuoi studiare?</p><div class="fm-modi-r">' + MODI.map(function (x) {
+      return '<button type="button" data-m="' + x[0] + '" aria-pressed="' + (x[0] === m) + '"><span class="ic" aria-hidden="true">' + x[1] + '</span><b>' + x[2] + '</b><small>' + x[3] + '</small></button>';
+    }).join('') + '</div></nav>';
+    function apri(m) {
+      STUDIO.zitto();
+      /* un contenitore nuovo a ogni cambio: nessun resto del modo di prima */
+      var vecchio = $('st-app'), nuovo = document.createElement('div'); nuovo.id = 'st-app'; vecchio.parentNode.replaceChild(nuovo, vecchio);
+      $('st-modi').querySelectorAll('[data-m]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-m') === m); });
+      if (m === 'percorso') STUDIO.avvia(L, nuovo, { id: id });
+      else { nuovo.classList.add('st'); window.FORMATI[m](L, nuovo); }
+    }
+    $('st-modi').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-m]'); if (!b) return;
+      var m2 = b.getAttribute('data-m'), u = new URL(location.href);
+      if (m2 === 'percorso') u.searchParams.delete('m'); else u.searchParams.set('m', m2);
+      history.replaceState(null, '', u);
+      apri(m2);
+      $('st-modi').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    apri(m);
   }
   window.addEventListener('hashchange', function () { location.reload(); });
   var q = new URLSearchParams(location.search), c = (q.get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');

@@ -252,3 +252,6 @@ mark.st-k{background:linear-gradient(transparent 55%,var(--oro3) 55%);color:inhe
 .ed-scorta summary{cursor:pointer;font:700 .82rem var(--fu);color:var(--txt2)}
 @media (prefers-reduced-motion:reduce){.st *{animation:none!important;transition:none!important}.st-lett{opacity:1;transform:none}}
 @media print{.st-barra,.st-mappa,.st-azioni,.st-leggi,header,footer,.st-anteprima{display:none!important}}
+
+/* Solo in questa sezione: dei pulsanti tondi in basso a destra restano Home e Aa (lettura facilitata) */
+body[data-page="studio"] #fab-top,body[data-page="studio"] #tr-fab,body[data-page="studio"] #cc-fab{display:none!important}

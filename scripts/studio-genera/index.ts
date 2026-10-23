@@ -15,6 +15,8 @@
 //   {lezione, classe?, autore?, anno?, materia?, condivisa?}            -> pubblica una lezione gia' pronta: nessun costo
 //   {modifica:codice, lezione, classe?, autore?, anno?, materia?, condivisa?} -> la corregge (solo l'autore)
 //   {elimina:codice}                               -> la cancella (solo l'autore)
+//   {revisioni:true} / {revisione:{chiave, lingua, stato:"ok"|"proposta"|"via", testo, proposta?, nota?}}
+//                                                  -> Lingue: le spunte dei docenti sulle frasi (solo con la mail)
 //   {immagini?:[{tipo:"image/jpeg", dati:<base64>}], argomento?, materia?, classe?, note?, ...} -> la crea con l'IA (a consumo)
 // Risposta: {ok:true, ...} oppure {ok:false, errore, messaggio?}
 // Le foto non vengono salvate: vanno a Claude e poi si buttano. Resta solo la lezione.
@@ -221,6 +223,26 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
       return risposta({ ok: false, errore: cod ? "codice" : "accesso" }, 403);
     }
     if (c.prova) return risposta({ ok: true, automatica: !!env.AUTOMATICA, email }); // solo verifica dell'accesso
+
+    // ───── Lingue: le spunte di revisione dei docenti (serve l'accesso con la mail: la spunta porta il nome) ─────
+    if (c.revisioni || c.revisione) {
+      if (!email) return risposta({ ok: false, errore: "mail" }, 403);
+      if (c.revisione) {
+        const r = c.revisione || {}, chiave = testo(r.chiave, 200), lingua = String(r.lingua || "");
+        if (!chiave || !["en", "fr", "es"].includes(lingua) || !["ok", "proposta", "via"].includes(r.stato)) return risposta({ ok: false, errore: "richiesta" }, 400);
+        const { error } = r.stato === "via"
+          ? await db.from("lingue_revisioni").delete().eq("chiave", chiave).eq("lingua", lingua).eq("email", email)
+          : await db.from("lingue_revisioni").upsert({
+            chiave, lingua, email, nome: nomeDaMail(email), stato: r.stato, testo: testo(r.testo, 300) || null,
+            proposta: r.stato === "proposta" ? testo(r.proposta, 300) || null : null, nota: testo(r.nota, 300) || null, aggiornata: new Date(adesso).toISOString(),
+          }, { onConflict: "chiave,lingua,email" });
+        if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
+      }
+      const { data, error } = await db.from("lingue_revisioni").select("chiave,lingua,email,nome,stato,proposta,nota,aggiornata").limit(5000);
+      if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
+      // le mail non escono: solo il nome e se la spunta è di chi chiede
+      return risposta({ ok: true, revisioni: (data || []).map(({ email: e, ...x }: any) => ({ ...x, mia: e === email })) });
+    }
     const io = await impronta(email ? "mail:" + email : cod);
     const comuni = await scorte;
     const mia = (r: any) => !r.proprietario || r.proprietario === io || comuni.includes(r.proprietario);

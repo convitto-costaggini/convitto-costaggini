@@ -53,3 +53,15 @@ Il file in chiaro non va mai committato.
     node scripts/lingue-riservato.js scorta XXXX-XXXX-XXXX-XXXX     # con LINGUE_CHIAVE impostata
 Cambiare il codice non toglie l'accesso a chi lo conosceva già e ha salvato la chiave: per questo serve ruotare anche la chiave
 (nuova riga in `lingue_chiave`, poi `decifra` e `cifra` di ogni pagina con la nuova chiave).
+
+## Le spunte dei docenti sul vocabolario (lingue/revisione.js)
+Nessuna revisione sistematica: un docente, mentre usa il vocabolario, se una frase gli passa sotto gli occhi può toccare
+**✔** (va bene) o **✏️** (la scriverei così, con una nota facoltativa). Gli studenti non vedono niente.
+- Si entra dal link discreto in fondo al vocabolario («Sei un docente?…») con la mail della scuola: è lo stesso accesso
+  della Sala studio (funzione `studio-genera`), vale 60 giorni sul dispositivo. «Nascondi le spunte» le toglie.
+- Le spunte stanno nella tabella `lingue_revisioni` (chiave = sezione|frase italiana, lingua, docente). I docenti
+  vedono i nomi di chi ha già spuntato e i suggerimenti degli altri; le mail non escono dalla funzione.
+- Le correzioni NON cambiano da sole il sito: chi cura il vocabolario le legge e le applica in `lingue/parole.js`.
+  Per vederle (SQL Editor di Supabase):
+      select chiave, lingua, nome, testo, proposta, nota, aggiornata from public.lingue_revisioni
+      where stato = 'proposta' order by aggiornata desc;

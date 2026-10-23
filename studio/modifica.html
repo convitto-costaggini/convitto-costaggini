@@ -49,7 +49,7 @@
   </section>
 
   <div class="st-palco">
-    <div id="md-gate" class="st-card"></div>
+    <div id="ed-area"></div>
 
     <div id="md-app" hidden>
       <div class="st-card md-sola" id="md-sola" hidden>
@@ -262,7 +262,7 @@
       disegnaForm();
     });
   }
-  var aggiornaAccesso = E.accesso($('md-gate'), function () { carica(); });
+  var aggiornaAccesso = E.area({ pagina: 'modifica', alCambio: function () { carica(); } });
 
   /* ───── salva, QR, IA, cancella ───── */
   $('md-salva').onclick = function () {

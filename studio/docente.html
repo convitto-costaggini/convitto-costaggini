@@ -22,13 +22,13 @@
     <div class="w">
       <p class="lbl">Per docenti ed educatori</p>
       <h1><span class="ic" aria-hidden="true">📸</span>Dal libro alla lezione</h1>
-      <p>Fotografa le pagine del libro, gli appunti o una mappa concettuale, oppure scrivi soltanto il titolo dell'argomento. Il tuo assistente di intelligenza artificiale (<b>Claude, ChatGPT o Gemini</b>, con l'account che usi già, nessun costo a consumo) prepara una lezione interattiva con idee chiave, mnemotecniche, esercizi e flashcard, con il QR per i ragazzi.</p>
-      <div class="st-azioni"><a class="st-btn oro" href="studio/archivio.html">🗂️ Archivio delle lezioni condivise</a></div>
+      <p>Da una foto (pagina del libro, appunti, mappa concettuale) o dal solo titolo, una lezione interattiva con il QR per i ragazzi. La prepara il tuo assistente IA: <b>Claude, ChatGPT o Gemini</b>, senza costi a consumo.</p>
     </div>
   </section>
 
   <div class="st-palco">
-    <div class="st-card" id="dc-accesso"></div>
+    <div id="ed-area"></div>
+    <div id="ed-dentro" hidden>
     <div id="dc-modulo">
       <div class="st-card">
         <div class="dc-passo"><b>1</b><h2>Le istruzioni per l'IA</h2></div>
@@ -92,12 +92,13 @@
     <div id="dc-lavoro" hidden></div>
     <div id="dc-esito" hidden></div>
 
-    <h3>📚 Le mie lezioni</h3>
+    <h3 id="mie">📚 Le mie lezioni</h3>
     <div class="st-card">
       <div class="dc-cerca"><input type="search" id="dc-cerca" placeholder="Cerca per titolo, materia, classe…" aria-label="Cerca fra le mie lezioni"/><button type="button" class="st-btn" id="dc-aggiorna">🔄 Mostra</button></div>
       <p class="st-nota" id="dc-elenco-stato" aria-live="polite"></p>
       <ul class="dc-mie" id="dc-mie"></ul>
       <p class="st-nota" style="margin-top:.8rem">Qui trovi le lezioni che hai pubblicato, da qualsiasi dispositivo su cui sei entrato. Quelle dei colleghi, se condivise, sono nell'<a href="studio/archivio.html">Archivio</a>.</p>
+    </div>
     </div>
   </div>
 </main>
@@ -116,10 +117,11 @@
   var BASE = location.origin + '/studio/lezione.html';
 
   $('dc-aut').value = E.autore();
-  E.accesso($('dc-accesso'), function (chi) {
+  E.area({ pagina: location.hash === '#mie' ? 'mie' : 'crea', dentro: $('ed-dentro'), alCambio: function (chi) {
     if (chi && chi.nome && !$('dc-aut').value) $('dc-aut').value = chi.nome;
     lezioni = null; caricaElenco();
-  });
+  } });
+  window.addEventListener('hashchange', function () { if (location.hash === '#mie') $('mie').scrollIntoView({ behavior: 'smooth' }); });
   E.riempiMaterie($('dc-mat'));
   E.riempiAnni($('dc-anno'));
   function materia() { return E.materiaScelta($('dc-mat'), $('dc-mat-altra')); }
@@ -132,7 +134,7 @@
   }
   function nonEntrato(err) {
     if (E.entrato()) return false;
-    err.textContent = E.ERRORI.accesso; $('dc-accesso').scrollIntoView({ behavior: 'smooth' });
+    err.textContent = E.ERRORI.accesso; scrollTo({ top: 0, behavior: 'smooth' });
     var m = document.getElementById('ac-mail'); if (m) m.focus();
     return true;
   }
@@ -225,11 +227,12 @@
   var lezioni = null; /* null = elenco non ancora caricato */
   function caricaElenco() {
     var st = $('dc-elenco-stato');
-    if (!E.entrato()) { st.textContent = 'Entra con la tua mail (riquadro "Accesso" in alto) per vedere le tue lezioni.'; $('dc-mie').innerHTML = ''; return; }
+    if (!E.entrato()) { $('dc-mie').innerHTML = ''; return; }
     st.textContent = 'Carico l\'elenco…';
     E.chiama({ mie: true }).then(function (r) {
       if (!r.ok) { st.textContent = r.messaggioErrore; return; }
       lezioni = r.lezioni || []; disegnaMie();
+      if (location.hash === '#mie') $('mie').scrollIntoView();
     });
   }
   function disegnaMie() {

@@ -36,12 +36,11 @@
       <p class="lbl">Per docenti ed educatori</p>
       <h1><span class="ic" aria-hidden="true">🗂️</span>Archivio delle lezioni</h1>
       <p>Le lezioni che docenti ed educatori hanno scelto di condividere, ordinate per anno di corso e materia secondo i quadri orari dell'istituto professionale alberghiero: <b>biennio</b> (1° e 2° anno) e <b>triennio</b> (3°, 4° e 5° anno). Ognuna si usa subito con il suo QR.</p>
-      <div class="st-azioni"><a class="st-btn oro" href="studio/docente.html">➕ Crea una lezione</a></div>
     </div>
   </section>
 
   <div class="st-palco">
-    <div id="ar-gate" class="st-card"></div>
+    <div id="ed-area"></div>
 
     <div id="ar-app" hidden>
       <div class="st-card ar-filtri">
@@ -144,7 +143,7 @@
     var x = tutte.filter(function (y) { return y.codice === b.getAttribute('data-qr'); })[0];
     E.cartello(BASE + x.codice, x, x.codice, false);
   });
-  var aggiornaAccesso = E.accesso($('ar-gate'), function () { carica(); });
+  var aggiornaAccesso = E.area({ pagina: 'archivio', alCambio: function () { carica(); } });
   carica();
 })();
 </script>

@@ -284,3 +284,96 @@ html.ed-cartello-aperto{overflow:hidden}
 @media print{html.ed-cartello-aperto body>*:not(.ed-cartello){display:none!important}.ed-cartello{position:static}.ed-cartello .az{display:none}}
 
 .dc-mie .dc-canc{border-color:var(--st-no);color:var(--st-no)}
+
+/* ═══ altri modi di studiare (studio/formati.js) ═══ */
+/* «Come vuoi studiare?» */
+.fm-modi{max-width:860px;margin:1rem auto 0;padding:0 .8rem;scroll-margin-top:90px}
+.fm-modi-t{font:800 .75rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro);margin:0 0 .45rem}
+.fm-modi-r{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+@media (max-width:640px){.fm-modi-r{grid-template-columns:repeat(2,1fr)}}
+.fm-modi-r button{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.1rem;background:#fff;border:2px solid var(--av3);border-radius:14px;padding:.6rem .4rem;cursor:pointer;color:var(--bosco);font-family:var(--fu);min-height:44px}
+.fm-modi-r button .ic{font-size:1.6rem;line-height:1.2}
+.fm-modi-r button b{font-size:.9rem;line-height:1.2}
+.fm-modi-r button small{font-size:.72rem;color:var(--txt2);line-height:1.25}
+.fm-modi-r button[aria-pressed="true"]{border-color:var(--bosco);background:var(--bosco);color:#fff}
+.fm-modi-r button[aria-pressed="true"] small{color:rgba(255,255,255,.85)}
+.fm-modi-r button:focus-visible{outline:3px solid var(--oro);outline-offset:2px}
+/* «Come funziona» */
+.fm-intro{text-align:center}
+.fm-intro .fm-ic{font-size:3.2rem;line-height:1.1}
+.fm-come{font:800 .75rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro);margin:1rem 0 .4rem}
+.fm-passi{text-align:left;max-width:560px;margin:0 auto;padding-left:1.4rem;display:grid;gap:.45rem}
+.fm-passi li{padding-left:.2rem}
+.fm-dom{position:relative}
+.fm-dom .st-leggi{position:absolute;top:0;right:0}
+/* escape room */
+.fm-lettere{display:flex;gap:.35rem;justify-content:center;flex-wrap:wrap;margin:.6rem 0 1rem}
+.fm-lettere span{width:2.3rem;height:2.6rem;display:flex;align-items:center;justify-content:center;border-radius:8px;border:2px dashed var(--av3);font:800 1.3rem var(--fu);color:var(--txt2);background:#fff}
+.fm-lettere span.si{border:2px solid var(--oro);background:#FFF8E1;color:var(--bosco);animation:st-pop .4s}
+.fm-lettere.grandi span{width:2.8rem;height:3.2rem;font-size:1.6rem}
+.fm-lucchetti{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.6rem}
+.fm-lucchetto{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;text-align:left;background:#fff;border:2px solid var(--av3);border-radius:14px;padding:.8rem;font-family:var(--fu);color:var(--bosco);cursor:pointer;min-height:44px}
+.fm-lucchetto .ic{font-size:1.8rem}
+.fm-lucchetto .n{font-weight:800;font-size:1rem}
+.fm-lucchetto small{color:var(--txt2);font-size:.8rem}
+.fm-lucchetto.pronto{border-color:var(--oro);box-shadow:0 0 0 4px rgba(212,170,74,.25);animation:fm-pulsa 1.8s ease-in-out infinite}
+.fm-lucchetto.aperto{border-color:var(--st-ok);background:var(--st-ok2)}
+.fm-lucchetto.chiuso{opacity:.55;cursor:not-allowed}
+.fm-lucchetto.porta{grid-column:1/-1;align-items:center;text-align:center}
+@keyframes fm-pulsa{50%{box-shadow:0 0 0 8px rgba(212,170,74,.12)}}
+.fm-prova h2{margin:.2rem 0}
+.fm-premio{text-align:center}
+.fm-premio .ic{font-size:3rem}
+.fm-tessere{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.fm-tessere .st-scelta{width:3.2rem;min-height:3.2rem;font-size:1.4rem;font-weight:800;text-align:center;padding:0}
+/* la mappa */
+.fm-mappa{display:grid;gap:.6rem;margin:.6rem 0 1rem}
+@media (min-width:700px){.fm-mappa{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,auto)}.fm-nodo{grid-row:var(--r);grid-column:var(--c)}.fm-centro{grid-row:2;grid-column:2}}
+.fm-centro{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.2rem;background:var(--bosco);color:#fff;border-radius:18px;padding:1rem;font-family:var(--fd);font-size:1.4rem;line-height:1.2;min-height:110px}
+.fm-centro span{font-size:2rem}
+.fm-nodo{display:flex;flex-direction:column;gap:.3rem;align-items:center;justify-content:center;text-align:center;background:#fff;border:2px dashed var(--oro);border-radius:16px;padding:.7rem;cursor:pointer;font-family:var(--st-f);color:var(--txt);min-height:110px}
+.fm-nodo .vuoto{font:800 1.4rem var(--fu);color:var(--oro)}
+.fm-nodo .aiuto{font-size:.88rem;line-height:1.45;color:var(--txt2)}
+.fm-nodo .tit{font-family:var(--fu);font-size:1rem;color:var(--bosco)}
+.fm-nodo.ok{border:2px solid var(--st-ok);background:var(--st-ok2);cursor:default}
+.fm-nodo.no{animation:st-scuoti .4s;border-color:var(--st-no)}
+.fm-etichette{position:sticky;bottom:0;z-index:5;display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;background:rgba(253,250,245,.97);border-top:2px solid var(--oro3);padding:.7rem .5rem;margin:0 -.8rem;box-shadow:0 -6px 16px rgba(0,0,0,.06)}
+@media (max-width:700px){.fm-etichette{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-right:3.4rem}.fm-etichette .st-scelta{flex:none;white-space:nowrap}}
+.fm-etichette::before{content:'Le etichette: tocca, poi tocca la casella';flex-basis:100%;text-align:center;font:800 .7rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)}
+@media (max-width:700px){.fm-etichette::before{content:'Etichette →';flex:none;flex-basis:auto;align-self:center}}
+.fm-etichette .st-scelta{width:auto;flex:0 1 auto}
+/* sfida a squadre alla LIM */
+.fm-imp h3{font:800 .9rem var(--fu);color:var(--bosco);margin:1rem 0 .4rem}
+.fm-scelte{display:flex;gap:.4rem;flex-wrap:wrap}
+.fm-scelte button{font:800 1rem var(--fu);border:2px solid var(--av3);background:#fff;color:var(--bosco);border-radius:99px;padding:.5rem 1.1rem;min-height:44px;cursor:pointer}
+.fm-scelte button[aria-pressed="true"]{background:var(--bosco);border-color:var(--bosco);color:#fff}
+.fm-nomi{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.4rem;margin-top:.5rem}
+.fm-nomi label{display:flex;align-items:center;gap:.4rem}
+.fm-nomi input{flex:1;min-width:0}
+.fm-lim{max-width:1100px;margin:0 auto;padding:1rem;font-family:var(--st-f)}
+main:fullscreen{background:#FDFAF5;overflow:auto}
+main:fullscreen .st-hero,main:fullscreen #st-modi{display:none}
+.fm-lim-su{display:flex;justify-content:space-between;align-items:center;gap:.5rem;font:800 1rem var(--fu);color:var(--txt2)}
+.fm-tab{display:flex;gap:.5rem;flex-wrap:wrap;margin:.6rem 0}
+.fm-tab div{flex:1;min-width:140px;display:flex;justify-content:space-between;align-items:center;gap:.4rem;background:#fff;border:2px solid var(--av3);border-radius:14px;padding:.5rem .9rem;font:800 clamp(1rem,2vw,1.4rem) var(--fu);color:var(--bosco)}
+.fm-tab div b{font-size:clamp(1.4rem,3vw,2.2rem)}
+.fm-tab div.turno{border-color:var(--oro);background:#FFF8E1;box-shadow:0 0 0 4px rgba(212,170,74,.25)}
+.fm-turno{text-align:center;font:800 clamp(1.1rem,2.4vw,1.6rem) var(--fu);color:var(--bosco);margin:.4rem 0}
+.fm-tempo{height:10px;background:var(--av);border-radius:99px;overflow:hidden;margin:.4rem 0}
+.fm-tempo i{display:block;height:100%;width:100%;background:var(--oro);transition:width .2s linear}
+.fm-domanda{text-align:center;font-family:var(--fd);font-size:clamp(1.6rem,4vw,3rem);line-height:1.25;color:var(--bosco);margin:1rem 0}
+.fm-domanda small{font:800 .45em var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro)}
+.fm-opz{display:grid;grid-template-columns:1fr;gap:.6rem}
+@media (min-width:800px){.fm-opz{grid-template-columns:repeat(3,1fr)}.fm-opz.due{grid-template-columns:repeat(2,1fr)}}
+.fm-opz button{display:flex;align-items:center;gap:.7rem;text-align:left;background:#fff;border:3px solid var(--av3);border-radius:18px;padding:1rem 1.2rem;font:700 clamp(1.1rem,2.4vw,1.7rem)/1.3 var(--st-f);color:var(--txt);cursor:pointer;min-height:80px}
+.fm-opz button .l{flex:none;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--bosco);color:#fff;display:flex;align-items:center;justify-content:center;font:800 1.2rem var(--fu)}
+.fm-opz button .l:empty{display:none}
+.fm-opz button.ok{border-color:var(--st-ok);background:var(--st-ok2)}
+.fm-opz button.no{border-color:var(--st-no);background:var(--st-no2);animation:st-scuoti .4s}
+.fm-opz button:disabled{cursor:default}
+.fm-msg{text-align:center;font:800 clamp(1.2rem,2.6vw,1.8rem) var(--fu);color:var(--bosco);margin:1rem 0 .3rem}
+.fm-spiega{text-align:center;font-size:clamp(1rem,2vw,1.3rem);max-width:800px;margin:0 auto}
+.fm-podio{list-style:none;padding:0;max-width:560px;margin:1rem auto;display:grid;gap:.5rem}
+.fm-podio li{display:flex;align-items:center;gap:.8rem;background:#fff;border:2px solid var(--av3);border-radius:14px;padding:.6rem 1rem;font:800 clamp(1.1rem,2.4vw,1.6rem) var(--fu);color:var(--bosco)}
+.fm-podio li:first-child{border-color:var(--oro);background:#FFF8E1}
+.fm-podio li span:nth-child(2){flex:1}

@@ -90,7 +90,7 @@ window.EDUCATORI = (function () {
       var barra = '<nav class="ed-barra" aria-label="Area docenti ed educatori">' + PAGINE.map(function (p) {
         return '<a href="' + p[3] + '"' + (o.pagina === p[0] ? ' aria-current="page"' : '') + '><span aria-hidden="true">' + p[1] + '</span> ' + p[2] + '</a>';
       }).join('') + (chi ? '<span class="ed-chi"><span>👤 <b>' + esc(chi.scorta ? 'Codice di scorta' : chi.nome) + '</b>' +
-        (s ? '<small>dentro fino al ' + new Date(s.scade).toLocaleDateString('it-IT') + '</small>' : '') + '</span><button type="button" class="st-btn" data-esci>Esci</button></span>' : '') + '</nav>';
+        (s ? '<small>chiave valida fino al ' + new Date(s.scade).toLocaleDateString('it-IT') + '</small>' : '') + '</span><button type="button" class="st-btn" data-esci>Esci</button></span>' : '') + '</nav>';
       if (chi) {
         box.innerHTML = barra;
         q('[data-esci]').onclick = function () { sessione(null); codice(''); window.STUDIO.toast('Sei uscito 👋'); fatto(); };
@@ -109,7 +109,10 @@ window.EDUCATORI = (function () {
           '<div class="st-azioni"><button type="button" class="st-btn oro ed-vai" data-entra>Entra →</button><button type="button" class="st-btn" data-rimanda>Rimanda il codice</button><button type="button" class="st-btn" data-cambia>Cambia mail</button></div></div>' +
         '<div data-fase="3" hidden><div class="ed-fatto">✅ <b>Fatto, sei dentro!</b></div></div>' +
         '<p class="dc-err" data-err role="alert"></p>' +
-        '<div class="ed-info"><b>📱 Una volta sola per dispositivo.</b> Dopo il primo accesso, questo telefono o computer ti riconosce per <b>60 giorni</b>: apri la pagina e sei già dentro. Su un altro dispositivo, o dopo 60 giorni, si rifà lo stesso percorso.<br><b>🏫 Computer della scuola?</b> Quando hai finito premi <b>Esci</b> in alto, così chi viene dopo non entra a nome tuo.</div>' +
+        '<div class="ed-info"><p><b>🔑 Funziona come una chiave.</b> Fai l\'accesso una volta e questo telefono (o computer) si ricorda di te per <b>60 giorni</b>: riapri la pagina e sei già dentro, senza mail né codice. In alto vedi fino a quando vale. Alla scadenza rifai solo mail e codice, e la chiave vale altri 60 giorni.</p>' +
+        '<p><b>📱 💻 Ogni dispositivo ha la sua chiave.</b> Sul telefono e sul computer di casa, la prima volta, fai l\'accesso su tutti e due. Le tue lezioni sono le stesse ovunque.</p>' +
+        '<p><b>🏫 Computer della scuola?</b> Quando hai finito premi <b>Esci</b> in alto: restituisci la chiave e chi viene dopo non entra a nome tuo.</p>' +
+        '<details><summary>Perché scade? Si può allungare?</summary><p>È una misura di <b>sicurezza</b>: se un telefono si perde o un computer resta acceso, dopo al massimo 60 giorni la porta si richiude da sola e nessuno può modificare o cancellare le tue lezioni. Sessanta giorni sono un compromesso tra sicurezza e comodità: mail e codice si rifanno 4 o 5 volte in un anno scolastico.</p><p>Se docenti ed educatori lo ritengono utile, la durata si può <b>prolungare fino alla fine dell\'anno scolastico</b>: basta chiederlo a chi cura la Sala studio.</p></details></div>' +
         '<details class="ed-scorta"><summary>La mail non arriva? Usa il codice di scorta</summary><p class="st-nota">Il codice di scorta lo conosce chi gestisce la Sala studio.</p><label for="ac-scorta">Codice di scorta</label><input type="password" id="ac-scorta" autocomplete="off"/>' +
           '<div class="st-azioni"><button type="button" class="st-btn" data-scorta>Entra con il codice di scorta</button></div></details></div>';
       var err = q('[data-err]');

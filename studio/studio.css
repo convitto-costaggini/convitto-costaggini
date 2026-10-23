@@ -248,6 +248,10 @@ mark.st-k{background:linear-gradient(transparent 55%,var(--oro3) 55%);color:inhe
 .ed-posta{background:#fdf8ea;border-radius:12px;padding:.8rem 1rem;margin:.8rem 0 .2rem;line-height:1.6}
 .ed-fatto{background:var(--st-ok2);color:#1d5236;border-radius:12px;padding:1rem;text-align:center;font-size:1.15rem;margin-top:.8rem}
 .ed-info{background:var(--av);border-radius:12px;padding:.8rem 1rem;margin-top:1rem;font-size:.88rem;line-height:1.65}
+.ed-info p{margin:0 0 .5rem}
+.ed-info details{border-top:1px solid var(--av3);padding-top:.4rem}
+.ed-info summary{cursor:pointer;font-weight:800;color:var(--bosco);min-height:40px;display:flex;align-items:center}
+.ed-info details p{margin:.3rem 0 .5rem}
 .ed-scorta{margin-top:.8rem}
 .ed-scorta summary{cursor:pointer;font:700 .82rem var(--fu);color:var(--txt2)}
 @media (prefers-reduced-motion:reduce){.st *{animation:none!important;transition:none!important}.st-lett{opacity:1;transform:none}}

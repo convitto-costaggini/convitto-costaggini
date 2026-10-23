@@ -41,6 +41,16 @@ Nella pagina della lezione i ragazzi scelgono «Come vuoi studiare?»; il link p
 - **🏆 Sfida a squadre** (`m=squadre`): alla LIM, da 2 a 4 squadre a turno, rubapalla dopo un errore,
   tempo facoltativo (30 s o 1 minuto), classifica finale; tasti A B C D sulla tastiera; schermo intero.
 
+## Verifica stampabile (studio/verifica.html?c=CODICE)
+Dal pulsante «📝 Verifica» (Le mie lezioni, Archivio, dopo la pubblicazione). Solo per chi è entrato.
+- Si sceglie quante domande per tipo (scelta multipla, vero/falso, completa, collega, metti in ordine, aperte):
+  tutte vengono dalla lezione. «Altre domande» rimescola.
+- Fila B: stesse domande, ordine e risposte mescolati. Soluzioni per il docente, fila per fila.
+- Versione facilitata (PDP, DSA/BES): circa il 70% delle domande, 2 opzioni, banca delle parole per le frasi da
+  completare, 1 domanda aperta, carattere più grande. Porta la lettera «Fila A»: sul foglio niente la distingue.
+- Mappa della lezione come strumento compensativo (legge 170/2010), se previsto dal PDP.
+- Si stampa dal browser (anche «Salva come PDF»): escono solo i fogli, in A4.
+
 ## Accesso di docenti ed educatori
 - A prova di malinteso: basta scrivere `nome.cognome` (il dominio si aggiunge da solo); se la chiave scade mentre si lavora
   ricompare subito il riquadro per entrare, e quanto scritto resta lì; «Crea una lezione» ricorda i campi anche se il

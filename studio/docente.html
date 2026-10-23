@@ -224,7 +224,7 @@
       (codice ? '<p class="st-nota" style="margin-top:1rem">🎲 <b>Già pronta in 7 modi</b>, senza fare altro: percorso guidato, escape room, costruisci la mappa, caccia all\'errore, intervista impossibile, il minuto e sfida a squadre alla LIM. I ragazzi scelgono il modo nella pagina della lezione.</p>' : '') +
       '<div class="st-azioni"><button type="button" class="st-btn oro" id="dc-lim">🖥️ QR a tutto schermo</button>' +
       (codice ? '<a class="st-btn" href="' + esc(url) + '&m=squadre" target="_blank" rel="noopener">🏆 Sfida a squadre alla LIM</a>' : '') + '<button type="button" class="st-btn" id="dc-st">🖨️ Stampa il cartello</button>' +
-      (codice ? '<a class="st-btn" href="studio/modifica.html?c=' + esc(codice) + '">✏️ Modifica</a>' : '') +
+      (codice ? '<a class="st-btn" href="studio/modifica.html?c=' + esc(codice) + '">✏️ Modifica</a><a class="st-btn" href="studio/verifica.html?c=' + esc(codice) + '">📝 Prepara una verifica</a>' : '') +
       '<button type="button" class="st-btn" id="dc-altra">➕ Un\'altra lezione</button></div>' +
       '<p class="st-nota" style="margin-top:1rem">🎓 Date un\'occhiata alla lezione prima di proporla: l\'IA può sbagliare. Se trovate un errore, <b>✏️ Modifica</b> permette di correggerla senza cambiare codice e QR.</p></div>';
     var cv = $('dc-qrc');
@@ -257,7 +257,7 @@
     $('dc-mie').innerHTML = m.length ? m.map(function (x) {
       return '<li><span>' + esc((x.icona || '📚') + ' ' + x.titolo) + (x.condivisa ? '<i class="dc-badge si">🌐 condivisa</i>' : '<i class="dc-badge no">🔒 solo mia</i>') +
         '<small>' + esc([x.materia, x.anno ? x.anno + '° anno' : '', x.classe, E.data(x.modificata || x.created_at), x.aperture ? '👀 ' + x.aperture : ''].filter(Boolean).join(' · ')) + '</small></span><code>' + esc(x.codice) + '</code>' +
-        '<div class="az"><a class="st-btn" href="studio/lezione.html?c=' + esc(x.codice) + '" target="_blank" rel="noopener">Apri</a><button type="button" class="st-btn" data-qr="' + esc(x.codice) + '">QR</button><a class="st-btn" href="studio/modifica.html?c=' + esc(x.codice) + '">✏️ Modifica</a><button type="button" class="st-btn dc-canc" data-canc="' + esc(x.codice) + '" aria-label="Cancella la lezione ' + esc(x.titolo) + '">🗑️ Cancella</button></div></li>';
+        '<div class="az"><a class="st-btn" href="studio/lezione.html?c=' + esc(x.codice) + '" target="_blank" rel="noopener">Apri</a><button type="button" class="st-btn" data-qr="' + esc(x.codice) + '">QR</button><a class="st-btn" href="studio/modifica.html?c=' + esc(x.codice) + '">✏️ Modifica</a><a class="st-btn" href="studio/verifica.html?c=' + esc(x.codice) + '">📝 Verifica</a><button type="button" class="st-btn dc-canc" data-canc="' + esc(x.codice) + '" aria-label="Cancella la lezione ' + esc(x.titolo) + '">🗑️ Cancella</button></div></li>';
     }).join('') : '<li><span class="st-nota">' + (lezioni.length ? 'Nessuna lezione corrisponde alla ricerca.' : 'Ancora nessuna lezione. Intanto guardate la <a href="studio/lezione.html?c=DEMO" target="_blank">lezione di esempio</a> o l\'<a href="studio/archivio.html">Archivio</a>.') + '</span></li>';
   }
   $('dc-mie').addEventListener('click', function (e) {

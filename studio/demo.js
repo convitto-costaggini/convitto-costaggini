@@ -110,6 +110,18 @@ window.STUDIO_DEMO = {
     { fronte: 'Quanta acqua c\'è nel corpo?', retro: 'Circa il 60% del peso' },
     { fronte: 'Quali nutrienti non danno energia?', retro: 'Vitamine, sali minerali e acqua' }
   ],
+  intervista: {
+    personaggio: 'La signora Proteina',
+    chi: 'Una proteina dell\'uovo: muscolosa, instancabile, sempre in cantiere dentro di te.',
+    emoji: '💪',
+    domande: [
+      { domanda: 'Signora Proteina, lei che lavoro fa?', risposta: 'Faccio la muratrice: costruisco e riparo il corpo, dai muscoli alla pelle. Si chiama funzione plastica.', sbagliate: ['Faccio la centrale elettrica: do quasi tutta l\'energia del corpo.', 'Faccio la guardia: proteggo il corpo dalle vitamine.'] },
+      { domanda: 'Quanta energia ci regala, per ogni grammo?', risposta: 'Circa 4 chilocalorie, come i carboidrati. Ma io preferisco costruire, non bruciare.', sbagliate: ['Circa 9 chilocalorie, più di tutti.', 'Nessuna: io non do energia, come l\'acqua.'] },
+      { domanda: 'Chi è la sua collega più energetica?', risposta: 'I lipidi, cioè i grassi: circa 9 chilocalorie per grammo. Più del doppio di me!', sbagliate: ['L\'acqua: è lei che dà più energia.', 'La vitamina C: un vero carburante.'] },
+      { domanda: 'E chi invece non dà energia per niente?', risposta: 'Vitamine, sali minerali e acqua: non danno energia, ma fanno funzionare bene tutto il corpo.', sbagliate: ['I carboidrati: sono solo decorazione.', 'Nessuno: tutti i nutrienti danno la stessa energia.'] },
+      { domanda: 'Dove la troviamo, a tavola?', risposta: 'Nella carne, nel pesce, nelle uova, nel latte e nei legumi. In cucina mi vedete tutti i giorni!', sbagliate: ['Solo nello zucchero e nei dolci.', 'Solo nell\'acqua del rubinetto.'] }
+    ]
+  },
   da_ricordare: [
     'I principi nutritivi sono sei: carboidrati, proteine, lipidi, vitamine, sali minerali e acqua.',
     'Carboidrati e lipidi danno energia; proteine e alcuni sali minerali costruiscono il corpo; vitamine, sali e acqua lo regolano e lo proteggono.',

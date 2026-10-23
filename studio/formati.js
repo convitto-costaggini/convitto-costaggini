@@ -5,6 +5,9 @@
    FORMATI.escape(lezione, el)   🔐 Escape room: lucchetti da aprire, una lettera per lucchetto, la porta finale
    FORMATI.mappa(lezione, el)    🗺️ Costruisci la mappa: ogni idea al suo posto (con aiuti, poi a memoria)
    FORMATI.squadre(lezione, el)  🏆 Sfida a squadre alla LIM: turni, rubapalla, classifica
+   FORMATI.caccia(lezione, el)   🔍 Caccia all'errore: il riassunto di un compagno distratto, da correggere
+   FORMATI.intervista(lezione, el) 🎭 Intervista impossibile: l'ospite risponde, tu scegli la risposta vera
+   FORMATI.minuto(lezione, el)   ⚡ Il minuto: quante risposte giuste in 60 (o 90) secondi
    Usa gli aiutanti di STUDIO (studio/studio.js).
    ════════════════════════════════════════════════════════ */
 window.FORMATI = (function () {
@@ -539,5 +542,167 @@ window.FORMATI = (function () {
     impostazioni();
   }
 
-  return { escape: escape, mappa: function (L, R) { mappa(L, R, 1); }, squadre: squadre };
+  /* ═══════════════ 🔍 CACCIA ALL'ERRORE ═══════════════ */
+  /* Il riassunto di un compagno distratto: alcune frasi sono giuste, altre hanno un errore.
+     Le frasi sbagliate vengono dai «vero o falso» falsi e dalle frasi da completare con la parola sbagliata. */
+  function caccia(L, R) {
+    var VF = arr(L.vero_falso), CO = arr(L.completa).filter(function (q) { return q.risposta && arr(q.distrattori).length && /_{2,}/.test(q.frase); });
+    function riempi(q, parola) { return String(q.frase).replace(/_{2,}/, parola); }
+    var sbagliate = [], giuste = [];
+    mescola(CO).forEach(function (q, i) {
+      if (i % 2 === 0) { var d = S.pesca(arr(q.distrattori)); sbagliate.push({ testo: riempi(q, d), errore: true, sbagliata: d, giusta: q.risposta, opz: mescola([q.risposta].concat(arr(q.distrattori).slice(0, 2))), corretta: riempi(q, q.risposta) }); }
+      else giuste.push({ testo: riempi(q, q.risposta) });
+    });
+    VF.forEach(function (q) { if (q.vero) giuste.push({ testo: q.affermazione }); else sbagliate.push({ testo: q.affermazione, errore: true, spiega: q.spiegazione }); });
+    var N = Math.min(3, sbagliate.length);
+    var frasi = mescola(mescola(sbagliate).slice(0, N).concat(mescola(giuste).slice(0, Math.max(3, 7 - N))));
+    if (!N) { R.innerHTML = '<div class="st-palco"><div class="st-card">Questa lezione non ha abbastanza frasi per la caccia all\'errore.</div></div>'; return; }
+    var trovati = 0, controllate = {}, sviste = 0;
+    R.innerHTML = '<div class="st-palco">' + comeFunziona('🔍', 'Caccia all\'errore', 'Un compagno distratto ha scritto il riassunto di <b>' + esc(L.titolo) + '</b>, ma ha fatto <b>' + N + (N === 1 ? ' errore' : ' errori') + '</b>.', [
+      'Leggi le frasi con calma, una alla volta. Puoi ascoltarle con 🔊.',
+      'Quando trovi una frase <b>sbagliata</b>, toccala.',
+      'Poi <b>correggila</b>: scegli la parola giusta oppure leggi perché è sbagliata. Trova tutti gli errori!'
+    ], 'Apri il quaderno →') + '</div>';
+    R.querySelector('.fm-via').onclick = function () { disegna(); };
+    function disegna(msg) {
+      R.innerHTML = '<div class="st-palco"><h2>🔍 Il quaderno del compagno</h2><p class="st-sot">Errori trovati: <b>' + trovati + ' di ' + N + '</b>. Tocca una frase che secondo te è sbagliata.</p>' +
+        '<div class="fm-quaderno">' + frasi.map(function (f, i) {
+          var st = f.fatta ? 'corretta' : controllate[i] ? 'giusta' : '';
+          return '<div class="fm-riga ' + st + '"><button type="button" class="fm-frase" data-f="' + i + '"' + (st ? ' disabled' : '') + '><span class="n">' + (i + 1) + '</span><span class="t">' + (f.fatta && f.corretta ? esc(f.corretta) : esc(f.testo)) + '</span>' +
+            (st === 'corretta' ? '<span class="tag">✏️ corretta</span>' : st === 'giusta' ? '<span class="tag">✔ era giusta</span>' : '') + '</button>' + S.tastoVoce(f.fatta && f.corretta ? f.corretta : f.testo) + '</div>' +
+            (f.fatta && f.spiega && !f.corretta ? '<p class="fm-nota-err">💡 ' + esc(f.spiega) + '</p>' : '');
+        }).join('') + '</div><div id="fm-correggi" aria-live="polite">' + (msg || '') + '</div></div>';
+      R.querySelectorAll('.fm-riga .st-leggi').forEach(function (b) { b.onclick = function () { S.leggi(b.getAttribute('data-leggi'), b); }; });
+      R.querySelectorAll('[data-f]').forEach(function (b) { b.onclick = function () { tocca(+b.getAttribute('data-f')); }; });
+    }
+    function tocca(i) {
+      var f = frasi[i], box;
+      if (!f.errore) { controllate[i] = true; sviste++; disegna('<div class="st-spiega no">🙂 Questa frase è giusta! Il compagno qui non ha sbagliato. Cerca ancora.</div>'); return; }
+      if (f.opz) {
+        disegna(); box = R.querySelector('#fm-correggi');
+        box.innerHTML = '<div class="st-card st-entra"><p class="st-dom" style="padding:0">🎯 Trovato! Nella frase ' + (i + 1) + ' la parola sbagliata è <b class="fm-barrata">' + esc(f.sbagliata) + '</b>. Qual è quella giusta?</p><div class="st-chips">' +
+          f.opz.map(function (o) { return '<button type="button" class="st-scelta">' + esc(o) + '</button>'; }).join('') + '</div></div>';
+        box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        box.querySelectorAll('.st-scelta').forEach(function (b) {
+          b.onclick = function () {
+            if (b.textContent !== f.giusta) { b.classList.add('no'); b.disabled = true; sviste++; return; }
+            f.fatta = true; trovati++; toast(S.pesca(S.BRAVO)); avanti();
+          };
+        });
+      } else { f.fatta = true; trovati++; toast('🎯 Trovato!'); avanti(); }
+    }
+    function avanti() {
+      if (trovati < N) return disegna();
+      disegna(); S.coriandoli();
+      R.querySelector('#fm-correggi').innerHTML = '<div class="st-card st-finale st-entra"><div class="st-medaglia">🔍</div><h2>Tutti gli errori trovati!</h2><p class="st-sot">' + (sviste ? sviste + (sviste === 1 ? ' tentativo a vuoto' : ' tentativi a vuoto') : 'Nessun tentativo a vuoto: occhio di falco!') + '</p>' +
+        '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn pieno" data-ancora>🔁 Un altro quaderno</button></div></div>';
+      R.querySelector('[data-ancora]').onclick = function () { caccia(L, R); };
+    }
+  }
+
+  /* ═══════════════ 🎭 INTERVISTA IMPOSSIBILE ═══════════════ */
+  /* Se la lezione ha «intervista» (personaggio + domande), si usa quella; altrimenti l'ospite è l'argomento stesso
+     e le domande sono le flashcard. */
+  function intervista(L, R) {
+    var I = L.intervista || {}, D = arr(I.domande).filter(function (d) { return d && d.domanda && d.risposta && arr(d.sbagliate).length; });
+    var ospite = I.personaggio, chi = I.chi, ic = I.emoji || '🎭';
+    if (D.length < 3) {
+      var F = arr(L.flashcard).filter(function (f) { return f.fronte && f.retro; });
+      if (F.length < 3) { R.innerHTML = '<div class="st-palco"><div class="st-card">Questa lezione non ha abbastanza materiale per un\'intervista.</div></div>'; return; }
+      ospite = L.titolo + ' in persona'; chi = 'L\'argomento di oggi, venuto in studio a rispondere alle tue domande.'; ic = L.icona || '🎭';
+      D = mescola(F).slice(0, 6).map(function (f) { return { domanda: f.fronte, risposta: f.retro, sbagliate: mescola(F.filter(function (x) { return x !== f; })).slice(0, 2).map(function (x) { return x.retro; }) }; });
+    }
+    D = D.slice(0, 6);
+    var k = 0, chat = [], sbagli = 0;
+    R.innerHTML = '<div class="st-palco">' + comeFunziona('🎙️', 'Intervista impossibile', 'Oggi in studio c\'è un ospite speciale: <b>' + esc(ic + ' ' + ospite) + '</b>. ' + esc(chi || ''), [
+      'Tu sei il <b>giornalista</b>: fai una domanda alla volta.',
+      'Il microfono gracchia e senti <b>tre risposte</b>: tocca quella che l\'ospite ha detto davvero.',
+      'Alla fine rileggi tutta l\'intervista, o ascoltala con 🔊.'
+    ], 'Accendi il microfono 🎙️') + '</div>';
+    R.querySelector('.fm-via').onclick = giro;
+    function bolle() {
+      return '<div class="fm-chat">' + '<div class="fm-ospite"><span class="av" aria-hidden="true">' + esc(ic) + '</span><b>' + esc(ospite) + '</b></div>' +
+        chat.map(function (m) { return '<div class="fm-bolla ' + m.da + '"><small>' + (m.da === 'io' ? '🎤 Tu' : esc(ic + ' ' + ospite)) + '</small>' + esc(m.t) + '</div>'; }).join('') + '</div>';
+    }
+    function giro() {
+      if (k >= D.length) return fine();
+      var d = D[k], opz = mescola([d.risposta].concat(arr(d.sbagliate).slice(0, 2)));
+      chat.push({ da: 'io', t: d.domanda });
+      R.innerHTML = '<div class="st-palco"><h2>🎙️ In onda</h2><p class="st-cont">Domanda ' + (k + 1) + ' di ' + D.length + '</p>' + bolle() +
+        '<p class="st-sot" style="margin-top:.8rem">Che cosa ha risposto ' + esc(ospite) + '?</p><div class="st-scelte">' + opz.map(function (o, i) { return '<button type="button" class="st-scelta" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div><div class="st-esito" aria-live="polite"></div></div>';
+      var ultima = R.querySelector('.fm-bolla:last-child'); if (ultima) ultima.scrollIntoView({ block: 'center' });
+      R.querySelectorAll('[data-i]').forEach(function (b) {
+        b.onclick = function () {
+          if (opz[+b.getAttribute('data-i')] === d.risposta) { chat.push({ da: 'lui', t: d.risposta }); k++; toast(S.pesca(S.BRAVO)); giro(); }
+          else { sbagli++; b.classList.add('no'); b.disabled = true; R.querySelector('.st-esito').innerHTML = '<div class="st-spiega no">🎙️ «No no, non l\'ho mai detto!» Riprova.</div>'; }
+        };
+      });
+    }
+    function fine() {
+      S.coriandoli();
+      var testo = chat.map(function (m) { return (m.da === 'io' ? 'Domanda: ' : ospite + ': ') + m.t; }).join(' ');
+      R.innerHTML = '<div class="st-palco"><div class="st-card st-finale st-entra"><div class="st-medaglia">📰</div><h2>Intervista in pagina!</h2><p class="st-sot">' + (sbagli ? sbagli + (sbagli === 1 ? ' risposta sbagliata' : ' risposte sbagliate') + ' scartata lungo la strada.' : 'Nessuna risposta sbagliata: giornalismo di precisione!') + '</p>' +
+        '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn" data-leggi="' + esc(testo) + '">🔊 Ascolta l\'intervista</button><button type="button" class="st-btn pieno" data-ancora>🔁 Rifai l\'intervista</button></div></div>' +
+        '<h3>📰 L\'intervista completa</h3>' + bolle() + '</div>';
+      var l = R.querySelector('[data-leggi]'); l.onclick = function () { S.leggi(l.getAttribute('data-leggi'), l); };
+      R.querySelector('[data-ancora]').onclick = function () { intervista(L, R); };
+    }
+  }
+
+  /* ═══════════════ ⚡ IL MINUTO ═══════════════ */
+  /* Quante risposte giuste in un minuto (o in un minuto e mezzo, con più calma). Alla fine: il record e gli errori da ripassare. */
+  function minuto(L, R) {
+    var pool = arr(L.vero_falso).map(daVF).concat(arr(L.quiz).map(daQuiz), arr(L.completa).map(daCompleta));
+    if (pool.length < 5) { R.innerHTML = '<div class="st-palco"><div class="st-card">Questa lezione non ha abbastanza domande per «Il minuto».</div></div>'; return; }
+    var chiave = 'studio-minuto-' + (L.titolo || ''), record = 0;
+    try { record = +localStorage.getItem(chiave) || 0; } catch (e) {}
+    R.innerHTML = '<div class="st-palco">' + comeFunziona('⚡', 'Il minuto', 'Quante risposte giuste riesci a dare prima che finisca il tempo?' + (record ? ' Il tuo record è <b>' + record + '</b>.' : ''), [
+      'Scegli il tempo: <b>60 secondi</b>, oppure <b>90 secondi</b> se vuoi più calma.',
+      'Rispondi più domande che puoi. Sbagliare non toglie punti: si passa subito alla prossima.',
+      'Alla fine vedi il tuo punteggio e <b>le domande sbagliate, con la risposta giusta</b>, da ripassare.'
+    ], 'Scegli il tempo ↓') + '<div class="st-azioni" style="justify-content:center" id="fm-tempi" hidden><button type="button" class="st-btn oro" data-s="60">⚡ 60 secondi</button><button type="button" class="st-btn" data-s="90">🐢 90 secondi</button></div></div>';
+    R.querySelector('.fm-via').onclick = function () { R.querySelector('#fm-tempi').hidden = false; this.parentNode.remove(); R.querySelector('[data-s]').focus(); };
+    R.querySelectorAll('[data-s]').forEach(function (b) { b.onclick = function () { via(+b.getAttribute('data-s')); }; });
+    function via(sec) {
+      var mazzo = mescola(pool), k = 0, giuste = 0, errori = [], fineT = Date.now() + sec * 1000, finito = false, timer;
+      R.innerHTML = '<div class="st-palco"><div class="fm-crono-box"><div class="fm-crono"><div class="fm-crono-n"><span id="fm-sec">' + sec + '</span><small>secondi</small></div><div class="fm-crono-p">✅ <b id="fm-punti">0</b></div></div><div class="fm-tempo"><i></i></div></div><div id="fm-q"></div></div>';
+      R.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var barra = R.querySelector('.fm-tempo i');
+      timer = setInterval(function () {
+        if (!document.body.contains(R)) return clearInterval(timer);
+        var resto = Math.max(0, fineT - Date.now());
+        R.querySelector('#fm-sec').textContent = Math.ceil(resto / 1000); barra.style.width = (resto / (sec * 10)) + '%';
+        if (!resto) { clearInterval(timer); fine(); }
+      }, 200);
+      function una() {
+        if (finito) return;
+        if (k >= mazzo.length) { mazzo = mescola(pool); k = 0; }
+        var d = mazzo[k++], q = R.querySelector('#fm-q');
+        q.innerHTML = '<div class="fm-dom">' + '<p class="st-dom">' + (d.vf ? '<small class="st-cont">Vero o falso?</small><br>' : '') + (d.html || esc(d.testo)) + '</p><div class="' + (d.vf ? 'st-vf' : d.chips ? 'st-chips' : 'st-scelte') + '">' + d.opz.map(function (o, i) { return '<button type="button" class="st-scelta" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div></div>';
+        q.querySelectorAll('[data-i]').forEach(function (b) {
+          b.onclick = function () {
+            q.querySelectorAll('[data-i]').forEach(function (x) { x.disabled = true; });
+            if (+b.getAttribute('data-i') === d.giusta) { giuste++; b.classList.add('ok'); R.querySelector('#fm-punti').textContent = giuste; }
+            else { b.classList.add('no'); q.querySelectorAll('[data-i]')[d.giusta].classList.add('ok'); errori.push(d); }
+            setTimeout(una, 450);
+          };
+        });
+      }
+      function fine() {
+        finito = true;
+        var nuovo = giuste > record; if (nuovo) { record = giuste; try { localStorage.setItem(chiave, giuste); } catch (e) {} S.coriandoli(); }
+        var visti = [];
+        R.innerHTML = '<div class="st-palco"><div class="st-card st-finale st-entra"><div class="st-medaglia">⚡</div><h2>' + giuste + (giuste === 1 ? ' risposta giusta' : ' risposte giuste') + '</h2>' +
+          '<p class="st-sot">' + (nuovo ? '🎉 Nuovo record!' : 'Il tuo record: ' + record + '. ') + ' (' + sec + ' secondi)</p>' +
+          '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn pieno" data-ancora>🔁 Riprova</button></div></div>' +
+          (errori.length ? '<h3>📌 Da ripassare</h3><div class="fm-ripasso">' + errori.filter(function (d) { var x = visti.indexOf(d) < 0; visti.push(d); return x; }).map(function (d) {
+            return '<div class="st-card"><p style="margin:0 0 .3rem">' + esc(d.testo) + '</p><p class="st-spiega ok" style="margin:0">✅ ' + esc(d.opz[d.giusta]) + (d.spiega ? ' — ' + esc(d.spiega) : '') + '</p></div>';
+          }).join('') + '</div>' : '<p class="st-sot" style="text-align:center">Nessun errore da ripassare. 👏</p>') + '</div>';
+        R.querySelector('[data-ancora]').onclick = function () { minuto(L, R); };
+      }
+      una();
+    }
+  }
+
+  return { escape: escape, mappa: function (L, R) { mappa(L, R, 1); }, squadre: squadre, caccia: caccia, intervista: intervista, minuto: minuto };
 })();

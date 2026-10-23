@@ -80,6 +80,7 @@ export const SCHEMA = oggetto({
   completa: lista(oggetto({ frase: { type: "string", description: "Frase con ___ al posto della parola mancante" }, risposta: S, distrattori: lista(S) })),
   abbina: lista(oggetto({ sinistra: S, destra: S })),
   flashcard: lista(oggetto({ fronte: S, retro: S })),
+  intervista: oggetto({ personaggio: S, chi: S, emoji: S, domande: lista(oggetto({ domanda: S, risposta: S, sbagliate: lista(S) })) }),
   da_ricordare: lista(S),
 });
 
@@ -114,6 +115,7 @@ CONTENUTI:
 - completa: 5-7 frasi prese dai concetti con una parola chiave sostituita da ___ (una sola ___ per frase); 2 distrattori plausibili.
 - abbina: 5-6 coppie (termine-definizione, personaggio-fatto, causa-effetto, data-evento...).
 - flashcard: 8-12 carte domanda/risposta brevi.
+- intervista: un'"intervista impossibile" a un personaggio legato all'argomento (storico, scienziato, autore, oppure un elemento dell'argomento che parla in prima persona). personaggio = il nome; chi = una frase di presentazione simpatica; emoji = una sola emoji; domande: 5-6 domande del giornalista, risposta in prima persona nel suo stile (max 2 frasi, solo contenuti delle pagine), sbagliate = 2 risposte plausibili ma sbagliate.
 - da_ricordare: le 5 frasi essenziali da sapere a memoria.`;
 
 // ───── la funzione ─────

@@ -233,6 +233,7 @@ window.EDUCATORI = (function () {
     '- completa: 5-7 frasi con una sola parola chiave sostituita da ___; 2 distrattori plausibili.\n' +
     '- abbina: 5-6 coppie (termine-definizione, personaggio-fatto, causa-effetto, data-evento...).\n' +
     '- flashcard: 8-12 carte domanda/risposta brevi.\n' +
+    '- intervista: un\'«intervista impossibile» a un personaggio legato all\'argomento: un personaggio storico, uno scienziato, un autore, oppure un elemento dell\'argomento che parla in prima persona (per esempio «La signora Proteina», «Il fiume Nilo», «L\'articolo 3 della Costituzione»). personaggio = il nome; chi = una frase di presentazione simpatica; emoji = una sola emoji. domande: 5-6 domande del giornalista; risposta = quello che risponde il personaggio, in prima persona, nel suo stile, massimo 2 frasi, solo con contenuti della lezione; sbagliate = 2 risposte plausibili ma sbagliate.\n' +
     '- da_ricordare: le 5 frasi essenziali da sapere a memoria.\n\n';
   var FORMATO = 'FORMATO DELLA RISPOSTA: rispondi con UN SOLO blocco di codice json, senza testo prima o dopo e senza creare artefatti, canvas o documenti a parte. Il JSON deve avere esattamente questa struttura (gli elenchi qui hanno un solo elemento di esempio: tu mettine quanti indicato sopra):\n' + FORMA;
   function istruzioni(d) {
@@ -302,7 +303,7 @@ window.EDUCATORI = (function () {
       '.m{font-size:2.2vh;letter-spacing:.2em;text-transform:uppercase;color:#B8922A;font-weight:bold}h1{font-size:5vh;margin:1vh 0 2vh}img{width:min(58vh,80vw);height:auto}' +
       '.c{font-size:4vh;letter-spacing:.3em;font-weight:bold;margin:1vh 0}p{font-size:2.3vh;color:#555;margin:.5vh}@media print{body{min-height:auto}}</style></head><body>' +
       '<div class="m">Sala studio · ' + esc(L.materia || '') + '</div><h1>' + esc((L.icona || '📚') + ' ' + L.titolo) + '</h1><img src="' + cv.toDataURL() + '" alt="Codice QR"/>' +
-      (cod ? '<div class="c">' + esc(cod) + '</div>' : '') + '<p>Inquadra il codice con la fotocamera del telefono.</p><p>Percorso guidato · Escape room · Costruisci la mappa · Sfida a squadre</p>' +
+      (cod ? '<div class="c">' + esc(cod) + '</div>' : '') + '<p>Inquadra il codice con la fotocamera del telefono.</p><p>Percorso · Escape room · Mappa · Caccia all\'errore · Intervista · Il minuto · Sfida a squadre</p>' +
       (stampa ? '<script>onload=function(){print()}<\/script>' : '') + '</body></html>');
     w.document.close();
   }

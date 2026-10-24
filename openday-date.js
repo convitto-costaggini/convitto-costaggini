@@ -126,7 +126,12 @@
     stile();
     document.querySelectorAll('[data-openday-date]').forEach(elenco);
     document.querySelectorAll('[data-openday-prossimo]').forEach(riquadro);
-    if (!prossimo()) document.querySelectorAll('[data-openday-chip]').forEach(function (el) { el.hidden = true; });
+    var p = prossimo();
+    document.querySelectorAll('[data-openday-chip]').forEach(function (el) {
+      if (!p) { el.hidden = true; return; }
+      var t = el.querySelector('.odp-chip-txt');
+      if (t) t.textContent = 'Prossimo: ' + p.nome + ', ' + esteso(p).replace(/ \d{4}$/, '') + ', ore ' + orario(p);
+    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', avvia); else avvia();
 })();

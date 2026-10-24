@@ -9,6 +9,12 @@
 .st *{box-sizing:border-box}
 .st [hidden]{display:none!important}
 .st-anteprima{background:var(--bosco);color:var(--oro3);text-align:center;font:800 .66rem var(--fu);letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1rem;line-height:1.5}
+/* la striscia in alto spinge giù la testata: il pulsante 🌐 della lingua la segue, invece di coprire il menu */
+@media (min-width:701px){body:has(> .st-anteprima) #tr-btn{top:calc(68px + 2rem)}body:has(> .st-anteprima) #tr-menu{top:calc(102px + 2rem)}}
+/* la freccia «sezione successiva» del sito copriva il sottotitolo */
+.st-hero .sec-nav-arrow{display:none}
+/* niente scorrimento laterale anche dove overflow-x:clip non è supportato (Safari meno recenti) */
+@supports not (overflow-x:clip){html{overflow-x:hidden}}
 
 /* testata */
 .st-hero{background:radial-gradient(120% 90% at 85% 0%,rgba(184,146,42,.25),transparent 60%),linear-gradient(160deg,#16261a,var(--bosco));padding:2.2rem 1.1rem 1.8rem;color:#fff;position:relative;overflow:hidden}
@@ -327,9 +333,17 @@ html.ed-cartello-aperto{overflow:hidden}
 .fm-tessere{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
 .fm-tessere .st-scelta{width:3.2rem;min-height:3.2rem;font-size:1.4rem;font-weight:800;text-align:center;padding:0}
 /* la mappa */
-.fm-mappa{display:grid;gap:.6rem;margin:.6rem 0 1rem}
-@media (min-width:700px){.fm-mappa{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,auto)}.fm-nodo{grid-row:var(--r);grid-column:var(--c)}.fm-centro{grid-row:2;grid-column:2}}
-.fm-centro{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.2rem;background:var(--bosco);color:#fff;border-radius:18px;padding:1rem;font-family:var(--fd);font-size:1.4rem;line-height:1.2;min-height:110px}
+/* sul telefono due colonne, con l'argomento in mezzo: metà delle idee sopra, metà sotto */
+.fm-mappa{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:1.1rem .8rem;margin:.6rem 0 1rem}
+.fm-mappa .fm-centro{grid-column:1/-1;order:1}
+.fm-mappa .fm-nodo{order:var(--o)}
+.fm-mappa>*{position:relative;z-index:1}
+.fm-mappa>.fm-rami{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
+.fm-rami line{stroke:var(--oro);stroke-width:3;stroke-dasharray:6 6;stroke-linecap:round;opacity:.7}
+.fm-rami line.ok{stroke:var(--st-ok);stroke-dasharray:none;opacity:1}
+@media (min-width:700px){.fm-mappa{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,auto);gap:1.6rem 2rem}.fm-nodo{grid-row:var(--r);grid-column:var(--c)}.fm-mappa .fm-centro{grid-row:2;grid-column:2}}
+@media (max-width:699px){.fm-nodo{min-height:96px;padding:.55rem}.fm-nodo .aiuto{font-size:.8rem;line-height:1.35}.fm-nodo .tit{font-size:.92rem}.fm-centro{min-height:80px;font-size:1.25rem}}
+.fm-centro{display:flex;box-shadow:0 0 0 6px rgba(212,170,74,.25);flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.2rem;background:var(--bosco);color:#fff;border-radius:18px;padding:1rem;font-family:var(--fd);font-size:1.4rem;line-height:1.2;min-height:110px}
 .fm-centro span{font-size:2rem}
 .fm-nodo{display:flex;flex-direction:column;gap:.3rem;align-items:center;justify-content:center;text-align:center;background:#fff;border:2px dashed var(--oro);border-radius:16px;padding:.7rem;cursor:pointer;font-family:var(--st-f);color:var(--txt);min-height:110px}
 .fm-nodo .vuoto{font:800 1.4rem var(--fu);color:var(--oro)}

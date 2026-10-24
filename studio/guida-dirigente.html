@@ -17,7 +17,9 @@
     html{scroll-behavior:smooth}
     body{margin:0;background:var(--panna);color:var(--testo);font-family:var(--fu);font-size:17px;line-height:1.65}
     a{color:var(--bosco2)}
-    .w{max-width:880px;margin:0 auto;padding:0 20px}
+    .w{max-width:1080px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right)) 0 max(20px,env(safe-area-inset-left))}
+    html{overflow-x:hidden}
+    section>p,.hero p{max-width:760px}
     header.hero{background:radial-gradient(1200px 400px at 80% -10%,rgba(212,170,74,.25),transparent),var(--bosco);color:#F5F0E8;padding:56px 0 64px}
     .hero .sopra{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro2);font-weight:700}
     .hero h1{font-family:var(--fd);font-weight:400;font-size:clamp(34px,6vw,54px);line-height:1.1;margin:12px 0 14px}
@@ -28,7 +30,7 @@
     nav.indice{background:#fff;border-bottom:1px solid var(--panna2);position:sticky;top:0;z-index:5}
     nav.indice .w{display:flex;flex-wrap:wrap;gap:8px;padding-top:12px;padding-bottom:12px}
     section{scroll-margin-top:120px}
-    @media (max-width:700px){nav.indice{position:static}nav.indice .w{flex-wrap:nowrap;overflow-x:auto}section{scroll-margin-top:12px}}
+    @media (max-width:700px){nav.indice{position:static}nav.indice a{padding:7px 11px;font-size:13.5px}section{scroll-margin-top:12px}}
     nav.indice a{white-space:nowrap;text-decoration:none;font-size:14px;font-weight:700;color:#fff;background:var(--bosco);padding:8px 14px;border-radius:8px;border:1px solid var(--bosco);box-shadow:0 1px 3px rgba(0,0,0,.18)}
     nav.indice a:hover,nav.indice a:focus-visible{background:var(--oro);border-color:var(--oro);color:#fff}
     section{padding:44px 0 8px}
@@ -90,6 +92,14 @@
     .poi{margin:14px 0 4px;color:var(--grigio)}
     .prossimo{display:block;text-align:center;text-decoration:none;font-weight:700;color:#fff;background:var(--bosco);border-radius:12px;padding:14px 18px;margin:20px 0 0}
     .prossimo:hover{background:var(--bosco2)}
+    .due{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin:18px 0}
+    .attivita{background:#fff;border-radius:16px;box-shadow:0 4px 22px rgba(44,62,45,.08);padding:20px 22px;display:flex;flex-direction:column}
+    .attivita .grande{margin:0 0 14px}
+    .attivita h3{font-family:var(--fd);font-weight:400;font-size:24px;color:var(--bosco);margin:0 0 4px}
+    .attivita ol.passi{margin:6px 0 0}
+    .attivita ol.passi>li{padding-bottom:12px}
+    .attivita .perche{margin-top:auto;font-size:15px;color:var(--grigio);border-top:1px dashed var(--panna2);padding-top:10px}
+    @media (max-width:520px){.due{grid-template-columns:1fr}.attivita{padding:18px 16px}}
     @media (max-width:520px){body{font-size:16px}.card{padding:18px 16px}ol.passi>li{padding-left:50px}}
   </style>
 </head>
@@ -115,6 +125,7 @@
     <a href="studio/guida-dirigente.html#breve">In breve</a>
     <a href="studio/guida-dirigente.html#comincia">Da dove comincio</a>
     <a href="studio/guida-dirigente.html#pronta">A · Una lezione pronta</a>
+    <a href="studio/guida-dirigente.html#giochi">A · Escape room e mappa</a>
     <a href="studio/guida-dirigente.html#verifica">B · La verifica</a>
     <a href="studio/guida-dirigente.html#crea">C · Crei Lei una lezione</a>
     <a href="studio/guida-dirigente.html#lingue">D · Lingue</a>
@@ -161,8 +172,8 @@
 <section id="comincia">
   <div class="etichetta">Da dove comincio</div>
   <h2>Tre passi, <em>in quest'ordine</em></h2>
-  <p>Bastano circa 15 minuti. Ogni passo si apre con un clic e spiega, uno per uno, i pulsanti da premere.</p>
-  <a class="tappa" href="studio/guida-dirigente.html#pronta"><span class="n">1</span><span><b>Guardi una lezione già pronta</b><span>Come la vede uno studente · circa 6 minuti · nessun accesso</span></span><span class="freccia">→</span></a>
+  <p>Bastano circa 20 minuti. Ogni passo si apre con un clic e spiega, uno per uno, i pulsanti da premere.</p>
+  <a class="tappa" href="studio/guida-dirigente.html#pronta"><span class="n">1</span><span><b>Guardi una lezione già pronta</b><span>Come la vede uno studente, con l'escape room e la mappa da costruire · circa 12 minuti · nessun accesso</span></span><span class="freccia">→</span></a>
   <a class="tappa" href="studio/guida-dirigente.html#verifica"><span class="n">2</span><span><b>Prepari una verifica in pochi secondi</b><span>Fila A e B, versione facilitata, mappa · circa 3 minuti · nessun accesso</span></span><span class="freccia">→</span></a>
   <a class="tappa" href="studio/guida-dirigente.html#crea"><span class="n">3</span><span><b>Crei Lei una lezione nuova</b><span>Da un argomento o dalla foto di una pagina · circa 8 minuti · con la Sua mail istituzionale</span></span><span class="freccia">→</span></a>
   <p class="poi">Se ha altro tempo: <a href="studio/guida-dirigente.html#lingue">D · Lingue</a> (6 minuti) e <a href="studio/guida-dirigente.html#aula">E · In aula</a> (10 minuti).</p>
@@ -190,9 +201,50 @@
       <li><input type="checkbox" id="a3"><label for="a3">Nella tappa <b>Memorizza</b> osservi i trucchi per ricordare: la parola-sigla, il «palazzo della memoria» ambientato nel Convitto, la filastrocca.</label></li>
       <li><input type="checkbox" id="a4"><label for="a4">Nella tappa <b>Allenati</b> risponda a una domanda <b>sbagliando apposta</b>: la lezione spiega subito perché.</label></li>
       <li><input type="checkbox" id="a5"><label for="a5">Provi le <b>Flashcard</b> e la <b>Sfida finale</b>.</label></li>
-      <li><input type="checkbox" id="a6"><label for="a6">Torni all'inizio della lezione e guardi gli altri modi di studiarla, ad esempio <span class="btn">🔐 Escape room</span> o <span class="btn">🗺️ Costruisci la mappa</span>: la stessa lezione, attività diverse.</label></li>
+      <li><input type="checkbox" id="a6"><label for="a6">Torni all'inizio della lezione: sotto «Come vuoi studiare?» ci sono gli altri sei modi di studiarla. Due li vediamo subito qui sotto, passo per passo.</label></li>
     </ul>
   </div>
+  <a class="prossimo" href="studio/guida-dirigente.html#giochi">Passo 1 · seconda parte: l'escape room e la mappa da costruire ↓</a>
+</section>
+
+<section id="giochi">
+  <div class="etichetta">Passo 1 · seconda parte</div>
+  <h2>La stessa lezione, <em>giocata</em></h2>
+  <span class="tempo">⏱️ circa 6 minuti · nessun accesso richiesto</span>
+  <p>Ogni lezione si può studiare in sette modi. Ecco i due che mostrano meglio la differenza fra leggere e lavorare sui contenuti. Entrambi si costruiscono da soli, a partire dalla stessa pagina di libro: il docente non prepara nulla.</p>
+  <div class="due">
+    <div class="attivita">
+      <a class="grande" href="studio/lezione.html?c=DEMO&amp;m=escape" target="_blank" rel="noopener">
+        <span class="e">🔐</span><span><b>Apra l'escape room</b><span>«Chiusi in dispensa!» · nuova scheda</span></span><span class="freccia">→</span>
+      </a>
+      <h3>Escape room</h3>
+      <ol class="passi">
+        <li><b class="t">Prema «Entra nella dispensa →»</b>
+          Lo chef ha nascosto la chiave dietro sei lucchetti. Ognuno è una prova diversa sulla lezione: vero o falso <b>con il perché</b>, parole da scrivere, definizioni, abbinamenti, una sequenza.</li>
+        <li><b class="t">Apra il primo lucchetto</b>
+          Sbagli apposta una risposta: compare un aiuto e si riprova. Ogni lucchetto aperto regala <b>una lettera</b>, che finisce nel taccuino.</li>
+        <li><b class="t">Arrivi alla porta</b>
+          L'ultimo guardiano è lo chef: vuole tre risposte giuste di fila. Poi, con il biglietto dello chef, si ricompone la parola segreta: è la parola-sigla della lezione, <b>CPLVSA</b>.</li>
+      </ol>
+      <p class="perche">Ogni lucchetto obbliga a <b>richiamare</b> ciò che si è studiato, non a rileggerlo: è ciò che fissa di più il ricordo.</p>
+    </div>
+    <div class="attivita">
+      <a class="grande" href="studio/lezione.html?c=DEMO&amp;m=mappa" target="_blank" rel="noopener">
+        <span class="e">🗺️</span><span><b>Apra «Costruisci la mappa»</b><span>La mappa concettuale · nuova scheda</span></span><span class="freccia">→</span>
+      </a>
+      <h3>Costruisci la mappa</h3>
+      <ol class="passi">
+        <li><b class="t">Prema «Inizia la mappa →»</b>
+          Al centro c'è l'argomento, collegato alle caselle delle idee chiave. I nomi delle idee sono spariti: in ogni casella resta solo una frase di aiuto.</li>
+        <li><b class="t">Tocchi un'etichetta, poi la casella</b>
+          Le etichette sono in basso. Se la casella è giusta diventa verde e il suo ramo si accende; se è sbagliata trema e si riprova.</li>
+        <li><b class="t">Completi la mappa e passi al livello 2</b>
+          Con <span class="btn">🧠 Livello 2: a memoria</span> le frasi di aiuto spariscono: restano l'emoji e la prima lettera. Con <span class="btn">🔊 Ascolta la mappa</span> la si sente leggere ad alta voce.</li>
+      </ol>
+      <p class="perche">La mappa non si studia già pronta: lo studente la <b>costruisce</b>. È il modo in cui le mappe concettuali aiutano di più.</p>
+    </div>
+  </div>
+  <div class="riquadro">Gli altri modi, dallo stesso menu «Come vuoi studiare?»: <span class="btn">🔍 Caccia all'errore</span>, <span class="btn">🎭 Intervista impossibile</span>, <span class="btn">⚡ Il minuto</span> e <span class="btn">🏆 Sfida a squadre</span>, quest'ultima pensata per la LIM (Percorso E).</div>
   <a class="prossimo" href="studio/guida-dirigente.html#verifica">Passo 2 · Dalla stessa lezione, la verifica in pochi secondi ↓</a>
 </section>
 

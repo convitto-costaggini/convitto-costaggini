@@ -370,7 +370,7 @@ window.FORMATI = (function () {
   var GIRO = [[1, 2], [1, 3], [2, 3], [3, 3], [3, 2], [3, 1], [2, 1], [1, 1]];
   function primaFrase(t) { var m = String(t || '').match(/^.*?[.!?](\s|$)/); return (m ? m[0] : String(t || '')).trim(); }
   function mappa(L, R, livello) {
-    var C = arr(L.concetti).slice(0, 8), n = C.length, posti = {}, sel = null, errori = 0;
+    var C = arr(L.concetti).slice(0, 8), n = C.length, posti = {}, sel = null, errori = 0, osserva = null;
     if (n < 2) { R.innerHTML = '<div class="st-palco"><div class="st-card">Questa lezione ha troppe poche idee chiave per una mappa.</div></div>'; return; }
     var pos = C.map(function (_, i) { return GIRO[Math.round(i * 8 / n) % 8]; });
     function aiuto(c) {
@@ -392,7 +392,7 @@ window.FORMATI = (function () {
         '<div class="fm-mappa">' +
           '<div class="fm-centro"><span aria-hidden="true">' + esc(L.icona || '📚') + '</span>' + esc(L.titolo) + '</div>' +
           C.map(function (c, i) {
-            return '<button type="button" class="fm-nodo' + (posti[i] ? ' ok' : '') + '" data-n="' + i + '" style="--r:' + pos[i][0] + ';--c:' + pos[i][1] + '"' + (posti[i] ? ' disabled' : '') + '>' +
+            return '<button type="button" class="fm-nodo' + (posti[i] ? ' ok' : '') + '" data-n="' + i + '" style="--r:' + pos[i][0] + ';--c:' + pos[i][1] + ';--o:' + (i < Math.ceil(n / 2) ? 0 : 2) + '"' + (posti[i] ? ' disabled' : '') + '>' +
               (posti[i] ? '<b class="tit">' + esc(c.titolo) + '</b>' : '<span class="vuoto">?</span>') + '<span class="aiuto">' + aiuto(c) + '</span></button>';
           }).join('') +
         '</div>' +
@@ -415,7 +415,29 @@ window.FORMATI = (function () {
           else { errori++; b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 450); }
         };
       });
+      /* la mappa cambia misura con il carattere più grande, la rotazione dello schermo, i font caricati */
+      if (osserva) osserva.disconnect();
+      if (window.ResizeObserver) { osserva = new ResizeObserver(linee); osserva.observe(R.querySelector('.fm-mappa')); } else linee();
       if (!mancano) fine();
+    }
+    /* i rami della mappa: una linea dal centro a ogni casella, tratteggiata finché è vuota */
+    function linee() {
+      var M = R.querySelector('.fm-mappa'), ce = M && M.querySelector('.fm-centro');
+      if (!ce) return;
+      var vecchio = M.querySelector('.fm-rami'); if (vecchio) vecchio.remove();
+      var b = M.getBoundingClientRect(), c = ce.getBoundingClientRect();
+      var cx = c.left + c.width / 2 - b.left, cy = c.top + c.height / 2 - b.top;
+      var NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('class', 'fm-rami'); svg.setAttribute('aria-hidden', 'true');
+      svg.setAttribute('viewBox', '0 0 ' + b.width + ' ' + b.height);
+      M.querySelectorAll('.fm-nodo').forEach(function (nd) {
+        var r = nd.getBoundingClientRect(), l = document.createElementNS(NS, 'line');
+        l.setAttribute('x1', cx); l.setAttribute('y1', cy);
+        l.setAttribute('x2', r.left + r.width / 2 - b.left); l.setAttribute('y2', r.top + r.height / 2 - b.top);
+        if (nd.classList.contains('ok')) l.setAttribute('class', 'ok');
+        svg.appendChild(l);
+      });
+      M.insertBefore(svg, M.firstChild);
     }
     function fine() {
       S.coriandoli();

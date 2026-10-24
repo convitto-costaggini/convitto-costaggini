@@ -3,6 +3,12 @@
    Usa le variabili del sito madre (style.min.css).
    ════════════════════════════════════════════════════════ */
 .lg-anteprima{background:var(--bosco);color:var(--oro3);text-align:center;font:800 .66rem var(--fu);letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1rem;line-height:1.5}
+/* la striscia in alto spinge giù la testata: il pulsante 🌐 della lingua la segue, invece di coprire il menu */
+@media (min-width:701px){body:has(> .lg-anteprima) #tr-btn{top:calc(68px + 2rem)}body:has(> .lg-anteprima) #tr-menu{top:calc(102px + 2rem)}}
+/* la freccia «sezione successiva» del sito copriva il sottotitolo */
+.lg-hero .sec-nav-arrow{display:none}
+/* niente scorrimento laterale anche dove overflow-x:clip non è supportato (Safari meno recenti) */
+@supports not (overflow-x:clip){html{overflow-x:hidden}}
 .lg-hero{background:radial-gradient(120% 90% at 85% 0%,rgba(184,146,42,.22),transparent 60%),linear-gradient(160deg,#16261a,var(--bosco));padding:3rem 1.25rem 2.25rem;color:#fff;position:relative;overflow:hidden}
 .lg-hero .w{max-width:900px;position:relative}
 .lg-hero .lbl{color:var(--oro2)}

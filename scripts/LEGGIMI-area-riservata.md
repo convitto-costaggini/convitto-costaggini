@@ -65,7 +65,13 @@ Nessuna revisione sistematica: un docente, mentre usa il vocabolario, se una fra
   e il link in fondo arrivano da soli.
 - Le spunte stanno nella tabella `lingue_revisioni` (chiave = sezione|frase italiana, lingua, docente). I docenti
   vedono i nomi di chi ha già spuntato e i suggerimenti degli altri; le mail non escono dalla funzione.
-- Le correzioni NON cambiano da sole il sito: chi cura il vocabolario le legge e le applica in `lingue/parole.js`.
-  Per vederle (SQL Editor di Supabase):
-      select chiave, lingua, nome, testo, proposta, nota, aggiornata from public.lingue_revisioni
-      where stato = 'proposta' order by aggiornata desc;
+- **Le correzioni valgono subito per tutti** (scelta del 24/10/2026): con ✏️ il docente riscrive la frase; la nuova
+  versione si vede da quel momento su tutte le pagine (testo, esercizi, giochi, voce), con il suo nome. Un collega può
+  annullarla con «↩ Annulla la correzione»: torna la versione precedente. Niente si cancella: tabella
+  `lingue_correzioni`, una riga per correzione (testo di prima, testo nuovo, chi, quando, chi l'ha annullata).
+- `lingue/correzioni.js`, caricato dopo i file dei dati di ogni pagina, applica le correzioni in vigore ai dati prima che
+  la pagina li mostri (subito quelle salvate nel browser, poi quelle del server; se cambiano, la pagina si ridisegna).
+- I file dei dati (`parole.js`, `dialoghi-dati.js`…) restano quelli di partenza. Per riportarvi le correzioni in modo
+  definitivo (SQL Editor di Supabase):
+      select distinct on (chiave, lingua) chiave, lingua, originale, testo, nome, creata
+      from public.lingue_correzioni where annullata is null order by chiave, lingua, creata desc;

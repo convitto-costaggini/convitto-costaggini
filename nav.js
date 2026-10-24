@@ -1142,11 +1142,3 @@
   heroBox.style.setProperty('--hero-icon-scale', isSatellite ? '.82' : '1');
 })();
 
-(function () {
-  var CF_TOKEN = '598e2b86583643aaaa7e801b7a6dea5d';
-  var s = document.createElement('script');
-  s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-  s.type = 'module';
-  s.setAttribute('data-cf-beacon', JSON.stringify({ token: CF_TOKEN }));
-  document.head.appendChild(s);
-})();

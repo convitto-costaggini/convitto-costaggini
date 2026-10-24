@@ -26,9 +26,11 @@
     .chips{display:flex;flex-wrap:wrap;gap:10px}
     .chip{background:rgba(255,255,255,.08);border:1px solid rgba(212,170,74,.45);border-radius:999px;padding:6px 14px;font-size:14px}
     nav.indice{background:#fff;border-bottom:1px solid var(--panna2);position:sticky;top:0;z-index:5}
-    nav.indice .w{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px}
-    nav.indice a{white-space:nowrap;text-decoration:none;font-size:14px;font-weight:700;color:var(--bosco);padding:7px 12px;border-radius:8px;border:1px solid var(--panna2)}
-    nav.indice a:hover{border-color:var(--oro)}
+    nav.indice .w{display:flex;flex-wrap:wrap;gap:8px;padding-top:12px;padding-bottom:12px}
+    section{scroll-margin-top:120px}
+    @media (max-width:700px){nav.indice{position:static}section{scroll-margin-top:12px}}
+    nav.indice a{white-space:nowrap;text-decoration:none;font-size:14px;font-weight:700;color:#fff;background:var(--bosco);padding:8px 14px;border-radius:8px;border:1px solid var(--bosco);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+    nav.indice a:hover,nav.indice a:focus-visible{background:var(--oro);border-color:var(--oro);color:#fff}
     section{padding:44px 0 8px}
     .etichetta{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);font-weight:700}
     h2{font-family:var(--fd);font-weight:400;font-size:clamp(28px,4.5vw,38px);color:var(--bosco);margin:6px 0 10px;line-height:1.15}
@@ -84,13 +86,13 @@
 
 <nav class="indice" aria-label="Sezioni della visita">
   <div class="w">
-    <a href="#inizio">Prima di iniziare</a>
-    <a href="#pronta">A · Una lezione pronta</a>
-    <a href="#crea">B · Crei Lei una lezione</a>
-    <a href="#lingue">C · Lingue</a>
-    <a href="#aula">D · In aula</a>
-    <a href="#perche">Perché funziona</a>
-    <a href="#domande">Domande</a>
+    <a href="studio/guida-dirigente.html#inizio">Prima di iniziare</a>
+    <a href="studio/guida-dirigente.html#pronta">A · Una lezione pronta</a>
+    <a href="studio/guida-dirigente.html#crea">B · Crei Lei una lezione</a>
+    <a href="studio/guida-dirigente.html#lingue">C · Lingue</a>
+    <a href="studio/guida-dirigente.html#aula">D · In aula</a>
+    <a href="studio/guida-dirigente.html#perche">Perché funziona</a>
+    <a href="studio/guida-dirigente.html#domande">Domande</a>
   </div>
 </nav>
 

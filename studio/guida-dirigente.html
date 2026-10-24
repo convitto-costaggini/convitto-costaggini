@@ -50,7 +50,10 @@
     ol.passi>li::before{content:counter(p);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--bosco);color:var(--oro2);
       font-family:var(--fd);font-size:22px;display:flex;align-items:center;justify-content:center}
     ol.passi>li b.t{display:block;color:var(--bosco);font-size:18px}
-    .btn{display:inline-block;background:var(--panna);border:1px solid var(--panna2);border-radius:6px;padding:1px 8px;font-weight:700;font-size:15px;color:var(--bosco);white-space:nowrap}
+    .btn{display:inline-block;background:var(--panna);border:1px solid var(--panna2);border-radius:6px;padding:1px 8px;font-weight:700;font-size:15px;color:var(--bosco);white-space:nowrap;max-width:100%}
+    /* sul telefono le etichette lunghe vanno a capo: una sola parola troppo larga allargava tutta la pagina */
+    @media (max-width:700px){.btn{white-space:normal}}
+    main{overflow-wrap:break-word}
     .prova{list-style:none;padding:0;margin:8px 0}
     .prova li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--panna2)}
     .prova li:last-child{border-bottom:0}

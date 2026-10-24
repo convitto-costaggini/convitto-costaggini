@@ -71,6 +71,9 @@ Nessuna revisione sistematica: un docente, mentre usa il vocabolario, se una fra
   `lingue_correzioni`, una riga per correzione (testo di prima, testo nuovo, chi, quando, chi l'ha annullata).
 - `lingue/correzioni.js`, caricato dopo i file dei dati di ogni pagina, applica le correzioni in vigore ai dati prima che
   la pagina li mostri (subito quelle salvate nel browser, poi quelle del server; se cambiano, la pagina si ridisegna).
+  Sorveglia anche i dati caricati dopo: le pagine riservate (Verifiche, Crea, Lunedì…) si aprono dentro il guscio
+  pubblico, che carica `correzioni.js`; quando la pagina riservata carica `parole.js` e gli altri dati, le correzioni
+  vengono applicate all'arrivo.
 - I file dei dati (`parole.js`, `dialoghi-dati.js`…) restano quelli di partenza. Per riportarvi le correzioni in modo
   definitivo (SQL Editor di Supabase):
       select distinct on (chiave, lingua) chiave, lingua, originale, testo, nome, creata

@@ -8,6 +8,7 @@
    Le chiavi delle frasi sono le stesse delle spunte (lingue/revisione.js):
      sezione|frase italiana (vocabolario) · dl|scena|riga · im|storia|passo|cliente o indice della risposta
      av|frase italiana · av-ascolto|id · av-email|id|paragrafo · lz|frase italiana (esempi delle lezioni)
+   Vale anche per i dati caricati dopo (le pagine riservate dell'area docenti, come Verifiche): si correggono all'arrivo.
    CORREZIONI.aggiorna(lista)  per chi corregge: applica la lista nuova senza ricaricare
    ════════════════════════════════════════════════════════ */
 window.CORREZIONI = (function () {
@@ -59,6 +60,19 @@ window.CORREZIONI = (function () {
     applica(lista); if (conRidisegno !== false) ridisegna();
     return true;
   }
+  /* i dati caricati DOPO questo script (per esempio dalle pagine riservate dell'area docenti, che si aprono
+     dentro la stessa scheda) vengono corretti nel momento stesso in cui arrivano */
+  ['VOCABOLARIO', 'DIALOGHI', 'IMPREVISTI', 'AVANZATO', 'LEZIONI'].forEach(function (nome) {
+    var valore = window[nome], d = Object.getOwnPropertyDescriptor(window, nome);
+    if (d && !d.configurable) return;
+    try {
+      Object.defineProperty(window, nome, {
+        configurable: true, enumerable: true,
+        get: function () { return valore; },
+        set: function (v) { valore = v; if (attuali.length) applica(attuali); }
+      });
+    } catch (e) {}
+  });
   /* 1) subito, dai dati salvati */
   try { applica(JSON.parse(localStorage.getItem(CH) || '[]')); } catch (e) {}
   /* 2) dal server */

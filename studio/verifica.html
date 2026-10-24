@@ -296,8 +296,9 @@
   $('vf-app').addEventListener('change', function (e) { if (!e.target.closest('#vf-fogli')) anteprima(); });
   $('vf-mescola').onclick = function () { seme = (seme * 31 + 17) % 100000; anteprima(); STUDIO.toast('Domande e ordine cambiati 🔀'); };
   $('vf-stampa').onclick = function () { window.print(); };
-  E.area({ pagina: 'verifica', dentro: $('vf-dentro'), alCambio: carica });
-  carica();
+  /* la verifica della lezione di esempio si apre per tutti, senza accesso: è quella della visita guidata */
+  if (codice === 'DEMO') { $('vf-dentro').hidden = false; $('vf-sot').hidden = false; pronta(window.STUDIO_DEMO); }
+  else { E.area({ pagina: 'verifica', dentro: $('vf-dentro'), alCambio: carica }); carica(); }
 })();
 </script>
 </body>

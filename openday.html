@@ -256,6 +256,7 @@
         <h1>Scopri il Convitto<br><em>in ogni dettaglio</em></h1>
         <p style="line-height:2">Non aspettare l'Open Day — il Convitto "Costaggini" è aperto 365 giorni l'anno, almeno su questo schermo.</p>
         <p class="hero-nav-links">
+          <a href="#date-openday" onclick="document.getElementById('date-openday').scrollIntoView({behavior:'smooth'});return false">Le date</a><span class="hero-sep">·</span>
           <a href="#tour"      onclick="document.getElementById('tour').scrollIntoView({behavior:'smooth'});return false">Esplora gli spazi</a><span class="hero-sep">·</span>
           <a href="#faq-od"    onclick="document.getElementById('faq-od').scrollIntoView({behavior:'smooth'});return false">Leggi le risposte</a><span class="hero-sep">·</span>
           <a href="#educatori" onclick="document.getElementById('educatori').scrollIntoView({behavior:'smooth'});return false">Conosci gli educatori</a><span class="hero-sep">·</span>
@@ -263,13 +264,30 @@
         </p>
 
         <div class="countdown" id="countdown" aria-label="Conto alla rovescia al prossimo Open Day" style="margin-top:1.25rem"></div>
-        <p style="font-family:var(--fu);font-size:.65rem;color:rgba(245,240,232,.55);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem">Prossimo Open Day — Dicembre 2026 (data da confermare)</p>
+        <p id="od-prossimo-txt" style="font-family:var(--fu);font-size:.72rem;font-weight:700;color:var(--oro3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem">Prossimo Open Day — sabato 28 novembre 2026, ore 9:00</p>
         <div style="display:flex;flex-wrap:wrap;gap:1rem">
-          <a href="#tour" class="btn-gold" onclick="document.getElementById('tour').scrollIntoView({behavior:'smooth'});return false">🏛️ Tour degli spazi →</a>
+          <a href="#date-openday" class="btn-gold" onclick="document.getElementById('date-openday').scrollIntoView({behavior:'smooth'});return false">🗓 Tutte le date →</a>
+          <a href="#tour" class="btn-outline" style="color:rgba(245,240,232,.7);border-color:rgba(245,240,232,.3)" onclick="document.getElementById('tour').scrollIntoView({behavior:'smooth'});return false">🏛️ Tour degli spazi</a>
           <a href="tour-virtuale.html" class="btn-outline" style="color:rgba(245,240,232,.7);border-color:rgba(245,240,232,.3)">🔄 Tour a 360°</a>
           <a href="#prenota" class="btn-outline" style="color:rgba(245,240,232,.7);border-color:rgba(245,240,232,.3)" onclick="document.getElementById('prenota').scrollIntoView({behavior:'smooth'});return false">📅 Prenota una visita</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ═══ DATE OPEN DAY E LAB EXPERIENCE (dati in openday-date.js) ═══ -->
+  <section id="date-openday" aria-labelledby="date-openday-t" style="background:var(--av);padding:4rem 1.25rem;scroll-margin-top:70px">
+    <div class="w">
+      <p class="lbl">Anno scolastico 2026/27</p>
+      <h2 id="date-openday-t">Le date dell'<em>Open Day</em></h2>
+      <p style="color:var(--txt2);max-width:620px;margin:.5rem 0 0;font-size:.95rem;line-height:1.7">Vieni a trovarci all'IPSSEOA «R.A. Costaggini» di Rieti: scuola, laboratori e Convitto aprono le porte alle famiglie. Nei pomeriggi di <strong>Lab Experience</strong> i ragazzi possono provare da vicino le attività dei laboratori.</p>
+      <div data-openday-date>
+        <noscript>
+          <p><strong>Open Day</strong> (ore 9:00 – 13:00): sabato 28 novembre 2026 · sabato 12 dicembre 2026 · domenica 13 dicembre 2026 · sabato 19 dicembre 2026 · domenica 10 gennaio 2027 · sabato 16 gennaio 2027.</p>
+          <p><strong>Lab Experience</strong> (ore 14:20 – 18:10): mercoledì 2 dicembre 2026 · mercoledì 16 dicembre 2026.</p>
+        </noscript>
+      </div>
+      <p style="margin-top:1.5rem;font-size:.88rem;color:var(--txt2)">Non riesci a venire in queste date? <a href="#prenota" style="color:var(--bosco2);font-weight:700" onclick="document.getElementById('prenota').scrollIntoView({behavior:'smooth'});return false">Prenota una visita guidata al Convitto →</a></p>
     </div>
   </section>
 
@@ -457,19 +475,28 @@
 </div>
 
 <script src="nav.min.js"></script>
+<script src="openday-date.js"></script>
 <script>
 
 // ═══════════════════════════════════════════════════
 // COUNTDOWN AL PROSSIMO OPEN DAY
 // ═══════════════════════════════════════════════════
 (function() {
-  // Prossimo Open Day: Dicembre 2026 (data da confermare)
-  const target = new Date('2026-12-01T09:00:00');
+  // Prossimo appuntamento: date in openday-date.js
+  const prossimo = window.OPENDAY && window.OPENDAY.prossimo();
+  const txt = document.getElementById('od-prossimo-txt');
+  if (!prossimo) {
+    document.getElementById('countdown').style.display = 'none';
+    if (txt) txt.textContent = 'Gli Open Day 2026/27 si sono conclusi — prenota una visita guidata';
+    return;
+  }
+  if (txt) txt.textContent = 'Prossimo ' + prossimo.nome + ' — ' + OPENDAY.esteso(prossimo) + ', ore ' + OPENDAY.orario(prossimo);
+  const target = prossimo.data;
   const now = new Date();
   const diff = target - now;
 
   if (diff <= 0) {
-    document.getElementById('countdown').innerHTML = '<div class="cd-unit"><span class="cd-num">🎉</span><span class="cd-lbl">Open Day oggi!</span></div>';
+    document.getElementById('countdown').innerHTML = '<div class="cd-unit"><span class="cd-num">🎉</span><span class="cd-lbl">' + prossimo.nome + ' in corso!</span></div>';
     return;
   }
 

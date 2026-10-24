@@ -17,6 +17,8 @@
 //   {elimina:codice}                               -> la cancella (solo l'autore)
 //   {revisioni:true} / {revisione:{chiave, lingua, stato:"ok"|"proposta"|"via", testo, proposta?, nota?}}
 //                                                  -> Lingue: le spunte dei docenti sulle frasi (solo con la mail)
+//   {correggi:{chiave, lingua, originale, testo, nota?}} / {annulla:{chiave, lingua}} -> Lingue: correzione subito valida per tutti
+//   {correzioni:true} (senza accesso)              -> Lingue: le correzioni in vigore, per tutte le pagine
 //   {immagini?:[{tipo:"image/jpeg", dati:<base64>}], argomento?, materia?, classe?, note?, ...} -> la crea con l'IA (a consumo)
 // Risposta: {ok:true, ...} oppure {ok:false, errore, messaggio?}
 // Le foto non vengono salvate: vanno a Claude e poi si buttano. Resta solo la lezione.
@@ -163,6 +165,13 @@ function pulisci(l: any) {
   return p;
 }
 
+// la correzione in vigore per ogni frase e lingua: la più recente fra quelle non annullate (le righe arrivano dalla più recente)
+function inVigore(righe: any[]) {
+  const visti = new Set<string>(), out: { k: string; l: string; t: string }[] = [];
+  for (const r of righe) { const id = r.chiave + "\u0000" + r.lingua; if (!visti.has(id)) { visti.add(id); out.push({ k: r.chiave, l: r.lingua, t: r.testo }); } }
+  return out;
+}
+
 const ELENCO = "codice,titolo,materia,classe,anno,autore,condivisa,aperture,created_at,modificata,proprietario,icona:contenuto->>icona,sottotitolo:contenuto->>sottotitolo";
 
 type Invia = (url: string, corpo: unknown) => Promise<boolean>;
@@ -215,6 +224,13 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
       return risposta({ ok: true, sessione: await firmaSessione(firma, email, adesso + SESSIONE_MS), email, nome: nomeDaMail(email) });
     }
 
+    // ───── Lingue, pubblico: le correzioni dei docenti in vigore (l'ultima non annullata per frase e lingua) ─────
+    if (c.correzioni && !c.sessione) {
+      const { data, error } = await db.from("lingue_correzioni").select("chiave,lingua,testo,creata").is("annullata", null).order("creata", { ascending: false }).limit(5000);
+      if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
+      return risposta({ ok: true, correzioni: inVigore(data || []) });
+    }
+
     // ───── chi e': la persona della sessione, oppure un codice di scorta ─────
     const email = await leggiSessione(firma, c.sessione, adesso);
     const cod = String(c.codice_docente || "").trim().toLowerCase();
@@ -225,8 +241,23 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
     if (c.prova) return risposta({ ok: true, automatica: !!env.AUTOMATICA, email }); // solo verifica dell'accesso
 
     // ───── Lingue: le spunte di revisione dei docenti (serve l'accesso con la mail: la spunta porta il nome) ─────
-    if (c.revisioni || c.revisione) {
+    if (c.revisioni || c.revisione || c.correggi || c.annulla) {
       if (!email) return risposta({ ok: false, errore: "mail" }, 403);
+      const nome = nomeDaMail(email);
+      if (c.correggi) {
+        const r = c.correggi || {}, chiave = testo(r.chiave, 200), lingua = String(r.lingua || ""), nuovo = testo(r.testo, 2000);
+        if (!chiave || !["en", "fr", "es"].includes(lingua) || !nuovo) return risposta({ ok: false, errore: "richiesta" }, 400);
+        const { error } = await db.from("lingue_correzioni").insert({ chiave, lingua, originale: testo(r.originale, 2000) || null, testo: nuovo, nota: testo(r.nota, 300) || null, email, nome });
+        if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
+      }
+      if (c.annulla) {
+        const chiave = testo(c.annulla.chiave, 200), lingua = String(c.annulla.lingua || "");
+        const { data: ultima } = await db.from("lingue_correzioni").select("id").eq("chiave", chiave).eq("lingua", lingua).is("annullata", null).order("creata", { ascending: false }).limit(1).maybeSingle();
+        if (ultima) {
+          const { error } = await db.from("lingue_correzioni").update({ annullata: new Date(adesso).toISOString(), annullata_da: nome }).eq("id", ultima.id);
+          if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
+        }
+      }
       if (c.revisione) {
         const r = c.revisione || {}, chiave = testo(r.chiave, 200), lingua = String(r.lingua || "");
         if (!chiave || !["en", "fr", "es"].includes(lingua) || !["ok", "proposta", "via"].includes(r.stato)) return risposta({ ok: false, errore: "richiesta" }, 400);
@@ -240,8 +271,13 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
       }
       const { data, error } = await db.from("lingue_revisioni").select("chiave,lingua,email,nome,stato,proposta,nota,aggiornata").limit(5000);
       if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
-      // le mail non escono: solo il nome e se la spunta è di chi chiede
-      return risposta({ ok: true, revisioni: (data || []).map(({ email: e, ...x }: any) => ({ ...x, mia: e === email })) });
+      const { data: storia, error: e2 } = await db.from("lingue_correzioni").select("chiave,lingua,originale,testo,nota,email,nome,creata,annullata,annullata_da").order("creata", { ascending: false }).limit(5000);
+      if (e2) { console.error("db", e2); return risposta({ ok: false, errore: "server" }, 500); }
+      // le mail non escono: solo il nome e se la spunta (o la correzione) è di chi chiede
+      return risposta({
+        ok: true, revisioni: (data || []).map(({ email: e, ...x }: any) => ({ ...x, mia: e === email })),
+        storia: (storia || []).map(({ email: e, ...x }: any) => ({ ...x, mia: e === email })), correzioni: inVigore((storia || []).filter((x: any) => !x.annullata)),
+      });
     }
     const io = await impronta(email ? "mail:" + email : cod);
     const comuni = await scorte;

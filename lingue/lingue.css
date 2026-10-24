@@ -127,3 +127,9 @@ body[data-page="lingue"] #fab-top,body[data-page="lingue"] #tr-fab,body[data-pag
 [data-rv-k]{flex-wrap:wrap}
 .av-f>.rv-spunte,.av-par>.rv-spunte,.lz-es>.rv-spunte,.av-f>.rv-form,.av-par>.rv-form,.lz-es>.rv-form,.av-f>.rv-sugg,.av-par>.rv-sugg,.lz-es>.rv-sugg{flex-basis:100%}
 .dl-b .rv-spunte,.im-cli .rv-spunte{margin-top:.4rem}
+/* correzioni dei docenti */
+.rv-form textarea{display:block;width:100%;margin-top:.15rem;font:400 .95rem 'Source Sans 3',system-ui,sans-serif;padding:.45rem .55rem;border:1.5px solid #cfc6b4;border-radius:8px;resize:vertical}
+.rv-nota{margin:.1rem 0 .4rem;font-size:.8rem;color:#6b6457}
+.rv-corr{color:#1d5236}
+.rv-annullata{opacity:.6;text-decoration:line-through}
+.rv-annullata small{text-decoration:none;display:inline-block}

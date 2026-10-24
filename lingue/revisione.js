@@ -1,7 +1,8 @@
 /* ════════════════════════════════════════════════════════
    REVISIONE — le spunte dei docenti sulle frasi, mentre usano il sito
    Niente da completare: chi è docente, quando una frase gli passa sotto gli occhi,
-   può toccare ✔ (va bene) o ✏️ (la scriverei così). Gli studenti non vedono niente.
+   può toccare ✔ (va bene) o ✏️ (la corregge: vale subito per tutti, con il suo nome; un collega può annullarla).
+   Gli studenti non vedono le spunte; vedono le frasi corrette (lingue/correzioni.js).
    L'accesso è lo stesso della Sala studio (mail della scuola + codice): una volta sola, 60 giorni.
    REVISIONE.porta(el)   in fondo alla pagina: il link discreto per i docenti, o la barra «modalità docente»
    REVISIONE.decora(el)  aggiunge le spunte agli elementi [data-rv-k][data-rv-l][data-rv-t]
@@ -30,12 +31,19 @@ window.REVISIONE = (function () {
   }
   function avviso(t) { if (window.FINESTRA) window.FINESTRA.avvisa(t); }
 
-  /* ───── le spunte già date, per frase e lingua ───── */
+  /* ───── le spunte già date e la cronologia delle correzioni, per frase e lingua ───── */
+  var storia = [];
   function prendi() {
-    if (!carica) carica = chiama({ revisioni: true }).then(function (r) { if (r.ok) { dati = r.revisioni; } else carica = null; return r; });
+    if (!carica) carica = chiama({ revisioni: true }).then(function (r) { if (r.ok) riceve(r); else carica = null; return r; });
     return carica;
   }
+  function riceve(r) {
+    dati = r.revisioni || []; storia = r.storia || [];
+    if (window.CORREZIONI && r.correzioni) window.CORREZIONI.aggiorna(r.correzioni);
+  }
   function di(k, l) { return (dati || []).filter(function (x) { return x.chiave === k && x.lingua === l; }); }
+  function versioni(k, l) { return storia.filter(function (x) { return x.chiave === k && x.lingua === l; }); }
+  function data(d) { var m = String(d || '').match(/^(\d{4})-(\d\d)-(\d\d)/); return m ? m[3] + '/' + m[2] : ''; }
 
   /* soloNuove: aggiunge le spunte solo dove mancano (lo usa l'osservatore, che le mette da sé quando la pagina cambia) */
   function decora(radice, soloNuove) {
@@ -44,50 +52,66 @@ window.REVISIONE = (function () {
     if (!dati) { prendi().then(function () { decora(document.body); }); return; }
     radice.querySelectorAll('[data-rv-k]').forEach(function (el) {
       var vecchio = el.querySelector(':scope > .rv-spunte'); if (vecchio) { if (soloNuove) return; vecchio.remove(); }
-      var k = el.getAttribute('data-rv-k'), l = el.getAttribute('data-rv-l'), tutte = di(k, l);
-      var mia = tutte.filter(function (x) { return x.mia; })[0], ok = tutte.filter(function (x) { return x.stato === 'ok'; }), prop = tutte.filter(function (x) { return x.stato === 'proposta'; });
+      var k = el.getAttribute('data-rv-k'), l = el.getAttribute('data-rv-l');
+      var mia = di(k, l).filter(function (x) { return x.mia && x.stato === 'ok'; })[0], ok = di(k, l).filter(function (x) { return x.stato === 'ok'; });
+      var V = versioni(k, l), vigore = V.filter(function (x) { return !x.annullata; })[0];
       var box = document.createElement('div'); box.className = 'rv-spunte';
-      box.innerHTML = '<button type="button" class="rv-b' + (mia && mia.stato === 'ok' ? ' si' : '') + '" data-rv="ok" aria-pressed="' + !!(mia && mia.stato === 'ok') + '" title="Va bene così">✔</button>' +
-        '<button type="button" class="rv-b' + (mia && mia.stato === 'proposta' ? ' si' : '') + '" data-rv="mod" title="La scriverei diversamente">✏️</button>' +
+      box.innerHTML = '<button type="button" class="rv-b' + (mia ? ' si' : '') + '" data-rv="ok" aria-pressed="' + !!mia + '" title="Va bene così">✔</button>' +
+        '<button type="button" class="rv-b" data-rv="mod" title="Correggi la frase">✏️</button>' +
         (ok.length ? '<span class="rv-i" title="Hanno detto che va bene">✔ ' + ok.map(function (x) { return esc(x.mia ? 'tu' : x.nome); }).join(', ') + '</span>' : '') +
-        (prop.length ? '<button type="button" class="rv-i rv-link" data-rv="vedi">✏️ ' + prop.length + (prop.length === 1 ? ' suggerimento' : ' suggerimenti') + '</button>' : '');
+        (vigore ? '<span class="rv-i rv-corr">✏️ corretta da ' + esc(vigore.mia ? 'te' : vigore.nome) + ' il ' + data(vigore.creata) + (vigore.originale ? ' · prima: «' + esc(vigore.originale) + '»' : '') + (vigore.nota ? ' · ' + esc(vigore.nota) : '') + '</span>' +
+          '<button type="button" class="rv-i rv-link" data-rv="annulla">↩ Annulla la correzione</button>' : '') +
+        (V.length > 1 || (V.length && !vigore) ? '<button type="button" class="rv-i rv-link" data-rv="storia">🕘 Cronologia</button>' : '');
       el.appendChild(box);
       box.addEventListener('click', function (e) {
         var b = e.target.closest('[data-rv]'); if (!b) return;
         var cosa = b.getAttribute('data-rv');
-        if (cosa === 'ok') return salva(el, { stato: mia && mia.stato === 'ok' ? 'via' : 'ok' });
-        if (cosa === 'mod') return modulo(el, mia);
-        if (cosa === 'vedi') return suggerimenti(el, prop);
+        if (cosa === 'ok') return spunta(el, mia ? 'via' : 'ok');
+        if (cosa === 'mod') return modulo(el);
+        if (cosa === 'annulla') return annulla(el, vigore);
+        if (cosa === 'storia') return cronologia(el, V);
       });
     });
   }
-  function salva(el, r) {
-    r.chiave = el.getAttribute('data-rv-k'); r.lingua = el.getAttribute('data-rv-l'); r.testo = el.getAttribute('data-rv-t');
-    return chiama({ revisione: r }).then(function (x) {
-      if (!x.ok) return avviso(x.errore === 'sessione' || x.errore === 'mail' ? 'L\'accesso è scaduto: rientra con la tua mail della scuola (in fondo alla pagina).' : 'Non sono riuscito a salvare: controlla la connessione e riprova.');
-      dati = x.revisioni; decora(ultima);
-      toast(r.stato === 'ok' ? 'Grazie! ✔' : r.stato === 'via' ? 'Spunta tolta' : 'Suggerimento salvato ✏️');
+  function errore(x) { avviso(x.errore === 'sessione' || x.errore === 'mail' ? 'L\'accesso è scaduto: rientra con la tua mail della scuola (in fondo alla pagina).' : 'Non sono riuscito a salvare: controlla la connessione e riprova.'); }
+  function invia(corpo, msg) {
+    return chiama(corpo).then(function (x) {
+      if (!x.ok) return errore(x);
+      riceve(x); decora(document.body); toast(msg);
     });
   }
-  function modulo(el, mia) {
-    var vecchio = el.querySelector('.rv-form'); if (vecchio) return vecchio.remove();
-    var f = document.createElement('div'); f.className = 'rv-form';
-    f.innerHTML = '<label>Come la scriveresti?<input type="text" maxlength="300" data-rv-p value="' + esc(mia && mia.proposta || el.getAttribute('data-rv-t')) + '"/></label>' +
-      '<label>Una nota (facoltativa)<input type="text" maxlength="300" data-rv-n placeholder="es. più formale; in Spagna si dice…" value="' + esc(mia && mia.nota || '') + '"/></label>' +
-      '<div class="rv-az"><button type="button" class="rv-b" data-rv-a>Annulla</button><button type="button" class="rv-b pieno" data-rv-s>Salva il suggerimento</button></div>' +
-      (mia && mia.stato === 'proposta' ? '<button type="button" class="rv-link" data-rv-via>Togli il mio suggerimento</button>' : '');
-    el.appendChild(f); f.querySelector('[data-rv-p]').focus();
+  function spunta(el, stato) {
+    invia({ revisione: { chiave: el.getAttribute('data-rv-k'), lingua: el.getAttribute('data-rv-l'), testo: el.getAttribute('data-rv-t'), stato: stato } }, stato === 'ok' ? 'Grazie! ✔' : 'Spunta tolta');
+  }
+  /* ✏️: la correzione vale subito per tutti; i colleghi vedono il nome e possono annullarla */
+  function modulo(el) {
+    var vecchio = el.querySelector(':scope > .rv-form'); if (vecchio) return vecchio.remove();
+    var f = document.createElement('div'), attuale = el.getAttribute('data-rv-t'); f.className = 'rv-form';
+    f.innerHTML = '<label>Correggi la frase<textarea rows="' + Math.min(6, 1 + Math.floor(attuale.length / 60)) + '" maxlength="2000" data-rv-p>' + esc(attuale) + '</textarea></label>' +
+      '<label>Perché (facoltativo)<input type="text" maxlength="300" data-rv-n placeholder="es. più naturale; in Spagna si dice…"/></label>' +
+      '<p class="rv-nota">La correzione vale <b>subito per tutti</b>, ragazzi compresi. I colleghi vedranno il tuo nome e potranno annullarla.</p>' +
+      '<div class="rv-az"><button type="button" class="rv-b" data-rv-a>Annulla</button><button type="button" class="rv-b pieno" data-rv-s>✔ Correggi per tutti</button></div>';
+    el.appendChild(f); var t = f.querySelector('[data-rv-p]'); t.focus(); t.setSelectionRange(t.value.length, t.value.length);
     f.querySelector('[data-rv-a]').onclick = function () { f.remove(); };
     f.querySelector('[data-rv-s]').onclick = function () {
-      var p = f.querySelector('[data-rv-p]').value.trim(); if (!p) return f.querySelector('[data-rv-p]').focus();
-      salva(el, { stato: 'proposta', proposta: p, nota: f.querySelector('[data-rv-n]').value.trim() });
+      var nuovo = t.value.trim();
+      if (!nuovo) return t.focus();
+      if (nuovo === attuale) return f.remove();
+      invia({ correggi: { chiave: el.getAttribute('data-rv-k'), lingua: el.getAttribute('data-rv-l'), originale: attuale, testo: nuovo, nota: f.querySelector('[data-rv-n]').value.trim() } }, 'Corretta per tutti ✏️');
     };
-    var via = f.querySelector('[data-rv-via]'); if (via) via.onclick = function () { salva(el, { stato: 'via' }); };
   }
-  function suggerimenti(el, prop) {
-    var vecchio = el.querySelector('.rv-sugg'); if (vecchio) return vecchio.remove();
+  function annulla(el, v) {
+    var testo = '«' + v.testo + '» torna com\'era prima' + (v.originale ? ': «' + v.originale + '»' : '') + '.';
+    (window.FINESTRA ? window.FINESTRA.chiedi({ icona: '↩', titolo: 'Annullare la correzione' + (v.mia ? '' : ' di ' + v.nome) + '?', testo: testo, si: 'Annulla la correzione', no: 'Lascia così' }) : Promise.resolve(true))
+      .then(function (ok) { if (ok) invia({ annulla: { chiave: el.getAttribute('data-rv-k'), lingua: el.getAttribute('data-rv-l') } }, 'Correzione annullata ↩'); });
+  }
+  function cronologia(el, V) {
+    var vecchio = el.querySelector(':scope > .rv-sugg'); if (vecchio) return vecchio.remove();
     var d = document.createElement('div'); d.className = 'rv-sugg';
-    d.innerHTML = prop.map(function (x) { return '<p><b>' + esc(x.mia ? 'Tu' : x.nome) + ':</b> «' + esc(x.proposta) + '»' + (x.nota ? ' <i>— ' + esc(x.nota) + '</i>' : '') + '</p>'; }).join('');
+    d.innerHTML = '<p><b>🕘 Le versioni di questa frase</b>, dalla più recente:</p>' + V.map(function (x) {
+      return '<p' + (x.annullata ? ' class="rv-annullata"' : '') + '>' + data(x.creata) + ' · <b>' + esc(x.mia ? 'Tu' : x.nome) + '</b>: «' + esc(x.testo) + '»' + (x.nota ? ' <i>— ' + esc(x.nota) + '</i>' : '') +
+        (x.annullata ? ' <small>(annullata da ' + esc(x.annullata_da || '') + ' il ' + data(x.annullata) + ')</small>' : '') + '</p>';
+    }).join('') + (V.length && V[V.length - 1].originale ? '<p>Testo di partenza: «' + esc(V[V.length - 1].originale) + '»</p>' : '');
     el.appendChild(d);
   }
 
@@ -97,7 +121,7 @@ window.REVISIONE = (function () {
     var s = sessione();
     if (s && attiva()) {
       el.innerHTML = '<div class="rv-barra"><p><b>👩‍🏫 Modalità docente</b> · ' + esc(s.nome || s.email) + '</p>' +
-        '<p>Se mentre usi il vocabolario una frase ti convince, tocca <b>✔</b>; se la scriveresti diversamente, tocca <b>✏️</b>. Si fa quando capita: non c\'è niente da completare. I ragazzi non vedono le spunte.</p>' +
+        '<p>Se una frase ti convince, tocca <b>✔</b>. Se va migliorata, tocca <b>✏️</b> e correggila: vale subito per tutti, e i colleghi potranno annullarla. Si fa quando capita: non c\'è niente da completare. I ragazzi non vedono le spunte.</p>' +
         '<button type="button" class="rv-link" data-rv-spegni>Nascondi le spunte</button></div>';
       el.querySelector('[data-rv-spegni]').onclick = function () { ls('lingue-revisione', 'off'); porta(el); if (ultima) ultima.querySelectorAll('.rv-spunte,.rv-form,.rv-sugg').forEach(function (x) { x.remove(); }); };
       return;

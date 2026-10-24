@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/cantiere.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Lingue e Sala studio – Visita guidata | Convitto "Costaggini"</title>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <style>
+    :root{--bosco:#2C3E2D;--bosco2:#3D5C3E;--oro:#B8922A;--oro2:#D4AA4A;--panna:#F5F0E8;--panna2:#EDE6D6;--testo:#1f1f1f;--grigio:#5b5b5b;
+      --fd:'Cormorant Garamond',Georgia,serif;--fu:'Source Sans 3',Arial,sans-serif}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--panna);color:var(--testo);font-family:var(--fu);font-size:17px;line-height:1.65}
+    a{color:var(--bosco2)}
+    .w{max-width:880px;margin:0 auto;padding:0 20px}
+    header.hero{background:radial-gradient(1200px 400px at 80% -10%,rgba(212,170,74,.25),transparent),var(--bosco);color:#F5F0E8;padding:56px 0 64px}
+    .hero .sopra{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro2);font-weight:700}
+    .hero h1{font-family:var(--fd);font-weight:400;font-size:clamp(34px,6vw,54px);line-height:1.1;margin:12px 0 14px}
+    .hero h1 em{color:var(--oro2)}
+    .hero p{max-width:640px;color:rgba(245,240,232,.85);margin:0 0 22px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{background:rgba(255,255,255,.08);border:1px solid rgba(212,170,74,.45);border-radius:999px;padding:6px 14px;font-size:14px}
+    nav.indice{background:#fff;border-bottom:1px solid var(--panna2);position:sticky;top:0;z-index:5}
+    nav.indice .w{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px}
+    nav.indice a{white-space:nowrap;text-decoration:none;font-size:14px;font-weight:700;color:var(--bosco);padding:7px 12px;border-radius:8px;border:1px solid var(--panna2)}
+    nav.indice a:hover{border-color:var(--oro)}
+    section{padding:44px 0 8px}
+    .etichetta{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);font-weight:700}
+    h2{font-family:var(--fd);font-weight:400;font-size:clamp(28px,4.5vw,38px);color:var(--bosco);margin:6px 0 10px;line-height:1.15}
+    h2 em{color:var(--oro)}
+    .tempo{display:inline-block;font-size:13px;color:var(--grigio);background:#fff;border:1px solid var(--panna2);border-radius:999px;padding:3px 12px;margin-bottom:14px}
+    .card{background:#fff;border-radius:14px;box-shadow:0 4px 22px rgba(44,62,45,.08);padding:22px 22px;margin:16px 0}
+    .riquadro{background:#FBF7EC;border-left:4px solid var(--oro);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;font-size:16px}
+    .grande{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;background:linear-gradient(135deg,#fff,#fdf6e3);border:2px solid var(--oro);border-radius:14px;padding:18px 20px;margin:18px 0}
+    .grande .e{font-size:40px;line-height:1}
+    .grande b{display:block;font-family:var(--fd);font-weight:400;font-size:24px;color:var(--bosco)}
+    .grande span{color:var(--grigio);font-size:15px}
+    .grande .freccia{margin-left:auto;font-size:26px;color:var(--oro)}
+    ol.passi{list-style:none;counter-reset:p;padding:0;margin:10px 0}
+    ol.passi>li{counter-increment:p;position:relative;padding:4px 0 16px 56px}
+    ol.passi>li::before{content:counter(p);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--bosco);color:var(--oro2);
+      font-family:var(--fd);font-size:22px;display:flex;align-items:center;justify-content:center}
+    ol.passi>li b.t{display:block;color:var(--bosco);font-size:18px}
+    .btn{display:inline-block;background:var(--panna);border:1px solid var(--panna2);border-radius:6px;padding:1px 8px;font-weight:700;font-size:15px;color:var(--bosco);white-space:nowrap}
+    .prova{list-style:none;padding:0;margin:8px 0}
+    .prova li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--panna2)}
+    .prova li:last-child{border-bottom:0}
+    .prova input{width:22px;height:22px;margin-top:3px;accent-color:var(--bosco);flex-shrink:0}
+    .prova label{cursor:pointer}
+    .griglia{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+    .griglia .card{margin:0}
+    .griglia .card h3{margin:6px 0 6px;font-family:var(--fd);font-weight:400;font-size:22px;color:var(--bosco)}
+    .griglia .card p{margin:0;font-size:15.5px}
+    .fonte{display:block;margin-top:8px;font-size:13px;color:var(--grigio)}
+    details{background:#fff;border-radius:12px;padding:14px 18px;margin:10px 0;box-shadow:0 2px 10px rgba(44,62,45,.06)}
+    summary{cursor:pointer;font-weight:700;color:var(--bosco)}
+    details p{margin:10px 0 0}
+    footer{margin-top:40px;background:var(--bosco);color:rgba(245,240,232,.85);padding:30px 0;font-size:15px}
+    footer a{color:var(--oro2)}
+    .avviso-ok{color:#1d6f42;font-weight:700}
+    @media (max-width:520px){body{font-size:16px}.card{padding:18px 16px}ol.passi>li{padding-left:50px}}
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="w">
+    <div class="sopra">Convitto “Costaggini” · Visita guidata riservata</div>
+    <h1>Lingue e <em>Sala studio</em></h1>
+    <p>Gentile Dirigente, questa pagina La accompagna, passo per passo, nella prova dei due strumenti descritti nella relazione. Può percorrerla quando preferisce, anche in più momenti: ogni sezione è indipendente.</p>
+    <div class="chips">
+      <span class="chip">⏱️ circa 20 minuti in tutto</span>
+      <span class="chip">📱 tablet, telefono o computer</span>
+      <span class="chip">🔒 sezioni oscurate al pubblico</span>
+      <span class="chip">🧒 nessun dato degli studenti</span>
+    </div>
+  </div>
+</header>
+
+<nav class="indice" aria-label="Sezioni della visita">
+  <div class="w">
+    <a href="#inizio">Prima di iniziare</a>
+    <a href="#pronta">A · Una lezione pronta</a>
+    <a href="#crea">B · Crei Lei una lezione</a>
+    <a href="#lingue">C · Lingue</a>
+    <a href="#perche">Perché funziona</a>
+    <a href="#domande">Domande</a>
+  </div>
+</nav>
+
+<main class="w">
+
+<section id="inizio">
+  <div class="etichetta">Prima di iniziare</div>
+  <h2>Due cose da <em>sapere</em></h2>
+  <div class="card">
+    <p style="margin-top:0"><b>Questo dispositivo è abilitato all'anteprima.</b> Aprendo il link ricevuto, il Suo dispositivo è stato autorizzato a vedere le pagine vere di Lingue e Sala studio. Per chiunque altro, le stesse pagine mostrano soltanto «Pagina in costruzione». L'abilitazione resta finché non la si annulla: può quindi tornare su questa pagina in qualsiasi momento.</p>
+    <p style="margin-bottom:0"><b>I collegamenti si aprono in una nuova scheda.</b> Per tornare qui basta chiudere la scheda o tornare a quella precedente.</p>
+  </div>
+  <div class="riquadro">Gli strumenti sono stati sottoposti al parere della Responsabile della Protezione dei Dati. In attesa del parere non sono accessibili agli studenti, e in questa fase sarebbero utilizzati soltanto da docenti ed educatori.</div>
+</section>
+
+<section id="pronta">
+  <div class="etichetta">Percorso A</div>
+  <h2>Guardi una <em>lezione già pronta</em></h2>
+  <span class="tempo">⏱️ circa 6 minuti · nessun accesso richiesto</span>
+  <p>È una lezione di esempio di Scienza e cultura dell'alimentazione, <i>I principi nutritivi</i>, costruita come quelle che nascono dalle pagine di un libro. È ciò che vedrebbe uno studente sul proprio dispositivo.</p>
+  <a class="grande" href="studio/lezione.html?c=DEMO" target="_blank" rel="noopener">
+    <span class="e">🥗</span><span><b>Apra la lezione di esempio</b><span>I principi nutritivi · si apre in una nuova scheda</span></span><span class="freccia">→</span>
+  </a>
+  <div class="card">
+    <p style="margin-top:0"><b>Cosa provare</b>, ad esempio in quest'ordine (può spuntare le voci man mano):</p>
+    <ul class="prova">
+      <li><input type="checkbox" id="a1"><label for="a1">Scelga il <span class="btn">🧭 Percorso guidato</span> e parta dal <b>gancio</b>: una domanda curiosa che apre l'argomento.</label></li>
+      <li><input type="checkbox" id="a2"><label for="a2">Su una scheda tocchi <span class="btn">🔊</span>: il testo viene <b>letto ad alta voce</b>. È lo strumento compensativo previsto per gli studenti con DSA.</label></li>
+      <li><input type="checkbox" id="a3"><label for="a3">Nella tappa <b>Memorizza</b> osservi i trucchi per ricordare: la parola-sigla, il «palazzo della memoria» ambientato nel Convitto, la filastrocca.</label></li>
+      <li><input type="checkbox" id="a4"><label for="a4">Nella tappa <b>Allenati</b> risponda a una domanda <b>sbagliando apposta</b>: noterà che la lezione spiega subito perché.</label></li>
+      <li><input type="checkbox" id="a5"><label for="a5">Provi le <b>Flashcard</b> e la <b>Sfida finale</b>.</label></li>
+      <li><input type="checkbox" id="a6"><label for="a6">Torni all'inizio della lezione e guardi gli altri modi di studiarla, ad esempio <span class="btn">🔐 Escape room</span> o <span class="btn">🗺️ Costruisci la mappa</span>: la stessa lezione, attività diverse.</label></li>
+    </ul>
+  </div>
+  <a class="grande" href="studio/verifica.html?c=DEMO" target="_blank" rel="noopener">
+    <span class="e">🖨️</span><span><b>E per il docente: la verifica stampabile</b><span>Fila A e fila B, versione facilitata, soluzioni · dalla stessa lezione</span></span><span class="freccia">→</span>
+  </a>
+</section>
+
+<section id="crea">
+  <div class="etichetta">Percorso B</div>
+  <h2>Crei Lei una <em>lezione nuova</em></h2>
+  <span class="tempo">⏱️ circa 8 minuti · serve la Sua email istituzionale</span>
+  <p>Qui vedrà il lavoro dal lato del docente o dell'educatore: da un argomento, o dalla foto di una pagina di libro, a una lezione completa con il suo QR.</p>
+
+  <div class="card">
+    <ol class="passi">
+      <li><b class="t">Apra la pagina per i docenti</b>
+        <a href="studio/docente.html" target="_blank" rel="noopener">Sala studio · Crea una lezione ↗</a> (si apre in una nuova scheda).</li>
+      <li><b class="t">Entri con la mail della scuola</b>
+        Compare un riquadro di accesso. Scriva la Sua mail istituzionale (ad esempio quella <i>@alberghierorieti.it</i>) e prema <span class="btn">Mandami il codice →</span>.
+        Non serve alcuna password.</li>
+      <li><b class="t">Copi il codice dalla posta</b>
+        Nella Sua casella arriva un messaggio intitolato <b>«Il tuo codice di accesso»</b>, con un codice di 6 cifre valido 10 minuti. Lo scriva nel riquadro e prema <span class="btn">Entra →</span>.
+        Se non arriva, controlli la posta indesiderata o prema <span class="btn">Rimanda il codice</span> (dopo mezzo minuto).</li>
+      <li><b class="t">Scriva l'argomento</b>
+        Nel <b>passo 1</b> della pagina, nel campo <b>«Argomento / titolo della lezione»</b>, scriva un argomento a Sua scelta. Qualche idea:
+        <i>«Il servizio del vino: le temperature»</i>, <i>«La catena del freddo»</i>, <i>«L'Unità d'Italia»</i>.
+        Materia, anno e classe sono facoltativi.</li>
+      <li><b class="t">Usi la creazione automatica</b>
+        Scenda fino al riquadro <b>«📸 Creazione automatica, senza passare dall'IA»</b> e prema <span class="btn">✨ Crea la lezione</span>.
+        Se lo desidera, può prima allegare la foto di una pagina di un libro con <span class="btn">📷 Scatta una foto</span> o <span class="btn">🖼️ Scegli dalla galleria</span>.</li>
+      <li><b class="t">Attenda un paio di minuti</b>
+        La lezione viene preparata dal servizio di intelligenza artificiale, usando soltanto l'argomento o la pagina fotografata. Quando è pronta compaiono il <b>QR</b> e un codice di 6 lettere: è ciò che lo studente userebbe per aprirla.</li>
+      <li><b class="t">La apra e la provi</b>
+        La percorra come nel Percorso A. Ritroverà la lezione in <span class="btn">📚 Le mie lezioni</span>; da lì, con <b>Modifica</b>, può anche cancellarla.</li>
+    </ol>
+  </div>
+
+  <div class="riquadro">🔒 <b>Una sola regola:</b> non fotografi quaderni, verifiche o fogli che riportino nomi o dati degli studenti. Lo strumento è pensato esclusivamente per materiali didattici.</div>
+
+  <details>
+    <summary>E se compare il messaggio «La creazione automatica non è attivata»?</summary>
+    <p>Significa che in quel momento la creazione automatica è sospesa. La pagina offre una seconda strada in tre passi: si copiano le istruzioni preparate (<span class="btn">📋 Copia le istruzioni</span>), le si incollano in un assistente come Claude, ChatGPT o Gemini insieme alle foto, e se ne incolla la risposta nel <b>passo 3</b> della pagina con <span class="btn">✨ Pubblica la lezione</span>. La risposta dell'assistente sembra scritta «in codice»: è normale, non va letta, si copia e si incolla. In alternativa, può limitarsi al Percorso A.</p>
+  </details>
+  <details>
+    <summary>Che cosa accade ai dati in questo percorso?</summary>
+    <p>Sono usati soltanto la Sua email istituzionale, per inviarLe il codice di accesso, e il nominativo ricavato dall'email come autore della lezione. La foto eventualmente allegata è inviata al servizio di intelligenza artificiale per creare la lezione e <b>non viene conservata</b>. Questo trattamento è descritto nella bozza di informativa sottoposta alla DPO.</p>
+  </details>
+</section>
+
+<section id="lingue">
+  <div class="etichetta">Percorso C</div>
+  <h2>Le lingue <em>dell'Alberghiero</em></h2>
+  <span class="tempo">⏱️ circa 6 minuti · nessun accesso richiesto</span>
+  <p>Inglese, francese e spagnolo costruiti sulle situazioni di lavoro dei cinque ambiti: sala, cucina, pasticceria, accoglienza turistica e bar.</p>
+
+  <a class="grande" href="lingue/illustrato.html" target="_blank" rel="noopener">
+    <span class="e">🍽️</span><span><b>Il ristorante illustrato</b><span>Tocchi un oggetto e ne ascolti il nome nelle tre lingue</span></span><span class="freccia">→</span>
+  </a>
+  <a class="grande" href="lingue/imprevisti.html" target="_blank" rel="noopener">
+    <span class="e">🍷</span><span><b>Gli imprevisti</b><span>Un vino che sa di tappo, una reazione allergica: scelga come rispondere al cliente</span></span><span class="freccia">→</span>
+  </a>
+  <a class="grande" href="lingue/vocabolario.html" target="_blank" rel="noopener">
+    <span class="e">📖</span><span><b>Il vocabolario professionale</b><span>Le frasi di lavoro, per ambito, con l'ascolto</span></span><span class="freccia">→</span>
+  </a>
+  <div class="card">
+    <ul class="prova" style="margin:0">
+      <li><input type="checkbox" id="c1"><label for="c1">Nel ristorante illustrato scelga la modalità <b>«Trova l'oggetto»</b>: è un piccolo esercizio di ascolto e riconoscimento.</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">In un imprevisto provi una risposta poco cortese: osservi come cambia l'umore del cliente.</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">In alto, con il pulsante 🌍, scelga la lingua: vale per tutta la sezione.</label></li>
+    </ul>
+  </div>
+</section>
+
+<section id="perche">
+  <div class="etichetta">Perché funziona</div>
+  <h2>Quattro principi <em>solidi</em></h2>
+  <p>Sono descritti, con le fonti, nella relazione allegata. In sintesi:</p>
+  <div class="griglia">
+    <div class="card"><div style="font-size:30px">🗺️</div><h3>Lavorare sulla mappa, non solo leggerla</h3><p>Le mappe concettuali aiutano di più quando lo studente ci lavora attivamente che quando le studia già pronte.</p><span class="fonte">Nesbit e Adesope, 2006; Schroeder et al., 2018</span></div>
+    <div class="card"><div style="font-size:30px">🎯</div><h3>Rispondere fissa più che rileggere</h3><p>Richiamare un'informazione la consolida, soprattutto con un riscontro immediato e ripassando a distanza di tempo.</p><span class="fonte">Roediger e Karpicke, 2006; Dunlosky et al., 2013</span></div>
+    <div class="card"><div style="font-size:30px">🖼️</div><h3>Parole e immagini insieme</h3><p>Ciò che è presentato in forma verbale e visiva si ricorda meglio.</p><span class="fonte">Clark e Paivio, 1991; Mayer, 2020</span></div>
+    <div class="card"><div style="font-size:30px">🔊</div><h3>Ascoltare quando serve</h3><p>La sintesi vocale è uno strumento compensativo previsto per i DSA, con un effetto documentato sulla comprensione.</p><span class="fonte">L. 170/2010; Wood et al., 2018</span></div>
+  </div>
+  <div class="riquadro">Il libro resta al centro: lo strumento digitale lo affianca nel momento della rielaborazione e della verifica.</div>
+</section>
+
+<section id="domande">
+  <div class="etichetta">Domande frequenti</div>
+  <h2>In breve</h2>
+  <details><summary>Serve installare qualcosa?</summary><p>No. Funziona dal browser di qualsiasi telefono, tablet o computer.</p></details>
+  <details><summary>Gli studenti possono vederlo adesso?</summary><p>No. Le sezioni mostrano «Pagina in costruzione» a chiunque non sia abilitato all'anteprima. Il loro eventuale coinvolgimento sarà oggetto di una richiesta di parere distinta alla DPO.</p></details>
+  <details><summary>Vengono raccolti dati degli studenti?</summary><p>No. Le lezioni si aprono senza registrazione e i progressi restano soltanto sul dispositivo di chi studia.</p></details>
+  <details><summary>Ci sono costi?</summary><p>La consultazione è gratuita. La sola creazione automatica delle lezioni ha un costo a consumo, contenuto e da quantificare; la seconda strada, attraverso un assistente esterno, non ha costi per l'Istituto.</p></details>
+  <details><summary>Come annullo l'abilitazione di questo dispositivo?</summary><p>Apra <a href="studio/?anteprima=esci">questo collegamento</a>: da quel momento il dispositivo vedrà di nuovo «Pagina in costruzione».</p></details>
+</section>
+
+</main>
+
+<footer>
+  <div class="w">
+    Per qualsiasi chiarimento: Michele Gaggiano, Educatore · <a href="mailto:michele.gaggiano@alberghierorieti.it">michele.gaggiano@alberghierorieti.it</a><br>
+    Convitto annesso all'IPSSEOA “R. A. Costaggini” · Rieti
+  </div>
+</footer>
+
+<script>
+// Le spunte restano solo su questo dispositivo
+document.querySelectorAll('.prova input').forEach(function (c) {
+  var k = 'guida-dirigente-' + c.id;
+  try { c.checked = localStorage.getItem(k) === '1'; } catch (e) {}
+  c.addEventListener('change', function () { try { localStorage.setItem(k, c.checked ? '1' : '0'); } catch (e) {} });
+});
+</script>
+</body>
+</html>

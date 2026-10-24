@@ -114,7 +114,7 @@ CONTENUTI:
   - immagini: 3-6 associazioni visive concetto-immagine mentale, con emoji.
   - trucchi: 2-4 altri trucchi (associazioni numeriche, parole simili, collegamenti con cose note).
 - sequenza: se l'argomento ha un ordine (fasi, cronologia, procedimento) da 4 a 7 passi nell'ordine giusto; altrimenti titolo vuoto e passi vuoti.
-- quiz: 8-10 domande, 3 opzioni ciascuna (una sola corretta, plausibili ma chiaramente distinguibili), "corretta" e' l'indice da 0. spiegazione: perche' e' giusta, in una frase.
+- quiz: 8-10 domande, 4 opzioni ciascuna (una sola corretta, plausibili ma chiaramente distinguibili), "corretta" e' l'indice da 0. spiegazione: perche' e' giusta, in una frase.
 - vero_falso: 6-8 affermazioni, circa meta' vere.
 - completa: 5-7 frasi prese dai concetti con una parola chiave sostituita da ___ (una sola ___ per frase); 2 distrattori plausibili.
 - abbina: 5-6 coppie (termine-definizione, personaggio-fatto, causa-effetto, data-evento...).

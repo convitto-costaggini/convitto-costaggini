@@ -28,7 +28,7 @@
     nav.indice{background:#fff;border-bottom:1px solid var(--panna2);position:sticky;top:0;z-index:5}
     nav.indice .w{display:flex;flex-wrap:wrap;gap:8px;padding-top:12px;padding-bottom:12px}
     section{scroll-margin-top:120px}
-    @media (max-width:700px){nav.indice{position:static}section{scroll-margin-top:12px}}
+    @media (max-width:700px){nav.indice{position:static}nav.indice .w{flex-wrap:nowrap;overflow-x:auto}section{scroll-margin-top:12px}}
     nav.indice a{white-space:nowrap;text-decoration:none;font-size:14px;font-weight:700;color:#fff;background:var(--bosco);padding:8px 14px;border-radius:8px;border:1px solid var(--bosco);box-shadow:0 1px 3px rgba(0,0,0,.18)}
     nav.indice a:hover,nav.indice a:focus-visible{background:var(--oro);border-color:var(--oro);color:#fff}
     section{padding:44px 0 8px}
@@ -65,6 +65,31 @@
     footer{margin-top:40px;background:var(--bosco);color:rgba(245,240,232,.85);padding:30px 0;font-size:15px}
     footer a{color:var(--oro2)}
     .avviso-ok{color:#1d6f42;font-weight:700}
+    /* in breve: gli argomenti forti */
+    .via{display:inline-block;margin-top:22px;background:var(--oro);color:#fff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+    .via:hover{background:var(--oro2)}
+    .via.chiaro{margin-top:14px}
+    .numeri{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0 8px}
+    .numero{background:var(--bosco);color:#F5F0E8;border-radius:16px;padding:20px 20px 22px;box-shadow:0 6px 24px rgba(44,62,45,.18)}
+    .numero.oro{background:linear-gradient(135deg,#B8922A,#D4AA4A);color:#fff}
+    .numero .e{font-size:34px;line-height:1;display:block}
+    .numero b{display:block;font-family:var(--fd);font-weight:400;font-size:34px;line-height:1.1;margin:8px 0 6px}
+    .numero span{font-size:15.5px;line-height:1.5}
+    h3.sotto{font-family:var(--fd);font-weight:400;font-size:26px;color:var(--bosco);margin:30px 0 4px}
+    .griglia .card .ic{font-size:30px}
+    .forte{background:#fff;border:3px solid var(--oro);border-radius:18px;padding:22px 24px;margin:26px 0 8px;box-shadow:0 6px 24px rgba(184,146,42,.18)}
+    .forte .titolo{font-family:var(--fd);font-size:27px;line-height:1.2;color:var(--bosco);margin:6px 0 10px}
+    .forte ul{margin:0;padding-left:20px}
+    .forte li{margin:8px 0}
+    .tappa{display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;background:#fff;border:2px solid var(--bosco);border-radius:14px;padding:16px 18px;margin:12px 0;box-shadow:0 3px 14px rgba(44,62,45,.1)}
+    .tappa:hover{border-color:var(--oro)}
+    .tappa .n{flex-shrink:0;width:48px;height:48px;border-radius:50%;background:var(--bosco);color:var(--oro2);font-family:var(--fd);font-size:28px;display:flex;align-items:center;justify-content:center}
+    .tappa b{display:block;font-family:var(--fd);font-weight:400;font-size:24px;color:var(--bosco);line-height:1.2}
+    .tappa span span{color:var(--grigio);font-size:15px}
+    .tappa .freccia{margin-left:auto;font-size:26px;color:var(--oro)}
+    .poi{margin:14px 0 4px;color:var(--grigio)}
+    .prossimo{display:block;text-align:center;text-decoration:none;font-weight:700;color:#fff;background:var(--bosco);border-radius:12px;padding:14px 18px;margin:20px 0 0}
+    .prossimo:hover{background:var(--bosco2)}
     @media (max-width:520px){body{font-size:16px}.card{padding:18px 16px}ol.passi>li{padding-left:50px}}
   </style>
 </head>
@@ -74,23 +99,26 @@
   <div class="w">
     <div class="sopra">Convitto “Costaggini” · Visita guidata riservata</div>
     <h1>Lingue e <em>Sala studio</em></h1>
-    <p>Gentile Dirigente, questa pagina La accompagna, passo per passo, nella prova dei due strumenti descritti nella relazione. Può percorrerla quando preferisce, anche in più momenti: ogni sezione è indipendente.</p>
+    <p>Gentile Dirigente, in questa pagina trova prima, in breve, <b>che cosa ottiene un docente</b>; poi la prova guidata, <b>un passo alla volta</b>. Non serve installare nulla e non occorre alcuna preparazione.</p>
     <div class="chips">
-      <span class="chip">⏱️ circa 30 minuti in tutto</span>
-      <span class="chip">📱 tablet, telefono o computer</span>
-      <span class="chip">🔒 sezioni oscurate al pubblico</span>
+      <span class="chip">⚡ verifica pronta in pochi secondi</span>
+      <span class="chip">⏱️ lezione completa in un paio di minuti</span>
+      <span class="chip">♿ pensato per DSA e BES</span>
       <span class="chip">🧒 nessun dato degli studenti</span>
     </div>
+    <a class="via" href="studio/guida-dirigente.html#comincia">Da dove comincio? ↓</a>
   </div>
 </header>
 
 <nav class="indice" aria-label="Sezioni della visita">
   <div class="w">
-    <a href="studio/guida-dirigente.html#inizio">Prima di iniziare</a>
+    <a href="studio/guida-dirigente.html#breve">In breve</a>
+    <a href="studio/guida-dirigente.html#comincia">Da dove comincio</a>
     <a href="studio/guida-dirigente.html#pronta">A · Una lezione pronta</a>
-    <a href="studio/guida-dirigente.html#crea">B · Crei Lei una lezione</a>
-    <a href="studio/guida-dirigente.html#lingue">C · Lingue</a>
-    <a href="studio/guida-dirigente.html#aula">D · In aula</a>
+    <a href="studio/guida-dirigente.html#verifica">B · La verifica</a>
+    <a href="studio/guida-dirigente.html#crea">C · Crei Lei una lezione</a>
+    <a href="studio/guida-dirigente.html#lingue">D · Lingue</a>
+    <a href="studio/guida-dirigente.html#aula">E · In aula</a>
     <a href="studio/guida-dirigente.html#perche">Perché funziona</a>
     <a href="studio/guida-dirigente.html#domande">Domande</a>
   </div>
@@ -98,18 +126,56 @@
 
 <main class="w">
 
-<section id="inizio">
-  <div class="etichetta">Prima di iniziare</div>
-  <h2>Due cose da <em>sapere</em></h2>
-  <div class="card">
-    <p style="margin-top:0"><b>Questo dispositivo è abilitato all'anteprima.</b> Aprendo il link ricevuto, il Suo dispositivo è stato autorizzato a vedere le pagine vere di Lingue e Sala studio. Per chiunque altro, le stesse pagine mostrano soltanto «Pagina in costruzione». L'abilitazione resta finché non la si annulla: può quindi tornare su questa pagina in qualsiasi momento.</p>
-    <p style="margin-bottom:0"><b>I collegamenti si aprono in una nuova scheda.</b> Per tornare qui basta chiudere la scheda o tornare a quella precedente.</p>
+<section id="breve">
+  <div class="etichetta">In breve</div>
+  <h2>Che cosa ottiene <em>un docente</em></h2>
+  <div class="numeri">
+    <div class="numero"><span class="e">⏱️</span><b>Un paio di minuti</b><span>Dalla foto di una pagina del libro, o dal solo argomento, a una lezione interattiva completa.</span></div>
+    <div class="numero oro"><span class="e">⚡</span><b>Pochi secondi</b><span>Dalla lezione alla verifica da stampare: fila A e fila B, versione facilitata, mappa, soluzioni. Senza scrivere nulla.</span></div>
+    <div class="numero"><span class="e">📚</span><b>Ogni materia</b><span>Area generale e area di indirizzo, dal 1° al 5° anno, laboratori compresi.</span></div>
   </div>
-  <div class="riquadro">Gli strumenti sono stati sottoposti al parere della Responsabile della Protezione dei Dati. In attesa del parere non sono accessibili agli studenti, e in questa fase sarebbero utilizzati soltanto da docenti ed educatori.</div>
+
+  <h3 class="sotto">Da una sola pagina di libro, ogni lezione contiene:</h3>
+  <div class="griglia">
+    <div class="card"><div class="ic">🧭</div><h3>7 modi di studiarla</h3><p>Percorso guidato · Escape room · Costruisci la mappa · Caccia all'errore · Intervista impossibile · Il minuto · Sfida a squadre alla LIM.</p></div>
+    <div class="card"><div class="ic">✏️</div><h3>6 tipi di esercizi</h3><p>Domande a scelta multipla con 4 risposte · Vero o falso · Frasi da completare · Abbinamenti · Sequenze da riordinare · Flashcard. Ogni errore è spiegato subito.</p></div>
+    <div class="card"><div class="ic">🧠</div><h3>5 tecniche per ricordare</h3><p>La parola-sigla · Il «palazzo della memoria» ambientato nel Convitto · La filastrocca · Le immagini mentali · I trucchi.</p></div>
+    <div class="card"><div class="ic">🔊</div><h3>Accessibile</h3><p>Lettura ad alta voce · Testo ingrandibile · Carattere ad alta leggibilità · Frasi brevi con la parola chiave evidenziata · Ripasso suggerito dopo 1, 3 e 7 giorni.</p></div>
+    <div class="card"><div class="ic">📝</div><h3>La verifica</h3><p>Fila A e fila B · Versione facilitata · Mappa come strumento compensativo · Soluzioni per il docente · Punteggio già calcolato.</p></div>
+    <div class="card"><div class="ic">🏫</div><h3>In aula e tra colleghi</h3><p>Proiezione alla LIM · QR a tutto schermo · Archivio condiviso per materia e anno · Correzione in ogni momento da parte del docente.</p></div>
+  </div>
+
+  <div class="forte">
+    <div class="etichetta">Per gli studenti con DSA e BES</div>
+    <p class="titolo">La stessa prova, alla portata di tutti, senza che nessuno si senta diverso.</p>
+    <ul>
+      <li><b>La versione facilitata è pronta insieme a quella ordinaria:</b> circa il 70% delle domande, 2 sole risposte fra cui scegliere, le parole da inserire già elencate, carattere più grande e più spazio.</li>
+      <li><b>Sul foglio non compare la parola «facilitata»</b> e porta la stessa lettera della fila A: lo studente riceve una verifica che sembra quella dei compagni.</li>
+      <li><b>La mappa della lezione si stampa con un clic</b>, da usare durante la prova come strumento compensativo, se previsto dal PDP (legge 170/2010).</li>
+      <li><b>Nelle lezioni:</b> lettura ad alta voce, carattere ad alta leggibilità, frasi brevi, una idea per volta.</li>
+    </ul>
+    <a class="via chiaro" href="studio/guida-dirigente.html#verifica">Lo veda subito: Percorso B, la verifica →</a>
+  </div>
+</section>
+
+<section id="comincia">
+  <div class="etichetta">Da dove comincio</div>
+  <h2>Tre passi, <em>in quest'ordine</em></h2>
+  <p>Bastano circa 15 minuti. Ogni passo si apre con un clic e spiega, uno per uno, i pulsanti da premere.</p>
+  <a class="tappa" href="studio/guida-dirigente.html#pronta"><span class="n">1</span><span><b>Guardi una lezione già pronta</b><span>Come la vede uno studente · circa 6 minuti · nessun accesso</span></span><span class="freccia">→</span></a>
+  <a class="tappa" href="studio/guida-dirigente.html#verifica"><span class="n">2</span><span><b>Prepari una verifica in pochi secondi</b><span>Fila A e B, versione facilitata, mappa · circa 3 minuti · nessun accesso</span></span><span class="freccia">→</span></a>
+  <a class="tappa" href="studio/guida-dirigente.html#crea"><span class="n">3</span><span><b>Crei Lei una lezione nuova</b><span>Da un argomento o dalla foto di una pagina · circa 8 minuti · con la Sua mail istituzionale</span></span><span class="freccia">→</span></a>
+  <p class="poi">Se ha altro tempo: <a href="studio/guida-dirigente.html#lingue">D · Lingue</a> (6 minuti) e <a href="studio/guida-dirigente.html#aula">E · In aula</a> (10 minuti).</p>
+
+  <div class="card">
+    <p style="margin-top:0"><b>Questo dispositivo è abilitato all'anteprima.</b> Aprendo il link ricevuto, il Suo dispositivo è stato autorizzato a vedere le pagine vere di Lingue e Sala studio; per chiunque altro restano «in costruzione». Può tornare su questa pagina in qualsiasi momento.</p>
+    <p style="margin-bottom:0"><b>I collegamenti si aprono in una nuova scheda.</b> Questa pagina resta aperta: per tornare qui basta chiudere la scheda nuova.</p>
+  </div>
+  <div class="riquadro">Gli strumenti sono stati sottoposti al parere della Responsabile della Protezione dei Dati. In attesa del parere non sono accessibili agli studenti; in questa fase sarebbero utilizzati soltanto da docenti ed educatori.</div>
 </section>
 
 <section id="pronta">
-  <div class="etichetta">Percorso A</div>
+  <div class="etichetta">Passo 1 · Percorso A</div>
   <h2>Guardi una <em>lezione già pronta</em></h2>
   <span class="tempo">⏱️ circa 6 minuti · nessun accesso richiesto</span>
   <p>È una lezione di esempio di Scienza e cultura dell'alimentazione, <i>I principi nutritivi</i>, costruita come quelle che nascono dalle pagine di un libro. È ciò che vedrebbe uno studente sul proprio dispositivo.</p>
@@ -117,23 +183,49 @@
     <span class="e">🥗</span><span><b>Apra la lezione di esempio</b><span>I principi nutritivi · si apre in una nuova scheda</span></span><span class="freccia">→</span>
   </a>
   <div class="card">
-    <p style="margin-top:0"><b>Cosa provare</b>, ad esempio in quest'ordine (può spuntare le voci man mano):</p>
+    <p style="margin-top:0"><b>Che cosa provare</b>, in quest'ordine (può spuntare le voci man mano):</p>
     <ul class="prova">
-      <li><input type="checkbox" id="a1"><label for="a1">Scelga il <span class="btn">🧭 Percorso guidato</span> e parta dal <b>gancio</b>: una domanda curiosa che apre l'argomento.</label></li>
+      <li><input type="checkbox" id="a1"><label for="a1">Alla domanda «Come vuoi studiare?» scelga <span class="btn">🧭 Percorso guidato</span> e parta dal <b>gancio</b>: una domanda curiosa che apre l'argomento.</label></li>
       <li><input type="checkbox" id="a2"><label for="a2">Su una scheda tocchi <span class="btn">🔊</span>: il testo viene <b>letto ad alta voce</b>. È lo strumento compensativo previsto per gli studenti con DSA.</label></li>
       <li><input type="checkbox" id="a3"><label for="a3">Nella tappa <b>Memorizza</b> osservi i trucchi per ricordare: la parola-sigla, il «palazzo della memoria» ambientato nel Convitto, la filastrocca.</label></li>
-      <li><input type="checkbox" id="a4"><label for="a4">Nella tappa <b>Allenati</b> risponda a una domanda <b>sbagliando apposta</b>: noterà che la lezione spiega subito perché.</label></li>
+      <li><input type="checkbox" id="a4"><label for="a4">Nella tappa <b>Allenati</b> risponda a una domanda <b>sbagliando apposta</b>: la lezione spiega subito perché.</label></li>
       <li><input type="checkbox" id="a5"><label for="a5">Provi le <b>Flashcard</b> e la <b>Sfida finale</b>.</label></li>
       <li><input type="checkbox" id="a6"><label for="a6">Torni all'inizio della lezione e guardi gli altri modi di studiarla, ad esempio <span class="btn">🔐 Escape room</span> o <span class="btn">🗺️ Costruisci la mappa</span>: la stessa lezione, attività diverse.</label></li>
     </ul>
   </div>
+  <a class="prossimo" href="studio/guida-dirigente.html#verifica">Passo 2 · Dalla stessa lezione, la verifica in pochi secondi ↓</a>
+</section>
+
+<section id="verifica">
+  <div class="etichetta">Passo 2 · Percorso B</div>
+  <h2>La verifica, <em>in pochi secondi</em></h2>
+  <span class="tempo">⏱️ circa 3 minuti · nessun accesso richiesto</span>
+  <p>Dalla lezione di esempio, una prova scritta pronta da stampare. Le domande vengono dalla lezione: il docente non scrive nulla, sceglie soltanto che cosa stampare.</p>
   <a class="grande" href="studio/verifica.html?c=DEMO" target="_blank" rel="noopener">
-    <span class="e">🖨️</span><span><b>E per il docente: la verifica stampabile</b><span>Fila A e fila B, versione facilitata, soluzioni · dalla stessa lezione</span></span><span class="freccia">→</span>
+    <span class="e">📝</span><span><b>Apra la verifica della lezione di esempio</b><span>I principi nutritivi · si apre in una nuova scheda</span></span><span class="freccia">→</span>
   </a>
+  <div class="card">
+    <ol class="passi">
+      <li><b class="t">Scenda fino a «👀 Anteprima»</b>
+        In fondo alla pagina c'è già il foglio della <b>fila A</b>, pronto: intestazione con nome e cognome, domande di sei tipi (scelta multipla, vero o falso, completamento, abbinamenti, riordino, domande aperte), punteggio totale già calcolato.</li>
+      <li><b class="t">Spunti «♿ Anche la versione facilitata»</b>
+        Nella sezione <b>3 · Che cosa stampare</b>. L'anteprima si aggiorna da sola: confronti la fila A con la versione facilitata. Meno domande, 2 sole risposte, le parole da inserire già elencate, carattere più grande. <b>Sul foglio non c'è scritto «facilitata».</b></li>
+      <li><b class="t">Spunti «🗺️ Anche la mappa della lezione»</b>
+        Compare una pagina con le idee chiave, da consegnare durante la prova come strumento compensativo, se previsto dal PDP.</li>
+      <li><b class="t">Guardi la fila B e le soluzioni</b>
+        Sono già spuntate: la <b>fila B</b> ha le stesse domande in ordine diverso e con le risposte mescolate; le <b>soluzioni</b> riportano le risposte giuste di ogni fila, per correggere in fretta.</li>
+      <li><b class="t">Prema «🔀 Altre domande»</b>
+        In un istante la verifica cambia: altre domande, altro ordine. Nella sezione <b>1 · Che cosa mettere</b> si sceglie quante domande per ogni tipo.</li>
+      <li><b class="t">Se vuole, prema «🖨️ Stampa»</b>
+        Si stampa su carta o si salva in PDF.</li>
+    </ol>
+  </div>
+  <div class="riquadro"><b>Lo stesso vale per ogni lezione:</b> per quella che creerà nel passo 3 e per le cinque lezioni dell'archivio, la verifica si prepara con il pulsante <span class="btn">📝 Verifica</span>, in pochi secondi.</div>
+  <a class="prossimo" href="studio/guida-dirigente.html#crea">Passo 3 · Crei Lei una lezione nuova ↓</a>
 </section>
 
 <section id="crea">
-  <div class="etichetta">Percorso B</div>
+  <div class="etichetta">Passo 3 · Percorso C</div>
   <h2>Crei Lei una <em>lezione nuova</em></h2>
   <span class="tempo">⏱️ circa 8 minuti · serve la Sua email istituzionale</span>
   <p>Qui vedrà il lavoro dal lato del docente o dell'educatore: da un argomento, o dalla foto di una pagina di libro, a una lezione completa con il suo QR.</p>
@@ -143,24 +235,23 @@
       <li><b class="t">Apra la pagina per i docenti</b>
         <a href="studio/docente.html" target="_blank" rel="noopener">Sala studio · Crea una lezione ↗</a> (si apre in una nuova scheda).</li>
       <li><b class="t">Entri con la mail della scuola</b>
-        Compare un riquadro di accesso. Scriva la Sua mail istituzionale (ad esempio quella <i>@alberghierorieti.it</i>) e prema <span class="btn">Mandami il codice →</span>.
-        Non serve alcuna password.</li>
+        Compare un riquadro di accesso. Scriva la Sua mail istituzionale e prema <span class="btn">Mandami il codice →</span>. Non serve alcuna password.</li>
       <li><b class="t">Copi il codice dalla posta</b>
         Nella Sua casella arriva un messaggio intitolato <b>«Il tuo codice di accesso»</b>, con un codice di 6 cifre valido 10 minuti. Lo scriva nel riquadro e prema <span class="btn">Entra →</span>.
-        Se non arriva, controlli la posta indesiderata o prema <span class="btn">Rimanda il codice</span> (dopo mezzo minuto).</li>
+        Se non arriva, controlli la posta indesiderata o prema <span class="btn">Rimanda il codice</span> (dopo mezzo minuto). Dopo il primo accesso, questo dispositivo La riconosce per 60 giorni.</li>
       <li><b class="t">Scriva l'argomento</b>
         Nel <b>passo 1</b> della pagina, nel campo <b>«Argomento / titolo della lezione»</b>, scriva un argomento a Sua scelta. Qualche idea:
-        <i>«Il servizio del vino: le temperature»</i>, <i>«La catena del freddo»</i>, <i>«L'Unità d'Italia»</i>.
-        Scelga anche la <b>materia</b> e l'<b>anno di corso</b>: servono per ritrovare la lezione nell'archivio condiviso (Percorso D).</li>
+        <i>«La Costituzione: i diritti e i doveri»</i>, <i>«L'accoglienza del cliente in hotel»</i>, <i>«Le frazioni»</i>.
+        Scelga anche la <b>materia</b> e l'<b>anno di corso</b>: servono per ritrovare la lezione nell'archivio condiviso.</li>
       <li><b class="t">La condivida con i colleghi</b>
         Nel <b>passo 3</b> spunti <span class="btn">🌐 Condividi nell'Archivio della Sala studio</span>. Potrà annullare la condivisione in qualsiasi momento da <b>Modifica</b>.</li>
       <li><b class="t">Usi la creazione automatica</b>
-        Scenda fino al riquadro <b>«📸 Creazione automatica, senza passare dall'IA»</b> e prema <span class="btn">✨ Crea la lezione</span>.
+        Scenda fino al riquadro <b>«📸 Creazione automatica»</b> e prema <span class="btn">✨ Crea la lezione</span>.
         Se lo desidera, può prima allegare la foto di una pagina di un libro con <span class="btn">📷 Scatta una foto</span> o <span class="btn">🖼️ Scegli dalla galleria</span>.</li>
       <li><b class="t">Attenda un paio di minuti</b>
         La lezione viene preparata dal servizio di intelligenza artificiale, usando soltanto l'argomento o la pagina fotografata. Quando è pronta compaiono il <b>QR</b> e un codice di 6 lettere: è ciò che lo studente userebbe per aprirla.</li>
-      <li><b class="t">La apra e la provi</b>
-        La percorra come nel Percorso A. Ritroverà la lezione in <span class="btn">📚 Le mie lezioni</span>; da lì, con <b>Modifica</b>, può anche cancellarla.</li>
+      <li><b class="t">La apra, la provi e ne prepari la verifica</b>
+        La percorra come nel passo 1. Poi prema <span class="btn">📝 Prepara una verifica</span>: è la stessa del passo 2, sulla Sua lezione. Ritroverà tutto in <span class="btn">📚 Le mie lezioni</span>; da lì, con <b>Modifica</b>, può correggere o cancellare.</li>
     </ol>
   </div>
 
@@ -168,7 +259,7 @@
 
   <details>
     <summary>E se compare il messaggio «La creazione automatica non è attivata»?</summary>
-    <p>Significa che in quel momento la creazione automatica è sospesa. La pagina offre una seconda strada in tre passi: si copiano le istruzioni preparate (<span class="btn">📋 Copia le istruzioni</span>), le si incollano in un assistente come Claude, ChatGPT o Gemini insieme alle foto, e se ne incolla la risposta nel <b>passo 3</b> della pagina con <span class="btn">✨ Pubblica la lezione</span>. La risposta dell'assistente sembra scritta «in codice»: è normale, non va letta, si copia e si incolla. In alternativa, può limitarsi al Percorso A.</p>
+    <p>Significa che in quel momento la creazione automatica è sospesa. La pagina offre una seconda strada in tre passi: si copiano le istruzioni preparate (<span class="btn">📋 Copia le istruzioni</span>), le si incollano in un assistente come Claude, ChatGPT o Gemini insieme alle foto, e se ne incolla la risposta nel <b>passo 3</b> della pagina con <span class="btn">✨ Pubblica la lezione</span>. La risposta dell'assistente sembra scritta «in codice»: è normale, non va letta, si copia e si incolla. In alternativa, può aprire una delle cinque lezioni dell'archivio (Percorso E).</p>
   </details>
   <details>
     <summary>Che cosa accade ai dati in questo percorso?</summary>
@@ -177,7 +268,7 @@
 </section>
 
 <section id="lingue">
-  <div class="etichetta">Percorso C</div>
+  <div class="etichetta">Se ha altro tempo · Percorso D</div>
   <h2>Le lingue <em>dell'Alberghiero</em></h2>
   <span class="tempo">⏱️ circa 6 minuti · nessun accesso richiesto</span>
   <p>Inglese, francese e spagnolo costruiti sulle situazioni di lavoro dei cinque ambiti: sala, cucina, pasticceria, accoglienza turistica e bar.</p>
@@ -201,9 +292,9 @@
 </section>
 
 <section id="aula">
-  <div class="etichetta">Percorso D</div>
+  <div class="etichetta">Se ha altro tempo · Percorso E</div>
   <h2>Gli stessi strumenti <em>in aula</em></h2>
-  <span class="tempo">⏱️ circa 10 minuti · per l'ultimo passo serve la Sua email istituzionale</span>
+  <span class="tempo">⏱️ circa 10 minuti · per gli ultimi passi serve la Sua email istituzionale</span>
   <p>Qui vedrà come ogni docente può usare gli strumenti durante la lezione, alla lavagna interattiva. Gli studenti partecipano a voce o per alzata di mano, senza usare dispositivi e senza fornire alcun dato.</p>
 
   <div class="card">
@@ -211,9 +302,9 @@
       <li><b class="t">La sfida a squadre alla LIM</b>
         Apra la <a href="studio/lezione.html?c=DEMO" target="_blank" rel="noopener">lezione di esempio ↗</a> e, tra i modi di studiarla, scelga <span class="btn">🏆 Sfida a squadre</span>. Indichi quante squadre, poi prema <span class="btn">⛶ Schermo intero</span>: le domande diventano una gara, con il punteggio sempre in vista. Il docente tocca sulla lavagna la risposta data a voce dalla squadra.</li>
       <li><b class="t">Il QR a tutto schermo</b>
-        Torni alla lezione che ha creato nel Percorso B e prema <span class="btn">🖥️ QR a tutto schermo</span>: è il cartello da proiettare in classe o da appendere in sala studio.</li>
+        Torni alla lezione che ha creato nel passo 3 e prema <span class="btn">🖥️ QR a tutto schermo</span>: è il cartello da proiettare in classe o da appendere in sala studio.</li>
       <li><b class="t">L'archivio condiviso</b>
-        Apra l'<a href="studio/archivio.html" target="_blank" rel="noopener">Archivio della Sala studio ↗</a>. Vi troverà già cinque lezioni di esempio, in materie e anni diversi: Diritto ed economia (1° anno), Scienza degli alimenti (2°), Laboratorio di sala e vendita (3°), Storia e Italiano (4°). Se nel Percorso B ha condiviso la Sua lezione, la troverà accanto a queste, ordinata per biennio o triennio, per anno e per materia: è il punto in cui il lavoro di un docente diventa disponibile per tutti i colleghi.</li>
+        Apra l'<a href="studio/archivio.html" target="_blank" rel="noopener">Archivio della Sala studio ↗</a>. Vi troverà già cinque lezioni di esempio, in materie e anni diversi: Diritto ed economia (1° anno), Scienza degli alimenti (2°), Laboratorio di sala e vendita (3°), Storia e Italiano (4°). Se nel passo 3 ha condiviso la Sua lezione, la troverà accanto a queste, ordinata per biennio o triennio, per anno e per materia: è il punto in cui il lavoro di un docente diventa disponibile per tutti i colleghi. Accanto a ogni lezione, il pulsante <span class="btn">📝 Verifica</span>.</li>
       <li><b class="t">I giochi di Lingue</b>
         Apra i <a href="lingue/giochi.html" target="_blank" rel="noopener">Giochi alla LIM ↗</a>, scelga un gioco (ad esempio <span class="btn">🃏 Memory</span> o <span class="btn">👂 Ascolta e scegli</span>) e la lingua con <span class="btn">🌍</span>, poi prema <span class="btn">⛶ Schermo intero</span>. Il docente può anche incollare le frasi della propria lezione.</li>
       <li><b class="t">Una lezione di lingua pronta per un'ora</b>

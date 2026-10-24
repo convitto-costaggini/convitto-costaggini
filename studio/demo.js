@@ -67,14 +67,14 @@ window.STUDIO_DEMO = {
   },
   sequenza: { titolo: 'Ordina i nutrienti dal più energetico al meno energetico (per grammo)', passi: ['Lipidi (circa 9 kcal)', 'Carboidrati e proteine (circa 4 kcal)', 'Vitamine, sali minerali e acqua (0 kcal)'] },
   quiz: [
-    { domanda: 'Quanti sono i principi nutritivi?', opzioni: ['Sei', 'Tre', 'Dieci'], corretta: 0, spiegazione: 'Carboidrati, proteine, lipidi, vitamine, sali minerali e acqua: sei.' },
-    { domanda: 'Quale nutriente dà più energia per grammo?', opzioni: ['I lipidi', 'Le proteine', 'Le vitamine'], corretta: 0, spiegazione: 'I lipidi danno circa 9 kcal per grammo, più del doppio degli altri.' },
-    { domanda: 'A che cosa servono soprattutto le proteine?', opzioni: ['A costruire e riparare il corpo', 'A sciogliere le vitamine', 'A raffreddare il corpo'], corretta: 0, spiegazione: 'Hanno funzione plastica: costruiscono muscoli, pelle e tessuti.' },
-    { domanda: 'Quale di questi gruppi NON dà energia?', opzioni: ['Vitamine, sali minerali e acqua', 'Carboidrati e lipidi', 'Proteine e carboidrati'], corretta: 0, spiegazione: 'Hanno funzione regolatrice e protettiva, ma 0 kcal.' },
-    { domanda: 'Quali vitamine sono liposolubili?', opzioni: ['A, D, E, K', 'C e gruppo B', 'Solo la C'], corretta: 0, spiegazione: 'A, D, E, K si sciolgono nei grassi: «ADEK».' },
-    { domanda: 'Quanta parte del corpo è fatta di acqua?', opzioni: ['Circa il 60%', 'Circa il 10%', 'Circa il 95%'], corretta: 0, spiegazione: 'In un adulto l\'acqua è circa il 60% del peso.' },
-    { domanda: 'In che unità si misura l\'energia degli alimenti?', opzioni: ['Chilocalorie (kcal)', 'Chilogrammi (kg)', 'Litri (l)'], corretta: 0, spiegazione: 'L\'energia si misura in chilocalorie.' },
-    { domanda: 'Quale sale minerale rinforza ossa e denti?', opzioni: ['Il calcio', 'La vitamina C', 'Lo zucchero'], corretta: 0, spiegazione: 'Il calcio ha funzione plastica: costruisce ossa e denti.' }
+    { domanda: 'Quanti sono i principi nutritivi?', opzioni: ['Sei', 'Tre', 'Dieci', 'Quattro'], corretta: 0, spiegazione: 'Carboidrati, proteine, lipidi, vitamine, sali minerali e acqua: sei.' },
+    { domanda: 'Quale nutriente dà più energia per grammo?', opzioni: ['I lipidi', 'Le proteine', 'Le vitamine', 'I sali minerali'], corretta: 0, spiegazione: 'I lipidi danno circa 9 kcal per grammo, più del doppio degli altri.' },
+    { domanda: 'A che cosa servono soprattutto le proteine?', opzioni: ['A costruire e riparare il corpo', 'A sciogliere le vitamine', 'A raffreddare il corpo', 'A dare il colore ai cibi'], corretta: 0, spiegazione: 'Hanno funzione plastica: costruiscono muscoli, pelle e tessuti.' },
+    { domanda: 'Quale di questi gruppi NON dà energia?', opzioni: ['Vitamine, sali minerali e acqua', 'Carboidrati e lipidi', 'Proteine e carboidrati', 'Lipidi e proteine'], corretta: 0, spiegazione: 'Hanno funzione regolatrice e protettiva, ma 0 kcal.' },
+    { domanda: 'Quali vitamine sono liposolubili?', opzioni: ['A, D, E, K', 'C e gruppo B', 'Solo la C', 'Solo la B12'], corretta: 0, spiegazione: 'A, D, E, K si sciolgono nei grassi: «ADEK».' },
+    { domanda: 'Quanta parte del corpo è fatta di acqua?', opzioni: ['Circa il 60%', 'Circa il 10%', 'Circa il 95%', 'Circa il 30%'], corretta: 0, spiegazione: 'In un adulto l\'acqua è circa il 60% del peso.' },
+    { domanda: 'In che unità si misura l\'energia degli alimenti?', opzioni: ['Chilocalorie (kcal)', 'Chilogrammi (kg)', 'Litri (l)', 'Gradi (°C)'], corretta: 0, spiegazione: 'L\'energia si misura in chilocalorie.' },
+    { domanda: 'Quale sale minerale rinforza ossa e denti?', opzioni: ['Il calcio', 'La vitamina C', 'Lo zucchero', 'Il glucosio'], corretta: 0, spiegazione: 'Il calcio ha funzione plastica: costruisce ossa e denti.' }
   ],
   vero_falso: [
     { affermazione: 'L\'acqua fornisce molta energia.', vero: false, spiegazione: 'L\'acqua non dà energia: 0 kcal. Però è indispensabile.' },

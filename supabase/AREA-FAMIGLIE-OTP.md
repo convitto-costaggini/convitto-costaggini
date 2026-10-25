@@ -46,6 +46,7 @@ un'altra sessione dello stesso account e 0 a verifica più vecchia di 12 ore.
 |---|---|
 | `supabase/migrazioni/2026-10-09_area_famiglie_otp.sql` | tabella `famiglie_otp`, funzioni, regole RLS, colonne del modulo firmato |
 | `supabase/migrazioni/2026-10-09b_abbinamento_per_codice.sql` | abbinamento genitore-studente solo per codice, riallineamento dei codici riassegnati |
+| `supabase/migrazioni/2026-10-25_otp_config_vault.sql` | lettura di OTP_PEPPER, OTP_MAIL_URL e OTP_MAIL_TOKEN dal Vault, se mancano i secret |
 | `supabase/functions/otp-famiglie/index.ts` | invio e verifica del codice |
 | `supabase/functions/richiesta-accesso/index.ts` | versione informativa aggiornata a `area-famiglie-2026-10-09` |
 | `supabase/gas-otp/Codice.gs` | progetto Apps Script che recapita l'email del codice |
@@ -63,6 +64,17 @@ un'altra sessione dello stesso account e 0 a verifica più vecchia di 12 ore.
 | Indirizzo per i moduli firmati | `rirh010007@istruzione.it` (casella istituzionale) |
 | Codice | Ramo `area-famiglie-otp` su GitHub, non unito a `main` |
 | Database e funzioni Supabase | Non ancora modificati |
+
+## Stato al 25 ottobre 2026
+
+| Tema | Stato |
+|---|---|
+| Via libera della Dirigente | Confermato (24/10) |
+| Apps Script OTP | Pubblicato come applicazione web; invio provato (senza `noReply`, che bloccava il recapito) |
+| Configurazione | Nel Vault del database (`otp_pepper`, `otp_mail_url`, `otp_mail_token`): la dashboard non era accessibile |
+| `otp-famiglie` | Pubblicata (Verify JWT attivo) |
+| Migrazioni 2026-10-09, 2026-10-09b, 2026-10-25 | Applicate il 25/10 (17 righe riallineate, 13 ambigue, come nella prova) |
+| `richiesta-accesso` | Da ridistribuire subito dopo l'unione del ramo |
 
 ## Ordine di attivazione
 

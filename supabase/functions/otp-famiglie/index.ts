@@ -29,13 +29,16 @@
 //   OTP_MAIL_URL    URL /exec della web app Apps Script
 //   OTP_MAIL_TOKEN  lo stesso valore della proprietà OTP_MAIL_TOKEN
 //                   impostata nel progetto Apps Script
+// In mancanza dei secret, gli stessi valori si leggono dal Vault del
+// database (otp_pepper, otp_mail_url, otp_mail_token): migrazione
+// 2026-10-25_otp_config_vault.sql.
 // SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY sono forniti da Supabase.
 //
 // Deploy con "Verify JWT" ATTIVO: la funzione risponde solo a chi ha
 // una sessione valida.
 // =====================================================================
 
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient, type SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const DURATA_MINUTI = 10;
 const MAX_TENTATIVI = 5;
@@ -93,9 +96,27 @@ function ugualeTempoCostante(a: string, b: string): boolean {
   return diff === 0;
 }
 
-async function inviaEmail(email: string, codice: string): Promise<boolean> {
-  const url = Deno.env.get("OTP_MAIL_URL");
-  const token = Deno.env.get("OTP_MAIL_TOKEN");
+type Config = { pepper: string; url: string; token: string };
+
+// I valori arrivano dai secret della funzione; se mancano, dal Vault del
+// database (funzione otp_famiglie_config, eseguibile solo con la service role).
+async function leggiConfig(admin: SupabaseClient): Promise<Config> {
+  let pepper = Deno.env.get("OTP_PEPPER") || "";
+  let url = Deno.env.get("OTP_MAIL_URL") || "";
+  let token = Deno.env.get("OTP_MAIL_TOKEN") || "";
+  if (!pepper || !url || !token) {
+    const { data, error } = await admin.rpc("otp_famiglie_config");
+    if (error) console.error("Lettura configurazione dal Vault:", error.message);
+    const riga = Array.isArray(data) ? data[0] : data;
+    pepper = pepper || riga?.pepper || "";
+    url = url || riga?.mail_url || "";
+    token = token || riga?.mail_token || "";
+  }
+  return { pepper, url, token };
+}
+
+async function inviaEmail(cfg: Config, email: string, codice: string): Promise<boolean> {
+  const { url, token } = cfg;
   if (!url || !token) return false;
   try {
     // Apps Script risponde con un redirect: fetch lo segue e legge l'esito.
@@ -118,19 +139,20 @@ Deno.serve(async (req) => {
   if (req.method !== "POST") return errore("Metodo non consentito", 405);
 
   try {
-    const pepper = Deno.env.get("OTP_PEPPER");
-    if (!pepper || pepper.length < 32) {
+    const admin = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      { auth: { autoRefreshToken: false, persistSession: false } },
+    );
+    const cfg = await leggiConfig(admin);
+    const pepper = cfg.pepper;
+    if (pepper.length < 32) {
       console.error("OTP_PEPPER mancante o troppo corto");
       return errore("Servizio non configurato. Riprovi più tardi.", 500);
     }
 
     // 1. Chi sta chiedendo: utente e sessione dal token
     const jwt = (req.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
-    const admin = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-      { auth: { autoRefreshToken: false, persistSession: false } },
-    );
     const { data: { user } } = await admin.auth.getUser(jwt);
     const sessionId = String(payloadJwt(jwt).session_id || "");
     if (!user || !user.email || !/^[0-9a-f-]{36}$/i.test(sessionId)) {
@@ -181,7 +203,7 @@ Deno.serve(async (req) => {
       }).select("id").single();
       if (errIns) throw errIns;
 
-      if (!(await inviaEmail(user.email, codice))) {
+      if (!(await inviaEmail(cfg, user.email, codice))) {
         await admin.from("famiglie_otp").update({ annullato_at: new Date().toISOString() }).eq("id", riga.id);
         return errore("Non è stato possibile inviare l'email con il codice. Riprovi tra qualche minuto.", 502);
       }

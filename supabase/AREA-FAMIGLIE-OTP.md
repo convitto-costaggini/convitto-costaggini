@@ -61,7 +61,7 @@ un'altra sessione dello stesso account e 0 a verifica più vecchia di 12 ore.
 |---|---|
 | Parere RTD sull'OTP (8/10) | Favorevole; già inoltrato alla DPO |
 | Benestare DPO all'Area con OTP | **In attesa** |
-| Indirizzo per i moduli firmati | `rirh010007@istruzione.it` (casella istituzionale) |
+| Indirizzo per i moduli firmati | `convitto@alberghierorieti.it` (dal 25/10/2026; prima rirh010007@istruzione.it) |
 | Codice | Ramo `area-famiglie-otp` su GitHub, non unito a `main` |
 | Database e funzioni Supabase | Non ancora modificati |
 

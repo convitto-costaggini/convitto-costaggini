@@ -5,7 +5,7 @@
    Il segno di lettura resta solo in questa scheda del browser (sessionStorage)
    o nell'indirizzo della pagina: nessun dato viene inviato. */
 (function () {
-  var EMAIL_MODULI = 'rirh010007@istruzione.it';
+  var EMAIL_MODULI = 'convitto@alberghierorieti.it';
   var CHIAVE = 'areaFamiglieInformativaLetta';
 
   function informativaLetta() {

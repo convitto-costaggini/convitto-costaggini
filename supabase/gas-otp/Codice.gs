@@ -71,8 +71,7 @@ function inviaCodice_(email, codice, minuti) {
     subject: oggetto,
     body: testo,
     htmlBody: html,
-    name: 'Convitto "Costaggini" - Rieti',
-    noReply: true
+    name: 'Convitto "Costaggini" - Rieti'
   });
 }
 

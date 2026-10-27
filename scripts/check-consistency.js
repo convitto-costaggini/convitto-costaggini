@@ -29,7 +29,7 @@ function estrai(nomeCampo, regex) {
   return m[1];
 }
 
-const SCADENZA = estrai('scadenza domanda', /Entro il (\d{1,2}\s+\w+)/);           // es. "30 luglio"
+const SCADENZA = estrai('scadenza domanda', /Entro (luglio)/);                        // scadenza generica: "luglio" (data esatta da circolare annuale)
 const QUOTA    = estrai('quota di iscrizione', /quota di iscrizione di € ([\d.,]+)/); // es. "450,00"
 const RETTA    = estrai('retta annua', /Totale annuo<\/span><strong[^>]*>€\s*([\d.,]+)/); // es. "1.600"
 const ANNO     = estrai('anno scolastico', /A\.S\.\s*(\d{4}\/\d{2,4})/);           // es. "2026/27"
@@ -47,7 +47,7 @@ console.log('');
 
 const TARGET = [
   { file: 'chatbot.js', fatti: [
-      // scadenza: nel chatbot è volutamente generica ("luglio", data fissata da circolare annuale)
+      { nome: 'scadenza', contains: SCADENZA },
       { nome: 'quota iscrizione', contains: QUOTA_NUM },
       { nome: 'retta annua', contains: RETTA_NUM },
       { nome: 'anno scolastico', contains: ANNO },

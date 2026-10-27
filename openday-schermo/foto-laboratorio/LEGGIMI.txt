@@ -1,0 +1,10 @@
+Mettere qui 4 foto degli strumenti del Laboratorio musicale, rinominate così:
+
+  strumento-1.jpg   (riquadro in alto a sinistra)
+  strumento-2.jpg   (in alto a destra)
+  strumento-3.jpg   (in basso a sinistra)
+  strumento-4.jpg   (in basso a destra)
+
+Formato orizzontale, senza ragazzi riconoscibili. Vanno bene anche foto grandi:
+vengono ritagliate in automatico. Finché una foto manca, al suo posto compare
+il riquadro "Foto in arrivo". Non serve modificare nient'altro.

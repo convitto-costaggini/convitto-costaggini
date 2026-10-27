@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Open Day Convitto Costaggini</title>
+<style>
+:root{
+  --bosco:#2C3E2D; --bosco2:#1a2e1b; --bosco3:#4a6b4c; --notte:#0f1b12;
+  --oro:#B8922A; --oro2:#D4AA4A; --oro3:#EDD98A;
+  --av:#F5F0E8; --av2:#ECE4D6; --av3:#D9CDB8; --txt:#24302a; --txt2:#5b6158;
+  --verde:#3f8f4e; --rosso:#b4553b;
+  --fd: Georgia, "Times New Roman", serif;
+  --fu: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden}
+body{font-family:var(--fu);color:var(--av);cursor:default}
+body.nocursor{cursor:none}
+
+/* Palco fisso 1920×1080, scalato per riempire qualunque schermo */
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center;overflow:hidden;background:var(--bosco)}
+
+.scene{position:absolute;inset:0;padding:110px 140px 150px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility 0s .9s}
+.scene.on{opacity:1;visibility:visible;transition:opacity .9s ease}
+.dark{background:radial-gradient(ellipse at 80% 10%,#3a5539 0,var(--bosco) 45%,var(--notte) 100%);color:var(--av)}
+.light{background:radial-gradient(ellipse at 15% 0,#fffaf1 0,var(--av) 50%,var(--av2) 100%);color:var(--txt)}
+
+.kicker{font-size:30px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--oro2);margin-bottom:22px}
+.light .kicker{color:var(--oro)}
+h1,h2{font-family:var(--fd);font-weight:400;line-height:1.08}
+h2{font-size:96px;margin-bottom:46px}
+h2 em,h1 em{font-style:italic;color:var(--oro3)}
+.light h2{color:var(--bosco)} .light h2 em{color:var(--oro)}
+.lead{font-size:40px;line-height:1.45;color:rgba(245,240,232,.85);max-width:1400px}
+.light .lead{color:var(--txt2)}
+
+/* Comparsa a scaglioni quando la scena è attiva */
+.rv{opacity:0;transform:translateY(40px)}
+.scene.on .rv{animation:sale .9s cubic-bezier(.2,.7,.2,1) forwards}
+.scene.on .d1{animation-delay:.35s}.scene.on .d2{animation-delay:.7s}.scene.on .d3{animation-delay:1.05s}
+.scene.on .d4{animation-delay:1.4s}.scene.on .d5{animation-delay:1.75s}.scene.on .d6{animation-delay:2.1s}
+.scene.on .d7{animation-delay:2.45s}.scene.on .d8{animation-delay:2.8s}
+@keyframes sale{to{opacity:1;transform:none}}
+
+/* Barra di avanzamento e indicatori */
+#barra{position:absolute;left:0;right:0;bottom:0;height:10px;background:rgba(0,0,0,.25);z-index:20}
+#barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--oro),var(--oro3))}
+#marchio{position:absolute;right:140px;top:44px;font-size:22px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(184,146,42,.85);z-index:20}
+
+/* Barra dei comandi, sempre visibile */
+#comandi{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;gap:14px;align-items:center;z-index:30;padding:10px;border-radius:50px;background:rgba(15,27,18,.55);backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.btn{font:700 27px/1 var(--fu);color:var(--av);background:rgba(44,62,45,.9);border:2px solid rgba(212,170,74,.55);border-radius:40px;height:70px;padding:0 30px;display:flex;align-items:center;gap:12px;cursor:pointer;white-space:nowrap;transition:background .2s,border-color .2s,transform .1s}
+.btn:hover{background:var(--bosco3);border-color:var(--oro3)}
+.btn:active{transform:scale(.96)}
+.btn:focus-visible{outline:4px solid var(--oro3);outline-offset:3px}
+#bFerma{background:var(--oro2);color:var(--bosco2);border-color:var(--oro3);min-width:250px;justify-content:center;font-weight:800}
+body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animation:richiamo 1.6s ease-in-out infinite}
+@keyframes richiamo{50%{box-shadow:0 0 0 10px rgba(200,85,61,.25)}}
+#contatore{font:800 28px/1 var(--fu);color:var(--oro3);min-width:110px;text-align:center}
+#contatore small{font-size:20px;color:rgba(237,217,138,.6)}
+
+/* Elenco di tutte le scene */
+#menu{position:absolute;inset:0;z-index:45;background:rgba(15,27,18,.94);display:none;flex-direction:column;justify-content:center;padding:0 140px 120px}
+#menu.on{display:flex}
+#menu h3{font-family:var(--fd);font-weight:400;font-size:64px;color:var(--oro3);margin-bottom:40px}
+#menu .griglia{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+#menu .griglia button{font:600 30px/1.25 var(--fu);color:var(--av);text-align:left;background:rgba(245,240,232,.07);border:2px solid rgba(212,170,74,.35);border-radius:20px;padding:26px 28px;cursor:pointer;display:flex;gap:18px;align-items:center;min-height:120px}
+#menu .griglia button:hover{background:rgba(212,170,74,.2);border-color:var(--oro3)}
+#menu .griglia button b{font:400 54px/1 var(--fd);color:var(--oro2);min-width:58px}
+#menu .griglia button.on{background:var(--oro2);color:var(--bosco2);border-color:var(--oro3)}
+#menu .griglia button.on b{color:var(--bosco2)}
+
+/* ── 1 Copertina ─────────────────────────────── */
+#s1{justify-content:center;align-items:flex-start}
+#s1 .anelli{position:absolute;right:-260px;top:50%;width:1300px;height:1300px;transform:translateY(-50%)}
+#s1 .anelli span{position:absolute;inset:0;border:2px solid rgba(212,170,74,.28);border-radius:50%;animation:respira 7s ease-in-out infinite}
+#s1 .anelli span:nth-child(2){inset:130px;animation-delay:-2.3s}
+#s1 .anelli span:nth-child(3){inset:260px;animation-delay:-4.6s;border-color:rgba(212,170,74,.45)}
+#s1 .anelli em{position:absolute;inset:420px;border-radius:50%;background:radial-gradient(circle,rgba(212,170,74,.35),transparent 70%)}
+@keyframes respira{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.06);opacity:1}}
+#s1 h1{font-size:150px;margin-bottom:34px;position:relative}
+#s1 .lead{font-size:48px;max-width:1150px;position:relative}
+#s1 .firma{margin-top:60px;font-size:30px;color:var(--oro3);letter-spacing:.06em;position:relative}
+
+/* ── 2 Settimana ─────────────────────────────── */
+.giorni{display:grid;grid-template-columns:repeat(7,1fr);gap:22px;margin-top:10px}
+.gg{border-radius:22px;padding:30px 16px 34px;text-align:center;background:rgba(245,240,232,.06);border:2px solid rgba(245,240,232,.12);min-height:300px;display:flex;flex-direction:column;align-items:center}
+.gg b{font-family:var(--fd);font-weight:400;font-size:54px;display:block;margin-bottom:18px}
+.gg span{font-size:26px;line-height:1.35;color:rgba(245,240,232,.7)}
+.gg i{font-style:normal;font-size:62px;display:block;margin:auto 0 0}
+.gg.in{background:linear-gradient(170deg,var(--oro2),var(--oro));border-color:var(--oro3);color:var(--bosco2)}
+.gg.in span{color:var(--bosco2);font-weight:700}
+.gg.mezzo{border-style:dashed;border-color:rgba(212,170,74,.6)}
+.nota-sett{display:flex;gap:30px;margin-top:46px}
+.pill{font-size:32px;padding:18px 34px;border-radius:60px;background:rgba(245,240,232,.08);border:1px solid rgba(212,170,74,.4)}
+.pill strong{color:var(--oro3)}
+
+/* ── 3 Giornata ──────────────────────────────── */
+.linea{position:relative;margin-top:70px}
+.linea::before{content:"";position:absolute;left:0;right:0;top:66px;height:6px;border-radius:3px;background:var(--av3)}
+.linea .sole{position:absolute;top:44px;left:0;width:50px;height:50px;border-radius:50%;background:radial-gradient(circle,#ffe7a0,var(--oro2));box-shadow:0 0 40px 10px rgba(212,170,74,.55)}
+.scene.on .linea .sole{animation:viaggio 12s linear forwards}
+@keyframes viaggio{from{left:0}to{left:calc(100% - 50px)}}
+.tappe{display:grid;grid-template-columns:repeat(8,1fr);gap:18px;position:relative}
+.tp{text-align:center}
+.tp .ic{width:132px;height:132px;margin:0 auto 22px;border-radius:50%;background:#fff;border:5px solid var(--oro);display:flex;align-items:center;justify-content:center;font-size:62px;box-shadow:0 10px 30px rgba(44,62,45,.15)}
+.tp.notte .ic{background:var(--bosco);border-color:var(--oro2)}
+.tp .ora{font-size:40px;font-weight:800;color:var(--oro)}
+.tp .cosa{font-family:var(--fd);font-size:36px;color:var(--bosco);line-height:1.15;margin-top:8px}
+.tp .det{font-size:24px;color:var(--txt2);line-height:1.35;margin-top:10px}
+
+/* ── 4 Educatori ─────────────────────────────── */
+.carte{display:grid;grid-template-columns:repeat(4,1fr);gap:34px}
+.carta{background:rgba(245,240,232,.06);border:1px solid rgba(212,170,74,.3);border-top:6px solid var(--oro2);border-radius:20px;padding:44px 36px}
+.carta .ic{font-size:86px;display:block;margin-bottom:24px}
+.carta h3{font-family:var(--fd);font-weight:400;font-size:46px;color:var(--oro3);margin-bottom:18px;line-height:1.1}
+.carta p{font-size:31px;line-height:1.45;color:rgba(245,240,232,.85)}
+
+/* ── 5 Flusso gestionale ─────────────────────── */
+.flusso{display:grid;grid-template-columns:1.35fr 80px 420px 80px 1fr;align-items:center;margin-top:10px}
+.fonti{display:flex;flex-direction:column;gap:26px}
+.nodo{background:rgba(245,240,232,.07);border:2px solid rgba(212,170,74,.45);border-radius:22px;padding:30px 34px}
+.nodo .ic{font-size:60px;float:left;margin:0 22px 6px 0;line-height:1}
+.nodo h3{font-family:var(--fd);font-weight:400;font-size:42px;color:var(--oro3);margin-bottom:10px}
+.nodo p{font-size:28px;line-height:1.4;color:rgba(245,240,232,.85);clear:none}
+.cuore{width:420px;height:420px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#4a6b4c,var(--bosco2));border:4px solid var(--oro2);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 0 0 22px rgba(212,170,74,.08),0 0 90px rgba(212,170,74,.3)}
+.scene.on .cuore{animation:pulsa 3s ease-in-out infinite}
+@keyframes pulsa{50%{box-shadow:0 0 0 38px rgba(212,170,74,.04),0 0 120px rgba(212,170,74,.45)}}
+.cuore .ic{font-size:100px}
+.cuore h3{font-family:var(--fd);font-weight:400;font-size:48px;color:var(--oro3);margin:12px 30px 8px;line-height:1.1}
+.cuore p{font-size:26px;color:rgba(245,240,232,.75);padding:0 50px;line-height:1.35}
+.tubo{position:relative;height:8px;background:rgba(212,170,74,.25);border-radius:4px;overflow:hidden}
+.tubo i{position:absolute;top:0;left:-40%;width:40%;height:100%;background:linear-gradient(90deg,transparent,var(--oro3),transparent)}
+.scene.on .tubo i{animation:scorre 1.6s linear infinite}
+@keyframes scorre{to{left:100%}}
+.nodo.fam{border-color:var(--oro3);background:rgba(212,170,74,.14)}
+#s5 h2{margin-bottom:34px}.chiosa{margin-top:34px;font-size:34px;text-align:center;color:var(--oro3)}
+
+/* ── 6 Area riservata dimostrativa ───────────── */
+#s6{flex-direction:row;gap:90px;align-items:flex-start;padding-top:90px}
+#s6 .testo{flex:1}
+.voci{list-style:none;display:flex;flex-direction:column;gap:10px}
+.voci li{font-size:37px;color:var(--txt);padding:13px 28px;border-radius:16px;border:2px solid transparent;display:flex;gap:22px;align-items:center;transition:all .5s}
+.voci li span{font-size:46px;width:60px;text-align:center}
+.voci li.acceso{background:#fff;border-color:var(--oro);box-shadow:0 10px 30px rgba(44,62,45,.12);color:var(--bosco);font-weight:700}
+.telefono{position:relative;width:480px;height:800px;border-radius:70px;background:#111;padding:22px;box-shadow:0 40px 90px rgba(0,0,0,.35);flex-shrink:0}
+.telefono::before{content:"";position:absolute;top:34px;left:50%;width:140px;height:30px;margin-left:-70px;background:#111;border-radius:20px;z-index:3}
+.schermo{position:relative;width:100%;height:100%;border-radius:50px;overflow:hidden;background:var(--av)}
+.app-top{position:relative;z-index:2;background:var(--bosco);color:var(--av);padding:78px 30px 24px}
+.app-top small{display:block;font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:var(--oro3);font-weight:700}
+.app-top b{font-family:var(--fd);font-weight:400;font-size:34px}
+.app-top em{display:block;font-style:normal;font-size:19px;color:rgba(245,240,232,.7);margin-top:4px}
+.rullo{padding:20px 22px}
+.scene.on .rullo{animation:rullo 12s ease-in-out infinite}
+@keyframes rullo{0%,12%{transform:translateY(0)}30%,42%{transform:translateY(-250px)}60%,72%{transform:translateY(-520px)}90%,100%{transform:translateY(0)}}
+.box{background:#fff;border-radius:18px;padding:18px 20px;margin-bottom:16px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+.box h4{font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:12px}
+.pasti{display:grid;grid-template-columns:64px repeat(4,1fr);gap:6px;font-size:17px;text-align:center}
+.pasti b{font-weight:700;color:var(--txt2)}
+.pasti .s{color:var(--verde);font-weight:800}.pasti .n{color:var(--rosso);font-weight:800}
+.riga{display:flex;justify-content:space-between;font-size:19px;padding:7px 0;border-bottom:1px solid var(--av2);color:var(--txt)}
+.riga:last-child{border:0}
+.riga i{font-style:normal;color:var(--txt2)}
+.tag{display:inline-block;font-size:16px;font-weight:700;padding:3px 12px;border-radius:12px;background:#e3f1e5;color:var(--verde)}
+.box p{font-size:19px;line-height:1.4;color:var(--txt)}
+.timbro{position:absolute;left:50%;bottom:30px;transform:translateX(-50%) rotate(-4deg);white-space:nowrap;background:var(--rosso);color:#fff;font-size:20px;font-weight:800;letter-spacing:.08em;padding:10px 22px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:4}
+
+/* ── 7 Accesso sicuro ────────────────────────── */
+.passi{display:grid;grid-template-columns:1fr 90px 1.35fr 90px 1fr;align-items:center}
+.passo{text-align:center;background:rgba(245,240,232,.06);border:2px solid rgba(212,170,74,.4);border-radius:26px;padding:46px 30px;min-height:430px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.passo .n{width:70px;height:70px;border-radius:50%;background:var(--oro2);color:var(--bosco2);font-size:38px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.passo .ic{font-size:90px;margin-bottom:16px}
+.passo h3{font-family:var(--fd);font-weight:400;font-size:46px;color:var(--oro3);margin-bottom:14px;line-height:1.1}
+.passo p{font-size:30px;line-height:1.4;color:rgba(245,240,232,.85)}
+.freccia{font-size:70px;color:var(--oro2);text-align:center}
+.cifre{display:flex;gap:12px;margin:10px 0 20px}
+.cifre span{width:74px;height:94px;border-radius:14px;background:var(--av);color:var(--bosco);font-family:var(--fd);font-size:60px;display:flex;align-items:center;justify-content:center;opacity:.25;transform:scale(.8)}
+.scene.on .cifre span{animation:cifra .4s ease forwards}
+.scene.on .cifre span:nth-child(1){animation-delay:2.2s}.scene.on .cifre span:nth-child(2){animation-delay:2.6s}
+.scene.on .cifre span:nth-child(3){animation-delay:3s}.scene.on .cifre span:nth-child(4){animation-delay:3.4s}
+.scene.on .cifre span:nth-child(5){animation-delay:3.8s}.scene.on .cifre span:nth-child(6){animation-delay:4.2s}
+@keyframes cifra{to{opacity:1;transform:none}}
+.adesione{margin-top:50px;display:flex;align-items:center;gap:30px;background:linear-gradient(90deg,rgba(212,170,74,.22),rgba(212,170,74,.06));border-left:8px solid var(--oro2);border-radius:16px;padding:28px 40px;font-size:34px;line-height:1.4}
+.adesione b{color:var(--oro3)}
+.adesione .ic{font-size:70px}
+
+/* ── 8 Trasparenza ───────────────────────────── */
+.due{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.col{background:#fff;border-radius:26px;padding:48px 54px;box-shadow:0 20px 50px rgba(44,62,45,.1)}
+.col h3{font-family:var(--fd);font-weight:400;font-size:54px;color:var(--bosco);margin-bottom:28px;display:flex;align-items:center;gap:20px}
+.col ul{list-style:none}
+.col li{font-size:34px;line-height:1.35;padding:16px 0 16px 62px;position:relative;color:var(--txt);border-bottom:1px solid var(--av2)}
+.col li:last-child{border:0}
+.col li::before{position:absolute;left:0;top:14px;font-size:38px}
+.si li::before{content:"✔";color:var(--verde)}
+.no li::before{content:"🔒";font-size:32px}
+.no{background:var(--bosco);color:var(--av)}
+.no h3{color:var(--oro3)} .no li{color:rgba(245,240,232,.9);border-color:rgba(245,240,232,.12)}
+.no li small{display:block;font-size:26px;color:rgba(245,240,232,.6);margin-top:4px}
+
+/* ── 9 Premio al merito ──────────────────────── */
+#s9{flex-direction:row;align-items:center;gap:100px}
+#s9 .testo{flex:1}
+#s9 .kicker{letter-spacing:.1em}.trofeo{width:440px;height:440px;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center}
+.trofeo .alone{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(237,217,138,.35),transparent 30%,transparent 50%,rgba(237,217,138,.35),transparent 80%)}
+.scene.on .trofeo .alone{animation:gira 14s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+.trofeo .med{font-size:300px;position:relative;filter:drop-shadow(0 20px 40px rgba(0,0,0,.4))}
+.citazione{font-family:var(--fd);font-style:italic;font-size:44px;line-height:1.4;color:var(--av);border-left:6px solid var(--oro2);padding-left:36px;margin-bottom:44px}
+.citazione small{display:block;font-family:var(--fu);font-style:normal;font-size:24px;letter-spacing:.1em;text-transform:uppercase;color:var(--oro2);margin-top:16px}
+.punti{list-style:none;display:flex;flex-direction:column;gap:20px}
+.punti li{font-size:34px;line-height:1.4;padding-left:56px;position:relative;color:rgba(245,240,232,.9)}
+.punti li::before{content:"✦";position:absolute;left:0;color:var(--oro2)}
+
+/* ── 10 Laboratorio musicale ─────────────────── */
+#s10 .corpo{display:grid;grid-template-columns:1fr 1.25fr;gap:70px;align-items:start}
+.foto{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.ft{position:relative;height:330px;border-radius:22px;overflow:hidden;background:linear-gradient(140deg,#3a5539,var(--bosco2));border:2px dashed rgba(212,170,74,.55)}
+.ft img{width:100%;height:100%;object-fit:cover;display:block}
+.scene.on .ft img{animation:zoom 14s ease-out forwards}
+@keyframes zoom{from{transform:scale(1)}to{transform:scale(1.1)}}
+.ft.vuoto img{display:none}
+.ft .segna{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--oro3)}
+.ft.vuoto .segna{display:flex}
+.ft .segna b{font-size:110px;line-height:1}
+.ft .segna span{font-size:24px;letter-spacing:.1em;text-transform:uppercase;color:rgba(237,217,138,.7)}
+.ft:not(.vuoto){border:0}
+.dove{margin-top:46px;background:var(--oro2);color:var(--bosco2);border-radius:22px;padding:34px 40px;font-size:36px;line-height:1.4;display:flex;gap:26px;align-items:center}
+.dove .ic{font-size:80px}
+.dove b{font-family:var(--fd);font-weight:400;font-size:52px;display:block;line-height:1.1;margin-bottom:6px}
+
+/* ── 11 Sito e QR ────────────────────────────── */
+#s11{flex-direction:row;align-items:center;gap:110px}
+#s11 .testo{flex:1}
+.qr{width:560px;flex-shrink:0;background:#fff;border-radius:34px;padding:46px;box-shadow:0 30px 70px rgba(44,62,45,.2);text-align:center}
+.qr svg{width:100%;height:auto;display:block;fill:var(--bosco2)}
+.qr p{font-size:28px;font-weight:700;color:var(--bosco);margin-top:26px}
+.url{font-family:var(--fd);font-size:56px;color:var(--bosco);margin:0 0 40px;word-break:break-all}
+.url span{color:var(--oro)}
+.elenco{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;list-style:none}
+.elenco li{font-size:34px;color:var(--txt);display:flex;gap:16px;align-items:center}
+.elenco li span{font-size:44px}
+
+/* ── 12 Date ─────────────────────────────────── */
+.date{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.dt{display:flex;gap:28px;align-items:center;background:rgba(245,240,232,.07);border:2px solid rgba(212,170,74,.3);border-radius:22px;padding:24px 28px}
+.dt .cal{width:130px;height:140px;flex-shrink:0;border-radius:16px;background:var(--av);color:var(--bosco);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.dt .cal small{font-size:22px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro)}
+.dt .cal b{font-family:var(--fd);font-weight:400;font-size:70px;margin:6px 0}
+.dt h3{font-family:var(--fd);font-weight:400;font-size:40px;color:var(--oro3);line-height:1.1}
+.dt p{font-size:28px;color:rgba(245,240,232,.8);margin-top:8px}
+.dt.primo{background:linear-gradient(150deg,var(--oro2),var(--oro));border-color:var(--oro3)}
+.dt.primo h3{color:var(--bosco2)} .dt.primo p{color:var(--bosco2);font-weight:600}
+.dt.primo .cal{background:var(--bosco2);color:var(--oro3)} .dt.primo .cal small{color:var(--oro2)}
+.saluto{margin-top:auto;padding-top:40px;font-family:var(--fd);font-size:48px;text-align:center;color:var(--oro3)}
+.saluto small{display:block;font-family:var(--fu);font-size:30px;color:rgba(245,240,232,.75);margin-top:12px}
+
+/* Aiuto per i colleghi (tasto H) */
+#aiuto{position:absolute;inset:0;z-index:50;background:rgba(15,27,18,.94);display:none;align-items:center;justify-content:center}
+#aiuto.on{display:flex}
+#aiuto div{background:var(--av);color:var(--txt);border-radius:28px;padding:60px 80px;max-width:1300px}
+#aiuto h3{font-family:var(--fd);font-weight:400;font-size:60px;color:var(--bosco);margin-bottom:28px}
+#aiuto li{font-size:34px;line-height:1.6;list-style:none}
+#aiuto kbd{display:inline-block;min-width:64px;text-align:center;font-family:var(--fu);font-weight:800;font-size:28px;background:var(--bosco);color:var(--oro3);border-radius:10px;padding:2px 14px;margin-right:16px}
+
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- 1 · COPERTINA -->
+  <section class="scene dark" id="s1">
+    <div class="anelli" aria-hidden="true"><span></span><span></span><span></span><em></em></div>
+    <p class="kicker rv">Open Day · a.s. 2026/27</p>
+    <h1 class="rv d1">Convitto<br><em>«Costaggini»</em></h1>
+    <p class="lead rv d2">Una seconda casa per i ragazzi, seguita con cura ogni giorno: dal lavoro degli educatori fino al telefono della famiglia.</p>
+    <p class="firma rv d3">Convitto annesso all'IPSSEOA «R. A. Costaggini» · Rieti</p>
+  </section>
+
+  <!-- 2 · LA SETTIMANA -->
+  <section class="scene dark" id="s2">
+    <p class="kicker rv">La settimana in Convitto</p>
+    <h2 class="rv d1">4 giorni insieme, <em>dal lunedì al giovedì</em></h2>
+    <div class="giorni">
+      <div class="gg mezzo rv d2"><b>Dom</b><span>Rientro la sera<br>20:00 – 22:00</span><i>🚌</i></div>
+      <div class="gg in rv d3"><b>Lun</b><span>In Convitto</span><i>🏠</i></div>
+      <div class="gg in rv d3"><b>Mar</b><span>In Convitto</span><i>🏠</i></div>
+      <div class="gg in rv d4"><b>Mer</b><span>In Convitto</span><i>🏠</i></div>
+      <div class="gg in rv d4"><b>Gio</b><span>In Convitto</span><i>🏠</i></div>
+      <div class="gg mezzo rv d5"><b>Ven</b><span>A scuola al mattino,<br>poi a casa</span><i>🎒</i></div>
+      <div class="gg rv d5"><b>Sab</b><span>In famiglia</span><i>❤️</i></div>
+    </div>
+    <div class="nota-sett">
+      <p class="pill rv d6">🍽️ <strong>4 pasti al giorno:</strong> colazione, pranzo, merenda e cena</p>
+      <p class="pill rv d7">👥 Educatori presenti <strong>giorno e notte</strong></p>
+    </div>
+  </section>
+
+  <!-- 3 · GIORNATA TIPO -->
+  <section class="scene light" id="s3">
+    <p class="kicker rv">Una giornata tipo</p>
+    <h2 class="rv d1">Ore strutturate, <em>spazi di libertà</em></h2>
+    <div class="linea">
+      <div class="sole" aria-hidden="true"></div>
+      <div class="tappe">
+        <div class="tp rv d1"><div class="ic">🌅</div><p class="ora">6:30</p><p class="cosa">Sveglia</p><p class="det">Ci si prepara con calma</p></div>
+        <div class="tp rv d2"><div class="ic">☕</div><p class="ora">7:00</p><p class="cosa">Colazione</p><p class="det">In mensa, tutti insieme</p></div>
+        <div class="tp rv d2"><div class="ic">📚</div><p class="ora">8:00</p><p class="cosa">Lezioni</p><p class="det">All'Istituto Alberghiero</p></div>
+        <div class="tp rv d3"><div class="ic">🍝</div><p class="ora">14:00</p><p class="cosa">Pranzo</p><p class="det">Con gli educatori</p></div>
+        <div class="tp rv d3"><div class="ic">✏️</div><p class="ora">15:30</p><p class="cosa">Studio guidato</p><p class="det">Silenzio e aiuto</p></div>
+        <div class="tp rv d4"><div class="ic">🎸</div><p class="ora">17:30</p><p class="cosa">Uscita o attività</p><p class="det">Città, sport, musica</p></div>
+        <div class="tp rv d4"><div class="ic">🍽️</div><p class="ora">19:15</p><p class="cosa">Cena</p><p class="det">Il momento delle voci</p></div>
+        <div class="tp notte rv d5"><div class="ic">🌙</div><p class="ora">22:30</p><p class="cosa">Riposo</p><p class="det">Educatori sui piani</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · GLI EDUCATORI -->
+  <section class="scene dark" id="s4">
+    <p class="kicker rv">Gli educatori</p>
+    <h2 class="rv d1">Adulti presenti, <em>a ogni ora</em></h2>
+    <div class="carte">
+      <div class="carta rv d2"><span class="ic">📚</span><h3>Studio guidato</h3><p>Ogni pomeriggio aule tranquille e un educatore a cui chiedere aiuto.</p></div>
+      <div class="carta rv d3"><span class="ic">🍽️</span><h3>A tavola insieme</h3><p>Pasti in mensa con gli educatori; allergie e intolleranze sempre segnalate.</p></div>
+      <div class="carta rv d4"><span class="ic">🌙</span><h3>Anche di notte</h3><p>Educatori notturni sui piani: i ragazzi dormono sapendo di essere al sicuro.</p></div>
+      <div class="carta rv d5"><span class="ic">📞</span><h3>Vicini alla famiglia</h3><p>Le famiglie vengono aggiornate, non solo quando c'è un problema.</p></div>
+    </div>
+  </section>
+
+  <!-- 5 · DIETRO LE QUINTE: IL GESTIONALE -->
+  <section class="scene dark" id="s5">
+    <p class="kicker rv">Dietro le quinte</p>
+    <h2 class="rv d1">Dal registro <em>alla famiglia</em></h2>
+    <div class="flusso">
+      <div class="fonti">
+        <div class="nodo rv d2"><span class="ic">🪪</span><h3>Tesserino con QR code</h3><p>Al totem della mensa e all'ingresso: pasti, uscite e rientri si registrano in un attimo.</p></div>
+        <div class="nodo rv d3"><span class="ic">📝</span><h3>Registro degli educatori</h3><p>Appello, comportamento, note e colloqui, annotati ogni giorno.</p></div>
+      </div>
+      <div class="tubo rv d4"><i></i></div>
+      <div class="rv d4"><div class="cuore"><span class="ic">🗂️</span><h3>Il gestionale del Convitto</h3><p>Un unico archivio protetto, curato dagli educatori</p></div></div>
+      <div class="tubo rv d5"><i></i></div>
+      <div class="nodo fam rv d6"><span class="ic">📱</span><h3>Area riservata famiglie</h3><p>La famiglia vede ciò che riguarda il proprio figlio, dal telefono o dal computer.</p></div>
+    </div>
+    <p class="chiosa rv d7">Un sistema costruito dentro il Convitto · nessuna app da acquistare · nessun costo per le famiglie</p>
+  </section>
+
+  <!-- 6 · AREA RISERVATA (SCHERMATA DIMOSTRATIVA) -->
+  <section class="scene light" id="s6">
+    <div class="testo">
+      <p class="kicker rv">Area riservata famiglie</p>
+      <h2 class="rv d1">Cosa vede <em>la famiglia</em></h2>
+      <ul class="voci" id="voci">
+        <li class="rv d2"><span>🍽️</span>Presenze ai pasti</li>
+        <li class="rv d2"><span>🚪</span>Uscite e rientri</li>
+        <li class="rv d3"><span>⭐</span>Comportamento</li>
+        <li class="rv d3"><span>📝</span>Note degli educatori</li>
+        <li class="rv d4"><span>🤝</span>Colloqui con la famiglia</li>
+        <li class="rv d4"><span>📨</span>Comunicazioni formali</li>
+      </ul>
+    </div>
+    <div class="telefono rv d2" aria-label="Schermata dimostrativa con dati inventati">
+      <div class="schermo">
+        <div class="app-top"><small>Area famiglie · Convitto</small><b>Luca Bianchi</b><em>Classe 2ª · Camera 14</em></div>
+        <div class="rullo">
+          <div class="box"><h4>🍽️ Pasti di questa settimana</h4>
+            <div class="pasti">
+              <b></b><b>Col.</b><b>Pra.</b><b>Mer.</b><b>Cena</b>
+              <b>Lun</b><span class="s">✓</span><span class="s">✓</span><span class="s">✓</span><span class="s">✓</span>
+              <b>Mar</b><span class="s">✓</span><span class="s">✓</span><span class="s">✓</span><span class="s">✓</span>
+              <b>Mer</b><span class="s">✓</span><span class="s">✓</span><span class="n">–</span><span class="s">✓</span>
+              <b>Gio</b><span class="s">✓</span><span class="s">✓</span><span class="s">✓</span><span class="s">✓</span>
+            </div>
+          </div>
+          <div class="box"><h4>🚪 Uscite e rientri</h4>
+            <div class="riga">Mer · uscita<i>17:34</i></div>
+            <div class="riga">Mer · rientro<i>19:08</i></div>
+            <div class="riga">Dom · arrivo in Convitto<i>20:41</i></div>
+          </div>
+          <div class="box"><h4>⭐ Comportamento</h4>
+            <div class="riga">Studio guidato<span class="tag">Impegnato</span></div>
+            <div class="riga">Cura della camera<span class="tag">Ordinata</span></div>
+          </div>
+          <div class="box"><h4>📝 Note</h4><p>Mar · Ha aiutato un compagno con gli esercizi di matematica.</p></div>
+          <div class="box"><h4>🤝 Colloqui con la famiglia</h4><div class="riga">Colloquio telefonico<i>12/11</i></div></div>
+          <div class="box"><h4>📨 Comunicazioni</h4><p>Calendario dei rientri per le vacanze di Natale.</p></div>
+        </div>
+      </div>
+      <div class="timbro">SCHERMATA DIMOSTRATIVA · DATI INVENTATI</div>
+    </div>
+  </section>
+
+  <!-- 7 · ACCESSO SICURO -->
+  <section class="scene dark" id="s7">
+    <p class="kicker rv">Accesso sicuro</p>
+    <h2 class="rv d1">Due chiavi, <em>solo per la famiglia</em></h2>
+    <div class="passi">
+      <div class="passo rv d2"><div class="n">1</div><div class="ic">🔑</div><h3>La password</h3><p>Personale, scelta dalla famiglia</p></div>
+      <div class="freccia rv d3">→</div>
+      <div class="passo rv d3"><div class="n">2</div><h3>Un codice di 6 cifre</h3>
+        <div class="cifre" aria-hidden="true"><span>4</span><span>8</span><span>2</span><span>9</span><span>1</span><span>7</span></div>
+        <p>arriva via email al momento dell'accesso</p></div>
+      <div class="freccia rv d4">→</div>
+      <div class="passo rv d4"><div class="n">3</div><div class="ic">✅</div><h3>Accesso</h3><p>Solo ai dati del proprio figlio</p></div>
+    </div>
+    <div class="adesione rv d5"><span class="ic">✍️</span><p><b>L'adesione è facoltativa.</b> Si richiede con un modulo firmato, disponibile sul sito del Convitto.</p></div>
+  </section>
+
+  <!-- 8 · TRASPARENZA, CON MISURA -->
+  <section class="scene light" id="s8">
+    <p class="kicker rv">Trasparenza, con misura</p>
+    <h2 class="rv d1">Chiaro, <em>e rispettoso di tutti</em></h2>
+    <div class="due">
+      <div class="col si rv d2"><h3>👁️ La famiglia vede</h3>
+        <ul><li>Presenze ai pasti, uscite e rientri</li><li>Comportamento e note</li><li>Colloqui con la famiglia</li><li>Comunicazioni formali del Convitto</li></ul></div>
+      <div class="col no rv d3"><h3>Resta riservato</h3>
+        <ul><li>I colloqui tra educatori e docenti<small>strumenti di lavoro della scuola</small></li>
+            <li>I dati degli altri ragazzi<small>ogni famiglia vede solo il proprio figlio</small></li>
+            <li>Nessuna classifica pubblica<small>i ragazzi non vengono messi in vetrina</small></li></ul></div>
+    </div>
+  </section>
+
+  <!-- 9 · PREMIO AL MERITO -->
+  <section class="scene dark" id="s9">
+    <div class="testo">
+      <p class="kicker rv">Premio al Merito «Educatore Francesco Monaco»</p>
+      <h2 class="rv d1">L'impegno di ogni giorno <em>viene visto</em></h2>
+      <p class="citazione rv d2">«Non una gara tra ragazzi, ma un modo per dire che la cura messa nello studio e nella vita comune viene osservata giorno dopo giorno.»<small>Dal Regolamento del Premio</small></p>
+      <ul class="punti">
+        <li class="rv d3">Gli educatori osservano ogni giorno la cura della camera e l'impegno nello studio guidato</li>
+        <li class="rv d4">Approvato dal Consiglio d'Istituto per l'a.s. 2026/27</li>
+        <li class="rv d5">Un riconoscimento dell'Istituto, senza premi in denaro</li>
+      </ul>
+    </div>
+    <div class="trofeo rv d2" aria-hidden="true"><div class="alone"></div><div class="med">🏅</div></div>
+  </section>
+
+  <!-- 10 · LABORATORIO MUSICALE -->
+  <section class="scene dark" id="s10">
+    <p class="kicker rv">Laboratorio musicale</p>
+    <h2 class="rv d1">Suonare insieme, <em>dopo lo studio</em></h2>
+    <div class="corpo">
+      <div>
+        <p class="lead rv d2">Chitarra, voce, batteria: nel tempo libero chi vuole impara uno strumento e suona con i compagni.</p>
+        <div class="dove rv d3"><span class="ic">📍</span><p><b>Al quarto piano</b>Durante la visita, gli educatori possono accompagnarLa a vederlo dal vivo.</p></div>
+      </div>
+      <!-- FOTO: mettere nella cartella "foto-laboratorio" i file strumento-1.jpg … strumento-4.jpg -->
+      <div class="foto">
+        <div class="ft rv d2"><img src="foto-laboratorio/strumento-1.jpg" alt="Strumento del Laboratorio musicale"><div class="segna"><b>🎸</b><span>Foto in arrivo</span></div></div>
+        <div class="ft rv d3"><img src="foto-laboratorio/strumento-2.jpg" alt="Strumento del Laboratorio musicale"><div class="segna"><b>🥁</b><span>Foto in arrivo</span></div></div>
+        <div class="ft rv d4"><img src="foto-laboratorio/strumento-3.jpg" alt="Strumento del Laboratorio musicale"><div class="segna"><b>🎹</b><span>Foto in arrivo</span></div></div>
+        <div class="ft rv d5"><img src="foto-laboratorio/strumento-4.jpg" alt="Strumento del Laboratorio musicale"><div class="segna"><b>🎤</b><span>Foto in arrivo</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · IL SITO -->
+  <section class="scene light" id="s11">
+    <div class="testo">
+      <p class="kicker rv">Il sito del Convitto</p>
+      <h2 class="rv d1">Tutto il Convitto, <em>sul Suo telefono</em></h2>
+      <p class="url rv d2">convitto.<span>alberghierorieti</span>.edu.it</p>
+      <ul class="elenco">
+        <li class="rv d3"><span>🕘</span>La giornata tipo</li>
+        <li class="rv d3"><span>🥗</span>Il menù della settimana</li>
+        <li class="rv d4"><span>🧭</span>Il tour virtuale</li>
+        <li class="rv d4"><span>📝</span>Come iscriversi</li>
+        <li class="rv d5"><span>🔐</span>L'Area riservata famiglie</li>
+        <li class="rv d5"><span>📅</span>Le date degli Open Day</li>
+      </ul>
+    </div>
+    <div class="qr rv d2"><svg role="img" aria-label="QR code del sito del Convitto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" shape-rendering="crispEdges"><path d="M0,0h1v1h-1zM1,0h1v1h-1zM2,0h1v1h-1zM3,0h1v1h-1zM4,0h1v1h-1zM5,0h1v1h-1zM6,0h1v1h-1zM9,0h1v1h-1zM10,0h1v1h-1zM11,0h1v1h-1zM14,0h1v1h-1zM16,0h1v1h-1zM18,0h1v1h-1zM19,0h1v1h-1zM20,0h1v1h-1zM22,0h1v1h-1zM23,0h1v1h-1zM24,0h1v1h-1zM25,0h1v1h-1zM26,0h1v1h-1zM27,0h1v1h-1zM28,0h1v1h-1zM0,1h1v1h-1zM6,1h1v1h-1zM10,1h1v1h-1zM12,1h1v1h-1zM14,1h1v1h-1zM15,1h1v1h-1zM17,1h1v1h-1zM22,1h1v1h-1zM28,1h1v1h-1zM0,2h1v1h-1zM2,2h1v1h-1zM3,2h1v1h-1zM4,2h1v1h-1zM6,2h1v1h-1zM8,2h1v1h-1zM9,2h1v1h-1zM10,2h1v1h-1zM12,2h1v1h-1zM14,2h1v1h-1zM15,2h1v1h-1zM16,2h1v1h-1zM19,2h1v1h-1zM22,2h1v1h-1zM24,2h1v1h-1zM25,2h1v1h-1zM26,2h1v1h-1zM28,2h1v1h-1zM0,3h1v1h-1zM2,3h1v1h-1zM3,3h1v1h-1zM4,3h1v1h-1zM6,3h1v1h-1zM8,3h1v1h-1zM12,3h1v1h-1zM13,3h1v1h-1zM15,3h1v1h-1zM17,3h1v1h-1zM20,3h1v1h-1zM22,3h1v1h-1zM24,3h1v1h-1zM25,3h1v1h-1zM26,3h1v1h-1zM28,3h1v1h-1zM0,4h1v1h-1zM2,4h1v1h-1zM3,4h1v1h-1zM4,4h1v1h-1zM6,4h1v1h-1zM8,4h1v1h-1zM10,4h1v1h-1zM12,4h1v1h-1zM13,4h1v1h-1zM16,4h1v1h-1zM17,4h1v1h-1zM18,4h1v1h-1zM19,4h1v1h-1zM20,4h1v1h-1zM22,4h1v1h-1zM24,4h1v1h-1zM25,4h1v1h-1zM26,4h1v1h-1zM28,4h1v1h-1zM0,5h1v1h-1zM6,5h1v1h-1zM8,5h1v1h-1zM13,5h1v1h-1zM14,5h1v1h-1zM15,5h1v1h-1zM16,5h1v1h-1zM18,5h1v1h-1zM20,5h1v1h-1zM22,5h1v1h-1zM28,5h1v1h-1zM0,6h1v1h-1zM1,6h1v1h-1zM2,6h1v1h-1zM3,6h1v1h-1zM4,6h1v1h-1zM5,6h1v1h-1zM6,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM12,6h1v1h-1zM14,6h1v1h-1zM16,6h1v1h-1zM18,6h1v1h-1zM20,6h1v1h-1zM22,6h1v1h-1zM23,6h1v1h-1zM24,6h1v1h-1zM25,6h1v1h-1zM26,6h1v1h-1zM27,6h1v1h-1zM28,6h1v1h-1zM8,7h1v1h-1zM10,7h1v1h-1zM15,7h1v1h-1zM16,7h1v1h-1zM18,7h1v1h-1zM20,7h1v1h-1zM0,8h1v1h-1zM2,8h1v1h-1zM3,8h1v1h-1zM4,8h1v1h-1zM5,8h1v1h-1zM6,8h1v1h-1zM9,8h1v1h-1zM10,8h1v1h-1zM12,8h1v1h-1zM13,8h1v1h-1zM14,8h1v1h-1zM15,8h1v1h-1zM17,8h1v1h-1zM22,8h1v1h-1zM23,8h1v1h-1zM24,8h1v1h-1zM25,8h1v1h-1zM26,8h1v1h-1zM1,9h1v1h-1zM2,9h1v1h-1zM3,9h1v1h-1zM4,9h1v1h-1zM7,9h1v1h-1zM11,9h1v1h-1zM12,9h1v1h-1zM13,9h1v1h-1zM16,9h1v1h-1zM17,9h1v1h-1zM18,9h1v1h-1zM19,9h1v1h-1zM20,9h1v1h-1zM21,9h1v1h-1zM22,9h1v1h-1zM23,9h1v1h-1zM24,9h1v1h-1zM28,9h1v1h-1zM5,10h1v1h-1zM6,10h1v1h-1zM10,10h1v1h-1zM15,10h1v1h-1zM18,10h1v1h-1zM21,10h1v1h-1zM22,10h1v1h-1zM4,11h1v1h-1zM5,11h1v1h-1zM7,11h1v1h-1zM8,11h1v1h-1zM9,11h1v1h-1zM14,11h1v1h-1zM16,11h1v1h-1zM19,11h1v1h-1zM23,11h1v1h-1zM24,11h1v1h-1zM25,11h1v1h-1zM27,11h1v1h-1zM0,12h1v1h-1zM3,12h1v1h-1zM6,12h1v1h-1zM12,12h1v1h-1zM13,12h1v1h-1zM14,12h1v1h-1zM17,12h1v1h-1zM23,12h1v1h-1zM25,12h1v1h-1zM26,12h1v1h-1zM0,13h1v1h-1zM1,13h1v1h-1zM5,13h1v1h-1zM10,13h1v1h-1zM12,13h1v1h-1zM14,13h1v1h-1zM18,13h1v1h-1zM19,13h1v1h-1zM20,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM24,13h1v1h-1zM28,13h1v1h-1zM0,14h1v1h-1zM1,14h1v1h-1zM2,14h1v1h-1zM6,14h1v1h-1zM8,14h1v1h-1zM9,14h1v1h-1zM11,14h1v1h-1zM12,14h1v1h-1zM14,14h1v1h-1zM15,14h1v1h-1zM16,14h1v1h-1zM25,14h1v1h-1zM26,14h1v1h-1zM0,15h1v1h-1zM1,15h1v1h-1zM3,15h1v1h-1zM5,15h1v1h-1zM9,15h1v1h-1zM10,15h1v1h-1zM15,15h1v1h-1zM20,15h1v1h-1zM21,15h1v1h-1zM23,15h1v1h-1zM27,15h1v1h-1zM0,16h1v1h-1zM3,16h1v1h-1zM6,16h1v1h-1zM7,16h1v1h-1zM9,16h1v1h-1zM10,16h1v1h-1zM11,16h1v1h-1zM17,16h1v1h-1zM19,16h1v1h-1zM25,16h1v1h-1zM26,16h1v1h-1zM0,17h1v1h-1zM1,17h1v1h-1zM2,17h1v1h-1zM3,17h1v1h-1zM5,17h1v1h-1zM8,17h1v1h-1zM13,17h1v1h-1zM16,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM22,17h1v1h-1zM23,17h1v1h-1zM24,17h1v1h-1zM26,17h1v1h-1zM28,17h1v1h-1zM0,18h1v1h-1zM2,18h1v1h-1zM3,18h1v1h-1zM6,18h1v1h-1zM8,18h1v1h-1zM11,18h1v1h-1zM13,18h1v1h-1zM14,18h1v1h-1zM15,18h1v1h-1zM17,18h1v1h-1zM18,18h1v1h-1zM20,18h1v1h-1zM23,18h1v1h-1zM26,18h1v1h-1zM0,19h1v1h-1zM2,19h1v1h-1zM3,19h1v1h-1zM7,19h1v1h-1zM8,19h1v1h-1zM9,19h1v1h-1zM10,19h1v1h-1zM12,19h1v1h-1zM13,19h1v1h-1zM15,19h1v1h-1zM16,19h1v1h-1zM18,19h1v1h-1zM21,19h1v1h-1zM23,19h1v1h-1zM27,19h1v1h-1zM0,20h1v1h-1zM2,20h1v1h-1zM4,20h1v1h-1zM5,20h1v1h-1zM6,20h1v1h-1zM9,20h1v1h-1zM11,20h1v1h-1zM14,20h1v1h-1zM15,20h1v1h-1zM16,20h1v1h-1zM17,20h1v1h-1zM20,20h1v1h-1zM21,20h1v1h-1zM22,20h1v1h-1zM23,20h1v1h-1zM24,20h1v1h-1zM26,20h1v1h-1zM27,20h1v1h-1zM28,20h1v1h-1zM8,21h1v1h-1zM10,21h1v1h-1zM12,21h1v1h-1zM16,21h1v1h-1zM17,21h1v1h-1zM18,21h1v1h-1zM20,21h1v1h-1zM24,21h1v1h-1zM25,21h1v1h-1zM26,21h1v1h-1zM27,21h1v1h-1zM28,21h1v1h-1zM0,22h1v1h-1zM1,22h1v1h-1zM2,22h1v1h-1zM3,22h1v1h-1zM4,22h1v1h-1zM5,22h1v1h-1zM6,22h1v1h-1zM10,22h1v1h-1zM11,22h1v1h-1zM12,22h1v1h-1zM15,22h1v1h-1zM16,22h1v1h-1zM17,22h1v1h-1zM19,22h1v1h-1zM20,22h1v1h-1zM22,22h1v1h-1zM24,22h1v1h-1zM25,22h1v1h-1zM26,22h1v1h-1zM0,23h1v1h-1zM6,23h1v1h-1zM8,23h1v1h-1zM10,23h1v1h-1zM11,23h1v1h-1zM14,23h1v1h-1zM15,23h1v1h-1zM16,23h1v1h-1zM19,23h1v1h-1zM20,23h1v1h-1zM24,23h1v1h-1zM27,23h1v1h-1zM0,24h1v1h-1zM2,24h1v1h-1zM3,24h1v1h-1zM4,24h1v1h-1zM6,24h1v1h-1zM8,24h1v1h-1zM11,24h1v1h-1zM12,24h1v1h-1zM15,24h1v1h-1zM17,24h1v1h-1zM20,24h1v1h-1zM21,24h1v1h-1zM22,24h1v1h-1zM23,24h1v1h-1zM24,24h1v1h-1zM26,24h1v1h-1zM27,24h1v1h-1zM28,24h1v1h-1zM0,25h1v1h-1zM2,25h1v1h-1zM3,25h1v1h-1zM4,25h1v1h-1zM6,25h1v1h-1zM8,25h1v1h-1zM9,25h1v1h-1zM14,25h1v1h-1zM16,25h1v1h-1zM20,25h1v1h-1zM25,25h1v1h-1zM26,25h1v1h-1zM27,25h1v1h-1zM28,25h1v1h-1zM0,26h1v1h-1zM2,26h1v1h-1zM3,26h1v1h-1zM4,26h1v1h-1zM6,26h1v1h-1zM8,26h1v1h-1zM10,26h1v1h-1zM11,26h1v1h-1zM12,26h1v1h-1zM13,26h1v1h-1zM14,26h1v1h-1zM15,26h1v1h-1zM16,26h1v1h-1zM17,26h1v1h-1zM18,26h1v1h-1zM19,26h1v1h-1zM20,26h1v1h-1zM21,26h1v1h-1zM22,26h1v1h-1zM23,26h1v1h-1zM24,26h1v1h-1zM25,26h1v1h-1zM26,26h1v1h-1zM27,26h1v1h-1zM0,27h1v1h-1zM6,27h1v1h-1zM9,27h1v1h-1zM10,27h1v1h-1zM11,27h1v1h-1zM12,27h1v1h-1zM13,27h1v1h-1zM15,27h1v1h-1zM18,27h1v1h-1zM20,27h1v1h-1zM22,27h1v1h-1zM23,27h1v1h-1zM25,27h1v1h-1zM27,27h1v1h-1zM0,28h1v1h-1zM1,28h1v1h-1zM2,28h1v1h-1zM3,28h1v1h-1zM4,28h1v1h-1zM5,28h1v1h-1zM6,28h1v1h-1zM8,28h1v1h-1zM9,28h1v1h-1zM14,28h1v1h-1zM17,28h1v1h-1zM22,28h1v1h-1zM24,28h1v1h-1zM26,28h1v1h-1z"/></svg><p>📷 Inquadri il codice con il telefono</p></div>
+  </section>
+
+  <!-- 12 · PROSSIME DATE -->
+  <section class="scene dark" id="s12">
+    <p class="kicker rv">Open Day e Lab Experience</p>
+    <h2 class="rv d1">I prossimi <em>appuntamenti</em></h2>
+    <div class="date" id="date"></div>
+    <p class="saluto rv d6">Grazie della visita<small>Per qualsiasi domanda, chieda pure a un educatore: siamo qui per questo.</small></p>
+  </section>
+
+  <div id="marchio">Convitto «Costaggini» · Rieti</div>
+  <nav id="comandi" aria-label="Comandi della presentazione">
+    <button class="btn" id="bIndietro" type="button">◀ Indietro</button>
+    <button class="btn" id="bFerma" type="button">⏸ Ferma</button>
+    <button class="btn" id="bAvanti" type="button">Avanti ▶</button>
+    <span id="contatore">1 <small>/ 12</small></span>
+    <button class="btn" id="bScene" type="button">☰ Tutte le scene</button>
+  </nav>
+  <div id="barra"><i></i></div>
+
+  <div id="menu" role="dialog" aria-label="Tutte le scene"><h3>Vai alla scena…</h3><div class="griglia"></div></div>
+
+  <div id="aiuto"><div>
+    <h3>Come si usa</h3>
+    <ul>
+      <li><kbd>F11</kbd>schermo intero (premere di nuovo per uscire)</li>
+      <li>In basso: <b>◀ Indietro</b> · <b>⏸ Ferma / ▶ Riparti</b> · <b>Avanti ▶</b> · <b>☰ Tutte le scene</b></li>
+      <li><kbd>→</kbd><kbd>←</kbd>avanti / indietro · <kbd>Spazio</kbd>ferma / riparti</li>
+      <li><kbd>H</kbd>mostra o nasconde questo aiuto</li>
+      <li>«Ferma» la blocca finché non si preme «Riparti». Se invece la si sfoglia senza fermarla, dopo 30 secondi riparte da sola.</li>
+    </ul>
+  </div></div>
+</div>
+
+<!-- Sul sito legge le date aggiornate; offline il file non c'è e vale la copia qui sotto -->
+<script src="../openday-date.js"></script>
+<script>
+(function () {
+  var DURATA = 14000;        /* millisecondi per scena */
+  var RIPRESA = 30000;       /* dopo uno sfoglio manuale, riparte da sola */
+
+  /* Copia di riserva delle date di openday-date.js (27/10/2026), usata solo
+     offline. Le date già passate spariscono da sole. */
+  var DATE_OPENDAY = [
+    { giorno: '2026-11-28', tipo: 'openday', inizio: '09:00', fine: '13:00' },
+    { giorno: '2026-12-02', tipo: 'lab',     inizio: '14:20', fine: '18:10' },
+    { giorno: '2026-12-12', tipo: 'openday', inizio: '09:00', fine: '13:00' },
+    { giorno: '2026-12-13', tipo: 'openday', inizio: '09:00', fine: '13:00' },
+    { giorno: '2026-12-16', tipo: 'lab',     inizio: '14:20', fine: '18:10' },
+    { giorno: '2026-12-19', tipo: 'openday', inizio: '09:00', fine: '13:00' },
+    { giorno: '2027-01-10', tipo: 'openday', inizio: '09:00', fine: '13:00' },
+    { giorno: '2027-01-16', tipo: 'openday', inizio: '09:00', fine: '13:00' }
+  ];
+  var NOMI = { openday: 'Open Day', lab: 'Lab Experience' };
+  var GIORNI = ['dom', 'lun', 'mar', 'mer', 'gio', 'ven', 'sab'];
+  var GIORNI_L = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
+  var MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+
+  function $(s) { return document.querySelector(s); }
+  var stage = $('#stage'), scene = [].slice.call(document.querySelectorAll('.scene'));
+  var barra = $('#barra i');
+  var TITOLI = ['Copertina', 'La settimana', 'La giornata tipo', 'Gli educatori', 'Dal registro alla famiglia',
+    'Area riservata famiglie', 'Accesso sicuro', 'Cosa resta riservato', 'Premio al Merito',
+    'Laboratorio musicale', 'Il sito', 'Prossimi Open Day'];
+
+  /* Adatta il palco 1920×1080 allo schermo */
+  function scala() {
+    var s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+  }
+  addEventListener('resize', scala); scala();
+
+  /* Date: tiene solo quelle future, al massimo 6 */
+  (function () {
+    var ora = new Date();
+    var fonte = (window.OPENDAY && window.OPENDAY.eventi) || DATE_OPENDAY;
+    var futuri = fonte.filter(function (e) { return new Date(e.giorno + 'T' + e.fine + ':00') > ora; }).slice(0, 6);
+    var box = $('#date');
+    if (!futuri.length) {
+      box.innerHTML = '<p class="lead rv d2">Le date dei prossimi Open Day saranno pubblicate sul sito del Convitto.</p>';
+      return;
+    }
+    box.innerHTML = futuri.map(function (e, i) {
+      var d = new Date(e.giorno + 'T' + e.inizio + ':00');
+      return '<div class="dt rv d' + Math.min(i + 2, 7) + (i === 0 ? ' primo' : '') + '">'
+        + '<div class="cal"><small>' + GIORNI[d.getDay()] + '</small><b>' + d.getDate() + '</b><small>' + MESI[d.getMonth()].slice(0, 3) + '</small></div>'
+        + '<div><h3>' + NOMI[e.tipo] + '</h3>'
+        + '<p>' + (i === 0 ? '<b>★ Il prossimo</b><br>' : '') + GIORNI_L[d.getDay()] + ' ' + d.getDate() + ' ' + MESI[d.getMonth()] + '<br>ore ' + e.inizio.replace(/^0/, '') + ' – ' + e.fine + '</p></div></div>';
+    }).join('');
+  })();
+
+  /* Foto del laboratorio: se il file manca resta il segnaposto */
+  document.querySelectorAll('.ft img').forEach(function (img) {
+    function vuoto() { img.parentNode.classList.add('vuoto'); }
+    img.addEventListener('error', vuoto);
+    if (img.complete && !img.naturalWidth) vuoto();
+  });
+
+  /* Navigazione */
+  var griglia = $('#menu .griglia');
+  griglia.innerHTML = TITOLI.map(function (t, i) {
+    return '<button type="button" data-n="' + i + '"><b>' + (i + 1) + '</b>' + t + '</button>';
+  }).join('');
+  var voceMenu = [].slice.call(griglia.children);
+  var cur = -1, inizio = 0, pausa = false, sospesa = 0;
+
+  function vai(n) {
+    n = (n + scene.length) % scene.length;
+    if (cur >= 0) scene[cur].classList.remove('on');
+    cur = n;
+    void scene[cur].offsetWidth;      /* fa ripartire le animazioni */
+    scene[cur].classList.add('on');
+    voceMenu.forEach(function (d, i) { d.classList.toggle('on', i === cur); });
+    $('#contatore').innerHTML = (cur + 1) + ' <small>/ ' + scene.length + '</small>';
+    inizio = performance.now();
+  }
+  function manuale(n) { vai(n); sospesa = performance.now() + RIPRESA; }
+
+  /* Scena 6: evidenzia una voce per volta, al ritmo del telefono */
+  var voci = [].slice.call(document.querySelectorAll('#voci li'));
+  function evidenzia(t) {
+    if (scene[cur].id !== 's6') return;
+    var k = Math.floor((t - inizio - 2500) / 1700);
+    voci.forEach(function (v, i) { v.classList.toggle('acceso', k >= 0 && i === k % voci.length); });
+  }
+
+  function giro() {
+    var t = performance.now();
+    var attesa = pausa || t < sospesa || $('#menu').classList.contains('on');
+    if (attesa) inizio = t - Math.min(t - inizio, DURATA);
+    var p = Math.min((t - inizio) / DURATA, 1);
+    barra.style.width = (attesa && !pausa ? 100 : p * 100) + '%';
+    if (!attesa && p >= 1) vai(cur + 1);
+    evidenzia(t);
+  }
+
+  function pausaSwitch() {
+    pausa = !pausa; sospesa = 0;
+    document.body.classList.toggle('inpausa', pausa);
+    $('#bFerma').textContent = pausa ? '▶ Riparti' : '⏸ Ferma';
+    if (!pausa) inizio = performance.now();
+  }
+  function menu(apri) { $('#menu').classList.toggle('on', apri); }
+
+  function premi(sel, fn) {
+    $(sel).addEventListener('click', function (e) { e.stopPropagation(); fn(); this.blur(); });
+  }
+  premi('#bIndietro', function () { manuale(cur - 1); });
+  premi('#bAvanti', function () { manuale(cur + 1); });
+  premi('#bFerma', pausaSwitch);
+  premi('#bScene', function () { menu(true); });
+  griglia.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    e.stopPropagation(); menu(false); manuale(+b.dataset.n);
+  });
+
+  addEventListener('keydown', function (e) {
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown' || k === 'Enter') manuale(cur + 1);
+    else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'Backspace') manuale(cur - 1);
+    else if (k === ' ') { e.preventDefault(); pausaSwitch(); }
+    else if (k === 'Home') manuale(0);
+    else if (k === 'h' || k === 'H' || k === '?') $('#aiuto').classList.toggle('on');
+    else if (k === 'm' || k === 'M') menu(!$('#menu').classList.contains('on'));
+    else if (k === 'Escape') { $('#aiuto').classList.remove('on'); menu(false); }
+    else return;
+    e.preventDefault();
+  });
+  /* Un clic fuori dai pulsanti chiude aiuto ed elenco, ma non sposta le scene:
+     l'educatore può indicare lo schermo senza farle avanzare per sbaglio */
+  addEventListener('click', function () { $('#aiuto').classList.remove('on'); menu(false); });
+  /* Sfoglio col dito su schermi touch */
+  var x0 = null;
+  addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 60) { manuale(cur + (dx < 0 ? 1 : -1)); e.preventDefault(); }
+  });
+
+  /* Nasconde il puntatore quando non si muove */
+  var tc;
+  addEventListener('mousemove', function () {
+    document.body.classList.remove('nocursor'); clearTimeout(tc);
+    tc = setTimeout(function () { document.body.classList.add('nocursor'); }, 2500);
+  });
+
+  /* Tiene acceso lo schermo, dove il browser lo consente */
+  function svegli() { try { navigator.wakeLock && navigator.wakeLock.request('screen').catch(function () {}); } catch (e) {} }
+  svegli(); document.addEventListener('visibilitychange', function () { if (!document.hidden) svegli(); });
+
+  vai(0);
+  setInterval(giro, 100);
+})();
+</script>
+</body>
+</html>

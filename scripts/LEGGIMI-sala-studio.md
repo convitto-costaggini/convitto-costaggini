@@ -56,7 +56,7 @@ Dal pulsante «📝 Verifica» (Le mie lezioni, Archivio, dopo la pubblicazione)
   ricompare subito il riquadro per entrare, e quanto scritto resta lì; «Crea una lezione» ricorda i campi anche se il
   telefono ricarica la pagina tornando dall'app dell'IA (`localStorage` `studio-bozza`, cancellata alla pubblicazione).
 - Se si incollano per sbaglio le istruzioni (o lo schema con i segnaposto `...`) al posto della risposta dell'IA, la pagina
-  lo dice e la funzione rifiuta la lezione. La creazione automatica si vede solo se è attiva (`ANTHROPIC_API_KEY`).
+  lo dice e la funzione rifiuta la lezione.
 - Si entra con la **mail istituzionale** (`@alberghierorieti.it` o `@alberghierorieti.edu.it`): chi la scrive riceve per posta
   un codice di 6 cifre (vale 10 minuti, si usa una volta, 5 tentativi, 5 invii all'ora). Nessun elenco da tenere aggiornato:
   entra chiunque abbia una mail della scuola. Del codice il database conserva solo l'impronta (tabella `studio_otp`).
@@ -95,10 +95,10 @@ Dal pulsante «📝 Verifica» (Le mie lezioni, Archivio, dopo la pubblicazione)
       `scripts/lingue-invio-codici.gs`, poi Esegui il deployment → Gestisci deployment → modifica (matita) →
       Versione: Nuova versione → Esegui il deployment. L'URL resta lo stesso.
 
-## Facoltativo: creazione automatica (a consumo)
-Nella pagina c'è anche "Creazione automatica": il sito manda le foto, o il solo argomento, direttamente all'IA, senza passare da
-Claude, ChatGPT o Gemini. Funziona solo aggiungendo il segreto `ANTHROPIC_API_KEY` (chiave API da console.anthropic.com,
-a consumo: stima 10-30 centesimi a lezione). Senza chiave quel riquadro avvisa che non è attivo; tutto il resto funziona.
+## Nessuna IA a pagamento
+Scelta del 27/10/2026: la scuola non paga alcun servizio di IA. La "creazione automatica" (il sito che mandava foto e argomento
+all'IA con una chiave API a consumo) è stata tolta dalla pagina e dalla funzione: il sito non manda nulla a servizi di IA e
+riceve solo il testo della lezione incollato dall'educatore. Il segreto `ANTHROPIC_API_KEY`, se c'era, non serve più.
 
 ## Limiti e controlli
 - Solo chi è entrato (mail della scuola o codice di scorta) può pubblicare, vedere l'Archivio, modificare; al massimo 30 lezioni nuove all'ora in tutto.

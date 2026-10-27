@@ -64,7 +64,8 @@ Nessuna revisione sistematica: un docente, mentre usa il vocabolario, se una fra
   carica `lingue/revisione.js` e mette `REVISIONE.attr(chiave, lingua, testo)` sull'elemento della frase: le spunte
   e il link in fondo arrivano da soli.
 - Le spunte stanno nella tabella `lingue_revisioni` (chiave = sezione|frase italiana, lingua, docente). I docenti
-  vedono i nomi di chi ha già spuntato e i suggerimenti degli altri; le mail non escono dalla funzione.
+  vedono i nomi di chi ha già spuntato e i suggerimenti degli altri. Di chi spunta o corregge si conserva solo il
+  nome ricavato dalla mail, mai la mail (scelta del 27/10/2026).
 - **Le correzioni valgono subito per tutti** (scelta del 24/10/2026): con ✏️ il docente riscrive la frase; la nuova
   versione si vede da quel momento su tutte le pagine (testo, esercizi, giochi, voce), con il suo nome. Un collega può
   annullarla con «↩ Annulla la correzione»: torna la versione precedente. Niente si cancella: tabella

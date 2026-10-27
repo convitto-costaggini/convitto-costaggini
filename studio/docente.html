@@ -82,22 +82,8 @@
         <p class="dc-err" id="dc-err2" role="alert"></p>
       </div>
 
-      <div class="st-card" id="dc-auto" hidden>
-        <details>
-          <summary>📸 Creazione automatica, senza passare dall'IA</summary>
-          <p class="st-nota">Il sito manda le foto, o il solo argomento, direttamente all'IA della scuola: niente da copiare e incollare. Usa argomento, materia, anno e indicazioni (passo 1), autore e condivisione (passo 3).</p>
-          <div class="st-azioni">
-            <label class="st-btn pieno">📷 Scatta una foto<input type="file" accept="image/*" capture="environment" id="dc-cam" hidden/></label>
-            <label class="st-btn">🖼️ Scegli dalla galleria<input type="file" accept="image/*" multiple id="dc-gal" hidden/></label>
-          </div>
-          <div id="dc-foto"></div>
-          <div class="st-azioni"><button type="button" class="st-btn oro" id="dc-crea" disabled>✨ Crea la lezione</button><span class="st-nota" id="dc-quante"></span></div>
-          <p class="dc-err" id="dc-err" role="alert"></p>
-        </details>
-      </div>
     </div>
 
-    <div id="dc-lavoro" hidden></div>
     <div id="dc-esito" hidden></div>
 
     <h3 id="mie">📚 Le mie lezioni</h3>
@@ -122,7 +108,6 @@
 (function () {
   'use strict';
   var E = window.EDUCATORI, esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
-  var MAX = 8, foto = [];
   var BASE = location.origin + '/studio/lezione.html';
 
   $('dc-aut').value = E.autore();
@@ -133,7 +118,7 @@
     presenta();
     if (chi && chi.nome && !$('dc-aut').value) $('dc-aut').value = chi.nome;
     lezioni = null; caricaElenco();
-  }, alControllo: function (r) { $('dc-auto').hidden = !r.automatica; } });
+  } });
   window.addEventListener('hashchange', function () { if (location.hash === '#mie') $('mie').scrollIntoView({ behavior: 'smooth' }); });
   E.riempiMaterie($('dc-mat'));
   E.riempiAnni($('dc-anno'));
@@ -151,67 +136,6 @@
     var m = document.getElementById('ac-mail'); if (m) m.focus();
     return true;
   }
-
-  /* ───── foto: ridotte nel browser (lato lungo 1600 px) prima dell'invio ───── */
-  function riduci(file) {
-    return new Promise(function (ok, ko) {
-      var img = new Image(), url = URL.createObjectURL(file);
-      img.onload = function () {
-        var s = Math.min(1, 1600 / Math.max(img.naturalWidth, img.naturalHeight)), c = document.createElement('canvas');
-        c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
-        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
-        ok(c.toDataURL('image/jpeg', 0.85));
-      };
-      img.onerror = function () { URL.revokeObjectURL(url); ko(new Error('immagine')); };
-      img.src = url;
-    });
-  }
-  function aggiungi(files) {
-    var nuove = Array.prototype.slice.call(files || []).filter(function (f) { return /^image\//.test(f.type); });
-    if (foto.length + nuove.length > MAX) { STUDIO.toast('Al massimo ' + MAX + ' foto'); nuove = nuove.slice(0, MAX - foto.length); }
-    Promise.all(nuove.map(riduci)).then(function (d) { foto = foto.concat(d); disegnaFoto(); })
-      .catch(function () { STUDIO.toast('Una foto non si legge: riprova con un\'altra'); });
-  }
-  function disegnaFoto() {
-    $('dc-foto').innerHTML = foto.length ? '<div class="dc-foto">' + foto.map(function (f, i) {
-      return '<figure><img src="' + f + '" alt="Foto ' + (i + 1) + '"/><figcaption>' + (i + 1) + '</figcaption><button type="button" data-via="' + i + '" aria-label="Togli la foto ' + (i + 1) + '">✕</button></figure>';
-    }).join('') + '</div>' : '<div class="dc-vuoto" style="margin-top:1rem"><div class="big">📖</div>Pagine del libro, appunti o una mappa concettuale. Senza foto la lezione nasce dall\'argomento del passo 1.</div>';
-    var arg = $('dc-arg').value.trim();
-    $('dc-crea').disabled = !foto.length && !arg;
-    $('dc-quante').textContent = foto.length ? foto.length + (foto.length === 1 ? ' foto pronta' : ' foto pronte') : arg ? 'Nessuna foto: userò l\'argomento.' : 'Aggiungi una foto o scrivi l\'argomento (passo 1).';
-  }
-  $('dc-foto').addEventListener('click', function (e) { var b = e.target.closest('[data-via]'); if (b) { foto.splice(+b.getAttribute('data-via'), 1); disegnaFoto(); } });
-  $('dc-cam').onchange = function () { aggiungi(this.files); this.value = ''; };
-  $('dc-gal').onchange = function () { aggiungi(this.files); this.value = ''; };
-  $('dc-arg').addEventListener('input', disegnaFoto);
-  disegnaFoto();
-
-  /* ───── creazione automatica (a consumo) ───── */
-  var FASI = ['Leggo la fonte 📖', 'Trovo le idee chiave 💡', 'Invento la parola magica e il palazzo della memoria 🧠', 'Scrivo la filastrocca 🎵', 'Preparo quiz, vero o falso, abbinamenti ✏️', 'Mescolo le flashcard 🃏', 'Ultimi ritocchi ✨'];
-  $('dc-crea').onclick = function () {
-    var d = dati();
-    $('dc-err').textContent = '';
-    if (nonEntrato($('dc-err'))) return;
-    d.argomento = $('dc-arg').value.trim(); d.note = $('dc-note').value.trim();
-    d.immagini = foto.map(function (f) { return { tipo: 'image/jpeg', dati: f.split(',')[1] }; });
-    $('dc-modulo').hidden = true; $('dc-esito').hidden = true;
-    var lav = $('dc-lavoro'); lav.hidden = false;
-    lav.innerHTML = '<div class="st-card dc-lavoro st-entra"><div class="ruota">🧑‍🍳</div><h2>Sto cucinando la lezione…</h2><p class="st-sot">Di solito ci vuole circa un minuto. <span id="dc-sec">0</span> s</p><ol class="dc-fasi">' + FASI.map(function (f) { return '<li>' + f + '</li>'; }).join('') + '</ol></div>';
-    lav.scrollIntoView({ behavior: 'smooth' });
-    var t0 = Date.now(), lis = lav.querySelectorAll('.dc-fasi li');
-    var iv = setInterval(function () {
-      var s = Math.round((Date.now() - t0) / 1000), k = Math.min(lis.length - 1, Math.floor(s / 11));
-      $('dc-sec').textContent = s;
-      lis.forEach(function (li, i) { li.className = i < k ? 'ok' : i === k ? 'on' : ''; });
-    }, 500);
-    E.chiama(d).then(function (r) {
-      clearInterval(iv); lav.hidden = true;
-      if (!r.ok) { $('dc-modulo').hidden = false; $('dc-err').textContent = r.errore === 'illeggibile' ? '📷 ' + (r.messaggio || 'Le foto non si leggono bene.') + ' Rifai le foto e riprova.' : r.messaggioErrore; return; }
-      caricaElenco();
-      foto = []; disegnaFoto(); $('dc-note').value = '';
-      esito(r.lezione, r.codice);
-    });
-  };
 
   /* ───── risultato: QR, link, cartello, modifica ───── */
   function esito(L, codice, urlLungo) {
@@ -294,7 +218,7 @@
   }
   try {
     var B = JSON.parse(localStorage.getItem('studio-bozza') || 'null');
-    if (B) { CAMPI.forEach(function (id) { if (B[id]) $(id).value = B[id]; }); $('dc-cond').checked = !!B.cond; materia(); controlla(); disegnaFoto(); }
+    if (B) { CAMPI.forEach(function (id) { if (B[id]) $(id).value = B[id]; }); $('dc-cond').checked = !!B.cond; materia(); controlla(); }
   } catch (e) {}
   CAMPI.concat('dc-cond').forEach(function (id) { $(id).addEventListener('change', function () { bozza(); }); $(id).addEventListener('input', function () { bozza(); }); });
 

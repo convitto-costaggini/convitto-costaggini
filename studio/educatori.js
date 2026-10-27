@@ -58,7 +58,6 @@ window.EDUCATORI = (function () {
     email: 'Serve una mail della scuola: @alberghierorieti.it o @alberghierorieti.edu.it.', otp: 'Codice sbagliato o scaduto: controlla la mail o richiedine un altro.',
     'troppo-presto': 'Aspetta mezzo minuto prima di chiedere un altro codice.', troppi: 'Hai chiesto troppi codici: riprova tra un\'ora.',
     posta: 'In questo momento non riesco a spedire la mail. Se hai il codice di scorta, usa quello.',
-    automatica: 'La creazione automatica non è attivata (serve la chiave API, a consumo). Usate i passi 1-2-3 con Claude, ChatGPT o Gemini.',
     lezione: 'La lezione non è completa: servono almeno il titolo e un\'idea chiave.',
     foto: 'Aggiungete almeno una foto oppure scrivete l\'argomento (passo 1). Se le foto ci sono, riprovate con foto più piccole o in JPEG.',
     troppe: 'Sono state create molte lezioni nell\'ultima ora: riprova tra un po\'.',

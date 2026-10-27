@@ -3,7 +3,6 @@
 // Accesso di docenti ed educatori: con la mail istituzionale e un codice monouso spedito per posta (come /lingue),
 // poi con la "sessione" firmata che la funzione restituisce; oppure con un codice di scorta di STUDIO_CODICI.
 // Segreti: GAS_URL e GAS_TOKEN (lo script di posta, gli stessi di lingue-accesso), STUDIO_CODICI (codici di scorta, facoltativi),
-//          ANTHROPIC_API_KEY (facoltativo: solo per la creazione automatica, a consumo).
 // SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY sono forniti da Supabase; dalla seconda deriva la chiave che firma le sessioni.
 //   {azione:"richiedi", email}                     -> spedisce il codice alla mail istituzionale
 //   {azione:"verifica", email, codice}             -> se il codice e' giusto, {ok, sessione, email, nome}
@@ -19,16 +18,11 @@
 //                                                  -> Lingue: le spunte dei docenti sulle frasi (solo con la mail)
 //   {correggi:{chiave, lingua, originale, testo, nota?}} / {annulla:{chiave, lingua}} -> Lingue: correzione subito valida per tutti
 //   {correzioni:true} (senza accesso)              -> Lingue: le correzioni in vigore, per tutte le pagine
-//   {immagini?:[{tipo:"image/jpeg", dati:<base64>}], argomento?, materia?, classe?, note?, ...} -> la crea con l'IA (a consumo)
 // Risposta: {ok:true, ...} oppure {ok:false, errore, messaggio?}
-// Le foto non vengono salvate: vanno a Claude e poi si buttano. Resta solo la lezione.
+// Nessun servizio di IA a pagamento: l'educatore prepara la lezione con un assistente esterno e la incolla qui.
 
-import Anthropic from "npm:@anthropic-ai/sdk@0.133.0";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
-const MODELLO = "claude-opus-5-5";
-const MAX_FOTO = 8;
-const MAX_BYTES_FOTO = 4_500_000; // base64 di una foto gia' ridotta dal browser
 const MAX_ORA = 30; // lezioni create in un'ora, in tutto: freno contro gli abusi
 const MAX_LEZIONE = 120_000; // caratteri del JSON di una lezione incollata
 const MAX_ELENCO = 300; // lezioni mostrate nell'elenco degli educatori
@@ -88,43 +82,8 @@ export const SCHEMA = oggetto({
   da_ricordare: lista(S),
 });
 
-export const ISTRUZIONI = `Sei un educatore esperto di didattica per ragazzi con DSA (dislessia, disortografia, discalculia) in un convitto di un istituto alberghiero italiano (14-19 anni).
-Prepari una lezione interattiva in italiano che i ragazzi faranno dal telefono in sala studio.
-
-LA FONTE:
-- Se ricevi delle foto (pagine di un libro, appunti, schede, oppure una MAPPA CONCETTUALE), usa SOLO i concetti, i fatti, le date, i nomi e le definizioni che contengono. Non aggiungere argomenti che non ci sono. Se una pagina e' tagliata, lavora su quello che si legge.
-- Se la foto e' una mappa concettuale: ogni nodo e' un concetto e ogni freccia un collegamento; spiega con frasi semplici i nodi e i legami fra loro, seguendo la struttura della mappa, senza aggiungere concetti assenti.
-- Se NON ricevi foto, costruisci la lezione sull'argomento indicato, con contenuti corretti e verificati, adatti a un istituto professionale alberghiero e all'anno di corso indicato; resta sui punti essenziali dell'argomento.
-- Ogni esercizio deve poter essere risolto da chi ha studiato la lezione.
-Se le foto non sono materiale di studio leggibile, scrivi il motivo in "problema" e lascia brevi o vuoti gli altri campi.
-
-STILE (pensato per DSA):
-- Frasi brevi, una idea per frase, parole semplici. Spiega i termini tecnici la prima volta.
-- Niente doppie negazioni, niente domande trabocchetto, niente "tutte le precedenti".
-- Tono caldo, diretto ("tu"), un po' di ironia; mai infantile.
-
-CONTENUTI:
-- gancio: una domanda curiosa o sorprendente legata all'argomento, con la risposta (presa dalle pagine).
-- concetti: da 4 a 8 idee chiave, nell'ordine del libro. spiegazione max 3 frasi; parola_chiave = la parola da evidenziare (deve comparire nella spiegazione); esempio concreto, se possibile dalla vita di tutti i giorni, dalla cucina, dalla sala o dall'albergo.
-- parole: 4-10 termini del glossario con definizione semplice.
-- mnemonica: mnemotecniche vere ed efficaci, costruite sui concetti delle pagine.
-  - acronimo: una parola o sigla facile da ricordare formata dalle iniziali di elementi da memorizzare (un elenco, le fasi, le cause...); "frase" e' una frase buffa le cui parole iniziano con quelle lettere. lettere: una voce per lettera.
-  - storia: un "palazzo della memoria" ambientato nel convitto o nella scuola (ingresso, refettorio, cucina, sala studio, camerata, cortile...). 4-7 tappe: in ogni luogo un'immagine assurda, esagerata, colorata o divertente che richiama un concetto.
-  - filastrocca: 4-8 versi in rima con i fatti principali (date, numeri, nomi).
-  - immagini: 3-6 associazioni visive concetto-immagine mentale, con emoji.
-  - trucchi: 2-4 altri trucchi (associazioni numeriche, parole simili, collegamenti con cose note).
-- sequenza: se l'argomento ha un ordine (fasi, cronologia, procedimento) da 4 a 7 passi nell'ordine giusto; altrimenti titolo vuoto e passi vuoti.
-- quiz: 8-10 domande, 4 opzioni ciascuna (una sola corretta, plausibili ma chiaramente distinguibili), "corretta" e' l'indice da 0. spiegazione: perche' e' giusta, in una frase.
-- vero_falso: 6-8 affermazioni, circa meta' vere.
-- completa: 5-7 frasi prese dai concetti con una parola chiave sostituita da ___ (una sola ___ per frase); 2 distrattori plausibili.
-- abbina: 5-6 coppie (termine-definizione, personaggio-fatto, causa-effetto, data-evento...).
-- flashcard: 8-12 carte domanda/risposta brevi.
-- intervista: un'"intervista impossibile" a un personaggio legato all'argomento (storico, scienziato, autore, oppure un elemento dell'argomento che parla in prima persona). personaggio = il nome; chi = una frase di presentazione simpatica; emoji = una sola emoji; domande: 5-6 domande del giornalista, risposta in prima persona nel suo stile (max 2 frasi, solo contenuti delle pagine), sbagliate = 2 risposte plausibili ma sbagliate.
-- da_ricordare: le 5 frasi essenziali da sapere a memoria.`;
-
 // ───── la funzione ─────
 type Db = any;
-type Chiama = (immagini: { tipo: string; dati: string }[], extra: string) => Promise<any>;
 
 async function impronta(codice: string) {
   const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(codice));
@@ -176,7 +135,7 @@ const ELENCO = "codice,titolo,materia,classe,anno,autore,condivisa,aperture,crea
 
 type Invia = (url: string, corpo: unknown) => Promise<boolean>;
 
-export function crea(db: Db, env: Record<string, string | undefined>, chiama: Chiama, invia: Invia = async () => false, ora = () => Date.now()) {
+export function crea(db: Db, env: Record<string, string | undefined>, invia: Invia = async () => false, ora = () => Date.now()) {
   const codici = (env.STUDIO_CODICI || "").split(",").map((c) => c.trim().toLowerCase()).filter(Boolean);
   const scorte = Promise.all(codici.map(impronta)); // le lezioni pubblicate con un codice di scorta sono di tutti
   const firma = env.FIRMA || "";
@@ -238,7 +197,7 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
       if (c.sessione) return risposta({ ok: false, errore: "sessione" }, 401);
       return risposta({ ok: false, errore: cod ? "codice" : "accesso" }, 403);
     }
-    if (c.prova) return risposta({ ok: true, automatica: !!env.AUTOMATICA, email }); // solo verifica dell'accesso
+    if (c.prova) return risposta({ ok: true, email }); // solo verifica dell'accesso
 
     // ───── Lingue: le spunte di revisione dei docenti (serve l'accesso con la mail: la spunta porta il nome) ─────
     if (c.revisioni || c.revisione || c.correggi || c.annulla) {
@@ -247,7 +206,7 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
       if (c.correggi) {
         const r = c.correggi || {}, chiave = testo(r.chiave, 200), lingua = String(r.lingua || ""), nuovo = testo(r.testo, 2000);
         if (!chiave || !["en", "fr", "es"].includes(lingua) || !nuovo) return risposta({ ok: false, errore: "richiesta" }, 400);
-        const { error } = await db.from("lingue_correzioni").insert({ chiave, lingua, originale: testo(r.originale, 2000) || null, testo: nuovo, nota: testo(r.nota, 300) || null, email, nome });
+        const { error } = await db.from("lingue_correzioni").insert({ chiave, lingua, originale: testo(r.originale, 2000) || null, testo: nuovo, nota: testo(r.nota, 300) || null, nome });
         if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
       }
       if (c.annulla) {
@@ -262,21 +221,21 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
         const r = c.revisione || {}, chiave = testo(r.chiave, 200), lingua = String(r.lingua || "");
         if (!chiave || !["en", "fr", "es"].includes(lingua) || !["ok", "proposta", "via"].includes(r.stato)) return risposta({ ok: false, errore: "richiesta" }, 400);
         const { error } = r.stato === "via"
-          ? await db.from("lingue_revisioni").delete().eq("chiave", chiave).eq("lingua", lingua).eq("email", email)
+          ? await db.from("lingue_revisioni").delete().eq("chiave", chiave).eq("lingua", lingua).eq("nome", nome)
           : await db.from("lingue_revisioni").upsert({
-            chiave, lingua, email, nome: nomeDaMail(email), stato: r.stato, testo: testo(r.testo, 300) || null,
+            chiave, lingua, nome, stato: r.stato, testo: testo(r.testo, 300) || null,
             proposta: r.stato === "proposta" ? testo(r.proposta, 300) || null : null, nota: testo(r.nota, 300) || null, aggiornata: new Date(adesso).toISOString(),
-          }, { onConflict: "chiave,lingua,email" });
+          }, { onConflict: "chiave,lingua,nome" });
         if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
       }
-      const { data, error } = await db.from("lingue_revisioni").select("chiave,lingua,email,nome,stato,proposta,nota,aggiornata").limit(5000);
+      const { data, error } = await db.from("lingue_revisioni").select("chiave,lingua,nome,stato,proposta,nota,aggiornata").limit(5000);
       if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
-      const { data: storia, error: e2 } = await db.from("lingue_correzioni").select("chiave,lingua,originale,testo,nota,email,nome,creata,annullata,annullata_da").order("creata", { ascending: false }).limit(5000);
+      const { data: storia, error: e2 } = await db.from("lingue_correzioni").select("chiave,lingua,originale,testo,nota,nome,creata,annullata,annullata_da").order("creata", { ascending: false }).limit(5000);
       if (e2) { console.error("db", e2); return risposta({ ok: false, errore: "server" }, 500); }
-      // le mail non escono: solo il nome e se la spunta (o la correzione) è di chi chiede
+      // delle spunte e delle correzioni si conserva solo il nome (ricavato dalla mail), mai la mail
       return risposta({
-        ok: true, revisioni: (data || []).map(({ email: e, ...x }: any) => ({ ...x, mia: e === email })),
-        storia: (storia || []).map(({ email: e, ...x }: any) => ({ ...x, mia: e === email })), correzioni: inVigore((storia || []).filter((x: any) => !x.annullata)),
+        ok: true, revisioni: (data || []).map((x: any) => ({ ...x, mia: x.nome === nome })),
+        storia: (storia || []).map((x: any) => ({ ...x, mia: x.nome === nome })), correzioni: inVigore((storia || []).filter((x: any) => !x.annullata)),
       });
     }
     const io = await impronta(email ? "mail:" + email : cod);
@@ -334,33 +293,7 @@ export function crea(db: Db, env: Record<string, string | undefined>, chiama: Ch
       return salva(db, lez, { ...dati(), proprietario: io, pagine: 0 });
     }
 
-    if (!env.AUTOMATICA) return risposta({ ok: false, errore: "automatica" }, 503);
-    const immagini = Array.isArray(c.immagini) ? c.immagini : [];
-    const argomento = testo(c.argomento, 200);
-    if ((!immagini.length && !argomento) || immagini.length > MAX_FOTO) return risposta({ ok: false, errore: "foto" }, 400);
-    for (const im of immagini) {
-      if (!im || !/^image\/(jpeg|png|webp)$/.test(im.tipo) || typeof im.dati !== "string" || im.dati.length > MAX_BYTES_FOTO || !/^[A-Za-z0-9+/=]+$/.test(im.dati)) {
-        return risposta({ ok: false, errore: "foto" }, 400);
-      }
-    }
-
-    const d = dati(), note = testo(c.note, 600);
-    const extra = [
-      argomento && `Argomento / titolo: ${argomento}.`,
-      d.materia && `Materia: ${d.materia}.`,
-      d.anno && `Anno di corso: ${d.anno}°.`,
-      d.classe && `Classe: ${d.classe}.`,
-      note && `Indicazioni dell'educatore: ${note}`,
-    ].filter(Boolean).join("\n");
-
-    let lez: any;
-    try { lez = await chiama(immagini, extra); }
-    catch (e) { console.error("claude", e); return risposta({ ok: false, errore: "ia" }, 502); }
-    if (!lez) return risposta({ ok: false, errore: "ia" }, 502);
-    if (lez.problema) return risposta({ ok: false, errore: "illeggibile", messaggio: testo(lez.problema, 300) }, 422);
-    lez = pulisci(lez);
-    if (!lez) return risposta({ ok: false, errore: "ia" }, 502);
-    return salva(db, lez, { ...d, proprietario: io, pagine: immagini.length });
+    return risposta({ ok: false, errore: "richiesta" }, 400);
   };
 }
 
@@ -378,36 +311,13 @@ async function salva(db: Db, lez: any, d: { classe: string | null; autore: strin
   return risposta({ ok: false, errore: "server" }, 500);
 }
 
-export function chiamaClaude(client: Anthropic): Chiama {
-  return async (immagini, extra) => {
-    const contenuto: any[] = immagini.map((im, i) => [
-      { type: "text", text: `Pagina ${i + 1}:` },
-      { type: "image", source: { type: "base64", media_type: im.tipo, data: im.dati } },
-    ]).flat();
-    contenuto.push({ type: "text", text: (extra ? extra + "\n\n" : "") + (immagini.length ? "Crea la lezione interattiva su queste pagine." : "Non ci sono foto: crea la lezione interattiva sull'argomento indicato.") });
-    const stream = client.beta.messages.stream({
-      model: MODELLO,
-      max_tokens: 32000,
-      betas: ["server-side-fallback-2026-07-01"],
-      fallbacks: "default",
-      system: ISTRUZIONI,
-      output_config: { effort: "medium", format: { type: "json_schema", schema: SCHEMA } },
-      messages: [{ role: "user", content: contenuto }],
-    } as any);
-    const msg: any = await stream.finalMessage();
-    if (msg.stop_reason === "refusal" || msg.stop_reason === "max_tokens") throw new Error(msg.stop_reason);
-    const blocco = msg.content.find((b: any) => b.type === "text");
-    return blocco ? JSON.parse(blocco.text) : null;
-  };
-}
-
 // Avvio su Supabase (non in test)
 // deno-lint-ignore no-explicit-any
 const D: any = (globalThis as any).Deno;
 if (D && D.serve && D.env) {
   const db = createClient(D.env.get("SUPABASE_URL")!, D.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { auth: { persistSession: false } });
   const env = {
-    STUDIO_CODICI: D.env.get("STUDIO_CODICI"), AUTOMATICA: D.env.get("ANTHROPIC_API_KEY") ? "1" : "",
+    STUDIO_CODICI: D.env.get("STUDIO_CODICI"),
     GAS_URL: D.env.get("GAS_URL"), GAS_TOKEN: D.env.get("GAS_TOKEN"),
     FIRMA: "studio-sessione:" + D.env.get("SUPABASE_SERVICE_ROLE_KEY"),
   };
@@ -418,5 +328,5 @@ if (D && D.serve && D.env) {
       return !!(t && t.ok);
     } catch { return false; }
   };
-  D.serve(crea(db, env, chiamaClaude(new Anthropic({ apiKey: D.env.get("ANTHROPIC_API_KEY") })), invia));
+  D.serve(crea(db, env, invia));
 }

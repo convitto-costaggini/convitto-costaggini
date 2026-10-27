@@ -724,14 +724,14 @@
     { titolo: 'Orari dei servizi', pagina: 'servizi.html', ancora: '#orari', cat: 'Servizi', keywords: ['orari','orario','apertura','chiusura','quando','ore','mattina','pomeriggio','sera'] },
     { titolo: 'Come iscriversi al Convitto', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['iscriversi','iscrizione','iscrivo','ammissione','domanda','come','procedura','miur','portale','modulo','candidatura','entrare'] },
     { titolo: 'Tariffe e rette 2026/27', pagina: 'ammissione.html', ancora: '#tariffe', cat: 'Ammissione', keywords: ['tariffa','retta','costo','costa','prezzo','quanto','pagare','isee','riduzione','agevolazione','contributo','pagopa','rata','mensile','euro'] },
-    { titolo: 'Moduli e documenti da scaricare', pagina: 'ammissione.html', ancora: '#moduli', cat: 'Ammissione', keywords: ['modulo','moduli','scaricare','download','pdf','documenti','stampare','compilare','domanda','allegati'] },
-    { titolo: 'Domande frequenti — FAQ', pagina: 'ammissione.html', ancora: '#faq', cat: 'Ammissione', keywords: ['faq','domande','frequenti','dubbi','risposta','chiarimenti','uscita','malattia','rimborso','ritiro','camera','compagno','valigia','corredo','portare','bagaglio','colloquio'] },
+    { titolo: 'Moduli e documenti da scaricare', pagina: 'ammissione.html', ancora: '#moduli', cat: 'Ammissione', keywords: ['modulo','moduli','scaricare','download','pdf','documenti','documento','certificato','attestato','stampare','compilare','domanda','allegati'] },
+    { titolo: 'Domande frequenti — FAQ', pagina: 'ammissione.html', ancora: '#faq', cat: 'Ammissione', keywords: ['faq','domande','frequenti','dubbi','risposta','chiarimenti','uscita','malattia','rimborso','ritiro','camera','compagno','valigia','corredo','portare','bagaglio','colloquio','ambientamento','nostalgia'] },
     { titolo: 'Scadenze e calendario iscrizioni', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['scadenza','calendario','quando','data','settembre','ottobre','novembre','gennaio','marzo','maggio','giugno','termine'] },
     { titolo: 'Regolamento del Convitto', pagina: 'trasparenza.html', ancora: '#disposizioni', cat: 'Trasparenza', keywords: ['regolamento','regole','norme','disciplina','comportamento','patto','convivenza'] },
     { titolo: 'P.T.O.F. — Piano Triennale Offerta Formativa', pagina: 'trasparenza.html', ancora: '#disposizioni', cat: 'Trasparenza', keywords: ['ptof','piano','triennale','offerta','formativa','progetto','educativo','programma'] },
     { titolo: 'Dichiarazione di accessibilità AGID', pagina: 'trasparenza.html', ancora: '#accessibilita', cat: 'Trasparenza', keywords: ['accessibilità','agid','wcag','disabilità','legge stanca','dichiarazione','conformità'] },
     { titolo: 'Privacy e trattamento dati GDPR', pagina: 'trasparenza.html', ancora: '#privacy', cat: 'Trasparenza', keywords: ['privacy','gdpr','dati','personali','trattamento','titolare','cookie','consenso','reg ue'] },
-    { titolo: 'Tutte le notizie e comunicati', pagina: 'notizie.html', ancora: '', cat: 'Notizie', keywords: ['notizie','news','comunicato','aggiornamento','avviso','circolare','delibera','comunicazioni'] },
+    { titolo: 'Tutte le notizie e comunicati', pagina: 'notizie.html', ancora: '', cat: 'Notizie', keywords: ['notizie','news','comunicato','aggiornamento','avviso','avvisi','circolare','delibera','comunicazioni'] },
     { titolo: 'Trionfo al Concorso Nazionale di Cucina', pagina: 'notizie.html', ancora: '', cat: 'Notizie', keywords: ['concorso','cucina','regionale','nazionale','junior','fipe','primo posto','gara','competizione','cuoco','chef'] },
     { titolo: 'Open Day — Porte aperte alle famiglie', pagina: 'notizie.html', ancora: '', cat: 'Notizie', keywords: ['open day','porte aperte','visita','famiglia','famiglie','presentazione','tour','scoprire'] },
     { titolo: 'Inaugurazione nuova palestra PNRR', pagina: 'notizie.html', ancora: '', cat: 'Notizie', keywords: ['palestra','inaugurazione','pnrr','fondi','nuovo','inaugurata','sport','apertura'] },
@@ -762,6 +762,7 @@
     { titolo: 'Gli Educatori', pagina: 'educatori.html', ancora: '', cat: 'Il Convitto', keywords: ['educatori','staff','ccnl','competenze','personale','notte','notturna','sorveglianza','24 ore su 24','turno di notte'] },
     { titolo: 'Il Convitto fa per me?', pagina: 'fa-per-me.html', ancora: '', cat: 'Orientamento', keywords: ['fa per me','quiz','scelta','giusta','vita convittuale','decidere'] },
     { titolo: 'Per i Genitori', pagina: 'genitori.html', ancora: '', cat: 'Famiglie', keywords: ['genitori','famiglie','famiglia','vicini','informazioni','dsa','bes','dislessia','disturbi di apprendimento','bisogni educativi speciali'] },
+    { titolo: 'Il Laboratorio Teatrale', pagina: 'genitori.html', ancora: '', cat: 'Comunità', keywords: ['teatro','teatrale','laboratorio teatrale','recitazione','spettacolo','palco','recitare','attori','commedia'] },
     { titolo: 'Una giornata al Convitto', pagina: 'giornata-tipo.html', ancora: '', cat: 'Il Convitto', keywords: ['giornata','tipo','sveglia','studio','sport','cena','quotidiana','routine'] },
     { titolo: 'In 2 Minuti', pagina: 'in-2-minuti.html', ancora: '', cat: 'Orientamento', keywords: ['2 minuti','veloce','faq','domande frequenti','riassunto'] },
     { titolo: 'Menu della Settimana', pagina: 'menu-settimana.html', ancora: '', cat: 'Novità', keywords: ['menu','mensa','cibo','pasti','primo','secondo','contorno','settimana','cucina'] },
@@ -830,7 +831,7 @@
     'dal':1,'dallo':1,'dalla':1,'dagli':1,'dalle':1,
     'sul':1,'sullo':1,'sulla':1,'sugli':1,'sulle':1,'col':1,'coi':1,
     'va':1,'fa':1,'fai':1,'faccio':1,'posso':1,'puoi':1,'puo':1,
-    'vorrei':1,'voglio':1,'devo':1,'deve':1
+    'vorrei':1,'voglio':1,'devo':1,'deve':1,'dove':1,'convitto':1
   };
   function tokenize(query) {
     return query

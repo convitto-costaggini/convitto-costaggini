@@ -29,7 +29,12 @@
     </div>
   </div>
   <button class="btn-logout" id="btn-logout" style="display:none;" onclick="eseguiLogout()">Esci</button>
+  <a class="btn-logout" id="btn-torna-admin" href="admin.html" style="display:none;text-decoration:none;">← Torna al pannello</a>
 </header>
+<!-- ══ ANTEPRIMA AMMINISTRATORE ══ -->
+<div id="fascia-anteprima" style="display:none;background:var(--oro2);color:var(--bosco);padding:10px 24px;font-family:var(--fu);font-size:.85rem;line-height:1.5;text-align:center;">
+  <strong>Anteprima amministratore.</strong> <span id="fascia-anteprima-testo"></span>
+</div>
 <!-- ══ SCHERMATA AUTH ══ -->
 <div id="schermata-auth">
   <div class="auth-wrap">
@@ -192,7 +197,7 @@
 </div>
 <script>
   const { createClient } = supabase;
-  const sb = createClient(
+  let sb = createClient(
     'https://sawclsysqnjsvbobioqo.supabase.co',
     'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ'
   );
@@ -202,7 +207,12 @@
   // ── AVVIO ──
   let inRecovery = /[#&]type=recovery/.test(window.location.hash);
   const OTP_URL = 'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/otp-famiglie';
+  // ?anteprima=STU-xxxx dal pannello admin: mostra l'Area come la vede la
+  // famiglia di quello studente. Usa la sessione admin della scheda (verificata
+  // in due passaggi): senza is_admin() non si legge nulla.
+  const ANTEPRIMA = (new URLSearchParams(location.search).get('anteprima') || '').trim().toUpperCase();
   window.addEventListener('load', async () => {
+    if (ANTEPRIMA) return avviaAnteprima(ANTEPRIMA);
     if (inRecovery) {
       mostraSchermata('nuova-password');
     } else {
@@ -316,7 +326,7 @@
   // La verifica vale 12 ore: tornando sulla pagina dopo la scadenza si
   // richiede di nuovo il codice invece di mostrare un'area vuota.
   document.addEventListener('visibilitychange', async () => {
-    if (document.visibilityState !== 'visible') return;
+    if (document.visibilityState !== 'visible' || ANTEPRIMA) return;
     if (document.getElementById('schermata-dashboard').style.display !== 'block') return;
     const { data: ok } = await sb.rpc('famiglie_otp_ok');
     if (ok !== true) {
@@ -370,6 +380,39 @@
     document.getElementById('dash-nome').textContent = nomeStudente;
     document.getElementById('dash-sub').textContent = assoc.relazione + ' · ' + email;
     document.getElementById('btn-logout').style.display = 'block';
+    document.getElementById('schermata-auth').style.display = 'none';
+    document.getElementById('schermata-dashboard').style.display = 'block';
+    await Promise.all([
+      caricaPresenze(), caricaSemafori(), caricaNote(),
+      caricaColloqui(), caricaRelazioni()
+    ]);
+  }
+  async function avviaAnteprima(codice) {
+    document.getElementById('btn-torna-admin').style.display = 'block';
+    document.querySelector('.tabs-auth').style.display = 'none';
+    document.getElementById('sez-login').classList.remove('attiva');
+    const tok = sessionStorage.getItem('sb_token');
+    if (!/^STU-\d{4,}$/.test(codice)) return mostraMsg('Codice studente non valido.', 'err');
+    if (!tok) return mostraMsg('L\'anteprima si apre dal pannello admin: entri nel pannello e usi il pulsante «Vedi come la famiglia».', 'err');
+    sb = createClient(
+      'https://sawclsysqnjsvbobioqo.supabase.co',
+      'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ',
+      { global: { headers: { Authorization: 'Bearer ' + tok } },
+        auth: { persistSession: false, autoRefreshToken: false } }
+    );
+    const { data: admin } = await sb.rpc('is_admin');
+    if (admin !== true) return mostraMsg('Sessione del pannello scaduta o non verificata: rientri nel pannello admin e riapra l\'anteprima.', 'err');
+    codiceStudente = codice;
+    for (const t of ['famiglie_presenze', 'famiglie_semafori', 'famiglie_note']) {
+      const { data } = await sb.from(t).select('nome_studente').eq('codice_studente', codice)
+        .order('data', { ascending: false }).limit(1);
+      if (data?.length) { nomeStudente = data[0].nome_studente; break; }
+    }
+    document.getElementById('dash-nome').textContent = nomeStudente || codice;
+    document.getElementById('dash-sub').textContent = 'Genitore · email del genitore';
+    document.getElementById('fascia-anteprima-testo').textContent =
+      'Così la famiglia di ' + (nomeStudente || codice) + ' (' + codice + ') vede l\'Area dopo l\'accesso con password e codice. Nessun dato viene modificato.';
+    document.getElementById('fascia-anteprima').style.display = 'block';
     document.getElementById('schermata-auth').style.display = 'none';
     document.getElementById('schermata-dashboard').style.display = 'block';
     await Promise.all([

@@ -431,6 +431,13 @@ function admConfirm(opts) {
         <div class="fam-toolbar">
           <input type="search" id="fam-ricerca" class="fam-ricerca" placeholder="Cerca per studente, email o relazione…" oninput="famCercaInput(this.value)" />
         </div>
+        <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-bottom:1.25rem;font-size:.8rem;color:var(--txt2)">
+          <span>Vedi l&rsquo;Area come la famiglia di uno studente:</span>
+          <input type="text" id="fam-anteprima-codice" placeholder="STU-0000" maxlength="12" autocomplete="off"
+                 onkeydown="if(event.key==='Enter') famAnteprima(this.value)"
+                 style="width:8rem;padding:.4rem .5rem;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;letter-spacing:.05em">
+          <button onclick="famAnteprima(document.getElementById('fam-anteprima-codice').value)" class="btn-annulla-fam">👁️ Apri l&rsquo;anteprima</button>
+        </div>
         <div class="fam-intestazioni" role="row" aria-label="Ordina le richieste per colonna">
           <button type="button" class="fam-th" data-campo="nome_studente" onclick="famOrdina('nome_studente')">Studente <span class="fam-th-freccia"></span></button>
           <button type="button" class="fam-th" data-campo="email_genitore" onclick="famOrdina('email_genitore')">Email <span class="fam-th-freccia"></span></button>
@@ -1079,10 +1086,21 @@ function famRenderLista() {
           ` : `
             <button class="btn-annulla-fam" onclick="famAzione('${f.id}','in_attesa')">↩ Annulla</button>
           `}
+          ${f.stato === 'approvata' && f.codice_studente ? `
+            <button class="btn-annulla-fam" onclick="famAnteprima('${escapeHtml(f.codice_studente)}')">👁️ Vedi come la famiglia</button>
+          ` : ''}
         </div>
       </div>`).join('');
 
   famAggiornaIntestazioni();
+}
+
+// Apre l'Area riservata come la vede la famiglia dello studente, nella stessa
+// scheda: l'anteprima usa la sessione admin conservata qui (sessionStorage).
+function famAnteprima(codice) {
+  codice = String(codice || '').trim().toUpperCase();
+  if (!/^STU-\d{4,}$/.test(codice)) { alert('Indicare il codice studente del gestionale (es. STU-0123).'); return; }
+  location.href = 'area-riservata.html?anteprima=' + encodeURIComponent(codice);
 }
 
 // Evidenzia nell'intestazione la colonna attiva e la direzione (▲/▼).

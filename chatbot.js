@@ -54,11 +54,11 @@ const KB=[
   {k:['accoglienza','accoglienza convittori','schede accoglienza','scheda accoglienza',
       'modulistica','moduli accoglienza','documenti accoglienza',
       'moduli da compilare','documenti da firmare','stampare moduli','autorizzazioni',
-      'scheda','schede','scheda informativa','scheda sanitaria','modulo autorizzazioni','rientro domenicale',
+      'scheda','schede','scheda informativa','scheda sanitaria','patologie','modulo autorizzazioni','rientro domenicale',
       'scheda del convittore','scheda convittore'],
    r:'Tutta la modulistica per l\'accoglienza convittori e convittrici è raccolta in un\'unica pagina: autorizzazioni del genitore/tutore, Patto di Corresponsabilità, scheda informativa del convittore/trice, scheda informativa sanitaria e richiesta di rientro domenicale. Alcuni moduli si compilano e inviano online, altri si compilano e stampano per la firma.<br><br>📋 <a href="accoglienza.html">Accoglienza & Modulistica →</a>'},
   // ── RETTE E COSTI ──
-  {k:['retta','costo','quanto costa','quanto si paga','tariffa','prezzo','euro','pagamento',
+  {k:['retta','costo','quanto costa','quanto si paga','quanto paga','tariffa','prezzo','euro','pagamento',
       'isee','agevolazion','riduzion','sconto','esonero','borsa di studio','rata','rate','rate da pagare',
       'quante rate','importi delle rate','quota iscrizione'],
    r:'La retta è deliberata ogni anno dal Consiglio d\'Istituto, con un importo fisso uguale per tutte le famiglie (non è prevista una riduzione legata all\'ISEE). La retta intera confermata per l\'A.S. 2026/27 è di <strong>1.600€ annui</strong>, comprensiva di vitto completo, alloggio, studio guidato, attività e trasporto Convitto-scuola.<br><br>💶 <a href="ammissione.html#tariffe">Tariffe complete →</a><br>✉️ Per un preventivo: <a href="contatti.html">Contattaci →</a>'},
@@ -133,7 +133,7 @@ const KB=[
       'buono libri','premio progresso','migliori convittori'],
    r:'Il <strong>Premio al Merito "Educatore Francesco Monaco"</strong>, approvato dal Consiglio di Istituto il 22/9/2026, premia ogni anno le convittrici e i convittori che si sono distinti per impegno, comportamento e partecipazione alla vita del Convitto.<br><br>Ai primi tre classificati e alle prime tre classificate spetta una <strong>riduzione della retta</strong> dell\'anno successivo (80%, 60%, 40%) e un buono libri e cultura, oltre ad attestato di merito, Albo d\'Oro e altri riconoscimenti.<br><br>📋 <a href="premio-merito.html">Leggi il bando completo →</a>'},
   // ── VISITE E OPEN DAY ──
-  {k:['open day','visita guidata','venire a vedere','prenotare','vedere il convitto',
+  {k:['open day','visita guidata','venire a vedere','venire a visitare','prenotare','vedere il convitto',
       'visitare il convitto','posso visitare','posso venire','sopralluogo','porte aperte','tour dal vivo'],
    r:'Puoi prenotare una <strong>visita guidata</strong> o partecipare all\'Open Day.<br><br>📅 <a href="orientamento.html">Orientamento e visite →</a><br>🔭 Oppure esplora virtualmente: <a href="tour-virtuale.html">Tour Virtuale 360° →</a>'},
   // ── TOUR VIRTUALE ──
@@ -172,7 +172,7 @@ const KB=[
   {k:['l\'anno al convitto','anno scolastico raccontato','cosa è successo quest\'anno','riepilogo dell\'anno'],
    r:'Un racconto per immagini di come è stato l\'anno appena trascorso al Convitto.<br><br>📖 <a href="anno.html">L\'Anno al Convitto →</a>'},
   // ── CONTATTI ──
-  {k:['telefono','email','contatto','scrivere','segreteria','informazioni','risponde',
+  {k:['telefono','email','contatto','contatti','scrivere','segreteria','informazioni','risponde',
       'numero','chiamare','mail','pec','indirizzo email','come contatto',
       'orari segreteria','orario segreteria','apertura segreteria','quando apre la segreteria'],
    r:'Puoi contattarci tramite:<br>📧 <a href="mailto:convitto@alberghierorieti.it">convitto@alberghierorieti.it</a><br>📋 <a href="contatti.html">Modulo di contatto →</a><br><br>La segreteria risponde entro 24-48 ore nei giorni scolastici. Per gli orari esatti dello sportello: <a href="contatti.html#orari">Orari dello sportello →</a><br><br>Gli uffici amministrativi dell\'Istituto (Didattica, Personale, Protocollo, Contabilità) ricevono presso la Sede Centrale, Via dei Salici 62: <a href="contatti.html#segreteria">Orari della segreteria dell\'Istituto →</a>'},
@@ -182,7 +182,7 @@ const KB=[
    r:'La lista completa del corredo obbligatorio è disponibile con possibilità di stampa.<br><br>📋 <a href="ammissione.html#moduli">Lista corredo →</a>'},
   // ── REGOLAMENTO ──
   {k:['regolamento','regole','norme','disciplina','vietato','cosa non si può',
-      'articoli','sanzioni','punizioni','provvedimento','comportamento','35 articoli'],
+      'articoli','sanzioni','punizioni','punito','essere punito','provvedimento','comportamento','35 articoli'],
    r:'Il <strong>Regolamento del Convitto</strong> conta 35 articoli (versione 30/01/2025). Disciplina diritti, doveri, orari, uscite, sanzioni e molto altro. È consultabile in formato interattivo con ricerca per parola chiave.<br><br>📜 <a href="regolamento.html">Leggi il Regolamento →</a>'},
   // ── USCITE E PERMESSI ──
   {k:['uscire','permesso uscita','uscita autonoma','possono uscire','chi ritira',
@@ -210,7 +210,7 @@ const KB=[
    r:'La community degli <strong>Alumni</strong> cresce ogni anno. Puoi aggiungere la tua scheda, lasciare un ricordo nel Muro dei Ricordi e apparire sulla mappa del mondo degli ex convittori.<br><br>🌍 <a href="comunita.html">La nostra Comunità →</a><br>✍️ <a href="iscriviti-alumni.html">Unisciti agli Alumni →</a>'},
   // ── AREA RISERVATA FAMIGLIE ──
   {k:['area riservata','famiglie','genitore','genitori','accesso famiglie','dashboard',
-      'seguire mio figlio','presenze online','registro famiglie','notifiche genitori'],
+      'seguire mio figlio','presenze online','registro famiglie','notifiche genitori','valutazioni','vedere le valutazioni'],
    r:'L\'<strong>Area Riservata Famiglie</strong> permette ai genitori di seguire in tempo reale: presenze ai pasti, valutazioni giornaliere, note degli educatori, colloqui e comunicazioni formali.<br><br>🔐 <a href="area-riservata.html">Richiedi accesso →</a>'},
   // ── AGGIORNAMENTI / NEWS ──
   {k:['novità','news','aggiornamenti','notizie','comunicazioni','avvisi','bacheca',
@@ -220,6 +220,10 @@ const KB=[
   {k:['ptof','progetto educativo','piano offerta formativa','filosofia','metodo',
       'mission','obiettivi','valori','come educate','stile educativo'],
    r:'Il progetto educativo del Convitto mira alla crescita umana, civile e culturale dei ragazzi — in coordinamento con i docenti dell\'Istituto.<br><br>📖 <a href="ptof-guida.html">Il PTOF spiegato →</a> · <a href="il-convitto.html#mission">Missione e valori →</a>'},
+  // ── PRIVACY, TRASPARENZA E ACCESSIBILITÀ ──
+  {k:['privacy','trasparenza','accessibilità','dati personali','gdpr','cookie','informativa privacy',
+      'agid','conformità','trattamento dati','protezione dati','dpo','responsabile protezione dati'],
+   r:'Le informazioni su privacy, trattamento dei dati, cookie e accessibilità del sito sono raccolte nella sezione Trasparenza.<br><br>📋 <a href="trasparenza.html">Trasparenza →</a> · <a href="privacy.html">Informativa Privacy →</a>'},
   // ── CERTIFICATI ──
   {k:['certificato','frequenza','documento','attestato','dichiarazione','modulo',
       'stampare','pdf','scaricare','modulistica'],
@@ -261,7 +265,7 @@ const KB=[
   // ── LABORATORIO TEATRALE ──
   {k:['teatro','laboratorio teatrale','recitazione','spettacolo','palco',
       'teatrale','recitare','attori','commedia'],
-   r:'Al Convitto è attivo un <strong>Laboratorio Teatrale</strong> che affianca il Laboratorio Musicale. Offre ai ragazzi uno spazio per esprimersi attraverso la recitazione, la voce e il corpo — sviluppando fiducia in sé stessi e capacità relazionali. A fine anno gli spettacoli sono aperti alle famiglie.<br><br>🎭 <a href="giornata-tipo.html">Attività e pomeriggio →</a>'},
+   r:'Al Convitto è attivo un <strong>Laboratorio Teatrale</strong> che affianca il Laboratorio Musicale. Offre ai ragazzi uno spazio per esprimersi attraverso la recitazione, la voce e il corpo — sviluppando fiducia in sé stessi e capacità relazionali. A fine anno gli spettacoli sono aperti alle famiglie.<br><br>🎭 <a href="genitori.html">Scopri di più →</a>'},
   // ── MAPPA / ALUMNI NEL MONDO ──
   {k:['mappa alumni','dove sono finiti','nel mondo','ex convittori nel mondo',
       'carriere','lavoro dopo','successi','londra','hanno fatto'],
@@ -321,7 +325,7 @@ const NORM_MAP={
   "telefono":"telefono","numero di telefono":"telefono",
   "educatrice":"educatori","educatrici":"educatori",
   "wifi":"wifi","wi fi":"wifi","wi-fi":"wifi",
-  "devo":"","dovrei":"","vorrei":"","voglio":"","puoi dirmi":"","puoi spiegarmi":"",
+  "devo":"","deve":"","dovrei":"","vorrei":"","voglio":"","puoi dirmi":"","puoi spiegarmi":"",
   "ho bisogno di sapere":"","mi puoi dire":"","vorrei sapere":"","dimmi":"",
   "qual è":"","quale":"","quando":"quando","dove":"dove","come":"come","chi":"chi",
   "\\bun\\b\\s+":"","\\buna\\b\\s+":"","\\bil\\b\\s+":"","\\bla\\b\\s+":"","\\blo\\b\\s+":"","\\bi\\b\\s+":"","\\ble\\b\\s+":"","\\bgli\\b\\s+":"",
@@ -338,7 +342,7 @@ function normalize(q){
   }
   return s.replace(/\s+/g,' ').trim();
 }
-const SHORT_OK=new Set(['dove','wifi','dsa','bes','ciao','cena','sede','pdf','pec','menu','menù','tour','quiz','isee','h24','via','gps','rate']);
+const SHORT_OK=new Set(['dove','wifi','dsa','bes','ciao','cena','sede','pdf','pec','menu','menù','tour','quiz','isee','h24','via','gps','rate','ptof']);
 function keywordMatches(norm,kn){
   if(!kn) return false;
   if(!(kn.length>4||SHORT_OK.has(kn))) return false;
@@ -351,7 +355,7 @@ function match(q){
   for(const e of KB){
     let score=0;
     for(const k of e.k){
-      const kn=k.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9\s]/g,' ').trim();
+      const kn=normalize(k);
       if(keywordMatches(norm,kn)){
         // Le frasi più lunghe pesano di più
         score+=kn.includes(' ')?2:1;

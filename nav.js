@@ -834,11 +834,13 @@
     'vorrei':1,'voglio':1,'devo':1,'deve':1,'dove':1,'convitto':1
   };
   function tokenize(query) {
-    return query
+    var tutti = query
       .toLowerCase()
       .replace(/[''"".,;:!?()]/g, ' ')
       .split(/\s+/)
-      .filter(function (t) { return t.length > 1 && !STOPWORDS[t]; });
+      .filter(function (t) { return t.length > 1; });
+    var utili = tutti.filter(function (t) { return !STOPWORDS[t]; });
+    return utili.length ? utili : tutti;
   }
   var PAGINE_INDEX = null;      // null = non ancora caricato, [] = caricato ma vuoto/fallito
   var caricamentoPagineIndex = null;

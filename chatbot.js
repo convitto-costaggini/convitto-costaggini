@@ -47,7 +47,7 @@ const KB=[
       'entro quando','quando scade','scadenza domanda','modulo domanda','procedura','diventare convittore'],
    r:'La procedura di ammissione si svolge in <strong>4 passi</strong>:<br>1. Open Day e orientamento tra dicembre e gennaio<br>2. A febbraio, iscrizione online all\'IPSSEOA Costaggini sulla <strong>Piattaforma Unica del MIM</strong>, con la spunta sulla voce "Convitto"<br>3. Entro il <strong>30 luglio</strong>, modulo di domanda al Convitto con documentazione e quota di iscrizione (450€)<br>4. Da settembre: versamento delle rate successive, arrivo, assegnazione camera, accoglienza<br><br>Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è.<br><br>📋 <a href="ammissione.html">Guida completa all\'ammissione →</a>'},
   // ── COLLOQUIO DI AMMISSIONE (non esiste) ──
-  {k:['colloquio','intervista di selezione','esame di ammissione','sostenere un colloquio',
+  {k:['colloquio','esame','intervista di selezione','esame di ammissione','sostenere un colloquio',
       'devo fare un colloquio','c\'è un colloquio','prova di ammissione','selezione'],
    r:'No: la procedura di ammissione al Convitto non prevede alcun colloquio di selezione con il Dirigente né con gli educatori. Bastano l\'iscrizione sulla Piattaforma Unica del MIM e il modulo di domanda entro il 30 luglio. Gli educatori restano comunque disponibili tutto l\'anno per incontrare le famiglie su richiesta.<br><br>📋 <a href="ammissione.html">Guida completa all\'ammissione →</a>'},
   // ── ACCOGLIENZA & MODULISTICA ──
@@ -79,7 +79,7 @@ const KB=[
       'dove si dorme','tripla','doppia','doppie','singole','piano','arredat'],
    r:'Camere principalmente <strong>triple con bagno privato</strong>, su 5 piani (3 maschili, 2 femminili). Ogni stanza ha letti, armadi e scrivanie personali. I ragazzi riordinano la camera ogni mattina prima di andare a scuola.<br><br>🔭 <a href="tour-virtuale.html">Visita gli spazi a 360° →</a>'},
   // ── WIFI E SMARTPHONE ──
-  {k:['wifi','internet','connession','smartphone','telefono','cellulare','tablet','pc',
+  {k:['wifi','internet','connession','smartphone','telefonino','usare il telefono','cellulare','tablet','pc',
       'computer','navigar','online','streaming','social'],
    r:'<strong>Wi-Fi</strong> disponibile in tutte le aree comuni. Lo smartphone è libero nelle ore di tempo libero (17:15–22:30). Durante lo studio guidato e le ore notturne si applicano le regole del Regolamento.'},
   // ── EDUCATORI ──
@@ -155,7 +155,7 @@ const KB=[
    r:'Tutti gli appuntamenti dell\'anno (Open Day, feste, uscite, concerti) sono raccolti in un calendario unico.<br><br>📅 <a href="calendario.html">Calendario Eventi →</a>'},
   // ── SERVIZI DEL CONVITTO (panoramica) ──
   {k:['servizi offerti','quali servizi','elenco servizi','cosa offre il convitto',
-      'panoramica servizi','tutti i servizi'],
+      'panoramica servizi','tutti i servizi','servizi'],
    r:'Il Convitto offre: ristorazione, alloggio in camera, studio guidato, sport e attività, connettività Wi-Fi e assistenza sanitaria — il tutto coordinato dagli educatori H24.<br><br>🧾 <a href="servizi.html">Tutti i servizi →</a>'},
   // ── MAPPA DEL SITO ──
   {k:['mappa del sito','tutte le pagine del sito','indice del sito','elenco di tutte le pagine',
@@ -185,7 +185,7 @@ const KB=[
       'articoli','sanzioni','punizioni','punito','essere punito','provvedimento','comportamento','35 articoli'],
    r:'Il <strong>Regolamento del Convitto</strong> conta 35 articoli (versione 30/01/2025). Disciplina diritti, doveri, orari, uscite, sanzioni e molto altro. È consultabile in formato interattivo con ricerca per parola chiave.<br><br>📜 <a href="regolamento.html">Leggi il Regolamento →</a>'},
   // ── USCITE E PERMESSI ──
-  {k:['uscire','permesso uscita','uscita autonoma','possono uscire','chi ritira',
+  {k:['uscire','permesso uscita','uscita autonoma','uscite autonome','possono uscire','chi ritira',
       'delega','delegato','autorizzazione uscita','libera uscita','rientrare tardi'],
    r:'Le uscite autonome richiedono l\'<strong>autorizzazione firmata dei genitori</strong>. È possibile delegare persone di fiducia per il ritiro. La libera uscita si regola secondo il Regolamento (Art. 28–29).<br><br>📋 <a href="ammissione.html#moduli">Modulo autorizzazione →</a>'},
   // ── DSA E BES ──

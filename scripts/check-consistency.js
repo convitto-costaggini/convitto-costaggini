@@ -47,7 +47,7 @@ console.log('');
 
 const TARGET = [
   { file: 'chatbot.js', fatti: [
-      { nome: 'scadenza', contains: SCADENZA },
+      // scadenza: nel chatbot è volutamente generica ("luglio", data fissata da circolare annuale)
       { nome: 'quota iscrizione', contains: QUOTA_NUM },
       { nome: 'retta annua', contains: RETTA_NUM },
       { nome: 'anno scolastico', contains: ANNO },

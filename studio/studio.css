@@ -337,6 +337,20 @@ html.ed-cartello-aperto{overflow:hidden}
 .fm-nodo .tit{font-family:var(--fu);font-size:1rem;color:var(--bosco)}
 .fm-nodo.ok{border:2px solid var(--st-ok);background:var(--st-ok2);cursor:default}
 .fm-nodo.no{animation:st-scuoti .4s;border-color:var(--st-no)}
+/* mappa: un'idea alla volta, e su telefono una vera mappa (centro, linea, rami) */
+.fm-nodo.cur{border:3px solid var(--oro);background:#fffaf0;box-shadow:0 0 0 4px rgba(184,146,42,.25)}
+@media (prefers-reduced-motion:no-preference){.fm-nodo.cur{animation:fm-pulsa 1.8s ease-in-out infinite}@keyframes fm-pulsa{50%{box-shadow:0 0 0 8px rgba(184,146,42,.12)}}}
+.fm-quesito{margin:.2rem 0 1rem}
+.fm-indizio{font-size:1.25rem;line-height:1.5;margin:.1rem 0 1rem;color:var(--txt)}
+@media (max-width:699px){
+.fm-mappa{grid-template-columns:1fr 1fr;gap:.9rem .8rem;position:relative}
+.fm-mappa::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;margin-left:-1.5px;background:var(--oro3);border-radius:2px}
+.fm-centro{grid-column:1/-1;position:relative;z-index:1;min-height:90px}
+.fm-nodo{position:relative;z-index:1;min-height:84px;padding:.55rem}
+.fm-nodo:nth-child(even)::after,.fm-nodo:nth-child(odd)::before{content:'';position:absolute;top:50%;width:.8rem;height:3px;background:var(--oro3)}
+.fm-nodo:nth-child(even)::after{left:100%}
+.fm-nodo:nth-child(odd)::before{right:100%}
+}
 .fm-etichette{position:sticky;bottom:0;z-index:5;display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;background:rgba(253,250,245,.97);border-top:2px solid var(--oro3);padding:.7rem .5rem;margin:0 -.8rem;box-shadow:0 -6px 16px rgba(0,0,0,.06)}
 @media (max-width:700px){.fm-etichette{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-right:3.4rem}.fm-etichette .st-scelta{flex:none;white-space:nowrap}}
 .fm-etichette::before{content:'Le etichette: tocca, poi tocca la casella';flex-basis:100%;text-align:center;font:800 .7rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)}

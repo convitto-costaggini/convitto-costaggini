@@ -370,50 +370,63 @@ window.FORMATI = (function () {
   var GIRO = [[1, 2], [1, 3], [2, 3], [3, 3], [3, 2], [3, 1], [2, 1], [1, 1]];
   function primaFrase(t) { var m = String(t || '').match(/^.*?[.!?](\s|$)/); return (m ? m[0] : String(t || '')).trim(); }
   function mappa(L, R, livello) {
-    var C = arr(L.concetti).slice(0, 8), n = C.length, posti = {}, sel = null, errori = 0;
+    var C = arr(L.concetti).slice(0, 8), n = C.length, posti = {}, errori = 0, cur = null, scelte = [], sbagliate = 0;
     if (n < 2) { R.innerHTML = '<div class="st-palco"><div class="st-card">Questa lezione ha troppe poche idee chiave per una mappa.</div></div>'; return; }
     var pos = C.map(function (_, i) { return GIRO[Math.round(i * 8 / n) % 8]; });
+    var titoloGioco = livello === 2 ? 'La mappa a memoria' : 'Costruisci la mappa';
     function aiuto(c) {
-      if (livello === 2) { var t = String(c.titolo || ''); return esc(c.emoji || '💡') + ' <b>' + esc(t.charAt(0)) + '</b>' + ' _'.repeat(Math.max(0, Math.min(12, t.replace(/\s/g, '').length - 1))); }
+      if (livello === 2) { var t = String(c.titolo || ''); return esc(c.emoji || '💡') + ' <b>' + esc(t.charAt(0)) + '</b>…'; }
       return esc(c.emoji || '💡') + ' ' + esc(primaFrase(c.spiegazione));
     }
+    function prossimo() { for (var i = 0; i < n; i++) if (!posti[i]) return i; return null; }
+    /* tre risposte: quella giusta e due diverse (prima quelle ancora da mettere) */
+    function opzioni(i) {
+      var altri = C.map(function (_, k) { return k; }).filter(function (k) { return k !== i; });
+      var dis = mescola(altri.filter(function (k) { return !posti[k]; })).concat(mescola(altri.filter(function (k) { return posti[k]; }))).slice(0, 2);
+      return mescola([i].concat(dis));
+    }
+    function vai(i) { cur = i; scelte = opzioni(i); sbagliate = 0; }
     function inizio() {
-      R.innerHTML = '<div class="st-palco">' + comeFunziona('🗺️', livello === 2 ? 'La mappa a memoria' : 'Costruisci la mappa', livello === 2 ? 'Stessa mappa, ma senza le frasi di aiuto: solo l\'emoji e la prima lettera.' : 'Al centro c\'è l\'argomento. Intorno ci sono le caselle delle idee chiave, ma i nomi sono spariti.', [
-        'Sotto la mappa trovi le <b>etichette</b> con i nomi delle idee.',
-        'Tocca un\'<b>etichetta</b>, poi tocca la <b>casella</b> dove secondo te va messa.',
-        'Se è giusta resta lì, verde. Se è sbagliata la casella trema e puoi riprovare.'
+      R.innerHTML = '<div class="st-palco">' + comeFunziona('🗺️', titoloGioco, livello === 2 ? 'Stessa mappa, ma senza la frase di aiuto: ti restano l\'immagine e la <b>prima lettera</b>.' : 'Al centro c\'è l\'argomento. Intorno ci sono le idee chiave: le riempi una alla volta.', [
+        'In alto leggi un <b>indizio</b>: ti dice di quale idea si parla.',
+        'Tra <b>tre risposte</b> tocca quella giusta: la casella della mappa si riempie.',
+        'Se sbagli non succede nulla: ricevi un <b>suggerimento</b> e riprovi.'
       ], 'Inizia la mappa →') + '</div>';
-      R.querySelector('.fm-via').onclick = disegna;
+      R.querySelector('.fm-via').onclick = function () { vai(prossimo()); disegna(); };
     }
     function disegna() {
-      var mancano = C.filter(function (c, i) { return !posti[i]; }).length;
-      R.innerHTML = '<div class="st-palco"><h2>🗺️ ' + (livello === 2 ? 'La mappa a memoria' : 'Costruisci la mappa') + '</h2>' +
-        '<p class="st-sot">' + (mancano ? 'Tocca un\'etichetta qui sotto, poi la casella giusta. Mancano <b>' + mancano + '</b>.' : 'Mappa completa! 🎉') + '</p>' +
+      var mancano = C.filter(function (c, i) { return !posti[i]; }).length, c = cur === null ? null : C[cur];
+      R.innerHTML = '<div class="st-palco"><h2>🗺️ ' + titoloGioco + '</h2>' +
+        '<p class="st-sot">' + (mancano ? 'Tocca la risposta giusta: si riempie la casella col bordo giallo. Mancano <b>' + mancano + '</b>.' : 'Mappa completa! 🎉') + '</p>' +
+        (mancano ? '<div class="st-card fm-quesito st-entra">' +
+          '<p class="st-cont">' + (n - mancano + 1) + ' di ' + n + '</p>' +
+          '<p class="st-dom" style="padding-right:0">' + (livello === 2 ? 'Quale idea è? Ti aiutano l\'immagine e l\'iniziale.' : 'Quale idea corrisponde a questa frase?') + '</p>' +
+          '<p class="fm-indizio">' + aiuto(c) + '</p>' +
+          '<div class="st-scelte" role="group" aria-label="Le risposte">' + scelte.map(function (k) {
+            return '<button type="button" class="st-scelta" data-r="' + k + '">' + esc(C[k].titolo) + '</button>';
+          }).join('') + '</div><div class="st-esito" aria-live="polite"></div></div>' : '') +
         '<div class="fm-mappa">' +
           '<div class="fm-centro"><span aria-hidden="true">' + esc(L.icona || '📚') + '</span>' + esc(L.titolo) + '</div>' +
-          C.map(function (c, i) {
-            return '<button type="button" class="fm-nodo' + (posti[i] ? ' ok' : '') + '" data-n="' + i + '" style="--r:' + pos[i][0] + ';--c:' + pos[i][1] + '"' + (posti[i] ? ' disabled' : '') + '>' +
-              (posti[i] ? '<b class="tit">' + esc(c.titolo) + '</b>' : '<span class="vuoto">?</span>') + '<span class="aiuto">' + aiuto(c) + '</span></button>';
+          C.map(function (x, i) {
+            return '<button type="button" class="fm-nodo' + (posti[i] ? ' ok' : '') + (i === cur && !posti[i] ? ' cur' : '') + '" data-n="' + i + '" style="--r:' + pos[i][0] + ';--c:' + pos[i][1] + '"' + (posti[i] ? ' disabled' : '') + (i === cur && !posti[i] ? ' aria-current="true"' : '') + '>' +
+              (posti[i] ? '<b class="tit">' + esc(x.titolo) + '</b>' : '<span class="vuoto">?</span>') + '<span class="aiuto">' + aiuto(x) + '</span></button>';
           }).join('') +
         '</div>' +
-        (mancano ? '<div class="fm-etichette" role="group" aria-label="Le etichette da mettere">' + mescola(C.map(function (c, i) { return i; }).filter(function (i) { return !posti[i]; })).map(function (i) {
-          return '<button type="button" class="st-scelta' + (sel === i ? ' sel' : '') + '" data-e="' + i + '" aria-pressed="' + (sel === i) + '">' + esc(C[i].titolo) + '</button>';
-        }).join('') + '</div>' : '') +
         '<div id="fm-fine"></div></div>';
-      R.querySelectorAll('[data-e]').forEach(function (b) {
+      R.querySelectorAll('[data-r]').forEach(function (b) {
         b.onclick = function () {
-          sel = +b.getAttribute('data-e');
-          R.querySelectorAll('[data-e]').forEach(function (x) { var on = x === b; x.classList.toggle('sel', on); x.setAttribute('aria-pressed', on); });
-          toast('Ora tocca la casella giusta 👆');
+          var k = +b.getAttribute('data-r');
+          if (k === cur) { posti[cur] = true; toast(S.pesca(S.BRAVO)); var p = prossimo(); if (p !== null) vai(p); else cur = null; disegna(); return; }
+          errori++; sbagliate++; b.classList.add('no'); b.disabled = true;
+          var nodo = R.querySelector('.fm-nodo[data-n="' + cur + '"]'); if (nodo) { nodo.classList.add('no'); setTimeout(function () { nodo.classList.remove('no'); }, 450); }
+          var t = String(C[cur].titolo || ''), lettere = Math.min(t.length - 1, sbagliate + (livello === 2 ? 1 : 0));
+          R.querySelector('.st-esito').innerHTML = '<div class="st-spiega no">🤔 Non è questa. <br>💡 Suggerimento: il titolo comincia con <b>«' + esc(t.slice(0, lettere)) + '…»</b>' +
+            (livello === 2 ? '<br>Rileggi: ' + esc(primaFrase(C[cur].spiegazione)) : '') + '</div>';
         };
       });
+      /* si può anche scegliere da sé la casella da riempire */
       R.querySelectorAll('[data-n]').forEach(function (b) {
-        b.onclick = function () {
-          if (sel === null) return toast('Prima tocca un\'etichetta qui sotto 👇');
-          var i = +b.getAttribute('data-n');
-          if (i === sel) { posti[i] = true; sel = null; toast(S.pesca(S.BRAVO)); disegna(); }
-          else { errori++; b.classList.add('no'); setTimeout(function () { b.classList.remove('no'); }, 450); }
-        };
+        b.onclick = function () { var i = +b.getAttribute('data-n'); if (posti[i] || i === cur) return; vai(i); disegna(); };
       });
       if (!mancano) fine();
     }

@@ -1,16 +1,17 @@
 /* Area docenti: accesso protetto.
    Le pagine riservate stanno nel repository solo in forma cifrata (aula/lingue/docenti/*.enc, AES-256-GCM).
    La chiave si ottiene in due modi:
-   1) con il proprio indirizzo istituzionale: un codice monouso arriva per e-mail; la funzione lingue-accesso
+   1) con il proprio indirizzo istituzionale: un codice monouso arriva per e-mail; la funzione aula-accesso
       rilascia la chiave solo ai docenti abilitati nell'elenco;
    2) con il codice del Dipartimento: una chiave di scorta, a sua volta cifrata con il codice.
    La chiave resta solo nella memoria della scheda (sessionStorage) e sparisce alla chiusura.
    Dopo la decifratura la pagina viene aperta in questa stessa scheda. */
 (function () {
   'use strict';
-  var API = 'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/lingue-accesso';
+  var API = 'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/aula-accesso';
   var MAIL = 'michele.gaggiano@alberghierorieti.it';
   var K_DIP = 'lingue-chiave-dip';
+  var K_SES = 'studio-sessione'; /* la stessa sessione della Sala studio: un solo accesso per tutta l'Aula */
 
   function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); if (v === null) sessionStorage.removeItem(k); else sessionStorage.setItem(k, v); } catch (e) {} return null; }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -28,11 +29,8 @@
     return fetch('aula/lingue/docenti/' + nome + '.enc', { cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('file');
       return r.json();
-    }).then(function (o) { return decifra(chiave, nome, o); }).then(percorsi);
+    }).then(function (o) { return decifra(chiave, nome, o); });
   }
-  /* Finché i materiali cifrati non vengono ricifrati con i nuovi percorsi, i file .enc contengono ancora i riferimenti
-     a lingue/ e studio/: qui li porta sotto aula/ dopo la decifratura (nessun effetto su testi già aggiornati). */
-  function percorsi(t) { return String(t).replace(/(["'`(])(\/?)(lingue|studio)\//g, '$1$2aula/$3/'); }
   /* chiave di scorta del Dipartimento: PBKDF2 sul codice, poi AES-GCM sulla chiave principale */
   function daCodice(codice) {
     var pulito = String(codice).toUpperCase().replace(/[^A-Z0-9]/g, '');
@@ -51,10 +49,23 @@
       return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j.ok) { var e = new Error(j.errore || 'rete'); e.stato = r.status; throw e; } return j; });
     });
   }
-  /* prova ad avere la chiave senza mostrare nulla */
+  /* sessione condivisa con la Sala studio (localStorage, 60 giorni) */
+  function sessione() {
+    try { var o = JSON.parse(localStorage.getItem(K_SES) || 'null'); return o && o.t && o.scade > Date.now() ? o : null; } catch (e) { return null; }
+  }
+  function salvaSessione(r) {
+    try { localStorage.setItem(K_SES, JSON.stringify({ t: r.sessione, email: r.email, nome: r.nome, scade: Date.now() + 59 * 24 * 3600 * 1000 })); } catch (e) {}
+  }
+  /* prova ad avere la chiave senza mostrare nulla: dalla scheda, oppure dalla sessione dell'Aula se il docente e' abilitato */
   function silenzioso() {
     var d = ss(K_DIP);
-    return d ? Promise.resolve(d) : Promise.reject(new Error('no-chiave'));
+    if (d) return Promise.resolve(d);
+    var s = sessione();
+    if (!s) return Promise.reject(new Error('no-chiave'));
+    return chiama({ azione: 'chiave', sessione: s.t }).then(function (r) { ss(K_DIP, r.chiave); return r.chiave; }).catch(function (e) {
+      if (e && e.stato === 401) { try { localStorage.removeItem(K_SES); } catch (x) {} }
+      throw e;
+    });
   }
 
   /* ───── dati delle lezioni (scheda Docente e verifiche) ───── */
@@ -93,6 +104,7 @@
     var m = String((e && e.message) || e || '');
     if (/troppo-presto/.test(m)) return 'Attendete mezzo minuto prima di chiedere un altro codice.';
     if (/troppi/.test(m)) return 'Troppe richieste: riprovate tra un po\'.';
+    if (/non-abilitato/.test(m)) return 'L\'accesso è riuscito, ma questo indirizzo non è abilitato all\'area docenti di lingue. Scrivete a ' + MAIL + '.';
     if (/codice/.test(m)) return 'Codice non valido o scaduto. Richiedetene uno nuovo.';
     if (/invio/.test(m)) return 'Non è stato possibile spedire la mail. Riprovate tra poco.';
     if (/rete|fetch|network|Failed/i.test(m)) return 'Connessione non riuscita. Controllate la rete e riprovate.';
@@ -139,7 +151,11 @@
       box.querySelector('#ac-f').addEventListener('submit', function (e) {
         e.preventDefault(); var b = e.target.querySelector('button'); occupato(b, true);
         chiama({ azione: 'verifica', email: mail, codice: box.querySelector('#ac-t').value.trim() })
-          .then(function (r) { ss(K_DIP, r.chiave); fine(r.chiave); })
+          .then(function (r) {
+            salvaSessione(r);
+            if (!r.chiave) throw new Error('non-abilitato');
+            ss(K_DIP, r.chiave); fine(r.chiave);
+          })
           .catch(function (er) { occupato(b, false); msg(errore(er)); });
       });
     }
@@ -177,7 +193,7 @@
     stile();
     var b = document.createElement('div'); b.className = 'ac-bar'; b.innerHTML = '<span>🔒 Area riservata</span><button type="button">Esci</button>';
     b.querySelector('button').addEventListener('click', function () {
-      ss(K_DIP, null);
+      ss(K_DIP, null); try { localStorage.removeItem(K_SES); } catch (e) {}
       location.href = 'aula/lingue/docenti.html';
     });
     document.body.appendChild(b);

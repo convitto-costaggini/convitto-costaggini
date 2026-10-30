@@ -8,7 +8,7 @@ Le pagine pubbliche `aula/lingue/<nome>.html` sono solo un guscio che chiede l'a
 - **E-mail istituzionale e codice monouso**: il docente scrive la sua e-mail, riceve un codice di sei cifre per posta, lo inserisce e entra.
   Non c'è nessun account da creare e nessuna password. Il codice parte solo per gli indirizzi presenti nella tabella `lingue_docenti`
   (Supabase), vale 10 minuti, si usa una volta sola, ha al massimo 5 tentativi e 5 invii all'ora. Del codice il database conserva solo
-  l'impronta (hash). La chiave di decifratura viene consegnata dalla funzione `lingue-accesso` solo dopo il codice giusto.
+  l'impronta (hash). La chiave di decifratura viene consegnata dalla funzione `aula-accesso` solo dopo il codice giusto.
 - **Codice del Dipartimento**: una chiave di scorta (`aula/lingue/docenti/accesso-dipartimento.json`) apribile con un codice condiviso.
 
 La mail parte da uno script Google Apps Script (`scripts/lingue-invio-codici.gs`), come le mail dei moduli del Convitto: nessuna casella
@@ -31,7 +31,7 @@ nuova, nessun SMTP, nessun intervento dell'amministratore del Workspace.
 Nel frattempo il **codice del Dipartimento** funziona senza nulla di tutto questo.
 
 ## Se qualcosa non va
-- *Il codice non arriva*: controllare la posta indesiderata; poi Dashboard, Edge Functions, `lingue-accesso`, Logs. Se lo script risponde
+- *Il codice non arriva*: controllare la posta indesiderata; poi Dashboard, Edge Functions, `aula-accesso`, Logs. Se lo script risponde
   "non autorizzato", `TOKEN` e `GAS_TOKEN` non coincidono. Dopo ogni modifica al codice dello script serve una nuova distribuzione.
 - *Limiti*: Gmail consente circa 1500 invii al giorno con un account Workspace, ampiamente sufficienti.
 - Il codice funziona solo per indirizzi che finiscono con `@alberghierorieti.it` o `@alberghierorieti.edu.it` (controllo anche nello script).

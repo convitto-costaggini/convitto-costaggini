@@ -2,13 +2,14 @@
  * Invio dei codici di accesso per l'area docenti di /lingue e della Sala studio (/studio).
  * Va pubblicato come "Applicazione web" (Esegui come: me; Chi ha accesso: Chiunque).
  * Proprietà dello script richiesta: TOKEN (una stringa lunga e casuale, la stessa di GAS_TOKEN su Supabase).
- * Riceve dalle funzioni Supabase "lingue-accesso" e "studio-genera" un POST {token, to, codice, servizio?} e spedisce la mail.
- * servizio "studio" = Sala studio; senza servizio = Le lingue dell'Alberghiero.
+ * Riceve dalle funzioni Supabase "aula-accesso" (e, finché esistono, "lingue-accesso" e "studio-genera") un POST {token, to, codice, servizio?} e spedisce la mail.
+ * servizio "aula" = accesso unico dell'Aula; "studio" = Sala studio; senza servizio = Le lingue dell'Alberghiero.
  */
 var DOMINI = ['@alberghierorieti.it', '@alberghierorieti.edu.it'];
 var SERVIZI = {
   lingue: { nome: 'Le lingue dell\'Alberghiero', area: 'all\'area docenti di <b>Le lingue dell\'Alberghiero</b>' },
-  studio: { nome: 'Sala Studio della Scuola', area: 'alla <b>Sala Studio della Scuola</b> (area docenti ed educatori)' }
+  studio: { nome: 'Sala Studio della Scuola', area: 'alla <b>Sala Studio della Scuola</b> (area docenti ed educatori)' },
+  aula: { nome: 'L\'Aula del Convitto Costaggini', area: 'all\'<b>Aula del Convitto Costaggini</b> (lingue e sala studio, area docenti ed educatori)' }
 };
 
 function doPost(e) {

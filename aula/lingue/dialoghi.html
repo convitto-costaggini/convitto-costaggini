@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/cantiere.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Dialoghi | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Scene di lavoro in sala, in cucina, in pasticceria, al ricevimento e al bar, in inglese, francese e spagnolo: ascolta il dialogo o interpreta il ruolo professionale."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .dl-ctrl{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:1rem 0 1.25rem}
+  .dl-modo{display:flex;background:#fff;border:1.5px solid var(--av3);border-radius:12px;padding:3px;gap:3px}
+  .dl-modo button{font:700 .74rem var(--fu);border:0;background:transparent;color:var(--bosco);padding:.55rem .8rem;border-radius:9px;cursor:pointer}
+  .dl-modo{max-width:100%}
+  @media (max-width:420px){.dl-modo{width:100%}.dl-modo button{flex:1;padding:.5rem .35rem;font-size:.7rem;line-height:1.25}}
+  .dl-modo button[aria-pressed=true]{background:var(--bosco);color:#fff}
+  .dl-sw{display:inline-flex;align-items:center;gap:.45rem;font:600 .78rem var(--fu);color:var(--txt2);cursor:pointer}
+  .dl-sw input{width:18px;height:18px;accent-color:var(--bosco)}
+  .dl-chat{display:flex;flex-direction:column;gap:.7rem;max-width:640px;margin:0 auto}
+  .dl-r{display:flex;gap:.55rem;align-items:flex-end}
+  .dl-r.cam{flex-direction:row-reverse}
+  .dl-av{flex-shrink:0;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;background:var(--av2);border:1px solid var(--av3)}
+  .dl-r.cam .dl-av{background:var(--bosco);border-color:var(--bosco)}
+  .dl-b{max-width:82%;background:#fff;border:1px solid var(--av3);border-radius:16px 16px 16px 4px;padding:.7rem .9rem;box-shadow:var(--sh-sm);transition:box-shadow .2s,transform .2s}
+  .dl-r.cam .dl-b{background:#eef3ee;border-color:#cfdccf;border-radius:16px 16px 4px 16px}
+  .dl-chi{font:800 .56rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:.2rem}
+  .dl-t{display:flex;gap:.5rem;align-items:flex-start}
+  .dl-t span{flex:1;font-size:.96rem;line-height:1.45;color:var(--txt)}
+  .dl-t .lg-play{width:32px;height:32px;font-size:.8rem}
+  .dl-it{font-size:.8rem;color:var(--txt2);font-style:italic;margin-top:.3rem;display:none}
+  .mostra-it .dl-it{display:block}
+  .dl-b.ora{box-shadow:0 0 0 2px var(--oro),0 8px 20px rgba(184,146,42,.2);transform:scale(1.01)}
+  .dl-nasc .dl-t span,.dl-nasc .dl-t .lg-play{display:none}
+  .dl-nasc .dl-it{display:block;font-style:normal;color:var(--bosco);font-size:.9rem}
+  .dl-svela{display:none;margin-top:.45rem;font:800 .6rem var(--fu);letter-spacing:.1em;text-transform:uppercase;border:1.5px dashed var(--bosco2);background:transparent;color:var(--bosco2);border-radius:8px;padding:.45rem .7rem;cursor:pointer}
+  .dl-nasc .dl-svela{display:inline-block}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="dialoghi">
+<div class="lg-anteprima">Le lingue dell'Alberghiero · minisito di prova, già utilizzabile</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Scene di lavoro</p>
+      <h1>I <em>dialoghi</em></h1>
+      <p>Una scena per ogni ambito: in sala, in cucina, in pasticceria, al ricevimento e al bar. Ascolta le due voci, poi prova a interpretare tu il ruolo professionale: il telefono ti dice cosa dire in italiano, tu lo dici nella lingua scelta.</p>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="lg-sez">
+    <div class="w">
+      <div class="lg-chips scorre" id="dl-scene" role="group" aria-label="Scena"></div>
+      <h2 class="lg-h2" id="dl-tit" style="margin-top:1.2rem"></h2>
+      <p class="lg-sot" id="dl-sot" style="margin-bottom:.8rem"></p>
+      <div class="dl-ctrl">
+        <div class="dl-modo" role="group" aria-label="Modalità">
+          <button type="button" data-m="leggi" aria-pressed="true">📖 Leggi e ascolta</button>
+          <button type="button" data-m="staff" aria-pressed="false">Fai tu</button>
+        </div>
+        <button type="button" class="lg-btn pieno" id="dl-tutto">▶ Ascolta tutto</button>
+        <label class="dl-sw"><input type="checkbox" id="dl-it"/> Traduzione italiana</label>
+      </div>
+      <div class="dl-chat" id="dl-chat"></div>
+      <p class="lg-nota" id="dl-coppia" style="max-width:640px;margin:1.5rem auto 0"></p>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/lingue/lingue.js"></script>
+<script src="aula/lingue/finestra.js"></script>
+<script src="aula/lingue/revisione.js"></script>
+<script src="aula/lingue/dialoghi-dati.js"></script>
+<script src="aula/lingue/correzioni.js"></script>
+<script>
+(function () {
+  var L = window.LINGUE_SITO, D = window.DIALOGHI;
+  var ICONE = { sala: '🍽️', cucina: '👨‍🍳', pasticceria: '🧁', accoglienza: '🛎️', bar: '🍸' };
+  var lingua = L.linguaScelta(), scena = L.leggi('scena-dl', D[0].id), modo = 'leggi', inCorso = false;
+  if (!D.some(function (x) { return x.id === scena; })) scena = D[0].id;
+  var chat = document.getElementById('dl-chat');
+  function sc() { return D.filter(function (x) { return x.id === scena; })[0]; }
+  function disegna() {
+    var s = sc();
+    document.getElementById('dl-scene').innerHTML = D.map(function (x) { return '<button type="button" class="lg-chip" data-sc="' + x.id + '" aria-pressed="' + (x.id === scena) + '">' + (ICONE[x.ambito] || x.staff.icona) + ' ' + L.esc(x.titolo) + '</button>'; }).join('');
+    document.getElementById('dl-tit').textContent = s.titolo;
+    document.getElementById('dl-sot').textContent = s.sot;
+    document.querySelector('[data-m="staff"]').textContent = s.staff.icona + ' Fai tu: ' + s.staff.nome.toLowerCase();
+    document.getElementById('dl-coppia').innerHTML = '🎭 <b>In coppia:</b> uno interpreta il ruolo di ' + L.esc(s.altro.nome.toLowerCase()) + ', l&#39;altro quello di ' + L.esc(s.staff.nome.toLowerCase()) + ', poi ci si scambia i ruoli. Le voci del telefono sono due, una più grave e una più acuta, per distinguere chi parla.';
+    chat.innerHTML = s.righe.map(function (r, i) {
+      var staff = r[0] === 'S', ruolo = staff ? s.staff : s.altro, t = r[2][lingua], nasc = staff && modo === 'staff';
+      return '<div class="dl-r' + (staff ? ' cam' : '') + '"><span class="dl-av" aria-hidden="true">' + ruolo.icona + '</span><div class="dl-b' + (nasc ? ' dl-nasc' : '') + '" data-i="' + i + '"' + (window.REVISIONE ? REVISIONE.attr('dl|' + s.id + '|' + i, lingua, t) : '') + '>' +
+        '<div class="dl-chi">' + L.esc(ruolo.nome) + '</div><div class="dl-t"><span lang="' + lingua + '">' + L.esc(t) + '</span>' + L.play(t, lingua) + '</div>' +
+        '<div class="dl-it">' + (nasc ? '<b style="display:block;font:800 .58rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)">Di&#39; in ' + L.lingua(lingua).nome.toLowerCase() + ':</b>' : '') + L.esc(r[1]) + '</div>' +
+        '<button type="button" class="dl-svela" data-svela="' + i + '">Dillo ad alta voce, poi tocca per controllare</button></div></div>';
+    }).join('');
+  }
+  function voceRuolo(i) { return sc().righe[i][0] === 'S' ? 1.15 : .85; }
+  function ferma() { if (inCorso && window.speechSynthesis) speechSynthesis.cancel(); inCorso = false; aggiornaTasto(); }
+  function tutto() {
+    if (!L.parla) return;
+    if (inCorso) return ferma();
+    inCorso = true; aggiornaTasto();
+    var i = 0, righe = sc().righe;
+    (function prossima() {
+      chat.querySelectorAll('.dl-b.ora').forEach(function (b) { b.classList.remove('ora'); });
+      if (!inCorso || i >= righe.length) { inCorso = false; aggiornaTasto(); return; }
+      var b = chat.querySelector('[data-i="' + i + '"]');
+      b.classList.add('ora'); b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var avanti = function () { L.ascolta(righe[i][2][lingua], lingua, { pitch: voceRuolo(i), fine: function () { i++; setTimeout(prossima, 350); } }); };
+      /* tocca allo studente: pausa per parlare, poi la battuta giusta si svela e si ascolta */
+      if (b.classList.contains('dl-nasc')) { setTimeout(function () { if (!inCorso) return; b.classList.remove('dl-nasc'); avanti(); }, 5000); return; }
+      avanti();
+    })();
+  }
+  function aggiornaTasto() { document.getElementById('dl-tutto').textContent = inCorso ? '■ Ferma' : (modo === 'staff' ? '▶ Avvia la scena' : '▶ Ascolta tutto'); }
+  document.addEventListener('click', function (e) {
+    var b;
+    if ((b = e.target.closest('[data-sc]'))) { ferma(); scena = b.dataset.sc; L.salva('scena-dl', scena); disegna(); }
+    else if ((b = e.target.closest('[data-m]'))) { ferma(); modo = b.dataset.m; document.querySelectorAll('[data-m]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); disegna(); aggiornaTasto(); }
+    else if ((b = e.target.closest('[data-svela]'))) { var bb = b.closest('.dl-b'); bb.classList.remove('dl-nasc'); var i = +b.dataset.svela; L.ascolta(sc().righe[i][2][lingua], lingua, { pitch: voceRuolo(i), btn: bb.querySelector('.lg-play') }); }
+  });
+  /* la lingua si sceglie una volta sola, dal pulsante 🌍 della barra */
+  document.addEventListener('lingua', function (e) { ferma(); lingua = e.detail; disegna(); });
+  document.getElementById('dl-tutto').addEventListener('click', tutto);
+  document.getElementById('dl-it').addEventListener('change', function () { chat.classList.toggle('mostra-it', this.checked); });
+  if (!L.parla) document.getElementById('dl-tutto').style.display = 'none';
+  disegna();
+})();
+</script>
+</body>
+</html>

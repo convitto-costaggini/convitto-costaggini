@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/cantiere.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Vocabolario delle lingue | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Il vocabolario di sala, cucina, pasticceria, accoglienza turistica e bar in inglese, francese e spagnolo, con l'ascolto."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/lingue/lingue.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .ps{background:var(--av);padding:2rem 1.25rem 3rem}
+  .ps .w{max-width:900px}
+  .ps-barra{background:var(--av);padding:.75rem 0 .9rem;border-bottom:1px solid var(--av3);margin-bottom:1.25rem}
+  .ps-riga{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+  .ps-riga+.ps-riga{margin-top:.6rem}
+  .ps-cerca{flex:1 1 220px;font:500 .9rem var(--fu);padding:.6rem .9rem;border:1.5px solid var(--av3);border-radius:10px;background:#fff;color:var(--txt)}
+  .ps-cerca:focus{outline:none;border-color:var(--oro)}
+  .ps-chip{font:700 .7rem var(--fu);letter-spacing:.06em;padding:.45rem .8rem;border-radius:999px;border:1.5px solid var(--av3);background:#fff;color:var(--bosco);cursor:pointer}
+  .ps-chip[aria-pressed=true]{background:var(--bosco);border-color:var(--bosco);color:#fff}
+  .ps-chip[disabled]{opacity:.45;cursor:default}
+  .ps-btn{font:800 .64rem var(--fu);letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1rem;border-radius:9px;cursor:pointer;border:1.5px solid var(--bosco);background:transparent;color:var(--bosco)}
+  .ps-btn.pieno{background:var(--bosco);color:#fff}
+  .ps-sez{font-family:var(--fd);font-weight:400;font-size:1.5rem;color:var(--bosco);margin:0 0 .25rem}
+  .ps-amb{font:800 .74rem var(--fu)!important;border-width:2px!important}
+  .ps-amb[aria-pressed=true]{background:var(--oro)!important;border-color:var(--oro)!important}
+  .ps-dove{font:800 .56rem var(--fu);letter-spacing:.1em;text-transform:uppercase;color:var(--oro);margin:0 0 .3rem}
+  .ps-sez-sot{font-size:.84rem;color:var(--txt2);margin:0 0 1.1rem}
+  .ps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem}
+  .ps-card{background:#fff;border:1px solid var(--av3);border-radius:12px;padding:1rem 1.1rem;box-shadow:var(--sh-sm)}
+  .ps-it{font-family:var(--fd);font-size:1.2rem;color:var(--bosco);margin:0 0 .65rem;line-height:1.3}
+  .ps-l{display:grid;grid-template-columns:30px 1fr 34px;gap:.15rem .5rem;align-items:center;padding:.4rem 0;border-top:1px dashed var(--av3)}
+  .ps-cod{font:800 .58rem var(--fu);letter-spacing:.06em;color:var(--oro);text-align:center;border:1px solid var(--av3);border-radius:5px;padding:.15rem 0}
+  .ps-fr{font-size:.92rem;color:var(--txt);line-height:1.35}
+  .ps-pr{grid-column:2;font-size:.76rem;color:var(--txt2);font-style:italic}
+  .ps-nota{grid-column:2;font-size:.72rem;color:#8a6d1a}
+  .ps-play{grid-row:1/span 2;grid-column:3;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--av3);background:var(--av);cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+  .ps-play:hover{border-color:var(--oro)}
+  .ps-play.va{background:var(--oro);border-color:var(--oro)}
+  .ps-vuoto{text-align:center;color:var(--txt2);font-size:.88rem;padding:2rem}
+  .ps-leg{margin-top:2rem;background:#fff;border:1px solid var(--av3);border-radius:12px;padding:1rem 1.2rem;font-size:.82rem;color:var(--txt2);line-height:1.7}
+  .ps-leg h3{font-family:var(--fd);font-weight:400;color:var(--bosco);font-size:1.1rem;margin:0 0 .4rem}
+  .ps-leg b{color:var(--bosco)}
+  /* allenamento */
+  .ps-all{display:none;max-width:520px;margin:0 auto}
+  .ps.allena .ps-all{display:block}
+  .ps.allena .ps-lista{display:none}
+  .ps-fc{background:#fff;border:1px solid var(--av3);border-radius:16px;box-shadow:var(--sh-sm);padding:2rem 1.5rem;text-align:center;min-height:250px;display:flex;flex-direction:column;justify-content:center;cursor:pointer}
+  .ps-fc-cod{font:800 .62rem var(--fu);letter-spacing:.14em;text-transform:uppercase;color:var(--oro)}
+  .ps-fc-it{font-family:var(--fd);font-size:1.7rem;color:var(--bosco);margin:.5rem 0}
+  .ps-fc-hint{font-size:.78rem;color:var(--txt2)}
+  .ps-fc-ris{display:none;margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--av3)}
+  .ps-fc.girata .ps-fc-ris{display:block}
+  .ps-fc.girata .ps-fc-hint{display:none}
+  .ps-fc-fr{font-size:1.25rem;color:var(--txt);font-weight:600}
+  .ps-fc-pr{font-size:.9rem;color:var(--txt2);font-style:italic;margin:.25rem 0 .6rem}
+  .ps-fc-b{display:flex;gap:.6rem;justify-content:center;margin-top:1rem}
+  .ps-fc-b .si{background:#047857;border-color:#047857;color:#fff}
+  .ps-fc-b .no{border-color:#b45309;color:#b45309}
+  .ps-prog{text-align:center;font:700 .72rem var(--fu);letter-spacing:.08em;text-transform:uppercase;color:var(--bosco2);margin-bottom:.8rem}
+  .ps-fine{text-align:center;padding:2rem 1rem}
+  @media (max-width:700px){#ps-ambiti,#ps-sezioni{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-1.25rem;margin-right:-1.25rem;padding:0 1.25rem}#ps-ambiti::-webkit-scrollbar,#ps-lingue::-webkit-scrollbar,#ps-sezioni::-webkit-scrollbar{display:none}.ps-chip{flex-shrink:0}}
+  </style>
+</head>
+<body data-page="lingue" data-lingue="vocabolario">
+<div class="lg-anteprima">Le lingue dell'Alberghiero · minisito di prova, già utilizzabile</div>
+<script src="nav-header.min.js"></script>
+<main id="main">
+  <section class="lg-hero">
+    <div class="w">
+      <p class="lbl">Il vocabolario dell'Alberghiero</p>
+      <h1>Il <em>vocabolario</em></h1>
+      <p>Le frasi che si usano davvero in sala, in cucina, in pasticceria, al ricevimento e al bar: in tre lingue, con la voce del telefono per ascoltarle.</p>
+      <div class="lg-bandiere"><span>English</span><span>Français</span><span>Español</span></div>
+    </div>
+  </section>
+  <div data-lingue-nav></div>
+
+  <section class="ps" id="ps">
+    <div class="w">
+      <div class="ps-barra">
+        <div class="ps-riga">
+          <input type="search" class="ps-cerca" id="ps-cerca" placeholder="Cerca una parola… (es. prenotato)" aria-label="Cerca una parola"/>
+          <button type="button" class="ps-btn pieno" id="ps-allena">🎴 Allenati</button>
+          <button type="button" class="ps-btn" id="ps-stampa">🖨️ Stampa</button>
+        </div>
+        <div class="ps-riga" id="ps-ambiti" role="group" aria-label="Ambito"></div>
+        <div class="ps-riga" id="ps-sezioni" role="group" aria-label="Sezione"></div>
+      </div>
+
+      <div class="ps-lista" id="ps-lista"></div>
+      <div class="ps-all" id="ps-all"></div>
+
+      <div class="ps-leg">
+        <h3>Come si ascolta</h3>
+        Il pulsante 🔊 usa la voce del tuo telefono o computer: se una lingua non è installata, la voce può mancare o avere un accento diverso.
+      </div>
+      <div id="rv-porta"></div>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/lingue/lingue.js"></script>
+<script src="aula/lingue/finestra.js"></script>
+<script src="aula/lingue/parole.js"></script>
+<script src="aula/lingue/correzioni.js"></script>
+<script src="aula/lingue/revisione.js"></script>
+<script>
+(function () {
+  'use strict';
+  var LINGUE = [
+    { cod: 'en', nome: 'Inglese', voce: 'en-GB' },
+    { cod: 'fr', nome: 'Francese', voce: 'fr-FR' },
+    { cod: 'es', nome: 'Spagnolo', voce: 'es-ES' }
+  ];
+  var V = window.VOCABOLARIO, AMBITI = V.AMBITI, SEZIONI = V.SEZIONI, PAROLE = V.PAROLE;
+  function sezioniDi(a) { return SEZIONI.filter(function (s) { return s.ambito === a; }); }
+  function ambitoDi(id) { return AMBITI.filter(function (a) { return a.id === id; })[0]; }
+  var CH = 'convitto-parole-sala-v1', st = {};
+  try { st = JSON.parse(localStorage.getItem(CH) || '{}') || {}; } catch (e) {}
+  function salva() { try { localStorage.setItem(CH, JSON.stringify(st)); } catch (e) {} }
+  var dalLink = (location.search.match(/[?&]a=([a-z]+)/) || [])[1];
+  var ambito = ambitoDi(dalLink) ? dalLink : (ambitoDi(st.ambito) ? st.ambito : 'sala');
+  var SITO = window.LINGUE_SITO;
+  /* una lingua sola, quella scelta col pulsante 🌍 della barra: niente confusione tra le tre */
+  var lingua = SITO.linguaScelta(), sezione = sezioniDi(ambito)[0].id, cerca = '';
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function norm(t) { return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+
+  /* voce del telefono */
+  var parla = 'speechSynthesis' in window;
+  /* la voce passa dalla funzione comune del minisito (lingue.js), che aggira i difetti noti di Chrome e Android */
+  function ascolta(testo, cod, btn) {
+    if (!parla) return;
+    SITO.ascolta(testo, cod, { btn: btn });
+  }
+
+
+  var elSez = document.getElementById('ps-sezioni');
+  function chips() {
+    document.getElementById('ps-ambiti').innerHTML = AMBITI.map(function (a) {
+      return '<button type="button" class="ps-chip ps-amb" data-amb="' + a.id + '" aria-pressed="' + (ambito === a.id) + '">' + a.icona + ' ' + a.nome + '</button>';
+    }).join('');
+    elSez.innerHTML = sezioniDi(ambito).map(function (s) {
+      var c = PAROLE[s.id];
+      return '<button type="button" class="ps-chip" data-s="' + s.id + '" aria-pressed="' + (sezione === s.id) + '"' + (c ? '' : ' disabled title="In preparazione"') + '>' + s.nome + (c ? '' : ' · presto') + '</button>';
+    }).join('');
+  }
+  function lingueAttive() { return LINGUE.filter(function (l) { return l.cod === lingua; }); }
+  function voci() {
+    var q = norm(cerca), out = [];
+    SEZIONI.forEach(function (s) {
+      (PAROLE[s.id] || []).forEach(function (p) {
+        if (!q && s.id !== sezione) return;
+        var testo = norm(p[0] + ' ' + p[1][lingua][0]);
+        if (!q || testo.indexOf(q) >= 0) out.push({ sez: s, p: p });
+      });
+    });
+    return out;
+  }
+  function lista() {
+    var v = voci(), s = SEZIONI.filter(function (x) { return x.id === sezione; })[0];
+    var testa = cerca ? '<h2 class="ps-sez">Risultati per «' + esc(cerca) + '»</h2><p class="ps-sez-sot">' + v.length + ' frasi trovate</p>' : '<h2 class="ps-sez">' + esc(s.nome) + '</h2><p class="ps-sez-sot">' + esc(s.sot) + '</p>';
+    if (!v.length) { document.getElementById('ps-lista').innerHTML = testa + '<p class="ps-vuoto">Nessuna frase trovata.</p>'; return; }
+    document.getElementById('ps-lista').innerHTML = testa + '<div class="ps-grid">' + v.map(function (x) {
+      return '<article class="ps-card">' + (cerca ? '<p class="ps-dove">' + ambitoDi(x.sez.ambito).icona + ' ' + esc(ambitoDi(x.sez.ambito).nome) + ' · ' + esc(x.sez.nome.replace(/^\S+\s/, '')) + '</p>' : '') + '<h3 class="ps-it">' + esc(x.p[0]) + '</h3>' + lingueAttive().map(function (l) {
+        var t = x.p[1][l.cod];
+        return '<div class="ps-l" data-rv-k="' + esc(x.sez.id + '|' + x.p[0]) + '" data-rv-l="' + l.cod + '" data-rv-t="' + esc(t[0]) + '"><span class="ps-cod" title="' + l.nome + '">' + l.cod.toUpperCase() + '</span><span class="ps-fr" lang="' + l.cod + '">' + esc(t[0]) + '</span>' +
+          (parla ? '<button type="button" class="ps-play" data-t="' + esc(t[0]) + '" data-c="' + l.cod + '" aria-label="Ascolta in ' + l.nome.toLowerCase() + '">🔊</button>' : '') +
+          (t[1] ? '<span class="ps-nota">ℹ️ ' + esc(t[1]) + '</span>' : '') + '</div>';
+      }).join('') + '</article>';
+    }).join('') + '</div>';
+    REVISIONE.decora(document.getElementById('ps-lista'));
+  }
+
+  /* allenamento a flashcard */
+  var mazzo = [], pos = 0, sapute = 0, tot = 0, primo = 0, visti = {}, linAll = lingua;
+  function iniziaAllenamento() {
+    linAll = lingua;
+    mazzo = (PAROLE[sezione] || []).slice().sort(function () { return Math.random() - .5; });
+    pos = 0; sapute = 0; tot = mazzo.length; primo = 0; visti = {}; carta();
+  }
+  function carta() {
+    var box = document.getElementById('ps-all'), l = LINGUE.filter(function (x) { return x.cod === linAll; })[0];
+    var scelta = '';
+    if (pos >= mazzo.length) {
+      box.innerHTML = scelta + '<div class="ps-fc ps-fine" style="cursor:default"><div class="ps-fc-it">' + (primo === tot ? '🏆 Perfetto!' : '👏 Mazzo completato!') + '</div><p class="ps-fc-hint" style="display:block">Al primo colpo ne sapevi ' + primo + ' su ' + tot + ' in ' + l.nome.toLowerCase() + (primo < tot ? '; le altre le hai ripassate fino a saperle.' : '.') + '</p>' +
+        '<div class="ps-fc-b"><button type="button" class="ps-btn pieno" data-a="ricomincia">↺ Ricomincia</button><button type="button" class="ps-btn" data-a="esci">← Torna alla lista</button></div></div>';
+      var r = st.risultati || (st.risultati = {}); r[sezione + '-' + linAll] = primo + '/' + tot; salva();
+      return;
+    }
+    var p = mazzo[pos], t = p[1][linAll];
+    box.innerHTML = scelta + '<div class="ps-prog">Sapute ' + sapute + ' di ' + tot + (mazzo.length - pos > 1 ? ' · ancora ' + (mazzo.length - pos) + ' carte' : ' · ultima carta') + '</div>' +
+      '<div class="ps-fc" id="ps-fc" role="button" tabindex="0" aria-label="Gira la carta"><div class="ps-fc-cod">Come si dice in ' + l.nome.toLowerCase() + '?</div><div class="ps-fc-it">' + esc(p[0]) + '</div><div class="ps-fc-hint">Pensa alla risposta, poi tocca la carta per girarla</div>' +
+      '<div class="ps-fc-ris"><div class="ps-fc-fr" lang="' + linAll + '">' + esc(t[0]) + '</div>' + (parla ? '<button type="button" class="ps-play" style="margin:0 auto" data-t="' + esc(t[0]) + '" data-c="' + linAll + '" aria-label="Ascolta">🔊</button>' : '') +
+      '<div class="ps-fc-b"><button type="button" class="ps-btn no" data-a="ripasso">Da ripassare</button><button type="button" class="ps-btn si" data-a="sapevo">✓ Lo sapevo</button></div></div></div>' +
+      '<p style="text-align:center;margin-top:1rem"><button type="button" class="ps-btn" data-a="esci">← Torna alla lista</button></p>';
+  }
+
+  function stampa() {
+    var s = SEZIONI.filter(function (x) { return x.id === sezione; })[0];
+    var righe = (PAROLE[sezione] || []).map(function (p) {
+      var t = p[1][lingua]; return '<tr><td class="it">' + esc(p[0]) + '</td><td>' + esc(t[0]) + '</td></tr>';
+    }).join('');
+    var nomeL = LINGUE.filter(function (x) { return x.cod === lingua; })[0].nome;
+    var w = window.open('', '_blank'); if (!w) { window.print(); return; }
+    w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>Vocabolario ' + esc(nomeL.toLowerCase()) + ' — ' + esc(ambitoDi(s.ambito).nome) + ' — ' + esc(s.nome.replace(/^\S+\s/, '')) + '</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#1a1a1a}h1{font-size:16pt;margin:0 0 2px}p{font-size:9pt;color:#555;margin:0 0 12px}table{width:100%;border-collapse:collapse;font-size:9.5pt}th{background:#2C3E2D;color:#fff;text-align:left;padding:5px;font-size:8.5pt;text-transform:uppercase}td{border-bottom:1px solid #ccc;padding:5px;vertical-align:top}td.it{font-weight:bold;width:45%}small{display:block;color:#666;font-style:italic;font-size:8pt}@page{size:A4;margin:12mm}</style></head><body>' +
+      '<h1>' + esc(ambitoDi(s.ambito).nome) + ' — ' + esc(s.nome.replace(/^\S+\s/, '')) + '</h1><p>Convitto "Costaggini" · IPSSEOA Rieti</p><table><thead><tr><th>Italiano</th><th>' + esc(nomeL) + '</th></tr></thead><tbody>' + righe + '</tbody></table>' +
+      '<script>window.onload=function(){window.print()}<\/script></body></html>');
+    w.document.close();
+  }
+
+  var ps = document.getElementById('ps');
+  document.addEventListener('click', function (e) {
+    var b;
+    if ((b = e.target.closest('.ps-play'))) { e.stopPropagation(); ascolta(b.dataset.t, b.dataset.c, b); return; }
+    if ((b = e.target.closest('[data-amb]'))) { ambito = b.dataset.amb; st.ambito = ambito; salva(); sezione = sezioniDi(ambito)[0].id; cerca = ''; document.getElementById('ps-cerca').value = ''; chips(); lista(); if (ps.classList.contains('allena')) iniziaAllenamento(); return; }
+    if ((b = e.target.closest('[data-s]')) && !b.disabled) { sezione = b.dataset.s; cerca = ''; document.getElementById('ps-cerca').value = ''; chips(); lista(); if (ps.classList.contains('allena')) iniziaAllenamento(); return; }
+    if ((b = e.target.closest('[data-a]'))) {
+      var a = b.dataset.a;
+      if (a === 'sapevo') { if (!visti[mazzo[pos][0]]) primo++; visti[mazzo[pos][0]] = 1; sapute++; pos++; carta(); }
+      else if (a === 'ripasso') { visti[mazzo[pos][0]] = 1; mazzo.push(mazzo[pos]); pos++; carta(); }
+      else if (a === 'ricomincia') iniziaAllenamento();
+      else if (a === 'esci') { ps.classList.remove('allena'); document.getElementById('ps-allena').textContent = '🎴 Allenati'; }
+      return;
+    }
+    if ((b = e.target.closest('#ps-fc'))) { b.classList.add('girata'); return; }
+  });
+  document.addEventListener('keydown', function (e) { var f = document.getElementById('ps-fc'); if (f && document.activeElement === f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); f.classList.add('girata'); } });
+  document.getElementById('ps-allena').addEventListener('click', function () {
+    var on = ps.classList.toggle('allena');
+    this.textContent = on ? '📋 Torna alla lista' : '🎴 Allenati';
+    if (on) { cerca = ''; document.getElementById('ps-cerca').value = ''; iniziaAllenamento(); }
+  });
+  document.getElementById('ps-stampa').addEventListener('click', stampa);
+  document.getElementById('ps-cerca').addEventListener('input', function () { cerca = this.value.trim(); if (ps.classList.contains('allena')) { ps.classList.remove('allena'); document.getElementById('ps-allena').textContent = '🎴 Allenati'; } lista(); });
+  if (parla) speechSynthesis.getVoices();
+  /* la lingua si sceglie una volta sola, dal pulsante 🌍 della barra */
+  document.addEventListener('lingua', function () { lingua = SITO.linguaScelta(); chips(); lista(); if (ps.classList.contains('allena')) iniziaAllenamento(); });
+  chips(); lista();
+  REVISIONE.porta(document.getElementById('rv-porta'));
+})();
+</script>
+</body>
+</html>

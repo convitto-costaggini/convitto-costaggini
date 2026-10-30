@@ -1,0 +1,21 @@
+/* L'Aula: stile della pagina di ingresso comune a Lingue e Sala studio.
+   Mobile first: una colonna fino a 600px, poi due; bersagli di tocco di almeno 44px. */
+.au-hero{background:linear-gradient(160deg,var(--bosco,#2C3E2D),#3D5C3E);color:#fff;padding:clamp(2.2rem,8vw,4.2rem) 0 clamp(1.8rem,6vw,3rem)}
+.au-hero .lbl{color:var(--oro2,#D4AA4A)}
+.au-hero h1{font-family:var(--fd,serif);font-weight:300;font-size:clamp(2.4rem,9vw,4rem);line-height:1.05;margin:.3rem 0 .8rem}
+.au-hero h1 em{font-style:italic;color:var(--oro2,#D4AA4A)}
+.au-hero .au-sub{color:#fff;max-width:34rem;font-size:clamp(.95rem,3.6vw,1.1rem);line-height:1.6;margin:0;opacity:.92}
+.au-sez{padding:clamp(1.6rem,6vw,2.8rem) 0}
+.au-doc{background:var(--av,#F5F0E8)}
+.au-tit{font:800 .72rem var(--fu,sans-serif);letter-spacing:.14em;text-transform:uppercase;color:var(--oro,#B8922A);margin:0 0 .9rem}
+.au-nota{font-size:.88rem;color:var(--txt2,#555);margin:-.4rem 0 1rem}
+.au-griglia{display:grid;grid-template-columns:1fr;gap:1rem}
+@media (min-width:600px){.au-griglia{grid-template-columns:repeat(2,1fr)}}
+.au-card{display:flex;flex-direction:column;gap:.4rem;min-height:44px;padding:1.2rem 1.1rem;border-radius:16px;background:#fff;border:1.5px solid var(--av3,#e4dccb);text-decoration:none;color:inherit;box-shadow:0 2px 10px rgba(44,62,45,.06);transition:transform .2s,border-color .2s,box-shadow .2s}
+.au-card:hover,.au-card:focus-visible{transform:translateY(-2px);border-color:var(--oro,#B8922A);box-shadow:0 10px 26px rgba(44,62,45,.12)}
+.au-card:focus-visible{outline:3px solid var(--oro2,#D4AA4A);outline-offset:2px}
+.au-ico{font-size:1.8rem;line-height:1}
+.au-card h3{font-family:var(--fd,serif);font-weight:400;font-size:1.3rem;color:var(--bosco,#2C3E2D);margin:.2rem 0 0}
+.au-card p{font-size:.9rem;line-height:1.6;color:var(--txt2,#555);margin:0}
+.au-vai{margin-top:auto;padding-top:.6rem;font:800 .66rem var(--fu,sans-serif);letter-spacing:.1em;text-transform:uppercase;color:var(--oro,#B8922A)}
+@media (prefers-reduced-motion:reduce){.au-card{transition:none}.au-card:hover,.au-card:focus-visible{transform:none}}

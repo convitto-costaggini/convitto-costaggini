@@ -2,6 +2,13 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"/>
+<script>
+/* I minisiti Lingue e Sala studio ora stanno sotto /aula/: i vecchi indirizzi (anche con parametri e QR già stampati) vengono portati al nuovo percorso. */
+(function () {
+  var p = location.pathname;
+  if (/^\/(lingue|studio)(\/|$)/.test(p)) location.replace('/aula' + p + location.search + location.hash);
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="robots" content="noindex"/>
   <title>Pagina non trovata | Convitto "Costaggini" — Rieti</title>

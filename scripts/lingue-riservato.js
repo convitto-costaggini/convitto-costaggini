@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* Strumenti per i materiali riservati di /lingue (area docenti).
-   Le pagine riservate stanno nel repository solo cifrate (lingue/docenti/*.enc, AES-256-GCM).
+   Le pagine riservate stanno nel repository solo cifrate (aula/lingue/docenti/*.enc, AES-256-GCM).
    La chiave NON è nel repository: sta nel database (tabella lingue_chiave) e in un file locale.
    Uso:
      LINGUE_CHIAVE=<base64> node scripts/lingue-riservato.js cifra <file> <nome>      cifra un file in lingue/docenti/<nome>.enc
@@ -10,7 +10,7 @@
      LINGUE_CHIAVE=<base64> node scripts/lingue-riservato.js tutto <cartella>         cifra tutte le pagine .html della cartella e scrive i rispettivi stub
 */
 const fs = require('fs'), path = require('path'), crypto = require('crypto');
-const RADICE = path.join(__dirname, '..', 'lingue');
+const RADICE = path.join(__dirname, '..', 'aula', 'lingue');
 const DEST = path.join(RADICE, 'docenti');
 const ITER = 600000;
 
@@ -44,7 +44,7 @@ function stub(nome) {
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
-  <link rel="stylesheet" href="lingue/lingue.css"/>
+  <link rel="stylesheet" href="aula/lingue/lingue.css"/>
   <link rel="icon" href="favicon.ico" sizes="any"/>
 </head>
 <body data-page="lingue" data-lingue="${nome}">
@@ -53,8 +53,8 @@ function stub(nome) {
   <div data-lingue-nav></div>
   <div id="ac-box"><div class="ac" style="max-width:460px;margin:2rem auto;padding:0 1rem"><p>Caricamento dell'area riservata…</p><noscript><p>Serve JavaScript per accedere all'area riservata.</p></noscript></div></div>
 </main>
-<script src="lingue/lingue.js"></script>
-<script src="lingue/accesso.js"></script>
+<script src="aula/lingue/lingue.js"></script>
+<script src="aula/lingue/accesso.js"></script>
 <script>ACCESSO.avvia('${nome}');</script>
 </body>
 </html>
@@ -78,7 +78,7 @@ else if (cmd === 'scorta') {
   const cart = a, tempi = fs.existsSync(path.join(cart, 'tempi.js')) ? fs.readFileSync(path.join(cart, 'tempi.js'), 'utf8') : null;
   fs.readdirSync(cart).filter(f => f.endsWith('.html')).forEach(f => {
     const nome = f.replace(/\.html$/, ''); let t = fs.readFileSync(path.join(cart, f), 'utf8');
-    if (tempi) t = t.replace('<script src="lingue/tempi.js"></script>', () => '<script>' + tempi.replace(/<\/script/gi, '<\\/script') + '</script>');
+    if (tempi) t = t.replace('<script src="aula/lingue/tempi.js"></script>', () => '<script>' + tempi.replace(/<\/script/gi, '<\\/script') + '</script>');
     scrivi(nome, t); stub(nome);
   });
   if (fs.existsSync(path.join(cart, 'lezioni-docente.json'))) scrivi('lezioni-docente', fs.readFileSync(path.join(cart, 'lezioni-docente.json'), 'utf8'));

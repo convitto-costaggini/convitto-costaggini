@@ -4,7 +4,7 @@
    il dispositivo resta abilitato finché non si apre una pagina con ?anteprima=esci.
    Qui c'è solo l'impronta SHA-256 della chiave, non la chiave. */
 (function () {
-  var IMPRONTA = '007168a11805412b07c12af105e0faf160b4c45f30b176fbc326210f08539a5e';
+  var IMPRONTA = '2640d251dd7905d0384194808861d58997e11abb112008a838bcab1cf7faed2b';
   var VOCE = 'cantiere-anteprima';
   var d = document.documentElement;
 

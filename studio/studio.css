@@ -340,7 +340,7 @@ html.ed-cartello-aperto{overflow:hidden}
 /* mappa: un'idea alla volta, e su telefono una vera mappa (centro, linea, rami) */
 .fm-nodo.cur{border:3px solid var(--oro);background:#fffaf0;box-shadow:0 0 0 4px rgba(184,146,42,.25)}
 @media (prefers-reduced-motion:no-preference){.fm-nodo.cur{animation:fm-pulsa 1.8s ease-in-out infinite}@keyframes fm-pulsa{50%{box-shadow:0 0 0 8px rgba(184,146,42,.12)}}}
-.fm-quesito{margin:.2rem 0 1rem}
+.fm-quesito{margin:.2rem 0 1rem;position:relative}
 .fm-indizio{font-size:1.25rem;line-height:1.5;margin:.1rem 0 1rem;color:var(--txt)}
 @media (max-width:699px){
 .fm-mappa{grid-template-columns:1fr 1fr;gap:.9rem .8rem;position:relative}

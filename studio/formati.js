@@ -378,6 +378,11 @@ window.FORMATI = (function () {
       if (livello === 2) { var t = String(c.titolo || ''); return esc(c.emoji || '💡') + ' <b>' + esc(t.charAt(0)) + '</b>…'; }
       return esc(c.emoji || '💡') + ' ' + esc(primaFrase(c.spiegazione));
     }
+    /* ciò che legge il pulsante 🔊: la domanda, l'indizio e le tre risposte */
+    function leggibile(c) {
+      return (livello === 2 ? 'Quale idea è? Comincia con la lettera ' + String(c.titolo || '').charAt(0) + '.' : 'Quale idea corrisponde a questa frase? ' + primaFrase(c.spiegazione)) +
+        ' Le risposte sono: ' + scelte.map(function (k) { return C[k].titolo; }).join('; ') + '.';
+    }
     function prossimo() { for (var i = 0; i < n; i++) if (!posti[i]) return i; return null; }
     /* tre risposte: quella giusta e due diverse (prima quelle ancora da mettere) */
     function opzioni(i) {
@@ -396,11 +401,12 @@ window.FORMATI = (function () {
     }
     function disegna() {
       var mancano = C.filter(function (c, i) { return !posti[i]; }).length, c = cur === null ? null : C[cur];
+      S.zitto();
       R.innerHTML = '<div class="st-palco"><h2>🗺️ ' + titoloGioco + '</h2>' +
         '<p class="st-sot">' + (mancano ? 'Tocca la risposta giusta: si riempie la casella col bordo giallo. Mancano <b>' + mancano + '</b>.' : 'Mappa completa! 🎉') + '</p>' +
-        (mancano ? '<div class="st-card fm-quesito st-entra">' +
+        (mancano ? '<div class="st-card fm-quesito st-entra">' + S.tastoVoce(leggibile(c)) +
           '<p class="st-cont">' + (n - mancano + 1) + ' di ' + n + '</p>' +
-          '<p class="st-dom" style="padding-right:0">' + (livello === 2 ? 'Quale idea è? Ti aiutano l\'immagine e l\'iniziale.' : 'Quale idea corrisponde a questa frase?') + '</p>' +
+          '<p class="st-dom">' + (livello === 2 ? 'Quale idea è? Ti aiutano l\'immagine e l\'iniziale.' : 'Quale idea corrisponde a questa frase?') + '</p>' +
           '<p class="fm-indizio">' + aiuto(c) + '</p>' +
           '<div class="st-scelte" role="group" aria-label="Le risposte">' + scelte.map(function (k) {
             return '<button type="button" class="st-scelta" data-r="' + k + '">' + esc(C[k].titolo) + '</button>';
@@ -424,6 +430,8 @@ window.FORMATI = (function () {
             (livello === 2 ? '<br>Rileggi: ' + esc(primaFrase(C[cur].spiegazione)) : '') + '</div>';
         };
       });
+      /* il pulsante 🔊 si accende e si spegne con lo stesso tocco */
+      R.querySelectorAll('.fm-quesito .st-leggi').forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); S.leggi(b.getAttribute('data-leggi'), b); }; });
       /* si può anche scegliere da sé la casella da riempire */
       R.querySelectorAll('[data-n]').forEach(function (b) {
         b.onclick = function () { var i = +b.getAttribute('data-n'); if (posti[i] || i === cur) return; vai(i); disegna(); };

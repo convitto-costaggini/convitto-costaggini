@@ -171,6 +171,14 @@
       document.open(); document.write(html); document.close();
     });
   }
+  /* link di cortesia (#dip=CODICE): il codice del Dipartimento nel frammento dell'indirizzo, che non viaggia verso il server;
+     si usa una volta e viene tolto subito dalla barra degli indirizzi. */
+  function daLink() {
+    var m = /[#&]dip=([A-Za-z0-9-]{8,40})/.exec(location.hash);
+    if (!m) return Promise.reject(new Error('no-link'));
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+    return daCodice(m[1]).then(function (k) { ss(K_DIP, k); return k; });
+  }
   function avvia(nome) {
     var box = document.getElementById('ac-box'); if (!box) return;
     var ok = function (k) {
@@ -179,7 +187,7 @@
         box.innerHTML = '<div class="ac"><div class="ac-c"><h2>Pagina non disponibile</h2><p class="s">Non è stato possibile aprire il materiale. Riprovate tra poco o scrivete a ' + MAIL + '.</p></div></div>';
       });
     };
-    silenzioso().then(ok).catch(function () { interfaccia(box, ok); });
+    daLink().catch(function () { return silenzioso(); }).then(ok).catch(function () { interfaccia(box, ok); });
   }
   /* finestra di accesso sopra una pagina pubblica (per esempio Lezioni) */
   function entra() {

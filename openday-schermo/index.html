@@ -64,9 +64,9 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
 /* Elenco di tutte le scene */
 #menu{position:absolute;inset:0;z-index:45;background:rgba(15,27,18,.94);display:none;flex-direction:column;justify-content:center;padding:0 140px 120px}
 #menu.on{display:flex}
-#menu h3{font-family:var(--fd);font-weight:400;font-size:64px;color:var(--oro3);margin-bottom:40px}
-#menu .griglia{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-#menu .griglia button{font:600 30px/1.25 var(--fu);color:var(--av);text-align:left;background:rgba(245,240,232,.07);border:2px solid rgba(212,170,74,.35);border-radius:20px;padding:26px 28px;cursor:pointer;display:flex;gap:18px;align-items:center;min-height:120px}
+#menu h3{font-family:var(--fd);font-weight:400;font-size:60px;color:var(--oro3);margin-bottom:30px}
+#menu .griglia{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+#menu .griglia button{font:600 28px/1.2 var(--fu);color:var(--av);text-align:left;background:rgba(245,240,232,.07);border:2px solid rgba(212,170,74,.35);border-radius:20px;padding:18px 24px;cursor:pointer;display:flex;gap:16px;align-items:center;min-height:96px}
 #menu .griglia button:hover{background:rgba(212,170,74,.2);border-color:var(--oro3)}
 #menu .griglia button b{font:400 54px/1 var(--fd);color:var(--oro2);min-width:58px}
 #menu .griglia button.on{background:var(--oro2);color:var(--bosco2);border-color:var(--oro3)}
@@ -169,7 +169,7 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
 
 /* ── 7 Accesso sicuro ────────────────────────── */
 .passi{display:grid;grid-template-columns:1fr 90px 1.35fr 90px 1fr;align-items:center}
-.passo{text-align:center;background:rgba(245,240,232,.06);border:2px solid rgba(212,170,74,.4);border-radius:26px;padding:46px 30px;min-height:430px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.passo{text-align:center;background:rgba(245,240,232,.06);border:2px solid rgba(212,170,74,.4);border-radius:26px;padding:40px 30px;min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .passo .n{width:70px;height:70px;border-radius:50%;background:var(--oro2);color:var(--bosco2);font-size:38px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
 .passo .ic{font-size:90px;margin-bottom:16px}
 .passo h3{font-family:var(--fd);font-weight:400;font-size:46px;color:var(--oro3);margin-bottom:14px;line-height:1.1}
@@ -182,7 +182,7 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
 .scene.on .cifre span:nth-child(3){animation-delay:3s}.scene.on .cifre span:nth-child(4){animation-delay:3.4s}
 .scene.on .cifre span:nth-child(5){animation-delay:3.8s}.scene.on .cifre span:nth-child(6){animation-delay:4.2s}
 @keyframes cifra{to{opacity:1;transform:none}}
-.adesione{margin-top:50px;display:flex;align-items:center;gap:30px;background:linear-gradient(90deg,rgba(212,170,74,.22),rgba(212,170,74,.06));border-left:8px solid var(--oro2);border-radius:16px;padding:28px 40px;font-size:34px;line-height:1.4}
+.adesione{margin-top:34px;display:flex;align-items:center;gap:30px;background:linear-gradient(90deg,rgba(212,170,74,.22),rgba(212,170,74,.06));border-left:8px solid var(--oro2);border-radius:16px;padding:28px 40px;font-size:34px;line-height:1.4}
 .adesione b{color:var(--oro3)}
 .adesione .ic{font-size:70px}
 
@@ -217,7 +217,7 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
 /* ── 10 Laboratorio musicale ─────────────────── */
 #s10 .corpo{display:grid;grid-template-columns:1fr 1.25fr;gap:70px;align-items:start}
 .foto{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.ft{position:relative;height:330px;border-radius:22px;overflow:hidden;background:linear-gradient(140deg,#3a5539,var(--bosco2));border:2px dashed rgba(212,170,74,.55)}
+.ft{position:relative;height:290px;border-radius:22px;overflow:hidden;background:linear-gradient(140deg,#3a5539,var(--bosco2));border:2px dashed rgba(212,170,74,.55)}
 .ft img{width:100%;height:100%;object-fit:cover;display:block}
 .scene.on .ft img{animation:zoom 14s ease-out forwards}
 @keyframes zoom{from{transform:scale(1)}to{transform:scale(1.1)}}
@@ -264,6 +264,95 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
 #aiuto h3{font-family:var(--fd);font-weight:400;font-size:60px;color:var(--bosco);margin-bottom:28px}
 #aiuto li{font-size:34px;line-height:1.6;list-style:none}
 #aiuto kbd{display:inline-block;min-width:64px;text-align:center;font-family:var(--fu);font-weight:800;font-size:28px;background:var(--bosco);color:var(--oro3);border-radius:10px;padding:2px 14px;margin-right:16px}
+
+
+/* ── Salute ──────────────────────────────────── */
+.quattro{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.qs{display:flex;gap:32px;align-items:center;background:#fff;border-radius:24px;padding:34px 40px;box-shadow:0 14px 40px rgba(44,62,45,.1)}
+.qs .ic{font-size:70px;flex-shrink:0;width:124px;height:124px;border-radius:50%;background:var(--av2);display:flex;align-items:center;justify-content:center}
+.qs h3{font-family:var(--fd);font-weight:400;font-size:44px;color:var(--bosco);line-height:1.1;margin-bottom:10px}
+.qs p{font-size:30px;line-height:1.4;color:var(--txt2)}
+
+/* ── Libertà a gradini ───────────────────────── */
+.scala{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:end;height:470px}
+.scala>div{height:100%;display:flex;align-items:flex-end}
+.gradino{width:100%;background:linear-gradient(170deg,rgba(212,170,74,.24),rgba(212,170,74,.06));border:2px solid rgba(212,170,74,.5);border-bottom:0;border-radius:22px 22px 0 0;padding:28px 30px}
+.scala>div:nth-child(1) .gradino{height:70%}.scala>div:nth-child(2) .gradino{height:79%}
+.scala>div:nth-child(3) .gradino{height:89%}.scala>div:nth-child(4) .gradino{height:100%;background:linear-gradient(170deg,var(--oro2),var(--oro));border-color:var(--oro3)}
+.gradino .ic{font-size:60px;display:block;margin-bottom:12px}
+.gradino h3{font-family:var(--fd);font-weight:400;font-size:44px;color:var(--oro3);margin-bottom:10px}
+.gradino p{font-size:28px;line-height:1.4;color:rgba(245,240,232,.88)}
+.scala>div:nth-child(4) h3,.scala>div:nth-child(4) p{color:var(--bosco2)}
+.base{height:8px;border-radius:4px;background:linear-gradient(90deg,rgba(212,170,74,.3),var(--oro2))}
+.nota-lib{margin-top:28px;font-size:31px;color:rgba(245,240,232,.85)}
+.nota-lib b{color:var(--oro3)}
+
+/* ── Il patto ────────────────────────────────── */
+.patto{display:grid;grid-template-columns:1fr 1.55fr;gap:70px;align-items:center}
+.motto{font-family:var(--fd);font-style:italic;font-size:52px;line-height:1.3;color:var(--bosco);border-left:8px solid var(--oro);padding-left:40px}
+.motto small{display:block;font:800 24px/1.3 var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);font-style:normal;margin-top:22px}
+.regole{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.rg{background:#fff;border-radius:20px;padding:24px 28px;display:flex;gap:20px;align-items:flex-start;box-shadow:0 10px 30px rgba(44,62,45,.08)}
+.rg .ic{font-size:50px;line-height:1}
+.rg p{font-size:27px;line-height:1.35;color:var(--txt2)}
+.rg b{display:block;font-family:var(--fd);font-weight:400;font-size:36px;color:var(--bosco);margin-bottom:4px}
+
+/* ── L'Aula ──────────────────────────────────── */
+#sAula{flex-direction:row;gap:90px;align-items:flex-start;padding-top:100px}
+#sAula .testo{flex:1}
+.avvio{display:inline-block;font:800 22px/1 var(--fu);letter-spacing:.12em;text-transform:uppercase;background:var(--oro2);color:var(--bosco2);padding:9px 18px;border-radius:30px;margin-left:14px;vertical-align:2px}
+.modi{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.modi span{font-size:28px;padding:12px 24px;border-radius:40px;background:rgba(245,240,232,.08);border:1px solid rgba(212,170,74,.4)}
+.garanzie{margin-top:36px;font-size:30px;color:var(--oro3)}
+.lez{padding:22px}
+.tap{display:flex;align-items:center;gap:16px;font-size:21px;color:var(--txt);padding:9px 0;border-bottom:1px solid var(--av2)}
+.tap i{width:30px;height:30px;border-radius:50%;border:3px solid var(--av3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:16px;color:#fff}
+.scene.on .tap i{animation:fatto .4s ease forwards}
+.scene.on .tap:nth-child(1) i{animation-delay:1.5s}.scene.on .tap:nth-child(2) i{animation-delay:2.7s}
+.scene.on .tap:nth-child(3) i{animation-delay:3.9s}.scene.on .tap:nth-child(4) i{animation-delay:5.1s}
+.scene.on .tap:nth-child(5) i{animation-delay:6.3s}.scene.on .tap:nth-child(6) i{animation-delay:7.5s}
+@keyframes fatto{to{background:var(--verde);border-color:var(--verde)}}
+.scheda{margin-top:18px;background:#fff;border-radius:18px;padding:20px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.scheda small{font:800 15px var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro)}
+.scheda p{font-size:23px;line-height:1.4;color:var(--txt);margin:8px 0 14px}
+.scheda p b{background:#fdf0c4;padding:0 4px;border-radius:4px}
+.ascolta{display:inline-flex;align-items:center;gap:10px;background:var(--bosco);color:var(--oro3);font:700 19px var(--fu);padding:10px 18px;border-radius:30px}
+.scene.on .ascolta{animation:pulsa2 1.8s ease-in-out infinite}
+@keyframes pulsa2{50%{box-shadow:0 0 0 10px rgba(44,62,45,.15)}}
+
+/* ── DSA e BES ───────────────────────────────── */
+.dsa{display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:start}
+.esempi{list-style:none;display:flex;flex-direction:column;gap:12px}
+.esempi li{display:flex;gap:22px;align-items:center;font-size:31px;line-height:1.35;color:var(--txt2)}
+.esempi li span{font-size:46px;width:64px;flex-shrink:0;text-align:center}
+.esempi li b{color:var(--bosco);font-weight:700}
+.fogli{position:relative;height:420px}
+.fogli>div{position:absolute;top:0}
+.fogli>div:nth-child(1){left:0}.fogli>div:nth-child(2){right:0}
+.foglio{width:300px;height:400px;background:#fff;border-radius:8px;box-shadow:0 18px 40px rgba(44,62,45,.2);padding:24px 24px;color:var(--txt);font-family:var(--fu)}
+.fogli>div:nth-child(1) .foglio{transform:rotate(-4deg) translateY(30px)}
+.fogli>div:nth-child(2) .foglio{transform:rotate(3deg)}
+.foglio .fila{display:flex;justify-content:space-between;font-weight:800;font-size:22px;color:var(--bosco);border-bottom:2px solid var(--bosco);padding-bottom:8px;margin-bottom:14px}
+.foglio .fila i{font-style:normal;font-weight:400;color:var(--txt2);font-size:16px}
+.foglio .dm{font-size:17px;font-weight:700;margin:10px 0 6px}
+.foglio .op{font-size:16px;line-height:1.6;color:var(--txt2)}
+.foglio.facile .dm{font-size:21px}.foglio.facile .op{font-size:20px;line-height:1.7}
+.foglio .parole{margin-top:14px;border:2px dashed var(--av3);border-radius:8px;padding:8px 10px;font-size:18px;color:var(--bosco)}
+.didascalia{text-align:center;font-family:var(--fd);font-style:italic;font-size:32px;color:var(--bosco);margin-top:10px}
+.compensa{margin-top:18px;display:flex;align-items:center;gap:26px;background:var(--bosco);color:var(--av);border-radius:18px;padding:22px 34px;font-size:29px;line-height:1.4}
+.compensa .ic{font-size:56px}
+.compensa b{color:var(--oro3)}
+
+/* ── Lingue ──────────────────────────────────── */
+.lingue3{font-family:var(--fd);font-size:58px;color:var(--oro3);margin:-18px 0 26px}
+.lingue3 span{color:rgba(237,217,138,.45);margin:0 18px}
+.ambiti{display:flex;gap:16px;margin-bottom:38px}
+.ambiti span{font-size:30px;padding:12px 26px;border-radius:40px;background:rgba(212,170,74,.15);border:1px solid rgba(212,170,74,.5)}
+#sLingue .carta{padding:34px 32px}
+#sLingue .carta .ic{font-size:70px;margin-bottom:16px}
+#sLingue .carta h3{font-size:42px}
+#sLingue .carta p{font-size:29px}
+.piede{margin-top:30px;font-size:30px;color:var(--oro3);text-align:center}
 
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
 </style>
@@ -326,7 +415,50 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
       <div class="carta rv d2"><span class="ic">📚</span><h3>Studio guidato</h3><p>Ogni pomeriggio aule tranquille e un educatore a cui chiedere aiuto.</p></div>
       <div class="carta rv d3"><span class="ic">🍽️</span><h3>A tavola insieme</h3><p>Pasti in mensa con gli educatori; allergie e intolleranze sempre segnalate.</p></div>
       <div class="carta rv d4"><span class="ic">🌙</span><h3>Anche di notte</h3><p>Educatori notturni sui piani: i ragazzi dormono sapendo di essere al sicuro.</p></div>
-      <div class="carta rv d5"><span class="ic">📞</span><h3>Vicini alla famiglia</h3><p>Le famiglie vengono aggiornate, non solo quando c'è un problema.</p></div>
+      <div class="carta rv d5"><span class="ic">📞</span><h3>Vicini alla famiglia</h3><p>Siedono nei Consigli di classe e aggiornano i genitori, non solo nei momenti difficili.</p></div>
+    </div>
+  </section>
+
+  <!-- SALUTE -->
+  <section class="scene light" id="sSal">
+    <p class="kicker rv">Salute e benessere</p>
+    <h2 class="rv d1">La salute, <em>seguita da vicino</em></h2>
+    <div class="quattro">
+      <div class="qs rv d2"><span class="ic">🩺</span><div><h3>Infermiera in Convitto</h3><p>E un medico convenzionato. L'infermeria è attrezzata per i primi interventi.</p></div></div>
+      <div class="qs rv d3"><span class="ic">💊</span><div><h3>Farmaci al sicuro</h3><p>Custoditi in infermeria e somministrati dall'infermiera.</p></div></div>
+      <div class="qs rv d4"><span class="ic">🥗</span><div><h3>Allergie rispettate</h3><p>Con il certificato medico, in mensa arriva il piatto giusto.</p></div></div>
+      <div class="qs rv d5"><span class="ic">📞</span><div><h3>Famiglia sempre avvisata</h3><p>Se sta poco bene, i genitori lo sanno subito.</p></div></div>
+    </div>
+  </section>
+
+  <!-- LIBERTÀ CON RESPONSABILITÀ -->
+  <section class="scene dark" id="sLib">
+    <p class="kicker rv">Libertà con responsabilità</p>
+    <h2 class="rv d1">Autonomia, <em>un gradino alla volta</em></h2>
+    <div class="scala">
+      <div class="rv d2"><div class="gradino"><span class="ic">🔐</span><h3>Al sicuro</h3><p>Custodi giorno e notte; di notte il cancello è chiuso.</p></div></div>
+      <div class="rv d3"><div class="gradino"><span class="ic">✍️</span><h3>Autorizzati</h3><p>Si esce solo con il permesso scritto dei genitori.</p></div></div>
+      <div class="rv d4"><div class="gradino"><span class="ic">🚌</span><h3>Accompagnati</h3><p>I minorenni vanno e tornano con i mezzi del Convitto.</p></div></div>
+      <div class="rv d5"><div class="gradino"><span class="ic">🚴</span><h3>Autonomi</h3><p>I maggiorenni, sulla pista ciclopedonale, da soli.</p></div></div>
+    </div>
+    <div class="base rv d5"></div>
+    <p class="nota-lib rv d6">👨‍👩‍👧 In settimana la famiglia può venire a prenderlo: basta <b>una richiesta scritta</b>, anche via email.</p>
+  </section>
+
+  <!-- IL PATTO DI CONVIVENZA -->
+  <section class="scene light" id="sPatto">
+    <p class="kicker rv">Il Regolamento del Convitto</p>
+    <h2 class="rv d1">Un patto, <em>non un elenco di divieti</em></h2>
+    <div class="patto">
+      <p class="motto rv d2">«Il Convitto è un laboratorio di vita democratica, di autonomia, di crescita e di consapevolezza.»<small>Dalle prime righe del Regolamento</small></p>
+      <div class="regole">
+        <div class="rg rv d3"><span class="ic">📵</span><p><b>Cellulare spento</b>a tavola, durante lo studio e di notte</p></div>
+        <div class="rg rv d3"><span class="ic">📸</span><p><b>Niente riprese</b>di compagni e personale senza consenso</p></div>
+        <div class="rg rv d4"><span class="ic">🚭</span><p><b>Zero alcol e fumo</b>e nessuna sostanza, senza eccezioni</p></div>
+        <div class="rg rv d4"><span class="ic">🧹</span><p><b>Camera in ordine</b>ogni mattina: rispetto per chi condivide</p></div>
+        <div class="rg rv d5"><span class="ic">🗳️</span><p><b>La voce dei ragazzi</b>rappresentanti eletti ogni anno</p></div>
+        <div class="rg rv d5"><span class="ic">🤝</span><p><b>Colloqui</b>la famiglia può chiederli in qualsiasi momento</p></div>
+      </div>
     </div>
   </section>
 
@@ -422,6 +554,88 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
     </div>
   </section>
 
+  <!-- L'AULA: E-LEARNING -->
+  <section class="scene dark" id="sAula">
+    <div class="testo">
+      <p class="kicker rv">L'Aula · e-learning del Convitto <span class="avvio">In avvio</span></p>
+      <h2 class="rv d1">Studiare <em>in modo furbo</em></h2>
+      <p class="lead rv d2">Le pagine del libro diventano una lezione da fare dal telefono: un'idea alla volta, i trucchi per ricordare, gli esercizi e una sfida finale.</p>
+      <div class="modi">
+        <span class="rv d3">🧭 Percorso guidato</span><span class="rv d3">🔐 Escape room</span><span class="rv d3">🗺️ Costruisci la mappa</span>
+        <span class="rv d4">🔍 Caccia all'errore</span><span class="rv d4">🎭 Intervista impossibile</span><span class="rv d4">⚡ Il minuto</span>
+        <span class="rv d5">🏆 Sfida a squadre alla LIM</span>
+      </div>
+      <p class="garanzie rv d6">Gratis · da qualsiasi telefono · senza registrazione · nessun dato degli studenti</p>
+    </div>
+    <div class="telefono rv d2" aria-label="Esempio di lezione della Sala studio">
+      <div class="schermo">
+        <div class="app-top"><small>Sala studio · lezione</small><b>I principi nutritivi</b><em>Scienza e cultura dell'alimentazione</em></div>
+        <div class="lez">
+          <div class="tap"><i>✓</i>🎣 Il gancio</div>
+          <div class="tap"><i>✓</i>💡 Le idee</div>
+          <div class="tap"><i>✓</i>🧠 Memorizza</div>
+          <div class="tap"><i>✓</i>🎯 Allenati</div>
+          <div class="tap"><i>✓</i>🃏 Flashcard</div>
+          <div class="tap"><i>✓</i>🏆 Sfida finale</div>
+          <div class="scheda"><small>💡 Un'idea alla volta</small><p>Le <b>proteine</b> costruiscono e riparano i tessuti del corpo.</p><span class="ascolta">🔊 Ascolta</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AULA: DSA E BES -->
+  <section class="scene light" id="sDsa">
+    <p class="kicker rv">L'Aula · per DSA, BES e per chi fa più fatica</p>
+    <h2 class="rv d1">Nessuno <em>resta indietro</em></h2>
+    <div class="dsa">
+      <ul class="esempi">
+        <li class="rv d2"><span>🔊</span><p><b>Ogni scheda si ascolta:</b> lettura ad alta voce</p></li>
+        <li class="rv d3"><span>🔠</span><p><b>Carattere ad alta leggibilità,</b> testo grande e spazi regolabili</p></li>
+        <li class="rv d4"><span>💡</span><p><b>Un'idea alla volta,</b> frasi brevi e parola chiave evidenziata</p></li>
+        <li class="rv d5"><span>✅</span><p><b>Ogni errore è spiegato subito:</b> sbagliare non costa niente</p></li>
+        <li class="rv d6"><span>🔁</span><p><b>Ripasso dopo 1, 3 e 7 giorni:</b> bastano cinque minuti</p></li>
+      </ul>
+      <div>
+        <div class="fogli" aria-hidden="true">
+          <div class="rv d3"><div class="foglio">
+            <p class="fila">Fila A <i>Nome ________</i></p>
+            <p class="dm">1. Le proteine servono a…</p>
+            <p class="op">○ dare energia immediata<br>○ costruire i tessuti<br>○ sciogliere i grassi<br>○ regolare la sete</p>
+            <p class="dm">2. Completa: le vitamine sono…</p>
+            <p class="op">______________________</p>
+          </div></div>
+          <div class="rv d4"><div class="foglio facile">
+            <p class="fila">Fila A <i>Nome ________</i></p>
+            <p class="dm">1. Le proteine servono a…</p>
+            <p class="op">○ dare energia immediata<br>○ costruire i tessuti</p>
+            <p class="dm">2. Completa: le vitamine sono…</p>
+            <p class="op">____________</p>
+            <p class="parole">Parole: regolatrici · energetiche</p>
+          </div></div>
+        </div>
+        <p class="didascalia rv d5">Sembrano uguali: a destra, la versione facilitata.</p>
+      </div>
+    </div>
+    <div class="compensa rv d6"><span class="ic">🗺️</span><p><b>La mappa della lezione si stampa con un clic,</b> come strumento compensativo previsto dal PDP (legge 170/2010).</p></div>
+  </section>
+
+  <!-- AULA: LINGUE -->
+  <section class="scene dark" id="sLingue">
+    <p class="kicker rv">L'Aula · Le lingue dell'Alberghiero</p>
+    <h2 class="rv d1">Le lingue del mestiere, <em>in tasca</em></h2>
+    <p class="lingue3 rv d2">English<span>·</span>Français<span>·</span>Español</p>
+    <div class="ambiti">
+      <span class="rv d2">🍷 Sala</span><span class="rv d2">👨‍🍳 Cucina</span><span class="rv d3">🧁 Pasticceria</span><span class="rv d3">🛎️ Accoglienza</span><span class="rv d3">☕ Bar</span>
+    </div>
+    <div class="carte">
+      <div class="carta rv d4"><span class="ic">🔊</span><h3>La frase del giorno</h3><p>Si ascolta e si ripete ad alta voce.</p></div>
+      <div class="carta rv d4"><span class="ic">🖼️</span><h3>Il ristorante illustrato</h3><p>Si tocca un oggetto e se ne sente il nome.</p></div>
+      <div class="carta rv d5"><span class="ic">💬</span><h3>Dialoghi</h3><p>Una cena, il check-in, la colazione al bar.</p></div>
+      <div class="carta rv d5"><span class="ic">🎭</span><h3>Imprevisti</h3><p>«Il vino sa di tappo»: come rispondere al cliente?</p></div>
+    </div>
+    <p class="piede rv d6">Anche in versione facilitata · gratis, dal telefono, senza registrazione</p>
+  </section>
+
   <!-- 9 · PREMIO AL MERITO -->
   <section class="scene dark" id="s9">
     <div class="testo">
@@ -487,7 +701,7 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
     <button class="btn" id="bIndietro" type="button">◀ Indietro</button>
     <button class="btn" id="bFerma" type="button">⏸ Ferma</button>
     <button class="btn" id="bAvanti" type="button">Avanti ▶</button>
-    <span id="contatore">1 <small>/ 12</small></span>
+    <span id="contatore">1 <small>/ 18</small></span>
     <button class="btn" id="bScene" type="button">☰ Tutte le scene</button>
   </nav>
   <div id="barra"><i></i></div>
@@ -533,9 +747,10 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
   function $(s) { return document.querySelector(s); }
   var stage = $('#stage'), scene = [].slice.call(document.querySelectorAll('.scene'));
   var barra = $('#barra i');
-  var TITOLI = ['Copertina', 'La settimana', 'La giornata tipo', 'Gli educatori', 'Dal registro alla famiglia',
-    'Area riservata famiglie', 'Accesso sicuro', 'Cosa resta riservato', 'Premio al Merito',
-    'Laboratorio musicale', 'Il sito', 'Prossimi Open Day'];
+  var TITOLI = ['Copertina', 'La settimana', 'La giornata tipo', 'Gli educatori', 'La salute',
+    'Libertà e autonomia', 'Il Regolamento', 'Dal registro alla famiglia', 'Area riservata famiglie',
+    'Accesso sicuro', 'Cosa resta riservato', 'L\'Aula: e-learning', 'DSA e BES', 'Le lingue',
+    'Premio al Merito', 'Laboratorio musicale', 'Il sito', 'Prossimi Open Day'];
 
   /* Adatta il palco 1920×1080 allo schermo */
   function scala() {

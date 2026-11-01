@@ -297,6 +297,23 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
 .rg p{font-size:27px;line-height:1.35;color:var(--txt2)}
 .rg b{display:block;font-family:var(--fd);font-weight:400;font-size:36px;color:var(--bosco);margin-bottom:4px}
 
+/* ── L'Aula: il progetto ─────────────────────── */
+#sProgetto{padding-top:80px}
+#sProgetto h2{font-size:84px}
+#sProgetto .lead{font-size:34px;max-width:1640px;margin:14px 0 26px}
+.pilastri{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.pil{background:rgba(245,240,232,.07);border:1px solid rgba(212,170,74,.4);border-radius:24px;padding:22px 28px}
+.pil .ic{font-size:42px;line-height:1;display:block;margin-bottom:8px}
+.pil b{display:block;font:400 36px/1.15 var(--fd);color:var(--oro3);margin-bottom:10px}
+.pil p{font-size:26px;line-height:1.4;color:rgba(245,240,232,.85)}
+.pil cite{display:block;margin-top:14px;font:italic 21px var(--fu);color:rgba(237,217,138,.75)}
+.tutti-dsa{margin-top:22px;display:flex;gap:26px;align-items:center;background:var(--av);color:var(--txt);border-radius:24px;padding:18px 30px;border-left:12px solid var(--oro2)}
+.tutti-dsa .ic{font-size:56px;line-height:1}
+.tutti-dsa p{font-size:28px;line-height:1.4}
+.tutti-dsa b{color:var(--bosco)}
+.tutti-dsa cite{font:italic 21px var(--fu);color:var(--txt2)}
+.unico{margin-top:16px;font:italic 400 32px/1.3 var(--fd);color:var(--oro3)}
+
 /* ── L'Aula ──────────────────────────────────── */
 #sAula{flex-direction:row;gap:90px;align-items:flex-start;padding-top:100px}
 #sAula .testo{flex:1}
@@ -685,18 +702,32 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
     </div>
   </section>
 
+  <!-- L'AULA: IL PROGETTO (cappello introduttivo) -->
+  <section class="scene dark" id="sProgetto" data-durata="24000">
+    <p class="kicker rv">L'Aula · il progetto e-learning del Convitto <span class="avvio">In avvio</span></p>
+    <h2 class="rv d1">Studiare meglio, <em>tutti</em></h2>
+    <p class="lead rv d2">Gli educatori trasformano gli argomenti del programma in lezioni digitali brevi, per lo studio e il ripasso, fondate su tre principi tra i più solidi della ricerca sull'apprendimento.</p>
+    <div class="pilastri">
+      <div class="pil rv d3"><span class="ic">🧠</span><b>Richiamare, non rileggere</b><p>Rispondere a domande fissa i ricordi più a lungo che rileggere il libro.</p><cite>Roediger e Karpicke, 2006</cite></div>
+      <div class="pil rv d4"><span class="ic">📅</span><b>Ripassare a intervalli</b><p>Pochi minuti distribuiti nei giorni valgono più di una lunga sessione la sera prima.</p><cite>Cepeda e coll., 2006 · Dunlosky e coll., 2013</cite></div>
+      <div class="pil rv d5"><span class="ic">🎧</span><b>Più strade per capire</b><p>Leggere, ascoltare, vedere: ognuno trova il canale che gli è più congeniale.</p><cite>Progettazione universale per l'apprendimento (CAST) · Mayer, 2009</cite></div>
+    </div>
+    <div class="tutti-dsa rv d6"><span class="ic">🤝</span><p>Pensato per tutta la classe, si rivela <b>particolarmente utile per chi ha un DSA o Bisogni Educativi Speciali</b>: il richiamo attivo aiuta di più proprio chi fatica a trattenere le informazioni. <cite>Agarwal e coll., 2017</cite></p></div>
+    <p class="unico rv d7">Per quanto ci risulta, nessuna struttura come la nostra offre qualcosa di simile.</p>
+  </section>
+
   <!-- L'AULA: E-LEARNING -->
   <section class="scene dark" id="sAula">
     <div class="testo">
       <p class="kicker rv">L'Aula · e-learning del Convitto <span class="avvio">In avvio</span></p>
       <h2 class="rv d1">Studiare <em>in modo furbo</em></h2>
-      <p class="lead rv d2">Le pagine del libro diventano una lezione da fare dal telefono: un'idea alla volta, i trucchi per ricordare, gli esercizi e una sfida finale.</p>
+      <p class="lead rv d2">Gli argomenti sui quali studiare diventano una lezione da fare dal telefono o dal tablet che la Scuola può dare in dotazione: un'idea alla volta, i trucchi per ricordare, gli esercizi e una sfida finale.</p>
       <div class="modi">
         <span class="rv d3">🧭 Percorso guidato</span><span class="rv d3">🔐 Escape room</span><span class="rv d3">🗺️ Costruisci la mappa</span>
         <span class="rv d4">🔍 Caccia all'errore</span><span class="rv d4">🎭 Intervista impossibile</span><span class="rv d4">⚡ Il minuto</span>
         <span class="rv d5">🏆 Sfida a squadre alla LIM</span>
       </div>
-      <p class="garanzie rv d6">Gratis · da qualsiasi telefono · senza registrazione · nessun dato degli studenti</p>
+      <p class="garanzie rv d6">Gratis · da telefono o tablet · senza registrazione · nessun dato degli studenti</p>
     </div>
     <div class="telefono rv d2" aria-label="Esempio di lezione della Sala studio">
       <div class="schermo">
@@ -869,7 +900,7 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
     <button class="btn" id="bIndietro" type="button">◀ Indietro</button>
     <button class="btn" id="bFerma" type="button">⏸ Ferma</button>
     <button class="btn" id="bAvanti" type="button">Avanti ▶</button>
-    <span id="contatore">1 <small>/ 24</small></span>
+    <span id="contatore">1 <small>/ 25</small></span>
     <button class="btn" id="bScene" type="button">☰ Tutte le scene</button>
   </nav>
   <div id="barra"><i></i></div>
@@ -892,7 +923,8 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
 <script src="../openday-date.js"></script>
 <script>
 (function () {
-  var DURATA = 14000;        /* millisecondi per scena */
+  var DURATA = 14000;        /* millisecondi per scena (data-durata per le scene più lunghe) */
+  function durata() { return +scene[cur].getAttribute('data-durata') || DURATA; }
   var RIPRESA = 30000;       /* dopo uno sfoglio manuale, riparte da sola */
 
   /* Copia di riserva delle date di openday-date.js (27/10/2026), usata solo
@@ -918,7 +950,7 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
   var TITOLI = ['Copertina', 'La settimana', 'La giornata tipo', 'La settimana in numeri', 'Gli educatori',
     'I primi giorni', 'Bullismo e sicurezza', 'La salute',
     'Libertà e autonomia', 'Il Regolamento', 'Dal registro alla famiglia', 'Area riservata famiglie',
-    'Accesso sicuro', 'Cosa resta riservato', 'L\'Aula: e-learning', 'DSA e BES', 'Le lingue',
+    'Accesso sicuro', 'Cosa resta riservato', 'L\'Aula: il progetto', 'L\'Aula: e-learning', 'DSA e BES', 'Le lingue',
     'Premio al Merito', 'I premi del bando', 'Laboratorio musicale', 'Come si entra', 'Il Semiconvitto', 'Il sito', 'Prossimi Open Day'];
 
   /* Adatta il palco 1920×1080 allo schermo */
@@ -1000,8 +1032,9 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
   function giro() {
     var t = performance.now();
     var attesa = pausa || t < sospesa || $('#menu').classList.contains('on');
-    if (attesa) inizio = t - Math.min(t - inizio, DURATA);
-    var p = Math.min((t - inizio) / DURATA, 1);
+    var d = durata();
+    if (attesa) inizio = t - Math.min(t - inizio, d);
+    var p = Math.min((t - inizio) / d, 1);
     barra.style.width = (attesa && !pausa ? 100 : p * 100) + '%';
     if (!attesa && p >= 1) vai(cur + 1);
     evidenzia(t);

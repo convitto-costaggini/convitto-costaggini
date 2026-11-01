@@ -125,7 +125,7 @@ const KB=[
   // ── SEMICONVITTO ──
   {k:['semiconvitto','semi convitto','solo pranzo','non alloggia','giornaliero','senza dormire',
       'non dormo','mezza pensione'],
-   r:'Il <strong>Semiconvitto</strong> (pranzo + studio guidato + attività pomeridiane, senza pernottamento) è attivo dall\'a.s. 2026/27.<br><br>📋 <a href="semiconvitto.html">Info Semiconvitto →</a>'},
+   r:'Il <strong>Semiconvitto</strong> (mensa + studio assistito fino alle 17:30, senza pernottamento) è attivo dal 12 ottobre 2026. Costa <strong>€ 70 al mese</strong> con PagoPA e dà diritto a un carnet di 16 ticket. La richiesta si invia compilata a rirh010007@istruzione.it (Avviso n. 58).<br><br>📋 <a href="semiconvitto.html">Info Semiconvitto →</a>'},
   // ── PREMIO AL MERITO ──
   {k:['premio al merito','premio merito','premio','premi','premiazione','merito','meritevol',
       'bando','bando merito','bando del premio','francesco monaco','educatore francesco monaco','riconosciment',

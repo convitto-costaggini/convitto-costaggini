@@ -354,6 +354,16 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
 #sLingue .carta p{font-size:29px}
 .piede{margin-top:30px;font-size:30px;color:var(--oro3);text-align:center}
 
+
+/* ── Premi: estratto della locandina ─────────── */
+#sPremi{align-items:center;padding-top:96px}
+#sPremi .kicker,#sPremi h2{align-self:flex-start}
+#sPremi h2{font-size:84px;margin-bottom:26px}
+.locandina{width:1300px;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45);border:3px solid rgba(212,170,74,.6);background:#fbf8f2}
+.locandina img{display:block;width:100%;height:auto}
+.scene.on .locandina img{animation:avvicina 14s ease-out forwards}
+@keyframes avvicina{from{transform:scale(1)}to{transform:scale(1.04)}}
+
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
 </style>
 </head>
@@ -651,6 +661,14 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
     <div class="trofeo rv d2" aria-hidden="true"><div class="alone"></div><div class="med">🏅</div></div>
   </section>
 
+  <!-- PREMI DEL BANDO MONACO (estratto della locandina) -->
+  <section class="scene dark" id="sPremi">
+    <p class="kicker rv">Premio al Merito «Educatore Francesco Monaco» · dalla locandina</p>
+    <h2 class="rv d1">Ogni giorno <em>conta.</em></h2>
+    <!-- Immagine ritagliata dal manifesto A3: immagini/premio-podio.jpg -->
+    <div class="locandina rv d2"><img src="immagini/premio-podio.jpg" alt="Il podio raddoppia, una classifica femminile e una maschile: primo posto meno 80% sulla retta dell'anno successivo e buono di 150 euro per libri e cultura; secondo posto meno 60% e buono di 100 euro; terzo posto meno 40% e buono di 50 euro. A tutti: targa alla festa di fine anno, attestato di merito valutabile per il credito scolastico, relazione al Consiglio di Classe per il voto di condotta."></div>
+  </section>
+
   <!-- 10 · LABORATORIO MUSICALE -->
   <section class="scene dark" id="s10">
     <p class="kicker rv">Laboratorio musicale</p>
@@ -701,7 +719,7 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
     <button class="btn" id="bIndietro" type="button">◀ Indietro</button>
     <button class="btn" id="bFerma" type="button">⏸ Ferma</button>
     <button class="btn" id="bAvanti" type="button">Avanti ▶</button>
-    <span id="contatore">1 <small>/ 18</small></span>
+    <span id="contatore">1 <small>/ 19</small></span>
     <button class="btn" id="bScene" type="button">☰ Tutte le scene</button>
   </nav>
   <div id="barra"><i></i></div>
@@ -750,7 +768,7 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
   var TITOLI = ['Copertina', 'La settimana', 'La giornata tipo', 'Gli educatori', 'La salute',
     'Libertà e autonomia', 'Il Regolamento', 'Dal registro alla famiglia', 'Area riservata famiglie',
     'Accesso sicuro', 'Cosa resta riservato', 'L\'Aula: e-learning', 'DSA e BES', 'Le lingue',
-    'Premio al Merito', 'Laboratorio musicale', 'Il sito', 'Prossimi Open Day'];
+    'Premio al Merito', 'I premi del bando', 'Laboratorio musicale', 'Il sito', 'Prossimi Open Day'];
 
   /* Adatta il palco 1920×1080 allo schermo */
   function scala() {

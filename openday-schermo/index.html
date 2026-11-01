@@ -66,7 +66,7 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
 #menu.on{display:flex}
 #menu h3{font-family:var(--fd);font-weight:400;font-size:60px;color:var(--oro3);margin-bottom:30px}
 #menu .griglia{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-#menu .griglia button{font:600 28px/1.2 var(--fu);color:var(--av);text-align:left;background:rgba(245,240,232,.07);border:2px solid rgba(212,170,74,.35);border-radius:20px;padding:18px 24px;cursor:pointer;display:flex;gap:16px;align-items:center;min-height:96px}
+#menu .griglia button{font:600 28px/1.2 var(--fu);color:var(--av);text-align:left;background:rgba(245,240,232,.07);border:2px solid rgba(212,170,74,.35);border-radius:20px;padding:14px 22px;cursor:pointer;display:flex;gap:16px;align-items:center;min-height:84px}
 #menu .griglia button:hover{background:rgba(212,170,74,.2);border-color:var(--oro3)}
 #menu .griglia button b{font:400 54px/1 var(--fd);color:var(--oro2);min-width:58px}
 #menu .griglia button.on{background:var(--oro2);color:var(--bosco2);border-color:var(--oro3)}
@@ -364,6 +364,73 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
 .scene.on .locandina img{animation:avvicina 14s ease-out forwards}
 @keyframes avvicina{from{transform:scale(1)}to{transform:scale(1.04)}}
 
+
+/* ── Settimana in numeri ─────────────────────── */
+.numeri{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.nm{background:#fff;border-radius:24px;padding:30px 30px 28px;box-shadow:0 14px 40px rgba(44,62,45,.1);border-top:6px solid var(--oro)}
+.nm b{display:block;font:400 118px/1 var(--fd);color:var(--bosco)}
+.nm b small{font-size:54px;margin-left:4px;color:var(--oro)}
+.nm span{display:block;font-size:29px;line-height:1.3;color:var(--txt2);margin-top:12px}
+.nm.scuro{background:var(--bosco);border-top-color:var(--oro2)}
+.nm.scuro b{color:var(--oro3)}.nm.scuro span{color:rgba(245,240,232,.85)}
+
+/* ── I primi giorni ──────────────────────────── */
+.primi{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;position:relative;margin-top:6px}
+.primi::before{content:"";position:absolute;left:60px;right:60px;top:58px;height:4px;background:linear-gradient(90deg,var(--oro),var(--av3));border-radius:2px}
+.pg{position:relative;text-align:center}
+.pg .ic{width:118px;height:118px;margin:0 auto 22px;border-radius:50%;background:#fff;border:5px solid var(--oro);display:flex;align-items:center;justify-content:center;font-size:56px;box-shadow:0 10px 30px rgba(44,62,45,.15)}
+.pg small{display:block;font:800 24px var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:8px}
+.pg h3{font-family:var(--fd);font-weight:400;font-size:42px;color:var(--bosco);line-height:1.1;margin-bottom:10px}
+.pg p{font-size:28px;line-height:1.4;color:var(--txt2)}
+.voce-ex{margin-top:46px;text-align:center;font-family:var(--fd);font-style:italic;font-size:44px;color:var(--bosco)}
+.voce-ex small{display:block;font:800 22px var(--fu);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-top:12px}
+
+/* ── Sicurezza e bullismo ────────────────────── */
+.sicuro{display:grid;grid-template-columns:1fr 1.15fr;gap:40px}
+.blocco{background:rgba(245,240,232,.06);border:2px solid rgba(212,170,74,.4);border-radius:24px;padding:30px 36px}
+.blocco h3{font-family:var(--fd);font-weight:400;font-size:44px;color:var(--oro3);margin-bottom:18px}
+.blocco ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.blocco li{font-size:28px;line-height:1.35;color:rgba(245,240,232,.9);display:flex;gap:16px;align-items:flex-start}
+.blocco li span{font-size:34px;width:44px;flex-shrink:0;text-align:center}
+.blocco ol{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;counter-reset:passo}
+.blocco ol li{counter-increment:passo}
+.blocco ol li::before{content:counter(passo);flex-shrink:0;width:46px;height:46px;border-radius:50%;background:var(--oro2);color:var(--bosco2);font:800 26px/46px var(--fu);text-align:center}
+.dubbio{margin-top:26px;display:flex;align-items:center;gap:30px;background:linear-gradient(90deg,rgba(212,170,74,.24),rgba(212,170,74,.06));border-left:8px solid var(--oro2);border-radius:16px;padding:18px 26px}
+.dubbio p{flex:1;font-size:31px;line-height:1.4}
+.dubbio p b{color:var(--oro3)}
+.dubbio p small{display:block;font-size:23px;color:rgba(245,240,232,.65);margin-top:4px}
+.qr-mini{width:130px;flex-shrink:0;background:#fff;border-radius:14px;padding:12px}
+.qr-mini svg{display:block;width:100%;height:auto;fill:var(--bosco2)}
+
+/* ── Come si entra ───────────────────────────── */
+.entra{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.ps{background:#fff;border-radius:24px;padding:30px 34px;box-shadow:0 14px 40px rgba(44,62,45,.1);position:relative}
+.ps .n{position:absolute;top:-26px;left:30px;width:60px;height:60px;border-radius:50%;background:var(--bosco);color:var(--oro3);font:400 34px/60px var(--fd);text-align:center}
+.ps small{display:block;font:800 24px var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin:14px 0 6px}
+.ps h3{font-family:var(--fd);font-weight:400;font-size:46px;color:var(--bosco);margin-bottom:10px}
+.ps p{font-size:28px;line-height:1.4;color:var(--txt2)}
+.ps.oggi{border:3px solid var(--oro)}
+.ps.oggi small::after{content:" · oggi!";color:var(--rosso)}
+.retta{margin-top:34px;display:flex;gap:34px;align-items:center;background:var(--bosco);color:var(--av);border-radius:22px;padding:24px 30px}
+.retta .testo{flex:1}
+.retta h3{font-family:var(--fd);font-weight:400;font-size:40px;color:var(--oro3);margin-bottom:14px}
+.retta .chips{display:flex;flex-wrap:wrap;gap:10px}
+.retta .chips span{font-size:25px;padding:7px 18px;border-radius:30px;background:rgba(245,240,232,.1);border:1px solid rgba(212,170,74,.4)}
+.retta .qr-mini{width:150px}
+.retta .qr-cap{font-size:21px;color:rgba(245,240,232,.7);text-align:center;margin-top:8px;width:150px}
+
+/* ── Semiconvitto ────────────────────────────── */
+.semi-ore{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.so{background:rgba(245,240,232,.06);border:2px solid rgba(212,170,74,.4);border-radius:24px;padding:34px 34px;text-align:center}
+.so .ic{font-size:76px;display:block;margin-bottom:12px}
+.so small{display:block;font:800 30px var(--fu);color:var(--oro2);margin-bottom:6px}
+.so h3{font-family:var(--fd);font-weight:400;font-size:46px;color:var(--oro3);margin-bottom:10px}
+.so p{font-size:28px;line-height:1.4;color:rgba(245,240,232,.85)}
+.so.casa{background:rgba(245,240,232,.02);border-style:dashed}
+.costo{margin-top:34px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap}
+.costo span{font-size:30px;padding:14px 30px;border-radius:40px;background:rgba(212,170,74,.16);border:1px solid rgba(212,170,74,.5)}
+.costo b{color:var(--oro3)}
+
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
 </style>
 </head>
@@ -417,6 +484,22 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
     </div>
   </section>
 
+  <!-- UNA SETTIMANA IN NUMERI -->
+  <section class="scene light" id="sNumeri">
+    <p class="kicker rv">Una settimana in numeri</p>
+    <h2 class="rv d1">Il ritmo della settimana, <em>in cifre</em></h2>
+    <div class="numeri">
+      <div class="nm scuro rv d2"><b data-conta="4">4</b><span>giorni insieme, dal lunedì al giovedì</span></div>
+      <div class="nm rv d2"><b data-conta="17">17</b><span>pasti: colazione, pranzo, merenda e cena</span></div>
+      <div class="nm rv d3"><b data-conta="7">7<small>h</small></b><span>di studio guidato con gli educatori</span></div>
+      <div class="nm rv d3"><b data-conta="4">4</b><span>notti in Convitto, più la domenica sera</span></div>
+      <div class="nm rv d4"><b data-conta="3">3<small>h</small></b><span>di sport</span></div>
+      <div class="nm rv d4"><b data-conta="2">2<small>h</small></b><span>di Laboratorio musicale</span></div>
+      <div class="nm rv d5"><b>∞</b><span>telefonate a casa, quando si vuole</span></div>
+      <div class="nm scuro rv d5"><b>1</b><span>comunità che diventa una seconda casa</span></div>
+    </div>
+  </section>
+
   <!-- 4 · GLI EDUCATORI -->
   <section class="scene dark" id="s4">
     <p class="kicker rv">Gli educatori</p>
@@ -427,6 +510,44 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
       <div class="carta rv d4"><span class="ic">🌙</span><h3>Anche di notte</h3><p>Educatori notturni sui piani: i ragazzi dormono sapendo di essere al sicuro.</p></div>
       <div class="carta rv d5"><span class="ic">📞</span><h3>Vicini alla famiglia</h3><p>Siedono nei Consigli di classe e aggiornano i genitori, non solo nei momenti difficili.</p></div>
     </div>
+  </section>
+
+  <!-- I PRIMI GIORNI -->
+  <section class="scene light" id="sPrimi">
+    <p class="kicker rv">I primi giorni</p>
+    <h2 class="rv d1">Lontano da casa, <em>mai da solo</em></h2>
+    <div class="primi">
+      <div class="pg rv d2"><div class="ic">🤝</div><small>Settembre</small><h3>L'accoglienza</h3><p>Una giornata per conoscere educatori, camera e compagni.</p></div>
+      <div class="pg rv d3"><div class="ic">🧑‍🏫</div><small>Da subito</small><h3>Un educatore di riferimento</h3><p>Una persona a cui rivolgersi per ogni cosa.</p></div>
+      <div class="pg rv d4"><div class="ic">📞</div><small>Ogni sera</small><h3>Una voce da casa</h3><p>Si chiama la famiglia quando si vuole.</p></div>
+      <div class="pg rv d5"><div class="ic">🌱</div><small>Col tempo</small><h3>Amici per la vita</h3><p>I compagni di camera diventano una seconda famiglia.</p></div>
+    </div>
+    <p class="voce-ex rv d6">«Dopo una settimana il Convitto era già casa mia.»<small>Un ex convittore del Costaggini</small></p>
+  </section>
+
+  <!-- SICUREZZA, BULLISMO E CYBERBULLISMO -->
+  <section class="scene dark" id="sSicuro">
+    <p class="kicker rv">Bullismo e cyberbullismo</p>
+    <h2 class="rv d1">Un adulto vicino, <em>sempre</em></h2>
+    <div class="sicuro">
+      <div class="blocco rv d2"><h3>🛡️ Prevenire</h3>
+        <ul>
+          <li><span>🌙</span>Un educatore presente in ogni turno, anche di notte</li>
+          <li><span>👀</span>Segnali di disagio osservati e annotati ogni giorno</li>
+          <li><span>🎓</span>Educatori formati a riconoscerli in tempo</li>
+          <li><span>📵</span>Regole chiare dal primo giorno, anche online</li>
+        </ul></div>
+      <div class="blocco rv d3"><h3>⚡ Se succede</h3>
+        <ol>
+          <li>Ascolto subito, in privato</li>
+          <li>L'episodio viene documentato</li>
+          <li>Entrambe le famiglie avvisate</li>
+          <li>Dirigente e Referente Antibullismo</li>
+          <li>Intervento educativo e recupero</li>
+          <li>La situazione seguita nel tempo</li>
+        </ol></div>
+    </div>
+    <div class="dubbio rv d5"><p><b>Un dubbio? Non servono prove:</b> basta parlarne con un educatore, anche di notte.<small>Codice interno di prevenzione e contrasto · Legge 71/2017 · guida per i genitori sul sito</small></p><div class="qr-mini"><svg role="img" aria-label="QR code della guida su bullismo e cyberbullismo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges"><path d="M0,0h1v1h-1zM1,0h1v1h-1zM2,0h1v1h-1zM3,0h1v1h-1zM4,0h1v1h-1zM5,0h1v1h-1zM6,0h1v1h-1zM10,0h1v1h-1zM11,0h1v1h-1zM12,0h1v1h-1zM13,0h1v1h-1zM16,0h1v1h-1zM17,0h1v1h-1zM19,0h1v1h-1zM20,0h1v1h-1zM22,0h1v1h-1zM23,0h1v1h-1zM26,0h1v1h-1zM27,0h1v1h-1zM28,0h1v1h-1zM29,0h1v1h-1zM30,0h1v1h-1zM31,0h1v1h-1zM32,0h1v1h-1zM0,1h1v1h-1zM6,1h1v1h-1zM9,1h1v1h-1zM13,1h1v1h-1zM14,1h1v1h-1zM15,1h1v1h-1zM20,1h1v1h-1zM21,1h1v1h-1zM22,1h1v1h-1zM26,1h1v1h-1zM32,1h1v1h-1zM0,2h1v1h-1zM2,2h1v1h-1zM3,2h1v1h-1zM4,2h1v1h-1zM6,2h1v1h-1zM8,2h1v1h-1zM11,2h1v1h-1zM12,2h1v1h-1zM13,2h1v1h-1zM20,2h1v1h-1zM21,2h1v1h-1zM24,2h1v1h-1zM26,2h1v1h-1zM28,2h1v1h-1zM29,2h1v1h-1zM30,2h1v1h-1zM32,2h1v1h-1zM0,3h1v1h-1zM2,3h1v1h-1zM3,3h1v1h-1zM4,3h1v1h-1zM6,3h1v1h-1zM8,3h1v1h-1zM9,3h1v1h-1zM14,3h1v1h-1zM15,3h1v1h-1zM16,3h1v1h-1zM17,3h1v1h-1zM22,3h1v1h-1zM23,3h1v1h-1zM24,3h1v1h-1zM26,3h1v1h-1zM28,3h1v1h-1zM29,3h1v1h-1zM30,3h1v1h-1zM32,3h1v1h-1zM0,4h1v1h-1zM2,4h1v1h-1zM3,4h1v1h-1zM4,4h1v1h-1zM6,4h1v1h-1zM8,4h1v1h-1zM9,4h1v1h-1zM11,4h1v1h-1zM13,4h1v1h-1zM15,4h1v1h-1zM18,4h1v1h-1zM19,4h1v1h-1zM20,4h1v1h-1zM21,4h1v1h-1zM23,4h1v1h-1zM26,4h1v1h-1zM28,4h1v1h-1zM29,4h1v1h-1zM30,4h1v1h-1zM32,4h1v1h-1zM0,5h1v1h-1zM6,5h1v1h-1zM8,5h1v1h-1zM15,5h1v1h-1zM16,5h1v1h-1zM17,5h1v1h-1zM18,5h1v1h-1zM21,5h1v1h-1zM22,5h1v1h-1zM24,5h1v1h-1zM26,5h1v1h-1zM32,5h1v1h-1zM0,6h1v1h-1zM1,6h1v1h-1zM2,6h1v1h-1zM3,6h1v1h-1zM4,6h1v1h-1zM5,6h1v1h-1zM6,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM12,6h1v1h-1zM14,6h1v1h-1zM16,6h1v1h-1zM18,6h1v1h-1zM20,6h1v1h-1zM22,6h1v1h-1zM24,6h1v1h-1zM26,6h1v1h-1zM27,6h1v1h-1zM28,6h1v1h-1zM29,6h1v1h-1zM30,6h1v1h-1zM31,6h1v1h-1zM32,6h1v1h-1zM8,7h1v1h-1zM11,7h1v1h-1zM12,7h1v1h-1zM14,7h1v1h-1zM15,7h1v1h-1zM18,7h1v1h-1zM20,7h1v1h-1zM21,7h1v1h-1zM0,8h1v1h-1zM2,8h1v1h-1zM3,8h1v1h-1zM4,8h1v1h-1zM5,8h1v1h-1zM6,8h1v1h-1zM9,8h1v1h-1zM10,8h1v1h-1zM11,8h1v1h-1zM12,8h1v1h-1zM13,8h1v1h-1zM14,8h1v1h-1zM15,8h1v1h-1zM16,8h1v1h-1zM17,8h1v1h-1zM22,8h1v1h-1zM23,8h1v1h-1zM24,8h1v1h-1zM26,8h1v1h-1zM27,8h1v1h-1zM28,8h1v1h-1zM29,8h1v1h-1zM30,8h1v1h-1zM0,9h1v1h-1zM2,9h1v1h-1zM3,9h1v1h-1zM4,9h1v1h-1zM5,9h1v1h-1zM7,9h1v1h-1zM8,9h1v1h-1zM9,9h1v1h-1zM11,9h1v1h-1zM16,9h1v1h-1zM17,9h1v1h-1zM18,9h1v1h-1zM19,9h1v1h-1zM20,9h1v1h-1zM22,9h1v1h-1zM23,9h1v1h-1zM26,9h1v1h-1zM27,9h1v1h-1zM29,9h1v1h-1zM30,9h1v1h-1zM32,9h1v1h-1zM2,10h1v1h-1zM3,10h1v1h-1zM4,10h1v1h-1zM6,10h1v1h-1zM7,10h1v1h-1zM9,10h1v1h-1zM11,10h1v1h-1zM12,10h1v1h-1zM15,10h1v1h-1zM16,10h1v1h-1zM21,10h1v1h-1zM24,10h1v1h-1zM26,10h1v1h-1zM28,10h1v1h-1zM30,10h1v1h-1zM0,11h1v1h-1zM1,11h1v1h-1zM2,11h1v1h-1zM9,11h1v1h-1zM12,11h1v1h-1zM14,11h1v1h-1zM16,11h1v1h-1zM18,11h1v1h-1zM19,11h1v1h-1zM21,11h1v1h-1zM22,11h1v1h-1zM23,11h1v1h-1zM25,11h1v1h-1zM28,11h1v1h-1zM29,11h1v1h-1zM30,11h1v1h-1zM31,11h1v1h-1zM1,12h1v1h-1zM2,12h1v1h-1zM3,12h1v1h-1zM4,12h1v1h-1zM5,12h1v1h-1zM6,12h1v1h-1zM8,12h1v1h-1zM9,12h1v1h-1zM10,12h1v1h-1zM11,12h1v1h-1zM12,12h1v1h-1zM18,12h1v1h-1zM20,12h1v1h-1zM22,12h1v1h-1zM24,12h1v1h-1zM25,12h1v1h-1zM27,12h1v1h-1zM28,12h1v1h-1zM29,12h1v1h-1zM32,12h1v1h-1zM0,13h1v1h-1zM1,13h1v1h-1zM2,13h1v1h-1zM3,13h1v1h-1zM7,13h1v1h-1zM9,13h1v1h-1zM12,13h1v1h-1zM13,13h1v1h-1zM14,13h1v1h-1zM15,13h1v1h-1zM16,13h1v1h-1zM18,13h1v1h-1zM19,13h1v1h-1zM20,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM25,13h1v1h-1zM26,13h1v1h-1zM29,13h1v1h-1zM31,13h1v1h-1zM32,13h1v1h-1zM0,14h1v1h-1zM1,14h1v1h-1zM3,14h1v1h-1zM4,14h1v1h-1zM6,14h1v1h-1zM12,14h1v1h-1zM17,14h1v1h-1zM21,14h1v1h-1zM22,14h1v1h-1zM25,14h1v1h-1zM26,14h1v1h-1zM27,14h1v1h-1zM28,14h1v1h-1zM31,14h1v1h-1zM3,15h1v1h-1zM4,15h1v1h-1zM5,15h1v1h-1zM7,15h1v1h-1zM9,15h1v1h-1zM10,15h1v1h-1zM11,15h1v1h-1zM14,15h1v1h-1zM16,15h1v1h-1zM21,15h1v1h-1zM25,15h1v1h-1zM26,15h1v1h-1zM28,15h1v1h-1zM29,15h1v1h-1zM30,15h1v1h-1zM0,16h1v1h-1zM6,16h1v1h-1zM7,16h1v1h-1zM10,16h1v1h-1zM12,16h1v1h-1zM13,16h1v1h-1zM14,16h1v1h-1zM17,16h1v1h-1zM19,16h1v1h-1zM22,16h1v1h-1zM25,16h1v1h-1zM27,16h1v1h-1zM28,16h1v1h-1zM32,16h1v1h-1zM0,17h1v1h-1zM1,17h1v1h-1zM9,17h1v1h-1zM11,17h1v1h-1zM12,17h1v1h-1zM14,17h1v1h-1zM16,17h1v1h-1zM17,17h1v1h-1zM18,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM21,17h1v1h-1zM23,17h1v1h-1zM26,17h1v1h-1zM27,17h1v1h-1zM29,17h1v1h-1zM30,17h1v1h-1zM32,17h1v1h-1zM0,18h1v1h-1zM3,18h1v1h-1zM6,18h1v1h-1zM7,18h1v1h-1zM8,18h1v1h-1zM10,18h1v1h-1zM15,18h1v1h-1zM17,18h1v1h-1zM24,18h1v1h-1zM25,18h1v1h-1zM27,18h1v1h-1zM28,18h1v1h-1zM30,18h1v1h-1zM31,18h1v1h-1zM1,19h1v1h-1zM5,19h1v1h-1zM9,19h1v1h-1zM11,19h1v1h-1zM12,19h1v1h-1zM17,19h1v1h-1zM18,19h1v1h-1zM20,19h1v1h-1zM21,19h1v1h-1zM22,19h1v1h-1zM23,19h1v1h-1zM27,19h1v1h-1zM28,19h1v1h-1zM29,19h1v1h-1zM30,19h1v1h-1zM2,20h1v1h-1zM3,20h1v1h-1zM4,20h1v1h-1zM5,20h1v1h-1zM6,20h1v1h-1zM7,20h1v1h-1zM8,20h1v1h-1zM9,20h1v1h-1zM10,20h1v1h-1zM13,20h1v1h-1zM15,20h1v1h-1zM16,20h1v1h-1zM19,20h1v1h-1zM22,20h1v1h-1zM23,20h1v1h-1zM27,20h1v1h-1zM28,20h1v1h-1zM29,20h1v1h-1zM31,20h1v1h-1zM0,21h1v1h-1zM1,21h1v1h-1zM5,21h1v1h-1zM8,21h1v1h-1zM11,21h1v1h-1zM12,21h1v1h-1zM13,21h1v1h-1zM15,21h1v1h-1zM17,21h1v1h-1zM18,21h1v1h-1zM19,21h1v1h-1zM20,21h1v1h-1zM23,21h1v1h-1zM26,21h1v1h-1zM27,21h1v1h-1zM29,21h1v1h-1zM30,21h1v1h-1zM32,21h1v1h-1zM0,22h1v1h-1zM3,22h1v1h-1zM5,22h1v1h-1zM6,22h1v1h-1zM7,22h1v1h-1zM8,22h1v1h-1zM9,22h1v1h-1zM12,22h1v1h-1zM13,22h1v1h-1zM15,22h1v1h-1zM16,22h1v1h-1zM18,22h1v1h-1zM22,22h1v1h-1zM24,22h1v1h-1zM29,22h1v1h-1zM30,22h1v1h-1zM31,22h1v1h-1zM0,23h1v1h-1zM2,23h1v1h-1zM4,23h1v1h-1zM7,23h1v1h-1zM9,23h1v1h-1zM10,23h1v1h-1zM13,23h1v1h-1zM14,23h1v1h-1zM15,23h1v1h-1zM18,23h1v1h-1zM19,23h1v1h-1zM20,23h1v1h-1zM21,23h1v1h-1zM22,23h1v1h-1zM23,23h1v1h-1zM24,23h1v1h-1zM25,23h1v1h-1zM26,23h1v1h-1zM29,23h1v1h-1zM30,23h1v1h-1zM32,23h1v1h-1zM0,24h1v1h-1zM4,24h1v1h-1zM5,24h1v1h-1zM6,24h1v1h-1zM10,24h1v1h-1zM11,24h1v1h-1zM14,24h1v1h-1zM15,24h1v1h-1zM16,24h1v1h-1zM17,24h1v1h-1zM19,24h1v1h-1zM24,24h1v1h-1zM25,24h1v1h-1zM26,24h1v1h-1zM27,24h1v1h-1zM28,24h1v1h-1zM31,24h1v1h-1zM8,25h1v1h-1zM12,25h1v1h-1zM13,25h1v1h-1zM14,25h1v1h-1zM16,25h1v1h-1zM18,25h1v1h-1zM19,25h1v1h-1zM20,25h1v1h-1zM24,25h1v1h-1zM28,25h1v1h-1zM30,25h1v1h-1zM31,25h1v1h-1zM32,25h1v1h-1zM0,26h1v1h-1zM1,26h1v1h-1zM2,26h1v1h-1zM3,26h1v1h-1zM4,26h1v1h-1zM5,26h1v1h-1zM6,26h1v1h-1zM10,26h1v1h-1zM11,26h1v1h-1zM14,26h1v1h-1zM15,26h1v1h-1zM16,26h1v1h-1zM18,26h1v1h-1zM20,26h1v1h-1zM21,26h1v1h-1zM22,26h1v1h-1zM23,26h1v1h-1zM24,26h1v1h-1zM26,26h1v1h-1zM28,26h1v1h-1zM30,26h1v1h-1zM31,26h1v1h-1zM0,27h1v1h-1zM6,27h1v1h-1zM8,27h1v1h-1zM9,27h1v1h-1zM10,27h1v1h-1zM12,27h1v1h-1zM13,27h1v1h-1zM15,27h1v1h-1zM16,27h1v1h-1zM21,27h1v1h-1zM22,27h1v1h-1zM23,27h1v1h-1zM24,27h1v1h-1zM28,27h1v1h-1zM29,27h1v1h-1zM30,27h1v1h-1zM31,27h1v1h-1zM0,28h1v1h-1zM2,28h1v1h-1zM3,28h1v1h-1zM4,28h1v1h-1zM6,28h1v1h-1zM8,28h1v1h-1zM9,28h1v1h-1zM10,28h1v1h-1zM11,28h1v1h-1zM12,28h1v1h-1zM14,28h1v1h-1zM15,28h1v1h-1zM18,28h1v1h-1zM22,28h1v1h-1zM24,28h1v1h-1zM25,28h1v1h-1zM26,28h1v1h-1zM27,28h1v1h-1zM28,28h1v1h-1zM29,28h1v1h-1zM31,28h1v1h-1zM0,29h1v1h-1zM2,29h1v1h-1zM3,29h1v1h-1zM4,29h1v1h-1zM6,29h1v1h-1zM8,29h1v1h-1zM9,29h1v1h-1zM14,29h1v1h-1zM15,29h1v1h-1zM16,29h1v1h-1zM17,29h1v1h-1zM19,29h1v1h-1zM23,29h1v1h-1zM25,29h1v1h-1zM28,29h1v1h-1zM29,29h1v1h-1zM30,29h1v1h-1zM31,29h1v1h-1zM32,29h1v1h-1zM0,30h1v1h-1zM2,30h1v1h-1zM3,30h1v1h-1zM4,30h1v1h-1zM6,30h1v1h-1zM8,30h1v1h-1zM9,30h1v1h-1zM10,30h1v1h-1zM12,30h1v1h-1zM14,30h1v1h-1zM18,30h1v1h-1zM20,30h1v1h-1zM22,30h1v1h-1zM23,30h1v1h-1zM26,30h1v1h-1zM27,30h1v1h-1zM30,30h1v1h-1zM0,31h1v1h-1zM6,31h1v1h-1zM10,31h1v1h-1zM12,31h1v1h-1zM13,31h1v1h-1zM16,31h1v1h-1zM19,31h1v1h-1zM20,31h1v1h-1zM21,31h1v1h-1zM25,31h1v1h-1zM26,31h1v1h-1zM28,31h1v1h-1zM29,31h1v1h-1zM30,31h1v1h-1zM0,32h1v1h-1zM1,32h1v1h-1zM2,32h1v1h-1zM3,32h1v1h-1zM4,32h1v1h-1zM5,32h1v1h-1zM6,32h1v1h-1zM8,32h1v1h-1zM9,32h1v1h-1zM10,32h1v1h-1zM11,32h1v1h-1zM12,32h1v1h-1zM13,32h1v1h-1zM14,32h1v1h-1zM17,32h1v1h-1zM19,32h1v1h-1zM22,32h1v1h-1zM23,32h1v1h-1zM24,32h1v1h-1zM25,32h1v1h-1zM26,32h1v1h-1zM27,32h1v1h-1zM29,32h1v1h-1zM31,32h1v1h-1z"/></svg></div></div>
   </section>
 
   <!-- SALUTE -->
@@ -688,6 +809,35 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
     </div>
   </section>
 
+  <!-- COME SI ENTRA -->
+  <section class="scene light" id="sIscr">
+    <p class="kicker rv">Come si entra in Convitto</p>
+    <h2 class="rv d1">Tre passi, <em>da qui a settembre</em></h2>
+    <div class="entra">
+      <div class="ps oggi rv d2"><span class="n">1</span><small>Dicembre – gennaio</small><h3>Conoscere</h3><p>Gli Open Day: ambienti, educatori, domande.</p></div>
+      <div class="ps rv d3"><span class="n">2</span><small>Febbraio</small><h3>Iscriversi</h3><p>Sulla Piattaforma Unica del Ministero, con la spunta «Convitto».</p></div>
+      <div class="ps rv d4"><span class="n">3</span><small>Entro luglio</small><h3>Confermare</h3><p>Modulo di domanda e quota d'iscrizione. A settembre, l'accoglienza.</p></div>
+    </div>
+    <div class="retta rv d5">
+      <div class="testo"><h3>La retta comprende</h3>
+        <div class="chips"><span>🍽️ 4 pasti al giorno</span><span>🛏️ Alloggio</span><span>🧺 Lavanderia</span><span>📚 Studio guidato</span><span>🎵 Laboratorio musicale</span><span>🚌 Trasporto Convitto–scuola</span><span>⚽ Attività culturali e sportive</span></div>
+      </div>
+      <div><div class="qr-mini"><svg role="img" aria-label="QR code della pagina Iscrizione e costi" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" shape-rendering="crispEdges"><path d="M0,0h1v1h-1zM1,0h1v1h-1zM2,0h1v1h-1zM3,0h1v1h-1zM4,0h1v1h-1zM5,0h1v1h-1zM6,0h1v1h-1zM10,0h1v1h-1zM12,0h1v1h-1zM13,0h1v1h-1zM16,0h1v1h-1zM17,0h1v1h-1zM19,0h1v1h-1zM20,0h1v1h-1zM22,0h1v1h-1zM23,0h1v1h-1zM26,0h1v1h-1zM27,0h1v1h-1zM28,0h1v1h-1zM29,0h1v1h-1zM30,0h1v1h-1zM31,0h1v1h-1zM32,0h1v1h-1zM0,1h1v1h-1zM6,1h1v1h-1zM9,1h1v1h-1zM12,1h1v1h-1zM13,1h1v1h-1zM14,1h1v1h-1zM15,1h1v1h-1zM18,1h1v1h-1zM20,1h1v1h-1zM21,1h1v1h-1zM26,1h1v1h-1zM32,1h1v1h-1zM0,2h1v1h-1zM2,2h1v1h-1zM3,2h1v1h-1zM4,2h1v1h-1zM6,2h1v1h-1zM8,2h1v1h-1zM9,2h1v1h-1zM10,2h1v1h-1zM11,2h1v1h-1zM12,2h1v1h-1zM13,2h1v1h-1zM18,2h1v1h-1zM20,2h1v1h-1zM21,2h1v1h-1zM22,2h1v1h-1zM24,2h1v1h-1zM26,2h1v1h-1zM28,2h1v1h-1zM29,2h1v1h-1zM30,2h1v1h-1zM32,2h1v1h-1zM0,3h1v1h-1zM2,3h1v1h-1zM3,3h1v1h-1zM4,3h1v1h-1zM6,3h1v1h-1zM8,3h1v1h-1zM14,3h1v1h-1zM15,3h1v1h-1zM16,3h1v1h-1zM17,3h1v1h-1zM22,3h1v1h-1zM23,3h1v1h-1zM24,3h1v1h-1zM26,3h1v1h-1zM28,3h1v1h-1zM29,3h1v1h-1zM30,3h1v1h-1zM32,3h1v1h-1zM0,4h1v1h-1zM2,4h1v1h-1zM3,4h1v1h-1zM4,4h1v1h-1zM6,4h1v1h-1zM8,4h1v1h-1zM9,4h1v1h-1zM12,4h1v1h-1zM13,4h1v1h-1zM15,4h1v1h-1zM19,4h1v1h-1zM20,4h1v1h-1zM21,4h1v1h-1zM22,4h1v1h-1zM23,4h1v1h-1zM26,4h1v1h-1zM28,4h1v1h-1zM29,4h1v1h-1zM30,4h1v1h-1zM32,4h1v1h-1zM0,5h1v1h-1zM6,5h1v1h-1zM8,5h1v1h-1zM11,5h1v1h-1zM12,5h1v1h-1zM15,5h1v1h-1zM16,5h1v1h-1zM17,5h1v1h-1zM18,5h1v1h-1zM21,5h1v1h-1zM22,5h1v1h-1zM26,5h1v1h-1zM32,5h1v1h-1zM0,6h1v1h-1zM1,6h1v1h-1zM2,6h1v1h-1zM3,6h1v1h-1zM4,6h1v1h-1zM5,6h1v1h-1zM6,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM12,6h1v1h-1zM14,6h1v1h-1zM16,6h1v1h-1zM18,6h1v1h-1zM20,6h1v1h-1zM22,6h1v1h-1zM24,6h1v1h-1zM26,6h1v1h-1zM27,6h1v1h-1zM28,6h1v1h-1zM29,6h1v1h-1zM30,6h1v1h-1zM31,6h1v1h-1zM32,6h1v1h-1zM8,7h1v1h-1zM9,7h1v1h-1zM11,7h1v1h-1zM14,7h1v1h-1zM15,7h1v1h-1zM18,7h1v1h-1zM19,7h1v1h-1zM20,7h1v1h-1zM21,7h1v1h-1zM0,8h1v1h-1zM2,8h1v1h-1zM3,8h1v1h-1zM4,8h1v1h-1zM5,8h1v1h-1zM6,8h1v1h-1zM9,8h1v1h-1zM11,8h1v1h-1zM13,8h1v1h-1zM14,8h1v1h-1zM15,8h1v1h-1zM16,8h1v1h-1zM17,8h1v1h-1zM19,8h1v1h-1zM22,8h1v1h-1zM23,8h1v1h-1zM24,8h1v1h-1zM26,8h1v1h-1zM27,8h1v1h-1zM28,8h1v1h-1zM29,8h1v1h-1zM30,8h1v1h-1zM1,9h1v1h-1zM3,9h1v1h-1zM4,9h1v1h-1zM5,9h1v1h-1zM8,9h1v1h-1zM9,9h1v1h-1zM10,9h1v1h-1zM16,9h1v1h-1zM18,9h1v1h-1zM19,9h1v1h-1zM20,9h1v1h-1zM21,9h1v1h-1zM22,9h1v1h-1zM23,9h1v1h-1zM26,9h1v1h-1zM27,9h1v1h-1zM29,9h1v1h-1zM30,9h1v1h-1zM32,9h1v1h-1zM0,10h1v1h-1zM3,10h1v1h-1zM4,10h1v1h-1zM5,10h1v1h-1zM6,10h1v1h-1zM7,10h1v1h-1zM8,10h1v1h-1zM12,10h1v1h-1zM15,10h1v1h-1zM16,10h1v1h-1zM24,10h1v1h-1zM26,10h1v1h-1zM28,10h1v1h-1zM30,10h1v1h-1zM2,11h1v1h-1zM3,11h1v1h-1zM4,11h1v1h-1zM5,11h1v1h-1zM8,11h1v1h-1zM9,11h1v1h-1zM10,11h1v1h-1zM14,11h1v1h-1zM16,11h1v1h-1zM18,11h1v1h-1zM19,11h1v1h-1zM21,11h1v1h-1zM22,11h1v1h-1zM23,11h1v1h-1zM25,11h1v1h-1zM28,11h1v1h-1zM29,11h1v1h-1zM30,11h1v1h-1zM31,11h1v1h-1zM1,12h1v1h-1zM4,12h1v1h-1zM5,12h1v1h-1zM6,12h1v1h-1zM12,12h1v1h-1zM17,12h1v1h-1zM22,12h1v1h-1zM24,12h1v1h-1zM25,12h1v1h-1zM27,12h1v1h-1zM28,12h1v1h-1zM29,12h1v1h-1zM32,12h1v1h-1zM0,13h1v1h-1zM1,13h1v1h-1zM2,13h1v1h-1zM7,13h1v1h-1zM8,13h1v1h-1zM10,13h1v1h-1zM13,13h1v1h-1zM14,13h1v1h-1zM15,13h1v1h-1zM16,13h1v1h-1zM18,13h1v1h-1zM19,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM25,13h1v1h-1zM26,13h1v1h-1zM29,13h1v1h-1zM31,13h1v1h-1zM32,13h1v1h-1zM6,14h1v1h-1zM7,14h1v1h-1zM9,14h1v1h-1zM10,14h1v1h-1zM12,14h1v1h-1zM17,14h1v1h-1zM20,14h1v1h-1zM21,14h1v1h-1zM22,14h1v1h-1zM25,14h1v1h-1zM26,14h1v1h-1zM27,14h1v1h-1zM28,14h1v1h-1zM31,14h1v1h-1zM0,15h1v1h-1zM3,15h1v1h-1zM4,15h1v1h-1zM7,15h1v1h-1zM10,15h1v1h-1zM11,15h1v1h-1zM12,15h1v1h-1zM13,15h1v1h-1zM16,15h1v1h-1zM20,15h1v1h-1zM21,15h1v1h-1zM25,15h1v1h-1zM26,15h1v1h-1zM28,15h1v1h-1zM29,15h1v1h-1zM30,15h1v1h-1zM0,16h1v1h-1zM2,16h1v1h-1zM3,16h1v1h-1zM5,16h1v1h-1zM6,16h1v1h-1zM7,16h1v1h-1zM10,16h1v1h-1zM17,16h1v1h-1zM22,16h1v1h-1zM23,16h1v1h-1zM25,16h1v1h-1zM27,16h1v1h-1zM28,16h1v1h-1zM32,16h1v1h-1zM2,17h1v1h-1zM3,17h1v1h-1zM7,17h1v1h-1zM8,17h1v1h-1zM11,17h1v1h-1zM12,17h1v1h-1zM13,17h1v1h-1zM16,17h1v1h-1zM17,17h1v1h-1zM18,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM21,17h1v1h-1zM23,17h1v1h-1zM26,17h1v1h-1zM27,17h1v1h-1zM29,17h1v1h-1zM30,17h1v1h-1zM32,17h1v1h-1zM0,18h1v1h-1zM2,18h1v1h-1zM3,18h1v1h-1zM4,18h1v1h-1zM6,18h1v1h-1zM7,18h1v1h-1zM9,18h1v1h-1zM12,18h1v1h-1zM14,18h1v1h-1zM15,18h1v1h-1zM24,18h1v1h-1zM25,18h1v1h-1zM27,18h1v1h-1zM28,18h1v1h-1zM30,18h1v1h-1zM31,18h1v1h-1zM4,19h1v1h-1zM5,19h1v1h-1zM7,19h1v1h-1zM8,19h1v1h-1zM10,19h1v1h-1zM11,19h1v1h-1zM20,19h1v1h-1zM21,19h1v1h-1zM22,19h1v1h-1zM23,19h1v1h-1zM27,19h1v1h-1zM28,19h1v1h-1zM29,19h1v1h-1zM30,19h1v1h-1zM0,20h1v1h-1zM3,20h1v1h-1zM5,20h1v1h-1zM6,20h1v1h-1zM9,20h1v1h-1zM12,20h1v1h-1zM14,20h1v1h-1zM15,20h1v1h-1zM16,20h1v1h-1zM17,20h1v1h-1zM19,20h1v1h-1zM22,20h1v1h-1zM23,20h1v1h-1zM24,20h1v1h-1zM27,20h1v1h-1zM28,20h1v1h-1zM29,20h1v1h-1zM31,20h1v1h-1zM0,21h1v1h-1zM1,21h1v1h-1zM2,21h1v1h-1zM3,21h1v1h-1zM4,21h1v1h-1zM9,21h1v1h-1zM12,21h1v1h-1zM13,21h1v1h-1zM14,21h1v1h-1zM15,21h1v1h-1zM17,21h1v1h-1zM18,21h1v1h-1zM19,21h1v1h-1zM20,21h1v1h-1zM23,21h1v1h-1zM26,21h1v1h-1zM27,21h1v1h-1zM29,21h1v1h-1zM30,21h1v1h-1zM32,21h1v1h-1zM0,22h1v1h-1zM3,22h1v1h-1zM5,22h1v1h-1zM6,22h1v1h-1zM7,22h1v1h-1zM8,22h1v1h-1zM12,22h1v1h-1zM14,22h1v1h-1zM15,22h1v1h-1zM16,22h1v1h-1zM18,22h1v1h-1zM22,22h1v1h-1zM29,22h1v1h-1zM30,22h1v1h-1zM31,22h1v1h-1zM0,23h1v1h-1zM2,23h1v1h-1zM3,23h1v1h-1zM4,23h1v1h-1zM5,23h1v1h-1zM7,23h1v1h-1zM8,23h1v1h-1zM9,23h1v1h-1zM12,23h1v1h-1zM15,23h1v1h-1zM18,23h1v1h-1zM19,23h1v1h-1zM20,23h1v1h-1zM21,23h1v1h-1zM22,23h1v1h-1zM24,23h1v1h-1zM25,23h1v1h-1zM26,23h1v1h-1zM29,23h1v1h-1zM30,23h1v1h-1zM0,24h1v1h-1zM6,24h1v1h-1zM7,24h1v1h-1zM8,24h1v1h-1zM11,24h1v1h-1zM12,24h1v1h-1zM13,24h1v1h-1zM15,24h1v1h-1zM16,24h1v1h-1zM17,24h1v1h-1zM19,24h1v1h-1zM24,24h1v1h-1zM25,24h1v1h-1zM26,24h1v1h-1zM27,24h1v1h-1zM28,24h1v1h-1zM32,24h1v1h-1zM8,25h1v1h-1zM9,25h1v1h-1zM10,25h1v1h-1zM14,25h1v1h-1zM16,25h1v1h-1zM17,25h1v1h-1zM18,25h1v1h-1zM19,25h1v1h-1zM20,25h1v1h-1zM24,25h1v1h-1zM28,25h1v1h-1zM30,25h1v1h-1zM31,25h1v1h-1zM32,25h1v1h-1zM0,26h1v1h-1zM1,26h1v1h-1zM2,26h1v1h-1zM3,26h1v1h-1zM4,26h1v1h-1zM5,26h1v1h-1zM6,26h1v1h-1zM9,26h1v1h-1zM11,26h1v1h-1zM12,26h1v1h-1zM14,26h1v1h-1zM15,26h1v1h-1zM16,26h1v1h-1zM20,26h1v1h-1zM21,26h1v1h-1zM23,26h1v1h-1zM24,26h1v1h-1zM26,26h1v1h-1zM28,26h1v1h-1zM30,26h1v1h-1zM31,26h1v1h-1zM0,27h1v1h-1zM6,27h1v1h-1zM8,27h1v1h-1zM9,27h1v1h-1zM11,27h1v1h-1zM13,27h1v1h-1zM15,27h1v1h-1zM16,27h1v1h-1zM18,27h1v1h-1zM21,27h1v1h-1zM22,27h1v1h-1zM23,27h1v1h-1zM24,27h1v1h-1zM28,27h1v1h-1zM29,27h1v1h-1zM30,27h1v1h-1zM31,27h1v1h-1zM0,28h1v1h-1zM2,28h1v1h-1zM3,28h1v1h-1zM4,28h1v1h-1zM6,28h1v1h-1zM8,28h1v1h-1zM9,28h1v1h-1zM12,28h1v1h-1zM13,28h1v1h-1zM15,28h1v1h-1zM18,28h1v1h-1zM22,28h1v1h-1zM24,28h1v1h-1zM25,28h1v1h-1zM26,28h1v1h-1zM27,28h1v1h-1zM28,28h1v1h-1zM29,28h1v1h-1zM31,28h1v1h-1zM0,29h1v1h-1zM2,29h1v1h-1zM3,29h1v1h-1zM4,29h1v1h-1zM6,29h1v1h-1zM8,29h1v1h-1zM10,29h1v1h-1zM11,29h1v1h-1zM15,29h1v1h-1zM16,29h1v1h-1zM17,29h1v1h-1zM18,29h1v1h-1zM19,29h1v1h-1zM20,29h1v1h-1zM23,29h1v1h-1zM25,29h1v1h-1zM28,29h1v1h-1zM29,29h1v1h-1zM30,29h1v1h-1zM31,29h1v1h-1zM32,29h1v1h-1zM0,30h1v1h-1zM2,30h1v1h-1zM3,30h1v1h-1zM4,30h1v1h-1zM6,30h1v1h-1zM8,30h1v1h-1zM10,30h1v1h-1zM12,30h1v1h-1zM13,30h1v1h-1zM14,30h1v1h-1zM18,30h1v1h-1zM20,30h1v1h-1zM22,30h1v1h-1zM23,30h1v1h-1zM26,30h1v1h-1zM27,30h1v1h-1zM30,30h1v1h-1zM0,31h1v1h-1zM6,31h1v1h-1zM11,31h1v1h-1zM12,31h1v1h-1zM13,31h1v1h-1zM14,31h1v1h-1zM16,31h1v1h-1zM19,31h1v1h-1zM20,31h1v1h-1zM21,31h1v1h-1zM25,31h1v1h-1zM26,31h1v1h-1zM28,31h1v1h-1zM29,31h1v1h-1zM30,31h1v1h-1zM0,32h1v1h-1zM1,32h1v1h-1zM2,32h1v1h-1zM3,32h1v1h-1zM4,32h1v1h-1zM5,32h1v1h-1zM6,32h1v1h-1zM8,32h1v1h-1zM11,32h1v1h-1zM12,32h1v1h-1zM13,32h1v1h-1zM14,32h1v1h-1zM17,32h1v1h-1zM19,32h1v1h-1zM22,32h1v1h-1zM23,32h1v1h-1zM24,32h1v1h-1zM25,32h1v1h-1zM26,32h1v1h-1zM27,32h1v1h-1zM29,32h1v1h-1zM31,32h1v1h-1z"/></svg></div><p class="qr-cap">Tariffe e moduli</p></div>
+    </div>
+  </section>
+
+  <!-- SEMICONVITTO -->
+  <section class="scene dark" id="sSemi">
+    <p class="kicker rv">Il Semiconvitto · per chi abita vicino</p>
+    <h2 class="rv d1">Il pomeriggio <em>con noi</em></h2>
+    <div class="semi-ore">
+      <div class="so rv d2"><span class="ic">🍽️</span><small>Dopo la scuola</small><h3>Pranzo</h3><p>In mensa, con i compagni del Convitto.</p></div>
+      <div class="so rv d3"><span class="ic">📖</span><small>Fino alle 17:30</small><h3>Studio assistito</h3><p>Compiti e lezioni con gli educatori.</p></div>
+      <div class="so casa rv d4"><span class="ic">🏠</span><small>La sera</small><h3>A casa</h3><p>Nel pomeriggio valgono le regole del Convitto.</p></div>
+    </div>
+    <div class="costo rv d5"><span>💶 <b>€ 70 al mese</b> · carnet di 16 ticket (a.s. 2026/27)</span><span>📝 Si aderisce con un modulo sul sito</span></div>
+  </section>
+
   <!-- 11 · IL SITO -->
   <section class="scene light" id="s11">
     <div class="testo">
@@ -719,7 +869,7 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
     <button class="btn" id="bIndietro" type="button">◀ Indietro</button>
     <button class="btn" id="bFerma" type="button">⏸ Ferma</button>
     <button class="btn" id="bAvanti" type="button">Avanti ▶</button>
-    <span id="contatore">1 <small>/ 19</small></span>
+    <span id="contatore">1 <small>/ 24</small></span>
     <button class="btn" id="bScene" type="button">☰ Tutte le scene</button>
   </nav>
   <div id="barra"><i></i></div>
@@ -765,10 +915,11 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
   function $(s) { return document.querySelector(s); }
   var stage = $('#stage'), scene = [].slice.call(document.querySelectorAll('.scene'));
   var barra = $('#barra i');
-  var TITOLI = ['Copertina', 'La settimana', 'La giornata tipo', 'Gli educatori', 'La salute',
+  var TITOLI = ['Copertina', 'La settimana', 'La giornata tipo', 'La settimana in numeri', 'Gli educatori',
+    'I primi giorni', 'Bullismo e sicurezza', 'La salute',
     'Libertà e autonomia', 'Il Regolamento', 'Dal registro alla famiglia', 'Area riservata famiglie',
     'Accesso sicuro', 'Cosa resta riservato', 'L\'Aula: e-learning', 'DSA e BES', 'Le lingue',
-    'Premio al Merito', 'I premi del bando', 'Laboratorio musicale', 'Il sito', 'Prossimi Open Day'];
+    'Premio al Merito', 'I premi del bando', 'Laboratorio musicale', 'Come si entra', 'Il Semiconvitto', 'Il sito', 'Prossimi Open Day'];
 
   /* Adatta il palco 1920×1080 allo schermo */
   function scala() {
@@ -818,8 +969,23 @@ body.inpausa #bFerma{background:#c8553d;color:#fff;border-color:#f0a48f;animatio
     void scene[cur].offsetWidth;      /* fa ripartire le animazioni */
     scene[cur].classList.add('on');
     voceMenu.forEach(function (d, i) { d.classList.toggle('on', i === cur); });
+    conta(scene[cur]);
     $('#contatore').innerHTML = (cur + 1) + ' <small>/ ' + scene.length + '</small>';
     inizio = performance.now();
+  }
+  /* I numeri della scena salgono da zero al valore finale */
+  function conta(sc) {
+    sc.querySelectorAll('[data-conta]').forEach(function (el) {
+      var fine = +el.dataset.conta, coda = el.innerHTML.replace(/^\d+/, ''), t0 = Date.now();
+      clearInterval(el._giro);
+      el.innerHTML = '0' + coda;
+      el._giro = setInterval(function () {
+        var p = Math.min((Date.now() - t0 - 700) / 1300, 1);
+        if (p < 0) return;
+        el.innerHTML = Math.round(fine * (1 - Math.pow(1 - p, 3))) + coda;
+        if (p >= 1) clearInterval(el._giro);
+      }, 40);
+    });
   }
   function manuale(n) { vai(n); sospesa = performance.now() + RIPRESA; }
 

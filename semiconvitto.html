@@ -99,232 +99,113 @@
         <div class="sc-firma">La Dirigente Scolastica — Avv. Maddalena Cioci<br>Firma autografa sostituita a mezzo stampa, ai sensi dell'art. 3 comma 2 del d.lgs. 39/93.</div>
       </div>
 
-      <!-- MODULO (contenuti del modello adottato dalla scuola, nell'aspetto dei moduli del sito) -->
+      <!-- MODULO (come il modulo allegato all'Avviso n. 58, con indirizzo e orario del testo dell'Avviso) -->
       <style>
         .sc-testo{font-family:var(--fu);font-size:.88rem;line-height:1.7;color:#1a1a1a;margin:0 0 .9rem}
-        .sc-testo:last-child{margin-bottom:0}
-        .sc-sub{font-family:var(--fu);font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--bosco);margin:0 0 .75rem;padding:0}
-        .sc-grid-via{grid-template-columns:3fr 1fr;gap:.85rem}
-        .sc-grid>*,.sc-grid-via>*{min-width:0}
-        .sc-field input{min-width:0;width:100%;box-sizing:border-box}
-        @media (max-width:640px){.sc-grid-via{grid-template-columns:3fr 1fr}}
-        .sc-fieldset{border:0;margin:1.75rem 0 0;padding:0;min-width:0}
-        .sc-fieldset .sc-check-row{margin-bottom:.45rem}
-        .sc-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+        .sc-fieldset{border:0;margin:.85rem 0 0;padding:0;min-width:0}
+        .sc-fieldset legend{font-family:var(--fu);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bosco2);margin-bottom:.6rem;padding:0}
         .sc-check-row input[type=radio]{width:17px;height:17px;margin-top:2px;accent-color:var(--bosco);cursor:pointer;flex-shrink:0}
-        .sc-dich{font-family:var(--fu);font-size:.88rem;line-height:1.8;color:#1a1a1a;margin:0;padding-left:1.4rem}
-        .sc-dich li{margin-bottom:.7rem}
-        .sc-inline{display:inline-block;width:5.5rem;padding:.2rem .5rem;border:1.5px solid #d1d5db;border-radius:6px;font-family:var(--fu);font-size:.88rem;color:#1a1a1a;background:#fafafa;outline:0;vertical-align:baseline}
-        .sc-inline:focus{border-color:var(--bosco);box-shadow:0 0 0 3px rgba(44,62,45,.1);background:#fff}
-        .sc-chiede{font-family:var(--fu);font-weight:800;font-size:.8rem;letter-spacing:.16em;text-align:center;color:var(--bosco);margin:0 0 1rem}
-        @media print{.sc-schermo{display:none!important}.sc-field input,.sc-inline{border:0;border-bottom:1px solid #999;border-radius:0;background:#fff;padding:.3rem 0;box-shadow:none}.sc-inline{padding:0 .2rem}}
+        .sc-intesta{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;border-bottom:3px solid var(--bosco);padding-bottom:.6rem;margin-bottom:.5rem;font-family:var(--fu)}
+        .sc-intesta strong{display:block;font-size:.95rem;color:#1a1a1a}
+        .sc-intesta small{font-size:.75rem;color:#6b7280}
+        .sc-kick{font-family:var(--fu);font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro);margin:0 0 .6rem}
+        .sc-titolo{font-family:var(--fd);font-size:2rem;font-weight:400;color:var(--bosco);margin:0 0 .35rem}
+        .sc-titolo em{color:var(--oro)}
+        @media print{.sc-schermo{display:none!important}.sc-field input,.sc-field textarea{border:0;border-bottom:1px solid #999;border-radius:0;background:#fff;padding:.3rem 0;box-shadow:none}}
       </style>
-      <form id="sc-form" novalidate onsubmit="return false" aria-label="Modulo di ammissione al Semiconvitto, anno scolastico 2026/2027">
+      <form id="sc-form" novalidate onsubmit="return false" aria-label="Richiesta di iscrizione al Semiconvitto, anno scolastico 2026/2027">
 
-        <div class="sc-section">
-          <div class="sc-section-hdr">
-            <h2>Modulo di ammissione al Semiconvitto</h2>
-            <span>IPSSEOA “R. A. Costaggini” · Rieti · A.S. 2026/2027</span>
-          </div>
-          <div class="sc-section-body">
-            <p class="sc-testo">Domanda di iscrizione/riconferma in qualità di semiconvittore/semiconvittrice per l'A.S. 2026/2027.</p>
-            <div class="sc-grid sc-grid-2">
-              <div class="sc-field">
-                <label for="sc-alunno">Alunno/a</label>
-                <input type="text" id="sc-alunno" name="alunno" autocomplete="off"/>
-              </div>
-              <div class="sc-field">
-                <label for="sc-classe">Classe</label>
-                <input type="text" id="sc-classe" name="classe" autocomplete="off"/>
-              </div>
-            </div>
-          </div>
+        <div class="sc-intesta">
+          <div><strong>IPSSEOA “R. A. Costaggini” — Convitto</strong><small>Rieti · convitto.alberghierorieti.edu.it</small></div>
+          <small>Anno Scolastico 2026/2027</small>
         </div>
+        <p class="sc-kick">Richiesta di iscrizione</p>
+        <h2 class="sc-titolo">Il <em>Semiconvitto</em></h2>
+        <p class="sc-testo">Servizio mensa e studio assistito fino alle 17:30, per chi non alloggia in Convitto.</p>
 
         <div class="sc-section">
           <div class="sc-section-hdr">
-            <h2>Sezione A</h2>
-            <span>dati dello/a studente/ssa</span>
+            <h2>1 — Lo studente</h2>
+            <span>dati anagrafici</span>
           </div>
           <div class="sc-section-body">
             <div class="sc-grid sc-grid-2">
               <div class="sc-field" style="grid-column:1/-1">
-                <label for="sc-a-nome">Cognome e Nome</label>
-                <input type="text" id="sc-a-nome" name="studente_nome" autocomplete="off"/>
+                <label for="sc-nome">Cognome e nome<span class="req">*</span></label>
+                <input type="text" id="sc-nome" name="studente_nome" autocomplete="off"/>
               </div>
               <div class="sc-field">
-                <label for="sc-a-luogo">Nata/o a</label>
-                <input type="text" id="sc-a-luogo" name="studente_luogo_nascita" autocomplete="off"/>
+                <label for="sc-nascita">Data di nascita</label>
+                <input type="text" id="sc-nascita" name="studente_data_nascita" placeholder="gg/mm/aaaa" autocomplete="off"/>
               </div>
               <div class="sc-field">
-                <label for="sc-a-data">Il</label>
-                <input type="text" id="sc-a-data" name="studente_data_nascita" placeholder="gg/mm/aaaa" autocomplete="off"/>
-              </div>
-              <div class="sc-field">
-                <label for="sc-a-res">Residente a</label>
-                <input type="text" id="sc-a-res" name="studente_residenza" autocomplete="off"/>
-              </div>
-              <div class="sc-grid sc-grid-via">
-                <div class="sc-field">
-                  <label for="sc-a-via">In Via</label>
-                  <input type="text" id="sc-a-via" name="studente_via" autocomplete="off"/>
-                </div>
-                <div class="sc-field">
-                  <label for="sc-a-civ">N°</label>
-                  <input type="text" id="sc-a-civ" name="studente_civico" autocomplete="off"/>
-                </div>
+                <label for="sc-classe">Classe frequentata<span class="req">*</span></label>
+                <input type="text" id="sc-classe" name="classe" autocomplete="off"/>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="sc-section">
-          <div class="sc-section-hdr">
-            <h2>Sezione B</h2>
-            <span>dati dei genitori / esercenti la responsabilità genitoriale</span>
-          </div>
-          <div class="sc-section-body">
-
-            <h3 class="sc-sub">Genitore 1 (Padre / Esercente)</h3>
-            <div class="sc-grid sc-grid-2">
-              <div class="sc-field">
-                <label for="sc-g1-nome">Cognome e Nome</label>
-                <input type="text" id="sc-g1-nome" name="genitore1_nome" autocomplete="off"/>
-              </div>
-              <div class="sc-field">
-                <label for="sc-g1-nasc">Luogo e Data di Nascita</label>
-                <input type="text" id="sc-g1-nasc" name="genitore1_nascita" autocomplete="off"/>
-              </div>
-              <div class="sc-field">
-                <label for="sc-g1-res">Residente (se diversa dallo studente): a</label>
-                <input type="text" id="sc-g1-res" name="genitore1_residenza" autocomplete="off"/>
-              </div>
-              <div class="sc-grid sc-grid-via">
-                <div class="sc-field">
-                  <label for="sc-g1-via">In Via</label>
-                  <input type="text" id="sc-g1-via" name="genitore1_via" autocomplete="off"/>
-                </div>
-                <div class="sc-field">
-                  <label for="sc-g1-civ">N°</label>
-                  <input type="text" id="sc-g1-civ" name="genitore1_civico" autocomplete="off"/>
-                </div>
-              </div>
-              <div class="sc-field">
-                <label for="sc-g1-tel">Recapito telefonico</label>
-                <input type="tel" id="sc-g1-tel" name="genitore1_telefono" inputmode="tel" autocomplete="off"/>
-              </div>
-              <div class="sc-field">
-                <label for="sc-g1-mail">E-mail</label>
-                <input type="email" id="sc-g1-mail" name="genitore1_email" autocomplete="off"/>
-              </div>
-            </div>
-
-            <h3 class="sc-sub" style="margin-top:1.75rem">Genitore 2 (Madre / Esercente)</h3>
-            <div class="sc-grid sc-grid-2">
-              <div class="sc-field">
-                <label for="sc-g2-nome">Cognome e Nome</label>
-                <input type="text" id="sc-g2-nome" name="genitore2_nome" autocomplete="off"/>
-              </div>
-              <div class="sc-field">
-                <label for="sc-g2-nasc">Luogo e Data di Nascita</label>
-                <input type="text" id="sc-g2-nasc" name="genitore2_nascita" autocomplete="off"/>
-              </div>
-              <div class="sc-field">
-                <label for="sc-g2-res">Residente (se diversa dallo studente): a</label>
-                <input type="text" id="sc-g2-res" name="genitore2_residenza" autocomplete="off"/>
-              </div>
-              <div class="sc-grid sc-grid-via">
-                <div class="sc-field">
-                  <label for="sc-g2-via">In Via</label>
-                  <input type="text" id="sc-g2-via" name="genitore2_via" autocomplete="off"/>
-                </div>
-                <div class="sc-field">
-                  <label for="sc-g2-civ">N°</label>
-                  <input type="text" id="sc-g2-civ" name="genitore2_civico" autocomplete="off"/>
-                </div>
-              </div>
-              <div class="sc-field">
-                <label for="sc-g2-tel">Recapito telefonico</label>
-                <input type="tel" id="sc-g2-tel" name="genitore2_telefono" inputmode="tel" autocomplete="off"/>
-              </div>
-              <div class="sc-field">
-                <label for="sc-g2-mail">E-mail</label>
-                <input type="email" id="sc-g2-mail" name="genitore2_email" autocomplete="off"/>
-              </div>
-            </div>
-
             <fieldset class="sc-fieldset">
-              <legend class="sc-sub">Situazione familiare</legend>
-              <p class="sc-testo" style="font-size:.8rem;color:#6b7280;margin-bottom:.7rem">(Barrare l'opzione che riflette la situazione attuale)</p>
-              <div class="sc-check-row">
-                <input type="radio" id="sc-sit-1" name="situazione_familiare" value="coniugati"/>
-                <label for="sc-sit-1">Genitori Coniugati / Convivenza</label>
-              </div>
-              <div class="sc-check-row">
-                <input type="radio" id="sc-sit-2" name="situazione_familiare" value="separati"/>
-                <label for="sc-sit-2">Genitori Separati / Divorziati / Non Coniugati</label>
-              </div>
-              <div class="sc-check-row">
-                <input type="radio" id="sc-sit-3" name="situazione_familiare" value="altra"/>
-                <label for="sc-sit-3">Altra situazione (Specificare):</label>
-              </div>
-              <div class="sc-field" style="margin-top:.5rem">
-                <label for="sc-sit-altra" class="sc-vh">Altra situazione: specificare</label>
-                <input type="text" id="sc-sit-altra" name="situazione_altra" autocomplete="off"/>
+              <legend>Indirizzo di studi (facoltativo)</legend>
+              <div class="sc-indirizzi">
+                <div class="sc-check-row"><input type="radio" id="sc-ind-1" name="indirizzo" value="cucina"/><label for="sc-ind-1">Enogastronomia — Cucina</label></div>
+                <div class="sc-check-row"><input type="radio" id="sc-ind-2" name="indirizzo" value="sala"/><label for="sc-ind-2">Enogastronomia — Sala e Vendita</label></div>
+                <div class="sc-check-row"><input type="radio" id="sc-ind-3" name="indirizzo" value="pasticceria"/><label for="sc-ind-3">Enogastronomia — Pasticceria</label></div>
+                <div class="sc-check-row"><input type="radio" id="sc-ind-4" name="indirizzo" value="accoglienza"/><label for="sc-ind-4">Accoglienza Turistica</label></div>
               </div>
             </fieldset>
-
           </div>
         </div>
 
         <div class="sc-section">
           <div class="sc-section-hdr">
-            <h2>Sezione C</h2>
-            <span>allergie e intolleranze (facoltativa)</span>
+            <h2>2 — Genitore / Tutore</h2>
+            <span>referente</span>
           </div>
           <div class="sc-section-body">
-            <p class="sc-testo">Indicare eventuali allergie, intolleranze alimentari o esigenze particolari di cui il servizio mensa deve tenere conto. La compilazione è facoltativa: le informazioni sono comunicate soltanto al personale della cucina e della mensa e sono cancellate al termine dell'anno scolastico (<a href="informativa-semiconvitto.html#base-giuridica" style="text-decoration:underline">informativa</a>).</p>
+            <div class="sc-grid sc-grid-2">
+              <div class="sc-field">
+                <label for="sc-gen">Nome e cognome<span class="req">*</span></label>
+                <input type="text" id="sc-gen" name="genitore_nome" autocomplete="off"/>
+              </div>
+              <div class="sc-field">
+                <label for="sc-tel">Cellulare<span class="req">*</span></label>
+                <input type="tel" id="sc-tel" name="genitore_cellulare" inputmode="tel" autocomplete="off"/>
+              </div>
+              <div class="sc-field" style="grid-column:1/-1">
+                <label for="sc-mail">Email (per la conferma)<span class="req">*</span></label>
+                <input type="email" id="sc-mail" name="genitore_email" autocomplete="off"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sc-section">
+          <div class="sc-section-hdr">
+            <h2>3 — Note e consenso</h2>
+          </div>
+          <div class="sc-section-body">
             <div class="sc-field">
               <label for="sc-allergie">Allergie, intolleranze o esigenze particolari</label>
               <textarea id="sc-allergie" name="allergie_intolleranze" rows="3" autocomplete="off"></textarea>
             </div>
-          </div>
-        </div>
-
-        <div class="sc-section">
-          <div class="sc-section-hdr">
-            <h2>Sezione D</h2>
-            <span>richiesta e dichiarazioni</span>
-          </div>
-          <div class="sc-section-body">
-            <p class="sc-testo">I sottoscritti, in qualità di genitori (esercenti la responsabilità genitoriale) dello studente/ssa indicato/a nella Sezione A:</p>
-            <p class="sc-chiede">CHIEDONO PER L'ANNO SCOLASTICO 2026/2027</p>
-            <p class="sc-testo">l'iscrizione del/la proprio/a figlio/a presso l'IPSSEOA “R. A. Costaggini” in qualità di semiconvittore/trice. A tal fine:</p>
-            <ol class="sc-dich">
-              <li>Dichiarano di essere a conoscenza che il servizio, attivo dal 12 ottobre 2026, consente allo/a studente/ssa di usufruire del servizio mensa e di svolgere i compiti e le attività di studio assistito, fino alle ore 17:30.</li>
-              <li>Dichiarano di essere a conoscenza che il costo del servizio è di € 70,00 mensili, da versare tramite il servizio PagoPA reso disponibile a seguito della ricezione della richiesta, e che il versamento dà diritto a un carnet di 16 ticket da consegnare al Personale Educativo preposto; gli eventuali ticket non fruiti nel mese di riferimento potranno essere utilizzati entro il mese successivo.</li>
-              <li>Dichiarano di aver preso visione dell'Avviso n. 58 del 25/09/2026 della Dirigente Scolastica.</li>
-            </ol>
+            <p class="sc-testo" style="font-size:.78rem;color:#6b7280;margin:.4rem 0 1rem">Facoltativo: le informazioni sono comunicate soltanto al personale della cucina e della mensa e sono cancellate al termine dell'anno scolastico.</p>
+            <div class="sc-check-row">
+              <input type="checkbox" id="sc-privacy" name="privacy"/>
+              <label for="sc-privacy">Ho letto l'informativa privacy (disponibile su convitto.alberghierorieti.edu.it/<a href="informativa-semiconvitto.html" style="text-decoration:underline">informativa-semiconvitto.html</a>) e acconsento al trattamento dei dati ai sensi del GDPR.<span style="color:#dc2626"> *</span></label>
+            </div>
           </div>
 
           <div class="sc-sig-row">
-            <div class="sc-sig" style="flex-basis:100%">
-              <div class="sc-field">
-                <label for="sc-luogo-data">Luogo e Data</label>
-                <input type="text" id="sc-luogo-data" name="luogo_data" autocomplete="off"/>
-              </div>
+            <div class="sc-sig">
+              <div class="sc-sig-line"></div>
+              <div class="sc-sig-label">Data</div>
             </div>
             <div class="sc-sig">
               <div class="sc-sig-line"></div>
-              <div class="sc-sig-label">Firma Genitore 1</div>
-            </div>
-            <div class="sc-sig">
-              <div class="sc-sig-line"></div>
-              <div class="sc-sig-label">Firma Genitore 2</div>
+              <div class="sc-sig-label">Firma del genitore / tutore</div>
             </div>
           </div>
 
-          <div class="sc-footer-note"><strong>NOTA BENE:</strong> la domanda è valida solo con la firma di entrambi gli esercenti la responsabilità genitoriale. Se la firma è di uno solo, è necessario allegare una dichiarazione di accordo sottoscritta e datata dal genitore non firmatario. Si prega di allegare copia dei documenti di identità in corso di validità di entrambi i firmatari. La domanda firmata va inviata a <strong>rirh010007@istruzione.it</strong>, come indicato nell'Avviso n. 58.</div>
+          <div class="sc-footer-note">Modulo da inviare, debitamente compilato, all'indirizzo di posta elettronica <strong>rirh010007@istruzione.it</strong>, come indicato nell'Avviso n. 58 del 25/09/2026. Riproduzione cartacea del modulo online disponibile su convitto.alberghierorieti.edu.it/semiconvitto.html</div>
         </div>
 
       </form>

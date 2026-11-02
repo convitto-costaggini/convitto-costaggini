@@ -29,7 +29,7 @@ window.STUDIO = (function () {
     if (!window.speechSynthesis) return toast('Il telefono non sa leggere ad alta voce 😕');
     var stessa = bottone && bottone === bottoneVoce;
     zitto(); if (stessa) return;
-    var u = new SpeechSynthesisUtterance(testo); u.lang = 'it-IT'; u.rate = 0.92; if (voce) u.voice = voce;
+    var u = new SpeechSynthesisUtterance(testo); u.lang = 'it-IT'; u.rate = (window.AULA_SUPPORTI ? AULA_SUPPORTI.velocita() : 0.92); if (voce) u.voice = voce;
     u.onend = u.onerror = function () { if (bottone) bottone.classList.remove('va'); if (bottoneVoce === bottone) bottoneVoce = null; };
     if (bottone) { bottone.classList.add('va'); bottoneVoce = bottone; }
     speechSynthesis.speak(u);

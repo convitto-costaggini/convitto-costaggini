@@ -63,7 +63,7 @@ const KB=[
       'quante rate','importi delle rate','quota iscrizione'],
    r:'La retta è deliberata ogni anno dal Consiglio d\'Istituto, con un importo fisso uguale per tutte le famiglie (non è prevista una riduzione legata all\'ISEE). La retta intera confermata per l\'A.S. 2026/27 è di <strong>1.600€ annui</strong>, comprensiva di vitto completo, alloggio, studio guidato, attività e trasporto Convitto-scuola.<br><br>💶 <a href="ammissione.html#tariffe">Tariffe complete →</a><br>✉️ Per un preventivo: <a href="contatti.html">Contattaci →</a>'},
   {k:['sveglia','giornata tipo','cosa si fa','routine','programma della giornata',
-      'alzarsi','luci spente','luce','mattina','pomeriggio','sera','notte'],
+      'alzarsi','luci spente','luce'],
    r:'<strong>La giornata tipo al Convitto:</strong><br>🌅 06:30 Sveglia · 07:00 Colazione (prodotti km zero)<br>🚌 07:40 Trasporto alla scuola<br>📚 08:00–14:00 Lezioni IPSSEOA<br>🍝 14:00 Pranzo<br>🏃 15:00–15:30 Tempo libero<br>📖 15:30–17:15 Studio guidato<br>⚽ 17:15–19:15 Tempo libero / sport / Lab Musicale<br>🍽️ 19:15 Cena<br>🌙 22:30 Luci spente<br><br>📅 <a href="giornata-tipo.html">Leggi la giornata completa →</a>'},
   // ── PASTI E MENSA ──
   {k:['pranzo','cena','colazione','pasti','mensa','si mangia','cosa si mangia','mangi oggi',
@@ -80,7 +80,7 @@ const KB=[
    r:'Camere principalmente <strong>triple con bagno privato</strong>, su 5 piani (3 maschili, 2 femminili). Ogni stanza ha letti, armadi e scrivanie personali. I ragazzi riordinano la camera ogni mattina prima di andare a scuola.<br><br>🔭 <a href="tour-virtuale.html">Visita gli spazi a 360° →</a>'},
   // ── WIFI E SMARTPHONE ──
   {k:['wifi','internet','connession','smartphone','telefonino','usare il telefono','cellulare','tablet','pc',
-      'computer','navigar','online','streaming','social'],
+      'computer','navigar','essere online','streaming','social'],
    r:'<strong>Wi-Fi</strong> disponibile in tutte le aree comuni. Lo smartphone è libero nelle ore di tempo libero (17:15–22:30). Durante lo studio guidato e le ore notturne si applicano le regole del Regolamento.'},
   // ── EDUCATORI ──
   {k:['educatori','educator','chi sono','personale','staff','chi segue','adulti',
@@ -101,7 +101,7 @@ const KB=[
       'primo giorno','prima settimana','paura','ansioso','ansia','timido','solo'],
    r:'È la preoccupazione più comune. I primi giorni gli educatori dedicano un\'attenzione particolare ai nuovi arrivati: li affiancano, li presentano, li aiutano a costruire le prime amicizie. <strong>La maggior parte dei ragazzi, dopo due o tre settimane, dice di sentirsi "a casa".</strong> Il gruppo dei pari e la routine quotidiana sono i due alleati più potenti.<br><br>💬 <a href="ammissione.html">Leggi le risposte dei genitori →</a>'},
   // ── STUDIO GUIDATO ──
-  {k:['studio guidato','compiti','aiuto studio','ore studio','15:30','studiare','pomeriggio studio',
+  {k:['studio guidato','compiti','aiuto studio','ore studio','15:30','pomeriggio studio',
       'studio pomeridiano','doposcuola','metodo di studio','riuscirà a studiare','insufficiente','recupero'],
    r:'Ogni pomeriggio dalle <strong>15:30 alle 17:15</strong> c\'è lo studio guidato con gli educatori. Non solo "fare i compiti" — gli educatori lavorano sul metodo, sull\'autonomia e sull\'abitudine allo studio. Per difficoltà persistenti si attivano supporti aggiuntivi in accordo con la famiglia.'},
   // ── COMPAGNO DI CAMERA / CONFLITTI ──
@@ -169,7 +169,8 @@ const KB=[
       'podcast dei ragazzi','testimonianze audio'],
    r:'Racconti audio in prima persona: dai convittori e dalle convittrici, e dal personale del Convitto.<br><br>🎙️ <a href="voci-dal-convitto.html">Voci dal Convitto →</a> · <a href="voci-del-personale.html">Voci del Personale →</a>'},
   // ── L'ANNO AL CONVITTO ──
-  {k:['l\'anno al convitto','anno scolastico raccontato','cosa è successo quest\'anno','riepilogo dell\'anno'],
+  {k:['l\'anno al convitto','anno scolastico raccontato','cosa è successo quest\'anno','riepilogo dell\'anno',
+      'come è andato l\'anno','com\'è andato l\'anno','riassunto dell\'anno'],
    r:'Un racconto per immagini di come è stato l\'anno appena trascorso al Convitto.<br><br>📖 <a href="anno.html">L\'Anno al Convitto →</a>'},
   // ── CONTATTI ──
   {k:['telefono','email','contatto','contatti','scrivere','segreteria','informazioni','risponde',
@@ -209,7 +210,7 @@ const KB=[
       'ho frequentato','community','mappa del mondo','muro dei ricordi','lettere'],
    r:'La community degli <strong>Alumni</strong> cresce ogni anno. Puoi aggiungere la tua scheda, lasciare un ricordo nel Muro dei Ricordi e apparire sulla mappa del mondo degli ex convittori.<br><br>🌍 <a href="comunita.html">La nostra Comunità →</a><br>✍️ <a href="iscriviti-alumni.html">Unisciti agli Alumni →</a>'},
   // ── AREA RISERVATA FAMIGLIE ──
-  {k:['area riservata','famiglie','genitore','genitori','accesso famiglie','dashboard',
+  {k:['area riservata','famiglie','accesso famiglie','dashboard',
       'seguire mio figlio','presenze online','registro famiglie','notifiche genitori','valutazioni','vedere le valutazioni'],
    r:'L\'<strong>Area Riservata Famiglie</strong> permette ai genitori di seguire in tempo reale: presenze ai pasti, valutazioni giornaliere, note degli educatori, colloqui e comunicazioni formali.<br><br>🔐 <a href="area-riservata.html">Richiedi accesso →</a>'},
   // ── AGGIORNAMENTI / NEWS ──
@@ -237,7 +238,7 @@ const KB=[
       'mezzi','ci accompagnano','7:40','come raggiungono la scuola'],
    r:'Il Convitto dispone di <strong>mezzi propri</strong> che accompagnano i ragazzi all\'IPSSEOA ogni mattina (ore 7:40). Un educatore è sempre presente sul mezzo.'},
   // ── AUTONOMIA DEL RAGAZZO ──
-  {k:['autonomia','diventerà autonomo','impara ad arrangiarsi','crescerà','responsabilità',
+  {k:['autonomia','diventerà autonomo','impara ad arrangiarsi','crescerà',
       'indipendenza','imparerà a vivere da solo'],
    r:'La conquista progressiva dell\'autonomia è uno degli <strong>obiettivi espliciti</strong> del progetto educativo. I ragazzi imparano a gestire il tempo, i rapporti, lo studio e gli spazi — con la guida degli educatori, non nonostante di essa.'},
   // ── PATTO EDUCATIVO ──

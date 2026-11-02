@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/cantiere.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Visita guidata | Lingue e Sala studio | Convitto "Costaggini"</title>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="/fonts.css"/>
+  <link rel="icon" href="/favicon.ico" sizes="any"/>
+  <style>
+    :root{--bosco:#2C3E2D;--bosco2:#3D5C3E;--oro:#B8922A;--oro2:#D4AA4A;--panna:#F5F0E8;--panna2:#EDE6D6;--testo:#1f1f1f;--grigio:#5b5b5b;
+      --fd:'Cormorant Garamond',Georgia,serif;--fu:'Source Sans 3',Arial,sans-serif;--col:410px}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--panna);color:var(--testo);font-family:var(--fu);font-size:16px;line-height:1.55}
+    a{color:var(--bosco2)}
+    button{font:inherit;cursor:pointer}
+    button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--oro);outline-offset:2px}
+
+    .app{display:grid;grid-template-columns:var(--col) 1fr;height:100vh;height:100dvh}
+    .app.stretta{grid-template-columns:0 1fr}
+    .app.stretta .guida{display:none}
+
+    /* ───── colonna a sinistra: le tappe ───── */
+    .guida{display:flex;flex-direction:column;min-height:0;background:#fff;border-right:1px solid var(--panna2)}
+    .testa{background:var(--bosco);color:var(--panna);padding:16px 18px 14px}
+    .testa .sopra{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro2);font-weight:700}
+    .testa h1{font-family:var(--fd);font-weight:400;font-size:28px;line-height:1.1;margin:4px 0 8px}
+    .testa h1 em{color:var(--oro2)}
+    .barra{height:6px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+    .barra i{display:block;height:100%;width:0;background:var(--oro2);transition:width .25s}
+    .conta{font-size:13px;color:rgba(245,240,232,.85);margin-top:6px}
+    .elenco{flex:1;min-height:0;overflow:auto;list-style:none;margin:0;padding:6px 0 10px}
+    .elenco>li{border-bottom:1px solid var(--panna2)}
+    .capo{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;padding:11px 16px;color:var(--bosco)}
+    .capo:hover{background:#FBF7EC}
+    .capo .n{flex:0 0 32px;height:32px;border-radius:50%;background:var(--panna2);color:var(--bosco);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:19px;font-weight:700}
+    .capo .t{flex:1;font-weight:700;font-size:16px;line-height:1.25}
+    .capo .m{display:block;font-weight:400;font-size:12.5px;color:var(--grigio)}
+    li.attiva .capo{background:#FBF7EC}
+    li.attiva .capo .n{background:var(--bosco);color:var(--oro2)}
+    li.fatta .capo .n{background:var(--oro);color:#fff}
+    .corpo{display:none;padding:2px 18px 16px 60px;font-size:15.5px}
+    li.attiva .corpo{display:block}
+    .corpo p{margin:.2rem 0 .6rem}
+    .corpo ul{list-style:none;padding:0;margin:.4rem 0}
+    .corpo li{padding:6px 0;border-bottom:1px dashed var(--panna2)}
+    .corpo li:last-child{border-bottom:0}
+    .corpo label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+    .corpo input{width:20px;height:20px;margin-top:2px;accent-color:var(--bosco);flex:0 0 auto}
+    .corpo .btn{display:inline;background:var(--panna);border:1px solid var(--panna2);border-radius:6px;padding:0 7px;font-weight:700;font-size:14.5px;color:var(--bosco)}
+    .viste{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0 .3rem}
+    .viste button{border:2px solid var(--bosco);background:#fff;color:var(--bosco);border-radius:10px;padding:5px 10px;font-weight:700;font-size:14px}
+    .viste button[aria-pressed="true"]{background:var(--bosco);color:#fff}
+    .avviso{background:#FBF7EC;border-left:4px solid var(--oro);border-radius:0 10px 10px 0;padding:8px 12px;margin:.5rem 0;font-size:14.5px}
+    .piede{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--panna2);background:#fff}
+    .piede button{flex:1;min-height:46px;border-radius:12px;border:2px solid var(--bosco);background:#fff;color:var(--bosco);font-weight:700;font-size:16px}
+    .piede .avanti{background:var(--bosco);color:#fff}
+    .piede button[disabled]{opacity:.4;cursor:default}
+
+    /* ───── lo spazio grande a destra: il sito vero ───── */
+    .vista{display:flex;flex-direction:column;min-width:0;min-height:0}
+    .strumenti{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;background:var(--panna2);border-bottom:1px solid #d9cfb8;font-size:14px}
+    .strumenti .dove{flex:1;min-width:120px;color:var(--grigio);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .strumenti button,.strumenti a.b{border:1px solid #b9ad92;background:#fff;color:var(--bosco);border-radius:8px;padding:5px 11px;font-weight:700;font-size:14px;text-decoration:none}
+    iframe{flex:1;width:100%;min-height:0;border:0;background:#fff}
+
+    @media (max-width:900px){
+      .app,.app.stretta{display:flex;flex-direction:column;height:auto;min-height:100vh}
+      .guida{max-height:none;border-right:0;border-bottom:3px solid var(--oro)}
+      .elenco{overflow:visible}
+      .vista{height:85vh;height:85dvh}
+      .app.stretta .guida{display:none}
+      .corpo{padding-left:18px}
+      .piede{position:sticky;bottom:0}
+    }
+    @media print{.vista{display:none}}
+  </style>
+</head>
+<body>
+<div class="app rsv" id="app" hidden>
+  <aside class="guida" aria-label="Guida passo passo">
+    <div class="testa">
+      <div class="sopra">Lingue e Sala studio</div>
+      <h1>Visita <em>guidata</em></h1>
+      <div class="barra" aria-hidden="true"><i id="barra"></i></div>
+      <div class="conta" id="conta"></div>
+    </div>
+    <ol class="elenco" id="elenco"></ol>
+    <div class="piede">
+      <button type="button" id="indietro">← Indietro</button>
+      <button type="button" id="avanti" class="avanti">Avanti →</button>
+    </div>
+  </aside>
+  <section class="vista" aria-label="Il sito">
+    <div class="strumenti">
+      <button type="button" id="largo" aria-pressed="false" title="Nasconde o mostra la guida">⇔ Guida</button>
+      <span class="dove" id="dove"></span>
+      <button type="button" id="ricarica">↻ Ricarica</button>
+      <a class="b" id="nuova" target="_blank" rel="noopener">Apri in una scheda nuova ↗</a>
+    </div>
+    <iframe id="sito" title="Il sito, per provare i passi indicati a sinistra" allow="camera; clipboard-write; fullscreen" referrerpolicy="same-origin"></iframe>
+  </section>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEMO = '/aula/studio/lezione.html?c=DEMO';
+
+  /* Le tappe. url: la pagina che si apre a destra; viste: altre pagine della stessa tappa;
+     ripristina: la tappa cambia l'aspetto della pagina, quindi all'uscita si rimette tutto com'era. */
+  var TAPPE = [
+    { t: 'Una lezione già pronta', m: 'circa 6 minuti · nessun accesso', url: DEMO,
+      intro: 'È ciò che vedrebbe uno studente sul proprio dispositivo: una lezione di esempio sui principi nutritivi.',
+      azioni: [
+        'Alla domanda «Come vuoi studiare?» scelga <span class="btn">🧭 Percorso guidato</span> e parta dal gancio: una domanda curiosa che apre l\'argomento.',
+        'Su una scheda tocchi <span class="btn">🔊</span>: il testo viene letto ad alta voce.',
+        'Nella tappa <b>Memorizza</b> osservi i trucchi per ricordare: la parola-sigla, il «palazzo della memoria» nel Convitto, la filastrocca.',
+        'Nella tappa <b>Allenati</b> risponda sbagliando apposta: la lezione spiega subito perché.',
+        'Provi le <b>Flashcard</b> e la <b>Sfida finale</b>.'
+      ] },
+    { t: 'La stessa lezione, in altri modi', m: 'circa 3 minuti · nessun accesso', url: DEMO,
+      intro: 'Dalla stessa lezione nascono attività diverse. Torni all\'inizio della lezione e guardi gli altri modi di studiarla.',
+      azioni: [
+        'Scelga <span class="btn">🔐 Escape room</span>: le domande diventano enigmi da risolvere.',
+        'Scelga <span class="btn">🗺️ Costruisci la mappa</span>: si mettono in ordine le idee chiave.',
+        'Scelga <span class="btn">🏆 Sfida a squadre</span> e prema <span class="btn">⛶ Schermo intero</span>: è la versione pensata per la lavagna interattiva.'
+      ] },
+    { t: 'La verifica, in pochi secondi', m: 'circa 3 minuti · nessun accesso', url: '/aula/studio/verifica.html?c=DEMO',
+      intro: 'Dalla lezione di esempio, una prova scritta pronta da stampare. Il docente non scrive nulla: sceglie soltanto che cosa stampare.',
+      azioni: [
+        'Scenda fino a <span class="btn">👀 Anteprima</span>: c\'è già il foglio della fila A, con intestazione, sei tipi di domande e punteggio.',
+        'Spunti <span class="btn">♿ Anche la versione facilitata</span> (sezione 3): confronti la fila A con la versione facilitata. Meno domande, 2 sole risposte, parole da inserire già elencate, carattere più grande. Sul foglio non c\'è scritto «facilitata».',
+        'Spunti <span class="btn">🗺️ Anche la mappa della lezione</span>: è una pagina di idee chiave da consegnare durante la prova, se prevista dal PDP.',
+        'Guardi la <b>fila B</b> e le <b>soluzioni</b>, per correggere in fretta.',
+        'Prema <span class="btn">🔀 Altre domande</span>: la verifica cambia in un istante.',
+        'Se vuole, <span class="btn">🖨️ Stampa</span>: su carta o in PDF.'
+      ] },
+    { t: 'Leggere a modo proprio', m: 'circa 5 minuti · nessun accesso', url: DEMO + '#p=1', ripristina: true,
+      viste: [['Livello 1', DEMO + '#p=1'], ['Livello 2', DEMO + '#p=2'], ['Livello 3', DEMO + '#p=3'], ['Pagina standard', DEMO + '#p=0']],
+      intro: 'In ogni pagina, per tutti, c\'è il pulsante <span class="btn">Aa Leggi a modo tuo</span> in basso a sinistra. Lo studente trova la pagina già comoda e non vede alcuna etichetta.',
+      azioni: [
+        'Guardi la lezione al <b>Livello 1</b>: carattere molto leggibile, testo un po\' più grande, più spazio, fondo color crema.',
+        'Passi al <b>Livello 2</b>: testo più grande, meno animazioni, meno distrazioni, più tempo nelle sfide con il cronometro.',
+        'Passi al <b>Livello 3</b>: testo molto grande e voce più lenta.',
+        'Nella pagina tocchi <span class="btn">Aa Leggi a modo tuo</span>: ogni scelta si può cambiare o togliere.',
+        'Selezioni una frase e tocchi <span class="btn">🔊 Leggi quello che ho selezionato</span>.',
+        'Torni a <b>Pagina standard</b>: la pagina si riapre come per tutti.'
+      ],
+      nota: 'Le impostazioni restano soltanto nel dispositivo di chi legge: il sito non le raccoglie. Uscendo da questa tappa la pagina viene rimessa com\'era.' },
+    { t: 'Il docente sceglie il livello', m: 'circa 4 minuti · accesso docente', url: '/aula/studio/inclusione.html',
+      intro: 'È la pagina in cui il docente prepara il link o il QR da dare allo studente. Se chiede l\'accesso, si entra con la mail della scuola.',
+      azioni: [
+        '<b>Passo 1:</b> nel menu scelga <span class="btn">La lezione di prova</span>. Per una lezione vera si incolla il link o il codice di 6 lettere.',
+        '<b>Passo 2:</b> scelga il livello (nessuno, 1, 2 o 3). Se serve, può personalizzare i singoli supporti.',
+        '<b>Passo 3:</b> compaiono il link e il QR. Prema <span class="btn">Provalo</span> per vedere ciò che vedrà lo studente.',
+        'Apra «Computer condiviso?»: contiene il link per rimettere tutto come prima.'
+      ],
+      nota: 'Le misure da adottare sono quelle stabilite dalla scuola e scritte nel PDP, condiviso con la famiglia: qui ci sono gli strumenti.' },
+    { t: 'Creare una lezione nuova', m: 'circa 8 minuti · accesso docente', url: '/aula/studio/docente.html',
+      intro: 'Dal lato del docente o dell\'educatore: da un argomento, o dalla foto di una pagina di libro, a una lezione completa con il suo QR.',
+      azioni: [
+        'Entri con la mail istituzionale: scriva la mail, prema <span class="btn">Mandami il codice →</span>, poi scriva il codice ricevuto (6 cifre, valido 10 minuti). Non serve alcuna password.',
+        'Scriva l\'<b>argomento</b>, scelga la materia e l\'anno di corso.',
+        'Se vuole, spunti <span class="btn">🌐 Condividi nell\'Archivio</span>: si può annullare in ogni momento da Modifica.',
+        'Prema <span class="btn">✨ Crea la lezione</span> (si può allegare la foto di una pagina di libro) e attenda un paio di minuti.',
+        'Quando è pronta compaiono il <b>QR</b> e un <b>codice di 6 lettere</b>. Poi <span class="btn">📝 Prepara una verifica</span> sulla stessa lezione.'
+      ],
+      nota: 'Una sola regola: non si fotografano quaderni, verifiche o fogli con nomi o dati degli studenti. Per solo guardare, si può saltare la creazione.' },
+    { t: 'Le mie lezioni e l\'Archivio', m: 'circa 3 minuti · nessun accesso', url: '/aula/studio/archivio.html',
+      intro: 'L\'Archivio è il punto in cui il lavoro di un docente diventa disponibile per tutti i colleghi.',
+      azioni: [
+        'Guardi le cinque lezioni di esempio, per materia e anno.',
+        'Accanto a ogni lezione c\'è il pulsante <span class="btn">📝 Verifica</span>.',
+        'Una lezione propria si ritrova in <b>Le mie lezioni</b>; da lì, con <b>Modifica</b>, si corregge o si cancella.'
+      ],
+      viste: [['Archivio', '/aula/studio/archivio.html'], ['Le mie lezioni', '/aula/studio/docente.html#mie']] },
+    { t: 'In aula, alla lavagna', m: 'circa 5 minuti · nessun accesso', url: DEMO,
+      intro: 'Come ogni docente può usare gli strumenti durante la lezione. Gli studenti partecipano a voce o per alzata di mano, senza dispositivi e senza fornire alcun dato.',
+      azioni: [
+        'Tra i modi di studiarla scelga <span class="btn">🏆 Sfida a squadre</span>, indichi quante squadre e prema <span class="btn">⛶ Schermo intero</span>.',
+        'Il docente tocca sulla lavagna la risposta data a voce dalla squadra; il punteggio resta sempre in vista.',
+        'Per una lezione propria, <span class="btn">🖥️ QR a tutto schermo</span> è il cartello da proiettare o appendere in sala studio.'
+      ] },
+    { t: 'Le lingue dell\'Alberghiero', m: 'circa 6 minuti · nessun accesso', url: '/aula/lingue/illustrato.html',
+      intro: 'Inglese, francese e spagnolo, costruiti sulle situazioni di lavoro: sala, cucina, pasticceria, accoglienza turistica e bar.',
+      viste: [['Ristorante illustrato', '/aula/lingue/illustrato.html'], ['Gli imprevisti', '/aula/lingue/imprevisti.html'], ['Vocabolario', '/aula/lingue/vocabolario.html']],
+      azioni: [
+        'Nel <b>ristorante illustrato</b> tocchi un oggetto: se ne ascolta il nome nelle tre lingue. Provi la modalità «Trova l\'oggetto».',
+        'Negli <b>imprevisti</b> scelga come rispondere al cliente: provi una risposta poco cortese e osservi come cambia l\'umore.',
+        'Nel <b>vocabolario</b> trova le frasi di lavoro per ambito, con l\'ascolto.',
+        'In alto, con il pulsante <span class="btn">🌍</span>, scelga la lingua: vale per tutta la sezione.'
+      ] },
+    { t: 'Le lingue in aula', m: 'circa 5 minuti · accesso docente', url: '/aula/lingue/giochi.html',
+      viste: [['Giochi alla LIM', '/aula/lingue/giochi.html'], ['Lezioni guidate', '/aula/lingue/lezioni.html']],
+      intro: 'Giochi da proiettare e lezioni pronte per un\'ora.',
+      azioni: [
+        'Nei <b>Giochi alla LIM</b> scelga un gioco (per esempio <span class="btn">🃏 Memory</span>) e la lingua, poi <span class="btn">⛶ Schermo intero</span>.',
+        'Nelle <b>Lezioni guidate</b> scelga una lezione e tocchi la scheda <span class="btn">🔒 Docente</span>: la prima volta serve la mail istituzionale e il codice ricevuto.',
+        'Troverà la modalità LIM, le schede da stampare (anche facilitate), la verifica con fila A e B e la scaletta per un\'ora.'
+      ] },
+    { t: 'Per concludere', m: 'circa 2 minuti', url: '/aula/',
+      intro: 'Quattro cose da ricordare.',
+      azioni: [
+        '<b>Un\'unica Aula per tutti:</b> le facilitazioni sono nella stessa pagina dei compagni, senza etichette.',
+        '<b>Nessun dato degli studenti:</b> si apre un link, senza registrazione. Le impostazioni e i progressi restano sul dispositivo.',
+        '<b>Il docente decide:</b> sceglie la lezione e il livello, secondo quanto stabilito dalla scuola e dal PDP.',
+        '<b>Stato attuale:</b> gli strumenti sono in anteprima, visibili solo ai dispositivi abilitati; è in corso il confronto con la Responsabile della Protezione dei Dati per l\'uso da parte degli studenti.'
+      ],
+      nota: 'Se ha provato i livelli di lettura, la pagina è già stata rimessa come prima.' }
+  ];
+
+  var app = $('app'), sito = $('sito'), elenco = $('elenco'), corrente = -1, vistaAttiva = null;
+  var spunte = {};
+  try { spunte = JSON.parse(sessionStorage.getItem('visita-spunte') || '{}') || {}; } catch (e) { spunte = {}; }
+  function salvaSpunte() { try { sessionStorage.setItem('visita-spunte', JSON.stringify(spunte)); } catch (e) {} }
+
+  /* una pagina nuova a ogni cambio, anche quando cambia solo il frammento (#p=...) */
+  function carica(url) {
+    vistaAttiva = url;
+    $('dove').textContent = url; $('dove').title = url;
+    $('nuova').href = url;
+    sito.src = 'about:blank';
+    setTimeout(function () { sito.src = url; }, 40);
+  }
+
+  /* rimette la lettura com'era, senza che si veda */
+  function ripristinaLettura() {
+    var f = document.createElement('iframe');
+    f.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none';
+    f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1;
+    f.onload = function () { setTimeout(function () { if (f.parentNode) f.parentNode.removeChild(f); }, 300); };
+    f.src = DEMO + '#p=0';
+    document.body.appendChild(f);
+  }
+
+  function costruisci() {
+    elenco.innerHTML = '';
+    TAPPE.forEach(function (p, i) {
+      var li = document.createElement('li'); li.id = 'tappa-' + i;
+      var h = '<button type="button" class="capo" data-i="' + i + '" aria-expanded="false"><span class="n">' + (i + 1) + '</span><span class="t">' + p.t + '<span class="m">' + p.m + '</span></span></button><div class="corpo">';
+      h += '<p>' + p.intro + '</p>';
+      if (p.viste) {
+        h += '<div class="viste" role="group" aria-label="Pagine di questa tappa">' + p.viste.map(function (v, k) { return '<button type="button" data-v="' + k + '" aria-pressed="false">' + v[0] + '</button>'; }).join('') + '</div>';
+      }
+      h += '<ul>' + p.azioni.map(function (a, j) {
+        var k = i + '.' + j;
+        return '<li><label><input type="checkbox" data-k="' + k + '"' + (spunte[k] ? ' checked' : '') + '/><span>' + a + '</span></label></li>';
+      }).join('') + '</ul>';
+      if (p.nota) h += '<div class="avviso">' + p.nota + '</div>';
+      h += '</div>';
+      li.innerHTML = h; elenco.appendChild(li);
+    });
+  }
+
+  function aggiornaStato() {
+    TAPPE.forEach(function (p, i) {
+      var li = $('tappa-' + i), tutte = p.azioni.length && p.azioni.every(function (a, j) { return spunte[i + '.' + j]; });
+      li.classList.toggle('attiva', i === corrente);
+      li.classList.toggle('fatta', !!tutte && i !== corrente);
+      li.querySelector('.capo').setAttribute('aria-expanded', i === corrente ? 'true' : 'false');
+      var vs = li.querySelectorAll('.viste button');
+      for (var k = 0; k < vs.length; k++) vs[k].setAttribute('aria-pressed', i === corrente && p.viste && p.viste[k][1] === vistaAttiva ? 'true' : 'false');
+    });
+    var fatte = 0; TAPPE.forEach(function (p, i) { if (i < corrente) fatte++; });
+    $('barra').style.width = (corrente < 0 ? 0 : Math.round(((corrente + 1) / TAPPE.length) * 100)) + '%';
+    $('conta').textContent = 'Passo ' + (corrente + 1) + ' di ' + TAPPE.length;
+    $('indietro').disabled = corrente <= 0;
+    $('avanti').textContent = corrente >= TAPPE.length - 1 ? 'Fine ✓' : 'Avanti →';
+  }
+
+  function vai(i, nonCaricare) {
+    if (i < 0 || i >= TAPPE.length) return;
+    var prima = corrente >= 0 ? TAPPE[corrente] : null;
+    if (prima && prima.ripristina && i !== corrente) ripristinaLettura();
+    corrente = i;
+    var p = TAPPE[i];
+    if (!nonCaricare) carica(p.url); else vistaAttiva = p.url;
+    try { history.replaceState(null, '', location.pathname + location.search + '#passo-' + (i + 1)); } catch (e) {}
+    aggiornaStato();
+    var el = $('tappa-' + i); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+  }
+
+  elenco.addEventListener('click', function (e) {
+    var c = e.target.closest('.capo'); if (c) { vai(+c.getAttribute('data-i')); return; }
+    var v = e.target.closest('.viste button');
+    if (v) { var p = TAPPE[corrente]; carica(p.viste[+v.getAttribute('data-v')][1]); aggiornaStato(); }
+  });
+  elenco.addEventListener('change', function (e) {
+    var k = e.target.getAttribute && e.target.getAttribute('data-k'); if (!k) return;
+    if (e.target.checked) spunte[k] = 1; else delete spunte[k];
+    salvaSpunte(); aggiornaStato();
+  });
+  $('indietro').onclick = function () { vai(corrente - 1); };
+  $('avanti').onclick = function () {
+    if (corrente >= TAPPE.length - 1) { if (TAPPE[corrente].ripristina) ripristinaLettura(); $('conta').textContent = 'Visita completata. Grazie.'; return; }
+    vai(corrente + 1);
+  };
+  $('ricarica').onclick = function () { if (vistaAttiva) carica(vistaAttiva); };
+  $('largo').onclick = function () {
+    var s = app.classList.toggle('stretta'); this.setAttribute('aria-pressed', s ? 'true' : 'false');
+  };
+  window.addEventListener('pagehide', function () { var p = corrente >= 0 && TAPPE[corrente]; if (p && p.ripristina) { try { localStorage.removeItem('aula-supporti'); } catch (e) {} } });
+
+  costruisci();
+  var m = /^#passo-(\d+)$/.exec(location.hash), inizio = m ? Math.min(Math.max(+m[1] - 1, 0), TAPPE.length - 1) : 0;
+  vai(inizio);
+})();
+</script>
+</body>
+</html>

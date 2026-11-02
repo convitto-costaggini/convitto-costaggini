@@ -85,7 +85,7 @@ window.EDUCATORI = (function () {
 
   /* ───── l'area riservata: barra di navigazione + percorso guidato per entrare ───── */
   var PAGINE = [['crea', '➕', 'Crea una lezione', 'aula/studio/docente.html'], ['mie', '📚', 'Le mie lezioni', 'aula/studio/docente.html#mie'], ['archivio', '🗂️', 'Archivio', 'aula/studio/archivio.html']];
-  if (window.AULA_RISERVATO) PAGINE.push(['inclusione', '♿', 'Supporti DSA e BES', 'aula/studio/inclusione.html']);
+  if (window.AULA_RISERVATO) PAGINE.push(['inclusione', '♿', 'Supporti alla lettura', 'aula/studio/inclusione.html']);
   function area(o) {
     var box = document.getElementById('ed-area'), mail = '', attesa = null;
     function q(sel) { return box.querySelector(sel); }

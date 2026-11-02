@@ -712,12 +712,12 @@
 (function () {
   var INDICE = [
     { titolo: 'Chi siamo — Storia del Convitto', pagina: 'il-convitto.html', ancora: '#storia', cat: 'Il Convitto', keywords: ['storia','convitto','costaggini','fondazione','rieti','tradizione','comunità','educante','origine','anni','decenni'] },
-    { titolo: 'Missione e valori', pagina: 'il-convitto.html', ancora: '#mission', cat: 'Il Convitto', keywords: ['missione','valori','sicurezza','eccellenza','responsabilità','cura','formazione','educare'] },
+    { titolo: 'Missione e valori', pagina: 'il-convitto.html', ancora: '#mission', cat: 'Il Convitto', keywords: ['missione','valori','sicurezza','eccellenza','cura','formazione','educare'] },
     { titolo: 'Staff educativo e organigramma', pagina: 'il-convitto.html', ancora: '#staff', cat: 'Il Convitto', keywords: ['staff','rettore','coordinatore','educatore','personale','direzione','organigramma','docenti'] },
     { titolo: 'Cronologia storica', pagina: 'il-convitto.html', ancora: '#cronologia', cat: 'Il Convitto', keywords: ['cronologia','storia','timeline','anni 70','pnrr','modernizzazione','espansione'] },
     { titolo: 'Ristorazione e pasti', pagina: 'servizi.html', ancora: '#ristorazione', cat: 'Servizi', keywords: ['ristorazione','mensa','pasti','colazione','pranzo','cena','merenda','menu','menù','cucina','mangiare','vitto','allergie','intolleranze','dieta','celiaco','celiachia'] },
     { titolo: 'Alloggi e camere', pagina: 'servizi.html', ancora: '#alloggi', cat: 'Servizi', keywords: ['camera','camere','stanza','alloggio','alloggi','singola','doppia','triple','persone','bagno','letto','dormitorio','wifi','wi-fi','armadietto','biancheria','climatizzazione'] },
-    { titolo: 'Studio guidato', pagina: 'servizi.html', ancora: '#studio', cat: 'Servizi', keywords: ['studio','studiare','tutoraggio','compiti','pomeriggio','15.30'] },
+    { titolo: 'Studio guidato', pagina: 'servizi.html', ancora: '#studio', cat: 'Servizi', keywords: ['studio','tutoraggio','compiti','studio pomeridiano','15.30'] },
     { titolo: 'Sport, palestra e benessere', pagina: 'servizi.html', ancora: '#sport', cat: 'Servizi', keywords: ['palestra','sport','calcio','basket','yoga','pilates','tornei','campo','ping pong','calciobalilla','attività','fisico','benessere','pnrr'] },
     { titolo: 'Tecnologia e connettività', pagina: 'servizi.html', ancora: '#tecnologia', cat: 'Servizi', keywords: ['wifi','wi-fi','internet','tecnologia','laboratorio','computer','digitale','pnsd','multimediale','software','alberghiero','pms','lim'] },
     { titolo: 'Salute e assistenza sanitaria', pagina: 'servizi.html', ancora: '#salute', cat: 'Servizi', keywords: ['infermeria','salute','medico','psicologico','emergenza','118','ospedale','farmaci','sanitaria','assistenza','asl'] },
@@ -751,14 +751,14 @@
     { titolo: 'Voci del Personale', pagina: 'voci-del-personale.html', ancora: '', cat: 'Organizzazione', keywords: ['voci','personale','staff','educatori','custodi','cuochi','infermiere','accudienti','testimonianze','audio','interviste','in costruzione'] },
     { titolo: 'Il Costaggini nel Mondo', pagina: 'mondo.html', ancora: '', cat: 'Comunità', keywords: ['mondo','alumni','ex convittori','mappa','estero'] },
     { titolo: 'Da dove vengono i convittori', pagina: 'provenienza.html', ancora: '', cat: 'Comunità', keywords: ['provenienza','province','regioni','da dove vengono','mappa','statistiche'] },
-    { titolo: 'Bullismo e Cyberbullismo', pagina: 'bullismo.html', ancora: '', cat: 'Sicurezza', keywords: ['bullismo','cyberbullismo','molestie','prepotenze','sicurezza','segnalare','aiuto','protezione','genitori','studenti'] },
+    { titolo: 'Bullismo e Cyberbullismo', pagina: 'bullismo.html', ancora: '', cat: 'Sicurezza', keywords: ['bullismo','cyberbullismo','molestie','prepotenze','sicurezza','segnalare','protezione dal bullismo','studenti'] },
     { titolo: 'Come arrivare al Convitto', pagina: 'come-arrivare.html', ancora: '', cat: 'Contatti', keywords: ['come arrivare','indicazioni','autobus','cotral','treno','auto','salaria','roma','biglietti','orari','trasporti','viaggio','raggiungere'] },
     { titolo: 'Alumni — le storie', pagina: 'alumni.html', ancora: '', cat: 'Comunità', keywords: ['alumni','ex convittori','storie','testimonianze','ricordi','passato'] },
     { titolo: "L'Anno al Convitto", pagina: 'anno.html', ancora: '', cat: 'Il Convitto', keywords: ['anno','scolastico','calendario','eventi','vissuto'] },
     { titolo: 'Calendario Eventi', pagina: 'calendario.html', ancora: '', cat: 'Notizie', keywords: ['calendario','eventi','open day','feste','uscite','concerti','appuntamenti'] },
     { titolo: 'La Nostra Comunità', pagina: 'comunita.html', ancora: '', cat: 'Comunità', keywords: ['comunità','alumni','muro dei ricordi','lab musicale','vinile','solidarietà'] },
     { titolo: 'Cookie Policy', pagina: 'cookie-policy.html', ancora: '', cat: 'Trasparenza', keywords: ['cookie','policy','privacy','profilazione'] },
-    { titolo: 'Domanda di Ammissione', pagina: 'domanda-ammissione.html', ancora: '', cat: 'Ammissione', keywords: ['domanda','ammissione','iscrizione','modulo','online','segreteria','compilare'] },
+    { titolo: 'Domanda di Ammissione', pagina: 'domanda-ammissione.html', ancora: '', cat: 'Ammissione', keywords: ['domanda','ammissione','iscrizione','modulo','iscrizione online','segreteria','compilare'] },
     { titolo: 'Gli Educatori', pagina: 'educatori.html', ancora: '', cat: 'Il Convitto', keywords: ['educatori','staff','ccnl','competenze','personale','notte','notturna','sorveglianza','24 ore su 24','turno di notte'] },
     { titolo: 'Il Convitto fa per me?', pagina: 'fa-per-me.html', ancora: '', cat: 'Orientamento', keywords: ['fa per me','quiz','scelta','giusta','vita convittuale','decidere'] },
     { titolo: 'Per i Genitori', pagina: 'genitori.html', ancora: '', cat: 'Famiglie', keywords: ['genitori','famiglie','famiglia','vicini','informazioni','dsa','bes','dislessia','disturbi di apprendimento','bisogni educativi speciali'] },
@@ -1144,4 +1144,3 @@
   heroBox.style.setProperty('--hero-icon-opacity', isSatellite ? '.7' : '1');
   heroBox.style.setProperty('--hero-icon-scale', isSatellite ? '.82' : '1');
 })();
-

@@ -77,7 +77,7 @@ window.LINGUE_SITO = (function () {
     if (btn) btn.classList.add('va');
     function di() {
       var u = new SpeechSynthesisUtterance(String(testo).replace(/[¿¡…]/g, ' ').replace(/\s+/g, ' '));
-      u.lang = cod === 'it' ? 'it-IT' : lingua(cod).voce; u.rate = opz.rate || .9; if (opz.pitch) u.pitch = opz.pitch;
+      u.lang = cod === 'it' ? 'it-IT' : lingua(cod).voce; u.rate = opz.rate || (window.AULA_SUPPORTI && AULA_SUPPORTI.ha('vl') ? .72 : .9); if (opz.pitch) u.pitch = opz.pitch;
       var v = cod === 'it' ? null : voce(cod); if (v) u.voice = v;
       u.onend = u.onerror = function (ev) {
         if (corrente === u) corrente = null; if (btn) btn.classList.remove('va'); if (opz.fine) opz.fine();

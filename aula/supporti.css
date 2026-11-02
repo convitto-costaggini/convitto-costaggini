@@ -1,0 +1,67 @@
+/* Supporti per la lettura (Aula).
+   Le scelte si applicano con classi su <html>: nessuna pagina porta etichette.
+   Tutto resta sul dispositivo di chi legge. */
+
+/* ───── il pulsante e il pannello (misure in px: non seguono lo zoom della pagina) ───── */
+#sup-btn{position:fixed;left:.7rem;bottom:.7rem;z-index:2147483100;display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;min-width:48px;padding:0 .8rem;border-radius:99px;border:2px solid #2C3E2D;background:#fff;color:#2C3E2D;font:800 17px/1 'Atkinson Hyperlegible',Arial,sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.22)}
+#sup-btn .sup-et{display:none;font-size:15px}
+@media (min-width:560px){#sup-btn .sup-et{display:inline}#sup-btn{padding:0 1.05rem}}
+#sup-btn[aria-expanded="true"]{background:#2C3E2D;color:#fff}
+#sup-btn:focus-visible,#sup-pann button:focus-visible,#sup-pann input:focus-visible{outline:3px solid #B8922A;outline-offset:2px}
+
+#sup-pann{position:fixed;left:.7rem;bottom:4.5rem;z-index:2147483100;width:min(380px,calc(100vw - 1.4rem));max-height:calc(100vh - 6rem);max-height:calc(100dvh - 6rem);overflow:auto;background:#fff;color:#1A1A18;border:2px solid #2C3E2D;border-radius:18px;padding:16px 16px 14px;box-shadow:0 12px 40px rgba(0,0,0,.3);font:16px/1.5 'Atkinson Hyperlegible',Arial,sans-serif;letter-spacing:0;word-spacing:0}
+#sup-pann[hidden]{display:none}
+#sup-pann *{font-family:inherit;letter-spacing:inherit;word-spacing:inherit;box-sizing:border-box}
+#sup-pann .sup-testa{display:flex;align-items:flex-start;justify-content:space-between;gap:.6rem;margin-bottom:6px}
+#sup-pann h2{font:800 19px/1.25 'Atkinson Hyperlegible',Arial,sans-serif;margin:0;color:#2C3E2D}
+#sup-pann .sup-x{flex:0 0 auto;width:40px;height:40px;border-radius:50%;border:2px solid #D9CEB5;background:#fff;font-size:18px;cursor:pointer;color:#2C3E2D}
+#sup-pann h3{font:800 12px/1.2 'Atkinson Hyperlegible',Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a6c14;margin:16px 0 6px}
+#sup-pann .sup-riga{display:flex;align-items:center;justify-content:space-between;gap:.8rem;min-height:46px;padding:4px 0;border-bottom:1px dashed #EDE5D4}
+#sup-pann .sup-riga>span{flex:1;font-size:16px}
+#sup-pann .sup-riga small{display:block;font-size:13px;color:#4A4840;line-height:1.35}
+#sup-pann .sup-tasto{position:relative;flex:0 0 auto;min-width:58px;min-height:36px;border-radius:99px;border:2px solid #8f8f8f;background:#fff;color:#1A1A18;font:800 14px 'Atkinson Hyperlegible',Arial,sans-serif;cursor:pointer;padding:0 .8rem}
+#sup-pann .sup-tasto[aria-pressed="true"]{background:#2C3E2D;border-color:#2C3E2D;color:#fff}
+#sup-pann .sup-scelte{display:flex;flex-wrap:wrap;gap:.45rem;margin:4px 0 2px}
+#sup-pann .sup-scelte button{min-height:44px;min-width:48px;padding:0 .9rem;border-radius:12px;border:2px solid #8f8f8f;background:#fff;color:#1A1A18;font:800 15px 'Atkinson Hyperlegible',Arial,sans-serif;cursor:pointer}
+#sup-pann .sup-scelte button[aria-pressed="true"]{border-color:#2C3E2D;background:#2C3E2D;color:#fff}
+#sup-pann .sup-scelte .sw{display:inline-block;width:14px;height:14px;border-radius:50%;border:1px solid #666;margin-right:.4rem;vertical-align:-1px}
+#sup-pann .sup-az{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:12px}
+#sup-pann .sup-az button{min-height:44px;padding:0 1rem;border-radius:12px;border:2px solid #2C3E2D;background:#fff;color:#2C3E2D;font:800 15px 'Atkinson Hyperlegible',Arial,sans-serif;cursor:pointer}
+#sup-pann .sup-az .pieno{background:#2C3E2D;color:#fff}
+#sup-pann .sup-nota{font-size:13px;color:#4A4840;margin:12px 0 0;line-height:1.45}
+#sup-toast{position:fixed;left:50%;bottom:5.2rem;transform:translateX(-50%);z-index:2147483200;background:#2C3E2D;color:#fff;padding:.7rem 1.1rem;border-radius:14px;font:800 15px/1.35 'Atkinson Hyperlegible',Arial,sans-serif;max-width:min(92vw,420px);text-align:center;pointer-events:none}
+#sup-toast[hidden]{display:none}
+
+/* ───── carattere ad alta leggibilità ───── */
+html.sup-car .st{--st-f:'Atkinson Hyperlegible',Arial,sans-serif!important}
+html.sup-car body>*:not(#sup-pann):not(#sup-btn):not(#sup-toast):not(#sup-riga):not(#sup-tinta),
+html.sup-car body>*:not(#sup-pann):not(#sup-btn):not(#sup-toast):not(#sup-riga):not(#sup-tinta) *:not(code):not(pre):not(kbd){font-family:'Atkinson Hyperlegible',Arial,sans-serif!important}
+
+/* ───── grandezza del testo: tutto ciò che è in rem cresce insieme ───── */
+html.sup-z1{font-size:112.5%}
+html.sup-z2{font-size:125%}
+html.sup-z3{font-size:143.75%}
+
+/* ───── più spazio fra lettere, parole e righe ───── */
+html.sup-sp body>*:not(#sup-pann):not(#sup-btn):not(#sup-toast):not(#sup-riga):not(#sup-tinta){letter-spacing:.04em;word-spacing:.14em}
+html.sup-sp body>*:not(#sup-pann):not(#sup-btn):not(#sup-toast):not(#sup-riga):not(#sup-tinta) :where(p,li,label,td,th,summary,dd,blockquote,span,button,a,.st){line-height:1.85!important}
+
+/* ───── colori: una velina trasparente che tinge la pagina (il bianco accecante sparisce) ───── */
+#sup-tinta{position:fixed;inset:0;z-index:2147483000;pointer-events:none;mix-blend-mode:multiply;background:transparent}
+html.sup-cr #sup-tinta{background:#ffefc2}
+html.sup-az #sup-tinta{background:#d6e8ff}
+html.sup-me #sup-tinta{background:#d9f2e1}
+html.sup-ro #sup-tinta{background:#fbdfe6}
+
+/* ───── meno animazioni (lo stato finale resta: niente resta nascosto) ───── */
+html.sup-ca *,html.sup-ca *::before,html.sup-ca *::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
+html.sup-ca .st-coriandoli{display:none!important}
+
+/* ───── meno distrazioni ───── */
+html.sup-fo #fab-wrap,html.sup-fo #cc-fab,html.sup-fo #tr-fab,html.sup-fo #fab-top,html.sup-fo .st-anteprima,html.sup-fo .st-punti{display:none!important}
+
+/* ───── riga guida ───── */
+#sup-riga{position:fixed;left:0;right:0;top:40%;height:3.4em;z-index:2147483050;pointer-events:none;box-shadow:0 0 0 100vmax rgba(20,20,20,.4);border-top:2px solid rgba(184,146,42,.95);border-bottom:2px solid rgba(184,146,42,.95);font-size:16px}
+#sup-riga[hidden]{display:none}
+
+@media print{#sup-btn,#sup-pann,#sup-toast,#sup-riga,#sup-tinta{display:none!important}html.sup-z1,html.sup-z2,html.sup-z3{font-size:100%}}

@@ -508,9 +508,9 @@ window.FORMATI = (function () {
         '<div class="fm-esito" aria-live="polite"></div></div>';
       R.querySelector('[data-schermo]').onclick = schermo;
       if (conf.tempo) {
-        var fine = Date.now() + conf.tempo * 1000, barra = R.querySelector('.fm-tempo i');
+        var tmp = conf.tempo * (window.AULA_SUPPORTI && AULA_SUPPORTI.ha('te') ? 1.5 : 1), fine = Date.now() + tmp * 1000, barra = R.querySelector('.fm-tempo i');
         timer = setInterval(function () {
-          var resto = fine - Date.now(); barra.style.width = Math.max(0, resto / (conf.tempo * 10)) + '%';
+          var resto = fine - Date.now(); barra.style.width = Math.max(0, resto / (tmp * 10)) + '%';
           if (resto <= 0) { clearInterval(timer); if (!finita) svela('⏰ Tempo scaduto!'); }
         }, 200);
       }
@@ -685,6 +685,7 @@ window.FORMATI = (function () {
     R.querySelector('.fm-via').onclick = function () { R.querySelector('#fm-tempi').hidden = false; this.parentNode.remove(); R.querySelector('[data-s]').focus(); };
     R.querySelectorAll('[data-s]').forEach(function (b) { b.onclick = function () { via(+b.getAttribute('data-s')); }; });
     function via(sec) {
+      if (window.AULA_SUPPORTI && AULA_SUPPORTI.ha('te')) sec = Math.round(sec * 1.5);
       var mazzo = mescola(pool), k = 0, giuste = 0, errori = [], fineT = Date.now() + sec * 1000, finito = false, timer;
       R.innerHTML = '<div class="st-palco"><div class="fm-crono-box"><div class="fm-crono"><div class="fm-crono-n"><span id="fm-sec">' + sec + '</span><small>secondi</small></div><div class="fm-crono-p">✅ <b id="fm-punti">0</b></div></div><div class="fm-tempo"><i></i></div></div><div id="fm-q"></div></div>';
       R.scrollIntoView({ behavior: 'smooth', block: 'start' });

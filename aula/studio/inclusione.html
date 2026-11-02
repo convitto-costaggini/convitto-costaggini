@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/cantiere.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Supporti per DSA e BES – Sala studio | Convitto "Costaggini" — Rieti</title>
+  <meta name="description" content="Per docenti ed educatori: link che aprono la lezione già impostata con i supporti per la lettura, senza etichette e senza dati degli studenti."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/studio/studio.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <style>
+  .in-prof{display:grid;gap:.6rem;margin:.6rem 0}
+  .in-prof .dc-spunta{margin-top:0}
+  .in-prof input[type=radio]{accent-color:var(--bosco)}
+  .in-prof .dc-spunta:has(input:checked){border-color:var(--bosco);background:var(--av)}
+  .in-gruppo{font:800 .72rem var(--fu);letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin:1.1rem 0 .2rem}
+  .in-scelte{display:flex;flex-wrap:wrap;gap:.45rem;margin:.3rem 0}
+  .in-scelte label{display:inline-flex;align-items:center;gap:.4rem;border:2px solid var(--av3);border-radius:99px;padding:.4rem .9rem;background:#fff;cursor:pointer;font:700 .9rem var(--fu);min-height:44px;margin:0!important;text-transform:none!important;letter-spacing:0!important;color:var(--bosco)!important}
+  .in-scelte label:has(input:checked){border-color:var(--bosco);background:var(--bosco);color:#fff!important}
+  .in-scelte input{accent-color:var(--oro)}
+  .in-misure{list-style:none;padding:0;margin:.6rem 0}
+  .in-misure li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:.2rem .9rem;padding:.55rem 0;border-bottom:1px dashed var(--av3)}
+  .in-misure li b{color:var(--bosco)}
+  @media (max-width:560px){.in-misure li{grid-template-columns:1fr}}
+  </style>
+</head>
+<body data-page="studio">
+<div class="st-anteprima">Sala studio del Convitto · area docenti ed educatori</div>
+<script src="nav-header.min.js"></script>
+<main id="main" class="st dc">
+  <section class="st-hero">
+    <div class="w">
+      <p class="lbl">Per docenti ed educatori</p>
+      <h1><span class="ic" aria-hidden="true">♿</span>Supporti per DSA e BES</h1>
+      <p id="in-presenta" hidden>Una sola Aula, comoda per tutti. Chi ha un PDP riceve un normale link che apre la pagina <b>già impostata</b>: nessuna etichetta sullo schermo, nessun elenco di nomi sul sito.</p>
+    </div>
+  </section>
+
+  <div class="st-palco">
+    <div id="ed-area"></div>
+    <div id="ed-dentro" hidden>
+
+      <div class="st-card">
+        <h2>Come funziona</h2>
+        <ol class="fm-passi" style="margin:.4rem 0 0">
+          <li>Tutti gli studenti trovano in ogni pagina il pulsante <b>«Aa Leggi a modo tuo»</b>: carattere, grandezza, spazi, colori, voce. Lo può usare chiunque.</li>
+          <li>Qui sotto scegliete i supporti e ottenete <b>un link (e un QR)</b> che apre la pagina già impostata. Quello che vede lo studente è una pagina comoda, non un avviso.</li>
+          <li>Il link non contiene né il nome né la diagnosi dello studente. Il sito <b>non registra chi usa quale impostazione</b>: resta sul dispositivo di chi legge.</li>
+        </ol>
+      </div>
+
+      <div class="st-card">
+        <div class="dc-passo"><b>1</b><h2>Quale pagina?</h2></div>
+        <label for="in-dest">Pagina da aprire</label>
+        <select id="in-dest">
+          <option value="lezione">Una lezione della Sala studio (incollo il link o il codice)</option>
+          <option value="studio">La Sala studio (pagina iniziale)</option>
+          <option value="lingue">Le lingue: lezioni</option>
+          <option value="lingue-home">Le lingue: pagina iniziale</option>
+          <option value="demo">La lezione di prova (per vedere l'effetto)</option>
+        </select>
+        <div id="in-lez-box">
+          <label for="in-lez">Link o codice della lezione</label>
+          <input type="text" id="in-lez" maxlength="2400" placeholder="Il link della lezione oppure il codice di 6 lettere" autocomplete="off" spellcheck="false"/>
+          <p class="st-nota" style="margin:.3rem 0 0">Il link e il codice li trovate in <a href="aula/studio/docente.html#mie">Le mie lezioni</a>.</p>
+        </div>
+      </div>
+
+      <div class="st-card">
+        <div class="dc-passo"><b>2</b><h2>Quali supporti?</h2></div>
+        <p class="st-sot">Partite da un livello e, se serve, aggiustate. Le indicazioni valide sono quelle del <b>PDP</b>: qui trovate gli strumenti.</p>
+        <div class="in-prof" id="in-prof" role="radiogroup" aria-label="Livello di supporto"></div>
+        <details style="margin-top:.6rem" id="in-pers"><summary>Personalizza i singoli supporti</summary>
+          <div id="in-ctrl"></div>
+        </details>
+      </div>
+
+      <div class="st-card">
+        <div class="dc-passo"><b>3</b><h2>Il link per lo studente</h2></div>
+        <div class="dc-qr">
+          <canvas id="in-qr" aria-label="Codice QR del link"></canvas>
+          <div class="lk">
+            <label for="in-link">Link</label>
+            <input type="text" id="in-link" readonly/>
+            <div class="st-azioni">
+              <button type="button" class="st-btn oro" id="in-copia">📋 Copia il link</button>
+              <a class="st-btn pieno" id="in-prova" href="#" target="_blank" rel="noopener">👁️ Provalo</a>
+            </div>
+            <p class="st-nota" id="in-nota" aria-live="polite" style="margin:.6rem 0 0"></p>
+          </div>
+        </div>
+        <details style="margin-top:1rem"><summary>Computer condiviso? Il link per rimettere tutto come prima</summary>
+          <p class="st-nota">Le impostazioni restano sul dispositivo. Su un computer usato da più studenti, aprite questo link a fine lavoro: ripristina la pagina standard.</p>
+          <input type="text" id="in-ripr" readonly aria-label="Link di ripristino"/>
+        </details>
+      </div>
+
+      <div class="st-card">
+        <h2>Le misure del PDP e dove trovarle</h2>
+        <p class="st-sot">La scelta delle misure spetta al Consiglio di classe e resta scritta nel PDP: l'Aula offre gli strumenti per applicarle senza mettere nessuno in evidenza.</p>
+        <ul class="in-misure">
+          <li><b>Sintesi vocale</b><span>Il pulsante 🔊 su ogni scheda; «Voce più lenta» nel pannello; «Leggi quello che ho selezionato» per qualsiasi testo.</span></li>
+          <li><b>Carattere e impaginazione</b><span>Carattere ad alta leggibilità, testo più grande, più spazio fra lettere e righe, pagina colorata (crema, azzurro, menta, rosa).</span></li>
+          <li><b>Mappe concettuali</b><span>«Costruisci la mappa» nello studio; la mappa si stampa dalla pagina <a href="aula/studio/archivio.html">Verifica</a> come strumento compensativo.</span></li>
+          <li><b>Tempi più lunghi</b><span>«Più tempo» nelle sfide con il cronometro; nella prova stampata si concede il tempo previsto dal PDP.</span></li>
+          <li><b>Verifica adattata</b><span>La versione facilitata: meno domande, due sole risposte, parole da inserire già elencate. Sul foglio non c'è scritto «facilitata».</span></li>
+          <li><b>Valutazione</b><span>Le domande sono a risposta chiusa o con parole già date: l'ortografia e la velocità di lettura pesano meno del contenuto.</span></li>
+        </ul>
+        <p class="st-nota">Per una verifica stampata: aprite una lezione dall'<a href="aula/studio/archivio.html">Archivio</a> o da <a href="aula/studio/docente.html#mie">Le mie lezioni</a>, premete <b>📝 Verifica</b> e spuntate <b>«Anche la versione facilitata»</b>.</p>
+      </div>
+
+    </div>
+  </div>
+</main>
+<script src="nav.min.js"></script>
+<script src="supabase.js"></script>
+<script src="aula/lingue/qrcode.js"></script>
+<script src="aula/lingue/finestra.js"></script>
+<script src="aula/studio/studio.js"></script>
+<script src="aula/studio/demo.js"></script>
+<script src="aula/studio/educatori.js"></script>
+<script>
+(function () {
+  'use strict';
+  var E = window.EDUCATORI, S = window.AULA_SUPPORTI, esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
+  var ORIGINE = location.origin;
+  var NOMI = { '0': 'Nessun supporto', '1': 'Supporto 1', '2': 'Supporto 2', '3': 'Supporto 3' };
+  var DESC = {
+    '0': 'La pagina si apre come per tutti.',
+    '1': 'Carattere ad alta leggibilità, testo un po\' più grande, più spazio, pagina color crema.',
+    '2': 'Come il Supporto 1, con testo più grande, meno animazioni, meno distrazioni e più tempo nelle sfide con il cronometro.',
+    '3': 'Come il Supporto 2, con il testo molto grande e la voce più lenta.'
+  };
+  var profilo = '1', stato = S.leggiLista(S.PROFILI['1']);
+
+  function presenta() { $('in-presenta').hidden = !E.entrato(); }
+  presenta();
+  E.area({ pagina: 'inclusione', dentro: $('ed-dentro'), alCambio: presenta });
+
+  /* ───── i livelli ───── */
+  $('in-prof').innerHTML = ['0', '1', '2', '3'].map(function (n) {
+    return '<label class="dc-spunta"><input type="radio" name="in-p" value="' + n + '"' + (n === profilo ? ' checked' : '') + '/><span><b>' + NOMI[n] + '</b><small>' + DESC[n] + '</small></span></label>';
+  }).join('');
+
+  /* ───── i singoli supporti (stessa lista del pannello degli studenti) ───── */
+  function disegnaControlli() {
+    var gruppi = {}; S.ELENCO.forEach(function (e) { (gruppi[e.g] = gruppi[e.g] || []).push(e); });
+    var h = '<p class="in-gruppo">Grandezza del testo</p><div class="in-scelte" role="radiogroup" aria-label="Grandezza del testo">' +
+      S.ZETE.map(function (t, i) { return '<label><input type="radio" name="in-z" value="' + i + '"' + (stato.z === i ? ' checked' : '') + '/> ' + t + '</label>'; }).join('') + '</div>' +
+      '<p class="in-gruppo">Colore della pagina</p><div class="in-scelte" role="radiogroup" aria-label="Colore della pagina">' +
+      Object.keys(S.TEMI).map(function (t) { return '<label><input type="radio" name="in-t" value="' + t + '"' + (stato.tema === t ? ' checked' : '') + '/> ' + S.TEMI[t] + '</label>'; }).join('') + '</div>';
+    Object.keys(gruppi).forEach(function (g) {
+      h += '<p class="in-gruppo">' + esc(g) + '</p><div class="in-scelte">' + gruppi[g].map(function (e) {
+        return '<label title="' + esc(e.d) + '"><input type="checkbox" data-k="' + e.k + '"' + (stato[e.k] ? ' checked' : '') + '/> ' + esc(e.t) + '</label>';
+      }).join('') + '</div>';
+    });
+    $('in-ctrl').innerHTML = h;
+  }
+  disegnaControlli();
+
+  function daControlli() {
+    var s = S.leggiLista([]);
+    $('in-ctrl').querySelectorAll('[data-k]').forEach(function (c) { s[c.getAttribute('data-k')] = c.checked ? 1 : 0; });
+    var z = $('in-ctrl').querySelector('[name="in-z"]:checked'), t = $('in-ctrl').querySelector('[name="in-t"]:checked');
+    s.z = z ? +z.value : 0; s.tema = t ? t.value : '';
+    return s;
+  }
+
+  /* ───── la pagina di destinazione ───── */
+  function destinazione() {
+    var d = $('in-dest').value, v = $('in-lez').value.trim();
+    if (d === 'studio') return { u: new URL('/aula/studio/', ORIGINE) };
+    if (d === 'lingue') return { u: new URL('/aula/lingue/lezioni.html', ORIGINE) };
+    if (d === 'lingue-home') return { u: new URL('/aula/lingue/', ORIGINE) };
+    if (d === 'demo') return { u: new URL('/aula/studio/lezione.html?c=DEMO', ORIGINE) };
+    if (!v) return { errore: 'Incolla il link della lezione o scrivi il suo codice di 6 lettere.' };
+    var codice = v.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (/^[A-Z2-9]{6}$/.test(codice)) return { u: new URL('/aula/studio/lezione.html?c=' + codice, ORIGINE) };
+    try {
+      var u = new URL(v, ORIGINE);
+      if (u.origin !== ORIGINE || !/^\/aula\/studio\/lezione\.html$/.test(u.pathname)) return { errore: 'Questo non sembra il link di una lezione della Sala studio.' };
+      return { u: u };
+    } catch (e) { return { errore: 'Il link non è valido: copialo di nuovo per intero.' }; }
+  }
+
+  function aggiorna() {
+    var d = destinazione(), quale = profilo;
+    $('in-lez-box').hidden = $('in-dest').value !== 'lezione';
+    var link = $('in-link'), nota = $('in-nota'), cv = $('in-qr'), prova = $('in-prova');
+    if (d.errore) { link.value = ''; nota.textContent = d.errore; cv.style.visibility = 'hidden'; prova.removeAttribute('href'); $('in-ripr').value = ''; return; }
+    var u = new URL(d.u.href); u.searchParams.delete('p'); u.searchParams.delete('s');
+    var lista = S.comporta(stato);
+    if (!lista) u.searchParams.set('p', '0');
+    else if (S.PROFILI[quale] && S.comporta(S.leggiLista(S.PROFILI[quale])) === lista) u.searchParams.set('p', quale);
+    else u.searchParams.set('s', lista);
+    var url = u.href;
+    link.value = url; prova.href = url;
+    var r = new URL(d.u.href); r.searchParams.delete('p'); r.searchParams.delete('s'); r.searchParams.set('p', '0'); $('in-ripr').value = r.href;
+    if (url.length <= 2200) { cv.style.visibility = ''; E.qr(url, cv, 5); nota.textContent = 'Lo studente apre il link (o inquadra il QR) e trova la pagina già impostata. Nessuna etichetta, nessun dato.'; }
+    else { cv.style.visibility = 'hidden'; nota.textContent = 'Questo link contiene tutta la lezione ed è troppo lungo per un QR: mandatelo con un messaggio o dal registro.'; }
+  }
+
+  $('in-prof').addEventListener('change', function (e) {
+    var n = e.target.value; profilo = n;
+    stato = n === '0' ? S.leggiLista([]) : S.leggiLista(S.PROFILI[n]);
+    disegnaControlli(); aggiorna();
+  });
+  $('in-ctrl').addEventListener('change', function () {
+    stato = daControlli();
+    var uguale = ['1', '2', '3'].filter(function (n) { return S.comporta(S.leggiLista(S.PROFILI[n])) === S.comporta(stato); })[0];
+    profilo = uguale || (S.comporta(stato) ? 'x' : '0');
+    document.querySelectorAll('[name="in-p"]').forEach(function (r) { r.checked = r.value === profilo; });
+    aggiorna();
+  });
+  $('in-dest').addEventListener('change', aggiorna);
+  $('in-lez').addEventListener('input', aggiorna);
+  $('in-copia').addEventListener('click', function () {
+    var url = $('in-link').value; if (!url) return STUDIO.toast('Prima scegli la pagina');
+    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).catch(function () { $('in-link').select(); document.execCommand('copy'); });
+    STUDIO.toast('Link copiato 📋');
+  });
+  aggiorna();
+})();
+</script>
+</body>
+</html>

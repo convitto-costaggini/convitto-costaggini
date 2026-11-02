@@ -1,9 +1,10 @@
 /* Anteprima riservata: le novità sul supporto alla lettura (DSA e BES) si vedono
-   solo su un dispositivo abilitato con una seconda chiave, data alla sola Dirigente.
+   su un dispositivo abilitato con la chiave di anteprima di sempre oppure con una seconda chiave (?riservato=).
    Vetrina, non sicurezza: nel codice c'è soltanto l'impronta della chiave. */
 (function () {
   var IMP = '383446f29ee28d9bb53a37bb18dd9a45ee6be3cef31d0b282fe26ba9c7cf28b3', V = 'aula-riservato', d = document.documentElement;
-  function ok() { try { return localStorage.getItem(V) === IMP; } catch (e) { return false; } }
+  var ANT = '2640d251dd7905d0384194808861d58997e11abb112008a838bcab1cf7faed2b'; /* impronta della chiave di anteprima di sempre: apre anche questo */
+  function ok() { try { return localStorage.getItem(V) === IMP || localStorage.getItem('cantiere-anteprima') === ANT; } catch (e) { return false; } }
   window.AULA_RISERVATO = ok();
   if (window.AULA_RISERVATO) d.classList.add('rsv-ok');
   var st = document.createElement('style'); st.textContent = '.rsv[hidden]{display:none!important}';

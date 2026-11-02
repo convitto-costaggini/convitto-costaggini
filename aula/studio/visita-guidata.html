@@ -116,66 +116,66 @@
      ripristina: la tappa cambia l'aspetto della pagina, quindi all'uscita si rimette tutto com'era. */
   var TAPPE = [
     { t: 'Una lezione già pronta', m: 'circa 6 minuti · nessun accesso', url: DEMO,
-      intro: 'È ciò che vedrebbe uno studente sul proprio dispositivo: una lezione di esempio sui principi nutritivi.',
+      intro: 'È ciò che vede uno studente sul proprio dispositivo: una lezione di esempio sui principi nutritivi.',
       azioni: [
-        'Alla domanda «Come vuoi studiare?» scelga <span class="btn">🧭 Percorso guidato</span> e parta dal gancio: una domanda curiosa che apre l\'argomento.',
-        'Su una scheda tocchi <span class="btn">🔊</span>: il testo viene letto ad alta voce.',
-        'Nella tappa <b>Memorizza</b> osservi i trucchi per ricordare: la parola-sigla, il «palazzo della memoria» nel Convitto, la filastrocca.',
-        'Nella tappa <b>Allenati</b> risponda sbagliando apposta: la lezione spiega subito perché.',
-        'Provi le <b>Flashcard</b> e la <b>Sfida finale</b>.'
+        'Alla domanda «Come vuoi studiare?» si sceglie <span class="btn">🧭 Percorso guidato</span> e si parte dal gancio: una domanda curiosa che apre l\'argomento.',
+        'Su una scheda si tocca <span class="btn">🔊</span>: il testo viene letto ad alta voce.',
+        'Nella tappa <b>Memorizza</b> si osservano i trucchi per ricordare: la parola-sigla, il «palazzo della memoria» nel Convitto, la filastrocca.',
+        'Nella tappa <b>Allenati</b> si risponde sbagliando apposta: la lezione spiega subito perché.',
+        'Si provano le <b>Flashcard</b> e la <b>Sfida finale</b>.'
       ] },
     { t: 'La stessa lezione, in altri modi', m: 'circa 3 minuti · nessun accesso', url: DEMO,
-      intro: 'Dalla stessa lezione nascono attività diverse. Torni all\'inizio della lezione e guardi gli altri modi di studiarla.',
+      intro: 'Dalla stessa lezione nascono attività diverse. Si torna all\'inizio della lezione e si guardano gli altri modi di studiarla.',
       azioni: [
-        'Scelga <span class="btn">🔐 Escape room</span>: le domande diventano enigmi da risolvere.',
-        'Scelga <span class="btn">🗺️ Costruisci la mappa</span>: si mettono in ordine le idee chiave.',
-        'Scelga <span class="btn">🏆 Sfida a squadre</span> e prema <span class="btn">⛶ Schermo intero</span>: è la versione pensata per la lavagna interattiva.'
+        'Si sceglie <span class="btn">🔐 Escape room</span>: le domande diventano enigmi da risolvere.',
+        'Si sceglie <span class="btn">🗺️ Costruisci la mappa</span>: si mettono in ordine le idee chiave.',
+        'Si sceglie <span class="btn">🏆 Sfida a squadre</span> e si preme <span class="btn">⛶ Schermo intero</span>: è la versione pensata per la lavagna interattiva.'
       ] },
     { t: 'La verifica, in pochi secondi', m: 'circa 3 minuti · nessun accesso', url: '/aula/studio/verifica.html?c=DEMO',
       intro: 'Dalla lezione di esempio, una prova scritta pronta da stampare. Il docente non scrive nulla: sceglie soltanto che cosa stampare.',
       azioni: [
-        'Scenda fino a <span class="btn">👀 Anteprima</span>: c\'è già il foglio della fila A, con intestazione, sei tipi di domande e punteggio.',
-        'Spunti <span class="btn">♿ Anche la versione facilitata</span> (sezione 3): confronti la fila A con la versione facilitata. Meno domande, 2 sole risposte, parole da inserire già elencate, carattere più grande. Sul foglio non c\'è scritto «facilitata».',
-        'Spunti <span class="btn">🗺️ Anche la mappa della lezione</span>: è una pagina di idee chiave da consegnare durante la prova, se prevista dal PDP.',
-        'Guardi la <b>fila B</b> e le <b>soluzioni</b>, per correggere in fretta.',
-        'Prema <span class="btn">🔀 Altre domande</span>: la verifica cambia in un istante.',
-        'Se vuole, <span class="btn">🖨️ Stampa</span>: su carta o in PDF.'
+        'Si scende fino a <span class="btn">👀 Anteprima</span>: c\'è già il foglio della fila A, con intestazione, sei tipi di domande e punteggio.',
+        'Si spunta <span class="btn">♿ Anche la versione facilitata</span> (sezione 3) e si confronta con la fila A: meno domande, 2 sole risposte, parole da inserire già elencate, carattere più grande. Sul foglio non c\'è scritto «facilitata».',
+        'Si spunta <span class="btn">🗺️ Anche la mappa della lezione</span>: è una pagina di idee chiave da consegnare durante la prova, se prevista dal PDP.',
+        'Si guardano la <b>fila B</b> e le <b>soluzioni</b>, per correggere in fretta.',
+        'Si preme <span class="btn">🔀 Altre domande</span>: la verifica cambia in un istante.',
+        'Se serve, <span class="btn">🖨️ Stampa</span>: su carta o in PDF.'
       ] },
     { t: 'Leggere a modo proprio', m: 'circa 5 minuti · nessun accesso', url: DEMO + '#p=1', ripristina: true,
       viste: [['Livello 1', DEMO + '#p=1'], ['Livello 2', DEMO + '#p=2'], ['Livello 3', DEMO + '#p=3'], ['Pagina standard', DEMO + '#p=0']],
       intro: 'In ogni pagina, per tutti, c\'è il pulsante <span class="btn">Aa Leggi a modo tuo</span> in basso a sinistra. Lo studente trova la pagina già comoda e non vede alcuna etichetta.',
       azioni: [
-        'Guardi la lezione al <b>Livello 1</b>: carattere molto leggibile, testo un po\' più grande, più spazio, fondo color crema.',
-        'Passi al <b>Livello 2</b>: testo più grande, meno animazioni, meno distrazioni, più tempo nelle sfide con il cronometro.',
-        'Passi al <b>Livello 3</b>: testo molto grande e voce più lenta.',
-        'Nella pagina tocchi <span class="btn">Aa Leggi a modo tuo</span>: ogni scelta si può cambiare o togliere.',
-        'Selezioni una frase e tocchi <span class="btn">🔊 Leggi quello che ho selezionato</span>.',
-        'Torni a <b>Pagina standard</b>: la pagina si riapre come per tutti.'
+        'Si guarda la lezione al <b>Livello 1</b>: carattere molto leggibile, testo un po\' più grande, più spazio, fondo color crema.',
+        'Si passa al <b>Livello 2</b>: testo più grande, meno animazioni, meno distrazioni, più tempo nelle sfide con il cronometro.',
+        'Si passa al <b>Livello 3</b>: testo molto grande e voce più lenta.',
+        'Nella pagina si tocca <span class="btn">Aa Leggi a modo tuo</span>: ogni scelta si può cambiare o togliere.',
+        'Si seleziona una frase e si tocca <span class="btn">🔊 Leggi quello che ho selezionato</span>.',
+        'Si torna a <b>Pagina standard</b>: la pagina si riapre come per tutti.'
       ],
       nota: 'Le impostazioni restano soltanto nel dispositivo di chi legge: il sito non le raccoglie. Uscendo da questa tappa la pagina viene rimessa com\'era.' },
     { t: 'Il docente sceglie il livello', m: 'circa 4 minuti · accesso docente', url: '/aula/studio/inclusione.html',
       intro: 'È la pagina in cui il docente prepara il link o il QR da dare allo studente. Se chiede l\'accesso, si entra con la mail della scuola.',
       azioni: [
-        '<b>Passo 1:</b> nel menu scelga <span class="btn">La lezione di prova</span>. Per una lezione vera si incolla il link o il codice di 6 lettere.',
-        '<b>Passo 2:</b> scelga il livello (nessuno, 1, 2 o 3). Se serve, può personalizzare i singoli supporti.',
-        '<b>Passo 3:</b> compaiono il link e il QR. Prema <span class="btn">Provalo</span> per vedere ciò che vedrà lo studente.',
-        'Apra «Computer condiviso?»: contiene il link per rimettere tutto come prima.'
+        '<b>Passo 1:</b> nel menu si sceglie <span class="btn">La lezione di prova</span>. Per una lezione vera si incolla il link o il codice di 6 lettere.',
+        '<b>Passo 2:</b> si sceglie il livello (nessuno, 1, 2 o 3). Se serve, si possono personalizzare i singoli supporti.',
+        '<b>Passo 3:</b> compaiono il link e il QR. Con <span class="btn">Provalo</span> si vede ciò che vedrà lo studente.',
+        'Si apre «Computer condiviso?»: contiene il link per rimettere tutto come prima.'
       ],
       nota: 'Le misure da adottare sono quelle stabilite dalla scuola e scritte nel PDP, condiviso con la famiglia: qui ci sono gli strumenti.' },
     { t: 'Creare una lezione nuova', m: 'circa 8 minuti · accesso docente', url: '/aula/studio/docente.html',
       intro: 'Dal lato del docente o dell\'educatore: da un argomento, o dalla foto di una pagina di libro, a una lezione completa con il suo QR.',
       azioni: [
-        'Entri con la mail istituzionale: scriva la mail, prema <span class="btn">Mandami il codice →</span>, poi scriva il codice ricevuto (6 cifre, valido 10 minuti). Non serve alcuna password.',
-        'Scriva l\'<b>argomento</b>, scelga la materia e l\'anno di corso.',
-        'Se vuole, spunti <span class="btn">🌐 Condividi nell\'Archivio</span>: si può annullare in ogni momento da Modifica.',
-        'Prema <span class="btn">✨ Crea la lezione</span> (si può allegare la foto di una pagina di libro) e attenda un paio di minuti.',
+        'Si entra con la mail istituzionale: si scrive la mail, si preme <span class="btn">Mandami il codice →</span>, poi si scrive il codice ricevuto (6 cifre, valido 10 minuti). Non serve alcuna password.',
+        'Si scrive l\'<b>argomento</b> e si scelgono la materia e l\'anno di corso.',
+        'Se si vuole, si spunta <span class="btn">🌐 Condividi nell\'Archivio</span>: si può annullare in ogni momento da Modifica.',
+        'Si preme <span class="btn">✨ Crea la lezione</span> (si può allegare la foto di una pagina di libro) e si attende un paio di minuti.',
         'Quando è pronta compaiono il <b>QR</b> e un <b>codice di 6 lettere</b>. Poi <span class="btn">📝 Prepara una verifica</span> sulla stessa lezione.'
       ],
       nota: 'Una sola regola: non si fotografano quaderni, verifiche o fogli con nomi o dati degli studenti. Per solo guardare, si può saltare la creazione.' },
     { t: 'Le mie lezioni e l\'Archivio', m: 'circa 3 minuti · nessun accesso', url: '/aula/studio/archivio.html',
       intro: 'L\'Archivio è il punto in cui il lavoro di un docente diventa disponibile per tutti i colleghi.',
       azioni: [
-        'Guardi le cinque lezioni di esempio, per materia e anno.',
+        'Si guardano le cinque lezioni di esempio, per materia e anno.',
         'Accanto a ogni lezione c\'è il pulsante <span class="btn">📝 Verifica</span>.',
         'Una lezione propria si ritrova in <b>Le mie lezioni</b>; da lì, con <b>Modifica</b>, si corregge o si cancella.'
       ],
@@ -183,7 +183,7 @@
     { t: 'In aula, alla lavagna', m: 'circa 5 minuti · nessun accesso', url: DEMO,
       intro: 'Come ogni docente può usare gli strumenti durante la lezione. Gli studenti partecipano a voce o per alzata di mano, senza dispositivi e senza fornire alcun dato.',
       azioni: [
-        'Tra i modi di studiarla scelga <span class="btn">🏆 Sfida a squadre</span>, indichi quante squadre e prema <span class="btn">⛶ Schermo intero</span>.',
+        'Tra i modi di studiarla si sceglie <span class="btn">🏆 Sfida a squadre</span>, si indica quante squadre e si preme <span class="btn">⛶ Schermo intero</span>.',
         'Il docente tocca sulla lavagna la risposta data a voce dalla squadra; il punteggio resta sempre in vista.',
         'Per una lezione propria, <span class="btn">🖥️ QR a tutto schermo</span> è il cartello da proiettare o appendere in sala studio.'
       ] },
@@ -191,18 +191,18 @@
       intro: 'Inglese, francese e spagnolo, costruiti sulle situazioni di lavoro: sala, cucina, pasticceria, accoglienza turistica e bar.',
       viste: [['Ristorante illustrato', '/aula/lingue/illustrato.html'], ['Gli imprevisti', '/aula/lingue/imprevisti.html'], ['Vocabolario', '/aula/lingue/vocabolario.html']],
       azioni: [
-        'Nel <b>ristorante illustrato</b> tocchi un oggetto: se ne ascolta il nome nelle tre lingue. Provi la modalità «Trova l\'oggetto».',
-        'Negli <b>imprevisti</b> scelga come rispondere al cliente: provi una risposta poco cortese e osservi come cambia l\'umore.',
-        'Nel <b>vocabolario</b> trova le frasi di lavoro per ambito, con l\'ascolto.',
-        'In alto, con il pulsante <span class="btn">🌍</span>, scelga la lingua: vale per tutta la sezione.'
+        'Nel <b>ristorante illustrato</b> si tocca un oggetto e se ne ascolta il nome nelle tre lingue. Si prova la modalità «Trova l\'oggetto».',
+        'Negli <b>imprevisti</b> si sceglie come rispondere al cliente: con una risposta poco cortese si osserva come cambia l\'umore.',
+        'Nel <b>vocabolario</b> si trovano le frasi di lavoro per ambito, con l\'ascolto.',
+        'In alto, con il pulsante <span class="btn">🌍</span>, si sceglie la lingua: vale per tutta la sezione.'
       ] },
     { t: 'Le lingue in aula', m: 'circa 5 minuti · accesso docente', url: '/aula/lingue/giochi.html',
       viste: [['Giochi alla LIM', '/aula/lingue/giochi.html'], ['Lezioni guidate', '/aula/lingue/lezioni.html']],
       intro: 'Giochi da proiettare e lezioni pronte per un\'ora.',
       azioni: [
-        'Nei <b>Giochi alla LIM</b> scelga un gioco (per esempio <span class="btn">🃏 Memory</span>) e la lingua, poi <span class="btn">⛶ Schermo intero</span>.',
-        'Nelle <b>Lezioni guidate</b> scelga una lezione e tocchi la scheda <span class="btn">🔒 Docente</span>: la prima volta serve la mail istituzionale e il codice ricevuto.',
-        'Troverà la modalità LIM, le schede da stampare (anche facilitate), la verifica con fila A e B e la scaletta per un\'ora.'
+        'Nei <b>Giochi alla LIM</b> si sceglie un gioco (per esempio <span class="btn">🃏 Memory</span>) e la lingua, poi <span class="btn">⛶ Schermo intero</span>.',
+        'Nelle <b>Lezioni guidate</b> si sceglie una lezione e si tocca la scheda <span class="btn">🔒 Docente</span>: la prima volta servono la mail istituzionale e il codice ricevuto.',
+        'Si trovano la modalità LIM, le schede da stampare (anche facilitate), la verifica con fila A e B e la scaletta per un\'ora.'
       ] },
     { t: 'Per concludere', m: 'circa 2 minuti', url: '/aula/',
       intro: 'Quattro cose da ricordare.',
@@ -212,7 +212,7 @@
         '<b>Il docente decide:</b> sceglie la lezione e il livello, secondo quanto stabilito dalla scuola e dal PDP.',
         '<b>Stato attuale:</b> gli strumenti sono in anteprima, visibili solo ai dispositivi abilitati; è in corso il confronto con la Responsabile della Protezione dei Dati per l\'uso da parte degli studenti.'
       ],
-      nota: 'Se ha provato i livelli di lettura, la pagina è già stata rimessa come prima.' }
+      nota: 'Se sono stati provati i livelli di lettura, la pagina è già stata rimessa come prima.' }
   ];
 
   var app = $('app'), sito = $('sito'), elenco = $('elenco'), corrente = -1, vistaAttiva = null;

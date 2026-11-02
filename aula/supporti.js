@@ -12,6 +12,7 @@
 (function () {
   'use strict';
   if (window.AULA_SUPPORTI) return;
+  if (!window.AULA_RISERVATO) return;
   var CHIAVE = 'aula-supporti', doc = document.documentElement;
 
   /* gli interruttori: sigla, titolo, spiegazione breve, gruppo */

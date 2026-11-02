@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <script src="/cantiere.js"></script>
+  <script src="/aula/riservato.js"></script>
   <script src="/aula/supporti.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <base href="/"/>
@@ -130,6 +131,7 @@
 (function () {
   'use strict';
   var E = window.EDUCATORI, S = window.AULA_SUPPORTI, esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
+  if (!S) { document.body.innerHTML = '<p style="font:18px sans-serif;padding:2rem">Pagina in costruzione.</p>'; return; }
   var ORIGINE = location.origin;
   var NOMI = { '0': 'Nessun supporto', '1': 'Supporto 1', '2': 'Supporto 2', '3': 'Supporto 3' };
   var DESC = {

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <script src="/cantiere.js"></script>
+  <script src="/aula/riservato.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <base href="/"/>
   <meta name="robots" content="noindex, nofollow"/>
@@ -114,7 +115,7 @@
 <nav class="indice" aria-label="Sezioni della visita">
   <div class="w">
     <a href="aula/studio/guida-dirigente.html#breve">In breve</a>
-    <a href="aula/studio/guida-dirigente.html#inclusione">DSA e BES</a>
+    <a class="rsv" hidden href="aula/studio/guida-dirigente.html#inclusione">DSA e BES</a>
     <a href="aula/studio/guida-dirigente.html#comincia">Da dove comincio</a>
     <a href="aula/studio/guida-dirigente.html#pronta">A · Una lezione pronta</a>
     <a href="aula/studio/guida-dirigente.html#verifica">B · La verifica</a>
@@ -155,14 +156,14 @@
       <li><b>Sul foglio non compare la parola «facilitata»</b> e porta la stessa lettera della fila A: lo studente riceve una verifica che sembra quella dei compagni.</li>
       <li><b>La mappa della lezione si stampa con un clic</b>, da usare durante la prova come strumento compensativo, se previsto dal PDP (legge 170/2010).</li>
       <li><b>Nelle lezioni:</b> lettura ad alta voce, carattere ad alta leggibilità, frasi brevi, una idea per volta.</li>
-      <li><b>In ogni pagina, per tutti, il pulsante «Aa Leggi a modo tuo»:</b> carattere, grandezza, spazi, colori, riga guida, voce più lenta, più tempo. Il docente può mandare un link che apre la pagina già impostata, senza etichette.</li>
+      <li class="rsv" hidden><b>In ogni pagina, per tutti, il pulsante «Aa Leggi a modo tuo»:</b> carattere, grandezza, spazi, colori, riga guida, voce più lenta, più tempo. Il docente può mandare un link che apre la pagina già impostata, senza etichette.</li>
     </ul>
-    <a class="via chiaro" href="aula/studio/guida-dirigente.html#inclusione">La parte dedicata a DSA e BES →</a>
-    <a class="via chiaro" href="aula/studio/guida-dirigente.html#verifica">Oppure la verifica: Percorso B →</a>
+    <a class="via chiaro rsv" hidden href="aula/studio/guida-dirigente.html#inclusione">La parte dedicata a DSA e BES →</a>
+    <a class="via chiaro" href="aula/studio/guida-dirigente.html#verifica">Lo veda subito: Percorso B, la verifica →</a>
   </div>
 </section>
 
-<section id="inclusione">
+<section id="inclusione" class="rsv" hidden>
   <div class="etichetta">Inclusione · DSA e BES</div>
   <h2>Una parte dedicata, <em>senza etichette</em></h2>
   <p>Il principio è uno solo: <b>un'unica Aula per tutti</b>. Gli strumenti per gli studenti con un PDP non stanno in una sezione a parte, che metterebbe qualcuno in evidenza davanti ai compagni: sono dentro le stesse pagine, e si attivano con un pulsante che può usare chiunque. Il docente, se vuole, manda un link che apre la pagina <b>già impostata</b>: lo studente trova una pagina comoda, non un avviso.</p>
@@ -387,9 +388,9 @@
   <details><summary>Gli studenti possono vederlo adesso?</summary><p>No. Le sezioni mostrano «Pagina in costruzione» a chiunque non sia abilitato all'anteprima. Il loro eventuale coinvolgimento sarà oggetto di una richiesta di parere distinta alla DPO.</p></details>
   <details><summary>Vengono raccolti dati degli studenti?</summary><p>No. Le lezioni si aprono senza registrazione e i progressi restano soltanto sul dispositivo di chi studia.</p></details>
   <details><summary>Ci sono costi?</summary><p>La consultazione è gratuita. La sola creazione automatica delle lezioni ha un costo a consumo, contenuto e da quantificare; la seconda strada, attraverso un assistente esterno, non ha costi per l'Istituto.</p></details>
-  <details><summary>Lo studente con DSA si accorge di essere trattato in modo diverso?</summary><p>No. Apre un link come tutti gli altri e trova la pagina già comoda; il pulsante «Aa Leggi a modo tuo» è lo stesso per tutta la classe. Sulle verifiche stampate non compare la parola «facilitata».</p></details>
-  <details><summary>Dove vengono salvate le impostazioni di lettura?</summary><p>Soltanto nel dispositivo di chi legge. Il sito non le raccoglie e non sa a chi appartengono. Con «Ripristina tutto» si cancellano; su un computer condiviso basta aprire il link di ripristino che il docente trova nell'area «Supporti DSA e BES».</p></details>
-  <details><summary>Chi decide quali supporti usare?</summary><p>La scuola, attraverso il PDP, condiviso con la famiglia. L'Aula mette a disposizione gli strumenti e il docente sceglie il livello per ciascuno studente, senza scrivere il suo nome sul sito.</p></details>
+  <details class="rsv" hidden><summary>Lo studente con DSA si accorge di essere trattato in modo diverso?</summary><p>No. Apre un link come tutti gli altri e trova la pagina già comoda; il pulsante «Aa Leggi a modo tuo» è lo stesso per tutta la classe. Sulle verifiche stampate non compare la parola «facilitata».</p></details>
+  <details class="rsv" hidden><summary>Dove vengono salvate le impostazioni di lettura?</summary><p>Soltanto nel dispositivo di chi legge. Il sito non le raccoglie e non sa a chi appartengono. Con «Ripristina tutto» si cancellano; su un computer condiviso basta aprire il link di ripristino che il docente trova nell'area «Supporti DSA e BES».</p></details>
+  <details class="rsv" hidden><summary>Chi decide quali supporti usare?</summary><p>La scuola, attraverso il PDP, condiviso con la famiglia. L'Aula mette a disposizione gli strumenti e il docente sceglie il livello per ciascuno studente, senza scrivere il suo nome sul sito.</p></details>
   <details><summary>Come annullo l'abilitazione di questo dispositivo?</summary><p>Apra <a href="aula/studio/?anteprima=esci">questo collegamento</a>: da quel momento il dispositivo vedrà di nuovo «Pagina in costruzione».</p></details>
 </section>
 

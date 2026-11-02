@@ -2,7 +2,7 @@
    AULA · Supporti per la lettura
    Un pannello uguale per tutti: «Rendi la pagina comoda per te».
    Il docente può mandare un link che apre la pagina già impostata
-   (?p=1, ?p=2, ?p=3 oppure ?s=car.z2.sp): il link non dice per chi è.
+   (#p=1, #p=2, #p=3 oppure #s=car.z2.sp): il link non dice per chi è.
    Le scelte restano nel dispositivo (localStorage), il sito non le raccoglie.
    window.AULA_SUPPORTI:
      ha(k)         vero se il supporto k è attivo
@@ -57,15 +57,18 @@
   try { var salvato = JSON.parse(localStorage.getItem(CHIAVE) || 'null'); if (salvato) stato = Object.assign(vuoto(), salvato); } catch (e) {}
   function salva() { try { localStorage.setItem(CHIAVE, JSON.stringify(stato)); } catch (e) {} }
 
-  /* il link del docente: ?p=1|2|3 (0 = ripristina) oppure ?s=elenco; poi sparisce dall'indirizzo */
+  /* il link del docente: #p=1|2|3 (0 = ripristina) oppure #s=elenco, nel frammento dopo il #:
+     il frammento non viene mai inviato al server. Poi sparisce dall'indirizzo. */
   (function () {
-    var u; try { u = new URL(location.href); } catch (e) { return; }
-    var p = u.searchParams.get('p'), s = u.searchParams.get('s');
+    var h = location.hash.replace(/^#/, ''); if (!h) return;
+    var parti = h.split('&'), p = null, s = null, resto = [];
+    parti.forEach(function (x) {
+      if (/^p=/.test(x)) p = x.slice(2); else if (/^s=/.test(x)) s = x.slice(2); else if (x) resto.push(x);
+    });
     if (p === null && s === null) return;
     var lista = p === '0' ? [] : PROFILI[p] ? PROFILI[p] : s ? s.split('.') : null;
     if (lista) { stato = leggiLista(lista); salva(); }
-    u.searchParams.delete('p'); u.searchParams.delete('s');
-    try { history.replaceState(null, '', u.pathname + u.search + u.hash); } catch (e) {}
+    try { history.replaceState(null, '', location.pathname + location.search + (resto.length ? '#' + resto.join('&') : '')); } catch (e) {}
   })();
 
   function applica() {

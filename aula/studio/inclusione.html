@@ -190,19 +190,25 @@
     } catch (e) { return { errore: 'Il link non è valido: copialo di nuovo per intero.' }; }
   }
 
+  /* il supporto sta nel frammento (#): non arriva mai al server. Un eventuale #l=... della lezione resta. */
+  function conFrammento(u, frag) {
+    var x = new URL(u.href), resto = x.hash.replace(/^#/, '').split('&').filter(function (k) { return k && !/^(p|s)=/.test(k); });
+    x.hash = resto.concat(frag).join('&');
+    return x.href;
+  }
+
   function aggiorna() {
     var d = destinazione(), quale = profilo;
     $('in-lez-box').hidden = $('in-dest').value !== 'lezione';
     var link = $('in-link'), nota = $('in-nota'), cv = $('in-qr'), prova = $('in-prova');
     if (d.errore) { link.value = ''; nota.textContent = d.errore; cv.style.visibility = 'hidden'; prova.removeAttribute('href'); $('in-ripr').value = ''; return; }
-    var u = new URL(d.u.href); u.searchParams.delete('p'); u.searchParams.delete('s');
-    var lista = S.comporta(stato);
-    if (!lista) u.searchParams.set('p', '0');
-    else if (S.PROFILI[quale] && S.comporta(S.leggiLista(S.PROFILI[quale])) === lista) u.searchParams.set('p', quale);
-    else u.searchParams.set('s', lista);
-    var url = u.href;
+    var lista = S.comporta(stato), frag;
+    if (!lista) frag = 'p=0';
+    else if (S.PROFILI[profilo] && S.comporta(S.leggiLista(S.PROFILI[profilo])) === lista) frag = 'p=' + profilo;
+    else frag = 's=' + lista;
+    var url = conFrammento(d.u, frag);
     link.value = url; prova.href = url;
-    var r = new URL(d.u.href); r.searchParams.delete('p'); r.searchParams.delete('s'); r.searchParams.set('p', '0'); $('in-ripr').value = r.href;
+    $('in-ripr').value = conFrammento(d.u, 'p=0');
     if (url.length <= 2200) { cv.style.visibility = ''; E.qr(url, cv, 5); nota.textContent = 'Lo studente apre il link (o inquadra il QR) e trova la pagina già impostata. Nessuna etichetta, nessun dato.'; }
     else { cv.style.visibility = 'hidden'; nota.textContent = 'Questo link contiene tutta la lezione ed è troppo lungo per un QR: mandatelo con un messaggio o dal registro.'; }
   }

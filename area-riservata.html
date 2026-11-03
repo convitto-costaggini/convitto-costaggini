@@ -206,6 +206,7 @@
   let schermataCorrente = 'login';
   // ── AVVIO ──
   let inRecovery = /[#&]type=recovery/.test(window.location.hash);
+  const linkScaduto = /[#&]error_code=otp_expired/.test(window.location.hash);
   const OTP_URL = 'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/otp-famiglie';
   // ?anteprima=STU-xxxx dal pannello admin: mostra l'Area come la vede la
   // famiglia di quello studente. Usa la sessione admin della scheda (verificata
@@ -213,7 +214,11 @@
   const ANTEPRIMA = (new URLSearchParams(location.search).get('anteprima') || '').trim().toUpperCase();
   window.addEventListener('load', async () => {
     if (ANTEPRIMA) return avviaAnteprima(ANTEPRIMA);
-    if (inRecovery) {
+    if (linkScaduto) {
+      history.replaceState(null, '', window.location.pathname);
+      mostraSchermata('reset');
+      mostraMsg('Il link per reimpostare la password è scaduto oppure è già stato utilizzato (vale una sola volta). Richiedine uno nuovo qui sotto e aprilo una volta sola.', 'err');
+    } else if (inRecovery) {
       mostraSchermata('nuova-password');
     } else {
       const { data: { session } } = await sb.auth.getSession();

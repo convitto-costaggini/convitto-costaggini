@@ -90,7 +90,7 @@
       <label class="pf-label">Nome (o iniziali) *</label>
       <input class="pf-input" id="pf-name" type="text" placeholder="Es. Marco R." maxlength="40"/>
       <label class="pf-label">Città e Paese *</label>
-      <input class="pf-input" id="pf-city" type="text" placeholder="Es. Dubai, Emirati Arabi" maxlength="60"/>
+      <input class="pf-input" id="pf-city" type="text" placeholder="Es. Dubai, Emirati Arabi Uniti" maxlength="80"/>
       <div class="pf-row" style="margin-top:.9rem">
         <div>
           <label class="pf-label" style="margin-top:0">Tipo di connessione</label>
@@ -107,7 +107,7 @@
       </div>
       <label class="pf-label">Cosa fai oggi? (facoltativo)</label>
       <input class="pf-input" id="pf-role" type="text" placeholder="Es. Chef in hotel 5★" maxlength="80"/>
-      <p style="font-size:.72rem;color:rgba(255,255,255,.35);margin-top:.75rem">* La posizione viene rilevata automaticamente dalla città inserita tramite OpenStreetMap.</p>
+      <p style="font-size:.72rem;color:rgba(255,255,255,.35);margin-top:.75rem">* La posizione è ricavata dalla città scelta nell'elenco del sito, senza servizi esterni.</p>
       <label class="pf-label" for="pf-email">La tua email * <span style="text-transform:none;letter-spacing:0;font-weight:400;opacity:.7">(non viene pubblicata)</span></label>
       <input class="pf-input" id="pf-email" type="email" placeholder="nome@esempio.it" maxlength="200" autocomplete="email"/>
       <p style="font-size:.72rem;color:rgba(255,255,255,.45);margin-top:.35rem;line-height:1.5">Serve solo per confermare la tua scelta, per revocarla e per chiederti fra due anni se vuoi restare sulla mappa.</p>
@@ -119,8 +119,8 @@
         <button class="pf-submit" onclick="submitPin()">Aggiungi 📍</button>
         <button class="pf-cancel" onclick="closeModal()">Annulla</button>
       </div>
-      <div id="pf-loading" style="display:none;text-align:center;margin-top:.75rem;font-size:.8rem;color:rgba(255,255,255,.4)">⏳ Ricerca posizione in corso…</div>
-      <div id="pf-error"   style="display:none;background:rgba(224,112,112,.1);border:1px solid rgba(224,112,112,.3);border-radius:6px;padding:.65rem 1rem;color:#e07070;font-size:.82rem;margin-top:.75rem">⚠️ Città non trovata. Prova con un nome più preciso, es. "Milano, Italia".</div>
+      <div id="pf-loading" style="display:none;text-align:center;margin-top:.75rem;font-size:.8rem;color:rgba(255,255,255,.4)">⏳ Invio in corso…</div>
+      <div id="pf-error"   style="display:none;background:rgba(224,112,112,.1);border:1px solid rgba(224,112,112,.3);border-radius:6px;padding:.65rem 1rem;color:#e07070;font-size:.82rem;margin-top:.75rem">⚠️ Città non trovata. Scegli una città dall'elenco che compare mentre scrivi; se la tua non c'è, indica la città più vicina.</div>
       <div id="pf-success" style="display:none;background:rgba(184,146,42,.08);border:1px solid rgba(184,146,42,.25);border-radius:8px;padding:1rem 1.1rem;margin-top:.75rem">
         <p style="font-family:'Source Sans 3',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#D4AA4A;margin-bottom:.35rem">📍 Richiesta ricevuta</p>
         <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:rgba(255,255,255,.75);line-height:1.65;margin:0">Grazie! Il tuo segnaposto apparirà sulla mappa non appena il nostro team lo avrà verificato. Di solito bastano poche ore.</p>
@@ -147,17 +147,26 @@
 
 </main>
 <script src="/vendor/leaflet-1.9.4/leaflet.min.js"></script>
+<script src="/vendor/topojson-client-3.1.0/topojson-client.min.js"></script>
+<script src="/citta.js"></script>
+<script>CittaSito.collega(document.getElementById('pf-city'), { mondo: true });</script>
 <script src="nav.min.js"></script>
 <script>
 const DEMO=[];
 const COLORS={alumni:'#B8922A',visitor:'#4fc3f7',school:'#81c784'};
 const LABELS={alumni:'<em>Alumni</em>',visitor:'Visitatore',school:'Scuola partner'};
 
-const map=L.map('map',{center:[30,10],zoom:2,minZoom:2,maxZoom:10});
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=cb1_2wbm_1_db8c9be60cf2d2d6ba49a9da',{
-  attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-  subdomains:'abcd',maxZoom:19
-}).addTo(map);
+const map=L.map('map',{center:[30,10],zoom:2,minZoom:2,maxZoom:8});
+// Sfondo: contorni dei paesi ospitati sul sito (Natural Earth, pubblico dominio), nessun servizio esterno
+map.attributionControl.addAttribution('Contorni: <a href="https://www.naturalearthdata.com/">Natural Earth</a> · Città: <a href="https://www.geonames.org/">GeoNames</a>');
+fetch('/dati/mappa-mondo.topo.json').then(r=>r.json()).then(t=>{
+  // Gli anelli che attraversano l'antimeridiano (Russia, Fiji...) vengono resi continui; l'Antartide è esclusa
+  const sroto=r=>{for(let i=1;i<r.length;i++){while(r[i][0]-r[i-1][0]>180)r[i][0]-=360;while(r[i][0]-r[i-1][0]<-180)r[i][0]+=360;}};
+  const g=topojson.feature(t,t.objects.countries);
+  g.features=g.features.filter(f=>f.id!=='010');
+  g.features.forEach(f=>{const c=f.geometry&&f.geometry.coordinates;if(!c)return;(f.geometry.type==='Polygon'?[c]:c).forEach(p=>p.forEach(sroto));});
+  L.geoJSON(g,{interactive:false,style:{color:'#2a4456',weight:.8,fillColor:'#13293a',fillOpacity:1}}).addTo(map).bringToBack();
+}).catch(()=>{});
 
 // Pin Rieti
 L.marker([42.405,12.865],{icon:L.divIcon({className:'',html:'<div style="position:relative"><div style="position:absolute;top:-7px;left:-7px;width:24px;height:24px;border-radius:50%;border:2px solid #B8922A;opacity:.8"></div><div style="width:12px;height:12px;border-radius:50%;background:#B8922A;border:2px solid #fff;box-shadow:0 0 8px rgba(184,146,42,.7)"></div></div>',iconSize:[12,12],iconAnchor:[6,6],popupAnchor:[0,-12]})})
@@ -290,15 +299,11 @@ async function submitPin() {
   errEl.style.display  = 'none';
   okEl.style.display   = 'none';
 
-  // 1. Geocodifica la città con OpenStreetMap
-  let lat = 41.9, lng = 12.5, found = false;
+  // 1. Posizione della città dall'elenco ospitato sul sito (nessun servizio esterno)
+  let lat = 41.9, lng = 12.5, found = false, cittaNome = city;
   try {
-    const r = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`,
-      { headers: { 'Accept-Language': 'it' } }
-    );
-    const d = await r.json();
-    if (d && d[0]) { lat = parseFloat(d[0].lat); lng = parseFloat(d[0].lon); found = true; }
+    const c = await CittaSito.cerca(city, { mondo: true });
+    if (c) { lat = c.lat; lng = c.lng; found = true; cittaNome = c.nome; }
   } catch(e) {}
 
   loadEl.style.display = 'none';
@@ -308,7 +313,7 @@ async function submitPin() {
   const pin = {
     id:    pinId,
     nome:  name,
-    citta: city,
+    citta: cittaNome,
     tipo:  document.getElementById('pf-type').value,
     anni:  document.getElementById('pf-year').value.trim() || null,
     ruolo: document.getElementById('pf-role').value.trim() || null,

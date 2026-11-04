@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="style.min.css"/>
   <link rel="stylesheet" href="/vendor/leaflet-1.9.4/leaflet.min.css"/>
   <script src="/vendor/leaflet-1.9.4/leaflet.min.js"></script>
-  <style>body{background:var(--av)}#pv-map{height:480px;border-radius:12px;overflow:hidden;border:1px solid var(--av3)}@media (max-width:600px){#pv-map{height:320px}}.pv-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem;margin-top:1.5rem}@media (max-width:480px){.pv-stats{grid-template-columns:1fr 1fr}}.pv-stat{background:#fff;border:1px solid var(--av3);border-radius:10px;padding:1rem;text-align:center}.pv-stat-num{font-family:var(--fd);font-size:2.2rem;font-weight:300;color:var(--bosco);line-height:1}.pv-stat-label{font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);margin-top:.3rem}.pv-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-top:1.25rem}@media (max-width:480px){.pv-list{grid-template-columns:1fr}}.pv-item{display:flex;align-items:center;gap:.75rem;background:#fff;border:1px solid var(--av3);border-radius:8px;padding:.6rem .85rem}.pv-bar,.pv-bar-wrap{border-radius:4px;height:6px}.pv-bar-wrap{flex:1;background:var(--av3)}.pv-bar{background:linear-gradient(90deg,var(--bosco),var(--bosco2));transition:width .6s ease}.pv-count,.pv-place{font-family:var(--fu)}.pv-place{font-size:.78rem;font-weight:700;color:var(--bosco);min-width:80px}.pv-count{font-size:.72rem;color:var(--txt2);min-width:28px;text-align:right}.pv-marker{background:var(--bosco);border:2px solid var(--oro);border-radius:50%;color:#fff;font-family:var(--fu);font-size:.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.3)}</style>
+  <style>body{background:var(--av)}#pv-map{background:#dbe6e8;height:480px;border-radius:12px;overflow:hidden;border:1px solid var(--av3)}@media (max-width:600px){#pv-map{height:320px}}.pv-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem;margin-top:1.5rem}@media (max-width:480px){.pv-stats{grid-template-columns:1fr 1fr}}.pv-stat{background:#fff;border:1px solid var(--av3);border-radius:10px;padding:1rem;text-align:center}.pv-stat-num{font-family:var(--fd);font-size:2.2rem;font-weight:300;color:var(--bosco);line-height:1}.pv-stat-label{font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--txt2);margin-top:.3rem}.pv-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-top:1.25rem}@media (max-width:480px){.pv-list{grid-template-columns:1fr}}.pv-item{display:flex;align-items:center;gap:.75rem;background:#fff;border:1px solid var(--av3);border-radius:8px;padding:.6rem .85rem}.pv-bar,.pv-bar-wrap{border-radius:4px;height:6px}.pv-bar-wrap{flex:1;background:var(--av3)}.pv-bar{background:linear-gradient(90deg,var(--bosco),var(--bosco2));transition:width .6s ease}.pv-count,.pv-place{font-family:var(--fu)}.pv-place{font-size:.78rem;font-weight:700;color:var(--bosco);min-width:80px}.pv-count{font-size:.72rem;color:var(--txt2);min-width:28px;text-align:right}.pv-marker{background:var(--bosco);border:2px solid var(--oro);border-radius:50%;color:#fff;font-family:var(--fu);font-size:.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.3)}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <script src="app.js" defer></script>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
@@ -136,14 +136,18 @@ document.getElementById('pv-list').innerHTML = sorted.map(d =>
 
 // ── MAPPA ─────────────────────────────────────────────────────
 const map = L.map('pv-map', {
-  center: [42.5, 13.5], zoom: 6,
+  center: [42.5, 13.5], zoom: 6, minZoom: 5, maxZoom: 9,
   zoomControl: true, scrollWheelZoom: false,
 });
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2wbm_1_db8c9be60cf2d2d6ba49a9da', {
-  attribution: '© OpenStreetMap contributors © CARTO',
-  maxZoom: 10,
-}).addTo(map);
+// Sfondo: contorni di Italia e paesi vicini ospitati sul sito (Natural Earth, pubblico dominio), nessun servizio esterno
+map.attributionControl.addAttribution('Contorni: <a href="https://www.naturalearthdata.com/">Natural Earth</a>');
+fetch('/dati/mappa-italia.json').then(r => r.json()).then(g => {
+  L.geoJSON(g, { interactive: false, style: f => ({
+    color: '#9fb0a0', weight: 1,
+    fillColor: f.properties.it ? '#F5F0E8' : '#e3ded3', fillOpacity: 1,
+  }) }).addTo(map).bringToBack();
+}).catch(() => {});
 
 // Segna Rieti come sede
 L.circleMarker([42.404, 12.857], {

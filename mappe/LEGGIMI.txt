@@ -1,0 +1,6 @@
+﻿Mappa offline Rieti (PMTiles v3, vettoriale MVT)
+Sorgente: https://build.protomaps.com/20261104.pmtiles (Protomaps Basemap v4.15.2, dati OSM al 2026-11-04T04:00:00Z)
+Area (bbox lon/lat): 12.70,42.34,12.95,42.54 - zoom 0-15 - 886 tile
+Strumento: go-pmtiles v1.31.2 scaricato ma NON eseguito (bloccato dalle impostazioni di sicurezza);
+estrazione fatta con uno script Python equivalente (solo libreria standard), file verificato: tutte le 886 tile leggibili.
+Attribuzione obbligatoria: (c) OpenStreetMap contributors - https://www.openstreetmap.org/copyright

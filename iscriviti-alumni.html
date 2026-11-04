@@ -232,6 +232,8 @@
   </section>
 
 </main>
+<script src="/citta.js"></script>
+<script>CittaSito.collega(document.getElementById('ia-citta'), { mondo: true });</script>
 <script src="nav.min.js"></script>
 <script>
 // ── ANTEPRIMA LIVE ─────────────────────────────────────
@@ -333,6 +335,13 @@ document.getElementById('ia-form').addEventListener('submit', async function(e) 
       });
     });
 
+    // Posizione del pin dall'elenco di città ospitato sul sito (nessun servizio esterno)
+    let lat = null, lng = null;
+    if (mappa && citta) {
+      const c = await CittaSito.cerca(citta, { mondo: true }).catch(() => null);
+      if (c) { lat = c.lat; lng = c.lng; }
+    }
+
     // Scheda alumni + ricordo + (eventuale) pin mappa: tutto gestito
     // lato server dalla Edge Function, che verifica prima il reCAPTCHA.
     const resp = await fetch(
@@ -346,7 +355,7 @@ document.getElementById('ia-form').addEventListener('submit', async function(e) 
         },
         body: JSON.stringify({
           nome, firma, anni, citta, lavoro, settore, ricordo, email,
-          contattabile, mappa,
+          contattabile, mappa, lat, lng,
           recaptchaToken,
           botField: document.getElementById('sito_web')?.value || ''
         })

@@ -157,7 +157,7 @@
       <button type="button" class="vs-btn-mappa" id="vs-apri-mappa" aria-expanded="false" aria-controls="vs-mappa-reale">🗺️ Apri la mappa reale dei luoghi</button>
       <div id="vs-mappa-reale" hidden>
         <div class="vs-leaflet" id="vs-leaflet" role="region" aria-label="Mappa geografica con il Convitto e i quattro santuari della Valle Santa"></div>
-        <p class="vs-nota-mappa">Tocca un segnaposto per il nome del luogo e le indicazioni stradali. Mappa © OpenStreetMap e CARTO.</p>
+        <p class="vs-nota-mappa">Tocca un segnaposto per il nome del luogo e le indicazioni stradali. Mappa © OpenStreetMap, ospitata sul sito.</p>
       </div>
     </div>
   </section>
@@ -343,7 +343,7 @@
     document.head.appendChild(css);
     var js = document.createElement('script');
     js.src = '/vendor/leaflet-1.9.4/leaflet.min.js';
-    js.onload = cb;
+    js.onload = function () { var pm = document.createElement('script'); pm.src = '/vendor/protomaps-leaflet-5.1.0/protomaps-leaflet.js'; pm.onload = cb; pm.onerror = js.onerror; document.head.appendChild(pm); };
     js.onerror = function () { box.querySelector('.vs-nota-mappa').textContent = 'Non è stato possibile caricare la mappa. Riprova più tardi.'; };
     document.head.appendChild(js);
   }
@@ -356,11 +356,13 @@
   }
   function disegna() {
     if (mappa) { mappa.invalidateSize(); return; }
-    mappa = L.map('vs-leaflet', { scrollWheelZoom: false });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2wbm_1_db8c9be60cf2d2d6ba49a9da', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd', maxZoom: 19
-    }).addTo(mappa);
+    mappa = L.map('vs-leaflet', { scrollWheelZoom: false, minZoom: 11, maxZoom: 18, maxBounds: [[42.34, 12.70], [42.54, 12.95]] });
+    // Sfondo ospitato sul sito: estratto OpenStreetMap dell'area di Rieti (Protomaps), nessun servizio esterno
+    var sfondo = protomapsL.leafletLayer({ url: '/mappe/rieti.pmtiles', flavor: 'light', lang: 'it', maxDataZoom: 15,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://protomaps.com">Protomaps</a>'
+    });
+    sfondo.backgroundColor = '#e2dfda'; // fuori dall'area ritagliata: stesso colore del terreno, non grigio
+    sfondo.addTo(mappa);
     var punti = [];
     LUOGHI.forEach(function (l) {
       var ll = [l.lat, l.lon]; punti.push(ll);

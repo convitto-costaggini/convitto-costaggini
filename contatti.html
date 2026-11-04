@@ -425,14 +425,12 @@ function calcolaItinerario() {
   const mapsUrl = `https://www.google.com/maps/dir/${fromEnc}/${destEnc}`;
   linkEl.href = mapsUrl;
 
-  fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(from + ', Italia')}&limit=1`, {
-    headers: { 'Accept-Language': 'it' }
-  })
-  .then(r => r.json())
-  .then(data => {
-    if (!data || data.length === 0) throw new Error('not found');
-    const lat1 = parseFloat(data[0].lat);
-    const lon1 = parseFloat(data[0].lon);
+  // Posizione della città dall'elenco dei comuni ospitato sul sito (nessun servizio esterno)
+  CittaSito.cerca(from, { mondo: false })
+  .then(c => {
+    if (!c) throw new Error('not found');
+    const lat1 = c.lat;
+    const lon1 = c.lng;
     // Coordinate Rieti Via Salaria
     const lat2 = 42.3921448, lon2 = 12.8582699;
 
@@ -460,6 +458,8 @@ function calcolaItinerario() {
   });
 }
 </script>
+<script src="/citta.js"></script>
+<script>CittaSito.collega(document.getElementById('from-city'), { mondo: false });</script>
 <script src="nav.min.js"></script>
 <script src="hero-jump.js"></script>
 <!-- ══════════ MINI-NAV MOBILE: bannerino rotante (stesso di index.html) ══════════

@@ -1,0 +1,10 @@
+Dati ospitati sul sito, al posto di servizi esterni (novembre 2026).
+
+citta-italia.json   comuni italiani [nome, sigla provincia, lat, lng]. Nomi: elenco ISTAT
+                    (pacchetto comuni-province-regioni, MIT). Coordinate: GeoNames (CC BY 4.0).
+citta-mondo.json    città con almeno 15.000 abitanti fuori dall'Italia [nome, paese ISO, lat, lng].
+                    Fonte: GeoNames (CC BY 4.0), tramite il pacchetto all-the-cities.
+mappa-mondo.topo.json  contorni dei paesi (Natural Earth 1:50m, pubblico dominio, pacchetto world-atlas).
+mappa-italia.json      contorni di Italia e paesi vicini (Natural Earth 1:10m, pubblico dominio).
+
+Si rigenerano con scripts/build-citta.js e scripts/build-contorni.js.

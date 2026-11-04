@@ -15,7 +15,6 @@
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-  <script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
 </head>
 <body data-page="iscriviti-alumni">
 <script src="nav-header.min.js"></script>
@@ -326,15 +325,6 @@ document.getElementById('ia-form').addEventListener('submit', async function(e) 
   const mappa   = document.getElementById('ia-mappa').checked;
 
   try {
-    // Token anti-spam reCAPTCHA Enterprise
-    const recaptchaToken = await new Promise((resolve, reject) => {
-      if (typeof grecaptcha === 'undefined') return reject(new Error('reCAPTCHA non caricato'));
-      grecaptcha.ready(() => {
-        grecaptcha.execute('6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO', {action: 'iscrizione_alumni'})
-          .then(resolve).catch(reject);
-      });
-    });
-
     // Posizione del pin dall'elenco di città ospitato sul sito (nessun servizio esterno)
     let lat = null, lng = null;
     if (mappa && citta) {
@@ -343,7 +333,7 @@ document.getElementById('ia-form').addEventListener('submit', async function(e) 
     }
 
     // Scheda alumni + ricordo + (eventuale) pin mappa: tutto gestito
-    // lato server dalla Edge Function, che verifica prima il reCAPTCHA.
+    // lato server dalla Edge Function (campo trappola e controlli interni).
     const resp = await fetch(
       'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/iscrizione-alumni',
       {
@@ -356,7 +346,6 @@ document.getElementById('ia-form').addEventListener('submit', async function(e) 
         body: JSON.stringify({
           nome, firma, anni, citta, lavoro, settore, ricordo, email,
           contattabile, mappa, lat, lng,
-          recaptchaToken,
           botField: document.getElementById('sito_web')?.value || ''
         })
       }

@@ -2,9 +2,8 @@
 // Edge Function: iscrizione-alumni
 // Convitto "Costaggini" — Supabase project sawclsysqnjsvbobioqo
 // =====================================================================
-// Cosa fa: riceve la scheda di iscrizione alla pagina Alumni, verifica
-// il token reCAPTCHA Enterprise lato server (Google Cloud) e solo se la
-// verifica passa inserisce la scheda alumni, il ricordo associato e,
+// Cosa fa: riceve la scheda di iscrizione alla pagina Alumni e, se il
+// campo trappola è vuoto, inserisce la scheda alumni, il ricordo associato e,
 // se l'utente ha acconsentito, il pin sulla Mappa Alumni.
 //
 // Dal 04/11/2026 la posizione del pin arriva dalla pagina, che la ricava
@@ -17,10 +16,7 @@
 // Se la registrazione del consenso non riesce, l'errore viene scritto
 // nei log ma l'iscrizione non viene interrotta.
 //
-// La chiave API di Google Cloud NON è scritta qui: va impostata come
-// secret del progetto Supabase con il nome RECAPTCHA_API_KEY
-// (Edge Functions → Secrets), lo stesso secret già usato dalla funzione
-// richiesta-accesso.
+// Dal 18/11/2026 non usa più il reCAPTCHA (nessun servizio di terzi).
 // =====================================================================
 
 const cors = {
@@ -37,49 +33,8 @@ function json(body: unknown, status = 200): Response {
   });
 }
 
-const SOGLIA_PUNTEGGIO = 0.5;
-const AZIONE_ATTESA = "iscrizione_alumni";
-const RECAPTCHA_PROJECT_ID = "convitto-costagg-1786033824350";
-const RECAPTCHA_SITE_KEY = "6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO";
 const INFORMATIVA_ALUMNI = "ricordi-2026-10-06";
 const INFORMATIVA_MAPPA = "mappa-2026-10-06";
-
-async function verificaRecaptcha(token: string): Promise<boolean> {
-  const apiKey = Deno.env.get("RECAPTCHA_API_KEY");
-  if (!apiKey || !token) return false;
-  try {
-    const resp = await fetch(
-      `https://recaptchaenterprise.googleapis.com/v1/projects/${RECAPTCHA_PROJECT_ID}/assessments?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          event: {
-            token,
-            expectedAction: AZIONE_ATTESA,
-            siteKey: RECAPTCHA_SITE_KEY,
-          },
-        }),
-      },
-    );
-    const esito = await resp.json();
-    const tp = esito?.tokenProperties;
-    const score = esito?.riskAnalysis?.score;
-    if (!resp.ok || !tp) {
-      console.error("Assessment reCAPTCHA fallita:", JSON.stringify(esito));
-      return false;
-    }
-    return (
-      tp.valid === true &&
-      tp.action === AZIONE_ATTESA &&
-      typeof score === "number" &&
-      score >= SOGLIA_PUNTEGGIO
-    );
-  } catch (e) {
-    console.error("Errore verifica reCAPTCHA:", e);
-    return false;
-  }
-}
 
 async function inserisci(tabella: string, riga: Record<string, unknown>): Promise<{ ok: boolean; status: number; body: string }> {
   const resp = await fetch(`${Deno.env.get("SUPABASE_URL")}/rest/v1/${tabella}`, {
@@ -133,11 +88,6 @@ Deno.serve(async (req) => {
 
     if (!nome || !anni || !lavoro || !ricordo || !email) {
       return json({ success: false, message: "Compilare tutti i campi obbligatori." }, 400);
-    }
-
-    const recaptchaOk = await verificaRecaptcha(String(body.recaptchaToken || ""));
-    if (!recaptchaOk) {
-      return json({ success: false, message: "Verifica anti-spam non superata. Ricarichi la pagina e riprovi." }, 400);
     }
 
     const colore = Math.floor(Math.random() * 5);

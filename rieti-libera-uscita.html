@@ -127,7 +127,7 @@
       <button type="button" class="lu-btn" id="lu-apri" aria-expanded="false" aria-controls="lu-reale">🗺️ Apri la mappa reale</button>
       <div id="lu-reale" hidden>
         <div id="lu-map" role="region" aria-label="Mappa geografica del centro di Rieti con i luoghi della libera uscita"></div>
-        <p class="lu-nota">Tocca un segnaposto per il nome e il tempo a piedi da Porta Romana. Mappa © OpenStreetMap e CARTO.</p>
+        <p class="lu-nota">Tocca un segnaposto per il nome e il tempo a piedi da Porta Romana. Mappa © OpenStreetMap, ospitata sul sito.</p>
       </div>
     </div>
   </section>
@@ -195,7 +195,8 @@
     var css = document.createElement('link'); css.rel = 'stylesheet';
     css.href = '/vendor/leaflet-1.9.4/leaflet.min.css'; document.head.appendChild(css);
     var js = document.createElement('script'); js.src = '/vendor/leaflet-1.9.4/leaflet.min.js';
-    js.onload = cb; js.onerror = function () { box.querySelector('.lu-nota').textContent = 'Non è stato possibile caricare la mappa. Riprova più tardi.'; };
+    js.onload = function () { var pm = document.createElement('script'); pm.src = '/vendor/protomaps-leaflet-5.1.0/protomaps-leaflet.js'; pm.onload = cb; pm.onerror = js.onerror; document.head.appendChild(pm); };
+    js.onerror = function () { box.querySelector('.lu-nota').textContent = 'Non è stato possibile caricare la mappa. Riprova più tardi.'; };
     document.head.appendChild(js);
   }
   function icona(t) {
@@ -207,10 +208,13 @@
   }
   function disegna() {
     if (mappa) { mappa.invalidateSize(); return; }
-    mappa = L.map('lu-map', { scrollWheelZoom: false });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_2wbm_1_db8c9be60cf2d2d6ba49a9da', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd', maxZoom: 19 }).addTo(mappa);
+    mappa = L.map('lu-map', { scrollWheelZoom: false, minZoom: 11, maxZoom: 18, maxBounds: [[42.34, 12.70], [42.54, 12.95]] });
+    // Sfondo ospitato sul sito: estratto OpenStreetMap dell'area di Rieti (Protomaps), nessun servizio esterno
+    var sfondo = protomapsL.leafletLayer({ url: '/mappe/rieti.pmtiles', flavor: 'light', lang: 'it', maxDataZoom: 15,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://protomaps.com">Protomaps</a>'
+    });
+    sfondo.backgroundColor = '#e2dfda'; // fuori dall'area ritagliata: stesso colore del terreno, non grigio
+    sfondo.addTo(mappa);
     var punti = [];
     LUOGHI.forEach(function (l) {
       var ll = [l.lat, l.lon]; punti.push(ll);

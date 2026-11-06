@@ -143,6 +143,8 @@
   };
   var DIDASCALIE = ['Nome, cognome e ruolo', 'Solo ruolo', 'Nessuna didascalia'];
   var NOMI = ['Nome e cognome', 'Solo nome', 'Nessun nome'];
+  var RUOLI = ['Docente', 'Educatore / Educatrice', 'Collaboratore scolastico', 'Assistente amministrativo', 'Assistente tecnico',
+               'Cuoco / Cuoca', 'Guardarobiere', 'Infermiere / Infermiera', 'DSGA', 'Dirigente scolastico', 'Altro'];
   var TIPI = null, SESSIONE = '', EMAIL = '';
 
   function $(id) { return document.getElementById(id); }
@@ -217,11 +219,17 @@
     var personale = tipo.indexOf('personale') !== -1;
     h += '<p class="cs-nota" style="margin-top:.8rem">Prima di decidere leggi l\'<a href="' + INFORMATIVE[tipo] + '" target="_blank" rel="noopener" style="color:var(--bosco2)">informativa «' + esc(t.etichetta) + '»</a> (versione ' + esc(t.versione) + ').</p>';
     h += '<label for="cs-nome">Nome e cognome</label><input id="cs-nome" type="text" maxlength="80" autocomplete="name">';
-    h += '<label for="cs-ruolo">' + (personale ? 'Ruolo (es. docente, educatore, collaboratore scolastico)' : 'Classe (es. 5A)') + '</label><input id="cs-ruolo" type="text" maxlength="60">';
+    if (personale) {
+      h += '<label for="cs-ruolo">Ruolo</label><select id="cs-ruolo"><option value="">Scegli…</option>' +
+        RUOLI.map(function (r) { return '<option>' + esc(r) + '</option>'; }).join('') + '</select>' +
+        '<input id="cs-ruolo-altro" type="text" maxlength="60" placeholder="Scrivi il tuo ruolo" aria-label="Il tuo ruolo" style="margin-top:.5rem" hidden>';
+    } else {
+      h += '<label for="cs-ruolo">Classe (es. 5A)</label><input id="cs-ruolo" type="text" maxlength="60">';
+    }
     if (tipo === 'voci_personale' || tipo === 'voci_convittori') {
       h += '<label for="cs-domanda">Numero della domanda a cui rispondi</label><select id="cs-domanda"><option value="">Scegli…</option>';
       for (var i = 1; i <= 10; i++) h += '<option>' + i + '</option>';
-      h += '</select><label>Nel contributo il tuo nome compare come</label><div class="cs-scelte">';
+      h += '<option value="tutte">Tutte le domande</option></select><label>Nel contributo il tuo nome compare come</label><div class="cs-scelte">';
       NOMI.forEach(function (n) { h += '<label><input type="radio" name="cs-nomeVoce" value="' + esc(n) + '"> ' + esc(n) + '</label>'; });
       h += '</div>';
     } else if (tipo === 'immagini_personale') {
@@ -241,11 +249,16 @@
     h += '<button class="cs-btn" id="cs-b-registra" type="button">Registra il consenso</button>';
     $('cs-opzioni').innerHTML = h;
     $('cs-b-registra').addEventListener('click', registra);
+    if (personale) $('cs-ruolo').addEventListener('change', function () {
+      var altro = $('cs-ruolo-altro'); altro.hidden = this.value !== 'Altro'; if (!altro.hidden) altro.focus();
+    });
   }
   $('cs-tipo').addEventListener('change', disegnaOpzioni);
   function registra() {
     var tipo = $('cs-tipo').value, t = TIPI[tipo];
-    var d = { tipo: tipo, nome: $('cs-nome').value, ruolo: $('cs-ruolo').value, letto: $('cs-letto').checked,
+    var ruolo = $('cs-ruolo').value;
+    if (ruolo === 'Altro') ruolo = $('cs-ruolo-altro').value.trim();
+    var d = { tipo: tipo, nome: $('cs-nome').value, ruolo: ruolo, letto: $('cs-letto').checked,
               maggiorenne: $('cs-maggiorenne') ? $('cs-maggiorenne').checked : false };
     if (tipo === 'voci_personale' || tipo === 'voci_convittori') { d.domanda = $('cs-domanda').value; d.indicazioneNome = valoreRadio('cs-nomeVoce'); }
     else if (tipo === 'immagini_personale') { d.didascalia = valoreRadio('cs-didascalia'); d.soloImmagini = $('cs-solo').value; }

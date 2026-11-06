@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/cantiere.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Visita per i docenti | Sala studio | Convitto "Costaggini"</title>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="/fonts.css"/>
+  <link rel="icon" href="/favicon.ico" sizes="any"/>
+  <style>
+    :root{--bosco:#2C3E2D;--bosco2:#3D5C3E;--oro:#B8922A;--oro2:#D4AA4A;--panna:#F5F0E8;--panna2:#EDE6D6;--testo:#1f1f1f;--grigio:#5b5b5b;
+      --fd:'Cormorant Garamond',Georgia,serif;--fu:'Source Sans 3',Arial,sans-serif;--col:430px}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--panna);color:var(--testo);font-family:var(--fu);font-size:16px;line-height:1.55}
+    a{color:var(--bosco2)}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--oro);outline-offset:2px}
+
+    .app{display:grid;grid-template-columns:var(--col) 1fr;height:100vh;height:100dvh}
+    .app.stretta{grid-template-columns:0 1fr}
+    .app.stretta .guida{display:none}
+
+    /* colonna a sinistra: i passi */
+    .guida{display:flex;flex-direction:column;min-height:0;background:#fff;border-right:1px solid var(--panna2)}
+    .testa{background:var(--bosco);color:var(--panna);padding:14px 18px 12px}
+    .testa .sopra{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro2);font-weight:700}
+    .testa h1{font-family:var(--fd);font-weight:400;font-size:28px;line-height:1.1;margin:4px 0 8px}
+    .testa h1 em{color:var(--oro2)}
+    .comandi{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+    .comandi button{border:1px solid rgba(245,240,232,.55);background:transparent;color:var(--panna);border-radius:8px;padding:5px 10px;font-weight:700;font-size:13.5px;min-height:32px}
+    .comandi button[aria-pressed="true"]{background:var(--panna);color:var(--bosco)}
+    .comandi .tempo{font-variant-numeric:tabular-nums;min-width:4.6em;text-align:center}
+    .barra{height:6px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+    .barra i{display:block;height:100%;width:0;background:var(--oro2);transition:width .25s}
+    .conta{font-size:13px;color:rgba(245,240,232,.88);margin-top:6px}
+    .elenco{flex:1;min-height:0;overflow:auto;list-style:none;margin:0;padding:6px 0 10px}
+    .elenco>li{border-bottom:1px solid var(--panna2)}
+    .capo{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;padding:11px 16px;color:var(--bosco)}
+    .capo:hover{background:#FBF7EC}
+    .capo .n{flex:0 0 32px;height:32px;border-radius:50%;background:var(--panna2);color:var(--bosco);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:19px;font-weight:700}
+    .capo .t{flex:1;font-weight:700;font-size:16px;line-height:1.25}
+    .capo .m{display:block;font-weight:400;font-size:12.5px;color:var(--grigio)}
+    li.attiva .capo{background:#FBF7EC}
+    li.attiva .capo .n{background:var(--bosco);color:var(--oro2)}
+    li.fatta .capo .n{background:var(--oro);color:#fff}
+    .corpo{display:none;padding:2px 18px 16px 60px;font-size:15.5px}
+    li.attiva .corpo{display:block}
+    .corpo p{margin:.2rem 0 .6rem}
+    .corpo ul.az{list-style:none;padding:0;margin:.4rem 0}
+    .corpo ul.az>li{padding:6px 0;border-bottom:1px dashed var(--panna2)}
+    .corpo ul.az>li:last-child{border-bottom:0}
+    .corpo label.sp{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+    .corpo label.sp input{width:20px;height:20px;margin-top:2px;accent-color:var(--bosco);flex:0 0 auto}
+    .corpo .btn{display:inline;background:var(--panna);border:1px solid var(--panna2);border-radius:6px;padding:0 7px;font-weight:700;font-size:14.5px;color:var(--bosco);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+    .viste{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0 .3rem}
+    .viste button{border:2px solid var(--bosco);background:#fff;color:var(--bosco);border-radius:10px;padding:5px 10px;font-weight:700;font-size:14px;min-height:36px}
+    .viste button[aria-pressed="true"]{background:var(--bosco);color:#fff}
+    .avviso{background:#FBF7EC;border-left:4px solid var(--oro);border-radius:0 10px 10px 0;padding:8px 12px;margin:.5rem 0;font-size:14.5px}
+    .perche{background:#EEF4EC;border-left:4px solid var(--bosco2);border-radius:0 10px 10px 0;padding:8px 12px;margin:.3rem 0 .6rem;font-size:14.5px}
+    .perche b.e{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bosco2);margin-bottom:2px}
+    .risp{margin:.55rem 0 .3rem;padding:8px 10px;border:1px solid var(--panna2);border-radius:10px;font-size:14px;background:#fff}
+    .risp b.e{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);margin-bottom:3px}
+    .risp .r{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;padding:3px 0}
+    .risp .c{flex:1 1 100%}
+    .pr,.dp{border-radius:6px;padding:0 7px;font-weight:700;font-size:13.5px;white-space:nowrap}
+    .pr{background:#F6E6E3;color:#7A2D22}
+    .dp{background:#E2EFE0;color:#2A5A2B}
+    .sf{font-size:13px;color:var(--grigio);margin-top:4px}
+
+    /* moduli dentro i passi */
+    .modulo{border:1px solid var(--panna2);border-radius:12px;padding:10px 12px;margin:.6rem 0;background:#FDFBF6}
+    .modulo label{display:block;font-weight:700;font-size:14px;margin:.5rem 0 .15rem;color:var(--bosco)}
+    .modulo label:first-child{margin-top:0}
+    .modulo input[type=text],.modulo input[type=number],.modulo select,.modulo textarea{width:100%;border:2px solid #cfc4a8;border-radius:8px;padding:7px 9px;background:#fff;color:var(--testo);font-size:16px}
+    .modulo textarea{min-height:76px;resize:vertical}
+    .modulo .az2{display:flex;flex-wrap:wrap;gap:8px;margin-top:.7rem}
+    .modulo .az2 button{min-height:44px;border-radius:10px;border:2px solid var(--bosco);background:#fff;color:var(--bosco);font-weight:700;padding:6px 14px}
+    .modulo .az2 button.pieno{background:var(--bosco);color:#fff}
+    .esito{font-size:14.5px;margin:.5rem 0 0;min-height:1.4em}
+    table.calc{width:100%;border-collapse:collapse;font-size:13.5px;margin:.4rem 0}
+    table.calc th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--grigio);text-align:left;padding:2px 3px}
+    table.calc td{padding:4px 3px;border-top:1px dashed var(--panna2);vertical-align:middle}
+    table.calc td.n input{width:58px;padding:5px 6px;text-align:right}
+    table.calc input[type=checkbox]{width:18px;height:18px;accent-color:var(--bosco)}
+    .modulo .due{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .totali{background:var(--bosco);color:var(--panna);border-radius:12px;padding:10px 12px;margin:.6rem 0;font-size:15px}
+    .totali b{color:var(--oro2);font-size:17px}
+    .totali .grande{font-family:var(--fd);font-size:24px;line-height:1.15;color:#fff;display:block;margin:.2rem 0}
+    .non{margin:.4rem 0;padding-left:1.1rem;font-size:14.5px}
+    .non li{margin:.15rem 0}
+
+    .piede{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--panna2);background:#fff}
+    .piede button{flex:1;min-height:46px;border-radius:12px;border:2px solid var(--bosco);background:#fff;color:var(--bosco);font-weight:700;font-size:16px}
+    .piede .avanti{background:var(--bosco);color:#fff}
+    .piede button[disabled]{opacity:.4;cursor:default}
+    .piede .sito{display:none}
+
+    /* lo spazio grande a destra: il sito vero */
+    .vista{display:flex;flex-direction:column;min-width:0;min-height:0}
+    .strumenti{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;background:var(--panna2);border-bottom:1px solid #d9cfb8;font-size:14px}
+    .strumenti .dove{flex:1;min-width:120px;color:var(--grigio);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .strumenti button,.strumenti a.b{border:1px solid #b9ad92;background:#fff;color:var(--bosco);border-radius:8px;padding:5px 11px;font-weight:700;font-size:14px;text-decoration:none;min-height:34px}
+    .strumenti .passi{display:none}
+    iframe{flex:1;width:100%;min-height:0;border:0;background:#fff}
+
+    @media (max-width:900px){
+      .app,.app.stretta{display:flex;flex-direction:column;height:auto;min-height:100vh}
+      .guida{max-height:none;border-right:0;border-bottom:3px solid var(--oro)}
+      .elenco{overflow:visible}
+      .vista{height:88vh;height:88dvh}
+      .app.stretta .guida{display:none}
+      .corpo{padding-left:18px}
+      .piede{position:sticky;bottom:0;z-index:5}
+      .piede .sito{display:block;flex:0 0 auto;padding:0 12px}
+      .strumenti .passi{display:inline-block}
+    }
+    @media print{
+      html,body{height:auto}
+      .app{display:block;height:auto}
+      .vista,.piede,.comandi,.barra,.modulo .az2,.viste{display:none!important}
+      .guida{border:0}
+      .elenco{overflow:visible}
+      .corpo{display:block!important;padding-left:18px}
+      .capo{padding-left:0}
+      li{break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+<noscript><p style="padding:24px;font-family:Arial,sans-serif">Questa guida richiede JavaScript.</p></noscript>
+<div class="app" id="app">
+  <aside class="guida" aria-label="Guida passo passo">
+    <div class="testa">
+      <div class="sopra">Sala studio · visita per i docenti</div>
+      <h1>Meno fatica, <em>più scuola</em></h1>
+      <div class="comandi">
+        <button type="button" id="breve" aria-pressed="false" title="Mostra solo i passi essenziali">Solo l'essenziale</button>
+        <button type="button" id="cronoBtn" aria-pressed="false" title="Avvia o ferma il cronometro">⏱ Avvia</button>
+        <button type="button" class="tempo" id="cronoVal" title="Tempo trascorso">00:00</button>
+        <button type="button" id="cronoZero" title="Azzera il cronometro">Azzera</button>
+      </div>
+      <div class="barra" aria-hidden="true"><i id="barra"></i></div>
+      <div class="conta" id="conta" aria-live="polite"></div>
+    </div>
+    <ol class="elenco" id="elenco"></ol>
+    <div class="piede">
+      <button type="button" id="indietro">← Indietro</button>
+      <button type="button" id="avanti" class="avanti">Avanti →</button>
+      <button type="button" id="vaiSito" class="sito" title="Vai al sito">Sito ↓</button>
+    </div>
+  </aside>
+  <section class="vista" id="vista" aria-label="Il sito">
+    <div class="strumenti">
+      <button type="button" id="largo" aria-pressed="false" title="Nasconde o mostra la guida">⇔ Guida</button>
+      <button type="button" id="vaiPassi" class="passi">↑ Passi</button>
+      <span class="dove" id="dove"></span>
+      <button type="button" id="ricarica">↻ Ricarica</button>
+      <a class="b" id="nuova" target="_blank" rel="noopener">Apri in una scheda nuova ↗</a>
+    </div>
+    <iframe id="sito" title="Il sito, per provare i passi indicati a sinistra" allow="camera; clipboard-write; fullscreen" referrerpolicy="same-origin"></iframe>
+  </section>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEMO = '/aula/studio/lezione.html?c=DEMO';
+  var MAIL = 'michele.gaggiano@alberghierorieti.it';
+
+  /* Le attività di cui si calcola il tempo. p = minuti che servono a mano (stima prudente), d = minuti con la Sala studio,
+     rilettura compresa. Sono stime di partenza, non misure: chi usa la pagina le può cambiare. */
+  var LAVORI = [
+    { k: 'lezione', c: 'Preparare la lezione: spiegazione, esempi, esercizi e flashcard', p: 90, d: 15 },
+    { k: 'attivita', c: 'Ideare altre attività sullo stesso argomento (mappa, enigmi, gioco)', p: 40, d: 3 },
+    { k: 'lim', c: 'Preparare un quiz a squadre per la lavagna', p: 40, d: 3 },
+    { k: 'verifica', c: 'Scrivere la verifica con fila A, fila B e soluzioni', p: 60, d: 8 },
+    { k: 'facilitata', c: 'Adattare la verifica in una versione facilitata', p: 45, d: 2 },
+    { k: 'mappa', c: 'Preparare la mappa delle idee chiave da consegnare', p: 30, d: 2 }
+  ];
+  function lavoro(k) { for (var i = 0; i < LAVORI.length; i++) if (LAVORI[i].k === k) return LAVORI[i]; return null; }
+  function durata(m) {
+    m = Math.round(m); if (m < 60) return m + ' min';
+    var h = Math.floor(m / 60), r = m % 60; return h + ' h' + (r ? ' ' + (r < 10 ? '0' : '') + r + ' min' : '');
+  }
+
+  /* I passi. url: la pagina che si apre a destra; viste: altre pagine dello stesso passo;
+     ripristina: il passo cambia l'aspetto della pagina, quindi all'uscita si rimette tutto com'era;
+     breve: il passo resta anche nel percorso essenziale; risp: le voci di tempo (chiavi di LAVORI). */
+  var TAPPE = [
+    { id: 'inizio', t: 'Benvenuto', min: 2, breve: true, url: '/aula/studio/index.html',
+      intro: 'Questa pagina accompagna a provare la Sala studio: a sinistra i passi, a destra il sito vero, che si può toccare e usare senza rompere nulla.',
+      perche: 'La Sala studio nasce per togliere lavoro a chi insegna, non per aggiungerne. In questo percorso si segue l\'intero ciclo: preparare, far studiare, verificare, adattare, condividere. Alla fine si calcola quanto tempo si risparmia.',
+      azioni: [
+        'A destra c\'è la pagina d\'ingresso di uno studente: un solo campo per il codice, nessuna registrazione, nessun dato richiesto.',
+        'In alto a sinistra, <span class="btn">⏱ Avvia</span> fa partire un cronometro: serve a misurare il tempo vero dei compiti che seguono. Si può fermare e azzerare in ogni momento.',
+        '<span class="btn">Solo l\'essenziale</span> riduce il percorso ai passi indispensabili (circa 30 minuti); premuto di nuovo, torna il percorso completo.'
+      ],
+      nota: 'Gli strumenti sono ancora in anteprima: si aprono soltanto con il link ricevuto. Il sito non raccoglie dati degli studenti.' },
+
+    { id: 'studente', t: 'Una lezione che lo studente fa da solo', min: 6, breve: true, url: DEMO, risp: ['lezione'],
+      intro: 'Prima di vedere come si prepara, si guarda il risultato: è una lezione di esempio di Scienza e cultura dell\'alimentazione sui principi nutritivi.',
+      perche: 'Se la lezione non serve ai ragazzi, tutto il resto non conta. Per questo si parte da ciò che vede uno studente: idee una alla volta, trucchi per ricordare, esercizi che spiegano gli errori.',
+      azioni: [
+        'Alla domanda «Come vuoi studiare?» si sceglie <span class="btn">🧭 Percorso guidato</span> e si parte dal gancio: una domanda curiosa che apre l\'argomento.',
+        'Su una scheda si tocca <span class="btn">🔊</span>: il testo viene letto ad alta voce.',
+        'Nella tappa <b>Memorizza</b> si osservano i trucchi per ricordare: la parola-sigla, il «palazzo della memoria» nel Convitto, la filastrocca che sparisce parola per parola.',
+        'Nella tappa <b>Allenati</b> si risponde sbagliando apposta: la lezione spiega subito perché.',
+        'Si provano le <b>Flashcard</b>, la <b>Sfida finale</b> e la pagina <b>Da ricordare</b>.',
+        '<b>Con occhio da esperto:</b> si controllano i contenuti (le kcal per grammo, le vitamine idrosolubili e liposolubili, le funzioni dei nutrienti). Ciò che non convince si annota per il passo finale.'
+      ],
+      nota: 'Il progresso resta soltanto sul dispositivo di chi studia: il sito non registra nomi né risultati.' },
+
+    { id: 'modi', t: 'Sette modi di studiare la stessa lezione', min: 4, url: DEMO, risp: ['attivita'],
+      intro: 'Dalla stessa lezione nascono attività diverse, senza che il docente ne prepari nessuna. Si torna all\'inizio della lezione e si scelgono gli altri modi.',
+      perche: 'Cambiare modo di studiare tiene viva l\'attenzione e permette di tornare più volte sullo stesso argomento senza annoiare.',
+      azioni: [
+        'Si sceglie <span class="btn">🔐 Escape room</span>: lucchetti da aprire, una lettera per lucchetto, la porta finale.',
+        'Si sceglie <span class="btn">🗺️ Costruisci la mappa</span>: ogni idea va al suo posto, prima con aiuti, poi a memoria.',
+        'Si sceglie <span class="btn">🔍 Caccia all\'errore</span>: il riassunto di un compagno distratto, da correggere.',
+        'Si sceglie <span class="btn">🎭 Intervista impossibile</span>: l\'ospite risponde e si sceglie la risposta vera.',
+        'Si sceglie <span class="btn">⚡ Il minuto</span>: quante risposte giuste in 60 secondi.'
+      ] },
+
+    { id: 'lavagna', t: 'Alla lavagna, con tutta la classe', min: 4, url: DEMO, risp: ['lim'],
+      intro: 'È il modo per usare la lezione in aula, con la LIM o il proiettore, oppure in sala studio con un gruppo.',
+      perche: 'Funziona anche quando i ragazzi non hanno il telefono: partecipano a voce o per alzata di mano, senza dispositivi e senza fornire dati.',
+      azioni: [
+        'Tra i modi di studiarla si sceglie <span class="btn">🏆 Sfida a squadre</span>, si indica quante squadre e si preme <span class="btn">⛶ Schermo intero</span>.',
+        'Il docente tocca sulla lavagna la risposta data a voce dalla squadra: turni, rubapalla e classifica sono già pronti.',
+        'Il punteggio resta sempre in vista; a fine gara compare la classifica.'
+      ] },
+
+    { id: 'crea', t: 'Dal libro alla lezione: si crea la propria', min: 8, breve: true, url: '/aula/studio/docente.html', risp: [], mia: true,
+      intro: 'È il passo che fa risparmiare più tempo. Da un argomento, o dalla foto di una pagina del libro, nasce una lezione completa con il suo QR.',
+      perche: 'Il docente non scrive la lezione: la fa preparare e poi la rilegge. Il lavoro che resta, quello che richiede competenza, è decidere che cosa va bene e che cosa si corregge.',
+      azioni: [
+        'Si inserisce l\'argomento del prossimo lavoro in classe nel riquadro qui sotto e si preme <span class="btn">Preparalo nel sito</span>: a destra la pagina si apre già compilata.',
+        'Se compare la richiesta di accesso: si scrive la mail della scuola (basta <b>nome.cognome</b>), si preme <span class="btn">Mandami il codice →</span> e si scrive il codice di 6 cifre ricevuto, valido 10 minuti. Non serve alcuna password.',
+        'Si scende fino al riquadro <b>«📸 Creazione automatica»</b>, si può allegare la foto di una pagina del libro e si preme <span class="btn">✨ Crea la lezione</span>. L\'attesa è di un paio di minuti.',
+        'Alla fine compaiono il <b>QR</b> e un <b>codice di 6 lettere</b>: lo stesso per tutta la classe. Si può anche scegliere <span class="btn">🌐 Condividi nell\'Archivio</span>.',
+        'In alternativa, senza foto e senza attesa: <span class="btn">📋 Copia le istruzioni</span> e si usa l\'assistente preferito (Claude, ChatGPT o Gemini), anche nella versione gratuita.'
+      ],
+      nota: 'Una sola regola: non si fotografano quaderni, verifiche o fogli con nomi o dati degli studenti. Per solo guardare, il passo si può saltare.' },
+
+    { id: 'comando', t: 'Il docente resta al comando', min: 4, url: '/aula/studio/docente.html#mie',
+      intro: 'Dopo la creazione la lezione si trova in «Le mie lezioni»: da lì si apre, si corregge o si cancella.',
+      perche: 'Una lezione preparata con l\'intelligenza artificiale può contenere imprecisioni. Per questo la rilettura è prevista, ed è rapida: ogni correzione vale subito per tutti, e il codice e il QR non cambiano.',
+      azioni: [
+        'In <b>Le mie lezioni</b> si trova la lezione appena creata; si preme <span class="btn">👀 Apri la lezione</span> per vederla come la vedrà lo studente.',
+        'Con <span class="btn">✏️ Modifica</span> si apre ogni sezione e si corregge il testo, per esempio una definizione o un valore.',
+        'Se serve cambiare molto, <b>«Fatti aiutare dall\'IA a correggerla»</b>: si scrive che cosa cambiare e si incolla la risposta.',
+        'Con <span class="btn">🖥️ QR a tutto schermo</span> si ottiene il cartello da proiettare o appendere in sala studio.'
+      ],
+      nota: 'Il parere di chi conosce la materia vale più di qualunque controllo automatico: è il contributo più prezioso che un docente di Alimentazione può dare.' },
+
+    { id: 'verifica', t: 'La verifica pronta in pochi secondi', min: 5, breve: true, url: '/aula/studio/verifica.html?c=DEMO', risp: ['verifica', 'facilitata', 'mappa'],
+      intro: 'Dalla lezione di esempio, una prova scritta da stampare. Il docente non scrive nulla: sceglie soltanto che cosa stampare.',
+      perche: 'Costruire due file, le soluzioni e una versione adattata è il lavoro più lungo e più ripetitivo. Qui le domande derivano dalla lezione, quindi la verifica è coerente con ciò che gli studenti hanno davvero studiato.',
+      azioni: [
+        'Nella sezione 1 si decide quante domande per tipo (con 0 si toglie un tipo); nella sezione 2 si compila l\'intestazione.',
+        'Si scende fino a <span class="btn">👀 Anteprima</span>: c\'è già il foglio della fila A, con sei tipi di domande e punteggio.',
+        'Si spunta <span class="btn">♿ Anche la versione facilitata</span> e si confronta con la fila A: meno domande, 2 sole risposte, parole da inserire già elencate, carattere più grande. Sul foglio non c\'è scritto «facilitata».',
+        'Si spunta <span class="btn">🗺️ Anche la mappa della lezione</span>: una pagina di idee chiave da consegnare durante la prova, se prevista dal PDP.',
+        'Si guardano la <b>fila B</b> (stesse domande, ordine e risposte mescolate) e le <b>soluzioni</b> per correggere in fretta.',
+        'Si preme <span class="btn">🔀 Altre domande</span>: la verifica cambia in un istante. Poi <span class="btn">🖨️ Stampa</span>, su carta o in PDF.'
+      ] },
+
+    { id: 'tutti', t: 'Una pagina comoda per tutti', min: 5, url: DEMO + '#p=1', ripristina: true,
+      viste: [['Livello 1', DEMO + '#p=1'], ['Livello 2', DEMO + '#p=2'], ['Livello 3', DEMO + '#p=3'], ['Pagina standard', DEMO + '#p=0']],
+      intro: 'In ogni pagina c\'è il pulsante <span class="btn">Aa Leggi a modo tuo</span> in basso a sinistra: lo può usare chiunque.',
+      perche: 'Le facilitazioni non devono mettere in evidenza nessuno. La pagina è una sola, e ciascuno la rende comoda a modo suo: lo studente non vede alcuna etichetta.',
+      azioni: [
+        'Si guarda la lezione al <b>Livello 1</b>: carattere molto leggibile, testo un po\' più grande, più spazio, fondo color crema.',
+        'Si passa al <b>Livello 2</b>: testo più grande, meno animazioni, più tempo nelle sfide con il cronometro.',
+        'Si passa al <b>Livello 3</b>: testo molto grande e voce più lenta.',
+        'Nella pagina si tocca <span class="btn">Aa Leggi a modo tuo</span>: ogni scelta si può cambiare o togliere.',
+        'Si seleziona una frase e si tocca <span class="btn">🔊 Leggi quello che ho selezionato</span>.',
+        'Si torna a <b>Pagina standard</b>: la pagina si riapre come per tutti.'
+      ],
+      nota: 'Le impostazioni restano soltanto nel dispositivo di chi legge. Uscendo da questo passo la pagina viene rimessa com\'era.' },
+
+    { id: 'link', t: 'Il link su misura, senza etichette', min: 3, url: '/aula/studio/inclusione.html',
+      intro: 'È la pagina in cui il docente prepara il link o il QR da dare, in modo riservato, a chi ne ha bisogno.',
+      perche: 'Il docente sceglie il livello una volta e ottiene un normale link: lo studente apre una pagina già comoda, senza avvisi e senza elenchi di nomi sul sito.',
+      azioni: [
+        '<b>Passo 1:</b> nel menu si sceglie <span class="btn">La lezione di prova</span>. Per una lezione vera si incolla il link o il codice di 6 lettere.',
+        '<b>Passo 2:</b> si sceglie il livello (nessuno, 1, 2 o 3). Se serve, si personalizzano i singoli supporti.',
+        '<b>Passo 3:</b> compaiono il link e il QR. Con <span class="btn">👁️ Provalo</span> si vede ciò che vedrà lo studente.'
+      ],
+      nota: 'Le misure da adottare sono quelle stabilite dalla scuola e scritte nel PDP: qui ci sono gli strumenti per applicarle.' },
+
+    { id: 'archivio', t: 'L\'Archivio dei colleghi', min: 3, url: '/aula/studio/archivio.html', viste: [['Archivio', '/aula/studio/archivio.html'], ['Le mie lezioni', '/aula/studio/docente.html#mie']],
+      intro: 'L\'Archivio è il punto in cui il lavoro di un docente diventa disponibile per tutti i colleghi.',
+      perche: 'Ciò che si prepara una volta serve a tutti: una lezione già fatta da un collega si usa con un clic, e la propria aiuta gli altri. Chi condivide può sempre annullare la condivisione.',
+      azioni: [
+        'Si filtrano le lezioni per materia e per anno, oppure si cerca per titolo.',
+        'Si apre una lezione di esempio e si guarda che cosa offre.',
+        'Accanto a ogni lezione c\'è il pulsante <span class="btn">📝 Verifica</span>: la prova nasce in un clic anche dal lavoro di un collega.',
+        'Una lezione propria si ritrova in <b>Le mie lezioni</b>; solo l\'autore può modificarla o cancellarla.'
+      ] },
+
+    { id: 'risparmio', t: 'Quanto tempo si risparmia', min: 5, breve: true, url: '/aula/studio/index.html', calc: true,
+      intro: 'Qui si fa il conto. I numeri di partenza sono stime prudenti, non misure: ciascuno li adatta alla propria esperienza.',
+      perche: 'La domanda giusta non è se la Sala studio sia bella, ma se faccia guadagnare tempo e fatica. Il conto si fa su un\'unità didattica completa: lezione, attività, quiz per la LIM, verifica con due file, versione facilitata e mappa.',
+      azioni: [
+        'Si controllano i tempi «a mano» di ogni attività: se per sé sono diversi, si correggono.',
+        'Si indicano quante unità didattiche si preparano in un mese e per quanti mesi.',
+        'Si confronta il risultato con il tempo misurato dal cronometro nei passi svolti.'
+      ] },
+
+    { id: 'parere', t: 'Il tuo parere e come proseguire', min: 5, breve: true, url: '/aula/studio/index.html', parere: true,
+      intro: 'Una sperimentazione piccola e senza rischi: una sola unità didattica, del prossimo argomento in programma.',
+      perche: 'Il giudizio di un docente di Alimentazione serve in due modi: dire se i contenuti sono esatti e dire che cosa renderebbe lo strumento davvero utile in classe.',
+      azioni: [
+        'Si crea la lezione sul prossimo argomento (passo «Dal libro alla lezione») e si rilegge con occhio da esperto.',
+        'Si prepara la verifica dalla stessa lezione e si guarda la versione facilitata.',
+        'Si compila il modulo qui sotto: si apre una mail già scritta, da inviare a Michele.'
+      ] }
+  ];
+
+  var app = $('app'), sito = $('sito'), elenco = $('elenco');
+  var solo = false, visibili = TAPPE.slice(), corrente = -1, vistaAttiva = null;
+  var spunte = {}, mia = { arg: '', cm: '', mat: '', anno: '' };
+  try { spunte = JSON.parse(sessionStorage.getItem('visita-docente-spunte') || '{}') || {}; } catch (e) { spunte = {}; }
+  function salvaSpunte() { try { sessionStorage.setItem('visita-docente-spunte', JSON.stringify(spunte)); } catch (e) {} }
+
+  /* ───── cronometro ───── */
+  var cr = { ms: 0, ini: 0, via: false, tim: null };
+  function tempoTesto(ms) {
+    var s = Math.floor(ms / 1000), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60;
+    var z = function (n) { return (n < 10 ? '0' : '') + n; };
+    return (h ? h + ':' : '') + z(m) + ':' + z(x);
+  }
+  function crTrascorso() { return cr.ms + (cr.via ? Date.now() - cr.ini : 0); }
+  function crAggiorna() {
+    $('cronoVal').textContent = tempoTesto(crTrascorso());
+    var q = $('cr-ora'); if (q) q.textContent = crTrascorso() > 0 ? tempoTesto(crTrascorso()) : 'non avviato';
+  }
+  function crParti() { cr.via = true; cr.ini = Date.now(); cr.tim = setInterval(crAggiorna, 500); }
+  function crFerma() { cr.ms = crTrascorso(); cr.via = false; clearInterval(cr.tim); cr.tim = null; }
+  $('cronoBtn').onclick = function () {
+    if (cr.via) crFerma(); else crParti();
+    this.textContent = cr.via ? '⏸ Ferma' : '⏱ Avvia';
+    this.setAttribute('aria-pressed', cr.via ? 'true' : 'false'); crAggiorna();
+  };
+  $('cronoZero').onclick = function () {
+    crFerma(); cr.ms = 0; $('cronoBtn').textContent = '⏱ Avvia'; $('cronoBtn').setAttribute('aria-pressed', 'false'); crAggiorna();
+  };
+
+  /* ───── il sito a destra ───── */
+  /* una pagina nuova a ogni cambio, anche quando cambia solo il frammento (#p=...) */
+  function carica(url) {
+    vistaAttiva = url;
+    $('dove').textContent = url; $('dove').title = url;
+    $('nuova').href = url;
+    sito.src = 'about:blank';
+    setTimeout(function () { sito.src = url; }, 40);
+  }
+  /* rimette la lettura com'era, senza che si veda */
+  function ripristinaLettura() {
+    var f = document.createElement('iframe');
+    f.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none';
+    f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1;
+    f.onload = function () { setTimeout(function () { if (f.parentNode) f.parentNode.removeChild(f); }, 300); };
+    f.src = DEMO + '#p=0';
+    document.body.appendChild(f);
+  }
+  /* compila la pagina «crea» con l'argomento scelto a sinistra */
+  function precompila() {
+    if (!mia.arg) return false;
+    var d; try { d = sito.contentDocument; } catch (e) { return false; }
+    if (!d || !/docente\.html/.test(sito.contentWindow.location.pathname)) return false;
+    var a = d.getElementById('dc-arg'); if (!a) return false;
+    function metti(el, v) { if (!el || v === '') return; el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); }
+    metti(a, mia.arg);
+    if (mia.mat) metti(d.getElementById('dc-mat'), mia.mat);
+    if (mia.anno) metti(d.getElementById('dc-anno'), mia.anno);
+    return true;
+  }
+  sito.addEventListener('load', function () {
+    if (!mia.arg) return;
+    setTimeout(precompila, 150); setTimeout(precompila, 900);
+  });
+
+  /* ───── la colonna dei passi ───── */
+  function stimaRisp(chiavi) {
+    if (!chiavi || !chiavi.length) return '';
+    var h = '<div class="risp"><b class="e">Il tempo, in stima</b>';
+    chiavi.forEach(function (k) {
+      var l = lavoro(k); if (!l) return;
+      h += '<div class="r"><span class="c">' + l.c + '</span><span class="pr">a mano: circa ' + durata(l.p) + '</span><span class="dp">con la Sala studio: circa ' + durata(l.d) + '</span></div>';
+    });
+    return h + '<div class="sf">La Sala studio fa la bozza; il tempo indicato comprende la rilettura del docente.</div></div>';
+  }
+  function moduloMia() {
+    return '<div class="modulo" id="mod-mia"><label for="mia-arg">L\'argomento del prossimo lavoro in classe</label>' +
+      '<input type="text" id="mia-arg" maxlength="120" placeholder="per esempio: le proteine e la loro qualità" autocomplete="off"/>' +
+      '<label for="mia-mat">Materia e anno</label><select id="mia-mat">' +
+      '<option value="Scienza degli alimenti|1">Scienza degli alimenti, 1° anno</option>' +
+      '<option value="Scienza degli alimenti|2">Scienza degli alimenti, 2° anno</option>' +
+      '<option value="Scienza e cultura dell\'alimentazione|3">Scienza e cultura dell\'alimentazione, 3° anno</option>' +
+      '<option value="Scienza e cultura dell\'alimentazione|4">Scienza e cultura dell\'alimentazione, 4° anno</option>' +
+      '<option value="Scienza e cultura dell\'alimentazione|5">Scienza e cultura dell\'alimentazione, 5° anno</option>' +
+      '<option value="|">Un\'altra materia (la scelgo nel sito)</option></select>' +
+      '<div class="az2"><button type="button" class="pieno" id="mia-vai">Preparalo nel sito →</button></div>' +
+      '<p class="esito" id="mia-esito" aria-live="polite"></p></div>';
+  }
+  function moduloCalc() {
+    var h = '<div class="modulo" id="mod-calc"><table class="calc"><thead><tr><th><span class="hm-sr" style="position:absolute;left:-9999px">Includi</span></th><th>Attività</th><th>A mano (min)</th><th>Con (min)</th></tr></thead><tbody>';
+    LAVORI.forEach(function (l, i) {
+      h += '<tr><td><input type="checkbox" id="cl-' + i + '" checked aria-label="Includi: ' + l.c + '"/></td><td><label for="cl-' + i + '" style="font-weight:400;margin:0">' + l.c + '</label></td>' +
+        '<td class="n"><input type="number" min="0" max="600" id="cp-' + i + '" value="' + l.p + '" aria-label="Minuti a mano: ' + l.c + '"/></td>' +
+        '<td class="n"><input type="number" min="0" max="600" id="cd-' + i + '" value="' + l.d + '" aria-label="Minuti con la Sala studio: ' + l.c + '"/></td></tr>';
+    });
+    h += '</tbody></table><div class="due"><div><label for="cu">Unità didattiche al mese</label><input type="number" min="1" max="20" id="cu" value="2"/></div>' +
+      '<div><label for="cm">Mesi di scuola</label><input type="number" min="1" max="12" id="cm" value="9"/></div></div>' +
+      '<div class="totali" id="cr-tot" aria-live="polite"></div>' +
+      '<p class="sf">Cronometro, nei passi svolti: <b id="cr-ora">non avviato</b></p>' +
+      '<div class="az2"><button type="button" id="calc-rip">Rimetti i valori di partenza</button></div></div>' +
+      '<div class="avviso"><b>Che cosa la Sala studio non fa.</b><ul class="non">' +
+      '<li>Non corregge le verifiche e non assegna voti: il docente resta il valutatore.</li>' +
+      '<li>Non sostituisce la competenza di chi insegna: la lezione è una bozza da rileggere.</li>' +
+      '<li>Non raccoglie dati degli studenti: si apre un link, senza registrazione.</li>' +
+      '<li>È ancora in anteprima: per ora la usano soltanto docenti ed educatori.</li></ul></div>';
+    return h;
+  }
+  function moduloParere() {
+    return '<div class="modulo" id="mod-par"><label for="pa-nome">Il tuo nome (facoltativo)</label><input type="text" id="pa-nome" maxlength="80" autocomplete="name"/>' +
+      '<label for="pa-uso">La userei nelle mie classi</label><select id="pa-uso"><option value="">scegli</option><option>certamente</option><option>probabilmente</option><option>forse</option><option>non credo</option></select>' +
+      '<label for="pa-cont">I contenuti di Alimentazione: che cosa è corretto e che cosa si deve correggere</label><textarea id="pa-cont"></textarea>' +
+      '<label for="pa-altro">Che cosa mi farebbe risparmiare ancora più tempo</label><textarea id="pa-altro"></textarea>' +
+      '<div class="az2"><button type="button" class="pieno" id="pa-mail">Prepara la mail a Michele →</button><button type="button" id="pa-copia">Copia il testo</button></div>' +
+      '<p class="esito" id="pa-esito" aria-live="polite"></p></div>';
+  }
+
+  function costruisci() {
+    elenco.innerHTML = '';
+    visibili.forEach(function (p, i) {
+      var li = document.createElement('li'); li.id = 'tappa-' + p.id;
+      var h = '<button type="button" class="capo" data-i="' + i + '" aria-expanded="false"><span class="n">' + (i + 1) + '</span><span class="t">' + p.t + '<span class="m">circa ' + p.min + ' minuti</span></span></button><div class="corpo">';
+      h += '<p>' + p.intro + '</p>';
+      if (p.perche) h += '<div class="perche"><b class="e">Perché</b>' + p.perche + '</div>';
+      if (p.viste) h += '<div class="viste" role="group" aria-label="Pagine di questo passo">' + p.viste.map(function (v, k) { return '<button type="button" data-v="' + k + '" aria-pressed="false">' + v[0] + '</button>'; }).join('') + '</div>';
+      if (p.mia) h += moduloMia();
+      h += '<ul class="az">' + p.azioni.map(function (a, j) {
+        var k = p.id + '.' + j;
+        return '<li><label class="sp"><input type="checkbox" data-k="' + k + '"' + (spunte[k] ? ' checked' : '') + '/><span>' + a + '</span></label></li>';
+      }).join('') + '</ul>';
+      if (p.calc) h += moduloCalc();
+      if (p.parere) h += moduloParere();
+      h += stimaRisp(p.risp);
+      if (p.nota) h += '<div class="avviso">' + p.nota + '</div>';
+      h += '</div>';
+      li.innerHTML = h; elenco.appendChild(li);
+    });
+    collegaModuli();
+  }
+
+  function fatta(p) { return p.azioni.length && p.azioni.every(function (a, j) { return spunte[p.id + '.' + j]; }); }
+  function aggiornaStato() {
+    visibili.forEach(function (p, i) {
+      var li = $('tappa-' + p.id);
+      li.classList.toggle('attiva', i === corrente);
+      li.classList.toggle('fatta', !!fatta(p) && i !== corrente);
+      li.querySelector('.capo').setAttribute('aria-expanded', i === corrente ? 'true' : 'false');
+      var vs = li.querySelectorAll('.viste button');
+      for (var k = 0; k < vs.length; k++) vs[k].setAttribute('aria-pressed', i === corrente && p.viste && p.viste[k][1] === vistaAttiva ? 'true' : 'false');
+    });
+    var min = visibili.reduce(function (s, p) { return s + p.min; }, 0);
+    $('barra').style.width = (corrente < 0 ? 0 : Math.round(((corrente + 1) / visibili.length) * 100)) + '%';
+    $('conta').textContent = 'Passo ' + (corrente + 1) + ' di ' + visibili.length + ' · percorso ' + (solo ? 'essenziale' : 'completo') + ', circa ' + min + ' minuti';
+    $('indietro').disabled = corrente <= 0;
+    $('avanti').textContent = corrente >= visibili.length - 1 ? 'Fine ✓' : 'Avanti →';
+  }
+
+  function vai(i, nonCaricare) {
+    if (i < 0 || i >= visibili.length) return;
+    var prima = corrente >= 0 ? visibili[corrente] : null;
+    if (prima && prima.ripristina && i !== corrente) ripristinaLettura();
+    corrente = i;
+    var p = visibili[i];
+    if (!nonCaricare) carica(p.url); else vistaAttiva = p.url;
+    try { history.replaceState(null, '', location.pathname + location.search + '#' + p.id); } catch (e) {}
+    if (p.calc) { calcola(); crAggiorna(); }
+    aggiornaStato();
+    var el = $('tappa-' + p.id); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+  }
+
+  /* ───── moduli ───── */
+  function num(id, min, max, def) {
+    var v = parseFloat(($(id) || {}).value); if (isNaN(v)) return def;
+    return Math.min(Math.max(v, min), max);
+  }
+  function calcola() {
+    if (!$('cr-tot')) return;
+    var pre = 0, dop = 0, n = 0;
+    LAVORI.forEach(function (l, i) {
+      if (!$('cl-' + i).checked) return;
+      pre += num('cp-' + i, 0, 600, l.p); dop += num('cd-' + i, 0, 600, l.d); n++;
+    });
+    var un = num('cu', 1, 20, 2), mesi = num('cm', 1, 12, 9), tot = un * mesi, risp = Math.max(pre - dop, 0);
+    if (!n) { $('cr-tot').innerHTML = 'Si spunta almeno un\'attività per fare il conto.'; return; }
+    var ore = Math.round(risp * tot / 60), gg = Math.round(risp * tot / 60 / 8 * 10) / 10;
+    var perc = pre > 0 ? Math.round(risp / pre * 100) : 0;
+    $('cr-tot').innerHTML = 'Per ogni unità didattica: da <b>' + durata(pre) + '</b> a <b>' + durata(dop) + '</b>.' +
+      '<span class="grande">Circa ' + ore + (ore === 1 ? ' ora' : ' ore') + ' in un anno</span>' +
+      'su ' + tot + ' unità' + ' didattiche: ' + perc + '% di tempo in meno, pari a circa ' + String(gg).replace('.', ',') + (gg === 1 ? ' giornata' : ' giornate') + ' di lavoro da 8 ore.';
+  }
+  function collegaModuli() {
+    var m = $('mia-vai');
+    if (m) m.onclick = function () {
+      var a = $('mia-arg').value.trim(), s = $('mia-mat').value.split('|');
+      if (!a) { $('mia-esito').textContent = 'Si scrive prima un argomento.'; $('mia-arg').focus(); return; }
+      mia = { arg: a, mat: s[0] || '', anno: s[1] || '' };
+      $('mia-esito').textContent = 'Fatto: la pagina a destra si apre con l\'argomento già inserito. Se non lo trova, si scrive a mano nel campo «Argomento».';
+      carica('/aula/studio/docente.html');
+    };
+    var c = $('mod-calc');
+    if (c) {
+      c.addEventListener('input', calcola); c.addEventListener('change', calcola);
+      $('calc-rip').onclick = function () {
+        LAVORI.forEach(function (l, i) { $('cl-' + i).checked = true; $('cp-' + i).value = l.p; $('cd-' + i).value = l.d; });
+        $('cu').value = 2; $('cm').value = 9; calcola();
+      };
+      calcola();
+    }
+    var pm = $('pa-mail');
+    if (pm) {
+      pm.onclick = function () {
+        var t = testoParere();
+        var u = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('Sala studio: il mio parere') + '&body=' + encodeURIComponent(t);
+        if (u.length > 1900) $('pa-esito').textContent = 'Il testo è lungo e la mail potrebbe non riceverlo tutto: si usa «Copia il testo» e lo si incolla nella mail.';
+        else $('pa-esito').textContent = 'Si apre il programma di posta con il messaggio già scritto. Se non si apre, si usa «Copia il testo».';
+        location.href = u;
+      };
+      $('pa-copia').onclick = function () {
+        var t = testoParere();
+        function ok() { $('pa-esito').textContent = 'Testo copiato: si incolla in una mail a ' + MAIL + '.'; }
+        function ripiego() {
+          var x = document.createElement('textarea'); x.value = t; x.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(x); x.select();
+          try { document.execCommand('copy'); ok(); } catch (e) { $('pa-esito').textContent = 'Non riesco a copiare: si seleziona il testo a mano.'; }
+          document.body.removeChild(x);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, ripiego); else ripiego();
+      };
+    }
+  }
+  function testoParere() {
+    var fatti = visibili.filter(fatta).length, v = function (id) { return ($(id) || {}).value || ''; };
+    var r = ['Ciao Michele,', 'ho provato la Sala studio.', ''];
+    r.push('Passi completati: ' + fatti + ' di ' + visibili.length + '.');
+    if (crTrascorso() > 0) r.push('Tempo misurato con il cronometro: ' + tempoTesto(crTrascorso()) + '.');
+    if (v('pa-uso')) r.push('La userei nelle mie classi: ' + v('pa-uso') + '.');
+    r.push('', 'Contenuti di Alimentazione (corretti o da correggere):', v('pa-cont') || 'nessuna osservazione.');
+    r.push('', 'Che cosa mi farebbe risparmiare ancora più tempo:', v('pa-altro') || 'nessuna osservazione.');
+    if (v('pa-nome')) r.push('', v('pa-nome'));
+    return r.join('\n');
+  }
+
+  /* ───── comandi generali ───── */
+  elenco.addEventListener('click', function (e) {
+    var c = e.target.closest('.capo'); if (c) { vai(+c.getAttribute('data-i')); return; }
+    var v = e.target.closest('.viste button');
+    if (v) { var p = visibili[corrente]; carica(p.viste[+v.getAttribute('data-v')][1]); aggiornaStato(); }
+  });
+  elenco.addEventListener('change', function (e) {
+    var k = e.target.getAttribute && e.target.getAttribute('data-k'); if (!k) return;
+    if (e.target.checked) spunte[k] = 1; else delete spunte[k];
+    salvaSpunte(); aggiornaStato();
+  });
+  $('indietro').onclick = function () { vai(corrente - 1); };
+  $('avanti').onclick = function () {
+    if (corrente >= visibili.length - 1) { if (visibili[corrente].ripristina) ripristinaLettura(); $('conta').textContent = 'Visita completata. Grazie.'; return; }
+    vai(corrente + 1);
+  };
+  $('ricarica').onclick = function () { if (vistaAttiva) carica(vistaAttiva); };
+  $('largo').onclick = function () { var s = app.classList.toggle('stretta'); this.setAttribute('aria-pressed', s ? 'true' : 'false'); };
+  $('vaiSito').onclick = function () { $('vista').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  $('vaiPassi').onclick = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  $('breve').onclick = function () {
+    var id = corrente >= 0 ? visibili[corrente].id : TAPPE[0].id;
+    solo = !solo; this.setAttribute('aria-pressed', solo ? 'true' : 'false');
+    visibili = TAPPE.filter(function (p) { return !solo || p.breve; });
+    var i = 0; visibili.forEach(function (p, k) { if (p.id === id) i = k; });
+    var salvaMia = { a: ($('mia-arg') || {}).value, m: ($('mia-mat') || {}).value };
+    costruisci();
+    if ($('mia-arg') && salvaMia.a) { $('mia-arg').value = salvaMia.a; $('mia-mat').value = salvaMia.m; }
+    corrente = -1; vai(i, true);
+  };
+  window.addEventListener('pagehide', function () { var p = corrente >= 0 && visibili[corrente]; if (p && p.ripristina) { try { localStorage.removeItem('aula-supporti'); } catch (e) {} } });
+
+  costruisci();
+  var h = (location.hash || '').replace('#', ''), inizio = 0;
+  visibili.forEach(function (p, k) { if (p.id === h) inizio = k; });
+  vai(inizio);
+})();
+</script>
+</body>
+</html>

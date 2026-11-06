@@ -151,36 +151,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://convitto.alberghierorieti.edu.it/autorizzazioni.html</loc>
-    <lastmod>2026-10-16</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/patto-di-corresponsabilita.html</loc>
-    <lastmod>2026-10-16</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/richiesta-rientro-domenicale.html</loc>
-    <lastmod>2026-10-16</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/scheda-informativa-convittore.html</loc>
-    <lastmod>2026-10-16</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/scheda-informativa-sanitaria.html</loc>
-    <lastmod>2026-10-16</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://convitto.alberghierorieti.edu.it/educatori.html</loc>
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
@@ -241,18 +211,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://convitto.alberghierorieti.edu.it/quiz-accoglienza.html</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/quiz-competenze.html</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://convitto.alberghierorieti.edu.it/quiz-cruciverba.html</loc>
     <lastmod>2026-10-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -261,12 +219,6 @@
   <url>
     <loc>https://convitto.alberghierorieti.edu.it/quiz-percorso.html</loc>
     <lastmod>2026-10-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/quiz-piatti.html</loc>
-    <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -337,81 +289,9 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://convitto.alberghierorieti.edu.it/privacy.html</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/privacy-moduli.html</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/informativa-area-famiglie.html</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/informativa-mappa.html</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/informativa-ricordi.html</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/informativa-voci.html</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/informativa-immagini-convittori.html</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/informativa-immagini-personale.html</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/informativa-semiconvitto.html</loc>
-    <lastmod>2026-11-01</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/cookie-policy.html</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
     <loc>https://convitto.alberghierorieti.edu.it/menu-settimana.html</loc>
     <lastmod>2026-10-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/informativa-premiazioni.html</loc>
-    <lastmod>2026-10-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/regole-ricordi.html</loc>
-    <lastmod>2026-10-16</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
@@ -423,12 +303,6 @@
   <url>
     <loc>https://convitto.alberghierorieti.edu.it/rieti-libera-uscita.html</loc>
     <lastmod>2026-10-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://convitto.alberghierorieti.edu.it/autorizzazioni-semiconvitto.html</loc>
-    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

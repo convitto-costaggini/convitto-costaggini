@@ -92,7 +92,34 @@ const locs = [...sitemapXml.matchAll(/<loc>([\s\S]*?)<\/loc>/g)].map(m => m[1]);
 // Unione con le pagine indicizzabili su disco: una pagina nuova non ancora
 // in sitemap.xml (che viene aggiornata da un altro workflow) va comunque
 // indicizzata subito.
-const files = [...new Set([...locs.map(locToFile).filter(Boolean), ...pagineIndicizzabili(ROOT)])].sort();
+// Pagine in "noindex" per Google (servizio/moduli) che devono restare
+// nella ricerca interna e nel chatbot: vanno incluse comunque.
+const SEMPRE_NELLA_RICERCA = [
+  'autorizzazioni-semiconvitto.html',
+  'autorizzazioni.html',
+  'cookie-policy.html',
+  'informativa-area-famiglie.html',
+  'informativa-immagini-convittori.html',
+  'informativa-immagini-personale.html',
+  'informativa-mappa.html',
+  'informativa-premiazioni.html',
+  'informativa-ricordi.html',
+  'informativa-semiconvitto.html',
+  'informativa-voci.html',
+  'patto-di-corresponsabilita.html',
+  'privacy-moduli.html',
+  'privacy.html',
+  'quiz-accoglienza.html',
+  'quiz-competenze.html',
+  'quiz-piatti.html',
+  'regole-ricordi.html',
+  'richiesta-rientro-domenicale.html',
+  'scheda-informativa-convittore.html',
+  'scheda-informativa-sanitaria.html',
+  'provenienza.html'
+];
+
+const files = [...new Set([...locs.map(locToFile).filter(Boolean), ...pagineIndicizzabili(ROOT), ...SEMPRE_NELLA_RICERCA])].sort();
 
 if (!files.length) fail('nessuna pagina trovata in sitemap.xml');
 

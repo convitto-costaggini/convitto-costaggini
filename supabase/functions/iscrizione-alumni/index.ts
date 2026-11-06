@@ -2,9 +2,8 @@
 // Edge Function: iscrizione-alumni
 // Convitto "Costaggini" — Supabase project sawclsysqnjsvbobioqo
 // =====================================================================
-// Cosa fa: riceve la scheda di iscrizione alla pagina Alumni, verifica
-// il token reCAPTCHA Enterprise lato server (Google Cloud) e solo se la
-// verifica passa inserisce la scheda alumni, il ricordo associato e,
+// Cosa fa: riceve la scheda di iscrizione alla pagina Alumni, applica
+// i controlli antispam interni e solo se li supera inserisce la scheda alumni, il ricordo associato e,
 // se l'utente ha acconsentito, il pin sulla Mappa Alumni.
 //
 // Dal 04/11/2026 la posizione del pin arriva dalla pagina, che la ricava
@@ -17,10 +16,8 @@
 // Se la registrazione del consenso non riesce, l'errore viene scritto
 // nei log ma l'iscrizione non viene interrotta.
 //
-// La chiave API di Google Cloud NON è scritta qui: va impostata come
-// secret del progetto Supabase con il nome RECAPTCHA_API_KEY
-// (Edge Functions → Secrets), lo stesso secret già usato dalla funzione
-// richiesta-accesso.
+// Dal 06/11/2026 il reCAPTCHA è tolto: lo sostituiscono il campo trappola,
+// il tempo di compilazione e il limite di invii (vedi ANTISPAM INTERNO).
 // =====================================================================
 
 const cors = {
@@ -37,48 +34,41 @@ function json(body: unknown, status = 200): Response {
   });
 }
 
-const SOGLIA_PUNTEGGIO = 0.5;
-const AZIONE_ATTESA = "iscrizione_alumni";
-const RECAPTCHA_PROJECT_ID = "convitto-costagg-1786033824350";
-const RECAPTCHA_SITE_KEY = "6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO";
 const INFORMATIVA_ALUMNI = "ricordi-2026-10-06";
 const INFORMATIVA_MAPPA = "mappa-2026-10-06";
 
-async function verificaRecaptcha(token: string): Promise<boolean> {
-  const apiKey = Deno.env.get("RECAPTCHA_API_KEY");
-  if (!apiKey || !token) return false;
+// ===== ANTISPAM INTERNO (dal 6/11/2026, al posto del reCAPTCHA) =====
+// Nessun servizio esterno e nessun dato sul visitatore: campo trappola
+// (botField), tempo di compilazione (tMs, aggiunto da app.js) e limite al
+// numero di invii, contato sulle righe gia' presenti nella tabella.
+const TEMPO_MINIMO_MS = 3000;     // sotto i 3 secondi: invio automatico
+const LIMITE_ORA = 20;            // invii complessivi in un'ora
+const LIMITE_EMAIL_10_MIN = 2;    // invii con la stessa email in 10 minuti
+
+async function contaRecenti(tabella: string, minuti: number, colonnaEmail?: string, email?: string): Promise<number | null> {
+  const chiave = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (!chiave) return null;
+  const da = new Date(Date.now() - minuti * 60000).toISOString();
+  let url = `${Deno.env.get("SUPABASE_URL")}/rest/v1/${tabella}?select=id&created_at=gte.${encodeURIComponent(da)}`;
+  if (colonnaEmail && email) url += `&${colonnaEmail}=eq.${encodeURIComponent(email)}`;
   try {
-    const resp = await fetch(
-      `https://recaptchaenterprise.googleapis.com/v1/projects/${RECAPTCHA_PROJECT_ID}/assessments?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          event: {
-            token,
-            expectedAction: AZIONE_ATTESA,
-            siteKey: RECAPTCHA_SITE_KEY,
-          },
-        }),
-      },
-    );
-    const esito = await resp.json();
-    const tp = esito?.tokenProperties;
-    const score = esito?.riskAnalysis?.score;
-    if (!resp.ok || !tp) {
-      console.error("Assessment reCAPTCHA fallita:", JSON.stringify(esito));
-      return false;
-    }
-    return (
-      tp.valid === true &&
-      tp.action === AZIONE_ATTESA &&
-      typeof score === "number" &&
-      score >= SOGLIA_PUNTEGGIO
-    );
+    const r = await fetch(url, { method: "HEAD", headers: { apikey: chiave, Authorization: `Bearer ${chiave}`, Prefer: "count=exact" } });
+    const n = Number((r.headers.get("content-range") || "").split("/")[1]);
+    return Number.isFinite(n) ? n : null;
   } catch (e) {
-    console.error("Errore verifica reCAPTCHA:", e);
-    return false;
+    console.error("Conteggio antispam non riuscito:", e);
+    return null;   // in caso di errore non si blocca l'invio: restano trappola e tempo
   }
+}
+
+async function antispam(body: Record<string, unknown>, tabella: string, colonnaEmail: string, email: string): Promise<string | null> {
+  const t = Number(body.tMs);
+  if (!Number.isFinite(t) || t < TEMPO_MINIMO_MS) return "Invio troppo rapido: attenda qualche secondo e riprovi.";
+  const ora = await contaRecenti(tabella, 60);
+  if (ora !== null && ora >= LIMITE_ORA) return "Troppe richieste in questo momento: riprovi fra un'ora.";
+  const stessa = await contaRecenti(tabella, 10, colonnaEmail, email);
+  if (stessa !== null && stessa >= LIMITE_EMAIL_10_MIN) return "Abbiamo già ricevuto la Sua richiesta: attenda qualche minuto prima di inviarne un'altra.";
+  return null;
 }
 
 async function inserisci(tabella: string, riga: Record<string, unknown>): Promise<{ ok: boolean; status: number; body: string }> {
@@ -135,10 +125,8 @@ Deno.serve(async (req) => {
       return json({ success: false, message: "Compilare tutti i campi obbligatori." }, 400);
     }
 
-    const recaptchaOk = await verificaRecaptcha(String(body.recaptchaToken || ""));
-    if (!recaptchaOk) {
-      return json({ success: false, message: "Verifica anti-spam non superata. Ricarichi la pagina e riprovi." }, 400);
-    }
+    const bloccato = await antispam(body, "alumni", "email", email);
+    if (bloccato) return json({ success: false, message: bloccato }, 429);
 
     const colore = Math.floor(Math.random() * 5);
     // Identificativi generati qui, così il consenso si collega con certezza alla riga inserita.

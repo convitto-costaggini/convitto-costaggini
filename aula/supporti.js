@@ -1,6 +1,8 @@
 /* ════════════════════════════════════════════════════════════
    AULA · Supporti per la lettura
    Un pannello uguale per tutti: «Rendi la pagina comoda per te».
+   In cima, la «Scelta rapida» Lettura 1-2-3 (gli stessi livelli dei link dei docenti),
+   cosi' ognuno puo' sceglierla da se' senza ricevere link (parere DPO del 4/11/2026).
    Il docente può mandare un link che apre la pagina già impostata
    (#p=1, #p=2, #p=3 oppure #s=car.z2.sp): il link non dice per chi è.
    Le scelte restano nel dispositivo (localStorage), il sito non le raccoglie.
@@ -126,6 +128,9 @@
   function disegnaPannello() {
     pann.innerHTML =
       '<div class="sup-testa"><h2 id="sup-tit">Rendi la pagina comoda per te</h2><button type="button" class="sup-x" data-chiudi aria-label="Chiudi">✕</button></div>' +
+      '<h3>Scelta rapida</h3><div class="sup-scelte" role="group" aria-label="Scelta rapida">' +
+        ['1', '2', '3'].map(function (n) { var on = comporta(stato) === comporta(leggiLista(PROFILI[n])); return '<button type="button" data-p="' + n + '" aria-pressed="' + (on ? 'true' : 'false') + '">Lettura ' + n + '</button>'; }).join('') + '</div>' +
+      '<p class="sup-nota" style="margin-top:4px">1: più chiara · 2: anche più calma e con più tempo · 3: anche testo più grande e voce lenta. Poi puoi aggiustare qui sotto.</p>' +
       gruppo('Testo') +
       '<h3>Grandezza del testo</h3><div class="sup-scelte" role="group" aria-label="Grandezza del testo">' +
         ZETE.map(function (t, i) { return '<button type="button" data-z="' + i + '" aria-pressed="' + (stato.z === i ? 'true' : 'false') + '" style="font-size:' + (14 + i * 2) + 'px" aria-label="Testo ' + (i ? 'più grande, livello ' + i : 'normale') + '">' + t + '</button>'; }).join('') + '</div>' +
@@ -158,12 +163,13 @@
       if (t.hasAttribute('data-leggi')) return leggiSelezione();
       if (t.hasAttribute('data-zitto')) return tuttoZitto();
       if (t.hasAttribute('data-ripristina')) { stato = vuoto(); salva(); applica(); disegnaPannello(); dici('Tutto come prima'); return; }
-      if (t.hasAttribute('data-k')) { var k = t.getAttribute('data-k'); stato[k] = stato[k] ? 0 : 1; }
+      if (t.hasAttribute('data-p')) stato = leggiLista(PROFILI[t.getAttribute('data-p')]);
+      else if (t.hasAttribute('data-k')) { var k = t.getAttribute('data-k'); stato[k] = stato[k] ? 0 : 1; }
       else if (t.hasAttribute('data-z')) stato.z = +t.getAttribute('data-z');
       else if (t.hasAttribute('data-tema')) stato.tema = t.getAttribute('data-tema');
       else return;
       salva(); applica();
-      var f = t.getAttribute('data-k') ? '[data-k="' + t.getAttribute('data-k') + '"]' : t.hasAttribute('data-z') ? '[data-z="' + t.getAttribute('data-z') + '"]' : '[data-tema="' + t.getAttribute('data-tema') + '"]';
+      var f = t.hasAttribute('data-p') ? '[data-p="' + t.getAttribute('data-p') + '"]' : t.getAttribute('data-k') ? '[data-k="' + t.getAttribute('data-k') + '"]' : t.hasAttribute('data-z') ? '[data-z="' + t.getAttribute('data-z') + '"]' : '[data-tema="' + t.getAttribute('data-tema') + '"]';
       var y = pann.scrollTop; disegnaPannello(); pann.scrollTop = y; var n = pann.querySelector(f); if (n) n.focus();
     });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pann.hidden) apri(false); });

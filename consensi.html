@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="robots" content="noindex"/>
+  <meta name="description" content="Pagina dei consensi online del Convitto Costaggini: per il personale e i convittori maggiorenni, con l'email della scuola."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <title>Consensi online | Convitto "Costaggini" — Rieti</title>
+  <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/consensi.html"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
+  <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+  <style>
+    .cs-body{max-width:640px;margin:0 auto;padding:2.5rem 1.1rem 4rem}
+    .cs-card{background:#fff;border-radius:14px;box-shadow:0 2px 14px rgba(0,0,0,.06);padding:1.3rem 1.2rem;margin:0 0 1.1rem}
+    .cs-card h2{font-family:var(--fd);font-weight:400;color:var(--bosco);font-size:1.35rem;margin:0 0 .6rem}
+    .cs-nota{font-size:.88rem;color:var(--txt2);line-height:1.6;margin:.2rem 0 .6rem}
+    .cs-body label{display:block;margin:.8rem 0 .3rem;font-size:.95rem;color:var(--txt)}
+    .cs-campo{display:flex;align-items:stretch;border:1.5px solid #d6d3c8;border-radius:10px;overflow:hidden;background:#fff}
+    .cs-campo:focus-within{border-color:var(--oro2)}
+    .cs-campo input{flex:1;min-width:0;border:0;padding:.8rem .85rem;font:inherit;font-size:1rem;outline:0}
+    .cs-campo span{display:flex;align-items:center;padding:0 .7rem;background:#f3f1ea;color:var(--txt2);font-size:.88rem;white-space:nowrap}
+    .cs-body input[type=text],.cs-body select,.cs-body textarea{width:100%;padding:.75rem .85rem;border:1.5px solid #d6d3c8;border-radius:10px;font:inherit;font-size:1rem;background:#fff;box-sizing:border-box}
+    .cs-body textarea{min-height:4.5rem}
+    .cs-codice{font-size:1.6rem!important;letter-spacing:.45em;text-align:center;font-family:ui-monospace,Menlo,Consolas,monospace!important}
+    .cs-btn{display:block;width:100%;margin-top:1.1rem;background:var(--oro2);color:var(--bosco);border:0;border-radius:30px;padding:.9rem 1.2rem;font-family:var(--fu);font-weight:800;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+    .cs-btn:disabled{opacity:.55;cursor:wait}
+    .cs-btn.sec{display:inline-block;width:auto;background:transparent;border:1.5px solid var(--oro2);color:#7a5c12;margin-top:.5rem;padding:.45rem 1rem;font-size:.72rem}
+    .cs-link{background:none;border:0;color:var(--bosco2);text-decoration:underline;font:inherit;font-size:.92rem;cursor:pointer;padding:0}
+    .cs-msg{padding:.75rem .9rem;border-radius:10px;font-size:.93rem;margin:0 0 1rem}
+    .cs-ok{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+    .cs-err{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+    .cs-spunta{display:flex;gap:.6rem;align-items:flex-start;margin:.9rem 0!important;font-size:.95rem}
+    .cs-spunta input{width:1.25rem;height:1.25rem;margin-top:.15rem;flex-shrink:0}
+    .cs-canale{border-top:1px solid #eee;padding:.7rem 0}
+    .cs-canale .sn{display:flex;gap:1.3rem;margin-top:.35rem}
+    .cs-canale .sn label,.cs-scelte label{display:flex;gap:.45rem;align-items:center;margin:.35rem 0}
+    .cs-canale input,.cs-scelte input{width:1.2rem;height:1.2rem}
+    .cs-mio{border-top:1px solid #eee;padding:.8rem 0}
+    .cs-mio:first-child{border-top:0}
+    .cs-mio b{color:var(--bosco)}
+    .cs-stato{font-weight:800;font-size:.75rem;letter-spacing:.06em;font-family:var(--fu)}
+    .cs-stato.ATTIVO{color:#047857}.cs-stato.REVOCATO,.cs-stato.SCADUTO{color:#b91c1c}
+    .cs-chi{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;font-size:.9rem;color:var(--txt2);margin:0 0 1rem}
+    .cs-body [hidden]{display:none!important}
+  </style>
+</head>
+<body data-page="privacy">
+<script src="nav-header.min.js"></script>
+<main id="main">
+
+  <div class="page-hero">
+    <div class="w">
+      <nav class="breadcrumb" aria-label="Percorso">
+        <a href="./">Home</a><span>›</span>
+        <a href="privacy-moduli.html">Informative e moduli</a><span>›</span>
+        <span aria-current="page">Consensi online</span>
+      </nav>
+      <div class="gold-bar"></div>
+      <h1>Consensi <em>online</em></h1>
+      <p class="sub">Per il personale e per i convittori maggiorenni: immagini e video, Voci, Premio al Merito. Si entra con l'email della scuola.</p>
+    </div>
+  </div>
+
+  <section style="background:var(--bco)">
+    <div class="cs-body">
+      <div id="cs-msg" aria-live="polite"></div>
+
+      <!-- PASSO 1: email -->
+      <div class="cs-card" id="cs-passo-email" hidden>
+        <h2>Entra con la tua email della scuola</h2>
+        <p class="cs-nota">Ti mandiamo un codice di 6 cifre nella casella della scuola. Non serve nessuna password.</p>
+        <label for="cs-email">La tua email</label>
+        <div class="cs-campo"><input id="cs-email" type="text" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="nome.cognome"><span>@alberghierorieti.it</span></div>
+        <button class="cs-btn" id="cs-b-invia" type="button">Mandami il codice</button>
+        <p class="cs-nota" style="margin-top:1rem">I convittori minorenni non possono dare il consenso online: serve il modulo cartaceo firmato da entrambi i genitori o dal tutore, che trovi nelle <a href="privacy-moduli.html" style="color:var(--bosco2)">informative e moduli</a>.</p>
+      </div>
+
+      <!-- PASSO 2: codice -->
+      <div class="cs-card" id="cs-passo-codice" hidden>
+        <h2>Scrivi il codice</h2>
+        <p class="cs-nota">L'abbiamo mandato a <b id="cs-email-mostrata"></b>. Se non lo vedi, guarda anche nello Spam. Vale 10 minuti.</p>
+        <input id="cs-codice" class="cs-codice" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="······" aria-label="Codice di 6 cifre">
+        <button class="cs-btn" id="cs-b-entra" type="button">Entra</button>
+        <p style="margin-top:1rem;display:flex;gap:1.2rem;flex-wrap:wrap">
+          <button class="cs-link" type="button" id="cs-nuovo">Mandami un nuovo codice</button>
+          <button class="cs-link" type="button" id="cs-cambia">Cambia email</button>
+        </p>
+      </div>
+
+      <!-- DENTRO -->
+      <div id="cs-dentro" hidden>
+        <p class="cs-chi"><span>Sei dentro come <b id="cs-io"></b></span><button class="cs-link" type="button" id="cs-esci">Esci</button></p>
+
+        <div class="cs-card">
+          <h2>Dai un consenso</h2>
+          <p class="cs-nota">È libero: puoi non darlo, o revocarlo quando vuoi, senza alcuna conseguenza. Ti arriva una ricevuta via email.</p>
+          <label for="cs-tipo">Per che cosa</label>
+          <select id="cs-tipo">
+            <option value="">Scegli…</option>
+            <optgroup label="Personale">
+              <option value="immagini_personale">Immagini del personale (foto e video)</option>
+              <option value="voci_personale">Voci del Personale</option>
+            </optgroup>
+            <optgroup label="Convittori maggiorenni">
+              <option value="immagini_convittori">Immagini e video dei convittori</option>
+              <option value="voci_convittori">Voci dal Convitto</option>
+              <option value="premiati">Premio al Merito</option>
+            </optgroup>
+          </select>
+          <div id="cs-opzioni"></div>
+        </div>
+
+        <div class="cs-card">
+          <h2>I miei consensi</h2>
+          <div id="cs-miei"><p class="cs-nota">Caricamento…</p></div>
+        </div>
+      </div>
+
+      <div class="cs-card" id="cs-attesa"><p class="cs-nota" style="margin:0">Caricamento della pagina dei consensi…</p></div>
+    </div>
+  </section>
+
+</main>
+<script>
+(function () {
+  'use strict';
+  /* La pagina dialoga con la «pagina dei consensi» del Convitto (Apps Script, ambiente Google Workspace
+     dell'Istituto) senza aprire pagine di Google: niente accesso con l'account, quindi niente errore
+     con più account collegati. L'identità si verifica con il codice inviato alla casella della scuola. */
+  var API = 'https://script.google.com/macros/s/AKfycbxq2NDh8tkpaUJbplFc81TGN58noJDmX2yZ0JReNVgSsY39YKi78cA-J-OGZupruamfbw/exec';
+  var INFORMATIVE = {
+    immagini_personale: 'informativa-immagini-personale.html',
+    voci_personale: 'informativa-voci.html',
+    voci_convittori: 'informativa-voci.html',
+    immagini_convittori: 'informativa-immagini-convittori.html',
+    premiati: 'informativa-premiazioni.html'
+  };
+  var DIDASCALIE = ['Nome, cognome e ruolo', 'Solo ruolo', 'Nessuna didascalia'];
+  var NOMI = ['Nome e cognome', 'Solo nome', 'Nessun nome'];
+  var TIPI = null, SESSIONE = '', EMAIL = '';
+
+  function $(id) { return document.getElementById(id); }
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function msg(t, err) { $('cs-msg').innerHTML = t ? '<div class="cs-msg ' + (err ? 'cs-err' : 'cs-ok') + '">' + esc(t) + '</div>' : ''; if (t) $('cs-msg').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  function mostra(q) {
+    $('cs-attesa').hidden = true;
+    $('cs-passo-email').hidden = q !== 'email';
+    $('cs-passo-codice').hidden = q !== 'codice';
+    $('cs-dentro').hidden = q !== 'dentro';
+    if (q === 'email') setTimeout(function () { $('cs-email').focus(); }, 50);
+    if (q === 'codice') { $('cs-codice').value = ''; setTimeout(function () { $('cs-codice').focus(); }, 50); }
+  }
+
+  /* Una chiamata alla pagina dei consensi: testo semplice (niente controlli preliminari del browser),
+     senza credenziali (nessun cookie di Google). */
+  function chiama(azione, extra, bottone) {
+    if (bottone) bottone.disabled = true;
+    var corpo = Object.assign({ azione: azione }, extra || {});
+    return fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(corpo), credentials: 'omit' })
+      .then(function (r) { if (!r.ok) throw new Error('rete'); return r.json(); })
+      .catch(function () { throw new Error('Connessione non riuscita: controlla la rete e riprova.'); })
+      .then(function (r) {
+        if (bottone) bottone.disabled = false;
+        if (r && r.ok) return r.dati;
+        var e = (r && r.errore) || 'Si è verificato un errore.';
+        if (e.indexOf('SESSIONE_SCADUTA') !== -1) {
+          SESSIONE = ''; mostra('email');
+          msg('Per sicurezza sei uscito dopo un po\' di inattività: chiedi un nuovo codice.', true);
+          throw new Error('');
+        }
+        throw new Error(e.replace(/^Error:\s*/, ''));
+      }, function (e) { if (bottone) bottone.disabled = false; throw e; });
+  }
+  function errore(e) { if (e && e.message) msg(e.message, true); }
+
+  /* ---------- accesso ---------- */
+  function inviaCodice(dinuovo) {
+    var e = (dinuovo ? EMAIL : $('cs-email').value).trim();
+    if (!e) { msg('Scrivi la tua email della scuola.', true); return; }
+    msg('');
+    chiama('inviaCodice', { email: e }, $('cs-b-invia')).then(function (r) {
+      EMAIL = r.email; $('cs-email-mostrata').textContent = r.email; mostra('codice');
+      if (dinuovo) msg('Ti abbiamo mandato un nuovo codice.');
+    }).catch(errore);
+  }
+  function verificaCodice() {
+    var c = $('cs-codice').value.replace(/\D/g, '');
+    if (c.length !== 6) { msg('Il codice è di 6 cifre.', true); return; }
+    msg('');
+    chiama('verificaCodice', { email: EMAIL, codice: c }, $('cs-b-entra')).then(function (r) {
+      SESSIONE = r.sessione; $('cs-io').textContent = r.email; mostra('dentro'); caricaMiei();
+    }).catch(errore);
+  }
+  $('cs-b-invia').addEventListener('click', function () { inviaCodice(false); });
+  $('cs-email').addEventListener('keydown', function (e) { if (e.key === 'Enter') inviaCodice(false); });
+  $('cs-email').addEventListener('input', function () { var i = this.value.indexOf('@'); if (i !== -1 && /alberghierorieti\.it$/i.test(this.value)) this.value = this.value.slice(0, i); });
+  $('cs-b-entra').addEventListener('click', verificaCodice);
+  $('cs-codice').addEventListener('input', function () { this.value = this.value.replace(/\D/g, '').slice(0, 6); if (this.value.length === 6) verificaCodice(); });
+  $('cs-nuovo').addEventListener('click', function () { inviaCodice(true); });
+  $('cs-cambia').addEventListener('click', function () { msg(''); mostra('email'); });
+  $('cs-esci').addEventListener('click', function () {
+    chiama('esci', { sessione: SESSIONE }).catch(function () {}).then(function () { SESSIONE = ''; $('cs-email').value = ''; msg('Sei uscito.'); mostra('email'); });
+  });
+
+  /* ---------- modulo ---------- */
+  function annoCorrente() { var d = new Date(), y = d.getFullYear(); return d.getMonth() >= 8 ? y + '/' + (y + 1) : (y - 1) + '/' + y; }
+  function valoreRadio(n) { var x = document.querySelector('input[name="' + n + '"]:checked'); return x ? x.value : ''; }
+  function disegnaOpzioni() {
+    var tipo = $('cs-tipo').value, t = TIPI && TIPI[tipo], h = '';
+    if (!t) { $('cs-opzioni').innerHTML = ''; return; }
+    var personale = tipo.indexOf('personale') !== -1;
+    h += '<p class="cs-nota" style="margin-top:.8rem">Prima di decidere leggi l\'<a href="' + INFORMATIVE[tipo] + '" target="_blank" rel="noopener" style="color:var(--bosco2)">informativa «' + esc(t.etichetta) + '»</a> (versione ' + esc(t.versione) + ').</p>';
+    h += '<label for="cs-nome">Nome e cognome</label><input id="cs-nome" type="text" maxlength="80" autocomplete="name">';
+    h += '<label for="cs-ruolo">' + (personale ? 'Ruolo (es. docente, educatore, collaboratore scolastico)' : 'Classe (es. 5A)') + '</label><input id="cs-ruolo" type="text" maxlength="60">';
+    if (tipo === 'voci_personale' || tipo === 'voci_convittori') {
+      h += '<label for="cs-domanda">Numero della domanda a cui rispondi</label><select id="cs-domanda"><option value="">Scegli…</option>';
+      for (var i = 1; i <= 10; i++) h += '<option>' + i + '</option>';
+      h += '</select><label>Nel contributo il tuo nome compare come</label><div class="cs-scelte">';
+      NOMI.forEach(function (n) { h += '<label><input type="radio" name="cs-nomeVoce" value="' + esc(n) + '"> ' + esc(n) + '</label>'; });
+      h += '</div>';
+    } else if (tipo === 'immagini_personale') {
+      h += '<label>Didascalia sotto le immagini</label><div class="cs-scelte">';
+      DIDASCALIE.forEach(function (n) { h += '<label><input type="radio" name="cs-didascalia" value="' + esc(n) + '"> ' + esc(n) + '</label>'; });
+      h += '</div><label for="cs-solo">Solo per queste immagini <span class="cs-nota">(facoltativo: lascia vuoto per tutte)</span></label><textarea id="cs-solo" maxlength="300"></textarea>';
+    } else {
+      var a = annoCorrente(), y = parseInt(a.slice(0, 4), 10), b = (y + 1) + '/' + (y + 2);
+      h += '<label for="cs-anno">Anno scolastico</label><select id="cs-anno"><option>' + a + '</option><option>' + b + '</option></select>';
+      h += '<label>Per ogni canale scegli sì o no</label>';
+      t.canali.forEach(function (c, j) {
+        h += '<div class="cs-canale">' + esc(c) + '<div class="sn"><label><input type="radio" name="cs-c' + j + '" value="si"> Sì</label><label><input type="radio" name="cs-c' + j + '" value="no"> No</label></div></div>';
+      });
+    }
+    if (t.maggiorenne) h += '<label class="cs-spunta"><input type="checkbox" id="cs-maggiorenne"> <span>Dichiaro di essere maggiorenne.</span></label>';
+    h += '<label class="cs-spunta"><input type="checkbox" id="cs-letto"> <span>Ho letto l\'informativa e presto il consenso alle condizioni scelte qui sopra.</span></label>';
+    h += '<button class="cs-btn" id="cs-b-registra" type="button">Registra il consenso</button>';
+    $('cs-opzioni').innerHTML = h;
+    $('cs-b-registra').addEventListener('click', registra);
+  }
+  $('cs-tipo').addEventListener('change', disegnaOpzioni);
+  function registra() {
+    var tipo = $('cs-tipo').value, t = TIPI[tipo];
+    var d = { tipo: tipo, nome: $('cs-nome').value, ruolo: $('cs-ruolo').value, letto: $('cs-letto').checked,
+              maggiorenne: $('cs-maggiorenne') ? $('cs-maggiorenne').checked : false };
+    if (tipo === 'voci_personale' || tipo === 'voci_convittori') { d.domanda = $('cs-domanda').value; d.indicazioneNome = valoreRadio('cs-nomeVoce'); }
+    else if (tipo === 'immagini_personale') { d.didascalia = valoreRadio('cs-didascalia'); d.soloImmagini = $('cs-solo').value; }
+    else { d.annoScolastico = $('cs-anno').value; d.canali = t.canali.map(function (c, j) { return valoreRadio('cs-c' + j); }); }
+    msg('');
+    chiama('registra', { sessione: SESSIONE, dati: d }, $('cs-b-registra')).then(function (r) {
+      $('cs-tipo').value = ''; $('cs-opzioni').innerHTML = '';
+      msg('Consenso registrato (codice ' + r.id + '). Ti abbiamo mandato la ricevuta via email.');
+      caricaMiei();
+    }).catch(errore);
+  }
+
+  /* ---------- i miei consensi ---------- */
+  function caricaMiei() { chiama('miei', { sessione: SESSIONE }).then(disegnaMiei).catch(errore); }
+  function disegnaMiei(r) {
+    var el = $('cs-miei');
+    if (!r || !r.length) { el.innerHTML = '<p class="cs-nota">Non hai ancora dato consensi con questa email.</p>'; return; }
+    el.innerHTML = r.slice().reverse().map(function (x) {
+      var scad = x.scadenza ? (x.scadenza.indexOf('/') !== -1 ? ' · fino al ' + esc(x.scadenza) : ' · ' + esc(String(x.scadenza).toLowerCase())) : '';
+      return '<div class="cs-mio"><b>' + esc(x.tipo) + '</b> <span class="cs-stato ' + esc(x.stato) + '">' + esc(x.stato) + '</span><br>' +
+        '<span class="cs-nota">' + esc(x.data) + ' · codice ' + esc(x.id) + scad + '</span><br>' +
+        '<span style="font-size:.9rem">' + esc(x.scelte) + '</span>' +
+        (x.stato === 'ATTIVO' ? '<br><button class="cs-btn sec" type="button" data-revoca="' + esc(x.id) + '">Revoca</button>' : '') + '</div>';
+    }).join('');
+  }
+  $('cs-miei').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-revoca]'); if (!b) return;
+    if (!confirm('Confermi la revoca? La pubblicazione sarà rimossa entro 7 giorni.')) return;
+    chiama('revoca', { id: b.getAttribute('data-revoca'), sessione: SESSIONE }, b).then(function (r) {
+      msg('Revoca registrata: la pubblicazione sarà rimossa entro il ' + r.rimozione + '. Ti abbiamo mandato una conferma via email.');
+      caricaMiei();
+    }).catch(errore);
+  });
+
+  /* ---------- avvio ---------- */
+  chiama('tipi').then(function (t) { TIPI = t; mostra('email'); })
+    .catch(function (e) { $('cs-attesa').innerHTML = '<p class="cs-nota" style="margin:0">' + esc(e.message || 'La pagina non è raggiungibile in questo momento.') + ' In alternativa puoi usare il modulo cartaceo nelle <a href="privacy-moduli.html" style="color:var(--bosco2)">informative e moduli</a>.</p>'; });
+})();
+</script>
+<script src="nav.min.js"></script>
+</body>
+</html>

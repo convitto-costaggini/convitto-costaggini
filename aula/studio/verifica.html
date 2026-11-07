@@ -268,7 +268,7 @@
   }
   function mappa() {
     var A = (L.mnemonica || {}).acronimo || {};
-    return '<div class="vf-foglio facile"><div class="vf-scuola">Mappa della lezione · strumento compensativo</div><div class="vf-mappa"><div class="c">' + esc((L.icona || '') + ' ' + L.titolo) + '</div>' +
+    return '<div class="vf-foglio facile"><div class="vf-scuola">Mappa della lezione</div><div class="vf-mappa"><div class="c">' + esc((L.icona || '') + ' ' + L.titolo) + '</div>' +
       arr(L.concetti).map(function (c) { return '<div class="n"><b>' + esc((c.emoji || '•') + ' ' + c.titolo) + '</b>' + esc((String(c.spiegazione || '').match(/^.*?[.!?](\s|$)/) || [String(c.spiegazione || '')])[0]) + '</div>'; }).join('') + '</div>' +
       (A.parola && A.frase ? '<p style="margin-top:4mm"><b>Per ricordare: ' + esc(A.parola) + '</b> — «' + esc(A.frase) + '»</p>' : '') +
       (arr(L.parole).length ? '<p style="margin-top:3mm"><b>Parole importanti:</b> ' + arr(L.parole).map(function (p) { return '<b>' + esc(p.termine) + '</b>: ' + esc(p.definizione); }).join(' · ') + '</p>' : '') + '</div>';

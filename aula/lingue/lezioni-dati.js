@@ -2,7 +2,7 @@
    LINGUE — lezioni guidate (pacchetti completi per un'ora di lezione)
    Ogni lezione, per ogni lingua: schede della mini-lezione, esercizi,
    missione finale, verifica A/B (stampabile) e note per il docente.
-   La versione facilitata (DSA/BES) si ricava in automatico dagli stessi dati.
+   La versione con più aiuti si ricava in automatico dagli stessi dati.
    Formato pensato anche per i pacchetti preparati con l'IA dai docenti.
    Nei testi italiani **parola** = grassetto.
    ════════════════════════════════════════════════════════ */

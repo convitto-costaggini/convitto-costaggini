@@ -1,4 +1,4 @@
-/* Anteprima riservata: le novità sul supporto alla lettura (DSA e BES) si vedono
+/* Anteprima riservata: le novità sul supporto alla lettura si vedono
    su un dispositivo abilitato con la chiave di anteprima di sempre oppure con una seconda chiave (?riservato=).
    Vetrina, non sicurezza: nel codice c'è soltanto l'impronta della chiave. */
 (function () {

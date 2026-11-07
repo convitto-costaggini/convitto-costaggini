@@ -1,7 +1,7 @@
 /* ════════════════════════════════════════════════════════
    SALA STUDIO — stile del minisito /studio/
    Usa le variabili del sito madre (style.min.css).
-   Pensato per ragazzi con DSA: carattere ad alta leggibilità,
+   Pensato per tutti: carattere ad alta leggibilità,
    righe ariose, niente testo giustificato, colori calmi.
    ════════════════════════════════════════════════════════ */
 .st{--st-f:'Atkinson Hyperlegible',var(--fu);--st-ok:#2e7d4f;--st-ok2:#e3f3e8;--st-no:#b4442f;--st-no2:#fbe9e4;--st-z:1;font-family:var(--st-f);font-size:calc(1.06rem * var(--st-z));line-height:1.7;color:var(--txt)}
@@ -257,7 +257,7 @@ mark.st-k{background:linear-gradient(transparent 55%,var(--oro3) 55%);color:inhe
 @media (prefers-reduced-motion:reduce){.st *{animation:none!important;transition:none!important}.st-lett{opacity:1;transform:none}}
 @media print{.st-barra,.st-mappa,.st-azioni,.st-leggi,header,footer,.st-anteprima{display:none!important}}
 
-/* Solo in questa sezione: dei pulsanti tondi in basso a destra restano Home e Aa (lettura facilitata) */
+/* Solo in questa sezione: dei pulsanti tondi in basso a destra restano Home e Aa (Leggi a modo tuo) */
 body[data-page="studio"] #fab-top,body[data-page="studio"] #tr-fab,body[data-page="studio"] #cc-fab{display:none!important}
 
 /* in cima a «Crea una lezione»: cosa costa (poco) e cosa non tocca fare */

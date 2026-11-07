@@ -106,7 +106,7 @@ window.FORMATI = (function () {
   }
 
   /* risposta da scrivere (ricordare senza suggerimenti è più efficace che riconoscere).
-     Pensata anche per chi ha DSA: maiuscole, accenti e un piccolo errore di battitura vanno bene;
+     Pensata per tutti: maiuscole, accenti e un piccolo errore di battitura vanno bene;
      dopo un errore compare l'iniziale, dopo due si può scegliere fra tre parole. */
   function norm(t) { return String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
   function vicine(a, b) {

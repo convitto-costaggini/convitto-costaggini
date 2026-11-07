@@ -85,7 +85,7 @@ window.EDUCATORI = (function () {
 
   /* ───── l'area riservata: barra di navigazione + percorso guidato per entrare ───── */
   var PAGINE = [['crea', '➕', 'Crea una lezione', 'aula/studio/docente.html'], ['mie', '📚', 'Le mie lezioni', 'aula/studio/docente.html#mie'], ['archivio', '🗂️', 'Archivio', 'aula/studio/archivio.html']];
-  if (window.AULA_RISERVATO) PAGINE.push(['inclusione', '♿', 'Supporti alla lettura', 'aula/studio/inclusione.html']);
+  if (window.AULA_RISERVATO) PAGINE.push(['inclusione', '🧩', 'Supporti alla lettura', 'aula/studio/inclusione.html']);
   function area(o) {
     var box = document.getElementById('ed-area'), mail = '', attesa = null;
     function q(sel) { return box.querySelector(sel); }
@@ -210,14 +210,14 @@ window.EDUCATORI = (function () {
   }
   var FORMA = JSON.stringify(scheletro(window.STUDIO_DEMO));
   var REGOLE =
-    'Sei un educatore esperto di didattica per ragazzi con DSA (dislessia, disortografia, discalculia) in un convitto di un istituto professionale alberghiero italiano (14-19 anni).\n' +
+    'Sei un educatore esperto di didattica inclusiva, attenta a chi legge con fatica, in un convitto di un istituto professionale alberghiero italiano (14-19 anni).\n' +
     'Prepari una lezione interattiva in italiano che i ragazzi faranno dal telefono in sala studio.\n\n' +
     'LA FONTE:\n' +
     '- Se ti allego delle foto (pagine di un libro, appunti, schede, oppure una MAPPA CONCETTUALE), usa SOLO i concetti, i fatti, le date, i nomi e le definizioni che contengono. Non aggiungere argomenti che non ci sono. Se una pagina è tagliata, lavora su quello che si legge.\n' +
     '- Se la foto è una mappa concettuale: ogni nodo è un concetto e ogni freccia un collegamento. Spiega con frasi semplici i nodi e i legami fra loro, seguendo la struttura della mappa, senza aggiungere concetti assenti.\n' +
     '- Se NON ti allego nessuna foto, costruisci la lezione sull\'argomento indicato qui sotto, con contenuti corretti e verificati, adatti a un istituto professionale alberghiero e all\'anno di corso indicato; resta sui punti essenziali dell\'argomento.\n' +
     '- Ogni esercizio deve poter essere risolto da chi ha studiato la lezione.\n\n' +
-    'STILE (pensato per DSA): frasi brevi, una idea per frase, parole semplici; spiega i termini tecnici la prima volta. Niente doppie negazioni, niente domande trabocchetto, niente "tutte le precedenti". Tono caldo, diretto ("tu"), un po\' di ironia; mai infantile.\n\n' +
+    'STILE (alta leggibilità, per tutti): frasi brevi, una idea per frase, parole semplici; spiega i termini tecnici la prima volta. Niente doppie negazioni, niente domande trabocchetto, niente "tutte le precedenti". Tono caldo, diretto ("tu"), un po\' di ironia; mai infantile.\n\n' +
     'CONTENUTI:\n' +
     '- gancio: una domanda curiosa o sorprendente legata all\'argomento, con la risposta.\n' +
     '- concetti: da 4 a 8 idee chiave, nell\'ordine della fonte. spiegazione max 3 frasi; parola_chiave = la parola da evidenziare, che deve comparire nella spiegazione; esempio concreto, se possibile dalla cucina, dalla sala o dall\'albergo.\n' +
@@ -249,7 +249,7 @@ window.EDUCATORI = (function () {
       '\n\nOra crea la lezione: sulle foto allegate se ci sono, altrimenti ' + (d.argomento ? 'sull\'argomento indicato.' : 'sull\'argomento che ti scrivo qui sotto. Se non ci sono né foto né argomento, non creare niente: chiedimi soltanto, con una frase breve, di allegare le foto o di scrivere l\'argomento.');
   }
   function correzione(L, richiesta) {
-    return 'Qui sotto c\'è una lezione interattiva per ragazzi con DSA di un istituto professionale alberghiero, in formato JSON.\n' +
+    return 'Qui sotto c\'è una lezione interattiva ad alta leggibilità per i ragazzi di un istituto professionale alberghiero, in formato JSON.\n' +
       'Correggila così: ' + (richiesta || '(scrivi qui cosa cambiare)') + '\n\n' +
       'Regole: cambia solo quello che serve per la correzione; mantieni esattamente la stessa struttura JSON e gli stessi nomi dei campi; ' +
       'nei quiz "corretta" è l\'indice della risposta giusta contando da 0; frasi brevi e semplici.\n' +

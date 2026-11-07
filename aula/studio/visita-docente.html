@@ -180,7 +180,7 @@
     { k: 'attivita', c: 'Ideare altre attività sullo stesso argomento (mappa, enigmi, gioco)', p: 40, d: 3 },
     { k: 'lim', c: 'Preparare un quiz a squadre per la lavagna', p: 40, d: 3 },
     { k: 'verifica', c: 'Scrivere la verifica con fila A, fila B e soluzioni', p: 60, d: 8 },
-    { k: 'facilitata', c: 'Adattare la verifica in una versione facilitata', p: 45, d: 2 },
+    { k: 'piu-aiuti', c: 'Adattare la verifica in una versione con più aiuti', p: 45, d: 2 },
     { k: 'mappa', c: 'Preparare la mappa delle idee chiave da consegnare', p: 30, d: 2 }
   ];
   function lavoro(k) { for (var i = 0; i < LAVORI.length; i++) if (LAVORI[i].k === k) return LAVORI[i]; return null; }
@@ -259,14 +259,14 @@
       ],
       nota: 'Il parere di chi conosce la materia vale più di qualunque controllo automatico: è il contributo più prezioso che un docente di Alimentazione può dare.' },
 
-    { id: 'verifica', t: 'La verifica pronta in pochi secondi', min: 5, breve: true, url: '/aula/studio/verifica.html?c=DEMO', risp: ['verifica', 'facilitata', 'mappa'],
+    { id: 'verifica', t: 'La verifica pronta in pochi secondi', min: 5, breve: true, url: '/aula/studio/verifica.html?c=DEMO', risp: ['verifica', 'piu-aiuti', 'mappa'],
       intro: 'Dalla lezione di esempio, una prova scritta da stampare. Il docente non scrive nulla: sceglie soltanto che cosa stampare.',
       perche: 'Costruire due file, le soluzioni e una versione adattata è il lavoro più lungo e più ripetitivo. Qui le domande derivano dalla lezione, quindi la verifica è coerente con ciò che gli studenti hanno davvero studiato.',
       azioni: [
         'Nella sezione 1 si decide quante domande per tipo (con 0 si toglie un tipo); nella sezione 2 si compila l\'intestazione.',
         'Si scende fino a <span class="btn">👀 Anteprima</span>: c\'è già il foglio della fila A, con sei tipi di domande e punteggio.',
-        'Si spunta <span class="btn">♿ Anche la versione facilitata</span> e si confronta con la fila A: meno domande, 2 sole risposte, parole da inserire già elencate, carattere più grande. Sul foglio non c\'è scritto «facilitata».',
-        'Si spunta <span class="btn">🗺️ Anche la mappa della lezione</span>: una pagina di idee chiave da consegnare durante la prova, se prevista dal PDP.',
+        'Si spunta <span class="btn">🧩 Anche la versione con più aiuti</span> e si confronta con la fila A: meno domande, 2 sole risposte, parole da inserire già elencate, carattere più grande. Sul foglio non c\'è nessuna scritta che la distingua.',
+        'Si spunta <span class="btn">🗺️ Anche la mappa della lezione</span>: una pagina di idee chiave da consegnare durante la prova, quando serve.',
         'Si guardano la <b>fila B</b> (stesse domande, ordine e risposte mescolate) e le <b>soluzioni</b> per correggere in fretta.',
         'Si preme <span class="btn">🔀 Altre domande</span>: la verifica cambia in un istante. Poi <span class="btn">🖨️ Stampa</span>, su carta o in PDF.'
       ] },
@@ -293,7 +293,7 @@
         '<b>Passo 2:</b> si sceglie il livello (nessuno, 1, 2 o 3). Se serve, si personalizzano i singoli supporti.',
         '<b>Passo 3:</b> compaiono il link e il QR. Con <span class="btn">👁️ Provalo</span> si vede ciò che vedrà lo studente.'
       ],
-      nota: 'Le misure da adottare sono quelle stabilite dalla scuola e scritte nel PDP: qui ci sono gli strumenti per applicarle.' },
+      nota: 'Le misure da adottare sono quelle stabilite dalla scuola : qui ci sono gli strumenti per applicarle.' },
 
     { id: 'archivio', t: 'L\'Archivio dei colleghi', min: 3, url: '/aula/studio/archivio.html', viste: [['Archivio', '/aula/studio/archivio.html'], ['Le mie lezioni', '/aula/studio/docente.html#mie']],
       intro: 'L\'Archivio è il punto in cui il lavoro di un docente diventa disponibile per tutti i colleghi.',
@@ -307,7 +307,7 @@
 
     { id: 'risparmio', t: 'Quanto tempo si risparmia', min: 5, breve: true, url: '/aula/studio/index.html', calc: true,
       intro: 'Qui si fa il conto. I numeri di partenza sono stime prudenti, non misure: ciascuno li adatta alla propria esperienza.',
-      perche: 'La domanda giusta non è se la Sala studio sia bella, ma se faccia guadagnare tempo e fatica. Il conto si fa su un\'unità didattica completa: lezione, attività, quiz per la LIM, verifica con due file, versione facilitata e mappa.',
+      perche: 'La domanda giusta non è se la Sala studio sia bella, ma se faccia guadagnare tempo e fatica. Il conto si fa su un\'unità didattica completa: lezione, attività, quiz per la LIM, verifica con due file, versione con più aiuti e mappa.',
       azioni: [
         'Si controllano i tempi «a mano» di ogni attività: se per sé sono diversi, si correggono.',
         'Si indicano quante unità didattiche si preparano in un mese e per quanti mesi.',
@@ -319,7 +319,7 @@
       perche: 'Il giudizio di un docente di Alimentazione serve in due modi: dire se i contenuti sono esatti e dire che cosa renderebbe lo strumento davvero utile in classe.',
       azioni: [
         'Si crea la lezione sul prossimo argomento (passo «Dal libro alla lezione») e si rilegge con occhio da esperto.',
-        'Si prepara la verifica dalla stessa lezione e si guarda la versione facilitata.',
+        'Si prepara la verifica dalla stessa lezione e si guarda la versione con più aiuti.',
         'Si compila il modulo qui sotto: si apre una mail già scritta, da inviare a Michele.'
       ] }
   ];

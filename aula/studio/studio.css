@@ -471,10 +471,3 @@ button.fm-tessera.no{border-color:var(--st-no);animation:st-scuoti .4s}
 .st-controlli li{padding:.5rem .7rem;border-radius:10px;font-size:.92em}
 .st-controlli li.ok{background:var(--st-ok2);color:#1d5236}
 .st-controlli li.no{background:#fdf6e3;color:#6b5418}
-.rp-invito{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;border-color:var(--oro);background:#fdf8ea}
-.rp-invito .e,.rp-riga .e{font-size:1.8rem;line-height:1}
-.rp-invito b{display:block;color:var(--bosco)}
-.rp-oggi{border-color:var(--oro)}
-.rp-riga{display:flex;gap:.7rem;align-items:center;padding:.55rem 0;border-top:1px dashed var(--av3)}
-.rp-riga b{display:block;color:var(--bosco)}
-.rp-riga small{display:block;color:var(--txt2);font-size:.8em}

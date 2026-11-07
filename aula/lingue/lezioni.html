@@ -185,6 +185,7 @@
 <script src="aula/lingue/lezioni-dati.js"></script>
 <script src="aula/lingue/correzioni.js"></script>
 <script src="aula/lingue/accesso.js"></script>
+<script src="aula/studio/ripasso.js"></script>
 <script src="aula/lingue/grammatica-dati.js"></script>
 <script src="aula/lingue/grammatica.js"></script>
 <script src="aula/lingue/grammatica-ui.js"></script>
@@ -254,9 +255,22 @@
     schedaN = 0; esN = 0; esPunti = []; miN = 0; miPunti = [];
     disegna();
   }
+  /* ripasso a intervalli e riscaldamento: lo stesso elenco della Sala studio, solo sul dispositivo */
+  function idRipasso() { return 'lingue-' + lez.id + '-' + lin; }
+  function domandeRipasso() {
+    var Dz = D(), q = [], mescola = L.mescola;
+    Dz.schede.forEach(function (s) { if (s.domanda && s.domanda.o && s.domanda.o.length >= 2) q.push({ d: s.domanda.testo, o: s.domanda.o.slice(0, 4), g: 0, s: s.domanda.spiega || '' }); });
+    Dz.esercizi.forEach(function (e) {
+      if (e.tipo === 'scelta') (e.voci || []).forEach(function (v) { q.push({ d: v.d, o: v.o.slice(0, 4), g: 0, s: '' }); });
+      if (e.tipo === 'ascolta') (e.voci || []).forEach(function (v) { q.push({ d: 'Che cosa vuol dire «' + v.t + '»?', o: v.o.slice(0, 4), g: 0, s: '' }); });
+      if (e.tipo === 'abbina') { var C = e.coppie || []; C.forEach(function (c, i) { var altri = mescola(C.filter(function (x, k) { return k !== i; })).slice(0, 2).map(function (x) { return x[1]; }); if (altri.length) q.push({ d: 'Che cosa vuol dire «' + c[0] + '»?', o: [c[1]].concat(altri), g: 0, s: '' }); }); }
+    });
+    return mescola(q).slice(0, 12);
+  }
+  function invitoRipasso() { var el = document.getElementById('lz-ripasso'); if (el && window.RIPASSO && lez.lingue[lin]) RIPASSO.invito(el, idRipasso()); }
   function disegna() {
     sez.classList.toggle('facile', facile);
-    var h = '<div class="lz-testa"><a class="lg-btn" href="aula/lingue/lezioni.html" style="min-height:38px;padding:.45rem .8rem" aria-label="Tutte le lezioni">←</a><h2>' + lez.icona + ' ' + esc(lez.titolo) + '<small>' + esc(lez.sottotitolo) + ' · ' + esc(lez.livello) + ' · ' + esc(lez.classi) + '</small></h2><button type="button" class="lg-btn" data-schermo style="min-height:38px;padding:.45rem .8rem" title="Lezione a tutto schermo per la LIM">🖥️ LIM</button></div><button type="button" class="lg-btn lz-esci-lim" data-schermo>✕ Esci dalla modalità LIM</button>';
+    var h = '<div id="lz-ripasso"></div><div class="lz-testa"><a class="lg-btn" href="aula/lingue/lezioni.html" style="min-height:38px;padding:.45rem .8rem" aria-label="Tutte le lezioni">←</a><h2>' + lez.icona + ' ' + esc(lez.titolo) + '<small>' + esc(lez.sottotitolo) + ' · ' + esc(lez.livello) + ' · ' + esc(lez.classi) + '</small></h2><button type="button" class="lg-btn" data-schermo style="min-height:38px;padding:.45rem .8rem" title="Lezione a tutto schermo per la LIM">🖥️ LIM</button></div><button type="button" class="lg-btn lz-esci-lim" data-schermo>✕ Esci dalla modalità LIM</button>';
     if (!lez.lingue[lin]) {
       var disp = Object.keys(lez.lingue);
       vista.innerHTML = h + '<div class="lg-card lz-avviso"><p style="margin:0">Questa lezione è disponibile in: <b>' + disp.map(function (c) { return L.lingua(c).nome.toLowerCase(); }).join('</b> e <b>') + '</b>.</p><div class="bott">' + disp.map(function (c) { return '<button type="button" class="lg-btn pieno" data-lin="' + c + '">Passa a: ' + L.lingua(c).nome.toLowerCase() + '</button>'; }).join('') + '</div></div>';
@@ -272,6 +286,7 @@
     var gm = document.getElementById('lz-gm');
     if (gm && G.editorMiei) G.editorMiei(gm, lin, function () { gram = (L.leggi('gram-argomenti', []) || []).slice(); gramSeme++; esN = 0; esPunti = []; stato = {}; disegna(); });
     ({ lezione: scheda, esercizi: esercizio, missione: missione, docente: docente, modifica: editor })[tab]();
+    invitoRipasso();
   }
   function corpo(html) { document.getElementById('lz-corpo').innerHTML = html; }
 
@@ -416,6 +431,7 @@
     if (o[1] && /^[^\u{1F300}-\u{1FAFF}]/u.test(o[0]) && L.parla) L.ascolta(o[0], lin);
   }
   function fineMissione() {
+    if (window.RIPASSO) RIPASSO.registra({ titolo: lez.titolo + ' · ' + L.lingua(lin).nome, icona: lez.icona, materia: 'Lingue · ' + lez.ambito }, idRipasso(), location.pathname + location.search + location.hash, domandeRipasso());
     var M = D().missione, pt = miPunti.reduce(function (a, b) { return a + b; }, 0), n = M.passi.length, r = pt / n;
     var rec = L.leggi('lz-rec-' + lez.id + '-' + lin, null); if (rec == null || pt > rec) L.salva('lz-rec-' + lez.id + '-' + lin, pt);
     corpo('<div class="lz-box"><div class="lg-card lz-ris"><div class="big">' + (r === 1 ? '🏆' : r >= .7 ? '😊' : r >= .4 ? '😐' : '😬') + '</div><p class="tit">' + pt + ' su ' + n + '</p><p>' + esc(M.esiti[r === 1 ? 0 : r >= .7 ? 1 : r >= .4 ? 2 : 3]) + '</p>' + (rec != null ? '<p>Il tuo record: ' + Math.max(rec, pt) + ' su ' + n + '</p>' : '') +

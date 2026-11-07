@@ -471,3 +471,9 @@ button.fm-tessera.no{border-color:var(--st-no);animation:st-scuoti .4s}
 .st-controlli li{padding:.5rem .7rem;border-radius:10px;font-size:.92em}
 .st-controlli li.ok{background:var(--st-ok2);color:#1d5236}
 .st-controlli li.no{background:#fdf6e3;color:#6b5418}
+/* intervista impossibile: ogni battuta si ascolta */
+.fm-ascolta{border:0;border-radius:50%;width:30px;height:30px;font-size:.85rem;cursor:pointer;vertical-align:middle;margin-left:.15rem;background:rgba(0,0,0,.06)}
+.fm-bolla.io .fm-ascolta{background:rgba(255,255,255,.22)}
+.fm-ascolta.va{background:var(--oro3);animation:st-pulsa 1s infinite}
+.fm-tre{margin-left:.4rem;padding:.35rem .7rem;font-size:.78rem;min-height:0}
+.fm-tre.va{background:var(--oro3);border-color:var(--oro3)}

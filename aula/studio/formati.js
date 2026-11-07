@@ -638,20 +638,23 @@ window.FORMATI = (function () {
     R.innerHTML = '<div class="st-palco">' + comeFunziona('🎙️', 'Intervista impossibile', 'Oggi in studio c\'è un ospite speciale: <b>' + esc(ic + ' ' + ospite) + '</b>. ' + esc(chi || ''), [
       'Tu sei il <b>giornalista</b>: fai una domanda alla volta.',
       'Il microfono gracchia e senti <b>tre risposte</b>: tocca quella che l\'ospite ha detto davvero.',
-      'Alla fine rileggi tutta l\'intervista, o ascoltala con 🔊.'
+      'Ogni battuta si ascolta con 🔊, anche le tre risposte prima di scegliere. Alla fine rileggi o ascolti tutta l\'intervista.'
     ], 'Accendi il microfono 🎙️') + '</div>';
     R.querySelector('.fm-via').onclick = giro;
     function bolle() {
       return '<div class="fm-chat">' + '<div class="fm-ospite"><span class="av" aria-hidden="true">' + esc(ic) + '</span><b>' + esc(ospite) + '</b></div>' +
-        chat.map(function (m) { return '<div class="fm-bolla ' + m.da + '"><small>' + (m.da === 'io' ? '🎤 Tu' : esc(ic + ' ' + ospite)) + '</small>' + esc(m.t) + '</div>'; }).join('') + '</div>';
+        chat.map(function (m) { return '<div class="fm-bolla ' + m.da + '"><small>' + (m.da === 'io' ? '🎤 Tu' : esc(ic + ' ' + ospite)) + '</small>' + esc(m.t) + ' <button type="button" class="fm-ascolta" data-leggi="' + esc(m.t) + '" aria-label="Ascolta la battuta" title="Ascolta">🔊</button></div>'; }).join('') + '</div>';
     }
+    /* ogni battuta, e le tre risposte prima di scegliere, si ascoltano con 🔊 */
+    function voci() { R.querySelectorAll('[data-leggi]').forEach(function (b) { b.onclick = function () { S.leggi(b.getAttribute('data-leggi'), b); }; }); }
     function giro() {
       if (k >= D.length) return fine();
       var d = D[k], opz = mescola([d.risposta].concat(arr(d.sbagliate).slice(0, 2)));
       chat.push({ da: 'io', t: d.domanda });
       R.innerHTML = '<div class="st-palco"><h2>🎙️ In onda</h2><p class="st-cont">Domanda ' + (k + 1) + ' di ' + D.length + '</p>' + bolle() +
-        '<p class="st-sot" style="margin-top:.8rem">Che cosa ha risposto ' + esc(ospite) + '?</p><div class="st-scelte">' + opz.map(function (o, i) { return '<button type="button" class="st-scelta" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div><div class="st-esito" aria-live="polite"></div></div>';
+        '<p class="st-sot" style="margin-top:.8rem">Che cosa ha risposto ' + esc(ospite) + '? <button type="button" class="st-btn fm-tre" data-leggi="' + esc(opz.map(function (o, i) { return ['Prima', 'Seconda', 'Terza'][i] + ' risposta: ' + o; }).join('. ')) + '">🔊 Ascolta le tre risposte</button></p><div class="st-scelte">' + opz.map(function (o, i) { return '<button type="button" class="st-scelta" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div><div class="st-esito" aria-live="polite"></div></div>';
       var ultima = R.querySelector('.fm-bolla:last-child'); if (ultima) ultima.scrollIntoView({ block: 'center' });
+      voci();
       R.querySelectorAll('[data-i]').forEach(function (b) {
         b.onclick = function () {
           if (opz[+b.getAttribute('data-i')] === d.risposta) { chat.push({ da: 'lui', t: d.risposta }); k++; toast(S.pesca(S.BRAVO)); giro(); }
@@ -665,7 +668,7 @@ window.FORMATI = (function () {
       R.innerHTML = '<div class="st-palco"><div class="st-card st-finale st-entra"><div class="st-medaglia">📰</div><h2>Intervista in pagina!</h2><p class="st-sot">' + (sbagli ? sbagli + (sbagli === 1 ? ' risposta sbagliata' : ' risposte sbagliate') + ' scartata lungo la strada.' : 'Nessuna risposta sbagliata: giornalismo di precisione!') + '</p>' +
         '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn" data-leggi="' + esc(testo) + '">🔊 Ascolta l\'intervista</button><button type="button" class="st-btn pieno" data-ancora>🔁 Rifai l\'intervista</button></div></div>' +
         '<h3>📰 L\'intervista completa</h3>' + bolle() + '</div>';
-      var l = R.querySelector('[data-leggi]'); l.onclick = function () { S.leggi(l.getAttribute('data-leggi'), l); };
+      voci();
       R.querySelector('[data-ancora]').onclick = function () { intervista(L, R); };
     }
   }

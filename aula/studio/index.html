@@ -52,6 +52,7 @@
   </section>
 
   <div class="st-palco">
+    <div id="sx-ripasso"></div>
     <a class="st-card sx-demo" href="aula/studio/lezione.html?c=DEMO">
       <span class="e" aria-hidden="true">🥗</span>
       <span style="flex:1"><span class="st-cont">Prova subito</span><b>I principi nutritivi</b><span class="st-nota">Una lezione di esempio completa: Scienza e cultura dell'alimentazione.</span></span>
@@ -77,6 +78,8 @@
   </div>
 </main>
 <script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script>if (window.RIPASSO) RIPASSO.elenco(document.getElementById('sx-ripasso'));</script>
 <script>
 document.getElementById('sx-form').addEventListener('submit', function (e) {
   e.preventDefault();

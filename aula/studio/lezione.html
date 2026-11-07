@@ -29,6 +29,7 @@
       <span class="st-badge" id="st-cod" hidden></span>
     </div>
   </section>
+  <div id="st-ripasso" class="st-palco" style="padding-bottom:0"></div>
   <div id="st-modi"></div>
   <div id="st-app"></div>
 </main>
@@ -39,6 +40,7 @@
 <script src="aula/studio/studio.js"></script>
 <script src="aula/studio/formati.js"></script>
 <script src="aula/studio/demo.js"></script>
+<script src="aula/studio/ripasso.js"></script>
 <script>
 (function () {
   var esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
@@ -53,6 +55,8 @@
     $('st-sot').textContent = L.sottotitolo || '';
     if (id && id !== 'DEMO' && id.length === 6) { $('st-cod').hidden = false; $('st-cod').textContent = 'Codice ' + id; }
     modi(L, id);
+    /* se è il giorno del ripasso di questa lezione lo propone; se no, un riscaldamento sull'ultima lezione fatta */
+    if (window.RIPASSO) RIPASSO.invito($('st-ripasso'), id);
   }
   /* «Come vuoi studiare?»: la stessa lezione in quattro modi (?m= nel link) */
   var MODI = [

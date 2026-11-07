@@ -462,3 +462,19 @@ button.fm-tessera.no{border-color:var(--st-no);animation:st-scuoti .4s}
 .fm-modi-chiuso span{font-size:.9rem}
 .fm-modi-chiuso b{font-size:1rem}
 .fm-modi-chiuso button{font:800 .85rem var(--fu);border:2px solid var(--bosco);background:#fff;color:var(--bosco);border-radius:99px;padding:.45rem .9rem;min-height:40px;cursor:pointer;white-space:nowrap}
+
+/* tempi indicativi, pausa, «Spiegalo a un compagno», ripasso e riscaldamento */
+.st-tappa .st-min{display:block;font-size:.62rem;opacity:.65;margin-top:.05rem}
+.st-scrivi{width:100%;font:inherit;font-size:1em;line-height:1.6;padding:.7rem .8rem;border:2px solid var(--av3);border-radius:12px;background:var(--bco);color:var(--txt);resize:vertical;min-height:120px}
+.st-scrivi:focus{outline:none;border-color:var(--oro)}
+.st-controlli{list-style:none;margin:.8rem 0 0;padding:0;display:grid;gap:.35rem}
+.st-controlli li{padding:.5rem .7rem;border-radius:10px;font-size:.92em}
+.st-controlli li.ok{background:var(--st-ok2);color:#1d5236}
+.st-controlli li.no{background:#fdf6e3;color:#6b5418}
+.rp-invito{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;border-color:var(--oro);background:#fdf8ea}
+.rp-invito .e,.rp-riga .e{font-size:1.8rem;line-height:1}
+.rp-invito b{display:block;color:var(--bosco)}
+.rp-oggi{border-color:var(--oro)}
+.rp-riga{display:flex;gap:.7rem;align-items:center;padding:.55rem 0;border-top:1px dashed var(--av3)}
+.rp-riga b{display:block;color:var(--bosco)}
+.rp-riga small{display:block;color:var(--txt2);font-size:.8em}

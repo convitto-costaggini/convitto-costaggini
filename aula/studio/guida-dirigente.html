@@ -143,7 +143,8 @@
     <div class="card"><div class="ic">🧭</div><h3>7 modi di studiarla</h3><p>Percorso guidato · Escape room · Costruisci la mappa · Caccia all'errore · Intervista impossibile · Il minuto · Sfida a squadre alla LIM.</p></div>
     <div class="card"><div class="ic">✏️</div><h3>6 tipi di esercizi</h3><p>Domande a scelta multipla con 4 risposte · Vero o falso · Frasi da completare · Abbinamenti · Sequenze da riordinare · Flashcard. Ogni errore è spiegato subito.</p></div>
     <div class="card"><div class="ic">🧠</div><h3>5 tecniche per ricordare</h3><p>La parola-sigla · Il «palazzo della memoria» ambientato nel Convitto · La filastrocca · Le immagini mentali · I trucchi.</p></div>
-    <div class="card"><div class="ic">🔊</div><h3>Accessibile</h3><p>Lettura ad alta voce · Testo ingrandibile · Carattere ad alta leggibilità · Frasi brevi con la parola chiave evidenziata · Ripasso suggerito dopo 1, 3 e 7 giorni.</p></div>
+    <div class="card"><div class="ic">🔊</div><h3>Accessibile</h3><p>Lettura ad alta voce · Testo ingrandibile · Carattere ad alta leggibilità · Frasi brevi con la parola chiave evidenziata · Durata indicata per ogni tappa.</p></div>
+    <div class="card"><div class="ic">🔁</div><h3>Ricordare nel tempo</h3><p>Ripasso lampo proposto in automatico dopo 1, 3 e 7 giorni · Riscaldamento sulla lezione precedente · «Spiegalo a un compagno» · Pausa facoltativa dopo tre tappe. Tutto resta sul dispositivo dello studente.</p></div>
     <div class="card"><div class="ic">📝</div><h3>La verifica</h3><p>Fila A e fila B · Versione con più aiuti · Mappa della lezione · Soluzioni per il docente · Punteggio già calcolato.</p></div>
     <div class="card"><div class="ic">🏫</div><h3>In aula e tra colleghi</h3><p>Proiezione alla LIM · QR a tutto schermo · Archivio condiviso per materia e anno · Correzione in ogni momento da parte del docente.</p></div>
   </div>
@@ -238,6 +239,10 @@
       <li><input type="checkbox" id="a3"><label for="a3">Nella tappa <b>Memorizza</b> osservi i trucchi per ricordare: la parola-sigla, il «palazzo della memoria» ambientato nel Convitto, la filastrocca.</label></li>
       <li><input type="checkbox" id="a4"><label for="a4">Nella tappa <b>Allenati</b> risponda a una domanda <b>sbagliando apposta</b>: la lezione spiega subito perché.</label></li>
       <li><input type="checkbox" id="a5"><label for="a5">Provi le <b>Flashcard</b> e la <b>Sfida finale</b>.</label></li>
+      <li><input type="checkbox" id="a7"><label for="a7">In apertura noti la <b>durata indicativa</b> della lezione e di ogni tappa: lo studente sa quanto gli serve e può farla anche in più volte.</label></li>
+      <li><input type="checkbox" id="a8"><label for="a8">Finite le idee chiave, provi <span class="btn">💬 Spiegalo a un compagno</span>: scelga un'idea, la scriva con parole Sue e la confronti con la spiegazione della lezione. Il controllo segnala se c'è la parola chiave e se la spiegazione è completa; il testo non si salva e non si invia.</label></li>
+      <li><input type="checkbox" id="a9"><label for="a9">Dopo tre tappe fatte di fila compare l'invito, facoltativo, a una <b>pausa di 2 minuti</b>.</label></li>
+      <li><input type="checkbox" id="a10"><label for="a10">Arrivata a <b>Da ricordare</b>, la lezione viene annotata sul dispositivo: <b>domani, tra 3 giorni e tra una settimana</b> la home della Sala studio proporrà «🔁 Oggi ripassa», 5 domande in circa 3 minuti. Aprendo un'altra lezione, comparirà invece un <b>riscaldamento</b> di 3 domande su questa.</label></li>
       <li><input type="checkbox" id="a6"><label for="a6">Torni all'inizio della lezione e guardi gli altri modi di studiarla, ad esempio <span class="btn">🔐 Escape room</span> o <span class="btn">🗺️ Costruisci la mappa</span>: la stessa lezione, attività diverse.</label></li>
     </ul>
   </div>
@@ -371,13 +376,14 @@
 
 <section id="perche">
   <div class="etichetta">Perché funziona</div>
-  <h2>Quattro principi <em>solidi</em></h2>
+  <h2>Cinque principi <em>solidi</em></h2>
   <p>Sono descritti, con le fonti, nella relazione allegata. In sintesi:</p>
   <div class="griglia">
     <div class="card"><div style="font-size:30px">🗺️</div><h3>Lavorare sulla mappa, non solo leggerla</h3><p>Le mappe concettuali aiutano di più quando lo studente ci lavora attivamente che quando le studia già pronte.</p><span class="fonte">Nesbit e Adesope, 2006; Schroeder et al., 2018</span></div>
     <div class="card"><div style="font-size:30px">🎯</div><h3>Rispondere fissa più che rileggere</h3><p>Richiamare un'informazione la consolida, soprattutto con un riscontro immediato e ripassando a distanza di tempo.</p><span class="fonte">Roediger e Karpicke, 2006; Dunlosky et al., 2013</span></div>
     <div class="card"><div style="font-size:30px">🖼️</div><h3>Parole e immagini insieme</h3><p>Ciò che è presentato in forma verbale e visiva si ricorda meglio.</p><span class="fonte">Clark e Paivio, 1991; Mayer, 2020</span></div>
     <div class="card"><div style="font-size:30px">🔊</div><h3>Ascoltare quando serve</h3><p>La sintesi vocale aiuta la comprensione di chi legge con fatica: un effetto documentato dalla ricerca.</p><span class="fonte">Wood et al., 2018</span></div>
+    <div class="card"><div style="font-size:30px">🔁</div><h3>Tornarci sopra, e spiegarlo</h3><p>Ripassare a distanza di giorni fissa più che studiare tutto in una volta; spiegare un'idea con parole proprie mostra subito che cosa si è capito davvero.</p><span class="fonte">Cepeda et al., 2006; Dunlosky et al., 2013; Fiorella e Mayer, 2016</span></div>
   </div>
   <div class="riquadro">Il libro resta al centro: lo strumento digitale lo affianca nel momento della rielaborazione e della verifica.</div>
 </section>
@@ -388,6 +394,7 @@
   <details><summary>Serve installare qualcosa?</summary><p>No. Funziona dal browser di qualsiasi telefono, tablet o computer.</p></details>
   <details><summary>Gli studenti possono vederlo adesso?</summary><p>Non ancora: le sezioni mostrano «Pagina in costruzione» a chiunque non sia abilitato all'anteprima, finché la Dirigenza non decide. La DPO ha ritenuto possibile l'utilizzo dell'Aula con gli studenti (4 novembre 2026); si propone di cominciare in sperimentazione nel Convitto, con gli educatori presenti.</p></details>
   <details><summary>Vengono raccolti dati degli studenti?</summary><p>No. Le lezioni si aprono senza registrazione e i progressi restano soltanto sul dispositivo di chi studia.</p></details>
+  <details><summary>Il ripasso automatico registra chi studia?</summary><p>No. L'annotazione della lezione finita (titolo, data e alcune domande) resta soltanto sul dispositivo dello studente, come i progressi: il sito non sa chi ha studiato che cosa. Cambiando telefono o cancellando i dati del browser, il promemoria sparisce.</p></details>
   <details><summary>Ci sono costi?</summary><p>La consultazione è gratuita. La sola creazione automatica delle lezioni ha un costo a consumo, contenuto e da quantificare; la seconda strada, attraverso un assistente esterno, non ha costi per l'Istituto.</p></details>
   <details class="rsv" hidden><summary>Chi usa i supporti si accorge di essere trattato in modo diverso?</summary><p>No. Apre un link come tutti gli altri e trova la pagina già comoda; il pulsante «Aa Leggi a modo tuo» è lo stesso per tutta la classe. Sulle verifiche stampate non compare nessuna scritta che la distingua.</p></details>
   <details class="rsv" hidden><summary>Dove vengono salvate le impostazioni di lettura?</summary><p>Soltanto nel dispositivo di chi legge. Il sito non le raccoglie e non sa a chi appartengono. Con «Ripristina tutto» si cancellano; su un computer condiviso basta aprire il link di ripristino che il docente trova nell'area «Supporti alla lettura».</p></details>

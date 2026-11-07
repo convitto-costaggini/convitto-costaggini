@@ -65,6 +65,7 @@
     </div>
   </section>
   <div data-lingue-nav></div>
+  <section class="lg-sez" id="lg-ripasso-sez" style="padding-bottom:0" hidden><div class="w"><div id="lg-ripasso"></div></div></section>
   <div class="w" style="max-width:900px;margin:1rem auto 0;padding:0 1rem">
     <a href="aula/lingue/presentazione.html" class="lg-card" style="display:flex;gap:1rem;align-items:center;text-decoration:none;border:2px solid var(--oro);background:linear-gradient(135deg,#fff,#fdf8ea)">
       <span style="font-size:2rem;line-height:1">🎬</span>
@@ -129,6 +130,8 @@
 </main>
 <script src="nav.min.js"></script>
 <script src="aula/lingue/lingue.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script>(function () { var el = document.getElementById('lg-ripasso'); if (!window.RIPASSO || !el) return; RIPASSO.elenco(el); document.getElementById('lg-ripasso-sez').hidden = !el.innerHTML; new MutationObserver(function () { document.getElementById('lg-ripasso-sez').hidden = !el.innerHTML; }).observe(el, { childList: true }); })();</script>
 <script src="aula/lingue/finestra.js"></script>
 <script src="aula/lingue/parole.js"></script>
 <script src="aula/lingue/correzioni.js"></script>

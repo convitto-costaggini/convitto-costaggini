@@ -16,7 +16,6 @@
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
 </head>
 <body data-page="scheda-informativa-convittore">
 <script src="nav-header.min.js"></script>
@@ -238,7 +237,6 @@
 <script src="nav.min.js"></script>
 <script>
 const CONTACT_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
-const RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
 document.getElementById('da-data').value = new Date().toISOString().split('T')[0];
 
 // ── Allegato certificato medico (facoltativo, un solo file) ──
@@ -487,14 +485,8 @@ function daInviaScheda(payload) {
     waitBox.textContent = '';
   }
 
-  new Promise((resolve) => {
-    grecaptcha.ready(() => {
-      grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'scheda_informativa_convittore' })
-        .then(resolve)
-        .catch(() => resolve(''));
-    });
-  }).then(recaptchaToken => {
-    payload.recaptchaToken = recaptchaToken;
+  // // Antispam interno (campo trappola, tempo di compilazione, limite di invii): il tipo di modulo resta in recaptchaAction
+  Promise.resolve().then(() => {
     payload.recaptchaAction = 'scheda_informativa_convittore';
 
     fetch(CONTACT_GAS, {

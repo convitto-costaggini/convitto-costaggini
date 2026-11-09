@@ -14,7 +14,6 @@
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-  <script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
 </head>
 <body data-page="richiesta-accesso">
 <script src="nav-header.min.js"></script>
@@ -146,13 +145,6 @@ async function inviaRichiesta() {
   btn.disabled = true;
   btn.textContent = 'Invio in corso...';
   try {
-    const recaptchaToken = await new Promise((resolve, reject) => {
-      if (typeof grecaptcha === 'undefined') return reject(new Error('reCAPTCHA non caricato'));
-      grecaptcha.ready(() => {
-        grecaptcha.execute('6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO', {action: 'richiesta_accesso'})
-          .then(resolve).catch(reject);
-      });
-    });
     const resp = await fetch(
       'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/richiesta-accesso',
       {
@@ -167,7 +159,6 @@ async function inviaRichiesta() {
           relazione,
           email,
           privacy,
-          recaptchaToken,
           botField: document.getElementById('sito_web')?.value || ''
         })
       }

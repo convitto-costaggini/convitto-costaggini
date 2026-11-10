@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="description" content="La biblioteca del Convitto Costaggini di Rieti e il Progetto Lettura: prestito, letture condivise, caviardage, debate e un anno di incontri con autori, poesia, teatro e arte nei luoghi di cultura di Rieti."/>
+  <meta property="og:title" content="Biblioteca e Lettura — Convitto &quot;Costaggini&quot; Rieti"/>
+  <meta property="og:description" content="La nostra biblioteca e «Oltre le pagine»: autori, poesia, teatro e arte con i convittori, a Rieti."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Convitto Costaggini — Rieti"/>
+  <meta property="og:image" content="https://convitto.alberghierorieti.edu.it/img/biblioteca/paroniana-capriate.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <title>Biblioteca e Lettura | Convitto "Costaggini" — Rieti</title>
+  <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/biblioteca.html"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="galleria.css"/>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Biblioteca e Lettura",
+  "description": "La biblioteca del Convitto Costaggini di Rieti e le iniziative del Progetto Lettura e Biblioteca: incontri con autori, poesia, teatro e arte.",
+  "url": "https://convitto.alberghierorieti.edu.it/biblioteca.html",
+  "inLanguage": "it",
+  "isPartOf": { "@type": "WebSite", "name": "Convitto \"Costaggini\"", "url": "https://convitto.alberghierorieti.edu.it/" },
+  "about": { "@type": "Library", "name": "Biblioteca del Convitto \"Costaggini\"", "address": { "@type": "PostalAddress", "addressLocality": "Rieti", "addressCountry": "IT" } }
+}
+</script>
+  <style>
+/* ── Hero ───────────────────────────────────── */
+.bib-hero{position:relative;overflow:hidden;min-height:78vh;display:flex;align-items:flex-end;background:#0d140e}
+.bib-hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,20,14,.55) 0,rgba(13,20,14,.45) 40%,rgba(13,20,14,.94) 100%),url(img/biblioteca/paroniana-capriate.webp) center 30%/cover no-repeat}
+.bib-hero-content{position:relative;z-index:2;padding:1.5rem 1.25rem 3.5rem;max-width:780px}
+@media (min-width:768px){.bib-hero-content{padding:1.5rem 2rem 4.5rem}}
+.bib-eyebrow{display:flex;align-items:center;gap:.7rem;font-family:var(--fu);font-size:.64rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--oro2);margin:1.6rem 0 1rem}
+.bib-eyebrow::before{content:"";width:28px;height:1px;background:var(--oro2)}
+.bib-hero h1{font-family:var(--fd);font-size:clamp(2.4rem,8vw,4.8rem);font-weight:300;color:#fff;line-height:1.04;margin:0 0 1rem}
+.bib-hero h1 em{display:block;font-style:italic;color:var(--oro3)}
+.bib-hero .lead{color:rgba(245,240,232,.78);font-size:clamp(.95rem,2.4vw,1.12rem);line-height:1.8;max-width:560px;margin:0 0 1.8rem}
+.bib-salti{display:flex;flex-wrap:wrap;gap:.6rem}
+.bib-salti a{font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:rgba(245,240,232,.85);border:1px solid rgba(212,170,74,.45);border-radius:40px;padding:.55rem 1.05rem;transition:background .2s,color .2s}
+.bib-salti a:hover,.bib-salti a:focus-visible{background:var(--oro2);color:var(--bosco);border-color:var(--oro2)}
+.bib-cred{position:absolute;right:1rem;bottom:.7rem;z-index:2;font-family:var(--fu);font-size:.6rem;letter-spacing:.06em;color:rgba(245,240,232,.45);margin:0}
+
+/* ── Sezioni ────────────────────────────────── */
+.bib-sez{padding:4.5rem 0}
+.bib-sez.chiara{background:var(--av)}
+.bib-sez.chiara2{background:var(--av2)}
+.bib-sez.scura{background:#16241a;color:var(--av)}
+.bib-sez h2{font-family:var(--fd);font-weight:300;font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.12;color:var(--bosco);margin:.35rem 0 1.1rem}
+.bib-sez h2 em{font-style:italic;color:var(--oro)}
+.bib-sez.scura h2{color:var(--av)}.bib-sez.scura h2 em{color:var(--oro3)}
+.bib-sez .lbl{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--fu);font-size:.64rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro)}
+.bib-sez.scura .lbl{color:var(--oro2)}
+.bib-testo p{font-size:.98rem;line-height:1.9;color:var(--txt2);margin:0 0 1rem;max-width:62ch}
+.bib-sez.scura .bib-testo p{color:rgba(245,240,232,.8)}
+.bib-due{display:grid;gap:2.5rem;align-items:center}
+@media (min-width:900px){.bib-due{grid-template-columns:1fr 1.15fr;gap:3.5rem}.bib-due.inv>:first-child{order:2}.bib-due.segui{align-items:start}.bib-media{position:sticky;top:110px}}
+
+/* Servizi */
+.bib-servizi{list-style:none;padding:0;margin:1.6rem 0 0;display:grid;gap:.7rem;grid-template-columns:1fr}
+@media (min-width:520px){.bib-servizi{grid-template-columns:1fr 1fr}}
+.bib-servizi li{display:flex;gap:.75rem;align-items:flex-start;background:var(--bco);border:1px solid var(--av3);border-radius:8px;padding:.85rem 1rem}
+.bib-servizi .ic{font-size:1.3rem;line-height:1;flex-shrink:0;margin-top:.1rem}
+.bib-servizi b{display:block;font-family:var(--fu);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--bosco);margin-bottom:.15rem}
+.bib-servizi span.d{font-size:.82rem;line-height:1.55;color:var(--txt2)}
+
+/* ── Slideshow nella pagina ─────────────────── */
+.bib-show{position:relative;border-radius:10px;overflow:hidden;background:#0b120c;box-shadow:0 24px 60px -24px rgba(0,0,0,.55);outline:1px solid rgba(212,170,74,.18)}
+.bib-stage{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:zoom-in;touch-action:pan-y}
+.bib-stage.alto{aspect-ratio:4/5}
+.bib-stage.largo{aspect-ratio:16/9}
+.bib-layer{position:absolute;inset:0;opacity:0;transition:opacity 1.1s cubic-bezier(.22,.61,.36,1)}
+.bib-layer.on{opacity:1}
+.bib-layer .bg{position:absolute;inset:-24px;background-size:cover;background-position:center;filter:blur(18px) brightness(.38) saturate(.7);transform:scale(1.08)}
+.bib-layer img{position:relative;display:block;width:100%;height:100%;object-fit:contain}
+.bib-layer.on img{animation:bib-kb 9s ease-out both}
+@keyframes bib-kb{from{transform:scale(1)}to{transform:scale(1.035)}}
+.bib-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(11,18,12,.55);border:1px solid rgba(212,170,74,.4);color:#f5f0e8;cursor:pointer;backdrop-filter:blur(4px);transition:background .2s,border-color .2s}
+.bib-nav:hover,.bib-nav:focus-visible{background:rgba(212,170,74,.25);border-color:var(--oro2);outline:none}
+.bib-nav svg,.bib-full svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.bib-prev{left:.7rem}.bib-next{right:.7rem}
+.bib-full{position:absolute;top:.7rem;right:.7rem;z-index:3;display:inline-flex;align-items:center;gap:.45rem;font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#f5f0e8;background:rgba(11,18,12,.6);border:1px solid rgba(212,170,74,.4);border-radius:40px;padding:.45rem .8rem;cursor:pointer;backdrop-filter:blur(4px)}
+.bib-full:hover,.bib-full:focus-visible{background:var(--oro2);color:#1b2a1c;border-color:var(--oro2);outline:none}
+.bib-foot{display:flex;align-items:flex-start;gap:1rem;padding:.9rem 1.1rem 1rem;background:#0f1a10;border-top:1px solid rgba(212,170,74,.15)}
+.bib-capt{flex:1;margin:0;min-height:3em;font-family:var(--fd);font-style:italic;font-size:1.05rem;line-height:1.45;color:rgba(245,240,232,.88);transition:opacity .4s}
+.bib-capt.via{opacity:0}
+.bib-count{font-family:var(--fu);font-size:.64rem;font-weight:800;letter-spacing:.18em;color:var(--oro2);white-space:nowrap;padding-top:.3rem;font-variant-numeric:tabular-nums}
+.bib-prog{height:2px;background:rgba(212,170,74,.12)}
+.bib-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--oro2),var(--oro3))}
+.bib-show.singola .bib-nav,.bib-show.singola .bib-count,.bib-show.singola .bib-prog{display:none}
+@media (prefers-reduced-motion:reduce){.bib-layer{transition:none}.bib-layer.on img{animation:none}}
+
+/* ── Dediche ────────────────────────────────── */
+.bib-dediche{display:grid;gap:1.6rem;margin-top:2rem}
+@media (min-width:760px){.bib-dediche{grid-template-columns:1fr 1fr;gap:2.2rem}}
+.bib-dedica{margin:0;background:var(--bco);border:1px solid var(--av3);border-radius:10px;overflow:hidden;box-shadow:0 18px 40px -26px rgba(44,62,45,.45);cursor:zoom-in;transition:transform .3s,box-shadow .3s}
+.bib-dedica:hover{transform:translateY(-3px);box-shadow:0 26px 50px -26px rgba(44,62,45,.55)}
+.bib-dedica:focus-visible{outline:3px solid var(--oro);outline-offset:3px}
+.bib-dedica img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:center 40%}
+.bib-dedica figcaption{padding:1.1rem 1.25rem 1.3rem}
+.bib-dedica blockquote{margin:0 0 .55rem;font-family:var(--fd);font-style:italic;font-size:1.25rem;line-height:1.4;color:var(--bosco)}
+.bib-dedica cite{font-family:var(--fu);font-style:normal;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro)}
+.bib-dedica cite span{display:block;margin-top:.2rem;font-weight:600;letter-spacing:.04em;text-transform:none;font-size:.8rem;color:var(--txt2)}
+
+/* ── Linea del tempo «Oltre le pagine» ─────── */
+.bib-intro{max-width:760px;margin:0 auto 3rem;text-align:center}
+.bib-intro .bib-testo p{margin-left:auto;margin-right:auto}
+.bib-quattro{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:1.3rem}
+.bib-quattro span{font-family:var(--fu);font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--oro3);border:1px solid rgba(212,170,74,.35);border-radius:40px;padding:.4rem .9rem}
+.bib-tl{position:relative;list-style:none;margin:0;padding:0}
+.bib-tl::before{content:"";position:absolute;left:11px;top:.5rem;bottom:.5rem;width:1px;background:linear-gradient(180deg,transparent,rgba(212,170,74,.45) 6%,rgba(212,170,74,.45) 94%,transparent)}
+.bib-ev{position:relative;padding-left:2.6rem;margin-bottom:4rem}
+.bib-ev:last-child{margin-bottom:0}
+.bib-ev::before{content:"";position:absolute;left:4px;top:.45rem;width:15px;height:15px;border-radius:50%;background:#16241a;border:2px solid var(--oro2);box-shadow:0 0 0 5px rgba(212,170,74,.12)}
+@media (min-width:900px){.bib-tl::before{left:50%}.bib-ev{padding-left:0}.bib-ev::before{left:calc(50% - 7px)}.bib-ev .bib-due{grid-template-columns:1fr 1fr;gap:4.5rem}}
+.bib-n{font-family:var(--fd);font-style:italic;font-size:1rem;color:var(--oro2)}
+.bib-ev h3{font-family:var(--fd);font-weight:400;font-size:clamp(1.5rem,3.6vw,2.05rem);line-height:1.18;color:var(--av);margin:.2rem 0 .55rem}
+.bib-ev h3 small{display:block;font-size:.62em;font-style:italic;color:var(--oro3);margin-top:.25rem}
+.bib-luogo{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.6);margin-bottom:1rem}
+.bib-luogo svg{width:14px;height:14px;fill:none;stroke:var(--oro2);stroke-width:1.8}
+.bib-ev .bib-testo p{font-size:.94rem}
+.bib-ev a{color:var(--oro3)}
+/* Scheda senza foto (Premio letterario) */
+.bib-scheda{position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem;background:radial-gradient(circle at 30% 20%,rgba(212,170,74,.18),transparent 55%),linear-gradient(135deg,#1f3322,#0f1a10);outline:1px solid rgba(212,170,74,.25)}
+.bib-libri{display:flex;align-items:flex-end;gap:6px;height:110px;margin-bottom:1.4rem}
+.bib-libri i{display:block;width:22px;border-radius:2px 2px 0 0;background:linear-gradient(180deg,var(--oro3),var(--oro));box-shadow:inset -3px 0 0 rgba(0,0,0,.18)}
+.bib-libri i:nth-child(1){height:78%}.bib-libri i:nth-child(2){height:100%;background:linear-gradient(180deg,#e9e2d0,#bfb398)}.bib-libri i:nth-child(3){height:86%;background:linear-gradient(180deg,#6f8f70,#3d5c3e)}.bib-libri i:nth-child(4){height:94%}.bib-libri i:nth-child(5){height:72%;background:linear-gradient(180deg,#c9a37a,#8a6a43)}
+.bib-scheda strong{font-family:var(--fd);font-weight:300;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--av);line-height:1.15}
+.bib-scheda strong em{color:var(--oro3)}
+.bib-scheda span{margin-top:.6rem;font-family:var(--fu);font-size:.66rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2)}
+
+/* ── Chiusura ───────────────────────────────── */
+.bib-fine{text-align:center;max-width:680px;margin:0 auto}
+.bib-fine .bib-testo p{margin-left:auto;margin-right:auto}
+.bib-firma{margin-top:2rem;padding-top:1.4rem;border-top:1px solid var(--av3);font-size:.86rem;color:var(--txt2)}
+.bib-firma a{color:var(--bosco);font-weight:600}
+  </style>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
+  <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+</head>
+<body data-page="biblioteca">
+<script src="nav-header.min.js"></script>
+<main id="main">
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="bib-hero" aria-labelledby="bib-h1">
+    <div class="bib-hero-bg" aria-hidden="true"></div>
+    <div class="bib-hero-content w">
+      <nav class="breadcrumb" aria-label="Percorso">
+        <a href="./">Home</a> <span>›</span> <a href="il-convitto.html">Il Convitto</a> <span>›</span> <span aria-current="page" style="color:var(--oro2)">Biblioteca e Lettura</span>
+      </nav>
+      <div class="bib-eyebrow">Progetto Lettura e Biblioteca</div>
+      <h1 id="bib-h1">Leggere insieme,<em>e andare oltre le pagine</em></h1>
+      <p class="lead">Una biblioteca nel Convitto, curata con le ragazze e i ragazzi. E un anno di incontri con autori, poesia, teatro e arte nei luoghi di cultura di Rieti.</p>
+      <div class="bib-salti">
+        <a href="#biblioteca">La nostra biblioteca</a>
+        <a href="#oltre-le-pagine">Oltre le pagine 2025/26</a>
+      </div>
+    </div>
+    <p class="bib-cred">Biblioteca comunale Paroniana, Rieti</p>
+  </section>
+
+  <!-- ══════════ LA NOSTRA BIBLIOTECA ══════════ -->
+  <section class="bib-sez chiara" id="biblioteca" aria-labelledby="bib-h2-bib">
+    <div class="w bib-due segui">
+      <div class="bib-testo">
+        <span class="lbl">Il potere delle storie</span>
+        <h2 id="bib-h2-bib">La nostra <em>biblioteca</em></h2>
+        <p>Al Convitto c'è una biblioteca sempre aperta ai convittori. Non è una stanza di libri da non toccare: le ragazze e i ragazzi partecipano alla sua cura, propongono titoli nuovi e la rinnovano anno dopo anno.</p>
+        <p>Un libro fa viaggiare senza muoversi, fa incontrare persone che non conosceremmo mai, allena il pensiero critico e l'empatia. E, a fine giornata, aiuta anche a staccare. Per questo la biblioteca è pensata come un luogo di incontro, di creatività e di confronto, in cui ognuno trova il proprio posto.</p>
+        <ul class="bib-servizi" aria-label="Cosa si fa in biblioteca">
+          <li><span class="ic" aria-hidden="true">📖</span><span><b>Lettura e prestito</b><span class="d">Si legge sul posto o si prende un libro in prestito.</span></span></li>
+          <li><span class="ic" aria-hidden="true">👥</span><span><b>Letture condivise</b><span class="d">Un libro letto insieme, e poi discusso.</span></span></li>
+          <li><span class="ic" aria-hidden="true">✒️</span><span><b>Caviardage</b><span class="d">Si cancellano parole da una pagina stampata finché ne resta una poesia.</span></span></li>
+          <li><span class="ic" aria-hidden="true">🗣️</span><span><b>Debate</b><span class="d">Confronto con regole precise: due squadre, una tesi, argomenti a favore e contro.</span></span></li>
+          <li><span class="ic" aria-hidden="true">🎲</span><span><b>Giochi letterari</b><span class="d">Sfide e giochi che partono dai libri.</span></span></li>
+          <li><span class="ic" aria-hidden="true">✍️</span><span><b>Incontri con autori</b><span class="d">Chi scrive i libri, dal vivo, a rispondere alle domande.</span></span></li>
+          <li><span class="ic" aria-hidden="true">🔎</span><span><b>Ricerche sul web</b><span class="d">Imparare a cercare, scegliere le fonti e verificarle.</span></span></li>
+        </ul>
+      </div>
+      <div class="bib-media">
+        <div class="bib-show" data-gal="biblioteca" aria-label="Galleria: la biblioteca del Convitto"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ DEDICHE D'AUTORE ══════════ -->
+  <section class="bib-sez chiara2" id="dediche" aria-labelledby="bib-h2-ded">
+    <div class="w">
+      <span class="lbl">Graditi ricordi</span>
+      <h2 id="bib-h2-ded">Dediche <em>d'autore</em></h2>
+      <div class="bib-testo"><p>Due libri dei nostri scaffali portano la dedica dei loro autori, scritta per chi legge al Convitto. Sono lì, a disposizione di tutti.</p></div>
+      <div class="bib-dediche">
+        <figure class="bib-dedica" tabindex="0" role="button" data-gal="dediche" data-i="0" aria-label="Ingrandisci la dedica di Concita De Gregorio">
+          <img src="img/biblioteca/dedica-de-gregorio.webp" alt="Frontespizio di «Di madre in figlia» di Concita De Gregorio con la dedica autografa" loading="lazy" width="1600" height="1600"/>
+          <figcaption>
+            <blockquote>«Per i lettori della biblioteca del Convitto alberghiero»</blockquote>
+            <cite>Concita De Gregorio<span>Di madre in figlia</span></cite>
+          </figcaption>
+        </figure>
+        <figure class="bib-dedica" tabindex="0" role="button" data-gal="dediche" data-i="1" aria-label="Ingrandisci la dedica di Piergiorgio Pulixi">
+          <img src="img/biblioteca/dedica-pulixi.webp" alt="Frontespizio di «L'uomo dagli occhi tristi» di Piergiorgio Pulixi con la dedica autografa" loading="lazy" width="1067" height="1600"/>
+          <figcaption>
+            <blockquote>«Alle ragazze e ai ragazzi del Convitto dell'Alberghiero di Rieti: che la vita vi sorrida sempre»</blockquote>
+            <cite>Piergiorgio Pulixi<span>L'uomo dagli occhi tristi</span></cite>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PAGINE PERDUTE ══════════ -->
+  <section class="bib-sez chiara" id="pagine-perdute" aria-labelledby="bib-h2-pp">
+    <div class="w bib-due inv">
+      <div class="bib-testo">
+        <span class="lbl">Laboratorio creativo</span>
+        <h2 id="bib-h2-pp">Pagine perdute <em>tornano a nuova vita</em></h2>
+        <p>I libri rovinati o rimasti senza lettori non finiscono nel cestino. Piegati pagina dopo pagina diventano alberi di Natale, vasi, decorazioni per la biblioteca.</p>
+        <p>È un lavoro di pazienza e di mani, che insegna a guardare un libro anche come materia: carta, pieghe, luce.</p>
+      </div>
+      <div>
+        <div class="bib-show" data-gal="pagine" data-alto aria-label="Galleria: oggetti nati da libri riciclati"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ OLTRE LE PAGINE ══════════ -->
+  <section class="bib-sez scura" id="oltre-le-pagine" aria-labelledby="bib-h2-olt">
+    <div class="w">
+      <div class="bib-intro">
+        <span class="lbl">Anno scolastico 2025/26</span>
+        <h2 id="bib-h2-olt">Oltre <em>le pagine</em></h2>
+        <div class="bib-testo">
+          <p>Ascoltare chi scrive, votare le poesie di un concorso, entrare nella sezione antica di una biblioteca o in un teatro dell'Ottocento. Durante l'anno il Progetto Lettura ha portato i convittori fuori dai libri, nei luoghi di cultura di Rieti.</p>
+          <p>Così la lettura smette di essere un compito: diventa una cosa viva, da discutere, che si lega alla storia e alla bellezza della città in cui si studia.</p>
+        </div>
+        <div class="bib-quattro" aria-hidden="true"><span>Letture</span><span>Cultura</span><span>Laboratori</span><span>Territorio</span></div>
+      </div>
+
+      <ol class="bib-tl">
+        <!-- 1 -->
+        <li class="bib-ev">
+          <div class="bib-due">
+            <div class="bib-testo">
+              <span class="bib-n">I.</span>
+              <h3>«La mia casa di Montalbano»<small>Incontro con Costanza DiQuattro</small></h3>
+              <div class="bib-luogo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Chiesa di San Giorgio, Rieti</div>
+              <p>Nel centenario della nascita di Andrea Camilleri, l'associazione culturale Polymnia ha invitato la scrittrice Costanza DiQuattro a presentare il suo libro autobiografico. È il racconto di un'infanzia nella casa di famiglia in Sicilia, diventata poi uno dei luoghi delle riprese del «Commissario Montalbano».</p>
+              <p>Per i ragazzi è stato un modo per guardare Camilleri da vicino, dove si incontrano la letteratura, la vita privata e la televisione che tutti conoscono.</p>
+            </div>
+            <div><div class="bib-show" data-gal="camilleri" data-largo aria-label="Foto: la chiesa di San Giorgio"></div></div>
+          </div>
+        </li>
+        <!-- 2 -->
+        <li class="bib-ev">
+          <div class="bib-due inv">
+            <div class="bib-testo">
+              <span class="bib-n">II.</span>
+              <h3>Il giro d'Italia delle poesie in cornice<small>e visita alla Biblioteca Paroniana</small></h3>
+              <div class="bib-luogo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Biblioteca comunale Paroniana, Rieti</div>
+              <p>Il gruppo del Progetto Lettura ha partecipato alla tappa reatina del concorso nazionale «Il giro d'Italia delle poesie in cornice 2025». Tra le oltre 45 poesie finaliste arrivate da tutta Italia, i ragazzi hanno letto e votato le loro preferite.</p>
+              <p>Poi la visita guidata alla biblioteca, settore per settore, fino alla sezione antica: volumi rari e secolari, codici miniati, carte geografiche di altri tempi.</p>
+            </div>
+            <div><div class="bib-show" data-gal="paroniana" aria-label="Galleria: la Biblioteca Paroniana"></div></div>
+          </div>
+        </li>
+        <!-- 3 -->
+        <li class="bib-ev">
+          <div class="bib-due">
+            <div class="bib-testo">
+              <span class="bib-n">III.</span>
+              <h3>Premio letterario Città di Rieti<small>XIII edizione · i convittori in giuria</small></h3>
+              <div class="bib-luogo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Biblioteca comunale Paroniana, Rieti</div>
+              <p>Questa volta i giudici erano loro. Come membri della giuria popolare, i ragazzi hanno letto i cinque romanzi in gara, molto diversi per stile e per temi, ne hanno discusso e li hanno votati alla Biblioteca Paroniana.</p>
+              <p>Leggere per dare un giudizio è un'altra cosa: bisogna arrivare in fondo, confrontare, motivare una scelta.</p>
+            </div>
+            <div>
+              <div class="bib-scheda" role="img" aria-label="Cinque libri stilizzati: i cinque romanzi in gara">
+                <div class="bib-libri" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+                <strong>Cinque romanzi,<br><em>una giuria di convittori</em></strong>
+                <span>Giuria popolare · XIII edizione</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <!-- 4 -->
+        <li class="bib-ev">
+          <div class="bib-due inv">
+            <div class="bib-testo">
+              <span class="bib-n">IV.</span>
+              <h3>«La partenza inaspettata» di Salieri<small>Incontro con gli artisti e opera buffa</small></h3>
+              <div class="bib-luogo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Teatro Flavio Vespasiano, Rieti</div>
+              <p>Prima l'incontro con gli artisti, che hanno raccontato come è nato lo spettacolo. Poi l'opera buffa di Antonio Salieri, portata in scena per il bicentenario della morte del compositore.</p>
+              <p>La regia moderna, con pareti a specchio e proiezioni in motion graphics, dialogava con i costumi del Settecento. I giovani artisti in scena hanno restituito all'opera la sua ironia, e i ragazzi l'hanno seguita con una curiosità sincera.</p>
+              <p>Un'esperienza che si lega ai laboratori del Convitto, quello teatrale, quello di lettura e il <a href="laboratorio-musicale.html">Laboratorio Musicale</a>, e che il gruppo ricorda come una serata vissuta insieme.</p>
+            </div>
+            <div><div class="bib-show" data-gal="salieri" aria-label="Galleria: lo spettacolo al Teatro Flavio Vespasiano"></div></div>
+          </div>
+        </li>
+        <!-- 5 -->
+        <li class="bib-ev">
+          <div class="bib-due">
+            <div class="bib-testo">
+              <span class="bib-n">V.</span>
+              <h3>Miró. Il giardino delle meraviglie<small>Un viaggio nel surrealismo</small></h3>
+              <div class="bib-luogo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Palazzo Dosi, Rieti</div>
+              <p>Un gruppo di convittrici e convittori, con le loro educatrici, ha visitato la mostra dedicata a Joan Miró. Colori pieni, linee libere, segni che sembrano un alfabeto inventato: l'universo del maestro catalano ha catturato l'attenzione di tutti.</p>
+              <p>Anche un quadro si legge: un'occasione per scoprire che l'arte può essere un linguaggio universale di libertà e di espressione.</p>
+            </div>
+            <div><div class="bib-show" data-gal="miro" aria-label="Galleria: la mostra di Miró a Palazzo Dosi"></div></div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══════════ CHIUSURA ══════════ -->
+  <section class="bib-sez chiara" aria-labelledby="bib-h2-fine">
+    <div class="w bib-fine">
+      <span class="lbl">Grazie</span>
+      <h2 id="bib-h2-fine">Ci vediamo il prossimo anno, <em>con nuovi libri</em></h2>
+      <div class="bib-testo">
+        <p>Grazie alle famiglie dei convittori e a tutti coloro che hanno donato libri e hanno contribuito ad arricchire la nostra biblioteca. Gli scaffali continuano a crescere: ogni nuovo titolo è benvenuto.</p>
+      </div>
+      <p class="bib-firma">Il Progetto Lettura e Biblioteca è curato dall'educatrice <a href="personale.html">E. Giansanti</a>, referente del progetto.</p>
+    </div>
+  </section>
+
+</main>
+<script src="nav.min.js"></script>
+<script src="galleria.js" defer></script>
+<script>
+(function () {
+  'use strict';
+  var P = 'img/biblioteca/';
+  function f(nome, alt, didascalia) { return { src: P + nome + '.jpg', mini: P + nome + '-mini.webp', alt: alt, didascalia: didascalia }; }
+
+  var GAL = {
+    biblioteca: { titolo: 'La biblioteca del Convitto', foto: [
+      f('sala-convitto', 'La biblioteca del Convitto: scaffali bianchi e verdi, piante e una parete lilla', 'La biblioteca del Convitto: scaffali chiari, piante e una parete lilla. Uno spazio piccolo, pensato per fermarsi a leggere.'),
+      f('scaffale-convitto', 'Scaffale della biblioteca con libri, piante e un vaso di pagine piegate', 'Gli scaffali crescono ogni anno, anche grazie ai libri donati dalle famiglie.'),
+      f('libri-convitto', 'Ripiani pieni di romanzi, con piccole piante tra i libri', 'Romanzi, gialli, classici e saggi: anche i ragazzi propongono i titoli da aggiungere.')
+    ]},
+    dediche: { titolo: "Dediche d'autore", foto: [
+      f('dedica-de-gregorio', 'Dedica autografa di Concita De Gregorio su «Di madre in figlia»', 'Concita De Gregorio, «Di madre in figlia»: «Per i lettori della biblioteca del Convitto alberghiero».'),
+      f('dedica-pulixi', "Dedica autografa di Piergiorgio Pulixi su «L'uomo dagli occhi tristi»", "Piergiorgio Pulixi, «L'uomo dagli occhi tristi»: «Alle ragazze e ai ragazzi del Convitto dell'Alberghiero di Rieti: che la vita vi sorrida sempre».")
+    ]},
+    pagine: { titolo: 'Pagine perdute tornano a nuova vita', foto: [
+      f('albero-di-libri-1', 'Albero di Natale fatto con le pagine piegate di un libro, illuminato da piccole luci', 'Un albero di Natale ricavato piegando le pagine di un vecchio volume.'),
+      f('albero-di-libri-2', 'Grande albero di Natale fatto di libri impilati, rami di pino e luci', "L'albero più grande: libri impilati, rami di pino e un libro aperto come puntale."),
+      f('albero-di-libri-3', 'Albero di pagine piegate a ventaglio con un disegno natalizio sullo sfondo', "Pagine piegate a ventaglio, una stella dorata e un'illustrazione natalizia sullo sfondo."),
+      f('vaso-di-pagine', 'Vaso di fiori secchi ricavato da un libro con le pagine piegate', 'Un vaso di fiori secchi: le pagine piegate diventano il contenitore.')
+    ]},
+    camilleri: { titolo: '«La mia casa di Montalbano»', foto: [
+      f('organo-san-giorgio', "L'organo della chiesa di San Giorgio a Rieti", "L'organo della chiesa di San Giorgio, a Rieti, dove si è svolto l'incontro con Costanza DiQuattro.")
+    ]},
+    paroniana: { titolo: 'Biblioteca Paroniana', foto: [
+      f('poesie-locandina', 'Locandina della tappa di Rieti del concorso «Il giro d\'Italia delle poesie in cornice 2025»', 'La locandina della tappa di Rieti: le poesie finaliste esposte alla Paroniana, votate dai visitatori.'),
+      f('paroniana-sala-rossa', 'Sala della Biblioteca Paroniana con soppalco e scaffalature rosse', 'Una delle sale della Paroniana, con il soppalco e le scaffalature rosse.'),
+      f('paroniana-capriate', 'Sala di lettura della Paroniana con il soffitto a capriate in legno', 'La grande sala di lettura sotto le capriate in legno.'),
+      f('paroniana-fondo-antico', 'Corridoio tra scaffali di volumi antichi rilegati in pergamena', 'Il deposito della sezione antica: file di volumi rilegati in pergamena.'),
+      f('paroniana-codice-miniato', 'Codice miniato aperto con capilettera decorati e scrittura gotica', 'Un codice miniato: capilettera decorati e scrittura gotica su due colonne.'),
+      f('paroniana-carta-italia', "Antica carta geografica dell'Italia esposta in una teca", "Una carta geografica antica dell'Italia, conservata in vetrina."),
+      f('paroniana-vetrina-1', 'Volumi antichi illustrati esposti in una vetrina', 'Tavole illustrate e piccoli volumi antichi esposti nelle teche.'),
+      f('paroniana-vetrina-2', 'Grande volume di incisioni aperto in una teca', 'Un grande volume di incisioni, aperto sotto il vetro.'),
+      f('paroniana-giornale', 'Vecchia annata di un quotidiano locale aperta su un tavolo', 'Una vecchia annata di un quotidiano locale: anche i giornali sono memoria della città.')
+    ]},
+    salieri: { titolo: '«La partenza inaspettata» al Teatro Flavio Vespasiano', foto: [
+      f('teatro-vespasiano', 'Interno del Teatro Flavio Vespasiano con la volta affrescata e i palchi', 'Il Teatro Flavio Vespasiano: la volta affrescata e i palchi, poco prima dell\'inizio.'),
+      f('salieri-luna', 'Due cantanti in costume settecentesco davanti a una grande luna proiettata', 'Una scena sotto la luna: la regia gioca con proiezioni e strutture trasparenti.'),
+      f('salieri-specchi', 'Scena con pareti a specchio e fogli proiettati', 'Pareti a specchio e fogli proiettati: il Settecento visto con gli occhi di oggi.'),
+      f('salieri-mare', 'Cantanti in costume davanti a una proiezione del mare', 'Il mare sullo sfondo, i costumi d\'epoca in primo piano.'),
+      f('salieri-applausi', 'La compagnia saluta il pubblico alla fine dello spettacolo', 'Gli applausi finali alla compagnia di giovani artisti.')
+    ]},
+    miro: { titolo: 'Miró. Il giardino delle meraviglie', foto: [
+      f('miro-1', 'Tre opere di Miró appese in sequenza, la prima su fondo blu', 'Tre opere in sequenza: il grande fondo blu e due litografie in bianco e nero con lampi di colore.'),
+      f('miro-2', 'Litografia di Miró a colori con figure rosse, blu e nere', 'Rosso, blu, giallo e nero: le figure di Miró sembrano personaggi di una favola.'),
+      f('miro-3', 'Due litografie di Miró affiancate in una teca', "Stelle, occhi e lune: il linguaggio di segni dell'artista."),
+      f('miro-4', 'Grande opera di Miró con una forma nera e accenti rossi', 'Una grande forma nera con accenti rossi, accanto a una piccola opera verticale.'),
+      f('miro-5', 'Acquaforte di Miró con poche linee e macchie di colore', "Un'opera firmata: poche linee, macchie di colore e molto spazio bianco."),
+      f('miro-6', 'Manifesto di Miró per «Quiri Quibu» di Joan Brossa', 'Il manifesto per «Quiri Quibu» di Joan Brossa, con le lettere dipinte come figure.')
+    ]}
+  };
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DUR = 6500;
+  function webp(s) { return s.replace(/\.jpg$/, '.webp'); }
+  function schermoIntero(nome, i) { if (window.Galleria && window.Galleria.apri) window.Galleria.apri(null, GAL[nome], i); }
+
+  function crea(box) {
+    var nome = box.getAttribute('data-gal'), g = GAL[nome];
+    if (!g) return;
+    var foto = g.foto, n = foto.length, idx = -1, timer = null, visibile = false, sopra = false;
+    box.innerHTML =
+      '<div class="bib-stage' + (box.hasAttribute('data-alto') ? ' alto' : box.hasAttribute('data-largo') ? ' largo' : '') + '"></div>' +
+      '<button type="button" class="bib-full" aria-label="Apri a schermo intero"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Schermo intero</button>' +
+      '<button type="button" class="bib-nav bib-prev" aria-label="Foto precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg></button>' +
+      '<button type="button" class="bib-nav bib-next" aria-label="Foto successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>' +
+      '<div class="bib-prog" aria-hidden="true"><i></i></div>' +
+      '<div class="bib-foot"><p class="bib-capt" aria-live="polite"></p><span class="bib-count"></span></div>';
+    if (n < 2) box.classList.add('singola');
+    var stage = box.querySelector('.bib-stage'), capt = box.querySelector('.bib-capt'), count = box.querySelector('.bib-count'), bar = box.querySelector('.bib-prog i');
+    var layers = foto.map(function (ft, i) {
+      var l = document.createElement('div');
+      l.className = 'bib-layer';
+      l.innerHTML = '<div class="bg" aria-hidden="true"></div><img alt="" decoding="async"/>';
+      var img = l.querySelector('img');
+      img.alt = ft.alt;
+      img.onerror = function () { img.onerror = null; img.src = ft.src; };
+      stage.appendChild(l);
+      return l;
+    });
+    function carica(i) {
+      var l = layers[(i + n) % n], ft = foto[(i + n) % n], img = l.querySelector('img');
+      if (!img.getAttribute('src')) { img.src = webp(ft.src); l.querySelector('.bg').style.backgroundImage = 'url(' + webp(ft.src) + ')'; }
+    }
+    function mostra(i) {
+      i = (i + n) % n;
+      if (i === idx) return;
+      carica(i); carica(i + 1);
+      if (idx >= 0) layers[idx].classList.remove('on');
+      layers[i].classList.add('on');
+      var primo = idx < 0;
+      idx = i;
+      capt.classList.add('via');
+      setTimeout(function () { capt.textContent = foto[i].didascalia; capt.classList.remove('via'); }, primo || reduce ? 0 : 200);
+      count.textContent = (i + 1) + ' / ' + n;
+      riparti();
+    }
+    function riparti() {
+      clearTimeout(timer);
+      bar.style.transition = 'none'; bar.style.width = '0';
+      if (reduce || n < 2 || !visibile || sopra) return;
+      var t = Math.max(DUR, Math.min(16000, 3500 + (foto[idx].didascalia || '').length * 60));
+      void bar.offsetWidth;
+      bar.style.transition = 'width ' + t + 'ms linear'; bar.style.width = '100%';
+      timer = setTimeout(function () { mostra(idx + 1); }, t);
+    }
+    box.querySelector('.bib-prev').addEventListener('click', function () { mostra(idx - 1); });
+    box.querySelector('.bib-next').addEventListener('click', function () { mostra(idx + 1); });
+    box.querySelector('.bib-full').addEventListener('click', function () { schermoIntero(nome, idx); });
+    stage.addEventListener('click', function () { schermoIntero(nome, idx); });
+    box.addEventListener('mouseenter', function () { sopra = true; riparti(); });
+    box.addEventListener('mouseleave', function () { sopra = false; riparti(); });
+    box.addEventListener('focusin', function () { sopra = true; riparti(); });
+    box.addEventListener('focusout', function () { sopra = false; riparti(); });
+    box.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); mostra(idx - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); mostra(idx + 1); }
+    });
+    /* Scorrimento col dito */
+    var x0 = null, y0 = null;
+    stage.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    stage.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { e.preventDefault(); mostra(idx + (dx < 0 ? 1 : -1)); }
+    });
+    /* Le prime foto si caricano poco prima di arrivarci; lo scorrimento parte solo quando lo slideshow è sullo schermo */
+    if ('IntersectionObserver' in window) {
+      var pre = new IntersectionObserver(function (v) {
+        if (v[0].isIntersecting) { carica(0); carica(1); pre.disconnect(); }
+      }, { rootMargin: '700px 0px' });
+      pre.observe(box);
+      new IntersectionObserver(function (v) {
+        v.forEach(function (en) { visibile = en.isIntersecting; if (visibile && idx < 0) mostra(0); else riparti(); });
+      }, { threshold: .35, rootMargin: '200px 0px 0px 0px' }).observe(box);
+    } else { visibile = true; mostra(0); }
+  }
+
+  document.querySelectorAll('.bib-show[data-gal]').forEach(crea);
+
+  /* Le due dediche si aprono a schermo intero */
+  document.querySelectorAll('.bib-dedica[data-gal]').forEach(function (el) {
+    function apri() { schermoIntero(el.getAttribute('data-gal'), +el.getAttribute('data-i')); }
+    el.addEventListener('click', apri);
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); apri(); } });
+  });
+})();
+</script>
+</body>
+</html>

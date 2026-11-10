@@ -307,11 +307,13 @@
     });
   }
 
-  function apri(key) {
-    var g = GALLERIE && GALLERIE[key];
+  /* dati (facoltativo): una galleria passata direttamente da una pagina, senza gallerie.json;
+     inizio (facoltativo): da quale foto partire */
+  function apri(key, dati, inizio) {
+    var g = dati || (GALLERIE && GALLERIE[key]);
     if (!g) return;
     costruisci();
-    slides = normalizza(g, key);
+    slides = dati ? normalizza({ foto: g.foto, includi_copertina: false }, '') : normalizza(g, key);
     titolo = g.titolo || '';
     titoloEl.textContent = titolo;
     lb.setAttribute('aria-label', 'Galleria fotografica' + (titolo ? ': ' + titolo : ''));
@@ -329,7 +331,7 @@
     void lb.offsetWidth;
     lb.classList.add('in');
     imposta(multi);
-    vai(0, 1);
+    vai(Math.max(0, Math.min(slides.length - 1, inizio | 0)), 1);
     suggerisci();
     (multi ? btnNext : lb.querySelector('.gal-x')).focus({ preventScroll: true });
   }
@@ -389,7 +391,7 @@
     if ((e.key === 'Enter' || e.key === ' ') && t && t.matches && t.matches('img[data-gal]')) { e.preventDefault(); apri(t.dataset.gal); }
   });
 
-  window.Galleria = { decora: decora };
+  window.Galleria = { decora: decora, apri: apri };
 
   fetch('gallerie.json', { cache: 'no-cache' })
     .then(function (r) { return r.ok ? r.json() : {}; })

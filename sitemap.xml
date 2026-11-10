@@ -175,6 +175,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://convitto.alberghierorieti.edu.it/biblioteca.html</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://convitto.alberghierorieti.edu.it/laboratorio-musicale.html</loc>
     <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>

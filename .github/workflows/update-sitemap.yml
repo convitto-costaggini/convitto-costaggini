@@ -40,4 +40,12 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml
           git commit -m "chore: aggiorna automaticamente lastmod sitemap.xml [skip ci]"
-          git push
+          # L'altro automatismo (indice di ricerca o mappa del sito) puo' aver appena salvato un suo commit:
+          # si riprende l'ultima versione di main e si riprova, fino a 3 volte.
+          for tentativo in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "Push rifiutato (tentativo $tentativo): riprendo l'ultima versione di main e riprovo."
+            git pull --rebase origin main
+          done
+          echo "Push non riuscito dopo 3 tentativi."
+          exit 1

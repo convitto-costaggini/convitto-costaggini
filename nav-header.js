@@ -49,6 +49,10 @@
           <li style="padding-left: .6rem;"><a href="vinile.html" data-page="vinile">└ 📻 Vinile</a></li>
           <li style="padding-left: .6rem;"><a href="solidarieta.html" data-page="solidarieta">└ 🤝 La Solidarietà</a></li>
 
+          <li style="padding: .4rem .9rem; font-family: var(--fu); font-size: .58rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .8;">📚 Biblioteca e Lettura</li>
+          <li style="padding-left: .6rem;"><a href="biblioteca.html" data-page="biblioteca">└ La nostra Biblioteca</a></li>
+          <li style="padding-left: .6rem;"><a href="biblioteca.html#oltre-le-pagine">└ Oltre le pagine 2025/26</a></li>
+
           <li><a href="comunita.html" data-page="comunita">🌟 La nostra Comunità</a></li>
         </ul>
       </div>
@@ -135,6 +139,10 @@
         <li style="padding-left: .75rem;"><a href="laboratorio-musicale.html">Accedi al Laboratorio</a></li>
         <li style="padding-left: .75rem;"><a href="vinile.html">📻 Vinile</a></li>
         <li style="padding-left: .75rem;"><a href="solidarieta.html">🤝 La Solidarietà</a></li>
+
+        <li style="padding: .5rem .5rem .2rem; font-family: var(--fu); font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .85;">📚 Biblioteca e Lettura</li>
+        <li style="padding-left: .75rem;"><a href="biblioteca.html">La nostra Biblioteca</a></li>
+        <li style="padding-left: .75rem;"><a href="biblioteca.html#oltre-le-pagine">Oltre le pagine 2025/26</a></li>
 
 
         <li><a href="comunita.html">🌟 La nostra Comunità</a></li>

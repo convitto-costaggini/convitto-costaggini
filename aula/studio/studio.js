@@ -26,7 +26,7 @@ window.STUDIO = (function () {
   var bottoneVoce = null;
   function zitto() { if (window.speechSynthesis) speechSynthesis.cancel(); if (bottoneVoce) bottoneVoce.classList.remove('va'); bottoneVoce = null; }
   function leggi(testo, bottone) {
-    if (!window.speechSynthesis) return toast('Il telefono non sa leggere ad alta voce 😕');
+    if (!window.speechSynthesis) return toast('Questo dispositivo non sa leggere ad alta voce 😕');
     var stessa = bottone && bottone === bottoneVoce;
     zitto(); if (stessa) return;
     var u = new SpeechSynthesisUtterance(testo); u.lang = 'it-IT'; u.rate = (window.AULA_SUPPORTI ? AULA_SUPPORTI.velocita() : 0.92); if (voce) u.voice = voce;
@@ -155,7 +155,7 @@ window.STUDIO = (function () {
     /* ═══ 1. IL GANCIO ═══ */
     function tappaGancio(el) {
       var g = L.gancio || {};
-      el.innerHTML = '<p class="st-nota" style="margin:0 0 .6rem">⏱️ Tutta la lezione: circa ' + TOTALE + ' minuti. Si può fare anche in più volte: il telefono ricorda dove sei arrivato.</p><h2>Prima di tutto, una domanda…</h2><p class="st-sot">Non devi saperlo. Prova a indovinare: il cervello ricorda meglio quello che ha provato a indovinare.</p>' +
+      el.innerHTML = '<p class="st-nota" style="margin:0 0 .6rem">⏱️ Tutta la lezione: circa ' + TOTALE + ' minuti. Si può fare anche in più volte: il dispositivo ricorda dove sei arrivato.</p><h2>Prima di tutto, una domanda…</h2><p class="st-sot">Non devi saperlo. Prova a indovinare: il cervello ricorda meglio quello che ha provato a indovinare.</p>' +
         '<div class="st-card st-gancio st-entra">' + tastoVoce(g.domanda) + '<div style="font-size:3rem">🤔</div><p class="q">' + esc(g.domanda) + '</p>' +
         '<div id="st-g"><button type="button" class="st-btn oro" id="st-pensa">Ci penso 5 secondi…</button></div></div>';
       el.querySelector('#st-pensa').onclick = function () {

@@ -291,7 +291,7 @@
       dire: 'Cinque minuti. Prima del laboratorio ciascuno ha bisogno della propria casella di posta istituzionale: il codice di accesso arriva per mail e vale 10 minuti.',
       azioni: ['Controllare di avere la casella di posta pronta e aperta sul dispositivo.'] },
 
-    { id: 'tre-passi', t: 'Dal libro alla lezione, in tre passi', ini: 40, fin: 42, url: CREA,
+    { id: 'tre-passi', accesso: true, t: 'Dal libro alla lezione, in tre passi', ini: 40, fin: 42, url: CREA,
       dire: 'Tre passi e un risultato: le istruzioni per l\'IA, l\'assistente esterno, incolla e pubblica. Prima di tutto si entra con la mail della scuola: una volta sola, poi il dispositivo si ricorda.',
       azioni: [
         'A destra, scrivi la tua mail della scuola. Basta «nome.cognome»: il resto lo aggiunge il sito. Tocca «Mandami il codice →».',
@@ -301,7 +301,7 @@
       ],
       nota: 'Serve l\'accesso con la mail istituzionale: se non arriva il codice, controllare lo spam e richiederlo.' },
 
-    { id: 'passo1', t: 'Passo 1: le istruzioni per l\'IA', ini: 42, fin: 45, url: CREA,
+    { id: 'passo1', accesso: true, t: 'Passo 1: le istruzioni per l\'IA', ini: 42, fin: 45, url: CREA,
       dire: 'Si compila un modulo semplice. Quasi tutto è facoltativo: basta un argomento. Si può anche scegliere un argomento qualsiasi, è una prova.',
       azioni: [
         'Nel riquadro «1 Le istruzioni per l\'IA» scrivi un argomento nel campo «Argomento / titolo della lezione», per esempio «Il sistema HACCP».',
@@ -318,7 +318,7 @@
         'Quando ha finito, tocca «Copia» sotto la risposta (o in alto, se è in un riquadro a parte). Poi torna a questa scheda.'
       ] },
 
-    { id: 'passo3', t: 'Passo 3: incolla e pubblica', ini: 48, fin: 51, url: CREA,
+    { id: 'passo3', accesso: true, t: 'Passo 3: incolla e pubblica', ini: 48, fin: 51, url: CREA,
       dire: 'Ultimo passo: si incolla e si pubblica. Si può cambiare idea sulla condivisione quando si vuole, da «Modifica».',
       azioni: [
         'Nel riquadro «3 Incolla e pubblica» tocca «📋 Incolla» (o incolla a mano nella casella «La risposta dell\'IA»).',
@@ -327,7 +327,7 @@
         'Dai un\'occhiata alla lezione con «👀 Apri la lezione». Se vedi un errore, «✏️ Modifica» lo corregge senza cambiare codice e QR.'
       ] },
 
-    { id: 'attenzioni', t: 'Tre attenzioni prima di creare', ini: 51, fin: 53, url: CREA,
+    { id: 'attenzioni', accesso: true, t: 'Tre attenzioni prima di creare', ini: 51, fin: 53, url: CREA,
       dire: 'La responsabilità del contenuto resta di chi lo pubblica, e la riservatezza dipende anche dalle nostre scelte, non solo dal sito.',
       azioni: [
         'Niente nomi di studenti nei titoli.',
@@ -335,17 +335,19 @@
         'Rileggere sempre la lezione prima di proporla: l\'IA può sbagliare.'
       ] },
 
-    { id: 'm4', t: 'Dopo la creazione (Missione 4)', ini: 53, fin: 56, m: 4, url: CREA,
-      dire: 'Sono gli strumenti che fanno risparmiare più tempo. Si guardano uno alla volta, senza fretta: sono pulsanti sotto il QR della lezione appena pubblicata.',
+    { id: 'm4', accesso: true, t: 'Dopo la creazione (Missione 4)', ini: 53, fin: 56, m: 4, url: CREA,
+      dire: 'Sono gli strumenti che fanno risparmiare più tempo. Si guardano uno alla volta, senza fretta. Servono una lezione e l\'accesso fatto a destra.',
       azioni: [
-        'Sotto il QR tocca «🖥️ QR a tutto schermo»: è quello da proiettare. Per tornare indietro chiudilo.',
-        'Tocca «🖨️ Stampa il cartello»: si apre il cartello con il QR, pronto da stampare. Chiudilo quando l\'hai visto.',
-        'Tocca «🏆 Sfida a squadre alla LIM» per vedere come appare in classe, poi torna qui.',
-        'Tocca «📝 Prepara una verifica»: dà una verifica dalla stessa lezione. Guardala e basta, non serve completarla.'
+        'Se hai appena pubblicato la lezione (passo 3), i pulsanti sono sotto il suo QR. Altrimenti tocca «Archivio» qui sotto e scegli una lezione.',
+        'Tocca «🖥️ QR a tutto schermo» (dall\'Archivio il pulsante si chiama «QR»): è il QR da proiettare. Per tornare indietro chiudilo.',
+        'Dalla lezione appena pubblicata tocca «🖨️ Stampa il cartello»: si apre il cartello con il QR. Chiudilo quando l\'hai visto.',
+        'Tocca «Sfida a squadre sull\'esempio» qui sotto: è la gara a squadre da fare alla LIM. Non richiede nessun accesso.',
+        'Se vuoi, dalla lezione pubblicata tocca «📝 Prepara una verifica»: guardala e basta, non serve completarla.'
       ],
-      nota: 'Chi non ha ancora una lezione pubblicata può guardare questi strumenti sulla lezione di esempio, con il codice DEMO.' },
+      viste: [['Crea (QR e strumenti)', CREA], ['Archivio (pulsante QR)', '/aula/studio/archivio.html'], ['Sfida a squadre sull\'esempio', DEMO + '&m=squadre']],
+      nota: 'Chi non ha ancora una lezione pubblicata può guardare gli strumenti sulla lezione di esempio, con il codice DEMO.' },
 
-    { id: 'm3', t: 'Missione 3: create la vostra prima lezione', ini: 56, fin: 65, m: 3, url: CREA,
+    { id: 'm3', accesso: true, t: 'Missione 3: create la vostra prima lezione', ini: 56, fin: 65, m: 3, url: CREA,
       dire: 'È il cuore dell\'incontro, ma si fa senza ansia: si ripercorrono i tre passi appena visti, su un argomento che vi interessa. Chi si ferma o ha un dubbio alza la mano: si risolve insieme.',
       azioni: [
         'Passo 1: scrivi l\'argomento e tocca «Copia le istruzioni».',
@@ -356,7 +358,7 @@
       viste: [['Crea', CREA], ['Le mie lezioni', '/aula/studio/docente.html#mie'], ['Archivio', '/aula/studio/archivio.html']],
       nota: 'Problemi tipici: il codice non arriva (controllare spam e correttezza della mail, poi richiederlo); il codice è scaduto dopo 10 minuti (se ne richiede un altro); la risposta dell\'IA è troppo lunga (chiedere di accorciare).' },
 
-    { id: 'm5', t: 'Missione 5: tre regole per la riservatezza', ini: 65, fin: 68, m: 5, url: CREA,
+    { id: 'm5', accesso: true, t: 'Missione 5: tre regole per la riservatezza', ini: 65, fin: 68, m: 5, url: CREA,
       dire: 'Sono tre regole semplici, scritte nella pagina di creazione. Le leggiamo una alla volta e ognuno le dice a modo suo: nessuna formula da ricordare.',
       azioni: [
         'In cima alla pagina di creazione trovi il riquadro «🔒 Tre regole per la privacy». Leggi la prima: un codice per lezione, mai per persona.',
@@ -467,10 +469,19 @@
         return '<li><label class="sp"><input type="checkbox" data-k="' + k + '"' + (spunte[k] ? ' checked' : '') + '/><span>' + a + '</span></label></li>';
       }).join('') + '</ul>';
       if (p.nota) h += '<div class="avviso">' + p.nota + '</div>';
+      if (p.accesso) h += '<div class="avviso acc" hidden><b>Prima l\'accesso, a destra.</b> Scrivi la mail della scuola e tocca «Mandami il codice →». Una volta sola: poi questo dispositivo si ricorda di te.</div>';
       h += '</div>';
       li.innerHTML = h; elenco.appendChild(li);
     });
   }
+  /* i passi che lavorano nell'area docenti ricordano l'accesso, finché a destra non si è entrati */
+  function haSessione() { try { var o = JSON.parse(localStorage.getItem('studio-sessione') || 'null'); return !!(o && o.t && o.scade > Date.now()); } catch (e) { return false; } }
+  function avvisoAccesso() {
+    var e = haSessione();
+    var a = elenco.querySelectorAll('.avviso.acc');
+    for (var i = 0; i < a.length; i++) a[i].hidden = e;
+  }
+  setInterval(avvisoAccesso, 1500);
   function fatta(p) { return p.azioni.length && p.azioni.every(function (a, j) { return spunte[p.id + '.' + j]; }); }
   function aggiornaStato() {
     visibili.forEach(function (p, i) {
@@ -486,7 +497,7 @@
     $('conta').textContent = 'Passo ' + (corrente + 1) + ' di ' + visibili.length + (solo ? ' · solo le missioni' : (p ? ' · previsto ' + ora(p.ini) + ' – ' + ora(p.fin) + ' su 1:30' : ' · 90 minuti'));
     $('indietro').disabled = corrente <= 0;
     $('avanti').textContent = corrente >= visibili.length - 1 ? 'Fine ✓' : 'Avanti →';
-    stato();
+    stato(); avvisoAccesso();
   }
   function vai(i, nonCaricare) {
     if (i < 0 || i >= visibili.length) return;

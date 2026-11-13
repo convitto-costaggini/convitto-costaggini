@@ -255,67 +255,76 @@
       ] },
 
     { id: 'm1', t: 'Missione 1: entra e gioca', ini: 19, fin: 25, m: 1, url: DEMO,
-      dire: 'Tutti provano come uno studente, con il proprio dispositivo.',
+      dire: 'Si prova come farebbe uno studente: con calma, un gesto alla volta. Non c\'è niente da sbagliare e nessuno controlla: si guarda, si tocca, si gioca.',
       azioni: [
-        'Sul proprio dispositivo: aprire la Sala studio, scrivere DEMO nel campo del codice (oppure inquadrare il QR della lezione). A destra la lezione di esempio è già aperta, per chi vuole provare qui.',
-        'Scegliere un modo di studiare e arrivare alla sfida finale.',
-        'Fatto quando: si è chiusa la sfida finale della lezione di esempio.'
+        'Sul tuo dispositivo apri la Sala studio. Nel campo «CODICE» scrivi DEMO e tocca «Entra →». In alternativa inquadra il QR proiettato. (Qui a destra la lezione di esempio è già aperta.)',
+        'Si apre «I principi nutritivi». Nella schermata «Come vuoi studiare?» tocca «Percorso guidato».',
+        'Vai avanti con «Avanti →», una tappa alla volta. Se una risposta è sbagliata non succede nulla: il sistema spiega perché.',
+        'Arrivato alla «Sfida finale», prova a rispondere con tranquillità. Quando hai finito sei a posto così.',
+        'Chi finisce prima può assaggiare un altro modo, per esempio «Il minuto» o «Escape room», mentre gli altri completano.'
       ],
       viste: [['Sala studio (campo del codice)', '/aula/studio/'], ['Lezione di esempio', DEMO]] },
 
     { id: 'supporti', t: 'Aa Leggi a modo tuo', ini: 25, fin: 31, url: DEMO, ripristina: true,
-      dire: 'Un pulsante per tutta la classe: ognuno regola da sé carattere, colori e spaziatura. Non è un aiuto per una categoria di studenti: è utile a tutti.',
+      dire: 'Un pulsante per tutta la classe: ognuno regola da sé carattere, colori e spaziatura. Non è un aiuto per una categoria di studenti: è utile a tutti. Si prova insieme, senza fretta: ogni scelta si può annullare.',
       azioni: [
-        'Aprire una lezione, premere «Aa Leggi a modo tuo», cambiare carattere e colori.',
-        'Usare le tre scelte rapide: Lettura 1, Lettura 2, Lettura 3.',
-        'Far provare ai partecipanti sul proprio dispositivo.',
-        'Ricordare che le scelte restano sul dispositivo e che nessuno sa chi ha scelto che cosa.'
+        'Nella lezione di esempio cerca in basso a destra il pulsante tondo «Aa» («Leggi a modo tuo») e toccalo.',
+        'In alto trovi la «Scelta rapida»: tocca «Lettura 1» e guarda come cambia la pagina.',
+        'Poi tocca «Lettura 2» e «Lettura 3». Scegli quella in cui leggi più comodo.',
+        'Se vuoi, cambia a mano carattere, spazi e colori: è solo una prova, nessuno vede cosa scegli.',
+        'Per tornare com\'era basta riprendere la prima scelta: il passo finisce e la lettura viene rimessa a posto da sola.'
       ],
       viste: [['Lezione di esempio', DEMO], ['Supporti alla lettura', '/aula/studio/inclusione.html']],
       nota: 'Al termine di questo passo la lettura viene rimessa com\'era.' },
 
     { id: 'm2', t: 'Missione 2: per tutti, senza etichette', ini: 31, fin: 35, m: 2, url: '/aula/studio/inclusione.html',
-      dire: 'Se il supporto è per tutti, nessuno ha bisogno di dichiarare una motivazione e nessuno si sente fuori posto. È il passaggio educativo più importante.',
+      dire: 'Se il supporto è per tutti, nessuno ha bisogno di dichiarare una motivazione e nessuno si sente fuori posto. È il passaggio educativo più importante. Qui si prova soltanto: nessuna risposta giusta o sbagliata.',
       azioni: [
-        'Leggere le voci «Si fa» e «Non si fa» della pagina.',
-        'Passare da Lettura 1 a Lettura 3 in un tocco.',
-        'Fatto quando: si è passati da Lettura 1 a Lettura 3 senza cercare nei menu.'
-      ] },
+        'A destra si apre la pagina dei supporti. Leggi con calma il riquadro «Come funziona»: sono tre righe.',
+        'Torna alla lezione di esempio (pulsante in alto a destra qui sopra) e tocca il pulsante «Aa».',
+        'Prova a passare da «Lettura 1» a «Lettura 3» con un solo tocco: non serve cercare nei menu.',
+        'Se ti è venuto naturale, la missione è già riuscita: un solo pulsante, uguale per tutti.'
+      ],
+      viste: [['Supporti alla lettura', '/aula/studio/inclusione.html'], ['Lezione di esempio', DEMO]] },
 
     { id: 'pausa', t: 'Pausa', ini: 35, fin: 40, url: '/aula/formazione/',
       dire: 'Cinque minuti. Prima del laboratorio ciascuno ha bisogno della propria casella di posta istituzionale: il codice di accesso arriva per mail e vale 10 minuti.',
       azioni: ['Controllare di avere la casella di posta pronta e aperta sul dispositivo.'] },
 
     { id: 'tre-passi', t: 'Dal libro alla lezione, in tre passi', ini: 40, fin: 42, url: CREA,
-      dire: 'Tre passi e un risultato: 1 le istruzioni per l\'IA, 2 l\'assistente esterno, 3 incolla e pubblica. In alternativa la creazione automatica manda le foto direttamente all\'IA della scuola, senza passare da un assistente esterno.',
+      dire: 'Tre passi e un risultato: le istruzioni per l\'IA, l\'assistente esterno, incolla e pubblica. Prima di tutto si entra con la mail della scuola: una volta sola, poi il dispositivo si ricorda.',
       azioni: [
-        'Aprire a destra la pagina di creazione e fare l\'accesso con la mail istituzionale e il codice.',
-        'Spiegare il flusso prima di farlo eseguire.'
+        'A destra, scrivi la tua mail della scuola. Basta «nome.cognome»: il resto lo aggiunge il sito. Tocca «Mandami il codice →».',
+        'Apri la tua posta e cerca il messaggio «Il tuo codice di accesso». Non lo vedi? Guarda in Spam o Posta indesiderata.',
+        'Copia le sei cifre, incollale nel campo del codice e tocca «Entra →». Compare «Fatto, sei dentro!».',
+        'Se il codice non arriva entro un minuto, tocca «Rimanda il codice»: non è un problema, capita.'
       ],
       nota: 'Serve l\'accesso con la mail istituzionale: se non arriva il codice, controllare lo spam e richiederlo.' },
 
     { id: 'passo1', t: 'Passo 1: le istruzioni per l\'IA', ini: 42, fin: 45, url: CREA,
-      dire: 'I campi sono quelli veri: argomento, materia, anno di corso, classe e indicazioni per l\'IA (facoltativi).',
+      dire: 'Si compila un modulo semplice. Quasi tutto è facoltativo: basta un argomento. Si può anche scegliere un argomento qualsiasi, è una prova.',
       azioni: [
-        'Scrivere un argomento reale nel campo «Argomento».',
-        'Scegliere materia e anno di corso.',
-        'Premere «Copia le istruzioni».'
+        'Nel riquadro «1 Le istruzioni per l\'IA» scrivi un argomento nel campo «Argomento / titolo della lezione», per esempio «Il sistema HACCP».',
+        'Se ti va, scegli «Materia» e «Anno di corso» dai menu. Sono facoltativi: si può anche lasciare così.',
+        'Tocca «Copia le istruzioni». Il testo è ora copiato: non serve leggerlo.'
       ] },
 
     { id: 'passo2', t: 'Passo 2: nell\'assistente IA', ini: 45, fin: 48, url: CREA,
-      dire: 'Il testo in codice è normale, non va letto. Se la risposta compare in un riquadro a parte accanto alla chat, si copia da lì. Senza foto va bene lo stesso: la lezione nasce dall\'argomento scritto nel passo 1.',
+      dire: 'Si esce un attimo dal sito e si usa l\'assistente che si preferisce. Il testo che comparirà sembra codice: è normale, non va letto né capito. Si copia e basta.',
       azioni: [
-        'Aprire l\'assistente scelto (a discrezione del docente) e incollare le istruzioni.',
-        'Allegare, se si vuole, la foto della pagina del libro.',
-        'Copiare la risposta dell\'IA.'
+        'Sotto «Poi apri l\'assistente che preferisci» tocca uno dei pulsanti (Claude, ChatGPT o altro): si apre in una nuova scheda.',
+        'Se hai una foto della pagina del libro, allegala con il tasto «+» o la graffetta. Se non ce l\'hai va bene lo stesso.',
+        'Incolla le istruzioni nel messaggio e invia.',
+        'Quando ha finito, tocca «Copia» sotto la risposta (o in alto, se è in un riquadro a parte). Poi torna a questa scheda.'
       ] },
 
     { id: 'passo3', t: 'Passo 3: incolla e pubblica', ini: 48, fin: 51, url: CREA,
-      dire: 'Si può cambiare idea sulla condivisione quando si vuole, da «Modifica». «Le mie lezioni» mostra le lezioni pubblicate da qualsiasi dispositivo su cui si è entrati.',
+      dire: 'Ultimo passo: si incolla e si pubblica. Si può cambiare idea sulla condivisione quando si vuole, da «Modifica».',
       azioni: [
-        'Incollare la risposta nell\'area «Incolla e pubblica».',
-        'Indicare l\'autore e premere «Pubblica la lezione»: compare il QR.',
-        'Ricordare che si può modificare o cancellare solo la propria lezione.'
+        'Nel riquadro «3 Incolla e pubblica» tocca «📋 Incolla» (o incolla a mano nella casella «La risposta dell\'IA»).',
+        'Controlla che compaia il tuo nome nel campo «Autore». Per ora lascia spenta la casella di condivisione nell\'Archivio, se non sei sicuro.',
+        'Tocca «✨ Pubblica la lezione»: compaiono il QR e il codice di sei lettere.',
+        'Dai un\'occhiata alla lezione con «👀 Apri la lezione». Se vedi un errore, «✏️ Modifica» lo corregge senza cambiare codice e QR.'
       ] },
 
     { id: 'attenzioni', t: 'Tre attenzioni prima di creare', ini: 51, fin: 53, url: CREA,
@@ -327,32 +336,33 @@
       ] },
 
     { id: 'm4', t: 'Dopo la creazione (Missione 4)', ini: 53, fin: 56, m: 4, url: CREA,
-      dire: 'Sono gli strumenti che fanno risparmiare più tempo: il QR a tutto schermo, il cartello stampabile e «Prepara una verifica».',
+      dire: 'Sono gli strumenti che fanno risparmiare più tempo. Si guardano uno alla volta, senza fretta: sono pulsanti sotto il QR della lezione appena pubblicata.',
       azioni: [
-        'Aprire il QR a tutto schermo (si inquadra nello studio pomeridiano e da casa; in classe si usa il codice sui PC di laboratorio).',
-        'Aprire il cartello stampabile con il QR.',
-        'Lanciare una sfida a squadre alla LIM e preparare una verifica dalla stessa lezione.',
-        'Fatto quando: si è aperto il QR a tutto schermo e il cartello.'
+        'Sotto il QR tocca «🖥️ QR a tutto schermo»: è quello da proiettare. Per tornare indietro chiudilo.',
+        'Tocca «🖨️ Stampa il cartello»: si apre il cartello con il QR, pronto da stampare. Chiudilo quando l\'hai visto.',
+        'Tocca «🏆 Sfida a squadre alla LIM» per vedere come appare in classe, poi torna qui.',
+        'Tocca «📝 Prepara una verifica»: dà una verifica dalla stessa lezione. Guardala e basta, non serve completarla.'
       ],
-      nota: 'Chi ha già finito la propria lezione può provare questa missione.' },
+      nota: 'Chi non ha ancora una lezione pubblicata può guardare questi strumenti sulla lezione di esempio, con il codice DEMO.' },
 
     { id: 'm3', t: 'Missione 3: create la vostra prima lezione', ini: 56, fin: 65, m: 3, url: CREA,
-      dire: 'È il cuore dell\'incontro: ciascuno crea la propria lezione.',
+      dire: 'È il cuore dell\'incontro, ma si fa senza ansia: si ripercorrono i tre passi appena visti, su un argomento che vi interessa. Chi si ferma o ha un dubbio alza la mano: si risolve insieme.',
       azioni: [
-        'Creare una lezione su un argomento che farete davvero.',
-        'Controllare che compaia in «Le mie lezioni».',
-        'Fatto quando: la lezione compare in «Le mie lezioni».'
+        'Passo 1: scrivi l\'argomento e tocca «Copia le istruzioni».',
+        'Passo 2: incollale nell\'assistente, aspetta la risposta e toccane «Copia».',
+        'Passo 3: incolla nella pagina e tocca «✨ Pubblica la lezione».',
+        'Per ritrovarla, vai in «Le mie lezioni» (nella barra in alto): la lezione è lì, con il suo codice.'
       ],
-      viste: [['Crea', CREA], ['Archivio', '/aula/studio/archivio.html']],
+      viste: [['Crea', CREA], ['Le mie lezioni', '/aula/studio/docente.html#mie'], ['Archivio', '/aula/studio/archivio.html']],
       nota: 'Problemi tipici: il codice non arriva (controllare spam e correttezza della mail, poi richiederlo); il codice è scaduto dopo 10 minuti (se ne richiede un altro); la risposta dell\'IA è troppo lunga (chiedere di accorciare).' },
 
     { id: 'm5', t: 'Missione 5: tre regole per la riservatezza', ini: 65, fin: 68, m: 5, url: CREA,
-      dire: 'Le tre regole sono scritte nella pagina di creazione e richiamano il parere della DPO. Una regola alla volta, con parole proprie.',
+      dire: 'Sono tre regole semplici, scritte nella pagina di creazione. Le leggiamo una alla volta e ognuno le dice a modo suo: nessuna formula da ricordare.',
       azioni: [
-        'Un codice per lezione, mai per persona: lo stesso codice o QR va a tutta la classe, senza nomi nei titoli.',
-        'I supporti sono per tutti: si mostra il pulsante a tutta la classe.',
-        'Le versioni con più aiuti non hanno nomi né etichette.',
-        'Fatto quando: titolo e foto senza nomi, un codice per la classe.'
+        'In cima alla pagina di creazione trovi il riquadro «🔒 Tre regole per la privacy». Leggi la prima: un codice per lezione, mai per persona.',
+        'Rileggi i titoli delle lezioni che hai pubblicato: non devono contenere nomi di studenti. Se ne trovi uno, «✏️ Modifica» lo cambia.',
+        'Seconda regola: i supporti sono per tutti. Si mostra il pulsante «Aa Leggi a modo tuo» a tutta la classe.',
+        'Terza regola: le versioni con più aiuti non hanno nomi né etichette. Basta così: sono tre idee, e si imparano facendo.'
       ] },
 
     { id: 'informativa', t: 'L\'informativa in una tabella', ini: 68, fin: 75, url: '/informativa-aula.html',

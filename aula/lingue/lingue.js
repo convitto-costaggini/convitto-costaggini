@@ -59,7 +59,7 @@ window.LINGUE_SITO = (function () {
     if (avvisati[cod + motivo]) return; avvisati[cod + motivo] = 1;
     var nome = cod === 'it' ? 'italiano' : lingua(cod).nome.toLowerCase();
     var testo = motivo === 'not-allowed' ? 'Il browser ha bloccato la voce: toccate di nuovo 🔊.'
-      : 'Su questo dispositivo manca la voce in ' + nome + '. Per sentirla, installatela: sul tablet in Impostazioni › Sintesi vocale (Samsung: Gestione generale › Sintesi vocale); su Windows in Impostazioni › Ora e lingua › Voce.';
+      : 'Su questo dispositivo manca la voce in ' + nome + '. Per sentirla, installatela: sul dispositivo in Impostazioni › Sintesi vocale (Samsung: Gestione generale › Sintesi vocale); su Windows in Impostazioni › Ora e lingua › Voce.';
     var d = document.createElement('div');
     d.setAttribute('role', 'status');
     d.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:300;max-width:min(520px,calc(100vw - 32px));background:#2C3E2D;color:#fff;font:600 .84rem/1.5 var(--fu,sans-serif);padding:.8rem 1rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.25);cursor:pointer';

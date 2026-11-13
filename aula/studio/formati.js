@@ -507,6 +507,8 @@ window.FORMATI = (function () {
         '<div class="fm-opz' + (d.vf ? ' due' : '') + '">' + d.opz.map(function (o, i) { return '<button type="button" data-o="' + i + '"><span class="l">' + (d.vf ? '' : LET[i]) + '</span>' + esc(o) + '</button>'; }).join('') + '</div>' +
         '<div class="fm-esito" aria-live="polite"></div></div>';
       R.querySelector('[data-schermo]').onclick = schermo;
+      /* il pulsante «Prossima domanda» sta in fondo e sparisce: senza questo la pagina resta in basso, sul piè di pagina */
+      R.scrollIntoView({ block: 'start' });
       if (conf.tempo) {
         var tmp = conf.tempo * (window.AULA_SUPPORTI && AULA_SUPPORTI.ha('te') ? 1.5 : 1), fine = Date.now() + tmp * 1000, barra = R.querySelector('.fm-tempo i');
         timer = setInterval(function () {
@@ -546,6 +548,7 @@ window.FORMATI = (function () {
         '<ol class="fm-podio">' + ord.map(function (s) { var pos = ord.filter(function (x) { return x.punti > s.punti; }).length; /* a pari punti, stessa medaglia */ return '<li><span>' + ['🥇', '🥈', '🥉', '4°'][pos] + '</span><span>' + s.ic + ' ' + esc(s.nome) + '</span><b>' + s.punti + '</b></li>'; }).join('') + '</ol>' +
         '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn oro" data-ancora>🔁 Un\'altra partita</button></div></div>';
       R.querySelector('[data-ancora]').onclick = impostazioni;
+      R.scrollIntoView({ block: 'start' });
     }
     function schermo() {
       var el = R.closest('main') || R;

@@ -53,6 +53,8 @@
     .corpo ul.az>li{padding:6px 0;border-bottom:1px dashed var(--panna2)}
     .corpo ul.az>li:last-child{border-bottom:0}
     .corpo label.sp{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+    .corpo label.sp .num{flex:0 0 auto;min-width:1.5em;height:1.5em;border-radius:50%;background:var(--bosco);color:#fff;font:700 .8em/1.5em var(--fu,sans-serif);text-align:center;margin-top:2px}
+    .corpo label.sp b.bt{background:#f3ecd6;border-radius:6px;padding:0 .3em;font-weight:700}
     .corpo label.sp input{width:20px;height:20px;margin-top:2px;accent-color:var(--bosco);flex:0 0 auto}
     .corpo .btn{display:inline;background:var(--panna);border:1px solid var(--panna2);border-radius:6px;padding:0 7px;font-weight:700;font-size:14.5px;color:var(--bosco);-webkit-box-decoration-break:clone;box-decoration-break:clone}
     .viste{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0 .3rem}
@@ -474,7 +476,7 @@
       if (p.viste) h += '<div class="viste" role="group" aria-label="Pagine di questo passo">' + p.viste.map(function (v, k) { return '<button type="button" data-v="' + k + '" aria-pressed="false">' + v[0] + '</button>'; }).join('') + '</div>';
       h += '<ul class="az">' + p.azioni.map(function (a, j) {
         var k = p.id + '.' + j;
-        return '<li><label class="sp"><input type="checkbox" data-k="' + k + '"' + (spunte[k] ? ' checked' : '') + '/><span>' + a + '</span></label></li>';
+        return '<li><label class="sp"><input type="checkbox" data-k="' + k + '"' + (spunte[k] ? ' checked' : '') + '/><span class="num" aria-hidden="true">' + (j + 1) + '</span><span>' + a.replace(/«([^»]+)»/g, '<b class="bt">«$1»</b>') + '</span></label></li>';
       }).join('') + '</ul>';
       if (p.nota) h += '<div class="avviso">' + p.nota + '</div>';
       if (p.accesso) h += '<div class="avviso acc" hidden><b>Prima l\'accesso, a destra.</b> Scrivi la mail della scuola e tocca «Mandami il codice →». Una volta sola: poi questo dispositivo si ricorda di te.</div>';

@@ -409,6 +409,12 @@
     if (mia.anno) metti(d.getElementById('dc-anno'), mia.anno);
     return true;
   }
+  /* se dal sito a destra si esce dall'Aula (home, menu del Convitto...), la visita finisce: la pagina passa a tutto schermo */
+  sito.addEventListener('load', function () {
+    var w; try { w = sito.contentWindow.location; } catch (e) { return; }
+    if (!w || w.href === 'about:blank') return;
+    if (w.pathname.indexOf('/aula/') !== 0) window.location.href = w.href;
+  });
   sito.addEventListener('load', function () {
     if (!mia.arg) return;
     setTimeout(precompila, 150); setTimeout(precompila, 900);

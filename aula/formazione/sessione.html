@@ -288,9 +288,15 @@
       viste: [['Lezione di esempio', DEMO], ['Supporti alla lettura (con accesso)', '/aula/studio/inclusione.html']],
       nota: 'Al termine di questo passo la lettura viene rimessa com\'era.' },
 
-    { id: 'pausa', t: 'Pausa', ini: 35, fin: 40, url: '/aula/formazione/',
-      dire: 'Cinque minuti. Prima del laboratorio ciascuno ha bisogno della propria casella di posta istituzionale: il codice di accesso arriva per mail e vale 10 minuti.',
-      azioni: ['Controllare di avere la casella di posta pronta e aperta sul dispositivo.'] },
+    { id: 'pausa', accesso: true, t: 'Pausa', ini: 35, fin: 40, url: CREA,
+      dire: 'Cinque minuti. Dopo la pausa si lavora nell\'area docenti, e per quella serve essere già entrati: conviene farlo adesso, con calma, così il laboratorio parte senza attese. Il codice di accesso arriva per mail e vale 10 minuti.',
+      azioni: [
+        'Apri la tua casella di posta istituzionale su questo dispositivo e tienila pronta.',
+        'A destra scrivi la mail della scuola (basta «nome.cognome») e tocca «Mandami il codice →».',
+        'Copia le sei cifre dalla mail, incollale e tocca «Entra →». Quando in alto compare il tuo nome, sei a posto: l\'accesso resta per 60 giorni.',
+        'Il codice non arriva? Guarda in Spam e riprova con «Rimanda il codice»: capita, e si risolve in un minuto.'
+      ],
+      nota: 'I passi che seguono (creazione della lezione e missioni 3, 4 e 5) richiedono l\'accesso fatto a destra: farlo in pausa evita di perdere tempo dopo.' },
 
     { id: 'tre-passi', accesso: true, t: 'Dal libro alla lezione, in tre passi', ini: 40, fin: 42, url: CREA,
       dire: 'Tre passi e un risultato: le istruzioni per l\'IA, l\'assistente esterno, incolla e pubblica. Prima di tutto si entra con la mail della scuola: una volta sola, poi il dispositivo si ricorda.',

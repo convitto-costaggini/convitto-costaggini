@@ -209,7 +209,7 @@
      ripristina: il passo cambia l'aspetto della lezione, all'uscita si rimette com'era */
   var TAPPE = [
     { id: 'obiettivi', t: 'Benvenuto e obiettivi', ini: 0, fin: 3, url: '/aula/',
-      dire: 'Questa non è una lezione di informatica: è un incontro su come togliere lavoro, non aggiungerlo. Alla fine saprete fare tre cose: aprire una lezione e proiettarla alla classe, creare una lezione dalla foto di una pagina in circa tre minuti, proteggere la riservatezza di tutti.',
+      dire: 'Questa non è una lezione di informatica: è un incontro su come togliere lavoro e non aggiungerne altro alla già faticosa opera del Docente. Alla fine saprete fare tre cose: aprire una lezione e proiettarla alla classe, creare una lezione dalla foto di una pagina in circa tre minuti, proteggere la riservatezza di tutti.',
       azioni: [
         'Aprire a destra la pagina d\'ingresso dell\'Aula e mostrare le due sezioni: Lingue e Sala studio.',
         'Chiedere per alzata di mano chi ha già usato un assistente di intelligenza artificiale: serve a tarare il ritmo del laboratorio.',
@@ -455,7 +455,7 @@
       var li = document.createElement('li'); li.id = 'tappa-' + p.id;
       var tempo = solo ? 'missione ' + p.m : ora(p.ini) + ' – ' + ora(p.fin) + ' · ' + (p.fin - p.ini) + ' min';
       var h = '<button type="button" class="capo" data-i="' + i + '" aria-expanded="false"><span class="n">' + (i + 1) + '</span><span class="t">' + p.t + (p.m ? '<span class="miss">Missione ' + p.m + '</span>' : '') + '<span class="m"><b>' + tempo + '</b></span></span></button><div class="corpo">';
-      h += '<div class="dire"><b class="e">Da dire</b>' + p.dire + '</div>';
+      h += '<div class="dire">' + p.dire + '</div>';
       if (p.viste) h += '<div class="viste" role="group" aria-label="Pagine di questo passo">' + p.viste.map(function (v, k) { return '<button type="button" data-v="' + k + '" aria-pressed="false">' + v[0] + '</button>'; }).join('') + '</div>';
       h += '<ul class="az">' + p.azioni.map(function (a, j) {
         var k = p.id + '.' + j;

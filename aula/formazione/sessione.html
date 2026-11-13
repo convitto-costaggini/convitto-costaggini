@@ -230,8 +230,7 @@
         'Mostrare a destra la pagina per le famiglie: è quella che leggeranno i genitori all\'Open Day.',
         'Leggere con parole vostre l\'elenco «Che cosa non raccoglie»: nessun account, nessuna classifica individuale, progressi solo sul dispositivo di chi studia, codici per la classe e mai per persona.',
         'Se arrivano domande di dettaglio, rimandare al passo sull\'informativa (1:08).'
-      ],
-      nota: 'È il passo che rassicura: ripetetelo con parole vostre.' },
+      ] },
 
     { id: 'lingue', t: 'Lingue: tre lingue, otto modi', ini: 10, fin: 14, url: '/aula/lingue/',
       dire: 'Il vocabolario di sala, cucina, pasticceria, accoglienza e bar in inglese, francese e spagnolo, curato con il Dipartimento. Ogni frase si ascolta con la voce del dispositivo.',
@@ -263,8 +262,7 @@
         'Aprire la lezione di esempio con il codice DEMO oppure dal QR.',
         'Scegliere un modo di studiare e arrivare alla sfida finale.',
         'Fatto quando: si è chiusa la sfida finale della lezione di esempio.'
-      ],
-      nota: 'Alle 0:25 chiedete una parola ciascuno come impressione. Missione ripetibile in autonomia.' },
+      ] },
 
     { id: 'supporti', t: 'Aa Leggi a modo tuo', ini: 25, fin: 31, url: DEMO, ripristina: true,
       dire: 'Un pulsante per tutta la classe: ognuno regola da sé carattere, colori e spaziatura. Non è un aiuto per una categoria di studenti: è utile a tutti.',
@@ -274,8 +272,7 @@
         'Far provare ai partecipanti sul proprio dispositivo.',
         'Ricordare che le scelte restano sul dispositivo e che nessuno sa chi ha scelto che cosa.'
       ],
-      viste: [['Lezione di esempio', DEMO], ['Supporti alla lettura', '/aula/studio/inclusione.html']],
-      nota: 'Al termine di questo passo la lettura viene rimessa com\'era.' },
+      viste: [['Lezione di esempio', DEMO], ['Supporti alla lettura', '/aula/studio/inclusione.html']] },
 
     { id: 'm2', t: 'Missione 2: per tutti, senza etichette', ini: 31, fin: 35, m: 2, url: '/aula/studio/inclusione.html',
       dire: 'Se il supporto è per tutti, nessuno ha bisogno di dichiarare una motivazione e nessuno si sente fuori posto. È il passaggio educativo più importante.',
@@ -283,8 +280,7 @@
         'Leggere le voci «Si fa» e «Non si fa» della pagina.',
         'Passare da Lettura 1 a Lettura 3 in un tocco.',
         'Fatto quando: si è passati da Lettura 1 a Lettura 3 senza cercare nei menu.'
-      ],
-      nota: 'Tre minuti per la missione e uno per le domande.' },
+      ] },
 
     { id: 'pausa', t: 'Pausa', ini: 35, fin: 40, url: '/aula/formazione/',
       dire: 'Cinque minuti. Prima del laboratorio ciascuno ha bisogno della propria casella di posta istituzionale: il codice di accesso arriva per mail e vale 10 minuti.',
@@ -295,8 +291,7 @@
       azioni: [
         'Aprire a destra la pagina di creazione e fare l\'accesso con la mail istituzionale e il codice.',
         'Spiegare il flusso prima di farlo eseguire.'
-      ],
-      nota: 'Serve l\'accesso con la mail istituzionale: se non arriva il codice, controllare lo spam e richiederlo.' },
+      ] },
 
     { id: 'passo1', t: 'Passo 1: le istruzioni per l\'IA', ini: 42, fin: 45, url: CREA,
       dire: 'I campi sono quelli veri: argomento, materia, anno di corso, classe e indicazioni per l\'IA (facoltativi).',
@@ -337,8 +332,7 @@
         'Aprire il cartello stampabile con il QR.',
         'Lanciare una sfida a squadre alla LIM e preparare una verifica dalla stessa lezione.',
         'Fatto quando: si è aperto il QR a tutto schermo e il cartello.'
-      ],
-      nota: 'Chi ha già finito la propria lezione può provare questa missione.' },
+      ] },
 
     { id: 'm3', t: 'Missione 3: create la vostra prima lezione', ini: 56, fin: 65, m: 3, url: CREA,
       dire: 'È il cuore dell\'incontro: ciascuno crea la propria lezione. Girate tra i tavoli.',
@@ -347,8 +341,7 @@
         'Controllare che compaia in «Le mie lezioni».',
         'Fatto quando: la lezione compare in «Le mie lezioni».'
       ],
-      viste: [['Crea', CREA], ['Archivio', '/aula/studio/archivio.html']],
-      nota: 'Problemi tipici: il codice non arriva (controllare spam e correttezza della mail, poi richiederlo); il codice è scaduto dopo 10 minuti (se ne richiede un altro); la risposta dell\'IA è troppo lunga (chiedere di accorciare).' },
+      viste: [['Crea', CREA], ['Archivio', '/aula/studio/archivio.html']] },
 
     { id: 'm5', t: 'Missione 5: tre regole per la riservatezza', ini: 65, fin: 68, m: 5, url: CREA,
       dire: 'Le tre regole sono scritte nella pagina di creazione e richiamano il parere della DPO. Ripetetele lentamente e fate riassumere una regola a un partecipante.',
@@ -372,8 +365,7 @@
       azioni: [
         'Ciascun gruppo sceglie uno scenario (studio pomeridiano, in classe, prima di una verifica, Lingue) e dice in una frase come lo userebbe.',
         'Mini compito: scrivere su un foglio la prima lezione che si farà e per quale classe (2 minuti).'
-      ],
-      nota: 'Se si è in ritardo, questo passo si riduce a due minuti.' },
+      ] },
 
     { id: 'openday', t: 'Open Day: tre messaggi per le famiglie', ini: 80, fin: 85, url: '/aula/famiglie/',
       dire: 'Il 28 novembre, dalle 9 alle 13: pochi concetti, sempre gli stessi. Le famiglie possono provare l\'Aula dal proprio dispositivo: è una dimostrazione, non l\'uso dei ragazzi in classe.',
@@ -461,7 +453,6 @@
         var k = p.id + '.' + j;
         return '<li><label class="sp"><input type="checkbox" data-k="' + k + '"' + (spunte[k] ? ' checked' : '') + '/><span>' + a + '</span></label></li>';
       }).join('') + '</ul>';
-      if (p.nota) h += '<div class="avviso">' + p.nota + '</div>';
       h += '</div>';
       li.innerHTML = h; elenco.appendChild(li);
     });

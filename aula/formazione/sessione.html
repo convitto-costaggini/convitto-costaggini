@@ -257,10 +257,11 @@
     { id: 'm1', t: 'Missione 1: entra e gioca', ini: 19, fin: 25, m: 1, url: DEMO,
       dire: 'Tutti provano come uno studente, con il proprio dispositivo.',
       azioni: [
-        'Aprire la lezione di esempio con il codice DEMO oppure dal QR.',
+        'Sul proprio dispositivo: aprire la Sala studio, scrivere DEMO nel campo del codice (oppure inquadrare il QR della lezione). A destra la lezione di esempio è già aperta, per chi vuole provare qui.',
         'Scegliere un modo di studiare e arrivare alla sfida finale.',
         'Fatto quando: si è chiusa la sfida finale della lezione di esempio.'
-      ] },
+      ],
+      viste: [['Sala studio (campo del codice)', '/aula/studio/'], ['Lezione di esempio', DEMO]] },
 
     { id: 'supporti', t: 'Aa Leggi a modo tuo', ini: 25, fin: 31, url: DEMO, ripristina: true,
       dire: 'Un pulsante per tutta la classe: ognuno regola da sé carattere, colori e spaziatura. Non è un aiuto per una categoria di studenti: è utile a tutti.',

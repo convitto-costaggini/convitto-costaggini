@@ -474,12 +474,12 @@
       var h = '<button type="button" class="capo" data-i="' + i + '" aria-expanded="false"><span class="n">' + (i + 1) + '</span><span class="t">' + p.t + (p.m ? '<span class="miss">Missione ' + p.m + '</span>' : '') + '<span class="m"><b>' + tempo + '</b></span></span></button><div class="corpo">';
       h += '<div class="dire">' + p.dire + '</div>';
       if (p.viste) h += '<div class="viste" role="group" aria-label="Pagine di questo passo">' + p.viste.map(function (v, k) { return '<button type="button" data-v="' + k + '" aria-pressed="false">' + v[0] + '</button>'; }).join('') + '</div>';
+      if (p.accesso) h += '<div class="avviso acc" hidden><b>Prima di cominciare: a destra serve l\'accesso.</b> Se vedi «Entra nell\'area docenti ed educatori» è normale: i pulsanti di questo passo compaiono dopo.<ol style="margin:.5rem 0 0 1.2rem;padding:0"><li>Scrivi la mail della scuola (basta «nome.cognome») e tocca <b>«Mandami il codice →»</b>.</li><li>Apri la posta e copia le sei cifre del messaggio «Il tuo codice di accesso» (guarda anche in Spam).</li><li>Incollale a destra e tocca <b>«Entra →»</b>. Si fa una volta sola.</li></ol><span style="display:block;margin-top:.4rem">Questo riquadro sparisce da solo quando sei dentro.</span></div>';
       h += '<ul class="az">' + p.azioni.map(function (a, j) {
         var k = p.id + '.' + j;
         return '<li><label class="sp"><input type="checkbox" data-k="' + k + '"' + (spunte[k] ? ' checked' : '') + '/><span class="num" aria-hidden="true">' + (j + 1) + '</span><span>' + a.replace(/«([^»]+)»/g, '<b class="bt">«$1»</b>') + '</span></label></li>';
       }).join('') + '</ul>';
       if (p.nota) h += '<div class="avviso">' + p.nota + '</div>';
-      if (p.accesso) h += '<div class="avviso acc" hidden><b>Prima l\'accesso, a destra.</b> Scrivi la mail della scuola e tocca «Mandami il codice →». Una volta sola: poi questo dispositivo si ricorda di te.</div>';
       h += '</div>';
       li.innerHTML = h; elenco.appendChild(li);
     });

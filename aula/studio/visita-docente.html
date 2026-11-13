@@ -118,7 +118,18 @@
       .piede .sito{display:block;flex:0 0 auto;padding:0 12px}
       .strumenti .passi{display:inline-block}
     }
+    .app.chiusa{display:none}
+    .fine{display:none;min-height:100vh;min-height:100dvh;align-items:center;justify-content:center;padding:24px;background:var(--panna)}
+    .fine.on{display:flex}
+    .fine .sc{max-width:520px;width:100%;background:#fff;border:1px solid var(--panna2);border-top:5px solid var(--oro);border-radius:16px;padding:28px 26px;box-shadow:0 8px 28px rgba(44,62,45,.12);text-align:center}
+    .fine h2{font-family:var(--fd);font-weight:500;font-size:30px;color:var(--bosco);margin:0 0 6px}
+    .fine p{margin:0 0 18px;color:var(--grigio)}
+    .fine .az2{display:flex;flex-direction:column;gap:10px}
+    .fine a.b,.fine button{display:block;min-height:48px;line-height:44px;border-radius:12px;border:2px solid var(--bosco);background:#fff;color:var(--bosco);font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;padding:0 14px}
+    .fine a.pri{background:var(--bosco);color:#fff}
+    .strumenti a.esci{border-color:var(--bosco)}
     @media print{
+      .fine{display:none!important}
       html,body{height:auto}
       .app{display:block;height:auto}
       .vista,.piede,.comandi,.barra,.modulo .az2,.viste{display:none!important}
@@ -159,10 +170,23 @@
       <button type="button" id="vaiPassi" class="passi">↑ Passi</button>
       <span class="dove" id="dove"></span>
       <button type="button" id="ricarica">↻ Ricarica</button>
+      <a class="b esci" href="/aula/formazione/">✕ Esci</a>
       <a class="b" id="nuova" target="_blank" rel="noopener">Apri in una scheda nuova ↗</a>
     </div>
     <iframe id="sito" title="Il sito, per provare i passi indicati a sinistra" allow="camera; clipboard-write; fullscreen" referrerpolicy="same-origin"></iframe>
   </section>
+</div>
+<div class="fine" id="fine" role="region" aria-label="Visita completata">
+  <div class="sc">
+    <h2>Visita completata</h2>
+    <p id="fineTesto">Grazie per aver provato l'Aula.</p>
+    <div class="az2">
+      <a class="b pri" href="/aula/formazione/">Torna alla pagina Formazione</a>
+      <a class="b" href="/aula/">Torna all'Aula</a>
+      <a class="b" href="/">Vai alla home del sito</a>
+      <button type="button" id="rivedi">Rivedi la visita</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -170,7 +194,7 @@
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
   var DEMO = '/aula/studio/lezione.html?c=DEMO';
-  var MAIL = 'michele.gaggiano@alberghierorieti.it';
+  var MAIL = ['michele.gaggiano', 'alberghierorieti.it'].join('@');
 
   /* Le attività di cui si calcola il tempo. p = minuti che servono a mano (stima prudente), d = minuti con la Sala studio,
      rilettura compresa. Sono stime di partenza, non misure: chi usa la pagina le può cambiare. */
@@ -491,7 +515,12 @@
     try { history.replaceState(null, '', location.pathname + location.search + '#' + p.id); } catch (e) {}
     if (p.calc) { calcola(); crAggiorna(); }
     aggiornaStato();
-    var el = $('tappa-' + p.id); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+    var el = $('tappa-' + p.id);
+    if (el) {
+      var ov = getComputedStyle(elenco).overflowY;
+      if (ov === 'auto' || ov === 'scroll') elenco.scrollTop = el.getBoundingClientRect().top - elenco.getBoundingClientRect().top + elenco.scrollTop;
+      else if (el.scrollIntoView) el.scrollIntoView({ block: 'start' });
+    }
   }
 
   /* ───── moduli ───── */
@@ -578,9 +607,17 @@
   });
   $('indietro').onclick = function () { vai(corrente - 1); };
   $('avanti').onclick = function () {
-    if (corrente >= visibili.length - 1) { if (visibili[corrente].ripristina) ripristinaLettura(); $('conta').textContent = 'Visita completata. Grazie.'; return; }
+    if (corrente >= visibili.length - 1) {
+      if (visibili[corrente].ripristina) ripristinaLettura();
+      crFerma();
+      var nf = visibili.filter(fatta).length;
+      $('fineTesto').textContent = 'Hai spuntato ' + nf + ' passi su ' + visibili.length + (crTrascorso() > 1000 ? ' in ' + tempoTesto(crTrascorso()) : '') + '. Grazie per aver provato l\'Aula.';
+      app.classList.add('chiusa'); $('fine').classList.add('on'); window.scrollTo(0, 0);
+      return;
+    }
     vai(corrente + 1);
   };
+  $('rivedi').onclick = function () { $('fine').classList.remove('on'); app.classList.remove('chiusa'); window.scrollTo(0, 0); };
   $('ricarica').onclick = function () { if (vistaAttiva) carica(vistaAttiva); };
   $('largo').onclick = function () { var s = app.classList.toggle('stretta'); this.setAttribute('aria-pressed', s ? 'true' : 'false'); };
   $('vaiSito').onclick = function () { $('vista').scrollIntoView({ behavior: 'smooth', block: 'start' }); };

@@ -9,7 +9,7 @@
 (function () {
   'use strict';
   var API = 'https://sawclsysqnjsvbobioqo.supabase.co/functions/v1/aula-accesso';
-  var MAIL = 'michele.gaggiano@alberghierorieti.it';
+  var MAIL = ['michele.gaggiano', 'alberghierorieti.it'].join('@');
   var K_DIP = 'lingue-chiave-dip';
   var K_SES = 'studio-sessione'; /* la stessa sessione della Sala studio: un solo accesso per tutta l'Aula */
 

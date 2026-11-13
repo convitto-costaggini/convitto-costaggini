@@ -51,7 +51,7 @@
 
       <div class="prv-art" id="accesso">
         <h2>Come si <em>accede</em></h2>
-        <p>Le aree riservate si aprono con l'indirizzo e-mail istituzionale: arriva un codice monouso, valido 10 minuti. Per i docenti di lingue è disponibile anche l'<a href="aula/lingue/docenti.html">area dedicata</a>. Se la vostra e-mail non risulta abilitata, scrivete a <a href="mailto:michele.gaggiano@alberghierorieti.it">michele.gaggiano@alberghierorieti.it</a>. L'<a href="informativa-aula.html">informativa sul trattamento dei dati</a> spiega che cosa viene registrato.</p>
+        <p>Le aree riservate si aprono con l'indirizzo e-mail istituzionale: arriva un codice monouso, valido 10 minuti. Per i docenti di lingue è disponibile anche l'<a href="aula/lingue/docenti.html">area dedicata</a>. Se la vostra e-mail non risulta abilitata, scrivete a <a data-u="michele.gaggiano" data-d="alberghierorieti.it" href="/aula/formazione/">scrivere a Michele</a>. L'<a href="informativa-aula.html">informativa sul trattamento dei dati</a> spiega che cosa viene registrato.</p>
       </div>
 
       <div class="inf-nav" style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem">
@@ -63,5 +63,6 @@
 
 </main>
 <script src="nav.min.js"></script>
+<script>(function(){var a=document.querySelectorAll('a[data-u]');for(var i=0;i<a.length;i++){var m=a[i].getAttribute('data-u')+'@'+a[i].getAttribute('data-d');a[i].href='mailto:'+m;a[i].textContent=m}})();</script>
 </body>
 </html>

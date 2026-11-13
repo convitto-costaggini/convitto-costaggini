@@ -407,7 +407,7 @@
 
 <footer>
   <div class="w">
-    Per qualsiasi chiarimento: Michele Gaggiano, Educatore · <a href="mailto:michele.gaggiano@alberghierorieti.it">michele.gaggiano@alberghierorieti.it</a><br>
+    Per qualsiasi chiarimento: Michele Gaggiano, Educatore · <a data-u="michele.gaggiano" data-d="alberghierorieti.it" href="/aula/formazione/">scrivere a Michele</a><br>
     Convitto annesso all'IPSSEOA “R. A. Costaggini” · Rieti
   </div>
 </footer>
@@ -420,5 +420,6 @@ document.querySelectorAll('.prova input').forEach(function (c) {
   c.addEventListener('change', function () { try { localStorage.setItem(k, c.checked ? '1' : '0'); } catch (e) {} });
 });
 </script>
+<script>(function(){var a=document.querySelectorAll('a[data-u]');for(var i=0;i<a.length;i++){var m=a[i].getAttribute('data-u')+'@'+a[i].getAttribute('data-d');a[i].href='mailto:'+m;a[i].textContent=m}})();</script>
 </body>
 </html>

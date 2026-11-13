@@ -583,7 +583,7 @@ h1, h2, .big, .step .n, .timer, .dbadge .d, .task .min { font-variant-numeric: l
 <div class="col" style="align-items:center;gap:18px">
 <p class="timer">9</p>
 <p class="tag" style="color:var(--gold);font-size:34px">MINUTI</p>
-<div class="card" style="width:100%"><p class="t">Il codice non arriva?</p><p class="tx">Controllate lo spam e l’indirizzo; se è scaduto, richiedetelo. Se non va, scrivete a michele.gaggiano@alberghierorieti.it.</p></div>
+<div class="card" style="width:100%"><p class="t">Il codice non arriva?</p><p class="tx">Controllate lo spam e l’indirizzo; se è scaduto, richiedetelo. Se non va, scrivete a <span class="em" data-u="michele.gaggiano" data-d="alberghierorieti.it"></span>.</p></div>
 </div>
 </div>
 <p class="foot">Aula digitale · formazione</p>
@@ -686,7 +686,7 @@ h1, h2, .big, .step .n, .timer, .dbadge .d, .task .min { font-variant-numeric: l
 <div class="card" style="background:#34493A;border-color:#4C6650;padding:44px">
 <p class="t" style="color:#F6F1E7;font-size:40px">Se l’accesso non funziona</p>
 <p class="tx" style="color:#E4EADD;font-size:30px">Scrivete a</p>
-<p class="url" style="color:var(--gold);font-size:34px">michele.gaggiano@alberghierorieti.it</p>
+<p class="url" style="color:var(--gold);font-size:34px"><span class="em" data-u="michele.gaggiano" data-d="alberghierorieti.it"></span></p>
 <p class="tx" style="color:#E4EADD;font-size:30px;margin-top:18px">Ogni lezione condivisa nell’Archivio serve anche ai colleghi.</p>
 </div>
 </div>
@@ -703,7 +703,7 @@ h1, h2, .big, .step .n, .timer, .dbadge .d, .task .min { font-variant-numeric: l
 <div class="card"><p class="t">Aula digitale</p><p class="url">convitto.alberghierorieti.edu.it/aula/</p></div>
 <div class="card"><p class="t">Accesso docenti ed educatori</p><p class="url">aula/studio/docente.html</p></div>
 <div class="card"><p class="t">Informativa</p><p class="url">informativa-aula.html</p></div>
-<div class="card"><p class="t">Per scrivermi</p><p class="url">michele.gaggiano@alberghierorieti.it</p></div>
+<div class="card"><p class="t">Per scrivermi</p><p class="url"><span class="em" data-u="michele.gaggiano" data-d="alberghierorieti.it"></span></p></div>
 </div>
 <aside>Minuti 1:28 – 1:30. Lasciate questa slide visibile mentre i partecipanti escono: contiene tutti i link utili. Chiudete ringraziando la Dirigente per l’autorizzazione e i colleghi per la partecipazione.</aside>
 </section>
@@ -712,6 +712,7 @@ h1, h2, .big, .step .n, .timer, .dbadge .d, .task .min { font-variant-numeric: l
 <div id="prog"></div>
 <script>
 (function(){
+[].forEach.call(document.querySelectorAll('.em'),function(x){x.textContent=x.getAttribute('data-u')+'@'+x.getAttribute('data-d')});
 var st=document.getElementById('stage'),S=[].slice.call(st.querySelectorAll('section')),n=0,
 cnt=document.getElementById('cnt'),prog=document.getElementById('prog'),nt=document.getElementById('notes'),ui=document.getElementById('ui'),hid;
 function fit(){var w=innerWidth,h=innerHeight,k=Math.min(w/1920,h/1080),

@@ -212,7 +212,7 @@
       dire: 'Questa non è una lezione di informatica: è un incontro su come togliere lavoro e non aggiungerne altro alla già faticosa opera del Docente. Alla fine saprete fare tre cose: aprire una lezione e proiettarla alla classe, creare una lezione dalla foto di una pagina in circa tre minuti, proteggere la riservatezza di tutti.',
       azioni: [
         'Aprire a destra la pagina d\'ingresso dell\'Aula e mostrare le due sezioni: Lingue e Sala studio.',
-        'Chiedere per alzata di mano chi ha già usato un assistente di intelligenza artificiale: serve a tarare il ritmo del laboratorio.',
+        'Chiedere per alzata di mano chi ha già usato un assistente di intelligenza artificiale.',
         'Far vedere sulla slide dei tempi (pagina Presentazione) le sette parti e le cinque missioni.'
       ],
       viste: [['L\'Aula', '/aula/'], ['Cronoprogramma', '/aula/formazione/presentazione.html']] },
@@ -220,16 +220,14 @@
     { id: 'perche', t: 'Meno fatica, più scuola', ini: 3, fin: 5, url: '/aula/studio/docente.html',
       dire: 'L\'Aula non è un compito in più: è un modo di fare prima quello che già facciamo. Una foto del libro, degli appunti o di una mappa (o anche solo il titolo) diventa una lezione interattiva, con il QR per i ragazzi.',
       azioni: [
-        'Leggere i quattro numeri: 3 minuti dalla foto al QR, 0 euro, 0 installazioni, 0 voti da inserire né registri da compilare.',
-        'A chi chiede «ma è sicuro?» rispondere che si arriva alla parte sulla riservatezza: l\'Aula non chiede dati agli studenti.'
+        'Leggere i quattro numeri: 3 minuti dalla foto al QR, 0 euro, 0 installazioni, 0 voti da inserire né registri da compilare.'
       ] },
 
     { id: 'cose', t: 'Che cos\'è, che cosa non raccoglie', ini: 5, fin: 10, url: '/aula/famiglie/',
       dire: 'Gli studenti non hanno bisogno di un account: aprono un link o inquadrano un QR ed entrano. Un accesso (mail istituzionale e codice) serve soltanto a chi crea o gestisce le lezioni.',
       azioni: [
         'Mostrare a destra la pagina per le famiglie: è quella che leggeranno i genitori all\'Open Day.',
-        'Leggere con parole vostre l\'elenco «Che cosa non raccoglie»: nessun account, nessuna classifica individuale, progressi solo sul dispositivo di chi studia, codici per la classe e mai per persona.',
-        'Se arrivano domande di dettaglio, rimandare al passo sull\'informativa (1:08).'
+        'Leggere con parole vostre l\'elenco «Che cosa non raccoglie»: nessun account, nessuna classifica individuale, progressi solo sul dispositivo di chi studia, codici per la classe e mai per persona.'
       ] },
 
     { id: 'lingue', t: 'Lingue: tre lingue, otto modi', ini: 10, fin: 14, url: '/aula/lingue/',
@@ -250,14 +248,14 @@
       viste: [['Sala studio', '/aula/studio/'], ['Lezione di esempio', DEMO]] },
 
     { id: 'percorso', t: 'Il percorso guidato', ini: 17, fin: 19, url: DEMO,
-      dire: 'Non spiegate ogni tappa: scorretele con il dito sulla lezione di esempio. Il messaggio è che la lezione non è un semplice testo, ma un percorso con domande, trucchi per ricordare e ripasso.',
+      dire: 'Si scorrono con il dito sulla lezione di esempio. Il messaggio è che la lezione non è un semplice testo, ma un percorso con domande, trucchi per ricordare e ripasso.',
       azioni: [
         'Scorrere le sette tappe: il gancio, le idee, memorizza, allenati, flashcard, sfida finale, da ricordare.',
         'Dire che il ripasso a distanza lo gestisce la Sala studio e che i progressi restano sul dispositivo di chi studia.'
       ] },
 
     { id: 'm1', t: 'Missione 1: entra e gioca', ini: 19, fin: 25, m: 1, url: DEMO,
-      dire: 'Tutti provano come uno studente, con il proprio dispositivo. Circolate tra i partecipanti; chi ha difficoltà si affianca a un collega.',
+      dire: 'Tutti provano come uno studente, con il proprio dispositivo.',
       azioni: [
         'Aprire la lezione di esempio con il codice DEMO oppure dal QR.',
         'Scegliere un modo di studiare e arrivare alla sfida finale.',
@@ -272,7 +270,8 @@
         'Far provare ai partecipanti sul proprio dispositivo.',
         'Ricordare che le scelte restano sul dispositivo e che nessuno sa chi ha scelto che cosa.'
       ],
-      viste: [['Lezione di esempio', DEMO], ['Supporti alla lettura', '/aula/studio/inclusione.html']] },
+      viste: [['Lezione di esempio', DEMO], ['Supporti alla lettura', '/aula/studio/inclusione.html']],
+      nota: 'Al termine di questo passo la lettura viene rimessa com\'era.' },
 
     { id: 'm2', t: 'Missione 2: per tutti, senza etichette', ini: 31, fin: 35, m: 2, url: '/aula/studio/inclusione.html',
       dire: 'Se il supporto è per tutti, nessuno ha bisogno di dichiarare una motivazione e nessuno si sente fuori posto. È il passaggio educativo più importante.',
@@ -291,7 +290,8 @@
       azioni: [
         'Aprire a destra la pagina di creazione e fare l\'accesso con la mail istituzionale e il codice.',
         'Spiegare il flusso prima di farlo eseguire.'
-      ] },
+      ],
+      nota: 'Serve l\'accesso con la mail istituzionale: se non arriva il codice, controllare lo spam e richiederlo.' },
 
     { id: 'passo1', t: 'Passo 1: le istruzioni per l\'IA', ini: 42, fin: 45, url: CREA,
       dire: 'I campi sono quelli veri: argomento, materia, anno di corso, classe e indicazioni per l\'IA (facoltativi).',
@@ -332,19 +332,21 @@
         'Aprire il cartello stampabile con il QR.',
         'Lanciare una sfida a squadre alla LIM e preparare una verifica dalla stessa lezione.',
         'Fatto quando: si è aperto il QR a tutto schermo e il cartello.'
-      ] },
+      ],
+      nota: 'Chi ha già finito la propria lezione può provare questa missione.' },
 
     { id: 'm3', t: 'Missione 3: create la vostra prima lezione', ini: 56, fin: 65, m: 3, url: CREA,
-      dire: 'È il cuore dell\'incontro: ciascuno crea la propria lezione. Girate tra i tavoli.',
+      dire: 'È il cuore dell\'incontro: ciascuno crea la propria lezione.',
       azioni: [
         'Creare una lezione su un argomento che farete davvero.',
         'Controllare che compaia in «Le mie lezioni».',
         'Fatto quando: la lezione compare in «Le mie lezioni».'
       ],
-      viste: [['Crea', CREA], ['Archivio', '/aula/studio/archivio.html']] },
+      viste: [['Crea', CREA], ['Archivio', '/aula/studio/archivio.html']],
+      nota: 'Problemi tipici: il codice non arriva (controllare spam e correttezza della mail, poi richiederlo); il codice è scaduto dopo 10 minuti (se ne richiede un altro); la risposta dell\'IA è troppo lunga (chiedere di accorciare).' },
 
     { id: 'm5', t: 'Missione 5: tre regole per la riservatezza', ini: 65, fin: 68, m: 5, url: CREA,
-      dire: 'Le tre regole sono scritte nella pagina di creazione e richiamano il parere della DPO. Ripetetele lentamente e fate riassumere una regola a un partecipante.',
+      dire: 'Le tre regole sono scritte nella pagina di creazione e richiamano il parere della DPO. Una regola alla volta, con parole proprie.',
       azioni: [
         'Un codice per lezione, mai per persona: lo stesso codice o QR va a tutta la classe, senza nomi nei titoli.',
         'I supporti sono per tutti: si mostra il pulsante a tutta la classe.',
@@ -353,7 +355,7 @@
       ] },
 
     { id: 'informativa', t: 'L\'informativa in una tabella', ini: 68, fin: 75, url: '/informativa-aula.html',
-      dire: 'Non leggete la tabella: indicate dove si trova l\'informativa completa.',
+      dire: 'L\'informativa completa è a destra: qui se ne ricordano i punti essenziali.',
       azioni: [
         'Il codice di accesso vale 10 minuti ed è eliminato all\'utilizzo.',
         'La sessione resta 60 giorni nel browser; la rimozione avviene su richiesta.',
@@ -377,7 +379,7 @@
       ] },
 
     { id: 'chiusura', t: 'Missioni, quattro passi e domande', ini: 85, fin: 90, url: '/aula/formazione/',
-      dire: 'Chiudete con un impegno piccolo e concreto: una lezione in una settimana. Ringraziate la Dirigente per l\'autorizzazione e i colleghi per la partecipazione.',
+      dire: 'Un impegno piccolo e concreto: una lezione in una settimana. Grazie alla Dirigente per l\'autorizzazione e ai colleghi per la partecipazione.',
       azioni: [
         'Ricordare le cinque missioni, da ripetere quando si vuole (il pulsante «Solo le missioni» le raccoglie).',
         'Quattro passi per questa settimana: creare una lezione, provarla nello studio pomeridiano o con una classe, condividerla nell\'Archivio, raccontare com\'è andata.',
@@ -453,6 +455,7 @@
         var k = p.id + '.' + j;
         return '<li><label class="sp"><input type="checkbox" data-k="' + k + '"' + (spunte[k] ? ' checked' : '') + '/><span>' + a + '</span></label></li>';
       }).join('') + '</ul>';
+      if (p.nota) h += '<div class="avviso">' + p.nota + '</div>';
       h += '</div>';
       li.innerHTML = h; elenco.appendChild(li);
     });

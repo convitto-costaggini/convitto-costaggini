@@ -125,7 +125,8 @@
         '<p class="ac-m" role="alert"></p><button class="b" type="submit">Invia il codice</button></form>' +
         '<div class="sep">oppure</div><form id="ac-fd"><label for="ac-c1">Codice del Dipartimento</label><input id="ac-c1" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX"/>' +
         '<p class="ac-m2" role="alert"></p><button class="b" type="submit" style="background:#8a6d1f">Entra con il codice</button></form>' +
-        '<p class="s" style="margin:1rem 0 0;font-size:.8rem">Non siete ancora abilitati? Scrivete a ' + MAIL + '.</p>');
+        '<p class="s" style="margin:1rem 0 0;font-size:.8rem">Non siete ancora abilitati? Scrivete a ' + MAIL + '.</p>' +
+        '<p class="s" style="margin:.5rem 0 0;font-size:.8rem"><a href="/informativa-aula.html" target="_blank" rel="noopener">Informativa sul trattamento dei dati</a></p>');
       box.querySelector('#ac-f').addEventListener('submit', function (e) {
         e.preventDefault(); var b = e.target.querySelector('button'), mail = box.querySelector('#ac-m1').value.trim().toLowerCase(); occupato(b, true);
         invia(mail).then(function () { codice(mail); }).catch(function (er) { occupato(b, false); msg(errore(er)); });

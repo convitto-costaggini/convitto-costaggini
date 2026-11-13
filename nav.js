@@ -711,6 +711,11 @@
 
 (function () {
   var INDICE = [
+    { titolo: 'Aula digitale', pagina: 'aula/', ancora: '', cat: 'Aula digitale', keywords: ['aula','aula digitale','lingue','sala studio','studiare','telefono','qr'] },
+    { titolo: 'Aula digitale per le famiglie', pagina: 'aula/famiglie/', ancora: '', cat: 'Aula digitale', keywords: ['aula','famiglie','genitori','privacy','nessun dato','studenti','registrazione'] },
+    { titolo: 'Aula digitale: formazione per i colleghi', pagina: 'aula/formazione/', ancora: '', cat: 'Aula digitale', keywords: ['aula','formazione','colleghi','docenti','educatori','lezione','qr'] },
+    { titolo: 'Le lingue dell\'Alberghiero', pagina: 'aula/lingue/', ancora: '', cat: 'Aula digitale', keywords: ['lingue','inglese','francese','spagnolo','vocabolario','esercizi','giochi'] },
+    { titolo: 'Sala studio', pagina: 'aula/studio/', ancora: '', cat: 'Aula digitale', keywords: ['sala studio','lezioni interattive','ripasso','verifica','lettura facilitata','supporti'] },
     { titolo: 'Chi siamo — Storia del Convitto', pagina: 'il-convitto.html', ancora: '#storia', cat: 'Il Convitto', keywords: ['storia','convitto','costaggini','fondazione','rieti','tradizione','comunità','educante','origine','anni','decenni'] },
     { titolo: 'Missione e valori', pagina: 'il-convitto.html', ancora: '#mission', cat: 'Il Convitto', keywords: ['missione','valori','sicurezza','eccellenza','cura','formazione','educare'] },
     { titolo: 'Staff educativo e organigramma', pagina: 'il-convitto.html', ancora: '#staff', cat: 'Il Convitto', keywords: ['staff','rettore','coordinatore','educatore','personale','direzione','organigramma','docenti'] },

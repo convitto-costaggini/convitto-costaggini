@@ -74,6 +74,23 @@
 
       <div class="dd-wrap">
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
+          Aula digitale <span style="margin-left:.35rem;background:linear-gradient(135deg,var(--oro2),var(--oro3));color:var(--bosco);font-size:.55rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .4rem;border-radius:99px">Nuovo</span> <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
+        </button>
+        <ul class="dd-menu" role="menu">
+          <li><a href="aula/" data-page="aula">🎓 Che cos'è l'Aula digitale</a></li>
+          <li style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per gli studenti</li>
+          <li><a href="aula/lingue/">🌍 Le lingue dell'Alberghiero</a></li>
+          <li><a href="aula/studio/">📖 Sala studio</a></li>
+          <li style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per le famiglie</li>
+          <li><a href="aula/famiglie/">👨‍👩‍👧 Come funziona, cosa non raccoglie</a></li>
+          <li style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per i colleghi</li>
+          <li><a href="aula/formazione/">🧑‍🏫 Formazione: provare l'Aula</a></li>
+          <li><a href="aula/studio/docente.html">🔒 Accesso docenti ed educatori</a></li>
+        </ul>
+      </div>
+
+      <div class="dd-wrap">
+        <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
           Novità <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
         </button>
         <ul class="dd-menu" role="menu">
@@ -159,6 +176,21 @@
         <li><a href="bullismo.html">🛡️ Bullismo e Cyberbullismo</a></li>
         <li><a href="come-arrivare.html">🚌 Come arrivare</a></li>
         <li><a href="contatti.html">Contattaci</a></li>
+      </ul>
+    </li>
+
+    <li class="drw-group" style="border:1.5px solid rgba(184,146,42,.6) !important;border-radius:12px;background:rgba(184,146,42,.09);margin:.6rem 0">
+      <button class="drw-acc" aria-expanded="false">Aula digitale <span style="margin-left:.35rem;background:linear-gradient(135deg,var(--oro2),var(--oro3));color:var(--bosco);font-size:.55rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .4rem;border-radius:99px">Nuovo</span> <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
+      <ul class="drw-sub">
+        <li><a href="aula/">🎓 Che cos'è l'Aula digitale</a></li>
+        <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per gli studenti</li>
+        <li><a href="aula/lingue/">🌍 Le lingue dell'Alberghiero</a></li>
+        <li><a href="aula/studio/">📖 Sala studio</a></li>
+        <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per le famiglie</li>
+        <li><a href="aula/famiglie/">👨‍👩‍👧 Come funziona, cosa non raccoglie</a></li>
+        <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per i colleghi</li>
+        <li><a href="aula/formazione/">🧑‍🏫 Formazione: provare l'Aula</a></li>
+        <li><a href="aula/studio/docente.html">🔒 Accesso docenti ed educatori</a></li>
       </ul>
     </li>
 

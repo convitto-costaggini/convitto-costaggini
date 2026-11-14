@@ -22,7 +22,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 |---|---|---|
 | **Togliere il reCAPTCHA di Google** dai sei moduli del sito. L'antispam diventa solo interno: tempo minimo di compilazione, limiti di invio, campo invisibile. Cookie policy e informativa vengono aggiornate. | Pronto: PR #202 (bozza), che sostituisce la #174 (da chiudere). | Dal 18/11. Prima vanno pubblicate le due funzioni Supabase (`richiesta-accesso`, `iscrizione-alumni`) e va modificato il `doPost` del gestionale in Apps Script. |
 | **Trofei e classifiche, vista personale**: ogni convittore vede solo il proprio punteggio (approvata dalla DPO il 7/10). | Pronto (PR #17, contenuto anche nel commit `74036d3`). | Modifica del Regolamento del Premio da parte del Consiglio di Istituto, poi aggiornamento del gestionale. |
-| **Sala studio senza IA a pagamento** (lezioni solo incollate dall'assistente esterno) e **Lingue: di chi corregge resta solo il nome**, non più la mail. | Preparato il 27/10, mai unito. | Decisione: la presentazione della formazione (13/11) presenta ancora la creazione automatica con «l'IA della scuola». La parte sulle Lingue cancella le mail già salvate (migrazione del database). |
+| **Lingue: di chi spunta o corregge una frase resta solo il nome**, non più la mail. | Preparato il 27/10, mai unito. | Decisione. Le mail già salvate verrebbero cancellate (migrazione del database). |
 | **Lingue: cliente virtuale** per i docenti (prototipo con funzione Supabase che usa un servizio di IA). | Prototipo del 12/10, mai unito. | Decisione se proseguirlo. |
 
 ---
@@ -85,6 +85,16 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - Il percorso di navigazione in cima alle pagine va a capo in modo ordinato.
 - Resta una sola freccia «scendi», non più una tra ogni sezione.
 
+**Aula digitale: nessuna IA a pagamento** (decisione del 14/11)
+- Dalla Sala studio è tolta la «creazione automatica» delle lezioni, che mandava foto e argomento a un servizio di IA a consumo pagato dalla scuola.
+- Le lezioni si preparano gratis con l'assistente che ogni docente preferisce (Claude, ChatGPT o Gemini, anche nella versione gratuita) e si incollano nel sito, che non manda nulla a servizi di IA.
+- Aggiornati la pagina dei docenti, la guida per la Dirigente, le due visite guidate e la presentazione della formazione.
+- La funzione del database `studio-genera` va ripubblicata perché la modifica valga anche sul server.
+
+**Indirizzi di studio** (14/11)
+- Le pagine dicono ovunque che gli indirizzi sono tre: Enogastronomia (con approfondimento Cucina oppure Prodotti dolciari / Pasticceria), Servizi di sala e vendita, Accoglienza turistica.
+- Prima la pagina Domande frequenti diceva «5 indirizzi» e la guida al PTOF «quattro articolazioni».
+
 **Velocità** (PR #200)
 - L'assistente virtuale e l'indice di ricerca (oltre 200 KB) si scaricano solo quando qualcuno li usa.
 - Pesi delle pagine al caricamento:
@@ -138,7 +148,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 
 **Dal repository** (Area famiglie, Aula, Alumni, pannello admin)
 - *3 nov.* Area riservata: il link di recupero della password, anche se scaduto, porta alla pagina giusta.
-- *4 nov.* Iscrizione Alumni: la posizione sulla mappa viene dall'elenco delle città del sito, senza servizi esterni (funzione Supabase `iscrizione-alumni`).
+- *4 nov.* Iscrizione Alumni: la posizione sulla mappa viene dall'elenco delle città del sito, senza servizi esterni (funzione Supabase `iscrizione-alumni`, pubblicata il 4/11 alle 12:25 come versione 5: verificato sul server).
 - *6 nov.* Consensi online gestiti dal sito, con la casella istituzionale e la ricevuta via email.
 - *13 nov.* Pulizia: tolta la vecchia funzione di accesso alle Lingue, sostituita dall'accesso unico dell'Aula.
 
@@ -168,6 +178,10 @@ I progetti Apps Script del Convitto sono quattro:
 
 Nessuna traccia di modifiche al **gestionale principale** a novembre.
 
+**Funzioni del database che esistevano solo sul server:** il 14/11 ne è stata salvata una copia nel repository (`supabase/functions/`), per tenerne traccia:
+- `dynamic-worker`: il ponte fra gestionale e Area famiglie, versione 22 del 20/10;
+- `crea-account-famiglia`: crea gli account delle famiglie, versione 15 del 31/8.
+
 **Da verificare nel gestionale** (indicazioni di ottobre senza prova di esecuzione):
 - Testo dell'email con le credenziali delle famiglie (`creaAccountEInvia`): aggiungere «A ogni accesso, dopo la password, riceverà via email un codice di verifica di 6 cifre».
 - Facoltativo: in `_verificaAdminSupabase_`, pretendere anche il secondo passaggio (`aal2`) per le azioni dell'amministratore.
@@ -196,4 +210,5 @@ Nessuna traccia di modifiche al **gestionale principale** a novembre.
 | 21 ott. | Posta dei codici | Nuovo progetto: invia i codici monouso di accesso ai docenti con la mail della scuola, senza SMTP né account; accetta anche gli indirizzi `@alberghierorieti.edu.it`. | dedotta (l'accesso dei docenti con il codice è in uso) |
 | 23 ott. | Posta dei codici | Servizio «studio» per la Sala studio; mail firmate «Sala Studio della Scuola». | dedotta |
 | 25 ott. | OTP famiglie | Nuovo progetto, pubblicato come applicazione web: recapita il codice di 6 cifre dell'Area famiglie. Invio senza `noReply`, che bloccava il recapito. | certa |
+| 20 ott. | Gestionale | Archiviazione dei vecchi «pallini» dell'Area famiglie dopo il backup (`mmArchiviaVecchiPallini`), con la cancellazione tramite il ponte `dynamic-worker`, aggiornato alla versione «v7-delete-semafori». Colloqui e comunicazioni hanno un identificativo stabile, così una ripubblicazione non crea doppioni. | certa (codice del ponte pubblicato il 20/10) |
 | 30 ott. | Posta dei codici | Servizio «aula» per l'accesso unico dell'Aula (Lingue e Sala studio). | dedotta (il 13/11 la vecchia funzione è stata eliminata perché quella nuova era in uso) |

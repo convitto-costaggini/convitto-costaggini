@@ -21,3 +21,15 @@ gergo, niente nomi di file se non servono.
 - Le domande frequenti stanno solo in `faq.js`: le pagine le leggono da lì.
 - Il sito carica `nav.min.js`, `nav-header.min.js` e `style.min.css`: ogni
   modifica ai sorgenti va riportata anche nei file `.min`.
+
+## Scelte da rispettare
+
+- **Nessuna IA a pagamento** (decisione del 14/11/2026): il sito non manda nulla a servizi
+  di IA a consumo; le lezioni si preparano con un assistente esterno scelto dal docente e si
+  incollano.
+- **Documenti ufficiali** (avvisi, circolari, regolamenti, moduli allegati agli avvisi): le
+  date e i testi che riportano non si modificano. Se una data è passata, al massimo si
+  propone una nota a parte, chiedendo prima.
+- **Indirizzi di studio:** sono tre. Enogastronomia (approfondimento Cucina oppure Prodotti
+  dolciari / Pasticceria), Servizi di sala e vendita (bar, ristorazione, sala e banqueting),
+  Accoglienza turistica (servizi di ospitalità, agenzie di viaggio, promozione del territorio).

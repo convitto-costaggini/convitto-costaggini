@@ -177,7 +177,7 @@
   } else {
     armChatbotFab();
   }
-  setTimeout(function () { loadChatbot(false); }, 4000);
+  // L'assistente (e il suo indice) si scarica solo quando qualcuno lo apre: pagine più leggere.
 
   /* Inietta modale PEC */
   const pecModal = document.createElement('div');

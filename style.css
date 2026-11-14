@@ -215,11 +215,12 @@ a { color: inherit; }
   .page-hero .w::after { display: none; }
 }
 .page-hero .breadcrumb, .breadcrumb {
-  display: flex; align-items: center; gap: .4rem;
+  display: flex; flex-wrap: wrap; row-gap: .25rem; align-items: center; gap: .4rem;
   font-family: var(--fu); font-size: .72rem; font-weight: 600;
   letter-spacing: .1em; text-transform: uppercase;
   color: rgba(245,240,232,.70); margin-bottom: .75rem;
 }
+.breadcrumb > * { white-space: nowrap; }
 .page-hero .breadcrumb a, .breadcrumb a { color: #D4AA4A; text-decoration: none; }
 .page-hero .breadcrumb span, .breadcrumb span { color: rgba(245,240,232,.60); }
 .page-hero h1 {

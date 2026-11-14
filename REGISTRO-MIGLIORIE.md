@@ -90,7 +90,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
   - telefono: da circa 1,5 MB a circa 610 KB;
   - computer: da circa 1,5 MB a circa 920 KB, con le stesse foto di prima.
 
-**Ritocchi di forma sul telefono** (14 novembre, PR da aprire)
+**Ritocchi di forma sul telefono** (14 novembre, PR #206)
 - **Testi più leggibili.** Sul telefono nessun testo è più piccolo di una misura minima:
   - 12 pixel le etichette dei moduli, a partire dal modulo di domanda di ammissione, dove erano sotto i 10;
   - 12,5 pixel i testi normali;

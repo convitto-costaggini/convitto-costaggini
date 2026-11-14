@@ -100,7 +100,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - Sul telefono le quattro schede di «Chi sei, oggi?» hanno l'icona a sinistra e occupano circa metà dello spazio.
 - «FAQ» è diventato «Domande frequenti» anche nelle barre di Home e Per i Genitori e nel Percorso di orientamento.
 
-**Strumenti a scomparsa anche nell'Aula digitale** (14 novembre, PR da aprire)
+**Strumenti a scomparsa anche nell'Aula digitale** (14 novembre, PR #207)
 - La linguetta «⋮» con Torna su, Home, Lingua e Assistente ora c'è in tutte le pagine, anche nell'Aula digitale. Prima nell'Aula questi bottoni erano nascosti, e la pagina principale dell'Aula e le pagine dei docenti non li avevano proprio.
 - Nelle pagine dell'Aula con lo strumento «Aa Leggi a modo tuo» non compare più il secondo «Aa» del sito, che faceva doppio. La pagina dell'Aula per le famiglie, che non ha lo strumento dell'Aula, tiene l'«Aa» del sito.
 - Nella guida della formazione dei docenti è corretta l'indicazione su dove si trova il pulsante «Aa».

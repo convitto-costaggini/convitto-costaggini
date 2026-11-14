@@ -206,7 +206,7 @@ export function crea(db: Db, env: Record<string, string | undefined>, invia: Inv
       if (c.correggi) {
         const r = c.correggi || {}, chiave = testo(r.chiave, 200), lingua = String(r.lingua || ""), nuovo = testo(r.testo, 2000);
         if (!chiave || !["en", "fr", "es"].includes(lingua) || !nuovo) return risposta({ ok: false, errore: "richiesta" }, 400);
-        const { error } = await db.from("lingue_correzioni").insert({ chiave, lingua, originale: testo(r.originale, 2000) || null, testo: nuovo, nota: testo(r.nota, 300) || null, email, nome });
+        const { error } = await db.from("lingue_correzioni").insert({ chiave, lingua, originale: testo(r.originale, 2000) || null, testo: nuovo, nota: testo(r.nota, 300) || null, nome });
         if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
       }
       if (c.annulla) {
@@ -221,21 +221,21 @@ export function crea(db: Db, env: Record<string, string | undefined>, invia: Inv
         const r = c.revisione || {}, chiave = testo(r.chiave, 200), lingua = String(r.lingua || "");
         if (!chiave || !["en", "fr", "es"].includes(lingua) || !["ok", "proposta", "via"].includes(r.stato)) return risposta({ ok: false, errore: "richiesta" }, 400);
         const { error } = r.stato === "via"
-          ? await db.from("lingue_revisioni").delete().eq("chiave", chiave).eq("lingua", lingua).eq("email", email)
+          ? await db.from("lingue_revisioni").delete().eq("chiave", chiave).eq("lingua", lingua).eq("nome", nome)
           : await db.from("lingue_revisioni").upsert({
-            chiave, lingua, email, nome: nomeDaMail(email), stato: r.stato, testo: testo(r.testo, 300) || null,
+            chiave, lingua, nome, stato: r.stato, testo: testo(r.testo, 300) || null,
             proposta: r.stato === "proposta" ? testo(r.proposta, 300) || null : null, nota: testo(r.nota, 300) || null, aggiornata: new Date(adesso).toISOString(),
-          }, { onConflict: "chiave,lingua,email" });
+          }, { onConflict: "chiave,lingua,nome" });
         if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
       }
-      const { data, error } = await db.from("lingue_revisioni").select("chiave,lingua,email,nome,stato,proposta,nota,aggiornata").limit(5000);
+      const { data, error } = await db.from("lingue_revisioni").select("chiave,lingua,nome,stato,proposta,nota,aggiornata").limit(5000);
       if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
-      const { data: storia, error: e2 } = await db.from("lingue_correzioni").select("chiave,lingua,originale,testo,nota,email,nome,creata,annullata,annullata_da").order("creata", { ascending: false }).limit(5000);
+      const { data: storia, error: e2 } = await db.from("lingue_correzioni").select("chiave,lingua,originale,testo,nota,nome,creata,annullata,annullata_da").order("creata", { ascending: false }).limit(5000);
       if (e2) { console.error("db", e2); return risposta({ ok: false, errore: "server" }, 500); }
-      // le mail non escono: solo il nome e se la spunta (o la correzione) è di chi chiede
+      // delle spunte e delle correzioni si conserva solo il nome (ricavato dalla mail), mai la mail
       return risposta({
-        ok: true, revisioni: (data || []).map(({ email: e, ...x }: any) => ({ ...x, mia: e === email })),
-        storia: (storia || []).map(({ email: e, ...x }: any) => ({ ...x, mia: e === email })), correzioni: inVigore((storia || []).filter((x: any) => !x.annullata)),
+        ok: true, revisioni: (data || []).map((x: any) => ({ ...x, mia: x.nome === nome })),
+        storia: (storia || []).map((x: any) => ({ ...x, mia: x.nome === nome })), correzioni: inVigore((storia || []).filter((x: any) => !x.annullata)),
       });
     }
     const io = await impronta(email ? "mail:" + email : cod);

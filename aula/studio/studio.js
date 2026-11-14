@@ -26,7 +26,7 @@ window.STUDIO = (function () {
   var bottoneVoce = null;
   function zitto() { if (window.speechSynthesis) speechSynthesis.cancel(); if (bottoneVoce) bottoneVoce.classList.remove('va'); bottoneVoce = null; }
   function leggi(testo, bottone) {
-    if (!window.speechSynthesis) return toast('Il telefono non sa leggere ad alta voce 😕');
+    if (!window.speechSynthesis) return toast('Questo dispositivo non sa leggere ad alta voce 😕');
     var stessa = bottone && bottone === bottoneVoce;
     zitto(); if (stessa) return;
     var u = new SpeechSynthesisUtterance(testo); u.lang = 'it-IT'; u.rate = (window.AULA_SUPPORTI ? AULA_SUPPORTI.velocita() : 0.92); if (voce) u.voice = voce;
@@ -76,6 +76,11 @@ window.STUDIO = (function () {
       { id: 'ricorda', ic: '📌', nome: 'Da ricordare', fn: tappaRicorda }
     ];
     var corrente = Math.min(stato.vista || 0, TAPPE.length - 1);
+    /* minuti indicativi: aiutano a organizzarsi (si può fare in più volte) */
+    var MINUTI = { gancio: 1, idee: Math.max(3, Math.round(arr(L.concetti).length * 0.6) + 2), memo: 3, allena: 5, flash: 3, sfida: 3, ricorda: 1 };
+    var TOTALE = TAPPE.reduce(function (t, x) { return t + MINUTI[x.id]; }, 0);
+    /* dopo tre tappe fatte di fila, un invito (facoltativo) alla pausa */
+    var fatteOra = 0, pausaVista = false;
 
     radice.classList.add('st');
     radice.innerHTML =
@@ -87,7 +92,7 @@ window.STUDIO = (function () {
         '<span class="st-punti" aria-live="polite">⭐ <b>' + stato.punti + '</b></span>' +
       '</div></div>' +
       '<nav class="st-mappa" aria-label="Le tappe della lezione">' + TAPPE.map(function (t, i) {
-        return '<button type="button" class="st-tappa" data-tappa="' + i + '"><span class="tondo" aria-hidden="true">' + t.ic + '</span><small>' + (i + 1) + '. ' + t.nome + '</small></button>';
+        return '<button type="button" class="st-tappa" data-tappa="' + i + '"><span class="tondo" aria-hidden="true">' + t.ic + '</span><small>' + (i + 1) + '. ' + t.nome + '</small><small class="st-min">~' + MINUTI[t.id] + ' min</small></button>';
       }).join('') + '</nav>' +
       '<div class="st-palco" id="st-palco" tabindex="-1"></div>';
     var palco = radice.querySelector('#st-palco');
@@ -99,7 +104,23 @@ window.STUDIO = (function () {
       var el = radice.querySelector('.st-punti'); el.querySelector('b').textContent = stato.punti;
       el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop');
     }
-    function fatta(id) { if (!stato.fatte[id]) { stato.fatte[id] = true; salva(); aggiornaMappa(); } }
+    function fatta(id) { if (!stato.fatte[id]) { stato.fatte[id] = true; fatteOra++; salva(); aggiornaMappa(); } }
+    function pausa(dopo) {
+      zitto();
+      palco.innerHTML = '<div class="st-card st-pausa st-entra" style="text-align:center"><div style="font-size:2.6rem" aria-hidden="true">☕</div><h2 style="margin:.2rem 0">Tre tappe fatte: pausa di 2 minuti?</h2>' +
+        '<p class="st-sot">Alzati, bevi un bicchiere d\'acqua, guarda fuori dalla finestra. Il cervello lavora anche in pausa: dopo si riparte meglio.</p>' +
+        '<div id="st-p"><div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn oro" id="st-pv">⏱️ Faccio la pausa</button><button type="button" class="st-btn" id="st-pn">Continuo →</button></div></div></div>';
+      palco.querySelector('#st-pn').onclick = dopo;
+      palco.querySelector('#st-pv').onclick = function () {
+        var box = palco.querySelector('#st-p'), n = 120;
+        box.innerHTML = '<div class="st-conto" aria-live="off">2:00</div><div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn" id="st-pf">Ho finito la pausa →</button></div>';
+        var iv = setInterval(function () {
+          n--; if (n > 0) { box.firstChild.textContent = Math.floor(n / 60) + ':' + ('0' + n % 60).slice(-2); return; }
+          clearInterval(iv); box.firstChild.textContent = 'Si riparte! 💪'; toast('Pausa finita: si riparte! 💪');
+        }, 1000);
+        box.querySelector('#st-pf').onclick = function () { clearInterval(iv); dopo(); };
+      };
+    }
     function aggiornaMappa() {
       radice.querySelectorAll('.st-tappa').forEach(function (b, i) {
         b.classList.toggle('fatta', !!stato.fatte[TAPPE[i].id]);
@@ -120,7 +141,12 @@ window.STUDIO = (function () {
       var t = e.target.closest('button'); if (!t || !radice.contains(t)) return;
       if (t.hasAttribute('data-leggi')) return leggi(t.getAttribute('data-leggi'), t);
       if (t.hasAttribute('data-tappa')) return vai(+t.getAttribute('data-tappa'), true);
-      if (t.hasAttribute('data-avanti')) { if (t.getAttribute('data-avanti')) fatta(t.getAttribute('data-avanti')); return vai(Math.min(corrente + 1, TAPPE.length - 1), true); }
+      if (t.hasAttribute('data-avanti')) {
+        if (t.getAttribute('data-avanti')) fatta(t.getAttribute('data-avanti'));
+        var poi = Math.min(corrente + 1, TAPPE.length - 1);
+        if (fatteOra >= 3 && !pausaVista && poi < TAPPE.length - 1) { pausaVista = true; return pausa(function () { vai(poi, true); }); }
+        return vai(poi, true);
+      }
       if (t.hasAttribute('data-zitto')) return zitto();
       if (t.hasAttribute('data-z')) { zoom = Math.max(0.85, Math.min(1.6, zoom + 0.1 * t.getAttribute('data-z'))); radice.style.setProperty('--st-z', zoom); try { localStorage.setItem('studio-zoom', zoom); } catch (e2) {} return; }
       if (t.hasAttribute('data-largo')) { var on = radice.classList.toggle('st-largo'); t.setAttribute('aria-pressed', on); try { localStorage.setItem('studio-largo', on ? '1' : '0'); } catch (e3) {} }
@@ -129,7 +155,7 @@ window.STUDIO = (function () {
     /* ═══ 1. IL GANCIO ═══ */
     function tappaGancio(el) {
       var g = L.gancio || {};
-      el.innerHTML = '<h2>Prima di tutto, una domanda…</h2><p class="st-sot">Non devi saperlo. Prova a indovinare: il cervello ricorda meglio quello che ha provato a indovinare.</p>' +
+      el.innerHTML = '<p class="st-nota" style="margin:0 0 .6rem">⏱️ Tutta la lezione: circa ' + TOTALE + ' minuti. Si può fare anche in più volte: il dispositivo ricorda dove sei arrivato.</p><h2>Prima di tutto, una domanda…</h2><p class="st-sot">Non devi saperlo. Prova a indovinare: il cervello ricorda meglio quello che ha provato a indovinare.</p>' +
         '<div class="st-card st-gancio st-entra">' + tastoVoce(g.domanda) + '<div style="font-size:3rem">🤔</div><p class="q">' + esc(g.domanda) + '</p>' +
         '<div id="st-g"><button type="button" class="st-btn oro" id="st-pensa">Ci penso 5 secondi…</button></div></div>';
       el.querySelector('#st-pensa').onclick = function () {
@@ -153,7 +179,7 @@ window.STUDIO = (function () {
     function tappaIdee(el) {
       var C = arr(L.concetti), i = 0;
       function disegna() {
-        if (i >= C.length) return glossario();
+        if (i >= C.length) return spiega();
         var c = C[i];
         el.innerHTML = '<h2>Le idee chiave</h2><p class="st-sot">Una alla volta. Leggi, ascolta, poi vai avanti.</p>' +
           '<div class="st-card st-concetto st-entra">' + tastoVoce(c.titolo + '. ' + c.spiegazione + (c.esempio ? ' Esempio: ' + c.esempio : '')) +
@@ -164,6 +190,44 @@ window.STUDIO = (function () {
           '<span class="st-nota">' + (i + 1) + ' di ' + C.length + '</span><button type="button" class="st-btn pieno" id="st-av">Capito →</button></div>';
         el.querySelector('#st-ind').onclick = function () { zitto(); i--; disegna(); };
         el.querySelector('#st-av').onclick = function () { zitto(); i++; punti(1); disegna(); };
+      }
+      /* spiegare con parole proprie è il modo più sicuro per capire se si è capito.
+         Quello che si scrive resta solo nella pagina: non si salva e non si invia. */
+      function norm(t) { return String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]+/g, ' '); }
+      function haChiave(testo, chiave) {
+        var T = ' ' + norm(testo) + ' ';
+        var P = norm(chiave).split(' ').filter(function (w) { return w.length >= 4; });
+        if (!P.length) P = norm(chiave).split(' ').filter(Boolean);
+        return P.some(function (w) { return T.indexOf(w.slice(0, Math.max(4, w.length - 2))) >= 0; });
+      }
+      function spiega() {
+        if (!C.length) return glossario();
+        el.innerHTML = '<h2>💬 Spiegalo a un compagno</h2><p class="st-sot">Scegli un\'idea e spiegala con parole tue, come se un compagno fosse stato assente. Se capisci quello che dici, l\'hai imparata davvero.</p>' +
+          '<div class="st-scelte st-entra">' + C.map(function (c, k) { return '<button type="button" class="st-scelta" data-c="' + k + '">' + esc((c.emoji || '💡') + ' ' + c.titolo) + '</button>'; }).join('') + '</div>' +
+          '<div class="st-azioni"><button type="button" class="st-btn" id="st-salta">Salto, vado avanti →</button></div>';
+        el.querySelector('#st-salta').onclick = function () { zitto(); glossario(); };
+        el.querySelectorAll('[data-c]').forEach(function (b) { b.onclick = function () { scrivi(C[+b.getAttribute('data-c')]); }; });
+      }
+      function scrivi(c) {
+        el.innerHTML = '<h2>💬 Spiegalo a un compagno</h2><p class="st-sot"><b>' + esc((c.emoji || '💡') + ' ' + c.titolo) + '</b> · scrivi due o tre frasi, oppure dettale con il microfono della tastiera. Resta solo qui: non si salva e non si invia.</p>' +
+          '<div class="st-card st-entra"><textarea class="st-scrivi" id="st-sc" rows="5" placeholder="Allora, in pratica…"></textarea>' +
+          '<div class="st-azioni"><button type="button" class="st-btn pieno" id="st-conf">Confronta con la spiegazione</button><button type="button" class="st-btn" id="st-altra">← Un\'altra idea</button></div><div id="st-esito"></div></div>';
+        el.querySelector('#st-altra').onclick = spiega;
+        el.querySelector('#st-conf').onclick = function () {
+          var t = el.querySelector('#st-sc').value.trim(), parole = t ? t.split(/\s+/).length : 0;
+          if (parole < 3) { toast('Scrivi almeno una frase 🙂'); el.querySelector('#st-sc').focus(); return; }
+          var chiave = c.parola_chiave && haChiave(t, c.parola_chiave), lunga = parole >= 12;
+          punti(2);
+          el.querySelector('#st-esito').innerHTML =
+            '<ul class="st-controlli">' +
+              (c.parola_chiave ? '<li class="' + (chiave ? 'ok' : 'no') + '">' + (chiave ? '✓ Hai usato la parola chiave «' + esc(c.parola_chiave) + '».' : '💡 Prova a usare la parola chiave «' + esc(c.parola_chiave) + '».') + '</li>' : '') +
+              '<li class="' + (lunga ? 'ok' : 'no') + '">' + (lunga ? '✓ Una spiegazione completa, non solo una parola.' : '💡 Aggiungi un esempio: «per esempio…».') + '</li>' +
+            '</ul><div class="st-esempio" style="margin-top:.6rem">' + tastoVoce(c.spiegazione) + '📘 <b>La spiegazione della lezione:</b> ' + esc(c.spiegazione) + (c.esempio ? '<br/>👉 ' + esc(c.esempio) : '') + '</div>' +
+            '<p class="st-nota">Confronta: che cosa hai detto uguale? Che cosa ti mancava?</p>' +
+            '<div class="st-azioni"><button type="button" class="st-btn" id="st-ancora">💬 Un\'altra idea</button><button type="button" class="st-btn pieno" id="st-via">Avanti →</button></div>';
+          el.querySelector('#st-ancora').onclick = spiega;
+          el.querySelector('#st-via').onclick = function () { zitto(); glossario(); };
+        };
       }
       function glossario() {
         var P = arr(L.parole);
@@ -448,9 +512,10 @@ window.STUDIO = (function () {
       el.innerHTML = '<h2>Le cose da ricordare</h2><p class="st-sot">Se ti resta in testa solo questo, sei a posto. Ascoltale prima di dormire: il sonno fissa i ricordi.</p>' +
         '<div class="st-card st-entra">' + tastoVoce(R.join('. ')) + '<ol class="st-ricorda">' + R.map(function (r) { return '<li>' + esc(r) + '</li>'; }).join('') + '</ol></div>' +
         '<div class="st-card st-finale st-entra"><div class="st-medaglia">' + (L.icona || '🎓') + '</div><h2>' + esc(L.titolo) + '</h2><p class="st-sot">Tappe completate: ' + Math.min(fatte, tot) + ' di ' + tot + ' · ⭐ ' + stato.punti + ' punti' + (stato.sfida ? ' · sfida ' + stato.sfida + '/10' : '') + '</p>' +
-        '<p class="st-nota">🔁 <b>Il trucco del ripasso</b>: torna su questa lezione <b>domani</b>, poi <b>tra 3 giorni</b> e <b>tra una settimana</b>. Bastano 5 minuti di flashcard: è così che si ricorda per sempre.</p>' +
+        '<p class="st-nota">🔁 <b>Il trucco del ripasso</b>: ci pensa la Sala studio. <b>Domani</b>, <b>tra 3 giorni</b> e <b>tra una settimana</b>, aprendo la Sala studio su questo dispositivo, trovi un ripasso lampo di 5 domande. È così che si ricorda per sempre.</p>' +
         '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn" data-tappa="4">🃏 Ripassa con le flashcard</button><button type="button" class="st-btn" id="st-azzera">↺ Ricomincia da zero</button></div></div>';
       fatta('ricorda');
+      if (window.RIPASSO) RIPASSO.registra(L, opz.id || L.titolo, location.pathname + location.search + location.hash);
       el.querySelector('#st-azzera').onclick = function () { FINESTRA.chiedi({ titolo: 'Ricominciare da zero?', testo: 'Tappe fatte e punti di questa lezione si cancellano.', si: 'Ricomincia', pericolo: true }).then(function (ok) { if (ok) { stato = { fatte: {}, punti: 0, vista: 0 }; salva(); radice.querySelector('.st-punti b').textContent = 0; vai(0, true); } }); };
     }
 

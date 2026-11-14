@@ -2,7 +2,9 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"/>
-  <script src="/cantiere.js"></script>
+  <script>window.AULA_ATTESA_MANUALE=true</script>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/guida-click.js"></script>
   <script src="/aula/riservato.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="robots" content="noindex, nofollow"/>
@@ -62,7 +64,7 @@
     .piede button[disabled]{opacity:.4;cursor:default}
 
     /* ───── lo spazio grande a destra: il sito vero ───── */
-    .vista{display:flex;flex-direction:column;min-width:0;min-height:0}
+    .vista{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0}
     .strumenti{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;background:var(--panna2);border-bottom:1px solid #d9cfb8;font-size:14px}
     .strumenti .dove{flex:1;min-width:120px;color:var(--grigio);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .strumenti button,.strumenti a.b{border:1px solid #b9ad92;background:#fff;color:var(--bosco);border-radius:8px;padding:5px 11px;font-weight:700;font-size:14px;text-decoration:none}
@@ -95,7 +97,7 @@
       <button type="button" id="avanti" class="avanti">Avanti →</button>
     </div>
   </aside>
-  <section class="vista" aria-label="Il sito">
+  <section class="vista" id="vista" aria-label="Il sito">
     <div class="strumenti">
       <button type="button" id="largo" aria-pressed="false" title="Nasconde o mostra la guida">⇔ Guida</button>
       <span class="dove" id="dove"></span>
@@ -122,7 +124,10 @@
         'Su una scheda si tocca <span class="btn">🔊</span>: il testo viene letto ad alta voce.',
         'Nella tappa <b>Memorizza</b> si osservano i trucchi per ricordare: la parola-sigla, il «palazzo della memoria» nel Convitto, la filastrocca.',
         'Nella tappa <b>Allenati</b> si risponde sbagliando apposta: la lezione spiega subito perché.',
-        'Si provano le <b>Flashcard</b> e la <b>Sfida finale</b>.'
+        'Si provano le <b>Flashcard</b> e la <b>Sfida finale</b>.',
+        'Si notano i <b>tempi</b>: la durata di tutta la lezione e di ogni tappa. Dopo tre tappe fatte di fila compare l\'invito, facoltativo, a una pausa di 2 minuti.',
+        'Finite le idee chiave si prova <span class="btn">💬 Spiegalo a un compagno</span>: si scrive un\'idea con parole proprie e la si confronta con la spiegazione. Il testo non si salva e non si invia.',
+        'Arrivati a <b>Da ricordare</b>, la lezione viene annotata sul dispositivo: domani, tra 3 giorni e tra una settimana la home della Sala studio proporrà <b>🔁 Oggi ripassa</b> (5 domande, circa 3 minuti). Aprendo un\'altra lezione compare invece un <b>☀️ riscaldamento</b> di 3 domande su questa.'
       ] },
     { t: 'La stessa lezione, in altri modi', m: 'circa 3 minuti · nessun accesso', url: DEMO,
       intro: 'Dalla stessa lezione nascono attività diverse. Si torna all\'inizio della lezione e si guardano gli altri modi di studiarla.',
@@ -135,8 +140,8 @@
       intro: 'Dalla lezione di esempio, una prova scritta pronta da stampare. Il docente non scrive nulla: sceglie soltanto che cosa stampare.',
       azioni: [
         'Si scende fino a <span class="btn">👀 Anteprima</span>: c\'è già il foglio della fila A, con intestazione, sei tipi di domande e punteggio.',
-        'Si spunta <span class="btn">♿ Anche la versione facilitata</span> (sezione 3) e si confronta con la fila A: meno domande, 2 sole risposte, parole da inserire già elencate, carattere più grande. Sul foglio non c\'è scritto «facilitata».',
-        'Si spunta <span class="btn">🗺️ Anche la mappa della lezione</span>: è una pagina di idee chiave da consegnare durante la prova, se prevista dal PDP.',
+        'Si spunta <span class="btn">🧩 Anche la versione con più aiuti</span> (sezione 3) e si confronta con la fila A: meno domande, 2 sole risposte, parole da inserire già elencate, carattere più grande. Sul foglio non c\'è nessuna scritta che la distingua.',
+        'Si spunta <span class="btn">🗺️ Anche la mappa della lezione</span>: è una pagina di idee chiave da consegnare durante la prova, quando serve.',
         'Si guardano la <b>fila B</b> e le <b>soluzioni</b>, per correggere in fretta.',
         'Si preme <span class="btn">🔀 Altre domande</span>: la verifica cambia in un istante.',
         'Se serve, <span class="btn">🖨️ Stampa</span>: su carta o in PDF.'
@@ -161,7 +166,7 @@
         '<b>Passo 3:</b> compaiono il link e il QR. Con <span class="btn">Provalo</span> si vede ciò che vedrà lo studente.',
         'Si apre «Computer condiviso?»: contiene il link per rimettere tutto come prima.'
       ],
-      nota: 'Le misure da adottare sono quelle stabilite dalla scuola e scritte nel PDP, condiviso con la famiglia: qui ci sono gli strumenti.' },
+      nota: 'Le misure da adottare sono quelle stabilite dalla scuola insieme alla famiglia: qui ci sono gli strumenti.' },
     { t: 'Creare una lezione nuova', m: 'circa 8 minuti · accesso docente', url: '/aula/studio/docente.html',
       intro: 'Dal lato del docente o dell\'educatore: da un argomento, o dalla foto di una pagina di libro, a una lezione completa con il suo QR.',
       azioni: [
@@ -202,14 +207,14 @@
       azioni: [
         'Nei <b>Giochi alla LIM</b> si sceglie un gioco (per esempio <span class="btn">🃏 Memory</span>) e la lingua, poi <span class="btn">⛶ Schermo intero</span>.',
         'Nelle <b>Lezioni guidate</b> si sceglie una lezione e si tocca la scheda <span class="btn">🔒 Docente</span>: la prima volta servono la mail istituzionale e il codice ricevuto.',
-        'Si trovano la modalità LIM, le schede da stampare (anche facilitate), la verifica con fila A e B e la scaletta per un\'ora.'
+        'Si trovano la modalità LIM, le schede da stampare (anche con più aiuti), la verifica con fila A e B e la scaletta per un\'ora.'
       ] },
     { t: 'Per concludere', m: 'circa 2 minuti', url: '/aula/',
       intro: 'Quattro cose da ricordare.',
       azioni: [
         '<b>Un\'unica Aula per tutti:</b> le facilitazioni sono nella stessa pagina dei compagni, senza etichette.',
         '<b>Nessun dato degli studenti:</b> si apre un link, senza registrazione. Le impostazioni e i progressi restano sul dispositivo.',
-        '<b>Il docente decide:</b> sceglie la lezione e il livello, secondo quanto stabilito dalla scuola e dal PDP.',
+        '<b>Il docente decide:</b> sceglie la lezione e il livello, secondo quanto stabilito dalla scuola.',
         '<b>Stato attuale:</b> gli strumenti sono in anteprima, visibili solo ai dispositivi abilitati; è in corso il confronto con la Responsabile della Protezione dei Dati per l\'uso da parte degli studenti.'
       ],
       nota: 'Se sono stati provati i livelli di lettura, la pagina è già stata rimessa come prima.' }
@@ -221,10 +226,18 @@
   function salvaSpunte() { try { sessionStorage.setItem('visita-spunte', JSON.stringify(spunte)); } catch (e) {} }
 
   /* una pagina nuova a ogni cambio, anche quando cambia solo il frammento (#p=...) */
+  /* mentre la pagina a destra si carica: barra di avanzamento, così non sembra bloccato */
+  var attesa = AulaAttesa.riquadro($('vista'), { titolo: 'Sto aprendo la pagina', ricarica: function () { if (vistaAttiva) carica(vistaAttiva); } });
+  sito.addEventListener('load', function () {
+    var w; try { w = sito.contentWindow.location.href; } catch (e) { w = ''; }
+    if (w === 'about:blank') return;
+    attesa.fine();
+  });
   function carica(url) {
     vistaAttiva = url;
     $('dove').textContent = url; $('dove').title = url;
     $('nuova').href = url;
+    attesa.avvia();
     sito.src = 'about:blank';
     setTimeout(function () { sito.src = url; }, 40);
   }
@@ -310,6 +323,8 @@
   costruisci();
   var m = /^#passo-(\d+)$/.exec(location.hash), inizio = m ? Math.min(Math.max(+m[1] - 1, 0), TAPPE.length - 1) : 0;
   vai(inizio);
+  /* animazione che mostra a destra dove toccare */
+  GuidaClick.avvia({ vista: $('vista'), sito: sito, elenco: elenco });
 })();
 </script>
 </body>

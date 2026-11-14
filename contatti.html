@@ -361,13 +361,27 @@
 
   <!-- MAPPA GOOGLE -->
   <section style="padding:0" aria-label="Mappa di localizzazione">
-    <iframe
-      src="https://www.google.com/maps?q=42.3921448,12.8582699&hl=it&z=16&output=embed"
-      title="Posizione del Convitto Costaggini — Rieti, Via Salaria"
-      style="width:100%;height:380px;border:none;display:block"
-      loading="lazy"
-      allowfullscreen>
-    </iframe>
+    <!-- La mappa di Google si carica solo su richiesta: prima del clic il sito non contatta Google. -->
+    <div id="mappa-google" style="width:100%;height:380px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e9e4d6,#d9d2bf);text-align:center;padding:1rem">
+      <div style="max-width:420px">
+        <p style="margin:0 0 .4rem;font-size:2rem" aria-hidden="true">🗺️</p>
+        <p style="margin:0 0 .9rem;color:var(--txt,#1f2937);font-size:.95rem;line-height:1.5">La mappa è fornita da Google. Si carica solo se scegli di vederla: da quel momento Google riceve l'indirizzo IP del tuo dispositivo e può impostare propri cookie (vedi la <a href="cookie-policy.html" style="color:var(--bosco2)">cookie policy</a>).</p>
+        <button type="button" id="mappa-google-mostra" style="display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.3rem;border-radius:30px;border:0;background:var(--oro2,#D4AF4F);color:var(--bosco,#2C3E2D);font-family:var(--fu);font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer">📍 Mostra la mappa</button>
+      </div>
+    </div>
+    <script>
+    (function () {
+      var b = document.getElementById('mappa-google-mostra'); if (!b) return;
+      b.addEventListener('click', function () {
+        var box = document.getElementById('mappa-google'), f = document.createElement('iframe');
+        f.src = 'https://www.google.com/maps?q=42.3921448,12.8582699&hl=it&z=16&output=embed';
+        f.title = 'Posizione del Convitto Costaggini — Rieti, Via Salaria';
+        f.style.cssText = 'width:100%;height:380px;border:none;display:block';
+        f.setAttribute('allowfullscreen', '');
+        box.replaceWith(f); f.focus();
+      });
+    })();
+    </script>
     <div style="background:var(--bosco);padding:1.1rem 1rem;font-size:.8rem;color:rgba(245,240,232,.7);text-align:center">
       <p style="margin:0 0 .85rem;font-size:.82rem">📍 Convitto "Costaggini" — Via Salaria s.n.c. — 02100 Rieti (RI)</p>
       <p style="margin:0 0 .7rem;font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--oro2)">Avvia la navigazione con la tua app</p>

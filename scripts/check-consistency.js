@@ -52,12 +52,16 @@ const TARGET = [
       { nome: 'retta annua', contains: RETTA_NUM },
       { nome: 'anno scolastico', contains: ANNO },
   ]},
-  { file: 'openday.html', fatti: [
+  // I dati strutturati FAQPage (con scadenza, quota e retta) sono in in-2-minuti.html,
+  // la pagina unica delle Domande frequenti.
+  { file: 'in-2-minuti.html', fatti: [
       { nome: 'scadenza', contains: SCADENZA },
       { nome: 'quota iscrizione', contains: QUOTA_NUM },
       { nome: 'retta annua', contains: RETTA_NUM },
       { nome: 'anno scolastico', contains: ANNO },
   ]},
+  // openday.html non si controlla sull'anno: gli Open Day (novembre-gennaio) servono
+  // per le iscrizioni all'anno successivo, quindi parlano di proposito di un altro anno.
   { file: 'genitori.html', fatti: [
       { nome: 'retta annua', contains: RETTA_NUM },
       { nome: 'anno scolastico', contains: ANNO },
@@ -67,8 +71,12 @@ const TARGET = [
       { nome: 'quota iscrizione', contains: QUOTA_NUM },
       { nome: 'retta annua', contains: RETTA_NUM },
   ]},
-  { file: 'index.html', fatti: [
+  // Le domande della home (index.html) e di tutte le altre pagine vengono da faq.js
+  { file: 'faq.js', fatti: [
       { nome: 'scadenza', contains: SCADENZA },
+      { nome: 'quota iscrizione', contains: QUOTA_NUM },
+      { nome: 'retta annua', contains: RETTA_NUM },
+      { nome: 'anno scolastico', contains: ANNO },
   ]},
   { file: 'regolamento-guida.html', fatti: [
       { nome: 'scadenza', contains: SCADENZA },

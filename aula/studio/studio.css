@@ -1,7 +1,7 @@
 /* ════════════════════════════════════════════════════════
    SALA STUDIO — stile del minisito /studio/
    Usa le variabili del sito madre (style.min.css).
-   Pensato per ragazzi con DSA: carattere ad alta leggibilità,
+   Pensato per tutti: carattere ad alta leggibilità,
    righe ariose, niente testo giustificato, colori calmi.
    ════════════════════════════════════════════════════════ */
 .st{--st-f:'Atkinson Hyperlegible',var(--fu);--st-ok:#2e7d4f;--st-ok2:#e3f3e8;--st-no:#b4442f;--st-no2:#fbe9e4;--st-z:1;font-family:var(--st-f);font-size:calc(1.06rem * var(--st-z));line-height:1.7;color:var(--txt)}
@@ -257,7 +257,7 @@ mark.st-k{background:linear-gradient(transparent 55%,var(--oro3) 55%);color:inhe
 @media (prefers-reduced-motion:reduce){.st *{animation:none!important;transition:none!important}.st-lett{opacity:1;transform:none}}
 @media print{.st-barra,.st-mappa,.st-azioni,.st-leggi,header,footer,.st-anteprima{display:none!important}}
 
-/* Solo in questa sezione: dei pulsanti tondi in basso a destra restano Home e Aa (lettura facilitata) */
+/* Solo in questa sezione: dei pulsanti tondi in basso a destra restano Home e Aa (Leggi a modo tuo) */
 body[data-page="studio"] #fab-top,body[data-page="studio"] #tr-fab,body[data-page="studio"] #cc-fab{display:none!important}
 
 /* in cima a «Crea una lezione»: cosa costa (poco) e cosa non tocca fare */
@@ -462,3 +462,18 @@ button.fm-tessera.no{border-color:var(--st-no);animation:st-scuoti .4s}
 .fm-modi-chiuso span{font-size:.9rem}
 .fm-modi-chiuso b{font-size:1rem}
 .fm-modi-chiuso button{font:800 .85rem var(--fu);border:2px solid var(--bosco);background:#fff;color:var(--bosco);border-radius:99px;padding:.45rem .9rem;min-height:40px;cursor:pointer;white-space:nowrap}
+
+/* tempi indicativi, pausa, «Spiegalo a un compagno», ripasso e riscaldamento */
+.st-tappa .st-min{display:block;font-size:.62rem;opacity:.65;margin-top:.05rem}
+.st-scrivi{width:100%;font:inherit;font-size:1em;line-height:1.6;padding:.7rem .8rem;border:2px solid var(--av3);border-radius:12px;background:var(--bco);color:var(--txt);resize:vertical;min-height:120px}
+.st-scrivi:focus{outline:none;border-color:var(--oro)}
+.st-controlli{list-style:none;margin:.8rem 0 0;padding:0;display:grid;gap:.35rem}
+.st-controlli li{padding:.5rem .7rem;border-radius:10px;font-size:.92em}
+.st-controlli li.ok{background:var(--st-ok2);color:#1d5236}
+.st-controlli li.no{background:#fdf6e3;color:#6b5418}
+/* intervista impossibile: ogni battuta si ascolta */
+.fm-ascolta{border:0;border-radius:50%;width:30px;height:30px;font-size:.85rem;cursor:pointer;vertical-align:middle;margin-left:.15rem;background:rgba(0,0,0,.06)}
+.fm-bolla.io .fm-ascolta{background:rgba(255,255,255,.22)}
+.fm-ascolta.va{background:var(--oro3);animation:st-pulsa 1s infinite}
+.fm-tre{margin-left:.4rem;padding:.35rem .7rem;font-size:.78rem;min-height:0}
+.fm-tre.va{background:var(--oro3);border-color:var(--oro3)}

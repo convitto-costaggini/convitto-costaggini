@@ -7,16 +7,16 @@
       a:`Possono fare domanda tutti gli studenti iscritti all'IPSSEOA "R. A. Costaggini" di Rieti. Il Consiglio d'Istituto può ammettere, su richiesta e in base ai posti disponibili, anche studenti di altri istituti della città; la precedenza resta sempre agli alunni del Costaggini.` },
     { id:'come', tags:['iscrizione'], pill:'⏱ 30 secondi',
       q:`Come si fa a iscrivere un figlio al Convitto?`,
-      a:`La procedura è in <strong>4 passi</strong>: ① Open Day e orientamento tra dicembre e gennaio ② a febbraio, iscrizione online all'IPSSEOA Costaggini sulla Piattaforma Unica del MIM, mettendo la spunta sulla voce "Convitto" (è qui che si esprime la scelta) ③ entro luglio, <a href="domanda-ammissione.html">modulo di domanda al Convitto</a> per formalizzare quanto già scelto a febbraio, con la documentazione richiesta e la quota di iscrizione (€450) ④ da settembre, versamento delle rate successive secondo il piano concordato. Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è. <a href="ammissione.html">Guida completa all'ammissione &rarr;</a>` },
+      a:`La procedura è in <strong>4 passi</strong>: ① Open Day e orientamento tra novembre e gennaio ② tra gennaio e febbraio, iscrizione online all'IPSSEOA Costaggini sulla Piattaforma Unica del MIM, mettendo la spunta sulla voce "Convitto" (è qui che si esprime la scelta) ③ entro luglio, <a href="domanda-ammissione.html">modulo di domanda al Convitto</a> per formalizzare quanto già scelto a febbraio, con la documentazione richiesta e la quota di iscrizione (€450) ④ da settembre, versamento delle rate successive secondo il piano concordato. Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è. <a href="ammissione.html">Guida completa all'ammissione &rarr;</a>` },
     { id:'quando-domanda', tags:['iscrizione'],
       q:`Entro quando va presentata la domanda?`,
-      a:`La domanda si presenta insieme all'iscrizione scolastica, nei termini previsti per le scuole secondarie di secondo grado. Entro <strong>luglio</strong> (la data esatta è stabilita ogni anno da apposita circolare) devono pervenire il modulo di domanda, la documentazione richiesta e la ricevuta della quota di iscrizione (€450) deliberata dal Consiglio d'Istituto. Le domande tardive vengono considerate solo se restano posti disponibili.` },
+      a:`La scelta del Convitto si fa durante l'iscrizione scolastica sulla Piattaforma Unica (tra gennaio e febbraio), mettendo la spunta sulla voce "Convitto". Poi, entro <strong>luglio</strong> (la data esatta è stabilita ogni anno da apposita circolare) devono pervenire il modulo di domanda, la documentazione richiesta e la ricevuta della quota di iscrizione (€450) deliberata dal Consiglio d'Istituto. Le domande tardive vengono considerate solo se restano posti disponibili.` },
     { id:'costo', tags:['iscrizione','genitori'], pill:'⏱ 20 secondi',
       q:`Quanto costa stare in Convitto?`,
       a:`La retta è deliberata ogni anno dal Consiglio d'Istituto. La retta intera confermata per l'A.S. 2026/27 è di <strong>1.600€ annui</strong>, comprensiva di vitto completo, alloggio, studio guidato, attività e trasporto Convitto–scuola — <a href="ammissione.html#tariffe">tabella completa con importi e scadenze delle rate &rarr;</a>. Essendo una struttura pubblica statale, e non un collegio privato, i costi sono accessibili. Per il preventivo aggiornato: <a href="mailto:convitto@alberghierorieti.it">convitto@alberghierorieti.it</a>.` },
     { id:'apertura', tags:['iscrizione','vita'],
       q:`Quando è aperto il Convitto durante l'anno?`,
-      a:`Il Convitto è aperto dal primo giorno di lezione fino al termine, esami compresi, da <strong>domenica sera (arrivo dalle 20:00) al venerdì mattina</strong>. Resta chiuso nei festivi del calendario scolastico regionale (1 novembre, 4 e 8 dicembre, 6 gennaio, 25 aprile, 1 maggio, 2 giugno) e in caso di ordinanze del Sindaco. Per il rientro domenicale sono previste corse con i mezzi del Convitto dai punti di ritrovo indicati a inizio anno.` },
+      a:`Il Convitto è aperto dal primo giorno di lezione fino al termine, esami compresi, dal <strong>lunedì mattina al venerdì mattina</strong> (4 notti, dal lunedì al giovedì); chi lo chiede con l'apposito modulo può rientrare già la <strong>domenica sera</strong>, dalle 20:00. Resta chiuso nei festivi del calendario scolastico regionale (1 novembre, 4 e 8 dicembre, 6 gennaio, 25 aprile, 1 maggio, 2 giugno) e in caso di ordinanze del Sindaco. Per il rientro domenicale sono previste corse con i mezzi del Convitto dai punti di ritrovo indicati a inizio anno.` },
     { id:'giornata', tags:['vita'], pill:'⏱ 20 secondi',
       q:`Com'è organizzata la giornata?`,
       a:`🌅 6:30 sveglia · 7:00 colazione · 8:00–14:00 scuola · 14:00 pranzo · 15:00–15:30 tempo libero · 15:30–17:15 studio guidato · 17:15 merenda · 17:30–19:15 libera uscita / sport / Laboratorio Musicale · 19:15 cena · 20:30–22:00 attività serali · 22:30 riposo. Gli orari si adattano all'orario scolastico. <a href="giornata-tipo.html">Il racconto completo della giornata &rarr;</a>` },
@@ -125,9 +125,12 @@
       return ids.split(',').map(function (s) { return map[s.trim()]; }).filter(Boolean);
     }
     var tagAttr = (container.getAttribute('data-faq') || '*').trim();
-    if (tagAttr === '*' || tagAttr === '') return FAQ.slice();
+    // data-faq-exclude: id da non ripetere (es. già mostrati più in alto nella stessa pagina)
+    var escl = (container.getAttribute('data-faq-exclude') || '').split(',').map(function (s) { return s.trim(); });
+    var base = FAQ.filter(function (e) { return escl.indexOf(e.id) === -1; });
+    if (tagAttr === '*' || tagAttr === '') return base;
     var wanted = tagAttr.split(',').map(function (s) { return s.trim(); });
-    return FAQ.filter(function (e) {
+    return base.filter(function (e) {
       return e.tags.some(function (t) { return wanted.indexOf(t) !== -1; });
     });
   }

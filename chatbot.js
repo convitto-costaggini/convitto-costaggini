@@ -45,7 +45,7 @@ const KB=[
   {k:['iscri','ammission','come si fa','come faccio','domanda di ammissione','entrare al convitto',
       'portale miur','piattaforma unica','piattaforma unica del mim','unica','scadenza','30 luglio',
       'entro quando','quando scade','scadenza domanda','modulo domanda','procedura','diventare convittore'],
-   r:'La procedura di ammissione si svolge in <strong>4 passi</strong>:<br>1. Open Day e orientamento tra dicembre e gennaio<br>2. A febbraio, iscrizione online all\'IPSSEOA Costaggini sulla <strong>Piattaforma Unica del MIM</strong>, con la spunta sulla voce "Convitto"<br>3. Entro <strong>luglio</strong> (la data esatta è stabilita ogni anno da apposita circolare), modulo di domanda al Convitto con documentazione e quota di iscrizione (450€)<br>4. Da settembre: versamento delle rate successive, arrivo, assegnazione camera, accoglienza<br><br>Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è.<br><br>📋 <a href="ammissione.html">Guida completa all\'ammissione →</a>'},
+   r:'La procedura di ammissione si svolge in <strong>4 passi</strong>:<br>1. Open Day e orientamento tra novembre e gennaio<br>2. Tra gennaio e febbraio, iscrizione online all\'IPSSEOA Costaggini sulla <strong>Piattaforma Unica del MIM</strong>, con la spunta sulla voce "Convitto"<br>3. Entro <strong>luglio</strong> (la data esatta è stabilita ogni anno da apposita circolare), modulo di domanda al Convitto con documentazione e quota di iscrizione (450€)<br>4. Da settembre: versamento delle rate successive, arrivo, assegnazione camera, accoglienza<br><br>Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è.<br><br>📋 <a href="ammissione.html">Guida completa all\'ammissione →</a>'},
   // ── COLLOQUIO DI AMMISSIONE (non esiste) ──
   {k:['colloquio','esame','intervista di selezione','esame di ammissione','sostenere un colloquio',
       'devo fare un colloquio','c\'è un colloquio','prova di ammissione','selezione'],
@@ -180,7 +180,7 @@ const KB=[
   // ── CORREDO ──
   {k:['corredo','cosa portare','cosa devo portare','lista','valigia','biancheria',
       'lenzuola','asciugamani','vestiti','necessaire','bagagli','cosa serve'],
-   r:'La lista completa del corredo obbligatorio è disponibile con possibilità di stampa.<br><br>📋 <a href="ammissione.html#moduli">Lista corredo →</a>'},
+   r:'La lista completa del corredo obbligatorio è disponibile con possibilità di stampa.<br><br>📋 <a href="genitori.html#valigia">Lista corredo →</a>'},
   // ── REGOLAMENTO ──
   {k:['regolamento','regole','norme','disciplina','vietato','cosa non si può',
       'articoli','sanzioni','punizioni','punito','essere punito','provvedimento','comportamento','35 articoli'],
@@ -188,7 +188,7 @@ const KB=[
   // ── USCITE E PERMESSI ──
   {k:['uscire','permesso uscita','uscita autonoma','uscite autonome','possono uscire','chi ritira',
       'delega','delegato','autorizzazione uscita','libera uscita','rientrare tardi'],
-   r:'Le uscite autonome richiedono l\'<strong>autorizzazione firmata dei genitori</strong>. È possibile delegare persone di fiducia per il ritiro. La libera uscita si regola secondo il Regolamento (Art. 28–29).<br><br>📋 <a href="ammissione.html#moduli">Modulo autorizzazione →</a>'},
+   r:'Le uscite autonome richiedono l\'<strong>autorizzazione firmata dei genitori</strong>. È possibile delegare persone di fiducia per il ritiro. La libera uscita si regola secondo il Regolamento (Art. 28–29).<br><br>📋 <a href="autorizzazioni.html">Modulo autorizzazioni →</a>'},
   // ── DSA E BES ──
   {k:['dsa','bes','dislessia','disgrafia','discalculia','adhd','bisogni educativi',
       'sostegno','pdp','piano didattico personalizzato','disturbo apprendimento'],
@@ -228,7 +228,7 @@ const KB=[
   // ── CERTIFICATI ──
   {k:['certificato','frequenza','documento','attestato','dichiarazione','modulo',
       'stampare','pdf','scaricare','modulistica'],
-   r:'Puoi richiedere e stampare online certificati di frequenza e altri moduli.<br><br>📄 <a href="ammissione.html#moduli">Modulistica →</a>'},
+   r:'Puoi richiedere e stampare online certificati di frequenza e altri moduli.<br><br>📄 <a href="accoglienza.html">Modulistica →</a>'},
   // ── CONVITTO VS COLLEGIO PRIVATO ──
   {k:['differenza','cos\'è un convitto','collegio privato','privatista','pubblico',
       'statale','costo rispetto a','convitto o collegio'],
@@ -248,7 +248,7 @@ const KB=[
   {k:['fretta','ho fretta','sintesi','riassunto','in breve','veloce','essenziale',
       'cosa devo sapere','in poche parole','subito','due minuti','2 minuti',
       'informazioni principali','info base','non ho tempo'],
-   r:'Perfetto — ho la pagina giusta per te: <strong>In 2 Minuti</strong>, le 10 domande che ogni genitore fa per prima con risposte immediate. Niente fronzoli, solo fatti.<br><br>⚡ <a href="in-2-minuti.html">Vai a "In 2 Minuti" →</a>'},
+   r:'Perfetto — ho la pagina giusta per te: <strong>Domande frequenti</strong>, con in cima le 10 domande che ogni genitore fa per prima, risposte in 2 minuti. Sotto trovi tutte le altre.<br><br>❓ <a href="in-2-minuti.html">Vai alle Domande frequenti →</a>'},
   // ── LETTERA / TESTIMONIANZE ──
   {k:['testimonianza','lettera','chi è passato','ex convittore','ex convittrice',
       'esperienze','cosa dicono','opinioni','recensioni','come si trovano',

@@ -17,7 +17,7 @@ Un solo codice monouso per e-mail dà accesso a tutta l'Aula.
 4. Aggiornare `lingue_chiave` con la chiave nuova (file locale riservato `ruota-chiave.sql`) e, subito dopo, fare il merge su `main`.
    I file `.enc` e `accesso-dipartimento.json` nel ramo sono già ricifrati con la chiave nuova e il nuovo codice del Dipartimento.
 5. Comunicare ai sette colleghi il nuovo codice del Dipartimento (non è nel repository).
-6. Dopo qualche giorno: eliminare la vecchia funzione `lingue-accesso` e la tabella `lingue_otp`.
+6. Fatto il 13/11/2026: eliminate la vecchia funzione `lingue-accesso` e la tabella `lingue_otp`.
 
 ## Rotazione futura della chiave
 `LINGUE_CHIAVE=<vecchia>` + script di ricifratura, poi `update lingue_chiave`, poi nuovo `accesso-dipartimento.json`.

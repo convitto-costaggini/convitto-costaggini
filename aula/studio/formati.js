@@ -106,7 +106,7 @@ window.FORMATI = (function () {
   }
 
   /* risposta da scrivere (ricordare senza suggerimenti è più efficace che riconoscere).
-     Pensata anche per chi ha DSA: maiuscole, accenti e un piccolo errore di battitura vanno bene;
+     Pensata per tutti: maiuscole, accenti e un piccolo errore di battitura vanno bene;
      dopo un errore compare l'iniziale, dopo due si può scegliere fra tre parole. */
   function norm(t) { return String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
   function vicine(a, b) {
@@ -507,6 +507,8 @@ window.FORMATI = (function () {
         '<div class="fm-opz' + (d.vf ? ' due' : '') + '">' + d.opz.map(function (o, i) { return '<button type="button" data-o="' + i + '"><span class="l">' + (d.vf ? '' : LET[i]) + '</span>' + esc(o) + '</button>'; }).join('') + '</div>' +
         '<div class="fm-esito" aria-live="polite"></div></div>';
       R.querySelector('[data-schermo]').onclick = schermo;
+      /* il pulsante «Prossima domanda» sta in fondo e sparisce: senza questo la pagina resta in basso, sul piè di pagina */
+      R.scrollIntoView({ block: 'start' });
       if (conf.tempo) {
         var tmp = conf.tempo * (window.AULA_SUPPORTI && AULA_SUPPORTI.ha('te') ? 1.5 : 1), fine = Date.now() + tmp * 1000, barra = R.querySelector('.fm-tempo i');
         timer = setInterval(function () {
@@ -546,6 +548,7 @@ window.FORMATI = (function () {
         '<ol class="fm-podio">' + ord.map(function (s) { var pos = ord.filter(function (x) { return x.punti > s.punti; }).length; /* a pari punti, stessa medaglia */ return '<li><span>' + ['🥇', '🥈', '🥉', '4°'][pos] + '</span><span>' + s.ic + ' ' + esc(s.nome) + '</span><b>' + s.punti + '</b></li>'; }).join('') + '</ol>' +
         '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn oro" data-ancora>🔁 Un\'altra partita</button></div></div>';
       R.querySelector('[data-ancora]').onclick = impostazioni;
+      R.scrollIntoView({ block: 'start' });
     }
     function schermo() {
       var el = R.closest('main') || R;
@@ -638,20 +641,23 @@ window.FORMATI = (function () {
     R.innerHTML = '<div class="st-palco">' + comeFunziona('🎙️', 'Intervista impossibile', 'Oggi in studio c\'è un ospite speciale: <b>' + esc(ic + ' ' + ospite) + '</b>. ' + esc(chi || ''), [
       'Tu sei il <b>giornalista</b>: fai una domanda alla volta.',
       'Il microfono gracchia e senti <b>tre risposte</b>: tocca quella che l\'ospite ha detto davvero.',
-      'Alla fine rileggi tutta l\'intervista, o ascoltala con 🔊.'
+      'Ogni battuta si ascolta con 🔊, anche le tre risposte prima di scegliere. Alla fine rileggi o ascolti tutta l\'intervista.'
     ], 'Accendi il microfono 🎙️') + '</div>';
     R.querySelector('.fm-via').onclick = giro;
     function bolle() {
       return '<div class="fm-chat">' + '<div class="fm-ospite"><span class="av" aria-hidden="true">' + esc(ic) + '</span><b>' + esc(ospite) + '</b></div>' +
-        chat.map(function (m) { return '<div class="fm-bolla ' + m.da + '"><small>' + (m.da === 'io' ? '🎤 Tu' : esc(ic + ' ' + ospite)) + '</small>' + esc(m.t) + '</div>'; }).join('') + '</div>';
+        chat.map(function (m) { return '<div class="fm-bolla ' + m.da + '"><small>' + (m.da === 'io' ? '🎤 Tu' : esc(ic + ' ' + ospite)) + '</small>' + esc(m.t) + ' <button type="button" class="fm-ascolta" data-leggi="' + esc(m.t) + '" aria-label="Ascolta la battuta" title="Ascolta">🔊</button></div>'; }).join('') + '</div>';
     }
+    /* ogni battuta, e le tre risposte prima di scegliere, si ascoltano con 🔊 */
+    function voci() { R.querySelectorAll('[data-leggi]').forEach(function (b) { b.onclick = function () { S.leggi(b.getAttribute('data-leggi'), b); }; }); }
     function giro() {
       if (k >= D.length) return fine();
       var d = D[k], opz = mescola([d.risposta].concat(arr(d.sbagliate).slice(0, 2)));
       chat.push({ da: 'io', t: d.domanda });
       R.innerHTML = '<div class="st-palco"><h2>🎙️ In onda</h2><p class="st-cont">Domanda ' + (k + 1) + ' di ' + D.length + '</p>' + bolle() +
-        '<p class="st-sot" style="margin-top:.8rem">Che cosa ha risposto ' + esc(ospite) + '?</p><div class="st-scelte">' + opz.map(function (o, i) { return '<button type="button" class="st-scelta" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div><div class="st-esito" aria-live="polite"></div></div>';
+        '<p class="st-sot" style="margin-top:.8rem">Che cosa ha risposto ' + esc(ospite) + '? <button type="button" class="st-btn fm-tre" data-leggi="' + esc(opz.map(function (o, i) { return ['Prima', 'Seconda', 'Terza'][i] + ' risposta: ' + o; }).join('. ')) + '">🔊 Ascolta le tre risposte</button></p><div class="st-scelte">' + opz.map(function (o, i) { return '<button type="button" class="st-scelta" data-i="' + i + '">' + esc(o) + '</button>'; }).join('') + '</div><div class="st-esito" aria-live="polite"></div></div>';
       var ultima = R.querySelector('.fm-bolla:last-child'); if (ultima) ultima.scrollIntoView({ block: 'center' });
+      voci();
       R.querySelectorAll('[data-i]').forEach(function (b) {
         b.onclick = function () {
           if (opz[+b.getAttribute('data-i')] === d.risposta) { chat.push({ da: 'lui', t: d.risposta }); k++; toast(S.pesca(S.BRAVO)); giro(); }
@@ -665,7 +671,7 @@ window.FORMATI = (function () {
       R.innerHTML = '<div class="st-palco"><div class="st-card st-finale st-entra"><div class="st-medaglia">📰</div><h2>Intervista in pagina!</h2><p class="st-sot">' + (sbagli ? sbagli + (sbagli === 1 ? ' risposta sbagliata' : ' risposte sbagliate') + ' scartata lungo la strada.' : 'Nessuna risposta sbagliata: giornalismo di precisione!') + '</p>' +
         '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn" data-leggi="' + esc(testo) + '">🔊 Ascolta l\'intervista</button><button type="button" class="st-btn pieno" data-ancora>🔁 Rifai l\'intervista</button></div></div>' +
         '<h3>📰 L\'intervista completa</h3>' + bolle() + '</div>';
-      var l = R.querySelector('[data-leggi]'); l.onclick = function () { S.leggi(l.getAttribute('data-leggi'), l); };
+      voci();
       R.querySelector('[data-ancora]').onclick = function () { intervista(L, R); };
     }
   }

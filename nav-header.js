@@ -7,7 +7,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L20 8.09v7.82L12 19.82 4 15.91V8.09L12 4.18z"/></svg>
     <a href="https://www.mim.gov.it/" target="_blank" rel="noopener">Ministero dell'Istruzione e del Merito</a>
   </div>
-  <div><a href="trasparenza.html">Trasparenza</a> · <a href="area-riservata.html">Area riservata</a> · <a href="#" onclick="document.getElementById('pec-modal').style.display='flex';return false" aria-label="Mostra indirizzo PEC">PEC</a></div>
+  <div><a href="contatti.html">Contatti</a> · <a href="trasparenza.html">Trasparenza</a> · <a href="area-riservata.html">Area riservata famiglie</a> · <a href="#" onclick="document.getElementById('pec-modal').style.display='flex';return false" aria-label="Mostra indirizzo PEC">PEC</a></div>
 </div>
 <header id="hdr">
   <div class="hdr-in">
@@ -36,20 +36,34 @@
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
           Il Convitto <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
         </button>
-        <ul class="dd-menu" role="menu">
-          <li><a href="il-convitto.html" data-page="il-convitto">Chi siamo &amp; storia</a></li>
-          <li><a href="educatori.html" data-page="educatori">Gli Educatori</a></li>
-          <li><a href="giornata-tipo.html" data-page="giornata-tipo">Una giornata tipo</a></li>
-          <li><a href="rieti-libera-uscita.html" data-page="rieti-libera-uscita">🧭 Rieti in libera uscita</a></li>
-          <li><a href="premio-merito.html" data-page="premio-merito">🏅 Premio al Merito</a></li>
-          <li><a href="trofei-e-classifiche.html" data-page="trofei-e-classifiche">🏆 Trofei e Classifiche</a></li>
-
-          <li style="padding: .4rem .9rem; font-family: var(--fu); font-size: .58rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .8;">♪ Laboratorio Musicale</li>
-          <li style="padding-left: .6rem;"><a href="laboratorio-musicale.html" data-page="laboratorio-musicale">└ Accedi al Laboratorio</a></li>
-          <li style="padding-left: .6rem;"><a href="vinile.html" data-page="vinile">└ 📻 Vinile</a></li>
-          <li style="padding-left: .6rem;"><a href="solidarieta.html" data-page="solidarieta">└ 🤝 La Solidarietà</a></li>
-
-          <li><a href="comunita.html" data-page="comunita">🌟 La nostra Comunità</a></li>
+        <ul class="dd-menu dd-menu--gruppi" role="menu">
+          <li class="dd-sub" role="none">
+            <button class="dd-sub-btn" type="button" aria-haspopup="true" aria-expanded="false">Chi siamo <svg viewBox="0 0 24 24" class="dd-sub-arrow" aria-hidden="true"><path d="M10 7l5 5-5 5z"/></svg></button>
+            <ul class="dd-sub-menu" role="menu">
+              <li><a href="il-convitto.html" data-page="il-convitto">Chi siamo &amp; storia</a></li>
+              <li><a href="educatori.html" data-page="educatori">Gli Educatori</a></li>
+              <li><a href="comunita.html" data-page="comunita">🌟 La nostra Comunità</a></li>
+              <li><a href="giornata-tipo.html" data-page="giornata-tipo">Una giornata tipo</a></li>
+            </ul>
+          </li>
+          <li class="dd-sub" role="none">
+            <button class="dd-sub-btn" type="button" aria-haspopup="true" aria-expanded="false">Attività e cultura <svg viewBox="0 0 24 24" class="dd-sub-arrow" aria-hidden="true"><path d="M10 7l5 5-5 5z"/></svg></button>
+            <ul class="dd-sub-menu" role="menu">
+              <li><a href="laboratorio-musicale.html" data-page="laboratorio-musicale">♪ Laboratorio Musicale</a></li>
+              <li><a href="vinile.html" data-page="vinile">📻 Vinile</a></li>
+              <li><a href="solidarieta.html" data-page="solidarieta">🤝 La Solidarietà</a></li>
+              <li><a href="biblioteca.html" data-page="biblioteca">📚 La nostra Biblioteca</a></li>
+              <li><a href="biblioteca.html#oltre-le-pagine">Oltre le pagine 2025/26</a></li>
+            </ul>
+          </li>
+          <li class="dd-sub" role="none">
+            <button class="dd-sub-btn" type="button" aria-haspopup="true" aria-expanded="false">Rieti e riconoscimenti <svg viewBox="0 0 24 24" class="dd-sub-arrow" aria-hidden="true"><path d="M10 7l5 5-5 5z"/></svg></button>
+            <ul class="dd-sub-menu" role="menu">
+              <li><a href="rieti-libera-uscita.html" data-page="rieti-libera-uscita">🧭 Rieti in libera uscita</a></li>
+              <li><a href="premio-merito.html" data-page="premio-merito">🏅 Premio al Merito</a></li>
+              <li><a href="trofei-e-classifiche.html" data-page="trofei-e-classifiche">🏆 Trofei e Classifiche</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
 
@@ -59,12 +73,30 @@
         </button>
         <ul class="dd-menu" role="menu">
           <li><a href="servizi.html" data-page="servizi">Servizi &amp; spazi</a></li>
-          <li><a href="semiconvitto.html" data-page="semiconvitto">🌅 Semiconvitto</a></li>
-          <li><a href="orientamento.html" data-page="orientamento">🗓 Orientamento &amp; Open Day</a></li>
-          <li><a href="scopri-talento.html" data-page="scopri-talento">🎮 Giochi &amp; Orientamento</a></li>
+          <li><a href="semiconvitto.html" data-page="semiconvitto">🌅 Semiconvitto (senza pernottamento)</a></li>
+          <li><a href="openday.html" data-page="openday">🗓 Open Day e visite</a></li>
+          <li><a href="orientamento.html" data-page="orientamento">🧭 Percorso per futuri convittori</a></li>
+          <li><a href="scopri-talento.html" data-page="scopri-talento">✨ Scopri il tuo Talento</a></li>
           <li><a href="bullismo.html" data-page="bullismo">🛡️ Bullismo e Cyberbullismo</a></li>
           <li><a href="come-arrivare.html" data-page="come-arrivare">🚌 Come arrivare</a></li>
           <li><a href="contatti.html" data-page="contatti">Contattaci</a></li>
+        </ul>
+      </div>
+
+      <div class="dd-wrap">
+        <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
+          Aula digitale <span style="margin-left:.35rem;background:linear-gradient(135deg,var(--oro2),var(--oro3));color:var(--bosco);font-size:.55rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .4rem;border-radius:99px">Nuovo</span> <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
+        </button>
+        <ul class="dd-menu" role="menu">
+          <li><a href="aula/" data-page="aula">🎓 Che cos'è l'Aula digitale</a></li>
+          <li style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per gli studenti</li>
+          <li><a href="aula/lingue/">🌍 Le lingue dell'Alberghiero</a></li>
+          <li><a href="aula/studio/">📖 Sala studio</a></li>
+          <li style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per le famiglie</li>
+          <li><a href="aula/famiglie/">👨‍👩‍👧 Come funziona, cosa non raccoglie</a></li>
+          <li style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per i colleghi</li>
+          <li><a href="aula/formazione/">🧑‍🏫 Formazione: provare l'Aula</a></li>
+          <li><a href="aula/studio/docente.html">🔒 Accesso docenti ed educatori</a></li>
         </ul>
       </div>
 
@@ -75,32 +107,32 @@
         <ul class="dd-menu" role="menu">
           <li><a href="notizie.html" data-page="notizie">Ultime notizie</a></li>
           <li><a href="menu-settimana.html" data-page="menu-settimana">🍽️ Menu della Settimana</a></li>
-          <li><a href="in-2-minuti.html" data-page="in-2-minuti">⚡ In 2 Minuti</a></li>
+          <li><a href="in-2-minuti.html" data-page="in-2-minuti">❓ Domande frequenti</a></li>
           <li><a href="calendario.html" data-page="calendario">Calendario eventi</a></li>
         </ul>
       </div>
 
       <div class="dd-wrap">
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
-          Regolamenti &amp; Documenti <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
+          Regolamenti<span class="hd-x"> &amp; Documenti</span> <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
         </button>
         <ul class="dd-menu" role="menu">
           <li><a href="accoglienza.html" data-page="accoglienza">📋 Accoglienza &amp; Modulistica</a></li>
-          <li><a href="regolamento.html" data-page="regolamento">📜 Regolamento</a></li>
-          <li><a href="ptof-guida.html" data-page="ptof-guida">PTOF</a></li>
-          <li><a href="trasparenza.html" data-page="trasparenza">Trasparenza</a></li>
+          <li><a href="regolamento.html" data-page="regolamento">📜 Regolamento di Convitto</a></li>
+          <li><a href="ptof-guida.html" data-page="ptof-guida">Il PTOF spiegato</a></li>
+          <li><a href="trasparenza.html" data-page="trasparenza">Amministrazione Trasparente</a></li>
           <li><a href="organizzazione.html" data-page="organizzazione">Organizzazione</a></li>
           <li><a href="mappa-sito.html" data-page="mappa-sito">🗺️ Mappa del Sito</a></li>
         </ul>
       </div>
 
-      <a href="contatti.html" aria-label="Contattaci" title="Contattaci" style="margin-left:.3rem;width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:rgba(245,240,232,.92) !important;transition:background .2s,color .2s;flex-shrink:0;">
+      <a class="hd-mail" href="contatti.html" aria-label="Contattaci" title="Contattaci" style="margin-left:.3rem;width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:rgba(245,240,232,.92) !important;transition:background .2s,color .2s;flex-shrink:0;">
         <svg viewBox="0 0 24 24" width="24" height="24" style="fill:currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       </a>
 
-      <a href="area-riservata.html" style="margin-left:.3rem;background:rgba(0,51,102,.28);border:1px solid rgba(120,160,210,.55);border-radius:4px;color:#BFD4EE !important;font-size:.72rem !important;padding:.4rem .75rem !important;display:inline-flex;align-items:center;gap:.3rem;" title="Area riservata famiglie — accesso con credenziali">
+      <a href="area-riservata.html" style="margin-left:.3rem;background:rgba(0,51,102,.28);border:1px solid rgba(120,160,210,.55);border-radius:4px;color:#BFD4EE !important;font-size:.72rem !important;padding:.4rem .75rem !important;display:inline-flex;align-items:center;gap:.3rem;" title="Area riservata alle famiglie dei convittori iscritti — accesso con credenziali">
         <svg viewBox="0 0 24 24" width="13" height="13" style="fill:#BFD4EE" aria-hidden="true"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-        Famiglie
+        Accesso famiglie
       </a>
     </nav>
 
@@ -124,20 +156,21 @@
     <li class="drw-group">
       <button class="drw-acc" aria-expanded="false">Il Convitto <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
       <ul class="drw-sub">
+        <li style="padding:.35rem .9rem .25rem .5rem;font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Chi siamo</li>
         <li><a href="il-convitto.html">Chi siamo &amp; storia</a></li>
         <li><a href="educatori.html">Gli Educatori</a></li>
+        <li><a href="comunita.html">🌟 La nostra Comunità</a></li>
         <li><a href="giornata-tipo.html">Una giornata tipo</a></li>
+        <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Attività e cultura</li>
+        <li><a href="laboratorio-musicale.html">♪ Laboratorio Musicale</a></li>
+        <li><a href="vinile.html">📻 Vinile</a></li>
+        <li><a href="solidarieta.html">🤝 La Solidarietà</a></li>
+        <li><a href="biblioteca.html">📚 La nostra Biblioteca</a></li>
+        <li><a href="biblioteca.html#oltre-le-pagine">Oltre le pagine 2025/26</a></li>
+        <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Rieti e riconoscimenti</li>
         <li><a href="rieti-libera-uscita.html">🧭 Rieti in libera uscita</a></li>
         <li><a href="premio-merito.html">🏅 Premio al Merito</a></li>
         <li><a href="trofei-e-classifiche.html">🏆 Trofei e Classifiche</a></li>
-
-        <li style="padding: .5rem .5rem .2rem; font-family: var(--fu); font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .85;">♪ Laboratorio Musicale</li>
-        <li style="padding-left: .75rem;"><a href="laboratorio-musicale.html">Accedi al Laboratorio</a></li>
-        <li style="padding-left: .75rem;"><a href="vinile.html">📻 Vinile</a></li>
-        <li style="padding-left: .75rem;"><a href="solidarieta.html">🤝 La Solidarietà</a></li>
-
-
-        <li><a href="comunita.html">🌟 La nostra Comunità</a></li>
       </ul>
     </li>
 
@@ -145,12 +178,28 @@
       <button class="drw-acc" aria-expanded="false">Servizi <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
       <ul class="drw-sub">
         <li><a href="servizi.html">Servizi &amp; spazi</a></li>
-        <li><a href="semiconvitto.html">🌅 Semiconvitto</a></li>
-        <li><a href="orientamento.html">🗓 Orientamento &amp; Open Day</a></li>
-        <li><a href="scopri-talento.html">🎮 Giochi &amp; Orientamento</a></li>
+        <li><a href="semiconvitto.html">🌅 Semiconvitto (senza pernottamento)</a></li>
+        <li><a href="openday.html">🗓 Open Day e visite</a></li>
+        <li><a href="orientamento.html">🧭 Percorso per futuri convittori</a></li>
+        <li><a href="scopri-talento.html">✨ Scopri il tuo Talento</a></li>
         <li><a href="bullismo.html">🛡️ Bullismo e Cyberbullismo</a></li>
         <li><a href="come-arrivare.html">🚌 Come arrivare</a></li>
         <li><a href="contatti.html">Contattaci</a></li>
+      </ul>
+    </li>
+
+    <li class="drw-group" style="border:1.5px solid rgba(184,146,42,.6) !important;border-radius:12px;background:rgba(184,146,42,.09);margin:.6rem 0">
+      <button class="drw-acc" aria-expanded="false">Aula digitale <span style="margin-left:.35rem;background:linear-gradient(135deg,var(--oro2),var(--oro3));color:var(--bosco);font-size:.55rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .4rem;border-radius:99px">Nuovo</span> <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
+      <ul class="drw-sub">
+        <li><a href="aula/">🎓 Che cos'è l'Aula digitale</a></li>
+        <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per gli studenti</li>
+        <li><a href="aula/lingue/">🌍 Le lingue dell'Alberghiero</a></li>
+        <li><a href="aula/studio/">📖 Sala studio</a></li>
+        <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per le famiglie</li>
+        <li><a href="aula/famiglie/">👨‍👩‍👧 Come funziona, cosa non raccoglie</a></li>
+        <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per i colleghi</li>
+        <li><a href="aula/formazione/">🧑‍🏫 Formazione: provare l'Aula</a></li>
+        <li><a href="aula/studio/docente.html">🔒 Accesso docenti ed educatori</a></li>
       </ul>
     </li>
 
@@ -159,7 +208,7 @@
       <ul class="drw-sub">
         <li><a href="notizie.html">Ultime notizie</a></li>
         <li><a href="menu-settimana.html">🍽️ Menu della Settimana</a></li>
-        <li><a href="in-2-minuti.html">⚡ In 2 Minuti</a></li>
+        <li><a href="in-2-minuti.html">❓ Domande frequenti</a></li>
         <li><a href="calendario.html">Calendario eventi</a></li>
       </ul>
     </li>
@@ -168,7 +217,7 @@
       <button class="drw-acc" aria-expanded="false">Regolamenti &amp; Documenti <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
       <ul class="drw-sub">
         <li><a href="accoglienza.html">📋 Accoglienza &amp; Modulistica</a></li>
-        <li><a href="regolamento.html">Regolamento di Convitto</a></li>
+        <li><a href="regolamento.html">📜 Regolamento di Convitto</a></li>
         <li><a href="ptof-guida.html">Il PTOF spiegato</a></li>
         <li><a href="trasparenza.html">Amministrazione Trasparente</a></li>
         <li><a href="organizzazione.html">Organizzazione</a></li>

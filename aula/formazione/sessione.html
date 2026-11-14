@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <script>window.AULA_ATTESA_MANUALE=true</script>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/guida-click.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Formazione in 90 minuti, passo passo | Aula digitale | Convitto "Costaggini"</title>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="/fonts.css"/>
+  <link rel="icon" href="/favicon.ico" sizes="any"/>
+  <style>
+    :root{--bosco:#2C3E2D;--bosco2:#3D5C3E;--oro:#B8922A;--oro2:#D4AA4A;--panna:#F5F0E8;--panna2:#EDE6D6;--testo:#1f1f1f;--grigio:#5b5b5b;
+      --fd:'Cormorant Garamond',Georgia,serif;--fu:'Source Sans 3',Arial,sans-serif;--col:460px}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--panna);color:var(--testo);font-family:var(--fu);font-size:16px;line-height:1.55}
+    a{color:var(--bosco2)}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--oro);outline-offset:2px}
+
+    .app{display:grid;grid-template-columns:var(--col) 1fr;height:100vh;height:100dvh}
+    .app.stretta{grid-template-columns:0 1fr}
+    .app.stretta .guida{display:none}
+
+    /* colonna a sinistra: i passi */
+    .guida{display:flex;flex-direction:column;min-height:0;background:#fff;border-right:1px solid var(--panna2)}
+    .testa{background:var(--bosco);color:var(--panna);padding:14px 18px 12px}
+    .testa .sopra{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro2);font-weight:700}
+    .testa h1{font-family:var(--fd);font-weight:400;font-size:28px;line-height:1.1;margin:4px 0 8px}
+    .testa h1 em{color:var(--oro2)}
+    .comandi{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+    .comandi button{border:1px solid rgba(245,240,232,.55);background:transparent;color:var(--panna);border-radius:8px;padding:5px 10px;font-weight:700;font-size:13.5px;min-height:32px}
+    .comandi button[aria-pressed="true"]{background:var(--panna);color:var(--bosco)}
+    .comandi .tempo{font-variant-numeric:tabular-nums;min-width:4.6em;text-align:center}
+    .barra{height:6px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+    .barra i{display:block;height:100%;width:0;background:var(--oro2);transition:width .25s}
+    .conta{font-size:13px;color:rgba(245,240,232,.88);margin-top:6px}
+    .elenco{flex:1;min-height:0;overflow:auto;list-style:none;margin:0;padding:6px 0 10px}
+    .elenco>li{border-bottom:1px solid var(--panna2)}
+    .capo{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;padding:11px 16px;color:var(--bosco)}
+    .capo:hover{background:#FBF7EC}
+    .capo .n{flex:0 0 32px;height:32px;border-radius:50%;background:var(--panna2);color:var(--bosco);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:19px;font-weight:700}
+    .capo .t{flex:1;font-weight:700;font-size:16px;line-height:1.25}
+    .capo .m{display:block;font-weight:400;font-size:12.5px;color:var(--grigio)}
+    li.attiva .capo{background:#FBF7EC}
+    li.attiva .capo .n{background:var(--bosco);color:var(--oro2)}
+    li.fatta .capo .n{background:var(--oro);color:#fff}
+    .corpo{display:none;padding:2px 18px 16px 60px;font-size:15.5px}
+    li.attiva .corpo{display:block}
+    .corpo p{margin:.2rem 0 .6rem}
+    .corpo ul.az{list-style:none;padding:0;margin:.4rem 0}
+    .corpo ul.az>li{padding:6px 0;border-bottom:1px dashed var(--panna2)}
+    .corpo ul.az>li:last-child{border-bottom:0}
+    .corpo label.sp{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+    .corpo label.sp .num{flex:0 0 auto;min-width:1.5em;height:1.5em;border-radius:50%;background:var(--bosco);color:#fff;font:700 .8em/1.5em var(--fu,sans-serif);text-align:center;margin-top:2px}
+    .corpo label.sp b.bt{background:#f3ecd6;border-radius:6px;padding:0 .3em;font-weight:700}
+    .corpo label.sp input{width:20px;height:20px;margin-top:2px;accent-color:var(--bosco);flex:0 0 auto}
+    .corpo .btn{display:inline;background:var(--panna);border:1px solid var(--panna2);border-radius:6px;padding:0 7px;font-weight:700;font-size:14.5px;color:var(--bosco);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+    .viste{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0 .3rem}
+    .viste button{border:2px solid var(--bosco);background:#fff;color:var(--bosco);border-radius:10px;padding:5px 10px;font-weight:700;font-size:14px;min-height:36px}
+    .viste button[aria-pressed="true"]{background:var(--bosco);color:#fff}
+    .avviso{background:#FBF7EC;border-left:4px solid var(--oro);border-radius:0 10px 10px 0;padding:8px 12px;margin:.5rem 0;font-size:14.5px}
+    .perche{background:#EEF4EC;border-left:4px solid var(--bosco2);border-radius:0 10px 10px 0;padding:8px 12px;margin:.3rem 0 .6rem;font-size:14.5px}
+    .perche b.e{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bosco2);margin-bottom:2px}
+    .risp{margin:.55rem 0 .3rem;padding:8px 10px;border:1px solid var(--panna2);border-radius:10px;font-size:14px;background:#fff}
+    .risp b.e{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grigio);margin-bottom:3px}
+    .risp .r{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;padding:3px 0}
+    .risp .c{flex:1 1 100%}
+    .pr,.dp{border-radius:6px;padding:0 7px;font-weight:700;font-size:13.5px;white-space:nowrap}
+    .pr{background:#F6E6E3;color:#7A2D22}
+    .dp{background:#E2EFE0;color:#2A5A2B}
+    .sf{font-size:13px;color:var(--grigio);margin-top:4px}
+
+    /* moduli dentro i passi */
+    .modulo{border:1px solid var(--panna2);border-radius:12px;padding:10px 12px;margin:.6rem 0;background:#FDFBF6}
+    .modulo label{display:block;font-weight:700;font-size:14px;margin:.5rem 0 .15rem;color:var(--bosco)}
+    .modulo label:first-child{margin-top:0}
+    .modulo input[type=text],.modulo input[type=number],.modulo select,.modulo textarea{width:100%;border:2px solid #cfc4a8;border-radius:8px;padding:7px 9px;background:#fff;color:var(--testo);font-size:16px}
+    .modulo textarea{min-height:76px;resize:vertical}
+    .modulo .az2{display:flex;flex-wrap:wrap;gap:8px;margin-top:.7rem}
+    .modulo .az2 button{min-height:44px;border-radius:10px;border:2px solid var(--bosco);background:#fff;color:var(--bosco);font-weight:700;padding:6px 14px}
+    .modulo .az2 button.pieno{background:var(--bosco);color:#fff}
+    .esito{font-size:14.5px;margin:.5rem 0 0;min-height:1.4em}
+    table.calc{width:100%;border-collapse:collapse;font-size:13.5px;margin:.4rem 0}
+    table.calc th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--grigio);text-align:left;padding:2px 3px}
+    table.calc td{padding:4px 3px;border-top:1px dashed var(--panna2);vertical-align:middle}
+    table.calc td.n input{width:58px;padding:5px 6px;text-align:right}
+    table.calc input[type=checkbox]{width:18px;height:18px;accent-color:var(--bosco)}
+    .modulo .due{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .totali{background:var(--bosco);color:var(--panna);border-radius:12px;padding:10px 12px;margin:.6rem 0;font-size:15px}
+    .totali b{color:var(--oro2);font-size:17px}
+    .totali .grande{font-family:var(--fd);font-size:24px;line-height:1.15;color:#fff;display:block;margin:.2rem 0}
+    .non{margin:.4rem 0;padding-left:1.1rem;font-size:14.5px}
+    .non li{margin:.15rem 0}
+
+    .piede{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--panna2);background:#fff}
+    .piede button{flex:1;min-height:46px;border-radius:12px;border:2px solid var(--bosco);background:#fff;color:var(--bosco);font-weight:700;font-size:16px}
+    .piede .avanti{background:var(--bosco);color:#fff}
+    .piede button[disabled]{opacity:.4;cursor:default}
+    .piede .sito{display:none}
+
+    /* lo spazio grande a destra: il sito vero */
+    .vista{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0}
+    .strumenti{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;background:var(--panna2);border-bottom:1px solid #d9cfb8;font-size:14px}
+    .strumenti .dove{flex:1;min-width:120px;color:var(--grigio);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .strumenti button,.strumenti a.b{border:1px solid #b9ad92;background:#fff;color:var(--bosco);border-radius:8px;padding:5px 11px;font-weight:700;font-size:14px;text-decoration:none;min-height:34px}
+    .strumenti .passi{display:none}
+    iframe{flex:1;width:100%;min-height:0;border:0;background:#fff}
+
+    @media (max-width:900px){
+      .app,.app.stretta{display:flex;flex-direction:column;height:auto;min-height:100vh}
+      .guida{max-height:none;border-right:0;border-bottom:3px solid var(--oro)}
+      .elenco{overflow:visible}
+      .vista{height:88vh;height:88dvh}
+      .app.stretta .guida{display:none}
+      .corpo{padding-left:18px}
+      .piede{position:sticky;bottom:0;z-index:5}
+      .piede .sito{display:block;flex:0 0 auto;padding:0 12px}
+      .strumenti .passi{display:inline-block}
+    }
+    .app.chiusa{display:none}
+    .fine{display:none;min-height:100vh;min-height:100dvh;align-items:center;justify-content:center;padding:24px;background:var(--panna)}
+    .fine.on{display:flex}
+    .fine .sc{max-width:520px;width:100%;background:#fff;border:1px solid var(--panna2);border-top:5px solid var(--oro);border-radius:16px;padding:28px 26px;box-shadow:0 8px 28px rgba(44,62,45,.12);text-align:center}
+    .fine h2{font-family:var(--fd);font-weight:500;font-size:30px;color:var(--bosco);margin:0 0 6px}
+    .fine p{margin:0 0 18px;color:var(--grigio)}
+    .fine .az2{display:flex;flex-direction:column;gap:10px}
+    .fine a.b,.fine button{display:block;min-height:48px;line-height:44px;border-radius:12px;border:2px solid var(--bosco);background:#fff;color:var(--bosco);font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;padding:0 14px}
+    .fine a.pri{background:var(--bosco);color:#fff}
+    .strumenti a.esci{border-color:var(--bosco)}
+    @media print{
+      .fine{display:none!important}
+      html,body{height:auto}
+      .app{display:block;height:auto}
+      .vista,.piede,.comandi,.barra,.modulo .az2,.viste{display:none!important}
+      .guida{border:0}
+      .elenco{overflow:visible}
+      .corpo{display:block!important;padding-left:18px}
+      .capo{padding-left:0}
+      li{break-inside:avoid}
+    }
+  
+    .dire{background:#EEF4EC;border-left:4px solid var(--bosco2);border-radius:0 10px 10px 0;padding:8px 12px;margin:.3rem 0 .6rem;font-size:15px}
+    .dire b.e{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bosco2);margin-bottom:2px}
+    .capo .m b{color:var(--oro);font-weight:700}
+    .miss{display:inline-block;background:var(--oro2);color:#2b2208;border-radius:99px;padding:0 8px;font-size:11.5px;font-weight:700;letter-spacing:.04em;margin-left:6px;vertical-align:1px}
+    .stato{font-size:13px;margin-top:4px;font-weight:700}
+    .stato.rit{color:#ffd9d2}.stato.ant{color:#cfe9cc}.stato.ora{color:var(--oro2)}
+    .app.grande .corpo{font-size:19px}.app.grande .capo .t{font-size:19px}.app.grande .dire{font-size:18px}.app.grande .avviso{font-size:17px}
+    .app.grande{--col:560px}
+</style>
+</head>
+<body>
+<noscript><p style="padding:24px;font-family:Arial,sans-serif">Questa guida richiede JavaScript.</p></noscript>
+<div class="app" id="app">
+  <aside class="guida" aria-label="Guida passo passo">
+    <div class="testa">
+      <div class="sopra">Aula digitale · formazione di 90 minuti</div>
+      <h1>Un passo alla volta, <em>sul sito vero</em></h1>
+      <div class="comandi">
+        <button type="button" id="breve" aria-pressed="false" title="Mostra solo le cinque missioni da ripetere in autonomia">Solo le missioni</button>
+        <button type="button" id="grande" aria-pressed="false" title="Ingrandisce il testo della guida, per la proiezione">A+</button>
+        <button type="button" id="cronoBtn" aria-pressed="false" title="Avvia o ferma l'orologio dell'incontro">⏱ Avvia</button>
+        <button type="button" class="tempo" id="cronoVal" title="Tempo trascorso">00:00</button>
+        <button type="button" id="cronoZero" title="Azzera l'orologio">Azzera</button>
+      </div>
+      <div class="barra" aria-hidden="true"><i id="barra"></i></div>
+      <div class="conta" id="conta" aria-live="polite"></div>
+      <div class="stato" id="stato" aria-live="polite"></div>
+    </div>
+    <ol class="elenco" id="elenco"></ol>
+    <div class="piede">
+      <button type="button" id="indietro">← Indietro</button>
+      <button type="button" id="avanti" class="avanti">Avanti →</button>
+      <button type="button" id="vaiSito" class="sito" title="Vai al sito">Sito ↓</button>
+    </div>
+  </aside>
+  <section class="vista" id="vista" aria-label="Il sito">
+    <div class="strumenti">
+      <button type="button" id="largo" aria-pressed="false" title="Nasconde o mostra la guida">⇔ Guida</button>
+      <button type="button" id="vaiPassi" class="passi">↑ Passi</button>
+      <span class="dove" id="dove"></span>
+      <button type="button" id="ricarica">↻ Ricarica</button>
+      <a class="b esci" href="/aula/formazione/">✕ Esci</a>
+      <a class="b" id="nuova" target="_blank" rel="noopener">Apri in una scheda nuova ↗</a>
+    </div>
+    <iframe id="sito" title="Il sito, per provare i passi indicati a sinistra" allow="camera; clipboard-write; fullscreen" referrerpolicy="same-origin"></iframe>
+  </section>
+</div>
+<div class="fine" id="fine" role="region" aria-label="Formazione completata">
+  <div class="sc">
+    <h2>Formazione completata</h2>
+    <p id="fineTesto">Grazie per aver partecipato.</p>
+    <div class="az2">
+      <a class="b pri" href="/aula/formazione/">Torna alla pagina Formazione</a>
+      <a class="b" href="/aula/">Torna all'Aula</a>
+      <a class="b" href="/">Vai alla home del sito</a>
+      <button type="button" id="rivedi">Rivedi il percorso</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEMO = '/aula/studio/lezione.html?c=DEMO';
+  var CREA = '/aula/studio/docente.html';
+  /* ini e fin: minuti dall'inizio dell'incontro (stessi tempi della presentazione); m: numero della missione; viste: altre pagine dello stesso passo;
+     ripristina: il passo cambia l'aspetto della lezione, all'uscita si rimette com'era */
+  var TAPPE = [
+    { id: 'obiettivi', t: 'Benvenuto e obiettivi', ini: 0, fin: 3, url: '/aula/',
+      dire: 'Questa non è una lezione di informatica: è un incontro su come togliere lavoro e non aggiungerne altro alla già faticosa opera del Docente. Alla fine saprete fare tre cose: aprire una lezione e proiettarla alla classe, creare una lezione dalla foto di una pagina in circa tre minuti, proteggere la riservatezza di tutti.',
+      azioni: [
+        'Aprire a destra la pagina d\'ingresso dell\'Aula e mostrare le due sezioni: Lingue e Sala studio.',
+        'Chiedere per alzata di mano chi ha già usato un assistente di intelligenza artificiale.',
+        'Far vedere sulla slide dei tempi (pagina Presentazione) le sette parti e le cinque missioni.'
+      ],
+      viste: [['L\'Aula', '/aula/'], ['Cronoprogramma', '/aula/formazione/presentazione.html#tempi']] },
+
+    { id: 'perche', t: 'Meno fatica, più scuola', ini: 3, fin: 5, url: '/aula/formazione/presentazione.html#perche',
+      dire: 'L\'Aula non è un compito in più: è un modo di fare prima quello che già facciamo. Una foto del libro, degli appunti o di una mappa (o anche solo il titolo) diventa una lezione interattiva, con il QR per i ragazzi.',
+      azioni: [
+        'Leggere i quattro numeri: 3 minuti dalla foto al QR, 7 modi di studiare la stessa lezione, 0 installazioni, 0 voti da inserire né registri da compilare.'
+      ] },
+
+    { id: 'cose', t: 'Che cos\'è, che cosa non raccoglie', ini: 5, fin: 10, url: '/aula/famiglie/',
+      dire: 'Gli studenti non hanno bisogno di un account: aprono un link o inquadrano un QR ed entrano. Un accesso (mail istituzionale e codice) serve soltanto a chi crea o gestisce le lezioni.',
+      azioni: [
+        'Mostrare a destra la pagina per le famiglie: è quella che leggeranno i genitori all\'Open Day.',
+        'Leggere con parole vostre l\'elenco «Che cosa non raccoglie»: nessun account, nessuna classifica individuale, progressi solo sul dispositivo di chi studia, codici per la classe e mai per persona.'
+      ] },
+
+    { id: 'lingue', t: 'Lingue: tre lingue, otto modi', ini: 10, fin: 14, url: '/aula/lingue/',
+      dire: 'Il vocabolario di sala, cucina, pasticceria, accoglienza e bar in inglese, francese e spagnolo, curato con il Dipartimento. Ogni frase si ascolta con la voce del dispositivo.',
+      azioni: [
+        'Aprire la schermata iniziale e la frase del giorno.',
+        'Provare un esercizio e, se c\'è tempo, un dialogo o un gioco da proiettare.',
+        'Ricordare che l\'area docenti delle Lingue è una sezione a parte, riservata.'
+      ],
+      viste: [['Lingue', '/aula/lingue/'], ['Esercizi', '/aula/lingue/esercizi.html'], ['Giochi alla LIM', '/aula/lingue/giochi.html']] },
+
+    { id: 'studio', t: 'Sala studio: una lezione, sette modi', ini: 14, fin: 17, url: '/aula/studio/',
+      dire: 'Una lezione creata una volta sola diventa sette attività diverse: nessun lavoro in più per chi prepara. Il codice è di sei lettere ed è scritto sotto il QR della lezione.',
+      azioni: [
+        'Mostrare il campo del codice e aprire la lezione di esempio.',
+        'Provare due modalità dal vivo: il percorso guidato e la sfida a squadre.'
+      ],
+      viste: [['Sala studio', '/aula/studio/'], ['Lezione di esempio', DEMO]] },
+
+    { id: 'percorso', t: 'Il percorso guidato', ini: 17, fin: 19, url: DEMO,
+      dire: 'Si scorrono con il dito sulla lezione di esempio. Il messaggio è che la lezione non è un semplice testo, ma un percorso con domande, trucchi per ricordare e ripasso.',
+      azioni: [
+        'Scorrere le sette tappe: il gancio, le idee, memorizza, allenati, flashcard, sfida finale, da ricordare.',
+        'Dire che il ripasso a distanza lo gestisce la Sala studio e che i progressi restano sul dispositivo di chi studia.'
+      ] },
+
+    { id: 'm1', t: 'Missione 1: entra e gioca', ini: 19, fin: 25, m: 1, url: '/aula/studio/',
+      dire: 'Si prova come farebbe uno studente: con calma, un gesto alla volta. Non c\'è niente da sbagliare e nessuno controlla: si guarda, si tocca, si gioca.',
+      azioni: [
+        'Sul tuo dispositivo apri la Sala studio. Nel campo «CODICE» scrivi DEMO e tocca «Entra →». In alternativa inquadra il QR proiettato. (Qui a destra c\'è già la pagina della Sala studio con il campo del codice.)',
+        'Si apre «I principi nutritivi». Nella schermata «Come vuoi studiare?» tocca «Percorso guidato».',
+        'Vai avanti con «Avanti →», una tappa alla volta. Se una risposta è sbagliata non succede nulla: il sistema spiega perché.',
+        'Arrivato alla «Sfida finale», prova a rispondere con tranquillità. Quando hai finito sei a posto così.',
+        'Chi finisce prima può assaggiare un altro modo, per esempio «Il minuto» o «Escape room», mentre gli altri completano.'
+      ],
+      viste: [['Sala studio (campo del codice)', '/aula/studio/'], ['Lezione di esempio', DEMO]] },
+
+    { id: 'supporti', t: 'Aa Leggi a modo tuo', ini: 25, fin: 31, url: DEMO, ripristina: true,
+      dire: 'Un pulsante per tutta la classe: ognuno regola da sé carattere, colori e spaziatura. Non è un aiuto per una categoria di studenti: è utile a tutti. Si prova insieme, senza fretta: ogni scelta si può annullare.',
+      azioni: [
+        'Nella lezione di esempio tocca il pulsante «Aa Leggi a modo tuo» (c\'è anche il tondo «Aa» in basso a destra).',
+        'In alto trovi la «Scelta rapida»: tocca «Lettura 1» e guarda come cambia la pagina.',
+        'Poi tocca «Lettura 2» e «Lettura 3». Scegli quella in cui leggi più comodo.',
+        'Se vuoi, cambia a mano carattere, spazi e colori: è solo una prova, nessuno vede cosa scegli.',
+        'Per tornare com\'era tocca «Standard». In ogni caso, quando il passo finisce la lettura viene rimessa a posto da sola.'
+      ],
+      viste: [['Lezione di esempio', DEMO], ['Supporti alla lettura (con accesso)', '/aula/studio/inclusione.html']],
+      nota: 'Al termine di questo passo la lettura viene rimessa com\'era.' },
+
+    { id: 'm2', t: 'Missione 2: per tutti, senza etichette', ini: 31, fin: 35, m: 2, url: DEMO, ripristina: true,
+      dire: 'Se il supporto è per tutti, nessuno ha bisogno di dichiarare una motivazione e nessuno si sente fuori posto. È il passaggio educativo più importante. Qui si prova soltanto: nessuna risposta giusta o sbagliata.',
+      azioni: [
+        'A destra c\'è la lezione di esempio. Tocca il pulsante «Aa Leggi a modo tuo».',
+        'Tocca «Lettura 1», poi «Lettura 3»: con un solo tocco la pagina cambia. Non serve cercare nei menu.',
+        'Nota che il pulsante è lo stesso per tutti: nessuno deve spiegare perché lo usa.',
+        'Se vuoi leggere le tre righe di «Come funziona», tocca «Supporti alla lettura» qui sotto (richiede l\'accesso: se non l\'hai ancora fatto, salta pure questo punto).'
+      ],
+      viste: [['Lezione di esempio', DEMO], ['Supporti alla lettura (con accesso)', '/aula/studio/inclusione.html']],
+      nota: 'Al termine di questo passo la lettura viene rimessa com\'era.' },
+
+    { id: 'pausa', accesso: true, t: 'Pausa', ini: 35, fin: 40, url: CREA,
+      dire: 'Cinque minuti. Dopo la pausa si lavora nell\'area docenti, e per quella serve essere già entrati: conviene farlo adesso, con calma, così il laboratorio parte senza attese. Il codice di accesso arriva per mail e vale 10 minuti.',
+      azioni: [
+        'Apri la tua casella di posta istituzionale su questo dispositivo e tienila pronta.',
+        'A destra scrivi la mail della scuola (basta «nome.cognome») e tocca «Mandami il codice →».',
+        'Copia le sei cifre dalla mail, incollale e tocca «Entra →». Quando in alto compare il tuo nome, sei a posto: l\'accesso resta per 60 giorni.',
+        'Il codice non arriva? Guarda in Spam e riprova con «Rimanda il codice»: capita, e si risolve in un minuto.'
+      ],
+      nota: 'I passi che seguono (creazione della lezione e missioni 3, 4 e 5) richiedono l\'accesso fatto a destra: farlo in pausa evita di perdere tempo dopo.' },
+
+    { id: 'tre-passi', accesso: true, t: 'Dal libro alla lezione, in tre passi', ini: 40, fin: 42, url: CREA,
+      dire: 'Tre passi e un risultato: le istruzioni per l\'IA, l\'assistente esterno, incolla e pubblica. Prima di tutto si entra con la mail della scuola: una volta sola, poi il dispositivo si ricorda.',
+      azioni: [
+        'A destra, scrivi la tua mail della scuola. Basta «nome.cognome»: il resto lo aggiunge il sito. Tocca «Mandami il codice →».',
+        'Apri la tua posta e cerca il messaggio «Il tuo codice di accesso». Non lo vedi? Guarda in Spam o Posta indesiderata.',
+        'Copia le sei cifre, incollale nel campo del codice e tocca «Entra →». In alto compare il tuo nome con il pulsante «Esci»: sei dentro.',
+        'Se il codice non arriva entro un minuto, tocca «Rimanda il codice»: non è un problema, capita.'
+      ],
+      nota: 'Serve l\'accesso con la mail istituzionale: se non arriva il codice, controllare lo spam e richiederlo.' },
+
+    { id: 'passo1', accesso: true, t: 'Passo 1: le istruzioni per l\'IA', ini: 42, fin: 45, url: CREA,
+      dire: 'Si compila un modulo semplice. Quasi tutto è facoltativo: basta un argomento. Si può anche scegliere un argomento qualsiasi, è una prova.',
+      azioni: [
+        'Nel riquadro «1 Le istruzioni per l\'IA» scrivi un argomento nel campo «Argomento / titolo della lezione», per esempio «Il sistema HACCP».',
+        'Se ti va, scegli «Materia» e «Anno di corso» dai menu. Sono facoltativi: si può anche lasciare così.',
+        'Tocca «Copia le istruzioni». Il testo è ora copiato: non serve leggerlo.'
+      ] },
+
+    { id: 'passo2', t: 'Passo 2: nell\'assistente IA', ini: 45, fin: 48, url: CREA,
+      dire: 'Si esce un attimo dal sito e si usa l\'assistente che si preferisce. Il testo che comparirà sembra codice: è normale, non va letto né capito. Si copia e basta.',
+      azioni: [
+        'Sotto «Poi apri l\'assistente che preferisci» tocca uno dei pulsanti (Claude, ChatGPT o altro): si apre in una nuova scheda.',
+        'Se hai una foto della pagina del libro, allegala con il tasto «+» o la graffetta. Se non ce l\'hai va bene lo stesso.',
+        'Incolla le istruzioni nel messaggio e invia.',
+        'Quando ha finito, tocca «Copia» sotto la risposta (o in alto, se è in un riquadro a parte). Poi torna a questa scheda.'
+      ] },
+
+    { id: 'passo3', accesso: true, t: 'Passo 3: incolla e pubblica', ini: 48, fin: 51, url: CREA,
+      dire: 'Ultimo passo: si incolla e si pubblica. Si può cambiare idea sulla condivisione quando si vuole, da «Modifica».',
+      azioni: [
+        'Nel riquadro «3 Incolla e pubblica» tocca «📋 Incolla» (o incolla a mano nella casella «La risposta dell\'IA»).',
+        'Controlla che compaia il tuo nome nel campo «Autore». Per ora lascia spenta la casella di condivisione nell\'Archivio, se non sei sicuro.',
+        'Tocca «✨ Pubblica la lezione»: compaiono il QR e il codice di sei lettere.',
+        'Dai un\'occhiata alla lezione con «👀 Apri la lezione». Se vedi un errore, «✏️ Modifica» lo corregge senza cambiare codice e QR.'
+      ] },
+
+    { id: 'attenzioni', accesso: true, t: 'Tre attenzioni prima di creare', ini: 51, fin: 53, url: CREA,
+      dire: 'La responsabilità del contenuto resta di chi lo pubblica, e la riservatezza dipende anche dalle nostre scelte, non solo dal sito.',
+      azioni: [
+        'Niente nomi di studenti nei titoli.',
+        'Niente foto con persone riconoscibili.',
+        'Rileggere sempre la lezione prima di proporla: l\'IA può sbagliare.'
+      ] },
+
+    { id: 'm4', accesso: true, t: 'Dopo la creazione (Missione 4)', ini: 53, fin: 56, m: 4, url: '/aula/studio/docente.html#mie',
+      dire: 'Sono gli strumenti che fanno risparmiare più tempo. Si guardano uno alla volta, senza fretta. Servono una lezione pubblicata (passo 3) e l\'accesso fatto a destra.',
+      azioni: [
+        'A destra, in «Le mie lezioni», trovi la tua lezione con i pulsanti «Apri», «QR», «📝 Verifica» e «✏️ Modifica».',
+        'Tocca «QR»: si apre in una nuova scheda il QR a tutto schermo, quello da proiettare. Quando l\'hai visto, chiudi la scheda e torna qui.',
+        'Il cartello da stampare è la stessa pagina: per stamparlo usa la stampa del browser (Ctrl+P). Subito dopo la pubblicazione c\'è anche il pulsante «🖨️ Stampa il cartello».',
+        'Tocca «Sfida a squadre sull\'esempio» qui sotto: è la gara a squadre da fare alla LIM. Non richiede nessun accesso.',
+        'Torna in «Le mie lezioni» e tocca «📝 Verifica»: guardala e basta, non serve completarla.'
+      ],
+      viste: [['Le mie lezioni', '/aula/studio/docente.html#mie'], ['Crea una lezione', CREA], ['Sfida a squadre sull\'esempio', DEMO + '&m=squadre']],
+      nota: 'Se il browser blocca la scheda nuova, il QR compare a tutto schermo nella stessa pagina, con il pulsante «✕ Chiudi». Chi non ha ancora una lezione pubblicata può tornare al passo 3 (bastano tre minuti) oppure guardare solo la sfida a squadre.' },
+
+    { id: 'm3', accesso: true, t: 'Missione 3: create la vostra prima lezione', ini: 56, fin: 65, m: 3, url: CREA,
+      dire: 'È il cuore dell\'incontro, ma si fa senza ansia: si ripercorrono i tre passi appena visti, su un argomento che vi interessa. Chi si ferma o ha un dubbio alza la mano: si risolve insieme.',
+      azioni: [
+        'Passo 1: scrivi l\'argomento e tocca «Copia le istruzioni».',
+        'Passo 2: incollale nell\'assistente, aspetta la risposta e toccane «Copia».',
+        'Passo 3: incolla nella pagina e tocca «✨ Pubblica la lezione».',
+        'Per ritrovarla, vai in «Le mie lezioni» (nella barra in alto): la lezione è lì, con il suo codice.'
+      ],
+      viste: [['Crea', CREA], ['Le mie lezioni', '/aula/studio/docente.html#mie'], ['Archivio', '/aula/studio/archivio.html']],
+      nota: 'Problemi tipici: il codice non arriva (controllare spam e correttezza della mail, poi richiederlo); il codice è scaduto dopo 10 minuti (se ne richiede un altro); la risposta dell\'IA è troppo lunga (chiedere di accorciare).' },
+
+    { id: 'm5', accesso: true, t: 'Missione 5: tre regole per la riservatezza', ini: 65, fin: 68, m: 5, url: CREA,
+      dire: 'Sono tre regole semplici, scritte nella pagina di creazione. Le leggiamo una alla volta e ognuno le dice a modo suo: nessuna formula da ricordare.',
+      azioni: [
+        'In cima alla pagina di creazione trovi il riquadro «🔒 Tre regole per la privacy». Leggi la prima: un codice per lezione, mai per persona.',
+        'Apri «Le mie lezioni» (qui sotto) e rileggi i titoli: non devono contenere nomi di studenti. Se ne trovi uno, «✏️ Modifica» lo cambia.',
+        'Seconda regola: i supporti sono per tutti. Si mostra il pulsante «Aa Leggi a modo tuo» a tutta la classe.',
+        'Terza regola: le versioni con più aiuti non hanno nomi né etichette. Basta così: sono tre idee, e si imparano facendo.'
+      ],
+      viste: [['Regole e creazione', CREA], ['Le mie lezioni', '/aula/studio/docente.html#mie']] },
+
+    { id: 'informativa', t: 'L\'informativa in una tabella', ini: 68, fin: 75, url: '/informativa-aula.html',
+      dire: 'L\'informativa completa è a destra: qui se ne ricordano i punti essenziali.',
+      azioni: [
+        'Il codice di accesso vale 10 minuti ed è eliminato all\'utilizzo.',
+        'La sessione resta 60 giorni nel browser; la rimozione avviene su richiesta.',
+        'Per le domande tecniche si rinvia al Responsabile della protezione dei dati.'
+      ] },
+
+    { id: 'scenari', t: 'Dove la userete già da lunedì', ini: 75, fin: 80, url: '/aula/',
+      dire: 'Modalità autorizzate dalla Dirigente: studio pomeridiano con gli educatori; in classe, su base volontaria, con LIM o PC di laboratorio e senza telefoni; da casa, con il dispositivo dello studente.',
+      azioni: [
+        'Ciascun gruppo sceglie uno scenario (studio pomeridiano, in classe, prima di una verifica, Lingue) e dice in una frase come lo userebbe.',
+        'Mini compito: scrivere su un foglio la prima lezione che si farà e per quale classe (2 minuti).'
+      ] },
+
+    { id: 'openday', t: 'Open Day: tre messaggi per le famiglie', ini: 80, fin: 85, url: '/aula/famiglie/',
+      dire: 'Il 28 novembre, dalle 9 alle 13: pochi concetti, sempre gli stessi. Le famiglie possono provare l\'Aula dal proprio dispositivo: è una dimostrazione, non l\'uso dei ragazzi in classe.',
+      azioni: [
+        'Primo messaggio: nessuna registrazione, nessun dato raccolto.',
+        'Secondo: si studia con i propri tempi e con il supporto che ciascuno preferisce.',
+        'Terzo: l\'Aula è appena nata ed è in sperimentazione, con tutte le autorizzazioni.',
+        'Mini compito: in 20 secondi, a coppie, ciascuno spiega l\'Aula al vicino con i tre messaggi.'
+      ] },
+
+    { id: 'chiusura', t: 'Missioni, quattro passi e domande', ini: 85, fin: 90, url: '/aula/formazione/',
+      dire: 'Un impegno piccolo e concreto: una lezione in una settimana. Grazie alla Dirigente per l\'autorizzazione e ai colleghi per la partecipazione.',
+      azioni: [
+        'Ricordare le cinque missioni, da ripetere quando si vuole (il pulsante «Solo le missioni» le raccoglie).',
+        'Quattro passi per questa settimana: creare una lezione, provarla nello studio pomeridiano o con una classe, condividerla nell\'Archivio, raccontare com\'è andata.',
+        'Raccogliere le mail di chi desidera un supporto individuale.'
+      ],
+      viste: [['Pagina Formazione', '/aula/formazione/'], ['Archivio lezioni', '/aula/studio/archivio.html']] }
+  ];
+
+  var CHIAVE = 'formazione-sessione-spunte';
+  var app = $('app'), sito = $('sito'), elenco = $('elenco');
+  var solo = false, visibili = TAPPE.slice(), corrente = -1, vistaAttiva = null, spunte = {};
+  try { spunte = JSON.parse(sessionStorage.getItem(CHIAVE) || '{}') || {}; } catch (e) { spunte = {}; }
+  function salvaSpunte() { try { sessionStorage.setItem(CHIAVE, JSON.stringify(spunte)); } catch (e) {} }
+  function ora(m) { return Math.floor(m / 60) + ':' + (m % 60 < 10 ? '0' : '') + (m % 60); }
+
+  /* orologio dell'incontro */
+  var cr = { ms: 0, ini: 0, via: false, tim: null };
+  function tempoTesto(ms) {
+    var s = Math.floor(ms / 1000), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60;
+    var z = function (n) { return (n < 10 ? '0' : '') + n; };
+    return (h ? h + ':' : '') + z(m) + ':' + z(x);
+  }
+  function crTrascorso() { return cr.ms + (cr.via ? Date.now() - cr.ini : 0); }
+  function stato() {
+    var el = $('stato'), p = corrente >= 0 && visibili[corrente];
+    if (solo || !p || crTrascorso() < 1000) { el.textContent = ''; el.className = 'stato'; return; }
+    var e = crTrascorso() / 60000, t, c;
+    if (e > p.fin) { t = 'In ritardo di circa ' + Math.ceil(e - p.fin) + ' min rispetto a questo passo'; c = 'rit'; }
+    else if (e < p.ini) { t = 'In anticipo di circa ' + Math.ceil(p.ini - e) + ' min'; c = 'ant'; }
+    else { t = 'In orario'; c = 'ora'; }
+    el.textContent = t; el.className = 'stato ' + c;
+  }
+  function crAggiorna() { $('cronoVal').textContent = tempoTesto(crTrascorso()); stato(); }
+  function crParti() { cr.via = true; cr.ini = Date.now(); cr.tim = setInterval(crAggiorna, 1000); }
+  function crFerma() { cr.ms = crTrascorso(); cr.via = false; clearInterval(cr.tim); cr.tim = null; }
+  $('cronoBtn').onclick = function () {
+    if (cr.via) crFerma(); else crParti();
+    this.textContent = cr.via ? '⏸ Ferma' : '⏱ Avvia';
+    this.setAttribute('aria-pressed', cr.via ? 'true' : 'false'); crAggiorna();
+  };
+  $('cronoZero').onclick = function () { crFerma(); cr.ms = 0; $('cronoBtn').textContent = '⏱ Avvia'; $('cronoBtn').setAttribute('aria-pressed', 'false'); crAggiorna(); };
+
+  /* il sito a destra */
+  /* mentre la pagina a destra si carica: barra di avanzamento, così non sembra bloccato */
+  var attesa = AulaAttesa.riquadro($('vista'), { titolo: 'Sto aprendo la pagina', ricarica: function () { if (vistaAttiva) carica(vistaAttiva); } });
+  sito.addEventListener('load', function () {
+    var w; try { w = sito.contentWindow.location.href; } catch (e) { w = ''; }
+    if (w === 'about:blank') return;
+    attesa.fine();
+  });
+  function carica(url) {
+    vistaAttiva = url; $('dove').textContent = url; $('dove').title = url; $('nuova').href = url;
+    attesa.avvia();
+    sito.src = 'about:blank'; setTimeout(function () { sito.src = url; }, 40);
+  }
+  function ripristinaLettura() {
+    var f = document.createElement('iframe');
+    f.style.cssText = 'position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none';
+    f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1;
+    f.onload = function () { setTimeout(function () { if (f.parentNode) f.parentNode.removeChild(f); }, 300); };
+    f.src = DEMO + '#p=0'; document.body.appendChild(f);
+  }
+  /* se dal sito a destra si esce dall'Aula (home, menu del Convitto...), la pagina passa a tutto schermo; l'informativa resta dentro */
+  var DENTRO = ['/aula/', '/informativa-aula.html'];
+  sito.addEventListener('load', function () {
+    var w; try { w = sito.contentWindow.location; } catch (e) { return; }
+    if (!w || w.href === 'about:blank') return;
+    for (var i = 0; i < DENTRO.length; i++) if (w.pathname.indexOf(DENTRO[i]) === 0) return;
+    window.location.href = w.href;
+  });
+
+  function costruisci() {
+    elenco.innerHTML = '';
+    visibili.forEach(function (p, i) {
+      var li = document.createElement('li'); li.id = 'tappa-' + p.id;
+      var tempo = solo ? 'missione ' + p.m : ora(p.ini) + ' – ' + ora(p.fin) + ' · ' + (p.fin - p.ini) + ' min';
+      var h = '<button type="button" class="capo" data-i="' + i + '" aria-expanded="false"><span class="n">' + (i + 1) + '</span><span class="t">' + p.t + (p.m ? '<span class="miss">Missione ' + p.m + '</span>' : '') + '<span class="m"><b>' + tempo + '</b></span></span></button><div class="corpo">';
+      h += '<div class="dire">' + p.dire + '</div>';
+      if (p.viste) h += '<div class="viste" role="group" aria-label="Pagine di questo passo">' + p.viste.map(function (v, k) { return '<button type="button" data-v="' + k + '" aria-pressed="false">' + v[0] + '</button>'; }).join('') + '</div>';
+      if (p.accesso) h += '<div class="avviso acc" hidden><b>Prima di cominciare: a destra serve l\'accesso.</b> Se vedi «Entra nell\'area docenti ed educatori» è normale: i pulsanti di questo passo compaiono dopo.<ol style="margin:.5rem 0 0 1.2rem;padding:0"><li>Scrivi la mail della scuola (basta «nome.cognome») e tocca <b>«Mandami il codice →»</b>.</li><li>Apri la posta e copia le sei cifre del messaggio «Il tuo codice di accesso» (guarda anche in Spam).</li><li>Incollale a destra e tocca <b>«Entra →»</b>. Si fa una volta sola.</li></ol><span style="display:block;margin-top:.4rem">Questo riquadro sparisce da solo quando sei dentro.</span></div>';
+      h += '<ul class="az">' + p.azioni.map(function (a, j) {
+        var k = p.id + '.' + j;
+        return '<li><label class="sp"><input type="checkbox" data-k="' + k + '"' + (spunte[k] ? ' checked' : '') + '/><span class="num" aria-hidden="true">' + (j + 1) + '</span><span>' + a.replace(/«([^»]+)»/g, '<b class="bt">«$1»</b>') + '</span></label></li>';
+      }).join('') + '</ul>';
+      if (p.nota) h += '<div class="avviso">' + p.nota + '</div>';
+      h += '</div>';
+      li.innerHTML = h; elenco.appendChild(li);
+    });
+  }
+  /* i passi che lavorano nell'area docenti ricordano l'accesso, finché a destra non si è entrati */
+  function haSessione() { try { var o = JSON.parse(localStorage.getItem('studio-sessione') || 'null'); return !!(o && o.t && o.scade > Date.now()); } catch (e) { return false; } }
+  function avvisoAccesso() {
+    var e = haSessione();
+    var a = elenco.querySelectorAll('.avviso.acc');
+    for (var i = 0; i < a.length; i++) a[i].hidden = e;
+  }
+  setInterval(avvisoAccesso, 1500);
+  function fatta(p) { return p.azioni.length && p.azioni.every(function (a, j) { return spunte[p.id + '.' + j]; }); }
+  function aggiornaStato() {
+    visibili.forEach(function (p, i) {
+      var li = $('tappa-' + p.id);
+      li.classList.toggle('attiva', i === corrente);
+      li.classList.toggle('fatta', !!fatta(p) && i !== corrente);
+      li.querySelector('.capo').setAttribute('aria-expanded', i === corrente ? 'true' : 'false');
+      var vs = li.querySelectorAll('.viste button');
+      for (var k = 0; k < vs.length; k++) vs[k].setAttribute('aria-pressed', i === corrente && p.viste && p.viste[k][1] === vistaAttiva ? 'true' : 'false');
+    });
+    var p = corrente >= 0 ? visibili[corrente] : null;
+    $('barra').style.width = (corrente < 0 ? 0 : Math.round(((corrente + 1) / visibili.length) * 100)) + '%';
+    $('conta').textContent = 'Passo ' + (corrente + 1) + ' di ' + visibili.length + (solo ? ' · solo le missioni' : (p ? ' · previsto ' + ora(p.ini) + ' – ' + ora(p.fin) + ' su 1:30' : ' · 90 minuti'));
+    $('indietro').disabled = corrente <= 0;
+    $('avanti').textContent = corrente >= visibili.length - 1 ? 'Fine ✓' : 'Avanti →';
+    stato(); avvisoAccesso();
+  }
+  function vai(i, nonCaricare) {
+    if (i < 0 || i >= visibili.length) return;
+    var prima = corrente >= 0 ? visibili[corrente] : null;
+    if (prima && prima.ripristina && i !== corrente) ripristinaLettura();
+    corrente = i;
+    var p = visibili[i];
+    /* se due passi usano la stessa pagina non la si ricarica: il lavoro già fatto a destra resta */
+    if (!nonCaricare) { if (p.url !== vistaAttiva) carica(p.url); } else vistaAttiva = p.url;
+    try { history.replaceState(null, '', location.pathname + location.search + '#' + p.id); } catch (e) {}
+    aggiornaStato();
+    var el = $('tappa-' + p.id);
+    if (el) {
+      var ov = getComputedStyle(elenco).overflowY;
+      if (ov === 'auto' || ov === 'scroll') elenco.scrollTop = el.getBoundingClientRect().top - elenco.getBoundingClientRect().top + elenco.scrollTop;
+      else if (el.scrollIntoView) el.scrollIntoView({ block: 'start' });
+    }
+  }
+
+  elenco.addEventListener('click', function (e) {
+    var c = e.target.closest('.capo'); if (c) { vai(+c.getAttribute('data-i')); return; }
+    var v = e.target.closest('.viste button');
+    if (v) { var p = visibili[corrente]; carica(p.viste[+v.getAttribute('data-v')][1]); aggiornaStato(); }
+  });
+  elenco.addEventListener('change', function (e) {
+    var k = e.target.getAttribute && e.target.getAttribute('data-k'); if (!k) return;
+    if (e.target.checked) spunte[k] = 1; else delete spunte[k];
+    salvaSpunte(); aggiornaStato();
+  });
+  $('indietro').onclick = function () { vai(corrente - 1); };
+  $('avanti').onclick = function () {
+    if (corrente >= visibili.length - 1) {
+      if (visibili[corrente].ripristina) ripristinaLettura();
+      crFerma();
+      var nf = visibili.filter(fatta).length;
+      $('fineTesto').textContent = 'Hai spuntato ' + nf + ' passi su ' + visibili.length + (crTrascorso() > 1000 ? ' in ' + tempoTesto(crTrascorso()) : '') + '. Le missioni si possono ripetere quando vuoi.';
+      app.classList.add('chiusa'); $('fine').classList.add('on'); window.scrollTo(0, 0);
+      return;
+    }
+    vai(corrente + 1);
+  };
+  $('rivedi').onclick = function () { $('fine').classList.remove('on'); app.classList.remove('chiusa'); window.scrollTo(0, 0); };
+  $('ricarica').onclick = function () { if (vistaAttiva) carica(vistaAttiva); };
+  $('largo').onclick = function () { var s = app.classList.toggle('stretta'); this.setAttribute('aria-pressed', s ? 'true' : 'false'); };
+  $('grande').onclick = function () { var s = app.classList.toggle('grande'); this.setAttribute('aria-pressed', s ? 'true' : 'false'); };
+  $('vaiSito').onclick = function () { $('vista').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  $('vaiPassi').onclick = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  $('breve').onclick = function () {
+    var id = corrente >= 0 ? visibili[corrente].id : TAPPE[0].id;
+    solo = !solo; this.setAttribute('aria-pressed', solo ? 'true' : 'false');
+    visibili = TAPPE.filter(function (p) { return !solo || p.m; });
+    visibili.sort(function (a, b) { return solo ? a.m - b.m : a.ini - b.ini; });
+    var i = 0; visibili.forEach(function (p, k) { if (p.id === id) i = k; });
+    costruisci(); corrente = -1; vai(i, true);
+  };
+  window.addEventListener('pagehide', function () { var p = corrente >= 0 && visibili[corrente]; if (p && p.ripristina) { try { localStorage.removeItem('aula-supporti'); } catch (e) {} } });
+
+  costruisci();
+  var hh = (location.hash || '').replace('#', ''), inizio = 0;
+  visibili.forEach(function (p, k) { if (p.id === hh) inizio = k; });
+  vai(inizio);
+  /* animazione che mostra a destra dove toccare */
+  GuidaClick.avvia({ vista: $('vista'), sito: sito, elenco: elenco });
+})();
+</script>
+</body>
+</html>

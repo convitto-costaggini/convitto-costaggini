@@ -24,8 +24,9 @@
 /* ════════════════════════════════════════════════════════
    ANTISPAM INTERNO (lato sito)
    Ai moduli pubblici che inviano i dati al gestionale (indirizzo
-   script.google.com) aggiunge il campo "tMs": i millisecondi trascorsi
-   dall'apertura della pagina all'invio. Il gestionale lo usa per
+   script.google.com) e alle funzioni richiesta-accesso e iscrizione-alumni
+   del database aggiunge il campo "tMs": i millisecondi trascorsi
+   dall'apertura della pagina all'invio. Gestionale e funzioni lo usano per
    riconoscere gli invii istantanei dei bot (vedi AntispamInterno.gs).
    Non raccoglie nulla sul visitatore, non usa cookie né servizi esterni,
    non cambia il comportamento dei moduli. Se qualcosa va storto, l'invio
@@ -40,7 +41,9 @@
     window.fetch = function (input, init) {
       try {
         var url = (typeof input === 'string') ? input : ((input && input.url) || '');
-        if (url.indexOf('script.google.com/') !== -1 &&
+        var destinazione = url.indexOf('script.google.com/') !== -1 ||
+          /\/functions\/v1\/(richiesta-accesso|iscrizione-alumni)(\?|$)/.test(url);
+        if (destinazione &&
             init && typeof init.body === 'string' && init.body.charAt(0) === '{') {
           var dati = JSON.parse(init.body);
           // Solo moduli pubblici: niente richieste dell'area admin (adminToken)

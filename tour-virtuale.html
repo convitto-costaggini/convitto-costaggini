@@ -15,7 +15,7 @@
   <link rel="canonical" href="https://convitto.alberghierorieti.edu.it/tour-virtuale.html"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
-  <style>body{background:#0a0f0a}.tv-rooms{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding:1.25rem;background:rgba(0,0,0,.3);border-bottom:1px solid rgba(184,146,42,.12)}.tv-room-btn{font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1rem;border-radius:20px;cursor:pointer;border:1.5px solid rgba(184,146,42,.25);color:rgba(245,240,232,.5);background:0 0;transition:all .2s;white-space:nowrap}.tv-room-btn:hover{border-color:var(--oro2);color:var(--oro2)}.tv-room-btn.active{background:var(--bosco);border-color:var(--oro);color:var(--oro2)}.tv-viewer-wrap{position:relative;width:100%;height:60vh;min-height:320px;max-height:680px;background:#111;overflow:hidden}#tv-canvas,.tv-thumb img{width:100%;height:100%;display:block}#tv-canvas{touch-action:none;cursor:grab}#tv-canvas:active{cursor:grabbing}#tv-controls,.tv-ctrl-group{display:flex;flex-direction:column}#tv-controls{position:absolute;bottom:12px;left:12px;z-index:10;gap:6px}.tv-ctrl-group{gap:3px}.tv-ctrl-btn,.tv-ctrl-row{display:flex;justify-content:center}.tv-ctrl-row{gap:3px}.tv-ctrl-btn{background:rgba(26,46,27,.9);border:1px solid rgba(184,146,42,.45);border-radius:7px;color:#d4aa4a;font-size:.9rem;font-weight:700;cursor:pointer;align-items:center;transition:background .15s,border-color .15s;user-select:none;-webkit-tap-highlight-color:transparent}.tv-ctrl-btn:active,.tv-ctrl-btn:hover{background:#2c3e2d;border-color:rgba(184,146,42,.9)}.tv-ctrl-btn,.tv-ctrl-spacer{width:34px;height:34px}.tv-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#111a11,#1a1a1a);color:rgba(245,240,232,.4);text-align:center;padding:2rem}.tv-placeholder-icon{font-size:4rem;margin-bottom:1rem;opacity:.4}.tv-info-text h2,.tv-placeholder h2{font-family:var(--fd);font-size:1.4rem;font-weight:300}.tv-placeholder h2{color:rgba(245,240,232,.6);margin-bottom:.5rem}.tv-placeholder p{font-family:var(--fu);font-size:.75rem;color:rgba(245,240,232,.3);line-height:1.7;max-width:380px}.tv-placeholder code{font-family:monospace;font-size:.75rem;background:rgba(255,255,255,.08);padding:.2rem .5rem;border-radius:4px;color:var(--oro2)}.tv-info{background:linear-gradient(135deg,var(--bosco),#1a3a1b);padding:1.5rem 1.25rem;border-bottom:1px solid rgba(184,146,42,.15)}.tv-info-wrap{max-width:860px;margin:0 auto;display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap}.tv-info-icon{font-size:2rem;flex-shrink:0}.tv-info-text h2{color:#fff;margin-bottom:.25rem}.tv-info-text h2 em{font-style:italic;color:var(--oro3)}.tv-info-text p{font-family:var(--fu);font-size:.8rem;color:rgba(245,240,232,.6);line-height:1.75;margin:0}.tv-thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.75rem;padding:1.5rem 1.25rem;max-width:960px;margin:0 auto}@media (max-width:480px){.tv-thumbs{grid-template-columns:repeat(2,1fr)}}.tv-thumb{border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:all .2s;aspect-ratio:4/3;background:#1a1a1a;position:relative}.tv-thumb:hover{border-color:var(--oro2);transform:translateY(-2px)}.tv-narr-btn:hover,.tv-thumb.active{border-color:var(--oro)}.tv-thumb img{object-fit:cover}.tv-thumb-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.8));padding:.4rem .5rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff}.tv-thumb-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;font-family:var(--fu);font-size:.6rem;color:rgba(245,240,232,.25);text-align:center;padding:.5rem}.tv-thumb-placeholder span{font-size:1.5rem;opacity:.3}.tv-narration{max-width:860px;margin:1rem auto 0;padding:0 1.25rem;display:flex;align-items:flex-start;gap:.75rem}.tv-narr-btn{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:rgba(184,146,42,.14);border:1.5px solid rgba(184,146,42,.5);color:var(--oro3);font-size:1.05rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s}.tv-narr-btn:hover{background:rgba(184,146,42,.28)}.tv-narr-btn[aria-pressed=true]{background:var(--oro);border-color:var(--oro);color:#1a1a1a}.tv-narr-body{flex:1;min-width:0}.tv-narr-caption{font-family:var(--fu);font-size:.78rem;line-height:1.65;color:rgba(245,240,232,.75);font-style:italic;min-height:1.4em}.tv-narr-caption.speaking{color:#fff}.tv-narr-toggle{margin-top:.35rem;background:0 0;border:0;cursor:pointer;font-family:var(--fu);font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.4);padding:0;text-decoration:underline;text-underline-offset:2px}.tv-narr-toggle:hover{color:var(--oro2)}.tv-narr-unavailable{font-size:.7rem;color:rgba(245,240,232,.35);font-style:italic}</style>
+  <style>body{background:#0a0f0a}.tv-rooms{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding:1.25rem;background:rgba(0,0,0,.3);border-bottom:1px solid rgba(184,146,42,.12)}.tv-room-btn{font-family:var(--fu);font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1rem;border-radius:20px;cursor:pointer;border:1.5px solid rgba(184,146,42,.25);color:rgba(245,240,232,.5);background:0 0;transition:all .2s;white-space:nowrap}.tv-room-btn:hover{border-color:var(--oro2);color:var(--oro2)}.tv-room-btn.active{background:var(--bosco);border-color:var(--oro);color:var(--oro2)}.tv-viewer-wrap{position:relative;width:100%;height:60vh;min-height:320px;max-height:680px;background:#111;overflow:hidden}#tv-canvas,.tv-thumb img{width:100%;height:100%;display:block}#tv-canvas{touch-action:none;cursor:grab}#tv-canvas:active{cursor:grabbing}#tv-controls,.tv-ctrl-group{display:flex;flex-direction:column}#tv-controls{position:absolute;bottom:12px;left:12px;z-index:10;gap:6px}.tv-ctrl-group{gap:3px}.tv-ctrl-btn,.tv-ctrl-row{display:flex;justify-content:center}.tv-ctrl-row{gap:3px}.tv-ctrl-btn{background:rgba(26,46,27,.9);border:1px solid rgba(184,146,42,.45);border-radius:7px;color:#d4aa4a;font-size:.9rem;font-weight:700;cursor:pointer;align-items:center;transition:background .15s,border-color .15s;user-select:none;-webkit-tap-highlight-color:transparent}.tv-ctrl-btn:active,.tv-ctrl-btn:hover{background:#2c3e2d;border-color:rgba(184,146,42,.9)}.tv-ctrl-btn,.tv-ctrl-spacer{width:34px;height:34px}.tv-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#111a11,#1a1a1a);color:rgba(245,240,232,.4);text-align:center;padding:2rem}.tv-placeholder-icon{font-size:4rem;margin-bottom:1rem;opacity:.4}.tv-info-text h2,.tv-placeholder h2{font-family:var(--fd);font-size:1.4rem;font-weight:300}.tv-placeholder h2{color:rgba(245,240,232,.6);margin-bottom:.5rem}.tv-placeholder p{font-family:var(--fu);font-size:.75rem;color:rgba(245,240,232,.3);line-height:1.7;max-width:380px}.tv-placeholder code{font-family:monospace;font-size:.75rem;background:rgba(255,255,255,.08);padding:.2rem .5rem;border-radius:4px;color:var(--oro2)}.tv-info{background:linear-gradient(135deg,var(--bosco),#1a3a1b);padding:1.5rem 1.25rem;border-bottom:1px solid rgba(184,146,42,.15)}.tv-info-wrap{max-width:860px;margin:0 auto;display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap}.tv-info-icon{font-size:2rem;flex-shrink:0}.tv-info-text h2{color:#fff;margin-bottom:.25rem}.tv-info-text h2 em{font-style:italic;color:var(--oro3)}.tv-info-text p{font-family:var(--fu);font-size:.8rem;color:rgba(245,240,232,.6);line-height:1.75;margin:0}.tv-thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.75rem;padding:1.5rem 1.25rem;max-width:960px;margin:0 auto}@media (max-width:480px){.tv-thumbs{grid-template-columns:repeat(2,1fr)}}.tv-thumb{border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:all .2s;aspect-ratio:4/3;background:#1a1a1a;position:relative}.tv-thumb:hover{border-color:var(--oro2);transform:translateY(-2px)}.tv-narr-btn:hover,.tv-thumb.active{border-color:var(--oro)}.tv-thumb img{object-fit:cover}.tv-thumb-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.8));padding:.4rem .5rem;font-family:var(--fu);font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff}.tv-thumb-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;font-family:var(--fu);font-size:.6rem;color:rgba(245,240,232,.25);text-align:center;padding:.5rem}.tv-thumb-placeholder span{font-size:1.5rem;opacity:.3}.tv-narration{max-width:860px;margin:1rem auto 0;padding:0 1.25rem;display:flex;align-items:flex-start;gap:.75rem}.tv-narr-btn{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:rgba(184,146,42,.14);border:1.5px solid rgba(184,146,42,.5);color:var(--oro3);font-size:1.05rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s}.tv-narr-btn:hover{background:rgba(184,146,42,.28)}.tv-narr-btn[aria-pressed=true]{background:var(--oro);border-color:var(--oro);color:#1a1a1a}.tv-narr-body{flex:1;min-width:0}.tv-narr-caption{font-family:var(--fu);font-size:.78rem;line-height:1.65;color:rgba(245,240,232,.75);font-style:italic;min-height:1.4em}.tv-narr-caption.speaking{color:#fff}.tv-narr-toggle{margin-top:.35rem;background:0 0;border:0;cursor:pointer;font-family:var(--fu);font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.4);padding:0;text-decoration:underline;text-underline-offset:2px}.tv-narr-toggle:hover{color:var(--oro2)}.tv-narr-unavailable{font-size:.7rem;color:rgba(245,240,232,.35);font-style:italic}.tv-loader{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#111a11,#1a1a1a);color:rgba(245,240,232,.7);text-align:center;padding:2rem}.tv-loader[hidden]{display:none}.tv-loader>*{animation:tvLdA .3s ease .45s both}.tv-loader.rst>*{animation-name:tvLdB}@keyframes tvLdA{from{opacity:0}to{opacity:1}}@keyframes tvLdB{from{opacity:0}to{opacity:1}}.tv-loader-icon{font-size:3rem;margin-bottom:1rem;opacity:.5}.tv-loader-label{font-family:var(--fu);font-size:.8rem;letter-spacing:.04em;margin-bottom:1rem}.tv-loader-track{width:min(320px,80%);height:6px;border-radius:6px;background:rgba(245,240,232,.12);overflow:hidden}.tv-loader-bar{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--oro),var(--oro2));transition:width .25s ease}.tv-loader.indet .tv-loader-bar{width:40%;animation:tvIndet 1.3s ease-in-out infinite}@keyframes tvIndet{0%{transform:translateX(-110%)}100%{transform:translateX(280%)}}.tv-loader-pct{font-family:var(--fu);font-size:.7rem;font-weight:700;color:var(--oro2);margin-top:.6rem;min-height:1em}@media (prefers-reduced-motion:reduce){.tv-loader.indet .tv-loader-bar{animation:none;width:100%;opacity:.5}.tv-loader-bar{transition:none}}</style>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <script src="app.js" defer></script>
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
@@ -67,7 +67,13 @@
         </div>
       </div>
     </div>
-    <div class="tv-placeholder" id="tv-placeholder">
+    <div class="tv-loader indet" id="tv-loader" role="status" aria-live="polite">
+      <div class="tv-loader-icon" aria-hidden="true">🏛️</div>
+      <div class="tv-loader-label" id="tv-loader-label">Caricamento del tour virtuale…</div>
+      <div class="tv-loader-track" role="progressbar" aria-label="Caricamento della foto a 360°" aria-valuemin="0" aria-valuemax="100" id="tv-loader-track"><div class="tv-loader-bar" id="tv-loader-bar"></div></div>
+      <div class="tv-loader-pct" id="tv-loader-pct"></div>
+    </div>
+    <div class="tv-placeholder" id="tv-placeholder" style="display:none">
       <div class="tv-placeholder-icon">🏛️</div>
       <h2>Foto a 360° in arrivo</h2>
       <p>Seleziona un ambiente qui sopra.</p>
@@ -102,10 +108,10 @@ const ROOMS = [
   { id:'corridoi',         label:'Corridoi',          icon:'🏛️', title:'I <em>corridoi</em>',                  desc:'La spina dorsale del Convitto. I luoghi dove si incrociano migliaia di storie — di mattina di corsa, di sera con calma.', img:'img/tour/corridoi.webp', thumb:'img/tour/corridoi-thumb.webp' },
   { id:'sala-ricreativa',  label:'Sala ricreativa',   icon:'🎮', title:'La <em>sala ricreativa</em>',          desc:'Calciobalilla, ping pong, divani e vetrate sul verde. Lo spazio del gioco, del relax e dello stare insieme dopo lo studio.', img:'img/tour/sala-ricreativa.webp', thumb:'img/tour/sala-ricreativa-thumb.webp' },
   { id:'ufficio-educatori',label:'Ufficio educatori', icon:'🖥️', title:'L\'<em>ufficio educatori</em>',        desc:'Il cuore operativo del Convitto. Da qui gli educatori coordinano le attività e — nelle giornate limpide — ammirano la splendida natura che circonda la struttura: dai piani, si può fruire di una splendida vista sul Terminillo.', img:'img/tour/ufficio-educatori.webp', thumb:'img/tour/ufficio-educatori-thumb.webp' },
+  { id:'musica',           label:'Lab Musicale',      icon:'🎵', title:'Il <em>Laboratorio Musicale</em>',     desc:'Fondato da Michele Gaggiano e Dino Barba. Chitarre, tastiere, percussioni — e la libertà di scoprire un talento.', img:'img/tour/musica.webp', thumb:'img/tour/musica-thumb.webp', lon:180, hfov:100 },
   { id:'camera',           label:'Camera tipo',       icon:'🛏️', title:'Una <em>camera tipo</em>',             desc:'Spazio personale, sicuro e ordinato. Ogni convittore ha il suo posto — un angolo tutto suo.', img:'img/tour/camera.webp', thumb:'img/tour/camera-thumb.webp', hfov:100 },
   { id:'mensa',            label:'Mensa',             icon:'🍽️', title:'La <em>mensa</em>',                    desc:'Ogni giorno, un menù cucinato internamente e concordato con lo specialista. Un luogo di convivialità vera.', img:'img/tour/mensa.jpg', thumb:'img/tour/mensa.jpg' },
   { id:'studio',           label:'Sala studio',       icon:'📖', title:'La <em>sala studio</em>',              desc:'Dalle 15:30 alle 17:15, studio guidato con gli educatori. Un ambiente silenzioso e strutturato.', img:'img/tour/studio.webp', thumb:'img/tour/studio-thumb.webp', hfov:100 },
-  { id:'musica',           label:'Lab Musicale',      icon:'🎵', title:'Il <em>Laboratorio Musicale</em>',     desc:'Fondato da Michele Gaggiano e Dino Barba. Chitarre, tastiere, percussioni — e la libertà di scoprire un talento.', img:'img/tour/musica.jpg', thumb:'img/tour/musica.jpg' },
   { id:'infermeria',       label:'Infermeria',        icon:'🩺', title:'L\'<em>infermeria</em>',               desc:'Presidiata ogni giorno da un\'infermiera professionale: un piccolo spazio di cura e di ascolto, dove si seguono le terapie quotidiane e il benessere di ciascun convittore, anche grazie al sostegno dello sportello psicologico d\'Istituto (C.I.C.), in stretto contatto con il medico convenzionato.', img:'img/tour/infermeria.webp', thumb:'img/tour/infermeria-thumb.webp', hfov:100 },
   { id:'esterni',          label:'Esterni',           icon:'🌳', title:'Gli <em>esterni</em> della struttura', desc:'Il lato ovest dell\'edificio, la nuova palestra in costruzione e il verde che circonda il Convitto: un contesto tranquillo, a pochi minuti dal centro di Rieti.', img:'img/tour/esterni.webp', thumb:'img/tour/esterni-thumb.webp' },
 ];
@@ -162,10 +168,12 @@ let lon = 0, lat = 0;   // angolo di visione corrente
 let autoTimer  = null;
 const DEFAULT_HFOV = 75; // campo visivo orizzontale di partenza per ogni ambiente
 let H_FOV = DEFAULT_HFOV;
+let V_EXT = 180; // copertura verticale reale della foto in gradi (180 = sfera intera)
 const FOV_MIN = 55, FOV_MAX = 100;
 function applyFov() {
   const hfov = THREE.MathUtils.degToRad(H_FOV);
   camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(hfov / 2) / camera.aspect));
+  if (camera.fov > V_EXT) camera.fov = V_EXT; // mai oltre il bordo alto/basso della foto (niente bande nere)
   camera.updateProjectionMatrix();
 }
 function resize() {
@@ -182,7 +190,8 @@ function zoom(delta) {
 function render() {
   // Autorotazione
   if (autoRot && !isDragging) lon += 0.04;
-  lat = Math.max(-85, Math.min(85, lat));
+  const latMax = Math.max(0, V_EXT / 2 - camera.fov / 2); // si può guardare in su/giù solo dove c'è la foto
+  lat = Math.max(-latMax, Math.min(latMax, lat));
   const phi   = THREE.MathUtils.degToRad(90 - lat);
   const theta = THREE.MathUtils.degToRad(lon);
   camera.lookAt(
@@ -193,22 +202,88 @@ function render() {
   renderer.render(scene, camera);
   raf = requestAnimationFrame(render);
 }
-// ── Carica immagine ──
-function loadPanorama(src) {
+// ── Carica immagine (con barra di avanzamento) ──
+const loaderEl = document.getElementById('tv-loader');
+const loaderBar = document.getElementById('tv-loader-bar');
+const loaderPct = document.getElementById('tv-loader-pct');
+const loaderLbl = document.getElementById('tv-loader-label');
+const loaderTrack = document.getElementById('tv-loader-track');
+let loadToken = 0, loadXhr = null;
+function showLoader(label) {
+  loaderLbl.textContent = label ? 'Caricamento: ' + label + '…' : 'Caricamento…';
+  loaderEl.classList.add('indet');
+  loaderBar.style.width = '';
+  loaderPct.textContent = '';
+  loaderTrack.removeAttribute('aria-valuenow');
+  // il riquadro compare solo se il caricamento dura più di ~0,45 s: sulle connessioni veloci nessun lampo
+  loaderEl.classList.remove('rst'); void loaderEl.offsetWidth; loaderEl.classList.toggle('rst', loaderEl.dataset.r !== '1'); loaderEl.dataset.r = loaderEl.dataset.r === '1' ? '0' : '1';
+  loaderEl.hidden = false;
+}
+function setLoaderProgress(p) {
+  const pct = Math.max(0, Math.min(100, Math.round(p * 100)));
+  loaderEl.classList.remove('indet');
+  loaderBar.style.width = pct + '%';
+  loaderPct.textContent = pct + '%';
+  loaderTrack.setAttribute('aria-valuenow', String(pct));
+}
+function loadPanorama(src, label) {
+  const token = ++loadToken;
+  if (loadXhr) { loadXhr.abort(); loadXhr = null; }
   material.map = null; material.needsUpdate = true;
-  loader.load(src, function(tex) {
-    tex.minFilter = THREE.LinearFilter;
-    tex.anisotropy = renderer.capabilities.getMaxAnisotropy(); // texture nitida anche guardando le pareti di sbieco
-    material.map  = tex;
-    material.color.set(0xffffff);
-    material.needsUpdate = true;
-    document.getElementById('tv-placeholder').style.display = 'none';
-    document.getElementById('tv-info').style.display = 'block';
-  }, undefined, function() {
+  showLoader(label);
+  document.getElementById('tv-placeholder').style.display = 'none';
+  function fail() {
+    if (token !== loadToken) return;
+    loaderEl.hidden = true;
     // Immagine non trovata → mostra placeholder
     document.getElementById('tv-placeholder').style.display = 'flex';
     document.getElementById('tv-info').style.display = 'block';
-  });
+  }
+  function apply(url, revoke) {
+    loader.load(url, function(tex) {
+      if (revoke) URL.revokeObjectURL(url);
+      if (token !== loadToken) { tex.dispose(); return; }
+      // La foto copre 360° in orizzontale ma solo una fascia in verticale (formato ritagliato):
+      // la applico a una calotta di sfera di altezza proporzionale, così non viene stirata.
+      const vExt = Math.min(Math.PI, 2 * Math.PI * tex.image.height / tex.image.width);
+      const geo = new THREE.SphereGeometry(500, 60, 40, 0, Math.PI * 2, (Math.PI - vExt) / 2, vExt);
+      geo.scale(-1, 1, 1);
+      sphere.geometry.dispose(); sphere.geometry = geo;
+      V_EXT = THREE.MathUtils.radToDeg(vExt);
+      lat = 0; applyFov();
+      tex.minFilter = THREE.LinearFilter;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy(); // texture nitida anche guardando le pareti di sbieco
+      material.map  = tex;
+      material.color.set(0xffffff);
+      material.needsUpdate = true;
+      setLoaderProgress(1);
+      loaderEl.hidden = true;
+      document.getElementById('tv-placeholder').style.display = 'none';
+      document.getElementById('tv-info').style.display = 'block';
+    }, undefined, function() { if (revoke) URL.revokeObjectURL(url); fail(); });
+  }
+  // Scarico il file con XMLHttpRequest per conoscere l'avanzamento reale; se non è
+  // possibile (browser molto vecchi) si ricade sul caricamento diretto, senza percentuale.
+  if (!window.XMLHttpRequest || !window.URL || !URL.createObjectURL) { apply(src, false); return; }
+  const xhr = new XMLHttpRequest();
+  loadXhr = xhr;
+  xhr.open('GET', src, true);
+  xhr.responseType = 'blob';
+  xhr.onprogress = function(e) {
+    if (token !== loadToken) return;
+    if (e.lengthComputable && e.total > 0) setLoaderProgress(e.loaded / e.total * 0.97); // l'ultimo tratto è la decodifica
+  };
+  xhr.onload = function() {
+    if (token !== loadToken) return;
+    loadXhr = null;
+    if (xhr.status >= 200 && xhr.status < 300 && xhr.response) {
+      setLoaderProgress(0.98);
+      loaderLbl.textContent = 'Preparazione della visuale a 360°…';
+      apply(URL.createObjectURL(xhr.response), true);
+    } else fail();
+  };
+  xhr.onerror = fail;
+  xhr.send();
 }
 // ── Drag mouse ──
 canvas.addEventListener('mousedown', e => {
@@ -432,11 +507,11 @@ function selectRoom(room, auto = true) {
   document.getElementById('tv-title').innerHTML   = room.title;
   document.getElementById('tv-desc').textContent  = room.desc;
   // Reset angolo visione e zoom
-  lon = 0; lat = 0; autoRot = true;
+  lon = room.lon || 0; lat = 0; autoRot = true; // lon iniziale per-stanza: tiene la giunzione della foto dietro le spalle
   H_FOV = room.hfov || DEFAULT_HFOV; applyFov();
   document.getElementById('tv-placeholder').style.display = 'flex';
   document.getElementById('tv-info').style.display = 'none';
-  loadPanorama(room.img);
+  loadPanorama(room.img, room.label);
   stopNarration();
   speakRoom(room, auto);
   // Selezione da click reale (scheda o miniatura): riporta il visualizzatore in vista,

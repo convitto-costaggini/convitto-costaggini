@@ -2,14 +2,14 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"/>
-  <script src="/cantiere.js"></script>
+  <script src="/aula/attesa.js"></script>
   <script src="/aula/riservato.js"></script>
   <script src="/aula/supporti.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Verifica – Sala studio | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Per docenti ed educatori: una verifica stampabile dalla lezione, con fila B, versione facilitata e soluzioni."/>
+  <meta name="description" content="Per docenti ed educatori: una verifica stampabile dalla lezione, con fila B, versione con più aiuti e soluzioni."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -54,11 +54,11 @@
   .vf-griglia{margin-top:2mm;display:flex;flex-wrap:wrap;gap:2mm 6mm}
   .vf-righe i{display:block;border-bottom:1px solid #777;height:8mm}
   .vf-voto{margin-top:5mm;text-align:right;font-weight:700}
-  /* versione facilitata: carattere più grande e più aria */
+  /* versione con più aiuti: carattere più grande e più aria */
   .vf-foglio.facile{font-size:13.5pt;line-height:1.75;letter-spacing:.01em}
   .vf-foglio.facile .vf-es li{margin-bottom:4mm}
   .vf-foglio.facile .vf-opz{flex-direction:column;gap:1.5mm}
-  /* la mappa (strumento compensativo) */
+  /* la mappa della lezione */
   .vf-mappa{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-top:3mm}
   .vf-mappa .c{grid-column:1/-1;text-align:center;border:2px solid #111;border-radius:3mm;padding:3mm;font-size:14pt;font-weight:700}
   .vf-mappa .n{border:1.2px solid #555;border-radius:3mm;padding:2mm 3mm;break-inside:avoid}
@@ -85,7 +85,7 @@
     <div class="w">
       <p class="lbl">Per docenti ed educatori</p>
       <h1 id="vf-tit"><span class="ic" aria-hidden="true">📝</span>Verifica dalla lezione</h1>
-      <p id="vf-sot" hidden>Una prova scritta pronta da stampare, con la fila B, la versione facilitata e le soluzioni. Le domande vengono dalla lezione: niente da scrivere.</p>
+      <p id="vf-sot" hidden>Una prova scritta pronta da stampare, con la fila B, la versione con più aiuti e le soluzioni. Le domande vengono dalla lezione: niente da scrivere.</p>
     </div>
   </section>
 
@@ -111,20 +111,20 @@
           <div class="dc-passo"><b>3</b><h2>Che cosa stampare</h2></div>
           <div class="vf-scelte">
             <label class="dc-spunta"><input type="checkbox" id="vf-b" checked/><span><b>🔀 Anche la fila B</b><small>Stesse domande, in ordine diverso e con le risposte mescolate: i vicini di banco non possono copiare.</small></span></label>
-            <label class="dc-spunta"><input type="checkbox" id="vf-facile"/><span><b>♿ Anche la versione facilitata</b><small>Per chi ha un PDP (DSA o BES): meno domande, 2 sole risposte fra cui scegliere, le parole da inserire già elencate, carattere più grande e più spazio. Sul foglio non c'è scritto «facilitata»: sembra una verifica come le altre.</small></span></label>
-            <label class="dc-spunta"><input type="checkbox" id="vf-mappa"/><span><b>🗺️ Anche la mappa della lezione</b><small>Una pagina con le idee chiave da usare durante la prova come strumento compensativo, se previsto dal PDP (legge 170/2010).</small></span></label>
+            <label class="dc-spunta"><input type="checkbox" id="vf-facile"/><span><b>🧩 Anche la versione con più aiuti</b><small>meno domande, 2 sole risposte fra cui scegliere, le parole da inserire già elencate, carattere più grande e più spazio. Sul foglio non c'è nessuna scritta che la distingua: sembra una verifica come le altre.</small></span></label>
+            <label class="dc-spunta"><input type="checkbox" id="vf-mappa"/><span><b>🗺️ Anche la mappa della lezione</b><small>Una pagina con le idee chiave da usare durante la prova, quando il docente lo ritiene utile.</small></span></label>
             <label class="dc-spunta"><input type="checkbox" id="vf-sol" checked/><span><b>✅ Le soluzioni per il docente</b><small>Una pagina con le risposte giuste di ogni fila, per correggere in fretta.</small></span></label>
           </div>
-          <details class="vf-pdp rsv" hidden style="margin-top:1rem">
-            <summary>♿ Promemoria per chi ha un PDP (solo per te, non si stampa)</summary>
+          <details class="vf-promemoria rsv" hidden style="margin-top:1rem">
+            <summary>🧩 Promemoria per la versione con più aiuti (solo per te, non si stampa)</summary>
             <ul class="st-nota" style="margin:.6rem 0 0;padding-left:1.2rem;line-height:1.6">
-              <li><b>Tempi:</b> concedete il tempo previsto dal PDP.</li>
-              <li><b>Consegne:</b> se il PDP lo prevede, leggetele a voce prima di cominciare.</li>
-              <li><b>Mappa:</b> spuntate «Anche la mappa della lezione» se il PDP prevede le mappe come strumento compensativo.</li>
-              <li><b>Distribuzione:</b> la versione facilitata porta la stessa lettera della fila A, quindi si consegna come tutte le altre. Annotate voi, fuori dal sito, a chi va quale foglio: il sito non lo registra.</li>
-              <li><b>Valutazione:</b> secondo il PDP, contano il contenuto e le risposte date; il punteggio è già sul foglio.</li>
+              <li><b>Tempi:</b> concedete il tempo previsto.</li>
+              <li><b>Consegne:</b> se serve, leggetele a voce prima di cominciare.</li>
+              <li><b>Mappa:</b> spuntate «Anche la mappa della lezione» se serve.</li>
+              <li><b>Distribuzione:</b> la versione con più aiuti porta la stessa lettera della fila A, quindi si consegna come tutte le altre. Annotate voi, fuori dal sito, a chi va quale foglio: il sito non lo registra.</li>
+              <li><b>Valutazione:</b> contano il contenuto e le risposte date; il punteggio è già sul foglio.</li>
             </ul>
-            <p class="st-nota" style="margin:.6rem 0 0">Le misure valide sono quelle del PDP, stabilite dalla scuola e condivise con la famiglia: qui trovate gli strumenti per applicarle. Per i supporti in schermo (carattere, colori, voce) vedete <a href="aula/studio/inclusione.html">Supporti DSA e BES</a>.</p>
+            <p class="st-nota" style="margin:.6rem 0 0">Le misure valide sono quelle stabilite dalla scuola insieme alla famiglia: qui trovate gli strumenti per applicarle. Per i supporti in schermo (carattere, colori, voce) vedete <a href="aula/studio/inclusione.html">Supporti alla lettura</a>.</p>
           </details>
         </div>
         <div class="vf-barra">
@@ -191,7 +191,7 @@
     s.aperte = mescola(arr(L.flashcard), r).slice(0, quante('aperte'));
     return s;
   }
-  /* versione facilitata: circa il 70% delle domande (almeno 2), 2 sole opzioni, al massimo 4 coppie, 1 domanda aperta */
+  /* versione con più aiuti: circa il 70% delle domande (almeno 2), 2 sole opzioni, al massimo 4 coppie, 1 domanda aperta */
   function facilita(s) {
     function meno(a) { return a.slice(0, a.length <= 2 ? a.length : Math.max(2, Math.ceil(a.length * 0.7))); }
     return {
@@ -254,7 +254,7 @@
   }
   function soluzioni(file) {
     return '<div class="vf-foglio vf-sol"><div class="vf-scuola">Solo per il docente</div><h1>Soluzioni · ' + esc($('vf-titolo').value.trim() || L.titolo) + '</h1>' + file.map(function (f) {
-      return '<h2 style="font:700 12pt Arial,Helvetica,sans-serif;margin:4mm 0 2mm;color:#111">Fila ' + f.nome + (f.facile ? ' · versione facilitata' : '') + '</h2><table>' + f.es.map(function (e, k) {
+      return '<h2 style="font:700 12pt Arial,Helvetica,sans-serif;margin:4mm 0 2mm;color:#111">Fila ' + f.nome + (f.facile ? ' · versione con più aiuti' : '') + '</h2><table>' + f.es.map(function (e, k) {
         var r;
         if (e.t === 'quiz') r = e.voci.map(function (q, i) { return (i + 1) + ' ' + LET[q.g]; }).join(' · ');
         else if (e.t === 'vf') r = e.voci.map(function (q, i) { return (i + 1) + ' ' + (q.vero ? 'V' : 'F'); }).join(' · ');
@@ -268,7 +268,7 @@
   }
   function mappa() {
     var A = (L.mnemonica || {}).acronimo || {};
-    return '<div class="vf-foglio facile"><div class="vf-scuola">Mappa della lezione · strumento compensativo</div><div class="vf-mappa"><div class="c">' + esc((L.icona || '') + ' ' + L.titolo) + '</div>' +
+    return '<div class="vf-foglio facile"><div class="vf-scuola">Mappa della lezione</div><div class="vf-mappa"><div class="c">' + esc((L.icona || '') + ' ' + L.titolo) + '</div>' +
       arr(L.concetti).map(function (c) { return '<div class="n"><b>' + esc((c.emoji || '•') + ' ' + c.titolo) + '</b>' + esc((String(c.spiegazione || '').match(/^.*?[.!?](\s|$)/) || [String(c.spiegazione || '')])[0]) + '</div>'; }).join('') + '</div>' +
       (A.parola && A.frase ? '<p style="margin-top:4mm"><b>Per ricordare: ' + esc(A.parola) + '</b> — «' + esc(A.frase) + '»</p>' : '') +
       (arr(L.parole).length ? '<p style="margin-top:3mm"><b>Parole importanti:</b> ' + arr(L.parole).map(function (p) { return '<b>' + esc(p.termine) + '</b>: ' + esc(p.definizione); }).join(' · ') + '</p>' : '') + '</div>';
@@ -277,15 +277,15 @@
     if (!L) return;
     var s = scegli(), r = rng(seme + 7), file = [fila(s, 'A', r)];
     if ($('vf-b').checked) file.push(fila(s, 'B', r));
-    /* la versione facilitata porta la stessa lettera della fila A: sul foglio niente la distingue dagli altri */
+    /* la versione con più aiuti porta la stessa lettera della fila A: sul foglio niente la distingue dagli altri */
     if ($('vf-facile').checked) file.push(fila(facilita(s), 'A', r));
     var vuota = !file[0].es.length, h = '';
-    file.forEach(function (f) { h += '<p class="vf-etichetta">Fila ' + f.nome + (f.facile ? ' · versione facilitata (sul foglio non compare)' : '') + '</p>' + foglio(f); });
-    if ($('vf-mappa').checked) h += '<p class="vf-etichetta">Mappa per chi ha il PDP</p>' + mappa();
+    file.forEach(function (f) { h += '<p class="vf-etichetta">Fila ' + f.nome + (f.facile ? ' · versione con più aiuti (sul foglio non compare)' : '') + '</p>' + foglio(f); });
+    if ($('vf-mappa').checked) h += '<p class="vf-etichetta">Mappa della lezione</p>' + mappa();
     if ($('vf-sol').checked) h += '<p class="vf-etichetta">Soluzioni</p>' + soluzioni(file);
     $('vf-fogli').innerHTML = vuota ? '<div class="st-card">Scegli almeno una domanda al passo 1.</div>' : h;
     $('vf-stampa').disabled = vuota;
-    var parti = ['fila A'].concat($('vf-b').checked ? ['fila B'] : [], $('vf-facile').checked ? ['versione facilitata'] : [], $('vf-mappa').checked ? ['mappa'] : [], $('vf-sol').checked ? ['soluzioni'] : []);
+    var parti = ['fila A'].concat($('vf-b').checked ? ['fila B'] : [], $('vf-facile').checked ? ['versione con più aiuti'] : [], $('vf-mappa').checked ? ['mappa'] : [], $('vf-sol').checked ? ['soluzioni'] : []);
     $('vf-stato').textContent = vuota ? '' : 'Si stampano: ' + parti.join(', ') + '.';
   }
 

@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<base href="/"/>
+<title>Aula digitale: presentazione della formazione | Convitto "Costaggini" - Rieti</title>
+<meta name="description" content="Presentazione dei 90 minuti di formazione per educatori e docenti sull'Aula digitale del Convitto: cronoprogramma, schermate e cinque missioni da ripetere in autonomia."/>
+<meta name="robots" content="noindex,follow"/>
+<meta name="theme-color" content="#1B2A1E"/>
+<link rel="canonical" href="https://convitto.alberghierorieti.edu.it/aula/formazione/presentazione.html"/>
+<link rel="stylesheet" href="fonts.css"/>
+<link rel="icon" href="favicon.ico" sizes="any"/>
+<style>
+html,body{margin:0;height:100%;background:#0E1710;overflow:hidden;font-family:'Source Sans 3',Arial,sans-serif}
+#stage{position:fixed;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;counter-reset:page;background:#F6F1E7}
+#stage section{position:absolute;left:0;top:0;width:1920px;height:1080px;box-sizing:border-box;visibility:hidden;overflow:hidden}
+#stage section.on{visibility:visible}
+#stage aside{display:none}
+#ui{position:fixed;left:0;right:0;top:0;display:flex;gap:8px;align-items:center;padding:8px 10px;z-index:5;transition:opacity .3s;font-size:14px}
+#ui.h{opacity:0;pointer-events:none}
+#ui a,#ui button{font:600 14px/1 'Source Sans 3',Arial,sans-serif;background:rgba(14,23,16,.78);color:#F6F1E7;border:1px solid rgba(246,241,231,.25);border-radius:999px;padding:9px 14px;cursor:pointer;text-decoration:none}
+#ui .sp{flex:1}
+#cnt{font:600 14px/1 'Source Sans 3',Arial,sans-serif;color:#F6F1E7;background:rgba(14,23,16,.78);border-radius:999px;padding:9px 14px}
+#prog{position:fixed;left:0;bottom:0;height:4px;background:#D9B24C;width:0;z-index:5;transition:width .25s}
+
+/* vista relatore: finestra separata, mai sul grande schermo */
+body.rel{background:#0E1710}
+body.rel #ui,body.rel #prog{display:none}
+#rel{display:none}
+body.rel #rel{display:grid;position:fixed;inset:0;grid-template-columns:minmax(0,46%) minmax(0,1fr);grid-template-rows:auto 1fr;gap:14px 22px;padding:18px 22px;color:#E4EADD;font:400 18px/1.5 'Source Sans 3',Arial,sans-serif;z-index:7}
+#rel .bar{grid-column:1/3;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#rel .bar b{color:#D9B24C;font-size:20px}
+#rel .bar .sp{flex:1}
+#rel button{font:600 15px/1 'Source Sans 3',Arial,sans-serif;background:#1D2B20;color:#F6F1E7;border:1px solid rgba(246,241,231,.3);border-radius:999px;padding:10px 16px;cursor:pointer}
+#rel button.go{background:#D9B24C;color:#1B2A1E;border-color:#D9B24C}
+#rel .clock{font:700 26px/1 'Source Sans 3',Arial,sans-serif;color:#F6F1E7;min-width:84px;text-align:center}
+#rel .L{position:relative;min-width:0}
+#rel .L .box{position:relative;width:100%;aspect-ratio:16/9;background:#243428;border-radius:8px;overflow:hidden}
+#rel .L .nx{margin-top:14px;color:#B9C4B2}
+#rel .L .nx b{color:#D9B24C}
+#rel .R{overflow:auto;min-width:0;padding-right:6px}
+#rel .when{color:#D9B24C;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:15px}
+#rel .say{font-size:clamp(22px,2.4vw,34px);line-height:1.42;color:#F6F1E7;margin:8px 0 18px}
+#rel .tip{font-size:17px;color:#B9C4B2;border-left:3px solid #D9B24C;padding-left:14px}
+#rel .tip:before{content:'Promemoria: ';color:#D9B24C;font-weight:700}
+body.rel #stage{z-index:8;pointer-events:none}
+#rel .hint{margin-top:26px;font-size:15px;color:#9fae9c}
+/* elenco dei testi (stampa o lettura da telefono) */
+body.testi{background:#fff;color:#1B2A1E;overflow:auto;font:400 17px/1.55 'Source Sans 3',Arial,sans-serif}
+body.testi #stage,body.testi #ui,body.testi #prog,body.testi #rel{display:none!important}
+#testi{display:none;max-width:820px;margin:0 auto;padding:22px 18px 60px}
+body.testi #testi{display:block}
+#testi h1{font:700 26px/1.2 'Cormorant Garamond',Georgia,serif;margin:0 0 6px}
+#testi .intro{color:#5b6a5e;margin:0 0 22px}
+#testi article{border-top:1px solid #ccd3c6;padding:14px 0;break-inside:avoid}
+#testi .n{color:#8a6d1c;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+#testi h2{font:700 21px/1.25 'Cormorant Garamond',Georgia,serif;margin:2px 0 6px}
+#testi .say{margin:0 0 8px}
+#testi .tip{margin:0;color:#4a5a4d;font-size:15px;border-left:3px solid #D9B24C;padding-left:10px}
+@media print{body.testi{overflow:visible}}
+@media print{
+ @page{size:1920px 1080px;margin:0}
+ html,body{overflow:visible;height:auto;background:#fff}
+ #stage{position:static;transform:none!important;width:1920px;height:auto}
+ #stage section{position:relative;visibility:visible;page-break-after:always;break-after:page}
+ #ui,#prog,#rel,#testi,#cnt{display:none!important}
+}
+:root {
+  --dark: #1B2A1E;
+  --bosco: #2C3E2D;
+  --light: #F6F1E7;
+  --light2: #EDE5D3;
+  --card: #FFFCF5;
+  --line: #DDD2B8;
+  --ink: #233325;
+  --soft: #47584A;
+  --gold: #D9B24C;
+  --goldink: #7A5F18;
+  --sage: #5B7A5E;
+}
+section {
+  counter-increment: page;
+  background: var(--light);
+  color: var(--ink);
+  font-family: 'Source Sans 3', Arial, sans-serif;
+  padding: 128px 128px 160px;
+  display: flex;
+  flex-direction: column;
+}
+h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 120px; font-weight: 600; line-height: 1.02; color: var(--bosco); margin: 0; }
+h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 76px; font-weight: 600; line-height: 1.08; color: var(--bosco); margin: 0; }
+h3 { font-family: 'Source Sans 3', Arial, sans-serif; font-size: 44px; font-weight: 700; line-height: 1.15; color: var(--bosco); margin: 0; }
+p { font-size: 32px; line-height: 1.45; color: var(--soft); margin: 0; }
+ul { font-size: 44px; line-height: 1.4; color: var(--ink); margin: 0; }
+li { margin-bottom: 14px; }
+
+.eyebrow { font-size: 28px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--goldink); margin: 0 0 24px; }
+.lead { font-size: 32px; line-height: 1.5; margin-top: 24px; max-width: 1400px; }
+.foot { position: absolute; left: 128px; bottom: 64px; width: 1664px; font-size: 24px; line-height: 1.2; color: var(--soft); margin: 0; }
+.foot::after { content: "  ·  " counter(page); }
+
+.dk { background: var(--dark); }
+.dk h1, .dk h2, .dk h3 { color: var(--light); }
+.dk p, .dk ul { color: #D5DDCE; }
+.dk .eyebrow { color: var(--gold); }
+.dk .foot { color: #A9BBA8; }
+.ac { background: var(--bosco); }
+.ac h1, .ac h2 { color: var(--light); }
+.ac p { color: #E4EADD; }
+.ac .eyebrow { color: var(--gold); }
+.ac .foot { color: #B8C8B6; }
+.alt { background: var(--light2); }
+
+.row { display: flex; gap: 32px; margin-top: 48px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 48px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+.card { background: var(--card); border: 2px solid var(--line); border-radius: 24px; padding: 36px 40px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+.card .tx { font-size: 28px; line-height: 1.45; color: var(--soft); margin: 0; }
+.card .t { font-size: 32px; font-weight: 700; line-height: 1.2; color: var(--bosco); margin: 0; }
+.dk .card { background: #24372A; border-color: #3C5440; }
+.dk .card h3, .dk .card .t { color: var(--light); }
+.dk .card .tx { color: #D5DDCE; }
+.big { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 120px; font-weight: 600; line-height: 0.9; color: var(--goldink); margin: 0; }
+.dk .big, .ac .big { color: var(--gold); }
+.tag { font-size: 28px; font-weight: 700; color: var(--goldink); margin: 0; }
+
+.bar { display: flex; gap: 6px; height: 48px; margin: 32px 0 28px; }
+.bar div { border-radius: 10px; }
+.b0 { background: #CFC4A8; }
+.b1 { background: #2C3E2D; }
+.b2 { background: #5B7A5E; }
+.b3 { background: #B8922A; }
+.b4 { background: #7A5F18; }
+
+.note { font-size: 28px; line-height: 1.45; color: var(--soft); margin-top: 28px; }
+.url { font-family: 'Source Sans 3', Arial, sans-serif; font-size: 32px; font-weight: 700; color: var(--goldink); margin: 0; }
+.dk .url { color: var(--gold); }
+
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 8px; }
+.grid5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-top: 32px; }
+.card.sm { padding: 22px 26px; gap: 8px; }
+.card.sm .tx { font-size: 24px; line-height: 1.35; }
+.pill { display: inline-block; align-self: flex-start; background: var(--gold); color: var(--dark); border-radius: 999px; padding: 4px 16px; font-size: 22px; font-weight: 700; margin: 0; }
+.two { display: grid; grid-template-columns: 1.05fr 1fr; gap: 72px; align-items: center; margin-top: 36px; }
+.col { display: flex; flex-direction: column; gap: 22px; }
+.phone { width: 330px; height: 590px; border: 10px solid #1B2A1E; border-radius: 44px; background: var(--card); padding: 30px 22px 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px; justify-self: center; overflow: hidden; box-shadow: 0 24px 48px rgba(27,42,30,.25); }
+.dk .phone { border-color: #0E1710; }
+.phone .ph-t { font-size: 26px; font-weight: 700; line-height: 1.15; color: var(--bosco); margin: 0; }
+.phone p { font-size: 21px; line-height: 1.3; color: var(--soft); margin: 0; }
+.win { border: 2px solid var(--line); border-radius: 20px; background: var(--card); overflow: hidden; box-shadow: 0 20px 44px rgba(27,42,30,.18); }
+.win .wb { background: var(--light2); height: 46px; display: flex; align-items: center; gap: 10px; padding: 0 20px; }
+.win .wb i { width: 14px; height: 14px; border-radius: 50%; background: #CFC4A8; display: block; }
+.win .wb span { font-size: 20px; color: var(--soft); margin-left: 14px; }
+.win .wc { padding: 26px 32px 30px; display: flex; flex-direction: column; gap: 14px; }
+.win p { font-size: 24px; line-height: 1.35; color: var(--soft); margin: 0; }
+.field { border: 2px solid var(--line); border-radius: 12px; padding: 10px 18px; font-size: 24px; color: var(--soft); background: #fff; }
+.field b { display: block; font-size: 17px; color: var(--goldink); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 2px; }
+.btn { background: var(--bosco); color: var(--light); border-radius: 14px; padding: 12px 24px; font-size: 25px; font-weight: 700; text-align: center; }
+.btn.gold { background: var(--gold); color: var(--dark); }
+.chips { display: flex; flex-wrap: wrap; gap: 12px; }
+.chip { display: inline-block; border: 2px solid var(--line); background: var(--card); border-radius: 999px; padding: 6px 20px; font-size: 25px; font-weight: 700; color: var(--bosco); }
+.chip.on { background: var(--bosco); color: var(--light); border-color: var(--bosco); }
+.task { border: 3px dashed var(--gold); border-radius: 24px; background: rgba(217,178,76,.16); padding: 22px 30px; display: flex; gap: 26px; align-items: center; }
+.task .tk { font-size: 22px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--goldink); margin: 0 0 6px; }
+.task p { font-size: 27px; line-height: 1.35; color: var(--ink); margin: 0; }
+.task .min { margin-left: auto; flex: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 72px; font-weight: 600; line-height: .9; color: var(--goldink); text-align: center; }
+.task .min small { display: block; font-family: 'Source Sans 3', Arial, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: .1em; }
+.dk .task { background: rgba(217,178,76,.12); }
+.dk .task p { color: #F6F1E7; }
+.dk .task .tk, .dk .task .min { color: var(--gold); }
+.chk { list-style: none; padding: 0; margin: 0; }
+.chk li { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 14px; font-size: 29px; line-height: 1.3; color: var(--ink); }
+.chk li::before { content: ""; flex: none; width: 28px; height: 28px; border: 3px solid var(--goldink); border-radius: 8px; margin-top: 3px; box-sizing: border-box; }
+.dk .chk li { color: #F6F1E7; }
+.dk .chk li::before { border-color: var(--gold); }
+.yes li::before { content: "✓"; border: none; width: 34px; height: auto; margin-top: 0; font-size: 34px; font-weight: 800; color: #2F7D4F; line-height: 1.1; }
+.no li::before { content: "✗"; border: none; width: 34px; height: auto; margin-top: 0; font-size: 34px; font-weight: 800; color: #A63A3A; line-height: 1.1; }
+.step { display: flex; gap: 24px; align-items: flex-start; }
+.step .n { flex: none; width: 64px; height: 64px; border-radius: 50%; background: var(--gold); color: var(--dark); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 38px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.step p { font-size: 29px; line-height: 1.3; color: var(--ink); padding-top: 6px; }
+.step p b { color: var(--bosco); }
+.dk .step p { color: #F6F1E7; }
+.dk .step p b { color: var(--gold); }
+.flow { display: flex; align-items: stretch; gap: 0; margin-top: 32px; }
+.flow .f { flex: 1; background: var(--card); border: 2px solid var(--line); border-radius: 22px; padding: 24px 20px; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center; }
+.flow .f .t { font-size: 26px; font-weight: 700; color: var(--bosco); margin: 0; line-height: 1.2; }
+.flow .arrow { align-self: center; font-size: 44px; color: var(--goldink); padding: 0 8px; }
+.ico { font-size: 56px; line-height: 1; margin: 0; }
+.mini { font-size: 24px; line-height: 1.35; color: var(--soft); margin: 0; }
+.code { font-family: 'Courier New', monospace; font-size: 20px; line-height: 1.5; background: #1B2A1E; color: #BFD3B8; border-radius: 12px; padding: 14px 18px; white-space: pre; }
+.bubble { border-radius: 18px; padding: 14px 20px; font-size: 22px; line-height: 1.35; }
+.bubble.u { background: var(--light2); color: var(--ink); align-self: flex-end; max-width: 80%; }
+.bubble.a { background: #fff; border: 2px solid var(--line); color: var(--soft); max-width: 92%; }
+.sheet { background: #fff; border: 2px solid var(--line); border-radius: 12px; width: 440px; height: 580px; padding: 36px 40px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; justify-self: center; box-shadow: 0 24px 48px rgba(27,42,30,.2); }
+.sheet .qr { width: 280px; height: 280px; }
+.sheet p { font-size: 26px; color: var(--ink); }
+.dbadge { background: var(--gold); color: var(--dark); border-radius: 28px; padding: 28px 40px; display: inline-flex; flex-direction: column; align-items: center; align-self: flex-start; }
+.dbadge .d { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 150px; font-weight: 600; line-height: .9; color: var(--dark); }
+.dbadge .m { font-size: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--dark); }
+.timer { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 260px; font-weight: 600; line-height: .85; color: var(--gold); margin: 0; }
+
+.ac .step p, .ac .chk li { color: #F6F1E7; }
+.ac .step p b { color: var(--gold); }
+.ac .chk li::before { border-color: var(--gold); }
+h1, h2, .big, .step .n, .timer, .dbadge .d, .task .min { font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+
+</style>
+</head>
+<body>
+<div id="ui"><a href="aula/formazione/">← Formazione</a><span class="sp"></span><span id="cnt"></span><button id="bn" type="button" title="Apre la vista del relatore in un'altra finestra (N)">Vista relatore</button><button id="bf" type="button" title="Schermo intero (F)">Schermo intero</button><button id="bp" type="button" title="Salva come PDF">PDF</button></div>
+<div id="stage">
+<section id="cover" class="dk" style="justify-content:space-between">
+<p class="eyebrow">IPSSEOA «R. A. Costaggini» · Convitto · Rieti</p>
+<div>
+<h1>Aula digitale</h1>
+<h2 style="margin-top:24px;font-style:italic;color:#D9B24C">Formazione per educatori e docenti</h2>
+<p class="lead">Novanta minuti, dal primo sguardo alla lezione in classe.</p>
+</div>
+<p>Michele Gaggiano · educatore · novembre 2026</p>
+<aside><p class="say">Buongiorno. Oggi vi rubo novanta minuti, e vi prometto di restituirvene molti di più. Seneca diceva che mentre insegniamo, impariamo: docendo discimus. Io aggiungo che, mentre impariamo a insegnare meglio, risparmiamo qualche sera di fotocopie. Questo è il programma di oggi.</p><p class="tip">Durata complessiva: 90 minuti. Accoglienza dei partecipanti prima delle 0:00; chiedete a tutti di tenere il telefono a portata di mano, perché serve già dalla seconda parte. Aprite dicendo che questa non è una lezione sull’informatica: è un incontro su come fare prima ciò che già facciamo.</p></aside>
+</section>
+<section id="tempi">
+<p class="eyebrow">Cronoprogramma</p>
+<h2>Novanta minuti, sette parti, cinque missioni</h2>
+<div class="bar" style="height:24px;margin:20px 0 22px"><div class="b1" style="flex:10"></div><div class="b2" style="flex:15"></div><div class="b3" style="flex:10"></div><div class="b0" style="flex:5"></div><div class="b4" style="flex:25"></div><div class="b3" style="flex:10"></div><div class="b2" style="flex:10"></div><div class="b1" style="flex:5"></div></div>
+<div class="grid4">
+<div class="card sm"><p class="tag">0:00 · 10’</p><p class="t">1 Apertura</p><p class="tx">Perché l’Aula, che cosa non raccoglie.</p></div>
+<div class="card sm"><p class="tag">0:10 · 15’</p><p class="t">2 Lato studente</p><p class="tx">Lingue e Sala studio, dal telefono.</p><p class="pill">Missione 1</p></div>
+<div class="card sm"><p class="tag">0:25 · 10’</p><p class="t">3 Per tutti</p><p class="tx">«Aa Leggi a modo tuo», senza etichette.</p><p class="pill">Missione 2</p></div>
+<div class="card sm"><p class="tag">0:35 · 5’</p><p class="t">Pausa</p><p class="tx">Un caffè, e la foto di una pagina pronta.</p></div>
+<div class="card sm"><p class="tag">0:40 · 25’</p><p class="t">4 Laboratorio</p><p class="tx">Dal libro alla lezione, in tre passi.</p><p class="pill">Missioni 3 e 4</p></div>
+<div class="card sm"><p class="tag">1:05 · 10’</p><p class="t">5 Riservatezza</p><p class="tx">Tre regole e informativa.</p><p class="pill">Missione 5</p></div>
+<div class="card sm"><p class="tag">1:15 · 10’</p><p class="t">6 In classe</p><p class="tx">Scenari d’uso e Open Day.</p></div>
+<div class="card sm"><p class="tag">1:25 · 5’</p><p class="t">7 Chiusura</p><p class="tx">Le missioni da ripetere da soli.</p></div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Sette parti, cinque missioni e una pausa caffè, che è la parte più amata. Non è una conferenza: si lavora. Ogni parte ha il suo orario, e alla fine di ciascuna avrete fatto una cosa vera, non ascoltato una cosa.</p><p class="tip">Mostrate questa slide intorno a 0:02 e tornateci a ogni cambio di parte. Le «missioni» sono piccoli compiti pratici di pochi minuti: si fanno durante l’incontro e si possono ripetere da soli, perché sono tutte riepilogate nella slide finale. Il blocco più lungo è il laboratorio. Se si accumula ritardo, si accorcia la parte 6, mai il laboratorio.</p></aside>
+</section>
+<section id="obiettivi">
+<p class="eyebrow">Parte 1 · Apertura · 0:00 – 0:10</p>
+<h2>Alla fine saprete fare tre cose</h2>
+<div class="two">
+<div class="col" style="gap:34px">
+<div class="step"><div class="n">1</div><p><b>Aprire</b> una lezione e proiettarla alla classe, con il codice o il QR.</p></div>
+<div class="step"><div class="n">2</div><p><b>Creare</b> una lezione dalla foto di una pagina, o da un semplice titolo, in circa tre minuti.</p></div>
+<div class="step"><div class="n">3</div><p><b>Proteggere</b> la riservatezza degli studenti: bastano tre regole.</p></div>
+</div>
+<div class="phone">
+<p class="ph-t">🥗 I principi nutritivi</p>
+<p>Scienza e cultura dell’alimentazione</p>
+<div style="width:200px;height:200px;margin:8px auto"><svg viewBox="0 0 21 21" width="100%" height="100%" shape-rendering="crispEdges"><g fill="#1B2A1E"><path fill-rule="evenodd" d="M0 0h7v7H0zM1 1v5h5V1zM14 0h7v7h-7zM15 1v5h5V1zM0 14h7v7H0zM1 15v5h5v-5z"/><path d="M2 2h3v3H2zM16 2h3v3h-3zM2 16h3v3H2z"/><path d="M8 0h2v2H8zM11 1h2v2h-2zM8 4h3v2H8zM12 5h1v2h-1zM0 8h2v2H0zM3 9h3v1H3zM7 8h2v3H7zM10 8h3v2h-3zM14 9h2v2h-2zM18 8h3v2h-3zM8 12h2v2H8zM11 11h2v3h-2zM15 13h2v2h-2zM18 12h2v3h-2zM9 16h3v2H9zM13 16h2v3h-2zM16 18h3v2h-3zM9 19h2v2H9zM12 20h4v1h-4z"/></g></svg></div>
+<p style="text-align:center">Codice della lezione: 6 lettere</p>
+<div class="btn gold">Entra →</div>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Tre verbi. Aprire una lezione e proiettarla alla classe con un codice o un QR. Creare una lezione da una foto, o da un semplice titolo, in circa tre minuti. Proteggere la riservatezza degli studenti, e bastano tre regole. Se uscite di qui sapendo fare queste tre cose, il corso ha funzionato.</p><p class="tip">Minuti 0:02 – 0:03. Dite chiaramente il risultato atteso: chi esce deve poter fare le tre cose senza aiuto. Il telefono a destra è la lezione di esempio «I principi nutritivi», che troverete nell’Aula. Chiedete per alzata di mano chi ha già usato un assistente di intelligenza artificiale: serve a tarare il ritmo del laboratorio.</p></aside>
+</section>
+<section id="perche" class="ac">
+<p class="eyebrow">Parte 1 · Perché · 0:03 – 0:05</p>
+<div class="two" style="margin-top:12px;flex:1">
+<div class="col">
+<h1 style="color:#F6F1E7;font-size:132px">Meno fatica, più scuola.</h1>
+<p class="lead" style="max-width:760px;margin-top:8px">Una foto del libro, degli appunti o di una mappa (o anche solo il titolo) diventa una lezione interattiva, con il QR e il codice per i ragazzi.</p>
+</div>
+<div class="grid2" style="margin-top:0">
+<div class="card" style="background:#34493A;border-color:#4C6650;align-items:center;text-align:center"><p class="big">3</p><p class="t" style="color:#F6F1E7">minuti</p><p class="tx" style="color:#E4EADD">dalla foto al QR</p></div>
+<div class="card" style="background:#34493A;border-color:#4C6650;align-items:center;text-align:center"><p class="big">7</p><p class="t" style="color:#F6F1E7">modi</p><p class="tx" style="color:#E4EADD">di studiare la stessa lezione</p></div>
+<div class="card" style="background:#34493A;border-color:#4C6650;align-items:center;text-align:center"><p class="big">0</p><p class="t" style="color:#F6F1E7">installazioni</p><p class="tx" style="color:#E4EADD">telefono o computer</p></div>
+<div class="card" style="background:#34493A;border-color:#4C6650;align-items:center;text-align:center"><p class="big">0</p><p class="t" style="color:#F6F1E7">voti da inserire</p><p class="tx" style="color:#E4EADD">né registri da compilare</p></div>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Il motivo è uno: meno fatica, più scuola. Una foto del libro o degli appunti diventa una lezione interattiva, con QR e codice per i ragazzi. Tre minuti dalla foto al QR, sette modi di studiare la stessa lezione, nessuna installazione, nessun voto da inserire. Plutarco, o chi per lui, diceva che la mente non è un vaso da riempire ma un fuoco da accendere. La macchina prepara la legna: il fuoco lo accendete voi.</p><p class="tip">Minuti 0:03 – 0:05. Una sola idea: l’Aula non è un compito in più, è un modo di fare prima quello che già facciamo. I quattro numeri sono quelli dichiarati nella pagina docenti dell’Aula. Se qualcuno chiede «ma è sicuro?», rispondete che si arriva alla parte sulla riservatezza e che il principio è semplice: l’Aula non chiede dati agli studenti.</p></aside>
+</section>
+<section id="cose">
+<p class="eyebrow">Parte 1 · Che cos’è · 0:05 – 0:07</p>
+<h2>L’Aula digitale in una schermata</h2>
+<div class="two">
+<div class="col">
+<p class="lead" style="margin-top:0">Uno spazio web del Convitto, aperto a tutti, per studiare con lezioni interattive.</p>
+<div class="step"><div class="n">1</div><p><b>Lingue</b>: inglese, francese e spagnolo per i mestieri della sala, della cucina e dell’accoglienza.</p></div>
+<div class="step"><div class="n">2</div><p><b>Sala studio</b>: lezioni di ogni materia, create da educatori e docenti.</p></div>
+<div class="step"><div class="n">3</div><p><b>Per colleghi e famiglie</b>: una pagina di formazione e una di spiegazione.</p></div>
+</div>
+<div class="win">
+<div class="wb"><i></i><i></i><i></i><span>convitto.alberghierorieti.edu.it/aula/</span></div>
+<div class="wc">
+<p class="ph-t" style="font-size:30px;font-weight:700;color:var(--bosco)">Aula del Convitto</p>
+<div class="grid2" style="margin-top:4px;gap:18px">
+<div style="background:var(--bosco);border-radius:18px;padding:22px 24px"><p style="color:#F6F1E7;font-size:30px;font-weight:700">Lingue</p><p style="color:#E4EADD;font-size:22px">Welcome · Bienvenue · Bienvenidos</p></div>
+<div style="background:var(--gold);border-radius:18px;padding:22px 24px"><p style="color:var(--dark);font-size:30px;font-weight:700">Sala studio</p><p style="color:var(--dark);font-size:22px">Studiare, ma in modo furbo</p></div>
+</div>
+<div class="grid2" style="margin-top:4px;gap:18px">
+<div class="field"><b>Per le famiglie</b>Studiare con calma</div>
+<div class="field"><b>Per i colleghi</b>Provare l’Aula, in tre passi</div>
+</div>
+</div>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">L’Aula digitale è uno spazio web del Convitto, aperto a tutti. Ha tre stanze. Lingue: inglese, francese e spagnolo per i mestieri della sala, della cucina e dell’accoglienza. Sala studio: lezioni di ogni materia, create da educatori e docenti. E una pagina di formazione e una di spiegazione per colleghi e famiglie. Einstein, si dice, voleva le cose semplici, ma non più semplici del dovuto. Ci abbiamo provato.</p><p class="tip">Minuti 0:05 – 0:07. Se c’è connessione, aprite la pagina dal vivo. Gli studenti non hanno bisogno di un account: entrano e studiano. Un accesso (con la mail istituzionale e un codice) serve soltanto a chi crea o gestisce lezioni.</p></aside>
+</section>
+<section id="nondati" class="dk">
+<p class="eyebrow">Parte 1 · Che cosa non raccoglie · 0:07 – 0:10</p>
+<h2>Nessuna registrazione. Nessun dato degli studenti.</h2>
+<div class="two">
+<div class="col" style="gap:26px">
+<div class="step"><div class="n">0</div><p><b>account per gli studenti</b>: si entra con il codice della lezione, senza lasciare il nome.</p></div>
+<div class="step"><div class="n">0</div><p><b>risultati inviati</b>: tappe e punti restano sul telefono di chi studia.</p></div>
+<div class="step"><div class="n">1</div><p><b>regola per chi insegna</b>: un codice per lezione, mai per persona.</p></div>
+<p class="note" style="color:#D5DDCE;margin-top:6px">Parere della DPO del 4 novembre 2026 e autorizzazione della Dirigente del 13 novembre 2026.</p>
+</div>
+<div class="phone">
+<p class="ph-t">La sala studio del Convitto</p>
+<div class="field"><b>Codice della lezione</b>_ _ _ _ _ _</div>
+<div class="btn">Entra →</div>
+<p style="margin-top:10px">Il codice di 6 lettere te lo dà il docente o l’educatore: è scritto sotto il QR della lezione.</p>
+<p style="margin-top:auto;font-weight:700;color:var(--goldink)">I progressi restano solo sul tuo telefono: il sito non raccoglie nomi né risultati.</p>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Questa è la slide più importante per le famiglie. Zero account per gli studenti: si entra con il codice della lezione, senza lasciare il nome. Zero risultati inviati: tappe e punti restano sul dispositivo di chi studia. Una sola regola per chi insegna: un codice per lezione, mai per persona. Il sito non sa come si chiamano i ragazzi, e sta benissimo così. C’è il parere della DPO del 4 novembre e l’autorizzazione della Dirigente del 13.</p><p class="tip">Minuti 0:07 – 0:10. È la slide che rassicura: ripetetela con parole vostre. Le frasi sul telefono sono quelle scritte nella pagina della Sala studio. Se vengono domande di dettaglio, rimandate alla slide sull’informativa (parte 5).</p></aside>
+</section>
+<section id="lingue" class="alt">
+<p class="eyebrow">Parte 2 · Lato studente · 0:10 – 0:14</p>
+<h2>Lingue: tre lingue, otto modi per imparare</h2>
+<div class="two">
+<div class="col">
+<div class="chips"><span class="chip on">English</span><span class="chip on">Français</span><span class="chip on">Español</span></div>
+<p class="lead" style="margin-top:0">Le parole e le frasi che servono davvero in sala, in cucina, in pasticceria, al ricevimento e al bar: da ascoltare, ripetere ed esercitare dal telefono.</p>
+<div class="card sm"><p class="t">🗓️ La frase del giorno</p><p class="tx">Cambia ogni giorno: si ascolta e si ripete ad alta voce.</p></div>
+<div class="card sm"><p class="t">🖨️ Anche su carta</p><p class="tx">Vocabolario stampabile per sezione; verifiche già impaginate per i docenti.</p></div>
+</div>
+<div class="col" style="gap:16px">
+<p class="tag">📖 Impara</p>
+<div class="chips"><span class="chip">🧭 Lezioni guidate</span><span class="chip">📖 Vocabolario</span><span class="chip">🖼️ Il ristorante illustrato</span><span class="chip">💬 Dialoghi</span><span class="chip">🎓 Livello avanzato</span></div>
+<p class="tag" style="margin-top:8px">🎯 Allenati</p>
+<div class="chips"><span class="chip">✏️ Esercizi</span><span class="chip">🎲 Giochi alla LIM</span><span class="chip">🎭 Imprevisti</span></div>
+<p class="note" style="margin-top:8px">Memory, indovina la parola, traduci a tempo, ascolta e scegli: quattro giochi a due squadre da proiettare in classe.</p>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Wittgenstein scriveva che i limiti del mio linguaggio sono i limiti del mio mondo. Qui allarghiamo il mondo di tre lingue, con le parole che servono davvero: in sala, in cucina, in pasticceria, al ricevimento e al bar. C’è la frase del giorno da ascoltare e ripetere ad alta voce, il vocabolario stampabile, le verifiche già impaginate, e quattro giochi a squadre da proiettare. Carlo V, si dice, parlava spagnolo a Dio, francese agli uomini e tedesco al suo cavallo: noi ci accontentiamo dei primi due.</p><p class="tip">Minuti 0:10 – 0:14. Mostrate aula/lingue/ dal telefono, come la vedrebbe uno studente: la schermata iniziale, la frase del giorno, un esercizio. I nomi degli otto modi sono quelli della pagina. L’area docenti delle Lingue è una sezione a parte, riservata. Ogni frase si ascolta con la voce del telefono (su Android, nelle impostazioni di sintesi vocale si possono scaricare le voci delle tre lingue).</p></aside>
+</section>
+<section id="studio">
+<p class="eyebrow">Parte 2 · Lato studente · 0:14 – 0:17</p>
+<h2>Sala studio: una lezione, sette modi</h2>
+<div class="two">
+<div class="win">
+<div class="wb"><i></i><i></i><i></i><span>aula/studio/</span></div>
+<div class="wc">
+<p style="font-size:30px;font-weight:700;color:var(--bosco)">📚 Studiare, ma in modo furbo</p>
+<div class="field"><b>Codice della lezione</b>_ _ _ _ _ _</div>
+<div class="btn">Entra →</div>
+<div class="card sm" style="margin-top:6px"><p class="tag">🥗 Prova subito</p><p class="t">I principi nutritivi</p><p class="tx">Una lezione di esempio completa: Scienza e cultura dell’alimentazione.</p></div>
+</div>
+</div>
+<div class="col" style="gap:14px">
+<p class="tag">Ogni lezione si studia in sette modi</p>
+<div class="chips"><span class="chip on">🧭 Percorso guidato</span><span class="chip">🔐 Escape room</span><span class="chip">🗺️ Costruisci la mappa</span><span class="chip">🔍 Caccia all’errore</span><span class="chip">🎭 Intervista impossibile</span><span class="chip">⚡ Il minuto</span><span class="chip">🏆 Sfida a squadre (LIM)</span></div>
+<p class="note">Lo stesso contenuto, creato una volta sola, diventa sette attività diverse: nessun lavoro in più per chi prepara.</p>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Montaigne voleva una testa ben fatta, non ben piena. La Sala studio fa questo: la stessa lezione, creata una volta sola, si studia in sette modi diversi. Per chi prepara non c’è nessun lavoro in più. Il titolo lo dice da solo: studiare, ma in modo furbo. E c’è una lezione di esempio pronta, sui principi nutritivi, da provare subito.</p><p class="tip">Minuti 0:14 – 0:17. Aprite aula/studio/ e mostrate il campo del codice, poi la lezione di esempio. Provate due modalità dal vivo, ad esempio il percorso guidato e la sfida a squadre. Il codice è di sei lettere ed è scritto sotto il QR della lezione.</p></aside>
+</section>
+<section id="percorso" class="alt">
+<p class="eyebrow">Parte 2 · Il percorso guidato · 0:17 – 0:19</p>
+<h2>Le sette tappe del percorso guidato</h2>
+<div class="flow">
+<div class="f"><p class="ico">🎣</p><p class="t">Il gancio</p></div><div class="arrow">›</div>
+<div class="f"><p class="ico">💡</p><p class="t">Le idee</p></div><div class="arrow">›</div>
+<div class="f"><p class="ico">🧠</p><p class="t">Memorizza</p></div><div class="arrow">›</div>
+<div class="f"><p class="ico">🎯</p><p class="t">Allenati</p></div><div class="arrow">›</div>
+<div class="f"><p class="ico">🃏</p><p class="t">Flashcard</p></div><div class="arrow">›</div>
+<div class="f"><p class="ico">🏆</p><p class="t">Sfida finale</p></div><div class="arrow">›</div>
+<div class="f"><p class="ico">📌</p><p class="t">Da ricordare</p></div>
+</div>
+<p class="tag" style="margin:36px 0 12px">Perché funziona</p>
+<div class="grid4" style="margin-top:0">
+<div class="card sm"><p class="t">🔊 Si ascolta</p><p class="tx">Ogni scheda si legge ad alta voce, con testo grande e spazi regolabili.</p></div>
+<div class="card sm"><p class="t">🏰 Trucchi per ricordare</p><p class="tx">Parole magiche, il palazzo della memoria nel Convitto, filastrocche.</p></div>
+<div class="card sm"><p class="t">🎯 Ci si mette alla prova</p><p class="tx">Si ricorda di più rispondendo che rileggendo. Sbagliare non costa niente.</p></div>
+<div class="card sm"><p class="t">🔁 Ripasso a distanza</p><p class="tx">Domani, tra 3 giorni e tra una settimana: un ripasso lampo di 5 domande.</p></div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Il percorso ha sette tappe: il gancio, le idee, memorizza, allenati, flashcard, sfida finale, da ricordare. Funziona per quattro motivi. Ogni scheda si ascolta. Ci sono i trucchi per ricordare, come il palazzo della memoria fatto con le stanze del Convitto. Ci si mette alla prova, perché si ricorda di più rispondendo che rileggendo. E il ripasso torna domani, tra tre giorni e tra una settimana. Beckett diceva: fail better, sbaglia meglio. Qui sbagliare non costa niente.</p><p class="tip">Minuti 0:17 – 0:19. Non spiegate ogni tappa: ditele scorrendo con il dito la lezione di esempio. Il messaggio è che la lezione generata non è un semplice testo, ma un percorso con domande, trucchi per ricordare e ripasso. Il ripasso a distanza è gestito dalla Sala studio e i progressi restano sul telefono.</p></aside>
+</section>
+<section id="prova" class="dk">
+<p class="eyebrow">Parte 2 · Missione 1 · 0:19 – 0:25</p>
+<h2>Missione 1: entra e gioca</h2>
+<div class="two">
+<div class="col">
+<ul class="chk">
+<li>Aprite <b>aula/studio/</b> dal telefono.</li>
+<li>Toccate «Prova subito: <b>I principi nutritivi</b>».</li>
+<li>Fate almeno tre tappe: il gancio, le idee, allenati.</li>
+<li>Chiudete con la <b>sfida finale</b> e guardate il punteggio.</li>
+</ul>
+<div class="task"><div><p class="tk">Se avanza tempo</p><p>Aprite aula/lingue/, ascoltate la frase del giorno e fate un esercizio.</p></div><div class="min">6<small>MINUTI</small></div></div>
+</div>
+<div class="phone">
+<p class="ph-t">🥗 I principi nutritivi</p>
+<p>Tappa 3 di 7 · 🧠 Memorizza</p>
+<div style="background:var(--light2);border-radius:14px;padding:16px 18px"><p style="font-size:22px;color:var(--ink)">Un trucco per ricordare: costruite il «palazzo della memoria» con le stanze del Convitto.</p></div>
+<div class="chips" style="gap:8px"><span class="chip" style="font-size:20px;padding:4px 14px">🔊 Ascolta</span><span class="chip" style="font-size:20px;padding:4px 14px">Aa</span></div>
+<div class="btn gold" style="margin-top:auto">Avanti →</div>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Sei minuti da studenti. Aprite aula/studio, toccate la lezione di esempio, fate il gancio, le idee, allenati, e chiudete con la sfida finale. Guardate il punteggio. Platone, nella Repubblica, consigliava di educare i ragazzi non con la forza ma per gioco. Se avanza tempo, passate in Lingue, ascoltate la frase del giorno e fate un esercizio.</p><p class="tip">Minuti 0:19 – 0:25. Tutti con il telefono in mano. Circolate tra i partecipanti; chi ha difficoltà si affianca a un collega. Alle 0:25 chiedete una parola ciascuno come impressione. La schermata a destra è illustrativa: l’aspetto reale è quello della lezione di esempio. Missione ripetibile in autonomia (vedi slide finale).</p></aside>
+</section>
+<section id="supporti">
+<p class="eyebrow">Parte 3 · Per tutti · 0:25 – 0:31</p>
+<h2>«Aa Leggi a modo tuo»</h2>
+<div class="two">
+<div class="col" style="gap:20px">
+<p class="lead" style="margin-top:0">Ogni lezione si adatta a chi la legge. Nessuno deve chiedere, nessuno viene segnato.</p>
+<div class="step"><div class="n">Aa</div><p><b>Carattere e grandezza</b>: un font ad alta leggibilità e testo più grande.</p></div>
+<div class="step"><div class="n">↔</div><p><b>Spazi e colori</b>: più aria tra lettere, parole e righe; sfondi più riposanti.</p></div>
+<div class="step"><div class="n">🔊</div><p><b>Voce</b>: si ascolta la lezione mentre si legge.</p></div>
+<div class="step"><div class="n">1·2·3</div><p><b>Scelta rapida</b>: Lettura 1, 2 o 3, in un tocco.</p></div>
+</div>
+<div class="phone">
+<p class="ph-t">Aa Leggi a modo tuo</p>
+<div class="field" style="font-size:20px;padding:8px 14px"><b>Carattere</b>Alta leggibilità</div>
+<div class="field" style="font-size:20px;padding:8px 14px"><b>Grandezza</b>A−&nbsp;&nbsp;&nbsp;<span style="font-size:28px">A</span>&nbsp;&nbsp;&nbsp;A+</div>
+<div class="field" style="font-size:20px;padding:8px 14px"><b>Colori</b><span style="display:inline-block;width:26px;height:26px;border-radius:50%;background:#F6F1E7;border:2px solid #DDD2B8"></span> <span style="display:inline-block;width:26px;height:26px;border-radius:50%;background:#FFF4B8"></span> <span style="display:inline-block;width:26px;height:26px;border-radius:50%;background:#CFE8D5"></span> <span style="display:inline-block;width:26px;height:26px;border-radius:50%;background:#1B2A1E"></span></div>
+<p style="font-weight:700;color:var(--goldink);margin-top:6px">Scelta rapida</p>
+<div class="chips" style="gap:8px"><span class="chip on" style="font-size:20px;padding:4px 14px">Lettura 1</span><span class="chip" style="font-size:20px;padding:4px 14px">Lettura 2</span><span class="chip" style="font-size:20px;padding:4px 14px">Lettura 3</span></div>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Ogni lezione si adatta a chi la legge, e nessuno deve chiedere. Carattere ad alta leggibilità e testo più grande; più aria tra lettere, parole e righe; sfondi riposanti; la voce che legge mentre si legge. E la scelta rapida: Lettura 1, 2 o 3, in un tocco. La scuola di Barbiana scriveva che non c’è nulla di più ingiusto che far parti uguali fra disuguali. Questo pulsante fa parti diverse senza dichiararlo a nessuno.</p><p class="tip">Minuti 0:25 – 0:31. Dimostrazione dal vivo: aprite una lezione, premete «Aa Leggi a modo tuo», cambiate carattere e colori, poi usate Lettura 1, 2, 3. Fate provare ai partecipanti sul proprio telefono. Le scelte restano sul dispositivo. Messaggio chiave: è utile a tutta la classe, non a una categoria di studenti. La schermata a destra è illustrativa.</p></aside>
+</section>
+<section id="etichette" class="alt">
+<p class="eyebrow">Parte 3 · Missione 2 · 0:31 – 0:35</p>
+<h2>Per tutti, senza etichette</h2>
+<div class="grid2" style="margin-top:28px">
+<div class="card"><h3>Si fa</h3>
+<ul class="chk yes"><li>Mostrare a tutta la classe il pulsante «Aa Leggi a modo tuo».</li><li>Dire: «provate quello che vi aiuta di più».</li><li>Se serve un link già impostato, darlo in modo riservato.</li></ul></div>
+<div class="card"><h3>Non si fa</h3>
+<ul class="chk no"><li>Indicare uno studente come destinatario di un supporto.</li><li>Dare un link già impostato davanti alla classe o con il nome.</li><li>Scrivere sul foglio una dicitura che distingue la versione con più aiuti.</li></ul></div>
+</div>
+<div class="task" style="margin-top:28px"><div><p class="tk">Missione 2 · Leggi a modo tuo</p><p>Aprite una lezione, premete «Aa Leggi a modo tuo», scegliete Lettura 2 e cambiate i colori; poi tornate a Lettura 1.</p></div><div class="min">3<small>MINUTI</small></div></div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Si fa: mostrare a tutta la classe il pulsante, dire «provate quello che vi aiuta di più», e, se serve un link già impostato, darlo in modo riservato. Non si fa: indicare uno studente come destinatario, dare il link davanti alla classe, scrivere sul foglio una dicitura che distingue la versione con più aiuti. Sul muro di Barbiana c’era scritto I care, mi sta a cuore. Il gesto giusto è questo: stare a cuore senza mettere il bollino. Missione 2, tre minuti: aprite una lezione, scegliete Lettura 2, cambiate i colori, tornate a Lettura 1.</p><p class="tip">Minuti 0:31 – 0:35. Passaggio educativo importante: il supporto non ha bisogno di una motivazione dichiarata, se è per tutti nessuno si sente fuori posto. Le tre voci di «Non si fa» e di «Si fa» riprendono le regole della pagina docenti. Lasciate tre minuti per la missione e uno per domande.</p></aside>
+</section>
+<section id="pausa" class="dk">
+<p class="eyebrow">0:35 – 0:40</p>
+<div class="two" style="margin-top:20px;flex:1">
+<div class="col">
+<h1 style="font-size:180px">Pausa</h1>
+<p class="lead" style="margin-top:0">Cinque minuti. Poi si lavora in prima persona.</p>
+<p class="timer" style="font-size:200px;margin-top:20px">5:00</p>
+</div>
+<div class="col">
+<p class="tag" style="color:var(--gold)">Prima di ripartire, preparate</p>
+<ul class="chk">
+<li>Una <b>foto</b> di una pagina del libro o di un appunto (senza nomi di ragazzi).</li>
+<li>La <b>mail istituzionale</b> aperta sul telefono: serve per ricevere il codice.</li>
+<li>Il <b>telefono carico</b>, o il computer.</li>
+</ul>
+<p class="note" style="color:#D5DDCE">Se non avete una foto, basta un titolo: la lezione nasce dall’argomento.</p>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Cinque minuti. Talleyrand voleva il caffè nero come il diavolo, caldo come l’inferno, puro come un angelo, dolce come l’amore. Almeno così si dice. Intanto preparate tre cose: la foto di una pagina o di un appunto, senza nomi di ragazzi; la mail istituzionale aperta, perché serve il codice; il dispositivo carico. Se non avete la foto, basta un titolo: la lezione nasce dall’argomento.</p><p class="tip">Minuti 0:35 – 0:40. Lasciate la slide visibile durante la pausa. Il codice di accesso arriva per posta all’indirizzo istituzionale e vale 10 minuti: conviene avere la casella pronta prima del laboratorio.</p></aside>
+</section>
+<section id="tre-passi">
+<p class="eyebrow">Parte 4 · Laboratorio · 0:40 – 0:42</p>
+<h2>Dal libro alla lezione, in tre passi</h2>
+<div class="flow" style="margin-top:36px">
+<div class="f" style="padding:30px 24px"><p class="ico">📋</p><p class="t" style="font-size:32px">1 · Le istruzioni</p><p class="mini">Scrivete l’argomento e premete «Copia le istruzioni».</p></div><div class="arrow">›</div>
+<div class="f" style="padding:30px 24px"><p class="ico">🤖</p><p class="t" style="font-size:32px">2 · L’assistente IA</p><p class="mini">Allegate le foto, incollate le istruzioni, copiate la risposta.</p></div><div class="arrow">›</div>
+<div class="f" style="padding:30px 24px"><p class="ico">✨</p><p class="t" style="font-size:32px">3 · Incolla e pubblica</p><p class="mini">Incollate, indicate l’autore, premete «Pubblica la lezione».</p></div><div class="arrow">›</div>
+<div class="f" style="padding:30px 24px;background:var(--bosco);border-color:var(--bosco)"><p class="ico">📱</p><p class="t" style="font-size:32px;color:#F6F1E7">La lezione</p><p class="mini" style="color:#E4EADD">con QR e codice per i ragazzi.</p></div>
+</div>
+<div class="grid2" style="margin-top:36px">
+<div class="card sm"><p class="t">📸 Creazione automatica</p><p class="tx">Alternativa senza copia e incolla: il sito manda le foto, o il solo argomento, all’IA della scuola.</p></div>
+<div class="card sm"><p class="t">🆓 Va bene la versione gratuita</p><p class="tx">Claude, ChatGPT o Gemini: scegliete l’assistente che preferite.</p></div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Tre passi, come nel valzer, ma senza pericolo per i piedi. Primo: le istruzioni, scrivete l’argomento e premete «Copia le istruzioni». Secondo: l’assistente IA, allegate le foto, incollate le istruzioni, copiate la risposta. Terzo: incollate, indicate l’autore, premete «Pubblica la lezione». In fondo compare la lezione con QR e codice. Esiste anche la creazione automatica, senza copia e incolla, che usa l’IA della scuola. E va bene l’assistente che preferite: Claude, ChatGPT o Gemini.</p><p class="tip">Minuti 0:40 – 0:42. Spiegate il flusso prima di farlo eseguire: tre passi e un risultato. Pagina di lavoro: aula/studio/docente.html. L’assistente esterno è uno strumento a scelta del docente. La creazione automatica evita il passaggio dall’IA esterna: le foto vanno direttamente all’IA della scuola.</p></aside>
+</section>
+<section id="passo1" class="alt">
+<p class="eyebrow">Parte 4 · Passo 1 · 0:42 – 0:45</p>
+<h2>Passo 1: le istruzioni per l’IA</h2>
+<div class="two">
+<div class="col" style="gap:26px">
+<div class="step"><div class="n">1</div><p>Scrivete l’<b>argomento</b> della lezione. Tutto il resto è facoltativo.</p></div>
+<div class="step"><div class="n">2</div><p>Se volete, indicate <b>materia, anno, classe</b> e indicazioni per l’IA.</p></div>
+<div class="step"><div class="n">3</div><p>Premete <b>«Copia le istruzioni»</b>.</p></div>
+<div class="step"><div class="n">4</div><p>Aprite l’assistente: <b>Claude, ChatGPT o Gemini</b>.</p></div>
+<p class="note">Se avete le foto, l’argomento può restare vuoto. Senza foto, scrivetelo: l’IA parte da lì.</p>
+</div>
+<div class="win">
+<div class="wb"><i></i><i></i><i></i><span>aula/studio/docente.html</span></div>
+<div class="wc">
+<p class="tag">1 · Le istruzioni per l’IA</p>
+<div class="field"><b>Argomento / titolo della lezione</b>I principi nutritivi</div>
+<div class="grid2" style="margin:0;gap:14px"><div class="field"><b>Materia (facoltativa)</b>Alimentazione</div><div class="field"><b>Anno di corso (facoltativo)</b>Primo</div></div>
+<div class="btn">📋 Copia le istruzioni</div>
+<div class="chips" style="gap:8px"><span class="chip" style="font-size:20px">Claude ↗</span><span class="chip" style="font-size:20px">ChatGPT ↗</span><span class="chip" style="font-size:20px">Gemini ↗</span></div>
+</div>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Si scrive l’argomento, e tutto il resto è facoltativo. Volendo, materia, anno, classe e indicazioni particolari. Poi «Copia le istruzioni» e si apre l’assistente. Una nota: se avete le foto, l’argomento può restare vuoto; senza foto, scrivetelo, e l’IA parte da lì.</p><p class="tip">Minuti 0:42 – 0:45. Mostrate la pagina docente.html. I campi sono quelli reali: argomento, materia, anno di corso, classe e indicazioni per l’IA (facoltativi). L’esempio compilato è illustrativo.</p></aside>
+</section>
+<section id="passo2">
+<p class="eyebrow">Parte 4 · Passo 2 · 0:45 – 0:48</p>
+<h2>Passo 2: nell’assistente IA</h2>
+<div class="two">
+<div class="col" style="gap:24px">
+<div class="step"><div class="n">1</div><p>Toccate <b>📎 o +</b> e allegate le foto: pagine del libro (nell’ordine), appunti o una mappa.</p></div>
+<div class="step"><div class="n">2</div><p><b>Incollate</b> le istruzioni nel messaggio e inviate.</p></div>
+<div class="step"><div class="n">3</div><p>A risposta finita, <b>copiate tutto</b> con il tasto 📋.</p></div>
+<div class="card sm" style="background:#FFF7DB;border-color:var(--gold)"><p class="t">😌 Sembra scritta in codice: è normale</p><p class="tx">Non dovete leggerla né capirla: si copia e si incolla.</p></div>
+</div>
+<div class="win">
+<div class="wb"><i></i><i></i><i></i><span>Claude · ChatGPT · Gemini</span></div>
+<div class="wc" style="min-height:470px">
+<div class="bubble u">📎 3 foto del libro<br>+ istruzioni incollate</div>
+<div class="bubble a">Ecco la lezione, pronta da copiare:</div>
+<div class="code">{
+  "titolo": "…",
+  "idee": [ … ],
+  "domande": [ … ]
+}</div>
+<div class="chips" style="margin-top:auto"><span class="chip on" style="font-size:20px">📋 Copia</span></div>
+</div>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Toccate la graffetta o il più e allegate le foto, nell’ordine: pagine del libro, appunti o una mappa. Incollate le istruzioni e inviate. A risposta finita, copiate tutto con il tasto apposito. Vi sembrerà scritta in codice: è normale, e non dovete né leggerla né capirla. Arthur Clarke diceva che ogni tecnologia sufficientemente avanzata è indistinguibile dalla magia. A noi basta il copia e incolla.</p><p class="tip">Minuti 0:45 – 0:48. Tranquillizzate subito: il testo in codice è normale, non va letto. Se la risposta compare in un riquadro a parte accanto alla chat, si copia da lì. Senza foto va bene lo stesso: la lezione nasce dall’argomento scritto nel passo 1. Schermata illustrativa.</p></aside>
+</section>
+<section id="passo3" class="alt">
+<p class="eyebrow">Parte 4 · Passo 3 · 0:48 – 0:51</p>
+<h2>Passo 3: incolla e pubblica</h2>
+<div class="two">
+<div class="col" style="gap:24px">
+<div class="step"><div class="n">1</div><p><b>Incollate</b> la risposta dell’IA.</p></div>
+<div class="step"><div class="n">2</div><p>Scrivete l’<b>autore</b>, come comparirà nell’Archivio.</p></div>
+<div class="step"><div class="n">3</div><p>Se volete, <b>condividete nell’Archivio</b>: gli altri la trovano per anno e materia. Solo voi potete modificarla o cancellarla.</p></div>
+<div class="step"><div class="n">4</div><p>Premete <b>«Pubblica la lezione»</b>: compare il QR.</p></div>
+</div>
+<div class="win">
+<div class="wb"><i></i><i></i><i></i><span>aula/studio/docente.html</span></div>
+<div class="wc">
+<p class="tag">3 · Incolla e pubblica</p>
+<div class="field"><b>La risposta dell’IA</b>{ "titolo": "I principi nutritivi", … }</div>
+<div class="field"><b>Autore (come comparirà nell’Archivio)</b>Prof. Rossi</div>
+<div class="field" style="border-color:var(--sage)">🌐 Condividi nell’Archivio della Sala studio</div>
+<div class="btn gold">✨ Pubblica la lezione</div>
+<p style="font-weight:700;color:var(--bosco)">📚 Le mie lezioni: le ritrovate da qualsiasi dispositivo.</p>
+</div>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Incollate la risposta, scrivete l’autore come comparirà nell’Archivio, e se volete condividete: gli altri la trovano per anno e materia, e solo voi potete modificarla o cancellarla. Premete «Pubblica la lezione» e compare il QR. Le ritrovate sempre in «Le mie lezioni», da qualsiasi dispositivo.</p><p class="tip">Minuti 0:48 – 0:51. Chiarite che si può cambiare idea sulla condivisione quando si vuole, da «Modifica». «Le mie lezioni» mostra le lezioni pubblicate da qualsiasi dispositivo su cui si è entrati. Il nome d’autore nell’esempio è inventato.</p></aside>
+</section>
+<section id="attenzione">
+<p class="eyebrow">Parte 4 · Prima di fotografare · 0:51 – 0:53</p>
+<h2>Tre attenzioni prima di creare</h2>
+<div class="grid3" style="margin-top:44px">
+<div class="card" style="align-items:center;text-align:center;padding:44px 36px"><p class="ico" style="font-size:88px">🚫</p><p class="t" style="font-size:38px">Niente nomi nelle foto</p><p class="tx" style="font-size:30px">Non fotografate quaderni o fogli con nomi o dati dei ragazzi.</p></div>
+<div class="card" style="align-items:center;text-align:center;padding:44px 36px"><p class="ico" style="font-size:88px">🔍</p><p class="t" style="font-size:38px">Rileggete sempre</p><p class="tx" style="font-size:30px">L’IA può sbagliare: controllate date, definizioni e termini prima di pubblicare.</p></div>
+<div class="card" style="align-items:center;text-align:center;padding:44px 36px"><p class="ico" style="font-size:88px">🏷️</p><p class="t" style="font-size:38px">Un codice per lezione</p><p class="tx" style="font-size:30px">Mai per persona: nei titoli di lezioni e verifiche non si scrivono nomi.</p></div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Prima: niente nomi nelle foto, non fotografate quaderni o fogli con dati dei ragazzi. Seconda: rileggete sempre, perché l’IA scrive in fretta e sbaglia con la stessa sicurezza; controllate date, definizioni e termini. Terza: un codice per lezione, mai per persona, e nei titoli niente nomi. Fidarsi è bene, rileggere è meglio.</p><p class="tip">Minuti 0:51 – 0:53. Due minuti. Ricordate che la responsabilità del contenuto resta di chi lo pubblica e che la riservatezza dipende anche dalle nostre scelte, non solo dal sito.</p></aside>
+</section>
+<section id="dopo" class="alt">
+<p class="eyebrow">Parte 4 · Dopo la creazione · 0:53 – 0:56</p>
+<h2>Che cosa si fa con la lezione</h2>
+<div class="two">
+<div class="col" style="gap:14px">
+<div class="step"><div class="n">📱</div><p><b>QR a tutto schermo</b>: nello studio pomeridiano e da casa si inquadra; in classe si usa il codice sui PC di laboratorio.</p></div>
+<div class="step"><div class="n">🖨️</div><p><b>Cartello stampabile</b> con il QR, da appendere nella sala studio.</p></div>
+<div class="step"><div class="n">🏆</div><p><b>Sfida a squadre</b> da proiettare alla LIM.</p></div>
+<div class="step"><div class="n">📝</div><p><b>Prepara una verifica</b> dalla stessa lezione.</p></div>
+<div class="step"><div class="n">✏️</div><p><b>Modifica</b>, Archivio e «Le mie lezioni».</p></div>
+<div class="task" style="margin-top:8px;padding:16px 24px"><div><p class="tk">Missione 4 · chi finisce prima</p><p style="font-size:24px">Aprite il QR a tutto schermo e lanciate la sfida a squadre.</p></div></div>
+</div>
+<div class="sheet">
+<p style="font-size:24px;font-weight:700;color:var(--goldink);letter-spacing:.1em">SALA STUDIO</p>
+<p style="font-family:'Cormorant Garamond',Georgia,serif;font-size:46px;font-weight:600;line-height:1.05;color:var(--bosco)">I principi nutritivi</p>
+<div class="qr"><svg viewBox="0 0 21 21" width="100%" height="100%" shape-rendering="crispEdges"><g fill="#1B2A1E"><path fill-rule="evenodd" d="M0 0h7v7H0zM1 1v5h5V1zM14 0h7v7h-7zM15 1v5h5V1zM0 14h7v7H0zM1 15v5h5v-5z"/><path d="M2 2h3v3H2zM16 2h3v3h-3zM2 16h3v3H2z"/><path d="M8 0h2v2H8zM11 1h2v2h-2zM8 4h3v2H8zM12 5h1v2h-1zM0 8h2v2H0zM3 9h3v1H3zM7 8h2v3H7zM10 8h3v2h-3zM14 9h2v2h-2zM18 8h3v2h-3zM8 12h2v2H8zM11 11h2v3h-2zM15 13h2v2h-2zM18 12h2v3h-2zM9 16h3v2H9zM13 16h2v3h-2zM16 18h3v2h-3zM9 19h2v2H9zM12 20h4v1h-4z"/></g></svg></div>
+<p>Inquadra il QR e studia dal dispositivo</p>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Cinque usi. Il QR a tutto schermo: nello studio pomeridiano e da casa si inquadra, in classe si usa il codice sui PC di laboratorio. Il cartello stampabile da appendere nella sala studio. La sfida a squadre da proiettare alla LIM. Una verifica preparata dalla stessa lezione. E la modifica, con Archivio e «Le mie lezioni». Missione 4 per chi finisce prima: aprite il QR a tutto schermo e lanciate la sfida.</p><p class="tip">Minuti 0:53 – 0:56. Fate vedere almeno il QR a tutto schermo e «Prepara una verifica»: sono gli strumenti che fanno risparmiare più tempo. Il cartello a destra è illustrativo (il QR è decorativo, non funzionante). Chi ha già finito la propria lezione può provare la Missione 4.</p></aside>
+</section>
+<section id="lab" class="dk">
+<p class="eyebrow">Parte 4 · Missione 3 · 0:56 – 1:05</p>
+<h2>Missione 3: create la vostra prima lezione</h2>
+<div class="two">
+<div class="col">
+<p class="tag" style="color:var(--gold)">Accesso, una volta sola</p>
+<ul class="chk">
+<li>Aprite <b>aula/studio/docente.html</b>.</li>
+<li>Inserite la <b>mail istituzionale</b>.</li>
+<li>Digitate il <b>codice ricevuto</b>: vale 10 minuti.</li>
+</ul>
+<p class="tag" style="color:var(--gold);margin-top:6px">Creazione</p>
+<ul class="chk">
+<li>Passo 1: argomento e <b>Copia le istruzioni</b>.</li>
+<li>Passo 2: foto e istruzioni nell’assistente, poi <b>copia</b>.</li>
+<li>Passo 3: <b>incolla</b>, autore, <b>Pubblica</b>.</li>
+</ul>
+</div>
+<div class="col" style="align-items:center;gap:18px">
+<p class="timer">9</p>
+<p class="tag" style="color:var(--gold);font-size:34px">MINUTI</p>
+<div class="card" style="width:100%"><p class="t">Il codice non arriva?</p><p class="tx">Controllate lo spam e l’indirizzo; se è scaduto, richiedetelo. Se non va, scrivete a <span class="em" data-u="michele.gaggiano" data-d="alberghierorieti.it"></span>.</p></div>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Nove minuti, ed è il momento della verità. Accesso una volta sola: aula/studio/docente.html, mail istituzionale, codice ricevuto che vale dieci minuti. Poi i tre passi: argomento e istruzioni, foto e assistente, incolla e pubblica. Aristotele: ciò che dobbiamo imparare a fare, lo impariamo facendo. Se il codice non arriva, guardate lo spam; se è scaduto, richiedetelo; se non va, scrivetemi.</p><p class="tip">Minuti 0:56 – 1:05. Cuore dell’incontro: ciascuno crea la propria lezione. Girate tra i tavoli. Problemi tipici: il codice non arriva (controllare spam e correttezza della mail, poi richiederlo), il codice è scaduto dopo 10 minuti (se ne richiede un altro), la risposta dell’IA è troppo lunga (chiedere di accorciare). Chi finisce prima passa alla Missione 4 (QR a tutto schermo e sfida a squadre).</p></aside>
+</section>
+<section id="tre-regole" class="ac">
+<p class="eyebrow">Parte 5 · Missione 5 · 1:05 – 1:08</p>
+<h2>Tre regole per la riservatezza</h2>
+<div class="grid3" style="margin-top:32px">
+<div class="card" style="background:#34493A;border-color:#4C6650"><p class="big">1</p><p class="t" style="color:#F6F1E7">Un codice per lezione, mai per persona</p><p class="tx" style="color:#E4EADD">Lo stesso codice o QR va a tutta la classe. Nei titoli di lezioni e verifiche niente nomi.</p></div>
+<div class="card" style="background:#34493A;border-color:#4C6650"><p class="big">2</p><p class="t" style="color:#F6F1E7">I supporti sono per tutti</p><p class="tx" style="color:#E4EADD">Mostrate a tutta la classe «Aa Leggi a modo tuo»: con la Scelta rapida ognuno sceglie da sé.</p></div>
+<div class="card" style="background:#34493A;border-color:#4C6650"><p class="big">3</p><p class="t" style="color:#F6F1E7">Più aiuti, senza nomi né etichette</p><p class="tx" style="color:#E4EADD">Le versioni con più aiuti si distribuiscono come le altre: sul foglio nessuna scritta che le distingua.</p></div>
+</div>
+<div class="task" style="margin-top:32px;background:rgba(217,178,76,.14)"><div><p class="tk">Missione 5 · Controllate la vostra lezione</p><p style="color:#F6F1E7">Il titolo non contiene nomi? Le foto non mostravano nomi? Il codice va alla classe intera? Se sì, è a posto.</p></div><div class="min">2<small>MINUTI</small></div></div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Una: un codice per lezione, mai per persona; lo stesso codice o QR va a tutta la classe. Due: i supporti sono per tutti; mostrate «Aa Leggi a modo tuo» e ognuno sceglie da sé. Tre: più aiuti, senza nomi né etichette; le versioni con più aiuti si distribuiscono come le altre, nessuna scritta sul foglio. Warren e Brandeis, nel 1890, chiamavano la riservatezza il diritto di essere lasciati in pace. Missione 5, due minuti: controllate la vostra lezione. Il titolo non ha nomi? Le foto non ne mostravano? Il codice va alla classe intera? Allora è a posto.</p><p class="tip">Minuti 1:05 – 1:08. Le tre regole sono quelle scritte nella pagina docenti dell’Aula, che richiama il parere della DPO del 4 novembre 2026. Ripetetele lentamente e fate riassumere una regola a un partecipante. Perché l’Aula resti senza dati degli studenti contano anche le nostre scelte.</p></aside>
+</section>
+<section id="informativa">
+<p class="eyebrow">Parte 5 · Informativa · 1:08 – 1:15</p>
+<h2>L’informativa in una tabella</h2>
+<div class="two" style="grid-template-columns:.8fr 1.2fr">
+<div class="col" style="gap:18px">
+<div class="card sm"><p class="t">📄 Dove si trova</p><p class="tx">informativa-aula.html, con il collegamento anche nella finestra di accesso.</p></div>
+<div class="card sm"><p class="t">⚖️ Base giuridica</p><p class="tx">Compito di interesse pubblico (art. 6.1, lettera e, del GDPR).</p></div>
+<div class="card sm"><p class="t">✉️ Diritti</p><p class="tx">Si esercitano scrivendo a rirh010007@istruzione.it.</p></div>
+</div>
+<div class="win">
+<div class="wb"><i></i><i></i><i></i><span>Dati di chi crea le lezioni</span></div>
+<div class="wc" style="padding:18px 24px">
+<table style="font-size:24px;color:#233325;width:100%">
+<tr><th style="width:27%">Dato</th><th style="width:37%">Perché</th><th style="width:36%">Quanto</th></tr>
+<tr><td>Mail istituzionale</td><td>Riconoscere chi crea le lezioni</td><td>Fino alla revoca</td></tr>
+<tr><td>Codice di accesso</td><td>Verificare l’identità</td><td>10 minuti, eliminato dopo l’uso</td></tr>
+<tr><td>Sessione nel browser</td><td>Non rifare l’accesso</td><td>60 giorni sul dispositivo</td></tr>
+<tr><td>Lezioni pubblicate</td><td>Condividerle nell’Archivio</td><td>Fino alla rimozione</td></tr>
+</table>
+</div>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Un’informativa che si legge davvero è già una piccola impresa. Sta in informativa-aula.html, e c’è il collegamento anche nella finestra di accesso. La base giuridica è il compito di interesse pubblico, articolo 6, paragrafo 1, lettera e del GDPR. I diritti si esercitano scrivendo all’indirizzo indicato sulla slide.</p><p class="tip">Minuti 1:08 – 1:15. Non leggete la tabella: indicate dove si trova l’informativa completa. I tempi sono quelli dell’informativa: il codice vale 10 minuti ed è eliminato all’utilizzo, la sessione resta 60 giorni nel browser, la rimozione avviene su richiesta. Per domande tecniche si rinvia al Responsabile della protezione dei dati dell’Istituto.</p></aside>
+</section>
+<section id="scenari" class="alt">
+<p class="eyebrow">Parte 6 · In classe · 1:15 – 1:20</p>
+<h2>Dove la userete già da lunedì</h2>
+<div class="grid2" style="margin-top:16px;gap:24px">
+<div class="card"><p class="t">📚 Studio pomeridiano</p><p class="tx">Gli studenti del Convitto aprono la lezione con il QR e studiano con l’accompagnamento degli educatori, ciascuno con il supporto che preferisce.</p></div>
+<div class="card"><p class="t">🏆 In classe, su base volontaria</p><p class="tx">Con i docenti interessati, alla LIM o con i PC di laboratorio, nel rispetto delle disposizioni sui telefoni cellulari: sfida a squadre o percorso guidato.</p></div>
+<div class="card"><p class="t">📝 Prima di una verifica</p><p class="tx">Una lezione di ripasso da fare a casa e una verifica stampabile dalla stessa lezione.</p></div>
+<div class="card"><p class="t">🌍 Lingue, con il Dipartimento</p><p class="tx">Percorsi curati dai colleghi di lingue, aperti a tutti gli studenti.</p></div>
+</div>
+<div class="task" style="margin-top:24px;padding:16px 28px"><div><p class="tk">Mini compito</p><p style="font-size:25px">Scrivete su un foglio la prima lezione che farete e per quale classe.</p></div><div class="min" style="font-size:56px">2<small>MINUTI</small></div></div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Quattro scenari. Studio pomeridiano: gli studenti del Convitto aprono la lezione con il QR, con l’accompagnamento degli educatori, ciascuno con il supporto che preferisce. In classe, su base volontaria: con i docenti interessati, alla LIM o con i PC di laboratorio, nel rispetto delle disposizioni sui telefoni. Prima di una verifica: un ripasso da fare a casa e una verifica stampabile dalla stessa lezione. Lingue, con il Dipartimento: percorsi curati dai colleghi, aperti a tutti. Mini compito di due minuti: scrivete su un foglio la prima lezione che farete e per quale classe.</p><p class="tip">Minuti 1:15 – 1:20. Ricordate le modalità autorizzate dalla Dirigente: studio pomeridiano con gli educatori; in classe, su base volontaria, con LIM o PC di laboratorio e senza telefoni; da casa, con il dispositivo dello studente. Chiedete a ciascun gruppo di scegliere uno scenario e dire in una frase come lo userebbe. Se siete in ritardo, questa slide si riduce a due minuti.</p></aside>
+</section>
+<section id="openday" class="dk">
+<p class="eyebrow">Parte 6 · Open Day · 1:20 – 1:25</p>
+<h2>Open Day: tre messaggi per le famiglie</h2>
+<div class="two">
+<div class="col" style="gap:24px">
+<div class="dbadge"><span class="d">28</span><span class="m">novembre · 9:00 – 13:00</span></div>
+<div class="step"><div class="n">1</div><p><b>Nessuna registrazione</b>, nessun dato richiesto: si apre e si prova.</p></div>
+<div class="step"><div class="n">2</div><p><b>Per tutti, senza etichette</b>: gli strumenti di lettura sono per ciascuno.</p></div>
+<div class="step"><div class="n">3</div><p><b>A misura di studente</b>: si studia da computer o da altro dispositivo, con i propri tempi.</p></div>
+</div>
+<div class="phone">
+<p class="ph-t">Studiare con calma, senza lasciare tracce</p>
+<p>La pagina dell’Aula per le famiglie, da mostrare con un QR.</p>
+<div style="width:190px;height:190px;margin:6px auto"><svg viewBox="0 0 21 21" width="100%" height="100%" shape-rendering="crispEdges"><g fill="#1B2A1E"><path fill-rule="evenodd" d="M0 0h7v7H0zM1 1v5h5V1zM14 0h7v7h-7zM15 1v5h5V1zM0 14h7v7H0zM1 15v5h5v-5z"/><path d="M2 2h3v3H2zM16 2h3v3h-3zM2 16h3v3H2z"/><path d="M8 0h2v2H8zM11 1h2v2h-2zM8 4h3v2H8zM12 5h1v2h-1zM0 8h2v2H0zM3 9h3v1H3zM7 8h2v3H7zM10 8h3v2h-3zM14 9h2v2h-2zM18 8h3v2h-3zM8 12h2v2H8zM11 11h2v3h-2zM15 13h2v2h-2zM18 12h2v3h-2zM9 16h3v2H9zM13 16h2v3h-2zM16 18h3v2h-3zM9 19h2v2H9zM12 20h4v1h-4z"/></g></svg></div>
+<p style="text-align:center;font-weight:700;color:var(--goldink)">aula/famiglie/</p>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Il 28 novembre le famiglie ci chiederanno: «ma i miei figli, qui, che dati lasciano?». Tre risposte da dare con un sorriso. Nessuna registrazione, nessun dato richiesto: si apre e si prova. Per tutti, senza etichette: gli strumenti di lettura sono di ciascuno. A misura di studente: si studia da computer o da altro dispositivo, con i propri tempi. Pennac ricordava che il verbo leggere non sopporta l’imperativo. Anche il verbo studiare: noi lo invitiamo, non lo ordiniamo. La pagina per le famiglie si mostra con un QR.</p><p class="tip">Minuti 1:20 – 1:25. Spiegate come parlarne durante l’Open Day: pochi concetti, sempre gli stessi. Le famiglie possono provare l’Aula dal proprio telefono: è una dimostrazione, non l’uso dei ragazzi in classe, per cui valgono le modalità autorizzate. Un QR su cartello rende immediato l’accesso. Mini compito: in 20 secondi, a coppie, ciascuno spiega l’Aula al vicino con i tre messaggi. Il QR sul telefono è decorativo.</p></aside>
+</section>
+<section id="missioni">
+<p class="eyebrow">Parte 7 · Da ripetere in autonomia · 1:25 – 1:27</p>
+<h2>Le cinque missioni, da rifare quando volete</h2>
+<div class="grid5">
+<div class="card sm"><p class="big" style="font-size:80px">1</p><p class="t">Entra e gioca</p><p class="pill">5 min</p><p class="tx"><b>Dove:</b> aula/studio/</p><p class="tx"><b>Fatto quando:</b> avete chiuso la sfida finale della lezione di esempio.</p></div>
+<div class="card sm"><p class="big" style="font-size:80px">2</p><p class="t">Leggi a modo tuo</p><p class="pill">3 min</p><p class="tx"><b>Dove:</b> in ogni lezione</p><p class="tx"><b>Fatto quando:</b> passate da Lettura 1 a Lettura 3 in un tocco.</p></div>
+<div class="card sm"><p class="big" style="font-size:80px">3</p><p class="t">Crea una lezione</p><p class="pill">10 min</p><p class="tx"><b>Dove:</b> aula/studio/docente.html</p><p class="tx"><b>Fatto quando:</b> la lezione compare in «Le mie lezioni».</p></div>
+<div class="card sm"><p class="big" style="font-size:80px">4</p><p class="t">Proietta e stampa</p><p class="pill">5 min</p><p class="tx"><b>Dove:</b> dalla vostra lezione</p><p class="tx"><b>Fatto quando:</b> avete aperto il QR a tutto schermo e il cartello.</p></div>
+<div class="card sm"><p class="big" style="font-size:80px">5</p><p class="t">Controlla le regole</p><p class="pill">2 min</p><p class="tx"><b>Dove:</b> prima di condividere</p><p class="tx"><b>Fatto quando:</b> titolo e foto senza nomi, un codice per la classe.</p></div>
+</div>
+<p class="note">Ogni missione si può ripetere quante volte serve: l’Aula non raccoglie dati sugli studenti.</p>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Cinque missioni, da rifare quando volete. Entra e gioca, cinque minuti. Leggi a modo tuo, tre. Crea una lezione, dieci. Proietta e stampa, cinque. Controlla le regole, due. Ognuna ha il suo luogo e il suo criterio di «fatto». E si possono ripetere quante volte serve: l’Aula non tiene nessun punteggio su di voi.</p><p class="tip">Minuti 1:25 – 1:27. Questa slide è la scheda di allenamento: si può stampare o fotografare. Le missioni 1, 2, 3 e 5 sono state fatte durante l’incontro; la 4 è per chi finisce prima. Invitate i partecipanti a ripeterle nei giorni successivi con una classe vera.</p></aside>
+</section>
+<section id="prossimi" class="ac">
+<p class="eyebrow">Parte 7 · Chiusura · 1:27 – 1:29</p>
+<h2>Quattro passi per questa settimana</h2>
+<div class="two">
+<div class="col" style="gap:28px">
+<div class="step"><div class="n">1</div><p><b>Create una lezione</b> da una pagina che usate già.</p></div>
+<div class="step"><div class="n">2</div><p><b>Provatela</b> nello studio pomeridiano o con una classe: QR o sfida alla LIM.</p></div>
+<div class="step"><div class="n">3</div><p><b>Condividetela nell’Archivio</b>, se vi sembra buona.</p></div>
+<div class="step"><div class="n">4</div><p><b>Raccontatemi com’è andata</b>: che cosa funziona e che cosa migliorare.</p></div>
+</div>
+<div class="card" style="background:#34493A;border-color:#4C6650;padding:44px">
+<p class="t" style="color:#F6F1E7;font-size:40px">Se l’accesso non funziona</p>
+<p class="tx" style="color:#E4EADD;font-size:30px">Scrivete a</p>
+<p class="url" style="color:var(--gold);font-size:34px"><span class="em" data-u="michele.gaggiano" data-d="alberghierorieti.it"></span></p>
+<p class="tx" style="color:#E4EADD;font-size:30px;margin-top:18px">Ogni lezione condivisa nell’Archivio serve anche ai colleghi.</p>
+</div>
+</div>
+<p class="foot">Aula digitale · formazione</p>
+<aside><p class="say">Lao Tzu: un viaggio di mille miglia comincia con un passo. Il nostro sono quattro. Create una lezione da una pagina che usate già. Provatela nello studio pomeridiano o con una classe. Condividetela nell’Archivio, se vi sembra buona. E raccontatemi com’è andata: che cosa funziona, che cosa migliorare. Se l’accesso non funziona, scrivetemi. Ogni lezione condivisa serve anche ai colleghi.</p><p class="tip">Minuti 1:27 – 1:29. Chiudete con un impegno piccolo e concreto: una lezione in una settimana. Raccogliete le mail di chi desidera un supporto individuale.</p></aside>
+</section>
+<section id="domande" class="dk" style="justify-content:space-between">
+<p class="eyebrow">1:28 – 1:30</p>
+<div>
+<h1>Domande?</h1>
+<p class="lead">Grazie per il tempo e per la curiosità.</p>
+</div>
+<div class="grid2" style="margin-top:0">
+<div class="card"><p class="t">Aula digitale</p><p class="url">convitto.alberghierorieti.edu.it/aula/</p></div>
+<div class="card"><p class="t">Accesso docenti ed educatori</p><p class="url">aula/studio/docente.html</p></div>
+<div class="card"><p class="t">Informativa</p><p class="url">informativa-aula.html</p></div>
+<div class="card"><p class="t">Per scrivermi</p><p class="url"><span class="em" data-u="michele.gaggiano" data-d="alberghierorieti.it"></span></p></div>
+</div>
+<aside><p class="say">Si dice che Voltaire giudicasse le persone dalle domande più che dalle risposte; in realtà la frase è del duca di Lévis, ma funziona uguale. Quindi: fatemi domande. Qui c’è tutto: l’Aula, l’accesso docenti ed educatori, l’informativa, il mio indirizzo. Grazie alla Dirigente per l’autorizzazione e a voi per il tempo e la curiosità.</p><p class="tip">Minuti 1:28 – 1:30. Lasciate questa slide visibile mentre i partecipanti escono: contiene tutti i link utili. Chiudete ringraziando la Dirigente per l’autorizzazione e i colleghi per la partecipazione.</p></aside>
+</section>
+</div>
+<div id="rel"></div>
+<div id="testi"></div>
+<div id="prog"></div>
+<script>
+(function(){
+[].forEach.call(document.querySelectorAll('.em'),function(x){x.textContent=x.getAttribute('data-u')+'@'+x.getAttribute('data-d')});
+var Q=location.search,REL=/[?&]relatore\b/.test(Q),TESTI=/[?&]testi\b/.test(Q);
+var st=document.getElementById('stage'),S=[].slice.call(st.querySelectorAll('section')),n=0,
+cnt=document.getElementById('cnt'),prog=document.getElementById('prog'),ui=document.getElementById('ui'),rel=document.getElementById('rel'),hid;
+var ch=null;try{ch=new BroadcastChannel('aula-presentazione')}catch(e){}
+function tit(s){var h=s.querySelector('h1,h2');return h?h.textContent.replace(/\s+/g,' ').trim():''}
+function nota(s,c){var e=s.querySelector('aside .'+c);return e?e.textContent:''}
+function el(id){return document.getElementById(id)}
+function fit(){var w=innerWidth,h=innerHeight,k,x,y;
+ if(REL){var b=el('relbox');if(!b)return;var r=b.getBoundingClientRect();k=r.width/1920;x=r.left;y=r.top}
+ else{k=Math.min(w/1920,h/1080);x=(w-1920*k)/2;y=(h-1080*k)/2}
+ st.style.transform='translate('+x+'px,'+y+'px) scale('+k+')';}
+function pannello(){
+ el('rc').textContent=(n+1)+' / '+S.length;
+ var e=S[n].querySelector('.eyebrow');el('rw').textContent=(e?e.textContent:'');
+ el('rs').textContent=nota(S[n],'say');el('rt').textContent=nota(S[n],'tip');
+ el('rt').style.display=nota(S[n],'tip')?'':'none';
+ el('rx').innerHTML=S[n+1]?'Prossima: <b></b>':'Ultima slide';
+ if(S[n+1])el('rx').querySelector('b').textContent=tit(S[n+1]);
+ el('rr').scrollTop=0;document.title='Relatore '+(n+1)+'/'+S.length+': '+tit(S[n]);}
+function go(i,noHash,noSend){n=Math.max(0,Math.min(S.length-1,i));
+ S.forEach(function(s,j){s.classList.toggle('on',j===n)});
+ cnt.textContent=(n+1)+' / '+S.length;prog.style.width=((n+1)/S.length*100)+'%';
+ if(!noHash)try{history.replaceState(null,'','#'+S[n].id)}catch(e){}
+ if(REL)pannello();
+ if(!noSend){if(ch)ch.postMessage({n:n});else try{localStorage.setItem('aula-pres-n',n+'|'+Date.now())}catch(e){}}
+ fit();}
+function from(){var h=location.hash.slice(1),i=S.findIndex(function(s){return s.id===h});return i<0?0:i}
+function relatore(){var u=location.pathname+'?relatore=1#'+S[n].id;window.open(u,'relatore_aula','width=1280,height=800')}
+function elenco(){var d=el('testi'),h='<h1>Aula digitale: testi della formazione</h1><p class="intro">Testo da dire e promemoria, slide per slide. Si legge da telefono o si stampa.</p>';
+ S.forEach(function(s,j){h+='<article><div class="n"></div><h2></h2><p class="say"></p><p class="tip"></p></article>'});
+ d.innerHTML=h;var A=d.querySelectorAll('article');
+ S.forEach(function(s,j){var e=s.querySelector('.eyebrow');A[j].querySelector('.n').textContent='Slide '+(j+1)+(e?' · '+e.textContent:'');
+  A[j].querySelector('h2').textContent=tit(s);A[j].querySelector('.say').textContent=nota(s,'say');
+  var t=nota(s,'tip');if(t)A[j].querySelector('.tip').textContent=t;else A[j].removeChild(A[j].querySelector('.tip'))});
+ document.body.classList.add('testi');document.title='Testi della formazione';}
+if(TESTI){elenco();return}
+if(REL){document.body.classList.add('rel');
+ rel.innerHTML='<div class="bar"><b>Vista relatore</b><span id="rc"></span><span class="sp"></span><span class="clock" id="ck">0:00</span><button id="ck1" type="button" class="go">Avvia</button><button id="ck0" type="button">Azzera</button><button id="rp" type="button">← Indietro</button><button id="rn" type="button" class="go">Avanti →</button></div><div class="L"><div class="box" id="relbox"></div><p class="nx" id="rx"></p></div><div class="R" id="rr"><p class="when" id="rw"></p><p class="say" id="rs"></p><p class="tip" id="rt"></p><p class="hint">Questa finestra va tenuta sullo schermo del computer; la presentazione, aperta in un’altra finestra, va portata sul grande schermo (tasto F per l’intero schermo). Se questa finestra compare anche sul grande schermo, i due schermi sono in duplicazione: scegliete «Estendi» (Windows: tasto Windows + P; Mac: Impostazioni, Schermi, togliere «Duplica»). In alternativa, i testi si leggono dal telefono: <a href="?testi=1" style="color:#D9B24C">elenco dei testi</a>.</p></div>';
+ var t=0,run=null;function ck(){var m=Math.floor(t/60),x=t%60;el('ck').textContent=m+':'+(x<10?'0':'')+x}
+ el('ck1').onclick=function(){if(run){clearInterval(run);run=null;this.textContent='Riprendi'}else{run=setInterval(function(){t++;ck()},1000);this.textContent='Pausa'}};
+ el('ck0').onclick=function(){t=0;ck()};
+ el('rp').onclick=function(){go(n-1)};el('rn').onclick=function(){go(n+1)};}
+document.addEventListener('keydown',function(e){var k=e.key;
+ if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();go(n+1)}
+ else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){e.preventDefault();go(n-1)}
+ else if(k==='Home')go(0);else if(k==='End')go(S.length-1);
+ else if((k==='n'||k==='N')&&!REL)relatore();
+ else if(k==='f'||k==='F')fs();});
+function fs(){var d=document;if(d.fullscreenElement)d.exitFullscreen();else if(d.documentElement.requestFullscreen)d.documentElement.requestFullscreen();}
+el('bf').onclick=fs;
+el('bn').onclick=relatore;
+el('bp').onclick=function(){window.print()};
+if(!REL)st.addEventListener('click',function(e){var x=e.clientX/innerWidth;go(x<.3?n-1:n+1)});
+if(ch)ch.onmessage=function(e){if(e.data&&typeof e.data.n==='number')go(e.data.n,false,true)};
+else addEventListener('storage',function(e){if(e.key==='aula-pres-n'&&e.newValue)go(parseInt(e.newValue,10),false,true)});
+var t0;document.addEventListener('touchstart',function(e){t0=e.changedTouches[0].clientX},{passive:true});
+document.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-t0;if(Math.abs(d)>50)go(d<0?n+1:n-1)},{passive:true});
+document.addEventListener('mousemove',function(){ui.classList.remove('h');clearTimeout(hid);hid=setTimeout(function(){ui.classList.add('h')},2500)});
+addEventListener('resize',fit);addEventListener('hashchange',function(){go(from(),true,true)});
+go(from(),true,true);hid=setTimeout(function(){ui.classList.add('h')},3500);
+if(REL)setTimeout(fit,60);
+})();
+</script>
+</body>
+</html>

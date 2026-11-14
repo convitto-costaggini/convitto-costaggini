@@ -33,15 +33,16 @@
           <li><a href="giornata-tipo.html">Giornata tipo</a></li>
           <li><a href="servizi.html">Servizi</a></li>
           <li><a href="tour-virtuale.html">🏛️ Tour Virtuale</a></li>
-          <li><a href="semiconvitto.html">🌅 Semiconvitto</a></li>
+          <li><a href="semiconvitto.html">🌅 Semiconvitto (senza pernottamento)</a></li>
           <li><a href="alumni.html"><em>Alumni</em></a></li>
           <li><a href="ricordi.html">🕯️ Muro dei Ricordi</a></li>
         </ul></div>
 
         <div class="fc"><h2>Servizi &amp; Ammissione</h2><ul>
-          <li><a href="openday.html">🗓 Open Day</a></li>
+          <li><a href="openday.html">🗓 Open Day e visite</a></li>
+          <li><a href="in-2-minuti.html">❓ Domande frequenti</a></li>
           <li><a href="ammissione.html">Come iscriversi</a></li>
-          <li><a href="domanda-ammissione.html">📋 Domanda online</a></li>
+          <li><a href="domanda-ammissione.html">📋 Domanda al Convitto (entro luglio)</a></li>
           <li><a href="ammissione.html#tariffe">Tariffe e rette</a></li>
           <li><a href="scopri-talento.html">✨ Scopri il tuo Talento</a></li>
           <li><a href="come-arrivare.html">🚌 Come arrivare</a></li>
@@ -63,16 +64,20 @@
             <a href="contatti.html#segreteria" style="color:var(--oro2)">Orari di ricevimento →</a>
           </li>
           <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6;margin-top:.4rem">
-            <strong style="color:rgba(245,240,232,.7);display:block">Sede centrale</strong>
+            <strong style="color:rgba(245,240,232,.7);display:block">Convitto (Open Day, accoglienza)</strong>
+            Via Salaria s.n.c. — Rieti
+          </li>
+          <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6;margin-top:.4rem">
+            <strong style="color:rgba(245,240,232,.7);display:block">Uffici amministrativi (sede centrale)</strong>
             Via dei Salici, 62 — Rieti
           </li>
         </ul></div>
 
         <div class="fc"><h2>Amministrazione</h2><ul>
-          <li><a href="trasparenza.html">Amm. Trasparente</a></li>
+          <li><a href="trasparenza.html">Amministrazione Trasparente</a></li>
           <li><a href="organizzazione.html">Organizzazione</a></li>
-          <li><a href="ptof-guida.html">PTOF</a></li>
-          <li><a href="regolamento.html">Regolamento</a></li>
+          <li><a href="ptof-guida.html">Il PTOF spiegato</a></li>
+          <li><a href="regolamento.html">Regolamento di Convitto</a></li>
           <li><a href="privacy.html">Privacy &amp; GDPR</a></li>
           <li><a href="privacy-moduli.html">Informative e moduli privacy</a></li>
           <li><a href="cookie-policy.html">Cookie Policy</a></li>
@@ -172,7 +177,7 @@
   } else {
     armChatbotFab();
   }
-  setTimeout(function () { loadChatbot(false); }, 4000);
+  // L'assistente (e il suo indice) si scarica solo quando qualcuno lo apre: pagine più leggere.
 
   /* Inietta modale PEC */
   const pecModal = document.createElement('div');
@@ -214,20 +219,20 @@
   /* ── Drawer ── */
   const brg = document.getElementById('brg');
   const drw = document.getElementById('drw');
-  function openD() { if(!drw||!brg) return; drw.classList.add('on'); brg.setAttribute('aria-expanded','true'); brg.setAttribute('aria-label','Chiudi menu'); document.body.style.overflow='hidden'; }
-  function closeD() { if(!drw||!brg) return; drw.classList.remove('on'); brg.setAttribute('aria-expanded','false'); brg.setAttribute('aria-label','Apri menu'); document.body.style.overflow=''; }
+  function openD() { if(!drw||!brg) return; drw.classList.add('on'); brg.setAttribute('aria-expanded','true'); brg.setAttribute('aria-label','Chiudi menu'); document.body.style.overflow='hidden'; document.body.classList.add('drw-aperto'); }
+  function closeD() { if(!drw||!brg) return; drw.classList.remove('on'); brg.setAttribute('aria-expanded','false'); brg.setAttribute('aria-label','Apri menu'); document.body.style.overflow=''; document.body.classList.remove('drw-aperto'); }
   if (brg && drw) {
     brg.addEventListener('click', () => drw.classList.contains('on') ? closeD() : openD());
     drw.querySelectorAll('a').forEach(a => a.addEventListener('click', closeD));
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeD(); });
 
-  /* ── FAB — 3 cerchi fissi, sempre visibili ── */
+  /* ── FAB — cerchi fissi (sul telefono raccolti nel bottone «⋯») ── */
   (function(){
     const isHome = !document.body.dataset.page || document.body.dataset.page === 'home';
 
     const CSS = `
-      .dd-menu{max-height:calc(100vh - 80px) !important;overflow-y:auto !important;}.dd-menu::-webkit-scrollbar{width:3px}.dd-menu::-webkit-scrollbar-thumb{background:rgba(184,146,42,.3);border-radius:2px}#fab-wrap{position:fixed;bottom:1.5rem;right:1.25rem;z-index:8900;display:flex;flex-direction:column;align-items:center;gap:.45rem;}
+      .dd-menu{max-height:calc(100vh - 80px) !important;overflow-y:auto !important;}.dd-menu::-webkit-scrollbar{width:3px}.dd-menu::-webkit-scrollbar-thumb{background:rgba(184,146,42,.3);border-radius:2px}body.drw-aperto #fab-wrap{display:none !important;}#fab-wrap{position:fixed;bottom:1.5rem;right:1.25rem;z-index:8900;display:flex;flex-direction:column;align-items:center;gap:.45rem;}
       .fab-c{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2C3E2D,#1a3a1b);border:1.5px solid rgba(184,146,42,.35);box-shadow:0 3px 12px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;color:#fff;font-size:1rem;position:relative;transition:transform .18s,box-shadow .18s;-webkit-tap-highlight-color:transparent;flex-shrink:0;}
       .fab-c:hover{transform:scale(1.12);box-shadow:0 5px 18px rgba(0,0,0,.38),0 0 0 2px rgba(184,146,42,.45);}
       .fab-c svg{width:17px;height:17px;fill:#D4AA4A;flex-shrink:0;}
@@ -264,8 +269,39 @@
     const fChat = document.createElement('button');
     fChat.id = 'cc-fab'; fChat.className = 'fab-c';
     fChat.setAttribute('aria-label','Apri assistente virtuale'); fChat.setAttribute('data-tip','Assistente');
-    fChat.innerHTML = '🎓<span id="cc-badge" style="position:absolute;top:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:#B8922A;border:2px solid #fff;display:none" aria-hidden="true"></span>';
+    fChat.innerHTML = '💬<span id="cc-badge" style="position:absolute;top:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:#B8922A;border:2px solid #fff;display:none" aria-hidden="true"></span>';
     wrap.appendChild(fChat);
+
+    // 4. Telefono: un solo bottone «⋯» al posto della colonna di cerchi.
+    //    Toccandolo si aprono gli altri, ciascuno con la sua etichetta visibile.
+    (function (w) {
+      var css = document.createElement('style');
+      css.textContent = '#fab-more{display:none;order:99;font-size:1.75rem;font-weight:800;line-height:1;color:#EDD98A;border-color:rgba(212,170,74,.75);}' +
+        '@media(max-width:700px){#fab-more{display:flex;}' +
+        '#fab-wrap:not(.aperto)>:not(#fab-more){display:none!important;}' +
+        '#fab-wrap.aperto #fab-top{opacity:1;pointer-events:auto;transform:none;}' +
+        '#fab-wrap.aperto .fab-c[data-tip]:not(#fab-more)::after{content:attr(data-tip);display:block!important;position:absolute;right:48px;top:50%;transform:translateY(-50%);background:rgba(12,20,13,.92);color:#F5F0E8;font-family:"Source Sans 3",sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:.3rem .6rem;border-radius:6px;white-space:nowrap;border:1px solid rgba(184,146,42,.35);pointer-events:none;}}';
+      document.head.appendChild(css);
+      var more = document.createElement('button');
+      more.id = 'fab-more'; more.type = 'button'; more.className = 'fab-c';
+      more.setAttribute('aria-label', 'Altri strumenti: lingua, assistente, lettura facilitata');
+      more.setAttribute('aria-expanded', 'false');
+      more.textContent = '⋯';
+      function chiudi() { w.classList.remove('aperto'); more.setAttribute('aria-expanded', 'false'); more.textContent = '⋯'; }
+      more.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var ap = w.classList.toggle('aperto');
+        more.setAttribute('aria-expanded', ap ? 'true' : 'false');
+        more.textContent = ap ? '✕' : '⋯';
+      });
+      w.addEventListener('click', function (e) {
+        var b = e.target.closest ? e.target.closest('.fab-c') : null;
+        if (b && b !== more && b.id !== 'tr-fab') chiudi();
+      });
+      document.addEventListener('click', function (e) { if (!w.contains(e.target)) chiudi(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') chiudi(); });
+      w.appendChild(more);
+    })(wrap);
   })();
 
   try {
@@ -315,6 +351,13 @@
         btn.nextElementSibling && btn.nextElementSibling.classList.add('open');
       }
     });
+  });
+
+  /* ── Menu «Il Convitto»: su touch, un tocco sulla voce apre l'elenco accanto ── */
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.dd-sub-btn');
+    document.querySelectorAll('.dd-sub-btn[aria-expanded="true"]').forEach(x => { if (x !== b) x.setAttribute('aria-expanded','false'); });
+    if (b) { b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); }
   });
 
   /* ── Dropdown desktop: chiudi cliccando fuori ── */
@@ -400,7 +443,7 @@
 
       // Aggiunge freccia a ogni sezione tranne l'ultima
       sections.forEach((sec, i) => {
-        if (i >= sections.length - 1) return;
+        if (i > 0) return; // solo la prima freccia (dall'intestazione alla prima sezione): le altre affollavano la pagina
         const pos = getComputedStyle(sec).position;
         if (pos === 'static') sec.style.position = 'relative';
 
@@ -471,6 +514,11 @@
       else{fab.style.cssText='position:fixed;bottom:1.5rem;right:1.25rem;z-index:8900;';document.body.appendChild(fab);}
     })();
 
+
+    /* il pulsante della lingua sta sempre sotto l'intestazione, anche a inizio pagina (sotto la barra istituzionale) */
+    (function(){var q=0;function pos(){q=0;var h=document.getElementById('hdr');if(!h)return;var b=Math.max(0,Math.round(h.getBoundingClientRect().bottom));btn.style.top=(b+8)+'px';menu.style.top=(b+42)+'px';}
+    function pianifica(){if(!q)q=requestAnimationFrame(pos);}
+    window.addEventListener('scroll',pianifica,{passive:true});window.addEventListener('resize',pianifica);pos();})();
     btn.onclick=e=>{e.stopPropagation();menu.classList.toggle('open');};
     document.addEventListener('click',()=>{menu.classList.remove('open');fab.setAttribute('aria-expanded','false');});
 
@@ -576,7 +624,9 @@
     }
 
     function animateCounter(el) {
-      if (noMotion) { el.textContent = finalText(el); return; }
+      // Gli anni (data-plain) e i numeri piccoli non si animano: a metà conteggio
+      // mostrerebbero valori sbagliati (es. "1694" come anno di apertura, "3 pasti").
+      if (noMotion || el.dataset.plain || parseInt(el.dataset.count) < 10) { el.textContent = finalText(el); return; }
       const target = parseInt(el.dataset.count);
       const suffix = el.dataset.suffix || '';
       const prefix = el.dataset.prefix || '';
@@ -711,6 +761,11 @@
 
 (function () {
   var INDICE = [
+    { titolo: 'Aula digitale', pagina: 'aula/', ancora: '', cat: 'Aula digitale', keywords: ['aula','aula digitale','lingue','sala studio','studiare','telefono','qr'] },
+    { titolo: 'Aula digitale per le famiglie', pagina: 'aula/famiglie/', ancora: '', cat: 'Aula digitale', keywords: ['aula','famiglie','genitori','privacy','nessun dato','studenti','registrazione'] },
+    { titolo: 'Aula digitale: formazione per i colleghi', pagina: 'aula/formazione/', ancora: '', cat: 'Aula digitale', keywords: ['aula','formazione','colleghi','docenti','educatori','lezione','qr'] },
+    { titolo: 'Le lingue dell\'Alberghiero', pagina: 'aula/lingue/', ancora: '', cat: 'Aula digitale', keywords: ['lingue','inglese','francese','spagnolo','vocabolario','esercizi','giochi'] },
+    { titolo: 'Sala studio', pagina: 'aula/studio/', ancora: '', cat: 'Aula digitale', keywords: ['sala studio','lezioni interattive','ripasso','verifica','lettura facilitata','supporti'] },
     { titolo: 'Chi siamo — Storia del Convitto', pagina: 'il-convitto.html', ancora: '#storia', cat: 'Il Convitto', keywords: ['storia','convitto','costaggini','fondazione','rieti','tradizione','comunità','educante','origine','anni','decenni'] },
     { titolo: 'Missione e valori', pagina: 'il-convitto.html', ancora: '#mission', cat: 'Il Convitto', keywords: ['missione','valori','sicurezza','eccellenza','cura','formazione','educare'] },
     { titolo: 'Staff educativo e organigramma', pagina: 'il-convitto.html', ancora: '#staff', cat: 'Il Convitto', keywords: ['staff','rettore','coordinatore','educatore','personale','direzione','organigramma','docenti'] },
@@ -723,8 +778,8 @@
     { titolo: 'Salute e assistenza sanitaria', pagina: 'servizi.html', ancora: '#salute', cat: 'Servizi', keywords: ['infermeria','salute','medico','psicologico','emergenza','118','ospedale','farmaci','sanitaria','assistenza','asl'] },
     { titolo: 'Orari dei servizi', pagina: 'servizi.html', ancora: '#orari', cat: 'Servizi', keywords: ['orari','orario','apertura','chiusura','quando','ore','mattina','pomeriggio','sera'] },
     { titolo: 'Come iscriversi al Convitto', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['iscriversi','iscrizione','iscrivo','ammissione','domanda','come','procedura','miur','portale','modulo','candidatura','entrare'] },
-    { titolo: 'Tariffe e rette 2026/27', pagina: 'ammissione.html', ancora: '#tariffe', cat: 'Ammissione', keywords: ['tariffa','retta','costo','costa','prezzo','quanto','pagare','isee','riduzione','agevolazione','contributo','pagopa','rata','mensile','euro'] },
-    { titolo: 'Moduli e documenti da scaricare', pagina: 'ammissione.html', ancora: '#moduli', cat: 'Ammissione', keywords: ['modulo','moduli','scaricare','download','pdf','documenti','documento','certificato','attestato','stampare','compilare','domanda','allegati'] },
+    { titolo: 'Tariffe e rette 2026/27', pagina: 'ammissione.html', ancora: '#tariffe', cat: 'Ammissione', keywords: ['tariffa','retta','rette','costo','costa','prezzo','quanto','pagare','pagamento','pagamenti','isee','riduzione','agevolazione','contributo','pagopa','rata','rate','scadenze','mensile','euro'] },
+    { titolo: 'Moduli per l\'iscrizione', pagina: 'ammissione.html', ancora: '#moduli', cat: 'Ammissione', keywords: ['modulo','moduli','scaricare','download','pdf','documenti','documento','stampare','compilare','domanda','allegati'] },
     { titolo: 'Domande frequenti — FAQ', pagina: 'ammissione.html', ancora: '#faq', cat: 'Ammissione', keywords: ['faq','domande','frequenti','dubbi','risposta','chiarimenti','uscita','malattia','rimborso','ritiro','camera','compagno','valigia','corredo','portare','bagaglio','colloquio','ambientamento','nostalgia'] },
     { titolo: 'Scadenze e calendario iscrizioni', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['scadenza','calendario','quando','data','settembre','ottobre','novembre','gennaio','marzo','maggio','giugno','termine'] },
     { titolo: 'Regolamento del Convitto', pagina: 'trasparenza.html', ancora: '#disposizioni', cat: 'Trasparenza', keywords: ['regolamento','regole','norme','disciplina','comportamento','patto','convivenza'] },
@@ -741,6 +796,7 @@
     { titolo: 'Dove siamo — Indirizzo e mappa', pagina: 'contatti.html', ancora: '#mappa', cat: 'Contatti', keywords: ['indirizzo','dove','mappa','come arrivare','rieti','sede','posizione','via','strada','percorso','gps','trova','trovare','trovarci','ubicazione','situato','convitto'] },
     { titolo: 'Scrivi un messaggio al Convitto', pagina: 'contatti.html', ancora: '#form', cat: 'Contatti', keywords: ['messaggio','scrivere','modulo','form','contatto','richiedere','informazioni','domanda','quesito'] },
     { titolo: 'Il Laboratorio Musicale', pagina: 'laboratorio-musicale.html', ancora: '', cat: 'Comunità', keywords: ['musica','laboratorio','chitarra','voce','canto','concerto','ensemble','strumenti'] },
+    { titolo: 'Biblioteca e Lettura', pagina: 'biblioteca.html', ancora: '', cat: 'Il Convitto', keywords: ['biblioteca','lettura','libri','prestito','progetto lettura','autori','poesia','caviardage','debate','paroniana','teatro','miró','miro','salieri','camilleri','oltre le pagine'] },
     { titolo: 'Il Vinile del Convitto', pagina: 'vinile.html', ancora: '', cat: 'Comunità', keywords: ['vinile','disco','musica','ascolta','esibizioni','registrazioni'] },
     { titolo: 'Rieti in libera uscita', pagina: 'rieti-libera-uscita.html', ancora: '', cat: 'Il Convitto', keywords: ['libera uscita','uscita','porta romana','centro','rieti','dove andare','nuovi arrivati','biblioteca','farmacia','mappa','tempo libero'] },
     { titolo: 'La Valle Santa a tavola', pagina: 'valle-santa.html', ancora: '', cat: 'Comunità', keywords: ['san francesco','francesco','valle santa','greccio','presepe','fonte colombo','la foresta','poggio bustone','santuari','800 anni','ricette','mostaccioli'] },
@@ -764,13 +820,13 @@
     { titolo: 'Per i Genitori', pagina: 'genitori.html', ancora: '', cat: 'Famiglie', keywords: ['genitori','famiglie','famiglia','vicini','informazioni','dsa','bes','dislessia','disturbi di apprendimento','bisogni educativi speciali'] },
     { titolo: 'Il Laboratorio Teatrale', pagina: 'genitori.html', ancora: '', cat: 'Comunità', keywords: ['teatro','teatrale','laboratorio teatrale','recitazione','spettacolo','palco','recitare','attori','commedia'] },
     { titolo: 'Una giornata al Convitto', pagina: 'giornata-tipo.html', ancora: '', cat: 'Il Convitto', keywords: ['giornata','tipo','sveglia','studio','sport','cena','quotidiana','routine'] },
-    { titolo: 'In 2 Minuti', pagina: 'in-2-minuti.html', ancora: '', cat: 'Orientamento', keywords: ['2 minuti','veloce','faq','domande frequenti','riassunto'] },
+    { titolo: 'Domande frequenti', pagina: 'in-2-minuti.html', ancora: '', cat: 'Orientamento', keywords: ['2 minuti','in 2 minuti','veloce','faq','domande frequenti','domande','risposte','riassunto'] },
     { titolo: 'Menu della Settimana', pagina: 'menu-settimana.html', ancora: '', cat: 'Novità', keywords: ['menu','mensa','cibo','pasti','primo','secondo','contorno','settimana','cucina'] },
     { titolo: 'Lettera a un Futuro Convittore', pagina: 'lettera.html', ancora: '', cat: 'Comunità', keywords: ['lettera','futuro','convittore','testimonianza','consigli'] },
-    { titolo: 'Open Day Digitale', pagina: 'openday.html', ancora: '', cat: 'Orientamento', keywords: ['open day','digitale','tour','spazi','faq','prenotazione','visita'] },
+    { titolo: 'Open Day e visite', pagina: 'openday.html', ancora: '', cat: 'Orientamento', keywords: ['open day','open day digitale','date','tour','spazi','prenotazione','visita','visita guidata'] },
     { titolo: 'Organizzazione del Convitto', pagina: 'organizzazione.html', ancora: '', cat: 'Trasparenza', keywords: ['organizzazione','organigramma','personale','patto educativo','corresponsabilità'] },
     { titolo: 'Chi è il Dirigente Scolastico', pagina: 'organizzazione.html', ancora: '#organigramma-titolo', cat: 'Organizzazione', keywords: ['dirigente','dirigente scolastico','preside','chi dirige il convitto','chi è il dirigente','chi è il preside','chi comanda','responsabile legale','cioci','maddalena cioci','avvocato','reggenza','in reggenza'] },
-    { titolo: 'Orientamento al Convitto', pagina: 'orientamento.html', ancora: '', cat: 'Orientamento', keywords: ['orientamento','open day','tour virtuale','fa per me','faq','prenotazione'] },
+    { titolo: 'Percorso per futuri convittori', pagina: 'orientamento.html', ancora: '', cat: 'Orientamento', keywords: ['orientamento','percorso','futuri convittori','tour virtuale','fa per me','test','quiz'] },
     { titolo: 'Elenco del Personale', pagina: 'personale.html', ancora: '', cat: 'Il Convitto', keywords: ['personale','elenco','educativo','amministrativo','staff'] },
     { titolo: 'Informative e moduli privacy', pagina: 'privacy-moduli.html', ancora: '', cat: 'Trasparenza', keywords: ['informative','moduli privacy','consenso','revoca','immagini','mappa','muro dei ricordi','semiconvitto','area famiglie','voci'] },
     { titolo: 'Informativa Privacy', pagina: 'privacy.html', ancora: '', cat: 'Trasparenza', keywords: ['privacy','informativa','dati personali','gdpr','reg ue 2016/679'] },
@@ -786,8 +842,8 @@
     { titolo: 'Mappa del Sito', pagina: 'mappa-sito.html', ancora: '', cat: 'Trasparenza', keywords: ['mappa del sito','mappa sito','tutte le pagine','indice delle pagine','trova quello che cerchi','elenco pagine','navigazione'] },
     { titolo: 'Festa di Natale 2024', pagina: 'natale2024.html', ancora: '', cat: 'Comunità', keywords: ['natale','natale 2024','festa di natale','cena di gala','tombola','musica dal vivo','dicembre 2024','galleria fotografica'] },
     { titolo: 'Iscriviti come Alumno', pagina: 'iscriviti-alumni.html', ancora: '', cat: 'Comunità', keywords: ['iscriviti alumni','registrati alumni','sei passato dal convitto','aggiungi la tua scheda','pin sulla mappa','registrazione ex convittori'] },
-    { titolo: 'Accoglienza & Modulistica', pagina: 'accoglienza.html', ancora: '', cat: 'Ammissione', keywords: ['accoglienza','modulistica','scheda','schede','convittori','convittrici','11 settembre','moduli','documenti da consegnare','arrivo'] },
-    { titolo: 'Autorizzazioni del genitore/tutore', pagina: 'autorizzazioni.html', ancora: '', cat: 'Ammissione', keywords: ['autorizzazioni','libera uscita','pista ciclopedonale','entrata autonoma','uscita autonoma','riprese immagini','attività sportive','attività culturali'] },
+    { titolo: 'Accoglienza & Modulistica', pagina: 'accoglienza.html', ancora: '', cat: 'Ammissione', keywords: ['accoglienza','modulistica','scheda','schede','convittori','convittrici','11 settembre','moduli','documenti da consegnare','arrivo','allergie','intolleranze','certificato','certificato di frequenza','attestato'] },
+    { titolo: 'Autorizzazioni del genitore/tutore', pagina: 'autorizzazioni.html', ancora: '', cat: 'Ammissione', keywords: ['autorizzazioni','autorizzazione','uscite','uscita','libera uscita','pista ciclopedonale','entrata autonoma','uscita autonoma','uscite autonome','riprese immagini','attività sportive','attività culturali'] },
     { titolo: 'Patto di Corresponsabilità', pagina: 'patto-di-corresponsabilita.html', ancora: '', cat: 'Ammissione', keywords: ['patto','corresponsabilità','impegni','famiglia','convitto','regole di convivenza'] },
     { titolo: 'Scheda Informativa del Convittore/trice', pagina: 'scheda-informativa-convittore.html', ancora: '', cat: 'Ammissione', keywords: ['scheda informativa','convittore','convittrice','anagrafica','dati alunno','genitori','provenienza scolastica','sostegno','invio online'] },
     { titolo: 'Scheda Informativa Sanitaria', pagina: 'scheda-informativa-sanitaria.html', ancora: '', cat: 'Ammissione', keywords: ['scheda sanitaria','medico curante','allergie','farmaci','intolleranze','patologie'] },

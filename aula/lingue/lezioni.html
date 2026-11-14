@@ -2,14 +2,14 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"/>
-  <script src="/cantiere.js"></script>
+  <script src="/aula/attesa.js"></script>
   <script src="/aula/riservato.js"></script>
   <script src="/aula/supporti.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Lezioni guidate | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Un argomento alla volta: una mini-lezione a schede, esercizi interattivi e una missione in situazione. Per i docenti: scaletta, link e QR per la classe, verifica in due file e versione facilitata."/>
+  <meta name="description" content="Un argomento alla volta: una mini-lezione a schede, esercizi interattivi e una missione in situazione. Per i docenti: scaletta, link e QR per la classe, verifica in due file e versione con più aiuti."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -121,7 +121,7 @@
   .lz-qr input{width:100%;font:600 .78rem var(--fu);padding:.55rem .6rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--bco);color:var(--txt);margin-bottom:.5rem}
   .lz-bott{display:flex;flex-wrap:wrap;gap:.5rem}
   .lz-doc .lg-nota{margin-top:1rem}
-  /* versione facilitata (DSA/BES): più grande, più aria, niente corsivo */
+  /* «Con più aiuti»: più grande, più aria, niente corsivo */
   .facile .lz-scheda .tx,.facile .lz-ric,.facile .ex-opz button,.facile .lz-ord button{font-size:1.12rem;line-height:1.85;letter-spacing:.01em}
   .facile .lz-es .fr{font-size:1.15rem}
   .facile .lz-es .pr,.facile .lz-ord button small,.facile .lz-chef .it,.facile .lz-sit{font-style:normal}
@@ -158,14 +158,14 @@
   </style>
 </head>
 <body data-page="lingue" data-lingue="lezioni">
-<div class="lg-anteprima">Le lingue dell'Alberghiero · minisito di prova, già utilizzabile</div>
+<div class="lg-anteprima">Aula del Convitto · Lingue</div>
 <script src="nav-header.min.js"></script>
 <main id="main">
   <section class="lg-hero">
     <div class="w">
       <p class="lbl">Un argomento alla volta</p>
       <h1>Le lezioni <em>guidate</em></h1>
-      <p>Prima una mini-lezione a schede, leggera e da ascoltare; poi gli esercizi; alla fine una missione in una cucina, in una sala o in un hotel all'estero. Per i docenti, tutto il necessario per un'ora di lezione: scaletta, link e QR per la classe, verifica in due file e versione facilitata.</p>
+      <p>Prima una mini-lezione a schede, leggera e da ascoltare; poi gli esercizi; alla fine una missione in una cucina, in una sala o in un hotel all'estero. Per i docenti, tutto il necessario per un'ora di lezione: scaletta, link e QR per la classe, verifica in due file e versione con più aiuti.</p>
     </div>
   </section>
   <div data-lingue-nav></div>
@@ -185,6 +185,7 @@
 <script src="aula/lingue/lezioni-dati.js"></script>
 <script src="aula/lingue/correzioni.js"></script>
 <script src="aula/lingue/accesso.js"></script>
+<script src="aula/studio/ripasso.js"></script>
 <script src="aula/lingue/grammatica-dati.js"></script>
 <script src="aula/lingue/grammatica.js"></script>
 <script src="aula/lingue/grammatica-ui.js"></script>
@@ -227,7 +228,7 @@
   /* ───── catalogo ───── */
   function catalogo() {
     lez = null;
-    vista.innerHTML = '<h2 class="lg-h2">Scegli <em>la lezione</em></h2><p class="lg-sot">Ogni lezione vale un\'ora di lavoro, in inglese, francese e spagnolo. Se serve, attiva la versione facilitata: caratteri più grandi, meno alternative, traduzione sempre visibile.</p><div class="lz-elenco">' +
+    vista.innerHTML = '<h2 class="lg-h2">Scegli <em>la lezione</em></h2><p class="lg-sot">Ogni lezione vale un\'ora di lavoro, in inglese, francese e spagnolo. Chi vuole può attivare «Con più aiuti»: caratteri più grandi, meno alternative, traduzione sempre visibile.</p><div class="lz-elenco">' +
       window.LEZIONI.map(function (l) {
         return '<a class="lz-card" href="aula/lingue/lezioni.html?l=' + l.id + '"><span class="ic">' + l.icona + '</span><span class="amb">' + esc(l.ambito) + ' · ' + esc(l.livello) + ' · ' + esc(l.classi) + '</span><h3>' + esc(l.titolo) + '</h3><p class="sot">' + esc(l.sottotitolo) + '</p><p>' + esc(l.descrizione) + '</p><span class="vai">Inizia la lezione →</span></a>';
       }).join('') +
@@ -254,9 +255,22 @@
     schedaN = 0; esN = 0; esPunti = []; miN = 0; miPunti = [];
     disegna();
   }
+  /* ripasso a intervalli e riscaldamento: lo stesso elenco della Sala studio, solo sul dispositivo */
+  function idRipasso() { return 'lingue-' + lez.id + '-' + lin; }
+  function domandeRipasso() {
+    var Dz = D(), q = [], mescola = L.mescola;
+    Dz.schede.forEach(function (s) { if (s.domanda && s.domanda.o && s.domanda.o.length >= 2) q.push({ d: s.domanda.testo, o: s.domanda.o.slice(0, 4), g: 0, s: s.domanda.spiega || '' }); });
+    Dz.esercizi.forEach(function (e) {
+      if (e.tipo === 'scelta') (e.voci || []).forEach(function (v) { q.push({ d: v.d, o: v.o.slice(0, 4), g: 0, s: '' }); });
+      if (e.tipo === 'ascolta') (e.voci || []).forEach(function (v) { q.push({ d: 'Che cosa vuol dire «' + v.t + '»?', o: v.o.slice(0, 4), g: 0, s: '' }); });
+      if (e.tipo === 'abbina') { var C = e.coppie || []; C.forEach(function (c, i) { var altri = mescola(C.filter(function (x, k) { return k !== i; })).slice(0, 2).map(function (x) { return x[1]; }); if (altri.length) q.push({ d: 'Che cosa vuol dire «' + c[0] + '»?', o: [c[1]].concat(altri), g: 0, s: '' }); }); }
+    });
+    return mescola(q).slice(0, 12);
+  }
+  function invitoRipasso() { var el = document.getElementById('lz-ripasso'); if (el && window.RIPASSO && lez.lingue[lin]) RIPASSO.invito(el, idRipasso()); }
   function disegna() {
     sez.classList.toggle('facile', facile);
-    var h = '<div class="lz-testa"><a class="lg-btn" href="aula/lingue/lezioni.html" style="min-height:38px;padding:.45rem .8rem" aria-label="Tutte le lezioni">←</a><h2>' + lez.icona + ' ' + esc(lez.titolo) + '<small>' + esc(lez.sottotitolo) + ' · ' + esc(lez.livello) + ' · ' + esc(lez.classi) + '</small></h2><button type="button" class="lg-btn" data-schermo style="min-height:38px;padding:.45rem .8rem" title="Lezione a tutto schermo per la LIM">🖥️ LIM</button></div><button type="button" class="lg-btn lz-esci-lim" data-schermo>✕ Esci dalla modalità LIM</button>';
+    var h = '<div id="lz-ripasso"></div><div class="lz-testa"><a class="lg-btn" href="aula/lingue/lezioni.html" style="min-height:38px;padding:.45rem .8rem" aria-label="Tutte le lezioni">←</a><h2>' + lez.icona + ' ' + esc(lez.titolo) + '<small>' + esc(lez.sottotitolo) + ' · ' + esc(lez.livello) + ' · ' + esc(lez.classi) + '</small></h2><button type="button" class="lg-btn" data-schermo style="min-height:38px;padding:.45rem .8rem" title="Lezione a tutto schermo per la LIM">🖥️ LIM</button></div><button type="button" class="lg-btn lz-esci-lim" data-schermo>✕ Esci dalla modalità LIM</button>';
     if (!lez.lingue[lin]) {
       var disp = Object.keys(lez.lingue);
       vista.innerHTML = h + '<div class="lg-card lz-avviso"><p style="margin:0">Questa lezione è disponibile in: <b>' + disp.map(function (c) { return L.lingua(c).nome.toLowerCase(); }).join('</b> e <b>') + '</b>.</p><div class="bott">' + disp.map(function (c) { return '<button type="button" class="lg-btn pieno" data-lin="' + c + '">Passa a: ' + L.lingua(c).nome.toLowerCase() + '</button>'; }).join('') + '</div></div>';
@@ -267,11 +281,12 @@
     if ((tab === 'docente' || tab === 'modifica') && !lez.docente) tab = 'lezione';
     if (tab === 'modifica' && !salvataNelBrowser()) tab = 'docente';
     h += '<div class="lz-tab" role="group" aria-label="Parti della lezione">' + T.map(function (t) { return t[0] === 'accedi' ? '<button type="button" data-accedi class="doc" title="Riservato ai docenti: serve l\'accesso"><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>' : '<button type="button" data-tab="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '"' + (t[0] === 'docente' ? ' class="doc"' : '') + '><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>' +
-      '<label class="lz-facile"><input type="checkbox" id="lz-fac"' + (facile ? ' checked' : '') + '/> Versione facilitata (DSA/BES)</label>' + gramPannello() + '<div id="lz-corpo"></div>';
+      '<label class="lz-facile"><input type="checkbox" id="lz-fac"' + (facile ? ' checked' : '') + '/> 🧩 Con più aiuti</label>' + gramPannello() + '<div id="lz-corpo"></div>';
     vista.innerHTML = h;
     var gm = document.getElementById('lz-gm');
     if (gm && G.editorMiei) G.editorMiei(gm, lin, function () { gram = (L.leggi('gram-argomenti', []) || []).slice(); gramSeme++; esN = 0; esPunti = []; stato = {}; disegna(); });
     ({ lezione: scheda, esercizi: esercizio, missione: missione, docente: docente, modifica: editor })[tab]();
+    invitoRipasso();
   }
   function corpo(html) { document.getElementById('lz-corpo').innerHTML = html; }
 
@@ -416,6 +431,7 @@
     if (o[1] && /^[^\u{1F300}-\u{1FAFF}]/u.test(o[0]) && L.parla) L.ascolta(o[0], lin);
   }
   function fineMissione() {
+    if (window.RIPASSO) RIPASSO.registra({ titolo: lez.titolo + ' · ' + L.lingua(lin).nome, icona: lez.icona, materia: 'Lingue · ' + lez.ambito }, idRipasso(), location.pathname + location.search + location.hash, domandeRipasso());
     var M = D().missione, pt = miPunti.reduce(function (a, b) { return a + b; }, 0), n = M.passi.length, r = pt / n;
     var rec = L.leggi('lz-rec-' + lez.id + '-' + lin, null); if (rec == null || pt > rec) L.salva('lz-rec-' + lez.id + '-' + lin, pt);
     corpo('<div class="lz-box"><div class="lg-card lz-ris"><div class="big">' + (r === 1 ? '🏆' : r >= .7 ? '😊' : r >= .4 ? '😐' : '😬') + '</div><p class="tit">' + pt + ' su ' + n + '</p><p>' + esc(M.esiti[r === 1 ? 0 : r >= .7 ? 1 : r >= .4 ? 2 : 3]) + '</p>' + (rec != null ? '<p>Il tuo record: ' + Math.max(rec, pt) + ' su ' + n + '</p>' : '') +
@@ -440,12 +456,12 @@
     var d = lez.docente;
     var strum = '<div class="lg-card" style="margin-bottom:1rem"><h3>🛠️ Strumenti</h3><p class="lz-cons">Lezione a tutto schermo per la LIM, la mini-lezione da stampare per il quaderno e, se serve, la lezione da adattare alla vostra classe.</p><div class="lz-bott">' +
       '<button type="button" class="lg-btn pieno" data-schermo>🖥️ Modalità LIM</button>' +
-      '<button type="button" class="lg-btn" data-scheda-stampa>🖨️ Scheda per i ragazzi</button><button type="button" class="lg-btn" data-scheda-stampa="facile">🖨️ Scheda facilitata</button>' +
+      '<button type="button" class="lg-btn" data-scheda-stampa>🖨️ Scheda per i ragazzi</button><button type="button" class="lg-btn" data-scheda-stampa="facile">🖨️ Scheda con più aiuti</button>' +
       (salvataNelBrowser() ? '<button type="button" class="lg-btn oro" data-tab="modifica">✏️ Modifica la lezione</button>' : '<button type="button" class="lg-btn oro" data-copia-lezione>📋 Fai una copia da modificare</button>') +
       '</div>' + (salvataNelBrowser() ? '' : '<p class="lz-cons" style="margin:.6rem 0 0">La copia finisce tra «Le mie lezioni» di questo browser: l\'originale resta com\'è.</p>') + '</div>';
     corpo('<div class="lz-doc">' + strum +
       '<div class="lg-card"><h3>🔗 Per i ragazzi</h3><p class="lz-cons">Proiettate il QR alla LIM o mandate il link sul gruppo della classe: la lezione si apre già in ' + L.lingua(lin).nome.toLowerCase() + '. Nessuna registrazione, nessun dato raccolto.</p><div class="lz-qr"><canvas id="lz-qr" width="150" height="150" aria-label="Codice QR della lezione"></canvas><div class="lk"><input type="text" readonly id="lz-link" value="…"/><div class="lz-bott"><button type="button" class="lg-btn pieno" data-copia>📋 Copia il link</button><button type="button" class="lg-btn" data-lim>🖥️ QR a tutto schermo</button></div></div></div></div>' +
-      '<div class="lg-card" style="margin-top:1rem"><h3>📝 La verifica</h3><p class="lz-cons">Due file con domande diverse (A e B), da stampare. La versione facilitata ha caratteri grandi, meno alternative e i suggerimenti. Le soluzioni sono su un foglio a parte.</p><div class="lz-bott"><button type="button" class="lg-btn pieno" data-stampa="A">🖨️ File A</button><button type="button" class="lg-btn pieno" data-stampa="B">🖨️ File B</button><button type="button" class="lg-btn" data-stampa="A" data-fac="1">File A facilitato</button><button type="button" class="lg-btn" data-stampa="B" data-fac="1">File B facilitato</button><button type="button" class="lg-btn oro" data-stampa="S">Soluzioni</button></div></div>' +
+      '<div class="lg-card" style="margin-top:1rem"><h3>📝 La verifica</h3><p class="lz-cons">Due file con domande diverse (A e B), da stampare. La versione con più aiuti ha meno alternative e i suggerimenti, e caratteri appena più grandi; porta la stessa lettera e la stessa intestazione del file, quindi sul foglio nulla la distingue. Le soluzioni sono su un foglio a parte.</p><div class="lz-bott"><button type="button" class="lg-btn pieno" data-stampa="A">🖨️ File A</button><button type="button" class="lg-btn pieno" data-stampa="B">🖨️ File B</button><button type="button" class="lg-btn" data-stampa="A" data-fac="1">File A con più aiuti</button><button type="button" class="lg-btn" data-stampa="B" data-fac="1">File B con più aiuti</button><button type="button" class="lg-btn oro" data-stampa="S">Soluzioni</button></div></div>' +
       '<div class="lg-card" style="margin-top:1rem"><h3>⏱️ In un\'ora di lezione</h3><table class="lz-scal">' + d.scaletta.map(function (r) { return '<tr><td>' + esc(r[0]) + '</td><td>' + esc(r[1]) + '</td></tr>'; }).join('') + '</table>' +
       '<h3>🎯 Obiettivi</h3><ul>' + d.obiettivi.map(function (o) { return '<li>' + esc(o) + '</li>'; }).join('') + '</ul>' +
       '<h3>🌍 Spunti</h3><ul>' + d.spunti.map(function (o) { return '<li>' + esc(o) + '</li>'; }).join('') + '</ul></div>' +
@@ -496,9 +512,9 @@
       if (s.domanda) h += '<p class="dom">✎ ' + esc(s.domanda.testo) + '</p><p class="opz">' + mescolaS(s.domanda.o, rnd).map(function (o) { return '☐ ' + esc(o); }).join('&nbsp;&nbsp;&nbsp; ') + '</p>';
       return '<div class="blocco">' + h + '</div>';
     }).join('');
-    var css = 'body{font-family:Arial,Helvetica,sans-serif;margin:22px;color:#1a1a1a;font-size:' + (fac ? '14pt' : '11pt') + ';line-height:' + (fac ? '1.8' : '1.5') + (fac ? ';letter-spacing:.02em' : '') + '}h1{font-size:' + (fac ? '19pt' : '16pt') + ';margin:0}.sot{font-size:9.5pt;color:#555;margin:2px 0 14px}h3{font-size:' + (fac ? '14pt' : '12pt') + ';color:#2C3E2D;margin:14px 0 4px}p{margin:0 0 6px}table{width:100%;border-collapse:collapse;margin:4px 0 6px}td{border-bottom:1px solid #ccc;padding:4px 6px;vertical-align:top;width:50%}td.fr{font-weight:bold}small{display:block;font-weight:normal;color:#666;' + (fac ? '' : 'font-style:italic;') + 'font-size:' + (fac ? '11pt' : '8.5pt') + '}.dom{margin-top:6px;font-weight:bold}.opz{color:#333}.blocco{page-break-inside:avoid}.nome{border:1px solid #999;border-radius:6px;padding:6px 10px;margin-bottom:12px;font-size:10pt}@page{size:A4;margin:14mm}';
+    var css = 'body{font-family:Arial,Helvetica,sans-serif;margin:22px;color:#1a1a1a;font-size:' + (fac ? '13.5pt' : '11.5pt') + ';line-height:' + (fac ? '1.75' : '1.45') + (fac ? ';letter-spacing:.01em' : '') + '}h1{font-size:16pt;margin:0}.sot{font-size:9.5pt;color:#555;margin:2px 0 14px}h3{font-size:12pt;color:#2C3E2D;margin:14px 0 4px}p{margin:0 0 6px}table{width:100%;border-collapse:collapse;margin:4px 0 6px}td{border-bottom:1px solid #ccc;padding:4px 6px;vertical-align:top;width:50%}td.fr{font-weight:bold}small{display:block;font-weight:normal;color:#666;' + (fac ? '' : 'font-style:italic;') + 'font-size:' + (fac ? '11pt' : '8.5pt') + '}.dom{margin-top:6px;font-weight:bold}.opz{color:#333}.blocco{page-break-inside:avoid}.nome{border:1px solid #999;border-radius:6px;padding:6px 10px;margin-bottom:12px;font-size:10pt}@page{size:A4;margin:14mm}';
     var w = window.open('', '_blank'); if (!w) return;
-    w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(lez.titolo) + ' — ' + esc(nomeL) + ' — scheda' + (fac ? ' facilitata' : '') + '</title><style>' + css + '</style></head><body>' +
+    w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(lez.titolo) + ' — ' + esc(nomeL) + ' — scheda</title><style>' + css + '</style></head><body>' +
       '<h1>' + esc(lez.titolo) + ' · ' + esc(nomeL) + '</h1><p class="sot">' + esc(lez.sottotitolo) + ' · livello ' + esc(lez.livello) + ' · IPSSEOA «Costaggini» Rieti</p><div class="nome">Cognome e nome ____________________________ Classe ______</div>' + corpoS +
       '<script>window.onload=function(){window.print()}<\/script></body></html>');
     w.document.close();
@@ -560,7 +576,7 @@
       var P = B + '.verifica.' + i, d = cIn(P + '.titolo', 'Titolo') + '<label class="c"><span>Punti per domanda</span><input type="number" min="1" max="10" data-p="' + P + '.punti" data-num="1" value="' + esc(v.punti) + '"/></label>';
       if (v.tipo === 'traduci') d += v.voci.map(function (c, j) { var Q = P + '.voci.' + j; return '<div class="riga">' + cIn(Q + '.0', 'Italiano') + cIn(Q + '.1', 'Soluzione') + x(Q) + '</div>'; }).join('') + piu(P + '.voci', 'traduci', 'aggiungi');
       if (v.tipo === 'scelta') d += v.voci.map(function (c, j) { var Q = P + '.voci.' + j; return '<div class="riga voce"><div>' + cIn(Q + '.d', 'Domanda') + cOpz(Q + '.o') + '</div>' + x(Q) + '</div>'; }).join('') + piu(P + '.voci', 'scelta', 'aggiungi');
-      if (v.tipo === 'aperta') d += cIn(P + '.testo', 'Consegna', true) + cIn(P + '.facile', 'Consegna facilitata', true);
+      if (v.tipo === 'aperta') d += cIn(P + '.testo', 'Consegna', true) + cIn(P + '.facile', 'Consegna con più aiuti', true);
       h += blocco('v' + i, 'Verifica · parte ' + (i + 1), v.titolo, d);
     });
     corpo('<div class="ed"><p class="lz-cons ed-intro">Cambiate quello che volete e premete <b>Salva</b>. Le frasi vuote vengono tolte da sole. Le modifiche restano in questo browser.</p>' + h +
@@ -644,7 +660,7 @@
         tot += pts;
         h = '<h3>' + (k + 1) + '. ' + esc(sz.titolo) + ' <span class="pt">(' + pts + ' punti)</span></h3>';
         if (sz.tipo === 'traduci') {
-          /* facilitata: per le parole la banca delle risposte, per le frasi solo la parola d'inizio */
+          /* più aiuti: per le parole la banca delle risposte, per le frasi solo la parola d'inizio */
           var frasi = sz.punti > 1;
           if (fac && !frasi) h += '<p class="banca">Parole da usare: ' + mescolaS(vv.map(function (v) { return v[1]; }), rnd).map(esc).join(' · ') + '</p>';
           h += '<ol>' + vv.map(function (v) { return '<li>' + esc(v[0]) + (fac && frasi ? ' <span class="pt">(inizia con: ' + esc(v[1].split(' ')[0]) + ' …)</span>' : '') + ' <span class="riga"></span></li>'; }).join('') + '</ol>';
@@ -656,8 +672,9 @@
         return h;
       }).join('');
     }
-    var css = 'body{font-family:Arial,Helvetica,sans-serif;margin:22px;color:#1a1a1a;font-size:' + (fac ? '14pt' : '11pt') + ';line-height:' + (fac ? '1.8' : '1.5') + (fac ? ';letter-spacing:.02em' : '') + '}h1{font-size:' + (fac ? '18pt' : '15pt') + ';margin:0}h2{font-size:14pt;margin:0 0 8px}.sot{font-size:9pt;color:#555;margin:2px 0 10px}.dati{display:flex;gap:16px;border:1px solid #999;border-radius:6px;padding:8px 10px;margin-bottom:12px;font-size:10pt}.dati span{flex:1;border-bottom:1px solid #999;padding-bottom:12px}h3{font-size:' + (fac ? '14pt' : '11.5pt') + ';margin:14px 0 6px;color:#2C3E2D}.pt{font-weight:normal;color:#666;font-size:9pt}ol{margin:0;padding-left:22px}li{margin:0 0 ' + (fac ? '12px' : '8px') + '}.opz{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:3px}.riga{display:inline-block;width:55%;border-bottom:1px solid #999;height:1.1em;vertical-align:bottom}.riga.piena{display:block;width:100%;height:' + (fac ? '2.2em' : '1.8em') + '}.banca{border:1.5px dashed #b8922a;border-radius:6px;padding:6px 10px;background:#fdf8ea}.sol{color:#555}.tot{text-align:right;font-weight:bold;margin-top:14px}.pag{page-break-after:always}@page{size:A4;margin:14mm}';
-    var tit = file === 'S' ? 'Soluzioni' : 'Verifica · file ' + file + (fac ? ' · versione facilitata' : '');
+    var css = 'body{font-family:Arial,Helvetica,sans-serif;margin:22px;color:#1a1a1a;font-size:' + (fac ? '13.5pt' : '11.5pt') + ';line-height:' + (fac ? '1.75' : '1.45') + (fac ? ';letter-spacing:.01em' : '') + '}h1{font-size:15pt;margin:0}h2{font-size:14pt;margin:0 0 8px}.sot{font-size:9pt;color:#555;margin:2px 0 10px}.dati{display:flex;gap:16px;border:1px solid #999;border-radius:6px;padding:8px 10px;margin-bottom:12px;font-size:10pt}.dati span{flex:1;border-bottom:1px solid #999;padding-bottom:12px}h3{font-size:12pt;margin:14px 0 6px;color:#2C3E2D}.pt{font-weight:normal;color:#666;font-size:9pt}ol{margin:0;padding-left:22px}li{margin:0 0 ' + (fac ? '12px' : '8px') + '}.opz{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:3px}.riga{display:inline-block;width:55%;border-bottom:1px solid #999;height:1.1em;vertical-align:bottom}.riga.piena{display:block;width:100%;height:' + (fac ? '2.2em' : '1.8em') + '}.banca{border:1.5px dashed #b8922a;border-radius:6px;padding:6px 10px;background:#fdf8ea}.sol{color:#555}.tot{text-align:right;font-weight:bold;margin-top:14px}.pag{page-break-after:always}@page{size:A4;margin:14mm}';
+    /* la versione con più aiuti porta la stessa lettera e la stessa intestazione: sul foglio niente la distingue */
+    var tit = file === 'S' ? 'Soluzioni' : 'Verifica · file ' + file;
     var w = window.open('', '_blank'); if (!w) return;
     w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"/><title>' + esc(lez.titolo) + ' — ' + esc(nomeL) + ' — ' + esc(tit) + '</title><style>' + css + '</style></head><body>' +
       '<h1>' + esc(lez.titolo) + ' · ' + esc(nomeL) + ' — ' + esc(tit) + '</h1><p class="sot">' + esc(lez.sottotitolo) + ' · livello ' + esc(lez.livello) + ' · IPSSEOA «Costaggini» Rieti</p>' +

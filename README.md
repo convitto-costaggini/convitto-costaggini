@@ -72,3 +72,5 @@ a riuso delle pubbliche amministrazioni.
 ## Contatti
 
 Istituzione scolastica: <rirh010007@istruzione.it>
+
+<!-- Ripubblicazione del sito: 10/11/2026 (la pubblicazione automatica precedente era scaduta per un timeout di GitHub Pages). -->

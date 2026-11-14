@@ -2,14 +2,16 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"/>
-  <script src="/cantiere.js"></script>
+  <script>window.AULA_ATTESA_MANUALE=true</script>
+  <script src="/aula/attesa.js"></script>
+  <script>AulaAttesa.pagina({ attendi: true, titolo: 'Sto preparando la lezione' });</script>
   <script src="/aula/riservato.js"></script>
   <script src="/aula/supporti.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <base href="/"/>
   <meta name="robots" content="noindex"/>
   <title>Lezione – Sala studio | Convitto "Costaggini" — Rieti</title>
-  <meta name="description" content="Una lezione interattiva della Sala studio del Convitto: idee chiave, mnemotecniche, esercizi e flashcard, dal telefono e senza registrarsi."/>
+  <meta name="description" content="Una lezione interattiva della Sala studio del Convitto: idee chiave, mnemotecniche, esercizi e flashcard, da computer o da altro dispositivo e senza registrarsi."/>
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
@@ -29,6 +31,7 @@
       <span class="st-badge" id="st-cod" hidden></span>
     </div>
   </section>
+  <div id="st-ripasso" class="st-palco" style="padding-bottom:0"></div>
   <div id="st-modi"></div>
   <div id="st-app"></div>
 </main>
@@ -39,20 +42,25 @@
 <script src="aula/studio/studio.js"></script>
 <script src="aula/studio/formati.js"></script>
 <script src="aula/studio/demo.js"></script>
+<script src="aula/studio/ripasso.js"></script>
 <script>
 (function () {
   var esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
   function errore(tit, t) {
+    if (window.AulaAttesa) AulaAttesa.fine();
     $('st-tit').textContent = tit; $('st-sot').textContent = t;
     $('st-app').innerHTML = '<div class="st-palco st"><div class="st-card st-avviso"><p style="margin:0">' + esc(t) + '</p><div class="st-azioni"><a class="st-btn pieno" href="aula/studio/lezione.html?c=DEMO">Prova la lezione di esempio</a><a class="st-btn" href="aula/studio/">Sala studio</a></div></div></div>';
   }
   function mostra(L, id) {
+    if (window.AulaAttesa) AulaAttesa.fine();
     document.title = L.titolo + ' – Sala studio | Convitto "Costaggini"';
     $('st-mat').textContent = L.materia || 'Sala studio';
     $('st-tit').innerHTML = '<span class="ic" aria-hidden="true">' + esc(L.icona || '📚') + '</span>' + esc(L.titolo);
     $('st-sot').textContent = L.sottotitolo || '';
     if (id && id !== 'DEMO' && id.length === 6) { $('st-cod').hidden = false; $('st-cod').textContent = 'Codice ' + id; }
     modi(L, id);
+    /* se è il giorno del ripasso di questa lezione lo propone; se no, un riscaldamento sull'ultima lezione fatta */
+    if (window.RIPASSO) RIPASSO.invito($('st-ripasso'), id);
   }
   /* «Come vuoi studiare?»: la stessa lezione in quattro modi (?m= nel link) */
   var MODI = [

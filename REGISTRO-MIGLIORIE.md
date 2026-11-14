@@ -34,7 +34,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 
 ### In sintesi
 
-- **Il sito è più chiaro per le famiglie.** È stato rivisto tre volte con gli occhi di due genitori, uno poco pratico del web e uno esperto. Ne sono usciti:
+- **Il sito è più chiaro per le famiglie.** È stato rivisto quattro volte con gli occhi di due genitori, uno poco pratico del web e uno esperto. Ne sono usciti:
   - l'iscrizione spiegata in due passaggi;
   - le pagine doppie unificate;
   - un'unica raccolta di domande frequenti;
@@ -77,6 +77,18 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - La ricerca interna ora trova «pagamento», «rate», «uscite», «autorizzazione» e «certificato».
 - Il bottone della home sul saluto della Dirigente ora dice «Messaggio della nuova Dirigente», come la finestra che apre e come le altre pagine.
 - In «Una giornata al Convitto» gli orari e le etichette della giornata sono più grandi e leggibili sul telefono.
+
+**Quarto giro con gli occhi dei due genitori** (14 novembre, PR #205)
+- In home, sotto «Chi sei, oggi?», c'è una scheda per il **genitore che sta valutando** il Convitto: porta a costi, iscrizione e Open Day. Prima c'era solo la scheda per chi ha già il figlio in Convitto, che ora si chiama «Genitore di un convittore».
+- La barra dei bottoni in cima a Come iscriversi, Per i Genitori, Contatti, Servizi e altre sette pagine sta ferma, come in home: sul telefono parte dalla prima voce, che prima appariva tagliata.
+- Il collegamento all'area riservata si chiama «Accesso famiglie» ovunque: menu, barra in alto e mappa del sito. Prima in due punti c'era ancora «Area Riservata Famiglie».
+- Il menu è più corto e più ordinato:
+  - le voci per i docenti («Formazione» e «Accesso docenti») non sono più nel menu pubblico, ma restano nella pagina dell'Aula digitale;
+  - «Oltre le pagine» non riporta più l'anno scorso;
+  - le voci dei sottomenu non hanno più icone, che prima c'erano solo su alcune. Restano solo sui due bottoni principali, «Come iscriversi» e «Per i Genitori».
+- La pagina Open Day è più leggera. Sul telefono le foto della visita arrivano in una copia più piccola, ugualmente nitida, e la pagina scarica una foto alla volta invece di tutte e sei insieme. Lo zoom a tutto schermo mostra sempre la foto originale.
+  - telefono: da circa 1,5 MB a circa 610 KB;
+  - computer: da circa 1,5 MB a circa 920 KB, con le stesse foto di prima.
 
 **Grafica e telefono** (PR #196, #199, #200)
 - Home riordinata: «Chi sei, oggi?» compare subito.

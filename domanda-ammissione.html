@@ -25,7 +25,7 @@
     <div class="w">
       <nav class="breadcrumb" aria-label="Percorso">
         <a href="./">Home</a><span>›</span>
-        <a href="ammissione.html">Ammissione</a><span>›</span>
+        <a href="ammissione.html">Come iscriversi</a><span>›</span>
         <span aria-current="page">Domanda di Ammissione</span>
       </nav>
       <div class="gold-bar"></div>
@@ -37,6 +37,15 @@
   <!-- FORM -->
   <section style="background:var(--av);padding:3rem 1.25rem 4rem">
     <div class="da-paper">
+
+      <!-- Avviso: il modulo va compilato solo dopo l'iscrizione sulla Piattaforma Unica -->
+      <div role="note" style="display:flex;gap:.9rem;align-items:flex-start;background:#fff8e1;border:1px solid var(--oro,#B8922A);border-left:5px solid var(--oro,#B8922A);border-radius:10px;padding:1.1rem 1.3rem;margin-bottom:1.75rem">
+        <span aria-hidden="true" style="font-size:1.4rem;line-height:1.3">⚠️</span>
+        <div style="min-width:0;font-size:.9rem;line-height:1.65;color:var(--bosco,#2C3E2D)">
+          <p style="margin:0 0 .35rem"><strong>Prima di compilare:</strong> questo modulo va compilato solo dopo l'iscrizione sulla Piattaforma Unica del Ministero (tra gennaio e febbraio), in cui hai messo la spunta su &laquo;Convitto&raquo;.</p>
+          <p style="margin:0">Non hai ancora fatto l'iscrizione? <a href="ammissione.html" style="color:var(--bosco2,#3a5a3c);font-weight:700">Leggi prima come iscriversi &rarr;</a></p>
+        </div>
+      </div>
 
       <!-- Barra avanzamento -->
       <div class="da-progress"><div class="da-progress-fill" id="da-prog" style="width:0%"></div></div>
@@ -71,20 +80,20 @@
                 </select>
               </div>
               <div class="da-field">
-                <label>Cellulare padre/tutore <span class="req">*</span></label>
+                <label>Cellulare del genitore/tutore che compila <span class="req">*</span></label>
                 <input type="tel" name="cell_padre" required placeholder="es. 340 1234567"/>
               </div>
               <div class="da-field">
-                <label>Cellulare madre</label>
+                <label>Cellulare dell'altro genitore</label>
                 <input type="tel" name="cell_madre" placeholder="es. 340 7654321"/>
               </div>
               <div class="da-field">
-                <label>Email padre/tutore <span class="req">*</span></label>
-                <input type="email" name="email_padre" required placeholder="es. mario.rossi@email.it"/>
+                <label>Email del genitore/tutore che compila <span class="req">*</span></label>
+                <input type="email" name="email_padre" required placeholder="es. nome.cognome@email.it"/>
               </div>
               <div class="da-field">
-                <label>Email madre</label>
-                <input type="email" name="email_madre" placeholder="es. anna.rossi@email.it"/>
+                <label>Email dell'altro genitore</label>
+                <input type="email" name="email_madre" placeholder="es. nome.cognome@email.it"/>
               </div>
               <div class="da-field">
                 <label>Altro cellulare (emergenze)</label>
@@ -657,10 +666,10 @@ document.getElementById('da-form').addEventListener('submit', function(e) {
 GENITORE / TUTORE
 Nome: ${d.genitore_nome || ''}
 Ruolo: ${d.genitore_ruolo || ''}
-Cell. padre/tutore: ${d.cell_padre || ''}
-Cell. madre: ${d.cell_madre || '—'}
-Email padre/tutore: ${d.email_padre || ''}
-Email madre: ${d.email_madre || '—'}
+Cell. genitore/tutore che compila: ${d.cell_padre || ''}
+Cell. altro genitore: ${d.cell_madre || '—'}
+Email genitore/tutore che compila: ${d.email_padre || ''}
+Email altro genitore: ${d.email_madre || '—'}
 Altro cell.: ${d.cell_altro || '—'}
 
 ALUNNO/A

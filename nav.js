@@ -33,7 +33,7 @@
           <li><a href="giornata-tipo.html">Giornata tipo</a></li>
           <li><a href="servizi.html">Servizi</a></li>
           <li><a href="tour-virtuale.html">🏛️ Tour Virtuale</a></li>
-          <li><a href="semiconvitto.html">🌅 Semiconvitto</a></li>
+          <li><a href="semiconvitto.html">🌅 Semiconvitto (senza pernottamento)</a></li>
           <li><a href="alumni.html"><em>Alumni</em></a></li>
           <li><a href="ricordi.html">🕯️ Muro dei Ricordi</a></li>
         </ul></div>
@@ -41,7 +41,7 @@
         <div class="fc"><h2>Servizi &amp; Ammissione</h2><ul>
           <li><a href="openday.html">🗓 Open Day</a></li>
           <li><a href="ammissione.html">Come iscriversi</a></li>
-          <li><a href="domanda-ammissione.html">📋 Domanda online</a></li>
+          <li><a href="domanda-ammissione.html">📋 Domanda al Convitto (entro luglio)</a></li>
           <li><a href="ammissione.html#tariffe">Tariffe e rette</a></li>
           <li><a href="scopri-talento.html">✨ Scopri il tuo Talento</a></li>
           <li><a href="come-arrivare.html">🚌 Come arrivare</a></li>
@@ -63,16 +63,20 @@
             <a href="contatti.html#segreteria" style="color:var(--oro2)">Orari di ricevimento →</a>
           </li>
           <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6;margin-top:.4rem">
-            <strong style="color:rgba(245,240,232,.7);display:block">Sede centrale</strong>
+            <strong style="color:rgba(245,240,232,.7);display:block">Convitto (Open Day, accoglienza)</strong>
+            Via Salaria s.n.c. — Rieti
+          </li>
+          <li style="font-size:.7rem;color:rgba(245,240,232,.65);line-height:1.6;margin-top:.4rem">
+            <strong style="color:rgba(245,240,232,.7);display:block">Uffici amministrativi (sede centrale)</strong>
             Via dei Salici, 62 — Rieti
           </li>
         </ul></div>
 
         <div class="fc"><h2>Amministrazione</h2><ul>
-          <li><a href="trasparenza.html">Amm. Trasparente</a></li>
+          <li><a href="trasparenza.html">Amministrazione Trasparente</a></li>
           <li><a href="organizzazione.html">Organizzazione</a></li>
-          <li><a href="ptof-guida.html">PTOF</a></li>
-          <li><a href="regolamento.html">Regolamento</a></li>
+          <li><a href="ptof-guida.html">Il PTOF spiegato</a></li>
+          <li><a href="regolamento.html">Regolamento di Convitto</a></li>
           <li><a href="privacy.html">Privacy &amp; GDPR</a></li>
           <li><a href="privacy-moduli.html">Informative e moduli privacy</a></li>
           <li><a href="cookie-policy.html">Cookie Policy</a></li>
@@ -214,8 +218,8 @@
   /* ── Drawer ── */
   const brg = document.getElementById('brg');
   const drw = document.getElementById('drw');
-  function openD() { if(!drw||!brg) return; drw.classList.add('on'); brg.setAttribute('aria-expanded','true'); brg.setAttribute('aria-label','Chiudi menu'); document.body.style.overflow='hidden'; }
-  function closeD() { if(!drw||!brg) return; drw.classList.remove('on'); brg.setAttribute('aria-expanded','false'); brg.setAttribute('aria-label','Apri menu'); document.body.style.overflow=''; }
+  function openD() { if(!drw||!brg) return; drw.classList.add('on'); brg.setAttribute('aria-expanded','true'); brg.setAttribute('aria-label','Chiudi menu'); document.body.style.overflow='hidden'; document.body.classList.add('drw-aperto'); }
+  function closeD() { if(!drw||!brg) return; drw.classList.remove('on'); brg.setAttribute('aria-expanded','false'); brg.setAttribute('aria-label','Apri menu'); document.body.style.overflow=''; document.body.classList.remove('drw-aperto'); }
   if (brg && drw) {
     brg.addEventListener('click', () => drw.classList.contains('on') ? closeD() : openD());
     drw.querySelectorAll('a').forEach(a => a.addEventListener('click', closeD));
@@ -227,7 +231,7 @@
     const isHome = !document.body.dataset.page || document.body.dataset.page === 'home';
 
     const CSS = `
-      .dd-menu{max-height:calc(100vh - 80px) !important;overflow-y:auto !important;}.dd-menu::-webkit-scrollbar{width:3px}.dd-menu::-webkit-scrollbar-thumb{background:rgba(184,146,42,.3);border-radius:2px}#fab-wrap{position:fixed;bottom:1.5rem;right:1.25rem;z-index:8900;display:flex;flex-direction:column;align-items:center;gap:.45rem;}
+      .dd-menu{max-height:calc(100vh - 80px) !important;overflow-y:auto !important;}.dd-menu::-webkit-scrollbar{width:3px}.dd-menu::-webkit-scrollbar-thumb{background:rgba(184,146,42,.3);border-radius:2px}body.drw-aperto #fab-wrap{display:none !important;}#fab-wrap{position:fixed;bottom:1.5rem;right:1.25rem;z-index:8900;display:flex;flex-direction:column;align-items:center;gap:.45rem;}
       .fab-c{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2C3E2D,#1a3a1b);border:1.5px solid rgba(184,146,42,.35);box-shadow:0 3px 12px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none;color:#fff;font-size:1rem;position:relative;transition:transform .18s,box-shadow .18s;-webkit-tap-highlight-color:transparent;flex-shrink:0;}
       .fab-c:hover{transform:scale(1.12);box-shadow:0 5px 18px rgba(0,0,0,.38),0 0 0 2px rgba(184,146,42,.45);}
       .fab-c svg{width:17px;height:17px;fill:#D4AA4A;flex-shrink:0;}
@@ -264,7 +268,7 @@
     const fChat = document.createElement('button');
     fChat.id = 'cc-fab'; fChat.className = 'fab-c';
     fChat.setAttribute('aria-label','Apri assistente virtuale'); fChat.setAttribute('data-tip','Assistente');
-    fChat.innerHTML = '🎓<span id="cc-badge" style="position:absolute;top:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:#B8922A;border:2px solid #fff;display:none" aria-hidden="true"></span>';
+    fChat.innerHTML = '💬<span id="cc-badge" style="position:absolute;top:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:#B8922A;border:2px solid #fff;display:none" aria-hidden="true"></span>';
     wrap.appendChild(fChat);
   })();
 
@@ -407,7 +411,7 @@
 
       // Aggiunge freccia a ogni sezione tranne l'ultima
       sections.forEach((sec, i) => {
-        if (i >= sections.length - 1) return;
+        if (i > 0) return; // solo la prima freccia (dall'intestazione alla prima sezione): le altre affollavano la pagina
         const pos = getComputedStyle(sec).position;
         if (pos === 'static') sec.style.position = 'relative';
 

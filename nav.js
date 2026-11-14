@@ -471,6 +471,11 @@
       else{fab.style.cssText='position:fixed;bottom:1.5rem;right:1.25rem;z-index:8900;';document.body.appendChild(fab);}
     })();
 
+
+    /* il pulsante della lingua sta sempre sotto l'intestazione, anche a inizio pagina (sotto la barra istituzionale) */
+    (function(){var q=0;function pos(){q=0;var h=document.getElementById('hdr');if(!h)return;var b=Math.max(0,Math.round(h.getBoundingClientRect().bottom));btn.style.top=(b+8)+'px';menu.style.top=(b+42)+'px';}
+    function pianifica(){if(!q)q=requestAnimationFrame(pos);}
+    window.addEventListener('scroll',pianifica,{passive:true});window.addEventListener('resize',pianifica);pos();})();
     btn.onclick=e=>{e.stopPropagation();menu.classList.toggle('open');};
     document.addEventListener('click',()=>{menu.classList.remove('open');fab.setAttribute('aria-expanded','false');});
 

@@ -741,3 +741,17 @@ a.nc:hover, a.article-card:hover, a.alumni-card:hover,
     scroll-behavior: auto !important;
   }
 }
+
+/* ═══ Intestazione: la barra completa compare solo se c'è spazio; altrimenti menu a tendina ═══ */
+.hdr-in { max-width: 1560px; }
+@media(min-width:900px) and (max-width:1559px) {
+  .hdr-in { padding: 0 1rem; }
+  #dnav .hd-x { display: none; }
+  #dnav .hd-mail { display: none !important; }
+  #dnav .dd-btn { padding: .44rem .5rem; letter-spacing: .05em; }
+}
+@media(min-width:900px) and (max-width:1259px) {
+  #brg { display: flex !important; }
+  #dnav { display: none !important; }
+  #drw { display: block !important; top: 68px; padding-top: calc(.5rem + 38px); }
+}

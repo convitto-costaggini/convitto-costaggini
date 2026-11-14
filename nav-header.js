@@ -7,7 +7,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L20 8.09v7.82L12 19.82 4 15.91V8.09L12 4.18z"/></svg>
     <a href="https://www.mim.gov.it/" target="_blank" rel="noopener">Ministero dell'Istruzione e del Merito</a>
   </div>
-  <div><a href="trasparenza.html">Trasparenza</a> · <a href="area-riservata.html">Area riservata</a> · <a href="#" onclick="document.getElementById('pec-modal').style.display='flex';return false" aria-label="Mostra indirizzo PEC">PEC</a></div>
+  <div><a href="contatti.html">Contatti</a> · <a href="trasparenza.html">Trasparenza</a> · <a href="area-riservata.html">Area riservata</a> · <a href="#" onclick="document.getElementById('pec-modal').style.display='flex';return false" aria-label="Mostra indirizzo PEC">PEC</a></div>
 </div>
 <header id="hdr">
   <div class="hdr-in">
@@ -103,7 +103,7 @@
 
       <div class="dd-wrap">
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
-          Regolamenti &amp; Documenti <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
+          Regolamenti<span class="hd-x"> &amp; Documenti</span> <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
         </button>
         <ul class="dd-menu" role="menu">
           <li><a href="accoglienza.html" data-page="accoglienza">📋 Accoglienza &amp; Modulistica</a></li>
@@ -115,7 +115,7 @@
         </ul>
       </div>
 
-      <a href="contatti.html" aria-label="Contattaci" title="Contattaci" style="margin-left:.3rem;width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:rgba(245,240,232,.92) !important;transition:background .2s,color .2s;flex-shrink:0;">
+      <a class="hd-mail" href="contatti.html" aria-label="Contattaci" title="Contattaci" style="margin-left:.3rem;width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:rgba(245,240,232,.92) !important;transition:background .2s,color .2s;flex-shrink:0;">
         <svg viewBox="0 0 24 24" width="24" height="24" style="fill:currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       </a>
 

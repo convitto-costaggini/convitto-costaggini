@@ -90,6 +90,16 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
   - telefono: da circa 1,5 MB a circa 610 KB;
   - computer: da circa 1,5 MB a circa 920 KB, con le stesse foto di prima.
 
+**Ritocchi di forma sul telefono** (14 novembre, PR da aprire)
+- **Testi più leggibili.** Sul telefono nessun testo è più piccolo di una misura minima:
+  - 12 pixel le etichette dei moduli, a partire dal modulo di domanda di ammissione, dove erano sotto i 10;
+  - 12,5 pixel i testi normali;
+  - 11 pixel le etichette in maiuscolo.
+  Il resto della grafica non cambia.
+- Il bottone «⋯» degli strumenti (lingua, assistente, lettura facilitata, torna su) è diventato una linguetta sul bordo destro dello schermo: non copre più bottoni e testi. Toccandola si apre come prima.
+- Sul telefono le quattro schede di «Chi sei, oggi?» hanno l'icona a sinistra e occupano circa metà dello spazio.
+- «FAQ» è diventato «Domande frequenti» anche nelle barre di Home e Per i Genitori e nel Percorso di orientamento.
+
 **Grafica e telefono** (PR #196, #199, #200)
 - Home riordinata: «Chi sei, oggi?» compare subito.
 - Su telefono, «Come iscriversi» è nella prima schermata.

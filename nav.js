@@ -277,7 +277,9 @@
     (function (w) {
       var css = document.createElement('style');
       css.textContent = '#fab-more{display:none;order:99;font-size:1.75rem;font-weight:800;line-height:1;color:#EDD98A;border-color:rgba(212,170,74,.75);}' +
-        '@media(max-width:700px){#fab-more{display:flex;}' +
+        '@media(max-width:700px){#fab-more{display:flex;}'+
+        /* linguetta sul bordo destro: sta nel margine e non copre testi o bottoni */
+        '#fab-wrap{right:0!important;bottom:5.5rem;align-items:flex-end;}#fab-more{width:26px;height:56px;border-radius:14px 0 0 14px;border-right:0;font-size:1.4rem;}#fab-wrap>.fab-c:not(#fab-more){margin-right:.75rem;}' +
         '#fab-wrap:not(.aperto)>:not(#fab-more){display:none!important;}' +
         '#fab-wrap.aperto #fab-top{opacity:1;pointer-events:auto;transform:none;}' +
         '#fab-wrap.aperto .fab-c[data-tip]:not(#fab-more)::after{content:attr(data-tip);display:block!important;position:absolute;right:48px;top:50%;transform:translateY(-50%);background:rgba(12,20,13,.92);color:#F5F0E8;font-family:"Source Sans 3",sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:.3rem .6rem;border-radius:6px;white-space:nowrap;border:1px solid rgba(184,146,42,.35);pointer-events:none;}}';
@@ -286,13 +288,13 @@
       more.id = 'fab-more'; more.type = 'button'; more.className = 'fab-c';
       more.setAttribute('aria-label', 'Altri strumenti: lingua, assistente, lettura facilitata');
       more.setAttribute('aria-expanded', 'false');
-      more.textContent = '⋯';
-      function chiudi() { w.classList.remove('aperto'); more.setAttribute('aria-expanded', 'false'); more.textContent = '⋯'; }
+      more.textContent = '⋮';
+      function chiudi() { w.classList.remove('aperto'); more.setAttribute('aria-expanded', 'false'); more.textContent = '⋮'; }
       more.addEventListener('click', function (e) {
         e.stopPropagation();
         var ap = w.classList.toggle('aperto');
         more.setAttribute('aria-expanded', ap ? 'true' : 'false');
-        more.textContent = ap ? '✕' : '⋯';
+        more.textContent = ap ? '✕' : '⋮';
       });
       w.addEventListener('click', function (e) {
         var b = e.target.closest ? e.target.closest('.fab-c') : null;
@@ -1199,4 +1201,29 @@
   heroBox.style.setProperty('--hero-icon', "url('img/icone/" + iconFile + ".svg')");
   heroBox.style.setProperty('--hero-icon-opacity', isSatellite ? '.7' : '1');
   heroBox.style.setProperty('--hero-icon-scale', isSatellite ? '.82' : '1');
+})();
+
+/* ── Testi leggibili sul telefono (14/11/2026) ──────────────────────────────
+   Sotto i 768px nessun testo dei contenuti resta più piccolo di:
+   12,5px i testi normali, 11px le etichette in maiuscolo, 12px le etichette
+   dei moduli. Tocca solo ciò che è sotto la soglia, il resto non cambia.
+   Esclusi menu e intestazione, e gli elementi con data-testo-piccolo o con
+   misure fisse (badge dell'orario, conto alla rovescia). */
+(function(){
+  if (window.innerWidth >= 768) return;
+  var ESCLUSI = 'header, nav, #jumpnav, .tl-time-badge, .cd-lbl, [data-testo-piccolo], [data-testo-piccolo] *';
+  function correggi(){
+    var el = document.querySelectorAll('main *');
+    for (var i = 0; i < el.length; i++){
+      var e = el[i], testo = '';
+      for (var n = e.firstChild; n; n = n.nextSibling) if (n.nodeType === 3) testo += n.textContent;
+      if (testo.trim().length < 2 || e.closest(ESCLUSI)) continue;
+      var s = getComputedStyle(e), fs = parseFloat(s.fontSize);
+      var modulo = e.tagName === 'LABEL' || e.tagName === 'LEGEND';
+      var min = modulo ? 12 : (s.textTransform === 'uppercase' ? 11 : 12.5);
+      if (fs < min) e.style.setProperty('font-size', min + 'px', 'important');
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', correggi); else correggi();
+  window.addEventListener('load', function(){ correggi(); setTimeout(correggi, 1500); });
 })();

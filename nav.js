@@ -227,7 +227,7 @@
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeD(); });
 
-  /* ── FAB — 3 cerchi fissi, sempre visibili ── */
+  /* ── FAB — cerchi fissi (sul telefono raccolti nel bottone «⋯») ── */
   (function(){
     const isHome = !document.body.dataset.page || document.body.dataset.page === 'home';
 
@@ -271,6 +271,37 @@
     fChat.setAttribute('aria-label','Apri assistente virtuale'); fChat.setAttribute('data-tip','Assistente');
     fChat.innerHTML = '💬<span id="cc-badge" style="position:absolute;top:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:#B8922A;border:2px solid #fff;display:none" aria-hidden="true"></span>';
     wrap.appendChild(fChat);
+
+    // 4. Telefono: un solo bottone «⋯» al posto della colonna di cerchi.
+    //    Toccandolo si aprono gli altri, ciascuno con la sua etichetta visibile.
+    (function (w) {
+      var css = document.createElement('style');
+      css.textContent = '#fab-more{display:none;order:99;font-size:1.75rem;font-weight:800;line-height:1;color:#EDD98A;border-color:rgba(212,170,74,.75);}' +
+        '@media(max-width:700px){#fab-more{display:flex;}' +
+        '#fab-wrap:not(.aperto)>:not(#fab-more){display:none!important;}' +
+        '#fab-wrap.aperto #fab-top{opacity:1;pointer-events:auto;transform:none;}' +
+        '#fab-wrap.aperto .fab-c[data-tip]:not(#fab-more)::after{content:attr(data-tip);display:block!important;position:absolute;right:48px;top:50%;transform:translateY(-50%);background:rgba(12,20,13,.92);color:#F5F0E8;font-family:"Source Sans 3",sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:.3rem .6rem;border-radius:6px;white-space:nowrap;border:1px solid rgba(184,146,42,.35);pointer-events:none;}}';
+      document.head.appendChild(css);
+      var more = document.createElement('button');
+      more.id = 'fab-more'; more.type = 'button'; more.className = 'fab-c';
+      more.setAttribute('aria-label', 'Altri strumenti: lingua, assistente, lettura facilitata');
+      more.setAttribute('aria-expanded', 'false');
+      more.textContent = '⋯';
+      function chiudi() { w.classList.remove('aperto'); more.setAttribute('aria-expanded', 'false'); more.textContent = '⋯'; }
+      more.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var ap = w.classList.toggle('aperto');
+        more.setAttribute('aria-expanded', ap ? 'true' : 'false');
+        more.textContent = ap ? '✕' : '⋯';
+      });
+      w.addEventListener('click', function (e) {
+        var b = e.target.closest ? e.target.closest('.fab-c') : null;
+        if (b && b !== more && b.id !== 'tr-fab') chiudi();
+      });
+      document.addEventListener('click', function (e) { if (!w.contains(e.target)) chiudi(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') chiudi(); });
+      w.appendChild(more);
+    })(wrap);
   })();
 
   try {

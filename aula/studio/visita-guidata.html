@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <script>window.AULA_ATTESA_MANUALE=true</script>
   <script src="/aula/attesa.js"></script>
+  <script src="/aula/guida-click.js"></script>
   <script src="/aula/riservato.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="robots" content="noindex, nofollow"/>
@@ -96,7 +97,7 @@
       <button type="button" id="avanti" class="avanti">Avanti →</button>
     </div>
   </aside>
-  <section class="vista" aria-label="Il sito">
+  <section class="vista" id="vista" aria-label="Il sito">
     <div class="strumenti">
       <button type="button" id="largo" aria-pressed="false" title="Nasconde o mostra la guida">⇔ Guida</button>
       <span class="dove" id="dove"></span>
@@ -322,6 +323,8 @@
   costruisci();
   var m = /^#passo-(\d+)$/.exec(location.hash), inizio = m ? Math.min(Math.max(+m[1] - 1, 0), TAPPE.length - 1) : 0;
   vai(inizio);
+  /* animazione che mostra a destra dove toccare */
+  GuidaClick.avvia({ vista: $('vista'), sito: sito, elenco: elenco });
 })();
 </script>
 </body>

@@ -3,6 +3,7 @@
 <head>
   <script>window.AULA_ATTESA_MANUALE=true</script>
   <script src="/aula/attesa.js"></script>
+  <script src="/aula/guida-click.js"></script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="robots" content="noindex, nofollow"/>
@@ -579,6 +580,8 @@
   var hh = (location.hash || '').replace('#', ''), inizio = 0;
   visibili.forEach(function (p, k) { if (p.id === hh) inizio = k; });
   vai(inizio);
+  /* animazione che mostra a destra dove toccare */
+  GuidaClick.avvia({ vista: $('vista'), sito: sito, elenco: elenco });
 })();
 </script>
 </body>

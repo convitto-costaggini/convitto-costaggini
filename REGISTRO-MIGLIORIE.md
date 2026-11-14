@@ -148,7 +148,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 
 **Dal repository** (Area famiglie, Aula, Alumni, pannello admin)
 - *3 nov.* Area riservata: il link di recupero della password, anche se scaduto, porta alla pagina giusta.
-- *4 nov.* Iscrizione Alumni: la posizione sulla mappa viene dall'elenco delle città del sito, senza servizi esterni (funzione Supabase `iscrizione-alumni`).
+- *4 nov.* Iscrizione Alumni: la posizione sulla mappa viene dall'elenco delle città del sito, senza servizi esterni (funzione Supabase `iscrizione-alumni`, pubblicata il 4/11 alle 12:25 come versione 5: verificato sul server).
 - *6 nov.* Consensi online gestiti dal sito, con la casella istituzionale e la ricevuta via email.
 - *13 nov.* Pulizia: tolta la vecchia funzione di accesso alle Lingue, sostituita dall'accesso unico dell'Aula.
 
@@ -178,6 +178,10 @@ I progetti Apps Script del Convitto sono quattro:
 
 Nessuna traccia di modifiche al **gestionale principale** a novembre.
 
+**Funzioni del database che esistevano solo sul server:** il 14/11 ne è stata salvata una copia nel repository (`supabase/functions/`), per tenerne traccia:
+- `dynamic-worker`: il ponte fra gestionale e Area famiglie, versione 22 del 20/10;
+- `crea-account-famiglia`: crea gli account delle famiglie, versione 15 del 31/8.
+
 **Da verificare nel gestionale** (indicazioni di ottobre senza prova di esecuzione):
 - Testo dell'email con le credenziali delle famiglie (`creaAccountEInvia`): aggiungere «A ogni accesso, dopo la password, riceverà via email un codice di verifica di 6 cifre».
 - Facoltativo: in `_verificaAdminSupabase_`, pretendere anche il secondo passaggio (`aal2`) per le azioni dell'amministratore.
@@ -206,4 +210,5 @@ Nessuna traccia di modifiche al **gestionale principale** a novembre.
 | 21 ott. | Posta dei codici | Nuovo progetto: invia i codici monouso di accesso ai docenti con la mail della scuola, senza SMTP né account; accetta anche gli indirizzi `@alberghierorieti.edu.it`. | dedotta (l'accesso dei docenti con il codice è in uso) |
 | 23 ott. | Posta dei codici | Servizio «studio» per la Sala studio; mail firmate «Sala Studio della Scuola». | dedotta |
 | 25 ott. | OTP famiglie | Nuovo progetto, pubblicato come applicazione web: recapita il codice di 6 cifre dell'Area famiglie. Invio senza `noReply`, che bloccava il recapito. | certa |
+| 20 ott. | Gestionale | Archiviazione dei vecchi «pallini» dell'Area famiglie dopo il backup (`mmArchiviaVecchiPallini`), con la cancellazione tramite il ponte `dynamic-worker`, aggiornato alla versione «v7-delete-semafori». Colloqui e comunicazioni hanno un identificativo stabile, così una ripubblicazione non crea doppioni. | certa (codice del ponte pubblicato il 20/10) |
 | 30 ott. | Posta dei codici | Servizio «aula» per l'accesso unico dell'Aula (Lingue e Sala studio). | dedotta (il 13/11 la vecchia funzione è stata eliminata perché quella nuova era in uso) |

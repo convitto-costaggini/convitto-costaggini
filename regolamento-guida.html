@@ -671,7 +671,7 @@
   var wrap = jn ? jn.querySelector('.jumpnav-wrap') : null;
   if (!jn || !track || !wrap) return;
 
-  var riduciMovimento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var riduciMovimento = true; // nastro fermo, come in home: parte sempre dalla prima voce
   function isMobile(){ return window.innerWidth < 768; }
 
   // Il nastro è mosso direttamente in JavaScript, fotogramma per fotogramma

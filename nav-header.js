@@ -7,7 +7,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L20 8.09v7.82L12 19.82 4 15.91V8.09L12 4.18z"/></svg>
     <a href="https://www.mim.gov.it/" target="_blank" rel="noopener">Ministero dell'Istruzione e del Merito</a>
   </div>
-  <div><a href="contatti.html">Contatti</a> · <a href="trasparenza.html">Trasparenza</a> · <a href="area-riservata.html">Area riservata famiglie</a> · <a href="#" onclick="document.getElementById('pec-modal').style.display='flex';return false" aria-label="Mostra indirizzo PEC">PEC</a></div>
+  <div><a href="contatti.html">Contatti</a> · <a href="trasparenza.html">Trasparenza</a> · <a href="area-riservata.html">Accesso famiglie</a> · <a href="#" onclick="document.getElementById('pec-modal').style.display='flex';return false" aria-label="Mostra indirizzo PEC">PEC</a></div>
 </div>
 <header id="hdr">
   <div class="hdr-in">
@@ -227,7 +227,7 @@
 
     <li><a href="area-riservata.html" style="color:#BFD4EE;font-weight:700;display:flex;align-items:center;gap:.5rem;padding:.6rem 0;">
       <svg viewBox="0 0 24 24" width="15" height="15" style="fill:#BFD4EE;flex-shrink:0"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-      Area Riservata Famiglie
+      Accesso famiglie
     </a></li>
 
   </ul>

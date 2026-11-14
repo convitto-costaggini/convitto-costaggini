@@ -53,16 +53,15 @@ const TARGET = [
       { nome: 'anno scolastico', contains: ANNO },
   ]},
   // I dati strutturati FAQPage (con scadenza, quota e retta) sono in in-2-minuti.html,
-  // la pagina unica delle Domande frequenti; openday.html mostra solo alcune domande.
+  // la pagina unica delle Domande frequenti.
   { file: 'in-2-minuti.html', fatti: [
       { nome: 'scadenza', contains: SCADENZA },
       { nome: 'quota iscrizione', contains: QUOTA_NUM },
       { nome: 'retta annua', contains: RETTA_NUM },
       { nome: 'anno scolastico', contains: ANNO },
   ]},
-  { file: 'openday.html', fatti: [
-      { nome: 'anno scolastico', contains: ANNO },
-  ]},
+  // openday.html non si controlla sull'anno: gli Open Day (novembre-gennaio) servono
+  // per le iscrizioni all'anno successivo, quindi parlano di proposito di un altro anno.
   { file: 'genitori.html', fatti: [
       { nome: 'retta annua', contains: RETTA_NUM },
       { nome: 'anno scolastico', contains: ANNO },

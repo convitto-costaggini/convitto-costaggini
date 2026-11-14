@@ -78,7 +78,7 @@
     var p = prossimo();
     if (!p) { (box.closest('[role=region]') || box).hidden = true; return; }
     var rimasti = futuri().length;
-    box.innerHTML = '<span class="odp-lbl">📅 Open Day 2026/27</span>'
+    box.innerHTML = '<span class="odp-lbl">📅 Open Day · iscrizioni 2027/28</span>'
       + '<strong class="odp-tit">Prossimo appuntamento: ' + p.nome + '</strong>'
       + '<span class="odp-quando">' + esteso(p) + ' · ore ' + orario(p) + '</span>'
       + (rimasti > 1 ? '<span class="odp-altre">e altre ' + (rimasti - 1) + ' date fino a gennaio</span>' : '')

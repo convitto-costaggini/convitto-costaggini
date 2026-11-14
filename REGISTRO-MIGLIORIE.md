@@ -89,7 +89,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - Dalla Sala studio è tolta la «creazione automatica» delle lezioni, che mandava foto e argomento a un servizio di IA a consumo pagato dalla scuola.
 - Le lezioni si preparano gratis con l'assistente che ogni docente preferisce (Claude, ChatGPT o Gemini, anche nella versione gratuita) e si incollano nel sito, che non manda nulla a servizi di IA.
 - Aggiornati la pagina dei docenti, la guida per la Dirigente, le due visite guidate e la presentazione della formazione.
-- La funzione del database `studio-genera` è stata ripubblicata il 14/11 alle 13:58 come versione 13, senza creazione automatica: verificato sul server. Il segreto `ANTHROPIC_API_KEY`, se presente, non è più usato e si può eliminare da Supabase.
+- La funzione del database `studio-genera` è stata ripubblicata il 14/11 alle 13:38 (UTC) come versione 13, senza creazione automatica: verificato sul server. Il segreto `ANTHROPIC_API_KEY`, se presente, non è più usato e si può eliminare da Supabase.
 
 **Indirizzi di studio** (14/11)
 - Le pagine dicono ovunque che gli indirizzi sono tre: Enogastronomia (con approfondimento Cucina oppure Prodotti dolciari / Pasticceria), Servizi di sala e vendita, Accoglienza turistica.

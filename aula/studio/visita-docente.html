@@ -2,6 +2,8 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"/>
+  <script>window.AULA_ATTESA_MANUALE=true</script>
+  <script src="/aula/attesa.js"></script>
   <script src="/aula/riservato.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="robots" content="noindex, nofollow"/>
@@ -100,7 +102,7 @@
     .piede .sito{display:none}
 
     /* lo spazio grande a destra: il sito vero */
-    .vista{display:flex;flex-direction:column;min-width:0;min-height:0}
+    .vista{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0}
     .strumenti{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;background:var(--panna2);border-bottom:1px solid #d9cfb8;font-size:14px}
     .strumenti .dove{flex:1;min-width:120px;color:var(--grigio);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .strumenti button,.strumenti a.b{border:1px solid #b9ad92;background:#fff;color:var(--bosco);border-radius:8px;padding:5px 11px;font-weight:700;font-size:14px;text-decoration:none;min-height:34px}
@@ -381,10 +383,18 @@
 
   /* ───── il sito a destra ───── */
   /* una pagina nuova a ogni cambio, anche quando cambia solo il frammento (#p=...) */
+  /* mentre la pagina a destra si carica: barra di avanzamento, così non sembra bloccato */
+  var attesa = AulaAttesa.riquadro($('vista'), { titolo: 'Sto aprendo la pagina', ricarica: function () { if (vistaAttiva) carica(vistaAttiva); } });
+  sito.addEventListener('load', function () {
+    var w; try { w = sito.contentWindow.location.href; } catch (e) { w = ''; }
+    if (w === 'about:blank') return;
+    attesa.fine();
+  });
   function carica(url) {
     vistaAttiva = url;
     $('dove').textContent = url; $('dove').title = url;
     $('nuova').href = url;
+    attesa.avvia();
     sito.src = 'about:blank';
     setTimeout(function () { sito.src = url; }, 40);
   }

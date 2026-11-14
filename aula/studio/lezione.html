@@ -2,6 +2,9 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"/>
+  <script>window.AULA_ATTESA_MANUALE=true</script>
+  <script src="/aula/attesa.js"></script>
+  <script>AulaAttesa.pagina({ attendi: true, titolo: 'Sto preparando la lezione' });</script>
   <script src="/aula/riservato.js"></script>
   <script src="/aula/supporti.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
@@ -44,10 +47,12 @@
 (function () {
   var esc = STUDIO.esc, $ = function (id) { return document.getElementById(id); };
   function errore(tit, t) {
+    if (window.AulaAttesa) AulaAttesa.fine();
     $('st-tit').textContent = tit; $('st-sot').textContent = t;
     $('st-app').innerHTML = '<div class="st-palco st"><div class="st-card st-avviso"><p style="margin:0">' + esc(t) + '</p><div class="st-azioni"><a class="st-btn pieno" href="aula/studio/lezione.html?c=DEMO">Prova la lezione di esempio</a><a class="st-btn" href="aula/studio/">Sala studio</a></div></div></div>';
   }
   function mostra(L, id) {
+    if (window.AulaAttesa) AulaAttesa.fine();
     document.title = L.titolo + ' – Sala studio | Convitto "Costaggini"';
     $('st-mat').textContent = L.materia || 'Sala studio';
     $('st-tit').innerHTML = '<span class="ic" aria-hidden="true">' + esc(L.icona || '📚') + '</span>' + esc(L.titolo);

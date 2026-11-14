@@ -52,10 +52,15 @@ const TARGET = [
       { nome: 'retta annua', contains: RETTA_NUM },
       { nome: 'anno scolastico', contains: ANNO },
   ]},
-  { file: 'openday.html', fatti: [
+  // I dati strutturati FAQPage (con scadenza, quota e retta) sono in in-2-minuti.html,
+  // la pagina unica delle Domande frequenti; openday.html mostra solo alcune domande.
+  { file: 'in-2-minuti.html', fatti: [
       { nome: 'scadenza', contains: SCADENZA },
       { nome: 'quota iscrizione', contains: QUOTA_NUM },
       { nome: 'retta annua', contains: RETTA_NUM },
+      { nome: 'anno scolastico', contains: ANNO },
+  ]},
+  { file: 'openday.html', fatti: [
       { nome: 'anno scolastico', contains: ANNO },
   ]},
   { file: 'genitori.html', fatti: [

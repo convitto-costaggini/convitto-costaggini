@@ -22,7 +22,6 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 |---|---|---|
 | **Togliere il reCAPTCHA di Google** dai sei moduli del sito. L'antispam diventa solo interno: tempo minimo di compilazione, limiti di invio, campo invisibile. Cookie policy e informativa vengono aggiornate. | Pronto: PR #202 (bozza). La vecchia versione, PR #174, è stata chiusa il 14/11. | Dal 18/11. Prima vanno pubblicate le due funzioni Supabase (`richiesta-accesso`, `iscrizione-alumni`) e va modificato il `doPost` del gestionale in Apps Script. |
 | **Trofei e classifiche, vista personale**: ogni convittore vede solo il proprio punteggio (approvata dalla DPO il 7/10). | Pronto (PR #17, contenuto anche nel commit `74036d3`). | Modifica del Regolamento del Premio da parte del Consiglio di Istituto, poi aggiornamento del gestionale. |
-| **Lingue: di chi spunta o corregge una frase resta solo il nome**, non più la mail. | Deciso il 14/11. Codice pronto; le tabelle sono ancora vuote, quindi nessuna mail viene cancellata. | La conferma, richiesta da Supabase, alla modifica del database; poi la nuova funzione e l'unione nel sito. |
 | **Progetto lettura 2026/27** («Oltre le pagine» del nuovo anno). | La pagina racconta il progetto 2025/26. | La documentazione del progetto di quest'anno. |
 
 **Esclusi** (decisione del 14/11)
@@ -94,6 +93,11 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - Le lezioni si preparano gratis con l'assistente che ogni docente preferisce (Claude, ChatGPT o Gemini, anche nella versione gratuita) e si incollano nel sito, che non manda nulla a servizi di IA.
 - Aggiornati la pagina dei docenti, la guida per la Dirigente, le due visite guidate e la presentazione della formazione.
 - La funzione del database `studio-genera` è stata ripubblicata il 14/11 alle 13:38 (UTC) come versione 13, senza creazione automatica: verificato sul server. Il segreto `ANTHROPIC_API_KEY`, se presente, non è più usato e si può eliminare da Supabase.
+
+**Aula digitale: meno dati personali nelle Lingue** (decisione del 14/11)
+- Quando un docente spunta o corregge una frase delle Lingue, il sito conserva solo il suo nome («Mario Rossi»), non più l'indirizzo email.
+- Le tabelle erano ancora vuote, quindi nessun dato è stato cancellato.
+- Modifica al database applicata il 14/11 da Supabase; funzione `studio-genera` ripubblicata come versione 14 alle 15:27 (UTC). Verificato sul server con una prova poi annullata.
 
 **Indirizzi di studio** (14/11)
 - Le pagine dicono ovunque che gli indirizzi sono tre: Enogastronomia (con approfondimento Cucina oppure Prodotti dolciari / Pasticceria), Servizi di sala e vendita, Accoglienza turistica.

@@ -14,6 +14,19 @@ dei commit, per ritrovare il dettaglio su GitHub.
 
 ---
 
+## In attesa di pubblicazione (aggiornato al 14/11/2026)
+
+Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel mese giusto.
+
+| Lavoro | Stato | Cosa serve |
+|---|---|---|
+| **Togliere il reCAPTCHA di Google** dai sei moduli del sito. L'antispam diventa solo interno: tempo minimo di compilazione, limiti di invio, campo invisibile. Cookie policy e informativa vengono aggiornate. | Pronto: PR #202 (bozza), che sostituisce la #174 (da chiudere). | Dal 18/11. Prima vanno pubblicate le due funzioni Supabase (`richiesta-accesso`, `iscrizione-alumni`) e va modificato il `doPost` del gestionale in Apps Script. |
+| **Trofei e classifiche, vista personale**: ogni convittore vede solo il proprio punteggio (approvata dalla DPO il 7/10). | Pronto (PR #17, contenuto anche nel commit `74036d3`). | Modifica del Regolamento del Premio da parte del Consiglio di Istituto, poi aggiornamento del gestionale. |
+| **Sala studio senza IA a pagamento** (lezioni solo incollate dall'assistente esterno) e **Lingue: di chi corregge resta solo il nome**, non più la mail. | Preparato il 27/10, mai unito. | Decisione: la presentazione della formazione (13/11) presenta ancora la creazione automatica con «l'IA della scuola». La parte sulle Lingue cancella le mail già salvate (migrazione del database). |
+| **Lingue: cliente virtuale** per i docenti (prototipo con funzione Supabase che usa un servizio di IA). | Prototipo del 12/10, mai unito. | Decisione se proseguirlo. |
+
+---
+
 ## Novembre 2026
 
 ### In sintesi
@@ -50,7 +63,7 @@ dei commit, per ritrovare il dettaglio su GitHub.
 
 **Nomi e testi coerenti** (PR #196, #197, #199, #200)
 - Ogni pagina ha lo stesso nome in menu, footer, mappa del sito e ricerca.
-- Le sigle sono sciolte: «Messaggio del nuovo Dirigente», «Il PTOF spiegato», «Amministrazione Trasparente», «Semiconvitto (senza pernottamento)».
+- Le sigle sono sciolte: «Messaggio della nuova Dirigente», «Il PTOF spiegato», «Amministrazione Trasparente», «Semiconvitto (senza pernottamento)».
 - Nel footer ci sono i due indirizzi: il Convitto (Via Salaria, Open Day e accoglienza) e gli uffici (Via dei Salici 62).
 - La domanda frequente sull'apertura spiega le 4 notti dal lunedì al giovedì, con il rientro domenicale su richiesta.
 - In Accoglienza la data dell'accoglienza 2026/27 (11 settembre) è indicata come già svolta, con la nota che quella del 2027/28 sarà pubblicata lì.
@@ -59,6 +72,8 @@ dei commit, per ritrovare il dettaglio su GitHub.
 - In home l'anno di apertura (1971) non si anima più: a metà animazione si leggeva «1694».
 - Nella pagina di conferma del modulo di contatto, il numero di telefono chiamava un numero con una cifra in più.
 - La ricerca interna ora trova «pagamento», «rate», «uscite», «autorizzazione» e «certificato».
+- Il bottone della home sul saluto della Dirigente ora dice «Messaggio della nuova Dirigente», come la finestra che apre e come le altre pagine.
+- In «Una giornata al Convitto» gli orari e le etichette della giornata sono più grandi e leggibili sul telefono.
 
 **Grafica e telefono** (PR #196, #199, #200)
 - Home riordinata: «Chi sei, oggi?» compare subito.
@@ -129,7 +144,34 @@ dei commit, per ritrovare il dettaglio su GitHub.
 
 **Repository `convitto-gestionale`:** nessuna modifica registrata a novembre (ultima: 1 ottobre, report presenze).
 
-**Modifiche fatte direttamente in Apps Script:** *da completare a mano.*
+**Modifiche in Apps Script (ricostruite dal codice il 14/11/2026)**
+
+Il codice dei progetti Apps Script non è su GitHub, a parte la copia del gestionale ferma al 1° ottobre, quindi le modifiche sono state ricostruite da tre fonti:
+- i messaggi dei commit del sito (per esempio «DA UNIRE DOPO aver pubblicato in Apps Script la versione…»);
+- le guide tecniche nel repository;
+- le chiamate che le pagine del sito fanno ai progetti Apps Script.
+
+Legenda: **certa** = scritto nel repository come fatto; **dedotta** = il sito pubblicato funziona solo se la modifica è stata fatta; **da verificare** = indicata come da fare, senza prova che sia stata fatta.
+
+I progetti Apps Script del Convitto sono quattro:
+1. **gestionale** (presenze, totem, account famiglie, segreteria, trofei);
+2. **pagina dei consensi**;
+3. **posta dei codici di accesso** (Aula);
+4. **codici OTP dell'Area famiglie**.
+
+| Data | Progetto | Modifica | Certezza |
+|---|---|---|---|
+| 6 nov. | Pagina dei consensi | Versione 1.4: la pagina riceve le richieste direttamente dal sito (`consensi.html`) e non apre più pagine di Google. Gestisce: tipi di consenso, invio del codice di 6 cifre alla casella della scuola, verifica del codice, elenco dei propri consensi, registrazione, revoca, uscita. Risolve l'errore «Impossibile aprire il file» sui telefoni con più account Google. | dedotta (la pagina del sito è stata unita dopo la pubblicazione della v1.4 ed è in uso) |
+| 6 nov. | Pagina dei consensi | Versione 1.5: per il personale il ruolo si sceglie da un elenco, con le figure apicali in cima e «Altro»; per le Voci, oltre ai numeri da 1 a 10, c'è l'opzione «Tutte le domande». | dedotta (come sopra) |
+| 6 nov. | Pagina dei consensi | Accesso con la casella email istituzionale e un codice di verifica, al posto dell'account Google; comunicato alla DPO il 6/11. | dedotta |
+| 13 nov. | Posta dei codici | Solo il commento iniziale aggiornato (riferimento alla funzione `lingue-accesso`, eliminata): nessuna nuova pubblicazione necessaria. | certa |
+
+Nessuna traccia di modifiche al **gestionale principale** a novembre.
+
+**Da verificare nel gestionale** (indicazioni di ottobre senza prova di esecuzione):
+- Testo dell'email con le credenziali delle famiglie (`creaAccountEInvia`): aggiungere «A ogni accesso, dopo la password, riceverà via email un codice di verifica di 6 cifre».
+- Facoltativo: in `_verificaAdminSupabase_`, pretendere anche il secondo passaggio (`aal2`) per le azioni dell'amministratore.
+- Trofei e classifiche: la «vista personale» richiede un aggiornamento del gestionale. La pagina è sospesa in attesa della modifica del Regolamento del Premio da parte del Consiglio di Istituto.
 
 ---
 
@@ -142,3 +184,16 @@ dei commit, per ritrovare il dettaglio su GitHub.
 - **Notizie:** formattazione del testo, descrizione delle immagini come testo alternativo, notizie nuove in cima.
 - **Privacy:** meno terze parti (librerie e foto ospitate sul sito); trasferimenti fuori dallo SEE con la formula della DPO.
 - **Gestionale (`convitto-gestionale`):** report presenze con il nominativo che va a capo invece di essere troncato (1 ottobre).
+
+**Modifiche in Apps Script di ottobre (ricostruite dal codice il 14/11/2026, stessa legenda di novembre)**
+
+| Data | Progetto | Modifica | Certezza |
+|---|---|---|---|
+| 7 ott. | Pagina dei consensi | Prima pubblicazione della pagina dei consensi online, collegata da «Informative e moduli», con i consensi allineati alla DPO. | certa |
+| 9 ott. | Gestionale | Tolto il controllo della chiave `MAIL_TOKEN` per la creazione degli account famiglie: resta il controllo, più solido, sulla sessione dell'amministratore. Chiave eliminata dalle Proprietà script. | dedotta (il pannello admin non invia più la chiave e la creazione degli account funziona) |
+| 9 ott. | Gestionale | Totem: nuova chiave `TOTEM_TOKEN`, non più scritta nella pagina ma inserita una volta sul dispositivo. | dedotta |
+| 9 ott. | Gestionale | `GENERA_CodiciStudenti`: il contatore non riassegna più numeri già usati (copia aggiornata in `gestionale/GENERA_CodiciStudenti.gs`). | da verificare |
+| 21 ott. | Posta dei codici | Nuovo progetto: invia i codici monouso di accesso ai docenti con la mail della scuola, senza SMTP né account; accetta anche gli indirizzi `@alberghierorieti.edu.it`. | dedotta (l'accesso dei docenti con il codice è in uso) |
+| 23 ott. | Posta dei codici | Servizio «studio» per la Sala studio; mail firmate «Sala Studio della Scuola». | dedotta |
+| 25 ott. | OTP famiglie | Nuovo progetto, pubblicato come applicazione web: recapita il codice di 6 cifre dell'Area famiglie. Invio senza `noReply`, che bloccava il recapito. | certa |
+| 30 ott. | Posta dei codici | Servizio «aula» per l'accesso unico dell'Aula (Lingue e Sala studio). | dedotta (il 13/11 la vecchia funzione è stata eliminata perché quella nuova era in uso) |

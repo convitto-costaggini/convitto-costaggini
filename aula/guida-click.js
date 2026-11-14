@@ -22,6 +22,7 @@
     '@keyframes gc-polso{0%,100%{box-shadow:0 0 0 3px rgba(212,170,74,.30),0 0 12px rgba(212,170,74,.40)}50%{box-shadow:0 0 0 9px rgba(212,170,74,.18),0 0 24px rgba(212,170,74,.65)}}' +
     '@keyframes gc-muovi{0%{transform:translate(150px,120px);opacity:0}14%{opacity:1}46%{transform:translate(0,0) scale(1)}54%{transform:translate(0,0) scale(.82)}62%{transform:translate(0,0) scale(1)}86%{transform:translate(0,0);opacity:1}100%{transform:translate(0,0);opacity:0}}' +
     '@keyframes gc-onda{0%,50%{transform:scale(.2);opacity:0}54%{transform:scale(.4);opacity:.9}82%{transform:scale(1.25);opacity:0}100%{opacity:0}}' +
+    '.viste button.gc-evid{box-shadow:0 0 0 3px #D4AA4A,0 0 14px rgba(212,170,74,.7);animation:gc-polso 1.4s ease-in-out infinite}' +
     '.corpo .bt,.corpo li .btn{cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}' +
     '.strumenti #guidaClick[aria-pressed="true"]{background:#2C3E2D;color:#fff;border-color:#2C3E2D}' +
     '@media (prefers-reduced-motion:reduce){.gc-r{animation:none}.gc-c,.gc-o{display:none}}';
@@ -56,7 +57,7 @@
     aggiornaBottone();
     if (barra) { var ric = barra.querySelector('#ricarica'); if (ric) barra.insertBefore(btn, ric); else barra.appendChild(btn); }
 
-    var bersaglio = null, raf = 0, poll = null, fatti = {}, firma = '', tMsg = null, scorsoPer = null;
+    var bersaglio = null, raf = 0, poll = null, fatti = {}, suggerito = {}, liCorrente = null, firma = '', tMsg = null, scorsoPer = null;
 
     function doc() {
       try { var d = sito.contentDocument; if (!d || !d.body || d.location.href === 'about:blank') return null; return d; } catch (e) { return null; }
@@ -138,7 +139,7 @@
       raf = requestAnimationFrame(ciclo);
     }
     function mostra(el, etichetta, li) {
-      bersaglio = el; scorsoPer = li ? chiave(li) : null;
+      bersaglio = el; scorsoPer = li ? chiave(li) + '|' + norm(etichetta) : null;
       var clic = !!el.closest(CLICCABILE);
       tip.textContent = (clic ? 'Tocca qui' : 'Guarda qui');
       /* se il punto è fuori dalla parte visibile, lo si porta al centro */
@@ -158,19 +159,42 @@
     /* ───── ricerca ───── */
     function cerca() {
       var d = doc(); if (!d || !attiva) return false;
-      var lis = lisPasso(), debole = null;
+      var lis = lisPasso();
+      liCorrente = null;
       for (var i = 0; i < lis.length; i++) {
         if (!daFare(lis[i])) continue;
         var et = etichetteDi(lis[i]);
-        for (var k = 0; k < et.length; k++) {
-          var el = trova(d, et[k]); if (!el) continue;
+        if (!et.length) continue; /* le azioni senza pulsanti (per esempio «Leggere il testo») non bloccano la guida */
+        /* questa è l'azione corrente: si guida solo lei, mai una successiva, altrimenti i passi non corrispondono a ciò che si vede */
+        var k = chiave(lis[i]), toccatoQualcosa = false, forte = null, debole = null;
+        for (var j = 0; j < et.length; j++) {
+          if (fatti[k + '|' + norm(et[j])]) { toccatoQualcosa = true; continue; }
+          var el = trova(d, et[j]); if (!el) continue;
           /* si preferisce ciò che si può toccare; un titolo o un testo vale solo se non c'è altro */
-          if (el.closest(CLICCABILE)) { mostra(el, et[k], lis[i]); return true; }
-          if (!debole) debole = { el: el, et: et[k], li: lis[i] };
+          if (el.closest(CLICCABILE)) { if (!forte) forte = { el: el, et: et[j] }; }
+          else if (!debole) debole = { el: el, et: et[j] };
         }
+        if (forte) { mostra(forte.el, forte.et, lis[i]); return true; }
+        if (debole && !toccatoQualcosa) { mostra(debole.el, debole.et, lis[i]); return true; }
+        /* se si è già toccato qualcosa e non resta altro da toccare, l'azione è finita: si passa alla successiva */
+        if (toccatoQualcosa) { fatti[k] = 1; continue; }
+        liCorrente = lis[i];
+        return false;
       }
-      if (debole) { mostra(debole.el, debole.et, debole.li); return true; }
       return false;
+    }
+    /* se l'azione corrente non si fa in questa pagina, lo si dice e si evidenziano i pulsanti delle pagine del passo */
+    function suggerisci() {
+      if (!attiva || bersaglio || !liCorrente) return;
+      var k = chiave(liCorrente); if (suggerito[k]) return; suggerito[k] = 1;
+      var viste = elenco.querySelectorAll('li.attiva .viste button');
+      if (viste.length) {
+        avviso('Questa azione si fa in un\'altra pagina: usa i pulsanti sotto il titolo del passo (in evidenza a sinistra).');
+        for (var i = 0; i < viste.length; i++) viste[i].classList.add('gc-evid');
+        setTimeout(function () { for (var j = 0; j < viste.length; j++) viste[j].classList.remove('gc-evid'); }, 6000);
+      } else {
+        avviso('Non vedo ancora questo punto nella pagina. Se l\'hai già fatto, spunta la casella e si passa alla prossima azione.');
+      }
     }
     function avviaRicerca() {
       if (poll) { clearInterval(poll); poll = null; }
@@ -179,7 +203,10 @@
       poll = setInterval(function () {
         if (!attiva || bersaglio) { clearInterval(poll); poll = null; return; }
         /* la pagina a destra può comparire a pezzi: si riprova per circa 20 secondi */
-        if (cerca() || ++n > 40) { clearInterval(poll); poll = null; }
+        if (cerca()) { clearInterval(poll); poll = null; return; }
+        n++;
+        if (n === 10) suggerisci(); /* dopo circa 5 secondi senza trovarlo */
+        if (n > 40) { clearInterval(poll); poll = null; }
       }, 500);
     }
     function mostraEtichetta(testo, li) {

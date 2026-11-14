@@ -37,23 +37,21 @@
           Il Convitto <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
         </button>
         <ul class="dd-menu" role="menu">
+          <li role="presentation" style="padding:.35rem .9rem .25rem .9rem;font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Chi siamo</li>
           <li><a href="il-convitto.html" data-page="il-convitto">Chi siamo &amp; storia</a></li>
           <li><a href="educatori.html" data-page="educatori">Gli Educatori</a></li>
+          <li><a href="comunita.html" data-page="comunita">🌟 La nostra Comunità</a></li>
           <li><a href="giornata-tipo.html" data-page="giornata-tipo">Una giornata tipo</a></li>
+          <li role="presentation" style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Attività e cultura</li>
+          <li><a href="laboratorio-musicale.html" data-page="laboratorio-musicale">♪ Laboratorio Musicale</a></li>
+          <li><a href="vinile.html" data-page="vinile">📻 Vinile</a></li>
+          <li><a href="solidarieta.html" data-page="solidarieta">🤝 La Solidarietà</a></li>
+          <li><a href="biblioteca.html" data-page="biblioteca">📚 La nostra Biblioteca</a></li>
+          <li><a href="biblioteca.html#oltre-le-pagine">Oltre le pagine 2025/26</a></li>
+          <li role="presentation" style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Rieti e riconoscimenti</li>
           <li><a href="rieti-libera-uscita.html" data-page="rieti-libera-uscita">🧭 Rieti in libera uscita</a></li>
           <li><a href="premio-merito.html" data-page="premio-merito">🏅 Premio al Merito</a></li>
           <li><a href="trofei-e-classifiche.html" data-page="trofei-e-classifiche">🏆 Trofei e Classifiche</a></li>
-
-          <li style="padding: .4rem .9rem; font-family: var(--fu); font-size: .58rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .8;">♪ Laboratorio Musicale</li>
-          <li style="padding-left: .6rem;"><a href="laboratorio-musicale.html" data-page="laboratorio-musicale">└ Accedi al Laboratorio</a></li>
-          <li style="padding-left: .6rem;"><a href="vinile.html" data-page="vinile">└ 📻 Vinile</a></li>
-          <li style="padding-left: .6rem;"><a href="solidarieta.html" data-page="solidarieta">└ 🤝 La Solidarietà</a></li>
-
-          <li style="padding: .4rem .9rem; font-family: var(--fu); font-size: .58rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .8;">📚 Biblioteca e Lettura</li>
-          <li style="padding-left: .6rem;"><a href="biblioteca.html" data-page="biblioteca">└ La nostra Biblioteca</a></li>
-          <li style="padding-left: .6rem;"><a href="biblioteca.html#oltre-le-pagine">└ Oltre le pagine 2025/26</a></li>
-
-          <li><a href="comunita.html" data-page="comunita">🌟 La nostra Comunità</a></li>
         </ul>
       </div>
 
@@ -145,24 +143,21 @@
     <li class="drw-group">
       <button class="drw-acc" aria-expanded="false">Il Convitto <svg viewBox="0 0 24 24" class="drw-arrow"><path d="M7 10l5 5 5-5z"/></svg></button>
       <ul class="drw-sub">
+        <li style="padding:.35rem .9rem .25rem .5rem;font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Chi siamo</li>
         <li><a href="il-convitto.html">Chi siamo &amp; storia</a></li>
         <li><a href="educatori.html">Gli Educatori</a></li>
+        <li><a href="comunita.html">🌟 La nostra Comunità</a></li>
         <li><a href="giornata-tipo.html">Una giornata tipo</a></li>
+        <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Attività e cultura</li>
+        <li><a href="laboratorio-musicale.html">♪ Laboratorio Musicale</a></li>
+        <li><a href="vinile.html">📻 Vinile</a></li>
+        <li><a href="solidarieta.html">🤝 La Solidarietà</a></li>
+        <li><a href="biblioteca.html">📚 La nostra Biblioteca</a></li>
+        <li><a href="biblioteca.html#oltre-le-pagine">Oltre le pagine 2025/26</a></li>
+        <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Rieti e riconoscimenti</li>
         <li><a href="rieti-libera-uscita.html">🧭 Rieti in libera uscita</a></li>
         <li><a href="premio-merito.html">🏅 Premio al Merito</a></li>
         <li><a href="trofei-e-classifiche.html">🏆 Trofei e Classifiche</a></li>
-
-        <li style="padding: .5rem .5rem .2rem; font-family: var(--fu); font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .85;">♪ Laboratorio Musicale</li>
-        <li style="padding-left: .75rem;"><a href="laboratorio-musicale.html">Accedi al Laboratorio</a></li>
-        <li style="padding-left: .75rem;"><a href="vinile.html">📻 Vinile</a></li>
-        <li style="padding-left: .75rem;"><a href="solidarieta.html">🤝 La Solidarietà</a></li>
-
-        <li style="padding: .5rem .5rem .2rem; font-family: var(--fu); font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--oro2); opacity: .85;">📚 Biblioteca e Lettura</li>
-        <li style="padding-left: .75rem;"><a href="biblioteca.html">La nostra Biblioteca</a></li>
-        <li style="padding-left: .75rem;"><a href="biblioteca.html#oltre-le-pagine">Oltre le pagine 2025/26</a></li>
-
-
-        <li><a href="comunita.html">🌟 La nostra Comunità</a></li>
       </ul>
     </li>
 

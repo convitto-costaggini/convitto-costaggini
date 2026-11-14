@@ -22,7 +22,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 |---|---|---|
 | **Togliere il reCAPTCHA di Google** dai sei moduli del sito. L'antispam diventa solo interno: tempo minimo di compilazione, limiti di invio, campo invisibile. Cookie policy e informativa vengono aggiornate. | Pronto: PR #202 (bozza), che sostituisce la #174 (da chiudere). | Dal 18/11. Prima vanno pubblicate le due funzioni Supabase (`richiesta-accesso`, `iscrizione-alumni`) e va modificato il `doPost` del gestionale in Apps Script. |
 | **Trofei e classifiche, vista personale**: ogni convittore vede solo il proprio punteggio (approvata dalla DPO il 7/10). | Pronto (PR #17, contenuto anche nel commit `74036d3`). | Modifica del Regolamento del Premio da parte del Consiglio di Istituto, poi aggiornamento del gestionale. |
-| **Sala studio senza IA a pagamento** (lezioni solo incollate dall'assistente esterno) e **Lingue: di chi corregge resta solo il nome**, non più la mail. | Preparato il 27/10, mai unito. | Decisione: la presentazione della formazione (13/11) presenta ancora la creazione automatica con «l'IA della scuola». La parte sulle Lingue cancella le mail già salvate (migrazione del database). |
+| **Lingue: di chi spunta o corregge una frase resta solo il nome**, non più la mail. | Preparato il 27/10, mai unito. | Decisione. Le mail già salvate verrebbero cancellate (migrazione del database). |
 | **Lingue: cliente virtuale** per i docenti (prototipo con funzione Supabase che usa un servizio di IA). | Prototipo del 12/10, mai unito. | Decisione se proseguirlo. |
 
 ---
@@ -84,6 +84,16 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - Il conto alla rovescia dell'Open Day sta su una riga.
 - Il percorso di navigazione in cima alle pagine va a capo in modo ordinato.
 - Resta una sola freccia «scendi», non più una tra ogni sezione.
+
+**Aula digitale: nessuna IA a pagamento** (decisione del 14/11)
+- Dalla Sala studio è tolta la «creazione automatica» delle lezioni, che mandava foto e argomento a un servizio di IA a consumo pagato dalla scuola.
+- Le lezioni si preparano gratis con l'assistente che ogni docente preferisce (Claude, ChatGPT o Gemini, anche nella versione gratuita) e si incollano nel sito, che non manda nulla a servizi di IA.
+- Aggiornati la pagina dei docenti, la guida per la Dirigente, le due visite guidate e la presentazione della formazione.
+- La funzione del database `studio-genera` va ripubblicata perché la modifica valga anche sul server.
+
+**Indirizzi di studio** (14/11)
+- Le pagine dicono ovunque che gli indirizzi sono tre: Enogastronomia (con approfondimento Cucina oppure Prodotti dolciari / Pasticceria), Servizi di sala e vendita, Accoglienza turistica.
+- Prima la pagina Domande frequenti diceva «5 indirizzi» e la guida al PTOF «quattro articolazioni».
 
 **Velocità** (PR #200)
 - L'assistente virtuale e l'indice di ricerca (oltre 200 KB) si scaricano solo quando qualcuno li usa.

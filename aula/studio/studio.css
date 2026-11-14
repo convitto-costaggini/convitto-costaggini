@@ -257,8 +257,6 @@ mark.st-k{background:linear-gradient(transparent 55%,var(--oro3) 55%);color:inhe
 @media (prefers-reduced-motion:reduce){.st *{animation:none!important;transition:none!important}.st-lett{opacity:1;transform:none}}
 @media print{.st-barra,.st-mappa,.st-azioni,.st-leggi,header,footer,.st-anteprima{display:none!important}}
 
-/* Solo in questa sezione: dei pulsanti tondi in basso a destra restano Home e Aa (Leggi a modo tuo) */
-body[data-page="studio"] #fab-top,body[data-page="studio"] #tr-fab,body[data-page="studio"] #cc-fab{display:none!important}
 
 /* in cima a «Crea una lezione»: cosa costa (poco) e cosa non tocca fare */
 .dc-patti{list-style:none;padding:0;margin:.8rem 0 0;display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem}
@@ -269,8 +267,6 @@ body[data-page="studio"] #fab-top,body[data-page="studio"] #tr-fab,body[data-pag
 /* quando il telefono non lascia copiare da solo */
 .dc-copia-a-mano{margin-top:.6rem}
 .dc-copia-a-mano textarea{min-height:110px;font:.8rem/1.4 monospace;background:#fffbea}
-/* sul telefono Home e Aa più piccoli e più in basso, per coprire meno il testo */
-@media (max-width:700px){body[data-page="studio"] #fab-wrap{bottom:.6rem;right:.45rem;gap:.35rem}body[data-page="studio"] #fab-wrap .fab-c{width:34px;height:34px;font-size:.85rem}body[data-page="studio"] #fab-wrap .fab-c svg{width:15px;height:15px}}
 
 /* il cartello del QR dentro la pagina (quando le finestre nuove sono bloccate) */
 .ed-cartello{position:fixed;inset:0;z-index:99999;background:#fff;color:#2C3E2D;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2vh 1rem;overflow:auto;font-family:Arial,sans-serif}

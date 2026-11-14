@@ -20,10 +20,14 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 
 | Lavoro | Stato | Cosa serve |
 |---|---|---|
-| **Togliere il reCAPTCHA di Google** dai sei moduli del sito. L'antispam diventa solo interno: tempo minimo di compilazione, limiti di invio, campo invisibile. Cookie policy e informativa vengono aggiornate. | Pronto: PR #202 (bozza), che sostituisce la #174 (da chiudere). | Dal 18/11. Prima vanno pubblicate le due funzioni Supabase (`richiesta-accesso`, `iscrizione-alumni`) e va modificato il `doPost` del gestionale in Apps Script. |
+| **Togliere il reCAPTCHA di Google** dai sei moduli del sito. L'antispam diventa solo interno: tempo minimo di compilazione, limiti di invio, campo invisibile. Cookie policy e informativa vengono aggiornate. | Pronto: PR #202 (bozza). La vecchia versione, PR #174, è stata chiusa il 14/11. | Dal 18/11. Prima vanno pubblicate le due funzioni Supabase (`richiesta-accesso`, `iscrizione-alumni`) e va modificato il `doPost` del gestionale in Apps Script. |
 | **Trofei e classifiche, vista personale**: ogni convittore vede solo il proprio punteggio (approvata dalla DPO il 7/10). | Pronto (PR #17, contenuto anche nel commit `74036d3`). | Modifica del Regolamento del Premio da parte del Consiglio di Istituto, poi aggiornamento del gestionale. |
-| **Lingue: di chi spunta o corregge una frase resta solo il nome**, non più la mail. | Preparato il 27/10, mai unito. | Decisione. Le mail già salvate verrebbero cancellate (migrazione del database). |
-| **Lingue: cliente virtuale** per i docenti (prototipo con funzione Supabase che usa un servizio di IA). | Prototipo del 12/10, mai unito. | Decisione se proseguirlo. |
+| **Lingue: di chi spunta o corregge una frase resta solo il nome**, non più la mail. | Deciso il 14/11. Codice pronto; le tabelle sono ancora vuote, quindi nessuna mail viene cancellata. | La conferma, richiesta da Supabase, alla modifica del database; poi la nuova funzione e l'unione nel sito. |
+| **Progetto lettura 2026/27** («Oltre le pagine» del nuovo anno). | La pagina racconta il progetto 2025/26. | La documentazione del progetto di quest'anno. |
+
+**Esclusi** (decisione del 14/11)
+- **Lingue: cliente virtuale**: prototipo del 12/10 in cui un'IA recitava un cliente straniero. È escluso perché usa un servizio di IA a pagamento, e manderebbe a un fornitore esterno le frasi degli studenti. Resta archiviato nel branch `lingue-cliente-virtuale`, non pubblicato.
+- **Semiconvitto, adesioni in corso d'anno**: nessuna nota aggiunta. Vale quanto fissato dall'Avviso n. 58.
 
 ---
 

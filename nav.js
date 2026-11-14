@@ -286,7 +286,7 @@
       document.head.appendChild(css);
       var more = document.createElement('button');
       more.id = 'fab-more'; more.type = 'button'; more.className = 'fab-c';
-      more.setAttribute('aria-label', 'Altri strumenti: lingua, assistente, lettura facilitata');
+      more.setAttribute('aria-label', 'Altri strumenti: torna su, home, lingua, assistente' + (document.querySelector('script[src*="supporti.js"]') ? '' : ', lettura facilitata'));
       more.setAttribute('aria-expanded', 'false');
       more.textContent = '⋮';
       function chiudi() { w.classList.remove('aperto'); more.setAttribute('aria-expanded', 'false'); more.textContent = '⋮'; }
@@ -699,6 +699,8 @@
 })();
 
 (function () {
+  // Dove c'è già «Leggi a modo tuo» dell'Aula digitale (più completo), niente secondo «Aa».
+  if (document.querySelector('script[src*="supporti.js"]')) return;
   var KEY = 'lf-convitto';
   var root = document.documentElement;
 

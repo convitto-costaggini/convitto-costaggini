@@ -317,6 +317,13 @@
     });
   });
 
+  /* ── Menu «Il Convitto»: su touch, un tocco sulla voce apre l'elenco accanto ── */
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.dd-sub-btn');
+    document.querySelectorAll('.dd-sub-btn[aria-expanded="true"]').forEach(x => { if (x !== b) x.setAttribute('aria-expanded','false'); });
+    if (b) { b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); }
+  });
+
   /* ── Dropdown desktop: chiudi cliccando fuori ── */
   document.addEventListener('click', e => {
     if (!e.target.closest('.dd-wrap')) {

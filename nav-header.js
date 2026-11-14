@@ -36,22 +36,34 @@
         <button class="dd-btn" aria-haspopup="true" aria-expanded="false">
           Il Convitto <svg viewBox="0 0 24 24" class="dd-arrow"><path d="M7 10l5 5 5-5z"/></svg>
         </button>
-        <ul class="dd-menu" role="menu">
-          <li role="presentation" style="padding:.35rem .9rem .25rem .9rem;font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Chi siamo</li>
-          <li><a href="il-convitto.html" data-page="il-convitto">Chi siamo &amp; storia</a></li>
-          <li><a href="educatori.html" data-page="educatori">Gli Educatori</a></li>
-          <li><a href="comunita.html" data-page="comunita">🌟 La nostra Comunità</a></li>
-          <li><a href="giornata-tipo.html" data-page="giornata-tipo">Una giornata tipo</a></li>
-          <li role="presentation" style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Attività e cultura</li>
-          <li><a href="laboratorio-musicale.html" data-page="laboratorio-musicale">♪ Laboratorio Musicale</a></li>
-          <li><a href="vinile.html" data-page="vinile">📻 Vinile</a></li>
-          <li><a href="solidarieta.html" data-page="solidarieta">🤝 La Solidarietà</a></li>
-          <li><a href="biblioteca.html" data-page="biblioteca">📚 La nostra Biblioteca</a></li>
-          <li><a href="biblioteca.html#oltre-le-pagine">Oltre le pagine 2025/26</a></li>
-          <li role="presentation" style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Rieti e riconoscimenti</li>
-          <li><a href="rieti-libera-uscita.html" data-page="rieti-libera-uscita">🧭 Rieti in libera uscita</a></li>
-          <li><a href="premio-merito.html" data-page="premio-merito">🏅 Premio al Merito</a></li>
-          <li><a href="trofei-e-classifiche.html" data-page="trofei-e-classifiche">🏆 Trofei e Classifiche</a></li>
+        <ul class="dd-menu dd-menu--gruppi" role="menu">
+          <li class="dd-sub" role="none">
+            <button class="dd-sub-btn" type="button" aria-haspopup="true" aria-expanded="false">Chi siamo <svg viewBox="0 0 24 24" class="dd-sub-arrow" aria-hidden="true"><path d="M10 7l5 5-5 5z"/></svg></button>
+            <ul class="dd-sub-menu" role="menu">
+              <li><a href="il-convitto.html" data-page="il-convitto">Chi siamo &amp; storia</a></li>
+              <li><a href="educatori.html" data-page="educatori">Gli Educatori</a></li>
+              <li><a href="comunita.html" data-page="comunita">🌟 La nostra Comunità</a></li>
+              <li><a href="giornata-tipo.html" data-page="giornata-tipo">Una giornata tipo</a></li>
+            </ul>
+          </li>
+          <li class="dd-sub" role="none">
+            <button class="dd-sub-btn" type="button" aria-haspopup="true" aria-expanded="false">Attività e cultura <svg viewBox="0 0 24 24" class="dd-sub-arrow" aria-hidden="true"><path d="M10 7l5 5-5 5z"/></svg></button>
+            <ul class="dd-sub-menu" role="menu">
+              <li><a href="laboratorio-musicale.html" data-page="laboratorio-musicale">♪ Laboratorio Musicale</a></li>
+              <li><a href="vinile.html" data-page="vinile">📻 Vinile</a></li>
+              <li><a href="solidarieta.html" data-page="solidarieta">🤝 La Solidarietà</a></li>
+              <li><a href="biblioteca.html" data-page="biblioteca">📚 La nostra Biblioteca</a></li>
+              <li><a href="biblioteca.html#oltre-le-pagine">Oltre le pagine 2025/26</a></li>
+            </ul>
+          </li>
+          <li class="dd-sub" role="none">
+            <button class="dd-sub-btn" type="button" aria-haspopup="true" aria-expanded="false">Rieti e riconoscimenti <svg viewBox="0 0 24 24" class="dd-sub-arrow" aria-hidden="true"><path d="M10 7l5 5-5 5z"/></svg></button>
+            <ul class="dd-sub-menu" role="menu">
+              <li><a href="rieti-libera-uscita.html" data-page="rieti-libera-uscita">🧭 Rieti in libera uscita</a></li>
+              <li><a href="premio-merito.html" data-page="premio-merito">🏅 Premio al Merito</a></li>
+              <li><a href="trofei-e-classifiche.html" data-page="trofei-e-classifiche">🏆 Trofei e Classifiche</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
 

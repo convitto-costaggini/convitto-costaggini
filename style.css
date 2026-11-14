@@ -755,3 +755,35 @@ a.nc:hover, a.article-card:hover, a.alumni-card:hover,
   #dnav { display: none !important; }
   #drw { display: block !important; top: 68px; padding-top: calc(.5rem + 38px); }
 }
+
+/* ═══ Menu «Il Convitto»: tre voci, ognuna apre a lato il suo elenco ═══ */
+@media(min-width:768px){
+  .dd-menu.dd-menu--gruppi { overflow: visible !important; max-height: none !important; min-width: 250px; }
+  .dd-menu--gruppi li + li { border-top: 1px solid rgba(184,146,42,.22); }
+  .dd-sub { position: relative; }
+  .dd-sub-btn {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    font-family: var(--fu); font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--oro2); background: none; border: 0; cursor: pointer; text-align: left;
+    padding: .8rem 1.1rem; transition: background .15s;
+  }
+  .dd-sub-arrow { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; transition: transform .2s; }
+  .dd-sub:hover > .dd-sub-btn, .dd-sub:focus-within > .dd-sub-btn, .dd-sub-btn[aria-expanded="true"] { background: rgba(184,146,42,.14); }
+  .dd-sub:hover .dd-sub-arrow, .dd-sub:focus-within .dd-sub-arrow, .dd-sub-btn[aria-expanded="true"] .dd-sub-arrow { transform: translateX(3px); }
+  .dd-sub-menu {
+    display: none; position: absolute; top: -.4rem; left: 100%; min-width: 250px;
+    background: var(--bosco); border: 1px solid rgba(184,146,42,.3); border-radius: 8px;
+    box-shadow: 0 16px 40px rgba(0,0,0,.35); padding: .4rem 0; margin: 0 0 0 -2px; list-style: none; z-index: 310;
+  }
+  /* ponte invisibile a sinistra: il puntatore non perde il sottomenu passando dalla voce all'elenco */
+  .dd-sub-menu::before { content: ''; position: absolute; top: 0; bottom: 0; left: -14px; width: 14px; }
+  .dd-sub:hover > .dd-sub-menu, .dd-sub:focus-within > .dd-sub-menu, .dd-sub-btn[aria-expanded="true"] + .dd-sub-menu { display: block; animation: ddIn .16s ease both; }
+  .dd-sub-menu li:first-child a { border-radius: 8px 8px 0 0; }
+  .dd-sub-menu li:last-child a { border-radius: 0 0 8px 8px; }
+}
+
+@media(min-width:768px){
+  /* la voce che contiene la pagina in cui ci si trova resta segnata */
+  .dd-sub:has(a.active) > .dd-sub-btn { box-shadow: inset 3px 0 0 var(--oro2); }
+  .dd-sub-arrow { width: 18px; height: 18px; }
+}

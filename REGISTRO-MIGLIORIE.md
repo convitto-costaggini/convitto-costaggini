@@ -50,7 +50,7 @@ dei commit, per ritrovare il dettaglio su GitHub.
 
 **Nomi e testi coerenti** (PR #196, #197, #199, #200)
 - Ogni pagina ha lo stesso nome in menu, footer, mappa del sito e ricerca.
-- Le sigle sono sciolte: «Messaggio del nuovo Dirigente», «Il PTOF spiegato», «Amministrazione Trasparente», «Semiconvitto (senza pernottamento)».
+- Le sigle sono sciolte: «Messaggio della nuova Dirigente», «Il PTOF spiegato», «Amministrazione Trasparente», «Semiconvitto (senza pernottamento)».
 - Nel footer ci sono i due indirizzi: il Convitto (Via Salaria, Open Day e accoglienza) e gli uffici (Via dei Salici 62).
 - La domanda frequente sull'apertura spiega le 4 notti dal lunedì al giovedì, con il rientro domenicale su richiesta.
 - In Accoglienza la data dell'accoglienza 2026/27 (11 settembre) è indicata come già svolta, con la nota che quella del 2027/28 sarà pubblicata lì.
@@ -59,6 +59,8 @@ dei commit, per ritrovare il dettaglio su GitHub.
 - In home l'anno di apertura (1971) non si anima più: a metà animazione si leggeva «1694».
 - Nella pagina di conferma del modulo di contatto, il numero di telefono chiamava un numero con una cifra in più.
 - La ricerca interna ora trova «pagamento», «rate», «uscite», «autorizzazione» e «certificato».
+- Il bottone della home sul saluto della Dirigente ora dice «Messaggio della nuova Dirigente», come la finestra che apre e come le altre pagine.
+- In «Una giornata al Convitto» gli orari e le etichette della giornata sono più grandi e leggibili sul telefono.
 
 **Grafica e telefono** (PR #196, #199, #200)
 - Home riordinata: «Chi sei, oggi?» compare subito.

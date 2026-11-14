@@ -78,7 +78,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - Il bottone della home sul saluto della Dirigente ora dice «Messaggio della nuova Dirigente», come la finestra che apre e come le altre pagine.
 - In «Una giornata al Convitto» gli orari e le etichette della giornata sono più grandi e leggibili sul telefono.
 
-**Quarto giro con gli occhi dei due genitori** (14 novembre, PR da aprire)
+**Quarto giro con gli occhi dei due genitori** (14 novembre, PR #205)
 - In home, sotto «Chi sei, oggi?», c'è una scheda per il **genitore che sta valutando** il Convitto: porta a costi, iscrizione e Open Day. Prima c'era solo la scheda per chi ha già il figlio in Convitto, che ora si chiama «Genitore di un convittore».
 - La barra dei bottoni in cima a Come iscriversi, Per i Genitori, Contatti, Servizi e altre sette pagine sta ferma, come in home: sul telefono parte dalla prima voce, che prima appariva tagliata.
 - Il collegamento all'area riservata si chiama «Accesso famiglie» ovunque: menu, barra in alto e mappa del sito. Prima in due punti c'era ancora «Area Riservata Famiglie».

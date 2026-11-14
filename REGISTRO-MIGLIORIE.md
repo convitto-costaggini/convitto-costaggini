@@ -82,6 +82,13 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - In home, sotto «Chi sei, oggi?», c'è una scheda per il **genitore che sta valutando** il Convitto: porta a costi, iscrizione e Open Day. Prima c'era solo la scheda per chi ha già il figlio in Convitto, che ora si chiama «Genitore di un convittore».
 - La barra dei bottoni in cima a Come iscriversi, Per i Genitori, Contatti, Servizi e altre sette pagine sta ferma, come in home: sul telefono parte dalla prima voce, che prima appariva tagliata.
 - Il collegamento all'area riservata si chiama «Accesso famiglie» ovunque: menu, barra in alto e mappa del sito. Prima in due punti c'era ancora «Area Riservata Famiglie».
+- Il menu è più corto e più ordinato:
+  - le voci per i docenti («Formazione» e «Accesso docenti») non sono più nel menu pubblico, ma restano nella pagina dell'Aula digitale;
+  - «Oltre le pagine» non riporta più l'anno scorso;
+  - le voci dei sottomenu non hanno più icone, che prima c'erano solo su alcune. Restano solo sui due bottoni principali, «Come iscriversi» e «Per i Genitori».
+- La pagina Open Day è più leggera. Sul telefono le foto della visita arrivano in una copia più piccola, ugualmente nitida, e la pagina scarica una foto alla volta invece di tutte e sei insieme. Lo zoom a tutto schermo mostra sempre la foto originale.
+  - telefono: da circa 1,5 MB a circa 610 KB;
+  - computer: da circa 1,5 MB a circa 920 KB, con le stesse foto di prima.
 
 **Grafica e telefono** (PR #196, #199, #200)
 - Home riordinata: «Chi sei, oggi?» compare subito.

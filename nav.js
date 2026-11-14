@@ -227,7 +227,7 @@
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeD(); });
 
-  /* ── FAB — 3 cerchi fissi, sempre visibili ── */
+  /* ── FAB — cerchi fissi (sul telefono raccolti nel bottone «⋯») ── */
   (function(){
     const isHome = !document.body.dataset.page || document.body.dataset.page === 'home';
 
@@ -271,6 +271,37 @@
     fChat.setAttribute('aria-label','Apri assistente virtuale'); fChat.setAttribute('data-tip','Assistente');
     fChat.innerHTML = '💬<span id="cc-badge" style="position:absolute;top:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:#B8922A;border:2px solid #fff;display:none" aria-hidden="true"></span>';
     wrap.appendChild(fChat);
+
+    // 4. Telefono: un solo bottone «⋯» al posto della colonna di cerchi.
+    //    Toccandolo si aprono gli altri, ciascuno con la sua etichetta visibile.
+    (function (w) {
+      var css = document.createElement('style');
+      css.textContent = '#fab-more{display:none;order:99;font-size:1.75rem;font-weight:800;line-height:1;color:#EDD98A;border-color:rgba(212,170,74,.75);}' +
+        '@media(max-width:700px){#fab-more{display:flex;}' +
+        '#fab-wrap:not(.aperto)>:not(#fab-more){display:none!important;}' +
+        '#fab-wrap.aperto #fab-top{opacity:1;pointer-events:auto;transform:none;}' +
+        '#fab-wrap.aperto .fab-c[data-tip]:not(#fab-more)::after{content:attr(data-tip);display:block!important;position:absolute;right:48px;top:50%;transform:translateY(-50%);background:rgba(12,20,13,.92);color:#F5F0E8;font-family:"Source Sans 3",sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:.3rem .6rem;border-radius:6px;white-space:nowrap;border:1px solid rgba(184,146,42,.35);pointer-events:none;}}';
+      document.head.appendChild(css);
+      var more = document.createElement('button');
+      more.id = 'fab-more'; more.type = 'button'; more.className = 'fab-c';
+      more.setAttribute('aria-label', 'Altri strumenti: lingua, assistente, lettura facilitata');
+      more.setAttribute('aria-expanded', 'false');
+      more.textContent = '⋯';
+      function chiudi() { w.classList.remove('aperto'); more.setAttribute('aria-expanded', 'false'); more.textContent = '⋯'; }
+      more.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var ap = w.classList.toggle('aperto');
+        more.setAttribute('aria-expanded', ap ? 'true' : 'false');
+        more.textContent = ap ? '✕' : '⋯';
+      });
+      w.addEventListener('click', function (e) {
+        var b = e.target.closest ? e.target.closest('.fab-c') : null;
+        if (b && b !== more && b.id !== 'tr-fab') chiudi();
+      });
+      document.addEventListener('click', function (e) { if (!w.contains(e.target)) chiudi(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') chiudi(); });
+      w.appendChild(more);
+    })(wrap);
   })();
 
   try {
@@ -593,7 +624,9 @@
     }
 
     function animateCounter(el) {
-      if (noMotion) { el.textContent = finalText(el); return; }
+      // Gli anni (data-plain) e i numeri piccoli non si animano: a metà conteggio
+      // mostrerebbero valori sbagliati (es. "1694" come anno di apertura, "3 pasti").
+      if (noMotion || el.dataset.plain || parseInt(el.dataset.count) < 10) { el.textContent = finalText(el); return; }
       const target = parseInt(el.dataset.count);
       const suffix = el.dataset.suffix || '';
       const prefix = el.dataset.prefix || '';
@@ -745,8 +778,8 @@
     { titolo: 'Salute e assistenza sanitaria', pagina: 'servizi.html', ancora: '#salute', cat: 'Servizi', keywords: ['infermeria','salute','medico','psicologico','emergenza','118','ospedale','farmaci','sanitaria','assistenza','asl'] },
     { titolo: 'Orari dei servizi', pagina: 'servizi.html', ancora: '#orari', cat: 'Servizi', keywords: ['orari','orario','apertura','chiusura','quando','ore','mattina','pomeriggio','sera'] },
     { titolo: 'Come iscriversi al Convitto', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['iscriversi','iscrizione','iscrivo','ammissione','domanda','come','procedura','miur','portale','modulo','candidatura','entrare'] },
-    { titolo: 'Tariffe e rette 2026/27', pagina: 'ammissione.html', ancora: '#tariffe', cat: 'Ammissione', keywords: ['tariffa','retta','costo','costa','prezzo','quanto','pagare','isee','riduzione','agevolazione','contributo','pagopa','rata','mensile','euro'] },
-    { titolo: 'Moduli e documenti da scaricare', pagina: 'ammissione.html', ancora: '#moduli', cat: 'Ammissione', keywords: ['modulo','moduli','scaricare','download','pdf','documenti','documento','certificato','attestato','stampare','compilare','domanda','allegati'] },
+    { titolo: 'Tariffe e rette 2026/27', pagina: 'ammissione.html', ancora: '#tariffe', cat: 'Ammissione', keywords: ['tariffa','retta','rette','costo','costa','prezzo','quanto','pagare','pagamento','pagamenti','isee','riduzione','agevolazione','contributo','pagopa','rata','rate','scadenze','mensile','euro'] },
+    { titolo: 'Moduli per l\'iscrizione', pagina: 'ammissione.html', ancora: '#moduli', cat: 'Ammissione', keywords: ['modulo','moduli','scaricare','download','pdf','documenti','documento','stampare','compilare','domanda','allegati'] },
     { titolo: 'Domande frequenti — FAQ', pagina: 'ammissione.html', ancora: '#faq', cat: 'Ammissione', keywords: ['faq','domande','frequenti','dubbi','risposta','chiarimenti','uscita','malattia','rimborso','ritiro','camera','compagno','valigia','corredo','portare','bagaglio','colloquio','ambientamento','nostalgia'] },
     { titolo: 'Scadenze e calendario iscrizioni', pagina: 'ammissione.html', ancora: '#procedura', cat: 'Ammissione', keywords: ['scadenza','calendario','quando','data','settembre','ottobre','novembre','gennaio','marzo','maggio','giugno','termine'] },
     { titolo: 'Regolamento del Convitto', pagina: 'trasparenza.html', ancora: '#disposizioni', cat: 'Trasparenza', keywords: ['regolamento','regole','norme','disciplina','comportamento','patto','convivenza'] },
@@ -809,8 +842,8 @@
     { titolo: 'Mappa del Sito', pagina: 'mappa-sito.html', ancora: '', cat: 'Trasparenza', keywords: ['mappa del sito','mappa sito','tutte le pagine','indice delle pagine','trova quello che cerchi','elenco pagine','navigazione'] },
     { titolo: 'Festa di Natale 2024', pagina: 'natale2024.html', ancora: '', cat: 'Comunità', keywords: ['natale','natale 2024','festa di natale','cena di gala','tombola','musica dal vivo','dicembre 2024','galleria fotografica'] },
     { titolo: 'Iscriviti come Alumno', pagina: 'iscriviti-alumni.html', ancora: '', cat: 'Comunità', keywords: ['iscriviti alumni','registrati alumni','sei passato dal convitto','aggiungi la tua scheda','pin sulla mappa','registrazione ex convittori'] },
-    { titolo: 'Accoglienza & Modulistica', pagina: 'accoglienza.html', ancora: '', cat: 'Ammissione', keywords: ['accoglienza','modulistica','scheda','schede','convittori','convittrici','11 settembre','moduli','documenti da consegnare','arrivo','allergie','intolleranze','certificato','certificato di frequenza'] },
-    { titolo: 'Autorizzazioni del genitore/tutore', pagina: 'autorizzazioni.html', ancora: '', cat: 'Ammissione', keywords: ['autorizzazioni','libera uscita','pista ciclopedonale','entrata autonoma','uscita autonoma','riprese immagini','attività sportive','attività culturali'] },
+    { titolo: 'Accoglienza & Modulistica', pagina: 'accoglienza.html', ancora: '', cat: 'Ammissione', keywords: ['accoglienza','modulistica','scheda','schede','convittori','convittrici','11 settembre','moduli','documenti da consegnare','arrivo','allergie','intolleranze','certificato','certificato di frequenza','attestato'] },
+    { titolo: 'Autorizzazioni del genitore/tutore', pagina: 'autorizzazioni.html', ancora: '', cat: 'Ammissione', keywords: ['autorizzazioni','autorizzazione','uscite','uscita','libera uscita','pista ciclopedonale','entrata autonoma','uscita autonoma','uscite autonome','riprese immagini','attività sportive','attività culturali'] },
     { titolo: 'Patto di Corresponsabilità', pagina: 'patto-di-corresponsabilita.html', ancora: '', cat: 'Ammissione', keywords: ['patto','corresponsabilità','impegni','famiglia','convitto','regole di convivenza'] },
     { titolo: 'Scheda Informativa del Convittore/trice', pagina: 'scheda-informativa-convittore.html', ancora: '', cat: 'Ammissione', keywords: ['scheda informativa','convittore','convittrice','anagrafica','dati alunno','genitori','provenienza scolastica','sostegno','invio online'] },
     { titolo: 'Scheda Informativa Sanitaria', pagina: 'scheda-informativa-sanitaria.html', ancora: '', cat: 'Ammissione', keywords: ['scheda sanitaria','medico curante','allergie','farmaci','intolleranze','patologie'] },

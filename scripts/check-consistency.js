@@ -72,8 +72,12 @@ const TARGET = [
       { nome: 'quota iscrizione', contains: QUOTA_NUM },
       { nome: 'retta annua', contains: RETTA_NUM },
   ]},
-  { file: 'index.html', fatti: [
+  // Le domande della home (index.html) e di tutte le altre pagine vengono da faq.js
+  { file: 'faq.js', fatti: [
       { nome: 'scadenza', contains: SCADENZA },
+      { nome: 'quota iscrizione', contains: QUOTA_NUM },
+      { nome: 'retta annua', contains: RETTA_NUM },
+      { nome: 'anno scolastico', contains: ANNO },
   ]},
   { file: 'regolamento-guida.html', fatti: [
       { nome: 'scadenza', contains: SCADENZA },

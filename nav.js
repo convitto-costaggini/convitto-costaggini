@@ -39,7 +39,8 @@
         </ul></div>
 
         <div class="fc"><h2>Servizi &amp; Ammissione</h2><ul>
-          <li><a href="openday.html">🗓 Open Day</a></li>
+          <li><a href="openday.html">🗓 Open Day e visite</a></li>
+          <li><a href="in-2-minuti.html">❓ Domande frequenti</a></li>
           <li><a href="ammissione.html">Come iscriversi</a></li>
           <li><a href="domanda-ammissione.html">📋 Domanda al Convitto (entro luglio)</a></li>
           <li><a href="ammissione.html#tariffe">Tariffe e rette</a></li>
@@ -786,13 +787,13 @@
     { titolo: 'Per i Genitori', pagina: 'genitori.html', ancora: '', cat: 'Famiglie', keywords: ['genitori','famiglie','famiglia','vicini','informazioni','dsa','bes','dislessia','disturbi di apprendimento','bisogni educativi speciali'] },
     { titolo: 'Il Laboratorio Teatrale', pagina: 'genitori.html', ancora: '', cat: 'Comunità', keywords: ['teatro','teatrale','laboratorio teatrale','recitazione','spettacolo','palco','recitare','attori','commedia'] },
     { titolo: 'Una giornata al Convitto', pagina: 'giornata-tipo.html', ancora: '', cat: 'Il Convitto', keywords: ['giornata','tipo','sveglia','studio','sport','cena','quotidiana','routine'] },
-    { titolo: 'In 2 Minuti', pagina: 'in-2-minuti.html', ancora: '', cat: 'Orientamento', keywords: ['2 minuti','veloce','faq','domande frequenti','riassunto'] },
+    { titolo: 'Domande frequenti', pagina: 'in-2-minuti.html', ancora: '', cat: 'Orientamento', keywords: ['2 minuti','in 2 minuti','veloce','faq','domande frequenti','domande','risposte','riassunto'] },
     { titolo: 'Menu della Settimana', pagina: 'menu-settimana.html', ancora: '', cat: 'Novità', keywords: ['menu','mensa','cibo','pasti','primo','secondo','contorno','settimana','cucina'] },
     { titolo: 'Lettera a un Futuro Convittore', pagina: 'lettera.html', ancora: '', cat: 'Comunità', keywords: ['lettera','futuro','convittore','testimonianza','consigli'] },
-    { titolo: 'Open Day Digitale', pagina: 'openday.html', ancora: '', cat: 'Orientamento', keywords: ['open day','digitale','tour','spazi','faq','prenotazione','visita'] },
+    { titolo: 'Open Day e visite', pagina: 'openday.html', ancora: '', cat: 'Orientamento', keywords: ['open day','open day digitale','date','tour','spazi','prenotazione','visita','visita guidata'] },
     { titolo: 'Organizzazione del Convitto', pagina: 'organizzazione.html', ancora: '', cat: 'Trasparenza', keywords: ['organizzazione','organigramma','personale','patto educativo','corresponsabilità'] },
     { titolo: 'Chi è il Dirigente Scolastico', pagina: 'organizzazione.html', ancora: '#organigramma-titolo', cat: 'Organizzazione', keywords: ['dirigente','dirigente scolastico','preside','chi dirige il convitto','chi è il dirigente','chi è il preside','chi comanda','responsabile legale','cioci','maddalena cioci','avvocato','reggenza','in reggenza'] },
-    { titolo: 'Orientamento al Convitto', pagina: 'orientamento.html', ancora: '', cat: 'Orientamento', keywords: ['orientamento','open day','tour virtuale','fa per me','faq','prenotazione'] },
+    { titolo: 'Percorso per futuri convittori', pagina: 'orientamento.html', ancora: '', cat: 'Orientamento', keywords: ['orientamento','percorso','futuri convittori','tour virtuale','fa per me','test','quiz'] },
     { titolo: 'Elenco del Personale', pagina: 'personale.html', ancora: '', cat: 'Il Convitto', keywords: ['personale','elenco','educativo','amministrativo','staff'] },
     { titolo: 'Informative e moduli privacy', pagina: 'privacy-moduli.html', ancora: '', cat: 'Trasparenza', keywords: ['informative','moduli privacy','consenso','revoca','immagini','mappa','muro dei ricordi','semiconvitto','area famiglie','voci'] },
     { titolo: 'Informativa Privacy', pagina: 'privacy.html', ancora: '', cat: 'Trasparenza', keywords: ['privacy','informativa','dati personali','gdpr','reg ue 2016/679'] },
@@ -808,7 +809,7 @@
     { titolo: 'Mappa del Sito', pagina: 'mappa-sito.html', ancora: '', cat: 'Trasparenza', keywords: ['mappa del sito','mappa sito','tutte le pagine','indice delle pagine','trova quello che cerchi','elenco pagine','navigazione'] },
     { titolo: 'Festa di Natale 2024', pagina: 'natale2024.html', ancora: '', cat: 'Comunità', keywords: ['natale','natale 2024','festa di natale','cena di gala','tombola','musica dal vivo','dicembre 2024','galleria fotografica'] },
     { titolo: 'Iscriviti come Alumno', pagina: 'iscriviti-alumni.html', ancora: '', cat: 'Comunità', keywords: ['iscriviti alumni','registrati alumni','sei passato dal convitto','aggiungi la tua scheda','pin sulla mappa','registrazione ex convittori'] },
-    { titolo: 'Accoglienza & Modulistica', pagina: 'accoglienza.html', ancora: '', cat: 'Ammissione', keywords: ['accoglienza','modulistica','scheda','schede','convittori','convittrici','11 settembre','moduli','documenti da consegnare','arrivo'] },
+    { titolo: 'Accoglienza & Modulistica', pagina: 'accoglienza.html', ancora: '', cat: 'Ammissione', keywords: ['accoglienza','modulistica','scheda','schede','convittori','convittrici','11 settembre','moduli','documenti da consegnare','arrivo','allergie','intolleranze','certificato','certificato di frequenza'] },
     { titolo: 'Autorizzazioni del genitore/tutore', pagina: 'autorizzazioni.html', ancora: '', cat: 'Ammissione', keywords: ['autorizzazioni','libera uscita','pista ciclopedonale','entrata autonoma','uscita autonoma','riprese immagini','attività sportive','attività culturali'] },
     { titolo: 'Patto di Corresponsabilità', pagina: 'patto-di-corresponsabilita.html', ancora: '', cat: 'Ammissione', keywords: ['patto','corresponsabilità','impegni','famiglia','convitto','regole di convivenza'] },
     { titolo: 'Scheda Informativa del Convittore/trice', pagina: 'scheda-informativa-convittore.html', ancora: '', cat: 'Ammissione', keywords: ['scheda informativa','convittore','convittrice','anagrafica','dati alunno','genitori','provenienza scolastica','sostegno','invio online'] },

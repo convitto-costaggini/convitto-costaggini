@@ -74,7 +74,8 @@
         <ul class="dd-menu" role="menu">
           <li><a href="servizi.html" data-page="servizi">Servizi &amp; spazi</a></li>
           <li><a href="semiconvitto.html" data-page="semiconvitto">🌅 Semiconvitto (senza pernottamento)</a></li>
-          <li><a href="orientamento.html" data-page="orientamento">🗓 Orientamento &amp; Open Day</a></li>
+          <li><a href="openday.html" data-page="openday">🗓 Open Day e visite</a></li>
+          <li><a href="orientamento.html" data-page="orientamento">🧭 Percorso per futuri convittori</a></li>
           <li><a href="scopri-talento.html" data-page="scopri-talento">✨ Scopri il tuo Talento</a></li>
           <li><a href="bullismo.html" data-page="bullismo">🛡️ Bullismo e Cyberbullismo</a></li>
           <li><a href="come-arrivare.html" data-page="come-arrivare">🚌 Come arrivare</a></li>
@@ -106,7 +107,7 @@
         <ul class="dd-menu" role="menu">
           <li><a href="notizie.html" data-page="notizie">Ultime notizie</a></li>
           <li><a href="menu-settimana.html" data-page="menu-settimana">🍽️ Menu della Settimana</a></li>
-          <li><a href="in-2-minuti.html" data-page="in-2-minuti">⚡ In 2 Minuti</a></li>
+          <li><a href="in-2-minuti.html" data-page="in-2-minuti">❓ Domande frequenti</a></li>
           <li><a href="calendario.html" data-page="calendario">Calendario eventi</a></li>
         </ul>
       </div>
@@ -178,7 +179,8 @@
       <ul class="drw-sub">
         <li><a href="servizi.html">Servizi &amp; spazi</a></li>
         <li><a href="semiconvitto.html">🌅 Semiconvitto (senza pernottamento)</a></li>
-        <li><a href="orientamento.html">🗓 Orientamento &amp; Open Day</a></li>
+        <li><a href="openday.html">🗓 Open Day e visite</a></li>
+        <li><a href="orientamento.html">🧭 Percorso per futuri convittori</a></li>
         <li><a href="scopri-talento.html">✨ Scopri il tuo Talento</a></li>
         <li><a href="bullismo.html">🛡️ Bullismo e Cyberbullismo</a></li>
         <li><a href="come-arrivare.html">🚌 Come arrivare</a></li>
@@ -206,7 +208,7 @@
       <ul class="drw-sub">
         <li><a href="notizie.html">Ultime notizie</a></li>
         <li><a href="menu-settimana.html">🍽️ Menu della Settimana</a></li>
-        <li><a href="in-2-minuti.html">⚡ In 2 Minuti</a></li>
+        <li><a href="in-2-minuti.html">❓ Domande frequenti</a></li>
         <li><a href="calendario.html">Calendario eventi</a></li>
       </ul>
     </li>

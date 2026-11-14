@@ -131,7 +131,34 @@ dei commit, per ritrovare il dettaglio su GitHub.
 
 **Repository `convitto-gestionale`:** nessuna modifica registrata a novembre (ultima: 1 ottobre, report presenze).
 
-**Modifiche fatte direttamente in Apps Script:** *da completare a mano.*
+**Modifiche in Apps Script (ricostruite dal codice il 14/11/2026)**
+
+Il codice dei progetti Apps Script non è su GitHub, a parte la copia del gestionale ferma al 1° ottobre, quindi le modifiche sono state ricostruite da tre fonti:
+- i messaggi dei commit del sito (per esempio «DA UNIRE DOPO aver pubblicato in Apps Script la versione…»);
+- le guide tecniche nel repository;
+- le chiamate che le pagine del sito fanno ai progetti Apps Script.
+
+Legenda: **certa** = scritto nel repository come fatto; **dedotta** = il sito pubblicato funziona solo se la modifica è stata fatta; **da verificare** = indicata come da fare, senza prova che sia stata fatta.
+
+I progetti Apps Script del Convitto sono quattro:
+1. **gestionale** (presenze, totem, account famiglie, segreteria, trofei);
+2. **pagina dei consensi**;
+3. **posta dei codici di accesso** (Aula);
+4. **codici OTP dell'Area famiglie**.
+
+| Data | Progetto | Modifica | Certezza |
+|---|---|---|---|
+| 6 nov. | Pagina dei consensi | Versione 1.4: la pagina riceve le richieste direttamente dal sito (`consensi.html`) e non apre più pagine di Google. Gestisce: tipi di consenso, invio del codice di 6 cifre alla casella della scuola, verifica del codice, elenco dei propri consensi, registrazione, revoca, uscita. Risolve l'errore «Impossibile aprire il file» sui telefoni con più account Google. | dedotta (la pagina del sito è stata unita dopo la pubblicazione della v1.4 ed è in uso) |
+| 6 nov. | Pagina dei consensi | Versione 1.5: per il personale il ruolo si sceglie da un elenco, con le figure apicali in cima e «Altro»; per le Voci, oltre ai numeri da 1 a 10, c'è l'opzione «Tutte le domande». | dedotta (come sopra) |
+| 6 nov. | Pagina dei consensi | Accesso con la casella email istituzionale e un codice di verifica, al posto dell'account Google; comunicato alla DPO il 6/11. | dedotta |
+| 13 nov. | Posta dei codici | Solo il commento iniziale aggiornato (riferimento alla funzione `lingue-accesso`, eliminata): nessuna nuova pubblicazione necessaria. | certa |
+
+Nessuna traccia di modifiche al **gestionale principale** a novembre.
+
+**Da verificare nel gestionale** (indicazioni di ottobre senza prova di esecuzione):
+- Testo dell'email con le credenziali delle famiglie (`creaAccountEInvia`): aggiungere «A ogni accesso, dopo la password, riceverà via email un codice di verifica di 6 cifre».
+- Facoltativo: in `_verificaAdminSupabase_`, pretendere anche il secondo passaggio (`aal2`) per le azioni dell'amministratore.
+- Trofei e classifiche: la «vista personale» richiede un aggiornamento del gestionale. La pagina è sospesa in attesa della modifica del Regolamento del Premio da parte del Consiglio di Istituto.
 
 ---
 
@@ -144,3 +171,16 @@ dei commit, per ritrovare il dettaglio su GitHub.
 - **Notizie:** formattazione del testo, descrizione delle immagini come testo alternativo, notizie nuove in cima.
 - **Privacy:** meno terze parti (librerie e foto ospitate sul sito); trasferimenti fuori dallo SEE con la formula della DPO.
 - **Gestionale (`convitto-gestionale`):** report presenze con il nominativo che va a capo invece di essere troncato (1 ottobre).
+
+**Modifiche in Apps Script di ottobre (ricostruite dal codice il 14/11/2026, stessa legenda di novembre)**
+
+| Data | Progetto | Modifica | Certezza |
+|---|---|---|---|
+| 7 ott. | Pagina dei consensi | Prima pubblicazione della pagina dei consensi online, collegata da «Informative e moduli», con i consensi allineati alla DPO. | certa |
+| 9 ott. | Gestionale | Tolto il controllo della chiave `MAIL_TOKEN` per la creazione degli account famiglie: resta il controllo, più solido, sulla sessione dell'amministratore. Chiave eliminata dalle Proprietà script. | dedotta (il pannello admin non invia più la chiave e la creazione degli account funziona) |
+| 9 ott. | Gestionale | Totem: nuova chiave `TOTEM_TOKEN`, non più scritta nella pagina ma inserita una volta sul dispositivo. | dedotta |
+| 9 ott. | Gestionale | `GENERA_CodiciStudenti`: il contatore non riassegna più numeri già usati (copia aggiornata in `gestionale/GENERA_CodiciStudenti.gs`). | da verificare |
+| 21 ott. | Posta dei codici | Nuovo progetto: invia i codici monouso di accesso ai docenti con la mail della scuola, senza SMTP né account; accetta anche gli indirizzi `@alberghierorieti.edu.it`. | dedotta (l'accesso dei docenti con il codice è in uso) |
+| 23 ott. | Posta dei codici | Servizio «studio» per la Sala studio; mail firmate «Sala Studio della Scuola». | dedotta |
+| 25 ott. | OTP famiglie | Nuovo progetto, pubblicato come applicazione web: recapita il codice di 6 cifre dell'Area famiglie. Invio senza `noReply`, che bloccava il recapito. | certa |
+| 30 ott. | Posta dei codici | Servizio «aula» per l'accesso unico dell'Aula (Lingue e Sala studio). | dedotta (il 13/11 la vecchia funzione è stata eliminata perché quella nuova era in uso) |

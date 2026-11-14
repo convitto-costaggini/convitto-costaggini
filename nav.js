@@ -593,7 +593,9 @@
     }
 
     function animateCounter(el) {
-      if (noMotion) { el.textContent = finalText(el); return; }
+      // Gli anni (data-plain) e i numeri piccoli non si animano: a metà conteggio
+      // mostrerebbero valori sbagliati (es. "1694" come anno di apertura, "3 pasti").
+      if (noMotion || el.dataset.plain || parseInt(el.dataset.count) < 10) { el.textContent = finalText(el); return; }
       const target = parseInt(el.dataset.count);
       const suffix = el.dataset.suffix || '';
       const prefix = el.dataset.prefix || '';

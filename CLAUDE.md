@@ -1,18 +1,18 @@
 # Istruzioni per Claude — sito del Convitto «Costaggini»
 
-## Registro delle migliorie (obbligatorio)
+## Registro delle migliorie (obbligatorio, ma privato)
 
-Ogni modifica che va online, sul sito o sul gestionale, va aggiunta a
-`REGISTRO-MIGLIORIE.md` **nello stesso commit o nella stessa pull request**,
-nel mese giusto:
+Il registro dei lavori fatti vive solo nel repository **privato** `convitto-gestionale`
+(file `REGISTRO-MIGLIORIE.md`). **Non va mai creato né copiato in questo repository**, che
+è pubblico: ogni file qui è leggibile da chiunque, anche dal sito. Dopo ogni modifica che va
+online, sul sito o sul gestionale, la voce si aggiunge lì, nel mese giusto, con la data e una
+frase chiara per chi non è tecnico: niente gergo, niente nomi di file se non servono.
 
-- per il sito, nella sezione del tema (iscrizione, Aula digitale, privacy, velocità…);
-- per il gestionale (Apps Script, Supabase, pannello admin, totem, Area famiglie,
-  repository `convitto-gestionale`), nella sezione «Gestionale» del mese.
+## Cosa non va mai in questo repository
 
-Ogni voce ha la data e una frase chiara per chi non è tecnico; tra parentesi il
-numero della pull request. Il registro serve per il resoconto mensile: niente
-gergo, niente nomi di file se non servono.
+Bozze di mail o lettere, decisioni interne, misure di sicurezza non ancora attive, note di
+lavoro, chiavi o valori segreti (nemmeno vecchi: restano nella cronologia). Queste cose vanno
+nel repository privato `convitto-gestionale` o fuori da GitHub. Nel dubbio, chiedere prima.
 
 ## Coerenza
 

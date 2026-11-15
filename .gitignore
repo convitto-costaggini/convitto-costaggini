@@ -1,3 +1,11 @@
+
+# Materiale interno: vive solo nel repository privato convitto-gestionale
+REGISTRO-MIGLIORIE*.md
+bozze/
+*-bozza.*
+*.bozza.*
+.env
+.env.*
 ﻿# Cartelle/file di lavorazione locale — MAI committare nella repo pubblica
 tappa*-coda*/
 tappa*-consegna*/

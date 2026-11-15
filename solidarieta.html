@@ -214,22 +214,8 @@
     vid.play().then(inRiproduzione).catch(function () {});
   }
 
-  ['pointerdown', 'touchstart', 'keydown'].forEach(function (ev) {
-    document.addEventListener(ev, function sblocca() {
-      if (!audioAttivo) attivaAudio();
-      if (audioAttivo) ['pointerdown', 'touchstart', 'keydown'].forEach(function (e2) { document.removeEventListener(e2, sblocca); });
-    }, { passive: true });
-  });
-  stato.addEventListener('click', attivaAudio);
-
-  vid.muted = false;
-  vid.volume = 1;
-  vid.play().then(inRiproduzione).catch(function () {
-    vid.muted = true;
-    vid.play().then(function () {
-      etichetta('🔇 Tocca per attivare l’audio', false);
-    }).catch(function () { /* nemmeno il muto: resta il tasto play del lettore */ });
-  });
+  // Nessun avvio automatico (WCAG 1.4.2 e 2.2.2): parte solo quando il visitatore preme play.
+  vid.addEventListener('play', function () { potenzia(); vid.muted = false; });
 
   function controlla() { if (!vid.muted && !vid.paused && !audioAttivo) inRiproduzione(); }
   vid.addEventListener('volumechange', controlla);

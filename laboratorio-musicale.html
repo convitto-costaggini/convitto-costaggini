@@ -61,6 +61,7 @@
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<style>.pausa-slide{display:block;margin:.7rem auto;font-family:var(--fu);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f5f0e8;background:#2c3e2d;border:1px solid #d4aa4a;border-radius:40px;padding:.55rem 1.2rem;min-height:36px;cursor:pointer}.pausa-slide:hover,.pausa-slide:focus-visible{background:#d4aa4a;color:#2c3e2d;outline:2px solid #fff;outline-offset:2px}</style>
 </head>
 <body data-page="laboratorio-musicale">
 <script src="nav-header.min.js"></script>
@@ -241,6 +242,8 @@
       <div class="mus-dots" id="musDots"></div>
     </div>
     <div class="mus-progress"><div class="mus-progress-bar" id="musProgressBar"></div></div>
+  <button type="button" class="pausa-slide" id="musPausa" aria-pressed="false">Metti in pausa lo scorrimento</button>
+
   </section>
 
 
@@ -445,12 +448,27 @@
     }));
   }
   function resetAutoplay(){
-    clearInterval(timer);startProgress();
+    clearInterval(timer);
+    if(typeof inPausa!=='undefined'&&inPausa){progressBar.style.transition='none';progressBar.style.width='0%';return;}
+    startProgress();
     timer=setInterval(()=>goTo(cur+1),AUTOPLAY);
   }
   const ss=document.getElementById('musSlideshow');
   ss.addEventListener('mouseenter',()=>{clearInterval(timer);progressBar.style.transition='none';});
   ss.addEventListener('mouseleave',()=>resetAutoplay());
+
+  // Pausa dello scorrimento automatico (WCAG 2.2.2): pulsante e rispetto di «riduci movimento»
+  const pausaBtn = document.getElementById('musPausa');
+  let inPausa = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function aggiornaPausa(){
+    pausaBtn.setAttribute('aria-pressed', inPausa ? 'true' : 'false');
+    pausaBtn.textContent = inPausa ? 'Riprendi lo scorrimento' : 'Metti in pausa lo scorrimento';
+  }
+  pausaBtn.addEventListener('click', function(){
+    inPausa = !inPausa; aggiornaPausa();
+    if (inPausa) { clearInterval(timer); progressBar.style.transition = 'none'; progressBar.style.width = '0%'; } else { resetAutoplay(); }
+  });
+  aggiornaPausa();
   resetAutoplay();
 
   // ── Blurred background per ogni slide ──

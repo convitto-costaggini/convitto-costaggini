@@ -616,7 +616,7 @@ a.nc:hover, a.article-card:hover, a.alumni-card:hover,
   font-family: var(--fu); font-size: .55rem; font-weight: 800;
   letter-spacing: .1em; text-transform: uppercase;
   padding: .15rem .5rem; border-radius: 20px;
-  animation: pulse-badge 2s ease-in-out infinite;
+  animation: pulse-badge 2s ease-in-out 2;
   margin-left: .4rem; vertical-align: middle;
 }
 

@@ -424,7 +424,7 @@
           cursor: pointer;
           z-index: 10;
           transition: background .2s, border-color .2s, transform .2s;
-          animation: secBounce 2s ease-in-out infinite;
+          animation: secBounce 2s ease-in-out 2;
           backdrop-filter: blur(4px);
         }
         .sec-nav-arrow:hover {

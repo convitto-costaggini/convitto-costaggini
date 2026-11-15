@@ -35,3 +35,11 @@ gergo, niente nomi di file se non servono.
 - **Indirizzi di studio:** sono tre. Enogastronomia (approfondimento Cucina oppure Prodotti
   dolciari / Pasticceria), Servizi di sala e vendita (bar, ristorazione, sala e banqueting),
   Accoglienza turistica (servizi di ospitalità, agenzie di viaggio, promozione del territorio).
+- **Movimento e audio (accessibilità, WCAG 2.1 AA, 2.2.2 e 1.4.2):** il sito deve restare a
+  norma. Nessun movimento che parte da solo e dura più di 5 secondi (animazioni CSS, scorrimenti
+  automatici, slideshow, zoom) senza un pulsante per fermarlo: le animazioni decorative si
+  limitano a pochi cicli (non `infinite`) oppure hanno il pulsante «Ferma le animazioni»;
+  gli slideshow automatici hanno «Metti in pausa» e non partono con «riduci movimento».
+  Nessun video o audio che parte da solo. Elementi decorativi mai dietro al testo. Le
+  didascalie che cambiano da sole non vanno in `aria-live`. Prima di pubblicare una pagina
+  nuova, controllare con `document.getAnimations()` che non restino animazioni infinite.

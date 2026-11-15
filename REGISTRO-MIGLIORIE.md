@@ -184,6 +184,9 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 
 ### Sito — altre migliorie del mese
 
+**Iscrizione**
+- *15 nov.* La pagina del modulo di domanda chiarisce che il modulo non è l'iscrizione alla scuola: chi esce dalla terza media si iscrive solo sulla Piattaforma Unica del Ministero (con il link). Il modulo di quest'anno serve per le richieste in corso d'anno: chi frequenta già l'Alberghiero, chi vi si trasferisce durante l'anno, chi frequenta un'altra scuola di Rieti. Chi arriva per il 2027/28 lo compilerà a luglio 2027.
+
 **Aula digitale**
 - *2 nov.* Supporti alla lettura per gli studenti, con pannello, profili e generatore di link; norme verificate sulle fonti.
 - *2 nov.* Visita guidata in 11 tappe, con la guida a sinistra e il sito vero a destra.

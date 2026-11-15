@@ -123,6 +123,10 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
   - i bottoni «Tour 360°» si chiamano «Tour virtuale», come la pagina;
   - SPID e PagoPA sono spiegati tra parentesi la prima volta che compaiono.
 - In «Come iscriversi» c'è il **codice della scuola da cercare sulla Piattaforma Unica: RIRH010007**.
+- **Ritocchi del 15 novembre** (PR da aprire):
+  - «Da scoprire» è un elenco di righe con icona, titolo, breve descrizione e freccia: una colonna sul telefono, due o tre sul computer, al posto dei riquadri bianchi.
+  - Il titolo è diventato «Dove vivrà tuo figlio, tua figlia».
+  - Sotto la scheda dello studio c'è la scritta visibile «Immagine illustrativa».
 
 **Grafica e telefono** (PR #196, #199, #200)
 - Home riordinata: «Chi sei, oggi?» compare subito.

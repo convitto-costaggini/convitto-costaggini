@@ -54,6 +54,7 @@
               <li><a href="solidarieta.html" data-page="solidarieta">La Solidarietà</a></li>
               <li><a href="biblioteca.html" data-page="biblioteca">La nostra Biblioteca</a></li>
               <li><a href="biblioteca.html#oltre-le-pagine">Oltre le pagine</a></li>
+            <li><a href="verde-lab.html" data-page="verde-lab">Verde Lab</a></li>
             </ul>
           </li>
           <li class="dd-sub" role="none">
@@ -165,6 +166,7 @@
         <li><a href="solidarieta.html">La Solidarietà</a></li>
         <li><a href="biblioteca.html">La nostra Biblioteca</a></li>
         <li><a href="biblioteca.html#oltre-le-pagine">Oltre le pagine</a></li>
+        <li><a href="verde-lab.html">Verde Lab</a></li>
         <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Rieti e riconoscimenti</li>
         <li><a href="rieti-libera-uscita.html">Rieti in libera uscita</a></li>
         <li><a href="premio-merito.html">Premio al Merito</a></li>

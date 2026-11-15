@@ -55,17 +55,43 @@ function inviaCodice_(email, codice, minuti) {
     'Convitto annesso all\'IPSSEOA "R. A. Costaggini" · Rieti\n' +
     'Messaggio automatico: non rispondere a questa email.';
   var html =
-    '<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#1a1a1a;max-width:520px">' +
-    '<p>Gentile genitore o tutore,</p>' +
-    '<p>il codice per completare l\'accesso all\'<strong>Area riservata famiglie</strong> è:</p>' +
-    '<p style="font-size:30px;font-weight:bold;letter-spacing:8px;color:#2C3E2D;margin:18px 0">' + codice + '</p>' +
-    '<p>Il codice vale <strong>' + minuti + ' minuti</strong> e può essere usato una sola volta. ' +
-    'Non lo comunichi a nessuno: il personale del Convitto non Le chiederà mai questo codice.</p>' +
-    '<p style="font-size:13px;color:#555">Se non ha appena tentato di accedere, ignori questo messaggio e, per sicurezza, ' +
-    'cambi la password con la funzione "Password dimenticata?" della pagina di accesso e ne dia notizia al Convitto ' +
+    '<!DOCTYPE html><html lang="it"><head><meta charset="utf-8">' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<meta name="x-apple-disable-message-reformatting">' +
+    '<meta name="color-scheme" content="light dark"><meta name="supported-color-schemes" content="light dark">' +
+    '<title>Codice di accesso</title>' +
+    '<style>body,table,td,a{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}' +
+    'body{margin:0;padding:0;width:100%!important}' +
+    '@media only screen and (max-width:480px){.pad{padding-left:20px!important;padding-right:20px!important}' +
+    '.cod{font-size:34px!important;letter-spacing:6px!important}}</style></head>' +
+    '<body style="margin:0;padding:0;background:#eeeae2">' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#eeeae2" style="background:#eeeae2"><tr>' +
+    '<td align="center" style="padding:16px 8px">' +
+    '<!--[if mso]><table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:560px;background:#ffffff;border-radius:10px;overflow:hidden">' +
+    '<tr><td class="pad" bgcolor="#2C3E2D" align="center" style="background:#2C3E2D;padding:26px 24px">' +
+    '<div style="font-family:Georgia,\'Times New Roman\',serif;font-size:24px;line-height:30px;color:#D4AA4A">Convitto &ldquo;Costaggini&rdquo;</div>' +
+    '<div style="font-family:Arial,sans-serif;font-size:12px;line-height:18px;color:#C9D3C5;margin-top:6px">IPSSEOA &ldquo;R. A. Costaggini&rdquo; &middot; Rieti</div>' +
+    '</td></tr>' +
+    '<tr><td class="pad" style="padding:28px 32px;font-family:Arial,\'Helvetica Neue\',sans-serif">' +
+    '<p style="font-size:17px;line-height:24px;color:#1a2e1b;margin:0 0 14px 0;font-weight:bold">Gentile genitore o tutore,</p>' +
+    '<p style="font-size:16px;line-height:25px;color:#333333;margin:0 0 20px 0">il codice per completare l&rsquo;accesso all&rsquo;<strong>Area riservata famiglie</strong> &egrave;:</p>' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f8f5ee" style="background:#f8f5ee;border:1px solid #d4aa4a;border-radius:8px"><tr>' +
+    '<td align="center" style="padding:18px 10px">' +
+    '<div class="cod" style="font-family:\'Courier New\',monospace;font-size:40px;line-height:48px;font-weight:bold;letter-spacing:8px;color:#2C3E2D">' + codice + '</div>' +
+    '</td></tr></table>' +
+    '<p style="font-size:16px;line-height:25px;color:#333333;margin:20px 0 0 0">Il codice vale <strong>' + minuti + ' minuti</strong> e pu&ograve; essere usato una sola volta. ' +
+    'Non lo comunichi a nessuno: il personale del Convitto non Le chieder&agrave; mai questo codice.</p>' +
+    '<p style="font-size:14px;line-height:22px;color:#555555;margin:18px 0 0 0">Se non ha appena tentato di accedere, ignori questo messaggio e, per sicurezza, ' +
+    'cambi la password con la funzione &ldquo;Password dimenticata?&rdquo; della pagina di accesso e ne dia notizia al Convitto ' +
     '(rirh010007@istruzione.it).</p>' +
-    '<p style="font-size:12px;color:#777;border-top:1px solid #ddd;padding-top:10px">Convitto annesso all\'IPSSEOA "R. A. Costaggini" · Rieti<br>' +
-    'Messaggio automatico: non rispondere a questa email.</p></div>';
+    '</td></tr>' +
+    '<tr><td class="pad" bgcolor="#f5f0e8" align="center" style="background:#f5f0e8;padding:16px 32px;border-top:1px solid #e8e0d0">' +
+    '<p style="font-family:Arial,sans-serif;font-size:12px;line-height:19px;color:#6f5f3f;margin:0">Convitto annesso all&rsquo;IPSSEOA &ldquo;R. A. Costaggini&rdquo; &middot; Rieti<br>' +
+    'Messaggio automatico: non rispondere a questa email.</p>' +
+    '</td></tr></table>' +
+    '<!--[if mso]></td></tr></table><![endif]-->' +
+    '</td></tr></table></body></html>';
   MailApp.sendEmail({
     to: email,
     subject: oggetto,

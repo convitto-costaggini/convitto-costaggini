@@ -113,6 +113,17 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - Le Domande frequenti si leggono anche senza JavaScript. Una copia semplice è scritta dentro le pagine e si aggiorna da sola a ogni modifica delle domande.
 - Senza JavaScript i blocchi che «compaiono scorrendo» restavano invisibili, da 8 a 10 per pagina tra home, Come iscriversi e Per i Genitori: ora si vedono.
 
+**Home più corta, parole più semplici, codice della scuola** (15 novembre, PR da aprire)
+- **Home riordinata:** sul telefono passa da circa 16 a circa 12 schermate, sul computer è di circa 7. Non si perde nulla.
+  - Subito dopo «Chi sei, oggi?» c'è «Dove vivrà tuo figlio»: la camera, la mensa e lo studio in evidenza, poi tutte le foto della galleria, con le stesse didascalie.
+  - Delle notizie restano quella in evidenza (la palestra), l'ultima pubblicata e «Dicono di noi».
+  - La storia, l'Aula digitale, la Valle Santa, il tour virtuale, l'Open Day, il Costaggini nel Mondo, gli ex convittori, la Trasparenza e la pagina Facebook sono raccolti in «Da scoprire», un clic più in là.
+- **Parole più semplici:**
+  - «Alumno / Alumna» e «community» diventano «Ex convittori» e «rete degli ex»;
+  - i bottoni «Tour 360°» si chiamano «Tour virtuale», come la pagina;
+  - SPID e PagoPA sono spiegati tra parentesi la prima volta che compaiono.
+- In «Come iscriversi» c'è il **codice della scuola da cercare sulla Piattaforma Unica: RIRH010007**.
+
 **Grafica e telefono** (PR #196, #199, #200)
 - Home riordinata: «Chi sei, oggi?» compare subito.
 - Su telefono, «Come iscriversi» è nella prima schermata.

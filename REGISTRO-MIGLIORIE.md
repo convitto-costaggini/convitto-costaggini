@@ -169,6 +169,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - *11 nov.* Laboratorio Musicale: galleria con le foto reali della sala prove.
 - *14 nov.* Tour virtuale: foto a 360° del Laboratorio Musicale, barra di caricamento con l'avanzamento reale, immagini non più deformate.
 - *14 nov.* Menu «Il Convitto» diviso in tre gruppi; barra del menu adattiva (completa, compatta o a tendina).
+- *15 nov.* Traduzione automatica delle pagine anche in cinese (semplificato), oltre a inglese, spagnolo, arabo e rumeno.
 
 **Ricerca su Google**
 - *6 nov.* 21 pagine di servizio escluse dai risultati di Google, ma presenti nella ricerca interna. I quiz di «Scopri il tuo talento» sono di nuovo indicizzati.

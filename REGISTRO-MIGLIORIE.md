@@ -105,7 +105,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - Nelle pagine dell'Aula con lo strumento «Aa Leggi a modo tuo» non compare più il secondo «Aa» del sito, che faceva doppio. La pagina dell'Aula per le famiglie, che non ha lo strumento dell'Aula, tiene l'«Aa» del sito.
 - Nella guida della formazione dei docenti è corretta l'indicazione su dove si trova il pulsante «Aa».
 
-**Aiuto per l'iscrizione e sito più solido** (15 novembre, PR da aprire)
+**Aiuto per l'iscrizione e sito più solido** (15 novembre, PR #210)
 - In «Come iscriversi», sotto la spiegazione dei due momenti, il Convitto offre aiuto per l'iscrizione online sulla Piattaforma Unica: telefono 0746 296862 o email convitto@alberghierorieti.it, con l'impegno a rispondere nel più breve tempo possibile.
 - La pagina dell'Aula digitale e la sezione dell'Aula in home dicono a chi serve: ai ragazzi per esercizi di lingue e ripasso; ai genitori basta la pagina per le famiglie, non c'è nulla da fare.
 - Se il menu del sito non si carica (connessione debole, telefono vecchio, script bloccato), in cima a ogni pagina compare una riga con i collegamenti essenziali: Home, Come iscriversi, Per i Genitori, Domande frequenti, Contatti.

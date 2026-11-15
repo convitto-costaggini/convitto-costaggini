@@ -127,7 +127,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
   - «Da scoprire» è un elenco di righe con icona, titolo, breve descrizione e freccia: una colonna sul telefono, due o tre sul computer, al posto dei riquadri bianchi.
   - Il titolo è diventato «Dove vivrà tuo figlio, tua figlia».
   - Sotto la scheda dello studio c'è la scritta visibile «Immagine illustrativa».
-- **Notizie in home** (15 novembre, PR da aprire): oltre a quella in evidenza, le notizie caricate sono due e stanno affiancate. Sul computer non resta più metà riga vuota accanto all'unica notizia; se un giorno ce ne fosse una sola, occuperebbe tutta la riga.
+- **Notizie in home** (15 novembre, PR #214): oltre a quella in evidenza, le notizie caricate sono due e stanno affiancate. Sul computer non resta più metà riga vuota accanto all'unica notizia; se un giorno ce ne fosse una sola, occuperebbe tutta la riga.
 
 **Grafica e telefono** (PR #196, #199, #200)
 - Home riordinata: «Chi sei, oggi?» compare subito.

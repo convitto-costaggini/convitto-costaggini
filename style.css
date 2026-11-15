@@ -788,3 +788,8 @@ a.nc:hover, a.article-card:hover, a.alumni-card:hover,
   .dd-sub:has(a.active) > .dd-sub-btn { box-shadow: inset 3px 0 0 var(--oro2); }
   .dd-sub-arrow { width: 18px; height: 18px; }
 }
+
+/* Riga di riserva: si vede solo se il menu del sito non si carica (script bloccato o connessione debole) */
+.nav-riserva{background:#2C3E2D;padding:.8rem 1rem;font:600 16px/1.9 "Source Sans 3",system-ui,sans-serif;color:#D4AA4A;text-align:center}.nav-riserva a{color:#fff;text-decoration:underline;margin:0 .35rem}.nav-ok .nav-riserva{display:none}
+/* Senza JavaScript (o se il menu non si carica) i blocchi che "compaiono scorrendo" restano visibili */
+html:not(.nav-ok) .rv{opacity:1!important;transform:none!important}

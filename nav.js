@@ -477,7 +477,7 @@
 
   /* ── TRADUZIONE — Google Translate widget ── */
   (function(){
-    const LANGS=[{code:'it',flag:'🇮🇹',name:'Italiano'},{code:'en',flag:'🇬🇧',name:'English'},{code:'es',flag:'🇪🇸',name:'Español'},{code:'ar',flag:'🇸🇦',name:'العربية'},{code:'ro',flag:'🇷🇴',name:'Română'}];
+    const LANGS=[{code:'it',flag:'🇮🇹',name:'Italiano'},{code:'en',flag:'🇬🇧',name:'English'},{code:'es',flag:'🇪🇸',name:'Español'},{code:'ar',flag:'🇸🇦',name:'العربية'},{code:'ro',flag:'🇷🇴',name:'Română'},{code:'zh-CN',short:'ZH',flag:'🇨🇳',name:'中文（简体）'}];
     const CSS=`
     /* Protegge footer e layout da Google Translate */
     .goog-te-banner-frame,.skiptranslate{display:none!important;}
@@ -560,7 +560,7 @@
       doSelectLang(l);
     }
     function doSelectLang(l){
-      btn.innerHTML='🌐 '+l.code.toUpperCase();
+      btn.innerHTML='🌐 '+(l.short||l.code.toUpperCase());
       fab.classList.toggle('act',l.code!=='it');
       menu.querySelectorAll('.tr-opt').forEach((o,i)=>o.classList.toggle('act',LANGS[i].code===l.code));
       if(l.code==='it'){
@@ -570,7 +570,7 @@
       }
       if(!document.getElementById('gt-div')){const d=document.createElement('div');d.id='gt-div';d.style.cssText='position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none';document.body.appendChild(d);}
       if(!document.getElementById('gt-sc')){
-        window.googleTranslateElementInit=function(){new google.translate.TranslateElement({pageLanguage:'it',includedLanguages:'en,es,ar,ro',autoDisplay:false},'gt-div');setTimeout(()=>applyLang(l.code),800);};
+        window.googleTranslateElementInit=function(){new google.translate.TranslateElement({pageLanguage:'it',includedLanguages:'en,es,ar,ro,zh-CN',autoDisplay:false},'gt-div');setTimeout(()=>applyLang(l.code),800);};
         const sc=document.createElement('script');sc.id='gt-sc';sc.src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';document.body.appendChild(sc);
       } else {setTimeout(()=>applyLang(l.code),300);}
     }

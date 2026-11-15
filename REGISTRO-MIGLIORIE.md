@@ -217,6 +217,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - *15 nov.* Traduzione automatica delle pagine anche in cinese (semplificato), oltre a inglese, spagnolo, arabo e rumeno (PR #208).
 - *15 nov.* Nuova pagina «Verde Lab» in «Attività e cultura»: le piante del Convitto affidate a piccoli gruppi di convittori, con testata floreale animata, slideshow di nove foto con schermo intero e le schede di cura delle piante.
 - *15 nov.* La pagina «Biblioteca e Lettura» ha una nuova testata illustrata (scaffali, lampade da lettura, un libro aperto da cui si levano pagine e lettere), nello stesso stile del Verde Lab, al posto della foto di sfondo.
+- *15 nov.* Verde Lab e Biblioteca e Lettura: pulsante «Ferma le animazioni» nella testata (ferma anche lo scorrimento automatico delle foto), animazioni già ferme per chi le ha disattivate nel dispositivo, pagine e lettere che non passano più dietro al testo, didascalie delle foto lette dagli screen reader solo quando si cambia foto a mano.
 
 **Ricerca su Google**
 - *6 nov.* 21 pagine di servizio escluse dai risultati di Google, ma presenti nella ricerca interna. I quiz di «Scopri il tuo talento» sono di nuovo indicizzati.

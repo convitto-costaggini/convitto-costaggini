@@ -48,6 +48,11 @@
 @keyframes vl-respiro{from{transform:scale(1)}to{transform:scale(1.04)}}
 @media (max-width:700px){.vl-hero{min-height:100svh}.vl-hero-body{padding-bottom:8rem}}
 
+.vl-stop{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.1rem;font-family:var(--fu);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.85);background:rgba(8,13,9,.45);backdrop-filter:blur(4px);border:1px solid rgba(212,170,74,.4);border-radius:40px;padding:.5rem 1rem;min-height:36px;cursor:pointer;transition:.25s}
+.vl-stop svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vl-stop:hover,.vl-stop:focus-visible{background:var(--oro2);color:var(--bosco);border-color:var(--oro2);outline:none}
+.animazioni-ferme .vl-hero-art img,.animazioni-ferme .vl-show.js .vl-card.on img,.animazioni-ferme .vl-card.on::after{animation:none!important}
+.animazioni-ferme .vl-polvere{display:none}
 /* ── Sezioni ───────────────────────────────── */
 .vl-sez{padding:4.5rem 0;position:relative}
 .vl-sez.chiara{background:var(--av)}
@@ -195,6 +200,7 @@
         <a href="#gesti">I gesti di ogni giorno</a>
         <a href="#una-pianta">Una pianta, un gruppo</a>
       </div>
+      <button type="button" class="vl-stop" aria-label="Ferma le animazioni della pagina"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg><span>Ferma le animazioni</span></button>
     </div>
   </section>
 
@@ -242,7 +248,7 @@
         </div>
       </div>
       <div class="vl-ui vl-foot">
-        <p class="vl-capt" aria-live="polite"></p>
+        <p class="vl-capt" aria-live="off"></p>
         <span class="vl-count"></span>
         <div class="vl-prog" aria-hidden="true"><i></i></div>
         <div class="vl-thumbs" role="group" aria-label="Scegli una foto"><button type="button" class="vl-th" data-i="0" aria-label="Foto 1: salotto piante"><img src="img/verde-lab/salotto-piante-mini.webp" alt="" width="360" height="480" loading="lazy"/></button><button type="button" class="vl-th" data-i="1" aria-label="Foto 2: sansevieria"><img src="img/verde-lab/sansevieria-mini.webp" alt="" width="360" height="480" loading="lazy"/></button><button type="button" class="vl-th" data-i="2" aria-label="Foto 3: scheda sansevieria"><img src="img/verde-lab/scheda-sansevieria-mini.webp" alt="" width="360" height="480" loading="lazy"/></button><button type="button" class="vl-th" data-i="3" aria-label="Foto 4: scheda ficus benjamin"><img src="img/verde-lab/scheda-ficus-benjamin-mini.webp" alt="" width="360" height="480" loading="lazy"/></button><button type="button" class="vl-th" data-i="4" aria-label="Foto 5: pothos"><img src="img/verde-lab/pothos-mini.webp" alt="" width="360" height="480" loading="lazy"/></button><button type="button" class="vl-th" data-i="5" aria-label="Foto 6: spatifillo zamioculcas"><img src="img/verde-lab/spatifillo-zamioculcas-mini.webp" alt="" width="360" height="480" loading="lazy"/></button><button type="button" class="vl-th" data-i="6" aria-label="Foto 7: violetta africana"><img src="img/verde-lab/violetta-africana-mini.webp" alt="" width="360" height="480" loading="lazy"/></button><button type="button" class="vl-th" data-i="7" aria-label="Foto 8: kalanchoe"><img src="img/verde-lab/kalanchoe-mini.webp" alt="" width="360" height="480" loading="lazy"/></button></div>
@@ -346,6 +352,7 @@
     i = (i + n) % n;
     var primo = capt.textContent === '';
     idx = i; disponi();
+    capt.setAttribute('aria-live', manuale ? 'polite' : 'off');
     capt.classList.add('via');
     setTimeout(function () { capt.textContent = FOTO[i].didascalia; capt.classList.remove('via'); }, primo || reduce ? 0 : 220);
     count.textContent = (i + 1) + ' / ' + n;
@@ -392,6 +399,7 @@
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (v) { visibile = v[0].isIntersecting; riparti(); }, { threshold: .3 }).observe(show);
   } else { visibile = true; }
+  document.addEventListener('animazioni', function (e) { if (e.detail.ferme) { inPausa = true; aggiornaPlay(); riparti(); } });
   aggiornaPlay(); mostra(0);
 
   /* le due schede si aprono a schermo intero */
@@ -400,6 +408,27 @@
     el.addEventListener('click', apri);
     el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); apri(); } });
   });
+})();
+
+(function () {
+  'use strict';
+  var root = document.documentElement, btn = document.querySelector('.vl-stop'), pic = document.querySelector('.vl-hero-art');
+  if (!btn) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function adatta(u, ferme) { return ferme ? u.replace(/(-fermo)?\.svg$/, '-fermo.svg') : u.replace(/-fermo\.svg$/, '.svg'); }
+  function imposta(ferme) {
+    root.classList.toggle('animazioni-ferme', ferme);
+    if (pic) {
+      [].forEach.call(pic.querySelectorAll('source'), function (s) { s.setAttribute('srcset', adatta(s.getAttribute('srcset'), ferme)); });
+      var im = pic.querySelector('img'); if (im) im.setAttribute('src', adatta(im.getAttribute('src'), ferme));
+    }
+    btn.querySelector('span').textContent = ferme ? 'Riattiva le animazioni' : 'Ferma le animazioni';
+    btn.setAttribute('aria-label', ferme ? 'Riattiva le animazioni della pagina' : 'Ferma le animazioni della pagina');
+    btn.querySelector('path').setAttribute('d', ferme ? 'M8 5l11 7-11 7z' : 'M8 5v14M16 5v14');
+    document.dispatchEvent(new CustomEvent('animazioni', { detail: { ferme: ferme } }));
+  }
+  btn.addEventListener('click', function () { imposta(!root.classList.contains('animazioni-ferme')); });
+  if (reduce) imposta(true);
 })();
 </script>
 </body>

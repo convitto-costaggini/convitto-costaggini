@@ -113,7 +113,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 - Le Domande frequenti si leggono anche senza JavaScript. Una copia semplice è scritta dentro le pagine e si aggiorna da sola a ogni modifica delle domande.
 - Senza JavaScript i blocchi che «compaiono scorrendo» restavano invisibili, da 8 a 10 per pagina tra home, Come iscriversi e Per i Genitori: ora si vedono.
 
-**Home più corta, parole più semplici, codice della scuola** (15 novembre, PR da aprire)
+**Home più corta, parole più semplici, codice della scuola** (15 novembre, PR #211)
 - **Home riordinata:** sul telefono passa da circa 16 a circa 12 schermate, sul computer è di circa 7. Non si perde nulla.
   - Subito dopo «Chi sei, oggi?» c'è «Dove vivrà tuo figlio»: la camera, la mensa e lo studio in evidenza, poi tutte le foto della galleria, con le stesse didascalie.
   - Delle notizie restano quella in evidenza (la palestra), l'ultima pubblicata e «Dicono di noi».

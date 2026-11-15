@@ -14,7 +14,7 @@ dei commit, per ritrovare il dettaglio su GitHub.
 
 ---
 
-## In attesa di pubblicazione (aggiornato al 14/11/2026)
+## In attesa di pubblicazione (aggiornato al 15/11/2026)
 
 Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel mese giusto.
 
@@ -23,6 +23,24 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 | **Togliere il reCAPTCHA di Google** dai sei moduli del sito. L'antispam diventa solo interno: tempo minimo di compilazione, limiti di invio, campo invisibile. Cookie policy e informativa vengono aggiornate. | Pronto: PR #202 (bozza). La vecchia versione, PR #174, è stata chiusa il 14/11. | Dal 18/11. Prima vanno pubblicate le due funzioni Supabase (`richiesta-accesso`, `iscrizione-alumni`) e va modificato il `doPost` del gestionale in Apps Script. |
 | **Trofei e classifiche, vista personale**: ogni convittore vede solo il proprio punteggio (approvata dalla DPO il 7/10). | Pronto (PR #17, contenuto anche nel commit `74036d3`). | Modifica del Regolamento del Premio da parte del Consiglio di Istituto, poi aggiornamento del gestionale. |
 | **Progetto lettura 2026/27** («Oltre le pagine» del nuovo anno). | La pagina racconta il progetto 2025/26. | La documentazione del progetto di quest'anno. |
+| **Due misure di sicurezza**: la politica di sicurezza dei contenuti (Content Security Policy), cioè le regole che dicono al browser da quali siti ogni pagina può caricare codice e a quali può mandare dati, e il file `security.txt`, con l'indirizzo del Convitto per segnalare vulnerabilità. Decise il 15/11. | Da preparare. La bozza della mail informativa è nella sezione qui sotto. | Dopo il 18/11, quando il reCAPTCHA sarà stato tolto. **Prima va mandata la mail informativa alla Dirigente e alla DPO dalla casella del Convitto**: è una comunicazione, non serve attendere una risposta. Promemoria programmato per il 18/11. |
+
+**Bozza della mail sulla sicurezza** (da mandare dalla casella del Convitto prima di attivare le due misure; al posto di [data] va il giorno di attivazione)
+
+> **Oggetto:** Sito del Convitto: due nuove misure di sicurezza (comunicazione)
+>
+> Gentile Dirigente, gentile DPO,
+>
+> vi informo che dal [data] sul sito del Convitto saranno attive due misure tecniche di sicurezza:
+>
+> 1. **Politica di sicurezza dei contenuti** (Content Security Policy): un'istruzione presente in ogni pagina che indica al browser da quali siti la pagina può caricare codice e verso quali può inviare dati. Sono ammessi solo il sito stesso e i servizi già in uso: Supabase (Area famiglie e notizie), Google Apps Script (moduli), Vimeo (video) e la traduzione automatica a richiesta. Se venisse inserito uno script estraneo, il browser lo bloccherebbe.
+> 2. **File «security.txt»**: indica a chi individua una vulnerabilità l'indirizzo a cui segnalarla, convitto@alberghierorieti.it.
+>
+> Le misure non cambiano i dati trattati, le finalità né i fornitori, e non hanno costi. Servono a ridurre il rischio di caricamenti o invii di dati non autorizzati, nello spirito dell'art. 32 del GDPR.
+>
+> La presente è a titolo informativo. Resto a disposizione per qualsiasi chiarimento.
+>
+> Cordiali saluti
 
 **Esclusi** (decisione del 14/11)
 - **Lingue: cliente virtuale**: prototipo del 12/10 in cui un'IA recitava un cliente straniero. È escluso perché usa un servizio di IA a pagamento, e manderebbe a un fornitore esterno le frasi degli studenti. Resta archiviato nel branch `lingue-cliente-virtuale`, non pubblicato.

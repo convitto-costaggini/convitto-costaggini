@@ -261,6 +261,10 @@ I progetti Apps Script del Convitto sono quattro:
 | 6 nov. | Pagina dei consensi | Versione 1.5: per il personale il ruolo si sceglie da un elenco, con le figure apicali in cima e «Altro»; per le Voci, oltre ai numeri da 1 a 10, c'è l'opzione «Tutte le domande». | dedotta (come sopra) |
 | 6 nov. | Pagina dei consensi | Accesso con la casella email istituzionale e un codice di verifica, al posto dell'account Google; comunicato alla DPO il 6/11. | dedotta |
 | 13 nov. | Posta dei codici | Solo il commento iniziale aggiornato (riferimento alla funzione `lingue-accesso`, eliminata): nessuna nuova pubblicazione necessaria. | certa |
+| 15 nov. | Gestionale | Email con le credenziali inviata alle famiglie: ora si legge bene sullo smartphone (si adatta alla larghezza dello schermo, testi più grandi, password e indirizzo che vanno a capo). Il pulsante porta al sito attuale (`convitto.alberghierorieti.edu.it`) e non più al vecchio indirizzo `github.io`. Pubblicata come versione 268 sullo stesso indirizzo; provata con un invio di prova. | certa (provata il 15/11) |
+| 15 nov. | Codici OTP dell'Area famiglie | Email con il codice di 6 cifre: stessa sistemazione per smartphone, codice molto grande al centro, testi invariati. Pubblicata come versione 2 sullo stesso indirizzo. Provata su Gmail personale; sulla casella della scuola si apriva ingrandita, da riguardare con un codice vero. | certa (pubblicata), resa visiva da riguardare |
+
+**Supabase (15 nov.):** email di recupero della password dell'Area famiglie rifatta per lo smartphone (si adatta allo schermo, pulsante a tutta larghezza, testo leggibile, collegamento di riserva). Modificata dal pannello di Supabase e verificata dopo il salvataggio.
 
 Nessuna traccia di modifiche al **gestionale principale** a novembre.
 
@@ -269,7 +273,7 @@ Nessuna traccia di modifiche al **gestionale principale** a novembre.
 - `crea-account-famiglia`: crea gli account delle famiglie, versione 15 del 31/8.
 
 **Da verificare nel gestionale** (indicazioni di ottobre senza prova di esecuzione):
-- Testo dell'email con le credenziali delle famiglie (`creaAccountEInvia`): aggiungere «A ogni accesso, dopo la password, riceverà via email un codice di verifica di 6 cifre».
+- Testo dell'email con le credenziali delle famiglie (`creaAccountEInvia`): verificato il 15/11, la frase sul codice di verifica di 6 cifre c'è già e resta nella nuova versione.
 - Facoltativo: in `_verificaAdminSupabase_`, pretendere anche il secondo passaggio (`aal2`) per le azioni dell'amministratore.
 - Trofei e classifiche: la «vista personale» richiede un aggiornamento del gestionale. La pagina è sospesa in attesa della modifica del Regolamento del Premio da parte del Consiglio di Istituto.
 

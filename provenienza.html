@@ -53,7 +53,7 @@
       <div style="margin:1rem 0">
         <p class="lbl">Mappa interattiva</p>
         <h2 style="margin-bottom:1rem">Le province di <em>provenienza</em></h2>
-        <div id="pv-map" role="img" aria-label="Mappa interattiva province di provenienza"></div>
+        <div id="pv-map" role="region" aria-label="Mappa interattiva province di provenienza"></div>
       </div>
 
       <!-- Lista ordinata -->
@@ -69,7 +69,7 @@
   <!-- ─ VEDI ANCHE (le due mappe) ─ -->
   <section style="background:var(--av);padding:3rem 1.25rem">
     <div class="w" style="max-width:760px;margin:0 auto">
-      <p style="font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);text-align:center;margin:0 0 1.5rem">Vedi anche</p>
+      <p style="font-family:var(--fu);font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro-txt);text-align:center;margin:0 0 1.5rem">Vedi anche</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem">
         <a href="mondo.html" style="display:block;background:#fff;border:1px solid var(--av2);border-radius:10px;padding:1.25rem 1.4rem;text-decoration:none;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 20px rgba(44,62,45,.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
           <div style="font-family:var(--fd);font-size:1.15rem;color:var(--bosco);margin-bottom:.25rem">Il Costaggini nel Mondo &rarr;</div>
@@ -160,16 +160,18 @@ L.circleMarker([42.404, 12.857], {
 // Segna le province di provenienza
 DATI.forEach(d => {
   if (d.sigla === 'RI') return;
-  const size = 8 + Math.round(d.n / max * 16);
+  const size = 12 + Math.round(d.n / max * 16);
   const icon = L.divIcon({
     className: '',
     html: `<div class="pv-marker" style="width:${size*2}px;height:${size*2}px;border-radius:50%;background:#2C3E2D;border:2px solid #B8922A;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Source Sans 3',sans-serif;font-size:${Math.max(9,size-2)}px;font-weight:800;box-shadow:0 2px 8px rgba(0,0,0,.3)">${d.n}</div>`,
     iconSize: [size*2, size*2],
     iconAnchor: [size, size],
   });
-  L.marker([d.lat, d.lng], { icon })
-    .addTo(map)
-    .bindPopup(`<strong>${d.nome} (${d.sigla})</strong><br>${d.n} convittor${d.n===1?'e':'i'}`);
+  const nomeMarker = d.nome + ' (' + d.sigla + '): ' + d.n + ' convittor' + (d.n===1?'e':'i');
+  const mk = L.marker([d.lat, d.lng], { icon, title: nomeMarker })
+    .addTo(map);
+  if (mk.getElement()) mk.getElement().setAttribute('aria-label', nomeMarker);
+  mk.bindPopup(`<strong>${d.nome} (${d.sigla})</strong><br>${d.n} convittor${d.n===1?'e':'i'}`);
 });
 </script>
 </body>

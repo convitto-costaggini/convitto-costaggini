@@ -18,7 +18,7 @@
 #sup-pann h3{font:800 12px/1.2 'Atkinson Hyperlegible',Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a6c14;margin:16px 0 6px}
 #sup-pann .sup-riga{display:flex;align-items:center;justify-content:space-between;gap:.8rem;min-height:46px;padding:4px 0;border-bottom:1px dashed #EDE5D4}
 #sup-pann .sup-riga>span{flex:1;font-size:16px}
-#sup-pann .sup-riga small{display:block;font-size:13px;color:#4A4840;line-height:1.35}
+#sup-pann .sup-riga small{display:block;font-size:13px;color:#acaba7;line-height:1.35}
 #sup-pann .sup-tasto{position:relative;flex:0 0 auto;min-width:58px;min-height:36px;border-radius:99px;border:2px solid #8f8f8f;background:#fff;color:#1A1A18;font:800 14px 'Atkinson Hyperlegible',Arial,sans-serif;cursor:pointer;padding:0 .8rem}
 #sup-pann .sup-tasto[aria-pressed="true"]{background:#2C3E2D;border-color:#2C3E2D;color:#fff}
 #sup-pann .sup-scelte{display:flex;flex-wrap:wrap;gap:.45rem;margin:4px 0 2px}
@@ -28,7 +28,7 @@
 #sup-pann .sup-az{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:12px}
 #sup-pann .sup-az button{min-height:44px;padding:0 1rem;border-radius:12px;border:2px solid #2C3E2D;background:#fff;color:#2C3E2D;font:800 15px 'Atkinson Hyperlegible',Arial,sans-serif;cursor:pointer}
 #sup-pann .sup-az .pieno{background:#2C3E2D;color:#fff}
-#sup-pann .sup-nota{font-size:13px;color:#4A4840;margin:12px 0 0;line-height:1.45}
+#sup-pann .sup-nota{font-size:13px;color:#acaba7;margin:12px 0 0;line-height:1.45}
 #sup-toast{position:fixed;left:50%;bottom:5.2rem;transform:translateX(-50%);z-index:2147483200;background:#2C3E2D;color:#fff;padding:.7rem 1.1rem;border-radius:14px;font:800 15px/1.35 'Atkinson Hyperlegible',Arial,sans-serif;max-width:min(92vw,420px);text-align:center;pointer-events:none}
 #sup-toast[hidden]{display:none}
 

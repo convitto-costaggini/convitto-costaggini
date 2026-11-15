@@ -6,7 +6,7 @@
   --bosco:  #2C3E2D;
   --bosco2: #3D5C3E;
   --bosco3: #4A6E4B;
-  --oro:    #B8922A;
+  --oro:    #B8922A;--oro-txt:#745807;
   --oro2:   #D4AA4A;
   --oro3:   #EDD98A;
   --av:     #F5F0E8;
@@ -222,7 +222,7 @@ a { color: inherit; }
 }
 .breadcrumb > * { white-space: nowrap; }
 .page-hero .breadcrumb a, .breadcrumb a { color: #D4AA4A; text-decoration: none; }
-.page-hero .breadcrumb span, .breadcrumb span { color: rgba(245,240,232,.60); }
+.page-hero .breadcrumb span, .breadcrumb span { color:rgba(245,240,232,.65); }
 .page-hero h1 {
   font-family: var(--fd); font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 300; color: #fff; line-height: 1.1; margin-bottom: .7rem;
@@ -361,7 +361,7 @@ p:last-child { margin-bottom: 0; }
    FOOTER
 ═══════════════════════════════════════════════════ */
 footer {
-  background: #0F1410; color: rgba(245,240,232,.58);
+  background: #0F1410; color:rgba(245,240,232,.65);
   padding: 2.5rem 1rem 1.25rem;
 }
 .fw { max-width: 1320px; margin: 0 auto; }

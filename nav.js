@@ -493,7 +493,7 @@
 #tr-fab.act{background:linear-gradient(135deg,#B8922A,#9a7a1f)!important;border-color:#EDD98A!important;}`;
     const st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);
 
-    const btn=document.createElement('button');btn.id='tr-btn';btn.setAttribute('aria-label','Cambia lingua');btn.innerHTML='🌐 IT';document.body.appendChild(btn);
+    const btn=document.createElement('button');btn.id='tr-btn';btn.setAttribute('aria-label','IT, cambia lingua');btn.innerHTML='🌐 IT';document.body.appendChild(btn);
     const menu=document.createElement('div');menu.id='tr-menu';menu.setAttribute('role','menu');
     LANGS.forEach(l=>{
       const o=document.createElement('div');o.className='tr-opt'+(l.code==='it'?' act':'');o.setAttribute('role','menuitem');
@@ -560,7 +560,7 @@
       doSelectLang(l);
     }
     function doSelectLang(l){
-      btn.innerHTML='🌐 '+(l.short||l.code.toUpperCase());
+      btn.innerHTML='🌐 '+(l.short||l.code.toUpperCase());btn.setAttribute('aria-label',(l.short||l.code.toUpperCase())+', cambia lingua');
       fab.classList.toggle('act',l.code!=='it');
       menu.querySelectorAll('.tr-opt').forEach((o,i)=>o.classList.toggle('act',LANGS[i].code===l.code));
       if(l.code==='it'){

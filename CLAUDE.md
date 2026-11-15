@@ -43,3 +43,4 @@ gergo, niente nomi di file se non servono.
   Nessun video o audio che parte da solo. Elementi decorativi mai dietro al testo. Le
   didascalie che cambiano da sole non vanno in `aria-live`. Prima di pubblicare una pagina
   nuova, controllare con `document.getAnimations()` che non restino animazioni infinite.
+- **Accessibilità, controllo prima di pubblicare:** il testo oro su fondo chiaro usa `var(--oro-txt)` (non `--oro`, che resta per bordi e sfondi); sui fondi scuri `--oro2` o `--oro3`. Testi secondari: mai opacità o trasparenze che portino il contrasto sotto 4,5:1. Ogni campo di modulo ha `<label for>` collegata a un `id`; pulsanti e pallini almeno 24x24 px di area di tocco; `aria-label` che contenga il testo visibile. Eseguire axe-core (npm i axe-core, Playwright) sulla pagina nuova o modificata.

@@ -231,4 +231,6 @@
 </nav>`;
 
   document.currentScript.insertAdjacentHTML('afterend', headerHTML);
+  // menu caricato: la riga di riserva (.nav-riserva) non serve più
+  document.documentElement.classList.add('nav-ok');
 })();

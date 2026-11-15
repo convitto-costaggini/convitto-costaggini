@@ -18,7 +18,9 @@ gergo, niente nomi di file se non servono.
 
 - I fatti che cambiano ogni anno (retta, quota, scadenza, anno scolastico) hanno
   come fonte `ammissione.html`; `node scripts/check-consistency.js` deve passare.
-- Le domande frequenti stanno solo in `faq.js`: le pagine le leggono da lì.
+- Le domande frequenti stanno solo in `faq.js`: le pagine le leggono da lì. La copia statica
+  dentro le pagine (tra `<!--faq-statiche-->` e `<!--/faq-statiche-->`, per chi è senza JavaScript)
+  si rigenera da sola con `scripts/build-faq-static.js`: non si modifica a mano.
 - Il sito carica `nav.min.js`, `nav-header.min.js` e `style.min.css`: ogni
   modifica ai sorgenti va riportata anche nei file `.min`.
 

@@ -1,0 +1,51 @@
+name: Aggiorna copia statica delle Domande frequenti
+
+# Le domande stanno solo in faq.js. A ogni modifica su main questo workflow
+# riscrive la copia statica dentro le pagine (leggibile anche senza JavaScript),
+# con scripts/build-faq-static.js. Stesso schema di update-kb-index.yml.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'faq.js'
+      - '*.html'
+      - 'scripts/build-faq-static.js'
+
+permissions:
+  contents: write
+
+jobs:
+  update-faq-static:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Rigenera la copia statica dalle domande di faq.js
+        run: node scripts/build-faq-static.js
+
+      - name: Commit ed eventuale push, solo se qualcosa è cambiato
+        run: |
+          if git diff --quiet -- '*.html'; then
+            echo "Copie statiche già allineate, niente da committare."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html'
+          git commit -m "chore: aggiorna automaticamente le domande frequenti statiche [skip ci]"
+          for tentativo in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "Push rifiutato (tentativo $tentativo): riprendo l'ultima versione di main e riprovo."
+            git pull --rebase origin main
+            node scripts/build-faq-static.js
+            git add -- '*.html'
+            git commit -m "chore: aggiorna automaticamente le domande frequenti statiche [skip ci]" || true
+          done
+          echo "Push non riuscito dopo 3 tentativi."
+          exit 1

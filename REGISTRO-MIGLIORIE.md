@@ -34,6 +34,7 @@ Lavori pronti o quasi, non ancora online. Quando vanno online si spostano nel me
 
 ### In sintesi
 
+- **Il sito parla anche cinese.** Le pagine si possono tradurre automaticamente in cinese (semplificato), oltre che in inglese, spagnolo, arabo e rumeno. È un modo concreto per far sentire accolti convittori e famiglie di lingua cinese (15 novembre, PR #208).
 - **Il sito è più chiaro per le famiglie.** È stato rivisto quattro volte con gli occhi di due genitori, uno poco pratico del web e uno esperto. Ne sono usciti:
   - l'iscrizione spiegata in due passaggi;
   - le pagine doppie unificate;

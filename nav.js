@@ -413,7 +413,7 @@
       style.textContent = `
         .sec-nav-arrow {
           position: absolute;
-          bottom: 1rem;
+          bottom: .5rem;
           left: 50%;
           transform: translateX(-50%);
           width: 48px; height: 48px;
@@ -446,8 +446,10 @@
       // Aggiunge freccia a ogni sezione tranne l'ultima
       sections.forEach((sec, i) => {
         if (i > 0) return; // solo la prima freccia (dall'intestazione alla prima sezione): le altre affollavano la pagina
-        const pos = getComputedStyle(sec).position;
-        if (pos === 'static') sec.style.position = 'relative';
+        const cs = getComputedStyle(sec);
+        if (cs.position === 'static') sec.style.position = 'relative';
+        // Riserva sotto il testo lo spazio della freccia (.5rem + 48px + margine), così non copre mai il contenuto
+        if ((parseFloat(cs.paddingBottom) || 0) < 68) sec.style.paddingBottom = '68px';
 
         const arrow = document.createElement('button');
         arrow.className = 'sec-nav-arrow';
@@ -464,6 +466,24 @@
         });
 
         sec.appendChild(arrow);
+
+        // Controllo sul testo reale: se la freccia sale sopra l'ultimo contenuto (caratteri ingranditi,
+        // font caricato dopo, schermo stretto) si aggiunge lo spazio che manca, senza coprire nulla.
+        const lascia = () => {
+          let fondo = 0;
+          Array.prototype.forEach.call(sec.children, (c) => {
+            if (c === arrow || getComputedStyle(c).position === 'absolute') return; // sfondi e decorazioni non contano
+            const r = c.getBoundingClientRect();
+            if (r.height > 0) fondo = Math.max(fondo, r.bottom);
+          });
+          if (!fondo) return;
+          const manca = fondo + 12 - arrow.getBoundingClientRect().top;
+          if (manca > 0) sec.style.paddingBottom = (parseFloat(getComputedStyle(sec).paddingBottom) + Math.ceil(manca)) + 'px';
+        };
+        lascia();
+        window.addEventListener('load', lascia);
+        window.addEventListener('resize', lascia, { passive: true });
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(lascia);
       });
     }
 

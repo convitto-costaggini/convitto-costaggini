@@ -98,6 +98,8 @@ const SEMPRE_NELLA_RICERCA = [
   'autorizzazioni-semiconvitto.html',
   'autorizzazioni.html',
   'cookie-policy.html',
+  'consensi.html',
+  'informativa-aula.html',
   'informativa-area-famiglie.html',
   'informativa-immagini-convittori.html',
   'informativa-immagini-personale.html',

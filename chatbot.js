@@ -196,7 +196,7 @@ const KB=[
   // ── STRANIERI E LINGUE ──
   {k:['straniero','altra nazionalità','non parlo italiano','traduzione','arabo','romeno',
       'inglese','spagnolo','altra lingua','cinque lingue','lingue','lingue parlate','in che lingue'],
-   r:'Il sito è disponibile in <strong>5 lingue</strong>: italiano, inglese, spagnolo, arabo, romeno. Usa il selettore in basso a sinistra.<br><br>✉️ Per assistenza nella tua lingua: <a href="contatti.html">Contattaci →</a>'},
+   r:'Il sito è disponibile in <strong>5 lingue</strong>: italiano, inglese, spagnolo, arabo, romeno. Usa il selettore in basso a sinistra. Per <em>imparare</em> le lingue c\'è l\'<a href="aula/lingue/">Aula digitale →</a><br><br>✉️ Per assistenza nella tua lingua: <a href="contatti.html">Contattaci →</a>'},
   // ── FARMACI ──
   {k:['farmaci','medicine','terapia','somministrazione farmaci','medicinale',
       'chi somministra','prendere farmaci','pillole'],
@@ -221,6 +221,19 @@ const KB=[
   {k:['ptof','progetto educativo','piano offerta formativa','filosofia','metodo',
       'mission','obiettivi','valori','come educate','stile educativo'],
    r:'Il progetto educativo del Convitto mira alla crescita umana, civile e culturale dei ragazzi — in coordinamento con i docenti dell\'Istituto.<br><br>📖 <a href="ptof-guida.html">Il PTOF spiegato →</a> · <a href="il-convitto.html#mission">Missione e valori →</a>'},
+  // ── AULA DIGITALE (lingue e sala studio) ──
+  {k:['aula digitale','aula','lingue dell alberghiero','vocabolario di sala','vocabolario','sala studio','lezioni interattive',
+      'imparare le lingue','imparare l inglese','esercizi di inglese','francese','giochi di lingue','studiare con il telefono','codice qr'],
+   r:'L\'<strong>Aula digitale</strong> è un insieme di strumenti web per studiare: <em>Le lingue dell\'Alberghiero</em> (vocabolario di sala, cucina, pasticceria, accoglienza e bar in inglese, francese e spagnolo, con lezioni, esercizi e giochi) e la <em>Sala studio</em> (lezioni interattive con ripasso e verifiche). Gli studenti aprono un link o un codice QR: <strong>nessuna registrazione, nessun account</strong>, nessun dato personale raccolto. È in fase di sperimentazione.<br><br>📚 <a href="aula/famiglie/">Aula per le famiglie →</a> · <a href="aula/">Entra nell\'Aula →</a>'},
+  // ── VERDE LAB ──
+  {k:['verde lab','piante del convitto','cura delle piante','sansevieria','pothos','ficus','sostenibilità','riciclo','raccolta differenziata','laboratorio verde'],
+   r:'Il <strong>Verde Lab</strong> raccoglie le piante degli spazi comuni, affidate alle ragazze e ai ragazzi: ogni pianta ha il suo cartellino e la sua scheda di cura (annaffiature, luce, pulizia), in un laboratorio quotidiano di cura, creatività e rispetto per l\'ambiente.<br><br>🌿 <a href="verde-lab.html">Verde Lab →</a>'},
+  // ── BIBLIOTECA ──
+  {k:['biblioteca','progetto lettura','prestito libri','prestito dei libri','leggere libri','caviardage','debate','incontri con gli autori','libri da leggere'],
+   r:'La <strong>biblioteca</strong> del Convitto e il <strong>Progetto Lettura</strong> comprendono prestito dei libri, letture condivise, caviardage, debate e incontri con autori, poesia, teatro e arte nei luoghi di cultura di Rieti.<br><br>📖 <a href="biblioteca.html">Biblioteca e Lettura →</a>'},
+  // ── CONSENSI E LIBERATORIE ──
+  {k:['consenso','consensi','consensi online','liberatoria','liberatorie','autorizzazione foto','foto e video','consenso foto','revocare il consenso','premiati'],
+   r:'Il personale e i convittori <strong>maggiorenni</strong> possono dare o revocare i consensi (immagini e video, Voci, Premio al Merito) online, con l\'email della scuola e un codice di 6 cifre. Per i <strong>minorenni</strong> serve il modulo cartaceo firmato da entrambi i genitori o dal tutore.<br><br>✅ <a href="consensi.html">Consensi online →</a> · <a href="privacy-moduli.html">Informative e moduli →</a>'},
   // ── PRIVACY, TRASPARENZA E ACCESSIBILITÀ ──
   {k:['privacy','trasparenza','accessibilità','dati personali','gdpr','cookie','informativa privacy',
       'agid','conformità','trattamento dati','protezione dati','dpo','responsabile protezione dati'],
@@ -343,7 +356,7 @@ function normalize(q){
   }
   return s.replace(/\s+/g,' ').trim();
 }
-const SHORT_OK=new Set(['dove','wifi','dsa','bes','ciao','cena','sede','pdf','pec','menu','menù','tour','quiz','isee','h24','via','gps','rate','ptof']);
+const SHORT_OK=new Set(['aula','dove','wifi','dsa','bes','ciao','cena','sede','pdf','pec','menu','menù','tour','quiz','isee','h24','via','gps','rate','ptof']);
 function keywordMatches(norm,kn){
   if(!kn) return false;
   if(!(kn.length>4||SHORT_OK.has(kn))) return false;

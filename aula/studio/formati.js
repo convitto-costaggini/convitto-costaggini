@@ -8,6 +8,10 @@
    FORMATI.caccia(lezione, el)   🔍 Caccia all'errore: il riassunto di un compagno distratto, da correggere
    FORMATI.intervista(lezione, el) 🎭 Intervista impossibile: l'ospite risponde, tu scegli la risposta vera
    FORMATI.minuto(lezione, el)   ⚡ Il minuto: quante risposte giuste in 60 (o 90) secondi
+   FORMATI.memory(lezione, el)   🃏 Memory: le carte coperte, si cercano le coppie (nessun timer)
+   FORMATI.detective(lezione, el) 🕵️ Il detective: indizi uno alla volta, chi riconosce l'idea prima prende più punti
+   FORMATI.sicuro(lezione, el)   🎲 Quanto sei sicuro?: rispondi e scommetti; alla fine le «false certezze»
+   FORMATI.parola(lezione, el)   🔤 Indovina la parola: dalla definizione, una lettera alla volta
    Usa gli aiutanti di STUDIO (aula/studio/studio.js).
    ════════════════════════════════════════════════════════ */
 window.FORMATI = (function () {
@@ -732,5 +736,325 @@ window.FORMATI = (function () {
     }
   }
 
-  return { escape: escape, mappa: function (L, R) { mappa(L, R, 1); }, squadre: squadre, caccia: caccia, intervista: intervista, minuto: minuto };
+  /* il pulsante 🔊 dei nuovi formati: si accende e si spegne con lo stesso tocco */
+  function cablaVoci(box) { box.querySelectorAll('[data-leggi]').forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); S.leggi(b.getAttribute('data-leggi'), b); }; }); }
+  function poco(R, t) { R.innerHTML = '<div class="st-palco"><div class="st-card">' + esc(t) + '</div></div>'; }
+  function rx(t) { return String(t).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  /* ═══════════════ 🃏 MEMORY ═══════════════ */
+  /* Le carte sono coperte: se ne girano due alla volta e si cercano le coppie.
+     Nessun timer: le due carte sbagliate restano scoperte finché non si tocca la carta dopo. */
+  function memory(L, R) {
+    var coppie = arr(L.abbina).filter(function (c) { return c.sinistra && c.destra; }).map(function (c) { return [c.sinistra, c.destra]; });
+    if (coppie.length < 4) coppie = arr(L.parole).filter(function (p) { return p.termine && p.definizione; }).map(function (p) { return [p.termine, p.definizione]; });
+    if (coppie.length < 4) coppie = arr(L.flashcard).filter(function (f) { return f.fronte && f.retro && String(f.retro).length < 90; }).map(function (f) { return [f.fronte, f.retro]; });
+    if (coppie.length < 3) return poco(R, 'Questa lezione non ha abbastanza coppie per il memory.');
+    R.innerHTML = '<div class="st-palco">' + comeFunziona('🃏', 'Memory', 'Le carte sono coperte. Ogni carta ha la sua compagna: trova tutte le coppie di <b>' + esc(L.titolo) + '</b>.', [
+      'Tocca <b>due carte</b>: si girano e leggi cosa c\'è scritto.',
+      'Le carte <b>oro</b> vanno con le carte <b>verdi</b>. Se stanno insieme restano scoperte; se no, si ricoprono quando tocchi la carta dopo.',
+      'Nessun timer: conta solo <b>ricordare dove sono</b>. Meno tentativi fai, meglio è.'
+    ], 'Scegli quante coppie ↓') + '<div class="st-azioni" style="justify-content:center" id="fm-quante" hidden>' +
+      [4, 6, 8].filter(function (x, i) { return !i || x <= coppie.length; }).map(function (x, i) { return '<button type="button" class="st-btn' + (i ? '' : ' oro') + '" data-q="' + x + '">' + ['🌱', '🌿', '🌳'][i] + ' ' + Math.min(x, coppie.length) + ' coppie</button>'; }).join('') + '</div></div>';
+    R.querySelector('.fm-via').onclick = function () { R.querySelector('#fm-quante').hidden = false; this.parentNode.remove(); R.querySelector('[data-q]').focus(); };
+    R.querySelectorAll('[data-q]').forEach(function (b) { b.onclick = function () { via(Math.min(+b.getAttribute('data-q'), coppie.length)); }; });
+    function via(n) {
+      var scelte = mescola(coppie).slice(0, n), carte = [];
+      scelte.forEach(function (c, i) { carte.push({ p: i, lato: 'a', t: c[0] }, { p: i, lato: 'b', t: c[1] }); });
+      carte = mescola(carte);
+      var su = [], trovate = 0, tentativi = 0, msg = '';
+      function disegna() {
+        R.innerHTML = '<div class="st-palco"><h2>🃏 Memory</h2><p class="st-sot">Coppie trovate: <b>' + trovate + ' di ' + n + '</b> · Tentativi: <b>' + tentativi + '</b></p>' +
+          '<div class="fm-memory" role="group" aria-label="Le carte">' + carte.map(function (c, k) {
+            var vis = c.ok || su.indexOf(k) >= 0;
+            return '<button type="button" class="fm-carta ' + c.lato + (vis ? ' su' : '') + (c.ok ? ' ok' : '') + '" data-c="' + k + '"' + (c.ok ? ' disabled' : '') +
+              (vis ? '' : ' aria-label="Carta ' + (k + 1) + ', coperta"') + '>' + (vis ? esc(c.t) : '<span class="n">' + (k + 1) + '</span>') + '</button>';
+          }).join('') + '</div><div class="st-esito" aria-live="polite">' + msg + '</div><div id="fm-fine"></div></div>';
+        R.querySelectorAll('[data-c]').forEach(function (b) { b.onclick = function () { gira(+b.getAttribute('data-c')); }; });
+      }
+      function gira(k) {
+        if (carte[k].ok) return;
+        if (su.length === 2) su = [];
+        if (su.indexOf(k) >= 0) return;
+        su.push(k); msg = '';
+        if (su.length === 2) {
+          tentativi++;
+          var a = carte[su[0]], b = carte[su[1]];
+          if (a.p === b.p && a.lato !== b.lato) { a.ok = b.ok = true; su = []; trovate++; msg = '<div class="st-spiega ok">✅ Coppia! «' + esc(a.lato === 'a' ? a.t : b.t) + '» va con «' + esc(a.lato === 'a' ? b.t : a.t) + '».</div>'; toast(S.pesca(S.BRAVO)); }
+          else msg = '<div class="st-spiega no">🤔 Non stanno insieme. Ricorda dove sono: si ricoprono quando tocchi un\'altra carta.</div>';
+        }
+        disegna();
+        var f = R.querySelector('[data-c="' + k + '"]'); if (f && !f.disabled) f.focus(); else { var x = R.querySelector('.fm-carta:not(:disabled)'); if (x) x.focus(); }
+        if (trovate === n) fine();
+      }
+      function fine() {
+        /* il record (meno tentativi) resta solo su questo dispositivo, uno per ogni numero di coppie */
+        var chiave = 'studio-memory-' + n + '-' + (L.titolo || ''), record = 0;
+        try { record = +localStorage.getItem(chiave) || 0; } catch (e) {}
+        var nuovo = !record || tentativi < record;
+        if (nuovo) { try { localStorage.setItem(chiave, tentativi); } catch (e) {} }
+        S.coriandoli();
+        R.querySelector('#fm-fine').innerHTML = '<div class="st-card st-finale st-entra"><div class="st-medaglia">🃏</div><h2>Tutte le coppie!</h2><p class="st-sot">' + tentativi + ' tentativi per ' + n + ' coppie' + (tentativi === n ? ': memoria perfetta! 🧠' : '.') + (nuovo && record ? ' 🎉 Nuovo record!' : record ? ' Il tuo record: ' + record + '.' : '') + '</p>' +
+          '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn pieno" data-ancora>🔁 Un\'altra partita</button></div></div>' +
+          '<h3>📌 Le coppie da ricordare</h3><ul class="fm-coppie">' + scelte.map(function (c) { return '<li><b>' + esc(c[0]) + '</b><span>' + esc(c[1]) + '</span></li>'; }).join('') + '</ul>';
+        R.querySelector('[data-ancora]').onclick = function () { memory(L, R); };
+      }
+      disegna();
+      R.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* ═══════════════ 🕵️ IL DETECTIVE ═══════════════ */
+  /* Un'idea della lezione è «il colpevole»: gli indizi arrivano uno alla volta, dal più difficile al più facile.
+     Chi la riconosce con meno indizi prende più punti. Le parole che la tradirebbero sono coperte. */
+  function detective(L, R) {
+    var C = arr(L.concetti).filter(function (c) { return c.titolo && c.spiegazione; });
+    if (C.length < 3) return poco(R, 'Questa lezione ha troppe poche idee chiave per il detective.');
+    function copri(t, c) {
+      var s = String(t || ''), parole = [c.parola_chiave, c.titolo].filter(Boolean);
+      /* solo parole intere: «costruire» si copre, «ricostruire» no */
+      parole.forEach(function (p) { s = s.replace(new RegExp('(^|[^A-Za-zÀ-ÿ])' + rx(p) + '(?![A-Za-zÀ-ÿ])', 'gi'), '$1▢▢▢'); });
+      String(c.titolo).split(/[^A-Za-zÀ-ÿ]+/).filter(function (w) { return w.length >= 6; }).forEach(function (w) {
+        s = s.replace(new RegExp('(^|[^A-Za-zÀ-ÿ])' + rx(w.slice(0, 5)) + '[A-Za-zÀ-ÿ]*', 'gi'), '$1▢▢▢');
+      });
+      return s;
+    }
+    function frasi(t) { return (String(t || '').match(/[^.!?]+[.!?]*/g) || []).map(function (x) { return x.trim(); }).filter(Boolean); }
+    function indizi(c) {
+      var F = frasi(c.spiegazione), I = [];
+      if (c.esempio) I.push({ ic: '🔎', t: 'Un caso concreto', x: copri(c.esempio, c) });
+      if (F.length > 1) I.push({ ic: '📄', t: 'Un dettaglio', x: copri(F.slice(1).join(' '), c) });
+      I.push({ ic: '📄', t: 'La descrizione', x: copri(F[0] || c.spiegazione, c) });
+      var tit = String(c.titolo), np = tit.trim().split(/\s+/).length;
+      I.push({ ic: '🔤', t: 'L\'ultima soffiata', x: (c.emoji ? c.emoji + ' · ' : '') + 'Comincia con «' + tit.charAt(0).toUpperCase() + '» ed è ' + (np > 1 ? 'formata da ' + np + ' parole' : 'una parola sola') + '.' });
+      return I.filter(function (i) { return i.x && /[A-Za-zÀ-ÿ]{3}/.test(i.x.replace(/▢/g, '')); }).slice(-4);
+    }
+    var casi = mescola(C).slice(0, 5), k = 0, punti = 0, tot = 0, esiti = [];
+    R.innerHTML = '<div class="st-palco">' + comeFunziona('🕵️', 'Il detective', 'In ogni caso il «colpevole» è un\'idea di <b>' + esc(L.titolo) + '</b>. Scopri quale, con meno indizi possibile.', [
+      'Leggi il <b>primo indizio</b>: è il più difficile. Le parole che svelerebbero tutto sono coperte con ▢▢▢.',
+      'Se sai chi è, <b>accusa</b>: tocca l\'idea giusta. Se no, chiedi <b>un altro indizio</b>: è più facile, ma vale meno.',
+      'Prima indovini, più punti prendi: fino a <b>4 punti</b> per caso. Un\'accusa sbagliata non toglie punti, ma fa arrivare l\'indizio dopo.'
+    ], 'Apri il primo fascicolo 🗂️') + '</div>';
+    R.querySelector('.fm-via').onclick = caso;
+    function caso() {
+      if (k >= casi.length) return fine();
+      var c = casi[k], I = indizi(c), visti = 1, scartate = [], max = I.length;
+      var opz = mescola([c].concat(mescola(C.filter(function (x) { return x !== c; })).slice(0, 4)));
+      tot += 4;
+      function valore() { return Math.max(1, 5 - visti); }
+      function disegna(msg) {
+        S.zitto();
+        var letti = I.slice(0, visti);
+        R.innerHTML = '<div class="st-palco"><h2>🕵️ Caso n. ' + (k + 1) + ' di ' + casi.length + '</h2><p class="st-sot">Punti finora: <b>' + punti + '</b> · Questo caso vale ora <b>' + valore() + (valore() === 1 ? ' punto' : ' punti') + '</b></p>' +
+          '<div class="fm-fascicolo">' + letti.map(function (x, i) {
+            return '<div class="fm-indizio-d' + (i === visti - 1 ? ' st-entra' : '') + '"><p class="fm-etic">' + x.ic + ' Indizio ' + (i + 1) + ' · ' + esc(x.t) + '</p><p>' + esc(x.x) + '</p></div>';
+          }).join('') + '</div>' +
+          '<div class="st-azioni">' + S.tastoVoce(letti.map(function (x) { return x.x.replace(/▢▢▢/g, 'bip'); }).join('. ') + '. Chi è? ' + opz.map(function (o) { return o.titolo; }).join('; ')) +
+          (visti < max ? '<button type="button" class="st-btn" data-altro>🔦 Un altro indizio (vale meno)</button>' : '') + '</div>' +
+          '<p class="st-dom" style="padding:0">Chi è il colpevole? Tocca l\'idea che accusi:</p>' +
+          '<div class="st-scelte">' + opz.map(function (o, i) { return '<button type="button" class="st-scelta" data-i="' + i + '"' + (scartate.indexOf(i) >= 0 ? ' disabled' : '') + '>' + esc((o.emoji ? o.emoji + ' ' : '') + o.titolo) + '</button>'; }).join('') + '</div>' +
+          '<div class="st-esito" aria-live="polite">' + (msg || '') + '</div></div>';
+        cablaVoci(R);
+        scartate.forEach(function (i) { R.querySelector('[data-i="' + i + '"]').classList.add('no'); });
+        var a = R.querySelector('[data-altro]'); if (a) a.onclick = function () { visti++; disegna(); R.querySelector('.fm-indizio-d:last-child').scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+        R.querySelectorAll('[data-i]').forEach(function (b) {
+          b.onclick = function () {
+            var i = +b.getAttribute('data-i');
+            if (opz[i] === c) {
+              var v = valore(); punti += v; esiti.push({ c: c, v: v }); toast(S.pesca(S.BRAVO));
+              R.querySelectorAll('[data-i]').forEach(function (x) { x.disabled = true; }); b.classList.add('ok');
+              var ad = R.querySelector('[data-altro]'); if (ad) ad.remove();
+              R.querySelector('.st-esito').innerHTML = '<div class="st-spiega ok">🎯 Caso risolto! +' + v + (v === 1 ? ' punto' : ' punti') + '.<br><b>' + esc(c.titolo) + '</b>: ' + esc(c.spiegazione) + '</div>' +
+                '<div class="st-azioni"><button type="button" class="st-btn pieno" data-avanti>' + (k + 1 < casi.length ? 'Prossimo caso →' : 'Chiudi l\'indagine 🗂️') + '</button></div>';
+              var av = R.querySelector('[data-avanti]'); av.onclick = function () { k++; caso(); }; av.focus();
+              return;
+            }
+            scartate.push(i);
+            var nuovo = visti < max; if (nuovo) visti++;
+            disegna('<div class="st-spiega no">🙅 Alibi di ferro: non è «' + esc(opz[i].titolo) + '».' + (nuovo ? ' Ecco un nuovo indizio.' : ' Rileggi gli indizi con calma.') + '</div>');
+          };
+        });
+      }
+      disegna();
+      R.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    function fine() {
+      var grado = punti >= tot * 0.8 ? ['🕵️', 'Commissario'] : punti >= tot * 0.55 ? ['🔍', 'Ispettore'] : ['🗂️', 'Agente investigativo'];
+      S.coriandoli();
+      R.innerHTML = '<div class="st-palco"><div class="st-card st-finale st-entra"><div class="st-medaglia">' + grado[0] + '</div><h2>Grado: ' + grado[1] + '</h2><p class="st-sot">' + punti + ' punti su ' + tot + ', con ' + casi.length + ' casi risolti.</p>' +
+        '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn pieno" data-ancora>🔁 Nuove indagini</button></div></div>' +
+        '<h3>🗂️ I fascicoli chiusi</h3><div class="fm-ripasso">' + esiti.map(function (e) {
+          return '<div class="st-card"><p style="margin:0 0 .3rem"><b>' + esc((e.c.emoji ? e.c.emoji + ' ' : '') + e.c.titolo) + '</b> · ' + e.v + (e.v === 1 ? ' punto' : ' punti') + '</p><p style="margin:0">' + esc(e.c.spiegazione) + '</p></div>';
+        }).join('') + '</div></div>';
+      R.querySelector('[data-ancora]').onclick = function () { detective(L, R); };
+    }
+  }
+
+  /* ═══════════════ 🎲 QUANTO SEI SICURO? ═══════════════ */
+  /* Si risponde e si dichiara quanto si è sicuri: chi è sicuro e ha ragione guadagna di più,
+     chi è sicuro e sbaglia perde. Alla fine: le «false certezze», cioè le cose da ripassare per prime. */
+  var FIDUCIA = [['🎯', 'Sicurissimo', 3, -3], ['🤔', 'Abbastanza sicuro', 2, -1], ['🤷', 'Tiro a indovinare', 1, 0]];
+  function sicuro(L, R) {
+    var pool = arr(L.quiz).map(daQuiz).concat(arr(L.vero_falso).map(daVF), arr(L.completa).map(daCompleta));
+    if (pool.length < 5) return poco(R, 'Questa lezione non ha abbastanza domande per «Quanto sei sicuro?».');
+    var D = mescola(pool).slice(0, 10), k = 0, punti = 0, log = [];
+    R.innerHTML = '<div class="st-palco">' + comeFunziona('🎲', 'Quanto sei sicuro?', 'Non basta rispondere: devi anche dire <b>quanto sei sicuro</b>. Chi conosce bene quello che sa, studia meglio.', [
+      'Leggi la domanda e <b>tocca la risposta</b> che scegli.',
+      'Poi scommetti: <b>🎯 Sicurissimo</b> (+3 se è giusta, −3 se è sbagliata), <b>🤔 Abbastanza</b> (+2 / −1) oppure <b>🤷 Tiro a indovinare</b> (+1 / 0).',
+      'Alla fine scopri le tue <b>false certezze</b>: le cose che credevi di sapere. Sono le prime da ripassare.'
+    ], 'Si comincia →') + '</div>';
+    R.querySelector('.fm-via').onclick = una;
+    function una() {
+      if (k >= D.length) return fine();
+      var d = D[k], scelta = null;
+      S.zitto();
+      R.innerHTML = '<div class="st-palco"><div class="fm-dom st-entra">' + S.tastoVoce(d.testo + '. ' + d.opz.join('. ')) +
+        '<p class="st-cont">' + (k + 1) + ' di ' + D.length + ' · Punti: <b>' + punti + '</b></p><p class="st-dom">' + (d.vf ? '<small class="st-cont">Vero o falso?</small><br>' : '') + (d.html || esc(d.testo)) + '</p>' +
+        '<div class="' + (d.vf ? 'st-vf' : d.chips ? 'st-chips' : 'st-scelte') + '" role="group" aria-label="Le risposte">' + d.opz.map(function (o, i) { return '<button type="button" class="st-scelta" data-i="' + i + '" aria-pressed="false">' + esc(o) + '</button>'; }).join('') + '</div>' +
+        '<div id="fm-scommessa" hidden><p class="st-dom" style="padding:0;margin-top:.8rem">Quanto sei sicuro?</p><div class="fm-fiducia">' + FIDUCIA.map(function (f, i) {
+          return '<button type="button" class="fm-fid" data-f="' + i + '"><span class="ic" aria-hidden="true">' + f[0] + '</span><b>' + f[1] + '</b><small>+' + f[2] + ' / ' + (f[3] ? '−' + (-f[3]) : '0') + '</small></button>';
+        }).join('') + '</div></div><div class="st-esito" aria-live="polite"></div></div></div>';
+      cablaVoci(R);
+      R.querySelectorAll('[data-i]').forEach(function (b) {
+        b.onclick = function () {
+          scelta = +b.getAttribute('data-i');
+          R.querySelectorAll('[data-i]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); x.classList.toggle('sel', x === b); });
+          var s = R.querySelector('#fm-scommessa'); if (s.hidden) { s.hidden = false; s.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+        };
+      });
+      R.querySelectorAll('[data-f]').forEach(function (b) {
+        b.onclick = function () {
+          if (scelta === null) return;
+          var f = FIDUCIA[+b.getAttribute('data-f')], giusta = scelta === d.giusta, v = giusta ? f[2] : f[3];
+          punti += v; log.push({ d: d, f: +b.getAttribute('data-f'), ok: giusta, data: d.opz[scelta] });
+          R.querySelectorAll('[data-i],[data-f]').forEach(function (x) { x.disabled = true; });
+          b.classList.add('sel');
+          var bs = R.querySelectorAll('[data-i]'); bs[d.giusta].classList.add('ok'); if (!giusta) bs[scelta].classList.add('no');
+          if (giusta) toast(S.pesca(S.BRAVO));
+          R.querySelector('.st-esito').innerHTML = '<div class="st-spiega ' + (giusta ? 'ok' : 'no') + '">' + (giusta ? '✅ Giusta! ' : '❌ Sbagliata. ') + (v > 0 ? '+' + v : v < 0 ? '−' + (-v) : '0') + (Math.abs(v) === 1 ? ' punto' : ' punti') + '.' +
+            (!giusta && f[3] < 0 ? ' Eri ' + (f[2] === 3 ? 'sicurissimo' : 'abbastanza sicuro') + ': questa è una <b>falsa certezza</b>, da ripassare.' : giusta && f[3] === 0 ? ' Ne sapevi più di quanto pensavi!' : '') +
+            (d.spiega ? '<br>💡 ' + esc(d.spiega) : !giusta ? '<br>💡 La risposta giusta è: ' + esc(d.opz[d.giusta]) : '') + '</div>' +
+            '<div class="st-azioni"><button type="button" class="st-btn pieno" data-avanti>' + (k + 1 < D.length ? 'Prossima →' : 'Vediamo come è andata 📊') + '</button></div>';
+          var av = R.querySelector('[data-avanti]'); av.onclick = function () { k++; una(); }; av.focus();
+        };
+      });
+    }
+    function fine() {
+      var righe = FIDUCIA.map(function (f, i) { var x = log.filter(function (l) { return l.f === i; }); return { f: f, n: x.length, ok: x.filter(function (l) { return l.ok; }).length }; });
+      var false_ = log.filter(function (l) { return !l.ok && l.f < 2; }), fortuna = log.filter(function (l) { return l.ok && l.f === 2; });
+      var giudizio = !false_.length ? 'Ottimo: quando eri sicuro, avevi ragione. Sai bene cosa sai. 🧠' :
+        false_.length <= 2 ? 'Qualche falsa certezza: sono poche, ripassale qui sotto.' : 'Attenzione: diverse volte eri sicuro ma sbagliavi. Prima di un\'interrogazione è il rischio più grande: ripassa le false certezze qui sotto.';
+      if (punti > 0) S.coriandoli();
+      R.innerHTML = '<div class="st-palco"><div class="st-card st-finale st-entra"><div class="st-medaglia">🎲</div><h2>' + punti + (Math.abs(punti) === 1 ? ' punto' : ' punti') + '</h2><p class="st-sot">' + giudizio + '</p>' +
+        '<table class="fm-tab-fid"><caption>Quante giuste, per ogni scommessa</caption><thead><tr><th scope="col">Scommessa</th><th scope="col">Giuste</th></tr></thead><tbody>' + righe.map(function (r) {
+          return '<tr><th scope="row">' + r.f[0] + ' ' + r.f[1] + '</th><td>' + (r.n ? r.ok + ' su ' + r.n : '—') + '</td></tr>';
+        }).join('') + '</tbody></table>' +
+        '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn pieno" data-ancora>🔁 Altre 10 domande</button></div></div>' +
+        (false_.length ? '<h3>⚠️ Le false certezze, da ripassare per prime</h3><div class="fm-ripasso">' + false_.map(function (l) {
+          return '<div class="st-card"><p style="margin:0 0 .3rem">' + esc(l.d.testo) + '</p><p class="st-nota" style="margin:0 0 .3rem">Avevi risposto: <span class="fm-barrata">' + esc(l.data) + '</span></p><p class="st-spiega ok" style="margin:0">✅ ' + esc(l.d.opz[l.d.giusta]) + (l.d.spiega ? ' — ' + esc(l.d.spiega) : '') + '</p></div>';
+        }).join('') + '</div>' : '') +
+        (fortuna.length ? '<h3>🍀 Indovinate tirando a caso: ripassale per esserne sicuro</h3><div class="fm-ripasso">' + fortuna.map(function (l) {
+          return '<div class="st-card"><p style="margin:0 0 .3rem">' + esc(l.d.testo) + '</p><p class="st-spiega ok" style="margin:0">✅ ' + esc(l.d.opz[l.d.giusta]) + '</p></div>';
+        }).join('') + '</div>' : '') + '</div>';
+      R.querySelector('[data-ancora]').onclick = function () { sicuro(L, R); };
+    }
+  }
+
+  /* ═══════════════ 🔤 INDOVINA LA PAROLA ═══════════════ */
+  /* La definizione è l'indizio; la parola si scopre una lettera alla volta. Sei tentativi a vuoto per parola. */
+  function parola(L, R) {
+    function pul(t) { return String(t || '').replace(/\s*\([^)]*\)/g, '').trim(); }
+    function lettere(t) { return String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase(); }
+    var V = arr(L.parole).filter(function (p) { return p.termine && p.definizione; }).map(function (p) { return { w: pul(p.termine), d: p.definizione }; });
+    arr(L.concetti).forEach(function (c) {
+      var w = pul(c.parola_chiave);
+      if (!w || !c.spiegazione || V.some(function (v) { return lettere(v.w) === lettere(w); })) return;
+      var d = String(c.spiegazione).replace(new RegExp(rx(w), 'gi'), '▢▢▢');
+      if (d.indexOf('▢') >= 0) V.push({ w: w, d: d });
+    });
+    V = V.filter(function (v) { var n = lettere(v.w).replace(/[^A-Z]/g, '').length; return n >= 3 && n <= 18; });
+    if (V.length < 3) return poco(R, 'Questa lezione non ha abbastanza parole per «Indovina la parola».');
+    var VITE = 6, giro = mescola(V).slice(0, 5), k = 0, prese = 0, esiti = [];
+    R.innerHTML = '<div class="st-palco">' + comeFunziona('🔤', 'Indovina la parola', 'Leggi la definizione e scopri la parola della lezione, una lettera alla volta.', [
+      'Tocca una <b>lettera</b> (o scrivila con la tastiera). Se c\'è nella parola, compare in tutti i posti giusti.',
+      'Hai <b>' + VITE + ' tentativi a vuoto</b> per ogni parola: li vedi come cuori 🧡.',
+      'Se sai già la parola intera, puoi <b>scriverla</b> e provare subito. Le parole sono ' + giro.length + '.'
+    ], 'Prima parola →') + '</div>';
+    R.querySelector('.fm-via').onclick = una;
+    var tasti = null;
+    function una() {
+      if (k >= giro.length) return fine();
+      var v = giro[k], W = lettere(v.w), dette = [], errori = 0, finita = false;
+      function scoperta() { return W.split('').every(function (ch) { return !/[A-Z]/.test(ch) || dette.indexOf(ch) >= 0; }); }
+      function disegna(msg) {
+        S.zitto();
+        R.innerHTML = '<div class="st-palco"><div class="fm-dom st-entra">' + S.tastoVoce('Definizione: ' + v.d.replace(/▢▢▢/g, 'bip')) +
+          '<p class="st-cont">Parola ' + (k + 1) + ' di ' + giro.length + '</p>' +
+          '<p class="fm-vite" aria-label="Tentativi a vuoto rimasti: ' + (VITE - errori) + '">' + Array.from({ length: VITE }, function (_, i) { return i < VITE - errori ? '🧡' : '🤍'; }).join('') + '</p>' +
+          '<p class="st-dom">«' + esc(v.d) + '»</p>' +
+          '<div class="fm-lettere grandi" aria-label="La parola">' + v.w.split('').map(function (ch, i) {
+            var L0 = W.charAt(i);
+            if (!/[A-Z]/.test(L0)) return ch === ' ' ? '<span class="sp" aria-hidden="true"></span>' : '<span class="si">' + esc(ch) + '</span>';
+            var vista = finita || dette.indexOf(L0) >= 0;
+            return '<span class="' + (vista ? 'si' : '') + '">' + (vista ? esc(ch.toUpperCase()) : '_') + '</span>';
+          }).join('') + '</div>' +
+          (finita ? '' : '<div class="fm-abc" role="group" aria-label="Le lettere">' + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(function (ch) {
+            var usata = dette.indexOf(ch) >= 0;
+            return '<button type="button" data-l="' + ch + '"' + (usata ? ' disabled class="' + (W.indexOf(ch) >= 0 ? 'ok' : 'no') + '"' : '') + '>' + ch + '</button>';
+          }).join('') + '</div>' +
+          '<div class="fm-scrivi"><label for="fm-intera" class="fm-etic" style="flex-basis:100%;margin:0">La sai già? Scrivi la parola intera</label><input type="text" id="fm-intera" autocomplete="off" autocapitalize="off" spellcheck="false"/><button type="button" class="st-btn" data-intera>Prova</button></div>') +
+          '<div class="st-esito" aria-live="polite">' + (msg || '') + '</div></div></div>';
+        cablaVoci(R);
+        R.querySelectorAll('[data-l]').forEach(function (b) { b.onclick = function () { lettera(b.getAttribute('data-l')); }; });
+        var bi = R.querySelector('[data-intera]'), inp = R.querySelector('#fm-intera');
+        if (bi) {
+          bi.onclick = function () { intera(inp.value); };
+          inp.addEventListener('keydown', function (e) { e.stopPropagation(); if (e.key === 'Enter') intera(inp.value); });
+        }
+      }
+      function lettera(ch) {
+        if (finita || dette.indexOf(ch) >= 0) return;
+        dette.push(ch);
+        if (W.indexOf(ch) < 0) errori++;
+        if (scoperta()) return chiudi(true);
+        if (errori >= VITE) return chiudi(false);
+        disegna(W.indexOf(ch) >= 0 ? '' : '<div class="st-spiega no">La ' + ch + ' non c\'è.</div>');
+        var b = R.querySelector('.fm-abc button:not(:disabled)'); if (b && document.activeElement === document.body) b.focus();
+      }
+      function intera(t) {
+        if (finita || !norm(t)) return;
+        if (vicine(t, v.w)) return chiudi(true);
+        errori++;
+        if (errori >= VITE) return chiudi(false);
+        disegna('<div class="st-spiega no">«' + esc(t) + '» non è la parola giusta. Hai perso un cuore.</div>');
+      }
+      function chiudi(ok) {
+        finita = true; if (ok) { prese++; toast(S.pesca(S.BRAVO)); }
+        esiti.push({ v: v, ok: ok });
+        disegna('<div class="st-spiega ' + (ok ? 'ok' : 'no') + '">' + (ok ? '🎉 Trovata: <b>' + esc(v.w) + '</b>!' : '🧡 Cuori finiti. La parola era <b>' + esc(v.w) + '</b>: la prossima volta la riconosci.') + '</div>' +
+          '<div class="st-azioni"><button type="button" class="st-btn pieno" data-avanti>' + (k + 1 < giro.length ? 'Prossima parola →' : 'Vediamo il risultato 🔤') + '</button></div>');
+        var av = R.querySelector('[data-avanti]'); av.onclick = function () { k++; una(); }; av.focus();
+      }
+      /* la tastiera del computer: basta premere la lettera */
+      if (tasti) document.removeEventListener('keydown', tasti);
+      tasti = function (e) {
+        if (!document.body.contains(R) || !R.querySelector('.fm-abc')) { document.removeEventListener('keydown', tasti); return; }
+        if (e.ctrlKey || e.metaKey || e.altKey || /input|textarea|select/i.test(e.target.tagName || '')) return;
+        var ch = lettere(e.key); if (/^[A-Z]$/.test(ch)) { e.preventDefault(); lettera(ch); }
+      };
+      document.addEventListener('keydown', tasti);
+      disegna();
+      R.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    function fine() {
+      if (tasti) document.removeEventListener('keydown', tasti);
+      if (prese) S.coriandoli();
+      R.innerHTML = '<div class="st-palco"><div class="st-card st-finale st-entra"><div class="st-medaglia">🔤</div><h2>' + prese + ' parole su ' + giro.length + '</h2><p class="st-sot">' + (prese === giro.length ? 'Tutte! Il vocabolario della lezione è tuo. 📖' : 'Rileggi quelle mancate qui sotto e riprova.') + '</p>' +
+        '<div class="st-azioni" style="justify-content:center"><button type="button" class="st-btn pieno" data-ancora>🔁 Altre parole</button></div></div>' +
+        '<h3>📖 Le parole del giro</h3><ul class="fm-coppie">' + esiti.map(function (e) { return '<li><b>' + (e.ok ? '✅ ' : '📌 ') + esc(e.v.w) + '</b><span>' + esc(e.v.d) + '</span></li>'; }).join('') + '</ul></div>';
+      R.querySelector('[data-ancora]').onclick = function () { parola(L, R); };
+    }
+  }
+
+  return { escape: escape, mappa: function (L, R) { mappa(L, R, 1); }, squadre: squadre, caccia: caccia, intervista: intervista, minuto: minuto,
+    memory: memory, detective: detective, sicuro: sicuro, parola: parola };
 })();

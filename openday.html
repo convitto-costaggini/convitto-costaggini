@@ -21,7 +21,6 @@
   <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"/>
   <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-<script src="https://www.google.com/recaptcha/api.js?render=6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO" async defer></script>
 </head>
 <body data-page="openday">
 <script src="nav-header.min.js"></script>
@@ -539,7 +538,6 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
   (function(){
   const CONTACT_GAS = 'https://script.google.com/a/macros/alberghierorieti.it/s/AKfycbxRt-dmvNX8xTVLTsh2Vnu8usHij2ZYvuREaLmqx6AdnP9Yz3SHFZ8JAbRAs2df5PS9_g/exec';
-  const RECAPTCHA_SITE_KEY = '6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO';
   const SB_N   = 'https://sawclsysqnjsvbobioqo.supabase.co';
   const SB_PUB = 'sb_publishable_sUgIVDar21Sf5Dtr3D7nhQ_kpOB57FQ';
   const f = document.querySelector('form[name="richiesta-visita"]');
@@ -574,13 +572,7 @@ document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
     })
       .then(r => { if (!r.ok) throw new Error('Supabase HTTP ' + r.status); })
       .then(() => {
-        const notifica = new Promise((resolve) => {
-          grecaptcha.ready(() => {
-            grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'openday' }).then(resolve).catch(() => resolve(''));
-          });
-        }).then(recaptchaToken => {
-          dati.email.recaptchaToken = recaptchaToken;
-          dati.email.recaptchaAction = 'openday';
+        const notifica = Promise.resolve().then(() => {
 
           return fetch(CONTACT_GAS, {
             method: 'POST',

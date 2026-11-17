@@ -47,8 +47,7 @@
             init && typeof init.body === 'string' && init.body.charAt(0) === '{') {
           var dati = JSON.parse(init.body);
           // Solo moduli pubblici: niente richieste dell'area admin (adminToken)
-          // né del totem (token). Non dipende dal reCAPTCHA, così resta valido
-          // anche quando il reCAPTCHA sarà tolto.
+          // né del totem (token).
           if (dati && typeof dati === 'object' && !Array.isArray(dati) &&
               !dati.adminToken && !dati.token && dati.tMs === undefined) {
             dati.tMs = Date.now() - t0;

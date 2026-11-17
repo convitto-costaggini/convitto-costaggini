@@ -2,10 +2,7 @@
 // Edge Function: iscrizione-alumni
 // Convitto "Costaggini" — Supabase project sawclsysqnjsvbobioqo
 // =====================================================================
-// Cosa fa: riceve la scheda di iscrizione alla pagina Alumni, verifica
-// il token reCAPTCHA Enterprise lato server (Google Cloud) e solo se la
-// verifica passa inserisce la scheda alumni, il ricordo associato e,
-// se l'utente ha acconsentito, il pin sulla Mappa Alumni.
+// Cosa fa: riceve la scheda di iscrizione alla pagina Alumni, applica i controlli anti-spam interni (campo trappola, tempo minimo di compilazione, limite di invio) e solo se passano inserisce la scheda alumni, il ricordo associato e, se l'utente ha acconsentito, il pin sulla Mappa Alumni.
 //
 // Dal 04/11/2026 la posizione del pin arriva dalla pagina, che la ricava
 // dall'elenco di città ospitato sul sito (citta.js): nessuna richiesta a
@@ -16,11 +13,6 @@
 // "mappa" per il pin), con data e versione dell'informativa accettata.
 // Se la registrazione del consenso non riesce, l'errore viene scritto
 // nei log ma l'iscrizione non viene interrotta.
-//
-// La chiave API di Google Cloud NON è scritta qui: va impostata come
-// secret del progetto Supabase con il nome RECAPTCHA_API_KEY
-// (Edge Functions → Secrets), lo stesso secret già usato dalla funzione
-// richiesta-accesso.
 // =====================================================================
 
 const cors = {
@@ -37,48 +29,34 @@ function json(body: unknown, status = 200): Response {
   });
 }
 
-const SOGLIA_PUNTEGGIO = 0.5;
-const AZIONE_ATTESA = "iscrizione_alumni";
-const RECAPTCHA_PROJECT_ID = "convitto-costagg-1786033824350";
-const RECAPTCHA_SITE_KEY = "6LersXgtAAAAAA5GJi_R_MQUeJqI0pWmu1-ww-WO";
 const INFORMATIVA_ALUMNI = "ricordi-2026-10-06";
 const INFORMATIVA_MAPPA = "mappa-2026-10-06";
 
-async function verificaRecaptcha(token: string): Promise<boolean> {
-  const apiKey = Deno.env.get("RECAPTCHA_API_KEY");
-  if (!apiKey || !token) return false;
-  try {
-    const resp = await fetch(
-      `https://recaptchaenterprise.googleapis.com/v1/projects/${RECAPTCHA_PROJECT_ID}/assessments?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          event: {
-            token,
-            expectedAction: AZIONE_ATTESA,
-            siteKey: RECAPTCHA_SITE_KEY,
-          },
-        }),
-      },
-    );
-    const esito = await resp.json();
-    const tp = esito?.tokenProperties;
-    const score = esito?.riskAnalysis?.score;
-    if (!resp.ok || !tp) {
-      console.error("Assessment reCAPTCHA fallita:", JSON.stringify(esito));
-      return false;
-    }
-    return (
-      tp.valid === true &&
-      tp.action === AZIONE_ATTESA &&
-      typeof score === "number" &&
-      score >= SOGLIA_PUNTEGGIO
-    );
-  } catch (e) {
-    console.error("Errore verifica reCAPTCHA:", e);
-    return false;
+const TEMPO_MINIMO_MS = 3000;       // un invio più rapido non è di una persona
+const FINESTRA_MS = 10 * 60 * 1000; // finestra del limite di invio
+const MAX_INVII = 5;                // invii consentiti per origine in quella finestra
+const recenti = new Map<string, number[]>(); // solo in memoria, non viene salvato nulla
+
+function origineRichiesta(req: Request): string {
+  return (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() || "sconosciuta";
+}
+
+function troppiInvii(origine: string): boolean {
+  const ora = Date.now();
+  const lista = (recenti.get(origine) || []).filter((t) => ora - t < FINESTRA_MS);
+  if (lista.length >= MAX_INVII) {
+    recenti.set(origine, lista);
+    return true;
   }
+  lista.push(ora);
+  recenti.set(origine, lista);
+  if (recenti.size > 5000) recenti.clear();
+  return false;
+}
+
+function inviaTroppoVeloce(body: Record<string, unknown>): boolean {
+  const t = Number(body.tMs);
+  return !Number.isFinite(t) || t < TEMPO_MINIMO_MS;
 }
 
 async function inserisci(tabella: string, riga: Record<string, unknown>): Promise<{ ok: boolean; status: number; body: string }> {
@@ -116,6 +94,14 @@ Deno.serve(async (req) => {
       return json({ success: true });
     }
 
+    // Tempo minimo di compilazione (campo tMs aggiunto da app.js): i bot inviano subito.
+    if (inviaTroppoVeloce(body)) return json({ success: true });
+
+    // Limite di invio per origine, tenuto solo in memoria.
+    if (troppiInvii(origineRichiesta(req))) {
+      return json({ success: false, message: "Troppi invii ravvicinati. Riprovi tra qualche minuto." }, 429);
+    }
+
     const nome = String(body.nome || "").trim();
     const firma = String(body.firma || "").trim() || nome.split(" ")[0];
     const anni = String(body.anni || "").trim();
@@ -133,11 +119,6 @@ Deno.serve(async (req) => {
 
     if (!nome || !anni || !lavoro || !ricordo || !email) {
       return json({ success: false, message: "Compilare tutti i campi obbligatori." }, 400);
-    }
-
-    const recaptchaOk = await verificaRecaptcha(String(body.recaptchaToken || ""));
-    if (!recaptchaOk) {
-      return json({ success: false, message: "Verifica anti-spam non superata. Ricarichi la pagina e riprovi." }, 400);
     }
 
     const colore = Math.floor(Math.random() * 5);

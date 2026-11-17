@@ -522,6 +522,6 @@ window.STUDIO = (function () {
     vai(corrente);
   }
 
-  /* anche per i formati (aula/studio/formati.js): escape room, mappa, sfida a squadre */
+  /* anche per i formati (aula/studio/formati.js): escape room, mappa, sfida a squadre e gli altri modi */
   return { avvia: avvia, esc: esc, toast: toast, mescola: mescola, pesca: pesca, coriandoli: coriandoli, leggi: leggi, zitto: zitto, tastoVoce: tastoVoce, BRAVO: BRAVO };
 })();

@@ -63,7 +63,7 @@
     /* se è il giorno del ripasso di questa lezione lo propone; se no, un riscaldamento sull'ultima lezione fatta */
     if (window.RIPASSO) RIPASSO.invito($('st-ripasso'), id);
   }
-  /* «Come vuoi studiare?»: la stessa lezione in quattro modi (?m= nel link) */
+  /* «Come vuoi studiare?»: la stessa lezione in undici modi (?m= nel link) */
   var MODI = [
     ['percorso', '🧭', 'Percorso guidato', '7 tappe, da solo'],
     ['escape', '🔐', 'Escape room', 'apri i lucchetti'],
@@ -71,6 +71,10 @@
     ['caccia', '🔍', 'Caccia all\'errore', 'correggi il compagno'],
     ['intervista', '🎭', 'Intervista impossibile', 'fai il giornalista'],
     ['minuto', '⚡', 'Il minuto', 'quante in 60 secondi?'],
+    ['memory', '🃏', 'Memory', 'trova le coppie'],
+    ['detective', '🕵️', 'Il detective', 'indovina dagli indizi'],
+    ['sicuro', '🎲', 'Quanto sei sicuro?', 'rispondi e scommetti'],
+    ['parola', '🔤', 'Indovina la parola', 'una lettera alla volta'],
     ['squadre', '🏆', 'Sfida a squadre', 'alla LIM, con la classe']
   ];
   function modi(L, id) {

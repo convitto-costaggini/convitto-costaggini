@@ -15,7 +15,7 @@
   <meta name="theme-color" content="#2C3E2D"/>
   <link rel="stylesheet" href="fonts.css"/>
   <link rel="stylesheet" href="style.min.css"/>
-  <link rel="stylesheet" href="aula/studio/studio.css"/>
+  <link rel="stylesheet" href="aula/studio/studio.css?v=20261117"/>
   <link rel="icon" href="favicon.ico" sizes="any"/>
   <script src="app.js" defer></script>
 </head>
@@ -40,8 +40,8 @@
 <script src="supabase.js"></script>
 <script src="aula/lingue/pacchetto.js"></script>
 <script src="aula/lingue/finestra.js"></script>
-<script src="aula/studio/studio.js"></script>
-<script src="aula/studio/formati.js"></script>
+<script src="aula/studio/studio.js?v=20261117"></script>
+<script src="aula/studio/formati.js?v=20261117"></script>
 <script src="aula/studio/demo.js"></script>
 <script src="aula/studio/ripasso.js"></script>
 <script>
@@ -94,7 +94,13 @@
       /* un contenitore nuovo a ogni cambio: nessun resto del modo di prima */
       var vecchio = $('st-app'), nuovo = document.createElement('div'); nuovo.id = 'st-app'; vecchio.parentNode.replaceChild(nuovo, vecchio);
       if (m === 'percorso') STUDIO.avvia(L, nuovo, { id: id });
-      else { nuovo.classList.add('st'); window.FORMATI[m](L, nuovo); }
+      else if (window.FORMATI && typeof FORMATI[m] === 'function') { try { sessionStorage.removeItem('studio-ricarica'); } catch (e) {} nuovo.classList.add('st'); FORMATI[m](L, nuovo); }
+      else {
+        /* il browser ha tenuto in memoria i giochi di una versione precedente: si ricarica una volta da capo */
+        var gia = false; try { gia = sessionStorage.getItem('studio-ricarica') === m; sessionStorage.setItem('studio-ricarica', m); } catch (e) {}
+        if (!gia) { var u2 = new URL(location.href); u2.searchParams.set('r', Date.now()); location.replace(u2); return; }
+        nuovo.innerHTML = '<div class="st-palco st"><div class="st-card st-avviso"><p style="margin:0">Questo modo non si è caricato: il dispositivo sta usando una copia vecchia della pagina. Chiudi e riapri il browser, poi riprova.</p></div></div>';
+      }
     }
     $('st-modi').addEventListener('click', function (e) {
       if (e.target.closest('[data-cambia]')) { aperto = true; barra(); var p = $('st-modi').querySelector('[aria-pressed="true"]'); if (p) p.focus(); return; }

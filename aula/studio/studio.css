@@ -245,7 +245,8 @@ mark.st-k{background:linear-gradient(transparent 55%,var(--oro3) 55%);color:inhe
 .dc input.ed-grande{font-size:1.2rem;padding:.9rem 1rem}
 .dc input.ed-otp{font-size:2rem;letter-spacing:.5em;text-align:center;font-weight:800}
 .ed-vai{font-size:1rem;padding:.8rem 1.4rem}
-.ed-posta{background:#fdf8ea;border-radius:12px;padding:.8rem 1rem;margin:.8rem 0 .2rem;line-height:1.6}
+.ed-posta{background:#fdf8ea;border-radius:12px;padding:.8rem 1rem;margin:.8rem 0 .2rem;line-height:1.6;overflow-wrap:anywhere}
+.ed-posta [data-a]{overflow-wrap:anywhere;word-break:break-all}
 .ed-fatto{background:var(--st-ok2);color:#1d5236;border-radius:12px;padding:1rem;text-align:center;font-size:1.15rem;margin-top:.8rem}
 .ed-info{background:var(--av);border-radius:12px;padding:.8rem 1rem;margin-top:1rem;font-size:.88rem;line-height:1.65}
 .ed-info p{margin:0 0 .5rem}

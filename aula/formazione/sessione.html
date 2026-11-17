@@ -134,10 +134,10 @@
   <aside class="guida" aria-label="Passi da fare">
     <div class="testa">
       <div class="sopra">Aula digitale · formazione pratica</div>
-      <h1>Prova tu, <em>sul sito vero</em></h1>
+      <h1>Alla prova, <em>sul sito reale</em></h1>
       <div class="parti" role="group" aria-label="Le due parti">
         <button type="button" id="p1" aria-pressed="true">Parte 1 · Insieme<small id="p1c"></small></button>
-        <button type="button" id="p2" aria-pressed="false">Parte 2 · Da soli<small id="p2c"></small></button>
+        <button type="button" id="p2" aria-pressed="false">Parte 2 · In autonomia<small id="p2c"></small></button>
       </div>
       <div class="barra" aria-hidden="true"><i id="barra"></i></div>
       <nav class="mappa" id="mappa" aria-label="Passi di questa parte"></nav>
@@ -196,154 +196,154 @@
      tipo 'azione': controlli che si spuntano da soli quando il collega fa davvero la cosa;
      tipo 'scelta': domande con risposta unica, con riscontro subito;
      tipo 'soglia': passaggio da una parte all'altra.
-     mostra: dove tocca il puntatore (selettore, elenco di selettori o funzione). */
+     mostra: dove seleziona il puntatore (selettore, elenco di selettori o funzione). */
   var T = [
     /* ───── PARTE 1: INSIEME ───── */
-    { id: 'ingresso', p: 1, tipo: 'azione', t: 'Entra nella Sala studio', url: '/aula/',
-      cosa: `Tocca «Sala studio».`,
-      sugg: `Le due schede sono nella sezione «Per gli studenti»: scegli la seconda.`,
-      controlli: [{ k: 'a', t: 'Sala studio aperta', ok: function (c) { return /^\/aula\/studio\/(index\.html)?$/.test(c.path); },
+    { id: 'ingresso', p: 1, tipo: 'azione', t: 'Accedi alla Sala studio', url: '/aula/',
+      cosa: `Seleziona «Sala studio».`,
+      sugg: `Le due schede si trovano nella sezione «Per gli studenti»: la seconda è la Sala studio.`,
+      controlli: [{ k: 'a', t: 'Sala studio raggiunta', ok: function (c) { return /^\/aula\/studio\/(index\.html)?$/.test(c.path); },
         mostra: function (c) { return c.q('a.au-card[href="aula/studio/"]'); } }],
-      fine: `Qui entrano i ragazzi: senza account e senza registrazione.` },
+      fine: `Da qui accedono gli studenti: senza account e senza registrazione.` },
 
-    { id: 'scelta-ingresso', p: 1, tipo: 'scelta', t: 'Come entrano i ragazzi?',
-      domande: [{ q: `Vuoi far studiare una classe. Che cosa dai agli studenti per entrare?`, opz: [
-        [`Un account a testa`, false, `No: nell'Aula gli studenti non hanno account.`],
-        [`Il codice o il QR della lezione`, true, `Giusto: lo stesso codice vale per tutta la classe.`],
-        [`Un link con il nome di ciascuno`, false, `No: niente nomi. Un codice per lezione, mai per persona.`]] }] },
+    { id: 'scelta-ingresso', p: 1, tipo: 'scelta', t: 'L’accesso degli studenti',
+      domande: [{ q: `Una classe deve accedere a una lezione. Che cosa consegni agli studenti?`, opz: [
+        [`Un account personale per ciascuno`, false, `No: nell'Aula gli studenti non hanno account.`],
+        [`Il codice o il QR della lezione`, true, `Esatto: il codice è unico per la lezione e vale per l’intera classe.`],
+        [`Un link con il nome di ciascuno`, false, `No: nessun nome. Un codice per lezione, mai per persona.`]] }] },
 
-    { id: 'codice', p: 1, tipo: 'azione', t: 'Entra con il codice', url: '/aula/studio/',
-      cosa: `Scrivi DEMO nel campo «CODICE» e tocca «Entra →».`,
-      sugg: `Il campo è nella parte alta della pagina, sopra «Prova subito». Le lettere si scrivono anche in minuscolo.`,
+    { id: 'codice', p: 1, tipo: 'azione', t: 'Accedi con il codice', url: '/aula/studio/',
+      cosa: `Digita DEMO nel campo «CODICE» e seleziona «Entra →».`,
+      sugg: `Il campo si trova in alto, sopra «Prova subito». Le lettere possono essere anche minuscole.`,
       controlli: [
-        { k: 'a', t: 'Codice scritto', ok: function (c) { return /c=DEMO/.test(c.url) || c.val('#sx-c').toUpperCase() === 'DEMO'; }, mostra: '#sx-c', et: 'Scrivi qui' },
+        { k: 'a', t: 'Codice digitato', ok: function (c) { return /c=DEMO/.test(c.url) || c.val('#sx-c').toUpperCase() === 'DEMO'; }, mostra: '#sx-c', et: 'Digita qui' },
         { k: 'b', t: 'Lezione aperta', ok: function (c) { return /c=DEMO/.test(c.url); }, mostra: '#sx-form button[type="submit"]' }],
-      fine: `Lezione aperta con il codice, come farebbe uno studente.` },
+      fine: `Lezione aperta con il codice, esattamente come farebbe uno studente.` },
 
-    { id: 'percorso', p: 1, tipo: 'azione', t: 'Scegli come studiare', url: DEMO,
-      cosa: `In «Come vuoi studiare?» tocca «Percorso guidato».`,
+    { id: 'percorso', p: 1, tipo: 'azione', t: 'Il modo di studiare', url: DEMO,
+      cosa: `In «Come vuoi studiare?» seleziona «Percorso guidato».`,
       sugg: `È il primo dei sette riquadri sotto il titolo della lezione.`,
       controlli: [{ k: 'a', t: 'Percorso guidato avviato', ok: function (c) { return c.clic(function (e) { return e.m === 'percorso'; }); }, mostra: '[data-m="percorso"]' }],
-      fine: `Sette tappe, dal gancio alla sfida finale. Gli altri sei modi sono nello stesso menu.` },
+      fine: `Sette tappe, dal gancio alla sfida finale; gli altri sei modi sono nello stesso menu.` },
 
-    { id: 'tappe', p: 1, tipo: 'azione', t: 'Vai avanti nel percorso', url: DEMO,
-      cosa: `Arriva alla tappa «Memorizza»: tocca «Capito →» e poi «Prossima tappa →».`,
-      sugg: `Se una risposta è sbagliata non succede nulla: il sistema la spiega. Puoi anche toccare direttamente «3. Memorizza» nella fila delle tappe.`,
+    { id: 'tappe', p: 1, tipo: 'azione', t: 'Il percorso guidato', url: DEMO,
+      cosa: `Arriva alla tappa «Memorizza»: seleziona «Capito →» e poi «Prossima tappa →».`,
+      sugg: `Un errore non ha conseguenze: il sistema ne spiega il motivo. In alternativa, seleziona direttamente «3. Memorizza» nella fila delle tappe.`,
       controlli: [{ k: 'a', t: 'Tappa «Memorizza» raggiunta', ok: function (c) { return tappaCorrente(c) >= 2; },
         mostra: function (c) { return c.trova('Capito') || c.trova('Prossima tappa') || c.trova('Memorizza'); } }],
-      fine: `Raggiunta la terza tappa: le idee sono già fatte.` },
+      fine: `Terza tappa raggiunta: le idee chiave sono acquisite.` },
 
-    { id: 'scelta-lettura', p: 1, tipo: 'scelta', t: 'Un alunno fatica a leggere',
-      domande: [{ q: `Un alunno fatica a leggere la lezione. Che cosa fai?`, opz: [
-        [`Gli chiedo davanti alla classe qual è il problema`, false, `No: nessuno deve dichiarare un motivo.`],
-        [`Mostro a tutta la classe il pulsante «Aa Leggi a modo tuo»`, true, `Giusto: è lo stesso per tutti e ognuno sceglie da sé.`],
-        [`Preparo per lui una versione con il suo nome`, false, `No: niente nomi e niente etichette sulle versioni.`]] }] },
+    { id: 'scelta-lettura', p: 1, tipo: 'scelta', t: 'Il supporto alla lettura',
+      domande: [{ q: `Un alunno incontra difficoltà nella lettura. Come procedi?`, opz: [
+        [`Gli chiedo in classe la ragione della difficoltà`, false, `No: nessuno è tenuto a dichiarare un motivo.`],
+        [`Presento a tutta la classe il pulsante «Aa Leggi a modo tuo»`, true, `Esatto: è identico per tutti e ciascuno decide da sé.`],
+        [`Predispongo per lui una versione con il suo nome`, false, `No: né nomi né etichette sulle versioni.`]] }] },
 
     { id: 'aa', p: 1, tipo: 'azione', t: 'Apri «Leggi a modo tuo»', url: DEMO, lettura: true,
-      cosa: `Tocca «Aa Leggi a modo tuo», in basso a sinistra.`,
-      sugg: `Il pulsante tondo con le lettere «Aa» resta sempre visibile sulla lezione, in basso a sinistra.`,
+      cosa: `Seleziona «Aa Leggi a modo tuo», in basso a sinistra.`,
+      sugg: `Il pulsante «Aa» è sempre visibile sulla lezione, in basso a sinistra.`,
       controlli: [{ k: 'a', t: 'Pannello aperto', ok: function (c) { var p = c.q('#sup-pann'); return !!(p && !p.hidden); }, mostra: '#sup-btn' }],
-      fine: `Il pannello è uguale per tutti: carattere, spazi, colori, voce.` },
+      fine: `Il pannello è identico per tutti: carattere, spazi, colori, voce.` },
 
-    { id: 'lettura', p: 1, tipo: 'azione', t: 'Prova due letture', url: DEMO, lettura: true,
-      cosa: `Nella «Scelta rapida» tocca «Lettura 1», poi «Lettura 3».`,
-      sugg: `Se il pannello si è chiuso, riaprilo con «Aa». I tre pulsanti sono in alto.`,
+    { id: 'lettura', p: 1, tipo: 'azione', t: 'Due modalità di lettura', url: DEMO, lettura: true,
+      cosa: `Nella «Scelta rapida» seleziona «Lettura 1», poi «Lettura 3».`,
+      sugg: `Se il pannello si è chiuso, riaprilo con «Aa»: i tre pulsanti sono in alto.`,
       controlli: [
         { k: 'a', t: 'Lettura 1', ok: function (c) { return c.clic(function (e) { return e.p === '1'; }); }, mostra: ['[data-p="1"]', '#sup-btn'] },
         { k: 'b', t: 'Lettura 3', ok: function (c) { return c.clic(function (e) { return e.p === '3'; }); }, mostra: ['[data-p="3"]', '#sup-btn'] }],
-      fine: `Con un solo tocco cambia tutta la pagina.` },
+      fine: `Con un solo gesto cambia l’intera pagina.` },
 
-    { id: 'standard', p: 1, tipo: 'azione', t: 'Torna come prima', url: DEMO, lettura: true,
-      cosa: `Tocca «↺ Ripristina tutto».`,
-      sugg: `È in fondo al pannello. Scorri il pannello verso il basso.`,
+    { id: 'standard', p: 1, tipo: 'azione', t: 'Il ripristino', url: DEMO, lettura: true,
+      cosa: `Seleziona «↺ Ripristina tutto».`,
+      sugg: `Si trova in fondo al pannello: scorri verso il basso.`,
       controlli: [{ k: 'a', t: 'Lettura ripristinata', ok: function (c) { return vuota(c); }, mostra: ['[data-ripristina]', '#sup-btn'] }],
-      fine: `Ognuno può tornare allo standard quando vuole.` },
+      fine: `Ciascuno può tornare alla visualizzazione standard in qualsiasi momento.` },
 
-    { id: 'accesso', p: 1, tipo: 'azione', t: 'Entra nell’area docenti', url: CREA,
-      cosa: `Scrivi la mail della scuola (basta nome.cognome) e tocca «Mandami il codice →». Poi incolla le sei cifre e tocca «Entra →».`,
-      sugg: `Il messaggio si chiama «Il tuo codice di accesso». Non lo vedi? Guarda in Spam. Il codice vale 10 minuti: se scade tocca «Rimanda il codice».`,
+    { id: 'accesso', p: 1, tipo: 'azione', t: 'Accedi all’area docenti', url: CREA,
+      cosa: `Digita la mail della scuola (è sufficiente nome.cognome) e seleziona «Mandami il codice →». Poi incolla le sei cifre e seleziona «Entra →».`,
+      sugg: `Il messaggio ha per oggetto «Il tuo codice di accesso»; se non lo trovi, controlla la posta indesiderata. Il codice vale 10 minuti: alla scadenza seleziona «Rimanda il codice».`,
       controlli: [
         { k: 'a', t: 'Codice richiesto', ok: function (c) { return accesso() || c.clic(function (e) { return /mandami il codice/.test(e.tx); }); }, mostra: function (c) { return c.trova('Mandami il codice'); } },
-        { k: 'b', t: 'Accesso fatto', ok: function () { return accesso(); }, mostra: function (c) { return c.trova('Entra'); } }],
-      fine: `Accesso fatto: resta valido 60 giorni su questo dispositivo.` },
+        { k: 'b', t: 'Accesso effettuato', ok: function () { return accesso(); }, mostra: function (c) { return c.trova('Entra'); } }],
+      fine: `Accesso effettuato: resta valido 60 giorni su questo dispositivo.` },
 
-    { id: 'istruzioni', p: 1, tipo: 'azione', t: 'Crea una lezione (1): le istruzioni', url: CREA, accesso: true,
-      cosa: `Scrivi un argomento (per esempio «Il sistema HACCP») e tocca «Copia le istruzioni».`,
-      sugg: `Il campo si chiama «Argomento / titolo della lezione». Gli altri campi sono facoltativi.`,
+    { id: 'istruzioni', p: 1, tipo: 'azione', t: 'Creare una lezione (1): le istruzioni', url: CREA, accesso: true,
+      cosa: `Indica un argomento (per esempio «Il sistema HACCP») e seleziona «Copia le istruzioni».`,
+      sugg: `Il campo è «Argomento / titolo della lezione»; gli altri sono facoltativi.`,
       controlli: [
-        { k: 'a', t: 'Argomento scritto', ok: function (c) { return c.val('#dc-arg').trim().length >= 3 || c.clic(function (e) { return e.id === 'dc-copia-prompt' && (e.arg || '').trim().length >= 3; }); }, mostra: '#dc-arg', et: 'Scrivi qui' },
+        { k: 'a', t: 'Argomento indicato', ok: function (c) { return c.val('#dc-arg').trim().length >= 3 || c.clic(function (e) { return e.id === 'dc-copia-prompt' && (e.arg || '').trim().length >= 3; }); }, mostra: '#dc-arg', et: 'Digita qui' },
         { k: 'b', t: 'Istruzioni copiate', ok: function (c) { return c.clic(function (e) { return e.id === 'dc-copia-prompt' && (e.arg || '').trim().length >= 3; }); }, mostra: '#dc-copia-prompt' }],
-      fine: `Istruzioni copiate: ora servono all’assistente.` },
+      fine: `Istruzioni copiate: serviranno all’assistente.` },
 
-    { id: 'assistente', p: 1, tipo: 'azione', t: 'Crea una lezione (2): l’assistente', url: CREA, accesso: true,
-      cosa: `Apri «Claude», «ChatGPT» o «Gemini», incolla le istruzioni e copia la risposta. Poi incollala nella casella «La risposta dell’IA».`,
-      sugg: `Se hai la foto di una pagina del libro, allegala con il tasto + o la graffetta; senza foto va bene lo stesso. La risposta sembra scritta in codice: è normale, si copia e basta. Il tasto «Copia» è sotto il testo.`,
+    { id: 'assistente', p: 1, tipo: 'azione', t: 'Creare una lezione (2): l’assistente', url: CREA, accesso: true,
+      cosa: `Apri «Claude», «ChatGPT» o «Gemini», incolla le istruzioni e copia la risposta; poi incollala nella casella «La risposta dell’IA».`,
+      sugg: `Se disponi della foto di una pagina del libro, allegala con il tasto + o la graffetta; in sua assenza basta l’argomento. La risposta ha l’aspetto di un codice: è la forma prevista, va solo copiata con il tasto «Copia» sotto il testo.`,
       controlli: [
         { k: 'a', t: 'Assistente aperto', ok: function (c) { return c.clic(function (e) { return /claude|chatgpt|gemini/.test(e.tx) && !!e.href; }); }, mostra: function (c) { return c.trova('Claude'); } },
         { k: 'b', t: 'Risposta incollata', ok: function (c) { return c.val('#dc-json').length > 100; }, mostra: ['#dc-incolla', '#dc-json'], et: 'Incolla qui' }],
-      fine: `Risposta incollata: la lezione è quasi pronta.` },
+      fine: `Risposta incollata: la lezione è pronta per la pubblicazione.` },
 
-    { id: 'pubblica', p: 1, tipo: 'azione', t: 'Crea una lezione (3): pubblica', url: CREA, accesso: true,
-      cosa: `Controlla il nome dell’autore e tocca «✨ Pubblica la lezione».`,
-      sugg: `Lascia spenta «Condividi nell’Archivio»: potrai accenderla più tardi da «Modifica».`,
+    { id: 'pubblica', p: 1, tipo: 'azione', t: 'Creare una lezione (3): la pubblicazione', url: CREA, accesso: true,
+      cosa: `Verifica il nome dell’autore e seleziona «✨ Pubblica la lezione».`,
+      sugg: `Lascia disattivata «Condividi nell’Archivio»: potrai attivarla in seguito da «Modifica».`,
       controlli: [{ k: 'a', t: 'Lezione pubblicata', ok: function (c) { var e = c.q('#dc-esito'); return !!(e && !e.hidden && c.raw('.dc-codice')); }, mostra: '#dc-manuale' }],
-      fine: function (c) { return `Lezione pubblicata. Codice: ${c.raw('.dc-codice')}. Se c’è un errore, «✏️ Modifica» lo corregge senza cambiare codice e QR.`; } },
+      fine: function (c) { return `Lezione pubblicata. Codice: ${c.raw('.dc-codice')}. Se emerge un errore, «✏️ Modifica» permette di correggerlo senza cambiare codice e QR.`; } },
 
     /* ───── PARTE 2: DA SOLI ───── */
-    { id: 'soglia', p: 2, tipo: 'soglia', t: 'Da qui fai da solo',
-      cosa: `Ogni missione ha un obiettivo: non ti dico dove toccare. La pagina segna ogni tappa quando la raggiungi.`,
-      cosa2: `Ti blocchi? «Non so come fare» ti dà un suggerimento e, se serve, ti mostra il punto.` },
+    { id: 'soglia', p: 2, tipo: 'soglia', t: 'Ora, in autonomia',
+      cosa: `Ogni missione indica un obiettivo, non il percorso per raggiungerlo: la pagina registra ogni tappa man mano che la completi.`,
+      cosa2: `Per un supporto, «Un aiuto?» offre un suggerimento e, se utile, indica il punto esatto.` },
 
-    { id: 'm1', p: 2, tipo: 'azione', t: 'Missione 1: una lezione sul tuo argomento', url: CREA, accesso: true, m: 1,
-      cosa: `Pubblica una seconda lezione, su un argomento della tua materia.`,
-      sugg: `Parti da «➕ Un’altra lezione». Poi di nuovo i tre passi: copia le istruzioni, usa l’assistente, incolla e pubblica.`,
+    { id: 'm1', p: 2, tipo: 'azione', t: 'Missione 1: una lezione nel tuo ambito disciplinare', url: CREA, accesso: true, m: 1,
+      cosa: `Pubblica una seconda lezione, su un argomento della tua disciplina.`,
+      sugg: `Avvia con «➕ Un’altra lezione», poi ripercorri i tre passi: istruzioni, assistente, incolla e pubblica.`,
       controlli: [
         { k: 'a', t: 'Nuova lezione avviata', ok: function (c) { var e = c.q('#dc-esito'); return c.clic(function (x) { return x.id === 'dc-altra'; }) || !!(c.vis(c.q('#dc-arg')) && e && e.hidden); }, mostra: '#dc-altra' },
         { k: 'b', t: 'Istruzioni copiate', ok: function (c) { return c.clic(function (e) { return e.id === 'dc-copia-prompt' && (e.arg || '').trim().length >= 3; }); }, mostra: '#dc-copia-prompt' },
         { k: 'c', t: 'Risposta incollata', ok: function (c) { return !!mem.ok['m1.b'] && (c.val('#dc-json').length > 100 || !!(c.raw('.dc-codice') && !mem.visti[c.raw('.dc-codice')])); }, mostra: '#dc-json', et: 'Incolla qui' },
         { k: 'd', t: 'Lezione pubblicata', ok: function (c) { var e = c.q('#dc-esito'), k = c.raw('.dc-codice'); return !!(e && !e.hidden && k && !mem.visti[k]); }, mostra: '#dc-manuale' }],
-      fine: `Due lezioni pubblicate. Il metodo è sempre lo stesso: argomento, assistente, incolla.` },
+      fine: `Due lezioni pubblicate: il metodo è ormai tuo.` },
 
-    { id: 'm2', p: 2, tipo: 'azione', t: 'Missione 2: proietta alla classe', url: CREA, accesso: true, m: 2,
-      cosa: `Mostra a tutto schermo il QR della tua lezione e apri la sfida a squadre.`,
-      sugg: `Dopo la pubblicazione trovi «🖥️ QR a tutto schermo» e «🏆 Sfida a squadre alla LIM». Se non li vedi, in «Le mie lezioni» tocca «QR».`,
+    { id: 'm2', p: 2, tipo: 'azione', t: 'Missione 2: la lezione in classe', url: CREA, accesso: true, m: 2,
+      cosa: `Proietta a tutto schermo il QR della tua lezione e apri la sfida a squadre.`,
+      sugg: `Dopo la pubblicazione compaiono «🖥️ QR a tutto schermo» e «🏆 Sfida a squadre alla LIM». Se non li vedi, in «Le mie lezioni» seleziona «QR».`,
       controlli: [
         { k: 'a', t: 'QR a tutto schermo', ok: function (c) { return c.clic(function (e) { return e.id === 'dc-lim' || !!e.qr; }); }, mostra: ['#dc-lim', '[data-qr]'] },
         { k: 'b', t: 'Sfida a squadre aperta', ok: function (c) { return c.clic(function (e) { return /m=squadre/.test(e.href || ''); }) || /m=squadre/.test(c.url); }, mostra: ['a[href*="m=squadre"]', '[data-qr]'] }],
-      fine: `Pronto per la LIM: il QR e la gara a squadre sono della tua lezione.` },
+      fine: `Pronto per la LIM: QR e sfida a squadre sono quelli della tua lezione.` },
 
-    { id: 'm3', p: 2, tipo: 'azione', t: 'Missione 3: lettura per tutti', url: DEMO, lettura: true, m: 3,
-      cosa: `Imposta «Lettura 2», poi riporta la pagina allo standard.`,
-      sugg: `Il pulsante «Aa Leggi a modo tuo» è in basso a sinistra. In fondo al pannello c’è «↺ Ripristina tutto».`,
+    { id: 'm3', p: 2, tipo: 'azione', t: 'Missione 3: la lettura, per tutti', url: DEMO, lettura: true, m: 3,
+      cosa: `Imposta «Lettura 2», poi riporta la pagina alla visualizzazione standard.`,
+      sugg: `Il pulsante «Aa Leggi a modo tuo» è in basso a sinistra; in fondo al pannello c’è «↺ Ripristina tutto».`,
       controlli: [
         { k: 'a', t: 'Pannello aperto', ok: function (c) { var p = c.q('#sup-pann'); return !!(p && !p.hidden) || c.clic(function (e) { return e.p === '2'; }); }, mostra: '#sup-btn' },
         { k: 'b', t: 'Lettura 2 impostata', ok: function (c) { return c.clic(function (e) { return e.p === '2'; }); }, mostra: ['[data-p="2"]', '#sup-btn'] },
-        { k: 'c', t: 'Pagina allo standard', ok: function (c) { return mem.ok['m3.b'] && vuota(c); }, mostra: ['[data-ripristina]', '#sup-btn'] }],
-      fine: `Fatto. Un pulsante per tutta la classe: nessuno deve spiegare perché lo usa.` },
+        { k: 'c', t: 'Visualizzazione standard ripristinata', ok: function (c) { return mem.ok['m3.b'] && vuota(c); }, mostra: ['[data-ripristina]', '#sup-btn'] }],
+      fine: `Fatto. Un solo pulsante per l’intera classe: nessuno deve motivare perché lo usa.` },
 
-    { id: 'm4', p: 2, tipo: 'azione', t: 'Missione 4: correggi una lezione', url: MIE, accesso: true, m: 4,
-      cosa: `Apri «✏️ Modifica» su una tua lezione, cambia il titolo e salva.`,
-      sugg: `In «Le mie lezioni» ogni lezione ha i suoi pulsanti. Nella pagina di modifica apri una sezione, correggi il testo e tocca «💾 Salva» in fondo.`,
+    { id: 'm4', p: 2, tipo: 'azione', t: 'Missione 4: rifinire una lezione', url: MIE, accesso: true, m: 4,
+      cosa: `Apri «✏️ Modifica» su una tua lezione, modifica il titolo e salva.`,
+      sugg: `In «Le mie lezioni» ogni lezione ha i propri comandi. Nella pagina di modifica apri una sezione, correggi il testo e seleziona «💾 Salva» in fondo.`,
       controlli: [
         { k: 'a', t: 'Modifica aperta', ok: function (c) { return /modifica\.html/.test(c.path); }, mostra: ['#dc-mie a[href*="modifica.html"]'] },
-        { k: 'b', t: 'Titolo cambiato', ok: function (c) { var s = c.q('#md-salva'); return !!(s && !s.disabled) || /salvata/.test(c.tx('#md-stato')); }, mostra: ['#md-tit', 'main input[type="text"]'], et: 'Cambia qui' },
+        { k: 'b', t: 'Titolo modificato', ok: function (c) { var s = c.q('#md-salva'); return !!(s && !s.disabled) || /salvata/.test(c.tx('#md-stato')); }, mostra: ['#md-tit', 'main input[type="text"]'], et: 'Modifica qui' },
         { k: 'c', t: 'Lezione salvata', ok: function (c) { return /salvata/.test(c.tx('#md-stato')); }, mostra: '#md-salva' }],
-      fine: `Salvata: i ragazzi vedono già la versione nuova, con lo stesso codice e lo stesso QR.` },
+      fine: `Salvata: gli studenti vedono subito la versione aggiornata, con lo stesso codice e lo stesso QR.` },
 
-    { id: 'm5', p: 2, tipo: 'scelta', t: 'Missione 5: tre scelte sulla riservatezza', m: 5,
+    { id: 'm5', p: 2, tipo: 'scelta', t: 'Missione 5: la riservatezza in tre decisioni', m: 5,
       domande: [
         { q: `Quale titolo pubblichi?`, opz: [
-          [`Ripasso di Marco Rossi (3ª B)`, false, `No: niente nomi di studenti nei titoli.`],
-          [`Il sistema HACCP: le sette fasi`, true, `Giusto: un titolo sul contenuto, senza nomi.`],
-          [`Verifica per i ragazzi con DSA`, false, `No: niente etichette. La lezione è uguale per tutti.`]] },
-        { q: `Per creare la lezione vuoi partire da una pagina del quaderno di un alunno. Come ti regoli?`, opz: [
-          [`La fotografo e poi la cancello`, false, `No: niente foto di quaderni con nomi o dati dei ragazzi.`],
-          [`Fotografo il libro oppure scrivo solo l’argomento`, true, `Giusto: libro o appunti tuoi, mai dati dei ragazzi.`],
-          [`La fotografo coprendo il nome con un dito`, false, `No: il quaderno resta fuori. Usa il libro o scrivi l’argomento.`]] },
-        { q: `Hai preparato una versione con più aiuti. Come la distribuisci?`, opz: [
-          [`Con la scritta «versione DSA» sul foglio`, false, `No: nessuna scritta che distingua la versione.`],
-          [`Come le altre: sul foglio non compare nulla che la distingua`, true, `Giusto: stessa consegna per tutti, senza nomi né etichette.`],
-          [`Chiamo l’alunno per nome e gliela do davanti a tutti`, false, `No: la consegna deve essere uguale per tutti.`]] }] }
+          [`Ripasso di Marco Rossi (3ª B)`, false, `No: nessun nome di studente nei titoli.`],
+          [`Il sistema HACCP: le sette fasi`, true, `Esatto: un titolo che descrive il contenuto, senza nomi.`],
+          [`Verifica per i ragazzi con DSA`, false, `No: nessuna etichetta. La lezione è la stessa per tutti.`]] },
+        { q: `Per preparare la lezione potresti partire da una pagina del quaderno di un alunno. Come ti regoli?`, opz: [
+          [`La fotografo e poi la cancello`, false, `No: nessuna foto di quaderni che contengano nomi o dati degli studenti.`],
+          [`Fotografo il libro oppure scrivo solo l’argomento`, true, `Esatto: il libro o i tuoi appunti, mai dati degli studenti.`],
+          [`La fotografo coprendo il nome con un dito`, false, `No: il quaderno resta fuori. Usa il libro o indica l’argomento.`]] },
+        { q: `Hai predisposto una versione con più supporti. Come la distribuisci?`, opz: [
+          [`Con la scritta «versione DSA» sul foglio`, false, `No: nessuna dicitura che distingua la versione.`],
+          [`Come le altre: sul foglio non compare nulla che la distingua`, true, `Esatto: stessa consegna per tutti, senza nomi né etichette.`],
+          [`Chiamo l’alunno per nome e gliela consegno davanti a tutti`, false, `No: la consegna deve essere identica per tutti.`]] }] }
   ];
 
   /* ───── memoria della sessione (solo in questa scheda) ───── */
@@ -466,7 +466,7 @@
   }
   function punta(el, etichetta) {
     if (el !== puntoEl) {
-      puntoEl = el; tip.textContent = etichetta || 'Tocca qui';
+      puntoEl = el; tip.textContent = etichetta || 'Qui';
       /* il puntatore si rinnova (3 richiami) solo quando cambia il punto */
       anello.style.animation = 'none'; void anello.offsetWidth; anello.style.animation = '';
       try { var r = el.getBoundingClientRect(), ih = el.ownerDocument.defaultView.innerHeight; if (r.top < 70 || r.bottom > ih - 30) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {}
@@ -498,9 +498,9 @@
     } else {
       h += '<p class="cosa">' + chip(t.cosa) + '</p><ul class="ctl" id="ctl"' + (t.controlli.length === 1 ? ' hidden' : '') + '>' + t.controlli.map(function (k) { return '<li data-k="' + k.k + '"><span class="sp" aria-hidden="true">✓</span><span>' + esc(k.t) + '</span></li>'; }).join('') + '</ul>';
       h += '<div class="esito" id="esito" role="status" aria-live="polite"></div>';
-      h += '<div class="mancano" id="serveAccesso" hidden>Per questo passo serve l’accesso: tocca il passo «Entra nell’area docenti» nella mappa in alto.</div>';
-      h += '<div class="aiuto" id="aiuto"><button type="button" id="nonso" aria-expanded="false" aria-controls="aiutoBox">Non so come fare</button>' +
-        '<div class="box" id="aiutoBox" hidden><p>' + chip(t.sugg) + '</p><div class="az2"><button type="button" class="pieno" id="mostra">👆 Mostrami dove</button><button type="button" id="riapri">↻ Apri la pagina del passo</button><button type="button" id="salta">Salta questo passo</button></div></div></div>';
+      h += '<div class="mancano" id="serveAccesso" hidden>Questo passo richiede l’accesso: riprendi dalla mappa il passo «Accedi all’area docenti».</div>';
+      h += '<div class="aiuto" id="aiuto"><button type="button" id="nonso" aria-expanded="false" aria-controls="aiutoBox">Un aiuto?</button>' +
+        '<div class="box" id="aiutoBox" hidden><p>' + chip(t.sugg) + '</p><div class="az2"><button type="button" class="pieno" id="mostra">👆 Indica il punto</button><button type="button" id="riapri">↻ Riapri la pagina</button><button type="button" id="salta">Procedi senza questo passo</button></div></div></div>';
     }
     corpo.innerHTML = h;
     aggiorna();
@@ -539,7 +539,7 @@
       for (var i = 0; i < t.controlli.length; i++) {
         var k = t.controlli[i]; if (mem.ok[t.id + '.' + k.k]) continue;
         var el = risolvi(c, k.mostra);
-        if (el) punta(el, k.et || (/^(INPUT|TEXTAREA)$/.test(el.tagName) && el.type !== 'submit' && el.type !== 'button' ? 'Scrivi qui' : 'Tocca qui')); else togli();
+        if (el) punta(el, k.et || (/^(INPUT|TEXTAREA)$/.test(el.tagName) && el.type !== 'submit' && el.type !== 'button' ? 'Digita qui' : 'Qui')); else togli();
         return;
       }
     } else togli();
@@ -549,7 +549,7 @@
   /* ───── interfaccia: parti, mappa, barra, pulsanti ───── */
   function aggiorna() {
     var t = T[idx], p = t.p;
-    [1, 2].forEach(function (n) { var cn = conteggio(n); $('p' + n).setAttribute('aria-pressed', n === p ? 'true' : 'false'); $('p' + n + 'c').textContent = cn[0] + ' di ' + cn[1] + ' fatti'; });
+    [1, 2].forEach(function (n) { var cn = conteggio(n); $('p' + n).setAttribute('aria-pressed', n === p ? 'true' : 'false'); $('p' + n + 'c').textContent = cn[0] + ' di ' + cn[1] + ' completati'; });
     var tot = azioni(1).length + azioni(2).length, fa = conteggio(1)[0] + conteggio(2)[0];
     $('barra').style.width = Math.round((fa / tot) * 100) + '%';
     var l = deiPasso(p), m = '';
@@ -560,12 +560,12 @@
     $('mappa').innerHTML = m;
     $('indietro').disabled = idx <= 0;
     var ultimo = idx >= T.length - 1;
-    $('avanti').textContent = t.tipo === 'soglia' ? 'Comincia →' : ultimo ? 'Concludi ✓' : 'Avanti →';
+    $('avanti').textContent = t.tipo === 'soglia' ? 'Prosegui →' : ultimo ? 'Concludi ✓' : 'Avanti →';
     $('avanti').disabled = !(t.tipo === 'soglia' || fatto(t));
     segnaControlli();
     var a = $('aiuto'); if (a) a.hidden = !!mem.fatti[t.id];
     if (t.tipo === 'azione' && mem.fatti[t.id]) { var f = typeof t.fine === 'function' ? t.fine(ctx()) : t.fine; mostraEsito('✓ ' + f, 'si'); }
-    else if (t.tipo === 'azione' && mem.saltati[t.id]) mostraEsito('Passo saltato: puoi tornarci dalla mappa.', '');
+    else if (t.tipo === 'azione' && mem.saltati[t.id]) mostraEsito('Passo omesso: si può riprendere dalla mappa.', '');
     else if (t.tipo === 'scelta' && mem.fatti[t.id] && $('esito') && !$('esito').textContent) mostraEsito('✓ Fatto.', 'si');
   }
   function vai(i, sposta) {
@@ -609,7 +609,7 @@
       mem.mostra[t.id] = true; salva();
       var c = ctx(), trovato = false;
       for (var j = 0; j < t.controlli.length; j++) { var k = t.controlli[j]; if (mem.ok[t.id + '.' + k.k]) continue; if (risolvi(c, k.mostra)) trovato = true; break; }
-      if (!trovato) mostraEsito('Non vedo il punto in questa pagina: tocca «Apri la pagina del passo».', 'no');
+      if (!trovato) mostraEsito('Il punto non è visibile in questa pagina: seleziona «Riapri la pagina».', 'no');
       giro(); return;
     }
     if (e.target.closest('#riapri')) { if (t.url) { carica(t.url); mostraEsito('', ''); } return; }
@@ -628,7 +628,7 @@
     var h = '';
     T.filter(function (t) { return t.tipo !== 'soglia'; }).forEach(function (t) {
       var ok = !!mem.fatti[t.id];
-      h += '<li class="' + (ok ? '' : 'no') + '"><span class="sp" aria-hidden="true">' + (ok ? '✓' : '–') + '</span><span>' + esc(t.t) + (ok ? '' : (mem.saltati[t.id] ? ' (saltato)' : ' (da fare)')) + '</span>' + (ok ? '' : '<button type="button" data-i="' + T.indexOf(t) + '">Rifai</button>') + '</li>';
+      h += '<li class="' + (ok ? '' : 'no') + '"><span class="sp" aria-hidden="true">' + (ok ? '✓' : '·') + '</span><span>' + esc(t.t) + (ok ? '' : (mem.saltati[t.id] ? ' (omesso)' : ' (da completare)')) + '</span>' + (ok ? '' : '<button type="button" data-i="' + T.indexOf(t) + '">Riprendi</button>') + '</li>';
     });
     $('riepilogo').innerHTML = h;
     $('app').classList.add('chiusa'); $('fine').classList.add('on'); window.scrollTo(0, 0);

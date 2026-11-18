@@ -361,7 +361,8 @@
     return { esito: 'giusta', forma: L.forma };
   }
 
-  var API = { calcola: calcola, genera: genera, controlla: controlla, leggiRisposta: leggiRisposta, LIVELLI: LIVELLI, ErroreFz: ErroreFz, espressione: espressione, math: math, decimale: decimale, ridotta: ridotta };
+  var M = { mn: mn, mo: mo, mt: mt, row: row, par: par, eq: eq, num: num, parNum: parNum, fr: fr, parFr: parFr, mf: mf, pot: pot, potFr: potFr, potNum: potNum, math: math, gcd: gcd, mcm: mcm, ridotta: ridotta, reciproca: reciproca, uguali: uguali, abs: abs, testoFr: testoFr, SIMB: SIMB };
+  var API = { M: M, calcola: calcola, genera: genera, controlla: controlla, leggiRisposta: leggiRisposta, LIVELLI: LIVELLI, ErroreFz: ErroreFz, espressione: espressione, math: math, decimale: decimale, ridotta: ridotta };
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
   root.FRAZIONI = API;
 })(typeof window !== 'undefined' ? window : globalThis);

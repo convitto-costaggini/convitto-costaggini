@@ -56,7 +56,7 @@
     var box = $('fz-esito');
     try {
       var c = F.calcola(leggi());
-      box.innerHTML = htmlRisultato(c) + '<h3 class="fz-sottit">I passaggi</h3>' + htmlPassi(c);
+      box.innerHTML = htmlRisultato(c) + '<details class="fz-det" open><summary>La soluzione completa, tutti i passaggi</summary>' + htmlPassi(c) + '</details>';
     } catch (e) {
       if (e.name !== 'ErroreFz') throw e;
       box.innerHTML = '<p class="fz-err" role="alert">' + e.message + '</p>';
@@ -161,7 +161,136 @@
   $('sc-crea').addEventListener('click', scheda);
   $('sc-stampa').addEventListener('click', function () { window.print(); });
 
+
+  /* ── il tutor: una domanda alla volta ── */
+  var TT = { q: null, t: null, i: 0, ok: false, tent: 0, aiuto: 0, soli: 0, aiutati: 0, usato: false, lav: [] };
+  var area = $('tt-area');
+  $('tt-liv').innerHTML = Object.keys(F.LIVELLI).map(function (k) { return '<option value="' + k + '">' + k + '. ' + F.LIVELLI[k].nome + ' (' + F.LIVELLI[k].desc + ')</option>'; }).join('');
+  $('tt-liv').value = '2';
+  function esc(x) { return String(x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function avviaTutor(q, scorri) {
+    var t;
+    try { t = window.FRAZIONI_TUTOR.costruisci(q); }
+    catch (e) {
+      if (e.name !== 'ErroreFz') throw e;
+      area.innerHTML = '<p class="fz-err" role="alert">' + e.message + '</p>';
+      if (scorri) $('impara').scrollIntoView();
+      return;
+    }
+    TT = { q: q, t: t, i: 0, ok: false, tent: 0, aiuto: 0, soli: 0, aiutati: 0, usato: false, lav: [] };
+    disegna(true);
+    if (scorri) $('impara').scrollIntoView();
+  }
+  function nuovoTutor(scorri) {
+    var ops = $('tt-op').value.split('');
+    avviaTutor(F.genera(+$('tt-liv').value, ops), scorri);
+  }
+  function testata() {
+    return '<div class="tt-testata"><p class="tt-et">L\'esercizio</p>' + TT.t.espressione + '</div>';
+  }
+  function barra() {
+    var n = TT.t.passi.length, i = Math.min(TT.i + (TT.ok ? 1 : 0), n);
+    return '<div class="tt-prog"><span>Passo ' + Math.min(TT.i + 1, n) + ' di ' + n + '</span><div class="tt-bar" role="img" aria-label="Fatti ' + i + ' passi su ' + n + '"><i style="width:' + Math.round(100 * i / n) + '%"></i></div></div>';
+  }
+  function lavagna() {
+    if (!TT.lav.length) return '';
+    return '<div class="tt-lav"><p class="tt-et">La tua lavagna</p>' + TT.lav.join('') + '</div>';
+  }
+  function campo(p) {
+    if (p.tipo === 'frac') {
+      return '<div class="tt-fi"><label for="tt-n">Numeratore</label><input id="tt-n" type="text" inputmode="text" autocomplete="off" aria-describedby="tt-q"/><span class="fz-barra" aria-hidden="true"></span><label for="tt-d">Denominatore</label><input id="tt-d" type="text" inputmode="numeric" autocomplete="off"/></div><button type="submit" class="fz-btn">Controlla</button>';
+    }
+    if (p.tipo === 'scelta') {
+      return '<div class="tt-sc" role="group" aria-labelledby="tt-q">' + p.opzioni.map(function (o) { return '<button type="button" class="fz-btn sec" data-v="' + esc(o[0]) + '">' + esc(o[1]) + '</button>'; }).join('') + '</div>';
+    }
+    return '<div class="tt-num"><label for="tt-r">La tua risposta</label><input id="tt-r" type="text" inputmode="' + (p.atteso < 0n ? 'text' : 'numeric') + '" autocomplete="off" aria-describedby="tt-q"/></div><button type="submit" class="fz-btn">Controlla</button>';
+  }
+  function disegna(primo) {
+    var t = TT.t, n = t.passi.length, h = testata();
+    if (TT.i >= n) { fine(h); return; }
+    var p = t.passi[TT.i];
+    h += barra() + lavagna();
+    h += '<div class="tt-card"><p class="tt-n">Passo ' + (TT.i + 1) + ' · ' + esc(p.titolo) + '</p><p class="tt-q" id="tt-q">' + esc(p.testo) + '</p>' + (p.ctx ? '<div class="tt-ctx">' + p.ctx + '</div>' : '');
+    if (!TT.ok) {
+      h += '<form id="tt-f" novalidate>' + campo(p) + '</form>';
+      h += '<p class="fz-fb" id="tt-fb" role="status"></p><p class="tt-aiuto" id="tt-aiuto-t"></p>';
+      h += '<div class="fz-azioni"><button type="button" class="fz-btn sec" id="tt-aiuto">Suggerimento</button><button type="button" class="fz-btn sec" id="tt-mostra">Mostrami la risposta</button></div>';
+    } else {
+      h += '<p class="fz-fb ' + TT.classe + '" id="tt-fb" role="status">' + esc(TT.fb) + '</p>';
+      h += '<div class="fz-azioni"><button type="button" class="fz-btn" id="tt-avanti">' + (TT.i + 1 >= n ? 'Vedi il risultato' : 'Avanti') + '</button></div>';
+    }
+    h += '</div>';
+    area.innerHTML = h;
+    var f = area.querySelector('#tt-r') || area.querySelector('#tt-n');
+    if (TT.ok) area.querySelector('#tt-avanti').focus();
+    else if (f && !primo) f.focus();
+  }
+  function fine(h) {
+    var t = TT.t;
+    h += '<div class="tt-fine"><p class="tt-et">Fatto!</p><p class="tt-q">Il risultato è:</p><div class="tt-ris">' + F.math(t.risultato.d === 1n ? F.M.num(t.risultato.n) : F.M.fr(t.risultato)) + '</div>';
+    var tot = TT.soli + TT.aiutati;
+    h += '<p class="tt-stat">Hai risposto da solo a ' + TT.soli + ' passi su ' + tot + (TT.aiutati ? ' (con aiuto: ' + TT.aiutati + ')' : '') + '.' + (TT.aiutati > Math.floor(tot / 2) ? ' Rifallo da capo con calma: la seconda volta sarà più facile.' : (TT.aiutati === 0 ? ' Ottimo lavoro!' : '')) + '</p>';
+    h += '<div class="fz-azioni"><button type="button" class="fz-btn" id="tt-altro">Un altro esercizio</button><button type="button" class="fz-btn sec" id="tt-rifai">Rifallo da capo</button><a class="fz-btn sec" href="aula/matematica/#allenati" style="text-decoration:none;display:inline-flex;align-items:center">Prova da solo, senza guida</a></div></div>';
+    area.innerHTML = h;
+    area.querySelector('#tt-altro').focus();
+  }
+  function valore(p) {
+    if (p.tipo === 'frac') return { n: area.querySelector('#tt-n').value, d: area.querySelector('#tt-d').value };
+    if (p.tipo === 'num') return area.querySelector('#tt-r').value;
+    return null;
+  }
+  function chiudiPasso(p, aiutato, msg, classe) {
+    if (p.lav) TT.lav.push(p.lav);
+    if (aiutato) TT.aiutati++; else TT.soli++;
+    TT.ok = true; TT.fb = msg; TT.classe = classe;
+    disegna(false);
+  }
+  function controlla(p, v) {
+    var r = p.verifica(v), fb = area.querySelector('#tt-fb');
+    if (r.ok) { chiudiPasso(p, TT.tent > 0 && TT.usato, 'Esatto! ' + p.spiega, 'si'); return; }
+    TT.tent++;
+    fb.className = 'fz-fb no';
+    fb.textContent = (r.msg || 'Non ancora.') + (TT.tent >= 2 && !r.msg ? ' Prova con il suggerimento.' : (r.msg ? '' : ' Riprova.'));
+    var f = area.querySelector('#tt-r') || area.querySelector('#tt-n');
+    if (f) { f.focus(); try { f.select(); } catch (e) {} }
+  }
+  area.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var p = TT.t.passi[TT.i]; if (!p || TT.ok) return;
+    controlla(p, valore(p));
+  });
+  area.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button'); if (!b) return;
+    var p = TT.t && TT.t.passi[TT.i];
+    if (b.dataset.v !== undefined && p && !TT.ok) { controlla(p, b.dataset.v); return; }
+    if (b.id === 'tt-aiuto' && p) {
+      TT.usato = true;
+      var el = area.querySelector('#tt-aiuto-t'), k = Math.min(TT.aiuto, p.aiuti.length - 1);
+      el.textContent = 'Suggerimento ' + (k + 1) + ': ' + p.aiuti[k];
+      if (TT.aiuto < p.aiuti.length) TT.aiuto++;
+      if (TT.aiuto >= p.aiuti.length) b.textContent = 'Hai visto tutti i suggerimenti';
+      else b.textContent = 'Un altro suggerimento';
+      if (TT.aiuto >= p.aiuti.length) b.disabled = true;
+      return;
+    }
+    if (b.id === 'tt-mostra' && p) { chiudiPasso(p, true, 'La risposta è ' + p.rivela() + '. ' + p.spiega, 'mezzo'); return; }
+    if (b.id === 'tt-avanti') { TT.i++; TT.ok = false; TT.tent = 0; TT.aiuto = 0; TT.usato = false; disegna(false); var h3 = area.querySelector('.tt-n'); return; }
+    if (b.id === 'tt-altro') { nuovoTutor(false); return; }
+    if (b.id === 'tt-rifai') { avviaTutor(TT.q, false); return; }
+  });
+  $('tt-nuovo').addEventListener('click', function () { nuovoTutor(false); });
+  ['tt-op', 'tt-liv'].forEach(function (id) { $(id).addEventListener('change', function () { nuovoTutor(false); }); });
+  $('fz-guida').addEventListener('click', function () {
+    var q = leggi();
+    try { F.calcola(q); } catch (e) { if (e.name !== 'ErroreFz') throw e; $('fz-esito').innerHTML = '<p class="fz-err" role="alert">' + e.message + '</p>'; return; }
+    avviaTutor(q, true);
+  });
+  $('fz-aiuto-b').addEventListener('click', function () { if (corr) avviaTutor(corr, true); });
+  window.TUTOR_UI = { stato: function () { return TT; } };
+
   /* avvio: un esempio già calcolato e il primo esercizio */
   calcola(false);
   nuovo(false);
+  avviaTutor(F.genera(2, ['+']), false);
 })();

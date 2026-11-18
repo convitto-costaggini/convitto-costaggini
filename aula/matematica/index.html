@@ -26,20 +26,48 @@
     <div class="w">
       <p class="lbl">Aula · Matematica</p>
       <h1>Le frazioni <em>passo passo</em></h1>
-      <p class="au-sub">Somma, differenza, prodotto, quoziente e potenze di frazioni, con ogni passaggio spiegato e la regola usata. Per studiare da soli, per ripassare, per proiettare alla LIM. Non serve registrarsi e il sito non salva i calcoli.</p>
+      <p class="au-sub">Somma, differenza, prodotto, divisione e potenze di frazioni. Ti prendo per mano: una domanda alla volta, tu rispondi e io ti dico se va bene e perché. Se ti blocchi c'è il suggerimento. Non serve registrarsi e il sito non salva niente.</p>
       <p class="fz-vai"><a href="aula/">← Torna all'Aula</a></p>
     </div>
   </section>
 
   <nav class="fz-nav no-stampa" aria-label="In questa pagina">
-    <div class="w"><a href="aula/matematica/#calcola">Calcola</a><a href="aula/matematica/#regole">Le regole</a><a href="aula/matematica/#allenati">Allenati</a><a href="aula/matematica/#scheda">Scheda stampabile</a></div>
+    <div class="w"><a href="aula/matematica/#impara">Impara</a><a href="aula/matematica/#calcola">Il tuo esercizio</a><a href="aula/matematica/#regole">Le regole</a><a href="aula/matematica/#allenati">Allenati</a><a href="aula/matematica/#scheda">Scheda stampabile</a></div>
   </nav>
 
-  <!-- 1. CALCOLA -->
+  <!-- 0. IMPARA (tutor) -->
+  <section class="au-sez no-stampa" id="impara" aria-labelledby="t-impara">
+    <div class="w">
+      <h2 class="au-tit" id="t-impara">Impara passo passo</h2>
+      <p class="au-nota">Una domanda alla volta: rispondi, io ti dico se va bene e perché. Se non sai come fare, chiedi un suggerimento; se proprio ti blocchi, ti mostro la risposta e si va avanti.</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte">
+          <div>
+            <label for="tt-op">Che cosa vuoi imparare?</label>
+            <select id="tt-op">
+              <option value="+">La somma di frazioni</option>
+              <option value="-">La differenza di frazioni</option>
+              <option value="*">Il prodotto di frazioni</option>
+              <option value=":">La divisione di frazioni</option>
+              <option value="+-*:">Un po' di tutto</option>
+            </select>
+          </div>
+          <div>
+            <label for="tt-liv">Difficoltà</label>
+            <select id="tt-liv"></select>
+          </div>
+        </div>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="tt-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. IL TUO ESERCIZIO -->
   <section class="au-sez no-stampa" id="calcola" aria-labelledby="t-calcola">
     <div class="w">
-      <h2 class="au-tit" id="t-calcola">Calcola e guarda i passaggi</h2>
-      <p class="au-nota">Scrivi due frazioni (il segno meno va al numeratore), l'esponente di ciascuna (anche negativo o 0) e scegli l'operazione. Oppure parti da un esempio.</p>
+      <h2 class="au-tit" id="t-calcola">Hai un esercizio tuo?</h2>
+      <p class="au-nota">Scrivi le due frazioni (il segno meno va al numeratore), l'esponente di ciascuna (anche negativo o 0) e scegli l'operazione. Poi fatti guidare passo passo, oppure guarda subito la soluzione completa. Puoi anche partire da un esempio.</p>
       <div class="fz-esempi" role="group" aria-label="Esempi pronti" id="fz-esempi"></div>
 
       <form id="fz-form" class="fz-form" novalidate>
@@ -87,7 +115,8 @@
           </div>
         </div>
         <div class="fz-azioni">
-          <button type="submit" class="fz-btn">Calcola</button>
+          <button type="button" class="fz-btn" id="fz-guida">Guidami passo passo</button>
+          <button type="submit" class="fz-btn sec">Mostra la soluzione completa</button>
           <button type="button" class="fz-btn sec" id="fz-lim" aria-pressed="false">Scrittura grande (per la LIM)</button>
         </div>
       </form>
@@ -192,7 +221,8 @@
         </form>
         <p class="fz-fb" id="fz-fb" role="status" aria-live="polite"></p>
         <div class="fz-azioni">
-          <button type="button" class="fz-btn sec" id="fz-sol-b">Mostra i passaggi</button>
+          <button type="button" class="fz-btn sec" id="fz-sol-b">Mostra la soluzione completa</button>
+          <button type="button" class="fz-btn sec" id="fz-aiuto-b">Aiutami passo passo</button>
           <button type="button" class="fz-btn" id="fz-nuovo">Nuovo esercizio</button>
         </div>
         <p class="fz-conta" id="fz-conta">Esercizi risolti in questa visita: 0</p>
@@ -245,6 +275,7 @@
 </main>
 <script src="nav.min.js"></script>
 <script src="aula/matematica/frazioni.js"></script>
+<script src="aula/matematica/frazioni-tutor.js"></script>
 <script src="aula/matematica/pagina.js"></script>
 </body>
 </html>

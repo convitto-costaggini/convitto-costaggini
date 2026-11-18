@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Frazioni passo passo – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="Operazioni e potenze tra frazioni con ogni passaggio spiegato: calcolo guidato, allenamento con correzione e schede di esercizi stampabili."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Aula · Matematica</p>
+      <h1>Le frazioni <em>passo passo</em></h1>
+      <p class="au-sub">Somma, differenza, prodotto, quoziente e potenze di frazioni, con ogni passaggio spiegato e la regola usata. Per studiare da soli, per ripassare, per proiettare alla LIM. Non serve registrarsi e il sito non salva i calcoli.</p>
+      <p class="fz-vai"><a href="aula/">← Torna all'Aula</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/#calcola">Calcola</a><a href="aula/matematica/#regole">Le regole</a><a href="aula/matematica/#allenati">Allenati</a><a href="aula/matematica/#scheda">Scheda stampabile</a></div>
+  </nav>
+
+  <!-- 1. CALCOLA -->
+  <section class="au-sez no-stampa" id="calcola" aria-labelledby="t-calcola">
+    <div class="w">
+      <h2 class="au-tit" id="t-calcola">Calcola e guarda i passaggi</h2>
+      <p class="au-nota">Scrivi due frazioni (il segno meno va al numeratore), l'esponente di ciascuna (anche negativo o 0) e scegli l'operazione. Oppure parti da un esempio.</p>
+      <div class="fz-esempi" role="group" aria-label="Esempi pronti" id="fz-esempi"></div>
+
+      <form id="fz-form" class="fz-form" novalidate>
+        <div class="fz-grid">
+          <div class="fz-op" role="group" aria-labelledby="g1">
+            <p class="fz-gt" id="g1">Prima frazione</p>
+            <div class="fz-riga">
+              <div class="fz-fraz">
+                <label for="n1">Numeratore</label>
+                <input id="n1" type="number" inputmode="numeric" step="1" min="-10000" max="10000" value="2" required/>
+                <span class="fz-barra" aria-hidden="true"></span>
+                <label for="d1">Denominatore</label>
+                <input id="d1" type="number" inputmode="numeric" step="1" min="1" max="10000" value="3" required/>
+              </div>
+              <div class="fz-esp">
+                <label for="k1">Elevata a</label>
+                <input id="k1" type="number" inputmode="numeric" step="1" min="-9" max="9" value="1" required/>
+              </div>
+            </div>
+          </div>
+
+          <fieldset class="fz-ops">
+            <legend>Operazione</legend>
+            <label class="fz-radio"><input type="radio" name="op" value="+" checked/><span><b aria-hidden="true">+</b> somma</span></label>
+            <label class="fz-radio"><input type="radio" name="op" value="-"/><span><b aria-hidden="true">−</b> differenza</span></label>
+            <label class="fz-radio"><input type="radio" name="op" value="*"/><span><b aria-hidden="true">·</b> prodotto</span></label>
+            <label class="fz-radio"><input type="radio" name="op" value=":"/><span><b aria-hidden="true">:</b> divisione</span></label>
+          </fieldset>
+
+          <div class="fz-op" role="group" aria-labelledby="g2">
+            <p class="fz-gt" id="g2">Seconda frazione</p>
+            <div class="fz-riga">
+              <div class="fz-fraz">
+                <label for="n2">Numeratore</label>
+                <input id="n2" type="number" inputmode="numeric" step="1" min="-10000" max="10000" value="3" required/>
+                <span class="fz-barra" aria-hidden="true"></span>
+                <label for="d2">Denominatore</label>
+                <input id="d2" type="number" inputmode="numeric" step="1" min="1" max="10000" value="4" required/>
+              </div>
+              <div class="fz-esp">
+                <label for="k2">Elevata a</label>
+                <input id="k2" type="number" inputmode="numeric" step="1" min="-9" max="9" value="1" required/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fz-azioni">
+          <button type="submit" class="fz-btn">Calcola</button>
+          <button type="button" class="fz-btn sec" id="fz-lim" aria-pressed="false">Scrittura grande (per la LIM)</button>
+        </div>
+      </form>
+
+      <div id="fz-esito" class="fz-esito" tabindex="-1"></div>
+    </div>
+  </section>
+
+  <!-- 2. LE REGOLE -->
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg">
+          <h3>Somma e differenza</h3>
+          <p>Servono frazioni con lo stesso denominatore: il più piccolo è il m.c.m. dei denominatori. Poi si sommano (o sottraggono) i numeratori.</p>
+          <math display="block"><mrow><mfrac><mi>a</mi><mi>m</mi></mfrac><mo>±</mo><mfrac><mi>c</mi><mi>m</mi></mfrac><mo>=</mo><mfrac><mrow><mi>a</mi><mo>±</mo><mi>c</mi></mrow><mi>m</mi></mfrac></mrow></math>
+        </article>
+        <article class="fz-reg">
+          <h3>Prodotto</h3>
+          <p>Numeratore per numeratore, denominatore per denominatore. Prima si semplifica «in croce».</p>
+          <math display="block"><mrow><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>·</mo><mfrac><mi>c</mi><mi>d</mi></mfrac><mo>=</mo><mfrac><mrow><mi>a</mi><mo>·</mo><mi>c</mi></mrow><mrow><mi>b</mi><mo>·</mo><mi>d</mi></mrow></mfrac></mrow></math>
+        </article>
+        <article class="fz-reg">
+          <h3>Quoziente</h3>
+          <p>Si moltiplica per il reciproco della seconda frazione, che non deve valere 0.</p>
+          <math display="block"><mrow><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>:</mo><mfrac><mi>c</mi><mi>d</mi></mfrac><mo>=</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>·</mo><mfrac><mi>d</mi><mi>c</mi></mfrac><mspace width="1em"/><mo>(</mo><mi>c</mi><mo>≠</mo><mn>0</mn><mo>)</mo></mrow></math>
+        </article>
+        <article class="fz-reg">
+          <h3>Potenza</h3>
+          <p>L'esponente vale per il numeratore e per il denominatore. Base negativa: esponente pari dà risultato positivo, dispari negativo.</p>
+          <math display="block"><mrow><msup><mrow><mo>(</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>)</mo></mrow><mi>n</mi></msup><mo>=</mo><mfrac><msup><mi>a</mi><mi>n</mi></msup><msup><mi>b</mi><mi>n</mi></msup></mfrac></mrow></math>
+        </article>
+        <article class="fz-reg">
+          <h3>Esponente negativo</h3>
+          <p>Si capovolge la frazione e l'esponente diventa positivo. La base non deve valere 0.</p>
+          <math display="block"><mrow><msup><mrow><mo>(</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>)</mo></mrow><mrow><mo>−</mo><mi>n</mi></mrow></msup><mo>=</mo><msup><mrow><mo>(</mo><mfrac><mi>b</mi><mi>a</mi></mfrac><mo>)</mo></mrow><mi>n</mi></msup></mrow></math>
+        </article>
+        <article class="fz-reg">
+          <h3>Esponente zero</h3>
+          <p>Vale 1 per ogni base diversa da 0. La scrittura 0⁰ non ha significato (forma indeterminata).</p>
+          <math display="block"><mrow><msup><mrow><mo>(</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>)</mo></mrow><mn>0</mn></msup><mo>=</mo><mn>1</mn><mspace width="1em"/><mo>(</mo><mi>a</mi><mo>≠</mo><mn>0</mn><mo>)</mo></mrow></math>
+        </article>
+      </div>
+
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li>
+          <p><strong>Sommare i denominatori.</strong> Si sommano solo i numeratori, dopo aver portato le frazioni allo stesso denominatore.</p>
+          <math display="block"><mrow><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>+</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo>=</mo><mfrac><mn>8</mn><mn>12</mn></mfrac><mo>+</mo><mfrac><mn>3</mn><mn>12</mn></mfrac><mo>=</mo><mfrac><mn>11</mn><mn>12</mn></mfrac><mspace width="1em"/><mtext>e non</mtext><mspace width="0.5em"/><mfrac><mn>3</mn><mn>7</mn></mfrac></mrow></math>
+        </li>
+        <li>
+          <p><strong>Elevare solo il numeratore.</strong> L'esponente riguarda tutta la frazione.</p>
+          <math display="block"><mrow><msup><mrow><mo>(</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><mfrac><mn>4</mn><mn>9</mn></mfrac><mspace width="1em"/><mtext>e non</mtext><mspace width="0.5em"/><mfrac><mn>4</mn><mn>3</mn></mfrac></mrow></math>
+        </li>
+        <li>
+          <p><strong>Le parentesi con il segno.</strong> Con la parentesi il segno fa parte della base; senza, il meno resta fuori dalla potenza.</p>
+          <math display="block"><mrow><msup><mrow><mo>(</mo><mrow><mo>−</mo><mfrac><mn>2</mn><mn>3</mn></mfrac></mrow><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><mfrac><mn>4</mn><mn>9</mn></mfrac><mspace width="1.5em"/><mo>−</mo><msup><mrow><mo>(</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><mo>−</mo><mfrac><mn>4</mn><mn>9</mn></mfrac></mrow></math>
+        </li>
+        <li>
+          <p><strong>Esponente −1.</strong> Si capovolge la frazione, il segno non cambia.</p>
+          <math display="block"><mrow><msup><mrow><mo>(</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mspace width="1em"/><mtext>e non</mtext><mspace width="0.5em"/><mo>−</mo><mfrac><mn>2</mn><mn>3</mn></mfrac></mrow></math>
+        </li>
+        <li>
+          <p><strong>Esponente 0.</strong> Il risultato è 1, non 0.</p>
+          <math display="block"><mrow><msup><mrow><mo>(</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>)</mo></mrow><mn>0</mn></msup><mo>=</mo><mn>1</mn></mrow></math>
+        </li>
+        <li>
+          <p><strong>Capovolgere la frazione sbagliata nella divisione.</strong> Si capovolge la seconda, quella per cui si divide.</p>
+          <math display="block"><mrow><mfrac><mn>3</mn><mn>4</mn></mfrac><mo>:</mo><mfrac><mn>2</mn><mn>5</mn></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><mo>·</mo><mfrac><mn>5</mn><mn>2</mn></mfrac><mo>=</mo><mfrac><mn>15</mn><mn>8</mn></mfrac></mrow></math>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. ALLENATI -->
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">Allenati</h2>
+      <p class="au-nota">Un esercizio alla volta, con correzione. Scrivi la risposta come frazione ridotta ai minimi termini (per esempio 3/4 o -5/6), come numero intero o come decimale finito (0,75).</p>
+      <div class="fz-form fz-alle">
+        <div class="fz-scelte">
+          <div>
+            <label for="fz-liv">Livello</label>
+            <select id="fz-liv"></select>
+          </div>
+          <fieldset class="fz-ck">
+            <legend>Operazioni</legend>
+            <label><input type="checkbox" name="al-op" value="+" checked/> somma</label>
+            <label><input type="checkbox" name="al-op" value="-" checked/> differenza</label>
+            <label><input type="checkbox" name="al-op" value="*" checked/> prodotto</label>
+            <label><input type="checkbox" name="al-op" value=":" checked/> divisione</label>
+          </fieldset>
+        </div>
+        <div class="fz-dom" id="fz-dom" aria-live="off"></div>
+        <form id="fz-rif" class="fz-risp" novalidate>
+          <label for="fz-ris-in">La tua risposta</label>
+          <div class="fz-risp-r">
+            <input id="fz-ris-in" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="per esempio 3/4"/>
+            <button type="submit" class="fz-btn">Controlla</button>
+          </div>
+        </form>
+        <p class="fz-fb" id="fz-fb" role="status" aria-live="polite"></p>
+        <div class="fz-azioni">
+          <button type="button" class="fz-btn sec" id="fz-sol-b">Mostra i passaggi</button>
+          <button type="button" class="fz-btn" id="fz-nuovo">Nuovo esercizio</button>
+        </div>
+        <p class="fz-conta" id="fz-conta">Esercizi risolti in questa visita: 0</p>
+        <div id="fz-sol" class="fz-esito" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SCHEDA STAMPABILE -->
+  <section class="au-sez au-doc" id="scheda" aria-labelledby="t-scheda">
+    <div class="w">
+      <div class="no-stampa">
+        <h2 class="au-tit" id="t-scheda">Scheda di esercizi da stampare</h2>
+        <p class="au-nota">Per chi insegna: si sceglie il livello e il numero di esercizi, si prepara la scheda e la si stampa (o la si salva in PDF) con le soluzioni sul foglio a parte. Ogni volta gli esercizi sono diversi.</p>
+        <div class="fz-form">
+          <div class="fz-scelte">
+            <div>
+              <label for="sc-liv">Livello</label>
+              <select id="sc-liv"></select>
+            </div>
+            <div>
+              <label for="sc-n">Numero di esercizi</label>
+              <select id="sc-n"><option>6</option><option selected>8</option><option>10</option><option>12</option></select>
+            </div>
+            <fieldset class="fz-ck">
+              <legend>Operazioni</legend>
+              <label><input type="checkbox" name="sc-op" value="+" checked/> somma</label>
+              <label><input type="checkbox" name="sc-op" value="-" checked/> differenza</label>
+              <label><input type="checkbox" name="sc-op" value="*" checked/> prodotto</label>
+              <label><input type="checkbox" name="sc-op" value=":" checked/> divisione</label>
+            </fieldset>
+          </div>
+          <label class="fz-un"><input type="checkbox" id="sc-sol" checked/> Aggiungi le soluzioni in un foglio separato</label>
+          <div class="fz-azioni">
+            <button type="button" class="fz-btn" id="sc-crea">Prepara la scheda</button>
+            <button type="button" class="fz-btn sec" id="sc-stampa" hidden>Stampa o salva in PDF</button>
+          </div>
+        </div>
+      </div>
+      <div id="sc-out" class="fz-foglio" hidden></div>
+    </div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/matematica/frazioni.js"></script>
+<script src="aula/matematica/pagina.js"></script>
+</body>
+</html>

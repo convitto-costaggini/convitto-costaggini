@@ -467,7 +467,7 @@ window.LEZIONI = [
         testo: "Hoy tenemos dos sugerencias. La lubina es [más] ligera que el chuletón y está [riquísima]: ¡ha llegado esta mañana! El chuletón es [tan] tierno como siempre. De postre, la tarta de queso es la más pedida, pero para mí el flan es el [mejor]. Los dos van muy bien [con] una copa de vino dulce.",
         intrusi: ["muy", "peor"] },
       { tipo: "ordina", titolo: "El diálogo en la mesa", consegna: "Tocca le battute nell'ordine giusto.",
-        passi: [["Buenas noches. ¿Ya han decidido?", "Buonasera. Avete già deciso?"], ["Todavía no. ¿Qué nos recomienda?", "Non ancora. Che cosa ci consiglia?"], ["Si les gusta el pescado, la lubina es lo más fresco de hoy.", "Se vi piace il pesce, il branzino è la cosa più fresca di oggi."], ["¿Es más ligera que la lasaña?", "È più leggero delle lasagne?"], ["Sí, mucho más ligera. Va muy bien con un blanco seco.", "Sì, molto più leggero. Si abbina bene a un bianco secco."], ["Perfecto, entonces tomamos la lubina.", "Perfetto, allora prendiamo il branzino."]] },
+        passi: [["Buenas noches. ¿Ya han decidido?", "Buonasera. Avete già deciso?"], ["Todavía no. ¿Qué nos recomienda?", "Non ancora. Che cosa ci consiglia?"], ["Si les apetece algo del mar, la lubina es el pescado más fresco de hoy.", "Se avete voglia di qualcosa di mare, il branzino è il pesce più fresco di oggi."], ["¿Es más ligera que la lasaña?", "È più leggero delle lasagne?"], ["Sí, mucho más ligera. Va muy bien con un blanco seco.", "Sì, molto più leggero. Si abbina bene a un bianco secco."], ["Perfecto, entonces tomamos la lubina.", "Perfetto, allora prendiamo il branzino."]] },
       { tipo: "scelta", titolo: "El mejor de la carta", consegna: "Scegli la forma giusta.",
         voci: [
           { d: "Es _____ vino de la carta. (il migliore)", o: ["el mejor", "el más mejor", "lo mejor"] },
@@ -686,8 +686,8 @@ window.LEZIONI = [
       { titolo: "Un ospite arrabbiato", testo: "Alla reception arriva un ospite furioso. Non serve avere ragione: serve **ascoltare**, **scusarsi** e **trovare una soluzione**. Sempre con il **lei** (usted).",
         esempi: [["¡Reservé una habitación con vistas al mar y me han dado una con vistas al aparcamiento!", "Ho prenotato una camera vista mare e me ne avete data una sul parcheggio!"], ["Lo siento muchísimo, señor. Déjeme ver qué puedo hacer.", "Mi dispiace moltissimo, signore. Vediamo che cosa posso fare."]],
         domanda: { testo: "Davanti a un reclamo la prima cosa da fare è…", o: ["ascoltare e scusarsi", "spiegare che non è colpa tua", "chiamare subito il direttore"], spiega: "Prima si ascolta e ci si scusa; le spiegazioni vengono dopo, e brevi." } },
-      { titolo: "Che cosa è successo: l'indefinido", testo: "Per i fatti conclusi in un tempo finito (**ayer**, **anoche**, **la semana pasada**, **cuando llegué**) si usa il pretérito indefinido: reservar → **reservé**, llegar → **llegamos**, funcionar → **funcionó**.\nIrregolari frequenti: estar → **estuvo**, tener → **tuvo**, ser/ir → **fue**, hacer → **hizo**.",
-        esempi: [["Reservé una habitación doble.", "Ho prenotato una camera doppia."], ["Anoche la ducha no funcionó.", "Ieri sera la doccia non ha funzionato."], ["Esperamos cuarenta minutos.", "Abbiamo aspettato quaranta minuti."]],
+      { titolo: "Che cosa è successo: l'indefinido", testo: "Per i fatti conclusi in un tempo finito (**ayer**, **anoche**, **la semana pasada**, **cuando llegué**) si usa il pretérito indefinido: reservar → **reservé**, llegar → **llegó**, funcionar → **funcionó**.\nIrregolari frequenti: estar → **estuvo**, tener → **tuvo**, ser/ir → **fue**, hacer → **hizo**.",
+        esempi: [["Reservé una habitación doble.", "Ho prenotato una camera doppia."], ["Anoche la ducha no funcionó.", "Ieri sera la doccia non ha funzionato."], ["Esperé cuarenta minutos.", "Ho aspettato quaranta minuti."]],
         domanda: { testo: "«Ieri sera il riscaldamento non ha funzionato»", o: ["Anoche la calefacción no funcionó.", "Anoche la calefacción no ha funcionado.", "Anoche la calefacción no funcionaste."], spiega: "Con anoche si usa l'indefinido: no funcionó." } },
       { titolo: "Che cosa ho fatto: il pretérito perfecto", testo: "Per ciò che è successo **oggi** o si è **appena / già** fatto: **he, ha, hemos** + participio (-ado, -ido): he llamado, hemos cambiado.\nPer «ho appena»: **acabo de** + infinito.",
         esempi: [["He llamado a mantenimiento.", "Ho chiamato la manutenzione."], ["Ya hemos cambiado su habitación.", "Le abbiamo già cambiato la camera."], ["Acabo de hablar con el director.", "Ho appena parlato con il direttore."]],
@@ -711,7 +711,7 @@ window.LEZIONI = [
         voci: [
           { d: "Anoche el aire acondicionado no _____ . (ha funzionato)", o: ["funcionó", "ha funcionado", "funciona"] },
           { d: "_____ llamar al técnico: ya viene. (ho appena)", o: ["Acabo de", "Acabo", "He acabado"] },
-          { d: "Cuando _____ , la habitación no estaba lista. (siamo arrivati)", o: ["llegamos", "hemos llegado", "llegáis"] },
+          { d: "Cuando _____ , la habitación no estaba lista. (sono arrivato)", o: ["llegué", "he llegado", "llegas"] },
           { d: "Ya _____ su habitación. Está lista. (abbiamo cambiato)", o: ["hemos cambiado", "cambiaremos", "cambiábamos"] },
           { d: "_____ una habitación con vistas al mar hace dos semanas. (ho prenotato)", o: ["Reservé", "He reservado", "Reservo"] },
           { d: "Hoy el cliente de la 12 _____ tres veces por el ruido. (si è lamentato)", o: ["se ha quejado", "se queja ayer", "se quejará ayer"] }
@@ -726,7 +726,7 @@ window.LEZIONI = [
           { d: "«¡La habitación está sucia!»", o: ["Le pido disculpas. Ahora mismo envío al servicio de limpieza.", "Imposible, la limpiamos esta mañana.", "Pues límpiela usted."] },
           { d: "«¡No hay agua caliente!»", o: ["Lo siento mucho. Llamo ahora mismo a mantenimiento.", "El agua caliente se paga aparte.", "Espere hasta mañana."] },
           { d: "«¡Reservé con vistas al mar!»", o: ["Me temo que ha habido un error. Permítame pasarle a una habitación superior.", "Se equivoca, no es verdad.", "El mar no es importante."] },
-          { d: "«¡Esperamos cuarenta minutos el desayuno!»", o: ["Lo siento muchísimo. Hoy el desayuno corre de nuestra cuenta.", "La cocina está llena, lo siento.", "La próxima vez vengan antes."] },
+          { d: "«¡Esperé cuarenta minutos el desayuno!»", o: ["Lo siento muchísimo. Hoy el desayuno corre de nuestra cuenta.", "La cocina está llena, lo siento.", "La próxima vez vengan antes."] },
           { d: "«¿Me pueden devolver el dinero?»", o: ["Hablo con el director y le respondo en menos de una hora.", "Nunca devolvemos el dinero.", "Pregunte a otra persona."] },
           { d: "«Gracias, ha sido usted muy amable.»", o: ["A usted, gracias por su paciencia.", "Sí, ya lo sé.", "¡Por fin!"] }
         ] },
@@ -756,7 +756,7 @@ window.LEZIONI = [
         { dice: "Bueno… gracias. Ha sido usted muy amable.", it: "Be'… grazie. Molto gentile da parte sua.",
           o: [["Gracias a usted por su paciencia, señora. Que disfrute de su estancia.", 1, "Chiudi ringraziando."], ["¡Por fin está contenta!", 0, "Inopportuno."], ["De nada. La próxima vez lea mejor su reserva.", 0, "Una frecciata che rovina tutto."]] },
         { situazione: "Il giorno dopo il direttore ti chiede di scrivere una riga nel registro dei reclami.", domanda: "Che cosa scrivi?",
-          o: [["La clienta de la 214 se quejó de las vistas. La pasamos a una habitación superior.", 1, "Indefinido: fatti conclusi, chiari e oggettivi."], ["La clienta se ha quejado ayer y la hemos pasado a otra habitación.", 0, "Con ayer si usa l'indefinido: se quejó, la pasamos."], ["Señora enfadada, problema resuelto.", 0, "Troppo vago e poco professionale."]] }
+          o: [["La clienta de la 214 se quejó de las vistas. La pasé a una habitación superior.", 1, "Indefinido: fatti conclusi, chiari e oggettivi."], ["La clienta se ha quejado ayer y la hemos pasado a otra habitación.", 0, "Con ayer si usa l'indefinido: se quejó, la pasé."], ["Señora enfadada, problema resuelto.", 0, "Troppo vago e poco professionale."]] }
       ],
       esiti: ["La signora Ortega scrive una recensione: «¡Una recepcionista fantástica convirtió un problema en una estancia estupenda!»", "«Gracias, ahora todo está bien.» Ottimo lavoro.", "«Bueno, está bien…» Ripassa le scuse e i tempi del passato, poi riprova.", "La signora chiede di parlare con il direttore. Rifai la lezione e riprova!"]
     },

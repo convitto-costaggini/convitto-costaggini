@@ -104,7 +104,7 @@
     var m = String((e && e.message) || e || '');
     if (/troppo-presto/.test(m)) return 'Attendete mezzo minuto prima di chiedere un altro codice.';
     if (/troppi/.test(m)) return 'Troppe richieste: riprovate tra un po\'.';
-    if (/non-abilitato/.test(m)) return 'L\'accesso è riuscito, ma questo indirizzo non è abilitato all\'area docenti di lingue. Scrivete a ' + MAIL + '.';
+    if (/non-abilitato/.test(m)) return 'L\'accesso è riuscito, ma questo indirizzo non è abilitato all\'area docenti. Scrivete a ' + MAIL + '.';
     if (/codice/.test(m)) return 'Codice non valido o scaduto. Richiedetene uno nuovo.';
     if (/invio/.test(m)) return 'Non è stato possibile spedire la mail. Riprovate tra poco.';
     if (/rete|fetch|network|Failed/i.test(m)) return 'Connessione non riuscita. Controllate la rete e riprovate.';
@@ -120,7 +120,7 @@
     function intesta() { return '<h2>Area riservata ai docenti</h2>'; }
 
     function accedi() {
-      vista(intesta() + '<p class="s">Materiali per i docenti di lingue. Scrivete la vostra e-mail istituzionale: vi invieremo un codice di accesso.</p>' +
+      vista(intesta() + '<p class="s">Materiali riservati ai docenti dell\'Aula. Scrivete la vostra e-mail istituzionale: vi invieremo un codice di accesso.</p>' +
         '<form id="ac-f"><label for="ac-m1">E-mail istituzionale</label><input id="ac-m1" type="email" autocomplete="username" required placeholder="nome.cognome@alberghierorieti.edu.it"/>' +
         '<p class="ac-m" role="alert"></p><button class="b" type="submit">Invia il codice</button></form>' +
         '<div class="sep">oppure</div><form id="ac-fd"><label for="ac-c1">Codice del Dipartimento</label><input id="ac-c1" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX"/>' +
@@ -203,7 +203,7 @@
     var b = document.createElement('div'); b.className = 'ac-bar'; b.innerHTML = '<span>🔒 Area riservata</span><button type="button">Esci</button>';
     b.querySelector('button').addEventListener('click', function () {
       ss(K_DIP, null); try { localStorage.removeItem(K_SES); } catch (e) {}
-      location.href = 'aula/lingue/docenti.html';
+      location.href = 'aula/docenti.html';
     });
     document.body.appendChild(b);
   }

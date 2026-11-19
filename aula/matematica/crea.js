@@ -39,11 +39,17 @@
     L.es.forEach(function (e, i) {
       var sol;
       try { sol = R.solStampa(e); } catch (x) { sol = '—'; }
-      h += '<div class="cr-es"><p class="tt-n">' + (i + 1) + ' · riga ' + e.riga + (R.tutor(e) ? ' · con passo passo' : '') + '</p>' + R.domanda(e) + '<p class="cr-sol"><span>Soluzione calcolata dal sito:</span> ' + sol + '</p></div>';
+      h += '<div class="cr-es"><p class="tt-n">' + (i + 1) + ' · riga ' + e.riga + (R.tutor(e) ? ' · con passo passo' : '') + '</p>' + R.domanda(e) + '<div class="fz-azioni cr-az"><button type="button" class="fz-btn sec" data-cr="sugg" aria-expanded="false">Suggerimento</button><button type="button" class="fz-btn sec" data-cr="sol" aria-expanded="false">Soluzione</button></div><p class="tt-aiuto cr-sug" hidden>' + esc(R.suggerimento(e)) + '</p><p class="cr-sol" hidden><span>Soluzione calcolata dal sito:</span> ' + sol + '</p></div>';
     });
     if (!L.es.length && !L.err.length) h = '<p class="au-nota">Scrivi almeno un esercizio al passo 2.</p>';
     $('cr-anteprima').innerHTML = h;
   }
+  $('cr-anteprima').addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-cr]'); if (!b) return;
+    var box = b.closest('.cr-es'), sugg = b.dataset.cr === 'sugg', el = box.querySelector(sugg ? '.cr-sug' : '.cr-sol'), apri = el.hidden;
+    el.hidden = !apri; b.setAttribute('aria-expanded', apri ? 'true' : 'false');
+    b.textContent = (apri ? 'Nascondi ' : '') + (sugg ? (apri ? 'suggerimento' : 'Suggerimento') : (apri ? 'soluzione' : 'Soluzione'));
+  });
   function condividi(L) {
     var p = pacchetto(), firma = JSON.stringify(p);
     if (firma === ultimo) return; ultimo = firma;

@@ -32,7 +32,8 @@ window.RACCOLTA = (function () {
     ['problema frazione 2/5 1000 g | Per la frolla servono i 2/5 di un pacco da 1000 g…', 'problema con la frazione di una quantità'],
     ['polinomio (3x^2+2x-1) + (x^2-4x+5)', 'operazioni con i polinomi: somma o differenza di due polinomi, per esempio (3x-2) - (x+4)'],
     ['polinomio 2x(3x-1)', 'prodotto di un monomio per un polinomio, oppure di due polinomi: (x+3)(x+2)'],
-    ['polinomio 3x+2-x+5', 'riduzione dei termini simili di un polinomio']
+    ['polinomio 3x+2-x+5', 'riduzione dei termini simili di un polinomio'],
+    ['polinomio 2[3(x+1)-(x-4)]-5x', 'espressione con parentesi tonde, quadre e graffe annidate (anche potenze di parentesi: (x+1)^2)']
   ];
 
   /* ── lettura delle righe ── */
@@ -225,7 +226,7 @@ window.RACCOLTA = (function () {
       'Regole:\n- Usa solo le forme qui sopra. Un esercizio del libro che non rientra in nessuna forma va saltato, senza commenti.\n' +
       '- Nei problemi, dopo la barra | scrivi il testo del problema in italiano semplice, possibilmente ambientato in cucina, in sala o in albergo; i numeri prima della barra devono essere quelli del testo.\n' +
       '- In «calcola» si usano solo due frazioni con una delle operazioni + − · : (si può aggiungere una potenza, per esempio (2/3)^2).\n' +
-      '- In «polinomio» si usano solo coefficienti interi, lettere minuscole (di solito la x), potenze con ^ e parentesi; niente frazioni né divisioni; polinomi già ridotti dentro le parentesi.\n' +
+      '- In «polinomio» si usano solo coefficienti interi, lettere minuscole (di solito la x), potenze con ^ e parentesi tonde, quadre e graffe (fino a 4 livelli); niente frazioni né divisioni.\n' +
       '- Al massimo ' + MAXR + ' righe. Nessun titolo, nessuna numerazione, nessuna spiegazione: solo le righe, dentro un unico blocco di testo.\n' +
       (d.argomento ? '\nArgomento: ' + d.argomento + '.' : '') + (d.quanti ? '\nNumero di esercizi: circa ' + d.quanti + '.' : '') + (d.note ? '\nIndicazioni del docente: ' + d.note : '') +
       '\n\nOra prepara le righe' + (d.argomento ? '.' : ', sulle foto allegate. Se non ci sono foto né argomento, chiedimi solo di allegare la foto.');

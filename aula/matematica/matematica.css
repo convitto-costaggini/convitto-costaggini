@@ -147,6 +147,7 @@ input[type=number],input[type=text],select{box-sizing:border-box;width:100%;min-
 .mt-come b{display:block;font:800 .9rem var(--fu,sans-serif);color:var(--bosco,#2C3E2D);margin-bottom:.2rem}
 .mt-come span{font-size:.86rem;line-height:1.5;color:var(--txt2,#555)}
 .mt-conto{font-size:.9rem;color:var(--txt2,#555);margin:0 0 1rem}
+.mt-blocco{padding:0!important}
 .mt-blocco+.mt-blocco{margin-top:1.8rem}
 .mt-blocco h3{font-family:var(--fd,serif);font-weight:400;font-size:1.5rem;color:var(--bosco,#2C3E2D);margin:0}
 .mt-bsot{font-size:.88rem;color:var(--txt2,#555);margin:.1rem 0 .8rem}

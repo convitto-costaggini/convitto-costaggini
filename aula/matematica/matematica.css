@@ -451,3 +451,6 @@ html:not(.cr-chiuso) .cr-porta{display:none}
 .es-fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle}.es-fr>span:first-child{border-bottom:2px solid currentColor;padding:0 .2rem}
 @media (max-width:480px){.tt-testata math{font-size:1.1em}.fz-grande .tt-testata math{font-size:1.3em}}
 .sg-ris{font-size:1.1rem;line-height:2}.sg-t{display:inline-block;padding:.1rem .5rem;border:1px solid #cfc9b8;border-radius:8px;background:#fff}.sg-n{background:#fff1c9;border-color:#c9a227;font-weight:700}
+.cr-ia{display:flex;gap:.55rem;align-items:flex-start;font-size:.86rem;color:var(--txt2,#555);margin:.9rem 0 .2rem;cursor:pointer}
+.cr-ia input{width:24px;height:24px;flex:none;margin:0}
+.es-ia{font-style:italic;text-align:center;margin:1.4rem 0 0}

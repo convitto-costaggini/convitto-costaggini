@@ -121,6 +121,7 @@
   .lz-qr input{width:100%;font:600 .78rem var(--fu);padding:.55rem .6rem;border:1.5px solid var(--av3);border-radius:10px;background:var(--bco);color:var(--txt);margin-bottom:.5rem}
   .lz-bott{display:flex;flex-wrap:wrap;gap:.5rem}
   .lz-doc .lg-nota{margin-top:1rem}
+  .lz-ia{font-size:.82rem;color:var(--txt2);font-style:italic;margin:1.2rem 0 0;text-align:center}
   /* «Con più aiuti»: più grande, più aria, niente corsivo */
   .facile .lz-scheda .tx,.facile .lz-ric,.facile .ex-opz button,.facile .lz-ord button{font-size:1.12rem;line-height:1.85;letter-spacing:.01em}
   .facile .lz-es .fr{font-size:1.15rem}
@@ -282,7 +283,9 @@
     if ((tab === 'docente' || tab === 'modifica') && !lez.docente) tab = 'lezione';
     if (tab === 'modifica' && !salvataNelBrowser()) tab = 'docente';
     h += '<div class="lz-tab" role="group" aria-label="Parti della lezione">' + T.map(function (t) { return t[0] === 'accedi' ? '<button type="button" data-accedi class="doc" title="Riservato ai docenti: serve l\'accesso"><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>' : '<button type="button" data-tab="' + t[0] + '" aria-pressed="' + (tab === t[0]) + '"' + (t[0] === 'docente' ? ' class="doc"' : '') + '><span aria-hidden="true">' + t[1] + '</span>' + t[2] + '</button>'; }).join('') + '</div>' +
-      '<label class="lz-facile"><input type="checkbox" id="lz-fac"' + (facile ? ' checked' : '') + '/> 🧩 Con più aiuti</label>' + gramPannello() + '<div id="lz-corpo"></div>';
+      '<label class="lz-facile"><input type="checkbox" id="lz-fac"' + (facile ? ' checked' : '') + '/> 🧩 Con più aiuti</label>' + gramPannello() + '<div id="lz-corpo"></div>' +
+      /* lezioni preparate dal docente con l'IA (non le copie delle lezioni pronte): lo dice anche ai ragazzi */
+      (lez.propria && !lez.copia ? '<p class="lz-ia">Lezione preparata dal docente con l\'ausilio di AI, e da lui rivista.</p>' : '');
     vista.innerHTML = h;
     var gm = document.getElementById('lz-gm');
     if (gm && G.editorMiei) G.editorMiei(gm, lin, function () { gram = (L.leggi('gram-argomenti', []) || []).slice(); gramSeme++; esN = 0; esPunti = []; stato = {}; disegna(); });
@@ -449,7 +452,7 @@
       return proprie.length ? window.PACCHETTO.codifica({ m: proprie }).then(function (t) { return base + '&gp=' + t; }) : Promise.resolve(base);
     }
     /* lezione del docente: viaggia dentro il link, senza verifica né scheda docente */
-    var v = { id: lez.id, icona: lez.icona, ambito: lez.ambito, titolo: lez.titolo, sottotitolo: lez.sottotitolo, livello: lez.livello, classi: lez.classi, descrizione: lez.descrizione, lingue: {} };
+    var v = { id: lez.id, icona: lez.icona, ambito: lez.ambito, titolo: lez.titolo, sottotitolo: lez.sottotitolo, livello: lez.livello, classi: lez.classi, descrizione: lez.descrizione, copia: lez.copia || undefined, lingue: {} };
     v.lingue[lin] = { schede: D().schede, esercizi: D().esercizi, missione: D().missione, verifica: [] };
     return window.PACCHETTO.codifica(v).then(function (t) { return location.origin + '/aula/lingue/lezioni.html#p=' + t; });
   }
@@ -469,7 +472,7 @@
       '<p class="lg-nota">🎓 <b>Pronta da usare.</b> Stampate la scheda, proiettate o girate il link ai ragazzi. Controllate la lezione come fareste con qualsiasi materiale e adattatela alla vostra classe con la grammatica scelta da voi.</p></div>');
     var verifica = D().verifica && D().verifica.length;
     if (!verifica) { var vv = document.querySelector('[data-stampa]').closest('.lg-card'); vv.querySelector('.lz-cons').textContent = 'Questa lezione non ha una verifica.'; vv.querySelector('.lz-bott').remove(); }
-    if (lez.propria) document.querySelector('.lz-doc .lg-nota').innerHTML = '🎓 <b>Lezione preparata con l\'IA.</b> Controllatela tutta prima di usarla in classe: l\'IA può sbagliare. Il link per i ragazzi contiene la lezione senza la verifica e senza questa scheda.';
+    if (lez.propria && !lez.copia) document.querySelector('.lz-doc .lg-nota').innerHTML = '🎓 <b>Lezione preparata con l\'IA.</b> Controllatela tutta prima di usarla in classe: l\'IA può sbagliare. Il link per i ragazzi contiene la lezione senza la verifica e senza questa scheda.';
     linkStudenti().then(function (u) {
       linkCorrente = u; document.getElementById('lz-link').value = u;
       var cv = document.getElementById('lz-qr');
@@ -526,7 +529,7 @@
   function copiaLezione() {
     var c = JSON.parse(JSON.stringify(lez)), dati = {};
     dati[lin] = c.lingue[lin];
-    c.lingue = dati; c.id = 'mia-' + Date.now().toString(36); c.propria = true; c.titolo = lez.titolo + ' (copia)'; c.creata = new Date().toISOString().slice(0, 10);
+    c.lingue = dati; c.id = 'mia-' + Date.now().toString(36); c.propria = true; c.copia = true; c.titolo = lez.titolo + ' (copia)'; c.creata = new Date().toISOString().slice(0, 10);
     var a = mie(); a.unshift(c); L.salva('mie-lezioni', a);
     location.href = 'aula/lingue/lezioni.html?mia=' + c.id + '&t=modifica';
   }

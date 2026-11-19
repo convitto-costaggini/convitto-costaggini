@@ -61,12 +61,13 @@
   function salva() { try { localStorage.setItem(CHIAVE, JSON.stringify(stato)); } catch (e) {} }
 
   /* il link del docente: #p=1|2|3 (0 = ripristina) oppure #s=elenco, nel frammento dopo il #:
+     solo #p= con una cifra: #p=<lezione> è il link di una lezione di lingue e va lasciato com'è.
      il frammento non viene mai inviato al server. Poi sparisce dall'indirizzo. */
   (function () {
     var h = location.hash.replace(/^#/, ''); if (!h) return;
     var parti = h.split('&'), p = null, s = null, resto = [];
     parti.forEach(function (x) {
-      if (/^p=/.test(x)) p = x.slice(2); else if (/^s=/.test(x)) s = x.slice(2); else if (x) resto.push(x);
+      if (/^p=[0-3]$/.test(x)) p = x.slice(2); else if (/^s=/.test(x)) s = x.slice(2); else if (x) resto.push(x);
     });
     if (p === null && s === null) return;
     var lista = p === '0' ? [] : PROFILI[p] ? PROFILI[p] : s ? s.split('.') : null;

@@ -17,7 +17,8 @@
   function istruzioni() { return R.istruzioni({ argomento: $('ia-arg').value.trim(), quanti: $('ia-n').value, note: $('ia-note').value.trim() }); }
   function aggIst() { $('ia-testo').value = istruzioni(); }
   ['ia-arg', 'ia-n', 'ia-note'].forEach(function (id) { $(id).addEventListener('input', aggIst); $(id).addEventListener('change', aggIst); });
-  $('ia-copia').addEventListener('click', function () { aggIst(); copia($('ia-testo').value, $('ia-fb'), 'Istruzioni copiate. Ora incollale nell\'assistente IA insieme alla foto, poi incolla la risposta al passo 2.'); });
+  /* chi copia le istruzioni per l'IA la sta usando: la casella al passo 2 si spunta da sola (si può togliere) */
+  $('ia-copia').addEventListener('click', function () { $('cr-ia').checked = true; if (typeof aggiorna === 'function') aggiorna(); aggIst(); copia($('ia-testo').value, $('ia-fb'), 'Istruzioni copiate. Ora incollale nell\'assistente IA insieme alla foto, poi incolla la risposta al passo 2.'); });
   aggIst();
 
   /* ── 2. esempi e forme ── */
@@ -32,7 +33,7 @@
 
   /* ── 3. anteprima ── */
   var ultimo = null;
-  function pacchetto() { var p = { v: 1, r: $('cr-righe').value.trim() }, t = $('cr-tit').value.trim(), i = $('cr-ist').value.trim(); if (t) p.t = t; if (i) p.i = i; return p; }
+  function pacchetto() { var p = { v: 1, r: $('cr-righe').value.trim() }, t = $('cr-tit').value.trim(), i = $('cr-ist').value.trim(); if (t) p.t = t; if (i) p.i = i; if ($('cr-ia').checked) p.a = 1; return p; }
   function anteprima(L) {
     var h = '<p class="cr-conto">Esercizi pronti: <strong>' + L.es.length + '</strong>' + (L.err.length ? ' · righe da sistemare: <strong class="cr-rosso">' + L.err.length + '</strong>' : '') + '</p>';
     L.err.forEach(function (e) { h += '<div class="cr-err"><b>Riga ' + e.riga + ':</b> <code>' + esc(e.testo) + '</code><br>' + esc(e.msg) + '.</div>'; });
@@ -72,6 +73,7 @@
     timer = setTimeout(function () { var L = R.leggi($('cr-righe').value); anteprima(L); condividi(L); }, 250);
   }
   ['cr-righe', 'cr-tit', 'cr-ist'].forEach(function (id) { $(id).addEventListener('input', aggiorna); });
+  $('cr-ia').addEventListener('change', aggiorna);
 
   /* ── 4. condividi, stampa, raccolte ── */
   $('cr-copia').addEventListener('click', function () { if ($('cr-link').value) copia($('cr-link').value, $('cr-fb'), 'Link copiato: puoi incollarlo nel registro elettronico, in Classroom o in una mail alla classe.'); });
@@ -89,7 +91,7 @@
     var M = mie();
     $('cr-mie').innerHTML = M.length ? M.map(function (x, i) { return '<li><span><b>' + esc(x.p.t || 'Senza titolo') + '</b><small>' + R.leggi(x.p.r).es.length + ' esercizi · ' + new Date(x.data).toLocaleDateString('it-IT') + '</small></span><button type="button" class="fz-btn sec" data-apri="' + i + '">Apri</button><button type="button" class="fz-btn sec" data-via="' + i + '" aria-label="Elimina ' + esc(x.p.t || 'raccolta senza titolo') + '">Elimina</button></li>'; }).join('') : '<li class="au-nota">Nessuna raccolta salvata.</li>';
   }
-  function carica(p) { $('cr-tit').value = p.t || ''; $('cr-ist').value = p.i || ''; $('cr-righe').value = p.r || ''; ultimo = null; aggiorna(); }
+  function carica(p) { $('cr-ia').checked = !!p.a; $('cr-tit').value = p.t || ''; $('cr-ist').value = p.i || ''; $('cr-righe').value = p.r || ''; ultimo = null; aggiorna(); }
   $('cr-salva').addEventListener('click', function () {
     var p = pacchetto(); if (!R.leggi(p.r).es.length) { $('cr-fb').className = 'fz-fb no'; $('cr-fb').textContent = 'Non c\'è ancora nessun esercizio da salvare.'; return; }
     var M = mie().filter(function (x) { return (x.p.t || '') !== (p.t || '') || x.p.r !== p.r; });

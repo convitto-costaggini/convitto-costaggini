@@ -83,6 +83,7 @@
     ES = L.es; S = ES.map(function () { return { ok: false, tent: 0, fase: 0 }; });
     if (p.t) { $('es-titolo').textContent = p.t; document.title = p.t + ' – Matematica | Convitto "Costaggini" - Rieti'; }
     if (p.i) $('es-ist').textContent = p.i;
+    if (p.a) $('es-ia').hidden = false;
     disegna(false);
   }).catch(function () { errore('Il link sembra incompleto o rovinato: forse è stato copiato solo in parte. Chiedi all\'insegnante di mandarlo di nuovo.'); });
   window.ESERCIZI_UI = { stato: function () { return { ES: ES, S: S, cur: cur }; } };

@@ -453,3 +453,26 @@ html:not(.cr-chiuso) .cr-porta{display:none}
 .sg-ris{font-size:1.1rem;line-height:2}.sg-t{display:inline-block;padding:.1rem .5rem;border:1px solid #cfc9b8;border-radius:8px;background:#fff}.sg-n{background:#fff1c9;border-color:#c9a227;font-weight:700}
 .cr-guida{margin:.4rem 0 .6rem;padding-left:1.3rem;line-height:1.6}.cr-guida li{margin:.25rem 0}
 .cr-ta.cr-risp{min-height:7rem}
+
+/* «Crea» · Verifica in classe: file A/B/C e versioni adattate */
+.vf-testa{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.vf-voto{margin:0;font-size:1rem;white-space:nowrap;color:#111}
+.vf-pt{font-size:.78rem;color:#444;white-space:nowrap}
+.vf-prev{margin:.5rem 0}
+.vf-es{margin:.4rem 0 .2rem;padding-left:1.6rem;display:grid;gap:.5rem}
+.vf-es math{font-size:1.3em}
+.vf-grande .fz-es-i{font-family:Verdana,Arial,sans-serif;line-height:1.75;letter-spacing:.02em}
+.vf-memo{font-family:Verdana,Arial,sans-serif;font-size:.95rem;line-height:1.55}
+.vf-griglia{border-collapse:collapse;margin-top:1.2rem;width:100%;font-size:.9rem;table-layout:fixed}
+.vf-griglia caption{text-align:left;font-weight:700;margin-bottom:.3rem}
+.vf-griglia th,.vf-griglia td{border:1px solid #777;padding:.3rem .1rem;text-align:center;font-size:.72rem;overflow-wrap:anywhere}
+.vf-griglia th:nth-last-child(-n+2),.vf-griglia td:nth-last-child(-n+2){width:3.4rem}
+@media print{
+  .vf-grande .fz-es-i{font-size:14pt;min-height:var(--h,3.6cm)}
+  .vf-grande .fz-es-i math{font-size:2.1em}
+  .vf-grande .fz-foglio-i{font-size:12pt}
+  .vf-memo{font-size:12pt;break-inside:avoid}
+  .vf-pt{font-size:9pt}
+  .vf-voto{font-size:12pt}
+  .vf-griglia{break-inside:avoid}
+}

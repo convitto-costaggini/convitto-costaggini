@@ -93,7 +93,7 @@
           <li style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per gli studenti</li>
           <li><a href="aula/lingue/">Le lingue dell'Alberghiero</a></li>
           <li><a href="aula/studio/">Sala studio</a></li>
-          <li><a href="aula/matematica/">Matematica: frazioni</a></li>
+          <li><a href="aula/matematica/">Matematica del primo anno</a></li>
           <li style="padding:.7rem .9rem .25rem .9rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per le famiglie</li>
           <li><a href="aula/famiglie/">Come funziona, cosa non raccoglie</a></li>
           <li><a href="aula/docenti.html">Area docenti (accesso)</a></li>
@@ -197,7 +197,7 @@
         <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per gli studenti</li>
         <li><a href="aula/lingue/">Le lingue dell'Alberghiero</a></li>
         <li><a href="aula/studio/">Sala studio</a></li>
-          <li><a href="aula/matematica/">Matematica: frazioni</a></li>
+          <li><a href="aula/matematica/">Matematica del primo anno</a></li>
         <li style="padding:.7rem .9rem .25rem .5rem;margin-top:.35rem;border-top:1px solid rgba(184,146,42,.35);font-family:var(--fu);font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--oro2)">Per le famiglie</li>
         <li><a href="aula/famiglie/">Come funziona, cosa non raccoglie</a></li>
           <li><a href="aula/docenti.html">Area docenti (accesso)</a></li>

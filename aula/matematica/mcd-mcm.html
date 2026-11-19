@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Numeri primi, MCD e mcm – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="Numeri primi, scomposizione in fattori, massimo comune divisore e minimo comune multiplo: giochi interattivi, metodo passo passo, esercizi con correzione e problemi di cucina e di sala."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Tappa 1</p>
+      <h1>Numeri primi, <em>MCD e mcm</em></h1>
+      <p class="au-sub">Quando due timer suonano di nuovo insieme? Qual è la mattonella più grande che copre il pavimento senza tagli? Sono due domande diverse, e qui scopri come rispondere a tutte e due.</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/mcd-mcm.html#lampo">⚡ Domanda lampo</a><a href="aula/matematica/mcd-mcm.html#scopri">🔍 Scopri</a><a href="aula/matematica/mcd-mcm.html#metodo">🧭 Il metodo</a><a href="aula/matematica/mcd-mcm.html#regole">Le regole</a><a href="aula/matematica/mcd-mcm.html#allenati">✏️ Allenati</a><a href="aula/matematica/mcd-mcm.html#missione">🎯 Missione</a><a href="aula/matematica/mcd-mcm.html#scheda">Scheda stampabile</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+  </nav>
+
+  <!-- DOMANDA LAMPO -->
+  <section class="au-sez no-stampa" id="lampo" aria-labelledby="t-lampo">
+    <div class="w">
+      <div id="mt-ripasso"></div>
+      <h2 class="au-tit" id="t-lampo">⚡ Domanda lampo</h2>
+      <div class="tt-card mm-lampo" id="mm-lampo"></div>
+    </div>
+  </section>
+
+  <!-- SCOPRI -->
+  <section class="au-sez au-doc no-stampa" id="scopri" aria-labelledby="t-scopri">
+    <div class="w">
+      <h2 class="au-tit" id="t-scopri">🔍 Scopri</h2>
+
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">⏲️ I due timer del forno</h3>
+        <p class="mm-p">Due timer partono insieme. Ogni casella è un minuto: il pallino verde segna quando suona il primo timer, quello giallo quando suona il secondo. <strong>Tocca il primo minuto in cui suonano tutti e due.</strong></p>
+        <div class="fz-scelte mm-due">
+          <div><label for="tm-a">Il primo timer suona ogni</label><select id="tm-a"></select></div>
+          <div><label for="tm-b">Il secondo timer suona ogni</label><select id="tm-b"></select></div>
+        </div>
+        <p class="mm-leg"><span><i class="mm-pa"></i> primo timer</span><span><i class="mm-pb"></i> secondo timer</span></p>
+        <div class="mm-griglia" id="tm-griglia" role="group" aria-label="I minuti"></div>
+        <p class="fz-fb" id="tm-fb" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🧱 Le mattonelle della dispensa</h3>
+        <p class="mm-p" id="pv-testo"></p>
+        <div class="fz-scelte mm-due">
+          <div><label for="pv-dim">Il pavimento</label><select id="pv-dim"></select></div>
+        </div>
+        <p class="mm-p"><strong>Scegli il lato della mattonella</strong> (in decimetri):</p>
+        <div class="fz-esempi" id="pv-lati" role="group" aria-label="Lato della mattonella"></div>
+        <div class="mm-pav" id="pv-disegno"></div>
+        <p class="fz-fb" id="pv-fb" role="status" aria-live="polite"></p>
+        <p class="mm-p" id="pv-ok"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IL METODO -->
+  <section class="au-sez no-stampa" id="metodo" aria-labelledby="t-metodo">
+    <div class="w">
+      <h2 class="au-tit" id="t-metodo">🧭 Il metodo</h2>
+      <h3 class="fz-sottit" style="margin-top:0">1. Scomporre in fattori primi</h3>
+      <p class="au-nota">Un numero primo si divide solo per 1 e per sé stesso: 2, 3, 5, 7, 11, 13… Ogni altro numero si scrive come prodotto di primi, in un solo modo. Si divide finché si arriva a 1, scrivendo i divisori a destra della riga.</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="al-n">Il numero da scomporre</label><input id="al-n" type="number" inputmode="numeric" min="2" max="99999" value="60"/></div>
+          <div class="fz-azioni" style="margin-top:auto"><button type="button" class="fz-btn sec" id="al-via">Ricomincia</button><button type="button" class="fz-btn sec" id="al-caso">Un numero a caso</button></div>
+        </div>
+        <div class="mm-albero">
+          <table class="mm-col" id="al-col" aria-label="La colonna delle divisioni"></table>
+          <div class="mm-al-dx">
+            <p class="mm-p" id="al-dom"></p>
+            <div class="fz-esempi" id="al-primi" role="group" aria-label="Dividi per"></div>
+            <p class="fz-fb" id="al-fb" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="fz-sottit">2. MCD e mcm, una domanda alla volta</h3>
+      <p class="au-nota">Rispondi a una domanda alla volta: il sito ti dice se va bene e perché. Se ti blocchi c'è il suggerimento.</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte mm-due">
+          <div><label for="tu-tipo">Con quanti numeri?</label><select id="tu-tipo"><option value="2">Due numeri</option><option value="3">Tre numeri</option></select></div>
+          <div><label for="tu-liv">Difficoltà</label><select id="tu-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · fino a 200</option><option value="3">3 · fino a 1000</option></select></div>
+        </div>
+        <details class="fz-det" style="margin-top:0"><summary>Oppure scrivi tu i numeri</summary>
+          <form id="tu-miei" class="mm-miei" novalidate>
+            <div class="tt-num"><label for="tu-n">Numeri separati da virgola</label><input id="tu-n" type="text" inputmode="text" placeholder="per esempio 12, 18" autocomplete="off"/></div>
+            <button type="submit" class="fz-btn sec">Guidami</button>
+          </form>
+        </details>
+        <div class="fz-azioni"><button type="button" class="fz-btn" id="tu-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LE REGOLE -->
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg"><h3>Multipli e divisori</h3><p>24 è <em>multiplo</em> di 6 perché 6 · 4 = 24. Allora 6 è un <em>divisore</em> di 24: la divisione 24 : 6 non ha resto.</p></article>
+        <article class="fz-reg"><h3>Numeri primi</h3><p>Hanno esattamente due divisori, 1 e sé stessi: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29… L'1 non è primo. Il 2 è l'unico primo pari.</p></article>
+        <article class="fz-reg"><h3>Criteri di divisibilità</h3><p><strong>per 2</strong>: l'ultima cifra è pari · <strong>per 3</strong>: la somma delle cifre è multiplo di 3 · <strong>per 5</strong>: finisce per 0 o 5 · <strong>per 9</strong>: la somma delle cifre è multiplo di 9 · <strong>per 10</strong>: finisce per 0 · <strong>per 11</strong>: la differenza tra la somma delle cifre di posto dispari e quella delle cifre di posto pari è 0 o un multiplo di 11.</p></article>
+        <article class="fz-reg"><h3>MCD: massimo comune divisore</h3><p>Il più grande numero che divide tutti i numeri dati. Si prendono <strong>solo i fattori comuni, con l'esponente più piccolo</strong>.</p><p class="mm-es">12 = 2²·3 · 18 = 2·3² → MCD = 2·3 = 6</p></article>
+        <article class="fz-reg"><h3>mcm: minimo comune multiplo</h3><p>Il più piccolo numero (diverso da 0) che è multiplo di tutti. Si prendono <strong>tutti i fattori, comuni e non comuni, con l'esponente più grande</strong>.</p><p class="mm-es">12 = 2²·3 · 18 = 2·3² → mcm = 2²·3² = 36</p></article>
+        <article class="fz-reg"><h3>Un controllo utile</h3><p>Con <em>due</em> numeri: MCD · mcm = prodotto dei due numeri (6 · 36 = 12 · 18 = 216). Se il MCD è 1 i numeri si dicono <em>primi tra loro</em> e il mcm è il loro prodotto.</p></article>
+      </div>
+      <div class="mm-quale">
+        <h3>MCD o mcm? Come capirlo da un problema</h3>
+        <p><strong>MCD</strong> quando si <em>divide</em> in parti uguali, le più grandi possibile, senza avanzi: cestini, vassoi, pezzi, mattonelle. Il risultato è <em>più piccolo</em> (o uguale) dei numeri di partenza.</p>
+        <p><strong>mcm</strong> quando qualcosa <em>si ripete</em> e si cerca la prima volta che coincide: timer, turni, consegne, confezioni da far tornare pari. Il risultato è <em>più grande</em> (o uguale) dei numeri di partenza.</p>
+      </div>
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li><p><strong>Scambiare MCD e mcm.</strong> Il MCD non supera il numero più piccolo; il mcm non è mai più piccolo del numero più grande. Se il risultato non rispetta questo, c'è un errore.</p></li>
+        <li><p><strong>Dimenticare i fattori non comuni nel mcm.</strong> 4 = 2² e 6 = 2·3: il mcm è 2²·3 = 12, non 2² = 4.</p></li>
+        <li><p><strong>Sbagliare l'esponente.</strong> MCD: il più piccolo. mcm: il più grande. 2² e 2³ → nel MCD va 2², nel mcm 2³.</p></li>
+        <li><p><strong>Fermarsi a un numero non primo.</strong> 18 = 2·9 non è finita: 9 = 3², quindi 18 = 2·3².</p></li>
+        <li><p><strong>Pensare che il mcm sia sempre il prodotto.</strong> 6 · 8 = 48 è un multiplo comune, ma il minimo è 24.</p></li>
+        <li><p><strong>Contare l'1 tra i primi.</strong> L'1 non è primo e nella scomposizione non si scrive.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ALLENATI -->
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">✏️ Allenati</h2>
+      <p class="au-nota">Un esercizio alla volta, con correzione. Le scomposizioni si scrivono così: 2^2*3*5 (oppure 2·2·3·5).</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ex-tipo">Che cosa?</label><select id="ex-tipo">
+            <option value="misto">Un po' di tutto</option>
+            <option value="primo">È un numero primo?</option>
+            <option value="scomponi">Scomponi in fattori primi</option>
+            <option value="mcd">Calcola il MCD</option>
+            <option value="mcm">Calcola il mcm</option>
+            <option value="problema">I problemi: MCD o mcm?</option>
+          </select></div>
+          <div><label for="ex-liv">Livello</label><select id="ex-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · fino a 200</option><option value="3">3 · fino a 1000, anche tre numeri</option></select></div>
+        </div>
+        <div id="ex-area"></div>
+        <p class="fz-conta" id="ex-conta">Esercizi risolti in questa visita: 0</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSIONE -->
+  <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
+    <div class="w">
+      <h2 class="au-tit" id="t-missione">🎯 Missione: il buffet del sabato</h2>
+      <p class="au-nota">Sabato il Convitto ospita un buffet. Lo chef ti affida quattro problemi: per ognuno decidi se serve il MCD o il mcm, poi calcolalo.</p>
+      <div class="fz-form" id="mi-area"></div>
+    </div>
+  </section>
+
+  <!-- SCHEDA STAMPABILE -->
+  <section class="au-sez" id="scheda" aria-labelledby="t-scheda">
+    <div class="w">
+      <div class="no-stampa">
+        <h2 class="au-tit" id="t-scheda">Scheda di esercizi da stampare</h2>
+        <p class="au-nota">Per chi insegna: si sceglie che cosa mettere, il livello e il numero di esercizi. Ogni volta gli esercizi sono diversi; con due file, A e B hanno esercizi diversi dello stesso tipo.</p>
+        <div class="fz-form">
+          <div class="fz-scelte mm-due">
+            <div><label for="sc-liv">Livello</label><select id="sc-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · fino a 200</option><option value="3">3 · fino a 1000, anche tre numeri</option></select></div>
+            <div><label for="sc-n">Numero di esercizi</label><select id="sc-n"><option>6</option><option selected>8</option><option>10</option><option>12</option></select></div>
+          </div>
+          <fieldset class="fz-ck">
+            <legend>Che cosa mettere</legend>
+            <label><input type="checkbox" name="sc-t" value="scomponi" checked/> scomposizioni</label>
+            <label><input type="checkbox" name="sc-t" value="mcd" checked/> MCD</label>
+            <label><input type="checkbox" name="sc-t" value="mcm" checked/> mcm</label>
+            <label><input type="checkbox" name="sc-t" value="problema" checked/> problemi</label>
+          </fieldset>
+          <label class="fz-un"><input type="checkbox" id="sc-ab"/> Due file (A e B)</label>
+          <label class="fz-un"><input type="checkbox" id="sc-aiuti"/> Con più aiuti (in cima al foglio: i primi fino a 50 e il promemoria del metodo)</label>
+          <label class="fz-un"><input type="checkbox" id="sc-sol" checked/> Aggiungi le soluzioni in un foglio separato</label>
+          <div class="fz-azioni">
+            <button type="button" class="fz-btn" id="sc-crea">Prepara la scheda</button>
+            <button type="button" class="fz-btn sec" id="sc-stampa" hidden>Stampa o salva in PDF</button>
+          </div>
+        </div>
+      </div>
+      <div id="sc-out" class="fz-foglio" hidden></div>
+    </div>
+  </section>
+
+  <nav class="au-sez no-stampa mt-tnav" id="mt-tappe-nav" aria-label="Le tappe vicine"></nav>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script src="aula/matematica/percorso.js"></script>
+<script src="aula/matematica/mcd-mcm.js"></script>
+</body>
+</html>

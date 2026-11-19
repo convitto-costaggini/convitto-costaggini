@@ -230,8 +230,9 @@
     var t = TT.t;
     h += '<div class="tt-fine"><p class="tt-et">Fatto!</p><p class="tt-q">Il risultato è:</p><div class="tt-ris">' + F.math(t.risultato.d === 1n ? F.M.num(t.risultato.n) : F.M.fr(t.risultato)) + '</div>';
     var tot = TT.soli + TT.aiutati;
+    if (window.PERCORSO) PERCORSO.segna('frazioni-operazioni');
     h += '<p class="tt-stat">Hai risposto da solo a ' + TT.soli + ' passi su ' + tot + (TT.aiutati ? ' (con aiuto: ' + TT.aiutati + ')' : '') + '.' + (TT.aiutati > Math.floor(tot / 2) ? ' Rifallo da capo con calma: la seconda volta sarà più facile.' : (TT.aiutati === 0 ? ' Ottimo lavoro!' : '')) + '</p>';
-    h += '<div class="fz-azioni"><button type="button" class="fz-btn" id="tt-altro">Un altro esercizio</button><button type="button" class="fz-btn sec" id="tt-rifai">Rifallo da capo</button><a class="fz-btn sec" href="aula/matematica/#allenati" style="text-decoration:none;display:inline-flex;align-items:center">Prova da solo, senza guida</a></div></div>';
+    h += '<div class="fz-azioni"><button type="button" class="fz-btn" id="tt-altro">Un altro esercizio</button><button type="button" class="fz-btn sec" id="tt-rifai">Rifallo da capo</button><a class="fz-btn sec" href="aula/matematica/frazioni.html#allenati" style="text-decoration:none;display:inline-flex;align-items:center">Prova da solo, senza guida</a></div></div>';
     area.innerHTML = h;
     area.querySelector('#tt-altro').focus();
   }

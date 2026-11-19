@@ -9,7 +9,7 @@
    ════════════════════════════════════════════════════════════ */
 window.RACCOLTA = (function () {
   'use strict';
-  var MC = window.MCD_MCM, FC = window.FRAZIONI_COSA, FZ = window.FRAZIONI, FT = window.FRAZIONI_TUTOR;
+  var MC = window.MCD_MCM, FC = window.FRAZIONI_COSA, FZ = window.FRAZIONI, FT = window.FRAZIONI_TUTOR, PL = window.POLI_ES;
   var MAXN = 99999, MAXR = 40;
   function esc(x) { return String(x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { var t = a % b; a = b; b = t; } return a; }
@@ -29,7 +29,10 @@ window.RACCOLTA = (function () {
     ['calcola 2/3 + 3/4', 'operazione tra due frazioni: + − · : e potenze, per esempio (2/3)^2 · 9/4'],
     ['problema MCD 36 48 | Lo chef ha 36 tartine al salmone e 48 al formaggio…', 'problema: il ragazzo sceglie MCD o mcm, poi calcola'],
     ['problema mcm 12 18 | Due forni sfornano ogni 12 e ogni 18 minuti…', 'problema con il mcm'],
-    ['problema frazione 2/5 1000 g | Per la frolla servono i 2/5 di un pacco da 1000 g…', 'problema con la frazione di una quantità']
+    ['problema frazione 2/5 1000 g | Per la frolla servono i 2/5 di un pacco da 1000 g…', 'problema con la frazione di una quantità'],
+    ['polinomio (3x^2+2x-1) + (x^2-4x+5)', 'operazioni con i polinomi: somma o differenza di due polinomi, per esempio (3x-2) - (x+4)'],
+    ['polinomio 2x(3x-1)', 'prodotto di un monomio per un polinomio, oppure di due polinomi: (x+3)(x+2)'],
+    ['polinomio 3x+2-x+5', 'riduzione dei termini simili di un polinomio']
   ];
 
   /* ── lettura delle righe ── */
@@ -89,6 +92,11 @@ window.RACCOLTA = (function () {
     }
     if (k === 'misto') { var mi = frazione(r); if (mi[0] <= mi[1] || mi[0] % mi[1] === 0) throw new Err('serve una frazione impropria che non sia un numero intero, per esempio 11/4'); return { k: k, motore: 'fc', q: { tipo: 'misto', n: mi[0], d: mi[1] } }; }
     if (k === 'calcola') return { k: k, motore: 'fz', q: calcola(r) };
+    var pl = /^polinomio\s*(.*)$/i.exec(s);
+    if (pl) {
+      try { return { k: 'polinomio', motore: 'pl', q: PL.leggi(pl[1]) }; }
+      catch (x) { if (x instanceof PL.Err) throw new Err(x.msg); throw x; }
+    }
     if (k === 'problema') {
       var pm = /^(mcd|mcm)\s+(.*)$/i.exec(r);
       if (!pm) throw new Err('scrivi «problema MCD …», «problema mcm …» oppure «problema frazione …»');
@@ -96,7 +104,7 @@ window.RACCOLTA = (function () {
       var serve = pm[1].toLowerCase(), nn = numeri(pm[2], 2, 4).sort(function (x, y) { return x - y; });
       return { k: 'problema', motore: 'mc', q: { tipo: 'problema', serve: serve, nums: nn, testo: testo, u: '', ris: serve === 'mcd' ? MC.gcdL(nn) : MC.lcmL(nn) } };
     }
-    throw new Err('non riconosco «' + (k || t) + '»: le parole iniziali ammesse sono MCD, mcm, scomponi, primo, semplifica, confronta, completa, frazione, misto, calcola, problema');
+    throw new Err('non riconosco «' + (k || t) + '»: le parole iniziali ammesse sono MCD, mcm, scomponi, primo, semplifica, confronta, completa, frazione, misto, calcola, polinomio, problema');
   }
   function leggi(testo) {
     var es = [], err = [];
@@ -112,6 +120,7 @@ window.RACCOLTA = (function () {
 
   /* ── che cosa vede e scrive il ragazzo ── */
   function domanda(e) {
+    if (e.motore === 'pl') return PL.domanda(e.q);
     if (e.motore === 'fz') return '<p class="mm-dom">Calcola e scrivi il risultato ridotto ai minimi termini:</p><div class="fz-dom">' + FZ.math(FZ.espressione(e.q), true) + '</div>';
     if (e.k === 'problema-frazione') return '<p class="mm-pr">' + esc(e.testo) + '</p>';
     if (e.motore === 'mc') return MC.domanda(e.q);
@@ -121,6 +130,7 @@ window.RACCOLTA = (function () {
     if (e.k === 'primo') return { tipo: 'scelta', opzioni: [['si', 'Sì, è primo'], ['no', 'No, non è primo']] };
     if (e.k === 'confronta') return { tipo: 'scelta', opzioni: [['>', '&gt;'], ['=', '='], ['<', '&lt;']], seg: true };
     if (e.k === 'problema' && !fase) return { tipo: 'scelta', opzioni: [['mcd', 'Serve il MCD'], ['mcm', 'Serve il mcm']], prima: 'Prima di tutto: che cosa serve?' };
+    if (e.motore === 'pl') return { tipo: 'testo', ph: 'per esempio 3x^2 - 5x + 2', u: '', num: false, prima: '' };
     var ph = { scomponi: 'per esempio 2^2*3*5', semplifica: 'per esempio 3/4', misto: 'per esempio 2 3/4', calcola: 'per esempio 3/4 oppure -5/6' }[e.k] || 'un numero';
     var u = e.motore === 'fc' && e.q.u ? e.q.u : '';
     return { tipo: 'testo', ph: ph, u: u, num: ph === 'un numero', prima: e.k === 'problema' ? 'Giusto, serve il <strong>' + (e.q.serve === 'mcd' ? 'MCD' : 'mcm') + '</strong> di ' + MC.elenco(e.q.nums) + '. Ora calcolalo.' : '' };
@@ -129,6 +139,7 @@ window.RACCOLTA = (function () {
     if (e.k === 'problema' && !fase) return MC.giudicaServe(e.q, v);
     if (e.motore === 'mc') return MC.giudica(e.q, v);
     if (e.motore === 'fc') return FC.giudica(e.q, v);
+    if (e.motore === 'pl') return PL.giudica(e.q, v);
     var att = FZ.calcola(e.q).risultato, r = FZ.controlla(v, att);
     if (r.esito === 'illeggibile') return { ok: false, cls: 'no', msg: 'Non riesco a leggere la risposta. Scrivila come frazione (3/4), numero intero (5) o decimale (0,75).' };
     if (r.esito === 'sbagliata') return { ok: false, cls: 'no', msg: 'Non ancora. Ricontrolla i passaggi, oppure fatti guidare passo passo.' };
@@ -138,16 +149,19 @@ window.RACCOLTA = (function () {
   function soluzione(e) {
     if (e.motore === 'mc') return MC.soluzione(e.q);
     if (e.motore === 'fc') return FC.soluzione(e.q);
+    if (e.motore === 'pl') return PL.soluzione(e.q);
     var c = FZ.calcola(e.q), h = '<p>Risultato: ' + c.mathRis + '</p><ol class="mm-sol">';
     c.passi.forEach(function (p) { h += '<li><strong>' + p.t + '.</strong> ' + p.p + p.m.join('') + '</li>'; });
     return h + '</ol>';
   }
   function tutor(e) {
     if (e.motore === 'mc') return ['mcd', 'mcm', 'problema'].indexOf(e.k) >= 0 ? function () { return MC.costruisci(e.q.nums); } : null;
+    if (e.motore === 'pl') return function () { return PL.costruisci(e.q); };
     if (e.motore === 'fc') return ['semplifica', 'confronta', 'frazione', 'problema-frazione', 'misto'].indexOf(e.k) >= 0 ? function () { return FC.costruisci(e.q); } : null;
     return function () { var t = FT.costruisci(e.q); return { testata: t.espressione, passi: t.passi, fine: '<p class="tt-q">' + FZ.math(t.risultato.d === BigInt(1) ? FZ.M.num(t.risultato.n) : FZ.M.fr(t.risultato)) + '</p>' }; };
   }
   function suggerimento(e) {
+    if (e.motore === 'pl') return PL.suggerimento(e.q);
     var q = e.q;
     return {
       mcd: 'Scomponi i numeri in fattori primi e prendi solo i fattori comuni, con l\'esponente più piccolo.',
@@ -166,6 +180,7 @@ window.RACCOLTA = (function () {
   }
   /* ── stampa ── */
   function stampa(e) {
+    if (e.motore === 'pl') return PL.stampa(e.q);
     if (e.motore === 'fz') return 'Calcola: ' + FZ.math(FZ.espressione(e.q) + '<mo>=</mo><mo>…</mo>');
     var q = e.q, F = FC.F;
     switch (e.k) {
@@ -183,6 +198,7 @@ window.RACCOLTA = (function () {
   }
   function solStampa(e) {
     var q = e.q;
+    if (e.motore === 'pl') return PL.solStampa(q);
     if (e.motore === 'fz') { var c = FZ.calcola(q); return FZ.math(FZ.espressione(q) + '<mo>=</mo>' + c.mathRis.replace(/^<math[^>]*>|<\/math>$/g, '')); }
     if (e.motore === 'mc') {
       if (q.tipo === 'scomponi') return q.n + ' = ' + MC.fH(q.n);
@@ -209,6 +225,7 @@ window.RACCOLTA = (function () {
       'Regole:\n- Usa solo le forme qui sopra. Un esercizio del libro che non rientra in nessuna forma va saltato, senza commenti.\n' +
       '- Nei problemi, dopo la barra | scrivi il testo del problema in italiano semplice, possibilmente ambientato in cucina, in sala o in albergo; i numeri prima della barra devono essere quelli del testo.\n' +
       '- In «calcola» si usano solo due frazioni con una delle operazioni + − · : (si può aggiungere una potenza, per esempio (2/3)^2).\n' +
+      '- In «polinomio» si usano solo coefficienti interi, lettere minuscole (di solito la x), potenze con ^ e parentesi; niente frazioni né divisioni; polinomi già ridotti dentro le parentesi.\n' +
       '- Al massimo ' + MAXR + ' righe. Nessun titolo, nessuna numerazione, nessuna spiegazione: solo le righe, dentro un unico blocco di testo.\n' +
       (d.argomento ? '\nArgomento: ' + d.argomento + '.' : '') + (d.quanti ? '\nNumero di esercizi: circa ' + d.quanti + '.' : '') + (d.note ? '\nIndicazioni del docente: ' + d.note : '') +
       '\n\nOra prepara le righe' + (d.argomento ? '.' : ', sulle foto allegate. Se non ci sono foto né argomento, chiedimi solo di allegare la foto.');

@@ -342,3 +342,9 @@ a.mt-int:focus-visible{outline:3px solid var(--oro2,#D4AA4A);outline-offset:2px}
   .fz-foglio-t{color:#000}
   body{background:#fff!important}
 }
+
+/* «Crea»: visibile solo dopo l'accesso da docente (cancello.js) */
+html.cr-chiuso main>section:not(.au-hero):not(.cr-porta){display:none!important}
+html:not(.cr-chiuso) .cr-porta{display:none}
+.cr-porta h2{font-family:var(--fd,serif);font-weight:400;font-size:1.5rem;color:var(--bosco,#2C3E2D);margin:0 0 .4rem}
+

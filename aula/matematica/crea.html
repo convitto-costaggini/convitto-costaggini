@@ -122,6 +122,31 @@
     </div>
   </section>
 
+  <section class="au-sez no-stampa" aria-labelledby="t-passo5">
+    <div class="w">
+      <h2 class="au-tit" id="t-passo5">5 · Verifica in classe: file A, B, C e versioni adattate</h2>
+      <p class="au-nota">Gli esercizi del passo 2 diventano la <b>fila A</b>. Il sito costruisce le altre file con gli stessi tipi di esercizio e la stessa difficoltà, ma numeri diversi. Sul foglio stampato non c'è nessuna scritta che distingua le versioni: dice solo «Fila A», «Fila B»… Le soluzioni e la griglia di valutazione (il foglio vale 10 punti) stanno in pagine a parte, per chi corregge.</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="vf-file">Quante file</label><select id="vf-file"><option value="1">Solo la fila A</option><option value="2" selected>Due file: A e B</option><option value="3">Tre file: A, B e C</option></select></div>
+        </div>
+        <div class="fz-azioni" style="flex-direction:column;align-items:flex-start;gap:.4rem">
+          <label class="fz-un"><input type="checkbox" id="vf-dsa"/> Versione con più aiuti, per chi ha un DSA (stessi esercizi, carattere grande, più spazio, promemoria del metodo)</label>
+          <label class="fz-un"><input type="checkbox" id="vf-da"/> Versione semplificata, per chi ha una disabilità (circa metà degli esercizi, numeri più piccoli, promemoria): è una base da rivedere con il PEI</label>
+          <label class="fz-un"><input type="checkbox" id="vf-sol" checked/> Soluzioni e griglia di valutazione a parte</label>
+          <label class="fz-un"><input type="checkbox" id="vf-doppio"/> I problemi valgono il doppio</label>
+        </div>
+        <div class="fz-azioni">
+          <button type="button" class="fz-btn" id="vf-prepara">Prepara le file</button>
+          <button type="button" class="fz-btn sec" id="vf-cambia">Cambia i numeri delle file B e C</button>
+          <button type="button" class="fz-btn sec" id="vf-stampa">Stampa i fogli</button>
+        </div>
+        <p class="fz-fb" id="vf-fb" role="status"></p>
+        <div id="vf-anteprima"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="au-sez" id="cr-foglio-sez" hidden>
     <div class="w"><div id="cr-foglio" class="fz-foglio"></div></div>
   </section>
@@ -137,6 +162,8 @@
 <script src="aula/matematica/polinomi-es.js"></script>
 <script src="aula/matematica/raccolta.js"></script>
 <script src="aula/matematica/crea.js"></script>
+<script src="aula/matematica/verifica.js"></script>
+<script src="aula/matematica/verifica-ui.js"></script>
 <script src="aula/lingue/accesso.js"></script>
 </body>
 </html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Operazioni con i monomi – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="Operazioni con i monomi: somma di monomi simili, prodotto, quoziente e potenza, con le regole degli esponenti. Giochi, metodo passo passo ed esercizi con correzione."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Tappa 9</p>
+      <h1>Operazioni con i <em>monomi</em></h1>
+      <p class="au-sub">Sommare vassoi, moltiplicare file di pasticcini, dividere porzioni: i monomi si calcolano con quattro regole. Scopri perché gli esponenti si sommano, si sottraggono o si moltiplicano.</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/monomi-operazioni.html#caso">🥐 Il caso</a><a href="aula/matematica/monomi-operazioni.html#scopri">🔍 Scopri</a><a href="aula/matematica/monomi-operazioni.html#metodo">🧭 Il metodo</a><a href="aula/matematica/monomi-operazioni.html#regole">Le regole</a><a href="aula/matematica/monomi-operazioni.html#allenati">✏️ Allenati</a><a href="aula/matematica/monomi-operazioni.html#servizio">⏱️ Il servizio</a><a href="aula/matematica/monomi-operazioni.html#missione">🎯 Missione</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+  </nav>
+
+  <section class="au-sez no-stampa" id="caso" aria-labelledby="t-caso">
+    <div class="w">
+      <h2 class="au-tit" id="t-caso">🥐 Il caso dei vassoi</h2>
+      <div id="mt-ripasso"></div>
+      <p class="mm-p">Vassoi, teglie e file di pasticcini: tre domande per capire come si calcola con le lettere. <em>Vediamo dove va a finire…</em></p>
+      <div class="tt-card" id="mp-caso"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="scopri" aria-labelledby="t-scopri">
+    <div class="w">
+      <h2 class="au-tit" id="t-scopri">🔍 Scopri</h2>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🍰 Si può sommare?</h3>
+        <p class="mm-p">Due monomi si sommano in uno solo <strong>soltanto se sono simili</strong>. Decidi tu, poi ti mostriamo il risultato.</p>
+        <div id="sp-area"></div>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🔭 Le leggi degli esponenti, fattore per fattore</h3>
+        <p class="mm-p">Perché gli esponenti si sommano nel prodotto e si sottraggono nel quoziente? Perché si contano i fattori. Scegli l'operazione e gli esponenti e guarda i «x» scritti uno per uno.</p>
+        <div class="fz-scelte mm-due"><div><label for="es-op">Operazione</label><select id="es-op"><option value="prodotto">Prodotto: x^a · x^b</option><option value="quoziente">Quoziente: x^a : x^b</option><option value="potenza">Potenza: (x^a)^b</option></select></div>
+        <div><label for="es-a">Esponente a</label><select id="es-a"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></div>
+        <div><label for="es-b">Esponente b</label><select id="es-b"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></div></div>
+        <div id="es-out" aria-live="polite"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="metodo" aria-labelledby="t-metodo">
+    <div class="w">
+      <h2 class="au-tit" id="t-metodo">🧭 Il metodo, una domanda alla volta</h2>
+      <p class="au-nota">Rispondi a una domanda alla volta: prima i coefficienti, poi gli esponenti, poi scrivi il monomio. Le potenze si scrivono con ^ (x^2).</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte mm-due">
+          <div><label for="tu-tipo">Che cosa vuoi imparare?</label><select id="tu-tipo"><option value="somma">Somma di monomi simili</option><option value="prodotto">Prodotto di monomi</option><option value="quoziente">Quoziente di monomi</option><option value="potenza">Potenza di un monomio</option></select></div>
+          <div><label for="tu-liv">Difficoltà</label><select id="tu-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedia</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="tu-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg"><h3>Somma (e differenza)</h3><p>Solo tra monomi <strong>simili</strong>: si sommano i coefficienti, la parte letterale resta.</p><p class="mm-es">3x² + 5x² − x² = 7x²</p></article>
+        <article class="fz-reg"><h3>Prodotto</h3><p>Si <strong>moltiplicano i coefficienti</strong> e si <strong>sommano gli esponenti</strong> delle lettere uguali.</p><p class="mm-es">(2x²y) · (3xy³) = 6x³y⁴</p></article>
+        <article class="fz-reg"><h3>Quoziente</h3><p>Si <strong>dividono i coefficienti</strong> e si <strong>sottraggono gli esponenti</strong>. Il quoziente è un monomio solo se il divisore «sta dentro» il dividendo.</p><p class="mm-es">12x³y : 4xy = 3x²</p></article>
+        <article class="fz-reg"><h3>Potenza</h3><p>Si eleva il <strong>coefficiente</strong> e si <strong>moltiplicano gli esponenti</strong> per l'esponente della potenza.</p><p class="mm-es">(2x²)³ = 8x⁶</p></article>
+        <article class="fz-reg"><h3>I segni</h3><p>Come con i numeri relativi: − · − = +, − · + = −. Una potenza pari di un coefficiente negativo è positiva.</p></article>
+      </div>
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li><p><strong>Sommare gli esponenti nella somma.</strong> 3x + 2x = 5x, non 5x².</p></li>
+        <li><p><strong>Moltiplicare gli esponenti nel prodotto.</strong> x² · x³ = x⁵ (2 + 3), non x⁶.</p></li>
+        <li><p><strong>Sommare i coefficienti nel prodotto.</strong> 2x · 3x = 6x², non 5x².</p></li>
+        <li><p><strong>Dividere gli esponenti nel quoziente.</strong> x⁶ : x² = x⁴ (6 − 2), non x³.</p></li>
+        <li><p><strong>Dimenticare di elevare il coefficiente.</strong> (2x²)³ = 8x⁶, non 2x⁶.</p></li>
+        <li><p><strong>Sommare monomi non simili.</strong> 3x + 2y resta 3x + 2y: non diventa 5xy.</p></li>
+      </ul>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">✏️ Allenati</h2>
+      <p class="au-nota">Un esercizio alla volta, con correzione. Le potenze si scrivono con ^ (x^2) oppure con l'apice (x²).</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ex-tipo">Che cosa?</label><select id="ex-tipo"><option value="tutto">Un po' di tutto</option><option value="somma">Somma di simili</option><option value="prodotto">Prodotto</option><option value="quoziente">Quoziente</option><option value="potenza">Potenza</option><option value="completa">Trova il monomio che manca</option><option value="errore">Trova l'errore</option></select></div>
+          <div><label for="ex-liv">Livello</label><select id="ex-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedio</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div id="ex-area"></div>
+        <p class="fz-conta" id="ex-conta">Esercizi risolti in questa visita: 0</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="servizio" aria-labelledby="t-servizio">
+    <div class="w">
+      <h2 class="au-tit" id="t-servizio">⏱️ Il servizio: sei comande</h2>
+      <p class="au-nota">La sala è piena. Sei comande, dalla più facile all'ordine speciale: 100 punti al primo colpo, 50 al secondo, e il bonus per le comande di fila.</p>
+      <div class="fz-form" id="sv-area"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
+    <div class="w">
+      <h2 class="au-tit" id="t-missione">🎯 Missione: la cucina in formula</h2>
+      <p class="au-nota">Cinque problemi: aree, volumi e riduzioni.</p>
+      <div class="fz-form" id="mi-area"></div>
+    </div>
+  </section>
+
+
+  <nav class="au-sez no-stampa mt-tnav" id="mt-tappe-nav" aria-label="Le tappe vicine"></nav>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script src="aula/matematica/percorso.js"></script>
+<script src="aula/matematica/tutor.js"></script>
+<script src="aula/matematica/tappa-base.js"></script>
+<script src="aula/matematica/alg-motore.js"></script>
+<script src="aula/matematica/monomi-operazioni.js"></script>
+</body>
+</html>

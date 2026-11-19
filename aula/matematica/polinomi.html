@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>I polinomi – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="I polinomi: somma, differenza, prodotto di un monomio per un polinomio e di due polinomi, con l&#x27;area del rettangolo. Giochi, metodo passo passo ed esercizi con correzione."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Tappa 10</p>
+      <h1>I <em>polinomi</em></h1>
+      <p class="au-sub">Sommare i conti di due tavoli, togliere uno sconto, calcolare l'area di una sala rettangolare: i polinomi servono a questo. Scopri come si somma tra simili e come si moltiplica «tutto per tutto».</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/polinomi.html#caso">🧮 Il caso</a><a href="aula/matematica/polinomi.html#scopri">🔍 Scopri</a><a href="aula/matematica/polinomi.html#metodo">🧭 Il metodo</a><a href="aula/matematica/polinomi.html#regole">Le regole</a><a href="aula/matematica/polinomi.html#allenati">✏️ Allenati</a><a href="aula/matematica/polinomi.html#servizio">⏱️ Il servizio</a><a href="aula/matematica/polinomi.html#missione">🎯 Missione</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+  </nav>
+
+  <section class="au-sez no-stampa" id="caso" aria-labelledby="t-caso">
+    <div class="w">
+      <h2 class="au-tit" id="t-caso">🧮 Il caso del conto di sala</h2>
+      <div id="mt-ripasso"></div>
+      <p class="mm-p">Due tavoli, uno sconto e una sala rettangolare: tre domande per capire come si calcola con più monomi insieme. <em>Vediamo dove va a finire…</em></p>
+      <div class="tt-card" id="pl-caso"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="scopri" aria-labelledby="t-scopri">
+    <div class="w">
+      <h2 class="au-tit" id="t-scopri">🔍 Scopri</h2>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">📐 La sala a rettangoli</h3>
+        <p class="mm-p">Il prodotto di due polinomi è l'<strong>area di un rettangolo</strong> diviso in pezzi: ogni pezzo è un prodotto «termine per termine». Scegli i due numeri e guarda i quattro pezzi.</p>
+        <div class="fz-scelte mm-due"><div><label for="ar-q">Primo lato: x + …</label><select id="ar-q"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></div><div><label for="ar-p">Secondo lato: x + …</label><select id="ar-p"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div>
+        <div class="db-svg" id="ar-svg"></div>
+        <div id="ar-out" aria-live="polite"></div>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">➖ Il segno meno davanti alla parentesi</h3>
+        <p class="mm-p">Il segno − davanti a una parentesi capovolge <strong>tutti</strong> i segni che ci sono dentro. Provaci, e vedi cosa succede se te ne dimentichi.</p>
+        <div id="sg-area"></div>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🧲 Il lampo dei termini simili</h3>
+        <p class="mm-p">Un polinomio disordinato: sommando i simili diventa corto e ordinato. Quante mosse ti servono?</p>
+        <div id="ls-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="metodo" aria-labelledby="t-metodo">
+    <div class="w">
+      <h2 class="au-tit" id="t-metodo">🧭 Il metodo, una domanda alla volta</h2>
+      <p class="au-nota">Rispondi a una domanda alla volta: il sito ti dice se va bene e perché. I polinomi si scrivono con + e −, senza parentesi, e le potenze con ^ (x^2).</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte mm-due">
+          <div><label for="tu-tipo">Che cosa vuoi imparare?</label><select id="tu-tipo"><option value="somma">Somma di polinomi</option><option value="diff">Differenza di polinomi</option><option value="monopoly">Monomio per polinomio</option><option value="poly">Polinomio per polinomio</option><option value="riduci">Ridurre un polinomio</option></select></div>
+          <div><label for="tu-liv">Difficoltà</label><select id="tu-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedia</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="tu-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg"><h3>Che cos'è un polinomio</h3><p>Una somma di monomi (i suoi <strong>termini</strong>). Si dice <strong>ridotto</strong> quando non ha termini simili. Il <strong>grado</strong> è il grado del termine più alto.</p><p class="mm-es">3x² − 5x + 2: tre termini, grado 2</p></article>
+        <article class="fz-reg"><h3>Somma</h3><p>Si tolgono le parentesi (il + non cambia nulla) e si sommano i termini simili.</p><p class="mm-es">(3x + 2) + (x − 5) = 4x − 3</p></article>
+        <article class="fz-reg"><h3>Differenza</h3><p>Il − davanti alla parentesi <strong>cambia tutti i segni</strong> dentro la parentesi.</p><p class="mm-es">(3x + 2) − (x − 5) = 3x + 2 − x + 5 = 2x + 7</p></article>
+        <article class="fz-reg"><h3>Monomio per polinomio</h3><p>Proprietà distributiva: il monomio moltiplica <strong>ogni</strong> termine.</p><p class="mm-es">2x(x + 3) = 2x² + 6x</p></article>
+        <article class="fz-reg"><h3>Polinomio per polinomio</h3><p>Ogni termine del primo per ogni termine del secondo, poi si sommano i simili: è l'area del rettangolo a pezzi.</p><p class="mm-es">(x + 2)(x + 3) = x² + 3x + 2x + 6 = x² + 5x + 6</p></article>
+      </div>
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li><p><strong>Dimenticare di cambiare tutti i segni.</strong> x − (x − 3) = x − x + 3, non x − x − 3.</p></li>
+        <li><p><strong>Moltiplicare solo il primo termine.</strong> 2x(x + 3) = 2x² + 6x, non 2x² + 3.</p></li>
+        <li><p><strong>Saltare i prodotti incrociati.</strong> (x + 2)(x + 3) non è x² + 6: manca il termine di mezzo 5x.</p></li>
+        <li><p><strong>Sommare termini non simili.</strong> 2x² + 3x non fa 5x³ né 5x²: resta com'è.</p></li>
+        <li><p><strong>Non ridurre alla fine.</strong> x² + 2x + 3x + 6 va ridotto: x² + 5x + 6.</p></li>
+      </ul>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">✏️ Allenati</h2>
+      <p class="au-nota">Un esercizio alla volta, con correzione. I polinomi si scrivono con + e −, senza parentesi: 3x^2 − 5x + 2.</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ex-tipo">Che cosa?</label><select id="ex-tipo"><option value="tutto">Un po' di tutto</option><option value="riduci">Riduci un polinomio</option><option value="somma">Somma</option><option value="diff">Differenza</option><option value="monopoly">Monomio per polinomio</option><option value="poly">Polinomio per polinomio</option><option value="grado">Il grado</option><option value="errore">Trova l'errore</option></select></div>
+          <div><label for="ex-liv">Livello</label><select id="ex-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedio</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div id="ex-area"></div>
+        <p class="fz-conta" id="ex-conta">Esercizi risolti in questa visita: 0</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="servizio" aria-labelledby="t-servizio">
+    <div class="w">
+      <h2 class="au-tit" id="t-servizio">⏱️ Il servizio: sei comande</h2>
+      <p class="au-nota">La sala è piena. Sei comande, dalla più facile all'ordine speciale: 100 punti al primo colpo, 50 al secondo, e il bonus per le comande di fila.</p>
+      <div class="fz-form" id="sv-area"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
+    <div class="w">
+      <h2 class="au-tit" id="t-missione">🎯 Missione: i conti della sala</h2>
+      <p class="au-nota">Cinque problemi: somme, sconti, aree.</p>
+      <div class="fz-form" id="mi-area"></div>
+    </div>
+  </section>
+
+
+  <nav class="au-sez no-stampa mt-tnav" id="mt-tappe-nav" aria-label="Le tappe vicine"></nav>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script src="aula/matematica/percorso.js"></script>
+<script src="aula/matematica/tutor.js"></script>
+<script src="aula/matematica/tappa-base.js"></script>
+<script src="aula/matematica/alg-motore.js"></script>
+<script src="aula/matematica/polinomi.js"></script>
+</body>
+</html>

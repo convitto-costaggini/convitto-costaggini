@@ -14,14 +14,14 @@ window.PERCORSO = (function () {
     { id: 'mcd-mcm', b: 'numeri', ico: '⏲️', t: 'Numeri primi, MCD e mcm', d: 'I timer del forno, le mattonelle della dispensa e l\'albero dei fattori.', url: 'aula/matematica/mcd-mcm.html' },
     { id: 'frazioni-cosa', b: 'numeri', ico: '🍕', t: 'Che cos\'è una frazione', d: 'Tagliare la teglia: frazioni equivalenti, semplificare, confrontare.', url: 'aula/matematica/frazioni-cosa.html' },
     { id: 'frazioni-operazioni', b: 'numeri', ico: '➗', t: 'Operazioni e potenze con le frazioni', d: 'Somma, differenza, prodotto, divisione e potenze, passo passo.', url: 'aula/matematica/frazioni.html' },
-    { id: 'decimali', b: 'numeri', ico: '⚖️', t: 'I numeri decimali', d: 'Dalla bilancia allo scontrino: leggere, confrontare, arrotondare.' },
-    { id: 'periodici', b: 'numeri', ico: '🔁', t: 'Dal decimale alla frazione', d: 'Decimali finiti e periodici: perché le cifre si ripetono e la frazione generatrice.' },
-    { id: 'ordine', b: 'espressioni', ico: '🧭', t: 'L\'ordine delle operazioni', d: 'Scegli tu che cosa fare prima: le parentesi e le precedenze.' },
+    { id: 'decimali', b: 'numeri', ico: '⚖️', t: 'I numeri decimali', d: 'Dalla bilancia allo scontrino: leggere, confrontare, arrotondare.', url: 'aula/matematica/decimali.html' },
+    { id: 'periodici', b: 'numeri', ico: '🔁', t: 'Dal decimale alla frazione', d: 'Decimali finiti e periodici: perché le cifre si ripetono e la frazione generatrice.', url: 'aula/matematica/periodici.html' },
+    { id: 'ordine', b: 'espressioni', ico: '🧭', t: 'L\'ordine delle operazioni', d: 'Scegli tu che cosa fare prima: le parentesi e le precedenze.', url: 'aula/matematica/ordine.html' },
     { id: 'espressioni-frazioni', b: 'espressioni', ico: '🧮', t: 'Espressioni con le frazioni', d: 'L\'ultima fetta, la frazione di una frazione, le parentesi e le frazioni a più piani.', url: 'aula/matematica/espressioni-frazioni.html' },
-    { id: 'monomi', b: 'lettere', ico: '🟩', t: 'Dalle lettere ai monomi', d: 'Le tessere colorate: grado, monomi simili.' },
-    { id: 'monomi-operazioni', b: 'lettere', ico: '✖️', t: 'Operazioni con i monomi', d: 'Somma dei simili, prodotto, quoziente e potenza.' },
-    { id: 'polinomi', b: 'lettere', ico: '🧱', t: 'I polinomi', d: 'Sommare e moltiplicare: il prodotto come area di un rettangolo.' },
-    { id: 'prodotti-notevoli', b: 'lettere', ico: '✨', t: 'I prodotti notevoli', d: 'Quadrato di un binomio e somma per differenza, da vedere e da toccare.' }
+    { id: 'monomi', b: 'lettere', ico: '🟩', t: 'Dalle lettere ai monomi', d: 'Le tessere colorate: grado, monomi simili.', url: 'aula/matematica/monomi.html' },
+    { id: 'monomi-operazioni', b: 'lettere', ico: '✖️', t: 'Operazioni con i monomi', d: 'Somma dei simili, prodotto, quoziente e potenza.', url: 'aula/matematica/monomi-operazioni.html' },
+    { id: 'polinomi', b: 'lettere', ico: '🧱', t: 'I polinomi', d: 'Sommare e moltiplicare: il prodotto come area di un rettangolo.', url: 'aula/matematica/polinomi.html' },
+    { id: 'prodotti-notevoli', b: 'lettere', ico: '✨', t: 'I prodotti notevoli', d: 'Quadrato di un binomio e somma per differenza, da vedere e da toccare.', url: 'aula/matematica/prodotti-notevoli.html' }
   ];
   function leggi() { try { return JSON.parse(localStorage.getItem(CH) || '{}') || {}; } catch (e) { return {}; } }
   function fatta(id) { return !!leggi()[id]; }

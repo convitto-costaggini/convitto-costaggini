@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Dal decimale alla frazione – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="Decimali finiti e periodici: perché le cifre si ripetono, come si riconosce il tipo di decimale e come si trova la frazione generatrice. Giochi, metodo passo passo ed esercizi."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Tappa 5</p>
+      <h1>Dal decimale alla <em>frazione</em></h1>
+      <p class="au-sub">1 diviso 3 non finisce mai: 0,3333… Qui scopri perché, come si scrive un numero che non finisce e come si torna alla frazione da cui nasce. Compresa la sorpresa 0,999… = 1.</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/periodici.html#caso">🍰 Il caso</a><a href="aula/matematica/periodici.html#scopri">🔍 Scopri</a><a href="aula/matematica/periodici.html#metodo">🧭 Il metodo</a><a href="aula/matematica/periodici.html#regole">Le regole</a><a href="aula/matematica/periodici.html#allenati">✏️ Allenati</a><a href="aula/matematica/periodici.html#servizio">⏱️ Il servizio</a><a href="aula/matematica/periodici.html#missione">🎯 Missione</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+  </nav>
+
+  <section class="au-sez no-stampa" id="caso" aria-labelledby="t-caso">
+    <div class="w">
+      <h2 class="au-tit" id="t-caso">🍰 Il caso della torta che non finisce</h2>
+      <div id="mt-ripasso"></div>
+      <p class="mm-p">Tre domande su una torta divisa in tre. Sembra scuola elementare, e invece alla fine scopri che <strong>due numeri diversi possono essere lo stesso numero</strong>. <em>Vediamo dove va a finire…</em></p>
+      <div class="tt-card" id="pc-caso"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="scopri" aria-labelledby="t-scopri">
+    <div class="w">
+      <h2 class="au-tit" id="t-scopri">🔍 Scopri</h2>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">➗ La divisione che non finisce</h3>
+        <p class="mm-p">Scegli una frazione e dividi, una cifra alla volta. Guarda i <strong>resti</strong>: quando ne compare uno già visto, le cifre ricominciano da capo.</p>
+        <div class="fz-scelte mm-due"><div><label for="dv-n">Numeratore</label><select id="dv-n"></select></div><div><label for="dv-d">Denominatore</label><select id="dv-d"></select></div></div>
+        <div id="dv-out"></div>
+        <div class="fz-azioni" id="dv-btn"></div>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🎯 Chi finisce e chi no?</h3>
+        <p class="mm-p">Senza fare la divisione: la frazione dà un decimale finito o periodico? Dopo ogni risposta ti spieghiamo il trucco dei fattori del denominatore.</p>
+        <div id="fn-area"></div>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🧪 La macchina della frazione generatrice</h3>
+        <p class="mm-p">Scrivi un numero periodico e la macchina trova la frazione, con tutti i passaggi. Prova con periodo <strong>9</strong>: ti aspetta una sorpresa.</p>
+        <div class="gn-in"><div><label for="gn-i">Parte intera</label><input id="gn-i" type="text" inputmode="numeric" value="0" autocomplete="off"/></div><div><label for="gn-a">Antiperiodo (cifre che non si ripetono)</label><input id="gn-a" type="text" inputmode="numeric" value="1" autocomplete="off"/></div><div><label for="gn-p">Periodo (cifre che si ripetono)</label><input id="gn-p" type="text" inputmode="numeric" value="6" autocomplete="off"/></div></div>
+        <div id="gn-out" aria-live="polite"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="metodo" aria-labelledby="t-metodo">
+    <div class="w">
+      <h2 class="au-tit" id="t-metodo">🧭 Il metodo, una domanda alla volta</h2>
+      <p class="au-nota">Rispondi a una domanda alla volta. I numeri periodici si scrivono con il periodo tra parentesi: 0,1(6).</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte mm-due">
+          <div><label for="tu-tipo">Che cosa vuoi imparare?</label><select id="tu-tipo"><option value="dec">Da frazione a decimale (finito o periodico)</option><option value="sem">Periodico semplice → frazione</option><option value="mis">Periodico misto → frazione</option></select></div>
+          <div><label for="tu-liv">Difficoltà</label><select id="tu-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedia</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="tu-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg"><h3>Finito o periodico?</h3><p>Riduci la frazione e scomponi il denominatore: se ci sono <strong>solo 2 e 5</strong> il decimale è finito, altrimenti è periodico.</p><p class="mm-es">3/8 → 8 = 2³ → 0,375 &nbsp;·&nbsp; 1/6 → 6 = 2 · 3 → 0,1(6)</p></article>
+        <article class="fz-reg"><h3>Periodo e antiperiodo</h3><p>Il <strong>periodo</strong> è il gruppo di cifre che si ripete; l'<strong>antiperiodo</strong> sono le cifre tra la virgola e il periodo.</p><p class="mm-es">0,1(6): antiperiodo 1, periodo 6</p></article>
+        <article class="fz-reg"><h3>Perché si ripete</h3><p>Dividendo per <em>d</em> i resti possibili sono al massimo <em>d</em> − 1: prima o poi un resto torna uguale e le cifre ricominciano.</p></article>
+        <article class="fz-reg"><h3>Generatrice: periodo semplice</h3><p>Tanti 9 quanti le cifre del periodo al denominatore, il periodo al numeratore.</p><p class="mm-es">0,(36) = 36/99 = 4/11</p></article>
+        <article class="fz-reg"><h3>Generatrice: periodo misto</h3><p>(numero fino al periodo − numero fino all'antiperiodo) / (9 per il periodo, 0 per l'antiperiodo).</p><p class="mm-es">0,1(6) = (16 − 1)/90 = 15/90 = 1/6</p></article>
+        <article class="fz-reg"><h3>0,(9) = 1</h3><p>Con il periodo 9 la regola dà 9/9 = 1: non c'è nessun numero tra 0,999… e 1, sono due scritture dello stesso numero.</p></article>
+      </div>
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li><p><strong>Scrivere 1/3 = 0,3.</strong> 0,3 = 3/10; 1/3 è 0,333… cioè 0,(3).</p></li>
+        <li><p><strong>Mettere nel periodo anche l'antiperiodo.</strong> 0,1666… è 0,1(6), non 0,(16).</p></li>
+        <li><p><strong>Dimenticare di ridurre</strong> la frazione generatrice: 15/90 va ridotta a 1/6.</p></li>
+        <li><p><strong>Giudicare la frazione senza ridurla.</strong> 6/15 sembra avere un 3 al denominatore, ma si riduce a 2/5: decimale finito (0,4).</p></li>
+        <li><p><strong>Pensare che 0,(9) sia «quasi 1».</strong> È uguale a 1.</p></li>
+      </ul>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">✏️ Allenati</h2>
+      <p class="au-nota">Un esercizio alla volta, con correzione. Il periodo si scrive tra parentesi: 0,1(6).</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ex-tipo">Che cosa?</label><select id="ex-tipo"><option value="tutto">Un po' di tutto</option><option value="fin">Finito o periodico?</option><option value="periodo">Quante cifre ha il periodo?</option><option value="decimale">Da frazione a decimale</option><option value="sem">Generatrice: periodo semplice</option><option value="mis">Generatrice: periodo misto</option></select></div>
+          <div><label for="ex-liv">Livello</label><select id="ex-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedio</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div id="ex-area"></div>
+        <p class="fz-conta" id="ex-conta">Esercizi risolti in questa visita: 0</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="servizio" aria-labelledby="t-servizio">
+    <div class="w">
+      <h2 class="au-tit" id="t-servizio">⏱️ Il servizio: sei comande</h2>
+      <p class="au-nota">La sala è piena. Sei comande, dalla più facile all'ordine speciale: 100 punti al primo colpo, 50 al secondo, e il bonus per le comande di fila.</p>
+      <div class="fz-form" id="sv-area"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
+    <div class="w">
+      <h2 class="au-tit" id="t-missione">🎯 Missione: il pasticciere e il tempo</h2>
+      <p class="au-nota">Cinque problemi: dal decimale che non finisce alla frazione che lo genera.</p>
+      <div class="fz-form" id="mi-area"></div>
+    </div>
+  </section>
+
+
+  <nav class="au-sez no-stampa mt-tnav" id="mt-tappe-nav" aria-label="Le tappe vicine"></nav>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script src="aula/matematica/percorso.js"></script>
+<script src="aula/matematica/tutor.js"></script>
+<script src="aula/matematica/tappa-base.js"></script>
+<script src="aula/matematica/periodici.js"></script>
+</body>
+</html>

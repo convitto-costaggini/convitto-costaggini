@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>I numeri decimali – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="I numeri decimali dalla bilancia allo scontrino: valore posizionale, confronto, arrotondamento, operazioni e legame con le frazioni. Giochi, metodo passo passo ed esercizi con correzione."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Tappa 4</p>
+      <h1>I numeri <em>decimali</em></h1>
+      <p class="au-sub">Il peso sulla bilancia, il prezzo sullo scontrino, la temperatura del forno: in cucina i numeri hanno la virgola. Qui scopri perché 0,5 vale più di 0,25 e come si calcola senza sbagliare.</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/decimali.html#caso">🧈 Il caso</a><a href="aula/matematica/decimali.html#scopri">🔍 Scopri</a><a href="aula/matematica/decimali.html#metodo">🧭 Il metodo</a><a href="aula/matematica/decimali.html#regole">Le regole</a><a href="aula/matematica/decimali.html#allenati">✏️ Allenati</a><a href="aula/matematica/decimali.html#servizio">⏱️ Il servizio</a><a href="aula/matematica/decimali.html#missione">🎯 Missione</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+  </nav>
+
+  <section class="au-sez no-stampa" id="caso" aria-labelledby="t-caso">
+    <div class="w">
+      <h2 class="au-tit" id="t-caso">🧈 Il caso del burro</h2>
+      <div id="mt-ripasso"></div>
+      <p class="mm-p">Tre piccoli misteri di cucina. Ognuno sembra facile: ti basta una risposta, poi ti diciamo come stanno davvero le cose. <em>Vediamo dove va a finire…</em></p>
+      <div class="tt-card" id="dc-caso"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="scopri" aria-labelledby="t-scopri">
+    <div class="w">
+      <h2 class="au-tit" id="t-scopri">🔍 Scopri</h2>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">⚖️ La bilancia delle cifre</h3>
+        <p class="mm-p">Ogni cifra vale <strong>dieci volte meno</strong> di quella alla sua sinistra: dopo le unità vengono i decimi, poi i centesimi, poi i millesimi. Tocca le frecce e guarda il numero crescere un pezzetto alla volta.</p>
+        <div class="bl-cifre" id="bl-cifre"></div>
+        <div id="bl-lettura"></div>
+        <div id="bl-sfida"></div>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🧾 Lo scontrino che si arrotonda</h3>
+        <p class="mm-p">I centesimi sono l'ultima moneta: quando il conto ha più cifre, si arrotonda. Scegli fin dove arrotondare, poi decidi qual è il numero più vicino.</p>
+        <div class="fz-azioni" id="sc-pos" style="margin-top:0"><button type="button" class="fz-chip" data-p="0" aria-pressed="false">all'euro</button><button type="button" class="fz-chip" data-p="1" aria-pressed="false">ai decimi</button><button type="button" class="fz-chip" data-p="2" aria-pressed="true">ai centesimi</button></div>
+        <p class="mm-p" id="sc-dom"></p>
+        <div class="db-svg" id="sc-svg"></div>
+        <div class="fz-azioni" id="sc-btn"></div>
+        <p class="fz-fb" id="sc-fb" role="status" aria-live="polite"></p>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">0️⃣ Lo zero che non conta (e quello che conta)</h3>
+        <p class="mm-p">Parti da <strong>3,5</strong> e prova ad aggiungere uno zero in posti diversi. Le barre dicono se il numero è cambiato.</p>
+        <div class="fz-azioni" id="zr-btn" style="margin-top:0"><button type="button" class="fz-btn sec" data-z="fine">Zero in fondo</button><button type="button" class="fz-btn sec" data-z="mezzo">Zero dopo la virgola</button><button type="button" class="fz-btn sec" data-z="sx">Zero all'inizio</button><button type="button" class="fz-btn sec" data-z="azz">Ricomincia</button></div>
+        <div id="zr-fig"></div>
+        <p class="fz-fb" id="zr-fb" role="status" aria-live="polite"></p>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🔬 Il microscopio che non finisce mai</h3>
+        <p class="mm-p">Quanti numeri ci sono tra <strong>0,1</strong> e <strong>0,2</strong>? Ingrandisci: ogni volta trovi il numero a metà strada, e puoi continuare dalla parte che preferisci.</p>
+        <div id="mc-out"></div>
+        <div class="fz-azioni" id="mc-btn"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="metodo" aria-labelledby="t-metodo">
+    <div class="w">
+      <h2 class="au-tit" id="t-metodo">🧭 Il metodo, una domanda alla volta</h2>
+      <p class="au-nota">Rispondi a una domanda alla volta: il sito ti dice se va bene e perché. Se ti blocchi c'è il suggerimento.</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte mm-due">
+          <div><label for="tu-tipo">Che cosa vuoi imparare?</label><select id="tu-tipo"><option value="confronta">Confrontare due decimali</option><option value="arrotonda">Arrotondare</option><option value="somma">Sommare in colonna</option><option value="diff">Sottrarre in colonna</option><option value="per10">Per 10, 100, 1000</option><option value="prodotto">Moltiplicare due decimali</option><option value="frdec">Da frazione a decimale</option><option value="decfr">Da decimale a frazione</option></select></div>
+          <div><label for="tu-liv">Difficoltà</label><select id="tu-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedia</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="tu-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg"><h3>Il valore posizionale</h3><p>Dopo la virgola: <strong>decimi</strong>, <strong>centesimi</strong>, <strong>millesimi</strong>. Ogni posto vale dieci volte meno di quello a sinistra.</p><p class="mm-es">3,25 = 3 unità + 2 decimi + 5 centesimi</p></article>
+        <article class="fz-reg"><h3>Confrontare</h3><p>Si porta lo stesso numero di cifre decimali aggiungendo zeri in fondo, poi si confronta come con gli interi.</p><p class="mm-es">0,5 e 0,25 → 0,50 e 0,25 → 50 &gt; 25</p></article>
+        <article class="fz-reg"><h3>Arrotondare</h3><p>Si guarda la cifra subito dopo quella a cui si arrotonda: 5 o più, si sale; meno di 5, si resta.</p><p class="mm-es">4,678 ai centesimi → 4,68</p></article>
+        <article class="fz-reg"><h3>Somma e differenza</h3><p>In colonna, <strong>virgola sotto virgola</strong>, aggiungendo gli zeri che mancano. La virgola del risultato sta sotto le altre.</p></article>
+        <article class="fz-reg"><h3>Per 10, 100, 1000</h3><p>Moltiplicare: la virgola va a <strong>destra</strong> di 1, 2, 3 posti. Dividere: a <strong>sinistra</strong>.</p><p class="mm-es">2,5 × 100 = 250 &nbsp;·&nbsp; 4,5 : 10 = 0,45</p></article>
+        <article class="fz-reg"><h3>Moltiplicare</h3><p>Si moltiplica senza virgola; poi si mettono tante cifre decimali quante ne hanno i due fattori in tutto.</p><p class="mm-es">1,2 × 0,3 → 12 × 3 = 36 → 0,36</p></article>
+        <article class="fz-reg"><h3>Decimali e frazioni</h3><p>Un decimale finito è una frazione con 10, 100, 1000… al denominatore: 0,75 = 75/100 = 3/4.</p></article>
+      </div>
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li><p><strong>«25 è più di 5, quindi 0,25 &gt; 0,5».</strong> I decimali non si leggono come interi: 0,5 = 0,50, più di 0,25.</p></li>
+        <li><p><strong>Dimenticare lo zero che tiene il posto.</strong> 7 centesimi si scrive 0,07, non 0,7. Lo zero dopo la virgola conta.</p></li>
+        <li><p><strong>Incolonnare a destra.</strong> Nelle somme si allineano le virgole, non l'ultima cifra.</p></li>
+        <li><p><strong>Arrotondare guardando due cifre.</strong> Si guarda una sola cifra, la prima che si butta via: 4,649 ai decimi è 4,6 (si guarda il 4, non il 49).</p></li>
+        <li><p><strong>Nella moltiplicazione, allineare le virgole.</strong> Non serve: si moltiplica come con gli interi e poi si contano le cifre decimali.</p></li>
+        <li><p><strong>Per 100 aggiungere «,00».</strong> Moltiplicare per 100 sposta la virgola di due posti: 2,5 × 100 = 250.</p></li>
+      </ul>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">✏️ Allenati</h2>
+      <p class="au-nota">Un esercizio alla volta, con correzione. I decimali si scrivono con la virgola: 3,25.</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ex-tipo">Che cosa?</label><select id="ex-tipo"><option value="tutto">Un po' di tutto</option><option value="leggi">Scrivi con le cifre</option><option value="confronta">Confronta due decimali</option><option value="ordina">Il più piccolo di tre</option><option value="arrotonda">Arrotonda</option><option value="somma">Somma (problema)</option><option value="diff">Sottrazione (problema)</option><option value="per10">Per 10, 100, 1000</option><option value="prodotto">Moltiplicazione (problema)</option><option value="frdec">Da frazione a decimale</option><option value="decfr">Da decimale a frazione</option></select></div>
+          <div><label for="ex-liv">Livello</label><select id="ex-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedio</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div id="ex-area"></div>
+        <p class="fz-conta" id="ex-conta">Esercizi risolti in questa visita: 0</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="servizio" aria-labelledby="t-servizio">
+    <div class="w">
+      <h2 class="au-tit" id="t-servizio">⏱️ Il servizio: sei comande</h2>
+      <p class="au-nota">La sala è piena. Arrivano sei comande, dalla più facile all'ordine speciale: ogni risposta giusta al primo colpo vale 100 punti, 50 al secondo tentativo, e più comande di fila indovini più sale il bonus.</p>
+      <div class="fz-form" id="sv-area"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
+    <div class="w">
+      <h2 class="au-tit" id="t-missione">🎯 Missione: una serata tra cassa e dispensa</h2>
+      <p class="au-nota">Cinque problemi veri della serata. Risolvili uno dopo l'altro.</p>
+      <div class="fz-form" id="mi-area"></div>
+    </div>
+  </section>
+
+
+  <nav class="au-sez no-stampa mt-tnav" id="mt-tappe-nav" aria-label="Le tappe vicine"></nav>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script src="aula/matematica/percorso.js"></script>
+<script src="aula/matematica/tutor.js"></script>
+<script src="aula/matematica/tappa-base.js"></script>
+<script src="aula/matematica/decimali.js"></script>
+</body>
+</html>

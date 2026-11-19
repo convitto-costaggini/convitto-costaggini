@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>L&#x27;ordine delle operazioni – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="L&#x27;ordine delle operazioni con i numeri naturali: parentesi, moltiplicazioni e divisioni, somme e sottrazioni. Giochi, rompicapo dei quattro 4, metodo passo passo ed esercizi con correzione."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Tappa 6</p>
+      <h1>L'ordine delle <em>operazioni</em></h1>
+      <p class="au-sub">3 + 4 × 2 fa 11 o 14? Un conto sbagliato di tre euro a tavolo e il ristorante chiude. Qui scopri chi passa avanti, quando comandano le parentesi, e puoi provare il rompicapo dei quattro 4.</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/ordine.html#caso">🧾 Il caso</a><a href="aula/matematica/ordine.html#scopri">🔍 Scopri</a><a href="aula/matematica/ordine.html#metodo">🧭 Il metodo</a><a href="aula/matematica/ordine.html#regole">Le regole</a><a href="aula/matematica/ordine.html#allenati">✏️ Allenati</a><a href="aula/matematica/ordine.html#servizio">⏱️ Il servizio</a><a href="aula/matematica/ordine.html#missione">🎯 Missione</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+  </nav>
+
+  <section class="au-sez no-stampa" id="caso" aria-labelledby="t-caso">
+    <div class="w">
+      <h2 class="au-tit" id="t-caso">🧾 Il caso dello scontrino</h2>
+      <div id="mt-ripasso"></div>
+      <p class="mm-p">Un conto, due totali diversi. Chi ha ragione, e perché? <em>Vediamo dove va a finire…</em></p>
+      <div class="tt-card" id="od-caso"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="scopri" aria-labelledby="t-scopri">
+    <div class="w">
+      <h2 class="au-tit" id="t-scopri">🔍 Scopri</h2>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🪜 La scala delle precedenze</h3>
+        <ol class="od-scala">
+          <li><strong>1 · Le parentesi</strong><span>Quello che c'è dentro si calcola per primo.</span></li>
+          <li><strong>2 · × e ÷</strong><span>Moltiplicazioni e divisioni, insieme, da sinistra a destra.</span></li>
+          <li><strong>3 · + e −</strong><span>Somme e sottrazioni, insieme, da sinistra a destra.</span></li>
+        </ol>
+        <p class="mm-p">Esempio: <math><mn>3</mn><mo>+</mo><mn>4</mn><mo>×</mo><mn>2</mn></math>: la moltiplicazione passa avanti, quindi 3 + 8 = 11. Ma <math><mrow><mo>(</mo><mn>3</mn><mo>+</mo><mn>4</mn><mo>)</mo></mrow><mo>×</mo><mn>2</mn></math> fa 14: le parentesi comandano.</p>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🅿️ Il gioco delle parentesi</h3>
+        <p class="mm-p">Lo stesso conto cambia totale a seconda di dove metti le parentesi. Trova la posizione giusta per ottenere il numero richiesto.</p>
+        <div id="pg-area"></div>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">4️⃣ Il rompicapo dei quattro 4</h3>
+        <div id="qq-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="metodo" aria-labelledby="t-metodo">
+    <div class="w">
+      <h2 class="au-tit" id="t-metodo">🧭 Il metodo, una domanda alla volta</h2>
+      <p class="au-nota">Per ogni passo scegli tu quale operazione fare per prima: il sito ti dice se va bene e perché. Poi fai il calcolo.</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte mm-due">
+          <div><label for="tu-tipo">Che cosa vuoi imparare?</label><select id="tu-tipo"><option value="tutto">Un po' di tutto</option><option value="senza">Senza parentesi</option><option value="con">Con le parentesi</option></select></div>
+          <div><label for="tu-liv">Difficoltà</label><select id="tu-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedia</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="tu-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg"><h3>Parentesi</h3><p>Si calcola prima ciò che sta dentro le parentesi, partendo dalle più interne.</p></article>
+        <article class="fz-reg"><h3>× e ÷ prima di + e −</h3><p>Moltiplicazioni e divisioni hanno la precedenza su somme e sottrazioni.</p><p class="mm-es">3 + 4 × 2 = 3 + 8 = 11</p></article>
+        <article class="fz-reg"><h3>A parità, da sinistra a destra</h3><p>Se le operazioni sono dello stesso livello si procede nell'ordine in cui sono scritte.</p><p class="mm-es">48 ÷ 6 ÷ 2 = 8 ÷ 2 = 4 &nbsp;·&nbsp; 20 − 6 + 4 = 18</p></article>
+        <article class="fz-reg"><h3>Una riga alla volta</h3><p>Riscrivi l'espressione dopo ogni passaggio, con il risultato al posto dell'operazione: è il modo più sicuro per non perdere pezzi.</p></article>
+      </div>
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li><p><strong>Andare sempre da sinistra a destra.</strong> 3 + 4 × 2 non fa 14: la moltiplicazione va fatta prima.</p></li>
+        <li><p><strong>Fare prima la somma e poi la sottrazione.</strong> 20 − 6 + 4 si fa da sinistra: 14 + 4 = 18, non 20 − 10 = 10.</p></li>
+        <li><p><strong>Dividere nell'ordine sbagliato.</strong> 48 ÷ 6 ÷ 2 = 4, non 48 ÷ 3 = 16.</p></li>
+        <li><p><strong>Dimenticare una parentesi nel ricopiare.</strong> Cambia tutto il risultato: ricopia con attenzione.</p></li>
+        <li><p><strong>Fare due operazioni insieme e confondersi.</strong> Meglio una per volta, riscrivendo l'espressione.</p></li>
+      </ul>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">✏️ Allenati</h2>
+      <p class="au-nota">Un esercizio alla volta, con correzione.</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ex-tipo">Che cosa?</label><select id="ex-tipo"><option value="tutto">Un po' di tutto</option><option value="prima">Quale operazione per prima?</option><option value="valore-senza">Calcola (senza parentesi)</option><option value="valore-con">Calcola (con le parentesi)</option><option value="errore">Trova l'errore</option><option value="parentesi">Metti le parentesi</option></select></div>
+          <div><label for="ex-liv">Livello</label><select id="ex-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedio</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div id="ex-area"></div>
+        <p class="fz-conta" id="ex-conta">Esercizi risolti in questa visita: 0</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="servizio" aria-labelledby="t-servizio">
+    <div class="w">
+      <h2 class="au-tit" id="t-servizio">⏱️ Il servizio: sei comande</h2>
+      <p class="au-nota">La sala è piena. Sei scontrini da calcolare, dal più facile all'ordine speciale con le parentesi: 100 punti al primo colpo, 50 al secondo, e il bonus per le comande di fila.</p>
+      <div class="fz-form" id="sv-area"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
+    <div class="w">
+      <h2 class="au-tit" id="t-missione">🎯 Missione: il conto della serata</h2>
+      <p class="au-nota">Cinque problemi: scrivi i calcoli nell'ordine giusto.</p>
+      <div class="fz-form" id="mi-area"></div>
+    </div>
+  </section>
+
+
+  <nav class="au-sez no-stampa mt-tnav" id="mt-tappe-nav" aria-label="Le tappe vicine"></nav>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script src="aula/matematica/percorso.js"></script>
+<script src="aula/matematica/tutor.js"></script>
+<script src="aula/matematica/tappa-base.js"></script>
+<script src="aula/matematica/ordine.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>I prodotti notevoli – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="I prodotti notevoli: quadrato di un binomio e somma per differenza, con il quadrato a pezzi e il calcolo a mente. Giochi, metodo passo passo ed esercizi con correzione."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Tappa 11</p>
+      <h1>I <em>prodotti notevoli</em></h1>
+      <p class="au-sub">Due formule che valgono oro: con il quadrato di un binomio e la somma per differenza batti la calcolatrice e smetti di moltiplicare «tutto per tutto».</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/prodotti-notevoli.html#caso">✨ Il caso</a><a href="aula/matematica/prodotti-notevoli.html#scopri">🔍 Scopri</a><a href="aula/matematica/prodotti-notevoli.html#metodo">🧭 Il metodo</a><a href="aula/matematica/prodotti-notevoli.html#regole">Le regole</a><a href="aula/matematica/prodotti-notevoli.html#allenati">✏️ Allenati</a><a href="aula/matematica/prodotti-notevoli.html#servizio">⏱️ Il servizio</a><a href="aula/matematica/prodotti-notevoli.html#missione">🎯 Missione</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+  </nav>
+
+  <section class="au-sez no-stampa" id="caso" aria-labelledby="t-caso">
+    <div class="w">
+      <h2 class="au-tit" id="t-caso">✨ Il caso dei numeri a mente</h2>
+      <div id="mt-ripasso"></div>
+      <p class="mm-p">Una teglia quadrata e due calcoli che sembrano impossibili senza calcolatrice. Tre domande, e scopri come si fa a mente. <em>Vediamo dove va a finire…</em></p>
+      <div class="tt-card" id="pn-caso"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="scopri" aria-labelledby="t-scopri">
+    <div class="w">
+      <h2 class="au-tit" id="t-scopri">🔍 Scopri</h2>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🟩 Il quadrato a pezzi</h3>
+        <p class="mm-p">Un quadrato di lato <strong>a + b</strong> si taglia in quattro pezzi: due quadrati e due rettangoli uguali. Cambia i numeri e guarda cosa succede all'area.</p>
+        <div class="fz-scelte mm-due"><div><label for="qp-a">Lato a</label><select id="qp-a"><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option><option>6</option><option>7</option><option>8</option></select></div><div><label for="qp-b">Lato b</label><select id="qp-b"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select></div></div>
+        <div class="db-svg" id="qp-svg"></div>
+        <div id="qp-out" aria-live="polite"></div>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🧠 Più veloci della calcolatrice</h3>
+        <p class="mm-p">Quadrati e prodotti vicini a un numero tondo si fanno a mente con le due formule. Quanti ne indovini di fila?</p>
+        <div id="cm-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="metodo" aria-labelledby="t-metodo">
+    <div class="w">
+      <h2 class="au-tit" id="t-metodo">🧭 Il metodo, una domanda alla volta</h2>
+      <p class="au-nota">Rispondi a una domanda alla volta: il sito ti dice se va bene e perché. I polinomi si scrivono con + e −, senza parentesi, e le potenze con ^ (x^2).</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte mm-due">
+          <div><label for="tu-tipo">Che cosa vuoi imparare?</label><select id="tu-tipo"><option value="qsomma">Quadrato di una somma</option><option value="qdiff">Quadrato di una differenza</option><option value="sd">Somma per differenza</option></select></div>
+          <div><label for="tu-liv">Difficoltà</label><select id="tu-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedia</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="tu-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg"><h3>Quadrato di un binomio</h3><p>Quadrato del primo, <strong>doppio prodotto</strong>, quadrato del secondo. Il doppio prodotto prende il segno del binomio.</p><p class="mm-es">(x + 3)² = x² + 6x + 9 &nbsp;·&nbsp; (x − 3)² = x² − 6x + 9</p></article>
+        <article class="fz-reg"><h3>Somma per differenza</h3><p>Quadrato del primo <strong>meno</strong> quadrato del secondo: i termini di mezzo si cancellano.</p><p class="mm-es">(x + 4)(x − 4) = x² − 16</p></article>
+        <article class="fz-reg"><h3>Calcolo a mente</h3><p>Scomponi il numero vicino a uno tondo e applica la formula.</p><p class="mm-es">52² = (50 + 2)² = 2500 + 200 + 4 = 2704<br>48 × 52 = 50² − 2² = 2496</p></article>
+      </div>
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li><p><strong>(a + b)² = a² + b².</strong> Falso: mancano i due rettangoli. Con a = 3 e b = 4: 49, non 25.</p></li>
+        <li><p><strong>Dimenticare il doppio prodotto.</strong> Il termine di mezzo è 2ab, non ab.</p></li>
+        <li><p><strong>Il quadrato del secondo negativo.</strong> (x − 3)² ha +9, perché (−3)² = +9.</p></li>
+        <li><p><strong>Somma per differenza con il +.</strong> (a + b)(a − b) = a² − b², non a² + b².</p></li>
+        <li><p><strong>Applicare la formula a due binomi diversi.</strong> (x + 2)(x + 3) non è un prodotto notevole: si moltiplica tutto per tutto.</p></li>
+      </ul>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">✏️ Allenati</h2>
+      <p class="au-nota">Un esercizio alla volta, con correzione. I polinomi si scrivono con + e −, senza parentesi: 4x^2 − 12x + 9.</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ex-tipo">Che cosa?</label><select id="ex-tipo"><option value="tutto">Un po' di tutto</option><option value="quadrato">Quadrato di un binomio</option><option value="sd">Somma per differenza</option><option value="riconosci">Che prodotto è?</option><option value="completa">Il termine che manca</option><option value="mentale">Calcolo a mente</option><option value="errore">Trova l'errore</option></select></div>
+          <div><label for="ex-liv">Livello</label><select id="ex-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedio</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div id="ex-area"></div>
+        <p class="fz-conta" id="ex-conta">Esercizi risolti in questa visita: 0</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="servizio" aria-labelledby="t-servizio">
+    <div class="w">
+      <h2 class="au-tit" id="t-servizio">⏱️ Il servizio: sei comande</h2>
+      <p class="au-nota">La sala è piena. Sei comande, dalla più facile all'ordine speciale: 100 punti al primo colpo, 50 al secondo, e il bonus per le comande di fila.</p>
+      <div class="fz-form" id="sv-area"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
+    <div class="w">
+      <h2 class="au-tit" id="t-missione">🎯 Missione: più veloci della calcolatrice</h2>
+      <p class="au-nota">Cinque problemi: formule e calcolo mentale.</p>
+      <div class="fz-form" id="mi-area"></div>
+    </div>
+  </section>
+
+
+  <nav class="au-sez no-stampa mt-tnav" id="mt-tappe-nav" aria-label="Le tappe vicine"></nav>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script src="aula/matematica/percorso.js"></script>
+<script src="aula/matematica/tutor.js"></script>
+<script src="aula/matematica/tappa-base.js"></script>
+<script src="aula/matematica/alg-motore.js"></script>
+<script src="aula/matematica/prodotti-notevoli.js"></script>
+</body>
+</html>

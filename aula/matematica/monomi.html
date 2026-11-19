@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Dalle lettere ai monomi – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="Dalle lettere ai monomi: coefficiente, parte letterale, grado, monomi simili e valore numerico. Giochi, metodo passo passo ed esercizi con correzione."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Tappa 8</p>
+      <h1>Dalle lettere ai <em>monomi</em></h1>
+      <p class="au-sub">Una lettera al posto di un numero: il prezzo di un piatto, il lato di una teglia. Scopri come si legge un monomio, perché 4p non è 4 + p e chi è simile a chi.</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/monomi.html#caso">🍕 Il caso</a><a href="aula/matematica/monomi.html#scopri">🔍 Scopri</a><a href="aula/matematica/monomi.html#metodo">🧭 Il metodo</a><a href="aula/matematica/monomi.html#regole">Le regole</a><a href="aula/matematica/monomi.html#allenati">✏️ Allenati</a><a href="aula/matematica/monomi.html#servizio">⏱️ Il servizio</a><a href="aula/matematica/monomi.html#missione">🎯 Missione</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+  </nav>
+
+  <section class="au-sez no-stampa" id="caso" aria-labelledby="t-caso">
+    <div class="w">
+      <h2 class="au-tit" id="t-caso">🍕 Il caso del prezzo che cambia</h2>
+      <div id="mt-ripasso"></div>
+      <p class="mm-p">Una lettera al posto di un numero: sembra un trucco da matematici, e invece è il modo in cui scrivi un menù una volta sola e vale per tutti. <em>Vediamo dove va a finire…</em></p>
+      <div class="tt-card" id="mo-caso"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="scopri" aria-labelledby="t-scopri">
+    <div class="w">
+      <h2 class="au-tit" id="t-scopri">🔍 Scopri</h2>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🏭 La fabbrica di monomi</h3>
+        <p class="mm-p">Un <strong>monomio</strong> è un prodotto tra un numero (il <strong>coefficiente</strong>) e alcune lettere con i loro esponenti (la <strong>parte letterale</strong>). Costruiscine uno con i pulsanti e guarda come si legge.</p>
+        <div class="fb-ctl" id="fb-ctl"></div>
+        <div id="fb-out"></div>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🧩 Chi è simile a chi?</h3>
+        <p class="mm-p">Due monomi sono <strong>simili</strong> se hanno la <em>stessa parte letterale</em>: solo così si potranno sommare, come mele con mele. Riconosci i simili.</p>
+        <div id="sm-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="metodo" aria-labelledby="t-metodo">
+    <div class="w">
+      <h2 class="au-tit" id="t-metodo">🧭 Il metodo, una domanda alla volta</h2>
+      <p class="au-nota">Rispondi a una domanda alla volta: il sito ti dice se va bene e perché. Le potenze si scrivono con ^ (x^2) oppure con l'apice (x²).</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte mm-due">
+          <div><label for="tu-tipo">Che cosa vuoi imparare?</label><select id="tu-tipo"><option value="analisi">Coefficiente, parte letterale e grado</option><option value="valore">Il valore di un monomio</option><option value="simili">Riconoscere i monomi simili</option></select></div>
+          <div><label for="tu-liv">Difficoltà</label><select id="tu-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedia</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="tu-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg"><h3>Che cos'è un monomio</h3><p>Un prodotto di un numero (<strong>coefficiente</strong>) per una o più lettere con esponente (<strong>parte letterale</strong>).</p><p class="mm-es">−4a²b³: coefficiente −4, parte letterale a²b³</p></article>
+        <article class="fz-reg"><h3>Il grado</h3><p>È la <strong>somma degli esponenti</strong> delle lettere. Un numero da solo ha grado 0.</p><p class="mm-es">−4a²b³ ha grado 2 + 3 = 5</p></article>
+        <article class="fz-reg"><h3>Coefficienti nascosti</h3><p>Se non c'è nessun numero il coefficiente è 1 (x = 1x); se c'è solo il segno meno è −1 (−y = −1y). Una lettera senza esponente ha esponente 1.</p></article>
+        <article class="fz-reg"><h3>Monomi simili</h3><p>Stessa parte letterale, coefficienti anche diversi. L'ordine delle lettere non conta: x²y e yx² sono simili.</p></article>
+        <article class="fz-reg"><h3>Il valore</h3><p>Si sostituiscono le lettere con i numeri: prima le potenze, poi il prodotto.</p><p class="mm-es">3x²y con x = 2, y = −1 → 3 · 4 · (−1) = −12</p></article>
+      </div>
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li><p><strong>Sommare gli esponenti e il coefficiente.</strong> Il grado di 3x²y è 3 (2 + 1), non 6: il coefficiente non conta.</p></li>
+        <li><p><strong>Dimenticare l'esponente 1.</strong> In xy² la x ha esponente 1: il grado è 1 + 2 = 3.</p></li>
+        <li><p><strong>Dire che x² e 2x sono la stessa cosa.</strong> Con x = 5: x² = 25 e 2x = 10.</p></li>
+        <li><p><strong>Pensare che x²y e xy² siano simili.</strong> Gli esponenti sono su lettere diverse: la parte letterale è diversa.</p></li>
+        <li><p><strong>Elevare il segno sbagliato.</strong> (−2)² = 4 ma −2² = −4; e con x = −2, x² vale 4, non −4.</p></li>
+      </ul>
+
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">✏️ Allenati</h2>
+      <p class="au-nota">Un esercizio alla volta, con correzione. Le potenze si scrivono con ^ (x^2) oppure con l'apice (x²).</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ex-tipo">Che cosa?</label><select id="ex-tipo"><option value="tutto">Un po' di tutto</option><option value="coeff">Il coefficiente</option><option value="grado">Il grado</option><option value="letterale">La parte letterale</option><option value="simili">Il monomio simile</option><option value="valore">Il valore con i numeri</option><option value="scrivi">Dalle parole al monomio</option></select></div>
+          <div><label for="ex-liv">Livello</label><select id="ex-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedio</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div id="ex-area"></div>
+        <p class="fz-conta" id="ex-conta">Esercizi risolti in questa visita: 0</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="servizio" aria-labelledby="t-servizio">
+    <div class="w">
+      <h2 class="au-tit" id="t-servizio">⏱️ Il servizio: sei comande</h2>
+      <p class="au-nota">La sala è piena. Sei comande, dalla più facile all'ordine speciale: 100 punti al primo colpo, 50 al secondo, e il bonus per le comande di fila.</p>
+      <div class="fz-form" id="sv-area"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
+    <div class="w">
+      <h2 class="au-tit" id="t-missione">🎯 Missione: il menù in formula</h2>
+      <p class="au-nota">Cinque problemi: dalla lettera al numero.</p>
+      <div class="fz-form" id="mi-area"></div>
+    </div>
+  </section>
+
+
+  <nav class="au-sez no-stampa mt-tnav" id="mt-tappe-nav" aria-label="Le tappe vicine"></nav>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script src="aula/matematica/percorso.js"></script>
+<script src="aula/matematica/tutor.js"></script>
+<script src="aula/matematica/tappa-base.js"></script>
+<script src="aula/matematica/alg-motore.js"></script>
+<script src="aula/matematica/monomi.js"></script>
+</body>
+</html>

@@ -17,7 +17,7 @@ window.PERCORSO = (function () {
     { id: 'decimali', b: 'numeri', ico: '⚖️', t: 'I numeri decimali', d: 'Dalla bilancia allo scontrino: leggere, confrontare, arrotondare.' },
     { id: 'periodici', b: 'numeri', ico: '🔁', t: 'Dal decimale alla frazione', d: 'Decimali finiti e periodici: perché le cifre si ripetono e la frazione generatrice.' },
     { id: 'ordine', b: 'espressioni', ico: '🧭', t: 'L\'ordine delle operazioni', d: 'Scegli tu che cosa fare prima: le parentesi e le precedenze.' },
-    { id: 'espressioni-frazioni', b: 'espressioni', ico: '🧮', t: 'Espressioni con le frazioni', d: 'Frazioni, decimali e potenze nella stessa espressione.' },
+    { id: 'espressioni-frazioni', b: 'espressioni', ico: '🧮', t: 'Espressioni con le frazioni', d: 'L\'ultima fetta, la frazione di una frazione, le parentesi e le frazioni a più piani.', url: 'aula/matematica/espressioni-frazioni.html' },
     { id: 'monomi', b: 'lettere', ico: '🟩', t: 'Dalle lettere ai monomi', d: 'Le tessere colorate: grado, monomi simili.' },
     { id: 'monomi-operazioni', b: 'lettere', ico: '✖️', t: 'Operazioni con i monomi', d: 'Somma dei simili, prodotto, quoziente e potenza.' },
     { id: 'polinomi', b: 'lettere', ico: '🧱', t: 'I polinomi', d: 'Sommare e moltiplicare: il prodotto come area di un rettangolo.' },

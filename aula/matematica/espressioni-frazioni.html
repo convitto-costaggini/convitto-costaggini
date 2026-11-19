@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Espressioni con le frazioni – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="Espressioni con le frazioni: frazione di una frazione, parentesi, precedenze e frazioni a più piani, con esempi di cucina e sala. Giochi, metodo passo passo ed esercizi con correzione."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Espressioni</p>
+      <h1>Espressioni <em>con le frazioni</em></h1>
+      <p class="au-sub">Se mangi metà della torta, poi metà di quel che resta, poi ancora metà: la finisci mai? Parti da qui e vediamo dove va a finire. Poi scopri la frazione di una frazione, il comando delle parentesi e le frazioni «a più piani», sempre con teglie, bottiglie e ricette.</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/espressioni-frazioni.html#ultima">🍰 L'ultima fetta</a><a href="aula/matematica/espressioni-frazioni.html#fettina">🔍 Frazione di frazione</a><a href="aula/matematica/espressioni-frazioni.html#strade">🛣️ Tre strade</a><a href="aula/matematica/espressioni-frazioni.html#parentesi">🅿️ Le parentesi</a><a href="aula/matematica/espressioni-frazioni.html#metodo">🧭 Il metodo</a><a href="aula/matematica/espressioni-frazioni.html#regole">Le regole</a><a href="aula/matematica/espressioni-frazioni.html#allenati">✏️ Allenati</a><a href="aula/matematica/espressioni-frazioni.html#missione">🎯 Missione</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+  </nav>
+
+  <section class="au-sez no-stampa" id="ultima" aria-labelledby="t-ultima">
+    <div class="w">
+      <div id="mt-ripasso"></div>
+      <h2 class="au-tit" id="t-ultima">🍰 L'ultima fetta</h2>
+      <div class="fz-form mm-gioco">
+        <p class="mm-p">C'è una teglia di tiramisù intera. Hai molta fame, ma una regola: ogni volta puoi mangiare <strong>solo metà di quello che è rimasto</strong>. Prima di provare, scommetti.</p>
+        <fieldset class="ef-scommessa" id="ul-sc">
+          <legend>Se continuassi per sempre, la teglia finirebbe?</legend>
+          <label><input type="radio" name="ul-p" value="si"/> Sì, prima o poi la finisco</label>
+          <label><input type="radio" name="ul-p" value="no"/> No, ne resterebbe sempre un pezzetto</label>
+          <label><input type="radio" name="ul-p" value="boh"/> Non lo so, provo</label>
+        </fieldset>
+        <div class="fz-azioni"><button type="button" class="fz-btn" id="ul-mangia">Mangia metà di quel che resta</button><button type="button" class="fz-btn sec" id="ul-da-capo">Ricomincia</button></div>
+        <div class="ef-teglia" id="ul-fig"></div>
+        <div class="ef-tabella" id="ul-tab"></div>
+        <p class="fz-fb" id="ul-fb" role="status"></p>
+        <div id="ul-quiz" hidden>
+          <p class="mm-p"><strong>Scopri lo schema.</strong> Guarda la colonna «Mangiato in tutto»: numeratore e denominatore seguono una regola. Dopo <strong>10 morsi</strong>, quale frazione della teglia hai mangiato in tutto?</p>
+          <form class="mm-tf" id="ul-form" novalidate><div class="tt-fi"><label for="ul-n">Numeratore</label><input id="ul-n" type="text" inputmode="numeric" autocomplete="off"/><span class="fz-barra" aria-hidden="true"></span><label for="ul-d">Denominatore</label><input id="ul-d" type="text" inputmode="numeric" autocomplete="off"/></div><button type="submit" class="fz-btn">Controlla</button></form>
+          <p class="fz-fb" id="ul-fb2" role="status"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="fettina" aria-labelledby="t-fettina">
+    <div class="w">
+      <h2 class="au-tit" id="t-fettina">🔍 La frazione di una frazione</h2>
+      <p class="au-nota">Ogni morso dell'esperimento era «metà di una metà»: una frazione <em>di</em> una frazione. Ma quanto vale? Guardala con i tuoi occhi.</p>
+      <div class="fz-form mm-gioco">
+        <div class="ef-ctrl">
+          <div><span class="fc-et">Prima frazione della teglia (colonne verdi)</span>
+            <div class="ef-sel"><label for="fd-a">Numeratore</label><select id="fd-a"></select><label for="fd-b">Denominatore</label><select id="fd-b"></select></div></div>
+          <div><span class="fc-et">Di quella parte ne prendo (righe gialle)</span>
+            <div class="ef-sel"><label for="fd-c">Numeratore</label><select id="fd-c"></select><label for="fd-d">Denominatore</label><select id="fd-d"></select></div></div>
+        </div>
+        <div class="ef-teglia" id="fd-fig"></div>
+        <div class="ef-legenda"><span><i class="ef-k v"></i> la prima frazione</span><span><i class="ef-k g"></i> la seconda frazione</span><span><i class="ef-k s"></i> dove si sovrappongono: la risposta</span></div>
+        <div class="fc-lettura" id="fd-lettura" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="strade" aria-labelledby="t-strade">
+    <div class="w">
+      <h2 class="au-tit" id="t-strade">🛣️ Un problema, tre strade</h2>
+      <p class="au-nota">Stesso problema, tre modi diversi di risolverlo. Non devi usarli tutti: scegli quello che ti viene più naturale. Ma controlla che arrivino nello stesso posto.</p>
+      <div class="fz-form mm-gioco">
+        <p class="mm-pr" id="st-testo"></p>
+        <div class="ef-tab" role="tablist" aria-label="Le tre strade" id="st-tabs">
+          <button type="button" role="tab" id="st-t1" aria-controls="st-p1" aria-selected="true" class="fz-chip">1 · Disegna</button>
+          <button type="button" role="tab" id="st-t2" aria-controls="st-p2" aria-selected="false" tabindex="-1" class="fz-chip">2 · Con i numeri veri</button>
+          <button type="button" role="tab" id="st-t3" aria-controls="st-p3" aria-selected="false" tabindex="-1" class="fz-chip">3 · Con la regola</button>
+        </div>
+        <div role="tabpanel" id="st-p1" aria-labelledby="st-t1" class="ef-pan"></div>
+        <div role="tabpanel" id="st-p2" aria-labelledby="st-t2" class="ef-pan" hidden></div>
+        <div role="tabpanel" id="st-p3" aria-labelledby="st-t3" class="ef-pan" hidden></div>
+        <form class="mm-tf" id="st-form" novalidate><p class="mm-p" style="width:100%;margin:0"><strong>Ora tocca a te:</strong> che frazione della teglia intera è?</p><div class="tt-fi"><label for="st-n">Numeratore</label><input id="st-n" type="text" inputmode="numeric" autocomplete="off"/><span class="fz-barra" aria-hidden="true"></span><label for="st-d">Denominatore</label><input id="st-d" type="text" inputmode="numeric" autocomplete="off"/></div><button type="submit" class="fz-btn">Controlla</button></form>
+        <p class="fz-fb" id="st-fb" role="status"></p>
+        <div class="fz-azioni"><button type="button" class="fz-btn sec" id="st-altro">Un altro problema</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="parentesi" aria-labelledby="t-parentesi">
+    <div class="w">
+      <h2 class="au-tit" id="t-parentesi">🅿️ Le parentesi comandano</h2>
+      <p class="au-nota">La stessa ricetta, con le parentesi in posti diversi, dà risultati diversi. Il tuo compito: trovare dove metterle.</p>
+      <div class="fz-form mm-gioco">
+        <p class="mm-p">Lo chef ha scritto la ricetta senza parentesi, ma sa quanto deve venire. Dove le metti per ottenere proprio <strong id="pa-obiettivo"></strong>?</p>
+        <div class="ef-opzioni" id="pa-opz" role="group" aria-label="Dove mettere le parentesi"></div>
+        <p class="fz-fb" id="pa-fb" role="status"></p>
+        <div class="ef-risv" id="pa-risv"></div>
+        <div class="fz-azioni"><button type="button" class="fz-btn sec" id="pa-altro">Un'altra ricetta</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="metodo" aria-labelledby="t-metodo">
+    <div class="w">
+      <h2 class="au-tit" id="t-metodo">🧭 Il metodo, una domanda alla volta</h2>
+      <p class="au-nota">Qui scegli tu che cosa fare per primo, poi calcoli. Il sito ti dice se va bene e perché. Se ti blocchi c'è il suggerimento.</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte mm-due">
+          <div><label for="tu-liv">Che cosa vuoi imparare?</label><select id="tu-liv">
+            <option value="1">1 · Prima le parentesi</option>
+            <option value="2" selected>2 · Prima × e :, poi + e −</option>
+            <option value="3">3 · Parentesi e precedenze insieme</option>
+            <option value="4">4 · Frazioni a più piani</option>
+          </select></div>
+        </div>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="tu-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg"><h3>L'ordine delle operazioni</h3><p>Prima ciò che sta <strong>tra parentesi</strong> (tonde, poi quadre, poi graffe, dall'interno verso l'esterno). Poi <strong>moltiplicazioni e divisioni</strong>, da sinistra a destra. Per ultime <strong>somme e differenze</strong>, da sinistra a destra.</p></article>
+        <article class="fz-reg"><h3>Frazione di una frazione</h3><p>«Di» tra due frazioni vuol dire <strong>per</strong>. La metà di un terzo è un sesto.</p><math display="block"><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>×</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>6</mn></mfrac></mrow></math></article>
+        <article class="fz-reg"><h3>La linea di frazione grande</h3><p>Una linea di frazione è una <strong>divisione</strong>. Se sopra e sotto ci sono frazioni, si calcola il numeratore, si calcola il denominatore e poi si divide l'uno per l'altro.</p><math display="block"><mrow><mfrac><mfrac><mn>1</mn><mn>2</mn></mfrac><mfrac><mn>1</mn><mn>8</mn></mfrac></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>:</mo><mfrac><mn>1</mn><mn>8</mn></mfrac><mo>=</mo><mn>4</mn></mrow></math></article>
+        <article class="fz-reg"><h3>Dividere è moltiplicare per l'inversa</h3><p>Per dividere per una frazione si capovolge e si moltiplica: quante bottigliette da 1/8 di litro riempio con 1/2 litro? 4.</p></article>
+        <article class="fz-reg"><h3>Somma e differenza</h3><p>Denominatore comune (il mcm), poi si operano i numeratori. Il risultato va sempre ridotto ai minimi termini.</p></article>
+        <article class="fz-reg"><h3>Un'espressione si risolve a passi</h3><p>Una operazione alla volta: si riscrive l'espressione con il risultato al posto dell'operazione svolta, finché resta un numero solo. Così non ti perdi mai.</p></article>
+      </div>
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li><p><strong>Fare tutto da sinistra a destra.</strong> In 1/2 + 1/4 × 2 la moltiplicazione viene prima della somma: il risultato è 1, non 3/2.</p></li>
+        <li><p><strong>Ignorare le parentesi.</strong> (1/2 + 1/4) × 2 e 1/2 + 1/4 × 2 sono ricette diverse: la parentesi dice «prima questo».</p></li>
+        <li><p><strong>Sommare i denominatori.</strong> 1/2 + 1/3 non fa 2/5: servono denominatori uguali.</p></li>
+        <li><p><strong>Dividere senza capovolgere.</strong> 1/2 : 1/8 non è 1/16: è 1/2 × 8/1 = 4.</p></li>
+        <li><p><strong>Capovolgere la frazione sbagliata.</strong> Si capovolge solo la seconda, quella per cui si divide.</p></li>
+        <li><p><strong>Dimenticare di ridurre.</strong> 6/12 è giusto ma non finito: 6/12 = 1/2.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">✏️ Allenati</h2>
+      <p class="au-nota">Un'espressione alla volta: scrivi il risultato ridotto ai minimi termini. Se non sai da dove cominciare, «Guidami passo passo» la risolve insieme a te.</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ex-liv">Livello</label><select id="ex-liv"><option value="1">1 · parentesi</option><option value="2" selected>2 · precedenze</option><option value="3">3 · parentesi e precedenze</option><option value="4">4 · frazioni a più piani</option></select></div>
+        </div>
+        <div id="ex-area"></div>
+        <p class="fz-conta" id="ex-conta">Esercizi risolti in questa visita: 0</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
+    <div class="w">
+      <h2 class="au-tit" id="t-missione">🎯 Missione: il servizio della sera</h2>
+      <p class="au-nota">Cinque problemi veri di cucina e sala. Scegli tu la strada.</p>
+      <div class="fz-form" id="mi-area"></div>
+    </div>
+  </section>
+
+  <nav class="au-sez no-stampa mt-tnav" id="mt-tappe-nav" aria-label="Le tappe vicine"></nav>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script src="aula/matematica/percorso.js"></script>
+<script src="aula/matematica/tutor.js"></script>
+<script src="aula/matematica/espressioni-motore.js"></script>
+<script src="aula/matematica/espressioni-frazioni.js"></script>
+</body>
+</html>

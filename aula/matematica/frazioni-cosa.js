@@ -72,6 +72,15 @@
   function primeN(n, d, interi) { var s = []; for (var i = 0; i < (interi || Math.max(1, Math.ceil(n / d))) * d; i++) s.push(i < n); return s; }
   function sparse(n, d) { var s = primeN(0, d, 1); var idx = []; for (var i = 0; i < d; i++) idx.push(i); for (var j = idx.length - 1; j > 0; j--) { var k = Math.floor(Math.random() * (j + 1)), t = idx[j]; idx[j] = idx[k]; idx[k] = t; } idx.slice(0, n).forEach(function (i) { s[i] = true; }); return s; }
 
+  var DENS = { 1: [2, 3, 4, 5, 6, 8, 10], 2: [2, 3, 4, 5, 6, 7, 8, 9, 10, 12], 3: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 18, 20] };
+  var CTX = [['g di farina', 1], ['g di burro', 1], ['ml di latte', 1], ['cl di vino', 1], ['€ di incasso', 1], ['coperti', 1], ['minuti di cottura', 1], ['uova', 0]];
+  function okm(m) { return { ok: true, msg: m || '' }; }
+  function nom(m, c) { return { ok: false, msg: m, cls: c || 'no' }; }
+  var API = { genera: genera, giudica: giudica, rispostaGiusta: rispostaGiusta, soluzione: soluzione, costruisci: costruisci, leggiFr: leggiFr, leggiMisto: leggiMisto, parole: parole, figura: figura, F: F, M: M, mfr: mfr, domanda: domanda };
+  window.FRAZIONI_COSA = API;
+  /* fuori dalla pagina della tappa serve solo il motore */
+  if (!$('tp-fig')) return;
+
   /* ════════ LIM ════════ */
   $('mt-lim').addEventListener('click', function () {
     var on = this.getAttribute('aria-pressed') !== 'true';
@@ -208,12 +217,10 @@
   rtNuova();
 
   /* ════════ GENERATORI ════════ */
-  var DENS = { 1: [2, 3, 4, 5, 6, 8, 10], 2: [2, 3, 4, 5, 6, 7, 8, 9, 10, 12], 3: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 18, 20] };
   function ridotta(liv, impropria) {
     var d, n; do { d = pesca(DENS[liv]); n = rnd(1, impropria ? 3 * d : d - 1); } while (gcd(n, d) !== 1 || n === d || (impropria && n < d));
     return [n, d];
   }
-  var CTX = [['g di farina', 1], ['g di burro', 1], ['ml di latte', 1], ['cl di vino', 1], ['€ di incasso', 1], ['coperti', 1], ['minuti di cottura', 1], ['uova', 0]];
   function genera(tipo, liv) {
     if (tipo === 'misto-tutto') tipo = pesca(['figura', 'classe', 'equivalente', 'semplifica', 'confronta', 'quantita', 'misto']);
     var r, k;
@@ -342,26 +349,27 @@
   function fb(msg, cls) { var f = $('ex-fb'); f.className = 'fz-fb ' + (cls || ''); f.innerHTML = msg; }
   function bravo(msg) { fb('Esatto! ' + (msg || ''), 'si'); if (!EX.risolto) { EX.risolto = true; EX.conta++; $('ex-conta').textContent = 'Esercizi risolti in questa visita: ' + EX.conta; } }
   function sbagliato(msg, cls) { EX.tent++; fb(msg + (EX.tent >= 2 ? ' Prova con il suggerimento.' : ''), cls || 'no'); }
-  function controlla(q, v) {
+  function giudica(q, v) {
     var g;
-    if (q.tipo === 'classe' || q.tipo === 'confronta') return v === rispostaGiusta(q) ? bravo() : sbagliato(q.tipo === 'classe' ? 'Confronta il numeratore con il denominatore.' : 'Porta le due frazioni allo stesso denominatore e confronta i numeratori.');
-    if (q.tipo === 'equivalente') { var x = intero(v), att = +rispostaGiusta(q); if (x === att) return bravo(); return sbagliato(x === null ? 'Scrivi un numero intero.' : (q.manca === 'n' ? x === q.a + (q.b * q.k - q.b) : x === q.b + (q.a * q.k - q.a)) ? 'Hai aggiunto lo stesso numero: invece bisogna moltiplicare per lo stesso numero.' : 'Per quanto è stato moltiplicato l\'altro numero?'); }
-    if (q.tipo === 'quantita') { var y = intero(v), a2 = +rispostaGiusta(q); if (y === a2) return bravo(); return sbagliato(y === q.Q * q.d || y === q.Q * q.d / q.n ? 'Hai moltiplicato per il denominatore: invece si divide per il denominatore e si moltiplica per il numeratore.' : y === q.Q / q.d ? 'Questo è il valore di una sola parte: ora moltiplica per il numeratore.' : 'Dividi per il denominatore, poi moltiplica per il numeratore.'); }
-    if (q.tipo === 'misto') { var m = leggiMisto(v); if (!m) return sbagliato('Scrivi il numero misto così: 2 3/4 (intero, spazio, frazione).'); if (m.q === Math.floor(q.n / q.d) && m.r === q.n % q.d && m.d === q.d) return bravo(); if (m.q * m.d + m.r === q.n * m.d / q.d) return bravo('(Si può scrivere anche ' + rispostaGiusta(q) + '.)'); return sbagliato('Quante volte ' + q.d + ' sta in ' + q.n + '? Quello è l\'intero; il resto va sopra il ' + q.d + '.'); }
+    if (q.tipo === 'classe' || q.tipo === 'confronta') return v === rispostaGiusta(q) ? { ok: true } : nom(q.tipo === 'classe' ? 'Confronta il numeratore con il denominatore.' : 'Porta le due frazioni allo stesso denominatore e confronta i numeratori.');
+    if (q.tipo === 'equivalente') { var x = intero(v), att = +rispostaGiusta(q); if (x === att) return { ok: true }; return nom(x === null ? 'Scrivi un numero intero.' : (q.manca === 'n' ? x === q.a + (q.b * q.k - q.b) : x === q.b + (q.a * q.k - q.a)) ? 'Hai aggiunto lo stesso numero: invece bisogna moltiplicare per lo stesso numero.' : 'Per quanto è stato moltiplicato l\'altro numero?'); }
+    if (q.tipo === 'quantita') { var y = intero(v), a2 = +rispostaGiusta(q); if (y === a2) return { ok: true }; return nom(y === q.Q * q.d || y === q.Q * q.d / q.n ? 'Hai moltiplicato per il denominatore: invece si divide per il denominatore e si moltiplica per il numeratore.' : y === q.Q / q.d ? 'Questo è il valore di una sola parte: ora moltiplica per il numeratore.' : 'Dividi per il denominatore, poi moltiplica per il numeratore.'); }
+    if (q.tipo === 'misto') { var m = leggiMisto(v); if (!m) return nom('Scrivi il numero misto così: 2 3/4 (intero, spazio, frazione).'); if (m.q === Math.floor(q.n / q.d) && m.r === q.n % q.d && m.d === q.d) return { ok: true }; if (m.q * m.d + m.r === q.n * m.d / q.d) return okm('(Si può scrivere anche ' + rispostaGiusta(q) + '.)'); return nom('Quante volte ' + q.d + ' sta in ' + q.n + '? Quello è l\'intero; il resto va sopra il ' + q.d + '.'); }
     var f = leggiFr(v);
-    if (!f || !f.d) return sbagliato('Scrivi una frazione così: 3/4.');
+    if (!f || !f.d) return nom('Scrivi una frazione così: 3/4.');
     if (q.tipo === 'figura') {
-      if (f.n === q.n && f.d === q.d) return bravo();
-      if (f.n * q.d === q.n * f.d) return bravo('Hai scritto una frazione equivalente: contando le fette è ' + q.n + '/' + q.d + '.');
-      if (f.n === q.d - q.n && f.d === q.d) return sbagliato('Questa è la parte bianca: conta le fette colorate.');
-      if (f.n === q.n && f.d === q.d - q.n) return sbagliato('Il denominatore conta TUTTE le fette, anche quelle colorate.');
-      return sbagliato('Sotto: quante fette in tutto. Sopra: quante colorate.');
+      if (f.n === q.n && f.d === q.d) return { ok: true };
+      if (f.n * q.d === q.n * f.d) return okm('Hai scritto una frazione equivalente: contando le fette è ' + q.n + '/' + q.d + '.');
+      if (f.n === q.d - q.n && f.d === q.d) return nom('Questa è la parte bianca: conta le fette colorate.');
+      if (f.n === q.n && f.d === q.d - q.n) return nom('Il denominatore conta TUTTE le fette, anche quelle colorate.');
+      return nom('Sotto: quante fette in tutto. Sopra: quante colorate.');
     }
     g = gcd(q.n, q.d);
-    if (f.n * q.d !== q.n * f.d) return sbagliato(f.n === q.n - (q.d - f.d) && f.d < q.d ? 'Hai sottratto lo stesso numero sopra e sotto: per semplificare si divide.' : 'Il valore è cambiato: dividi numeratore e denominatore per lo stesso numero.');
-    if (gcd(f.n, f.d) > 1) return sbagliato('Il valore è giusto, ma si può ancora semplificare: ' + f.n + ' e ' + f.d + ' hanno ancora un divisore comune.', 'mezzo');
-    bravo();
+    if (f.n * q.d !== q.n * f.d) return nom(f.n === q.n - (q.d - f.d) && f.d < q.d ? 'Hai sottratto lo stesso numero sopra e sotto: per semplificare si divide.' : 'Il valore è cambiato: dividi numeratore e denominatore per lo stesso numero.');
+    if (gcd(f.n, f.d) > 1) return nom('Il valore è giusto, ma si può ancora semplificare: ' + f.n + ' e ' + f.d + ' hanno ancora un divisore comune.', 'mezzo');
+    return { ok: true };
   }
+  function controlla(q, v) { var r = giudica(q, v); if (r.ok) bravo(r.msg); else sbagliato(r.msg, r.cls); }
   exA.addEventListener('submit', function (ev) { ev.preventDefault(); controlla(EX.q, $('ex-in').value); });
   exA.addEventListener('click', function (ev) {
     var b = ev.target.closest('button'); if (!b) return;
@@ -467,5 +475,5 @@
   $('sc-stampa').addEventListener('click', function () { window.print(); });
 
   if (window.RIPASSO) RIPASSO.invito($('mt-ripasso'), 'mate-' + ID);
-  window.FRAZIONI_COSA = { genera: genera, controlla: controlla, rispostaGiusta: rispostaGiusta, soluzione: soluzione, costruisci: costruisci, leggiFr: leggiFr, leggiMisto: leggiMisto, parole: parole };
+  API.controlla = controlla;
 })();

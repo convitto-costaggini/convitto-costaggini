@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Crea i tuoi esercizi – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Per chi insegna</p>
+      <h1>Crea i tuoi <em>esercizi</em></h1>
+      <p class="au-sub">Scrivi gli esercizi della tua lezione, uno per riga, oppure falli preparare all'IA dalla foto di una pagina del libro. Soluzioni, correzione, suggerimenti e passo passo li calcola il sito: i ragazzi ricevono un link o un QR.</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" aria-labelledby="t-regole3">
+    <div class="w">
+      <div class="cr-regole">
+        <h2 class="au-tit" id="t-regole3">🔒 Tre regole per la privacy</h2>
+        <ul><li>Nel titolo e nei testi niente nomi o dati dei ragazzi.</li><li>Lo stesso link per tutta la classe: non si preparano raccolte per un solo studente.</li><li>Non fotografate quaderni o fogli con nomi: solo pagine del libro, schede o mappe.</li></ul>
+        <p class="au-nota" style="margin:0">Il sito non chiede e non conserva dati: gli esercizi viaggiano dentro il link, le bozze restano solo in questo browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" aria-labelledby="t-passo1">
+    <div class="w">
+      <h2 class="au-tit" id="t-passo1">1 · Dalla foto del libro o da una mappa (facoltativo)</h2>
+      <p class="au-nota">Scrivi l'argomento (o lascialo vuoto se alleghi la foto), premi «Copia le istruzioni», poi incollale nell'assistente IA che preferisci (va bene la versione gratuita) insieme alla foto. La risposta la incolli al passo 2. L'IA scrive solo i testi degli esercizi: le soluzioni le calcola il sito, quindi non possono essere sbagliate.</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ia-arg">Argomento</label><input id="ia-arg" type="text" placeholder="per esempio: MCD e mcm, problemi" autocomplete="off"/></div>
+          <div><label for="ia-n">Quanti esercizi</label><select id="ia-n"><option>6</option><option selected>10</option><option>15</option><option>20</option></select></div>
+        </div>
+        <label for="ia-note" class="cr-lab">Indicazioni per l'IA (facoltative)</label>
+        <input id="ia-note" type="text" placeholder="per esempio: numeri piccoli, metà problemi ambientati in pasticceria" autocomplete="off"/>
+        <div class="fz-azioni"><button type="button" class="fz-btn" id="ia-copia">Copia le istruzioni per l'IA</button></div>
+        <p class="fz-fb" id="ia-fb" role="status"></p>
+        <details class="fz-det"><summary>Vedi le istruzioni (se la copia automatica non funziona)</summary><textarea id="ia-testo" class="cr-ta" rows="10" readonly></textarea></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" aria-labelledby="t-passo2">
+    <div class="w">
+      <h2 class="au-tit" id="t-passo2">2 · Gli esercizi</h2>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="cr-tit">Titolo (lo vedono i ragazzi)</label><input id="cr-tit" type="text" maxlength="80" placeholder="per esempio: MCD e mcm in cucina" autocomplete="off"/></div>
+          <div><label for="cr-ist">Una frase per i ragazzi (facoltativa)</label><input id="cr-ist" type="text" maxlength="200" placeholder="per esempio: fate i primi 5 in classe, gli altri a casa" autocomplete="off"/></div>
+        </div>
+        <label for="cr-righe" class="cr-lab">Un esercizio per riga (le righe che iniziano con # sono note per te e non si vedono)</label>
+        <textarea id="cr-righe" class="cr-ta" rows="12" spellcheck="false" placeholder="MCD 24 36&#10;semplifica 18/24&#10;problema mcm 12 18 | Due forni sfornano una teglia ogni 12 e ogni 18 minuti. Dopo quanti minuti sfornano insieme?"></textarea>
+        <p class="cr-lab" style="margin-top:.8rem">Aggiungi un esempio:</p>
+        <div class="fz-esempi" id="cr-esempi" role="group" aria-label="Aggiungi un esempio"></div>
+        <details class="fz-det"><summary>Tutte le forme possibili</summary><table class="cr-forme" id="cr-forme"></table></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" aria-labelledby="t-passo3">
+    <div class="w">
+      <h2 class="au-tit" id="t-passo3">3 · Controlla</h2>
+      <p class="au-nota">Ecco gli esercizi come li vedranno i ragazzi, con la soluzione calcolata dal sito. Le righe che il sito non capisce sono segnate in rosso, con il motivo.</p>
+      <div id="cr-anteprima"></div>
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" aria-labelledby="t-passo4">
+    <div class="w">
+      <h2 class="au-tit" id="t-passo4">4 · Condividi con la classe</h2>
+      <div class="fz-form" id="cr-condividi">
+        <label for="cr-link" class="cr-lab">Il link per i ragazzi</label>
+        <div class="fz-risp-r"><input id="cr-link" type="text" readonly/><button type="button" class="fz-btn" id="cr-copia">Copia il link</button></div>
+        <p class="fz-fb" id="cr-fb" role="status"></p>
+        <div class="cr-qr" id="cr-qr"></div>
+        <div class="fz-azioni">
+          <a class="fz-btn sec cr-a" id="cr-apri" href="aula/matematica/esercizi.html" target="_blank" rel="noopener">Apri come la vedono i ragazzi</a>
+          <button type="button" class="fz-btn sec" id="cr-stampa">Scheda da stampare</button>
+          <label class="fz-un"><input type="checkbox" id="cr-sol" checked/> con le soluzioni a parte</label>
+        </div>
+        <h3 class="fz-sottit">Le tue raccolte, in questo browser</h3>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn sec" id="cr-salva">Salva questa raccolta</button><button type="button" class="fz-btn sec" id="cr-nuova">Nuova raccolta vuota</button></div>
+        <ul class="cr-mie" id="cr-mie"></ul>
+        <p class="au-nota">Per modificare una raccolta ricevuta da un collega, apri questa pagina con il suo link al posto di «esercizi.html»: oppure incolla qui il link.</p>
+        <div class="fz-risp-r"><input id="cr-importa" type="text" placeholder="incolla un link di esercizi" autocomplete="off" aria-label="Link di esercizi da modificare"/><button type="button" class="fz-btn sec" id="cr-importa-b">Apri per modificare</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez" id="cr-foglio-sez" hidden>
+    <div class="w"><div id="cr-foglio" class="fz-foglio"></div></div>
+  </section>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/lingue/pacchetto.js"></script>
+<script src="aula/lingue/qrcode.js"></script>
+<script src="aula/matematica/frazioni.js"></script>
+<script src="aula/matematica/frazioni-tutor.js"></script>
+<script src="aula/matematica/mcd-mcm.js"></script>
+<script src="aula/matematica/frazioni-cosa.js"></script>
+<script src="aula/matematica/raccolta.js"></script>
+<script src="aula/matematica/crea.js"></script>
+</body>
+</html>

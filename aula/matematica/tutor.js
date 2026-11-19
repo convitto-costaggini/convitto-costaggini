@@ -20,7 +20,7 @@ window.TUTOR = (function () {
       if (p.tipo === 'multi') return '<div class="tt-sc" role="group" aria-labelledby="tt-q">' + p.primi.map(function (q) { return '<button type="button" class="fz-chip" data-m="' + q + '" aria-pressed="' + (TT.sel.indexOf(q) >= 0) + '">' + q + '</button>'; }).join('') + '<button type="button" class="fz-chip" data-m="0" aria-pressed="false">nessuno</button></div>' + ok;
       if (p.tipo === 'scelta') return '<div class="tt-sc" role="group" aria-labelledby="tt-q">' + p.opzioni.map(function (o) { return '<button type="button" class="fz-btn sec" data-v="' + esc(o[0]) + '">' + o[1] + '</button>'; }).join('') + '</div>';
       if (p.tipo === 'frac') return '<div class="tt-fi"><label for="tt-n">Numeratore</label><input id="tt-n" type="text" inputmode="numeric" autocomplete="off" aria-describedby="tt-q"/><span class="fz-barra" aria-hidden="true"></span><label for="tt-d">Denominatore</label><input id="tt-d" type="text" inputmode="numeric" autocomplete="off"/></div>' + ok;
-      return '<div class="tt-num"><label for="tt-r">La tua risposta</label><input id="tt-r" type="text" inputmode="' + (p.testo_libero ? 'text' : 'numeric') + '" autocomplete="off" aria-describedby="tt-q"/></div>' + ok;
+      return '<div class="tt-num"><label for="tt-r">La tua risposta</label><input id="tt-r" type="text" inputmode="' + (p.testo_libero || (typeof p.atteso === 'bigint' && p.atteso < BigInt(0)) ? 'text' : 'numeric') + '" autocomplete="off" aria-describedby="tt-q"/></div>' + ok;
     }
     function valore(p) {
       if (p.tipo === 'esp') { var v = {}; Array.prototype.forEach.call(area.querySelectorAll('[data-p]'), function (x) { v[x.dataset.p] = parseInt(x.value, 10) || 0; }); return v; }

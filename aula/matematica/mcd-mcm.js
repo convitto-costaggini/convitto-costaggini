@@ -177,6 +177,37 @@
     return h + '<tr><td>1</td><td></td></tr></table>';
   }
 
+  /* il giudizio su una risposta, senza toccare la pagina: {ok, msg, cls}
+     primo: 'si'/'no' · scomponi: testo · mcd, mcm, problema: numero (testo) */
+  function giudica(q, v) {
+    if (q.tipo === 'primo') {
+      var p = primo(q.n), si = v === 'si';
+      if (si === p) return { ok: true, msg: p ? q.n + ' si divide solo per 1 e per sé stesso.' : q.n + ' = ' + minDiv(q.n) + ' · ' + q.n / minDiv(q.n) + '.' };
+      return { ok: false, cls: 'no', msg: p ? 'Invece sì: prova a dividerlo per 2, 3, 5, 7… nessuno lo divide.' : 'Invece no: ' + q.n + ' si divide per ' + minDiv(q.n) + '.' };
+    }
+    if (q.tipo === 'scomponi') {
+      var r = controllaFatt(v, q.n);
+      return r.ok ? { ok: true, msg: q.n + ' = ' + fH(q.n) + '.' } : { ok: false, cls: 'no', msg: r.msg };
+    }
+    var x = intero(v), G = gcdL(q.nums), Mm = lcmL(q.nums), vuoleMcd = q.tipo === 'mcd' || q.serve === 'mcd', att = vuoleMcd ? G : Mm;
+    if (x === null) return { ok: false, cls: 'no', msg: 'Scrivi un numero intero.' };
+    if (x === att) return { ok: true, msg: q.tipo === 'problema' && q.u ? att + ' ' + esc(q.u) + '.' : '' };
+    if (vuoleMcd && x === Mm) return { ok: false, cls: 'no', msg: 'Hai calcolato il mcm: qui serve il MCD (solo fattori comuni, esponente più piccolo).' };
+    if (!vuoleMcd && x === G) return { ok: false, cls: 'no', msg: 'Hai calcolato il MCD: qui serve il mcm (tutti i fattori, esponente più grande).' };
+    if (!vuoleMcd && x === q.nums.reduce(function (a, b) { return a * b; }, 1)) return { ok: false, cls: 'mezzo', msg: x + ' è un multiplo comune (è il prodotto), ma non il minimo.' };
+    if (vuoleMcd && x && q.nums.every(function (n) { return n % x === 0; })) return { ok: false, cls: 'mezzo', msg: x + ' divide tutti i numeri, ma non è il più grande divisore comune.' };
+    if (!vuoleMcd && x && q.nums.every(function (n) { return x % n === 0; })) return { ok: false, cls: 'mezzo', msg: x + ' è un multiplo comune, ma non il minimo.' };
+    return { ok: false, cls: 'no', msg: '' };
+  }
+  function giudicaServe(q, scelta) {
+    if (scelta === q.serve) return { ok: true };
+    return { ok: false, cls: 'no', msg: q.serve === 'mcd' ? 'Pensa: qui si divide qualcosa in parti uguali, le più grandi possibile, senza avanzi. Il risultato sarà più piccolo dei numeri dati.' : 'Pensa: qui qualcosa si ripete e cerchi la prima volta che coincide. Il risultato sarà più grande dei numeri dati.' };
+  }
+  var API = { gcdL: gcdL, lcmL: lcmL, primo: primo, fattori: fattori, fH: fH, leggiFatt: leggiFatt, controllaFatt: controllaFatt, esercizio: esercizio, costruisci: costruisci, soluzione: soluzione, giudica: giudica, giudicaServe: giudicaServe, elenco: elenco, domanda: domandaHtml };
+  window.MCD_MCM = API;
+  /* fuori dalla pagina della tappa (per esempio negli esercizi della docente) serve solo il motore */
+  if (!$('tm-griglia')) return;
+
   /* ════════ LIM ════════ */
   $('mt-lim').addEventListener('click', function () {
     var on = this.getAttribute('aria-pressed') !== 'true';
@@ -457,16 +488,10 @@
     if (!EX.risolto) { EX.risolto = true; EX.conta++; $('ex-conta').textContent = 'Esercizi risolti in questa visita: ' + EX.conta; }
   }
   function verificaNum(q, x) {
-    var G = gcdL(q.nums), M = lcmL(q.nums), att = q.tipo === 'mcm' || q.serve === 'mcm' ? M : G, vuoleMcd = att === G && (q.tipo === 'mcd' || q.serve === 'mcd');
-    if (x === null) return fb('Scrivi un numero intero.', 'no');
-    if (x === att) return bravo(q.tipo === 'problema' ? q.ris + ' ' + esc(q.u) + '.' : '');
+    var r = giudica(q, x === null ? '' : String(x));
+    if (r.ok) return bravo(r.msg);
     EX.tent++;
-    if (vuoleMcd && x === M) return fb('Hai calcolato il mcm: qui serve il MCD (solo fattori comuni, esponente più piccolo).', 'no');
-    if (!vuoleMcd && x === G) return fb('Hai calcolato il MCD: qui serve il mcm (tutti i fattori, esponente più grande).', 'no');
-    if (!vuoleMcd && x === q.nums.reduce(function (a, b) { return a * b; }, 1)) return fb(x + ' è un multiplo comune (è il prodotto), ma non il minimo.', 'mezzo');
-    if (vuoleMcd && q.nums.every(function (n) { return n % x === 0; })) return fb(x + ' divide tutti i numeri, ma non è il più grande divisore comune.', 'mezzo');
-    if (!vuoleMcd && q.nums.every(function (n) { return x % n === 0; })) return fb(x + ' è un multiplo comune, ma non il minimo.', 'mezzo');
-    fb('Non ancora. ' + (EX.tent >= 2 ? 'Prova con il suggerimento o con «Aiutami passo passo».' : 'Ricontrolla le scomposizioni.'), 'no');
+    fb(r.msg || ('Non ancora. ' + (EX.tent >= 2 ? 'Prova con il suggerimento o con «Aiutami passo passo».' : 'Ricontrolla le scomposizioni.')), r.cls);
   }
   exA.addEventListener('submit', function (ev) {
     ev.preventDefault();
@@ -607,5 +632,4 @@
   /* ripasso: se è il giorno, l'invito in cima; altrimenti un riscaldamento sull'ultima lezione fatta */
   if (window.RIPASSO) RIPASSO.invito($('mt-ripasso'), 'mate-' + ID);
 
-  window.MCD_MCM = { gcdL: gcdL, lcmL: lcmL, fattori: fattori, leggiFatt: leggiFatt, controllaFatt: controllaFatt, esercizio: esercizio, costruisci: costruisci, soluzione: soluzione };
 })();

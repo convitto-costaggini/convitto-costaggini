@@ -20,7 +20,9 @@
     var a = intero(n), b = String(d).trim() === '' ? 1 : intero(d);
     return a === null || b === null || b === 0 ? null : { n: a, d: b };
   }
-  window.ESPR_PAGINA = { M: M, F: F };
+  var P = window.ESPR_PAGINA = window.ESPR_PAGINA || {};
+  P.M = M; P.F = F;
+  function sblocca(k) { return P.indizio ? P.indizio(k) : ''; }
 
   /* ════════ LIM ════════ */
   $('mt-lim').addEventListener('click', function () {
@@ -64,7 +66,7 @@
     ev.preventDefault();
     var v = leggiFr($('ul-n').value, $('ul-d').value), fb = $('ul-fb2');
     if (!v) { fb.className = 'fz-fb no'; fb.textContent = 'Scrivi numeratore e denominatore con numeri interi.'; return; }
-    if (v.n === 1023 && v.d === 1024) { fb.className = 'fz-fb si'; fb.innerHTML = 'Esatto: ' + F(1023, 1024) + '. Ne resta ' + F(1, 1024) + ', proprio l\'ultimo morso. Lo schema: dopo n morsi hai mangiato (2<sup>n</sup> − 1) / 2<sup>n</sup>.'; }
+    if (v.n === 1023 && v.d === 1024) { fb.className = 'fz-fb si'; fb.innerHTML = 'Esatto: ' + F(1023, 1024) + '. Ne resta ' + F(1, 1024) + ', proprio l\'ultimo morso. Lo schema: dopo n morsi hai mangiato (2<sup>n</sup> − 1) / 2<sup>n</sup>.' + sblocca(1); }
     else if (v.d === 1024) { fb.className = 'fz-fb no'; fb.textContent = 'Il denominatore è giusto (2 moltiplicato per sé stesso 10 volte). Il numeratore è sempre uno in meno del denominatore: guarda 3/4, 7/8, 15/16...'; }
     else { fb.className = 'fz-fb no'; fb.innerHTML = 'Non ancora. I denominatori raddoppiano a ogni morso: 2, 4, 8, 16, 32... Dopo 10 morsi quanto vale? E il numeratore è sempre uno in meno.'; }
   });
@@ -95,8 +97,16 @@
     $(id).addEventListener('change', function () {
       FD.a = +$('fd-a').value; FD.b = +$('fd-b').value; FD.c = +$('fd-c').value; FD.d = +$('fd-d').value;
       if (id === 'fd-b' || id === 'fd-d') { FD.a = Math.min(FD.a, FD.b); FD.c = Math.min(FD.c, FD.d); fdControlli(); $(id).focus(); }
-      fdDisegna();
+      fdDisegna(); $('fq-fb').textContent = ''; $('fq-fb').className = 'fz-fb'; $('fq-n').value = ''; $('fq-d').value = '';
     });
+  });
+  $('fq-form').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var v = leggiFr($('fq-n').value, $('fq-d').value), fb = $('fq-fb'), r = E.red(FD.a * FD.c, FD.b * FD.d);
+    if (!v) { fb.className = 'fz-fb no'; fb.textContent = 'Scrivi numeratore e denominatore con numeri interi.'; return; }
+    if (v.n === r.n && v.d === r.d) { fb.className = 'fz-fb si'; fb.innerHTML = 'Esatto: ' + fr(r) + '.' + sblocca(2); }
+    else if (v.n * r.d === r.n * v.d) { fb.className = 'fz-fb mezzo'; fb.textContent = 'Il valore è giusto, ma va ridotto ai minimi termini.'; }
+    else { fb.className = 'fz-fb no'; fb.textContent = 'Non ancora. Conta i quadretti scuri e dividili per il totale dei quadretti, poi riduci.'; }
   });
   fdControlli(); fdDisegna();
 
@@ -143,7 +153,7 @@
     ev.preventDefault();
     var v = leggiFr($('st-n').value, $('st-d').value), fb = $('st-fb');
     if (!v) { fb.className = 'fz-fb no'; fb.textContent = 'Scrivi numeratore e denominatore con numeri interi.'; return; }
-    if (v.n === ST.r.n && v.d === ST.r.d) { fb.className = 'fz-fb si'; fb.innerHTML = 'Esatto! ' + fr(ST.r) + ' dell\'intera teglia. Tre strade, un solo risultato.'; }
+    if (v.n === ST.r.n && v.d === ST.r.d) { fb.className = 'fz-fb si'; fb.innerHTML = 'Esatto! ' + fr(ST.r) + ' dell\'intera teglia. Tre strade, un solo risultato.' + sblocca(3); }
     else if (v.n * ST.r.d === ST.r.n * v.d) { fb.className = 'fz-fb mezzo'; fb.textContent = 'Il valore è giusto, ma si può ridurre ancora ai minimi termini.'; }
     else { fb.className = 'fz-fb no'; fb.textContent = 'Non ancora. Prova una delle tre strade: la più sicura all\'inizio è la seconda, con i numeri veri.'; }
   });
@@ -178,7 +188,7 @@
   $('pa-opz').addEventListener('click', function (ev) {
     var b = ev.target.closest('button'); if (!b || !PA) return;
     var k = +b.dataset.k, fb = $('pa-fb');
-    if (k === PA.giusto) { fb.className = 'fz-fb si'; fb.innerHTML = 'Esatto! Con queste parentesi viene ' + fr(PA.val[k]) + '.'; }
+    if (k === PA.giusto) { fb.className = 'fz-fb si'; fb.innerHTML = 'Esatto! Con queste parentesi viene ' + fr(PA.val[k]) + '.' + sblocca(4); }
     else { fb.className = 'fz-fb no'; fb.innerHTML = 'Con queste parentesi viene ' + fr(PA.val[k]) + ', non ' + fr(PA.val[PA.giusto]) + '. Riprova.'; }
     if (k === PA.giusto) {
       $('pa-risv').innerHTML = '<p class="mm-p">Ecco che cosa darebbero tutte le versioni: le parentesi cambiano davvero il risultato.</p><ul class="ef-lista">' + PA.ordine.map(function (j) { return '<li>' + E.math(PA.V[j]) + ' <span class="fz-m">=</span> ' + fr(PA.val[j]) + '</li>'; }).join('') + '</ul>';
@@ -188,11 +198,12 @@
   paNuovo();
 
   /* ════════ 5 · IL METODO (tutor) ════════ */
-  var TU = TUTOR.crea($('tt-area'), { altro: function () { nuovoTutor(); }, allenati: URL + '#allenati' });
+  var TU = TUTOR.crea($('tt-area'), { altro: function () { nuovoTutor(); }, allenati: URL + '#allenati', fatto: function () { var x = sblocca(5); if (x) setTimeout(function () { var e = $('tu-sbl'); if (e) e.innerHTML = x; }, 0); } });
   function defTutor(t) {
     var c = E.costruisci(t);
-    return { testata: c.testata, passi: c.passi, fine: '<p class="tt-q">Il risultato è:</p><div class="tt-ris">' + E.mathFr(c.risultato) + '</div>' };
+    return { testata: c.testata, passi: c.passi, fine: '<p class="tt-q">Il risultato è:</p><div class="tt-ris">' + E.mathFr(c.risultato) + '</div><p class="fz-fb si" id="tu-sbl"></p>' };
   }
+  P.avviaTutor = function (t, scorri) { avviaTutor(t, scorri); };
   function avviaTutor(t, scorri) { TU.avvia(function () { return defTutor(t); }, scorri ? $('metodo') : null); }
   function nuovoTutor() { avviaTutor(E.genera(+$('tu-liv').value), false); }
   $('tu-nuovo').addEventListener('click', nuovoTutor);

@@ -389,3 +389,22 @@ html:not(.cr-chiuso) .cr-porta{display:none}
 .ef-ev{background:#fff0b8}
 .fz-grande .ef-pan math,.fz-grande .ef-opz math{font-size:2em}
 .fz-grande .mm-pr{font-size:1.4rem}
+
+/* ── il caso del dolce, i trucchi, il servizio ── */
+.ef-slots{list-style:none;margin:.6rem 0;padding:0;display:grid;gap:.6rem;grid-template-columns:1fr}
+@media (min-width:700px){.ef-slots{grid-template-columns:repeat(2,1fr)}}
+.ef-slot{display:flex;gap:.7rem;align-items:flex-start;padding:.7rem .9rem;border:1.5px dashed var(--av3,#e4dccb);border-radius:12px;background:#fffdf7}
+.ef-slot.ok{border-style:solid;border-color:#2e7d4f;background:#eef6f0}
+.ef-slot-n{font-size:1.3rem;line-height:1.5rem}
+.ef-slot strong{display:block;font:800 .95rem var(--fu,sans-serif);color:var(--bosco,#2C3E2D)}
+.ef-nota{display:block;font-size:.88rem;line-height:1.5;color:var(--txt2,#555);margin-top:.15rem}
+.ef-slot a{color:var(--bosco,#2C3E2D);font-weight:700}
+.ef-sblocco{display:block;margin-top:.3rem;color:#1d5a2a;font-weight:800}
+.ef-step{margin:.8rem 0}
+.ef-step math{font-size:1.2em}
+.ef-ordine{border:2px solid var(--bosco,#2C3E2D);border-radius:16px;padding:1rem 1.1rem;margin-top:.7rem;background:#fff}
+.ef-ordine.sp{border-color:#B8922A;background:#fffbef}
+.ef-stelle{font-size:2.2rem;line-height:1;margin:.2rem 0 .4rem;color:#7A5A10;letter-spacing:.15em}
+.ef-link{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.4rem 0}
+.ef-link input{flex:1;min-width:12rem;min-height:44px;font-size:.9rem;padding:0 .6rem;border:1.5px solid #6b726c;border-radius:8px}
+.mm-tf[hidden],.tt-card form[hidden]{display:none}

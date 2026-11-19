@@ -32,8 +32,20 @@
   </section>
 
   <nav class="fz-nav no-stampa" aria-label="In questa pagina">
-    <div class="w"><a href="aula/matematica/espressioni-frazioni.html#ultima">🍰 L'ultima fetta</a><a href="aula/matematica/espressioni-frazioni.html#fettina">🔍 Frazione di frazione</a><a href="aula/matematica/espressioni-frazioni.html#strade">🛣️ Tre strade</a><a href="aula/matematica/espressioni-frazioni.html#parentesi">🅿️ Le parentesi</a><a href="aula/matematica/espressioni-frazioni.html#metodo">🧭 Il metodo</a><a href="aula/matematica/espressioni-frazioni.html#regole">Le regole</a><a href="aula/matematica/espressioni-frazioni.html#allenati">✏️ Allenati</a><a href="aula/matematica/espressioni-frazioni.html#missione">🎯 Missione</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+    <div class="w"><a href="aula/matematica/espressioni-frazioni.html#caso">🕵️ Il caso</a><a href="aula/matematica/espressioni-frazioni.html#ultima">🍰 L'ultima fetta</a><a href="aula/matematica/espressioni-frazioni.html#fettina">🔍 Frazione di frazione</a><a href="aula/matematica/espressioni-frazioni.html#strade">🛣️ Tre strade</a><a href="aula/matematica/espressioni-frazioni.html#parentesi">🅿️ Le parentesi</a><a href="aula/matematica/espressioni-frazioni.html#wow">🤯 Wow</a><a href="aula/matematica/espressioni-frazioni.html#metodo">🧭 Il metodo</a><a href="aula/matematica/espressioni-frazioni.html#regole">Le regole</a><a href="aula/matematica/espressioni-frazioni.html#allenati">✏️ Allenati</a><a href="aula/matematica/espressioni-frazioni.html#servizio">⏱️ Il servizio</a><a href="aula/matematica/espressioni-frazioni.html#missione">🎯 Missione</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
   </nav>
+
+  <section class="au-sez no-stampa" id="caso" aria-labelledby="t-caso">
+    <div class="w">
+      <h2 class="au-tit" id="t-caso">🕵️ Il caso del dolce del banchetto</h2>
+      <div class="fz-form ef-caso">
+        <p class="mm-p">Stasera c'è il banchetto e il pasticcere ha lasciato sul tavolo il biglietto con la ricetta del dolce. Peccato che sia strappato: le quantità non si leggono più. Ogni sfida di questa pagina ti restituisce un pezzo del biglietto. Quando li hai tutti, tocca a te preparare la dose.</p>
+        <ol class="ef-slots" id="ca-slots"></ol>
+        <p class="fz-fb" id="ca-live" role="status"></p>
+        <div id="ca-finale" hidden></div>
+      </div>
+    </div>
+  </section>
 
   <section class="au-sez no-stampa" id="ultima" aria-labelledby="t-ultima">
     <div class="w">
@@ -74,6 +86,8 @@
         <div class="ef-teglia" id="fd-fig"></div>
         <div class="ef-legenda"><span><i class="ef-k v"></i> la prima frazione</span><span><i class="ef-k g"></i> la seconda frazione</span><span><i class="ef-k s"></i> dove si sovrappongono: la risposta</span></div>
         <div class="fc-lettura" id="fd-lettura" aria-live="polite"></div>
+        <form class="mm-tf" id="fq-form" novalidate><p class="mm-p" style="width:100%;margin:0"><strong>Prova tu:</strong> con i numeri scelti qui sopra, che frazione dell'intera teglia è la parte scura? Scrivila ridotta ai minimi termini.</p><div class="tt-fi"><label for="fq-n">Numeratore</label><input id="fq-n" type="text" inputmode="numeric" autocomplete="off"/><span class="fz-barra" aria-hidden="true"></span><label for="fq-d">Denominatore</label><input id="fq-d" type="text" inputmode="numeric" autocomplete="off"/></div><button type="submit" class="fz-btn">Controlla</button></form>
+        <p class="fz-fb" id="fq-fb" role="status"></p>
       </div>
     </div>
   </section>
@@ -109,6 +123,30 @@
         <p class="fz-fb" id="pa-fb" role="status"></p>
         <div class="ef-risv" id="pa-risv"></div>
         <div class="fz-azioni"><button type="button" class="fz-btn sec" id="pa-altro">Un'altra ricetta</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="wow" aria-labelledby="t-wow">
+    <div class="w">
+      <h2 class="au-tit" id="t-wow">🤯 Due trucchi che non ti aspetti</h2>
+      <p class="au-nota">Con le frazioni si fanno cose che sembrano magia. Qui ne trovi due: portale a cena e racconta come funzionano.</p>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🧀 Il casaro e la forma in prestito</h3>
+        <p class="mm-p">Un casaro lascia ai tre figli <strong>17 forme di pecorino</strong>: la metà al primo, un terzo al secondo, un nono al terzo. Ma 17 non si divide in modo esatto né per 2, né per 3, né per 9. I figli stanno già litigando. Passa il vicino e dice: «Provo io».</p>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="ca-prova">1 · Prova a dividere le 17 forme</button><button type="button" class="fz-btn sec" id="ca-presta" disabled>2 · Il vicino presta una forma</button></div>
+        <div class="ef-step" id="cz-out" aria-live="polite"></div>
+        <form class="mm-tf" id="cz-form" novalidate hidden><p class="mm-p" style="width:100%;margin:0"><strong>Perché funziona?</strong> Quanto fa <span id="cz-somma"></span>? Scrivi la frazione.</p><div class="tt-fi"><label for="cz-n">Numeratore</label><input id="cz-n" type="text" inputmode="numeric" autocomplete="off"/><span class="fz-barra" aria-hidden="true"></span><label for="cz-d">Denominatore</label><input id="cz-d" type="text" inputmode="numeric" autocomplete="off"/></div><button type="submit" class="fz-btn">Controlla</button></form>
+        <p class="fz-fb" id="cz-fb" role="status"></p>
+      </div>
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🏺 Le frazioni degli antichi egizi</h3>
+        <p class="mm-p">Più di 3500 anni fa gli scribi egizi (lo vediamo nel papiro Rhind) scrivevano quasi ogni frazione come una <strong>somma di fette «uno su qualcosa», tutte diverse</strong>. Come dividere 3 pizze tra 4 persone senza tagliare fette storte? Una metà e un quarto a testa. Vediamo il metodo, un passo alla volta: prendi sempre la fetta più grande che ci sta.</p>
+        <div class="fz-scelte mm-due"><div><label for="eg-fr">Quale frazione scomponi?</label><select id="eg-fr"></select></div></div>
+        <div class="fz-azioni"><button type="button" class="fz-btn" id="eg-passo">Prendi la fetta più grande che ci sta</button><button type="button" class="fz-btn sec" id="eg-da-capo">Ricomincia</button></div>
+        <div class="ef-step" id="eg-out" aria-live="polite"></div>
+        <form class="mm-tf" id="eg-form" novalidate><p class="mm-p" style="width:100%;margin:0"><strong>Sfida:</strong> dividi <span id="eg-sf"></span> in <strong>due</strong> fette diverse del tipo «uno su qualcosa». Scrivi i due denominatori.</p><div class="tt-num"><label for="eg-k1">Prima fetta: 1 su…</label><input id="eg-k1" type="text" inputmode="numeric" autocomplete="off"/></div><div class="tt-num"><label for="eg-k2">Seconda fetta: 1 su…</label><input id="eg-k2" type="text" inputmode="numeric" autocomplete="off"/></div><button type="submit" class="fz-btn">Controlla</button></form>
+        <p class="fz-fb" id="eg-fb" role="status"></p>
       </div>
     </div>
   </section>
@@ -169,6 +207,14 @@
     </div>
   </section>
 
+  <section class="au-sez au-doc no-stampa" id="servizio" aria-labelledby="t-servizio">
+    <div class="w">
+      <h2 class="au-tit" id="t-servizio">⏱️ Il servizio: sei comande</h2>
+      <p class="au-nota">La sala è piena. Arrivano sei comande, dalla più facile all'ordine speciale. Ogni quantità da preparare è un'espressione: se rispondi giusto al primo colpo prendi il massimo, e più comande di fila indovini, più sale il bonus.</p>
+      <div class="fz-form" id="sv-area"></div>
+    </div>
+  </section>
+
   <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
     <div class="w">
       <h2 class="au-tit" id="t-missione">🎯 Missione: il servizio della sera</h2>
@@ -184,6 +230,7 @@
 <script src="aula/matematica/percorso.js"></script>
 <script src="aula/matematica/tutor.js"></script>
 <script src="aula/matematica/espressioni-motore.js"></script>
+<script src="aula/matematica/espressioni-extra.js"></script>
 <script src="aula/matematica/espressioni-frazioni.js"></script>
 </body>
 </html>

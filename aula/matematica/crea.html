@@ -60,7 +60,17 @@
         <p class="fz-fb" id="ia-fb" role="status"></p>
         <p class="au-nota" style="margin:.8rem 0 0">Poi apri l'assistente che preferisci:</p>
         <div class="fz-azioni" style="margin-top:.4rem"><a class="fz-btn cr-a" href="https://claude.ai/new" target="_blank" rel="noopener">Claude ↗</a><a class="fz-btn cr-a" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT ↗</a><a class="fz-btn cr-a" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini ↗</a></div>
-        <details class="fz-det"><summary>Vedi le istruzioni (se la copia automatica non funziona)</summary><textarea id="ia-testo" class="cr-ta" rows="10" readonly></textarea></details>
+        <details class="fz-det"><summary>Vedi le istruzioni (se la copia automatica non funziona)</summary><textarea id="ia-testo" class="cr-ta" rows="10" readonly aria-label="Istruzioni per l'IA"></textarea></details>
+        <h3 class="fz-sottit">Nell'assistente IA</h3>
+        <ol class="cr-guida">
+          <li>Tocca <b>📎 / +</b> e allega la <b>foto</b> della pagina del libro o della mappa. Nessuna foto? Va bene lo stesso: basta l'argomento.</li>
+          <li><b>Incolla</b> le istruzioni nel messaggio e invia.</li>
+          <li>Quando ha finito, <b>copia tutta la risposta</b> con il tasto <b>Copia</b> (📋) sotto la risposta o in alto sul riquadro, poi torna qui.</li>
+        </ol>
+        <label for="ia-risp" class="cr-lab">Incolla qui la risposta dell'IA</label>
+        <textarea id="ia-risp" class="cr-ta cr-risp" rows="6" spellcheck="false" placeholder="MCD 24 36&#10;semplifica 18/24&#10;…"></textarea>
+        <div class="fz-azioni"><button type="button" class="fz-btn sec" id="ia-incolla">📋 Incolla</button><button type="button" class="fz-btn" id="ia-usa">Crea gli esercizi</button></div>
+        <p class="fz-fb" id="ia-fb2" role="status"></p>
       </div>
     </div>
   </section>

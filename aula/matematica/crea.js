@@ -20,6 +20,34 @@
   $('ia-copia').addEventListener('click', function () { aggIst(); copia($('ia-testo').value, $('ia-fb'), 'Istruzioni copiate. Ora incollale nell\'assistente IA insieme alla foto, poi incolla la risposta al passo 2.'); });
   aggIst();
 
+  /* la risposta dell'IA: si ripulisce (blocchi ```, numerazione, elenchi puntati, righe vuote) e va nel riquadro del passo 2 */
+  function pulisci(t) {
+    return String(t).replace(/\r/g, '').split('\n')
+      .filter(function (r) { return !/^\s*`{3}/.test(r); })
+      .map(function (r) { return r.replace(/^\s*(?:[-*•]|\d{1,2}[.)])\s+/, '').trim(); })
+      .filter(Boolean).join('\n');
+  }
+  function usaRisposta() {
+    var fb = $('ia-fb2'), t = pulisci($('ia-risp').value);
+    if (!t) { fb.className = 'fz-fb mezzo'; fb.textContent = 'Il riquadro è vuoto: incolla prima la risposta dell\'IA.'; $('ia-risp').focus(); return; }
+    var ta = $('cr-righe'), prima = ta.value.replace(/\s+$/, '');
+    ta.value = (prima ? prima + '\n' : '') + t;
+    aggiorna();
+    var n = t.split('\n').length;
+    fb.className = 'fz-fb si';
+    fb.textContent = (n === 1 ? 'Una riga aggiunta' : n + ' righe aggiunte') + ' al passo 2' + (prima ? ', dopo quelle che c\'erano' : '') + '. Controlla gli esercizi al passo 3.';
+    $('ia-risp').value = '';
+  }
+  $('ia-usa').addEventListener('click', usaRisposta);
+  $('ia-incolla').addEventListener('click', function () {
+    var fb = $('ia-fb2');
+    if (!navigator.clipboard || !navigator.clipboard.readText) { fb.className = 'fz-fb mezzo'; fb.textContent = 'Tocca il riquadro e incolla a mano (tieni premuto, poi «Incolla»).'; $('ia-risp').focus(); return; }
+    navigator.clipboard.readText().then(function (t) {
+      if (!t.trim()) { fb.className = 'fz-fb mezzo'; fb.textContent = 'Negli appunti non c\'è testo: copia la risposta dell\'IA e riprova.'; return; }
+      $('ia-risp').value = t; usaRisposta();
+    }, function () { fb.className = 'fz-fb mezzo'; fb.textContent = 'Il browser non ha permesso di leggere gli appunti: tocca il riquadro e incolla a mano.'; $('ia-risp').focus(); });
+  });
+
   /* ── 2. esempi e forme ── */
   $('cr-esempi').innerHTML = R.FORME.map(function (f, i) { return '<button type="button" class="fz-chip" data-f="' + i + '">' + esc(f[0].split(' ')[0] === 'problema' ? f[0].split('|')[0].trim() : f[0].split(' ')[0]) + '</button>'; }).join('');
   $('cr-forme').innerHTML = '<thead><tr><th>Scrivi così</th><th>Che cosa diventa</th></tr></thead><tbody>' + R.FORME.map(function (f) { return '<tr><td><code>' + esc(f[0]) + '</code></td><td>' + esc(f[1]) + '</td></tr>'; }).join('') + '</tbody>';

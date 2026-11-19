@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <script src="/aula/attesa.js"></script>
+  <script src="/aula/riservato.js"></script>
+  <script src="/aula/supporti.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <base href="/"/>
+  <meta name="robots" content="noindex"/>
+  <title>Che cos'è una frazione – Matematica | Convitto "Costaggini" - Rieti</title>
+  <meta name="description" content="Le frazioni dalla teglia alla retta dei numeri: frazioni proprie, improprie e apparenti, equivalenti, ridotte ai minimi termini, confronto e frazione di una quantità. Giochi, metodo passo passo ed esercizi con correzione."/>
+  <meta name="theme-color" content="#2C3E2D"/>
+  <link rel="stylesheet" href="fonts.css"/>
+  <link rel="stylesheet" href="style.min.css"/>
+  <link rel="stylesheet" href="aula/aula.css"/>
+  <link rel="stylesheet" href="aula/matematica/matematica.css"/>
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="aula">
+<script src="nav-header.min.js"></script>
+<nav class="nav-riserva" aria-label="Collegamenti essenziali"><a href="./">Home</a> · <a href="ammissione.html">Come iscriversi</a> · <a href="genitori.html">Per i Genitori</a> · <a href="in-2-minuti.html">Domande frequenti</a> · <a href="contatti.html">Contatti</a></nav>
+<main id="main">
+  <section class="au-hero fz-hero no-stampa">
+    <div class="w">
+      <p class="lbl">Matematica · Tappa 2</p>
+      <h1>Che cos'è <em>una frazione</em></h1>
+      <p class="au-sub">Una teglia di lasagne, un pacco di farina, una bottiglia: in cucina le frazioni si usano tutti i giorni. Qui le tagli, le confronti e scopri perché 2/4 e 1/2 sono la stessa porzione.</p>
+      <p class="fz-vai"><a href="aula/matematica/">← Il percorso di matematica</a></p>
+    </div>
+  </section>
+
+  <nav class="fz-nav no-stampa" aria-label="In questa pagina">
+    <div class="w"><a href="aula/matematica/frazioni-cosa.html#lampo">⚡ Domanda lampo</a><a href="aula/matematica/frazioni-cosa.html#scopri">🔍 Scopri</a><a href="aula/matematica/frazioni-cosa.html#metodo">🧭 Il metodo</a><a href="aula/matematica/frazioni-cosa.html#regole">Le regole</a><a href="aula/matematica/frazioni-cosa.html#allenati">✏️ Allenati</a><a href="aula/matematica/frazioni-cosa.html#missione">🎯 Missione</a><a href="aula/matematica/frazioni-cosa.html#scheda">Scheda stampabile</a><button type="button" class="fz-btn sec mt-lim" id="mt-lim" aria-pressed="false">Scrittura grande (LIM)</button></div>
+  </nav>
+
+  <section class="au-sez no-stampa" id="lampo" aria-labelledby="t-lampo">
+    <div class="w">
+      <div id="mt-ripasso"></div>
+      <h2 class="au-tit" id="t-lampo">⚡ Domanda lampo</h2>
+      <div class="tt-card" id="fc-lampo"></div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="scopri" aria-labelledby="t-scopri">
+    <div class="w">
+      <h2 class="au-tit" id="t-scopri">🔍 Scopri</h2>
+
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">🔪 Taglia e prendi</h3>
+        <p class="mm-p">Scegli in quante fette tagliare la teglia (il <strong>denominatore</strong>), poi tocca le fette che prendi (il <strong>numeratore</strong>). Se ne prendi più di una teglia intera, compare la seconda.</p>
+        <div class="fc-ctrl">
+          <span class="fc-et" id="tp-et">Fette per teglia</span>
+          <div class="fc-step" role="group" aria-labelledby="tp-et"><button type="button" class="fz-btn sec" id="tp-meno" aria-label="Meno fette">−</button><output id="tp-d" aria-live="polite">4</output><button type="button" class="fz-btn sec" id="tp-piu" aria-label="Più fette">+</button></div>
+          <div class="fc-step" role="group" aria-label="Forma"><button type="button" class="fz-chip" data-forma="teglia" aria-pressed="true">▭ teglia</button><button type="button" class="fz-chip" data-forma="pizza" aria-pressed="false">◯ pizza</button></div>
+        </div>
+        <div class="fc-figure" id="tp-fig"></div>
+        <div class="fc-lettura" id="tp-lettura" aria-live="polite"></div>
+        <div class="fc-sfida" id="tp-sfida"></div>
+      </div>
+
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">✂️ Taglia ancora: le frazioni equivalenti</h3>
+        <p class="mm-p">Taglia ogni fetta in parti più piccole, oppure riunisci le fette. Guarda la parte colorata: cambia?</p>
+        <div class="fz-azioni" style="margin-top:0" id="eq-btn">
+          <button type="button" class="fz-btn sec" data-k="2">Taglia ogni fetta in 2</button>
+          <button type="button" class="fz-btn sec" data-k="3">Taglia ogni fetta in 3</button>
+          <button type="button" class="fz-btn sec" data-k="-1">Riunisci le fette</button>
+          <button type="button" class="fz-btn sec" data-k="0">Un'altra frazione</button>
+        </div>
+        <div class="fc-figure" id="eq-fig"></div>
+        <p class="fc-catena" id="eq-catena" aria-live="polite"></p>
+        <p class="fz-fb" id="eq-fb" role="status"></p>
+      </div>
+
+      <div class="fz-form mm-gioco">
+        <h3 class="fz-sottit" style="margin-top:0">📏 La retta dei numeri</h3>
+        <p class="mm-p" id="rt-dom"></p>
+        <div class="fc-retta" id="rt-svg"></div>
+        <p class="fz-fb" id="rt-fb" role="status" aria-live="polite"></p>
+        <div class="fz-azioni"><button type="button" class="fz-btn sec" id="rt-altra">Un'altra frazione</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="metodo" aria-labelledby="t-metodo">
+    <div class="w">
+      <h2 class="au-tit" id="t-metodo">🧭 Il metodo, una domanda alla volta</h2>
+      <p class="au-nota">Rispondi a una domanda alla volta: il sito ti dice se va bene e perché. Se ti blocchi c'è il suggerimento.</p>
+      <div class="fz-form fz-tutor">
+        <div class="fz-scelte mm-due">
+          <div><label for="tu-tipo">Che cosa vuoi imparare?</label><select id="tu-tipo">
+            <option value="semplifica">Ridurre ai minimi termini</option>
+            <option value="confronta">Confrontare due frazioni</option>
+            <option value="quantita">La frazione di una quantità</option>
+            <option value="misto">Da frazione impropria a numero misto</option>
+          </select></div>
+          <div><label for="tu-liv">Difficoltà</label><select id="tu-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedia</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div class="fz-azioni" style="margin-top:0"><button type="button" class="fz-btn" id="tu-nuovo">Nuovo esercizio</button></div>
+        <div id="tt-area" class="tt-area"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="regole" aria-labelledby="t-regole">
+    <div class="w">
+      <h2 class="au-tit" id="t-regole">Le regole in breve</h2>
+      <div class="fz-regole">
+        <article class="fz-reg"><h3>Numeratore e denominatore</h3><p>Il <strong>denominatore</strong> (sotto) dice in quante parti uguali si divide l'intero; il <strong>numeratore</strong> (sopra) quante parti si prendono. Il denominatore non può essere 0.</p><math display="block"><mfrac><mtext>parti prese</mtext><mtext>parti uguali dell'intero</mtext></mfrac></math></article>
+        <article class="fz-reg"><h3>Proprie, improprie, apparenti</h3><p><strong>Propria</strong>: numeratore minore del denominatore, vale meno di 1 (3/4). <strong>Impropria</strong>: numeratore maggiore, vale più di 1 (7/4). <strong>Apparente</strong>: il numeratore è multiplo del denominatore, è un numero intero (8/4 = 2).</p></article>
+        <article class="fz-reg"><h3>Frazioni equivalenti</h3><p>Moltiplicando o dividendo numeratore e denominatore per lo <strong>stesso</strong> numero (diverso da 0) la frazione non cambia valore: è la proprietà invariantiva.</p><math display="block"><mrow><mfrac><mn>3</mn><mn>4</mn></mfrac><mo>=</mo><mfrac><mrow><mn>3</mn><mo>·</mo><mn>5</mn></mrow><mrow><mn>4</mn><mo>·</mo><mn>5</mn></mrow></mfrac><mo>=</mo><mfrac><mn>15</mn><mn>20</mn></mfrac></mrow></math></article>
+        <article class="fz-reg"><h3>Ridurre ai minimi termini</h3><p>Si dividono numeratore e denominatore per il loro MCD. Quando il MCD è 1 la frazione è <em>ridotta ai minimi termini</em> (o irriducibile).</p><math display="block"><mrow><mfrac><mn>18</mn><mn>24</mn></mfrac><mo>=</mo><mfrac><mrow><mn>18</mn><mo>:</mo><mn>6</mn></mrow><mrow><mn>24</mn><mo>:</mo><mn>6</mn></mrow></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>4</mn></mfrac></mrow></math></article>
+        <article class="fz-reg"><h3>Confrontare</h3><p>Stesso denominatore: è più grande quella con il numeratore più grande. Altrimenti si portano allo stesso denominatore (il mcm dei denominatori) e si confrontano i numeratori.</p><math display="block"><mrow><mfrac><mn>3</mn><mn>4</mn></mfrac><mo>=</mo><mfrac><mn>9</mn><mn>12</mn></mfrac><mo>&gt;</mo><mfrac><mn>8</mn><mn>12</mn></mfrac><mo>=</mo><mfrac><mn>2</mn><mn>3</mn></mfrac></mrow></math></article>
+        <article class="fz-reg"><h3>La frazione di una quantità</h3><p>Si divide la quantità per il denominatore (quanto vale una parte), poi si moltiplica per il numeratore.</p><p class="mm-es">3/4 di 200 g → 200 : 4 = 50 → 50 · 3 = 150 g</p></article>
+      </div>
+      <h3 class="fz-sottit">Gli errori che si vedono più spesso</h3>
+      <ul class="fz-errori">
+        <li><p><strong>«Denominatore più grande, frazione più grande».</strong> È il contrario: 1/8 di torta è più piccolo di 1/4. Più fette, fette più piccole.</p></li>
+        <li><p><strong>Semplificare sottraendo.</strong> 6/8 non diventa 4/6 togliendo 2 sopra e sotto: si divide, 6/8 = 3/4.</p></li>
+        <li><p><strong>Semplificare solo sopra (o solo sotto).</strong> Il numero va diviso sia al numeratore sia al denominatore.</p></li>
+        <li><p><strong>Fermarsi troppo presto.</strong> 12/18 = 6/9 non è finita: 6/9 = 2/3. Dividendo per il MCD si arriva subito alla fine.</p></li>
+        <li><p><strong>Parti non uguali.</strong> Una teglia tagliata in 4 pezzi diversi non dà dei «quarti»: le parti devono essere uguali.</p></li>
+        <li><p><strong>Nella frazione di una quantità, moltiplicare per il denominatore.</strong> 3/4 di 200 non è 200 · 4: si divide per 4 e si moltiplica per 3.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="au-sez no-stampa" id="allenati" aria-labelledby="t-allenati">
+    <div class="w">
+      <h2 class="au-tit" id="t-allenati">✏️ Allenati</h2>
+      <p class="au-nota">Un esercizio alla volta, con correzione. Le frazioni si scrivono così: 3/4. Un numero misto così: 2 3/4.</p>
+      <div class="fz-form">
+        <div class="fz-scelte mm-due">
+          <div><label for="ex-tipo">Che cosa?</label><select id="ex-tipo">
+            <option value="misto-tutto">Un po' di tutto</option>
+            <option value="figura">Che frazione è colorata?</option>
+            <option value="classe">Propria, impropria o apparente?</option>
+            <option value="equivalente">Completa l'equivalenza</option>
+            <option value="semplifica">Riduci ai minimi termini</option>
+            <option value="confronta">Confronta due frazioni</option>
+            <option value="quantita">La frazione di una quantità</option>
+            <option value="misto">Numero misto</option>
+          </select></div>
+          <div><label for="ex-liv">Livello</label><select id="ex-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedio</option><option value="3">3 · numeri più grandi</option></select></div>
+        </div>
+        <div id="ex-area"></div>
+        <p class="fz-conta" id="ex-conta">Esercizi risolti in questa visita: 0</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="au-sez au-doc no-stampa" id="missione" aria-labelledby="t-missione">
+    <div class="w">
+      <h2 class="au-tit" id="t-missione">🎯 Missione: una sera in pasticceria e in sala</h2>
+      <p class="au-nota">Cinque problemi veri della serata. Risolvili uno dopo l'altro.</p>
+      <div class="fz-form" id="mi-area"></div>
+    </div>
+  </section>
+
+  <section class="au-sez" id="scheda" aria-labelledby="t-scheda">
+    <div class="w">
+      <div class="no-stampa">
+        <h2 class="au-tit" id="t-scheda">Scheda di esercizi da stampare</h2>
+        <p class="au-nota">Per chi insegna: si sceglie che cosa mettere, il livello e il numero di esercizi. Ogni volta gli esercizi sono diversi; con due file, A e B hanno esercizi diversi dello stesso tipo.</p>
+        <div class="fz-form">
+          <div class="fz-scelte mm-due">
+            <div><label for="sc-liv">Livello</label><select id="sc-liv"><option value="1">1 · numeri piccoli</option><option value="2" selected>2 · intermedio</option><option value="3">3 · numeri più grandi</option></select></div>
+            <div><label for="sc-n">Numero di esercizi</label><select id="sc-n"><option>6</option><option selected>8</option><option>10</option><option>12</option></select></div>
+          </div>
+          <fieldset class="fz-ck">
+            <legend>Che cosa mettere</legend>
+            <label><input type="checkbox" name="sc-t" value="figura" checked/> figure</label>
+            <label><input type="checkbox" name="sc-t" value="equivalente" checked/> equivalenze</label>
+            <label><input type="checkbox" name="sc-t" value="semplifica" checked/> minimi termini</label>
+            <label><input type="checkbox" name="sc-t" value="confronta" checked/> confronti</label>
+            <label><input type="checkbox" name="sc-t" value="quantita" checked/> frazione di una quantità</label>
+            <label><input type="checkbox" name="sc-t" value="misto"/> numeri misti</label>
+          </fieldset>
+          <label class="fz-un"><input type="checkbox" id="sc-ab"/> Due file (A e B)</label>
+          <label class="fz-un"><input type="checkbox" id="sc-aiuti"/> Con più aiuti (in cima al foglio il promemoria delle regole)</label>
+          <label class="fz-un"><input type="checkbox" id="sc-sol" checked/> Aggiungi le soluzioni in un foglio separato</label>
+          <div class="fz-azioni">
+            <button type="button" class="fz-btn" id="sc-crea">Prepara la scheda</button>
+            <button type="button" class="fz-btn sec" id="sc-stampa" hidden>Stampa o salva in PDF</button>
+          </div>
+        </div>
+      </div>
+      <div id="sc-out" class="fz-foglio" hidden></div>
+    </div>
+  </section>
+
+  <nav class="au-sez no-stampa mt-tnav" id="mt-tappe-nav" aria-label="Le tappe vicine"></nav>
+</main>
+<script src="nav.min.js"></script>
+<script src="aula/studio/ripasso.js"></script>
+<script src="aula/matematica/percorso.js"></script>
+<script src="aula/matematica/tutor.js"></script>
+<script src="aula/matematica/frazioni-cosa.js"></script>
+</body>
+</html>

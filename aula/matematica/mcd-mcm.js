@@ -339,7 +339,7 @@
   albero(60);
 
   /* ════════ IL METODO PASSO PASSO ════════ */
-  var area = $('tt-area'), TT = null;
+  var area = $('tt-area');
   function costruisci(nums) {
     var F = nums.map(fattori), P = [];
     F.forEach(function (f) { primiDi(f).forEach(function (p) { if (P.indexOf(p) < 0) P.push(p); }); });
@@ -411,92 +411,18 @@
       spiega: 'mcm(' + nums.join(', ') + ') = ' + fattHtml(mF) + ' = ' + M + '.' + (nums.length === 2 ? ' Controllo: MCD · mcm = ' + G + ' · ' + M + ' = ' + G * M + ', proprio come ' + nums[0] + ' · ' + nums[1] + '.' : ''),
       lav: 'mcm = ' + fattHtml(mF) + ' = <strong>' + M + '</strong>'
     });
-    return { nums: nums, passi: passi, G: G, M: M };
+    return { nums: nums, passi: passi, G: G, M: M, testata: '<p class="mm-testa">MCD e mcm di ' + elenco(nums) + '</p>', fine: '<p class="tt-q">MCD = ' + G + ' · mcm = ' + M + '</p>' };
   }
-  function avvia(nums, scorri) {
-    TT = { t: costruisci(nums), i: 0, ok: false, tent: 0, aiuto: 0, usato: false, soli: 0, aiutati: 0, lav: [], sel: [] };
-    disegna(true);
-    if (scorri) $('metodo').scrollIntoView();
-  }
+  var TU = TUTOR.crea(area, { altro: function () { nuovoTutor(); }, allenati: 'aula/matematica/mcd-mcm.html#allenati' });
+  function avvia(nums, scorri) { TU.avvia(function () { return costruisci(nums); }, scorri ? $('metodo') : null); }
   function nuovoTutor() { avvia(gruppo(+$('tu-liv').value, +$('tu-tipo').value, false), false); }
-  function disegna(primo) {
-    var t = TT.t, n = t.passi.length;
-    var h = '<div class="tt-testata"><p class="tt-et">L\'esercizio</p><p class="mm-testa">MCD e mcm di ' + elenco(t.nums) + '</p></div>';
-    if (TT.i >= n) {
-      h += (TT.lav.length ? '<div class="tt-lav"><p class="tt-et">La tua lavagna</p>' + TT.lav.map(function (x) { return '<p class="mm-lav">' + x + '</p>'; }).join('') + '</div>' : '');
-      var tot = TT.soli + TT.aiutati;
-      h += '<div class="tt-fine"><p class="tt-et">Fatto!</p><p class="tt-q">MCD = ' + t.G + ' · mcm = ' + t.M + '</p><p class="tt-stat">Hai risposto da solo a ' + TT.soli + ' passi su ' + tot + (TT.aiutati ? ' (con aiuto: ' + TT.aiutati + ')' : '') + '.' + (TT.aiutati > tot / 2 ? ' Rifallo da capo con calma: la seconda volta sarà più facile.' : (TT.aiutati === 0 ? ' Ottimo lavoro!' : '')) + '</p><div class="fz-azioni"><button type="button" class="fz-btn" id="tt-altro">Un altro esercizio</button><button type="button" class="fz-btn sec" id="tt-rifai">Rifallo da capo</button><a class="fz-btn sec" href="aula/matematica/mcd-mcm.html#allenati" style="text-decoration:none;display:inline-flex;align-items:center">Prova da solo, senza guida</a></div></div>';
-      area.innerHTML = h; area.querySelector('#tt-altro').focus(); return;
-    }
-    var p = t.passi[TT.i], fatti = Math.min(TT.i + (TT.ok ? 1 : 0), n);
-    h += '<div class="tt-prog"><span>Passo ' + (TT.i + 1) + ' di ' + n + '</span><div class="tt-bar" role="img" aria-label="Fatti ' + fatti + ' passi su ' + n + '"><i style="width:' + Math.round(100 * fatti / n) + '%"></i></div></div>';
-    if (TT.lav.length) h += '<div class="tt-lav"><p class="tt-et">La tua lavagna</p>' + TT.lav.map(function (x) { return '<p class="mm-lav">' + x + '</p>'; }).join('') + '</div>';
-    h += '<div class="tt-card"><p class="tt-n">Passo ' + (TT.i + 1) + ' · ' + esc(p.titolo) + '</p><p class="tt-q" id="tt-q">' + esc(p.testo) + '</p>';
-    if (!TT.ok) {
-      h += '<form id="tt-f" class="mm-tf" novalidate>' + campo(p) + '</form><p class="fz-fb" id="tt-fb" role="status"></p><p class="tt-aiuto" id="tt-aiuto-t"></p>';
-      h += '<div class="fz-azioni"><button type="button" class="fz-btn sec" id="tt-aiuto">Suggerimento</button><button type="button" class="fz-btn sec" id="tt-mostra">Mostrami la risposta</button></div>';
-    } else {
-      h += '<p class="fz-fb ' + TT.classe + '" id="tt-fb" role="status">' + TT.fb + '</p><div class="fz-azioni"><button type="button" class="fz-btn" id="tt-avanti">' + (TT.i + 1 >= n ? 'Vedi il risultato' : 'Avanti') + '</button></div>';
-    }
-    area.innerHTML = h + '</div>';
-    if (TT.ok) area.querySelector('#tt-avanti').focus();
-    else if (!primo) { var f = area.querySelector('input'); if (f) f.focus(); }
-  }
-  function campo(p) {
-    if (p.tipo === 'esp') return '<div class="mm-esp">' + p.primi.map(function (q) { return '<span class="mm-e"><b>' + q + '</b><input type="number" inputmode="numeric" min="0" max="30" data-p="' + q + '" aria-label="Esponente di ' + q + '"/></span>'; }).join('<span class="mm-per" aria-hidden="true">·</span>') + '</div><button type="submit" class="fz-btn">Controlla</button>';
-    if (p.tipo === 'multi') return '<div class="tt-sc" role="group" aria-labelledby="tt-q">' + p.primi.map(function (q) { return '<button type="button" class="fz-chip" data-m="' + q + '" aria-pressed="' + (TT.sel.indexOf(q) >= 0) + '">' + q + '</button>'; }).join('') + '<button type="button" class="fz-chip" data-m="0" aria-pressed="false">nessuno</button></div><button type="submit" class="fz-btn">Controlla</button>';
-    return '<div class="tt-num"><label for="tt-r">La tua risposta</label><input id="tt-r" type="text" inputmode="numeric" autocomplete="off" aria-describedby="tt-q"/></div><button type="submit" class="fz-btn">Controlla</button>';
-  }
-  function valore(p) {
-    if (p.tipo === 'esp') { var v = {}; Array.prototype.forEach.call(area.querySelectorAll('[data-p]'), function (x) { v[x.dataset.p] = intero(x.value) || 0; }); return v; }
-    if (p.tipo === 'multi') return TT.sel.slice();
-    return area.querySelector('#tt-r').value;
-  }
-  function chiudi(p, aiutato, msg, cls) {
-    if (p.lav) TT.lav.push(p.lav);
-    if (aiutato) TT.aiutati++; else TT.soli++;
-    TT.ok = true; TT.fb = msg; TT.classe = cls;
-    disegna(false);
-  }
-  area.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    var p = TT.t.passi[TT.i]; if (!p || TT.ok) return;
-    var r = p.verifica(valore(p));
-    if (r.ok) { chiudi(p, TT.usato, 'Esatto! ' + (p.spiega || ''), 'si'); return; }
-    TT.tent++;
-    var fb = area.querySelector('#tt-fb'); fb.className = 'fz-fb no';
-    fb.textContent = r.msg + (TT.tent >= 2 ? ' Prova con il suggerimento.' : '');
-  });
-  area.addEventListener('click', function (ev) {
-    var b = ev.target.closest('button'); if (!b || !TT) return;
-    var p = TT.t.passi[TT.i];
-    if (b.dataset.m !== undefined && p && !TT.ok) {
-      var q = +b.dataset.m;
-      if (q === 0) TT.sel = [];
-      else { var k = TT.sel.indexOf(q); if (k >= 0) TT.sel.splice(k, 1); else TT.sel.push(q); }
-      Array.prototype.forEach.call(area.querySelectorAll('[data-m]'), function (x) { var v = +x.dataset.m; x.setAttribute('aria-pressed', v === 0 ? String(q === 0) : String(TT.sel.indexOf(v) >= 0)); });
-      return;
-    }
-    if (b.id === 'tt-aiuto' && p) {
-      TT.usato = true;
-      var k2 = Math.min(TT.aiuto, p.aiuti.length - 1);
-      area.querySelector('#tt-aiuto-t').innerHTML = 'Suggerimento ' + (k2 + 1) + ': ' + p.aiuti[k2];
-      TT.aiuto++;
-      if (TT.aiuto >= p.aiuti.length) { b.textContent = 'Hai visto tutti i suggerimenti'; b.disabled = true; } else b.textContent = 'Un altro suggerimento';
-      return;
-    }
-    if (b.id === 'tt-mostra' && p) { chiudi(p, true, 'La risposta è ' + p.rivela() + '. ' + (p.spiega || ''), 'mezzo'); return; }
-    if (b.id === 'tt-avanti') { TT.i++; TT.ok = false; TT.tent = 0; TT.aiuto = 0; TT.usato = false; TT.sel = []; disegna(false); return; }
-    if (b.id === 'tt-altro') { nuovoTutor(); return; }
-    if (b.id === 'tt-rifai') { avvia(TT.t.nums, false); return; }
-  });
   $('tu-nuovo').addEventListener('click', nuovoTutor);
   ['tu-tipo', 'tu-liv'].forEach(function (id) { $(id).addEventListener('change', nuovoTutor); });
   $('tu-miei').addEventListener('submit', function (ev) {
     ev.preventDefault();
     var l = $('tu-n').value.split(/[,;\s]+/).filter(Boolean).map(intero);
     if (l.length < 2 || l.length > 4 || l.some(function (x) { return !x || x < 2 || x > 99999; })) {
-      area.innerHTML = '<p class="fz-err" role="alert">Scrivi da 2 a 4 numeri interi tra 2 e 99999, separati da virgola.</p>'; return;
+      TU.errore('Scrivi da 2 a 4 numeri interi tra 2 e 99999, separati da virgola.'); return;
     }
     avvia(l.sort(function (a, b) { return a - b; }), false);
   });

@@ -238,8 +238,61 @@ a.mt-int:focus-visible{outline:3px solid var(--oro2,#D4AA4A);outline-offset:2px}
 .fz-grande .mm-col{font-size:2rem}
 .fz-grande .mm-lav{font-size:1.4rem}
 
+/* ── tappa: che cos'è una frazione ── */
+.fc-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin-bottom:.8rem}
+.fc-et{font:700 .85rem var(--fu,sans-serif);color:var(--txt2,#555)}
+.fc-step{display:inline-flex;align-items:center;gap:.4rem}
+.fc-step .fz-btn{min-width:48px;padding:0 .8rem;font-size:1.2rem}
+.fc-step output{min-width:2.2rem;text-align:center;font:800 1.5rem var(--fu,sans-serif);color:var(--bosco,#2C3E2D)}
+.fc-teglie{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+.fc-svg{width:min(100%,300px);height:auto;display:block}
+.fc-svg.pizza{width:min(100%,220px)}
+.fc-f{fill:#fbf6ea;stroke:#7a6440;stroke-width:1.2px;vector-effect:non-scaling-stroke}
+.fc-f.on{fill:#d9a441}
+.fc-f[data-k]{cursor:pointer}
+.fc-f[data-k]:hover{fill:#f1e2bf}
+.fc-f.on[data-k]:hover{fill:#c8922e}
+.fc-f[data-k]:focus-visible{outline:none;stroke:#2C3E2D;stroke-width:4px}
+.fc-bordo{fill:none;stroke:#2C3E2D;stroke-width:3px;vector-effect:non-scaling-stroke}
+.fc-bordo-f{fill:#fbf6ea;stroke:#2C3E2D;stroke-width:3px;vector-effect:non-scaling-stroke}
+.fc-forte{stroke:#2C3E2D;stroke-width:2.5px;vector-effect:non-scaling-stroke}
+.fc-lettura{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;margin-top:.9rem;padding:.8rem 1rem;background:var(--av,#F5F0E8);border-radius:12px}
+.fc-lettura>div:last-child{flex:1 1 14rem}
+.fc-grande math{font-size:2.6em}
+.fc-parole{font:800 1.1rem var(--fu,sans-serif);color:var(--bosco,#2C3E2D);margin:0 0 .2rem}
+.fc-lettura .mm-p{margin:0}
+.fc-sfida{margin-top:1rem;border-top:1px dashed var(--av3,#e4dccb);padding-top:.9rem}
+.fc-sfida math,.mm-p math,.mm-dom math{font-size:1.35em}
+.fc-con{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.fc-catena{overflow-x:auto;margin:.8rem 0 0}
+.fc-catena math{font-size:1.6em}
+.fc-retta{overflow-x:auto}
+.fc-retta svg{display:block;width:100%;min-width:540px;max-width:680px;height:auto}
+.fc-asse{stroke:#2C3E2D;stroke-width:3}
+.fc-freccia{fill:#2C3E2D}
+.fc-tacca{stroke:#2C3E2D;stroke-width:2}
+.fc-tacca.M{stroke-width:3.5}
+.fc-num{font:800 24px var(--fu,sans-serif);fill:#2C3E2D;text-anchor:middle}
+.fc-hit{fill:transparent;cursor:pointer}
+.fc-hit:hover+.fc-punto{fill:#f1e2bf;stroke:#7a6440}
+.fc-hit:focus-visible{outline:none;fill:rgba(212,170,74,.25)}
+.fc-punto{fill:transparent;stroke:none;pointer-events:none}
+.fc-punto.si{fill:#2e7d4f;stroke:#fff;stroke-width:2}
+.fc-punto.no{fill:#b4442f;stroke:#fff;stroke-width:2}
+.fc-centro .fc-teglie{justify-content:center}
+.fc-figure{margin:.4rem 0}
+.fc-vs{display:inline-block;min-width:1.5em;font-weight:800;color:var(--oro-txt,#7A5A10)}
+.fc-seg{font-size:1.5rem!important;min-width:64px}
+.fc-st-fig{display:inline-block;vertical-align:middle;margin-left:.6rem}
+.fc-st-fig .fc-svg{width:120px}
+.fc-st-fig .fc-svg.pizza{width:95px}
+.fz-grande .fc-grande math{font-size:3.6em}
+.fz-grande .fc-parole{font-size:1.5rem}
+.fz-grande .fc-svg{width:min(100%,420px)}
+
 @media print{
   @page{margin:1.6cm}
+  .fc-f.on{fill:#bbb!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .mm-es-pr{min-height:4.2cm!important;font-size:11pt}
   body>*:not(main){display:none!important}
   .no-stampa{display:none!important}

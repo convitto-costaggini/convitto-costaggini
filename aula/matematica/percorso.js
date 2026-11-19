@@ -12,7 +12,7 @@ window.PERCORSO = (function () {
   ];
   var TAPPE = [
     { id: 'mcd-mcm', b: 'numeri', ico: '⏲️', t: 'Numeri primi, MCD e mcm', d: 'I timer del forno, le mattonelle della dispensa e l\'albero dei fattori.', url: 'aula/matematica/mcd-mcm.html' },
-    { id: 'frazioni-cosa', b: 'numeri', ico: '🍕', t: 'Che cos\'è una frazione', d: 'Tagliare la teglia: frazioni equivalenti, semplificare, confrontare.' },
+    { id: 'frazioni-cosa', b: 'numeri', ico: '🍕', t: 'Che cos\'è una frazione', d: 'Tagliare la teglia: frazioni equivalenti, semplificare, confrontare.', url: 'aula/matematica/frazioni-cosa.html' },
     { id: 'frazioni-operazioni', b: 'numeri', ico: '➗', t: 'Operazioni e potenze con le frazioni', d: 'Somma, differenza, prodotto, divisione e potenze, passo passo.', url: 'aula/matematica/frazioni.html' },
     { id: 'decimali', b: 'numeri', ico: '⚖️', t: 'I numeri decimali', d: 'Dalla bilancia allo scontrino: leggere, confrontare, arrotondare.' },
     { id: 'periodici', b: 'numeri', ico: '🔁', t: 'Dal decimale alla frazione', d: 'Decimali finiti e periodici: perché le cifre si ripetono e la frazione generatrice.' },

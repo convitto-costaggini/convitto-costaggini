@@ -39,14 +39,17 @@ async function leggiSessione(chiave: string, t: unknown, adesso: number) {
   try { const o = JSON.parse(new TextDecoder().decode(deb64u(dati))); return o.s > adesso && typeof o.e === "string" ? o.e : null; } catch { return null; }
 }
 const mailValida = (e: string) => /^[^\s@]{1,64}@[^\s@]{1,190}$/.test(e) && DOMINI.some((d) => e.endsWith(d));
+const varianti = (e: string) => { const u = e.split("@")[0]; return DOMINI.map((d) => u + d); };
 const nomeDaMail = (e: string) => e.split("@")[0].split(/[._-]+/).filter(Boolean).map((p) => p[0].toUpperCase() + p.slice(1)).join(" ").slice(0, 80);
 function codiceSeiCifre() { const v = new Uint32Array(1); crypto.getRandomValues(v); return String(v[0] % 1000000).padStart(6, "0"); }
 
 export function crea(db: any, env: Record<string, string | undefined>, invia: (url: string, corpo: unknown) => Promise<boolean>, ora = () => Date.now()) {
   const firma = env.FIRMA || "";
+  // @alberghierorieti.it e @alberghierorieti.edu.it sono la stessa casella: l'elenco vale per entrambe le forme.
+  // Se una delle due forme e' revocata (attivo = false), l'accesso resta chiuso.
   async function chiaveSeAbilitato(email: string) {
-    const { data: doc } = await db.from("lingue_docenti").select("email,attivo").eq("email", email).maybeSingle();
-    if (!doc || !doc.attivo) return null;
+    const { data: righe } = await db.from("lingue_docenti").select("email,attivo").in("email", varianti(email));
+    if (!righe || !righe.length || righe.some((r: any) => !r.attivo)) return null;
     const { data: k } = await db.from("lingue_chiave").select("chiave").order("id", { ascending: false }).limit(1).maybeSingle();
     return k ? k.chiave as string : null;
   }

@@ -104,7 +104,7 @@
     var m = String((e && e.message) || e || '');
     if (/troppo-presto/.test(m)) return 'Attendete mezzo minuto prima di chiedere un altro codice.';
     if (/troppi/.test(m)) return 'Troppe richieste: riprovate tra un po\'.';
-    if (/non-abilitato/.test(m)) return 'L\'accesso è riuscito, ma questo indirizzo non è abilitato all\'area docenti. Scrivete a ' + MAIL + '.';
+    if (/non-abilitato/.test(m)) return 'Questo indirizzo non è ancora abilitato all\'area docenti. La richiesta è registrata: appena approvata riceverete una mail. Per sollecitare scrivete a ' + MAIL + '.';
     if (/codice/.test(m)) return 'Codice non valido o scaduto. Richiedetene uno nuovo.';
     if (/invio/.test(m)) return 'Non è stato possibile spedire la mail. Riprovate tra poco.';
     if (/rete|fetch|network|Failed/i.test(m)) return 'Connessione non riuscita. Controllate la rete e riprovate.';
@@ -125,7 +125,7 @@
         '<p class="ac-m" role="alert"></p><button class="b" type="submit">Invia il codice</button></form>' +
         '<div class="sep">oppure</div><form id="ac-fd"><label for="ac-c1">Codice del Dipartimento</label><input id="ac-c1" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX"/>' +
         '<p class="ac-m2" role="alert"></p><button class="b" type="submit" style="background:#8a6d1f">Entra con il codice</button></form>' +
-        '<p class="s" style="margin:1rem 0 0;font-size:.8rem">Non siete ancora abilitati? Scrivete a ' + MAIL + '.</p>' +
+        '<p class="s" style="margin:1rem 0 0;font-size:.8rem">Non siete ancora abilitati? Scrivete qui sopra la vostra mail: la richiesta arriva all\'amministratore e riceverete una mail appena approvata.</p>' +
         '<p class="s" style="margin:.5rem 0 0;font-size:.8rem"><a href="/informativa-aula.html" target="_blank" rel="noopener">Informativa sul trattamento dei dati</a></p>');
       box.querySelector('#ac-f').addEventListener('submit', function (e) {
         e.preventDefault(); var b = e.target.querySelector('button'), mail = box.querySelector('#ac-m1').value.trim().toLowerCase(); occupato(b, true);
@@ -140,7 +140,7 @@
     /* il codice parte solo per gli indirizzi abilitati; la risposta a video è la stessa in ogni caso */
     function invia(mail) { return chiama({ azione: 'richiedi', email: mail }); }
     function codice(mail) {
-      vista(intesta() + '<p class="s">Se l\'indirizzo <b>' + esc(mail) + '</b> è abilitato, tra pochi istanti riceverete un messaggio con un codice. Controllate anche la posta indesiderata.</p>' +
+      vista(intesta() + '<p class="s">Se l\'indirizzo <b>' + esc(mail) + '</b> è abilitato, tra pochi istanti riceverete un messaggio con un codice. Controllate anche la posta indesiderata.<br><br><b>Il codice non arriva?</b> Probabilmente l\'indirizzo non è ancora in elenco: la vostra richiesta è già stata registrata e verrà approvata al più presto (di norma in giornata). Appena abilitati, riceverete una mail con il link per entrare.</p>' +
         '<form id="ac-f"><label for="ac-t">Codice ricevuto per e-mail</label><input id="ac-t" class="cod" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required/>' +
         '<p class="ac-m" role="alert"></p><button class="b" type="submit">Entra</button></form>' +
         '<button type="button" class="l" id="ac-ri">Invia di nuovo il codice</button> <button type="button" class="l" id="ac-ind">Cambia indirizzo</button>');

@@ -109,7 +109,7 @@ window.EDUCATORI = (function () {
           '<input type="email" id="ac-mail" class="ed-grande" autocomplete="email" inputmode="email" placeholder="nome.cognome@alberghierorieti.it" value="' + esc(mail) + '"/>' +
           '<div class="st-azioni"><button type="button" class="st-btn oro ed-vai" data-manda>Mandami il codice →</button></div>' +
           '<p class="st-nota">Basta anche solo <b>nome.cognome</b>: il resto lo aggiungo io. Va bene anche @alberghierorieti.edu.it.</p></div>' +
-        '<div data-fase="2" hidden><div class="ed-posta">📬 Ti abbiamo scritto a <b data-a></b>.<br>Apri la posta e cerca il messaggio <b>«Il tuo codice di accesso»</b>. Non c\'è? Guarda anche in <b>Spam / Posta indesiderata</b>.</div>' +
+        '<div data-fase="2" hidden><div class="ed-posta">📬 Se la mail <b data-a></b> è abilitata, ti abbiamo scritto.<br>Apri la posta e cerca il messaggio <b>«Il tuo codice di accesso»</b>. Non c\'è? Guarda anche in <b>Spam / Posta indesiderata</b>.<br><b>Ancora niente?</b> Allora la mail non è ancora in elenco: la tua richiesta è già registrata e ti scriviamo appena è approvata (di norma in giornata).</div>' +
           '<label for="ac-otp">Il codice di 6 cifre</label><input type="text" id="ac-otp" class="ed-grande ed-otp" inputmode="numeric" autocomplete="one-time-code" maxlength="7" placeholder="● ● ● ● ● ●"/>' +
           '<div class="st-azioni"><button type="button" class="st-btn oro ed-vai" data-entra>Entra →</button><button type="button" class="st-btn" data-rimanda>Rimanda il codice</button><button type="button" class="st-btn" data-cambia>Cambia mail</button></div></div>' +
         '<div data-fase="3" hidden><div class="ed-fatto">✅ <b>Fatto, sei dentro!</b></div></div>' +

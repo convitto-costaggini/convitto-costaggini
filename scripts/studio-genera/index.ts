@@ -4,8 +4,8 @@
 // poi con la "sessione" firmata che la funzione restituisce; oppure con un codice di scorta di STUDIO_CODICI.
 // Segreti: GAS_URL e GAS_TOKEN (lo script di posta, gli stessi di lingue-accesso), STUDIO_CODICI (codici di scorta, facoltativi),
 // SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY sono forniti da Supabase; dalla seconda deriva la chiave che firma le sessioni.
-//   {azione:"richiedi", email}                     -> spedisce il codice alla mail istituzionale
-//   {azione:"verifica", email, codice}             -> se il codice e' giusto, {ok, sessione, email, nome}
+//   {azione:"richiedi", email}                     -> spedisce il codice se la mail e' in lingue_docenti; altrimenti, stessa risposta e richiesta in aula_richieste
+//   {azione:"verifica", email, codice}             -> se il codice e' giusto e la mail e' in elenco, {ok, sessione, email, nome}; altrimenti 403 non-abilitato
 // Tutte le altre richieste hanno sessione (o codice_docente); l'autore di una lezione e' la persona che l'ha pubblicata:
 //   {prova:true}                                   -> verifica l'accesso
 //   {mie:true}                                     -> le lezioni dell'autore (e quelle senza autore, pubblicate prima)
@@ -30,6 +30,7 @@ const ALFABETO = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // niente 0/O, 1/I
 const DOMINI = ["@alberghierorieti.it", "@alberghierorieti.edu.it"];
 const OTP_SCADENZA_MS = 10 * 60 * 1000, OTP_PAUSA_MS = 30 * 1000, OTP_FINESTRA_MS = 60 * 60 * 1000, OTP_INVII = 5, OTP_TENTATIVI = 5;
 const SESSIONE_MS = 60 * 24 * 3600 * 1000; // un dispositivo resta riconosciuto per 60 giorni
+const MAX_NUOVE_ORA = 30; // richieste di abilitazione nuove all'ora, in tutto
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
@@ -106,6 +107,7 @@ async function leggiSessione(chiave: string, t: unknown, adesso: number) {
   if (!dati || !firma || !chiave || firma !== await hmac(chiave, dati)) return null;
   try { const o = JSON.parse(new TextDecoder().decode(deb64u(dati))); return o.s > adesso && typeof o.e === "string" ? o.e : null; } catch { return null; }
 }
+const varianti = (e: string) => { const u = e.split("@")[0]; return DOMINI.map((d) => u + d); };
 function mailValida(email: string) { return /^[^\s@]{1,64}@[^\s@]{1,190}$/.test(email) && DOMINI.some((d) => email.endsWith(d)); }
 // "mario.rossi@..." -> "Mario Rossi"
 function nomeDaMail(email: string) { return email.split("@")[0].split(/[._-]+/).filter(Boolean).map((p) => p[0].toUpperCase() + p.slice(1)).join(" ").slice(0, 80); }
@@ -139,6 +141,22 @@ export function crea(db: Db, env: Record<string, string | undefined>, invia: Inv
   const codici = (env.STUDIO_CODICI || "").split(",").map((c) => c.trim().toLowerCase()).filter(Boolean);
   const scorte = Promise.all(codici.map(impronta)); // le lezioni pubblicate con un codice di scorta sono di tutti
   const firma = env.FIRMA || "";
+  // Gli strumenti degli educatori sono per il personale: serve essere in lingue_docenti (stesso elenco dell'Aula, gestito dal pannello admin).
+  // Le due forme del dominio sono la stessa casella; se una e' revocata (attivo = false) l'accesso resta chiuso.
+  async function abilitato(email: string) {
+    const { data: righe } = await db.from("lingue_docenti").select("email,attivo").in("email", varianti(email));
+    return !!righe && righe.length > 0 && !righe.some((r: any) => !r.attivo);
+  }
+  async function registra(email: string, adesso: number) {
+    if (!/^[a-z0-9._-]{1,64}@/.test(email)) return; // solo indirizzi "normali": il pannello admin mostra questi testi
+    try {
+      const { data: riga } = await db.from("aula_richieste").select("email,tentativi").eq("email", email).maybeSingle();
+      if (riga) { await db.from("aula_richieste").update({ tentativi: (riga.tentativi || 1) + 1, ultima: new Date(adesso).toISOString() }).eq("email", email); return; }
+      const { count } = await db.from("aula_richieste").select("email", { count: "exact", head: true }).gt("creata", new Date(adesso - 3600_000).toISOString());
+      if ((count || 0) >= MAX_NUOVE_ORA) return;
+      await db.from("aula_richieste").insert({ email, nome: nomeDaMail(email), ultima: new Date(adesso).toISOString(), creata: new Date(adesso).toISOString() });
+    } catch (e) { console.error("richieste", e); }
+  }
   return async function gestisci(req: Request): Promise<Response> {
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
     if (req.method !== "POST") return risposta({ ok: false, errore: "metodo" }, 405);
@@ -154,6 +172,8 @@ export function crea(db: Db, env: Record<string, string | undefined>, invia: Inv
       if (!firma) return risposta({ ok: false, errore: "configurazione" }, 503);
       if (c.azione === "richiedi") {
         if (!env.GAS_URL || !env.GAS_TOKEN) return risposta({ ok: false, errore: "posta" }, 503);
+        // il codice parte solo per chi e' abilitato; agli altri si risponde allo stesso modo e la richiesta va al pannello admin
+        if (!await abilitato(email)) { await registra(email, adesso); return risposta({ ok: true }); }
         const { data: riga } = await db.from("studio_otp").select("*").eq("email", email).maybeSingle();
         let finestra = adesso, invii = 1;
         if (riga) {
@@ -173,6 +193,7 @@ export function crea(db: Db, env: Record<string, string | undefined>, invia: Inv
         return risposta({ ok: true });
       }
       const codice = String(c.codice || "").replace(/\D/g, "");
+      if (!await abilitato(email)) return risposta({ ok: false, errore: "non-abilitato" }, 403); // nessuna sessione a chi non e' in elenco
       const { data: riga } = await db.from("studio_otp").select("*").eq("email", email).maybeSingle();
       if (codice.length !== 6 || !riga || new Date(riga.scade).getTime() < adesso || riga.tentativi >= OTP_TENTATIVI) return risposta({ ok: false, errore: "otp" }, 401);
       if (await impronta(`${email}:${codice}:${firma}`) !== riga.hash) {
@@ -191,7 +212,9 @@ export function crea(db: Db, env: Record<string, string | undefined>, invia: Inv
     }
 
     // ───── chi e': la persona della sessione, oppure un codice di scorta ─────
-    const email = await leggiSessione(firma, c.sessione, adesso);
+    let email = await leggiSessione(firma, c.sessione, adesso);
+    // una sessione gia' rilasciata vale solo finche' l'indirizzo e' in elenco (vale anche per le sessioni di prima del blocco)
+    if (email && !await abilitato(email)) return risposta({ ok: false, errore: "sessione" }, 401);
     const cod = String(c.codice_docente || "").trim().toLowerCase();
     if (!email && !(cod && codici.includes(cod))) {
       if (c.sessione) return risposta({ ok: false, errore: "sessione" }, 401);

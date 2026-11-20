@@ -22,3 +22,9 @@ Un solo codice monouso per e-mail dà accesso a tutta l'Aula.
 ## Rotazione futura della chiave
 `LINGUE_CHIAVE=<vecchia>` + script di ricifratura, poi `update lingue_chiave`, poi nuovo `accesso-dipartimento.json`.
 La cronologia pubblica di Git conserva i vecchi `.enc` (decifrabili con la vecchia chiave): la rotazione protegge i contenuti nuovi, non quelli già pubblicati.
+
+## Abilitazione dei colleghi (20/11/2026)
+- Il codice parte solo per gli indirizzi attivi in `lingue_docenti`, sia da `aula-accesso` sia da `studio-genera` (stesso elenco). Chi non è in elenco riceve la stessa risposta a video e la sua richiesta finisce in `aula_richieste`.
+- `verifica` non rilascia sessione a chi non è in elenco; `studio-genera` rifiuta anche le sessioni già rilasciate a indirizzi non in elenco (la revoca vale subito).
+- L'amministratore approva dal pannello (tab "Aula"): la funzione `aula-admin` accetta solo il token di chi supera `is_admin()` (secondo passaggio) e, abilitando, manda al collega la mail di avviso (servizio `abilitato` dello script di posta).
+- Ordine di pubblicazione: 1) migrazione `2026-11-20_aula_richieste.sql`; 2) aggiungere in `lingue_docenti` chi usa già la Sala studio e non è in elenco; 3) script di posta (nuovo servizio `abilitato`) e nuova distribuzione; 4) deploy di `aula-admin`, `aula-accesso`, `studio-genera` (verify_jwt=false); 5) merge del sito (admin.html e testi di accesso).

@@ -2,14 +2,15 @@
 // Deploy con verify_jwt=false (i controlli sono qui dentro). Segreti richiesti: GAS_URL, GAS_TOKEN.
 // Sostituisce lingue-accesso. Il codice monouso e la "sessione" sono quelli di studio-genera (stessa tabella studio_otp,
 // stessa firma), quindi la sessione rilasciata qui vale anche per la Sala studio e viceversa.
-//   {azione:"richiedi", email}            -> spedisce il codice (solo indirizzi istituzionali)
-//   {azione:"verifica", email, codice}    -> {ok, sessione, email, nome, chiave?}  (chiave solo se il docente e' abilitato a Lingue)
+//   {azione:"richiedi", email}            -> spedisce il codice solo se l'indirizzo e' abilitato in lingue_docenti (risposta ok:true identica negli altri casi)
+//   {azione:"verifica", email, codice}    -> {ok, sessione, email, nome, chiave}  (solo docenti abilitati; gli altri: 403 non-abilitato, nessuna sessione)
 //   {azione:"chiave", sessione}           -> {ok, chiave}  (sessione valida + docente abilitato: niente secondo codice)
 // La chiave dei materiali riservati non esce mai senza una sessione valida e senza l'abilitazione in lingue_docenti.
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const OTP_SCADENZA_MS = 10 * 60 * 1000, OTP_PAUSA_MS = 30 * 1000, OTP_FINESTRA_MS = 60 * 60 * 1000, OTP_INVII = 5, OTP_TENTATIVI = 5;
 const SESSIONE_MS = 60 * 24 * 3600 * 1000;
+const MAX_NUOVE_ORA = 30;
 const DOMINI = ["@alberghierorieti.it", "@alberghierorieti.edu.it"];
 const CORS = {
   "Access-Control-Allow-Origin": "*",
@@ -47,11 +48,26 @@ export function crea(db: any, env: Record<string, string | undefined>, invia: (u
   const firma = env.FIRMA || "";
   // @alberghierorieti.it e @alberghierorieti.edu.it sono la stessa casella: l'elenco vale per entrambe le forme.
   // Se una delle due forme e' revocata (attivo = false), l'accesso resta chiuso.
-  async function chiaveSeAbilitato(email: string) {
+  async function abilitato(email: string) {
     const { data: righe } = await db.from("lingue_docenti").select("email,attivo").in("email", varianti(email));
-    if (!righe || !righe.length || righe.some((r: any) => !r.attivo)) return null;
+    return !!righe && righe.length > 0 && !righe.some((r: any) => !r.attivo);
+  }
+  async function chiaveSeAbilitato(email: string) {
+    if (!await abilitato(email)) return null;
     const { data: k } = await db.from("lingue_chiave").select("chiave").order("id", { ascending: false }).limit(1).maybeSingle();
     return k ? k.chiave as string : null;
+  }
+  // Registra la richiesta di abilitazione di chi non e' in elenco. Una riga per indirizzo; chi e' stato rifiutato non rientra in coda.
+  // Freno: non piu' di MAX_NUOVE_ORA richieste nuove all'ora, in tutto (contro chi prova indirizzi a caso).
+  async function registra(email: string, adesso: number) {
+    if (!/^[a-z0-9._-]{1,64}@/.test(email)) return; // solo indirizzi "normali": il pannello admin mostra questi testi
+    try {
+      const { data: riga } = await db.from("aula_richieste").select("email,stato,tentativi").eq("email", email).maybeSingle();
+      if (riga) { await db.from("aula_richieste").update({ tentativi: (riga.tentativi || 1) + 1, ultima: new Date(adesso).toISOString() }).eq("email", email); return; }
+      const { count } = await db.from("aula_richieste").select("email", { count: "exact", head: true }).gt("creata", new Date(adesso - 3600_000).toISOString());
+      if ((count || 0) >= MAX_NUOVE_ORA) return;
+      await db.from("aula_richieste").insert({ email, nome: nomeDaMail(email), ultima: new Date(adesso).toISOString(), creata: new Date(adesso).toISOString() });
+    } catch (e) { console.error("richieste", e); }
   }
   return async function gestisci(req: Request): Promise<Response> {
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
@@ -73,6 +89,10 @@ export function crea(db: any, env: Record<string, string | undefined>, invia: (u
 
     if (c.azione === "richiedi") {
       if (!env.GAS_URL || !env.GAS_TOKEN) return risposta({ ok: false, errore: "posta" }, 503);
+      // Il codice parte solo per gli indirizzi abilitati in lingue_docenti. A chi non e' in elenco si risponde allo stesso modo
+      // (ok:true), senza spedire nulla e senza scrivere in studio_otp: da fuori non si distingue un indirizzo abilitato da uno no.
+      // La richiesta resta in aula_richieste e l'amministratore la approva dal pannello.
+      if (!await abilitato(email)) { await registra(email, adesso); return risposta({ ok: true }); }
       const { data: riga } = await db.from("studio_otp").select("*").eq("email", email).maybeSingle();
       let finestra = adesso, invii = 1;
       if (riga) {
@@ -102,6 +122,7 @@ export function crea(db: any, env: Record<string, string | undefined>, invia: (u
       }
       await db.from("studio_otp").delete().eq("email", email); // monouso
       const chiave = await chiaveSeAbilitato(email);
+      if (!chiave) return risposta({ ok: false, errore: "non-abilitato" }, 403); // niente sessione a chi non e' in elenco
       return risposta({ ok: true, sessione: await firmaSessione(firma, email, adesso + SESSIONE_MS), email, nome: nomeDaMail(email), ...(chiave ? { chiave } : {}) });
     }
     return risposta({ ok: false, errore: "azione" }, 400);

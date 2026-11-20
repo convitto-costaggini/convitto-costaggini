@@ -21,6 +21,7 @@ function doPost(e) {
     var codice = String(d.codice || '');
     var dominioOk = DOMINI.some(function (dom) { return to.slice(-dom.length) === dom; });
     if (!dominioOk || !/^[^\s@]+@[^\s@]+$/.test(to)) return risposta_(false, 'destinatario');
+    if (d.servizio === 'abilitato') { avvisoAbilitazione_(to); return risposta_(true); }
     if (!/^\d{6}$/.test(codice)) return risposta_(false, 'codice');
     var sv = SERVIZI[d.servizio] || SERVIZI.lingue;
     MailApp.sendEmail({
@@ -39,6 +40,23 @@ function doPost(e) {
   } catch (err) {
     return risposta_(false, 'errore');
   }
+}
+
+/* Avviso al collega abilitato dall'amministratore (nessun codice: lo chiederà lui stesso entrando). */
+function avvisoAbilitazione_(to) {
+  var link = 'https://convitto.alberghierorieti.edu.it/aula/docenti.html';
+  MailApp.sendEmail({
+    to: to,
+    subject: 'Siete abilitati all\'Aula del Convitto Costaggini',
+    name: SERVIZI.aula.nome,
+    body: 'La vostra richiesta è stata approvata: potete entrare nell\'area docenti dell\'Aula.\n\n' +
+      'Aprite ' + link + ', scrivete questo stesso indirizzo e vi arriverà il codice di accesso (vale 10 minuti).\n' +
+      'Il dispositivo resta riconosciuto per 60 giorni.\n\nSe non avete chiesto voi l\'accesso, ignorate questo messaggio.',
+    htmlBody: '<div style="font-family:Arial,sans-serif;font-size:16px;color:#2C3E2D;max-width:420px">' +
+      '<p>La vostra richiesta è stata approvata: potete entrare nell&rsquo;<b>area docenti dell&rsquo;Aula</b>.</p>' +
+      '<p><a href="' + link + '" style="display:inline-block;background:#2C3E2D;color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:bold">Entra nell&rsquo;Aula</a></p>' +
+      '<p style="font-size:14px;color:#555">Scrivete questo stesso indirizzo e vi arriverà il codice di accesso (vale 10 minuti). Il dispositivo resta riconosciuto per 60 giorni.<br>Se non avete chiesto voi l&rsquo;accesso, ignorate questo messaggio.</p></div>'
+  });
 }
 
 function doGet() { return risposta_(false, 'usare POST'); }

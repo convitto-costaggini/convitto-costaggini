@@ -143,6 +143,7 @@ function admConfirm(opts) {
     <button class="main-tab" onclick="switchTab('menu',this)">🍽️ Menu Settimanale</button>
     <button class="main-tab" onclick="switchTab('ricordi',this)">💬 Ricordi</button>
     <button class="main-tab" onclick="switchTab('lingue',this)">🌐 Lingue</button>
+    <button class="main-tab" id="tab-btn-aula" onclick="switchTab('aula',this)">🎓 Aula <span id="badge-aula" style="display:none;background:#dc2626;color:#fff;font-size:.5rem;padding:.1rem .4rem;border-radius:10px;margin-left:.3rem;vertical-align:middle"></span></button>
       <button class="main-tab" onclick="switchTab('mappa',this)">🗺️ Mappa — Pin in attesa</button>
     <button class="main-tab" onclick="switchTab('alumni',this)">👥 <em>Alumni</em> — Schede in attesa</button>
     <button class="main-tab" onclick="switchTab('openday',this)">📅 Open Day</button>
@@ -391,6 +392,28 @@ function admConfirm(opts) {
           <button class="btn-ed" onclick="lingueLoad(null)">Tutte</button>
         </div>
         <div id="lingue-list"><p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB AULA: richieste di abilitazione dei colleghi -->
+  <div class="tab-section" id="tab-aula">
+    <div style="padding:1.5rem 1.25rem">
+      <div class="adm-card">
+        <h2>Aula: <em>richieste</em> dei colleghi</h2>
+        <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1.25rem;line-height:1.65">
+          Chi scrive la propria mail nell&rsquo;area docenti e non &egrave; ancora abilitato compare qui. Con <b>Abilita</b> entra nell&rsquo;elenco e riceve una mail con il link; con <b>Rifiuta</b> la richiesta si chiude (utile per le mail degli studenti). Gli studenti hanno la stessa forma di mail dei colleghi: controllate il nome prima di abilitare.
+        </p>
+        <form onsubmit="aulaAggiungi(event)" style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1.25rem;padding:.8rem;border:1.5px dashed #d4c9a8;border-radius:10px">
+          <div style="flex:1;min-width:11rem"><label for="aula-nuovo-nome" style="display:block;font-size:.65rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.25rem">Nome e cognome</label>
+            <input type="text" id="aula-nuovo-nome" autocomplete="off" placeholder="Mario Rossi" style="width:100%;box-sizing:border-box;padding:.5rem .6rem;border:1px solid #ccc;border-radius:6px"></div>
+          <div style="flex:1.4;min-width:14rem"><label for="aula-nuovo-mail" style="display:block;font-size:.65rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.25rem">Mail istituzionale</label>
+            <input type="text" id="aula-nuovo-mail" autocomplete="off" required placeholder="nome.cognome (basta così)" style="width:100%;box-sizing:border-box;padding:.5rem .6rem;border:1px solid #ccc;border-radius:6px"></div>
+          <button type="submit" class="btn-approva">➕ Abilita un collega</button>
+        </form>
+        <div id="aula-richieste"><p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p></div>
+        <h2 style="margin-top:1.75rem;font-size:1.05rem">Abilitati <em>attualmente</em></h2>
+        <div id="aula-docenti"></div>
       </div>
     </div>
   </div>
@@ -1586,6 +1609,72 @@ async function ricordiElimina(id) {
   else { alert('Errore: ' + resp.status); }
 }
 
+// ═══ AULA: richieste di abilitazione dei colleghi ═══
+// Le azioni passano dalla funzione aula-admin, che accetta solo l'amministratore con il secondo passaggio.
+async function aulaChiama(corpo) {
+  const resp = await fetch(SB_N + '/functions/v1/aula-admin', {
+    method: 'POST',
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(corpo)
+  });
+  const j = await resp.json().catch(() => ({}));
+  if (!resp.ok || !j.ok) throw new Error(j.errore || ('errore ' + resp.status));
+  return j;
+}
+async function aulaLoad() {
+  const rl = document.getElementById('aula-richieste'), dl = document.getElementById('aula-docenti');
+  try {
+    const j = await aulaChiama({ azione: 'elenco' });
+    const attesa = j.richieste.filter(r => r.stato === 'in_attesa'), rifiutate = j.richieste.filter(r => r.stato === 'rifiutata');
+    const badge = document.getElementById('badge-aula');
+    if (badge) { badge.textContent = attesa.length; badge.style.display = attesa.length ? 'inline-block' : 'none'; }
+    const riga = (r, rif) => `
+      <div class="fam-card ${rif ? 'rifiutata' : 'in_attesa'}" style="margin-bottom:.6rem">
+        <div class="fam-info">
+          <div class="fam-campo"><strong>Nome</strong>${escapeHtml(r.nome || '')}</div>
+          <div class="fam-campo"><strong>Mail</strong>${escapeHtml(r.email)}</div>
+          <div class="fam-campo"><strong>Ultima richiesta</strong>${escapeHtml(new Date(r.ultima).toLocaleString('it-IT'))}${r.tentativi > 1 ? ' (' + r.tentativi + ' tentativi)' : ''}</div>
+        </div>
+        <div class="fam-azioni" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem">
+          <button class="btn-approva" data-email="${escapeHtml(r.email)}" onclick="aulaAzione('abilita',this.dataset.email)">✅ Abilita</button>
+          ${rif ? '' : `<button class="btn-rifiuta" data-email="${escapeHtml(r.email)}" onclick="aulaAzione('rifiuta',this.dataset.email)">✖ Rifiuta</button>`}
+        </div>
+      </div>`;
+    rl.innerHTML = (attesa.length ? attesa.map(r => riga(r, false)).join('') : '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessuna richiesta in attesa.</p>') +
+      (rifiutate.length ? `<details style="margin-top:.8rem"><summary style="cursor:pointer;font-size:.8rem;color:var(--txt2)">Rifiutate (${rifiutate.length})</summary><div style="margin-top:.6rem">${rifiutate.map(r => riga(r, true)).join('')}</div></details>` : '');
+    dl.innerHTML = j.docenti.length ? '<div style="display:grid;gap:.35rem;margin-top:.6rem">' + j.docenti.map(d => `
+      <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;font-size:.85rem;${d.attivo ? '' : 'opacity:.55'}">
+        <span style="flex:1;min-width:14rem">${escapeHtml(d.nome || '')} <span style="color:var(--txt2)">${escapeHtml(d.email)}</span>${d.attivo ? '' : ' (revocato)'}</span>
+        ${d.attivo ? `<button class="btn-annulla-fam" data-email="${escapeHtml(d.email)}" onclick="aulaAzione('revoca',this.dataset.email)">Revoca</button>` : `<button class="btn-annulla-fam" data-email="${escapeHtml(d.email)}" onclick="aulaAzione('abilita',this.dataset.email)">Riattiva</button>`}
+      </div>`).join('') + '</div>' : '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessuno.</p>';
+  } catch (e) {
+    rl.innerHTML = '<p style="color:#b91c1c;font-size:.85rem">Impossibile caricare: ' + escapeHtml(e.message) + '. Serve l&rsquo;accesso con il codice dell&rsquo;app (secondo passaggio).</p>';
+  }
+}
+async function aulaAggiungi(ev) {
+  ev.preventDefault();
+  let mail = document.getElementById('aula-nuovo-mail').value.trim().toLowerCase().replace(/\s+/g, '.');
+  const nome = document.getElementById('aula-nuovo-nome').value.trim();
+  if (mail.indexOf('@') < 0) mail += '@alberghierorieti.edu.it';
+  if (!/^[a-z0-9._-]{1,64}@alberghierorieti\.(edu\.)?it$/.test(mail)) { alert('Mail non valida: serve nome.cognome oppure l\'indirizzo completo @alberghierorieti.it / .edu.it.'); return; }
+  if (!confirm('Abilitare ' + mail + ' e avvisarlo per mail?')) return;
+  try {
+    const j = await aulaChiama({ azione: 'abilita', email: mail, nome });
+    if (j.avvisato === false) alert('Abilitato, ma la mail di avviso non è partita: avvisate voi il collega.');
+    document.getElementById('aula-nuovo-nome').value = ''; document.getElementById('aula-nuovo-mail').value = '';
+  } catch (e) { alert('Errore: ' + e.message); }
+  aulaLoad();
+}
+async function aulaAzione(azione, email) {
+  const testi = { abilita: 'Abilitare ' + email + ' e avvisarlo per mail?', rifiuta: 'Rifiutare la richiesta di ' + email + '?', revoca: 'Togliere l\'accesso a ' + email + '?' };
+  if (!confirm(testi[azione])) return;
+  try {
+    const j = await aulaChiama({ azione, email });
+    if (azione === 'abilita' && j.avvisato === false) alert('Abilitato, ma la mail di avviso non è partita: avvisate voi il collega.');
+  } catch (e) { alert('Errore: ' + e.message); }
+  aulaLoad();
+}
+
 // ═══ LINGUE: schede di riscontro ═══
 async function lingueLoad(letto) {
   const list = document.getElementById('lingue-list');
@@ -1982,6 +2071,7 @@ function switchTab(nome, btn) {
   // Carica dati al primo accesso al tab
   if (nome === 'ricordi') ricordiLoad(false);
   if (nome === 'lingue')  lingueLoad(false);
+  if (nome === 'aula')    aulaLoad();
   if (nome === 'alumni')  loadAlumni();
   if (nome === 'mappa')   loadPins();
   if (nome === 'openday') odLoad('nuova');

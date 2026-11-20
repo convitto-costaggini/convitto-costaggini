@@ -142,7 +142,7 @@ function admConfirm(opts) {
     <button class="main-tab" onclick="switchTab('eventi',this)">🗓️ Eventi</button>
     <button class="main-tab" onclick="switchTab('menu',this)">🍽️ Menu Settimanale</button>
     <button class="main-tab" onclick="switchTab('ricordi',this)">💬 Ricordi</button>
-    <button class="main-tab" onclick="switchTab('lingue',this)">🌐 Lingue</button>
+    <button class="main-tab" onclick="switchTab('lingue',this)">🌐 Lingue <span id="badge-lingue" style="display:none;background:#dc2626;color:#fff;font-size:.5rem;padding:.1rem .4rem;border-radius:10px;margin-left:.3rem;vertical-align:middle"></span></button>
       <button class="main-tab" onclick="switchTab('mappa',this)">🗺️ Mappa — Pin in attesa</button>
     <button class="main-tab" onclick="switchTab('alumni',this)">👥 <em>Alumni</em> — Schede in attesa</button>
     <button class="main-tab" onclick="switchTab('openday',this)">📅 Open Day</button>
@@ -381,6 +381,19 @@ function admConfirm(opts) {
   <!-- TAB LINGUE: schede di riscontro del Dipartimento -->
   <div class="tab-section" id="tab-lingue">
     <div style="padding:1.5rem 1.25rem">
+      <div class="adm-card" style="margin-bottom:1.25rem">
+        <h2>Lingue: richieste di <em>abilitazione</em></h2>
+        <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1rem;line-height:1.65">
+          Chi entra nell'Aula con la mail della scuola ma non è nell'elenco può chiedere l'abilitazione all'area docenti di Lingue.
+          <strong>Approvate solo docenti che conoscete:</strong> l'area contiene soluzioni e verifiche. Anche gli studenti hanno una mail della scuola e potrebbero chiederla.
+          Con «Rifiuta» la persona non può più ripresentare la richiesta, e non vede che è stata rifiutata.
+        </p>
+        <div id="lingue-richieste"><p style="color:var(--txt2);font-size:.85rem;font-style:italic">Caricamento…</p></div>
+        <details style="margin-top:1rem">
+          <summary style="cursor:pointer;font-size:.85rem;font-weight:700">Docenti abilitati</summary>
+          <div id="lingue-docenti" style="margin-top:.75rem"></div>
+        </details>
+      </div>
       <div class="adm-card">
         <h2>Lingue: schede di <em>riscontro</em></h2>
         <p style="font-size:.82rem;color:var(--txt2);margin-bottom:1.25rem;line-height:1.65">
@@ -1586,6 +1599,65 @@ async function ricordiElimina(id) {
   else { alert('Errore: ' + resp.status); }
 }
 
+// ═══ LINGUE: richieste di abilitazione e docenti abilitati ═══
+// Le decisioni passano dalla funzione admin_lingue_decidi, che controlla is_admin() (due passaggi).
+async function docentiLoad() {
+  const box = document.getElementById('lingue-richieste'), elenco = document.getElementById('lingue-docenti');
+  try {
+    const [rich, doc] = await Promise.all([
+      sbFetch('lingue_richieste?order=creata.desc'),
+      sbFetch('lingue_docenti?order=nome.asc')
+    ]);
+    const attesa = rich.filter(r => r.stato === 'in_attesa');
+    const badge = document.getElementById('badge-lingue');
+    if (badge) { badge.textContent = attesa.length; badge.style.display = attesa.length ? 'inline-block' : 'none'; }
+    if (!box) return;
+    box.innerHTML = attesa.length ? attesa.map(r => `
+      <div class="fam-card in_attesa" style="margin-bottom:.75rem">
+        <div class="fam-info">
+          <div class="fam-campo"><strong>Nome</strong>${escapeHtml(r.nome)}</div>
+          <div class="fam-campo"><strong>E-mail</strong>${escapeHtml(r.email)}</div>
+          <div class="fam-campo"><strong>Richiesta</strong>${escapeHtml(new Date(r.creata).toLocaleString('it-IT'))}</div>
+        </div>
+        <div class="fam-azioni" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem">
+          <button class="btn-approva" data-lingue-az="approva" data-email="${escapeHtml(r.email)}">✅ Approva</button>
+          <button class="btn-rifiuta" data-lingue-az="rifiuta" data-email="${escapeHtml(r.email)}">✖ Rifiuta</button>
+        </div>
+      </div>`).join('') : '<p style="color:var(--txt2);font-size:.85rem;font-style:italic">Nessuna richiesta in attesa.</p>';
+    elenco.innerHTML = doc.length ? '<table style="width:100%;font-size:.82rem;border-collapse:collapse">' + doc.map(d => `
+      <tr style="border-top:1px solid #e5e7eb">
+        <td style="padding:.4rem .3rem">${escapeHtml(d.nome)}</td>
+        <td style="padding:.4rem .3rem">${escapeHtml(d.email)}</td>
+        <td style="padding:.4rem .3rem">${d.attivo ? 'attivo' : '<strong>revocato</strong>'}</td>
+        <td style="padding:.4rem .3rem;text-align:right">${d.attivo
+          ? `<button class="btn-rifiuta" style="font-size:.65rem" data-lingue-az="revoca" data-email="${escapeHtml(d.email)}">Revoca</button>`
+          : `<button class="btn-approva" style="font-size:.65rem" data-lingue-az="riattiva" data-email="${escapeHtml(d.email)}">Riattiva</button>`}</td>
+      </tr>`).join('') + '</table>' : '<p style="font-size:.85rem">Nessun docente.</p>';
+  } catch (e) {
+    if (box) box.innerHTML = '<p style="color:#b91c1c;font-size:.85rem">Impossibile caricare le richieste: ' + escapeHtml(e.message) + '</p>';
+  }
+}
+const LINGUE_DOMANDE = {   // admConfirm scrive titolo e messaggio come HTML: l'indirizzo va sempre passato da escapeHtml
+  approva:  e => ({ icon: '✅', title: 'Abilitare ' + escapeHtml(e) + '?', message: 'Vedrà soluzioni, verifiche e schede del docente di Lingue. Confermate solo se è un docente che conoscete.', confirmText: 'Abilita', type: 'success' }),
+  rifiuta:  e => ({ icon: '✖', title: 'Rifiutare la richiesta?', message: escapeHtml(e) + ' non potrà ripresentarla.', confirmText: 'Rifiuta', type: 'danger' }),
+  revoca:   e => ({ icon: '🔒', title: 'Revocare ' + escapeHtml(e) + '?', message: 'Non riceverà più la chiave dei materiali. Una scheda già aperta resta leggibile fino alla chiusura.', confirmText: 'Revoca', type: 'danger' }),
+  riattiva: e => ({ icon: '🔓', title: 'Riattivare ' + escapeHtml(e) + '?', message: 'Tornerà a vedere i materiali riservati di Lingue.', confirmText: 'Riattiva', type: 'success' })
+};
+document.addEventListener('click', async ev => {
+  const b = ev.target.closest && ev.target.closest('[data-lingue-az]');
+  if (!b) return;
+  const az = b.getAttribute('data-lingue-az'), email = b.getAttribute('data-email');
+  if (!LINGUE_DOMANDE[az] || !await admConfirm(LINGUE_DOMANDE[az](email))) return;
+  b.disabled = true;
+  const resp = await fetch(SB_N + '/rest/v1/rpc/admin_lingue_decidi', {
+    method: 'POST',
+    headers: { 'apikey': SB_PUB, 'Authorization': 'Bearer ' + SB_TOKEN(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ p_email: email, p_azione: az })
+  });
+  if (!resp.ok) { b.disabled = false; alert('Errore: ' + resp.status + ' ' + await resp.text()); return; }
+  docentiLoad();
+});
+
 // ═══ LINGUE: schede di riscontro ═══
 async function lingueLoad(letto) {
   const list = document.getElementById('lingue-list');
@@ -1921,6 +1993,7 @@ async function verificaMfa() {
     await initNotizie();
     await loadAvvisi();
     await famLoad('in_attesa');
+    docentiLoad();
   } catch (e) {
     err.textContent = /invalid|code/i.test(e.message) ? 'Codice non valido o scaduto. Riprova con il codice attuale.' : 'Accesso negato. ' + e.message;
     err.style.display = 'block';
@@ -1981,7 +2054,7 @@ function switchTab(nome, btn) {
   if (btn) btn.classList.add('on');
   // Carica dati al primo accesso al tab
   if (nome === 'ricordi') ricordiLoad(false);
-  if (nome === 'lingue')  lingueLoad(false);
+  if (nome === 'lingue')  { docentiLoad(); lingueLoad(false); }
   if (nome === 'alumni')  loadAlumni();
   if (nome === 'mappa')   loadPins();
   if (nome === 'openday') odLoad('nuova');

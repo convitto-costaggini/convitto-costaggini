@@ -104,7 +104,6 @@
     var m = String((e && e.message) || e || '');
     if (/troppo-presto/.test(m)) return 'Attendete mezzo minuto prima di chiedere un altro codice.';
     if (/troppi/.test(m)) return 'Troppe richieste: riprovate tra un po\'.';
-    if (/non-abilitato/.test(m)) return 'L\'accesso è riuscito, ma questo indirizzo non è abilitato all\'area docenti. Scrivete a ' + MAIL + '.';
     if (/codice/.test(m)) return 'Codice non valido o scaduto. Richiedetene uno nuovo.';
     if (/invio/.test(m)) return 'Non è stato possibile spedire la mail. Riprovate tra poco.';
     if (/rete|fetch|network|Failed/i.test(m)) return 'Connessione non riuscita. Controllate la rete e riprovate.';
@@ -112,7 +111,7 @@
   }
 
   /* disegna la procedura dentro `box`; chiama fine(chiave) quando la chiave è disponibile */
-  function interfaccia(box, fine) {
+  function interfaccia(box, fine, stato) {
     stile();
     function vista(h) { box.innerHTML = '<div class="ac"><div class="ac-c">' + h + '</div></div>'; var i = box.querySelector('input'); if (i) try { i.focus(); } catch (e) {} }
     function msg(t, ok) { var p = box.querySelector('.ac-m'); if (!p) return; p.className = 'ac-m ' + (ok ? 'o' : 'e'); p.textContent = t; }
@@ -125,7 +124,7 @@
         '<p class="ac-m" role="alert"></p><button class="b" type="submit">Invia il codice</button></form>' +
         '<div class="sep">oppure</div><form id="ac-fd"><label for="ac-c1">Codice del Dipartimento</label><input id="ac-c1" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX"/>' +
         '<p class="ac-m2" role="alert"></p><button class="b" type="submit" style="background:#8a6d1f">Entra con il codice</button></form>' +
-        '<p class="s" style="margin:1rem 0 0;font-size:.8rem">Non siete ancora abilitati? Scrivete a ' + MAIL + '.</p>' +
+        '<p class="s" style="margin:1rem 0 0;font-size:.8rem">Non siete ancora abilitati? Entrate con la vostra e-mail: dopo l\'accesso potrete chiedere l\'abilitazione con un clic.</p>' +
         '<p class="s" style="margin:.5rem 0 0;font-size:.8rem"><a href="/informativa-aula.html" target="_blank" rel="noopener">Informativa sul trattamento dei dati</a></p>');
       box.querySelector('#ac-f').addEventListener('submit', function (e) {
         e.preventDefault(); var b = e.target.querySelector('button'), mail = box.querySelector('#ac-m1').value.trim().toLowerCase(); occupato(b, true);
@@ -137,10 +136,10 @@
           .catch(function () { occupato(b, false); m2.className = 'ac-m2 e'; m2.textContent = 'Codice non valido.'; });
       });
     }
-    /* il codice parte solo per gli indirizzi abilitati; la risposta a video è la stessa in ogni caso */
+    /* il codice parte per gli indirizzi della scuola; la chiave dei materiali solo per i docenti abilitati */
     function invia(mail) { return chiama({ azione: 'richiedi', email: mail }); }
     function codice(mail) {
-      vista(intesta() + '<p class="s">Se l\'indirizzo <b>' + esc(mail) + '</b> è abilitato, tra pochi istanti riceverete un messaggio con un codice. Controllate anche la posta indesiderata.</p>' +
+      vista(intesta() + '<p class="s">Se l\'indirizzo <b>' + esc(mail) + '</b> è della scuola, tra pochi istanti riceverete un messaggio con un codice. Controllate anche la posta indesiderata.</p>' +
         '<form id="ac-f"><label for="ac-t">Codice ricevuto per e-mail</label><input id="ac-t" class="cod" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required/>' +
         '<p class="ac-m" role="alert"></p><button class="b" type="submit">Entra</button></form>' +
         '<button type="button" class="l" id="ac-ri">Invia di nuovo il codice</button> <button type="button" class="l" id="ac-ind">Cambia indirizzo</button>');
@@ -154,13 +153,35 @@
         chiama({ azione: 'verifica', email: mail, codice: box.querySelector('#ac-t').value.trim() })
           .then(function (r) {
             salvaSessione(r);
-            if (!r.chiave) throw new Error('non-abilitato');
+            if (!r.chiave) return nonAbilitato();
             ss(K_DIP, r.chiave); fine(r.chiave);
           })
           .catch(function (er) { occupato(b, false); msg(errore(er)); });
       });
     }
-    accedi();
+    /* accesso riuscito, ma l'indirizzo non è (ancora) nell'elenco dei docenti di Lingue */
+    function nonAbilitato() {
+      var s = sessione(); if (!s) return accedi();
+      vista(intesta() + '<p class="o" style="margin-top:0">L\'accesso con <b>' + esc(s.email) + '</b> è riuscito: la <a href="aula/studio/">Sala studio</a> e il resto dell\'<a href="aula/">Aula</a> sono a vostra disposizione.</p>' +
+        '<p class="s" style="margin-top:1rem">I materiali riservati di Lingue (schede del docente, soluzioni, verifiche) sono aperti solo ai docenti abilitati. Se insegnate una lingua, chiedete l\'abilitazione: la richiesta arriva all\'amministratore, che la controlla e la approva.</p>' +
+        '<p class="ac-m" role="status"></p><button class="b" type="button" id="ac-chiedi">Chiedi l\'abilitazione</button>' +
+        '<button type="button" class="l" id="ac-ind">Entra con un altro indirizzo</button>');
+      box.querySelector('#ac-ind').addEventListener('click', accedi);
+      var b = box.querySelector('#ac-chiedi');
+      b.addEventListener('click', function () {
+        occupato(b, true);
+        chiama({ azione: 'chiedi', sessione: s.t }).then(function (r) {
+          if (r.stato === 'abilitato') { location.reload(); return; }
+          b.remove();
+          msg('Richiesta registrata. Quando sarà approvata basterà tornare su questa pagina: si aprirà da sola, senza un altro codice.', true);
+        }).catch(function (er) {
+          occupato(b, false);
+          if (er && er.stato === 401) { try { localStorage.removeItem(K_SES); } catch (x) {} return accedi(); }
+          msg(errore(er));
+        });
+      });
+    }
+    if (stato === 'non-abilitato' && sessione()) nonAbilitato(); else accedi();
   }
 
   /* ───── pagina riservata ───── */
@@ -188,7 +209,7 @@
         box.innerHTML = '<div class="ac"><div class="ac-c"><h2>Pagina non disponibile</h2><p class="s">Non è stato possibile aprire il materiale. Riprovate tra poco o scrivete a ' + MAIL + '.</p></div></div>';
       });
     };
-    daLink().catch(function () { return silenzioso(); }).then(ok).catch(function () { interfaccia(box, ok); });
+    daLink().catch(function () { return silenzioso(); }).then(ok).catch(function (e) { interfaccia(box, ok, e && e.message); });
   }
   /* finestra di accesso sopra una pagina pubblica (per esempio Lezioni) */
   function entra() {
@@ -196,7 +217,8 @@
     var v = document.createElement('div'); v.className = 'ac-vel'; v.innerHTML = '<button class="x" type="button" aria-label="Chiudi">✕</button><div id="ac-box-v"></div>';
     document.body.appendChild(v);
     v.querySelector('.x').addEventListener('click', function () { v.remove(); });
-    interfaccia(v.querySelector('#ac-box-v'), function () { location.reload(); });
+    var dentro = v.querySelector('#ac-box-v'), fine = function () { location.reload(); };
+    silenzioso().then(fine).catch(function (e) { interfaccia(dentro, fine, e && e.message); });
   }
   function barra() {
     stile();

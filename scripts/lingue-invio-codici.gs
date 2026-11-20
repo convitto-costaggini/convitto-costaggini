@@ -4,7 +4,10 @@
  * Proprietà dello script richiesta: TOKEN (una stringa lunga e casuale, la stessa di GAS_TOKEN su Supabase).
  * Riceve dalle funzioni Supabase "aula-accesso" (e "studio-genera") un POST {token, to, codice, servizio?} e spedisce la mail.
  * servizio "aula" = accesso unico dell'Aula; "studio" = Sala studio; senza servizio = Le lingue dell'Alberghiero.
+ * servizio "richiesta-lingue" = avviso di una nuova richiesta di abilitazione all'area docenti di Lingue:
+ *   va SOLO all'amministratore (AVVISI_A, fisso qui), mai a un indirizzo preso dalla richiesta.
  */
+var AVVISI_A = ['michele.gaggiano', 'alberghierorieti.it'].join('@');
 var DOMINI = ['@alberghierorieti.it', '@alberghierorieti.edu.it'];
 var SERVIZI = {
   lingue: { nome: 'Le lingue dell\'Alberghiero', area: 'all\'area docenti di <b>Le lingue dell\'Alberghiero</b>' },
@@ -17,6 +20,7 @@ function doPost(e) {
     var d = JSON.parse(e.postData.contents);
     var token = PropertiesService.getScriptProperties().getProperty('TOKEN');
     if (!token || d.token !== token) return risposta_(false, 'non autorizzato');
+    if (d.servizio === 'richiesta-lingue') return avvisoRichiesta_(d);
     var to = String(d.to || '').trim().toLowerCase();
     var codice = String(d.codice || '');
     var dominioOk = DOMINI.some(function (dom) { return to.slice(-dom.length) === dom; });
@@ -39,6 +43,24 @@ function doPost(e) {
   } catch (err) {
     return risposta_(false, 'errore');
   }
+}
+
+function avvisoRichiesta_(d) {
+  var chi = String(d.richiedente || '').trim().toLowerCase();
+  var nome = String(d.nome || '').slice(0, 80);
+  var dominioOk = DOMINI.some(function (dom) { return chi.slice(-dom.length) === dom; });
+  if (!dominioOk || !/^[^\s@<>"]+@[^\s@<>"]+$/.test(chi)) return risposta_(false, 'richiedente');
+  nome = nome.replace(/[<>&"]/g, '');
+  MailApp.sendEmail({
+    to: AVVISI_A,
+    subject: 'Aula, Lingue: richiesta di abilitazione da ' + chi,
+    name: SERVIZI.aula.nome,
+    body: nome + ' (' + chi + ') chiede di entrare nell\'area docenti di Lingue.\n\n' +
+      'Per decidere: pannello admin del sito, scheda «Lingue», riquadro «Richieste di abilitazione».\n' +
+      'Approvate solo se è un docente che conoscete: l\'area contiene i materiali riservati ai docenti.\n' +
+      'In questa mail non ci sono link: si approva solo dal pannello, con la verifica in due passaggi.'
+  });
+  return risposta_(true);
 }
 
 function doGet() { return risposta_(false, 'usare POST'); }

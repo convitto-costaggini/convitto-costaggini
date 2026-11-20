@@ -5,6 +5,8 @@
 //   {azione:"richiedi", email}            -> spedisce il codice (solo indirizzi istituzionali)
 //   {azione:"verifica", email, codice}    -> {ok, sessione, email, nome, chiave?}  (chiave solo se il docente e' abilitato a Lingue)
 //   {azione:"chiave", sessione}           -> {ok, chiave}  (sessione valida + docente abilitato: niente secondo codice)
+//   {azione:"chiedi", sessione}           -> {ok, stato}   registra la richiesta di abilitazione a Lingue (non abilita nessuno:
+//                                            decide solo un amministratore dal pannello admin, con la verifica in due passaggi)
 // La chiave dei materiali riservati non esce mai senza una sessione valida e senza l'abilitazione in lingue_docenti.
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -66,6 +68,21 @@ export function crea(db: any, env: Record<string, string | undefined>, invia: (u
       if (!email) return risposta({ ok: false, errore: "sessione" }, 401);
       const k = await chiaveSeAbilitato(email);
       return k ? risposta({ ok: true, chiave: k }) : risposta({ ok: false, errore: "non-abilitato" }, 403);
+    }
+
+    if (c.azione === "chiedi") {
+      const email = await leggiSessione(firma, c.sessione, adesso);
+      if (!email) return risposta({ ok: false, errore: "sessione" }, 401);
+      if (await chiaveSeAbilitato(email)) return risposta({ ok: true, stato: "abilitato" });
+      // una richiesta per casella, in qualunque delle due forme; chi è stato rifiutato non può insistere
+      const { data: gia } = await db.from("lingue_richieste").select("email,stato").in("email", varianti(email));
+      const aperta = (gia || []).find((r: any) => r.stato !== "approvata");
+      if (aperta) return risposta({ ok: true, stato: "in_attesa" });
+      const { error } = await db.from("lingue_richieste").upsert({ email, nome: nomeDaMail(email), stato: "in_attesa", creata: new Date(adesso).toISOString(), decisa: null });
+      if (error) { console.error("db", error); return risposta({ ok: false, errore: "server" }, 500); }
+      // avviso all'amministratore (il destinatario è fisso nello script di posta); se non parte, la richiesta resta nel pannello
+      if (env.GAS_URL && env.GAS_TOKEN) await invia(env.GAS_URL, { token: env.GAS_TOKEN, servizio: "richiesta-lingue", richiedente: email, nome: nomeDaMail(email) });
+      return risposta({ ok: true, stato: "in_attesa" });
     }
 
     const email = String(c.email || "").trim().toLowerCase();

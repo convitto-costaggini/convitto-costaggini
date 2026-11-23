@@ -41,11 +41,16 @@ const KB=[
    r:'Prego! 😊 Se hai altre domande sono qui. Puoi anche scrivere direttamente alla segreteria: <a href="contatti.html">modulo di contatto →</a>'},
   {k:['sei un robot','sei un ai','intelligenza artificiale','chi sei','come funzioni','chatbot','bot','automatico'],
    r:'Sono l\'assistente virtuale del Convitto "Costaggini" — funziono completamente in locale, nessuna domanda viene trasmessa a server esterni. So rispondere su iscrizioni, orari, rette, educatori e vita convittuale. Per domande specifiche usa il <a href="contatti.html">modulo di contatto →</a>'},
+  // ── STORIA E FONDAZIONE ──
+  {k:['storia del convitto','fondazione del convitto','quando e stato fondato','quando fu fondato',
+      'quanti anni ha il convitto','da quanti anni esiste','anno di fondazione','cronologia storica',
+      'chi ha fondato il convitto','le origini del convitto','nato nel'],
+   r:'Il Convitto "Costaggini" nasce nel <strong>1962</strong>, quando a Rieti apre una scuola alberghiera fondata da Ranieri Antonelli Costaggini: oggi ha oltre sessant\'anni di storia.<br><br>📖 <a href="il-convitto.html#storia">La nostra storia →</a><br>🕰️ <a href="il-convitto.html#cronologia">Cronologia storica →</a>'},
   // ── ISCRIZIONI ──
-  {k:['iscri','ammission','come si fa','come faccio','domanda di ammissione','entrare al convitto',
+  {k:['iscri','ammission','domanda di ammissione','entrare al convitto',
       'portale miur','piattaforma unica','piattaforma unica del mim','unica','scadenza','30 luglio',
       'entro quando','quando scade','scadenza domanda','modulo domanda','procedura','diventare convittore'],
-   r:'La procedura di ammissione si svolge in <strong>4 passi</strong>:<br>1. Open Day e orientamento tra novembre e gennaio<br>2. Tra gennaio e febbraio, iscrizione online all\'IPSSEOA Costaggini sulla <strong>Piattaforma Unica del MIM</strong>, con la spunta sulla voce "Convitto"<br>3. Entro <strong>luglio</strong> (la data esatta è stabilita ogni anno da apposita circolare), modulo di domanda al Convitto con documentazione e quota di iscrizione (450€)<br>4. Da settembre: versamento delle rate successive, arrivo, assegnazione camera, accoglienza<br><br>Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è.<br><br>📋 <a href="ammissione.html">Guida completa all\'ammissione →</a>'},
+   r:'La procedura di ammissione si svolge in <strong>4 passi</strong>:<br>1. Open Day e orientamento tra dicembre e gennaio<br>2. A febbraio, iscrizione online all\'IPSSEOA Costaggini sulla <strong>Piattaforma Unica del MIM</strong>, con la spunta sulla voce "Convitto"<br>3. Entro <strong>luglio</strong> (la data esatta è stabilita ogni anno da apposita circolare), modulo di domanda al Convitto con documentazione e quota di iscrizione (450€)<br>4. Da settembre: versamento delle rate successive, arrivo, assegnazione camera, accoglienza<br><br>Il posto non è automatico: viene assegnato in base alla disponibilità, quindi prima ci si iscrive, meglio è.<br><br>📋 <a href="ammissione.html">Guida completa all\'ammissione →</a>'},
   // ── COLLOQUIO DI AMMISSIONE (non esiste) ──
   {k:['colloquio','esame','intervista di selezione','esame di ammissione','sostenere un colloquio',
       'devo fare un colloquio','c\'è un colloquio','prova di ammissione','selezione'],
@@ -63,11 +68,11 @@ const KB=[
       'quante rate','importi delle rate','quota iscrizione'],
    r:'La retta è deliberata ogni anno dal Consiglio d\'Istituto, con un importo fisso uguale per tutte le famiglie (non è prevista una riduzione legata all\'ISEE). La retta intera confermata per l\'A.S. 2026/27 è di <strong>1.600€ annui</strong>, comprensiva di vitto completo, alloggio, studio guidato, attività e trasporto Convitto-scuola.<br><br>💶 <a href="ammissione.html#tariffe">Tariffe complete →</a><br>✉️ Per un preventivo: <a href="contatti.html">Contattaci →</a>'},
   {k:['sveglia','giornata tipo','cosa si fa','routine','programma della giornata',
-      'alzarsi','luci spente','luce'],
+      'alzarsi','luci spente','luce','orari'],
    r:'<strong>La giornata tipo al Convitto:</strong><br>🌅 06:30 Sveglia · 07:00 Colazione (prodotti km zero)<br>🚌 07:40 Trasporto alla scuola<br>📚 08:00–14:00 Lezioni IPSSEOA<br>🍝 14:00 Pranzo<br>🏃 15:00–15:30 Tempo libero<br>📖 15:30–17:15 Studio guidato<br>⚽ 17:15–19:15 Tempo libero / sport / Lab Musicale<br>🍽️ 19:15 Cena<br>🌙 22:30 Luci spente<br><br>📅 <a href="giornata-tipo.html">Leggi la giornata completa →</a>'},
   // ── PASTI E MENSA ──
   {k:['pranzo','cena','colazione','pasti','mensa','si mangia','cosa si mangia','mangi oggi',
-      'menù della settimana','menu della settimana','cucina','cosa mangi',
+      'menù della settimana','menu della settimana','cucina','cosa mangi','piatti',
       'menù','menu','km zero','prodotti locali','reatino','quattro pasti','vitto'],
    r:'La cucina prepara <strong>quattro pasti al giorno</strong> con prodotti locali a <strong>km zero</strong> del territorio reatino. I menù sono elaborati con la consulenza di specialisti. La mensa è presidiata dagli educatori — un momento di convivialità vera.<br><br>🍽️ <a href="menu-settimana.html">Il menù di questa settimana →</a><br>🥗 Allergie e intolleranze gestite con menù dedicati.'},
   // ── ALLERGIE E DIETE ──
@@ -76,7 +81,7 @@ const KB=[
    r:'Il Convitto gestisce allergie, intolleranze e diete particolari — anche per esigenze culturali o religiose — con <strong>menù dedicati</strong>, senza che il ragazzo debba chiedere due volte. Va segnalato al momento dell\'iscrizione.<br><br>📋 <a href="ammissione.html#moduli">Modulo allergie →</a>'},
   // ── CAMERE E STRUTTURA ──
   {k:['camera','camere','stanza','letto','bagno','dormitor','alloggio','posto letto','struttura',
-      'dove si dorme','tripla','doppia','doppie','singole','piano','arredat'],
+      'dove si dorme','dormono','tripla','doppia','doppie','singole','piano','arredat'],
    r:'Camere principalmente <strong>triple con bagno privato</strong>, su 5 piani (3 maschili, 2 femminili). Ogni stanza ha letti, armadi e scrivanie personali. I ragazzi riordinano la camera ogni mattina prima di andare a scuola.<br><br>🔭 <a href="tour-virtuale.html">Visita gli spazi a 360° →</a>'},
   // ── WIFI E SMARTPHONE ──
   {k:['wifi','internet','connession','smartphone','telefonino','usare il telefono','cellulare','tablet','pc',
@@ -173,22 +178,22 @@ const KB=[
       'come è andato l\'anno','com\'è andato l\'anno','riassunto dell\'anno'],
    r:'Un racconto per immagini di come è stato l\'anno appena trascorso al Convitto.<br><br>📖 <a href="anno.html">L\'Anno al Convitto →</a>'},
   // ── CONTATTI ──
-  {k:['telefono','email','contatto','contatti','scrivere','segreteria','informazioni','risponde',
-      'numero','chiamare','mail','pec','indirizzo email','come contatto',
+  {k:['telefono','email','contatto','contatti','scrivere','segreteria','risponde',
+      'numero','chiamare','mail','pec','indirizzo email','come contatto','parlare con qualcuno',
       'orari segreteria','orario segreteria','apertura segreteria','quando apre la segreteria'],
    r:'Puoi contattarci tramite:<br>📧 <a href="mailto:convitto@alberghierorieti.it">convitto@alberghierorieti.it</a><br>📋 <a href="contatti.html">Modulo di contatto →</a><br><br>La segreteria risponde entro 24-48 ore nei giorni scolastici. Per gli orari esatti dello sportello: <a href="contatti.html#orari">Orari dello sportello →</a><br><br>Gli uffici amministrativi dell\'Istituto (Didattica, Personale, Protocollo, Contabilità) ricevono presso la Sede Centrale, Via dei Salici 62: <a href="contatti.html#segreteria">Orari della segreteria dell\'Istituto →</a>'},
   // ── CORREDO ──
   {k:['corredo','cosa portare','cosa devo portare','lista','valigia','biancheria',
       'lenzuola','asciugamani','vestiti','necessaire','bagagli','cosa serve'],
-   r:'La lista completa del corredo obbligatorio è disponibile con possibilità di stampa.<br><br>📋 <a href="genitori.html#valigia">Lista corredo →</a>'},
+   r:'La lista completa del corredo obbligatorio è disponibile con possibilità di stampa.<br><br>📋 <a href="ammissione.html#moduli">Lista corredo →</a>'},
   // ── REGOLAMENTO ──
   {k:['regolamento','regole','norme','disciplina','vietato','cosa non si può',
       'articoli','sanzioni','punizioni','punito','essere punito','provvedimento','comportamento','35 articoli'],
    r:'Il <strong>Regolamento del Convitto</strong> conta 35 articoli (versione 30/01/2025). Disciplina diritti, doveri, orari, uscite, sanzioni e molto altro. È consultabile in formato interattivo con ricerca per parola chiave.<br><br>📜 <a href="regolamento.html">Leggi il Regolamento →</a>'},
   // ── USCITE E PERMESSI ──
-  {k:['uscire','permesso uscita','uscita autonoma','uscite autonome','possono uscire','chi ritira',
+  {k:['uscire','uscite','permesso uscita','uscita autonoma','uscite autonome','possono uscire','chi ritira',
       'delega','delegato','autorizzazione uscita','libera uscita','rientrare tardi'],
-   r:'Le uscite autonome richiedono l\'<strong>autorizzazione firmata dei genitori</strong>. È possibile delegare persone di fiducia per il ritiro. La libera uscita si regola secondo il Regolamento (Art. 28–29).<br><br>📋 <a href="autorizzazioni.html">Modulo autorizzazioni →</a>'},
+   r:'Le uscite autonome richiedono l\'<strong>autorizzazione firmata dei genitori</strong>. È possibile delegare persone di fiducia per il ritiro. La libera uscita si regola secondo il Regolamento (Art. 28–29).<br><br>📋 <a href="ammissione.html#moduli">Modulo autorizzazione →</a>'},
   // ── DSA E BES ──
   {k:['dsa','bes','dislessia','disgrafia','discalculia','adhd','bisogni educativi',
       'sostegno','pdp','piano didattico personalizzato','disturbo apprendimento'],
@@ -196,9 +201,9 @@ const KB=[
   // ── STRANIERI E LINGUE ──
   {k:['straniero','altra nazionalità','non parlo italiano','traduzione','arabo','romeno',
       'inglese','spagnolo','altra lingua','cinque lingue','lingue','lingue parlate','in che lingue'],
-   r:'Il sito è disponibile in <strong>5 lingue</strong>: italiano, inglese, spagnolo, arabo, romeno. Usa il selettore in basso a sinistra. Per <em>imparare</em> le lingue c\'è l\'<a href="aula/lingue/">Aula digitale →</a><br><br>✉️ Per assistenza nella tua lingua: <a href="contatti.html">Contattaci →</a>'},
+   r:'Il sito è disponibile in <strong>5 lingue</strong>: italiano, inglese, spagnolo, arabo, romeno. Usa il selettore in basso a sinistra.<br><br>✉️ Per assistenza nella tua lingua: <a href="contatti.html">Contattaci →</a>'},
   // ── FARMACI ──
-  {k:['farmaci','medicine','terapia','somministrazione farmaci','medicinale',
+  {k:['farmaci','medicina','medicine','terapia','somministrazione farmaci','medicinale',
       'chi somministra','prendere farmaci','pillole'],
    r:'La somministrazione di farmaci richiede apposita autorizzazione medica e dei genitori. Contattare la segreteria per il modulo specifico.<br><br>✉️ <a href="contatti.html">Contattaci →</a>'},
   // ── QUIZ E ORIENTAMENTO ──
@@ -206,12 +211,12 @@ const KB=[
       'enogastronomia','ospitalità','pasticceria','indirizzo accoglienza','sala','cucina','indirizzo'],
    r:'Prova i <strong>6 quiz interattivi</strong> per scoprire quale percorso fa per te: sai già cucinare? Cucina, Sala, Pasticceria o Accoglienza? C\'è anche un cruciverba del Costaggini!<br><br>🎮 <a href="scopri-talento.html">Scopri il tuo Talento →</a>'},
   // ── ALUMNI E COMMUNITY ──
-  {k:['alumni','ex convittore','ex studente','diplomati','ex allievi','sono stato convittore',
+  {k:['alumni','ex convittore','ex convittori','ex convittrici','ex studente','diplomati','ex allievi','sono stato convittore',
       'ho frequentato','community','mappa del mondo','muro dei ricordi','lettere'],
    r:'La community degli <strong>Alumni</strong> cresce ogni anno. Puoi aggiungere la tua scheda, lasciare un ricordo nel Muro dei Ricordi e apparire sulla mappa del mondo degli ex convittori.<br><br>🌍 <a href="comunita.html">La nostra Comunità →</a><br>✍️ <a href="iscriviti-alumni.html">Unisciti agli Alumni →</a>'},
   // ── AREA RISERVATA FAMIGLIE ──
   {k:['area riservata','famiglie','accesso famiglie','dashboard',
-      'seguire mio figlio','presenze online','registro famiglie','notifiche genitori','valutazioni','vedere le valutazioni'],
+      'seguire mio figlio','presenze online','registro famiglie','notifiche genitori','valutazioni','vedere le valutazioni','vedere i voti','voti online'],
    r:'L\'<strong>Area Riservata Famiglie</strong> permette ai genitori di seguire in tempo reale: presenze ai pasti, valutazioni giornaliere, note degli educatori, colloqui e comunicazioni formali.<br><br>🔐 <a href="area-riservata.html">Richiedi accesso →</a>'},
   // ── AGGIORNAMENTI / NEWS ──
   {k:['novità','news','aggiornamenti','notizie','comunicazioni','avvisi','bacheca',
@@ -221,19 +226,6 @@ const KB=[
   {k:['ptof','progetto educativo','piano offerta formativa','filosofia','metodo',
       'mission','obiettivi','valori','come educate','stile educativo'],
    r:'Il progetto educativo del Convitto mira alla crescita umana, civile e culturale dei ragazzi — in coordinamento con i docenti dell\'Istituto.<br><br>📖 <a href="ptof-guida.html">Il PTOF spiegato →</a> · <a href="il-convitto.html#mission">Missione e valori →</a>'},
-  // ── AULA DIGITALE (lingue e sala studio) ──
-  {k:['aula digitale','aula','lingue dell alberghiero','vocabolario di sala','vocabolario','sala studio','lezioni interattive',
-      'imparare le lingue','imparare l inglese','esercizi di inglese','francese','giochi di lingue','studiare con il telefono','codice qr'],
-   r:'L\'<strong>Aula digitale</strong> è un insieme di strumenti web per studiare: <em>Le lingue dell\'Alberghiero</em> (vocabolario di sala, cucina, pasticceria, accoglienza e bar in inglese, francese e spagnolo, con lezioni, esercizi e giochi) e la <em>Sala studio</em> (lezioni interattive con ripasso e verifiche). Gli studenti aprono un link o un codice QR: <strong>nessuna registrazione, nessun account</strong>, nessun dato personale raccolto. È in fase di sperimentazione.<br><br>📚 <a href="aula/famiglie/">Aula per le famiglie →</a> · <a href="aula/">Entra nell\'Aula →</a>'},
-  // ── VERDE LAB ──
-  {k:['verde lab','piante del convitto','cura delle piante','sansevieria','pothos','ficus','sostenibilità','riciclo','raccolta differenziata','laboratorio verde'],
-   r:'Il <strong>Verde Lab</strong> raccoglie le piante degli spazi comuni, affidate alle ragazze e ai ragazzi: ogni pianta ha il suo cartellino e la sua scheda di cura (annaffiature, luce, pulizia), in un laboratorio quotidiano di cura, creatività e rispetto per l\'ambiente.<br><br>🌿 <a href="verde-lab.html">Verde Lab →</a>'},
-  // ── BIBLIOTECA ──
-  {k:['biblioteca','progetto lettura','prestito libri','prestito dei libri','leggere libri','caviardage','debate','incontri con gli autori','libri da leggere'],
-   r:'La <strong>biblioteca</strong> del Convitto e il <strong>Progetto Lettura</strong> comprendono prestito dei libri, letture condivise, caviardage, debate e incontri con autori, poesia, teatro e arte nei luoghi di cultura di Rieti.<br><br>📖 <a href="biblioteca.html">Biblioteca e Lettura →</a>'},
-  // ── CONSENSI E LIBERATORIE ──
-  {k:['consenso','consensi','consensi online','liberatoria','liberatorie','autorizzazione foto','foto e video','consenso foto','revocare il consenso','premiati'],
-   r:'Il personale e i convittori <strong>maggiorenni</strong> possono dare o revocare i consensi (immagini e video, Voci, Premio al Merito) online, con l\'email della scuola e un codice di 6 cifre. Per i <strong>minorenni</strong> serve il modulo cartaceo firmato da entrambi i genitori o dal tutore.<br><br>✅ <a href="consensi.html">Consensi online →</a> · <a href="privacy-moduli.html">Informative e moduli →</a>'},
   // ── PRIVACY, TRASPARENZA E ACCESSIBILITÀ ──
   {k:['privacy','trasparenza','accessibilità','dati personali','gdpr','cookie','informativa privacy',
       'agid','conformità','trattamento dati','protezione dati','dpo','responsabile protezione dati'],
@@ -241,7 +233,7 @@ const KB=[
   // ── CERTIFICATI ──
   {k:['certificato','frequenza','documento','attestato','dichiarazione','modulo',
       'stampare','pdf','scaricare','modulistica'],
-   r:'Puoi richiedere e stampare online certificati di frequenza e altri moduli.<br><br>📄 <a href="accoglienza.html">Modulistica →</a>'},
+   r:'Puoi richiedere e stampare online certificati di frequenza e altri moduli.<br><br>📄 <a href="ammissione.html#moduli">Modulistica →</a>'},
   // ── CONVITTO VS COLLEGIO PRIVATO ──
   {k:['differenza','cos\'è un convitto','collegio privato','privatista','pubblico',
       'statale','costo rispetto a','convitto o collegio'],
@@ -255,13 +247,13 @@ const KB=[
       'indipendenza','imparerà a vivere da solo'],
    r:'La conquista progressiva dell\'autonomia è uno degli <strong>obiettivi espliciti</strong> del progetto educativo. I ragazzi imparano a gestire il tempo, i rapporti, lo studio e gli spazi — con la guida degli educatori, non nonostante di essa.'},
   // ── PATTO EDUCATIVO ──
-  {k:['patto educativo','patto di corresponsabilità','firmare','accordo','impegno'],
+  {k:['patto educativo','patto di corresponsabilità','firmare','firmano','accordo','impegno'],
    r:'Prima dell\'inizio dell\'anno scolastico, alle famiglie viene presentato il Regolamento e viene firmato il Patto Educativo di Corresponsabilità. Gli educatori restano comunque disponibili durante tutto l\'anno a incontrare le famiglie, sia dei convittori sia degli aspiranti, per supporto e chiarimenti.<br><br>📜 <a href="patto-di-corresponsabilita.html">Leggi e firma il Patto di Corresponsabilità →</a><br>📖 <a href="regolamento.html">Il Regolamento →</a>'},
   // ── IN 2 MINUTI ──
   {k:['fretta','ho fretta','sintesi','riassunto','in breve','veloce','essenziale',
       'cosa devo sapere','in poche parole','subito','due minuti','2 minuti',
-      'informazioni principali','info base','non ho tempo'],
-   r:'Perfetto — ho la pagina giusta per te: <strong>Domande frequenti</strong>, con in cima le 10 domande che ogni genitore fa per prima, risposte in 2 minuti. Sotto trovi tutte le altre.<br><br>❓ <a href="in-2-minuti.html">Vai alle Domande frequenti →</a>'},
+      'informazioni principali','info base','non ho tempo','essenziali'],
+   r:'Perfetto — ho la pagina giusta per te: <strong>In 2 Minuti</strong>, le 10 domande che ogni genitore fa per prima con risposte immediate. Niente fronzoli, solo fatti.<br><br>⚡ <a href="in-2-minuti.html">Vai a "In 2 Minuti" →</a>'},
   // ── LETTERA / TESTIMONIANZE ──
   {k:['testimonianza','lettera','chi è passato','ex convittore','ex convittrice',
       'esperienze','cosa dicono','opinioni','recensioni','come si trovano',
@@ -356,7 +348,7 @@ function normalize(q){
   }
   return s.replace(/\s+/g,' ').trim();
 }
-const SHORT_OK=new Set(['aula','dove','wifi','dsa','bes','ciao','cena','sede','pdf','pec','menu','menù','tour','quiz','isee','h24','via','gps','rate','ptof']);
+const SHORT_OK=new Set(['dove','wifi','dsa','bes','ciao','cena','sede','pdf','pec','menu','menù','tour','quiz','isee','h24','via','gps','rate','ptof']);
 function keywordMatches(norm,kn){
   if(!kn) return false;
   if(!(kn.length>4||SHORT_OK.has(kn))) return false;

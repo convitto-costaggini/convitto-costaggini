@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Sfondo del Vinile del Convitto: disco dorato con i solchi, pentagramma ondulato, note e luci scintillanti">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#0f1b12"/><stop offset="0.55" stop-color="#0a120c"/><stop offset="1" stop-color="#060b07"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="0.5" cy="0.6" r="0.6">
+      <stop offset="0" stop-color="#e7c45f" stop-opacity="0.26"/>
+      <stop offset="0.5" stop-color="#cBa23e" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#caa23e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdf3cf"/><stop offset="0.3" stop-color="#eccb72"/>
+      <stop offset="0.62" stop-color="#c89a36"/><stop offset="1" stop-color="#8a6a22"/>
+    </linearGradient>
+    <linearGradient id="goldV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbeec5"/><stop offset="0.5" stop-color="#d8b04a"/><stop offset="1" stop-color="#8a6a22"/>
+    </linearGradient>
+    <radialGradient id="boke" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fbeec5" stop-opacity="0.9"/>
+      <stop offset="0.4" stop-color="#e6c45c" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#e6c45c" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="bk" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="bkBig" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="20"/></filter>
+    <filter id="ng" x="-120%" y="-120%" width="340%" height="340%"><feGaussianBlur stdDeviation="3.2"/></filter>
+    <filter id="sg" x="-300%" y="-300%" width="700%" height="700%"><feGaussianBlur stdDeviation="2.6"/></filter>
+
+    <g id="spark">
+      <path d="M0,-30 C3,-8 8,-3 30,0 C8,3 3,8 0,30 C-3,8 -8,3 -30,0 C-8,-3 -3,-8 0,-30 Z" fill="#fff7da" filter="url(#sg)"/>
+      <path d="M0,-15 C2,-4 4,-2 15,0 C4,2 2,4 0,15 C-2,4 -4,2 -15,0 C-4,-2 -2,-4 0,-15 Z" fill="#ffffff"/>
+      <path d="M0,-52 L1.5,-2 L0,52 L-1.5,-2 Z" fill="#fff7da" opacity="0.55" filter="url(#sg)"/>
+      <path d="M-52,0 L-2,1.5 L52,0 L-2,-1.5 Z" fill="#fff7da" opacity="0.55" filter="url(#sg)"/>
+    </g>
+
+    <!-- nota da 1/4 -->
+    <g id="q">
+      <ellipse cx="0" cy="0" rx="13.5" ry="10" transform="rotate(-22)" fill="url(#gold)"/>
+      <rect x="11" y="-66" width="4" height="66" rx="2" fill="url(#goldV)"/>
+    </g>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#spot)"/>
+  <g>
+    <circle cx="260" cy="260" r="58" fill="url(#boke)" filter="url(#bkBig)" opacity="0.45"/>
+    <circle cx="1350" cy="220" r="50" fill="url(#boke)" filter="url(#bkBig)" opacity="0.5"/>
+    <circle cx="560" cy="760" r="44" fill="url(#boke)" filter="url(#bkBig)" opacity="0.35"/>
+    <circle cx="1100" cy="780" r="40" fill="url(#boke)" filter="url(#bkBig)" opacity="0.4"/>
+    <circle cx="120" cy="520" r="22" fill="url(#boke)" filter="url(#bk)" opacity="0.5"/>
+    <circle cx="1500" cy="460" r="20" fill="url(#boke)" filter="url(#bk)" opacity="0.55"/>
+    <circle cx="430" cy="430" r="14" fill="url(#boke)" filter="url(#bk)" opacity="0.6"/>
+    <circle cx="1180" cy="420" r="12" fill="url(#boke)" filter="url(#bk)" opacity="0.6"/>
+    <circle cx="700" cy="180" r="10" fill="url(#boke)" filter="url(#bk)" opacity="0.5"/>
+    <circle cx="960" cy="150" r="11" fill="url(#boke)" filter="url(#bk)" opacity="0.45"/>
+    <circle cx="300" cy="720" r="16" fill="url(#boke)" filter="url(#bk)" opacity="0.45"/>
+    <circle cx="1440" cy="740" r="15" fill="url(#boke)" filter="url(#bk)" opacity="0.5"/>
+    <circle cx="200" cy="380" r="22" fill="none" stroke="#f0d68a" stroke-opacity="0.35" stroke-width="2.5" filter="url(#bk)"/>
+    <circle cx="1260" cy="330" r="18" fill="none" stroke="#f0d68a" stroke-opacity="0.4" stroke-width="2.5" filter="url(#bk)"/>
+  </g>
+  <!-- DISCO in vinile, a destra, in parte fuori quadro -->
+  <g transform="translate(1530,300)">
+    <circle r="440" fill="#080d09" fill-opacity="0.55"/>
+    <circle r="150" fill="none" stroke="#e2bd5c" stroke-opacity="0.1" stroke-width="2"/><circle r="164" fill="none" stroke="#e2bd5c" stroke-opacity="0.2" stroke-width="2"/><circle r="178" fill="none" stroke="#e2bd5c" stroke-opacity="0.1" stroke-width="2"/><circle r="192" fill="none" stroke="#e2bd5c" stroke-opacity="0.2" stroke-width="2"/><circle r="206" fill="none" stroke="#e2bd5c" stroke-opacity="0.1" stroke-width="2"/><circle r="220" fill="none" stroke="#e2bd5c" stroke-opacity="0.2" stroke-width="2"/><circle r="234" fill="none" stroke="#e2bd5c" stroke-opacity="0.1" stroke-width="2"/><circle r="248" fill="none" stroke="#e2bd5c" stroke-opacity="0.2" stroke-width="2"/><circle r="262" fill="none" stroke="#e2bd5c" stroke-opacity="0.1" stroke-width="2"/><circle r="276" fill="none" stroke="#e2bd5c" stroke-opacity="0.2" stroke-width="2"/><circle r="290" fill="none" stroke="#e2bd5c" stroke-opacity="0.1" stroke-width="2"/><circle r="304" fill="none" stroke="#e2bd5c" stroke-opacity="0.2" stroke-width="2"/><circle r="318" fill="none" stroke="#e2bd5c" stroke-opacity="0.1" stroke-width="2"/><circle r="332" fill="none" stroke="#e2bd5c" stroke-opacity="0.2" stroke-width="2"/><circle r="346" fill="none" stroke="#e2bd5c" stroke-opacity="0.1" stroke-width="2"/><circle r="360" fill="none" stroke="#e2bd5c" stroke-opacity="0.2" stroke-width="2"/><circle r="374" fill="none" stroke="#e2bd5c" stroke-opacity="0.1" stroke-width="2"/><circle r="388" fill="none" stroke="#e2bd5c" stroke-opacity="0.2" stroke-width="2"/><circle r="402" fill="none" stroke="#e2bd5c" stroke-opacity="0.1" stroke-width="2"/><circle r="416" fill="none" stroke="#e2bd5c" stroke-opacity="0.2" stroke-width="2"/>
+    <path d="M-300,-250 A390,390 0 0 1 120,-372" fill="none" stroke="#fbeec5" stroke-opacity="0.28" stroke-width="10" stroke-linecap="round" filter="url(#ng)"/>
+    <circle r="120" fill="url(#gold)" fill-opacity="0.32"/>
+    <circle r="12" fill="#0a120c"/>
+  </g>
+  <!-- disco piccolo in filigrana a sinistra -->
+  <g transform="translate(90,820)" fill="none" stroke="#dab44f" stroke-opacity="0.12" stroke-width="2">
+    <circle r="40"/><circle r="56"/><circle r="72"/><circle r="88"/><circle r="104"/><circle r="120"/><circle r="136"/><circle r="152"/><circle r="168"/><circle r="184"/><circle r="200"/><circle r="216"/>
+  </g>
+  <!-- PENTAGRAMMA ondulato -->
+  <g stroke="#dab44f" stroke-opacity="0.30" stroke-width="2.4" fill="none">
+    <path d="M0,620 C300,540 520,700 820,620 S1300,540 1600,610"/><path d="M0,650 C300,570 520,730 820,650 S1300,570 1600,640"/><path d="M0,680 C300,600 520,760 820,680 S1300,600 1600,670"/><path d="M0,710 C300,630 520,790 820,710 S1300,630 1600,700"/><path d="M0,740 C300,660 520,820 820,740 S1300,660 1600,730"/>
+  </g>
+  <ellipse cx="800" cy="660" rx="620" ry="140" fill="url(#spot)" opacity="0.5"/>
+  <g filter="url(#ng)"><g transform="translate(250,600)"><use href="#q"/><path d="M15,-66 C30,-52 42,-44 36,-22" fill="none" stroke="url(#goldV)" stroke-width="4" stroke-linecap="round"/></g><g transform="translate(360,578)"><use href="#q"/><path d="M15,-66 C30,-52 42,-44 36,-22" fill="none" stroke="url(#goldV)" stroke-width="4" stroke-linecap="round"/></g><g transform="translate(1200,566)"><use href="#q"/><path d="M15,-66 C30,-52 42,-44 36,-22" fill="none" stroke="url(#goldV)" stroke-width="4" stroke-linecap="round"/></g><g transform="translate(1300,600)"><use href="#q"/><path d="M15,-66 C30,-52 42,-44 36,-22" fill="none" stroke="url(#goldV)" stroke-width="4" stroke-linecap="round"/></g><g transform="translate(1420,606)"><use href="#q"/><path d="M15,-66 C30,-52 42,-44 36,-22" fill="none" stroke="url(#goldV)" stroke-width="4" stroke-linecap="round"/></g></g>
+  <use href="#spark" transform="translate(250,600) scale(0.55)"/>
+  <use href="#spark" transform="translate(1300,600) scale(0.6)"/>
+  <use href="#spark" transform="translate(1350,220) scale(0.7)"/>
+  <use href="#spark" transform="translate(430,430) scale(0.4)"/>
+  <use href="#spark" transform="translate(1180,420) scale(0.45)"/>
+  <use href="#spark" transform="translate(150,250) scale(0.5)"/>
+</svg>

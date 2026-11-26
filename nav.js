@@ -438,9 +438,9 @@
     .goog-te-banner-frame,.skiptranslate{display:none!important;}
     body{top:0!important;}
     footer .ftop,.footer .fcols{transform:none!important;}
-    #tr-btn{position:fixed;top:112px;right:1rem;z-index:8500;@media(max-width:700px){display:none}background:linear-gradient(135deg,#2C3E2D,#1a3a1b);border:1.5px solid rgba(184,146,42,.3);border-radius:8px;padding:.38rem .7rem;display:flex;align-items:center;gap:.35rem;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.22);font-family:'Source Sans 3',sans-serif;font-size:.7rem;font-weight:700;color:rgba(245,240,232,.7);transition:all .2s;white-space:nowrap;}
+    #tr-btn{position:fixed;top:136px;right:1rem;z-index:8500;@media(max-width:700px){display:none}background:linear-gradient(135deg,#2C3E2D,#1a3a1b);border:1.5px solid rgba(184,146,42,.3);border-radius:8px;padding:.38rem .7rem;display:flex;align-items:center;gap:.35rem;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.22);font-family:'Source Sans 3',sans-serif;font-size:.7rem;font-weight:700;color:rgba(245,240,232,.7);transition:all .2s;white-space:nowrap;}
 #tr-btn:hover{border-color:rgba(184,146,42,.6);color:#fff;}
-#tr-menu{position:fixed;top:146px;right:1rem;z-index:8950;background:#fff;border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,.16);border:1px solid #e5e7eb;overflow:hidden;display:none;flex-direction:column;max-height:70vh;overflow-y:auto;}@media(max-width:700px){#tr-btn{display:none!important;}#tr-menu{top:auto;bottom:1.5rem;right:4.9rem;left:auto;}}@media(min-width:701px){#tr-fab{display:none!important;}}
+#tr-menu{position:fixed;top:170px;right:1rem;z-index:8950;background:#fff;border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,.16);border:1px solid #e5e7eb;overflow:hidden;display:none;flex-direction:column;max-height:70vh;overflow-y:auto;}@media(max-width:700px){#tr-btn{display:none!important;}#tr-menu{top:auto;bottom:1.5rem;right:4.9rem;left:auto;}}@media(min-width:701px){#tr-fab{display:none!important;}}
 #tr-menu.open{display:flex;}
 .tr-opt{display:flex;align-items:center;gap:.55rem;padding:.55rem .9rem;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.78rem;color:#374151;transition:background .15s;border-bottom:1px solid #f3f4f6;}
 .tr-opt:last-child{border-bottom:none;}.tr-opt:hover{background:#f3f4f6;}.tr-opt.act{background:rgba(44,62,45,.06);color:#2C3E2D;font-weight:700;}
